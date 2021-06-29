@@ -88,6 +88,8 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("eperusteet-service.tutkinnonosankuvaukset", this.require("eperusteet-service.tutkinnonosankuvaukset"));
         this.frontProperties.setProperty("eperusteet-service.peruste-rakenne", this.require("eperusteet-service.peruste-rakenne"));
         this.frontProperties.setProperty("eperusteet-service.peruste-sisalto", this.require("eperusteet-service.peruste-sisalto"));
+        this.frontProperties.setProperty("eperusteet-service.lukiodiplomit", this.require("eperusteet-service.lukiodiplomit"));
+        this.frontProperties.setProperty("eperusteet-service.lukiodiplomi-tiedot", this.require("eperusteet-service.lukiodiplomi-tiedot"));
 
         this.frontProperties.setProperty("organisaatio-service.base-url", this.require("organisaatio-service.base-url"));
         this.frontProperties.setProperty("organisaatio-service.children", this.require("organisaatio-service.children"));

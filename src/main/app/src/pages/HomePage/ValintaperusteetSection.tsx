@@ -19,12 +19,12 @@ import { ENTITY, ICONS } from '#/src/constants';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import searchValintaperusteet from '#/src/utils/valintaperuste/searchValintaperusteet';
+import { searchValintaperusteet } from '#/src/utils/valintaperuste/searchValintaperusteet';
 
 import Filters from './Filters';
 import ListCollapse from './ListCollapse';
 import NavigationAnchor from './NavigationAnchor';
-import useFilterState from './useFilterState';
+import { useFilterState } from './useFilterState';
 import { getIndexParamsByFilters } from './utils';
 
 const { VALINTAPERUSTE } = ENTITY;
@@ -84,7 +84,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState({ paginationName: 'valintaperusteet' });
+  } = useFilterState('valintaperusteet');
 
   const watch = JSON.stringify([
     page,
@@ -119,10 +119,10 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
       : null;
   }, [valintaperusteet]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
-    t,
-    organisaatioOid,
-  ]);
+  const tableColumns = useMemo(
+    () => makeTableColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
 
   return (
     <>

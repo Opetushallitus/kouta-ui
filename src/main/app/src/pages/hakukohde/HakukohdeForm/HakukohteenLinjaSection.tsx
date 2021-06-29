@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldEditor,
   FormFieldRadioGroup,
@@ -43,27 +43,25 @@ const useLukiolinjaKoodit = toteutus => {
   const { t } = useTranslation();
 
   // Haetaan koko koodistot hakukohteen nimen tallennusta varten
-  const {
-    data: lukiopainotukset = [],
-    isLoading: painotuksetLoading,
-  } = useKoodisto({
-    koodisto: 'lukiopainotukset',
-  });
+  const { data: lukiopainotukset = [], isLoading: painotuksetLoading } =
+    useKoodisto({
+      koodisto: 'lukiopainotukset',
+    });
   const painotusOptions = useKoodistoDataOptions({
     koodistoData: lukiopainotukset,
   });
 
-  const {
-    data: erityisetKoulutusTehtavat = [],
-    isLoading: erityisetLoading,
-  } = useKoodisto({
-    koodisto: 'lukiolinjaterityinenkoulutustehtava',
-  });
+  const { data: erityisetKoulutusTehtavat = [], isLoading: erityisetLoading } =
+    useKoodisto({
+      koodisto: 'lukiolinjaterityinenkoulutustehtava',
+    });
   const erityisOptions = useKoodistoDataOptions({
     koodistoData: erityisetKoulutusTehtavat,
   });
 
   const loading = painotuksetLoading || erityisetLoading;
+
+  const yleislinja = toteutus?.metadata?.yleislinja;
 
   const availableOptionIds = useMemo(
     () =>
@@ -78,11 +76,18 @@ const useLukiolinjaKoodit = toteutus => {
     const filterValues = v => availableOptionIds.some(id => id === v.value);
 
     return [
-      { value: LUKIO_YLEISLINJA, label: t('hakukohdelomake.lukionYleislinja') },
+      ...(yleislinja
+        ? [
+            {
+              value: LUKIO_YLEISLINJA,
+              label: t('hakukohdelomake.lukionYleislinja'),
+            },
+          ]
+        : []),
       ...painotusOptions.filter(filterValues),
       ...erityisOptions.filter(filterValues),
     ];
-  }, [availableOptionIds, erityisOptions, painotusOptions, t]);
+  }, [yleislinja, availableOptionIds, erityisOptions, painotusOptions, t]);
 
   // Tarvitaan kaikki käännökset yleislinjalle hakukohteen nimeä varten
   const yleislinjaTranslations = useMemo(

@@ -15,6 +15,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "kieli": "fi"
       }
     ],
+    "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
       "alkaa": "2050-04-01T00:00",
@@ -47,8 +48,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     },
     "opetus": {
       "apuraha": null,
-      "diplomiKoodiUrit": [],
-      "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -121,7 +120,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "Kaivosalan perustutkinto"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -153,6 +152,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
@@ -174,8 +174,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
-      "diplomiKoodiUrit": [],
-      "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -258,7 +256,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "Kaivosalan perustutkinto"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -290,6 +288,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
@@ -318,8 +317,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "min": 20,
         "yksikko": "euro"
       },
-      "diplomiKoodiUrit": [],
-      "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -414,16 +411,27 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
   "metadata": {
     "alemmanKorkeakoulututkinnonOsaamisalat": [],
     "aloituspaikat": null,
-    "ammattinimikkeet": [
-      {
-        "arvo": "ammattinimike",
-        "kieli": "fi"
-      }
-    ],
+    "ammattinimikkeet": [],
     "asiasanat": [
       {
         "arvo": "avainsana",
         "kieli": "fi"
+      }
+    ],
+    "diplomit": [
+      {
+        "koodiUri": "moduulikoodistolops2021_kald3#1",
+        "linkinAltTeksti": {
+          "fi": "Käsityön diplomin lisätietoja"
+        },
+        "linkki": {
+          "fi": "http://example.com"
+        }
+      },
+      {
+        "koodiUri": "moduulikoodistolops2021_tald7#1",
+        "linkinAltTeksti": {},
+        "linkki": {}
       }
     ],
     "erityisetKoulutustehtavat": [
@@ -472,12 +480,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
-      "diplomiKoodiUrit": [
-        "lukiodiplomit_6#1"
-      ],
-      "diplomiKuvaus": {
-        "fi": "<p>Diplomi kuvaus</p>"
-      },
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -559,11 +561,12 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         }
       }
     ],
+    "yleislinja": true,
     "ylemmanKorkeakoulututkinnonOsaamisalat": []
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "toteutuslomake.lukionYleislinja, 150 yleiset.opintopistetta, Lukion IB-linja, 150 yleiset.opintopistetta, Lukion ICT-linja, 150 yleiset.opintopistetta, Lukion IB-linja (erityinen koulutustehtävä), 150 yleiset.opintopistetta, Lukion ICT-linja (erityinen koulutustehtävä), 150 yleiset.opintopistetta"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -600,6 +603,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
@@ -619,8 +623,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
-      "diplomiKoodiUrit": [],
-      "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -759,6 +761,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
@@ -778,8 +781,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
-      "diplomiKoodiUrit": [],
-      "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -908,6 +909,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
@@ -939,12 +941,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
-      "diplomiKoodiUrit": [
-        "lukiodiplomit_1#1"
-      ],
-      "diplomiKuvaus": {
-        "fi": "<p>Fi diplomi</p>"
-      },
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -1014,12 +1010,13 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         }
       }
     ],
+    "yleislinja": true,
     "ylemmanKorkeakoulututkinnonOsaamisalat": []
   },
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
+    "fi": "toteutuslomake.lukionYleislinja, 150 yleiset.opintopistetta"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
@@ -1058,6 +1055,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
@@ -1079,8 +1077,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
-      "diplomiKoodiUrit": [],
-      "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},

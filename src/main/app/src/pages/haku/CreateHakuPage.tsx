@@ -12,16 +12,12 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
-import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 
 import { HakuFooter } from './HakuFooter';
 import HakuForm, { initialValues } from './HakuForm';
-
-const config = getHakuFormConfig();
 
 const getCopyValues = hakuOid => ({
   pohja: {
@@ -73,14 +69,12 @@ const CreateHakuPage = props => {
         <RelationInfoContainer>
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        <FormConfigContext.Provider value={config}>
-          <HakuForm
-            steps
-            organisaatioOid={organisaatioOid}
-            onSelectBase={selectBase}
-            showArkistoituTilaOption={false}
-          />
-        </FormConfigContext.Provider>
+        <HakuForm
+          steps
+          organisaatioOid={organisaatioOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+        />
       </FormPage>
     </ReduxForm>
   );

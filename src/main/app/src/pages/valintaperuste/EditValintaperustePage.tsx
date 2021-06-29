@@ -13,7 +13,6 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
@@ -21,8 +20,6 @@ import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperu
 
 import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm } from './ValintaperusteForm';
-
-const formConfig = { noFieldConfigs: true };
 
 export const EditValintaperustePage = props => {
   const {
@@ -41,10 +38,6 @@ export const EditValintaperustePage = props => {
     valintaperuste?.organisaatioOid
   );
 
-  const config = useMemo(() => ({ ...formConfig, readOnly: !canUpdate }), [
-    canUpdate,
-  ]);
-
   const apiUrls = useUrls();
 
   const initialValues = useMemo(
@@ -55,47 +48,49 @@ export const EditValintaperustePage = props => {
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="valintaperusteForm" initialValues={initialValues}>
+    <ReduxForm
+      form="valintaperusteForm"
+      initialValues={initialValues}
+      disabled={!canUpdate}
+    >
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
-        <FormPage
-          readOnly={!canUpdate}
-          header={
-            <EntityFormHeader
-              entityType={ENTITY.VALINTAPERUSTE}
-              entity={valintaperuste}
-            />
-          }
-          steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
-          footer={
-            valintaperuste ? (
-              <ValintaperusteFooter
-                formMode={FormMode.EDIT}
-                organisaatioOid={organisaatioOid}
-                valintaperuste={valintaperuste}
-                canUpdate={canUpdate}
-              />
-            ) : null
-          }
-          esikatseluControls={
-            <EsikatseluControls
-              esikatseluUrl={apiUrls.url('konfo-ui.valintaperuste', id)}
-            />
-          }
-        >
-          <RelationInfoContainer>
-            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-          </RelationInfoContainer>
-          {valintaperuste && (
-            <ValintaperusteForm
-              steps={false}
-              canSelectBase={false}
-              canEditTyyppi={false}
+      <FormPage
+        readOnly={!canUpdate}
+        header={
+          <EntityFormHeader
+            entityType={ENTITY.VALINTAPERUSTE}
+            entity={valintaperuste}
+          />
+        }
+        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
+        footer={
+          valintaperuste ? (
+            <ValintaperusteFooter
+              formMode={FormMode.EDIT}
               organisaatioOid={organisaatioOid}
+              valintaperuste={valintaperuste}
+              canUpdate={canUpdate}
             />
-          )}
-        </FormPage>
-      </FormConfigContext.Provider>
+          ) : null
+        }
+        esikatseluControls={
+          <EsikatseluControls
+            esikatseluUrl={apiUrls.url('konfo-ui.valintaperuste', id)}
+          />
+        }
+      >
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
+        {valintaperuste && (
+          <ValintaperusteForm
+            steps={false}
+            canSelectBase={false}
+            canEditTyyppi={false}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
@@ -97,6 +97,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
 const SuunniteltuKestoFields = ({ name }) => {
   const { t } = useTranslation();
 
+  // TODO: Tämä on ainut paikka, jossa käytetään HeadingComponent-proppia. Pitäisi refaktoroida pois ja yksinkertaistaa FieldGroup-komponenttia.
   return (
     <FieldGroup
       title={t('toteutuslomake.opintojenSuunniteltuKesto')}
@@ -282,7 +283,7 @@ export const JarjestamisTiedotSection = ({
           </Spacing>
 
           <Spacing marginBottom={4}>
-            <DiplomiFields name={name} language={language} />
+            <DiplomiFields name={`${name}.diplomit`} />
           </Spacing>
         </>
       )}

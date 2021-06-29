@@ -12,8 +12,6 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
@@ -49,47 +47,48 @@ const EditHakuPage = ({
     haku?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(ENTITY.HAKU);
-
-  const initialValues = useMemo(() => (haku ? getFormValuesByHaku(haku) : {}), [
-    haku,
-  ]);
+  const initialValues = useMemo(
+    () => (haku ? getFormValuesByHaku(haku) : {}),
+    [haku]
+  );
 
   return (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm
+      form={FORM_NAME}
+      initialValues={initialValues}
+      disabled={!canUpdate}
+    >
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
-        <FormPage
-          readOnly={!canUpdate}
-          header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
-          steps={<FormSteps activeStep={ENTITY.HAKU} />}
-          footer={
-            haku ? (
-              <HakuFooter
-                haku={haku}
-                organisaatioOid={organisaatioOid}
-                formMode={FormMode.EDIT}
-                canUpdate={canUpdate}
-              />
-            ) : null
-          }
-        >
-          <RelationInfoContainer>
-            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-          </RelationInfoContainer>
-          {!isFetching && haku ? (
-            <HakuForm
+      <FormPage
+        readOnly={!canUpdate}
+        header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
+        steps={<FormSteps activeStep={ENTITY.HAKU} />}
+        footer={
+          haku ? (
+            <HakuFooter
               haku={haku}
               organisaatioOid={organisaatioOid}
-              steps={false}
-              onAttachHakukohde={onAttachHakukohde}
-              canSelectBase={false}
+              formMode={FormMode.EDIT}
+              canUpdate={canUpdate}
             />
-          ) : (
-            <Spin center />
-          )}
-        </FormPage>
-      </FormConfigContext.Provider>
+          ) : null
+        }
+      >
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
+        {!isFetching && haku ? (
+          <HakuForm
+            haku={haku}
+            organisaatioOid={organisaatioOid}
+            steps={false}
+            onAttachHakukohde={onAttachHakukohde}
+            canSelectBase={false}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

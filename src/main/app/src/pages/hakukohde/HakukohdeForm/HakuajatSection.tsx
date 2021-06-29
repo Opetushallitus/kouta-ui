@@ -17,13 +17,12 @@ const HakuaikaInterval = ({ haku }) => {
 
   const hakuajat = useMemo(
     () =>
-      (haku && _.isArray(haku.hakuajat)
-        ? haku.hakuajat
-        : []
-      ).map(({ alkaa, paattyy }) => [
-        formatDateValue(alkaa) ?? '',
-        formatDateValue(paattyy) ?? '',
-      ]),
+      (haku && _.isArray(haku.hakuajat) ? haku.hakuajat : []).map(
+        ({ alkaa, paattyy }) => [
+          formatDateValue(alkaa) ?? '',
+          formatDateValue(paattyy) ?? '',
+        ]
+      ),
     [haku]
   );
 

@@ -23,7 +23,7 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import Filters from '../Filters';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
-import useFilterState from '../useFilterState';
+import { useFilterState } from '../useFilterState';
 import { getIndexParamsByFilters } from '../utils';
 import LiitoksetModal from './LiitoksetModal';
 
@@ -87,7 +87,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState({ paginationName: 'hakukohteet' });
+  } = useFilterState('hakukohteet');
 
   const watch = JSON.stringify([
     page,
@@ -117,10 +117,10 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     return haut ? haut.map(haku => ({ ...haku, key: haku.oid })) : null;
   }, [haut]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
-    t,
-    organisaatioOid,
-  ]);
+  const tableColumns = useMemo(
+    () => makeTableColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
 
   return (
     <>

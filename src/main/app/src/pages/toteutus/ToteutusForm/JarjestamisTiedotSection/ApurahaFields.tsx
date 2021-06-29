@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,

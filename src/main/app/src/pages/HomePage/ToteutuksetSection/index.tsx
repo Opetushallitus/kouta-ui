@@ -24,7 +24,7 @@ import searchToteutukset from '#/src/utils/toteutus/searchToteutukset';
 import Filters from '../Filters';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
-import useFilterState from '../useFilterState';
+import { useFilterState } from '../useFilterState';
 import { getIndexParamsByFilters } from '../utils';
 import { KoulutusModal } from './KoulutusModal';
 
@@ -95,7 +95,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState({ paginationName: 'toteutukset' });
+  } = useFilterState('toteutukset');
 
   const watch = JSON.stringify([
     page,
@@ -127,10 +127,10 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
       : null;
   }, [toteutukset]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
-    t,
-    organisaatioOid,
-  ]);
+  const tableColumns = useMemo(
+    () => makeTableColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
 
   return (
     <>

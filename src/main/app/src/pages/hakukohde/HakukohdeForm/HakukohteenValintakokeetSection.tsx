@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
 import DividerHeading from '#/src/components/DividerHeading';
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldEditor } from '#/src/components/formFields';
 import { KokeetTaiLisanaytotFields } from '#/src/components/KokeetTaiLisanaytotFields';
 import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';

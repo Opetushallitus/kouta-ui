@@ -17,7 +17,10 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import SmallStatusTag from './StatusTag/SmallStatusTag';
 
-export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
+export const makeOnSort =
+  ({ name, onSort }) =>
+  dir =>
+    onSort(`${name}:${dir}`);
 
 export const getSortDirection = ({ sort, name }) => {
   if (!sort) {

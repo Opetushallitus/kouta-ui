@@ -1,6 +1,12 @@
-import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '#/src/constants';
+import _fp from 'lodash/fp';
 
-import { createIsKoulutustyyppiDisabledGetter } from './KoulutustyyppiSection';
+import {
+  KOULUTUSTYYPIT,
+  KOULUTUSTYYPPI,
+  EI_TUETUT_KOULUTUSTYYPIT,
+} from '#/src/constants';
+
+import { createIsKoulutustyyppiDisabledGetter } from '../useOppilaitosTyypit';
 
 const getIsDisabledForOPH = createIsKoulutustyyppiDisabledGetter({
   isOphVirkailija: true,
@@ -23,14 +29,14 @@ const getIsDisabledForNone = createIsKoulutustyyppiDisabledGetter({
   isLukio: false,
 });
 
-test.each(KOULUTUSTYYPIT)(
+test.each(_fp.difference(KOULUTUSTYYPIT)(EI_TUETUT_KOULUTUSTYYPIT))(
   'Creating KOMO with any koulutustyyppi should be allowed for OPH',
   kt => {
     expect(getIsDisabledForOPH(kt)).toEqual(false);
   }
 );
 
-test.each(KOULUTUSTYYPIT)(
+test.each(_fp.difference(KOULUTUSTYYPIT)(EI_TUETUT_KOULUTUSTYYPIT))(
   'Should not disable any koulutustyyppi when not detecting any oppilaitos types',
   kt => {
     expect(getIsDisabledForNone(kt)).toEqual(false);
@@ -46,5 +52,5 @@ test('Should disable right koulutustyyppis when having kk, amm and lukio oppilai
   );
   expect(getIsDisabledForAll(KOULUTUSTYYPPI.TUTKINNON_OSA)).toEqual(false);
   expect(getIsDisabledForAll(KOULUTUSTYYPPI.OSAAMISALA)).toEqual(false);
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.MUUT_KOULUTUKSET)).toEqual(false);
+  expect(getIsDisabledForAll(KOULUTUSTYYPPI.MUUT_KOULUTUKSET)).toEqual(true);
 });

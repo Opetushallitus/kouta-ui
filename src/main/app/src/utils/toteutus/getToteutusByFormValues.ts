@@ -27,17 +27,21 @@ const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
 
 const getLukiolinjatByValues = (linjaValues, pickTranslations) =>
   (linjaValues?.kaytossa &&
-    linjaValues?.valinnat?.map(
-      ({ value }, index) => ({
-        koodiUri: value,
-        kuvaus: _fp.flow(
-          pickTranslations,
-          _fp.mapValues(serializeEditorState)
-        )(linjaValues.kuvaukset[index] ?? {}),
-      }),
-      linjaValues?.valinnat
-    )) ||
+    linjaValues?.valinnat?.map(({ value }, index) => ({
+      koodiUri: value,
+      kuvaus: _fp.flow(
+        pickTranslations,
+        _fp.mapValues(serializeEditorState)
+      )(linjaValues.kuvaukset[index] ?? {}),
+    }))) ||
   [];
+
+const getDiplomitByValues = (diplomiValues, pickTranslations) =>
+  diplomiValues?.valinnat?.map(({ value }, index) => ({
+    koodiUri: value,
+    linkki: pickTranslations(diplomiValues?.linkit[index]?.url ?? {}),
+    linkinAltTeksti: pickTranslations(diplomiValues?.linkit[index]?.alt ?? {}),
+  })) || [];
 
 const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
@@ -71,7 +75,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
 
   const apurahaMin = values?.jarjestamistiedot?.apurahaMin;
   const apurahaMax = values?.jarjestamistiedot?.apurahaMax;
-
   return {
     nimi: pickTranslations(values?.tiedot?.nimi || {}),
     tarjoajat: values?.tarjoajat || [],
@@ -134,13 +137,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
                   : {}),
               }
             : null,
-        diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
-          _fp.prop('value')
-        ),
-        diplomiKuvaus: _fp.flow(
-          pickTranslations,
-          _fp.mapValues(serializeEditorState)
-        )(values?.jarjestamistiedot?.diplomiKuvaus || {}),
         suunniteltuKestoVuodet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.vuotta
         ),
@@ -156,8 +152,13 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           pickTranslations
         ),
       },
+      diplomit: getDiplomitByValues(
+        values?.jarjestamistiedot?.diplomit,
+        pickTranslations
+      ),
       ammatillinenPerustutkintoErityisopetuksena:
         values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
+      yleislinja: values?.lukiolinjat?.yleislinja,
       painotukset: getLukiolinjatByValues(
         values?.lukiolinjat?.painotukset,
         pickTranslations

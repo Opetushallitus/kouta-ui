@@ -43,7 +43,7 @@ Asenna mkcert. Esim MacOS:ssä löytyy brew:lla:
 
 `brew install mkcert`
 
-Luo sertifikaatit ajamalla seuraavat komennot projektin juurihakemistossa:
+Luo sertifikaatit ajamalla seuraavat komennot kouta-ui:n app-hakemistossa:
 
     mkdir -p .cert
     mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem "localhost"
@@ -63,6 +63,8 @@ Korvaa kouta-backendissä dev-vars.yml-tiedostoon:
 
     cas_url: https://localhost:3000/cas
     kouta_backend_cas_service: https://localhost:3000/kouta-backend/auth/login
+    
+ja käynnistä kouta-backend (EmbeddedJettyLauncher).
 
 Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.local`-tiedostossa): 
 
@@ -72,7 +74,7 @@ Käynnistä kouta-ui lokaalisti komennolla:
 
 `npm run start`
 
-Käynnistä VPN ja aseta reititykset/tunnelointi, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan. 
+Käynnistä Opintopolun VPN, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan. 
 
 Ilman kouta-indeksoijan ajamista lokaalisti etusivun listat eivät toimi, mutta luominen ja muokaaminen lomakkeiden avulla onnistuu.
 
@@ -101,7 +103,7 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 ## Testit
 
-Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, tai sen `__tests__` kansiosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
+Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
 
 Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:integration`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
 
@@ -112,7 +114,7 @@ Cypress-testejä voi ajaa myös interaktiivisesti käynnistämällä ensin kouta
     cd src/main/app
     npm run start:integration
 
-ja sitten samassa kansiossa, mutta toisessa shellissa: 
+ja sitten samassa kansiossa, mutta toisessa shellissä: 
 
     npm run cypress:open
     

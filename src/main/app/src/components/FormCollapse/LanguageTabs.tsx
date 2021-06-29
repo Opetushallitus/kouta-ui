@@ -34,10 +34,10 @@ const LanguageTabs = ({
 }) => {
   const { t } = useTranslation();
 
-  const options = useMemo(() => getLanguageOptions({ t, languages }), [
-    t,
-    languages,
-  ]);
+  const options = useMemo(
+    () => getLanguageOptions({ t, languages }),
+    [t, languages]
+  );
 
   return (
     <Tabs value={language} onChange={onChange}>

@@ -6,9 +6,10 @@ import useKoodisto from '#/src/hooks/useKoodisto';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const useKoodi = koodiUri => {
-  const { koodisto, koodi } = useMemo(() => parseKoodiUri(koodiUri), [
-    koodiUri,
-  ]);
+  const { koodisto, koodi } = useMemo(
+    () => parseKoodiUri(koodiUri),
+    [koodiUri]
+  );
 
   // Not passing koodisto version parsed from koodiUri here, because we
   // want to use the latest koodisto. Also if a single koodi tries to fetch

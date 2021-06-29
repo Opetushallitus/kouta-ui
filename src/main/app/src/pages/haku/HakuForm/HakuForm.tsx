@@ -50,7 +50,7 @@ const HakuForm = ({
         organisaatioOid={organisaatioOid}
         onSave={onAttachHakukohde}
       />
-      <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
+      <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
         {canSelectBase ? (
           <PohjaFormCollapse
             section="pohja"

@@ -4,7 +4,20 @@ import {
   JULKAISUTILA,
   LIITTEEN_TOIMITUSTAPA,
 } from '#/src/constants';
-import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
+import {
+  getFormValuesByHakukohde,
+  parseKeskiarvo,
+} from '#/src/utils/hakukohde/getFormValuesByHakukohde';
+
+describe('parseKeskiarvo', () => {
+  test.each([
+    [7, '7,0'],
+    [6.9, '6,9'],
+    [1.234, '1,234'],
+  ])('produces correct output', (number, expected) =>
+    expect(parseKeskiarvo(number)).toEqual(expected)
+  );
+});
 
 test('getFormValuesByHakukohde returns correct form values given hakukohde', () => {
   const values = getFormValuesByHakukohde({

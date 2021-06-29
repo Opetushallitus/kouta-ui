@@ -13,6 +13,7 @@ const NameSection = ({ language, name, ...props }) => {
       name={`${name}.${language}`}
       component={FormFieldInput}
       label={t('yleiset.nimi')}
+      required
     />
   );
 };

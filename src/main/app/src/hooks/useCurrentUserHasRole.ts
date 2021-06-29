@@ -27,8 +27,8 @@ export const useCurrentUserHasRole = (
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const getCurrentUserHasRole = useGetCurrentUserHasRole(entity, role);
 
-  return useMemo(() => getCurrentUserHasRole(organisaatio), [
-    getCurrentUserHasRole,
-    organisaatio,
-  ]);
+  return useMemo(
+    () => getCurrentUserHasRole(organisaatio),
+    [getCurrentUserHasRole, organisaatio]
+  );
 };

@@ -49,7 +49,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
               {t('yleiset.avaaLomake')}
             </Button>
             <Spacing marginRight={1} />
-            {/*haku && haku.oid ? (
+            {haku && haku.oid ? (
               <Button
                 as="a"
                 href={apiUrls.url(
@@ -62,7 +62,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
               >
                 {t('yleiset.muokkaaAsetuksia')}
               </Button>
-                ) : null*/}
+            ) : null}
           </Buttons>
         </Spacing>
       ) : null}
@@ -96,6 +96,7 @@ const AdditionalTyyppiFields = ({
           apiUrls={apiUrls}
           haku={haku}
           t={t}
+          required
         />
       );
     case HAKULOMAKETYYPPI.MUU:
@@ -104,6 +105,7 @@ const AdditionalTyyppiFields = ({
           name={`${baseName}.linkki.${language}`}
           component={FormFieldUrlInput}
           label={t('yleiset.linkki')}
+          required
         />
       );
     case HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA:
@@ -177,6 +179,7 @@ export const LomakeFields = ({
           component={FormFieldRadioGroup}
           options={tyyppiOptions}
           label={optionsLabel}
+          required
         />
       </FlexItem>
       <FlexItem grow={1} paddingLeft={3}>

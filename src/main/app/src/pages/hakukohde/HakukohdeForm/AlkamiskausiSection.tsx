@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldSwitch } from '#/src/components/formFields';
 import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import Anchor, { RouterAnchor } from '#/src/components/Anchor';
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldInput,
   FormFieldCheckboxGroup,
@@ -211,13 +211,10 @@ const OsaamisalatContainer = ({
 };
 
 const useExtendedEPeruste = ePerusteId => {
-  const { data: ePeruste, isLoading: ePerusteLoading } = useEPerusteById(
-    ePerusteId
-  );
-  const {
-    data: osaamisalaKuvaukset,
-    isLoading: osaamisalaKuvauksetLoading,
-  } = useEPerusteOsaamisalaKuvaukset({ ePerusteId });
+  const { data: ePeruste, isLoading: ePerusteLoading } =
+    useEPerusteById(ePerusteId);
+  const { data: osaamisalaKuvaukset, isLoading: osaamisalaKuvauksetLoading } =
+    useEPerusteOsaamisalaKuvaukset({ ePerusteId });
 
   const osaamisalat = ePeruste?.osaamisalat;
 

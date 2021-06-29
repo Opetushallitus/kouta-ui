@@ -63,6 +63,7 @@ const HaunKohdejoukkoFields = ({
           component={FormFieldRadioGroup}
           options={kohdejoukkoOptions}
           name={`${name}.kohdejoukko`}
+          required
         />
       </KohdejoukkoFlexItem>
       {showTarkenteet && (

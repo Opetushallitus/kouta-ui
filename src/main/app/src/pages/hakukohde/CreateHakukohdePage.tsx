@@ -16,7 +16,6 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
@@ -24,8 +23,6 @@ import {
   HakukohdeForm,
   initialValues as getInitialValues,
 } from './HakukohdeForm';
-
-const formConfig = { noFieldConfigs: true };
 
 export const CreateHakukohdePage = ({
   match: {
@@ -55,46 +52,44 @@ export const CreateHakukohdePage = ({
   return (
     <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
-      <FormConfigContext.Provider value={formConfig}>
-        <FormPage
-          header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
-          steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-          esikatseluControls={<EsikatseluControls />}
-          footer={
-            <HakukohdeFooter
-              formMode={FormMode.CREATE}
+      <FormPage
+        header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
+        esikatseluControls={<EsikatseluControls />}
+        footer={
+          <HakukohdeFooter
+            formMode={FormMode.CREATE}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={koulutustyyppi}
+            haku={haku}
+            toteutus={toteutus}
+          />
+        }
+      >
+        {isFetching ? (
+          <Spin center />
+        ) : (
+          <>
+            <RelationInfoContainer>
+              <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+              <ToteutusRelation
+                organisaatioOid={organisaatioOid}
+                toteutus={toteutus}
+              />
+              <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+            </RelationInfoContainer>
+            <HakukohdeForm
+              steps
               organisaatioOid={organisaatioOid}
-              koulutustyyppi={koulutustyyppi}
               haku={haku}
               toteutus={toteutus}
+              tarjoajat={data.tarjoajat}
+              koulutustyyppi={koulutustyyppi}
+              showArkistoituTilaOption={false}
             />
-          }
-        >
-          {isFetching ? (
-            <Spin center />
-          ) : (
-            <>
-              <RelationInfoContainer>
-                <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
-                <ToteutusRelation
-                  organisaatioOid={organisaatioOid}
-                  toteutus={toteutus}
-                />
-                <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-              </RelationInfoContainer>
-              <HakukohdeForm
-                steps
-                organisaatioOid={organisaatioOid}
-                haku={haku}
-                toteutus={toteutus}
-                tarjoajat={data.tarjoajat}
-                koulutustyyppi={koulutustyyppi}
-                showArkistoituTilaOption={false}
-              />
-            </>
-          )}
-        </FormPage>
-      </FormConfigContext.Provider>
+          </>
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

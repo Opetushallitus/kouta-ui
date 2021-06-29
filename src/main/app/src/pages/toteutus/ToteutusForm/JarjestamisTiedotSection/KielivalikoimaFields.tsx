@@ -21,32 +21,21 @@ const KielivalikoimaFields = ({ name }) => {
     <>
       <DividerHeading>{t('toteutuslomake.kielivalikoima')}</DividerHeading>
       <Box display="flex" flexWrap="wrap" m={-1}>
-        <KielivalikoimaBox {...getTestIdProps('A1A2Kielet')}>
+        <KielivalikoimaBox width={0.5} {...getTestIdProps('A1Kielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.kielivalikoima.A1A2Kielet`}
+            name={`${name}.kielivalikoima.A1Kielet`}
             options={options}
-            label={t('toteutuslomake.A1A2Kielet')}
+            label={t('toteutuslomake.A1Kielet')}
             isMulti
           />
         </KielivalikoimaBox>
-
-        <KielivalikoimaBox {...getTestIdProps('B2Kielet')}>
+        <KielivalikoimaBox width={0.5} {...getTestIdProps('A2Kielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.kielivalikoima.B2Kielet`}
+            name={`${name}.kielivalikoima.A2Kielet`}
             options={options}
-            label={t('toteutuslomake.B2Kielet')}
-            isMulti
-          />
-        </KielivalikoimaBox>
-
-        <KielivalikoimaBox {...getTestIdProps('aidinkielet')}>
-          <Field
-            component={FormFieldSelect}
-            name={`${name}.kielivalikoima.aidinkielet`}
-            options={options}
-            label={t('toteutuslomake.valinnainenAidinkielenOpetus')}
+            label={t('toteutuslomake.A2Kielet')}
             isMulti
           />
         </KielivalikoimaBox>
@@ -61,6 +50,16 @@ const KielivalikoimaFields = ({ name }) => {
           />
         </KielivalikoimaBox>
 
+        <KielivalikoimaBox {...getTestIdProps('B2Kielet')}>
+          <Field
+            component={FormFieldSelect}
+            name={`${name}.kielivalikoima.B2Kielet`}
+            options={options}
+            label={t('toteutuslomake.B2Kielet')}
+            isMulti
+          />
+        </KielivalikoimaBox>
+
         <KielivalikoimaBox {...getTestIdProps('B3Kielet')}>
           <Field
             component={FormFieldSelect}
@@ -71,7 +70,17 @@ const KielivalikoimaFields = ({ name }) => {
           />
         </KielivalikoimaBox>
 
-        <KielivalikoimaBox {...getTestIdProps('muutKielet')}>
+        <KielivalikoimaBox width={0.5} {...getTestIdProps('aidinkielet')}>
+          <Field
+            component={FormFieldSelect}
+            name={`${name}.kielivalikoima.aidinkielet`}
+            options={options}
+            label={t('toteutuslomake.valinnainenAidinkielenOpetus')}
+            isMulti
+          />
+        </KielivalikoimaBox>
+
+        <KielivalikoimaBox width={0.5} {...getTestIdProps('muutKielet')}>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.muutKielet`}

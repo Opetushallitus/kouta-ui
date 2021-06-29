@@ -135,12 +135,13 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         },
       },
       kielivalikoima: {
-        A1JaA2Kielet: ['kieli_1#1'],
-        B1Kielet: ['kieli_2#1'],
-        B2Kielet: ['kieli_3#1'],
-        B3Kielet: ['kieli_4#1'],
-        aidinkielet: ['kieli_5#1'],
-        muutKielet: ['kieli_6#1'],
+        A1Kielet: ['kieli_1#1'],
+        A2Kielet: ['kieli_2#1'],
+        B1Kielet: ['kieli_3#1'],
+        B2Kielet: ['kieli_4#1'],
+        B3Kielet: ['kieli_5#1'],
+        aidinkielet: ['kieli_6#1'],
+        muutKielet: ['kieli_7#1'],
       },
       diplomit: [
         {

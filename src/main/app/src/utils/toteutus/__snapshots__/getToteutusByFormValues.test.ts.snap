@@ -99,23 +99,26 @@ Object {
       "sv": "Sv linkki",
     },
     "kielivalikoima": Object {
-      "A1JaA2Kielet": Array [
+      "A1Kielet": Array [
         "kieli_1#1",
       ],
+      "A2Kielet": Array [
+        "kieli_2#1",
+      ],
       "B1Kielet": Array [
-        "kieli_4#1",
+        "kieli_3#1",
       ],
       "B2Kielet": Array [
-        "kieli_2#1",
+        "kieli_4#1",
       ],
       "B3Kielet": Array [
         "kieli_5#1",
       ],
       "aidinkielet": Array [
-        "kieli_3#1",
+        "kieli_6#1",
       ],
       "muutKielet": Array [
-        "kieli_6#1",
+        "kieli_7#1",
       ],
     },
     "kuvaus": Object {

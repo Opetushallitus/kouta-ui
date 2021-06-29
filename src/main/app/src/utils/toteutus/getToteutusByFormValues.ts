@@ -164,7 +164,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         pickTranslations
       ),
       kielivalikoima: {
-        A1JaA2Kielet: (kielivalikoima?.A1A2Kielet || []).map(_fp.prop('value')),
+        A1Kielet: (kielivalikoima?.A1Kielet || []).map(_fp.prop('value')),
+        A2Kielet: (kielivalikoima?.A2Kielet || []).map(_fp.prop('value')),
         aidinkielet: (kielivalikoima?.aidinkielet || []).map(_fp.prop('value')),
         B1Kielet: (kielivalikoima?.B1Kielet || []).map(_fp.prop('value')),
         B2Kielet: (kielivalikoima?.B2Kielet || []).map(_fp.prop('value')),

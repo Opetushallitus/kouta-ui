@@ -194,7 +194,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       ),
       diplomit: diplomitToFormValues(diplomit),
       kielivalikoima: {
-        A1A2Kielet: toSelectValueList(kielivalikoima.A1JaA2Kielet),
+        A1Kielet: toSelectValueList(kielivalikoima.A1Kielet),
+        A2Kielet: toSelectValueList(kielivalikoima.A2Kielet),
         aidinkielet: toSelectValueList(kielivalikoima.aidinkielet),
         B1Kielet: toSelectValueList(kielivalikoima.B1Kielet),
         B2Kielet: toSelectValueList(kielivalikoima.B2Kielet),

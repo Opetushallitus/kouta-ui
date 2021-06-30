@@ -28,7 +28,8 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [],
+      "A1Kielet": [],
+      "A2Kielet": [],
       "B1Kielet": [],
       "B2Kielet": [],
       "B3Kielet": [],
@@ -158,7 +159,8 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [],
+      "A1Kielet": [],
+      "A2Kielet": [],
       "B1Kielet": [],
       "B2Kielet": [],
       "B3Kielet": [],
@@ -294,7 +296,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [],
+      "A1Kielet": [],
+      "A2Kielet": [],
       "B1Kielet": [],
       "B2Kielet": [],
       "B3Kielet": [],
@@ -452,7 +455,10 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [
+      "A1Kielet": [
+        "kieli_en#1"
+      ],
+      "A2Kielet": [
         "kieli_en#1"
       ],
       "B1Kielet": [
@@ -609,7 +615,8 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [],
+      "A1Kielet": [],
+      "A2Kielet": [],
       "B1Kielet": [],
       "B2Kielet": [],
       "B3Kielet": [],
@@ -767,7 +774,8 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [],
+      "A1Kielet": [],
+      "A2Kielet": [],
       "B1Kielet": [],
       "B2Kielet": [],
       "B3Kielet": [],
@@ -915,23 +923,26 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [
+      "A1Kielet": [
         "kieli_1#1"
       ],
-      "B1Kielet": [
-        "kieli_3#1"
-      ],
-      "B2Kielet": [
+      "A2Kielet": [
         "kieli_2#1"
       ],
-      "B3Kielet": [
+      "B1Kielet": [
         "kieli_4#1"
+      ],
+      "B2Kielet": [
+        "kieli_3#1"
+      ],
+      "B3Kielet": [
+        "kieli_5#1"
       ],
       "aidinkielet": [
-        "kieli_4#1"
+        "kieli_6#1"
       ],
       "muutKielet": [
-        "kieli_4#1"
+        "kieli_7#1"
       ]
     },
     "kuvaus": {},
@@ -1063,7 +1074,8 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
-      "A1JaA2Kielet": [],
+      "A1Kielet": [],
+      "A2Kielet": [],
       "B1Kielet": [],
       "B2Kielet": [],
       "B3Kielet": [],

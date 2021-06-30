@@ -244,7 +244,11 @@ const fillDiplomi = () => {
 };
 
 const fillKielivalikoima = () => {
-  getByTestId('A1A2Kielet').within(() => {
+  getByTestId('A1Kielet').within(() => {
+    selectOption('englanti');
+  });
+
+  getByTestId('A2Kielet').within(() => {
     selectOption('englanti');
   });
 

@@ -74,12 +74,16 @@ const LukiolinjaOsio = ({
   );
 };
 
-const findTranslationsByKoodi =
-  koodistoData =>
+const makeTranslationsByKoodi =
+  (koodistoData, suffixKey, t) =>
   ({ value }) =>
-    mapKoodiToTranslateable(
-      koodistoData?.find(
-        ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
+    mapValues(
+      (translation, lng) =>
+        translation ? `${translation} (${t(suffixKey, { lng })})` : undefined,
+      mapKoodiToTranslateable(
+        koodistoData?.find(
+          ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
+        )
       )
     );
 
@@ -188,15 +192,24 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
         ? []
         : [
             ..._fp.map(
-              findTranslationsByKoodi(koodistoDataPainotukset),
+              makeTranslationsByKoodi(
+                koodistoDataPainotukset,
+                'toteutuslomake.lukionPainotus',
+                t
+              ),
               selectedPainotukset
             ),
             ..._fp.map(
-              findTranslationsByKoodi(koodistoDataKoulutustehtavat),
+              makeTranslationsByKoodi(
+                koodistoDataKoulutustehtavat,
+                'toteutuslomake.erityinenKoulutustehtava',
+                t
+              ),
               selectedKoulutustehtavat
             ),
           ],
     [
+      t,
       isLoading,
       selectedPainotukset,
       koodistoDataPainotukset,

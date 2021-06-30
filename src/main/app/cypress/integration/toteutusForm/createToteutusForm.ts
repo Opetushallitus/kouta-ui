@@ -201,8 +201,8 @@ const fillLukiolinjatSection = () => {
       cy.findByText(
         'toteutuslomake.lukiollaOnErityisiaKoulutustehtavia'
       ).click();
-      fillAsyncSelect('Lukion IB-linja (erityinen koulutustehtävä)');
-      fillAsyncSelect('Lukion ICT-linja (erityinen koulutustehtävä)');
+      fillAsyncSelect('Lukion IB-linja');
+      fillAsyncSelect('Lukion ICT-linja');
 
       cy.findByRole('button', {
         name: /^Lukion IB-linja/,

@@ -37,10 +37,8 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import {
-  TiedotSection,
-  TuvaTiedotSection,
-} from './TiedotSection/TiedotSection';
+import { TiedotSection } from './TiedotSection/TiedotSection';
+import { TuvaTiedotSection } from './TiedotSection/TuvaTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';

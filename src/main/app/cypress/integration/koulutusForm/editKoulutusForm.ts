@@ -8,6 +8,8 @@ import {
   fillKieliversiotSection,
   tallenna,
   assertNoUnsavedChangesDialog,
+  getByTestId,
+  paste,
 } from '#/cypress/utils';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -107,6 +109,31 @@ export const editKoulutusForm = () => {
     tallenna();
 
     cy.wait('@updateLkKoulutusResponse').then(({ request }) => {
+      cy.wrap(request.body).toMatchSnapshot();
+    });
+  });
+
+  it('should be able to edit TUVA-koulutus', () => {
+    prepareTest('tuva');
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+    cy.intercept(
+      { method: 'POST', url: '**/koulutus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateTuvaKoulutusResponse');
+
+    getByTestId('linkkiEPerusteisiinInput')
+      .find('input')
+      .pipe(paste('http://testilinkki.fi'));
+
+    tallenna();
+
+    cy.wait('@updateTuvaKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });

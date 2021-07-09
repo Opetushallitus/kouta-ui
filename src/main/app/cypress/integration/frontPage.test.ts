@@ -4,15 +4,6 @@ import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import { stubCommonRoutes, getByTestId } from '#/cypress/utils';
 
-const koutaSearchItem = () => ({
-  modified: '2019-02-20T07:55',
-  muokkaaja: { nimi: 'John Doe', oid: '1.2.246.562.24.62301161440' },
-  nimi: { fi: 'Nimi' },
-  oid: '1.1.1.1.1.1',
-  organisaatio: {},
-  tila: 'tallennettu',
-});
-
 const stubMyOrganisations = () => {
   const oid = '1.2.246.562.10.00000000001';
 
@@ -62,22 +53,22 @@ const stubMyOrganisations = () => {
   );
 
   cy.intercept(
-    { method: 'GET', url: '/kouta-backend/koulutus/list' },
+    { method: 'GET', url: '/kouta-backend/koulutus/list*' },
     { body: [] }
   );
 
   cy.intercept(
-    { method: 'GET', url: '/kouta-backend/haku/list' },
+    { method: 'GET', url: '/kouta-backend/haku/list*' },
     { body: [] }
   );
 
   cy.intercept(
-    { method: 'GET', url: '/kouta-backend/toteutus/list' },
+    { method: 'GET', url: '/kouta-backend/toteutus/list*' },
     { body: [] }
   );
 
   cy.intercept(
-    { method: 'GET', url: '/kouta-backend/hakukohde/list' },
+    { method: 'GET', url: '/kouta-backend/hakukohde/list*' },
     { body: [] }
   );
 };
@@ -85,66 +76,6 @@ const stubMyOrganisations = () => {
 describe('frontPage', () => {
   before(() => {
     stubCommonRoutes();
-
-    cy.intercept(
-      { method: 'GET', url: '/kouta-backend/search/koulutukset' },
-      {
-        body: {
-          result: [
-            _.merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
-          ],
-          totalCount: 1,
-        },
-      }
-    );
-
-    cy.intercept(
-      { method: 'GET', url: '/kouta-backend/search/toteutukset' },
-      {
-        body: {
-          result: [
-            _.merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
-          ],
-          totalCount: 1,
-        },
-      }
-    );
-
-    cy.intercept(
-      { method: 'GET', url: '/kouta-backend/search/haut' },
-      {
-        body: {
-          result: [_.merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
-          totalCount: 1,
-        },
-      }
-    );
-
-    cy.intercept(
-      { method: 'GET', url: '/kouta-backend/search/valintaperusteet' },
-      {
-        body: {
-          result: [
-            _.merge(koutaSearchItem(), {
-              nimi: { fi: 'Valintaperusteen nimi' },
-            }),
-          ],
-          totalCount: 1,
-        },
-      }
-    );
-
-    cy.intercept(
-      { method: 'GET', url: '/kouta-backend/search/hakukohteet' },
-      {
-        body: {
-          result: [
-            _.merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
-          ],
-          totalCount: 1,
-        },
-      }
-    );
 
     stubMyOrganisations();
 

@@ -53,6 +53,10 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
 
   cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
 
+  cy.intercept({ method: 'GET', url: `**/koulutus/list**` }, { body: [] });
+
+  cy.intercept({ method: 'GET', url: `**/search/haku/**` }, { body: [] });
+
   stubHakemuspalveluLomakkeetRoute();
   stubOppijanumerorekisteriHenkiloRoute();
 };

@@ -119,12 +119,13 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         ],
       },
       kielivalikoima: {
-        A1A2Kielet: [{ value: 'kieli_1#1' }],
-        B1Kielet: [{ value: 'kieli_4#1' }],
-        B2Kielet: [{ value: 'kieli_2#1' }],
+        A1Kielet: [{ value: 'kieli_1#1' }],
+        A2Kielet: [{ value: 'kieli_2#1' }],
+        B1Kielet: [{ value: 'kieli_3#1' }],
+        B2Kielet: [{ value: 'kieli_4#1' }],
         B3Kielet: [{ value: 'kieli_5#1' }],
-        aidinkielet: [{ value: 'kieli_3#1' }],
-        muutKielet: [{ value: 'kieli_6#1' }],
+        aidinkielet: [{ value: 'kieli_6#1' }],
+        muutKielet: [{ value: 'kieli_7#1' }],
       },
       ajankohta: {
         ajankohtaTyyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,

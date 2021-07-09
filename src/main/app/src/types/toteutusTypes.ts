@@ -39,7 +39,8 @@ export type LukiolinjatOsio = {
 };
 
 type Kielivalikoima = {
-  A1A2Kielet: SelectOptions;
+  A1Kielet: SelectOptions;
+  A2Kielet: SelectOptions;
   aidinkielet: SelectOptions;
   B1Kielet: SelectOptions;
   B2Kielet: SelectOptions;

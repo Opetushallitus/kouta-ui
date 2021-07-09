@@ -83,7 +83,7 @@ const Toolbar = styled.div`
   border-bottom: 1px solid ${getThemeProp('colors.inputBorder')};
   display: flex;
   align-items: center;
-  z-index: 20;
+  z-index: 2;
 `;
 
 const StyleIcon = styled(Icon)`

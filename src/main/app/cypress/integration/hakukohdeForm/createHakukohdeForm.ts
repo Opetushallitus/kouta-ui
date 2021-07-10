@@ -18,8 +18,9 @@ import {
   tallenna,
   fillAjankohtaFields,
   getSelectOption,
+  wrapMutationTest,
 } from '#/cypress/utils';
-import { Alkamiskausityyppi } from '#/src/constants';
+import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
 const lisaa = () => {
   getByTestId('lisaaButton').click({ force: true });
@@ -188,141 +189,141 @@ export const createHakukohdeForm = () => {
     '1.2.246.562.10.45854578546', // Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka
   ];
 
-  it('should be able to create ammatillinen hakukohde', () => {
-    prepareTest({
-      tyyppi: 'amm',
-      hakuOid,
-      hakukohdeOid,
-      organisaatioOid,
-      tarjoajat,
-    });
-
-    fillKieliversiotSection({ jatka: true });
-    fillPohjakoulutusvaatimusSection();
-    fillPerustiedotSection();
-    fillAloituspaikatSection();
-    fillValintaperusteenKuvausSection();
-    fillValintakokeetSection({ withValintaperusteenKokeet: true });
-    fillLiitteetSection();
-    fillJarjestyspaikkaSection({
-      jatka: true,
-    });
-    fillTilaSection();
-    tallenna();
-
-    cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
-    );
+  const mutationTest = wrapMutationTest({
+    oid: hakukohdeOid,
+    entity: ENTITY.HAKUKOHDE,
   });
 
-  it('should be able to create korkeakoulu hakukohde', () => {
-    prepareTest({
-      tyyppi: 'yo',
-      hakuOid,
-      hakukohdeOid,
-      organisaatioOid,
-      tarjoajat,
-    });
+  it(
+    'should be able to create ammatillinen hakukohde',
+    mutationTest(() => {
+      prepareTest({
+        tyyppi: 'amm',
+        hakuOid,
+        hakukohdeOid,
+        organisaatioOid,
+        tarjoajat,
+      });
 
-    fillKieliversiotSection({ jatka: true });
-    fillPohjakoulutusvaatimusSection();
-    fillPerustiedotSection({ isKorkeakoulu: true });
-    fillAloituspaikatSection({ isKorkeakoulu: true });
-    fillValintaperusteenKuvausSection();
-    fillValintakokeetSection({ withValintaperusteenKokeet: true });
-    fillLiitteetSection();
-    fillJarjestyspaikkaSection({ jatka: true });
-    fillTilaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillPohjakoulutusvaatimusSection();
+      fillPerustiedotSection();
+      fillAloituspaikatSection();
+      fillValintaperusteenKuvausSection();
+      fillValintakokeetSection({ withValintaperusteenKokeet: true });
+      fillLiitteetSection();
+      fillJarjestyspaikkaSection({
+        jatka: true,
+      });
+      fillTilaSection();
+      tallenna();
 
-    tallenna();
+      cy.location('pathname').should(
+        'eq',
+        `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+      );
+    })
+  );
 
-    cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  it(
+    'should be able to create korkeakoulu hakukohde',
+    mutationTest(() => {
+      prepareTest({
+        tyyppi: 'yo',
+        hakuOid,
+        hakukohdeOid,
+        organisaatioOid,
+        tarjoajat,
+      });
 
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
-    );
-  });
+      fillKieliversiotSection({ jatka: true });
+      fillPohjakoulutusvaatimusSection();
+      fillPerustiedotSection({ isKorkeakoulu: true });
+      fillAloituspaikatSection({ isKorkeakoulu: true });
+      fillValintaperusteenKuvausSection();
+      fillValintakokeetSection({ withValintaperusteenKokeet: true });
+      fillLiitteetSection();
+      fillJarjestyspaikkaSection({ jatka: true });
+      fillTilaSection();
 
-  it('should be able to create hakukohde with muu hakulomake', () => {
-    prepareTest({
-      tyyppi: 'yo',
-      hakuOid,
-      hakukohdeOid,
-      organisaatioOid,
-      tarjoajat,
-    });
+      tallenna();
 
-    fillKieliversiotSection({ jatka: true });
-    fillPohjakoulutusvaatimusSection();
-    fillLomakeSection('muu');
+      cy.location('pathname').should(
+        'eq',
+        `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+      );
+    })
+  );
 
-    tallenna();
+  it(
+    'should be able to create hakukohde with muu hakulomake',
+    mutationTest(() => {
+      prepareTest({
+        tyyppi: 'yo',
+        hakuOid,
+        hakukohdeOid,
+        organisaatioOid,
+        tarjoajat,
+      });
 
-    cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+      fillKieliversiotSection({ jatka: true });
+      fillPohjakoulutusvaatimusSection();
+      fillLomakeSection('muu');
 
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
-    );
-  });
+      tallenna();
 
-  it('should be able to create hakukohde with "ei sähköistä" hakulomake', () => {
-    prepareTest({
-      tyyppi: 'yo',
-      hakuOid,
-      hakukohdeOid,
-      organisaatioOid,
-      tarjoajat,
-    });
+      cy.location('pathname').should(
+        'eq',
+        `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+      );
+    })
+  );
 
-    fillKieliversiotSection({ jatka: true });
-    fillPohjakoulutusvaatimusSection();
-    fillLomakeSection('ei sähköistä');
+  it(
+    'should be able to create hakukohde with "ei sähköistä" hakulomake',
+    mutationTest(() => {
+      prepareTest({
+        tyyppi: 'yo',
+        hakuOid,
+        hakukohdeOid,
+        organisaatioOid,
+        tarjoajat,
+      });
 
-    tallenna();
+      fillKieliversiotSection({ jatka: true });
+      fillPohjakoulutusvaatimusSection();
+      fillLomakeSection('ei sähköistä');
 
-    cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+      tallenna();
 
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
-    );
-  });
+      cy.location('pathname').should(
+        'eq',
+        `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+      );
+    })
+  );
 
-  it('should be able to create hakukohde with lukiolinjat', () => {
-    prepareTest({
-      tyyppi: 'lk',
-      hakuOid,
-      hakukohdeOid,
-      organisaatioOid,
-      tarjoajat,
-    });
+  it(
+    'should be able to create hakukohde with lukiolinjat',
+    mutationTest(() => {
+      prepareTest({
+        tyyppi: 'lk',
+        hakuOid,
+        hakukohdeOid,
+        organisaatioOid,
+        tarjoajat,
+      });
 
-    fillKieliversiotSection({ jatka: true });
-    fillPohjakoulutusvaatimusSection();
-    fillLukiolinjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillPohjakoulutusvaatimusSection();
+      fillLukiolinjaSection();
 
-    tallenna();
+      tallenna();
 
-    cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
-    );
-  });
+      cy.location('pathname').should(
+        'eq',
+        `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+      );
+    })
+  );
 };

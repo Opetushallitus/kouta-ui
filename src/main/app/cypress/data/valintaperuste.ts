@@ -94,7 +94,7 @@ const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
           },
           vahimmaispisteet: 10.03,
         },
-        tyyppiKoodiUri: 'tyyppi_1#1',
+        tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
         tilaisuudet: [
           {
             osoite: {

@@ -476,13 +476,13 @@ export const wrapMutationTest = options => run => () => {
 
   // Delay to prevent 404 before the actual response
   cy.intercept(
-    { method: 'GET', url: `**/kouta-backend/${entity}/*` },
-    { delay: 10 * 1000 }
+    { method: 'GET', url: `**/kouta-backend/${entity}/**` },
+    { delay: 1000 * 1000 }
   );
 
   cy.wait(`@${requestAlias}`).then(({ request }) => {
     cy.intercept(
-      { method: 'GET', url: `**/kouta-backend/${entity}/*` },
+      { method: 'GET', url: `**/kouta-backend/${entity}/**` },
       { body: request.body }
     );
     cy.wrap(request.body).toMatchSnapshot();

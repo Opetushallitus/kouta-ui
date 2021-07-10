@@ -8,8 +8,9 @@ import {
   fillKieliversiotSection,
   tallenna,
   assertNoUnsavedChangesDialog,
+  wrapMutationTest,
 } from '#/cypress/utils';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const koulutusOid = '1.2.3.4.5.6';
@@ -30,6 +31,8 @@ const prepareTest = tyyppi => {
 
   cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
 
+  cy.intercept({ method: 'GET', url: '**/search/koulutus/**' }, { body: [] });
+
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
     { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
@@ -41,75 +44,52 @@ export const editKoulutusForm = () => {
     playMocks(koulutusMocks);
   });
 
-  it('should be able to edit ammatillinen koulutus', () => {
-    prepareTest('amm');
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
-    );
-
-    cy.intercept(
-      { method: 'POST', url: '**/koulutus' },
-      {
-        body: {
-          oid: '1.2.3.4.5.6',
-        },
-      }
-    ).as('updateAmmKoulutusResponse');
-
-    fillKieliversiotSection();
-
-    tallenna();
-
-    cy.wait('@updateAmmKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  const mutationTest = wrapMutationTest({
+    entity: ENTITY.KOULUTUS,
+    oid: koulutusOid,
   });
 
-  it('should be able to edit AMK-koulutus', () => {
-    prepareTest('amk');
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
-    );
-    cy.intercept(
-      { method: 'POST', url: '**/koulutus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateAmkKoulutusResponse');
+  it(
+    'should be able to edit ammatillinen koulutus',
+    mutationTest(() => {
+      prepareTest('amm');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
 
-    fillKieliversiotSection();
+      fillKieliversiotSection();
 
-    tallenna();
+      tallenna();
+    })
+  );
 
-    cy.wait('@updateAmkKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+  it(
+    'should be able to edit AMK-koulutus',
+    mutationTest(() => {
+      prepareTest('amk');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
 
-  it('should be able to edit lukiokoulutus', () => {
-    prepareTest('lk');
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
-    );
-    cy.intercept(
-      { method: 'POST', url: '**/koulutus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateLkKoulutusResponse');
+      fillKieliversiotSection();
 
-    fillKieliversiotSection();
+      tallenna();
+    })
+  );
 
-    tallenna();
+  it(
+    'should be able to edit lukiokoulutus',
+    mutationTest(() => {
+      prepareTest('lk');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
 
-    cy.wait('@updateLkKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      fillKieliversiotSection();
+
+      tallenna();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');

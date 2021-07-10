@@ -73,7 +73,7 @@ const getKorkeakouluFields = ({ tyyppi }) => {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
       kuvauksenNimi: { fi: 'Fi kuvauksen nimi', sv: 'Sv kuvauksen nimi' },
       koulutusalaKoodiUrit: [
-        'kansallinenkoulutusluokitus2016koulutusalataso2_1#1',
+        'kansallinenkoulutusluokitus2016koulutusalataso2_052#1',
       ],
     },
   });
@@ -81,7 +81,7 @@ const getKorkeakouluFields = ({ tyyppi }) => {
 
 const getLukioFields = ({ tyyppi }) => {
   return _.merge(getBaseFields({ tyyppi }), {
-    koulutuksetKoodiUri: ['koulutus_309902#12'],
+    koulutuksetKoodiUri: ['koulutus_309902#7'],
     nimi: { fi: 'Lukion oppimäärä' },
     metadata: {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_150',

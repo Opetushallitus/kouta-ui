@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import { loggable } from 'cypress-pipe';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import { includes, last, merge } from 'lodash/fp';
+import { includes, last, merge, toLower } from 'lodash/fp';
 
 import commonMocks from '#/cypress/mocks/common.mocks.json';
 import { Alkamiskausityyppi } from '#/src/constants';
@@ -461,28 +461,30 @@ export const fillAjankohtaFields = (
 };
 
 export const wrapMutationTest = options => run => () => {
-  const { entity, oid } = options;
-  const requestAlias = `${entity}Request`;
+  const { entity, oid, id } = options;
+
+  const entityLower = toLower(entity);
+  const requestAlias = `${entityLower}Request`;
 
   cy.intercept(
     {
       method: '{PUT,POST}',
-      url: `**/kouta-backend/${entity}`,
+      url: `**/kouta-backend/${entityLower}`,
     },
-    { body: { oid } }
+    { body: oid ? { oid } : { id } }
   ).as(requestAlias);
 
   run();
 
   // Delay to prevent 404 before the actual response
   cy.intercept(
-    { method: 'GET', url: `**/kouta-backend/${entity}/**` },
+    { method: 'GET', url: `**/kouta-backend/${entityLower}/**` },
     { delay: 1000 * 1000 }
   );
 
   cy.wait(`@${requestAlias}`).then(({ request }) => {
     cy.intercept(
-      { method: 'GET', url: `**/kouta-backend/${entity}/**` },
+      { method: 'GET', url: `**/kouta-backend/${entityLower}/**` },
       { body: request.body }
     );
     cy.wrap(request.body).toMatchSnapshot();

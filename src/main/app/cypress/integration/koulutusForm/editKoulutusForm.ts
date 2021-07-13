@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _fp from 'lodash/fp';
+import { merge } from 'lodash/fp';
 
 import koulutus from '#/cypress/data/koulutus';
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
@@ -35,7 +35,7 @@ const prepareTest = tyyppi => {
 
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
-    { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
+    { body: merge(koulutus({ tyyppi }), testKoulutusFields) }
   );
 };
 
@@ -45,8 +45,8 @@ export const editKoulutusForm = () => {
   });
 
   const mutationTest = wrapMutationTest({
-    entity: ENTITY.KOULUTUS,
     oid: koulutusOid,
+    entity: ENTITY.KOULUTUS,
   });
 
   it(

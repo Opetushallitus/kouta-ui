@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import { loggable } from 'cypress-pipe';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import { includes, last, merge, toLower } from 'lodash/fp';
+import { includes, last, merge, toLower, replace } from 'lodash/fp';
 
 import commonMocks from '#/cypress/mocks/common.mocks.json';
 import { Alkamiskausityyppi } from '#/src/constants';
@@ -460,8 +460,28 @@ export const fillAjankohtaFields = (
   });
 };
 
+const INTERVAL = 200;
+
+const waitFor = condition => {
+  const fn = cb => () => {
+    if (condition) {
+      cb();
+    } else {
+      setTimeout(fn(cb), INTERVAL);
+    }
+  };
+
+  return new Promise(resolve => setTimeout(fn(resolve)));
+};
+
+/* Curried funktio, joka toteuttaa create ja edit testien yhteiset osat (stubien alustaminen
+ * ja tallennus-pyynnön vertaaminen snapshottiin).
+ * "run" on funktio, joka ajaa muun testikoodin
+ * options, objektissa entity on ENTITY-enum, jolle testi luodaan. oid/id on entiteetin tunniste
+ * ("id" SORA-kuvauksella ja valintaperusteella)
+ */
 export const wrapMutationTest = options => run => () => {
-  const { entity, oid, id } = options;
+  const { entity, oid, id, stubGet } = options;
 
   const entityLower = toLower(entity);
   const requestAlias = `${entityLower}Request`;
@@ -474,19 +494,37 @@ export const wrapMutationTest = options => run => () => {
     { body: oid ? { oid } : { id } }
   ).as(requestAlias);
 
+  // Tähän säilötään entiteetin tallennetut arvot alempana, kun ne saadaan PUT tai POST-pyynnöstä.
+  let savedEntityValues;
+
+  if (stubGet) {
+    cy.intercept(
+      {
+        method: 'GET',
+        url: `**/kouta-backend/${entityLower}/${oid || id}**`,
+      },
+      req => {
+        req.on('before:response', async res => {
+          // Odotetaan entiteetin tallennetut arvot ja palautetaan ne GET-pyynnön vastauksessa
+          await waitFor(savedEntityValues);
+
+          // Korvataan null-arvot savedEntityValues-objektista undefined-arvoilla
+          const strSaveValues = replace(
+            JSON.stringify(savedEntityValues),
+            'null',
+            'undefined'
+          );
+
+          res.send({ statusCode: 200, body: strSaveValues });
+        });
+      }
+    );
+  }
+
   run();
 
-  // Delay to prevent 404 before the actual response
-  cy.intercept(
-    { method: 'GET', url: `**/kouta-backend/${entityLower}/**` },
-    { delay: 1000 * 1000 }
-  );
-
   cy.wait(`@${requestAlias}`).then(({ request }) => {
-    cy.intercept(
-      { method: 'GET', url: `**/kouta-backend/${entityLower}/**` },
-      { body: request.body }
-    );
+    savedEntityValues = request.body;
     cy.wrap(request.body).toMatchSnapshot();
   });
 };

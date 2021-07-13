@@ -144,7 +144,7 @@ const fillYhteystiedotSection = () => {
 
 export const createHakuForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
-  const createdHakuOid = '1.2.3.4.5.6';
+  const hakuOid = '1.2.3.4.5.6';
 
   beforeEach(() => {
     stubHakuFormRoutes({ organisaatioOid });
@@ -154,8 +154,8 @@ export const createHakuForm = () => {
 
   const mutationTest = wrapMutationTest({
     entity: ENTITY.HAKU,
-    oid: createdHakuOid,
-    organisaatioOid,
+    oid: hakuOid,
+    stubGet: true,
   });
 
   it(

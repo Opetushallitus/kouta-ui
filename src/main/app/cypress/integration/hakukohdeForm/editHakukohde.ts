@@ -17,9 +17,10 @@ export const editHakukohdeForm = () => {
   const organisaatioOid = '1.2.246.562.10.52251087186';
   const hakuOid = '4.1.1.1.1.1';
   const hakukohdeOid = '6.1.1.1.1.1';
+
   const mutationTest = wrapMutationTest({
-    entity: ENTITY.HAKUKOHDE,
     oid: hakukohdeOid,
+    entity: ENTITY.HAKUKOHDE,
   });
 
   it(

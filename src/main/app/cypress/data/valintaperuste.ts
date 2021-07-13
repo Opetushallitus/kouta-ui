@@ -1,7 +1,7 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 const withKorkeakouluFields = valintaperuste =>
-  _.merge(
+  merge(
     {
       metadata: {
         valintatavat: [

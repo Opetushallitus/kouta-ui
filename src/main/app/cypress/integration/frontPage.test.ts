@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
@@ -13,7 +13,7 @@ const stubMyOrganisations = () => {
       url: `/organisaatio-service/rest/organisaatio/v4/${oid}`,
     },
     {
-      body: _.merge(organisaatio(), {
+      body: merge(organisaatio(), {
         oid,
       }),
     }
@@ -34,7 +34,7 @@ const stubMyOrganisations = () => {
     },
     {
       body: [
-        _.merge(organisaatio(), {
+        merge(organisaatio(), {
           oid,
           nimi: {
             fi: 'Organisaatio_1',

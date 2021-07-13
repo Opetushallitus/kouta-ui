@@ -192,6 +192,7 @@ export const createHakukohdeForm = () => {
   const mutationTest = wrapMutationTest({
     oid: hakukohdeOid,
     entity: ENTITY.HAKUKOHDE,
+    stubGet: true,
   });
 
   it(

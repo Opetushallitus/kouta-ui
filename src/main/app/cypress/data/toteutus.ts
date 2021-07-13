@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import { Alkamiskausityyppi, ApurahaYksikko } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -96,7 +96,7 @@ const getBaseFields = () => ({
 });
 
 const getAmmatillinenFields = ({ tyyppi }) =>
-  _.merge(getBaseFields(), {
+  merge(getBaseFields(), {
     metadata: {
       tyyppi,
       osaamisalat: [
@@ -114,7 +114,7 @@ const getAmmatillinenFields = ({ tyyppi }) =>
   });
 
 const getKorkeakouluFields = ({ tyyppi }) =>
-  _.merge(getBaseFields(), {
+  merge(getBaseFields(), {
     metadata: {
       tyyppi,
       ylemmanKorkeakoulututkinnonOsaamisalat: [
@@ -137,7 +137,7 @@ const getKorkeakouluFields = ({ tyyppi }) =>
   });
 
 const getLukioFields = ({ tyyppi }) =>
-  _.merge(getBaseFields(), {
+  merge(getBaseFields(), {
     metadata: {
       tyyppi,
       yleislinja: true,

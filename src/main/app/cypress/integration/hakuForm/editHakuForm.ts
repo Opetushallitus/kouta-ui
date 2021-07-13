@@ -14,7 +14,10 @@ const organisaatioOid = '1.1.1.1.1.1';
 const hakuOid = '2.1.1.1.1.1';
 
 export const editHakuForm = () => {
-  const mutationTest = wrapMutationTest({ oid: hakuOid, entity: ENTITY.HAKU });
+  const mutationTest = wrapMutationTest({
+    oid: hakuOid,
+    entity: ENTITY.HAKU,
+  });
 
   beforeEach(() => {
     stubHakuFormRoutes({ organisaatioOid });

@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
@@ -25,7 +25,7 @@ export const editSoraKuvausForm = () => {
     cy.intercept(
       { method: 'GET', url: `**/sorakuvaus/${soraKuvaus.id}` },
       {
-        body: _.merge({}, soraKuvaus, {
+        body: merge(soraKuvaus, {
           organisaatioOid,
         }),
       }

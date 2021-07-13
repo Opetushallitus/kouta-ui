@@ -1,5 +1,4 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
@@ -56,8 +55,9 @@ export const createSoraKuvausForm = () => {
   });
 
   const mutationTest = wrapMutationTest({
-    entity: ENTITY.SORA_KUVAUS,
     id: soraKuvaus.id,
+    entity: ENTITY.SORA_KUVAUS,
+    stubGet: true,
   });
 
   it(

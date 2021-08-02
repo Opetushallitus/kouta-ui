@@ -1,5 +1,4 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
@@ -15,7 +14,9 @@ import {
   tallenna,
   fillKoulutustyyppiSelect,
   fillAsyncSelect,
+  wrapMutationTest,
 } from '#/cypress/utils';
+import { ENTITY } from '#/src/constants';
 
 const fillKoulutustyyppiSection = () => {
   getByTestId('koulutustyyppiSection').within(() => {
@@ -50,43 +51,30 @@ export const createSoraKuvausForm = () => {
     playMocks(soraKuvausMocks);
     stubSoraKuvausFormRoutes({ organisaatioOid });
 
-    cy.intercept(
-      { method: 'GET', url: `**/sorakuvaus/${soraKuvaus.id}` },
-      {
-        body: _.merge({}, soraKuvaus, {
-          organisaatioOid,
-        }),
-      }
-    );
-
     cy.visit(`/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/`);
   });
 
-  it('should be able to create sora-kuvaus', () => {
-    cy.intercept(
-      { method: 'PUT', url: '**/sorakuvaus' },
-      {
-        body: {
-          id: soraKuvaus.id,
-        },
-      }
-    ).as('createSoraKuvausRequest');
-
-    fillKoulutustyyppiSection();
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillTiedotSection();
-    fillTilaSection();
-
-    tallenna();
-
-    cy.wait('@createSoraKuvausRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`
-    );
+  const mutationTest = wrapMutationTest({
+    id: soraKuvaus.id,
+    entity: ENTITY.SORA_KUVAUS,
+    stubGet: true,
   });
+
+  it(
+    'should be able to create sora-kuvaus',
+    mutationTest(() => {
+      fillKoulutustyyppiSection();
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillTiedotSection();
+      fillTilaSection();
+
+      tallenna();
+
+      cy.location('pathname').should(
+        'eq',
+        `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`
+      );
+    })
+  );
 };

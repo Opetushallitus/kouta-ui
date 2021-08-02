@@ -462,7 +462,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
           }
         }
       ],
-      "tyyppiKoodiUri": "tyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
     }
   ],
   "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"

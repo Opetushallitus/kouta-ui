@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import haku from '#/cypress/data/haku';
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
@@ -6,13 +6,19 @@ import {
   assertNoUnsavedChangesDialog,
   fillKieliversiotSection,
   tallenna,
+  wrapMutationTest,
 } from '#/cypress/utils';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const hakuOid = '2.1.1.1.1.1';
 
 export const editHakuForm = () => {
+  const mutationTest = wrapMutationTest({
+    oid: hakuOid,
+    entity: ENTITY.HAKU,
+  });
+
   beforeEach(() => {
     stubHakuFormRoutes({ organisaatioOid });
 
@@ -26,7 +32,7 @@ export const editHakuForm = () => {
     cy.intercept(
       { method: 'GET', url: `**/haku/${hakuOid}` },
       {
-        body: _.merge(haku(), {
+        body: merge(haku(), {
           oid: hakuOid,
           organisaatioOid: organisaatioOid,
         }),
@@ -34,25 +40,16 @@ export const editHakuForm = () => {
     );
   });
 
-  it('should be able to edit haku', () => {
-    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
-    cy.intercept(
-      { method: 'POST', url: '**/haku' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('editHakuRequest');
+  it(
+    'should be able to edit haku',
+    mutationTest(() => {
+      cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
 
-    fillKieliversiotSection();
+      fillKieliversiotSection();
 
-    tallenna();
-
-    cy.wait('@editHakuRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      tallenna();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);

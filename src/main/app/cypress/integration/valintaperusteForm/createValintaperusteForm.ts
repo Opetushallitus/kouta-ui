@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import valintaperuste from '#/cypress/data/valintaperuste';
 import {
@@ -16,8 +16,10 @@ import {
   fillTilaSection,
   tallenna,
   fillKoulutustyyppiSelect,
+  wrapMutationTest,
 } from '#/cypress/utils';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
+import { ENTITY } from '#/src/constants';
 
 const lisaaSisaltoa = tyyppi => {
   getByTestId('sisaltoMenuToggle').click({ force: true });
@@ -137,7 +139,7 @@ const fillPerustiedotSection = () => {
 
 export const createValintaperusteForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
-  const createdValintaperusteId = '1.2.3.4.5.6';
+  const valintaperusteId = '1.2.3.4.5.6';
 
   beforeEach(() => {
     stubValintaperusteFormRoutes({ organisaatioOid });
@@ -145,46 +147,42 @@ export const createValintaperusteForm = () => {
     cy.visit(`/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat`);
   });
 
-  it('should be able to create valintaperuste', () => {
-    cy.intercept(
-      { method: 'GET', url: `**/valintaperuste/${createdValintaperusteId}` },
-      {
-        body: [
-          _.merge(valintaperuste(), {
-            oid: createdValintaperusteId,
-          }),
-        ],
-      }
-    );
-
-    cy.intercept(
-      { method: 'PUT', url: '**/valintaperuste' },
-      {
-        body: {
-          id: createdValintaperusteId,
-        },
-      }
-    ).as('createValintaperusteRequest');
-
-    fillPerustiedotSection();
-    fillPohjaSection();
-    fillHakukelpoisuusSection();
-    fillKuvausSection();
-    fillValintatapaSection();
-    fillValintakokeetSection();
-    fillLisatiedotSection();
-    fillJulkisuusSection();
-    fillTilaSection();
-
-    tallenna();
-
-    cy.wait('@createValintaperusteRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${createdValintaperusteId}/muokkaus`
-    );
+  const mutationTest = wrapMutationTest({
+    id: valintaperusteId,
+    entity: ENTITY.VALINTAPERUSTE,
+    stubGet: true,
   });
+
+  it(
+    'should be able to create valintaperuste',
+    mutationTest(() => {
+      cy.intercept(
+        { method: 'GET', url: `**/valintaperuste/${valintaperusteId}` },
+        {
+          body: [
+            merge(valintaperuste(), {
+              oid: valintaperusteId,
+            }),
+          ],
+        }
+      );
+
+      fillPerustiedotSection();
+      fillPohjaSection();
+      fillHakukelpoisuusSection();
+      fillKuvausSection();
+      fillValintatapaSection();
+      fillValintakokeetSection();
+      fillLisatiedotSection();
+      fillJulkisuusSection();
+      fillTilaSection();
+
+      tallenna();
+
+      cy.location('pathname').should(
+        'eq',
+        `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteId}/muokkaus`
+      );
+    })
+  );
 };

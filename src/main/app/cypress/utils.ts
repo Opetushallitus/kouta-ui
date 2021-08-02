@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import { loggable } from 'cypress-pipe';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _fp from 'lodash/fp';
+import { includes, last, merge, toLower, replace } from 'lodash/fp';
 
 import commonMocks from '#/cypress/mocks/common.mocks.json';
 import { Alkamiskausityyppi } from '#/src/constants';
@@ -54,7 +54,7 @@ export const fillAsyncSelect = (input, match = null) => {
   const searchTerm = match || input;
   getSelect().within(() => {
     cy.get('input[type="text"]').should('not.be.disabled').pipe(paste(input));
-    cy.findAllByRole('option', { name: _fp.includes(searchTerm) })
+    cy.findAllByRole('option', { name: includes(searchTerm) })
       .first()
       .click({ force: true });
   });
@@ -195,7 +195,79 @@ export const fillDatePickerInput = value => {
   cy.get('.DatePickerInput__').find('input').pipe(paste(value));
 };
 
+const koutaSearchItem = ({ idProp = 'oid' } = { idProp: 'oid' }) => ({
+  modified: '2019-02-20T07:55',
+  muokkaaja: { nimi: 'John Doe', oid: '1.2.246.562.24.62301161440' },
+  nimi: { fi: 'Nimi' },
+  [idProp]: '1.1.1.1.1.1',
+  organisaatio: {},
+  tila: 'tallennettu',
+});
+
+const stubEntityLists = () => {
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/search/koulutukset?*' },
+    {
+      body: {
+        result: [
+          merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
+        ],
+        totalCount: 1,
+      },
+    }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/search/toteutukset?*' },
+    {
+      body: {
+        result: [
+          merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
+        ],
+        totalCount: 1,
+      },
+    }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/search/haut?*' },
+    {
+      body: {
+        result: [merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
+        totalCount: 1,
+      },
+    }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/search/valintaperusteet?*' },
+    {
+      body: {
+        result: [
+          merge(koutaSearchItem({ idProp: 'id' }), {
+            nimi: { fi: 'Valintaperusteen nimi' },
+          }),
+        ],
+        totalCount: 1,
+      },
+    }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/search/hakukohteet?*' },
+    {
+      body: {
+        result: [
+          merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
+        ],
+        totalCount: 1,
+      },
+    }
+  );
+};
+
 export const stubCommonRoutes = () => {
+  stubEntityLists();
   stubLokalisaatioRoute();
   stubKayttoOikeusMeRoute();
   stubAsiointikieliRoute();
@@ -320,7 +392,7 @@ const isTutkintoonJohtava = koulutustyyppi =>
   ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
 
 export const fillKoulutustyyppiSelect = koulutustyyppiPath => {
-  const johtaaTutkintoon = isTutkintoonJohtava(_fp.last(koulutustyyppiPath));
+  const johtaaTutkintoon = isTutkintoonJohtava(last(koulutustyyppiPath));
 
   if (johtaaTutkintoon) {
     cy.findByRole('button', {
@@ -385,5 +457,74 @@ export const fillAjankohtaFields = (
         ).click();
         typeToEditor('Henkilökohtaisen suunnitelman lisätiedot');
     }
+  });
+};
+
+const INTERVAL = 200;
+
+const waitFor = condition => {
+  const fn = cb => () => {
+    if (condition) {
+      cb();
+    } else {
+      setTimeout(fn(cb), INTERVAL);
+    }
+  };
+
+  return new Promise(resolve => setTimeout(fn(resolve)));
+};
+
+/* Curried funktio, joka toteuttaa create ja edit testien yhteiset osat (stubien alustaminen
+ * ja tallennus-pyynnön vertaaminen snapshottiin).
+ * "run" on funktio, joka ajaa muun testikoodin
+ * options, objektissa entity on ENTITY-enum, jolle testi luodaan. oid/id on entiteetin tunniste
+ * ("id" SORA-kuvauksella ja valintaperusteella)
+ */
+export const wrapMutationTest = options => run => () => {
+  const { entity, oid, id, stubGet } = options;
+
+  const entityLower = toLower(entity);
+  const requestAlias = `${entityLower}Request`;
+
+  cy.intercept(
+    {
+      method: '{PUT,POST}',
+      url: `**/kouta-backend/${entityLower}`,
+    },
+    { body: oid ? { oid } : { id } }
+  ).as(requestAlias);
+
+  // Tähän säilötään entiteetin tallennetut arvot alempana, kun ne saadaan PUT tai POST-pyynnöstä.
+  let savedEntityValues;
+
+  if (stubGet) {
+    cy.intercept(
+      {
+        method: 'GET',
+        url: `**/kouta-backend/${entityLower}/${oid || id}**`,
+      },
+      req => {
+        req.on('before:response', async res => {
+          // Odotetaan entiteetin tallennetut arvot ja palautetaan ne GET-pyynnön vastauksessa
+          await waitFor(savedEntityValues);
+
+          // Korvataan null-arvot savedEntityValues-objektista undefined-arvoilla
+          const strSaveValues = replace(
+            JSON.stringify(savedEntityValues),
+            'null',
+            'undefined'
+          );
+
+          res.send({ statusCode: 200, body: strSaveValues });
+        });
+      }
+    );
+  }
+
+  run();
+
+  cy.wait(`@${requestAlias}`).then(({ request }) => {
+    savedEntityValues = request.body;
+    cy.wrap(request.body).toMatchSnapshot();
   });
 };

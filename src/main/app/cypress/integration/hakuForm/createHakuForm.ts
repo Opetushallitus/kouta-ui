@@ -13,7 +13,9 @@ import {
   tallenna,
   typeToEditor,
   fillAjankohtaFields,
+  wrapMutationTest,
 } from '#/cypress/utils';
+import { ENTITY } from '#/src/constants';
 
 const fillNimiSection = () => {
   getByTestId('nimiSection').within(() => {
@@ -142,7 +144,7 @@ const fillYhteystiedotSection = () => {
 
 export const createHakuForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
-  const createdHakuOid = '1.2.3.4.5.6';
+  const hakuOid = '1.2.3.4.5.6';
 
   beforeEach(() => {
     stubHakuFormRoutes({ organisaatioOid });
@@ -150,82 +152,52 @@ export const createHakuForm = () => {
     cy.visit(`/organisaatio/${organisaatioOid}/haku`);
   });
 
-  it('should be able to create haku with ataru hakulomake', () => {
-    cy.intercept(
-      {
-        method: 'PUT',
-        url: '**/haku',
-      },
-      {
-        oid: createdHakuOid,
-      }
-    ).as('createHakuRequest');
-
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillNimiSection();
-    fillKohdejoukkoSection();
-    fillHakutapaSection();
-    fillAikatauluSection();
-    fillHakulomakeSection('ataru');
-    fillYhteystiedotSection();
-    fillTilaSection();
-
-    tallenna();
-
-    cy.wait('@createHakuRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-
-    cy.location('pathname').should(
-      'eq',
-      `/kouta/organisaatio/${organisaatioOid}/haku/${createdHakuOid}/muokkaus`
-    );
+  const mutationTest = wrapMutationTest({
+    entity: ENTITY.HAKU,
+    oid: hakuOid,
+    stubGet: true,
   });
 
-  it('should be able to create haku with muu hakulomake', () => {
-    cy.intercept(
-      { method: 'PUT', url: '**/haku' },
-      {
-        body: {
-          oid: createdHakuOid,
-        },
-      }
-    ).as('createHakuRequest');
+  it(
+    'should be able to create haku with ataru hakulomake',
+    mutationTest(() => {
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillNimiSection();
+      fillKohdejoukkoSection();
+      fillHakutapaSection();
+      fillAikatauluSection();
+      fillHakulomakeSection('ataru');
+      fillYhteystiedotSection();
+      fillTilaSection();
 
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillNimiSection();
-    getByTestId('hakulomakeSection').click();
-    fillHakulomakeSection('muu');
+      tallenna();
+    })
+  );
 
-    tallenna();
+  it(
+    'should be able to create haku with muu hakulomake',
+    mutationTest(() => {
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillNimiSection();
+      getByTestId('hakulomakeSection').click();
+      fillHakulomakeSection('muu');
 
-    cy.wait('@createHakuRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      tallenna();
+    })
+  );
 
-  it('should be able to create haku with "ei sähköistä" hakulomake', () => {
-    cy.intercept(
-      { method: 'PUT', url: '**/haku' },
-      {
-        body: {
-          oid: createdHakuOid,
-        },
-      }
-    ).as('createHakuRequest');
+  it(
+    'should be able to create haku with "ei sähköistä" hakulomake',
+    mutationTest(() => {
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillNimiSection();
+      getByTestId('hakulomakeSection').click();
+      fillHakulomakeSection('ei sähköistä');
 
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillNimiSection();
-    getByTestId('hakulomakeSection').click();
-    fillHakulomakeSection('ei sähköistä');
-
-    tallenna();
-
-    cy.wait('@createHakuRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      tallenna();
+    })
+  );
 };

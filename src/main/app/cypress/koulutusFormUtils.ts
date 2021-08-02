@@ -1,13 +1,12 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import soraKuvaus from '#/cypress/data/soraKuvaus';
 import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
 } from '#/cypress/utils';
-
-import soraKuvaus from './data/soraKuvaus';
 
 export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
@@ -26,7 +25,7 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: _.merge(organisaatio(), {
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -39,22 +38,12 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        _.merge(organisaatio(), {
+        merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],
     }
   );
-
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `**/koulutus/list?organisaatioOid=${organisaatioOid}`,
-    },
-    { body: [] }
-  );
-
-  cy.intercept({ method: 'GET', url: `/koulutus/list` }, { body: [] });
 
   cy.intercept(
     { method: 'GET', url: `**/koulutus/*/toteutukset/list**` },
@@ -70,7 +59,7 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
     { method: 'GET', url: '**/sorakuvaus/list**' },
     {
       body: [...new Array(10)].map((v, i) =>
-        _.merge(soraKuvaus(), {
+        merge(soraKuvaus(), {
           nimi: { fi: `Sora-kuvaus ${i}` },
           id: i.toString(),
           tila: 'julkaistu',
@@ -82,13 +71,16 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     { method: 'GET', url: '**/sorakuvaus/1' },
     {
-      body: _.merge(soraKuvaus(), {
+      body: merge(soraKuvaus(), {
         nimi: { fi: `Sora-kuvaus 1` },
         id: 1,
         tila: 'julkaistu',
       }),
     }
   );
+
+  cy.intercept({ method: 'GET', url: '**/koulutus/list**' }, { body: [] });
+  cy.intercept({ method: 'GET', url: '**/search/koulutus/**' }, { body: [] });
 
   stubOppijanumerorekisteriHenkiloRoute();
 };

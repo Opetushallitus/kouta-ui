@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _fp from 'lodash/fp';
+import { merge } from 'lodash/fp';
 
 import koulutus from '#/cypress/data/koulutus';
 import lukioMocks from '#/cypress/mocks/lukio.mocks.json';
@@ -23,8 +23,9 @@ import {
   fillYhteyshenkilotFields,
   fillAjankohtaFields,
   selectCheckbox,
+  wrapMutationTest,
 } from '#/cypress/utils';
-import { Alkamiskausityyppi } from '#/src/constants';
+import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const fillOpetuskieli = (chosenLang = 'suomi') => {
@@ -296,171 +297,145 @@ const prepareTest = tyyppi => {
   stubToteutusFormRoutes({ organisaatioOid });
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
-    { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
-  );
-
-  cy.intercept(
-    { method: 'GET', url: `**/toteutus/${toteutusOid}` },
-    { body: [] }
+    { body: merge(koulutus({ tyyppi }), testKoulutusFields) }
   );
 
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`);
 };
 
+const mutationTest = wrapMutationTest({
+  oid: toteutusOid,
+  entity: ENTITY.TOTEUTUS,
+  stubGet: true,
+});
+
 export const createToteutusForm = () => {
-  it('should be able to create ammatillinen tutkinnon osa toteutus', () => {
-    prepareTest('amm-tutkinnon-osa');
+  it(
+    'should be able to create ammatillinen tutkinnon osa toteutus',
+    mutationTest(() => {
+      prepareTest('amm-tutkinnon-osa');
 
-    cy.intercept(
-      { method: 'PUT', url: '**/toteutus' },
-      {
-        body: {
-          oid: toteutusOid,
-        },
-      }
-    ).as('createAmmToteutusResponse');
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillTiedotSection('amm-tutkinnon-osa');
 
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillTiedotSection('amm-tutkinnon-osa');
+      getByTestId('jarjestamistiedotSection').within(() => {
+        fillCommonJarjestamistiedot();
+        jatka();
+      });
 
-    getByTestId('jarjestamistiedotSection').within(() => {
-      fillCommonJarjestamistiedot();
-      jatka();
-    });
+      fillTeemakuvaSection();
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
 
-    fillTeemakuvaSection();
-    fillNayttamistiedotSection({ ammattinimikkeet: false });
-    fillJarjestajatSection();
+      cy.findByTestId('soraKuvausSection').should('not.exist');
 
-    cy.findByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+        cy.findByRole('button', {
+          name: 'toteutuslomake.hakuTapa.hakeutuminen',
+        }).click();
 
-    getByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
-      cy.findByRole('button', {
-        name: 'toteutuslomake.hakuTapa.hakeutuminen',
-      }).click();
+        cy.findByRole('button', {
+          name: 'toteutuslomake.hakuTapa.hakeutuminen',
+        }).click();
 
-      cy.findByRole('button', {
-        name: 'toteutuslomake.hakuTapa.hakeutuminen',
-      }).click();
+        cy.findByText('toteutuslomake.muuHakulomake').click();
 
-      cy.findByText('toteutuslomake.muuHakulomake').click();
+        cy.findByRole('textbox', {
+          name: /^toteutuslomake.hakeutuminen.linkki/,
+        })
+          .click()
+          .pipe(paste('http://example.com'));
 
-      cy.findByRole('textbox', {
-        name: /^toteutuslomake.hakeutuminen.linkki/,
-      })
-        .click()
-        .pipe(paste('http://example.com'));
+        cy.findByRole('textbox', {
+          name: /^toteutuslomake.hakeutuminen.lisatiedot/,
+        })
+          .click()
+          .pipe(paste('lisätiedot'));
 
-      cy.findByRole('textbox', {
-        name: /^toteutuslomake.hakeutuminen.lisatiedot/,
-      })
-        .click()
-        .pipe(paste('lisätiedot'));
+        cy.findByRole('textbox', {
+          name: /^toteutuslomake.lisatiedotValintaperusteista/,
+        })
+          .click()
+          .pipe(paste('lisätiedot valintaperusteista'));
 
-      cy.findByRole('textbox', {
-        name: /^toteutuslomake.lisatiedotValintaperusteista/,
-      })
-        .click()
-        .pipe(paste('lisätiedot valintaperusteista'));
-
-      cy.findByTestId('alkaa').within(() => {
-        fillDateTimeInput({
-          date: '01.04.2050',
-          time: '00:00',
+        cy.findByTestId('alkaa').within(() => {
+          fillDateTimeInput({
+            date: '01.04.2050',
+            time: '00:00',
+          });
         });
-      });
 
-      cy.findByTestId('paattyy').within(() => {
-        fillDateTimeInput({
-          date: '01.09.2050',
-          time: '00:00',
+        cy.findByTestId('paattyy').within(() => {
+          fillDateTimeInput({
+            date: '01.09.2050',
+            time: '00:00',
+          });
         });
+
+        jatka();
       });
 
-      jatka();
-    });
-
-    getByTestId('soraKuvausSection').within(() => {
-      jatka();
-    });
-
-    fillYhteystiedotSection();
-    fillTilaSection();
-
-    tallenna();
-
-    cy.wait('@createAmmToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
-
-  it('should be able to create ammatillinen toteutus', () => {
-    prepareTest('amm');
-
-    cy.intercept(
-      { method: 'PUT', url: '**/toteutus' },
-      {
-        body: {
-          oid: toteutusOid,
-        },
-      }
-    ).as('createAmmToteutusResponse');
-
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillTiedotSection('amm');
-
-    getByTestId('osaamisalatSection').within(() => {
-      getByTestId('osaamisalaSelection').within(() => {
-        selectCheckbox('Kaivostyön osaamisala');
+      getByTestId('soraKuvausSection').within(() => {
+        jatka();
       });
 
-      getByTestId('osaamisalaToggle.osaamisala_1800').click({ force: true });
-      cy.findByLabelText('yleiset.linkki').pipe(paste('http://linkki.com'));
-      cy.findByLabelText('yleiset.linkinOtsikko').pipe(
-        paste('osaamisala_0 otsikko')
-      );
+      fillYhteystiedotSection();
+      fillTilaSection();
 
-      jatka();
-    });
+      tallenna();
+    })
+  );
 
-    getByTestId('jarjestamistiedotSection').within(() => {
-      fillCommonJarjestamistiedot();
-      jatka();
-    });
+  it(
+    'should be able to create ammatillinen toteutus',
+    mutationTest(() => {
+      prepareTest('amm');
 
-    fillTeemakuvaSection();
-    fillNayttamistiedotSection();
-    fillJarjestajatSection();
-    fillYhteystiedotSection();
-    fillTilaSection();
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillTiedotSection('amm');
 
-    tallenna();
+      getByTestId('osaamisalatSection').within(() => {
+        getByTestId('osaamisalaSelection').within(() => {
+          selectCheckbox('Kaivostyön osaamisala');
+        });
 
-    cy.wait('@createAmmToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+        getByTestId('osaamisalaToggle.osaamisala_1800').click({ force: true });
+        cy.findByLabelText('yleiset.linkki').pipe(paste('http://linkki.com'));
+        cy.findByLabelText('yleiset.linkinOtsikko').pipe(
+          paste('osaamisala_0 otsikko')
+        );
 
-  it('should be able to create korkeakoulu toteutus', () => {
-    prepareTest('yo');
+        jatka();
+      });
 
-    cy.intercept(
-      { method: 'PUT', url: '**/toteutus' },
-      {
-        body: {
-          oid: toteutusOid,
-        },
-      }
-    ).as('createYoToteutusResponse');
+      getByTestId('jarjestamistiedotSection').within(() => {
+        fillCommonJarjestamistiedot();
+        jatka();
+      });
 
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillTiedotSection('yo');
+      fillTeemakuvaSection();
+      fillNayttamistiedotSection();
+      fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
 
-    // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175)
-    /*
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create korkeakoulu toteutus',
+    mutationTest(() => {
+      prepareTest('yo');
+
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillTiedotSection('yo');
+
+      // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175)
+      /*
     getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
       fillKkOsaamisalat();
       jatka();
@@ -472,65 +447,52 @@ export const createToteutusForm = () => {
     });
     */
 
-    getByTestId('jarjestamistiedotSection').within(() => {
-      fillCommonJarjestamistiedot({
-        maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+      getByTestId('jarjestamistiedotSection').within(() => {
+        fillCommonJarjestamistiedot({
+          maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        });
+        cy.findByTestId('apuraha').should('not.exist');
+        fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
+        cy.findByTestId('apuraha').should('exist');
+        fillApuraha();
+        jatka();
       });
-      cy.findByTestId('apuraha').should('not.exist');
-      fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
-      cy.findByTestId('apuraha').should('exist');
-      fillApuraha();
-      jatka();
-    });
 
-    fillTeemakuvaSection();
-    fillNayttamistiedotSection();
-    fillJarjestajatSection();
-    fillYhteystiedotSection();
-    fillTilaSection();
+      fillTeemakuvaSection();
+      fillNayttamistiedotSection();
+      fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
 
-    tallenna();
+      tallenna();
+    })
+  );
 
-    cy.wait('@createYoToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+  it(
+    'should be able to create lukio toteutus',
+    mutationTest(() => {
+      prepareTest('lk');
 
-  it('should be able to create lukio toteutus', () => {
-    prepareTest('lk');
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillTiedotSection('lk');
 
-    cy.intercept(
-      { method: 'PUT', url: '**/toteutus' },
-      {
-        body: {
-          oid: toteutusOid,
-        },
-      }
-    ).as('createLkToteutusResponse');
+      fillLukiolinjatSection();
 
-    fillPohjaSection();
-    fillKieliversiotSection({ jatka: true });
-    fillTiedotSection('lk');
+      getByTestId('jarjestamistiedotSection').within(() => {
+        fillCommonJarjestamistiedot();
+        fillKielivalikoima();
+        fillDiplomi();
+        jatka();
+      });
 
-    fillLukiolinjatSection();
+      fillTeemakuvaSection();
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
 
-    getByTestId('jarjestamistiedotSection').within(() => {
-      fillCommonJarjestamistiedot();
-      fillKielivalikoima();
-      fillDiplomi();
-      jatka();
-    });
-
-    fillTeemakuvaSection();
-    fillNayttamistiedotSection({ ammattinimikkeet: false });
-    fillJarjestajatSection();
-    fillYhteystiedotSection();
-    fillTilaSection();
-
-    tallenna();
-
-    cy.wait('@createLkToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      tallenna();
+    })
+  );
 };

@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
@@ -29,7 +29,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: _.merge(organisaatio(), {
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -42,7 +42,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        _.merge(organisaatio(), {
+        merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],
@@ -52,6 +52,10 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   cy.intercept({ method: 'GET', url: '**/haku/list**' }, { body: [] });
 
   cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
+
+  cy.intercept({ method: 'GET', url: `**/koulutus/list**` }, { body: [] });
+
+  cy.intercept({ method: 'GET', url: `**/search/haku/**` }, { body: [] });
 
   stubHakemuspalveluLomakkeetRoute();
   stubOppijanumerorekisteriHenkiloRoute();

@@ -1,3 +1,6 @@
+import { merge } from 'lodash/fp';
+
+import organisaatio from '#/cypress/data/organisaatio';
 import {
   prepareTest,
   fillJarjestyspaikkaSection,
@@ -6,34 +9,39 @@ import {
   assertNoUnsavedChangesDialog,
   fillKieliversiotSection,
   tallenna,
+  wrapMutationTest,
 } from '#/cypress/utils';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 export const editHakukohdeForm = () => {
   const organisaatioOid = '1.2.246.562.10.52251087186';
   const hakuOid = '4.1.1.1.1.1';
   const hakukohdeOid = '6.1.1.1.1.1';
 
-  it('should be able to edit hakukohde', () => {
-    prepareTest({
-      tyyppi: 'amm',
-      hakuOid,
-      hakukohdeOid,
-      organisaatioOid,
-      edit: true,
-      tarjoajat: ['1.2.246.562.10.45854578546'],
-    });
-
-    fillKieliversiotSection();
-    fillJarjestyspaikkaSection({
-      jatka: false,
-    });
-    tallenna();
-
-    cy.wait('@updateHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  const mutationTest = wrapMutationTest({
+    oid: hakukohdeOid,
+    entity: ENTITY.HAKUKOHDE,
   });
+
+  it(
+    'should be able to edit hakukohde',
+    mutationTest(() => {
+      prepareTest({
+        tyyppi: 'amm',
+        hakuOid,
+        hakukohdeOid,
+        organisaatioOid,
+        edit: true,
+        tarjoajat: ['1.2.246.562.10.45854578546'],
+      });
+
+      fillKieliversiotSection();
+      fillJarjestyspaikkaSection({
+        jatka: false,
+      });
+      tallenna();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest({
@@ -56,7 +64,23 @@ export const editHakukohdeForm = () => {
       edit: true,
       tarjoajat: ['1.2.246.562.10.45854578546'],
     });
+
+    cy.intercept(
+      {
+        method: 'POST',
+        url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+      },
+      {
+        body: [
+          merge(organisaatio(), {
+            oid: organisaatioOid,
+          }),
+        ],
+      }
+    );
+
     cy.visit(`/hakukohde/${hakukohdeOid}/muokkaus`);
+
     cy.url().should(
       'include',
       `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/hakukohde/${hakukohdeOid}/muokkaus`

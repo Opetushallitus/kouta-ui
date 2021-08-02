@@ -19,7 +19,7 @@ export default () => ({
             fi: 'Fi osoite',
             sv: 'Sv osoite',
           },
-          postinumeroKoodiUri: 'posti_0#2',
+          postinumeroKoodiUri: 'posti_00350#2',
         },
         puhelinnumero: {
           fi: '1234',

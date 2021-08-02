@@ -4,7 +4,9 @@ import {
   assertNoUnsavedChangesDialog,
   fillKieliversiotSection,
   tallenna,
+  wrapMutationTest,
 } from '#/cypress/utils';
+import { ENTITY } from '#/src/constants';
 
 export const editOppilaitosForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
@@ -26,19 +28,19 @@ export const editOppilaitosForm = () => {
     cy.visit(`/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 
-  it('should be able to edit oppilaitos', () => {
-    cy.intercept({ method: 'POST', url: '**/oppilaitos' }, { body: {} }).as(
-      'editOppilaitosResponse'
-    );
-
-    fillKieliversiotSection();
-
-    tallenna();
-
-    cy.wait('@editOppilaitosResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  const mutationTest = wrapMutationTest({
+    oid: organisaatioOid,
+    entity: ENTITY.OPPILAITOS,
   });
+
+  it(
+    'should be able to edit oppilaitos',
+    mutationTest(() => {
+      fillKieliversiotSection();
+
+      tallenna();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     assertNoUnsavedChangesDialog();

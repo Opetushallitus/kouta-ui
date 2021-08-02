@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _fp from 'lodash/fp';
+import { merge } from 'lodash/fp';
 
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
@@ -10,8 +10,9 @@ import {
   assertNoUnsavedChangesDialog,
   fillKieliversiotSection,
   tallenna,
+  wrapMutationTest,
 } from '#/cypress/utils';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const koulutusOid = '1.2.1.1.1.1';
@@ -47,123 +48,90 @@ const prepareTest = tyyppi => {
 
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
-    { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
+    { body: merge(koulutus({ tyyppi }), testKoulutusFields) }
   );
 
   cy.intercept(
     { method: 'GET', url: `**/toteutus/${toteutusOid}` },
-    { body: _fp.merge(toteutus({ tyyppi }), testToteutusFields) }
+    { body: merge(toteutus({ tyyppi }), testToteutusFields) }
   );
 
   cy.visit(`/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`);
 };
 
 export const editToteutusForm = () => {
-  it('should be able to edit ammatillinen toteutus', () => {
-    prepareTest('amm');
-    cy.intercept(
-      { method: 'POST', url: '**/toteutus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateAmmToteutusResponse');
-
-    fillKieliversiotSection();
-
-    cy.findByTestId('hakukohteetSection').should('exist');
-
-    tallenna();
-
-    cy.wait('@updateAmmToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  const mutationTest = wrapMutationTest({
+    oid: toteutusOid,
+    entity: ENTITY.TOTEUTUS,
   });
 
-  it('should be able to edit tutkinnon osa toteutus', () => {
-    prepareTest('amm-tutkinnon-osa');
-    cy.intercept(
-      { method: 'POST', url: '**/toteutus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateAmmToteutusResponse');
+  it(
+    'should be able to edit ammatillinen toteutus',
+    mutationTest(() => {
+      prepareTest('amm');
 
-    fillKieliversiotSection();
-    cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
-      cy.findByRole('button', {
-        name: 'toteutuslomake.hakuTapa.hakeutuminen',
-      }).click();
+      fillKieliversiotSection();
 
-      cy.findByText('toteutuslomake.hakemuspalvelu').click();
-    });
+      cy.findByTestId('hakukohteetSection').should('exist');
 
-    cy.findByTestId('hakukohteetSection').should('exist');
+      tallenna();
+    })
+  );
 
-    cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
-      cy.findByText('toteutuslomake.muuHakulomake').click();
-    });
+  it(
+    'should be able to edit tutkinnon osa toteutus',
+    mutationTest(() => {
+      prepareTest('amm-tutkinnon-osa');
 
-    cy.findByTestId('hakukohteetSection').should('not.exist');
+      fillKieliversiotSection();
+      cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+        cy.findByRole('button', {
+          name: 'toteutuslomake.hakuTapa.hakeutuminen',
+        }).click();
 
-    cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
-      cy.findByText('toteutuslomake.eiSahkoistaHakua').click();
-    });
+        cy.findByText('toteutuslomake.hakemuspalvelu').click();
+      });
 
-    cy.findByTestId('hakukohteetSection').should('not.exist');
+      cy.findByTestId('hakukohteetSection').should('exist');
 
-    tallenna();
+      cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+        cy.findByText('toteutuslomake.muuHakulomake').click();
+      });
 
-    cy.wait('@updateAmmToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      cy.findByTestId('hakukohteetSection').should('not.exist');
 
-  it('should be able to edit korkeakoulu toteutus', () => {
-    prepareTest('yo');
+      cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+        cy.findByText('toteutuslomake.eiSahkoistaHakua').click();
+      });
 
-    cy.intercept(
-      { method: 'POST', url: '**/toteutus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateYoToteutusResponse');
+      cy.findByTestId('hakukohteetSection').should('not.exist');
 
-    fillKieliversiotSection();
-    tallenna();
+      tallenna();
+    })
+  );
 
-    cy.wait('@updateYoToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+  it(
+    'should be able to edit korkeakoulu toteutus',
+    mutationTest(() => {
+      prepareTest('yo');
 
-  it('should be able to edit lukio toteutus', () => {
-    prepareTest('lk');
+      fillKieliversiotSection();
+      tallenna();
+    })
+  );
 
-    cy.intercept(
-      { method: 'POST', url: '**/toteutus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateLkToteutusResponse');
+  it(
+    'should be able to edit lukio toteutus',
+    mutationTest(() => {
+      prepareTest('lk');
 
-    fillKieliversiotSection();
+      fillKieliversiotSection();
 
-    cy.findByTestId('hakukohteetSection').should('exist');
+      cy.findByTestId('hakukohteetSection').should('exist');
 
-    tallenna();
-
-    cy.wait('@updateLkToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      tallenna();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');

@@ -9,7 +9,9 @@ import {
   fillKieliversiotSection,
   fillTilaSection,
   tallenna,
+  wrapMutationTest,
 } from '#/cypress/utils';
+import { ENTITY } from '#/src/constants';
 
 const fillPerustiedotSection = () => {
   getByTestId('perustiedotSection').within(() => {
@@ -139,63 +141,48 @@ export const createOppilaitosForm = () => {
     cy.visit(`/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 
-  it('should be able to create oppilaitos without hakijapalveluyhteystiedot', () => {
-    cy.intercept(
-      { method: 'PUT', url: '**/oppilaitos' },
-      {
-        body: {
-          oid: '1.2.3.4.5.6',
-        },
-      }
-    ).as('createOppilaitosResponse');
-
-    fillKieliversiotSection({ jatka: true });
-
-    fillPerustiedotSection();
-
-    fillEsittelySection();
-
-    fillTeemakuvaSection();
-
-    passOsatSection();
-
-    fillTietoaOpiskelustaSection();
-
-    fillTilaSection();
-
-    fillYhteystiedotSection();
-
-    skipHakijapalveluidenYhteystiedotSection();
-
-    tallenna();
-
-    cy.wait('@createOppilaitosResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  const mutationTest = wrapMutationTest({
+    oid: organisaatioOid,
+    entity: ENTITY.OPPILAITOS,
   });
 
-  it('should be able to create oppilaitos with hakijapalveluyhteystiedot', () => {
-    cy.intercept(
-      { method: 'PUT', url: '**/oppilaitos' },
-      {
-        body: {
-          oid: '1.2.3.4.5.6',
-        },
-      }
-    ).as('createOppilaitosResponse');
+  it(
+    'should be able to create oppilaitos without hakijapalveluyhteystiedot',
+    mutationTest(() => {
+      fillKieliversiotSection({ jatka: true });
 
-    fillKieliversiotSection({ jatka: true });
+      fillPerustiedotSection();
 
-    getByTestId('yhteystiedotSection').click();
+      fillEsittelySection();
 
-    fillYhteystiedotSection();
+      fillTeemakuvaSection();
 
-    fillHakijapalveluidenYhteystiedotSection();
+      passOsatSection();
 
-    tallenna();
+      fillTietoaOpiskelustaSection();
 
-    cy.wait('@createOppilaitosResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
-  });
+      fillTilaSection();
+
+      fillYhteystiedotSection();
+
+      skipHakijapalveluidenYhteystiedotSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create oppilaitos with hakijapalveluyhteystiedot',
+    mutationTest(() => {
+      fillKieliversiotSection({ jatka: true });
+
+      getByTestId('yhteystiedotSection').click();
+
+      fillYhteystiedotSection();
+
+      fillHakijapalveluidenYhteystiedotSection();
+
+      tallenna();
+    })
+  );
 };

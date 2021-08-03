@@ -267,6 +267,7 @@ const stubEntityLists = () => {
 };
 
 export const stubCommonRoutes = () => {
+  cy.intercept('**/frontProperties', { fixture: 'frontProperties.json' });
   stubEntityLists();
   stubLokalisaatioRoute();
   stubKayttoOikeusMeRoute();
@@ -471,7 +472,7 @@ const waitFor = condition => {
     }
   };
 
-  return new Promise(resolve => setTimeout(fn(resolve)));
+  return new Promise(resolve => setTimeout(fn(resolve), 0));
 };
 
 /* Curried funktio, joka toteuttaa create ja edit testien yhteiset osat (stubien alustaminen
@@ -486,18 +487,9 @@ export const wrapMutationTest = options => run => () => {
   const entityLower = toLower(entity);
   const requestAlias = `${entityLower}Request`;
 
-  cy.intercept(
-    {
-      method: '{PUT,POST}',
-      url: `**/kouta-backend/${entityLower}`,
-    },
-    { body: oid ? { oid } : { id } }
-  ).as(requestAlias);
-
-  // Tähän säilötään entiteetin tallennetut arvot alempana, kun ne saadaan PUT tai POST-pyynnöstä.
-  let savedEntityValues;
-
   if (stubGet) {
+    const DEFAULT_COMMAND_TIMEOUT = Cypress.config().defaultCommandTimeout;
+    Cypress.config('defaultCommandTimeout', 60000);
     cy.intercept(
       {
         method: 'GET',
@@ -516,10 +508,22 @@ export const wrapMutationTest = options => run => () => {
           );
 
           res.send({ statusCode: 200, body: strSaveValues });
+          Cypress.config('defaultCommandTimeout', DEFAULT_COMMAND_TIMEOUT);
         });
       }
     );
   }
+
+  cy.intercept(
+    {
+      method: '{PUT,POST}',
+      url: `**/kouta-backend/${entityLower}`,
+    },
+    { body: oid ? { oid } : { id } }
+  ).as(requestAlias);
+
+  // Tähän säilötään entiteetin tallennetut arvot alempana, kun ne saadaan PUT tai POST-pyynnöstä.
+  let savedEntityValues;
 
   run();
 

@@ -4,18 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
 
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldRadioGroup,
   FormFieldSelect,
 } from '#/src/components/formFields';
+import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getThemeProp, spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 
-const KohdejoukkoFlexItem = styled(FlexItem).attrs({ grow: 0 })`
+const KohdejoukkoFlexItem = styled(Box).attrs({ flexGrow: 0 })`
   ${({ showTarkenteet }) =>
     showTarkenteet &&
     css`
@@ -53,7 +53,7 @@ const HaunKohdejoukkoFields = ({
   });
 
   return (
-    <Flex>
+    <Box display="flex">
       <KohdejoukkoFlexItem
         showTarkenteet={showTarkenteet}
         {...getTestIdProps('kohdejoukko')}
@@ -67,7 +67,7 @@ const HaunKohdejoukkoFields = ({
         />
       </KohdejoukkoFlexItem>
       {showTarkenteet && (
-        <FlexItem grow={1} paddingLeft={4} {...getTestIdProps('tarkenne')}>
+        <Box flexGrow={1} paddingLeft={4} {...getTestIdProps('tarkenne')}>
           <Field
             label={tarkenneLabel}
             component={FormFieldSelect}
@@ -75,9 +75,9 @@ const HaunKohdejoukkoFields = ({
             name={`${name}.tarkenne`}
             isClearable
           />
-        </FlexItem>
+        </Box>
       )}
-    </Flex>
+    </Box>
   );
 };
 

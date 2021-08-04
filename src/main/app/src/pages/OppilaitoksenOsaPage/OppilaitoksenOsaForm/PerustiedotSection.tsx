@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
-import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
+import Heading from '#/src/components/Heading';
 import { Box, Typography } from '#/src/components/virkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
@@ -129,9 +129,9 @@ export const PerustiedotSection = ({ name, organisaatioOid, language }) => {
   return (
     <>
       <OrganisaatioSection organisaatio={organisaatio} t={t} />
-      <DividerHeading mt={4}>
+      <Heading hasDivider mt={4}>
         {t('oppilaitoslomake.syotaPerustiedot')}
-      </DividerHeading>
+      </Heading>
       <TiedotSection name={name} t={t} language={language} />
     </>
   );

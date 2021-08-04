@@ -3,8 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import { Flex } from '#/src/components/Flex';
-import { Typography } from '#/src/components/virkailija';
+import { Box, Typography } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey } from '#/src/constants';
 import { spacing } from '#/src/theme';
 
@@ -26,19 +25,14 @@ const getLabel = ({ children, tila, t }) => {
   return t(getJulkaisutilaTranslationKey(tila));
 };
 
-export const SmallStatusTag = ({
-  children,
-  status,
-  color,
-  ...props
-}: StatusTagProps) => {
+export const SmallStatusTag = ({ children, status, color }: StatusTagProps) => {
   const { t } = useTranslation();
 
   return (
-    <Flex inline alignCenter {...props}>
+    <Box display="inline-flex" alignItems="center">
       <Badge status={status} color={color} />
       <Typography>{getLabel({ children, tila: status, t })}</Typography>
-    </Flex>
+    </Box>
   );
 };
 

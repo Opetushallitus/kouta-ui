@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
   FormFieldInput,
@@ -71,8 +70,13 @@ export const ApurahaMaaraFields = createFormFieldComponent(
             disabled={disabled}
           />
         </Box>
-        <Flex mt={1} alignCenter justifyBetween>
-          <FlexItem basis="60px" grow={1} data-testid="apurahaMin">
+        <Box
+          display="flex"
+          mt={1}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Box flexBasis="60px" flexGrow={1} data-testid="apurahaMin">
             <Field
               name={`${section}.apurahaMin`}
               placeholder={
@@ -84,11 +88,11 @@ export const ApurahaMaaraFields = createFormFieldComponent(
               type="number"
               disabled={disabled}
             />
-          </FlexItem>
+          </Box>
           {apurahaMaaraTyyppi === ApurahaMaaraTyyppi.VAIHTELUVALI && (
             <>
               <Box style={{ textAlign: 'center', width: '20px' }}>{NDASH}</Box>
-              <FlexItem basis="60px" grow={1}>
+              <Box flexBasis="60px" flexGrow={1}>
                 <Field
                   name={`${section}.apurahaMax`}
                   placeholder={t('toteutuslomake.max')}
@@ -96,7 +100,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
                   type="number"
                   disabled={disabled}
                 />
-              </FlexItem>
+              </Box>
             </>
           )}
           <Box ml={1} style={{ width: '70px' }}>
@@ -105,7 +109,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
               disabled={disabled}
             />
           </Box>
-        </Flex>
+        </Box>
       </Spacing>
     );
   }
@@ -125,8 +129,8 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
 
   return (
     <FieldGroup title={t('toteutuslomake.apuraha')}>
-      <Flex {...getTestIdProps('apuraha')}>
-        <FlexItem grow={0} basis="30%">
+      <Box display="flex" {...getTestIdProps('apuraha')}>
+        <Box flexGrow={0} flexBasis="30%">
           <Field name={`${name}.onkoApuraha`} component={FormFieldSwitch}>
             {t('toteutuslomake.apurahaKaytossa')}
           </Field>
@@ -137,18 +141,18 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
               section={name}
             />
           )}
-        </FlexItem>
+        </Box>
         {onkoApuraha && (
-          <FlexItem grow={1} paddingLeft={4}>
+          <Box flexGrow={1} paddingLeft={4}>
             <Field
               name={`${name}.apurahaKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
               hideHeaderSelect
             />
-          </FlexItem>
+          </Box>
         )}
-      </Flex>
+      </Box>
     </FieldGroup>
   );
 };

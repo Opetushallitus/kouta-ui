@@ -28,17 +28,20 @@ const FooterContainer = styled.div`
   border-top: 2px solid ${getThemeProp('palette.primary.main')};
   padding: ${({ theme }) => theme.spacing.unit * 2}px 0px;
   bottom: 0px;
-  position: fixed;
+  position: sticky;
   left: 0px;
   width: 100%;
   z-index: 99;
+  height: 36px;
+  bottom: 0;
 `;
 
 const FormContent = styled.div`
   background-color: ${getThemeProp('palette.mainBackground')};
   padding-top: ${({ theme }) => theme.spacing.unit * 6}px;
-  padding-bottom: ${({ theme, hasFooter }) =>
-    theme.spacing.unit * 6 + (hasFooter ? 75 : 0)}px;
+  padding-bottom: ${({ theme }) => theme.spacing.unit * 6}px;
+  flex-grow: 1;
+  flex-basis: 100%;
 `;
 
 const FooterWrapper = styled.div`
@@ -59,9 +62,12 @@ const Buttons = styled.div`
 const FooterActions = styled.div``;
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   border: 0;
   padding: 0;
   margin: 0;
+  height: 100%;
   ${({ readOnly }) =>
     readOnly &&
     css`

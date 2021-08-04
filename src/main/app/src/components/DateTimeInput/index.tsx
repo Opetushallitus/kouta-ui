@@ -2,10 +2,9 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 import _ from 'lodash';
 
-import DatePickerInput from '#/src/components/DatePickerInput';
-import { Flex, FlexItem } from '#/src/components/Flex';
+import { DatePickerInput } from '#/src/components/DatePickerInput';
 import TimeInput from '#/src/components/TimeInput';
-import { FormControl, FormLabel } from '#/src/components/virkailija';
+import { Box, FormControl } from '#/src/components/virkailija';
 import {
   getKoutaDateString,
   isValidDate,
@@ -88,8 +87,6 @@ const getCompactTime = time => {
 export const DateTimeInput = ({
   value,
   onChange,
-  dateLabel,
-  timeLabel,
   disabled = false,
   error = false,
   datePlaceholder = '',
@@ -135,18 +132,15 @@ export const DateTimeInput = ({
   );
 
   return (
-    <Flex {...getTestIdProps('DateTimeInput')}>
-      <FlexItem
-        basis="280px"
-        shrink={0}
-        grow={1}
+    <Box display="flex" {...getTestIdProps('DateTimeInput')}>
+      <Box
+        flexBasis="280px"
+        flexShrink={1}
+        flexGrow={1}
         paddingRight={1}
         {...getTestIdProps('DateTimeInput__Date')}
       >
         <FormControl {...formControlProps}>
-          {dateLabel ? (
-            <FormLabel htmlFor={dateId}>{dateLabel}</FormLabel>
-          ) : null}
           <DatePickerInput
             inputProps={{ id: dateId }}
             value={date}
@@ -154,18 +148,15 @@ export const DateTimeInput = ({
             placeholder={datePlaceholder}
           />
         </FormControl>
-      </FlexItem>
-      <FlexItem
-        basis="178px"
-        shrink={0}
-        grow={1}
+      </Box>
+      <Box
+        flexBasis="178px"
+        flexShrink={1}
+        flexGrow={1}
         paddingLeft={1}
         {...getTestIdProps('DateTimeInput__Time')}
       >
         <FormControl {...formControlProps}>
-          {timeLabel ? (
-            <FormLabel htmlFor={timeId}>{timeLabel}</FormLabel>
-          ) : null}
           <TimeInput
             id={timeId}
             value={time}
@@ -173,8 +164,8 @@ export const DateTimeInput = ({
             placeholder={timePlaceholder}
           />
         </FormControl>
-      </FlexItem>
-    </Flex>
+      </Box>
+    </Box>
   );
 };
 

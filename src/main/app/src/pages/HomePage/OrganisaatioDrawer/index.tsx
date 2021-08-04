@@ -6,7 +6,6 @@ import { useUnmount, usePrevious } from 'react-use';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
-import DividerHeading from '#/src/components/DividerHeading';
 import Heading from '#/src/components/Heading';
 import {
   Drawer,
@@ -247,7 +246,7 @@ const DrawerContent = ({
             />
           </Box>
         ) : (
-          <DividerHeading>{t('yleiset.organisaatiot')}</DividerHeading>
+          <Heading hasDivider>{t('yleiset.organisaatiot')}</Heading>
         )}
 
         <TreeContainer {...getTestIdProps('organisaatioList')}>

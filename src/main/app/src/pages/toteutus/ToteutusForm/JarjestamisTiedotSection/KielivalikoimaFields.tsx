@@ -3,8 +3,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldSelect } from '#/src/components/formFields';
+import Heading from '#/src/components/Heading';
 import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
@@ -19,7 +19,7 @@ const KielivalikoimaFields = ({ name }) => {
 
   return (
     <>
-      <DividerHeading>{t('toteutuslomake.kielivalikoima')}</DividerHeading>
+      <Heading hasDivider>{t('toteutuslomake.kielivalikoima')}</Heading>
       <Box display="flex" flexWrap="wrap" m={-1}>
         <KielivalikoimaBox width={0.5} {...getTestIdProps('A1Kielet')}>
           <Field

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Icon } from '#/src/components/virkailija';
 
 import AbstractCollapse from './AbstractCollapse';
-import DividerHeading from './DividerHeading';
+import Heading from './Heading';
 
 const SimpleCollapseHeader = styled.div`
   display: flex;
@@ -32,13 +32,13 @@ const SimpleCollapseToggle = ({
 }) => {
   return (
     <SimpleCollapseHeader onClick={onToggle} {...props}>
-      <DividerHeading>
+      <Heading hasDivider>
         <span>{open ? header : hiddenHeader ?? header}</span>
         <Icon
           style={{ float: 'right' }}
           type={open ? 'expand_more' : 'expand_less'}
         />
-      </DividerHeading>
+      </Heading>
     </SimpleCollapseHeader>
   );
 };

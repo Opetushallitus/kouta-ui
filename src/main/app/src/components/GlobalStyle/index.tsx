@@ -13,10 +13,13 @@ body {
   overflow-y: auto;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 #root {
   background-color: ${({ theme }) => theme.colors.mainBackground};
+  flex-grow: 1;
 }
 
 body > :not(#raamit_app_root) {

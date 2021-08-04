@@ -5,13 +5,13 @@ import { FieldArray, Field } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldInput,
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 const OsaamisalatFieldArray = ({ fields, language, t }) => (
@@ -34,9 +34,9 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
               label={t('yleiset.kuvaus')}
             />
           </Spacing>
-          <Flex>
-            <FlexItem
-              grow={1}
+          <Box display="flex">
+            <Box
+              flexGrow={1}
               paddingRight={1}
               {...getTestIdProps('osaamisalanLinkki')}
             >
@@ -45,9 +45,9 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
                 component={FormFieldUrlInput}
                 label={t('yleiset.linkki')}
               />
-            </FlexItem>
-            <FlexItem
-              grow={1}
+            </Box>
+            <Box
+              flexGrow={1}
               paddingLeft={1}
               {...getTestIdProps('osaamisalanOtsikko')}
             >
@@ -56,12 +56,16 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
                 component={FormFieldInput}
                 label={t('yleiset.linkinOtsikko')}
               />
-            </FlexItem>
-          </Flex>
+            </Box>
+          </Box>
         </>
       )}
     </FieldArrayList>
-    <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+    <Box
+      display="flex"
+      justifyContent="center"
+      marginTop={fields.length > 0 ? 4 : 0}
+    >
       <Button
         type="button"
         variant="outlined"
@@ -72,7 +76,7 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
       >
         {t('toteutuslomake.lisaaOsaamisala')}
       </Button>
-    </Flex>
+    </Box>
   </>
 );
 

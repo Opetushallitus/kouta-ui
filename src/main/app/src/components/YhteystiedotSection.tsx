@@ -8,12 +8,11 @@ import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
 } from '#/src/components/formFields';
-import { Divider } from '#/src/components/virkailija';
+import { Box, Divider } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 import { Button } from './Button';
 import { FieldArrayList } from './FieldArrayList';
-import { Flex } from './Flex';
 
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
@@ -107,7 +106,11 @@ const YhteystiedotComponent = ({ fields, language, t }) => {
       <FieldArrayList fields={fields}>
         {({ field }) => <YhteystietoSection name={field} language={language} />}
       </FieldArrayList>
-      <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        marginTop={fields.length > 0 ? 4 : 0}
+      >
         <Button
           variant="outlined"
           color="primary"
@@ -117,7 +120,7 @@ const YhteystiedotComponent = ({ fields, language, t }) => {
         >
           {t('yleiset.lisaaYhteystieto')}
         </Button>
-      </Flex>
+      </Box>
     </>
   );
 };

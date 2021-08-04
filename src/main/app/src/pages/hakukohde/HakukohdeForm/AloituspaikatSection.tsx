@@ -3,7 +3,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import { Flex, FlexItem } from '#/src/components/Flex';
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
@@ -53,14 +52,14 @@ export const AloituspaikatSection = ({ language, koulutustyyppi, name }) => {
     <>
       {isKorkeakoulu ? (
         <>
-          <Flex>
-            <FlexItem grow={1} paddingRight={1}>
+          <Box display="flex">
+            <Box flexGrow={1} paddingRight={1}>
               {aloituspaikatField}
-            </FlexItem>
-            <FlexItem grow={1} paddingLeft={1}>
+            </Box>
+            <Box flexGrow={1} paddingLeft={1}>
               {ensikertalaisetField}
-            </FlexItem>
-          </Flex>
+            </Box>
+          </Box>
           <Box marginTop={2}>
             <Field
               name={`${name}.aloituspaikkakuvaus.${language}`}

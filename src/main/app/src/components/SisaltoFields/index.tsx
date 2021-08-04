@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
 import Editor from '#/src/components/Editor';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import {
@@ -17,6 +16,7 @@ import {
 import Spacing from '#/src/components/Spacing';
 import TableInput from '#/src/components/TableInput';
 import {
+  Box,
   Dropdown,
   DropdownMenu,
   DropdownMenuItem,
@@ -28,7 +28,7 @@ const MoveButton = SortableHandle(props => (
   <Button as="div" style={{ cursor: 'grab', width: '100%' }} {...props} />
 ));
 
-const InputContainer = styled(FlexItem)`
+const InputContainer = styled(Box)`
   max-width: 100%;
   min-width: 0;
 `;
@@ -121,8 +121,11 @@ const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
 
         return (
           <FieldSortableElement key={index} index={index}>
-            <Flex marginBottom={index < fields.length - 1 ? 2 : 0}>
-              <InputContainer grow={1}>
+            <Box
+              display="flex"
+              marginBottom={index < fields.length - 1 ? 2 : 0}
+            >
+              <InputContainer flexGrow={1}>
                 <InputWrapper>
                   <ContentField
                     {...contentValue}
@@ -131,15 +134,15 @@ const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
                   />
                 </InputWrapper>
               </InputContainer>
-              <FlexItem grow={0} paddingLeft={2}>
+              <Box flexGrow={0} paddingLeft={2}>
                 <Spacing marginBottom={2}>
                   <MoveButton variant="outlined" color="primary" type="button">
                     <Icon type="drag_indicator" /> {t('yleiset.siirra')}
                   </MoveButton>
                 </Spacing>
                 <RemoveButton onClick={() => fields.remove(index)} />
-              </FlexItem>
-            </Flex>
+              </Box>
+            </Box>
           </FieldSortableElement>
         );
       })}

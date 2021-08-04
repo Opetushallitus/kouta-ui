@@ -4,10 +4,9 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-import { Flex, FlexItem } from '#/src/components/Flex';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import RemoveButton from '#/src/components/RemoveButton';
-import { FormControl } from '#/src/components/virkailija';
+import { Box, FormControl } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
 
 const Item = styled.div`
@@ -27,7 +26,7 @@ const Item = styled.div`
     `}
 `;
 
-const ItemFlex = styled(FlexItem)`
+const ItemFlex = styled(Box)`
   max-width: 100%;
   min-width: 0;
 `;
@@ -52,16 +51,18 @@ export const FieldArrayList = ({
         key={index}
         hasDivider={hasDivider}
       >
-        <Flex>
-          <ItemFlex grow={1}>{children({ field, index, fields: f })}</ItemFlex>
+        <Box display="flex">
+          <ItemFlex flexGrow={1}>
+            {children({ field, index, fields: f })}
+          </ItemFlex>
           {hasRemoveButton ? (
-            <FlexItem grow={0} paddingLeft={4} marginTop={4}>
+            <Box flexGrow={0} paddingLeft={4} marginTop={4}>
               <RemoveButton onClick={() => fields.remove(index)}>
                 {removeButtonText}
               </RemoveButton>
-            </FlexItem>
+            </Box>
           ) : null}
-        </Flex>
+        </Box>
       </Item>
     );
   });

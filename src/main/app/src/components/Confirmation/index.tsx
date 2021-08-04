@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
+  Box,
   Dropdown,
   DropdownMenu,
   Typography,
@@ -23,7 +23,7 @@ const ContentContainer = styled.div`
   border-bottom: 1px solid ${getThemeProp('palette.border')};
 `;
 
-const Action = styled(FlexItem).attrs({ grow: 1 })`
+const Action = styled(Box).attrs({ flexGrow: 1 })`
   text-align: center;
   ${getThemeProp('typography.body')};
   cursor: pointer;
@@ -65,7 +65,7 @@ export const Confirmation = ({
           <ContentContainer>
             {_.isString(content) ? <Typography>{content}</Typography> : content}
           </ContentContainer>
-          <Flex>
+          <Box display="flex">
             <Action
               onClick={createChainedFunction(onConfirm, onToggle)}
               success
@@ -75,7 +75,7 @@ export const Confirmation = ({
             <Action onClick={onToggle} danger>
               Peruuta
             </Action>
-          </Flex>
+          </Box>
         </Wrapper>
       </DropdownMenu>
     ),

@@ -5,9 +5,9 @@ import { Field, FieldArray } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import { Flex } from '#/src/components/Flex';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {
   const onAddField = useCallback(() => {
@@ -57,7 +57,11 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
           </>
         )}
       </FieldArrayList>
-      <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        marginTop={fields.length > 0 ? 4 : 0}
+      >
         <Button
           variant="outlined"
           color="primary"
@@ -66,7 +70,7 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
         >
           {t('yleiset.lisaaYhteyshenkilo')}
         </Button>
-      </Flex>
+      </Box>
     </>
   );
 };

@@ -7,8 +7,7 @@ import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
 import Button from '#/src/components/Button';
-import { Flex, FlexItem } from '#/src/components/Flex';
-import { Typography, Icon, Spin } from '#/src/components/virkailija';
+import { Box, Typography, Icon, Spin } from '#/src/components/virkailija';
 import { useMachine } from '#/src/hooks/useMachine';
 import { disabledStyle } from '#/src/system';
 import { getThemeProp, spacing } from '#/src/theme';
@@ -98,13 +97,13 @@ const Container = styled.div`
 `;
 
 const FlexWrapper = ({ children }) => (
-  <Flex alignCenter column>
+  <Box display="flex" flexDirection="column" alignItems="center">
     {children.map((c, i) => (
-      <FlexItem marginBottom={1} key={`item_${i}`}>
+      <Box marginBottom={1} key={`item_${i}`}>
         {c}
-      </FlexItem>
+      </Box>
     ))}
-  </Flex>
+  </Box>
 );
 
 const ValueContent = ({ file, t, onRemove }) => (

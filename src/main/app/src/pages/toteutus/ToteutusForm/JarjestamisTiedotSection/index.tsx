@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
   FormFieldInput,
@@ -104,8 +103,8 @@ const SuunniteltuKestoFields = ({ name }) => {
       HeadingComponent={FormLabel}
       required
     >
-      <Flex>
-        <FlexItem>
+      <Box display="flex">
+        <Box>
           <Field
             name={`${name}.suunniteltuKesto.vuotta`}
             component={FormFieldInput}
@@ -113,8 +112,8 @@ const SuunniteltuKestoFields = ({ name }) => {
             type="number"
             {...getTestIdProps('suunniteltuKestoVuotta')}
           />
-        </FlexItem>
-        <FlexItem ml={2}>
+        </Box>
+        <Box ml={2}>
           <Field
             name={`${name}.suunniteltuKesto.kuukautta`}
             component={FormFieldInput}
@@ -122,8 +121,8 @@ const SuunniteltuKestoFields = ({ name }) => {
             type="number"
             {...getTestIdProps('suunniteltuKestoKuukautta')}
           />
-        </FlexItem>
-      </Flex>
+        </Box>
+      </Box>
     </FieldGroup>
   );
 };
@@ -148,31 +147,31 @@ export const JarjestamisTiedotSection = ({
   return (
     <>
       <FieldGroup title={t('yleiset.opetuskieli')}>
-        <Flex {...getTestIdProps('opetuskieli')}>
-          <FlexItem grow={0} basis="30%">
+        <Box display="flex" {...getTestIdProps('opetuskieli')}>
+          <Box flexGrow={0} flexBasis="30%">
             <Field
               name={`${name}.opetuskieli`}
               component={OpetuskieliField}
               label={t('toteutuslomake.valitsePaaasiallinenOpetuskieli')}
               required
             />
-          </FlexItem>
-          <FlexItem grow={1} paddingLeft={4}>
+          </Box>
+          <Box flexGrow={1} paddingLeft={4}>
             <Field
               name={`${name}.opetuskieliKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
               hideHeaderSelect
             />
-          </FlexItem>
-        </Flex>
+          </Box>
+        </Box>
       </FieldGroup>
       <FieldGroup title={t('toteutuslomake.suunniteltuKesto')}>
-        <Flex {...getTestIdProps('suunniteltuKesto')}>
-          <FlexItem grow={0} basis="30%">
+        <Box display="flex" {...getTestIdProps('suunniteltuKesto')}>
+          <Box flexGrow={0} flexBasis="30%">
             <SuunniteltuKestoFields name={name} />
-          </FlexItem>
-          <FlexItem grow={1} paddingLeft={4}>
+          </Box>
+          <Box flexGrow={1} paddingLeft={4}>
             <Field
               name={`${name}.suunniteltuKestoKuvaus.${language}`}
               component={FormFieldEditor}
@@ -180,13 +179,13 @@ export const JarjestamisTiedotSection = ({
               hideHeaderSelect
               {...getTestIdProps('suunniteltuKestoKuvaus')}
             />
-          </FlexItem>
-        </Flex>
+          </Box>
+        </Box>
       </FieldGroup>
 
       <FieldGroup title={t('toteutuslomake.opetusaika')}>
-        <Flex {...getTestIdProps('opetusaika')}>
-          <FlexItem grow={0} basis="30%">
+        <Box display="flex" {...getTestIdProps('opetusaika')}>
+          <Box flexGrow={0} flexBasis="30%">
             <Field
               name={`${name}.opetusaika`}
               component={OpetusaikaField}
@@ -194,50 +193,50 @@ export const JarjestamisTiedotSection = ({
               helperText={t('yleiset.voitValitaEnintaan', { lukumaara: 2 })}
               required
             />
-          </FlexItem>
-          <FlexItem grow={1} paddingLeft={4}>
+          </Box>
+          <Box flexGrow={1} paddingLeft={4}>
             <Field
               name={`${name}.opetusaikaKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
               hideHeaderSelect
             />
-          </FlexItem>
-        </Flex>
+          </Box>
+        </Box>
       </FieldGroup>
 
       <FieldGroup title={t('toteutuslomake.paaasiallinenOpetustapa')}>
-        <Flex {...getTestIdProps('opetustapa')}>
-          <FlexItem grow={0} basis="30%">
+        <Box display="flex" {...getTestIdProps('opetustapa')}>
+          <Box flexGrow={0} flexBasis="30%">
             <Field
               name={`${name}.opetustapa`}
               component={OpetustapaField}
               label={t('toteutuslomake.valitsePaaasiallinenOpetustapa')}
               required
             />
-          </FlexItem>
-          <FlexItem grow={1} paddingLeft={4}>
+          </Box>
+          <Box flexGrow={1} paddingLeft={4}>
             <Field
               name={`${name}.opetustapaKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
               hideHeaderSelect
             />
-          </FlexItem>
-        </Flex>
+          </Box>
+        </Box>
       </FieldGroup>
 
       <FieldGroup title={t('toteutuslomake.opetuksenMaksullisuus')}>
-        <Flex {...getTestIdProps('maksullisuus')}>
-          <FlexItem grow={0} basis="30%">
+        <Box display="flex" {...getTestIdProps('maksullisuus')}>
+          <Box flexGrow={0} flexBasis="30%">
             <MaksullisuusFields
               isKorkeakoulu={isKorkeakoulu}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />
-          </FlexItem>
-          <FlexItem
-            grow={1}
+          </Box>
+          <Box
+            flexGrow={1}
             paddingLeft={4}
             {...getTestIdProps('maksullisuusKuvaus')}
           >
@@ -247,8 +246,8 @@ export const JarjestamisTiedotSection = ({
               label={t('yleiset.tarkempiKuvaus')}
               hideHeaderSelect
             />
-          </FlexItem>
-        </Flex>
+          </Box>
+        </Box>
       </FieldGroup>
 
       {/* ApurahaFields contains conditional rendering -> FieldGroup moved there */}

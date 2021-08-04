@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
 import Button from '#/src/components/Button';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import Select from '#/src/components/Select';
-import { Icon, Typography } from '#/src/components/virkailija';
+import { Box, Icon, Typography } from '#/src/components/virkailija';
 import { spacing } from '#/src/theme';
 
 const ButtonIcon = styled(Icon)`
@@ -52,11 +51,11 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
   const pageValue = options[value];
 
   return (
-    <Flex alignCenter inline>
+    <Box display="inline-flex" alignItems="center">
       <Button disabled={value === 0} onClick={onPrev} variant="text">
         <ButtonIcon type="arrow_back" before /> {t('yleiset.edellinen')}
       </Button>
-      <FlexItem marginLeft={2} grow={2} basis="10rem">
+      <Box marginLeft={2} flexGrow={2} flexBasis="10rem">
         <SelectWrapper>
           <Select
             options={options}
@@ -67,10 +66,10 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
             isClearable={false}
           />
         </SelectWrapper>
-      </FlexItem>
-      <FlexItem marginLeft={1} marginRight={2}>
+      </Box>
+      <Box marginLeft={1} marginRight={2}>
         <PageCount>/ {pageCount}</PageCount>
-      </FlexItem>
+      </Box>
       <Button
         disabled={pageCount === 0 || value === pageCount - 1}
         onClick={onNext}
@@ -79,7 +78,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
         {t('yleiset.seuraava')}
         <ButtonIcon type="arrow_forward" after />
       </Button>
-    </Flex>
+    </Box>
   );
 };
 

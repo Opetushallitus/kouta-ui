@@ -4,7 +4,6 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
-import { Flex } from '#/src/components/Flex';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
@@ -12,6 +11,7 @@ import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
+import { Box } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   HAKULOMAKETYYPPI,
@@ -228,11 +228,17 @@ const ToteutusForm = ({
             header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}
             id="toteutukseen-liitetetyt-hakukohteet"
             actions={
-              <Flex justifyCenter full>
+              <Box
+                display="flex"
+                justifyContent="center"
+                width="100%"
+                height="100%"
+                flexBasis="100%"
+              >
                 <Button onClick={open} type="button">
                   {t('yleiset.liitaHakukohde')}
                 </Button>
-              </Flex>
+              </Box>
             }
             Component={HakukohteetSection}
             toteutus={toteutus}

@@ -3,8 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 import styled, { css } from 'styled-components';
 
-import { Flex, FlexItem } from '#/src/components/Flex';
-import { Dropdown, Icon, Typography } from '#/src/components/virkailija';
+import { Box, Dropdown, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
 const Header = styled.div`
@@ -62,10 +61,10 @@ export const StatusPopover = ({
   const overlay = (
     <Container>
       <Header status={status}>
-        <Flex alignCenter justifyBetween>
-          <FlexItem>
-            <Flex alignCenter>
-              <FlexItem>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Box>
+            <Box display="flex" alignItems="center">
+              <Box>
                 <StatusIcon
                   type={
                     status === 'success'
@@ -73,18 +72,18 @@ export const StatusPopover = ({
                       : 'error_outline'
                   }
                 />
-              </FlexItem>
-              <FlexItem paddingTop={2} paddingLeft={2} paddingBottom={2}>
+              </Box>
+              <Box paddingTop={2} paddingLeft={2} paddingBottom={2}>
                 <HeaderTypography>{header}</HeaderTypography>
-              </FlexItem>
-            </Flex>
-          </FlexItem>
+              </Box>
+            </Box>
+          </Box>
           {canClose ? (
-            <FlexItem paddingLeft={2}>
+            <Box paddingLeft={2}>
               <CloseIcon onClick={onClose} />
-            </FlexItem>
+            </Box>
           ) : null}
-        </Flex>
+        </Box>
       </Header>
       <Body>{body}</Body>
     </Container>

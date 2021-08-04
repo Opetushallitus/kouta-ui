@@ -6,7 +6,6 @@ import { Field, FieldArray, Fields } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import { Flex } from '#/src/components/Flex';
 import {
   FormFieldDateTimeInput,
   FormFieldInput,
@@ -17,6 +16,7 @@ import {
   FormFieldEditor,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -250,7 +250,11 @@ const LiitteetListField = ({
           </>
         )}
       </FieldArrayList>
-      <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        marginTop={fields.length > 0 ? 4 : 0}
+      >
         <Button
           type="button"
           variant="outlined"
@@ -261,7 +265,7 @@ const LiitteetListField = ({
         >
           {t('hakukohdelomake.lisaaLiite')}
         </Button>
-      </Flex>
+      </Box>
     </>
   );
 };

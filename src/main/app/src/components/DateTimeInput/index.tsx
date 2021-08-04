@@ -3,9 +3,8 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import _ from 'lodash';
 
 import DatePickerInput from '#/src/components/DatePickerInput';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import TimeInput from '#/src/components/TimeInput';
-import { FormControl, FormLabel } from '#/src/components/virkailija';
+import { Box, FormControl, FormLabel } from '#/src/components/virkailija';
 import {
   getKoutaDateString,
   isValidDate,
@@ -135,11 +134,11 @@ export const DateTimeInput = ({
   );
 
   return (
-    <Flex {...getTestIdProps('DateTimeInput')}>
-      <FlexItem
-        basis="280px"
-        shrink={0}
-        grow={1}
+    <Box display="flex" {...getTestIdProps('DateTimeInput')}>
+      <Box
+        flexBasis="280px"
+        flexShrink={0}
+        flexGrow={1}
         paddingRight={1}
         {...getTestIdProps('DateTimeInput__Date')}
       >
@@ -154,11 +153,11 @@ export const DateTimeInput = ({
             placeholder={datePlaceholder}
           />
         </FormControl>
-      </FlexItem>
-      <FlexItem
-        basis="178px"
-        shrink={0}
-        grow={1}
+      </Box>
+      <Box
+        flexBasis="178px"
+        flexShrink={0}
+        flexGrow={1}
         paddingLeft={1}
         {...getTestIdProps('DateTimeInput__Time')}
       >
@@ -173,8 +172,8 @@ export const DateTimeInput = ({
             placeholder={timePlaceholder}
           />
         </FormControl>
-      </FlexItem>
-    </Flex>
+      </Box>
+    </Box>
   );
 };
 

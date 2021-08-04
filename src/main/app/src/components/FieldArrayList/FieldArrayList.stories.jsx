@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/react';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
 import Button from '#/src/components/Button';
-import { Flex } from '#/src/components/Flex';
 import { FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 
 import FieldArrayList from './index';
 
@@ -30,11 +30,15 @@ const StoryFieldArrayList = ({ fields }) => (
         </>
       )}
     </FieldArrayList>
-    <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+    <Box
+      display="flex"
+      justifyContent="center"
+      marginTop={fields.length > 0 ? 4 : 0}
+    >
       <Button type="button" variant="outlined" onClick={() => fields.push({})}>
         Lisää henkilö
       </Button>
-    </Flex>
+    </Box>
   </>
 );
 

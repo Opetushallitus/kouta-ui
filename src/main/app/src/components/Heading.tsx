@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { Divider, Typography } from '#/src/components/virkailija';
+import { Box, Divider, Typography } from '#/src/components/virkailija';
 
 const StyledTypography = styled(Typography)`
   width: 100%;
@@ -20,12 +20,12 @@ export const Heading = ({
   hasDivider = false,
   ...props
 }: HeadingProps) => (
-  <>
+  <Box width={hasDivider ? '100%' : 'auto'}>
     <StyledTypography variant={variant} {...props}>
       {children}
     </StyledTypography>
     {hasDivider && <Divider mb={2} />}
-  </>
+  </Box>
 );
 
 export default Heading;

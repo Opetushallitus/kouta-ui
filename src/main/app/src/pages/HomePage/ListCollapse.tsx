@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Collapse from '#/src/components/Collapse';
-import { Flex, FlexItem } from '#/src/components/Flex';
-import { Icon, Typography } from '#/src/components/virkailija';
+import { Box, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
 const HeaderIcon = styled(Icon)`
@@ -38,17 +37,17 @@ const ListCollapse = ({
 
   const collapseHeader = (
     <HeaderWrapper>
-      <Flex justifyBetween alignCenter>
-        <FlexItem>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box>
           <HeaderContainer>
             {icon ? <HeaderIcon type={icon} /> : null}
             {header ? (
               <HeaderTypography marginLeft={2}>{header}</HeaderTypography>
             ) : null}
           </HeaderContainer>
-        </FlexItem>
-        {actions ? <FlexItem>{actions}</FlexItem> : null}
-      </Flex>
+        </Box>
+        {actions ? <Box>{actions}</Box> : null}
+      </Box>
     </HeaderWrapper>
   );
 

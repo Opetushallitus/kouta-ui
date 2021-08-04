@@ -7,7 +7,6 @@ import { RouterAnchor } from '#/src/components/Anchor';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import ErrorAlert from '#/src/components/ErrorAlert';
-import { Flex } from '#/src/components/Flex';
 import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeModifiedColumn,
@@ -16,6 +15,7 @@ import ListTable, {
 } from '#/src/components/ListTable';
 import Pagination from '#/src/components/Pagination';
 import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { getTestIdProps } from '#/src/utils';
@@ -153,9 +153,9 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
           <ListSpin />
         )}
 
-        <Flex marginTop={3} justifyCenter>
+        <Box display="flex" marginTop={3} justifyContent="center">
           <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-        </Flex>
+        </Box>
       </ListCollapse>
     </>
   );

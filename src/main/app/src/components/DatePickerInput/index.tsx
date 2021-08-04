@@ -29,31 +29,35 @@ const getLocalizationProps = t => ({
   firstDayOfWeek: 1,
 });
 
+type DatePickerProps = {
+  disabled?: boolean;
+  value?: Date;
+  onChange: (d: Date | undefined | null) => void;
+  inputProps?: object;
+  placeholder?: string;
+};
+
 export const DatePickerInput = ({
-  dayPickerProps = {},
-  disabled,
+  disabled = false,
   value,
   onChange,
+  inputProps = {},
+  placeholder,
   ...props
-}) => {
+}: DatePickerProps) => {
   const { t } = useTranslation();
 
   const localizationProps = useMemo(() => getLocalizationProps(t), [t]);
 
   return (
     <UiDatePickerInput
-      dayPickerProps={{
-        ...localizationProps,
-        ...dayPickerProps,
-      }}
+      dayPickerProps={localizationProps}
       {...props}
       value={isValid(value) ? value : ''}
       onChange={e => {
         onChange(isValid(e) ? e : null);
       }}
-      inputProps={{ ...(props?.inputProps ?? {}), disabled }}
+      inputProps={{ ...inputProps, disabled }}
     />
   );
 };
-
-export default DatePickerInput;

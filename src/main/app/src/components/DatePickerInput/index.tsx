@@ -58,6 +58,7 @@ export const DatePickerInput = ({
         onChange(isValid(e) ? e : null);
       }}
       inputProps={{ ...inputProps, disabled }}
+      placeholder={placeholder}
     />
   );
 };

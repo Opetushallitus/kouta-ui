@@ -24,7 +24,7 @@ const SectionInnerCollapseHeader = styled.div`
     css`
       background-color: ${getThemeProp('colors.primary.main')};
       border-radius: 4px 4px 0 0;
-      & > * {
+      & * {
         color: white;
       }
     `}

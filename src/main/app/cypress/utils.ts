@@ -267,7 +267,6 @@ const stubEntityLists = () => {
 };
 
 export const stubCommonRoutes = () => {
-  cy.intercept('**/frontProperties', { fixture: 'frontProperties.json' });
   stubEntityLists();
   stubLokalisaatioRoute();
   stubKayttoOikeusMeRoute();

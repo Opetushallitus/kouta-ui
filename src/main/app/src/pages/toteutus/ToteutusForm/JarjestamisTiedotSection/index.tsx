@@ -96,7 +96,6 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
 const SuunniteltuKestoFields = ({ name }) => {
   const { t } = useTranslation();
 
-  // TODO: Tämä on ainut paikka, jossa käytetään HeadingComponent-proppia. Pitäisi refaktoroida pois ja yksinkertaistaa FieldGroup-komponenttia.
   return (
     <FieldGroup
       title={t('toteutuslomake.opintojenSuunniteltuKesto')}

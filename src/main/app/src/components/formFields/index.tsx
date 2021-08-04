@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
-import { DatePickerInput } from '#/src/components/DatePickerInput';
 import { DateTimeInput } from '#/src/components/DateTimeInput';
 import { Editor } from '#/src/components/Editor';
 import { ImageInput } from '#/src/components/ImageInput';
@@ -15,7 +14,6 @@ import { Switch } from '#/src/components/Switch';
 import { TimeInput } from '#/src/components/TimeInput';
 import { UrlInput } from '#/src/components/UrlInput';
 import {
-  DatePicker,
   Checkbox,
   CheckboxGroup,
   Input,
@@ -87,8 +85,6 @@ export const FormFieldSelect = createComponent(
   })
 );
 
-export const FormFieldDatePicker = createComponent(DatePicker, simpleMapProps);
-
 export const FormFieldTimeInput = createComponent(TimeInput, simpleMapProps);
 
 export const FormFieldDateTimeInput = createComponent(
@@ -140,11 +136,6 @@ export const FormFieldSoraKuvausSelect = createComponent(
 export const FormFieldLanguageSelect = createComponent(
   LanguageSelect,
   selectMapProps
-);
-
-export const FormFieldDatePickerInput = createComponent(
-  DatePickerInput,
-  simpleMapProps
 );
 
 export const FormFieldPostinumeroSelect = createComponent(

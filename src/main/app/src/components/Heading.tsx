@@ -9,22 +9,28 @@ const StyledTypography = styled(Typography)`
 `;
 
 type HeadingProps = {
+  id?: string;
   children?: React.ReactNode;
   variant?: string;
   hasDivider?: boolean;
+  mt?: number;
+  mb?: number;
 };
 
 export const Heading = ({
+  id,
   children,
   variant = 'h6',
   hasDivider = false,
+  mt = 0,
+  mb = 2,
   ...props
 }: HeadingProps) => (
-  <Box width={hasDivider ? '100%' : 'auto'}>
-    <StyledTypography variant={variant} {...props}>
+  <Box width="100%" mb={mb} mt={mt}>
+    <StyledTypography id={id} variant={variant}>
       {children}
     </StyledTypography>
-    {hasDivider && <Divider mb={2} />}
+    {hasDivider && <Divider />}
   </Box>
 );
 

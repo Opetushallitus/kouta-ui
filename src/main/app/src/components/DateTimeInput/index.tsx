@@ -137,7 +137,7 @@ export const DateTimeInput = ({
     <Box display="flex" {...getTestIdProps('DateTimeInput')}>
       <Box
         flexBasis="280px"
-        flexShrink={0}
+        flexShrink={1}
         flexGrow={1}
         paddingRight={1}
         {...getTestIdProps('DateTimeInput__Date')}
@@ -156,7 +156,7 @@ export const DateTimeInput = ({
       </Box>
       <Box
         flexBasis="178px"
-        flexShrink={0}
+        flexShrink={1}
         flexGrow={1}
         paddingLeft={1}
         {...getTestIdProps('DateTimeInput__Time')}

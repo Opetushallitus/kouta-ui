@@ -4,11 +4,23 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "module": "es6",
-    "target": "es6",
+    "target": "es5",
+    "lib": [
+      "es5",
+      "dom"
+    ],
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
-    "types": ["cypress", "cypress-plugin-snapshots", "@types/testing-library__cypress"]
+    "types": [
+      "cypress",
+      "cypress-plugin-snapshots",
+      "@types/testing-library__cypress"
+    ]
   },
-  "include": ["**/*.ts", "**/*.js", "../src/constants.ts"]
+  "include": [
+    "./**/*.ts",
+    "./**/*.js",
+    "../src/constants.ts"
+  ]
 }

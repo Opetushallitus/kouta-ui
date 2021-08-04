@@ -28,7 +28,7 @@ const FooterContainer = styled.div`
   border-top: 2px solid ${getThemeProp('palette.primary.main')};
   padding: ${({ theme }) => theme.spacing.unit * 2}px 0px;
   bottom: 0px;
-  position: fixed;
+  position: sticky;
   left: 0px;
   width: 100%;
   z-index: 99;
@@ -37,8 +37,7 @@ const FooterContainer = styled.div`
 const FormContent = styled.div`
   background-color: ${getThemeProp('palette.mainBackground')};
   padding-top: ${({ theme }) => theme.spacing.unit * 6}px;
-  padding-bottom: ${({ theme, hasFooter }) =>
-    theme.spacing.unit * 6 + (hasFooter ? 75 : 0)}px;
+  padding-bottom: ${({ theme }) => theme.spacing.unit * 6}px;
 `;
 
 const FooterWrapper = styled.div`

@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 import _ from 'lodash';
 
-import DatePickerInput from '#/src/components/DatePickerInput';
+import { DatePickerInput } from '#/src/components/DatePickerInput';
 import TimeInput from '#/src/components/TimeInput';
-import { Box, FormControl, FormLabel } from '#/src/components/virkailija';
+import { Box, FormControl } from '#/src/components/virkailija';
 import {
   getKoutaDateString,
   isValidDate,
@@ -87,8 +87,6 @@ const getCompactTime = time => {
 export const DateTimeInput = ({
   value,
   onChange,
-  dateLabel,
-  timeLabel,
   disabled = false,
   error = false,
   datePlaceholder = '',
@@ -143,9 +141,6 @@ export const DateTimeInput = ({
         {...getTestIdProps('DateTimeInput__Date')}
       >
         <FormControl {...formControlProps}>
-          {dateLabel ? (
-            <FormLabel htmlFor={dateId}>{dateLabel}</FormLabel>
-          ) : null}
           <DatePickerInput
             inputProps={{ id: dateId }}
             value={date}
@@ -162,9 +157,6 @@ export const DateTimeInput = ({
         {...getTestIdProps('DateTimeInput__Time')}
       >
         <FormControl {...formControlProps}>
-          {timeLabel ? (
-            <FormLabel htmlFor={timeId}>{timeLabel}</FormLabel>
-          ) : null}
           <TimeInput
             id={timeId}
             value={time}

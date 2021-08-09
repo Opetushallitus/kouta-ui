@@ -6,9 +6,8 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import Spacing from '#/src/components/Spacing';
-import { Icon, Typography } from '#/src/components/virkailija';
+import { Box, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
 const ErrorIcon = styled(Icon).attrs({ type: 'error_outline' })`
@@ -52,11 +51,11 @@ export const ErrorAlert = ({
 
   const content = (
     <Container>
-      <Flex alignCenter>
-        <FlexItem grow={0} paddingRight={1}>
+      <Box display="flex" alignItems="center">
+        <Box flexGrow={0} paddingRight={1}>
           <ErrorIcon />
-        </FlexItem>
-        <FlexItem grow={1}>
+        </Box>
+        <Box flexGrow={1}>
           <ErrorTypography>{text}</ErrorTypography>{' '}
           <Spacing>
             {_.isFunction(onReload) ? (
@@ -65,12 +64,18 @@ export const ErrorAlert = ({
               </ReloadAnchor>
             ) : null}
           </Spacing>
-        </FlexItem>
-      </Flex>
+        </Box>
+      </Box>
     </Container>
   );
 
-  return center ? <Flex justifyCenter>{content}</Flex> : content;
+  return center ? (
+    <Box display="flex" justifyContent="center">
+      {content}
+    </Box>
+  ) : (
+    content
+  );
 };
 
 export default ErrorAlert;

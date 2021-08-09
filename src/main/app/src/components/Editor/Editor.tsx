@@ -18,9 +18,9 @@ import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
 import Button from '#/src/components/Button';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import Select from '#/src/components/Select';
 import {
+  Box,
   Icon,
   Input,
   Dropdown,
@@ -217,21 +217,21 @@ const LinkDropdown = ({ value, onChange, onSubmit }) => {
 
   return (
     <LinkDropdownContainer>
-      <Flex>
-        <FlexItem grow={1} paddingRight={1}>
+      <Box display="flex">
+        <Box flexGrow={1} paddingRight={1}>
           <Input
             placeholder="https://..."
             value={value}
             onChange={onChange}
             ref={inputRef}
           />
-        </FlexItem>
-        <FlexItem grow={0}>
+        </Box>
+        <Box flexGrow={0}>
           <Button type="button" onClick={onSubmit}>
             {t('editor.lisaa')}
           </Button>
-        </FlexItem>
-      </Flex>
+        </Box>
+      </Box>
     </LinkDropdownContainer>
   );
 };

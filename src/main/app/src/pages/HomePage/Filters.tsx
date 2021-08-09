@@ -3,9 +3,8 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import { Flex, FlexItem } from '#/src/components/Flex';
 import Select from '#/src/components/Select';
-import { Checkbox, Input, InputIcon } from '#/src/components/virkailija';
+import { Box, Checkbox, Input, InputIcon } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
@@ -59,30 +58,30 @@ export const Filters = ({
   }, []);
 
   return (
-    <Flex alignCenter>
-      <FlexItem grow={1} paddingRight={2}>
+    <Box display="flex" alignItems="center">
+      <Box flexGrow={1} paddingRight={2}>
         <Input
           placeholder={nimiPlaceholder}
           value={usedNimi}
           onChange={onNimiChangeDebounced}
           suffix={<InputIcon type="search" />}
         />
-      </FlexItem>
-      <FlexItem grow={0} basis="20%" paddingRight={2}>
+      </Box>
+      <Box flexGrow={0} flexBasis="20%" paddingRight={2}>
         <Select
           options={tilaOptions}
           onChange={onTilaChange}
           placeholder={t('yleiset.tila')}
           isClearable
         />
-      </FlexItem>
+      </Box>
       {/* TODO: Hide this if any tila is chosen */}
-      <FlexItem grow={0}>
+      <Box flexGrow={0}>
         <Checkbox checked={showArchived} onChange={onShowArchivedChange}>
           {t('etusivu.naytaArkistoidut')}
         </Checkbox>
-      </FlexItem>
-    </Flex>
+      </Box>
+    </Box>
   );
 };
 

@@ -4,7 +4,6 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
-import { Flex } from '#/src/components/Flex';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
@@ -13,6 +12,7 @@ import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
+import { Box } from '#/src/components/virkailija';
 import {
   ENTITY,
   KOULUTUSTYYPPI,
@@ -294,7 +294,7 @@ export const KoulutusForm = ({
               header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
               id="koulutukseen-liitetetyt-toteutukset"
               actions={
-                <Flex justifyCenter>
+                <Box display="flex" justifyContent="center">
                   <Button
                     disabled={onlyTarjoajaRights}
                     color="primary"
@@ -303,7 +303,7 @@ export const KoulutusForm = ({
                   >
                     {t('koulutuslomake.liitaToteutus')}
                   </Button>
-                </Flex>
+                </Box>
               }
               Component={ToteutuksetSection}
               koulutus={koulutusProp}

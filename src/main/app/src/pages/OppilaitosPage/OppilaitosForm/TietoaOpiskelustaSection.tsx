@@ -3,8 +3,8 @@ import React, { useMemo, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import Heading from '#/src/components/Heading';
 import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -42,7 +42,9 @@ export const TietoaOpiskelustaSection = ({ name, language }) => {
 
       {osiotWithLabels.map(({ value, label }) => (
         <Fragment key={value}>
-          <DividerHeading marginTop={3}>{label}</DividerHeading>
+          <Heading hasDivider mt={3}>
+            {label}
+          </Heading>
           <Field
             name={`${name}.tiedot.${value}.${language}`}
             component={FormFieldEditor}

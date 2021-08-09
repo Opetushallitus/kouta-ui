@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import _ from 'lodash';
+
 import { useKoodit } from '#/src/hooks/useKoodit';
 import { getPostinumeroByPostinumeroUri } from '#/src/utils';
 import { getPostinumeroKoodiLabel } from '#/src/utils/koodi/postinumero';

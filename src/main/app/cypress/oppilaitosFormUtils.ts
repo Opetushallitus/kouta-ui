@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import createOrganisaatio from '#/cypress/data/organisaatio';
 import createOrganisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
@@ -17,7 +17,7 @@ export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        _.merge(createOrganisaatio(), {
+        merge(createOrganisaatio(), {
           oid: organisaatioOid,
         }),
       ],

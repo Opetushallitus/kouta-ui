@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
   FormFieldCheckbox,
@@ -44,10 +43,10 @@ export const KoeTaiLisanayttoFields = ({
         header={t(`koeTaiLisanaytto.title`, { index })}
         defaultOpen={true}
       >
-        <Flex ml={12}>
-          <FlexItem grow={1}>
-            <Flex mb={2}>
-              <FlexItem grow={1}>
+        <Box display="flex" ml={12}>
+          <Box flexGrow={1}>
+            <Box display="flex" mb={2}>
+              <Box flexGrow={1}>
                 <Box {...getTestIdProps('kokeenTaiLisanaytonTyyppi')}>
                   <Field
                     name={`${field}.tyyppi`}
@@ -57,8 +56,8 @@ export const KoeTaiLisanayttoFields = ({
                     required
                   />
                 </Box>
-              </FlexItem>
-              <FlexItem grow={1} ml={4}>
+              </Box>
+              <Box flexGrow={1} ml={4}>
                 <Box {...getTestIdProps('hakijalleNakyvaNimi')}>
                   <Field
                     name={`${field}.nimi.${language}`}
@@ -66,8 +65,8 @@ export const KoeTaiLisanayttoFields = ({
                     label={t('koeTaiLisanaytto.hakijalleNakyvaNimi')}
                   />
                 </Box>
-              </FlexItem>
-            </Flex>
+              </Box>
+            </Box>
             <Box mb={2} {...getTestIdProps('tietoaHakijalle')}>
               <Field
                 name={`${field}.tietoaHakijalle.${language}`}
@@ -126,11 +125,11 @@ export const KoeTaiLisanayttoFields = ({
               language={language}
               t={t}
             />
-          </FlexItem>
-          <FlexItem mt={4} ml={4}>
+          </Box>
+          <Box mt={4} ml={4}>
             <RemoveButton onClick={removeSelf} />
-          </FlexItem>
-        </Flex>
+          </Box>
+        </Box>
       </SectionInnerCollapse>
     </>
   );
@@ -162,7 +161,11 @@ export const KokeetTaiLisanaytotFields = ({
         )}
       </FieldArrayList>
       {!_.isEmpty(fields) && <Divider />}
-      <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        marginTop={fields.length > 0 ? 4 : 0}
+      >
         <IconButton
           variant="outlined"
           type="button"
@@ -172,7 +175,7 @@ export const KokeetTaiLisanaytotFields = ({
         >
           {t('koeTaiLisanaytto.lisaa')}
         </IconButton>
-      </Flex>
+      </Box>
     </div>
   );
 };

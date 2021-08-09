@@ -3,9 +3,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
-import DividerHeading from '#/src/components/DividerHeading';
 import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldEditor } from '#/src/components/formFields';
+import Heading from '#/src/components/Heading';
 import { KokeetTaiLisanaytotFields } from '#/src/components/KokeetTaiLisanaytotFields';
 import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
@@ -32,9 +32,9 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
     <>
       {valintaperusteenKokeidenYleiskuvaus?.[language] && (
         <>
-          <DividerHeading>
+          <Heading hasDivider>
             {t('koeTaiLisanaytto.valintaperusteenYleisKuvaus')}
-          </DividerHeading>
+          </Heading>
           <StyledSectionHTML
             html={valintaperusteenKokeidenYleiskuvaus[language]}
           />
@@ -50,9 +50,9 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
       </FieldGroup>
       {valintaperusteenValintakokeet.length > 0 && (
         <div {...getTestIdProps('valintaperusteenValintakokeet')}>
-          <DividerHeading>
+          <Heading hasDivider>
             {t('koeTaiLisanaytto.valintaperusteenValintakokeet')}
-          </DividerHeading>
+          </Heading>
           {valintaperusteenValintakokeet.map(({ id, ...rest }, index) => (
             <Box mb={2} key={`valintakoe-${id}`}>
               <SectionInnerCollapse
@@ -74,9 +74,9 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
           ))}
         </div>
       )}
-      <DividerHeading>
+      <Heading hasDivider>
         {t('koeTaiLisanaytto.hakukohteenValintakokeet')}
-      </DividerHeading>
+      </Heading>
       <FieldArray
         name={`${name}.kokeetTaiLisanaytot`}
         readonlyAmount={valintaperusteenValintakokeet?.length}

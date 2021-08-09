@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
+  Box,
   Dropdown,
   DropdownMenu,
   DropdownMenuItem,
@@ -49,13 +49,13 @@ const Invisible = styled.div`
   visibility: hidden;
 `;
 
-const Column = styled(FlexItem)`
+const Column = styled(Box)`
   border-right: 1px solid ${getThemeProp('palette.border')};
   box-sizing: border-box;
   width: 17rem;
 `;
 
-const Row = styled(Flex).attrs({ inline: true })`
+const Row = styled(Box).attrs({ display: 'inline-flex' })`
   background-color: white;
   border-top: 1px solid ${getThemeProp('palette.border')};
   border-left: 1px solid ${getThemeProp('palette.border')};
@@ -91,7 +91,7 @@ const Container = styled.div`
   }
 `;
 
-const EditRowBase = styled(FlexItem)`
+const EditRowBase = styled(Box)`
   background-color: ${getThemeProp('palette.mainBackground')};
   width: 2rem;
   text-align: center;
@@ -324,7 +324,7 @@ class TableInput extends Component {
 
   renderColumn = ({ column, columnIndex, rowIndex }) => {
     return (
-      <Column key={`${rowIndex}.${columnIndex}`} grow={0}>
+      <Column key={`${rowIndex}.${columnIndex}`} flexGrow={0}>
         <ColumnInput
           value={this.getColumnTextFieldValue(column)}
           onPaste={this.handlePasteEvent}

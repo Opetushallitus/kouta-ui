@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
-import { Flex } from '#/src/components/Flex';
 import Modal from '#/src/components/Modal';
 import {
+  Box,
   ModalBody,
   ModalFooter,
   ModalHeader,
@@ -26,14 +26,14 @@ const UnsavedChangesDialog = ({ onConfirm, onCancel }) => {
       </ModalHeader>
       <ModalBody>{t('ilmoitukset.tallentamattomiaMuutoksia.viesti')}</ModalBody>
       <ModalFooter>
-        <Flex justifyCenter>
+        <Box display="flex" justifyContent="center">
           <ModalButton color="danger" onClick={onConfirm}>
             {t('ilmoitukset.tallentamattomiaMuutoksia.jatka')}
           </ModalButton>
           <ModalButton onClick={onCancel}>
             {t('ilmoitukset.tallentamattomiaMuutoksia.peruuta')}
           </ModalButton>
-        </Flex>
+        </Box>
       </ModalFooter>
     </Modal>
   );

@@ -4,9 +4,9 @@ import { StatusCodes } from 'http-status-codes';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
-import { Flex } from '#/src/components/Flex';
 import Modal from '#/src/components/Modal';
 import {
+  Box,
   ModalBody,
   ModalFooter,
   ModalHeader,
@@ -46,7 +46,7 @@ export default function AuthorizationErrorModal({
       <ModalHeader>{t(`${errorKeyPrefix}.otsikko`)}</ModalHeader>
       <ModalBody>{t(`${errorKeyPrefix}.viesti`)}</ModalBody>
       <ModalFooter>
-        <Flex justifyCenter>
+        <Box display="flex" justifyContent="center">
           <ModalButton color="danger" onClick={() => setErrorCode(null)}>
             {t('yleiset.suljeVaroitus')}
           </ModalButton>
@@ -66,7 +66,7 @@ export default function AuthorizationErrorModal({
               {t('yleiset.meneLoginSivulle')}
             </ModalButton>
           )}
-        </Flex>
+        </Box>
       </ModalFooter>
     </Modal>
   );

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
@@ -23,7 +23,7 @@ export const stubToteutusFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: _.merge(organisaatio(), {
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -36,7 +36,7 @@ export const stubToteutusFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        _.merge(organisaatio(), {
+        merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],
@@ -53,4 +53,6 @@ export const stubToteutusFormRoutes = ({ organisaatioOid }) => {
   );
 
   cy.intercept({ method: 'GET', url: '**/asiasana/search/**' }, { body: [] });
+
+  cy.intercept({ method: 'GET', url: '**/search/toteutus/**' }, { body: [] });
 };

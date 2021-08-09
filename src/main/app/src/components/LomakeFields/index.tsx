@@ -6,7 +6,6 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
-import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
   FormFieldRadioGroup,
@@ -14,6 +13,7 @@ import {
   FormFieldUrlInput,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
 
@@ -172,8 +172,8 @@ export const LomakeFields = ({
   });
 
   return (
-    <Flex>
-      <FlexItem grow={0}>
+    <Box display="flex">
+      <Box flexGrow={0}>
         <Field
           name={tyyppiName}
           component={FormFieldRadioGroup}
@@ -181,8 +181,8 @@ export const LomakeFields = ({
           label={optionsLabel}
           required
         />
-      </FlexItem>
-      <FlexItem grow={1} paddingLeft={3}>
+      </Box>
+      <Box flexGrow={1} paddingLeft={3}>
         <Field
           baseName={name}
           ataruOptions={ataruOptions}
@@ -194,7 +194,7 @@ export const LomakeFields = ({
           language={translationLanguage}
           haku={haku}
         />
-      </FlexItem>
-    </Flex>
+      </Box>
+    </Box>
   );
 };

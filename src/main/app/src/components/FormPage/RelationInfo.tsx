@@ -3,8 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import { RouterAnchor } from '#/src/components/Anchor';
-import { Flex, FlexItem } from '#/src/components/Flex';
-import { Typography } from '#/src/components/virkailija';
+import { Box, Typography } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const getEntityName = entity => {
@@ -14,21 +13,23 @@ const getEntityName = entity => {
 };
 
 export const RelationInfoContainer = ({ children }) => {
-  const justify =
-    React.Children.count(children) === 1
-      ? { justifyEnd: true }
-      : { justifyBetween: true };
   return (
-    <Flex marginBottom={2} {...justify}>
+    <Box
+      display="flex"
+      marginBottom={2}
+      justifyContent={
+        React.Children.count(children) === 1 ? 'flex-end' : 'space-between'
+      }
+    >
       {children}
-    </Flex>
+    </Box>
   );
 };
 
 export function RelationInfo({ title = '', entity, linkUrl = undefined }) {
   const name = getEntityName(entity) || '';
   return (
-    <FlexItem grow={0}>
+    <Box flexGrow={0}>
       {entity && (
         <>
           <Typography variant="h6" marginBottom={1}>
@@ -39,6 +40,6 @@ export function RelationInfo({ title = '', entity, linkUrl = undefined }) {
           </Typography>
         </>
       )}
-    </FlexItem>
+    </Box>
   );
 }

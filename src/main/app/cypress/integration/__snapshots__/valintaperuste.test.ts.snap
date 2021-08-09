@@ -188,6 +188,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 
 exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
 {
+  "esikatselu": false,
   "hakutapaKoodiUri": "hakutapa_01#1",
   "id": "649adb37-cd4d-4846-91a9-84b58b90f928",
   "julkinen": false,
@@ -283,11 +284,9 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
   "nimi": {
     "fi": "Valintaperusteen nimi"
   },
-  "julkinen": false,
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": "1",
   "tila": "tallennettu",
-  "esikatselu": false,
   "valintakokeet": [
     {
       "id": "testi-id-123",
@@ -328,7 +327,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
           }
         }
       ],
-      "tyyppiKoodiUri": "tyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
     }
   ]
 };

@@ -308,7 +308,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
   "koulutustyyppi": "amk",
   "metadata": {
     "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso2_1#1"
+      "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
     "koulutustyyppi": "amk",
     "kuvauksenNimi": {
@@ -359,7 +359,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
     "fi"
   ],
   "koulutuksetKoodiUri": [
-    "koulutus_309902#12"
+    "koulutus_309902#7"
   ],
   "koulutustyyppi": "lk",
   "metadata": {

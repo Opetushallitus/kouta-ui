@@ -16,6 +16,7 @@ import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
 import HttpContext from '#/src/contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
 import { UserGate } from '#/src/pages/UserGate';
+import { isDev } from '#/src/utils';
 
 import Routes from './Routes';
 
@@ -32,7 +33,7 @@ const App = ({
 }) => (
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {isDev && <ReactQueryDevtools initialIsOpen={false} />}
       <I18nextProvider i18n={localization}>
         <ThemeProvider theme={theme}>
           <PersistGate

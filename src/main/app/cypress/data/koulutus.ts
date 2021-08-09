@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
   return {
@@ -33,7 +33,7 @@ const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
 };
 
 const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
-  return _.merge(getBaseFields(), {
+  return merge(getBaseFields(), {
     oid: '1.2.246.562.13.00000000000000000599',
     johtaaTutkintoon: false,
     koulutustyyppi: tyyppi,
@@ -61,7 +61,7 @@ const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
 };
 
 const getKorkeakouluFields = ({ tyyppi }) => {
-  return _.merge(getBaseFields(), {
+  return merge(getBaseFields(), {
     johtaaTutkintoon: true,
     koulutustyyppi: tyyppi,
     koulutuksetKoodiUri: ['koulutus_671112#12'],
@@ -73,15 +73,15 @@ const getKorkeakouluFields = ({ tyyppi }) => {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
       kuvauksenNimi: { fi: 'Fi kuvauksen nimi', sv: 'Sv kuvauksen nimi' },
       koulutusalaKoodiUrit: [
-        'kansallinenkoulutusluokitus2016koulutusalataso2_1#1',
+        'kansallinenkoulutusluokitus2016koulutusalataso2_052#1',
       ],
     },
   });
 };
 
 const getLukioFields = ({ tyyppi }) => {
-  return _.merge(getBaseFields({ tyyppi }), {
-    koulutuksetKoodiUri: ['koulutus_309902#12'],
+  return merge(getBaseFields({ tyyppi }), {
+    koulutuksetKoodiUri: ['koulutus_309902#7'],
     nimi: { fi: 'Lukion oppimäärä' },
     metadata: {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_150',

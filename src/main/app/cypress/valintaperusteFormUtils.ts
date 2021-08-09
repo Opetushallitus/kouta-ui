@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import valintaperusteMocks from '#/cypress/mocks/valintaperuste.mock.json';
 
@@ -28,7 +28,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: _.merge(organisaatio(), {
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -41,11 +41,16 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        _.merge(organisaatio(), {
+        merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],
     }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/valintaperuste/list**' },
+    { body: [] }
   );
 
   stubOppijanumerorekisteriHenkiloRoute();

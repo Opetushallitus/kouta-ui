@@ -98,7 +98,7 @@ export const development = ({ isCypress }) => ({
 });
 
 export const configure = async (urls, httpClient) => {
-  if (isNodeEnv(['development', 'test'])) {
+  if (isNodeEnv(['development', 'test']) || isCypress) {
     urls.addProperties(development({ isCypress }));
   } else {
     const { data } = await httpClient.get('/kouta/rest/config/frontProperties');

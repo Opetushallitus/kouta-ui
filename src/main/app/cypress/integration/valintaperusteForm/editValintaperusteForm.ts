@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import valintaperuste from '#/cypress/data/valintaperuste';
 import {
@@ -6,9 +6,10 @@ import {
   fillKieliversiotSection,
   tallenna,
   assertNoUnsavedChangesDialog,
+  wrapMutationTest,
 } from '#/cypress/utils';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const valintaperusteId = '1';
@@ -22,7 +23,7 @@ const prepareTest = tyyppi => {
 
   cy.intercept(
     { method: 'GET', url: `**/valintaperuste/${valintaperusteId}` },
-    { body: _.merge(valintaperuste({ tyyppi }), testValintaperusteFields) }
+    { body: merge(valintaperuste({ tyyppi }), testValintaperusteFields) }
   );
 
   cy.visit(
@@ -31,26 +32,22 @@ const prepareTest = tyyppi => {
 };
 
 export const editValintaperusteForm = () => {
-  it('should be able to edit valintaperuste', () => {
-    prepareTest('amk');
-    cy.intercept(
-      { method: 'POST', url: '**/valintaperuste' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateValintaperusteRequest');
-
-    getByTestId('postinumero').contains('00350');
-
-    fillKieliversiotSection();
-    tallenna();
-
-    cy.wait('@updateValintaperusteRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  const mutationTest = wrapMutationTest({
+    id: valintaperusteId,
+    entity: ENTITY.VALINTAPERUSTE,
   });
+
+  it(
+    'should be able to edit valintaperuste',
+    mutationTest(() => {
+      prepareTest('amk');
+
+      getByTestId('postinumero').contains('00350');
+
+      fillKieliversiotSection();
+      tallenna();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched amm-form", () => {
     prepareTest('amm');

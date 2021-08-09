@@ -11,8 +11,6 @@ Kouta-UI on luotu create-react-app:lla, ja se on kääritty Spring Boot 2.0 -sov
 
 ### Lomakkeiden logiikka
 
-Lomakkeiden kenttien näkyvyys riippuu muiden kenttien arvoista sekä käyttäjän oikeuksista (joitakin kenttiä näytetään ainoastaan OPH-virkailijoille). Lomakkeiden kenttien näkyvyyksien määrittelyt on tämän kirjoitusaikana (joulukuu 2020) toteutettu osittain lomakkeiden React-komponenteissa ja osittain FormConfig-objekteissa. FormConfig-objektien takia osa lomakkeiden logiikasta sijaitsee erillään komponenteista joihin se vaikuttaa. Tämä aiheuttaa hämmennystä etenkin uusissa kehittäjissä. FormConfig-objekteissa määritelty lomakkeiden kenttien piilottamiseen/näyttämiseen liittyvä logiikka on päätetty siirtää lomakkeiden komponentteihin. 
-
 Lomakkeiden tilan hallinta on toteutettu redux-form-kirjastolla. Redux-form *rekisteröi* kentän kun sitä vastaava komponentti renderöidään. Vastaavasti *rekisteröinti poistetaan* (unregister), kun kenttää vastaava komponentti poistetaan. Näiden redux-tapahtumien avulla tunnistetaan milloin käyttäjä on poistanut kentät itse näkyvistä ja niille halutaan lähettää tyhjä arvo. Tämä onnistuu, koska *unregister*-tapahtumaa ei lähetetä alussa kun kenttä on piilossa.
 
 ### Palvelinkyselyiden hallinta ja muistintaminen

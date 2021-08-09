@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import haku from '#/cypress/data/haku';
 import hakukohde from '#/cypress/data/hakukohde';
@@ -14,9 +14,6 @@ import {
   stubCommonRoutes,
   jatka,
 } from '#/cypress/utils';
-
-import organisaatio from './data/organisaatio';
-import organisaatioHierarkia from './data/organisaatioHierarkia';
 
 const toimipisteTarjoajat = [
   '1.2.246.562.10.16538823663',
@@ -87,7 +84,7 @@ export const prepareTest = ({
   cy.intercept(
     { method: 'GET', url: `**/toteutus/${toteutusOid}` },
     {
-      body: _.merge(toteutus({ tyyppi }), {
+      body: merge(toteutus({ tyyppi }), {
         oid: toteutusOid,
         organisaatioOid,
         koulutusOid: koulutusOid,
@@ -100,7 +97,7 @@ export const prepareTest = ({
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
     {
-      body: _.merge(koulutus({ tyyppi }), {
+      body: merge(koulutus({ tyyppi }), {
         oid: koulutusOid,
         tarjoajat,
         organisaatioOid: organisaatioOid,
@@ -113,7 +110,7 @@ export const prepareTest = ({
     { method: 'GET', url: '**/valintaperuste/list**' },
     {
       body: [
-        _.merge(valintaperuste(), {
+        merge(valintaperuste(), {
           id: valintaperusteId,
           nimi: { fi: 'Valintaperusteen nimi' },
           tila: 'julkaistu',
@@ -125,7 +122,7 @@ export const prepareTest = ({
   cy.intercept(
     { method: 'GET', url: `**/valintaperuste/${valintaperusteId}` },
     {
-      body: _.merge(valintaperuste(), {
+      body: merge(valintaperuste(), {
         id: valintaperusteId,
         nimi: { fi: 'Valintaperusteen nimi' },
         tila: 'julkaistu',
@@ -135,30 +132,8 @@ export const prepareTest = ({
 
   cy.intercept(
     { method: 'GET', url: `**/hakukohde/${hakukohdeOid}` },
-    { body: _.merge(hakukohde(), testHakukohdeFields) }
+    { body: merge(hakukohde(), testHakukohdeFields) }
   );
-
-  edit
-    ? cy
-        .intercept(
-          { method: 'POST', url: '**/hakukohde' },
-          {
-            body: {
-              muokattu: false,
-            },
-          }
-        )
-        .as('updateHakukohdeRequest')
-    : cy
-        .intercept(
-          { method: 'PUT', url: '**/hakukohde' },
-          {
-            body: {
-              oid: hakukohdeOid,
-            },
-          }
-        )
-        .as('createHakukohdeRequest');
 
   cy.visit(
     edit
@@ -171,43 +146,9 @@ export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
   stubCommonRoutes();
 
   cy.intercept(
-    {
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
-    },
-    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
-  );
-
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-    },
-    {
-      body: _.merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    }
-  );
-
-  cy.intercept(
-    {
-      method: 'POST',
-      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    },
-    {
-      body: [
-        _.merge(organisaatio(), {
-          oid: organisaatioOid,
-        }),
-      ],
-    }
-  );
-
-  cy.intercept(
     { method: 'GET', url: `**/haku/${hakuOid}` },
     {
-      body: _.merge(haku(), {
+      body: merge(haku(), {
         oid: hakuOid,
         organisaatioOid: organisaatioOid,
         hakulomaketyyppi: 'muu',

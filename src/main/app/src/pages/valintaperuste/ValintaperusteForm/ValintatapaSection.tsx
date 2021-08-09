@@ -6,7 +6,6 @@ import { Grid, Cell } from 'styled-css-grid';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import { Flex } from '#/src/components/Flex';
 import {
   FormFieldEditor,
   FormFieldInput,
@@ -14,6 +13,7 @@ import {
 } from '#/src/components/formFields';
 import { SisaltoFields } from '#/src/components/SisaltoFields';
 import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
@@ -85,7 +85,11 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
         renderValintatapaFields({ valintatapa, tapaOptions, language, t })
       }
     </FieldArrayList>
-    <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+    <Box
+      display="flex"
+      justifyContent="center"
+      marginTop={fields.length > 0 ? 4 : 0}
+    >
       <Button
         type="button"
         variant="outlined"
@@ -96,7 +100,7 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
       >
         {t('valintaperustelomake.lisaaValintatapa')}
       </Button>
-    </Flex>
+    </Box>
   </>
 );
 

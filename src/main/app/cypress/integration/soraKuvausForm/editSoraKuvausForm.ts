@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import _ from 'lodash';
+import { merge } from 'lodash/fp';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
@@ -8,8 +8,9 @@ import {
   assertNoUnsavedChangesDialog,
   fillKieliversiotSection,
   tallenna,
+  wrapMutationTest,
 } from '#/cypress/utils';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const soraKuvausId = '123e4567-e89b-12d3-a456-426655440000';
 const organisaatioOid = '1.1.1.1.1.1';
@@ -24,7 +25,7 @@ export const editSoraKuvausForm = () => {
     cy.intercept(
       { method: 'GET', url: `**/sorakuvaus/${soraKuvaus.id}` },
       {
-        body: _.merge({}, soraKuvaus, {
+        body: merge(soraKuvaus, {
           organisaatioOid,
         }),
       }
@@ -35,23 +36,18 @@ export const editSoraKuvausForm = () => {
     );
   });
 
-  it('should be able to edit sora-kuvaus', () => {
-    cy.intercept(
-      { method: 'POST', url: '**/sorakuvaus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('editSoraKuvausRequest');
-
-    fillKieliversiotSection();
-    tallenna();
-
-    cy.wait('@editSoraKuvausRequest').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
-    });
+  const mutationTest = wrapMutationTest({
+    id: soraKuvausId,
+    entity: ENTITY.SORA_KUVAUS,
   });
+
+  it(
+    'should be able to edit sora-kuvaus',
+    mutationTest(() => {
+      fillKieliversiotSection();
+      tallenna();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     assertNoUnsavedChangesDialog();

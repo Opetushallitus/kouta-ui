@@ -1,3 +1,4 @@
+import { LANGUAGES } from '#/src/constants';
 import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
 
 export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
@@ -52,5 +53,19 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
         },
       ];
     }
+  }
+
+  if (path === 'metadata.kuvaus') {
+    return LANGUAGES.map(lng => ({
+      field: `description.kuvaus.${lng}`,
+      errorKey: 'validointivirheet.pakollisetKaannokset',
+    }));
+  }
+
+  if (path === 'metadata.opintojenLaajuusKoodiUri') {
+    return {
+      field: `information.opintojenLaajuus`,
+      errorKey: 'validointivirheet.pakollinen',
+    };
   }
 };

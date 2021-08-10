@@ -543,8 +543,7 @@
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä hakua",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu haku",
-    "haullaErillinenAloitusajankohta": "Haulla on erillinen aloitusajankohta",
-    "haunTunnistetiedot": "Haun tunnistetiedot"
+    "haullaErillinenAloitusajankohta": "Haulla on erillinen aloitusajankohta"
   },
   "hakukohdelomake": {
     "toteutukseenLiitettyAlkamisajankohta": "Toteutukseen liitetty alkamisajankohta",

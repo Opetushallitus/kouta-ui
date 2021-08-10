@@ -5,7 +5,6 @@ import { Field } from 'redux-form';
 
 import { FormFieldCheckbox, FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
-import { UlkoinenTunniste } from '#/src/components/UlkoinenTunniste';
 import { Divider } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
@@ -28,7 +27,6 @@ export const PerustiedotSection = ({
 
   return (
     <>
-      <UlkoinenTunniste />
       <Spacing marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
         <Field
           name={`${name}.nimi.${language}`}

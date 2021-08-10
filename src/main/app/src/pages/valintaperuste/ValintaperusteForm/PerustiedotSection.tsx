@@ -9,7 +9,6 @@ import {
   FormFieldSelect,
 } from '#/src/components/formFields';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
-import { UlkoinenTunniste } from '#/src/components/UlkoinenTunniste';
 import { Divider } from '#/src/components/virkailija';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
@@ -88,7 +87,6 @@ export const PerustiedotSection = ({
         />
       </div>
       <Divider marginTop={3} marginBottom={3} />
-      <UlkoinenTunniste />
     </>
   );
 };

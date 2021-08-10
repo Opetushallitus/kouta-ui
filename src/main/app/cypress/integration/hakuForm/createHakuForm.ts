@@ -17,8 +17,8 @@ import {
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
-const fillTunnistetiedotSection = () => {
-  getByTestId('tiedotSection').within(() => {
+const fillNimiSection = () => {
+  getByTestId('nimiSection').within(() => {
     cy.findByLabelText(/yleiset.nimi/).pipe(paste('haun nimi'));
 
     jatka();
@@ -163,7 +163,7 @@ export const createHakuForm = () => {
     mutationTest(() => {
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
-      fillTunnistetiedotSection();
+      fillNimiSection();
       fillKohdejoukkoSection();
       fillHakutapaSection();
       fillAikatauluSection();
@@ -180,7 +180,7 @@ export const createHakuForm = () => {
     mutationTest(() => {
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
-      fillTunnistetiedotSection();
+      fillNimiSection();
       getByTestId('hakulomakeSection').click();
       fillHakulomakeSection('muu');
 
@@ -193,7 +193,7 @@ export const createHakuForm = () => {
     mutationTest(() => {
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
-      fillTunnistetiedotSection();
+      fillNimiSection();
       getByTestId('hakulomakeSection').click();
       fillHakulomakeSection('ei sähköistä');
 

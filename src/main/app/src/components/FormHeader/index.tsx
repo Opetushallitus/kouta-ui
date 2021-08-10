@@ -27,7 +27,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.unit * 1}px 0px;
+  padding: ${({ theme }) => theme.spacing.unit * 2}px 0px;
 `;
 
 const TitleContainer = styled.div`

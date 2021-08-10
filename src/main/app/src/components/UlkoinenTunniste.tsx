@@ -8,7 +8,7 @@ import { FormFieldInput } from './formFields';
 export const UlkoinenTunniste = ({ disabled = false }) => {
   const { t } = useTranslation();
   return (
-    <Box mb={2}>
+    <Box>
       <Field
         label={t('yleiset.ulkoinenTunniste')}
         disabled={disabled}

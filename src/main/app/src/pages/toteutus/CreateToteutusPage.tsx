@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,
@@ -115,7 +114,6 @@ const CreateToteutusPage = props => {
             />
           ) : null
         }
-        esikatseluControls={<EsikatseluControls />}
       >
         <RelationInfoContainer>
           <KoulutusRelation

@@ -366,59 +366,49 @@ export const createKoulutusForm = () => {
     cy.visit(
       `/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`
     );
-    cy.intercept(
-      { method: 'PUT', url: '**/koulutus' },
-      {
-        body: {
-          oid: koulutusOid,
-        },
-      }
-    ).as('createTuvaKoulutusResponse');
 
-    fillCommon({ koulutustyyppiPath: ['tuva'] });
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['tuva'] });
 
-    getByTestId('informationSection').within(() => {
-      getByTestId('tuvaOpintojenlaajuusSelect')
-        .click()
-        .within(() => {
-          getSelectOption('Vähintään 53 op').click();
+      getByTestId('informationSection').within(() => {
+        getByTestId('tuvaOpintojenlaajuusSelect')
+          .click()
+          .within(() => {
+            getSelectOption('Vähintään 53 op').click();
+          });
+
+        getByTestId('nimiInput').within(() => {
+          cy.get('input').should('have.value', 'koulutustyypit.tuva');
         });
 
-      getByTestId('nimiInput').within(() => {
-        cy.get('input').should('have.value', 'koulutustyypit.tuva');
+        jatka();
       });
 
-      jatka();
-    });
+      getByTestId('descriptionSection').within(() => {
+        getByTestId('kuvauksenNimiInput').should('not.exist');
+        getByTestId('kuvausInput').within(() => {
+          typeToEditor('Kuvaus');
+        });
 
-    getByTestId('descriptionSection').within(() => {
-      getByTestId('kuvauksenNimiInput').should('not.exist');
-      getByTestId('kuvausInput').within(() => {
-        typeToEditor('Kuvaus');
+        getByTestId('linkkiEPerusteisiinInput').within(() => {
+          cy.get('input').pipe(paste('linkki'));
+        });
+
+        jatka();
       });
 
-      getByTestId('linkkiEPerusteisiinInput').within(() => {
-        cy.get('input').pipe(paste('linkki'));
-      });
+      fillTeemakuvaSection();
 
-      jatka();
-    });
+      fillJarjestajaSection();
 
-    fillTeemakuvaSection();
+      fillNakyvyysSection();
 
-    fillJarjestajaSection();
+      fillTilaSection();
 
-    fillNakyvyysSection();
+      getByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('lisatiedotSection').should('not.exist');
 
-    fillTilaSection();
-
-    getByTestId('soraKuvausSection').should('not.exist');
-    getByTestId('lisatiedotSection').should('not.exist');
-
-    tallenna();
-
-    cy.wait('@createTuvaKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
+      tallenna();
     });
   });
 };

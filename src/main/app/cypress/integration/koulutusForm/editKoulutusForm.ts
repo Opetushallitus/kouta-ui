@@ -98,23 +98,13 @@ export const editKoulutusForm = () => {
     cy.visit(
       `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
     );
-    cy.intercept(
-      { method: 'POST', url: '**/koulutus' },
-      {
-        body: {
-          muokattu: false,
-        },
-      }
-    ).as('updateTuvaKoulutusResponse');
 
-    getByTestId('linkkiEPerusteisiinInput')
-      .find('input')
-      .pipe(paste('http://testilinkki.fi'));
+    mutationTest(() => {
+      getByTestId('linkkiEPerusteisiinInput')
+        .find('input')
+        .pipe(paste('http://testilinkki.fi'));
 
-    tallenna();
-
-    cy.wait('@updateTuvaKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).toMatchSnapshot();
+      tallenna();
     });
   });
 

@@ -35,7 +35,7 @@ export const TuvaTiedotSection = ({ disabled, language, name }) => {
       </Box>
       <Box mb={2} {...getTestIdProps('nimiInput')}>
         <Field
-          disabled={true}
+          disabled
           name={`${name}.nimi.${language}`}
           component={FormFieldInput}
           label={t('koulutuslomake.koulutuksenNimi')}

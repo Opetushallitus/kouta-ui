@@ -128,6 +128,7 @@ export const getValintaperusteByFormValues = values => {
   });
 
   return {
+    externalId: _.isEmpty(values?.externalId) ? null : values?.externalId,
     tila,
     muokkaaja,
     kielivalinta,

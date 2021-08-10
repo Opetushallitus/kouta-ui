@@ -6,9 +6,23 @@ import { Link } from 'react-router-dom';
 import Button from '#/src/components/Button';
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import { Box } from '#/src/components/virkailija';
+import { ENTITY } from '#/src/constants';
 import { useIsSubmitting } from '#/src/hooks/form';
 
 import FormEditInfo from '../FormEditInfo';
+
+type FormFooterProps = {
+  entityType: ENTITY;
+  entity: {
+    muokkaaja?: string;
+    modified?: string;
+  };
+  save: () => void;
+  canUpdate?: boolean;
+  submitProps?: object;
+  hideEsikatselu?: boolean;
+  esikatseluUrl?: string;
+};
 
 const FormFooter = ({
   entityType,
@@ -16,8 +30,9 @@ const FormFooter = ({
   save,
   canUpdate = true,
   submitProps = {},
+  hideEsikatselu = false,
   esikatseluUrl,
-}) => {
+}: FormFooterProps) => {
   const { t } = useTranslation();
   const isSubmitting = useIsSubmitting();
   const { modified, muokkaaja } = entity;
@@ -27,7 +42,9 @@ const FormFooter = ({
         <Button as={Link} to="/" color="primary" variant="outlined">
           {t('yleiset.etusivulle')}
         </Button>
-        <EsikatseluControls esikatseluUrl={esikatseluUrl} />
+        {!hideEsikatselu && (
+          <EsikatseluControls esikatseluUrl={esikatseluUrl} />
+        )}
         <Box marginLeft={2}>
           {modified && <FormEditInfo date={modified} editorOid={muokkaaja} />}
         </Box>

@@ -82,5 +82,13 @@ export const HakuFooter = ({
     validate: validateHakuForm,
   });
 
-  return <FormFooter entity={ENTITY.HAKU} save={save} canUpdate={canUpdate} />;
+  return (
+    <FormFooter
+      hideEsikatselu
+      entityType={ENTITY.HAKU}
+      entity={haku}
+      save={save}
+      canUpdate={canUpdate}
+    />
+  );
 };

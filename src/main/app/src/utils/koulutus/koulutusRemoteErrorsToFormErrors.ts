@@ -55,14 +55,17 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
     }
   }
 
-  if (path === 'metadata.kuvaus') {
+  if (path === 'metadata.kuvaus' && errorType === 'invalidKielistetty') {
     return LANGUAGES.map(lng => ({
       field: `description.kuvaus.${lng}`,
       errorKey: 'validointivirheet.pakollisetKaannokset',
     }));
   }
 
-  if (path === 'metadata.opintojenLaajuusKoodiUri') {
+  if (
+    path === 'metadata.opintojenLaajuusKoodiUri' &&
+    errorType === 'missingMsg'
+  ) {
     return {
       field: `information.opintojenLaajuus`,
       errorKey: 'validointivirheet.pakollinen',

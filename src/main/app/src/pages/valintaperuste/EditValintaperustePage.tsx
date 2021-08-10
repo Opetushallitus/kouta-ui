@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -13,7 +12,6 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
@@ -37,8 +35,6 @@ export const EditValintaperustePage = props => {
     CRUD_ROLES.UPDATE,
     valintaperuste?.organisaatioOid
   );
-
-  const apiUrls = useUrls();
 
   const initialValues = useMemo(
     () => (valintaperuste ? getFormValuesByValintaperuste(valintaperuste) : {}),
@@ -72,11 +68,6 @@ export const EditValintaperustePage = props => {
               canUpdate={canUpdate}
             />
           ) : null
-        }
-        esikatseluControls={
-          <EsikatseluControls
-            esikatseluUrl={apiUrls.url('konfo-ui.valintaperuste', id)}
-          />
         }
       >
         <RelationInfoContainer>

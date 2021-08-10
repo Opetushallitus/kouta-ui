@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
@@ -73,11 +74,15 @@ export const ValintaperusteFooter = ({
       ),
   });
 
+  const apiUrls = useUrls();
+
   return (
     <FormFooter
-      entity={ENTITY.VALINTAPERUSTE}
+      entityType={ENTITY.VALINTAPERUSTE}
+      entity={valintaperuste}
       save={save}
       canUpdate={canUpdate}
+      esikatseluUrl={apiUrls.url('konfo-ui.valintaperuste', valintaperuste?.id)}
     />
   );
 };

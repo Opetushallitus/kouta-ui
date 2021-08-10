@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
+import { UlkoinenTunniste } from '#/src/components/UlkoinenTunniste';
 import { Box, FormControl } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
@@ -34,14 +35,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
 
   return (
     <Box mb={-2}>
-      <Box mb={2} maxWidth="400px">
-        <Field
-          label={t('yleiset.ulkoinenTunniste')}
-          disabled={disabled}
-          component={FormFieldInput}
-          name="externalId"
-        />
-      </Box>
+      <UlkoinenTunniste disabled={disabled} />
       {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
         koulutustyyppi
       ) && (

@@ -57,6 +57,12 @@ export const SoraKuvausFooter = ({
   });
 
   return (
-    <FormFooter entity={ENTITY.SORA_KUVAUS} save={save} canUpdate={canUpdate} />
+    <FormFooter
+      entityType={ENTITY.SORA_KUVAUS}
+      entity={soraKuvaus}
+      hideEsikatselu
+      save={save}
+      canUpdate={canUpdate}
+    />
   );
 };

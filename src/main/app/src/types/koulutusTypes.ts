@@ -20,6 +20,7 @@ export type InformationSectionValues = {
 };
 
 export type KoulutusFormValues = {
+  externalId?: string;
   koulutustyyppi: KOULUTUSTYYPPI;
   kieliversiot: Array<LanguageCode>;
   muokkaaja?: string;

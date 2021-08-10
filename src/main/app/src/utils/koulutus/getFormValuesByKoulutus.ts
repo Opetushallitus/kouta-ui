@@ -40,6 +40,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     teemakuva,
     ePerusteId,
     sorakuvausId,
+    externalId,
   } = koulutus;
 
   const { koulutusKoodiUri, korkeakoulutusKoodiUrit } = getKoulutusKoodiUrit(
@@ -60,6 +61,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
   } = metadata;
 
   return {
+    externalId,
     tila,
     kieliversiot: kielivalinta,
     tarjoajat: { tarjoajat, kaytaPohjanJarjestajaa: true },

@@ -56,6 +56,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     kuvauksenNimi = {},
     koulutusalaKoodiUrit = [],
     osaamisalaKoodiUri,
+    linkkiEPerusteisiin = {},
   } = metadata;
 
   return {
@@ -120,6 +121,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     description: {
       kuvaus: _fp.mapValues(parseEditorState, kuvaus),
       nimi: kuvauksenNimi,
+      linkkiEPerusteisiin,
     },
     esikatselu,
     julkinen,

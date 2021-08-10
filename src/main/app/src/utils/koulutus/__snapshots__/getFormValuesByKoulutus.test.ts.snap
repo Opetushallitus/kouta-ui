@@ -7,6 +7,7 @@ Object {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
     },
+    "linkkiEPerusteisiin": Object {},
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
@@ -95,6 +96,7 @@ Object {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
     },
+    "linkkiEPerusteisiin": Object {},
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",

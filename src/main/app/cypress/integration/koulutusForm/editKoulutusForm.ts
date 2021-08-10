@@ -8,6 +8,8 @@ import {
   fillKieliversiotSection,
   tallenna,
   assertNoUnsavedChangesDialog,
+  getByTestId,
+  paste,
   wrapMutationTest,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
@@ -90,6 +92,21 @@ export const editKoulutusForm = () => {
       tallenna();
     })
   );
+
+  it('should be able to edit TUVA-koulutus', () => {
+    prepareTest('tuva');
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    mutationTest(() => {
+      getByTestId('linkkiEPerusteisiinInput')
+        .find('input')
+        .pipe(paste('http://testilinkki.fi'));
+
+      tallenna();
+    });
+  });
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');

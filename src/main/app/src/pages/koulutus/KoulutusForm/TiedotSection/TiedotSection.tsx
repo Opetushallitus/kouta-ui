@@ -113,7 +113,6 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           </Box>
         </>
       )}
-
       {[
         ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
         KOULUTUSTYYPPI.AVOIN_YO,

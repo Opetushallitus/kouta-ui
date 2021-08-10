@@ -89,6 +89,16 @@ const getLukioFields = ({ tyyppi }) => {
   });
 };
 
+const getTuvaFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    nimi: { fi: 'Tutkintokoulutukseen valmentava koulutus (TUVA)' },
+    metadata: {
+      opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53',
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
 export default ({ tyyppi = 'amm' } = {}) => {
   if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
@@ -96,6 +106,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getKorkeakouluFields({ tyyppi });
   } else if (tyyppi === 'lk') {
     return getLukioFields({ tyyppi });
+  } else if (tyyppi === 'tuva') {
+    return getTuvaFields({ tyyppi });
   }
 
   return getBaseFields();

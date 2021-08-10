@@ -2,6 +2,7 @@ import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutu
 
 test('getFormValuesByKoulutus returns correct form values given koulutus', () => {
   const values = getFormValuesByKoulutus({
+    externalId: 'ext1',
     tila: 'tallennettu',
     julkinen: true,
     kielivalinta: ['fi', 'sv'],

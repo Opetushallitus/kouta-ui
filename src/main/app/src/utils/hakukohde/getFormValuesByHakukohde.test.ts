@@ -21,6 +21,7 @@ describe('parseKeskiarvo', () => {
 
 test('getFormValuesByHakukohde returns correct form values given hakukohde', () => {
   const values = getFormValuesByHakukohde({
+    externalId: 'ext1',
     tila: JULKAISUTILA.TALLENNETTU,
     kielivalinta: ['fi', 'sv'],
     hakuajat: [{ alkaa: '2019-03-29T12:28', paattyy: '2019-09-29T12:30' }],

@@ -2,6 +2,7 @@
 
 exports[`getSoraKuvausByFormValues returns correct sora-kuvaus given form values 1`] = `
 Object {
+  "externalId": "ext1",
   "kielivalinta": Array [
     "fi",
     "sv",

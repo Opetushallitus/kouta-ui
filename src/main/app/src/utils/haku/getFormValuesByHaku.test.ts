@@ -6,6 +6,7 @@ import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { getFormValuesByHaku } from './getFormValuesByHaku';
 
 const baseHaku = {
+  externalId: 'ext1',
   muokkaaja: '1.1.1.1',
   tila: 'tallennettu',
   kielivalinta: ['fi', 'sv'],

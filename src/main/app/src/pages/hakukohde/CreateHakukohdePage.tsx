@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormHeader from '#/src/components/FormHeader';
 import FormPage from '#/src/components/FormPage';
 import {
@@ -55,7 +54,6 @@ export const CreateHakukohdePage = ({
       <FormPage
         header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
         steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-        esikatseluControls={<EsikatseluControls />}
         footer={
           <HakukohdeFooter
             formMode={FormMode.CREATE}

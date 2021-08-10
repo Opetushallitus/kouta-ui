@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakukohdeModel } from '#/src/types/hakukohdeTypes';
@@ -102,7 +103,15 @@ export const HakukohdeFooter = ({
     validate: validateHakukohdeForm(koulutustyyppi),
   });
 
+  const apiUrls = useUrls();
+
   return (
-    <FormFooter entity={ENTITY.HAKUKOHDE} save={save} canUpdate={canUpdate} />
+    <FormFooter
+      entityType={ENTITY.HAKUKOHDE}
+      entity={hakukohde}
+      save={save}
+      canUpdate={canUpdate}
+      esikatseluUrl={apiUrls.url('konfo-ui.toteutus', hakukohde?.toteutusOid)}
+    />
   );
 };

@@ -21,8 +21,8 @@ import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
 import { HakutapaSection } from './HakutapaSection';
 import HaunKohdejoukkoFields from './HaunKohdejoukkoFields';
-import NameSection from './NameSection';
 import ScheduleSection from './ScheduleSection';
+import { TunnistetiedotSection } from './TunnistetiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const HakuForm = ({
@@ -71,10 +71,10 @@ const HakuForm = ({
         />
 
         <FormCollapse
-          section="nimi"
-          header={t('hakulomake.haunNimi')}
+          section="tiedot"
+          header={t('hakulomake.haunTunnistetiedot')}
           languages={languages}
-          Component={NameSection}
+          Component={TunnistetiedotSection}
         />
 
         <FormCollapse

@@ -187,7 +187,8 @@
     "koulutuksenAjankohta": "Koulutuksen aloitusajankohta",
     "tallennaLuonnoksenaEsikatsellaksesi": "Tallenna lomake luonnoksena esikatsellaksesi.",
     "naytaJulkaistu": "Näytä julkaistu",
-    "naytaJulkaistuTooltip": "Näyttää julkaistun lomakkeen tiedot oppijan puolella"
+    "naytaJulkaistuTooltip": "Näyttää julkaistun lomakkeen tiedot oppijan puolella",
+    "ulkoinenTunniste": "Ulkoinen tunniste"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -542,7 +543,8 @@
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä hakua",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu haku",
-    "haullaErillinenAloitusajankohta": "Haulla on erillinen aloitusajankohta"
+    "haullaErillinenAloitusajankohta": "Haulla on erillinen aloitusajankohta",
+    "haunTunnistetiedot": "Haun tunnistetiedot"
   },
   "hakukohdelomake": {
     "toteutukseenLiitettyAlkamisajankohta": "Toteutukseen liitetty alkamisajankohta",

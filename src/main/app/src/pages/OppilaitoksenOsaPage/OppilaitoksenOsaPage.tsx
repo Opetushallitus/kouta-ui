@@ -26,10 +26,10 @@ import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatio
 import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
+import { OppilaitoksenOsaFooter } from './OppilaitoksenOsaFooter';
 import OppilaitoksenOsaForm, {
   initialValues as formInitialValues,
 } from './OppilaitoksenOsaForm';
-import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
 
 const useOppilaitosOid = oppilaitoksenOsaOrganisaatio => {
   const parentOids = getOrganisaatioParentOidPath(oppilaitoksenOsaOrganisaatio);
@@ -141,7 +141,7 @@ export const OppilaitoksenOsaPage = ({
           />
         }
         footer={
-          <OppilaitoksenOsaPageFooter
+          <OppilaitoksenOsaFooter
             oppilaitoksenOsa={oppilaitoksenOsa}
             organisaatioOid={organisaatioOid}
             readOnly={readOnly}

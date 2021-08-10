@@ -19,10 +19,10 @@ import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesB
 import { useOppilaitosByOid } from '#/src/utils/oppilaitos/getOppilaitosByOid';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
+import { OppilaitosFooter } from './OppilaitosFooter';
 import OppilaitosForm, {
   initialValues as formInitialValues,
 } from './OppilaitosForm';
-import OppilaitosPageFooter from './OppilaitosPageFooter';
 
 export const OppilaitosPage = ({
   match: {
@@ -123,7 +123,7 @@ export const OppilaitosPage = ({
           />
         }
         footer={
-          <OppilaitosPageFooter
+          <OppilaitosFooter
             oppilaitos={oppilaitos}
             organisaatioOid={organisaatioOid}
             readOnly={readOnly}

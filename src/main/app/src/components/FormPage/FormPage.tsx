@@ -1,11 +1,8 @@
 import React from 'react';
 
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import NavigationPrompt from 'react-router-navigation-prompt';
 import styled, { css } from 'styled-components';
 
-import Button from '#/src/components/Button';
 import Container from '#/src/components/Container';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
 import { useIsDirty, useIsSubmitting } from '#/src/hooks/form';
@@ -42,21 +39,6 @@ const FormContent = styled.div`
   padding-bottom: ${({ theme }) => theme.spacing.unit * 6}px;
   flex-grow: 1;
   flex-basis: 100%;
-`;
-
-const FooterWrapper = styled.div`
-  ${({ hasFooterHomeLink }) =>
-    hasFooterHomeLink &&
-    css`
-      display: flex;
-      justify-content: space-between;
-    `}
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const FooterActions = styled.div``;
@@ -97,11 +79,8 @@ const FormPage: React.FC<FormPageProps> = ({
   steps = null,
   children = null,
   footer = null,
-  hasFooterHomeLink = true,
   readOnly = false,
-  esikatseluControls,
 }) => {
-  const { t } = useTranslation();
   const isSubmitting = useIsSubmitting();
   const isDirty = useIsDirty();
 
@@ -129,17 +108,7 @@ const FormPage: React.FC<FormPageProps> = ({
         </FormContent>
         <FooterContainer>
           <Container>
-            <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
-              <Buttons>
-                {hasFooterHomeLink ? (
-                  <Button as={Link} to="/" color="primary" variant="outlined">
-                    {t('yleiset.etusivulle')}
-                  </Button>
-                ) : null}
-                {esikatseluControls}
-              </Buttons>
-              <FooterActions>{footer}</FooterActions>
-            </FooterWrapper>
+            <FooterActions>{footer}</FooterActions>
           </Container>
         </FooterContainer>
       </Wrapper>

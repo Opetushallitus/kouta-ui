@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { FormFooter } from '#/src/components/FormPage';
 import { ORGANISAATIOTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
@@ -112,8 +113,18 @@ export const KoulutusFooter = ({
     validate: validateKoulutusForm,
   });
 
+  const apiUrls = useUrls();
+
   return (
-    <FormFooter entity={ENTITY.KOULUTUS} save={save} canUpdate={canUpdate} />
+    <FormFooter
+      entityType={ENTITY.KOULUTUS}
+      save={save}
+      canUpdate={canUpdate}
+      entity={koulutus}
+      esikatseluUrl={
+        FormMode.EDIT && apiUrls.url('konfo-ui.koulutus', koulutus?.oid)
+      }
+    />
   );
 };
 

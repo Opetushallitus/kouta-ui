@@ -4,7 +4,6 @@ import _ from 'lodash';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,
@@ -67,7 +66,6 @@ const CreateKoulutusPage = props => {
       <FormPage
         header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
         steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-        esikatseluControls={<EsikatseluControls />}
         footer={
           <KoulutusFooter
             formMode={FormMode.CREATE}

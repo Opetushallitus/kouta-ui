@@ -12,6 +12,7 @@ import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
+import { UlkoinenTunniste } from '#/src/components/UlkoinenTunniste';
 import { Box } from '#/src/components/virkailija';
 import {
   ENTITY,
@@ -90,6 +91,7 @@ export const KoulutusForm = ({
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      <UlkoinenTunniste />
       <FormCollapse
         section="koulutustyyppi"
         header={t('yleiset.koulutustyyppi')}

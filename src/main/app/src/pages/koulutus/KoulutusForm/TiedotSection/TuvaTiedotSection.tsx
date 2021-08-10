@@ -30,7 +30,7 @@ export const TuvaTiedotSection = ({ disabled, language, name }) => {
         <OpintojenlaajuusField
           disabled={disabled}
           name={name}
-          required={true}
+          required
         />
       </Box>
       <Box mb={2} {...getTestIdProps('nimiInput')}>

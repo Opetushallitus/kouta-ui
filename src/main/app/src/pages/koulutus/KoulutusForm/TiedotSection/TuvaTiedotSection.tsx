@@ -27,11 +27,7 @@ export const TuvaTiedotSection = ({ disabled, language, name }) => {
   return (
     <Box mb={-2}>
       <Box mb={2} {...getTestIdProps('tuvaOpintojenlaajuusSelect')}>
-        <OpintojenlaajuusField
-          disabled={disabled}
-          name={name}
-          required
-        />
+        <OpintojenlaajuusField disabled={disabled} name={name} required />
       </Box>
       <Box mb={2} {...getTestIdProps('nimiInput')}>
         <Field

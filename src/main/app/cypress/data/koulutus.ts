@@ -90,7 +90,7 @@ const getLukioFields = ({ tyyppi }) => {
 };
 
 const getTuvaFields = ({ tyyppi }) => {
-  return _.merge(getBaseFields({ tyyppi }), {
+  return merge(getBaseFields({ tyyppi }), {
     nimi: { fi: 'Tutkintokoulutukseen valmentava koulutus (TUVA)' },
     metadata: {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53',

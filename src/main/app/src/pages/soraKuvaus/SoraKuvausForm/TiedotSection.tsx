@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
+import { UlkoinenTunniste } from '#/src/components/UlkoinenTunniste';
 import { getTestIdProps } from '#/src/utils';
 
 export const TiedotSection = ({ name, language }) => {
@@ -12,6 +13,7 @@ export const TiedotSection = ({ name, language }) => {
 
   return (
     <>
+      <UlkoinenTunniste />
       <div {...getTestIdProps('nimi')}>
         <Spacing marginBottom={2}>
           <Field

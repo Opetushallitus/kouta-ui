@@ -76,6 +76,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const apurahaMin = values?.jarjestamistiedot?.apurahaMin;
   const apurahaMax = values?.jarjestamistiedot?.apurahaMax;
   return {
+    externalId: values?.externalId,
     nimi: pickTranslations(values?.tiedot?.nimi || {}),
     tarjoajat: values?.tarjoajat || [],
     kielivalinta,

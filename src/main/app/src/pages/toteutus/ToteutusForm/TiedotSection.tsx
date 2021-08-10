@@ -10,6 +10,7 @@ import {
   FormFieldSelect,
   FormFieldSwitch,
 } from '#/src/components/formFields';
+import { UlkoinenTunniste } from '#/src/components/UlkoinenTunniste';
 import { Box } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPIT,
@@ -63,6 +64,7 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
 
   return (
     <>
+      <UlkoinenTunniste />
       {_fp
         .without(
           [

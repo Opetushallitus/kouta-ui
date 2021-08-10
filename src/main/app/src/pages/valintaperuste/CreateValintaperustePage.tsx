@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import FormHeader from '#/src/components/FormHeader';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -72,7 +72,7 @@ export const CreateValintaperustePage = props => {
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
       <FormPage
-        header={<FormHeader>{t('yleiset.valintaperuste')}</FormHeader>}
+        header={<EntityFormHeader entityType={ENTITY.VALINTAPERUSTE} />}
         steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
         footer={
           <ValintaperusteFooter

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import FormHeader from '#/src/components/FormHeader';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
 import {
   RelationInfoContainer,
@@ -52,7 +52,7 @@ export const CreateHakukohdePage = ({
     <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
-        header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
+        header={<EntityFormHeader entityType={ENTITY.HAKUKOHDE} />}
         steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
         footer={
           <HakukohdeFooter

@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Icon, Typography } from '#/src/components/virkailija';
+import { Box, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
 
 const HomeIcon = styled(Icon).attrs({ type: 'home' })`
@@ -27,42 +27,44 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.unit * 2}px 0px;
+  padding: ${({ theme }) => theme.spacing.unit * 1}px 0px;
 `;
 
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 `;
 
 type FormHeaderProps = {
+  title: string;
   status?: React.ReactNode;
-  children: React.ReactNode;
-  editInfo?: React.ReactNode;
+  children?: React.ReactNode;
   hasHomeLink?: boolean;
 };
 
 const FormHeader = ({
+  title,
   status,
   children,
-  editInfo,
   hasHomeLink = true,
-  ...props
 }: FormHeaderProps) => {
   const homeIconProps = hasHomeLink ? { as: Link, to: '/' } : {};
 
   return (
-    <Container {...props}>
-      {children && (
-        <TitleContainer>
-          <IconContainer {...homeIconProps}>
-            <HomeIcon />
-          </IconContainer>
-          <Typography variant="h5">{children}</Typography>
-        </TitleContainer>
-      )}
-      {status && <div>{status}</div>}
-      {editInfo && <div>{editInfo}</div>}
+    <Container>
+      <TitleContainer>
+        <IconContainer {...homeIconProps}>
+          <HomeIcon />
+        </IconContainer>
+        <Typography variant="h5">{title}</Typography>
+        {status && (
+          <Box ml={2} mr={2}>
+            {status}
+          </Box>
+        )}
+      </TitleContainer>
+      {children}
     </Container>
   );
 };

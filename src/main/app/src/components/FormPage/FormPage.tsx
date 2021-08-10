@@ -71,7 +71,6 @@ type FormPageProps = {
   footer?: React.ReactNode;
   hasFooterHomeLink?: boolean;
   readOnly?: boolean;
-  esikatseluControls?: React.ReactNode;
 };
 
 const FormPage: React.FC<FormPageProps> = ({

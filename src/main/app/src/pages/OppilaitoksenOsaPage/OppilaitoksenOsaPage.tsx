@@ -4,7 +4,6 @@ import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage from '#/src/components/FormPage';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
@@ -16,7 +15,6 @@ import {
   ORGANISAATIOTYYPPI,
   FormMode,
 } from '#/src/constants';
-import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
@@ -120,8 +118,6 @@ export const OppilaitoksenOsaPage = ({
     [formMode, oppilaitoksenOsa, oppilaitosOid, contactInfo]
   );
 
-  const apiUrls = useUrls();
-
   return isFetching ? (
     <FullSpin />
   ) : (
@@ -145,14 +141,6 @@ export const OppilaitoksenOsaPage = ({
             oppilaitoksenOsa={oppilaitoksenOsa}
             organisaatioOid={organisaatioOid}
             readOnly={readOnly}
-          />
-        }
-        esikatseluControls={
-          <EsikatseluControls
-            esikatseluUrl={
-              oppilaitoksenOsa &&
-              apiUrls.url('konfo-ui.oppilaitoksenOsa', organisaatioOid)
-            }
           />
         }
       >

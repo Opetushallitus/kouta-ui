@@ -52,7 +52,12 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
       await httpClient.get(apiUrls.url('kouta-backend.session'));
     } catch (e) {
       if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
-        !isDev && window.location.replace(apiUrls.url('cas.login'));
+        !isDev &&
+          window.location.replace(
+            apiUrls.url('cas.login') +
+              '?service=' +
+              encodeURIComponent(window.location.href)
+          );
       }
     }
   }, []);

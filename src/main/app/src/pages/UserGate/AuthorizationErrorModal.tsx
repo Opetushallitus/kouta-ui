@@ -60,7 +60,11 @@ export default function AuthorizationErrorModal({
                           'https://localhost:3000/kouta'
                         )}`
                     )
-                  : window.location.replace(apiUrls.url('cas.login'))
+                  : window.location.replace(
+                      apiUrls.url('cas.login') +
+                        '?service=' +
+                        encodeURIComponent(window.location.href)
+                    )
               }
             >
               {t('yleiset.meneLoginSivulle')}

@@ -1184,3 +1184,68 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
   ],
   "tila": "tallennettu"
 };
+
+exports[`createToteutus > should be able to create TUVA toteutus #0`] =
+{
+  "esikatselu": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "alemmanKorkeakoulututkinnonOsaamisalat": [],
+    "aloituspaikat": 25,
+    "ammattinimikkeet": [],
+    "asiasanat": [],
+    "diplomit": [],
+    "erityisetKoulutustehtavat": [],
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
+    "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1Kielet": [],
+      "A2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
+    "kuvaus": {},
+    "laajuus": null,
+    "laajuusyksikkoKoodiUri": null,
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
+    "opetus": {
+      "apuraha": null,
+      "koulutuksenAlkamiskausi": null,
+      "lisatiedot": [],
+      "maksullisuusKuvaus": {},
+      "maksullisuustyyppi": "maksuton",
+      "maksunMaara": null,
+      "opetusaikaKoodiUrit": [],
+      "opetusaikaKuvaus": {},
+      "opetuskieletKuvaus": {},
+      "opetuskieliKoodiUrit": [],
+      "opetustapaKoodiUrit": [],
+      "opetustapaKuvaus": {},
+      "suunniteltuKestoKuukaudet": null,
+      "suunniteltuKestoKuvaus": {},
+      "suunniteltuKestoVuodet": null
+    },
+    "osaamisalat": [],
+    "painotukset": [],
+    "toteutusjaksot": [],
+    "tyyppi": "tuva",
+    "yhteyshenkilot": [],
+    "ylemmanKorkeakoulututkinnonOsaamisalat": []
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "toteutuksen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [],
+  "tila": "tallennettu"
+};

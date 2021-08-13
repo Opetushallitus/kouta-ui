@@ -152,6 +152,24 @@ const fillTiedotSection = tyyppi => {
   });
 };
 
+const fillTuvaTiedotSection = () => {
+  getByTestId('tiedotSection').within(() => {
+    getByTestId('toteutuksenNimi').within(() => {
+      cy.get('input').clear().pipe(paste('toteutuksen nimi'));
+    });
+
+    cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' })
+      .should('be.disabled')
+      .should('have.value', '38 viikkoa');
+
+    cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
+      .clear()
+      .pipe(paste('25'));
+
+    jatka();
+  });
+};
+
 const fillYhteystiedotSection = () => {
   getByTestId('yhteyshenkilotSection').within(() => {
     fillYhteyshenkilotFields();
@@ -491,6 +509,32 @@ export const createToteutusForm = () => {
       fillJarjestajatSection();
       fillYhteystiedotSection();
       fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it.only(
+    'should be able to create TUVA toteutus',
+    mutationTest(() => {
+      prepareTest('tuva');
+
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillTuvaTiedotSection();
+
+      // getByTestId('jarjestamistiedotSection').within(() => {
+      //   fillCommonJarjestamistiedot();
+      //   fillKielivalikoima();
+      //   fillDiplomi();
+      //   jatka();
+      // });
+
+      // fillTeemakuvaSection();
+      // fillNayttamistiedotSection({ ammattinimikkeet: false });
+      // fillJarjestajatSection();
+      // fillYhteystiedotSection();
+      // fillTilaSection();
 
       tallenna();
     })

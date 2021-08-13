@@ -34,6 +34,7 @@ import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
 import { TiedotSection } from './TiedotSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
+import { TuvaTiedotSection } from './TuvaTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
@@ -102,13 +103,24 @@ const ToteutusForm = ({
           header={t('yleiset.kieliversiot')}
           Component={KieliversiotFields}
         />
-        <FormCollapse
-          section="tiedot"
-          header={t('toteutuslomake.toteutuksenTiedot')}
-          languages={languages}
-          Component={TiedotSection}
-          koulutustyyppi={koulutustyyppi}
-        />
+        {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={TiedotSection}
+            koulutustyyppi={koulutustyyppi}
+          />
+        )}
+        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={TuvaTiedotSection}
+            koulutus={koulutus}
+          />
+        )}
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
             section="lukiolinjat"

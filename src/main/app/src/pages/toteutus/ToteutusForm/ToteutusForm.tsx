@@ -34,6 +34,7 @@ import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
 import { TiedotSection } from './TiedotSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
+import { TuvaKuvausSection } from './TuvaKuvausSection';
 import { TuvaTiedotSection } from './TuvaTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
@@ -119,6 +120,14 @@ const ToteutusForm = ({
             languages={languages}
             Component={TuvaTiedotSection}
             koulutus={koulutus}
+          />
+        )}
+        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+          <FormCollapse
+            section="kuvaus"
+            header={t('toteutuslomake.toteutuksenKuvaus')}
+            languages={languages}
+            Component={TuvaKuvausSection}
           />
         )}
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (

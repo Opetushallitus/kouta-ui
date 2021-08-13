@@ -292,6 +292,16 @@ const fillKielivalikoima = () => {
   });
 };
 
+const fillKuvausSection = () => {
+  getByTestId('kuvausSection').within(() => {
+    getByTestId('toteutuksenKuvaus').within(() => {
+      typeToEditor('Tuva kuvaus');
+    });
+
+    jatka();
+  });
+};
+
 const toteutusOid = '1.2.3.4.5.6';
 
 const prepareTest = tyyppi => {
@@ -522,6 +532,8 @@ export const createToteutusForm = () => {
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
       fillTuvaTiedotSection();
+
+      fillKuvausSection();
 
       // getByTestId('jarjestamistiedotSection').within(() => {
       //   fillCommonJarjestamistiedot();

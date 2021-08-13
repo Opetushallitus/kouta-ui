@@ -1211,7 +1211,9 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
       "aidinkielet": [],
       "muutKielet": []
     },
-    "kuvaus": {},
+    "kuvaus": {
+      "fi": "<p>Tuva kuvaus</p>"
+    },
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},

@@ -15,7 +15,6 @@ import {
   ERROR_INTERNET_DISCONNECTED,
   ERROR_KAYTTOOIKEUS_SERVICE,
 } from '#/src/constants';
-import { isDev } from '#/src/utils';
 
 const ModalButton = styled(Button)`
   margin-left: 1em;
@@ -53,18 +52,11 @@ export default function AuthorizationErrorModal({
           {errorCode === StatusCodes.UNAUTHORIZED && (
             <ModalButton
               onClick={() =>
-                isDev
-                  ? window.open(
-                      apiUrls.url('cas.login') +
-                        `?service=${encodeURIComponent(
-                          'https://localhost:3000/kouta'
-                        )}`
-                    )
-                  : window.location.replace(
-                      apiUrls.url('cas.login') +
-                        '?service=' +
-                        encodeURIComponent(window.location.href)
-                    )
+                window.location.replace(
+                  apiUrls.url('cas.login') +
+                    '?service=' +
+                    encodeURIComponent(window.location.href)
+                )
               }
             >
               {t('yleiset.meneLoginSivulle')}

@@ -14,7 +14,6 @@ import AuthorizedUserContext from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import { isDev } from '#/src/utils';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
 import { getMe } from '#/src/utils/api/getMe';
 
@@ -52,12 +51,11 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
       await httpClient.get(apiUrls.url('kouta-backend.session'));
     } catch (e) {
       if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
-        !isDev &&
-          window.location.replace(
-            apiUrls.url('cas.login') +
-              '?service=' +
-              encodeURIComponent(window.location.href)
-          );
+        window.location.replace(
+          apiUrls.url('cas.login') +
+            '?service=' +
+            encodeURIComponent(window.location.href)
+        );
       }
     }
   }, []);

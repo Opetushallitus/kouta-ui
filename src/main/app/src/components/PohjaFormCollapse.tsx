@@ -18,7 +18,7 @@ type PohjaFormCollapseProps = {
   copyLabel: string;
   getCopyEntities: (any) => any;
   organisaatioOid: string;
-  disabled: boolean | null;
+  disabled?: boolean | null;
 };
 
 export default function PohjaFormCollapse({

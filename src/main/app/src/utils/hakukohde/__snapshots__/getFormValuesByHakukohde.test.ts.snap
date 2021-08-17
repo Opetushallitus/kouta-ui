@@ -23,6 +23,7 @@ Object {
     "ensikertalaismaara": "35",
   },
   "esikatselu": false,
+  "externalId": "ext1",
   "hakuajat": Object {
     "eriHakuaika": true,
     "hakuajat": Array [

@@ -12,6 +12,7 @@ export type HakulomakeFormSection = {
 };
 
 export type HakuFormValues = {
+  externalId?: string;
   muokkaaja: string;
   tila: JULKAISUTILA;
   nimi: TranslatedField<string>;

@@ -3,7 +3,6 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   KoulutusRelation,
@@ -15,7 +14,6 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
@@ -33,7 +31,6 @@ const EditToteutusPage = props => {
       params: { organisaatioOid, oid },
     },
   } = props;
-  const apiUrls = useUrls();
 
   const { data: toteutus, isFetching: isToteutusFetching } =
     useToteutusByOid(oid);
@@ -86,11 +83,6 @@ const EditToteutusPage = props => {
             entityType={ENTITY.TOTEUTUS}
             entity={toteutus}
             canUpdate={canUpdate}
-          />
-        }
-        esikatseluControls={
-          <EsikatseluControls
-            esikatseluUrl={apiUrls.url('konfo-ui.toteutus', oid)}
           />
         }
         steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}

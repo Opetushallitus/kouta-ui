@@ -86,6 +86,7 @@ export const PerustiedotSection = ({
           label={t('valintaperustelomake.valitseHaunKohdejoukko')}
         />
       </div>
+      <Divider marginTop={3} marginBottom={3} />
     </>
   );
 };

@@ -3,6 +3,7 @@ import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFor
 
 test('getSoraKuvausByFormValues returns correct sora-kuvaus given form values', () => {
   const soraKuvaus = getSoraKuvausByFormValues({
+    externalId: 'ext1',
     tila: 'tallennettu',
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],

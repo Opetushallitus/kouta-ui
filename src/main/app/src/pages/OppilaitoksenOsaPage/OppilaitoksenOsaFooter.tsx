@@ -4,13 +4,14 @@ import { useQueryClient } from 'react-query';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/createOppilaitoksenOsa';
 import { getOppilaitoksenOsaByFormValues } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 import updateOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/updateOppilaitoksenOsa';
 import { validateOppilaitoksenOsaForm } from '#/src/utils/oppilaitoksenOsa/validateOppilaitoksenOsaForm';
 
-const OppilaitoksenOsaPageFooter = ({
+export const OppilaitoksenOsaFooter = ({
   oppilaitoksenOsa,
   organisaatioOid,
   readOnly,
@@ -45,13 +46,18 @@ const OppilaitoksenOsaPageFooter = ({
     validate: validateOppilaitoksenOsaForm,
   });
 
+  const apiUrls = useUrls();
+
   return (
     <FormFooter
-      entity={ENTITY.OPPILAITOKSEN_OSA}
+      entityType={ENTITY.OPPILAITOKSEN_OSA}
+      entity={oppilaitoksenOsa}
       save={save}
       canUpdate={!readOnly}
+      esikatseluUrl={
+        oppilaitoksenOsa &&
+        apiUrls.url('konfo-ui.oppilaitoksenOsa', organisaatioOid)
+      }
     />
   );
 };
-
-export default OppilaitoksenOsaPageFooter;

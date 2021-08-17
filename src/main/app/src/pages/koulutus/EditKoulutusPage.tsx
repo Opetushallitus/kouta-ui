@@ -3,7 +3,6 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -14,7 +13,6 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
@@ -56,8 +54,6 @@ const EditKoulutusPage = props => {
 
   const isJulkinen = useFieldValue('julkinen', FORM_NAME);
 
-  const apiUrls = useUrls();
-
   return !koulutus ? (
     <FullSpin />
   ) : (
@@ -82,11 +78,6 @@ const EditKoulutusPage = props => {
               canUpdate={canUpdate || isJulkinen}
             />
           ) : null
-        }
-        esikatseluControls={
-          <EsikatseluControls
-            esikatseluUrl={apiUrls.url('konfo-ui.koulutus', oid)}
-          />
         }
       >
         <RelationInfoContainer>

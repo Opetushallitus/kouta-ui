@@ -4,8 +4,7 @@ import _ from 'lodash';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
-import FormHeader from '#/src/components/FormHeader';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -65,9 +64,8 @@ const CreateKoulutusPage = props => {
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
       <FormPage
-        header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
+        header={<EntityFormHeader entityType={ENTITY.KOULUTUS} />}
         steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-        esikatseluControls={<EsikatseluControls />}
         footer={
           <KoulutusFooter
             formMode={FormMode.CREATE}

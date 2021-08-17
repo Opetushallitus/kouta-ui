@@ -3,8 +3,7 @@ import React, { useMemo } from 'react';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
-import FormHeader from '#/src/components/FormHeader';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   KoulutusRelation,
@@ -101,7 +100,7 @@ const CreateToteutusPage = props => {
     <ReduxForm form="toteutusForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiToteutus')}</Title>
       <FormPage
-        header={<FormHeader>{t('yleiset.toteutus')}</FormHeader>}
+        header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}
         steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
         footer={
           koulutus ? (
@@ -115,7 +114,6 @@ const CreateToteutusPage = props => {
             />
           ) : null
         }
-        esikatseluControls={<EsikatseluControls />}
       >
         <RelationInfoContainer>
           <KoulutusRelation

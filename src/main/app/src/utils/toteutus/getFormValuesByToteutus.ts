@@ -72,6 +72,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     teemakuva,
     sorakuvausId,
     esikatselu = false,
+    externalId,
   } = toteutus;
 
   const {
@@ -117,6 +118,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   )(osaamisalat);
 
   return {
+    externalId,
     koulutustyyppi,
     tila,
     esikatselu,

@@ -12,14 +12,13 @@ import {
   FormFieldSelect,
 } from '#/src/components/formFields';
 import { SisaltoFields } from '#/src/components/SisaltoFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
   <div {...getTestIdProps('valintatapalista')}>
-    <Spacing marginBottom={2} {...getTestIdProps('tapa')}>
+    <Box marginBottom={2} {...getTestIdProps('tapa')}>
       <Field
         name={`${valintatapa}.tapa`}
         required
@@ -27,18 +26,18 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         label={t('valintaperustelomake.valitseTapa')}
         options={tapaOptions}
       />
-    </Spacing>
+    </Box>
 
-    <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
+    <Box marginBottom={2} {...getTestIdProps('nimi')}>
       <Field
         name={`${valintatapa}.nimi.${language}`}
         required
         component={FormFieldInput}
         label={t('valintaperustelomake.valintatapajononNimi')}
       />
-    </Spacing>
+    </Box>
 
-    <Spacing marginBottom={2}>
+    <Box marginBottom={2}>
       <Grid>
         <Cell width={6} {...getTestIdProps('enimmaispistemaara')}>
           <Field
@@ -57,15 +56,15 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
           />
         </Cell>
       </Grid>
-    </Spacing>
+    </Box>
 
-    <Spacing marginBottom={2} {...getTestIdProps('kynnysehto')}>
+    <Box marginBottom={2} {...getTestIdProps('kynnysehto')}>
       <Field
         name={`${valintatapa}.kynnysehto.${language}`}
         component={FormFieldEditor}
         label={t('valintaperustelomake.kynnysehto')}
       />
-    </Spacing>
+    </Box>
 
     <div {...getTestIdProps('valintatapaSisalto')}>
       <SisaltoFields name={`${valintatapa}.sisalto`} language={language} />
@@ -76,9 +75,9 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
 const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
     {fields.length === 0 && (
-      <Spacing marginBottom={2}>
+      <Box marginBottom={2}>
         {t('valintaperustelomake.lisaaVahintaanYksiValintatapa') + ' *'}
-      </Spacing>
+      </Box>
     )}
     <FieldArrayList fields={fields}>
       {({ field: valintatapa }) =>

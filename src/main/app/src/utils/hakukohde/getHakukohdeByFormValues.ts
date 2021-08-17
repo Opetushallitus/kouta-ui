@@ -159,6 +159,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   );
 
   return {
+    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
     muokkaaja,
     tila,
     esikatselu,

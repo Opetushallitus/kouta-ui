@@ -63,6 +63,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     esikatselu = false,
     pohjakoulutusvaatimusTarkenne,
     metadata = {},
+    externalId,
   } = hakukohde;
 
   const {
@@ -76,6 +77,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
   } = metadata;
 
   return {
+    externalId,
     tila,
     esikatselu,
     kieliversiot: kielivalinta,

@@ -23,6 +23,7 @@ Object {
     },
   ],
   "esikatselu": false,
+  "externalId": "ext1",
   "hakeutumisTaiIlmoittautumistapa": Object {
     "hakeutumisTaiIlmoittautumistapa": undefined,
     "hakuTapa": undefined,

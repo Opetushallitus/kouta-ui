@@ -26,6 +26,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
   const kohdejoukkoKoodiUri = values?.kohdejoukko?.kohdejoukko || null;
 
   return {
+    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
     muokkaaja: values?.muokkaaja,
     tila: values?.tila,
     kielivalinta,

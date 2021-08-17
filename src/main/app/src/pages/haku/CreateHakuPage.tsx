@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import FormHeader from '#/src/components/FormHeader';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -57,7 +57,7 @@ const CreateHakuPage = props => {
     <ReduxForm form="hakuForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHaku')}</Title>
       <FormPage
-        header={<FormHeader>{t('yleiset.haku')}</FormHeader>}
+        header={<EntityFormHeader entityType={ENTITY.HAKU} />}
         steps={<FormSteps activeStep={ENTITY.HAKU} />}
         footer={
           <HakuFooter

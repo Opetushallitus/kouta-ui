@@ -1,7 +1,9 @@
 exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "hakutapaKoodiUri": "hakutapa_01#1",
+  "julkinen": true,
   "kielivalinta": [
     "fi"
   ],
@@ -139,7 +141,6 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
   "nimi": {
     "fi": "Valintaperusteen nimi"
   },
-  "julkinen": true,
   "organisaatioOid": "1.1.1.1.1.1",
   "tila": "julkaistu",
   "valintakokeet": [
@@ -189,6 +190,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "hakutapaKoodiUri": "hakutapa_01#1",
   "id": "649adb37-cd4d-4846-91a9-84b58b90f928",
   "julkinen": false,

@@ -12,7 +12,6 @@ import {
   FormFieldSwitch,
   createFormFieldComponent,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { ApurahaMaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
@@ -51,7 +50,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
       `${section}.apurahaMaaraTyyppi`
     );
     return (
-      <Spacing marginTop={1} {...getTestIdProps('apurahaMaara')} width="200px">
+      <Box marginTop={1} {...getTestIdProps('apurahaMaara')} width="200px">
         <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
         <Box mt={1}>
           <Field
@@ -110,7 +109,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
             />
           </Box>
         </Box>
-      </Spacing>
+      </Box>
     );
   }
 );

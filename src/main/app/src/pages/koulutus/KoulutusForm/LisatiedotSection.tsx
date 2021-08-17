@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
-import { Typography } from '#/src/components/virkailija';
+import { Box, Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
@@ -27,7 +26,7 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
   }, [osiot, osiotOptions]);
 
   return osiotArrWithLabels.map(({ value, label }, index) => (
-    <Spacing
+    <Box
       marginBottom={index !== osiot.length - 1 ? 2 : 0}
       key={value}
       {...getTestIdProps(`osioKuvaus.${value}`)}
@@ -38,7 +37,7 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
         component={FormFieldEditor}
         label={label}
       />
-    </Spacing>
+    </Box>
   ));
 };
 
@@ -54,7 +53,7 @@ export const LisatiedotSection = ({ disabled, language, name }) => {
       <Typography variant="secondary" as="div" marginBottom={2}>
         {t('koulutuslomake.lisatiedotInfo')}
       </Typography>
-      <Spacing marginBottom={2}>
+      <Box marginBottom={2}>
         <div {...getTestIdProps('osiotSelect')}>
           <Field
             disabled={disabled}
@@ -65,7 +64,7 @@ export const LisatiedotSection = ({ disabled, language, name }) => {
             isMulti
           />
         </div>
-      </Spacing>
+      </Box>
       <OsiotFields
         disabled={disabled}
         name={name}

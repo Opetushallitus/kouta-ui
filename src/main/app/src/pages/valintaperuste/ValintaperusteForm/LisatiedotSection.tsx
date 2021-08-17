@@ -4,18 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldEditor } from '#/src/components/formFields';
-import { Spacing } from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 
 export const LisatiedotSection = ({ language, name }) => {
   const { t } = useTranslation();
 
   return (
-    <Spacing marginBottom={2}>
+    <Box marginBottom={2}>
       <Field
         name={`${name}.${language}`}
         component={FormFieldEditor}
         label={t('valintaperustelomake.lisatiedot')}
       />
-    </Spacing>
+    </Box>
   );
 };

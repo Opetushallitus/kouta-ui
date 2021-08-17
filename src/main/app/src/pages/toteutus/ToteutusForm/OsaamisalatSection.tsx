@@ -13,9 +13,14 @@ import {
   FormFieldCheckboxGroup,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
+import {
+  Box,
+  Divider,
+  Icon,
+  Typography,
+  Spin,
+} from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
@@ -66,8 +71,8 @@ const OsaamisalaDetails = ({ osaamisala, language, name }) => {
   const { t } = useTranslation();
 
   return (
-    <Spacing marginTop={2}>
-      <Spacing
+    <Box marginTop={2}>
+      <Box
         marginBottom={2}
         {...getTestIdProps(`osaamisalaLinkki.${osaamisala.uri}`)}
       >
@@ -76,15 +81,15 @@ const OsaamisalaDetails = ({ osaamisala, language, name }) => {
           component={FormFieldUrlInput}
           label={t('yleiset.linkki')}
         />
-      </Spacing>
-      <Spacing {...getTestIdProps(`osaamisalaOtsikko.${osaamisala.uri}`)}>
+      </Box>
+      <Box {...getTestIdProps(`osaamisalaOtsikko.${osaamisala.uri}`)}>
         <Field
           name={`${name}.osaamisalaLinkkiOtsikot.${osaamisala.uri}.${language}`}
           component={FormFieldInput}
           label={t('yleiset.linkinOtsikko')}
         />
-      </Spacing>
-    </Spacing>
+      </Box>
+    </Box>
   );
 };
 
@@ -103,13 +108,13 @@ const OsaamisalatInfoFields = ({
 
     return (
       <div key={uri}>
-        <Spacing key={uri}>
-          <Spacing marginBottom={2}>
+        <Box key={uri}>
+          <Box marginBottom={2}>
             <Typography variant="h6" marginBottom={1}>
               {getLanguageValue(nimi, language)}
             </Typography>
             <StyledSectionHTML html={getLanguageValue(kuvaus, language)} />
-          </Spacing>
+          </Box>
 
           <AbstractCollapse
             content={
@@ -128,7 +133,7 @@ const OsaamisalatInfoFields = ({
               />
             )}
           </AbstractCollapse>
-        </Spacing>
+        </Box>
         {index < activeOsaamisalat.length - 1 ? (
           <Divider marginTop={3} marginBottom={3} />
         ) : null}

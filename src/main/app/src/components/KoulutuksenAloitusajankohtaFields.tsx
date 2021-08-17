@@ -10,7 +10,6 @@ import {
   FormFieldYearSelect,
   FormFieldEditor,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { Alkamiskausityyppi } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -21,7 +20,7 @@ const AlkamiskausiJaVuosiFields = ({ name, kausiRequired }) => {
   const { t } = useTranslation();
 
   return (
-    <Spacing>
+    <Box>
       <Box flexGrow="1" p={1}>
         <Field
           name={`${name}.kausi`}
@@ -38,12 +37,12 @@ const AlkamiskausiJaVuosiFields = ({ name, kausiRequired }) => {
           placeholder={t('yleiset.valitseAlkamisvuosi')}
         />
       </Box>
-    </Spacing>
+    </Box>
   );
 };
 
 const TarkkaAlkamisaikaFields = ({ name }) => (
-  <Spacing>
+  <Box>
     <Box flexGrow="1" p={1}>
       <DateTimeRange
         startProps={{
@@ -55,19 +54,19 @@ const TarkkaAlkamisaikaFields = ({ name }) => (
         }}
       />
     </Box>
-  </Spacing>
+  </Box>
 );
 
 const HenkilokohtaisenSuunnitelmanLisatiedot = ({ name, language }) => {
   const { t } = useTranslation();
   return (
-    <Spacing>
+    <Box>
       <Field
         name={`${name}.henkilokohtaisenSuunnitelmanLisatiedot.${language}`}
         component={FormFieldEditor}
         label={t('yleiset.lisatietoa')}
       />
-    </Spacing>
+    </Box>
   );
 };
 

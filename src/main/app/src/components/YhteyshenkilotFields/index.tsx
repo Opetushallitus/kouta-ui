@@ -6,7 +6,6 @@ import { Field, FieldArray } from 'redux-form';
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {
@@ -19,41 +18,41 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
       <FieldArrayList fields={fields}>
         {({ field }) => (
           <>
-            <Spacing marginBottom={2}>
+            <Box marginBottom={2}>
               <Field
                 name={`${field}.nimi.${language}`}
                 label={t('yleiset.nimi')}
                 component={FormFieldInput}
               />
-            </Spacing>
-            <Spacing marginBottom={2}>
+            </Box>
+            <Box marginBottom={2}>
               <Field
                 name={`${field}.titteli.${language}`}
                 label={t('yleiset.titteli')}
                 component={FormFieldInput}
               />
-            </Spacing>
-            <Spacing marginBottom={2}>
+            </Box>
+            <Box marginBottom={2}>
               <Field
                 name={`${field}.sahkoposti.${language}`}
                 label={t('yleiset.sahkoposti')}
                 component={FormFieldInput}
               />
-            </Spacing>
-            <Spacing marginBottom={2}>
+            </Box>
+            <Box marginBottom={2}>
               <Field
                 name={`${field}.puhelinnumero.${language}`}
                 label={t('yleiset.puhelinnumero')}
                 component={FormFieldInput}
               />
-            </Spacing>
-            <Spacing>
+            </Box>
+            <Box>
               <Field
                 name={`${field}.verkkosivu.${language}`}
                 label={t('yleiset.verkkosivu')}
                 component={FormFieldUrlInput}
               />
-            </Spacing>
+            </Box>
           </>
         )}
       </FieldArrayList>

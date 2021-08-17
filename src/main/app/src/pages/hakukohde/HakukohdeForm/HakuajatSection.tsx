@@ -6,8 +6,7 @@ import { Field, FieldArray } from 'redux-form';
 
 import { FormFieldSwitch } from '#/src/components/formFields';
 import { HakuajatFields } from '#/src/components/HakuajatFields';
-import Spacing from '#/src/components/Spacing';
-import { Typography } from '#/src/components/virkailija';
+import { Box, Typography } from '#/src/components/virkailija';
 import { NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { formatDateValue } from '#/src/utils';
@@ -45,9 +44,9 @@ const CustomHakuaika = ({ name }) => {
   const { t } = useTranslation();
 
   return (
-    <Spacing marginTop={2}>
+    <Box marginTop={2}>
       <FieldArray name={`${name}.hakuajat`} component={HakuajatFields} t={t} />
-    </Spacing>
+    </Box>
   );
 };
 
@@ -57,9 +56,9 @@ export const HakuajatSection = ({ haku, name }) => {
 
   return (
     <>
-      <Spacing marginBottom={2}>
+      <Box marginBottom={2}>
         <HakuaikaInterval haku={haku} />
-      </Spacing>
+      </Box>
       <Field name={`${name}.eriHakuaika`} component={FormFieldSwitch}>
         {t('hakukohdelomake.hakukohteellaEriHakuaika')}
       </Field>

@@ -6,7 +6,7 @@ import { Field } from 'redux-form';
 
 import { createFormFieldComponent } from '#/src/components/formFields';
 import { AsyncCreatableSelect } from '#/src/components/Select';
-import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
@@ -79,7 +79,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
         KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO,
       ].includes(koulutustyyppi) && (
-        <Spacing marginBottom={2}>
+        <Box marginBottom={2}>
           <div {...getTestIdProps('ammattinimikkeetSelect')}>
             <Field
               name={`${name}.ammattinimikkeet.${language}`}
@@ -98,9 +98,9 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
               maxItems={MAX_ITEMS}
             />
           </div>
-        </Spacing>
+        </Box>
       )}
-      <Spacing>
+      <Box>
         <div {...getTestIdProps('avainsanatSelect')}>
           <Field
             name={`${name}.avainsanat.${language}`}
@@ -115,7 +115,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             maxItems={MAX_ITEMS}
           />
         </div>
-      </Spacing>
+      </Box>
     </>
   );
 };

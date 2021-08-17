@@ -7,17 +7,16 @@ import {
   FormFieldSelect,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
-import { FormControl, Typography } from '#/src/components/virkailija';
+import { Box, FormControl, Typography } from '#/src/components/virkailija';
 import { POHJAVALINTA } from '#/src/constants';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { useEntityOptions } from '#/src/hooks/useEntityOptionsHook';
 
 const CopySelect = ({ input: { value }, options, selectName }) => {
   return value === POHJAVALINTA.KOPIO ? (
-    <Spacing marginTop={2} marginBottom={2}>
+    <Box marginTop={2} marginBottom={2}>
       <Field name={selectName} component={FormFieldSelect} options={options} />
-    </Spacing>
+    </Box>
   ) : null;
 };
 

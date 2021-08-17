@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 export const TiedotSection = ({ name, language }) => {
@@ -13,14 +13,14 @@ export const TiedotSection = ({ name, language }) => {
   return (
     <>
       <div {...getTestIdProps('nimi')}>
-        <Spacing marginBottom={2}>
+        <Box marginBottom={2}>
           <Field
             name={`${name}.nimi.${language}`}
             label={t('yleiset.nimi')}
             component={FormFieldInput}
             required
           />
-        </Spacing>
+        </Box>
       </div>
       <div {...getTestIdProps('kuvaus')}>
         <Field

@@ -13,7 +13,6 @@ import {
   SortableElement,
   SortableHandle,
 } from '#/src/components/Sortable';
-import Spacing from '#/src/components/Spacing';
 import TableInput from '#/src/components/TableInput';
 import {
   Box,
@@ -135,20 +134,20 @@ const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
                 </InputWrapper>
               </InputContainer>
               <Box flexGrow={0} paddingLeft={2}>
-                <Spacing marginBottom={2}>
+                <Box marginBottom={2}>
                   <MoveButton variant="outlined" color="primary" type="button">
                     <Icon type="drag_indicator" /> {t('yleiset.siirra')}
                   </MoveButton>
-                </Spacing>
+                </Box>
                 <RemoveButton onClick={() => fields.remove(index)} />
               </Box>
             </Box>
           </FieldSortableElement>
         );
       })}
-      <Spacing marginTop={fields.length > 0 ? 2 : 0}>
+      <Box marginTop={fields.length > 0 ? 2 : 0}>
         <AddContentDropdown onAdd={content => fields.push(content)} />
-      </Spacing>
+      </Box>
     </div>
   );
 });

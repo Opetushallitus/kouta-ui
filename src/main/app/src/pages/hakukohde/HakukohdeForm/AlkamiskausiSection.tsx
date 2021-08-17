@@ -7,7 +7,7 @@ import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldSwitch } from '#/src/components/formFields';
 import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
-import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import { Alkamiskausityyppi, ICONS } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
@@ -97,7 +97,7 @@ export const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
 
   return (
     <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
-      <Spacing marginBottom={2}>
+      <Box marginBottom={2}>
         <InlineAjankohtaInfoBox
           ajankohta={toteutuksenAjankohta}
           foundTitle={t('hakukohdelomake.toteutukseenLiitettyAlkamisajankohta')}
@@ -112,7 +112,7 @@ export const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
           notFoundTitle={t('hakukohdelomake.hakuunEiOleLiitettyAlkamiskautta')}
           iconType={ICONS.haku}
         />
-      </Spacing>
+      </Box>
       <Field
         name={`${name}.kaytetaanHakukohteenAlkamiskautta`}
         component={FormFieldSwitch}

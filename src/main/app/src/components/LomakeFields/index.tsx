@@ -12,7 +12,6 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -37,7 +36,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
     <>
       <FormFieldSelect value={value} {...props} input={input} />
       {url ? (
-        <Spacing marginTop={2}>
+        <Box marginTop={2}>
           <Buttons>
             <Button
               as="a"
@@ -48,7 +47,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
             >
               {t('yleiset.avaaLomake')}
             </Button>
-            <Spacing marginRight={1} />
+            <Box marginRight={1} />
             {haku && haku.oid ? (
               <Button
                 as="a"
@@ -64,7 +63,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
               </Button>
             ) : null}
           </Buttons>
-        </Spacing>
+        </Box>
       ) : null}
     </>
   );

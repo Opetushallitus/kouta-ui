@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -9,9 +9,8 @@ import Button from '#/src/components/Button';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import { getValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
+import { useValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
 const Buttons = styled.div`
   display: flex;
@@ -33,23 +32,16 @@ export const KuvausSection = ({
 }) => {
   const hakuOid = haku?.oid;
   const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
-  const watch = [hakuOid, organisaatioOid].join(',');
   const { t } = useTranslation();
   const kuvausValues = useFieldValue(name);
   const valintaperusteOid = kuvausValues?.valintaperuste?.value;
   const kieliValinnat = languages;
 
-  const { data, reload } = useApiAsync({
-    promiseFn: getValintaperusteet,
+  const { data, refetch } = useValintaperusteet({
     hakuOid,
     koulutustyyppi,
     organisaatioOid,
-    watch,
   });
-
-  const onFocus = useCallback(() => {
-    reload();
-  }, [reload]);
 
   const options = useEntityOptions(data);
 
@@ -66,7 +58,7 @@ export const KuvausSection = ({
         name={`${name}.valintaperuste`}
         component={FormFieldSelect}
         options={options}
-        onFocus={onFocus}
+        onFocus={() => refetch()}
         label={t('hakukohdelomake.valitseValintaperustekuvaus')}
         helperText={t('hakukohdelomake.valintaperustekuvaustenListausperuste')}
       />

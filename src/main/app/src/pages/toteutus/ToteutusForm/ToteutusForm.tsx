@@ -222,15 +222,16 @@ const ToteutusForm = ({
               Component={HakeutumisTaiIlmoittautumistapaSection}
               languages={languages}
             />
-            {hakeutumisTaiIlmoittautumistapa === MUU && (
-              <FormCollapse
-                section="soraKuvaus"
-                header={t('yleiset.soraKuvaus')}
-                Component={SoraKuvausSection}
-                organisaatioOid={organisaatioOid}
-                languages={languages}
-              />
-            )}
+            {hakeutumisTaiIlmoittautumistapa === MUU &&
+              koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+                <FormCollapse
+                  section="soraKuvaus"
+                  header={t('yleiset.soraKuvaus')}
+                  Component={SoraKuvausSection}
+                  organisaatioOid={organisaatioOid}
+                  languages={languages}
+                />
+              )}
           </>
         )}
         <FormCollapse

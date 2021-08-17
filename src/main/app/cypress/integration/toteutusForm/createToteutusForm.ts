@@ -302,6 +302,54 @@ const fillKuvausSection = () => {
   });
 };
 
+const fillHakeutumisTaiIlmoittautumistapaSection = () => {
+  getByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+    cy.findByRole('button', {
+      name: 'toteutuslomake.hakuTapa.hakeutuminen',
+    }).click();
+
+    cy.findByRole('button', {
+      name: 'toteutuslomake.hakuTapa.hakeutuminen',
+    }).click();
+
+    cy.findByText('toteutuslomake.muuHakulomake').click();
+
+    cy.findByRole('textbox', {
+      name: /^toteutuslomake.hakeutuminen.linkki/,
+    })
+      .click()
+      .pipe(paste('http://example.com'));
+
+    cy.findByRole('textbox', {
+      name: /^toteutuslomake.hakeutuminen.lisatiedot/,
+    })
+      .click()
+      .pipe(paste('lisätiedot'));
+
+    cy.findByRole('textbox', {
+      name: /^toteutuslomake.lisatiedotValintaperusteista/,
+    })
+      .click()
+      .pipe(paste('lisätiedot valintaperusteista'));
+
+    cy.findByTestId('alkaa').within(() => {
+      fillDateTimeInput({
+        date: '01.04.2050',
+        time: '00:00',
+      });
+    });
+
+    cy.findByTestId('paattyy').within(() => {
+      fillDateTimeInput({
+        date: '01.09.2050',
+        time: '00:00',
+      });
+    });
+
+    jatka();
+  });
+};
+
 const toteutusOid = '1.2.3.4.5.6';
 
 const prepareTest = tyyppi => {
@@ -358,51 +406,7 @@ export const createToteutusForm = () => {
 
       cy.findByTestId('soraKuvausSection').should('not.exist');
 
-      getByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
-        cy.findByRole('button', {
-          name: 'toteutuslomake.hakuTapa.hakeutuminen',
-        }).click();
-
-        cy.findByRole('button', {
-          name: 'toteutuslomake.hakuTapa.hakeutuminen',
-        }).click();
-
-        cy.findByText('toteutuslomake.muuHakulomake').click();
-
-        cy.findByRole('textbox', {
-          name: /^toteutuslomake.hakeutuminen.linkki/,
-        })
-          .click()
-          .pipe(paste('http://example.com'));
-
-        cy.findByRole('textbox', {
-          name: /^toteutuslomake.hakeutuminen.lisatiedot/,
-        })
-          .click()
-          .pipe(paste('lisätiedot'));
-
-        cy.findByRole('textbox', {
-          name: /^toteutuslomake.lisatiedotValintaperusteista/,
-        })
-          .click()
-          .pipe(paste('lisätiedot valintaperusteista'));
-
-        cy.findByTestId('alkaa').within(() => {
-          fillDateTimeInput({
-            date: '01.04.2050',
-            time: '00:00',
-          });
-        });
-
-        cy.findByTestId('paattyy').within(() => {
-          fillDateTimeInput({
-            date: '01.09.2050',
-            time: '00:00',
-          });
-        });
-
-        jatka();
-      });
+      fillHakeutumisTaiIlmoittautumistapaSection();
 
       getByTestId('soraKuvausSection').within(() => {
         jatka();
@@ -524,7 +528,7 @@ export const createToteutusForm = () => {
     })
   );
 
-  it.only(
+  it(
     'should be able to create TUVA toteutus',
     mutationTest(() => {
       prepareTest('tuva');
@@ -535,18 +539,17 @@ export const createToteutusForm = () => {
 
       fillKuvausSection();
 
-      // getByTestId('jarjestamistiedotSection').within(() => {
-      //   fillCommonJarjestamistiedot();
-      //   fillKielivalikoima();
-      //   fillDiplomi();
-      //   jatka();
-      // });
+      getByTestId('jarjestamistiedotSection').within(() => {
+        fillCommonJarjestamistiedot();
+        jatka();
+      });
 
-      // fillTeemakuvaSection();
-      // fillNayttamistiedotSection({ ammattinimikkeet: false });
-      // fillJarjestajatSection();
-      // fillYhteystiedotSection();
-      // fillTilaSection();
+      fillTeemakuvaSection();
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
 
       tallenna();
     })

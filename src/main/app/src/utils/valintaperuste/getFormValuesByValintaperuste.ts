@@ -32,6 +32,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     tila,
     valintakokeet,
     esikatselu = false,
+    externalId,
   } = valintaperuste;
 
   const {
@@ -44,6 +45,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
   } = metadata;
 
   return {
+    externalId,
     tila,
     perustiedot: {
       tyyppi: koulutustyyppi,

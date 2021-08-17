@@ -9,6 +9,7 @@ const getSoraKuvausByFormValues = values => {
   const pickTranslations = _fp.pick(kielivalinta);
 
   return {
+    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
     tila,
     muokkaaja,
     nimi: pickTranslations(values?.tiedot?.nimi ?? {}),

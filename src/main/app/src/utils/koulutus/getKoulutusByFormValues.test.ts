@@ -4,6 +4,7 @@ import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValue
 
 test('getKoulutusByFormValues returns correct koulutus given form values', () => {
   const koulutus = getKoulutusByFormValues({
+    externalId: 'ext1',
     tila: JULKAISUTILA.TALLENNETTU,
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],
@@ -74,6 +75,7 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
 
 test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus', () => {
   const koulutus = getKoulutusByFormValues({
+    externalId: 'ext1',
     koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
     information: {
       nimi: {

@@ -2,6 +2,7 @@ import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySor
 
 test('getFormValuesBySoraKuvaus returns correct form values given sora-kuvaus', () => {
   const values = getFormValuesBySoraKuvaus({
+    externalId: 'ext1',
     tila: 'tallennettu',
     kieliversiot: ['fi', 'sv'],
     nimi: {

@@ -187,7 +187,8 @@
     "koulutuksenAjankohta": "Koulutuksen aloitusajankohta",
     "tallennaLuonnoksenaEsikatsellaksesi": "Tallenna lomake luonnoksena esikatsellaksesi.",
     "naytaJulkaistu": "Näytä julkaistu",
-    "naytaJulkaistuTooltip": "Näyttää julkaistun lomakkeen tiedot oppijan puolella"
+    "naytaJulkaistuTooltip": "Näyttää julkaistun lomakkeen tiedot oppijan puolella",
+    "ulkoinenTunniste": "Ulkoinen tunniste"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

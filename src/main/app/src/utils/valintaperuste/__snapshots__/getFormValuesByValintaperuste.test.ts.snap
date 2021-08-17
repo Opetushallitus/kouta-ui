@@ -3,6 +3,7 @@
 exports[`getFormValuesByValintaperuste returns correct form values given valintaperuste 1`] = `
 Object {
   "esikatselu": false,
+  "externalId": undefined,
   "hakukelpoisuus": Object {
     "fi": "<h1>Fi hakukelpoisuus</h1>",
     "sv": "<h1>Sv hakukelpoisuus</h1>",

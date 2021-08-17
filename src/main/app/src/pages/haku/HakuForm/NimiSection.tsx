@@ -5,17 +5,15 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
 
-const NameSection = ({ language, name, ...props }) => {
+export const NimiSection = ({ language }) => {
   const { t } = useTranslation();
 
   return (
     <Field
-      name={`${name}.${language}`}
+      name={`nimi.${language}`}
       component={FormFieldInput}
       label={t('yleiset.nimi')}
       required
     />
   );
 };
-
-export default NameSection;

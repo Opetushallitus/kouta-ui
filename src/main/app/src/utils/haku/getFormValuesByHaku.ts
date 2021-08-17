@@ -21,6 +21,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     nimi = {},
     metadata = {},
     tila,
+    externalId,
   } = haku;
 
   const {
@@ -30,6 +31,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
   } = metadata;
 
   return {
+    externalId,
     muokkaaja,
     tila,
     nimi,

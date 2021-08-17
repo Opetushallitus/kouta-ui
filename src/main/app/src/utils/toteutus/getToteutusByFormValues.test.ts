@@ -13,6 +13,7 @@ import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValue
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues({
+    externalId: 'ext1',
     tila: JULKAISUTILA.JULKAISTU,
     koulutustyyppi: KOULUTUSTYYPPI.AMKKOULUTUS,
     tiedot: {

@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   RelationInfoContainer,
   OrganisaatioRelation,
@@ -15,7 +14,6 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
@@ -32,7 +30,6 @@ export const EditHakukohdePage = props => {
       params: { organisaatioOid, oid },
     },
   } = props;
-  const apiUrls = useUrls();
 
   const { data: hakukohde, isFetching: hakukohdeLoading } =
     useHakukohdeByOid(oid);
@@ -89,14 +86,6 @@ export const EditHakukohdePage = props => {
             }
             haku={haku}
             canUpdate={canUpdate}
-          />
-        }
-        esikatseluControls={
-          <EsikatseluControls
-            esikatseluUrl={apiUrls.url(
-              'konfo-ui.toteutus',
-              hakukohde?.toteutusOid
-            )}
           />
         }
       >

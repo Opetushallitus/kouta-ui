@@ -19,7 +19,7 @@ import { ENTITY } from '#/src/constants';
 
 const fillNimiSection = () => {
   getByTestId('nimiSection').within(() => {
-    cy.get('input').pipe(paste('haun nimi'));
+    cy.findByLabelText(/yleiset.nimi/).pipe(paste('haun nimi'));
 
     jatka();
   });

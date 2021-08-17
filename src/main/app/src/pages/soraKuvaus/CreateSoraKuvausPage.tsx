@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import FormHeader from '#/src/components/FormHeader';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -62,7 +62,7 @@ const CreateSoraKuvausPage = props => {
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
       <FormPage
-        header={<FormHeader>{t('yleiset.soraKuvaus')}</FormHeader>}
+        header={<EntityFormHeader entityType={ENTITY.SORA_KUVAUS} />}
         steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
         footer={
           <SoraKuvausFooter

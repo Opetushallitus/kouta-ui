@@ -1,6 +1,7 @@
 exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
     {
@@ -157,6 +158,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
 exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
     {
@@ -315,6 +317,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "alkamiskausiKoodiUri": "kausi_k#1",
   "alkamisvuosi": "2024",
   "esikatselu": false,
+  "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
     {
@@ -471,6 +474,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
 exports[`createHakukohde > should be able to create hakukohde with muu hakulomake #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
   "hakulomakeAtaruId": null,
@@ -523,6 +527,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
 exports[`createHakukohde > should be able to create hakukohde with "ei sähköistä" hakulomake #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
   "hakulomakeAtaruId": null,
@@ -575,6 +580,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
 exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
   "hakulomakeAtaruId": null,

@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
@@ -118,7 +119,18 @@ export const ToteutusFooter = ({
       ),
   });
 
+  const apiUrls = useUrls();
+
   return (
-    <FormFooter entity={ENTITY.TOTEUTUS} save={save} canUpdate={canUpdate} />
+    <FormFooter
+      entityType={ENTITY.TOTEUTUS}
+      entity={toteutus}
+      save={save}
+      canUpdate={canUpdate}
+      esikatseluUrl={
+        formMode === FormMode.EDIT &&
+        apiUrls.url('konfo-ui.toteutus', toteutus?.oid)
+      }
+    />
   );
 };

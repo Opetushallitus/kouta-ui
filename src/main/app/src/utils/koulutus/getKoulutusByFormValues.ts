@@ -49,6 +49,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const sorakuvausId = values?.soraKuvaus?.value || null;
 
   return {
+    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
     johtaaTutkintoon:
       TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(koulutustyyppi),
     muokkaaja,

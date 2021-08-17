@@ -3,6 +3,7 @@
 exports[`getHakukohdeByFormValues returns correct hakukohde given form values 1`] = `
 Object {
   "esikatselu": false,
+  "externalId": "ext1",
   "hakuajat": Array [
     Object {
       "alkaa": "2019-04-17T05:52",

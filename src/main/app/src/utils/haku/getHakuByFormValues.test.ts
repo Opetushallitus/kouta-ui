@@ -10,6 +10,7 @@ import { HakuFormValues } from '#/src/types/hakuTypes';
 import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 
 const baseValues: HakuFormValues = {
+  externalId: 'ext1',
   muokkaaja: '1.1.1.1',
   tila: JULKAISUTILA.TALLENNETTU,
   nimi: {

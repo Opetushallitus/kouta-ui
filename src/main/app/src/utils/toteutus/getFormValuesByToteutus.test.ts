@@ -8,6 +8,7 @@ import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutu
 
 test('getFormValuesByToteutus returns correct form values given toteutus', () => {
   const values = getFormValuesByToteutus({
+    externalId: 'ext1',
     tila: JULKAISUTILA.TALLENNETTU,
     kielivalinta: ['fi', 'sv'],
     metadata: {

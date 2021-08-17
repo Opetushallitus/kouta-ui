@@ -4,14 +4,12 @@ import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage from '#/src/components/FormPage';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
@@ -19,10 +17,10 @@ import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesB
 import { useOppilaitosByOid } from '#/src/utils/oppilaitos/getOppilaitosByOid';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
+import { OppilaitosFooter } from './OppilaitosFooter';
 import OppilaitosForm, {
   initialValues as formInitialValues,
 } from './OppilaitosForm';
-import OppilaitosPageFooter from './OppilaitosPageFooter';
 
 export const OppilaitosPage = ({
   match: {
@@ -102,8 +100,6 @@ export const OppilaitosPage = ({
   const stepsEnabled = !oppilaitos;
   const showArkistoituTilaOption = !!oppilaitos;
 
-  const apiUrls = useUrls();
-
   return isFetching ? (
     <FullSpin />
   ) : (
@@ -123,17 +119,10 @@ export const OppilaitosPage = ({
           />
         }
         footer={
-          <OppilaitosPageFooter
+          <OppilaitosFooter
             oppilaitos={oppilaitos}
             organisaatioOid={organisaatioOid}
             readOnly={readOnly}
-          />
-        }
-        esikatseluControls={
-          <EsikatseluControls
-            esikatseluUrl={
-              oppilaitos && apiUrls.url('konfo-ui.oppilaitos', organisaatioOid)
-            }
           />
         }
       >

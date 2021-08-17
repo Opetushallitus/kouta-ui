@@ -65,6 +65,7 @@ exports[`createHaku > should be able to create haku #0`] =
 exports[`editHaku > should be able to edit haku #0`] =
 {
   "ajastettuJulkaisu": "2019-12-05T06:45",
+  "externalId": null,
   "hakuajat": [
     {
       "alkaa": "2019-02-08T07:05",
@@ -130,6 +131,7 @@ exports[`editHaku > should be able to edit haku #0`] =
 exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
 {
   "ajastettuJulkaisu": "2019-12-05T06:45",
+  "externalId": null,
   "hakuajat": [
     {
       "alkaa": "2019-04-02T10:45",
@@ -194,6 +196,7 @@ exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
 exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
 {
   "ajastettuJulkaisu": null,
+  "externalId": null,
   "hakuajat": [],
   "hakukohteenLiittamisenTakaraja": null,
   "hakukohteenMuokkaamisenTakaraja": null,
@@ -225,6 +228,7 @@ exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
 exports[`createHaku > should be able to create haku with "ei sähköistä" hakulomake #0`] =
 {
   "ajastettuJulkaisu": null,
+  "externalId": null,
   "hakuajat": [],
   "hakukohteenLiittamisenTakaraja": null,
   "hakukohteenMuokkaamisenTakaraja": null,

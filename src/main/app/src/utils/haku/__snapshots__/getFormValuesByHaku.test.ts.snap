@@ -28,6 +28,7 @@ Object {
       "value": "2020",
     },
   },
+  "externalId": "ext1",
   "hakulomake": Object {
     "kuvaus": Object {},
     "linkki": Object {
@@ -108,6 +109,7 @@ Object {
       "value": "2020",
     },
   },
+  "externalId": "ext1",
   "hakulomake": Object {
     "kuvaus": Object {
       "fi": "<p>kuvaus</p>",
@@ -188,6 +190,7 @@ Object {
       "value": "2020",
     },
   },
+  "externalId": "ext1",
   "hakulomake": Object {
     "kuvaus": Object {},
     "linkki": Object {},
@@ -270,6 +273,7 @@ Object {
     "tarkkaPaattyy": null,
     "vuosi": undefined,
   },
+  "externalId": "ext1",
   "hakulomake": Object {
     "kuvaus": Object {},
     "linkki": Object {},
@@ -350,6 +354,7 @@ Object {
       "value": "2030",
     },
   },
+  "externalId": "ext1",
   "hakulomake": Object {
     "kuvaus": Object {},
     "linkki": Object {},

@@ -1,5 +1,6 @@
 exports[`createSoraKuvaus > should be able to create sora-kuvaus #0`] =
 {
+  "externalId": null,
   "kielivalinta": [
     "fi"
   ],
@@ -23,6 +24,7 @@ exports[`createSoraKuvaus > should be able to create sora-kuvaus #0`] =
 
 exports[`editSoraKuvaus > should be able to edit sora-kuvaus #0`] =
 {
+  "externalId": null,
   "id": "123e4567-e89b-12d3-a456-426655440000",
   "julkinen": true,
   "kielivalinta": [

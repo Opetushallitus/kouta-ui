@@ -9,7 +9,7 @@ import {
 } from '#/src/components/formFields';
 import { Box, FormControl, Typography } from '#/src/components/virkailija';
 import { POHJAVALINTA } from '#/src/constants';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { useEntityOptions } from '#/src/hooks/useEntityOptionsHook';
 
 const CopySelect = ({ input: { value }, options, selectName }) => {
@@ -31,10 +31,8 @@ export default function PohjaValintaSection({
 }) {
   const { t } = useTranslation();
 
-  const { data = [] } = useApiAsync({
-    promiseFn: getCopyEntities,
+  const { data = [] } = useApiQuery('getCopyEntities', getCopyEntities, {
     organisaatioOid,
-    watch: organisaatioOid,
   });
 
   const tapaName = `${name}.tapa`;

@@ -13,9 +13,8 @@ import {
 import AuthorizedUserContext from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
-import { getMe } from '#/src/utils/api/getMe';
+import { useGetMe } from '#/src/utils/api/getMe';
 
 import AuthorizationErrorModal from './AuthorizationErrorModal';
 
@@ -30,7 +29,7 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
   const [isFocused, setFocused] = useState(true);
   const [errorCode, setErrorCode] = useState<string | number | null>(null);
 
-  const { data, error: getMeError } = useApiAsync({ promiseFn: getMe });
+  const { data, error: getMeError } = useGetMe();
   const isLoaded = !!data?.oid;
   const isIdle = useIdle(IDLE_TIMEOUT);
   const { i18n, t } = useTranslation();

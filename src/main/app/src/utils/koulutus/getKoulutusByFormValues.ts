@@ -77,6 +77,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
     teemakuva: values?.teemakuva,
     sorakuvausId,
     metadata: {
+      tyyppi: koulutustyyppi,
       tutkinnonOsat: _fp.reduce(
         (
           resultOsat,

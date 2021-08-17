@@ -30,7 +30,7 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
         <Box>
           <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
             <Input
-              value={getKoodiNimiTranslation(laajuusKoodi)}
+              value={getKoodiNimiTranslation(laajuusKoodi) || ''}
               {...getTestIdProps('laajuus')}
             />
           </FormControl>

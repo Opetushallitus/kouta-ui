@@ -13,11 +13,6 @@ jobs:
     node_js: 14
     addons:
       chrome: stable
-    cache:
-      directories:
-        - $HOME/.m2
-        - $HOME/.cache
-        - $HOME/.npm
     before_install:
       - cd src/main/app
     install:
@@ -39,8 +34,7 @@ jobs:
     cache:
       directories:
         - $HOME/.m2
-        - $HOME/.cache
-        - $HOME/.npm
+      npm: true
     install:
       - git clone https://github.com/Opetushallitus/ci-tools.git
       - source ci-tools/common/setup-tools.sh
@@ -60,11 +54,6 @@ jobs:
     name: "Publish Storybook"
     language: node_js
     node_js: 14
-    cache:
-      directories:
-        - $HOME/.m2
-        - $HOME/.cache
-        - $HOME/.npm
     install:
       - git clone https://github.com/Opetushallitus/ci-tools.git
       - source ci-tools/common/setup-tools.sh

@@ -46,7 +46,7 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
       </Box>
       <Box mb={2}>
         <Field
-          name={`${name}.jarjestetaanErityisopetuksena`}
+          name={`${name}.tuvaErityisopetuksena`}
           component={FormFieldSwitch}
         >
           {t('toteutuslomake.jarjestetaanErityisopetuksena')}

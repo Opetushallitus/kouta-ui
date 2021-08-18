@@ -9,21 +9,24 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     esikatselu = false,
     logo,
     teemakuva,
-    metadata: {
-      tietoaOpiskelusta,
-      yhteystiedot = [],
-      hakijapalveluidenYhteystiedot: hy,
-      esittely,
-      opiskelijoita,
-      korkeakouluja,
-      tiedekuntia,
-      kampuksia,
-      yksikoita,
-      toimipisteita,
-      akatemioita,
-      wwwSivu,
-    },
+    metadata = {},
   } = oppilaitos;
+
+  const {
+    tietoaOpiskelusta,
+    yhteystiedot = [],
+    hakijapalveluidenYhteystiedot: hy,
+    esittely,
+    opiskelijoita,
+    korkeakouluja,
+    tiedekuntia,
+    kampuksia,
+    yksikoita,
+    toimipisteita,
+    akatemioita,
+    wwwSivu,
+    jarjestaaUrheilijanAmmKoulutusta,
+  } = metadata;
 
   return {
     kieliversiot: kielivalinta || [],
@@ -84,6 +87,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       logo,
       wwwSivuUrl: wwwSivu?.url || {},
       wwwSivuNimi: wwwSivu?.nimi || {},
+      jarjestaaUrheilijanAmmKoulutusta,
     },
     teemakuva,
   };

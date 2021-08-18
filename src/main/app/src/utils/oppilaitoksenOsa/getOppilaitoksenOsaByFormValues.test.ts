@@ -1,4 +1,5 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { OptionalBinaryValue } from '#/src/constants';
 import { getOppilaitoksenOsaByFormValues } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 
 test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given form values', () => {
@@ -25,6 +26,7 @@ test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given fo
         fi: 'Verkkosivu fi',
         sv: 'Verkkosivu sv',
       },
+      jarjestaaUrheilijanAmmKoulutusta: OptionalBinaryValue.EI,
     },
     yhteystiedot: [
       {

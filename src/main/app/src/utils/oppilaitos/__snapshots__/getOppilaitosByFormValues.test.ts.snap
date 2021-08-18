@@ -42,6 +42,7 @@ Object {
         "sv": "sv@sahkoposti.sv",
       },
     },
+    "jarjestaaUrheilijanAmmKoulutusta": false,
     "kampuksia": 3,
     "korkeakouluja": 5,
     "opiskelijoita": 100,

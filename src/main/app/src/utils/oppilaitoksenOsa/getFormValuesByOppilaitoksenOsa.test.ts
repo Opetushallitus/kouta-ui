@@ -54,6 +54,7 @@ test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilait
           sv: 'Verkkosivu sv',
         },
       },
+      jarjestaaUrheilijanAmmKoulutusta: false,
     },
     muokkaaja: '1.1.1.1',
     tila: 'tallennettu',

@@ -97,6 +97,7 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
           sv: 'Verkkosivu sv',
         },
       },
+      jarjestaaUrheilijanAmmKoulutusta: false,
     },
   });
 

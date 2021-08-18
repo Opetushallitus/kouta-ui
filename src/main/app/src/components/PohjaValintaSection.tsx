@@ -33,6 +33,7 @@ export default function PohjaValintaSection({
 
   const { data = [] } = useApiQuery('getCopyEntities', getCopyEntities, {
     organisaatioOid,
+    copyLabel, // Tätä ei tarvita API-kutsussa, mutta react-query käyttää tätä queryn avaimen osana. Näin sitä ei sotketa muihin getCopyEntites-queryihin.
   });
 
   const tapaName = `${name}.tapa`;

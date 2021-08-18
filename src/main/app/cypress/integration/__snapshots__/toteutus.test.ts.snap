@@ -694,6 +694,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tuvaErityisopetuksena": false,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -844,6 +845,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tuvaErityisopetuksena": false,
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -1008,6 +1010,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tuvaErityisopetuksena": false,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -1156,6 +1159,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tuvaErityisopetuksena": false,
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {
@@ -1196,6 +1200,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
 exports[`createToteutus > should be able to create TUVA toteutus #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "kielivalinta": [
     "fi"
   ],
@@ -1329,6 +1334,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
 exports[`editToteutus > should be able to edit tuva toteutus #0`] =
 {
   "esikatselu": false,
+  "externalId": null,
   "kielivalinta": [
     "fi"
   ],
@@ -1423,6 +1429,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tuvaErityisopetuksena": false,
     "tyyppi": "tuva",
     "yhteyshenkilot": [
       {

@@ -88,7 +88,6 @@ export const OppilaitosPage = ({
             ],
             perustiedot: {
               wwwSivuUrl: contactInfo.verkkosivu || '',
-              jarjestaaUrheilijanAmmKoulutusta: false,
             },
           }
         : oppilaitos

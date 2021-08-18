@@ -7,12 +7,11 @@ import { Grid, Cell } from 'styled-css-grid';
 
 import {
   FormFieldInput,
-  FormFieldRadioGroup,
+  FormFieldSwitch,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
 import Heading from '#/src/components/Heading';
 import { Box, Typography } from '#/src/components/virkailija';
-import { OptionalBinaryValue } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
@@ -70,22 +69,12 @@ const TiedotSection = ({ name, t, language }) => {
       </Grid>
       <Box mt={3} mb={3}>
         <Field
-          label={t('oppilaitoksenOsaLomake.jarjestaaUrheilijanAmmKoulutusta')}
-          component={FormFieldRadioGroup}
+          component={FormFieldSwitch}
           name={`${name}.jarjestaaUrheilijanAmmKoulutusta`}
           disabled={!isOphVirkailija}
-          options={[
-            {
-              value: OptionalBinaryValue.TYHJA,
-              label: t('oppilaitoksenOsaLomake.kaytaOppilaitoksenValintaa'),
-            },
-            {
-              value: OptionalBinaryValue.KYLLA,
-              label: t('yleiset.kylla'),
-            },
-            { value: OptionalBinaryValue.EI, label: t('yleiset.ei') },
-          ]}
-        />
+        >
+          {t('oppilaitoksenOsaLomake.jarjestaaUrheilijanAmmKoulutusta')}
+        </Field>
       </Box>
     </>
   );

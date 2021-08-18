@@ -108,8 +108,6 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
             nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
           }
         : null,
-      jarjestaaUrheilijanAmmKoulutusta:
-        perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
     },
   };
 };

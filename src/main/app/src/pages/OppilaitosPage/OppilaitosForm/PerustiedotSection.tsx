@@ -5,15 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
-import {
-  FormFieldInput,
-  FormFieldSwitch,
-  FormFieldUrlInput,
-} from '#/src/components/formFields';
+import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import Heading from '#/src/components/Heading';
 import LogoSection from '#/src/components/LogoSection';
 import { Box, Typography } from '#/src/components/virkailija';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
@@ -27,8 +22,6 @@ const InfoLabel = props => (
 const InfoValue = props => <Box flexGrow={1} {...props} />;
 
 const TiedotSection = ({ language, name, t }) => {
-  const isOphVirkailija = useIsOphVirkailija();
-
   return (
     <>
       <Typography as="div" mb={2}>
@@ -109,15 +102,6 @@ const TiedotSection = ({ language, name, t }) => {
           />
         </Cell>
       </Grid>
-      <Box mt={3} mb={3}>
-        <Field
-          component={FormFieldSwitch}
-          name={`${name}.jarjestaaUrheilijanAmmKoulutusta`}
-          disabled={!isOphVirkailija}
-        >
-          {t('oppilaitoslomake.jarjestaaUrheilijanAmmKoulutusta')}
-        </Field>
-      </Box>
       <Grid>
         <Cell width={12} {...getTestIdProps('logo')}>
           <LogoSection

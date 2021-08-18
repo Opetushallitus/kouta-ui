@@ -2,19 +2,7 @@ import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
-import { OptionalBinaryValue } from '#/src/constants';
 import { isNumeric } from '#/src/utils';
-
-export const radioValueToOptionalBool = enumValue => {
-  switch (enumValue) {
-    case OptionalBinaryValue.KYLLA:
-      return true;
-    case OptionalBinaryValue.EI:
-      return false;
-    default:
-      return null;
-  }
-};
 
 export const getOppilaitoksenOsaByFormValues = ({
   tila,
@@ -84,9 +72,8 @@ export const getOppilaitoksenOsaByFormValues = ({
             nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
           }
         : null,
-      jarjestaaUrheilijanAmmKoulutusta: radioValueToOptionalBool(
-        perustiedot?.jarjestaaUrheilijanAmmKoulutusta
-      ),
+      jarjestaaUrheilijanAmmKoulutusta:
+        perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
     },
   };
 };

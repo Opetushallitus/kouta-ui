@@ -14,7 +14,6 @@ import {
   CRUD_ROLES,
   ORGANISAATIOTYYPPI,
   FormMode,
-  OptionalBinaryValue,
 } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
@@ -109,7 +108,7 @@ export const OppilaitoksenOsaPage = ({
             ],
             perustiedot: {
               wwwSivuUrl: contactInfo.verkkosivu || '',
-              jarjestaaUrheilijanAmmKoulutusta: OptionalBinaryValue.TYHJA,
+              jarjestaaUrheilijanAmmKoulutusta: false,
             },
           }
         : oppilaitoksenOsa

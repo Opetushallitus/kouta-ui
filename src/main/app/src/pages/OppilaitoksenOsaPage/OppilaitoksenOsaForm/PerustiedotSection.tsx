@@ -70,14 +70,14 @@ const TiedotSection = ({ name, t, language }) => {
       </Grid>
       <Box mt={3} mb={3}>
         <Field
-          label={t('oppilaitoslomake.jarjestaaUrheilijanAmmKoulutusta')}
+          label={t('oppilaitoksenOsaLomake.jarjestaaUrheilijanAmmKoulutusta')}
           component={FormFieldRadioGroup}
           name={`${name}.jarjestaaUrheilijanAmmKoulutusta`}
           disabled={!isOphVirkailija}
           options={[
             {
               value: OptionalBinaryValue.TYHJA,
-              label: t('oppilaitoslomake.kaytaOppilaitoksenValintaa'),
+              label: t('oppilaitoksenOsaLomake.kaytaOppilaitoksenValintaa'),
             },
             {
               value: OptionalBinaryValue.KYLLA,

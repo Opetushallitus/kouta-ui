@@ -96,7 +96,7 @@
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.12.0",
     "cross-env": "^7.0.3",
-    "cypress": "^8.2.0",
+    "cypress": "^8.3.0",
     "cypress-pipe": "^2.0.0",
     "cypress-plugin-snapshots": "^1.4.4",
     "eslint": "^7.32.0",

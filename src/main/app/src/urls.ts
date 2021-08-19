@@ -74,7 +74,6 @@ export const development = ({ isCypress }) => ({
   'eperusteet-service.lukiodiplomi-tiedot': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/6828810/lops2019/oppiaineet/6835372/moduulit/$1`,
   'organisaatio-service.base-url': `${virkailijaDevUrl}/organisaatio-service`,
   'organisaatio-service.children': `${virkailijaDevUrl}/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false`,
-  'organisaatio-service.hierarkia': `${virkailijaDevUrl}/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=$1&aktiiviset=true&suunnitellut=true&lakkautetut=false`,
   'organisaatio-service.hierarkia-haku': `${virkailijaDevUrl}/organisaatio-service/rest/organisaatio/v4/hierarkia/hae`,
   'organisaatio-service.organisaatio-by-oid': `${virkailijaDevUrl}/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false`,
   'organisaatio-service.organisaatiot-by-oids': `${virkailijaDevUrl}/organisaatio-service/rest/organisaatio/v4/findbyoids`,

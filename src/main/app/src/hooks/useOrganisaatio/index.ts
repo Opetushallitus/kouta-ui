@@ -19,11 +19,6 @@ export const useOrganisaatio = oid => {
   return { organisaatio: organisaatiot?.[0], ...rest };
 };
 
-type UseOrganisaatiotResult = {
-  organisaatiot?: Array<Record<string, any>>;
-  [key: string]: unknown;
-};
-
 export const useOrganisaatiot = oids => {
   const { data: organisaatiot, ...rest } = useApiQuery(
     'getOrganisaatiot',
@@ -36,7 +31,7 @@ export const useOrganisaatiot = oids => {
     }
   );
 
-  return { ...rest, organisaatiot } as UseOrganisaatiotResult;
+  return { ...rest, organisaatiot };
 };
 
 const oppilaitostyyppiToKoulutustyyppi = o =>

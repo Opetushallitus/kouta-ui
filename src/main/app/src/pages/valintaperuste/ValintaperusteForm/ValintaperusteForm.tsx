@@ -7,8 +7,10 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import { KokeetTaiLisanaytotSection } from '#/src/components/KokeetTaiLisanaytotSection';
+import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
+import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from '#/src/utils/valintaperuste/constants';
 import { getValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
@@ -41,8 +43,18 @@ export const ValintaperusteForm = ({
   const koulutustyyppi = useFieldValue('perustiedot.tyyppi');
   const languages = kieliversiot || [];
 
+  const formMode = useFormMode();
+
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      {formMode === FormMode.EDIT && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSection}
+          header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
       <FormCollapse
         section="perustiedot"
         header={t('valintaperustelomake.valintaperusteenPerustiedot')}

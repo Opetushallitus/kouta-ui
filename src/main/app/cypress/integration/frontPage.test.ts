@@ -22,7 +22,7 @@ const stubMyOrganisations = () => {
   cy.intercept(
     {
       method: 'GET',
-      url: `/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${oid}`,
+      url: `/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**oid=${oid}`,
     },
     { body: organisaatioHierarkia() }
   );

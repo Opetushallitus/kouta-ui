@@ -69,7 +69,11 @@ export const CreateValintaperustePage = props => {
   }, [valintaperuste, kieliValinnat, koulutustyyppi]);
 
   return (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm
+      form={FORM_NAME}
+      mode={FormMode.CREATE}
+      initialValues={initialValues}
+    >
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
       <FormPage
         header={<EntityFormHeader entityType={ENTITY.VALINTAPERUSTE} />}

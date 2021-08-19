@@ -12,6 +12,7 @@ export type HakulomakeFormSection = {
 };
 
 export type HakuFormValues = {
+  organisaatioOid?: SelectOption;
   externalId?: string;
   muokkaaja: string;
   tila: JULKAISUTILA;

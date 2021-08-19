@@ -1,6 +1,6 @@
 [
   {
-    "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=1.2.246.562.10.52251087186&aktiiviset=true&suunnitellut=true&lakkautetut=false",
+    "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?aktiiviset=true&lakkautetut=false&oid=1.2.246.562.10.52251087186&suunnitellut=true",
     "response": {
       "body": {
         "numHits": 16,

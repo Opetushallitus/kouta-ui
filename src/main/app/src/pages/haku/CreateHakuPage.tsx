@@ -54,7 +54,11 @@ const CreateHakuPage = props => {
   }, [data]);
 
   return (
-    <ReduxForm form="hakuForm" initialValues={initialValues}>
+    <ReduxForm
+      form="hakuForm"
+      mode={FormMode.CREATE}
+      initialValues={initialValues}
+    >
       <Title>{t('sivuTitlet.uusiHaku')}</Title>
       <FormPage
         header={<EntityFormHeader entityType={ENTITY.HAKU} />}

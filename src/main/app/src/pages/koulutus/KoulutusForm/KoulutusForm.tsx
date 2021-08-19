@@ -9,16 +9,19 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { Box } from '#/src/components/virkailija';
 import {
   ENTITY,
+  FormMode,
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
+import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
@@ -88,8 +91,18 @@ export const KoulutusForm = ({
     !isInHierarkia(organisaatio)(hierarkia) &&
     isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia);
 
+  const formMode = useFormMode();
+
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      {formMode === FormMode.EDIT && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSection}
+          header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
       <FormCollapse
         section="koulutustyyppi"
         header={t('yleiset.koulutustyyppi')}

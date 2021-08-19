@@ -373,6 +373,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "sorakuvausId": null,
   "tarjoajat": Array [
     "org1",

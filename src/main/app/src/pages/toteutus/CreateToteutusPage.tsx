@@ -97,7 +97,11 @@ const CreateToteutusPage = props => {
   }, [toteutus, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
   return (
-    <ReduxForm form="toteutusForm" initialValues={initialValues}>
+    <ReduxForm
+      form="toteutusForm"
+      mode={FormMode.CREATE}
+      initialValues={initialValues}
+    >
       <Title>{t('sivuTitlet.uusiToteutus')}</Title>
       <FormPage
         header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}

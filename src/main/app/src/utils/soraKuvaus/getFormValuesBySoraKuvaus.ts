@@ -11,10 +11,12 @@ const getFormValuesBySoraKuvaus = soraKuvaus => {
     metadata = {},
     tila,
     externalId,
+    organisaatioOid,
   } = soraKuvaus;
 
   const { kuvaus, koulutusKoodiUrit, koulutusalaKoodiUri } = metadata;
   return {
+    organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
     tila,
     kieliversiot: kielivalinta || [],

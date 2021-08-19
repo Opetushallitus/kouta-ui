@@ -51,11 +51,17 @@ export const HakuFooter = ({
       const { oid } = await dataSendFn({
         httpClient,
         apiUrls,
-        haku: {
-          organisaatioOid,
-          ...haku,
-          ...getHakuByFormValues(valuesForSaving),
-        },
+        haku:
+          formMode === FormMode.CREATE
+            ? {
+                ...haku,
+                ...getHakuByFormValues(valuesForSaving),
+                organisaatioOid,
+              }
+            : {
+                ...haku,
+                ...getHakuByFormValues(valuesForSaving),
+              },
       });
 
       if (formMode === FormMode.CREATE) {

@@ -41,11 +41,17 @@ export const ValintaperusteFooter = ({
       const { id } = await dataSendFn({
         httpClient,
         apiUrls,
-        valintaperuste: {
-          organisaatioOid,
-          ...valintaperuste,
-          ...getValintaperusteByFormValues(values),
-        },
+        valintaperuste:
+          formMode === FormMode.CREATE
+            ? {
+                ...valintaperuste,
+                ...getValintaperusteByFormValues(values),
+                organisaatioOid,
+              }
+            : {
+                ...valintaperuste,
+                ...getValintaperusteByFormValues(values),
+              },
       });
 
       if (formMode === FormMode.CREATE) {

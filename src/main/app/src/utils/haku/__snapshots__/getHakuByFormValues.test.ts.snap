@@ -78,6 +78,7 @@ Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
 }
 `;
@@ -160,6 +161,7 @@ Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
 }
 `;
@@ -240,6 +242,7 @@ Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
 }
 `;
@@ -323,6 +326,7 @@ Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
 }
 `;
@@ -403,6 +407,7 @@ Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
 }
 `;

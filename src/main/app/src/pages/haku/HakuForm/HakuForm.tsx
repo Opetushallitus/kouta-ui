@@ -9,8 +9,11 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { LomakeFields } from '#/src/components/LomakeFields';
+import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { Box } from '#/src/components/virkailija';
+import { FormMode } from '#/src/constants';
+import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
@@ -42,6 +45,8 @@ const HakuForm = ({
 
   const isOphVirkailija = useIsOphVirkailija();
 
+  const formMode = useFormMode();
+
   return (
     <>
       <HakukohteetModal
@@ -51,6 +56,14 @@ const HakuForm = ({
         onSave={onAttachHakukohde}
       />
       <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+        {formMode === FormMode.EDIT && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSection}
+            header={t('yleiset.organisaatio')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
         {canSelectBase ? (
           <PohjaFormCollapse
             section="pohja"

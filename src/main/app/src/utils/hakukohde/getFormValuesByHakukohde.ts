@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { isNumeric } from '#/src/utils';
+import { isNumeric, toSelectValue } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
 import {
@@ -64,6 +64,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     pohjakoulutusvaatimusTarkenne,
     metadata = {},
     externalId,
+    organisaatioOid,
   } = hakukohde;
 
   const {
@@ -77,6 +78,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
   } = metadata;
 
   return {
+    organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
     tila,
     esikatselu,

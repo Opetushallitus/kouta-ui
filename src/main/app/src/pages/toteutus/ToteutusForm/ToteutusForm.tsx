@@ -8,6 +8,7 @@ import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
@@ -16,7 +17,9 @@ import {
   KOULUTUSTYYPPI,
   HAKULOMAKETYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+  FormMode,
 } from '#/src/constants';
+import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
@@ -77,6 +80,8 @@ const ToteutusForm = ({
     ? hakeutumisTaiIlmoittautumistapa === ATARU
     : true;
 
+  const formMode = useFormMode();
+
   return (
     <>
       <HakukohteetModal
@@ -86,6 +91,14 @@ const ToteutusForm = ({
         onSave={onAttachHakukohde}
       />
       <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+        {formMode === FormMode.EDIT && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSection}
+            header={t('yleiset.organisaatio')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
         {canSelectBase && (
           <PohjaFormCollapse
             onSelectBase={onSelectBase}

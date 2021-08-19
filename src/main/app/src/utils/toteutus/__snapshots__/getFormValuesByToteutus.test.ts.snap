@@ -238,6 +238,7 @@ Object {
       ],
     },
   },
+  "organisaatioOid": undefined,
   "osaamisalat": Object {
     "osaamisalaLinkit": Object {
       "osaamisala1": Object {

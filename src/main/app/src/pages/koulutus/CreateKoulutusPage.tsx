@@ -61,7 +61,11 @@ const CreateKoulutusPage = props => {
   }, [data]);
 
   return (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm
+      mode={FormMode.CREATE}
+      form={FORM_NAME}
+      initialValues={initialValues}
+    >
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
       <FormPage
         header={<EntityFormHeader entityType={ENTITY.KOULUTUS} />}

@@ -13,7 +13,6 @@ import {
   FormFieldSwitch,
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
-import Spacing from '#/src/components/Spacing';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
@@ -77,7 +76,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
   return (
     <>
       {osiotArrWithLabels.map(({ value, label }, index) => (
-        <Spacing
+        <Box
           marginBottom={index !== osiot.length - 1 ? 2 : 0}
           key={value}
           {...getTestIdProps(`osioKuvaus.${value}`)}
@@ -87,7 +86,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
             component={FormFieldEditor}
             label={label}
           />
-        </Spacing>
+        </Box>
       ))}
     </>
   );
@@ -276,13 +275,13 @@ export const JarjestamisTiedotSection = ({
 
       {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
         <>
-          <Spacing marginBottom={4}>
+          <Box marginBottom={4}>
             <KielivalikoimaFields name={name} />
-          </Spacing>
+          </Box>
 
-          <Spacing marginBottom={4}>
+          <Box marginBottom={4}>
             <DiplomiFields name={`${name}.diplomit`} />
-          </Spacing>
+          </Box>
         </>
       )}
 

@@ -1,3 +1,5 @@
+import { useApiQuery } from '#/src/hooks/useApiQuery';
+
 export const getValintaperusteet = async ({
   organisaatioOid,
   hakuOid,
@@ -19,3 +21,14 @@ export const getValintaperusteet = async ({
 
   return data;
 };
+
+export const useValintaperusteet = ({
+  organisaatioOid,
+  hakuOid,
+  koulutustyyppi,
+}) =>
+  useApiQuery('getValintaperusteet', getValintaperusteet, {
+    organisaatioOid,
+    hakuOid,
+    koulutustyyppi,
+  });

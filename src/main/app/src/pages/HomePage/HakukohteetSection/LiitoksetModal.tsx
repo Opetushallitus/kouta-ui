@@ -13,10 +13,9 @@ import {
   ModalFooter,
   ModalHeader,
 } from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import getHaut from '#/src/utils/haku/getHaut';
-import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
+import { useHaut } from '#/src/utils/haku/getHaut';
+import { useToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
@@ -24,16 +23,12 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const [haku, setHaku] = useState();
   const [toteutus, setToteutus] = useState();
 
-  const { data: haut } = useApiAsync({
-    promiseFn: getHaut,
+  const { data: haut } = useHaut({
     organisaatioOid,
-    watch: organisaatioOid,
   });
 
-  const { data: toteutukset } = useApiAsync({
-    promiseFn: getToteutukset,
+  const { data: toteutukset } = useToteutukset({
     organisaatioOid,
-    watch: organisaatioOid,
     vainHakukohteeseenLiitettavat: true,
   });
 

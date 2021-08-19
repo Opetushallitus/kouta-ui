@@ -14,7 +14,6 @@ import ListTable, {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import Pagination from '#/src/components/Pagination';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
 import useApiAsync from '#/src/hooks/useApiAsync';
@@ -135,9 +134,9 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
         }
         defaultOpen
       >
-        <Spacing marginBottom={3}>
+        <Box marginBottom={3}>
           <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
-        </Spacing>
+        </Box>
 
         {rows ? (
           <ListTable

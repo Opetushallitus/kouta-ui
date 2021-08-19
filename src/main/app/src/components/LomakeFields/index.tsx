@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
@@ -12,16 +11,13 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { HakuModel } from '#/src/types/hakuTypes';
 
-import {
-  createEnhancedGetTyyppiLabel,
-  createEnhancedGetTyyppiShowUrl,
-  useLomakeOptions,
-} from './utils';
+import { useAtaruLomakeUrl, useLomakeOptions } from './utils';
 
 const Buttons = styled.div`
   display: flex;
@@ -29,15 +25,30 @@ const Buttons = styled.div`
   align-items: center;
 `;
 
-const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
+const LomakeSelect = ({ input, haku, getShowUrl, ...props }) => {
   const { value } = input;
-  const url = _.isFunction(getShowUrl) ? getShowUrl(value) : null;
+  const url = useAtaruLomakeUrl(value);
+
+  const { t } = useTranslation();
+
+  const apiUrls = useUrls();
+
+  const userLanguage = useUserLanguage();
+
+  const ataruOptions = useLomakeOptions({
+    language: userLanguage,
+  });
 
   return (
     <>
-      <FormFieldSelect value={value} {...props} input={input} />
+      <FormFieldSelect
+        value={value}
+        options={ataruOptions}
+        {...props}
+        input={input}
+      />
       {url ? (
-        <Spacing marginTop={2}>
+        <Box marginTop={2}>
           <Buttons>
             <Button
               as="a"
@@ -48,7 +59,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
             >
               {t('yleiset.avaaLomake')}
             </Button>
-            <Spacing marginRight={1} />
+            <Box marginRight={1} />
             {haku && haku.oid ? (
               <Button
                 as="a"
@@ -64,7 +75,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
               </Button>
             ) : null}
           </Buttons>
-        </Spacing>
+        </Box>
       ) : null}
     </>
   );
@@ -74,28 +85,17 @@ const AdditionalTyyppiFields = ({
   input: { value },
   baseName,
   haku,
-  ataruOptions,
-  getTyyppiShowUrl,
-  apiUrls,
   language,
-  t,
 }) => {
-  const getShowUrl = useMemo(() => {
-    return option => getTyyppiShowUrl({ option, apiUrls, tyyppi: value });
-  }, [getTyyppiShowUrl, apiUrls, value]);
-
+  const { t } = useTranslation();
   switch (value) {
     case HAKULOMAKETYYPPI.ATARU:
       return (
         <Field
           name={`${baseName}.lomake`}
           component={LomakeSelect}
-          options={ataruOptions}
           label={t('yleiset.valitseHakulomake')}
-          getShowUrl={getShowUrl}
-          apiUrls={apiUrls}
           haku={haku}
-          t={t}
           required
         />
       );
@@ -128,48 +128,38 @@ const defaultTyypit = [
   HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
 ];
 
+const tyyppiToTranslationKey = {
+  [HAKULOMAKETYYPPI.ATARU]: 'hakulomakeValinnat.ataru',
+  [HAKULOMAKETYYPPI.HAKUAPP]: 'hakulomakeValinnat.hakuapp',
+  [HAKULOMAKETYYPPI.MUU]: 'hakulomakeValinnat.muu',
+  [HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA]: 'hakulomakeValinnat.eiSahkoistaHakua',
+};
+
+type LomakeFieldsProps = {
+  name: string;
+  haku?: HakuModel;
+  tyypit?: Array<HAKULOMAKETYYPPI>;
+  optionsLabel?: string;
+  language?: LanguageCode;
+};
+
 export const LomakeFields = ({
   name,
   haku,
   tyypit = defaultTyypit,
-  optionsLabel: optionsLabelProp,
-  getTyyppiLabel,
-  getTyyppiLomakkeet,
-  getTyyppiShowUrl,
+  optionsLabel,
   language: translationLanguage = 'fi',
-}) => {
-  const { t, i18n } = useTranslation();
-  const userLanguage = i18n.language;
+}: LomakeFieldsProps) => {
+  const { t } = useTranslation();
 
   const tyyppiName = `${name}.tyyppi`;
-
-  const optionsLabel =
-    optionsLabelProp === undefined
-      ? t('yleiset.valitseMitaHakulomakettaKaytetaan')
-      : optionsLabelProp;
-
-  const apiUrls = useUrls();
-
-  const enhancedGetTyyppiLabel = useMemo(() => {
-    return createEnhancedGetTyyppiLabel(getTyyppiLabel, t);
-  }, [getTyyppiLabel, t]);
-
-  const enhancedGetTyyppiShowUrl = useMemo(() => {
-    return createEnhancedGetTyyppiShowUrl(getTyyppiShowUrl);
-  }, [getTyyppiShowUrl]);
 
   const tyyppiOptions = useMemo(() => {
     return tyypit.map(tyyppi => ({
       value: tyyppi,
-      label: enhancedGetTyyppiLabel(tyyppi),
+      label: t(tyyppiToTranslationKey[tyyppi]),
     }));
-  }, [tyypit, enhancedGetTyyppiLabel]);
-
-  const { ataruOptions } = useLomakeOptions({
-    getTyyppiLomakkeet,
-    tyypit,
-    language: userLanguage,
-  });
+  }, [t, tyypit]);
 
   return (
     <Box display="flex">
@@ -178,18 +168,14 @@ export const LomakeFields = ({
           name={tyyppiName}
           component={FormFieldRadioGroup}
           options={tyyppiOptions}
-          label={optionsLabel}
+          label={optionsLabel ?? t('yleiset.valitseMitaHakulomakettaKaytetaan')}
           required
         />
       </Box>
       <Box flexGrow={1} paddingLeft={3}>
         <Field
           baseName={name}
-          ataruOptions={ataruOptions}
           name={tyyppiName}
-          getTyyppiShowUrl={enhancedGetTyyppiShowUrl}
-          apiUrls={apiUrls}
-          t={t}
           component={AdditionalTyyppiFields}
           language={translationLanguage}
           haku={haku}

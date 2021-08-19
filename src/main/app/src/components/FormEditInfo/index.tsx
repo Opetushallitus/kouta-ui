@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
-import Spacing from '#/src/components/Spacing';
-import { Icon } from '#/src/components/virkailija';
+import { Icon, Box } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
 import { formatDateValue } from '#/src/utils';
 
@@ -42,11 +41,11 @@ const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
         <InfoIcon />
       </IconContainer>
       <InfoContainer>
-        <Spacing marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Spacing>
-        <Spacing marginBottom={0.25}>
+        <Box marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Box>
+        <Box marginBottom={0.25}>
           {formatDateValue(date)}{' '}
           {editorOid ? <Editor oid={editorOid} /> : null}
-        </Spacing>
+        </Box>
         <div>
           {historyUrl ? (
             <Anchor href={historyUrl} target="_blank">

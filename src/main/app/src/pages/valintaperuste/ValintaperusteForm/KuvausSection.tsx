@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
 import { SisaltoFields } from '#/src/components/SisaltoFields';
-import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 export const KuvausSection = ({ language, name }) => {
@@ -13,24 +13,24 @@ export const KuvausSection = ({ language, name }) => {
 
   return (
     <>
-      <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
+      <Box marginBottom={2} {...getTestIdProps('nimi')}>
         <Field
           name={`${name}.nimi.${language}`}
           required
           component={FormFieldInput}
           label={t('valintaperustelomake.kuvauksenNimi')}
         />
-      </Spacing>
-      <Spacing marginBottom={2} {...getTestIdProps('kuvaus')}>
+      </Box>
+      <Box marginBottom={2} {...getTestIdProps('kuvaus')}>
         <Field
           name={`${name}.kuvaus.${language}`}
           component={FormFieldEditor}
           label={t('valintaperustelomake.kuvauksenTarkenne')}
         />
-      </Spacing>
-      <Spacing {...getTestIdProps('sisalto')}>
+      </Box>
+      <Box {...getTestIdProps('sisalto')}>
         <SisaltoFields name={`${name}.sisalto`} language={language} />
-      </Spacing>
+      </Box>
     </>
   );
 };

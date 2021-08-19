@@ -7,17 +7,16 @@ import {
   FormFieldSelect,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
-import { FormControl, Typography } from '#/src/components/virkailija';
+import { Box, FormControl, Typography } from '#/src/components/virkailija';
 import { POHJAVALINTA } from '#/src/constants';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { useEntityOptions } from '#/src/hooks/useEntityOptionsHook';
 
 const CopySelect = ({ input: { value }, options, selectName }) => {
   return value === POHJAVALINTA.KOPIO ? (
-    <Spacing marginTop={2} marginBottom={2}>
+    <Box marginTop={2} marginBottom={2}>
       <Field name={selectName} component={FormFieldSelect} options={options} />
-    </Spacing>
+    </Box>
   ) : null;
 };
 
@@ -32,10 +31,9 @@ export default function PohjaValintaSection({
 }) {
   const { t } = useTranslation();
 
-  const { data = [] } = useApiAsync({
-    promiseFn: getCopyEntities,
+  const { data = [] } = useApiQuery('getCopyEntities', getCopyEntities, {
     organisaatioOid,
-    watch: organisaatioOid,
+    copyLabel, // Tätä ei tarvita API-kutsussa, mutta react-query käyttää tätä queryn avaimen osana. Näin sitä ei sotketa muihin getCopyEntites-queryihin.
   });
 
   const tapaName = `${name}.tapa`;

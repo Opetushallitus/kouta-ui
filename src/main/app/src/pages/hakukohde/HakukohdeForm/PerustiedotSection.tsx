@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldCheckbox, FormFieldInput } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
-import { Divider } from '#/src/components/virkailija';
+import { Box, Divider } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import isAmmatillinenKoulutustyyppi from '#/src/utils/koulutus/isAmmatillinenKoulutustyyppi';
@@ -27,7 +26,7 @@ export const PerustiedotSection = ({
 
   return (
     <>
-      <Spacing marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
+      <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
         <Field
           name={`${name}.nimi.${language}`}
           component={FormFieldInput}
@@ -35,7 +34,7 @@ export const PerustiedotSection = ({
           required
           disabled={nimiReadonly}
         />
-      </Spacing>
+      </Box>
       {isAmmatillinen ? (
         <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
           <Field

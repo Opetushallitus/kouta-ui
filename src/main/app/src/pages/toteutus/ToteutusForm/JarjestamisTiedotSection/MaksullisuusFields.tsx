@@ -8,8 +8,7 @@ import {
   FormFieldRadioGroup,
   FormFieldInput,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
-import { InputIcon } from '#/src/components/virkailija';
+import { Box, InputIcon } from '#/src/components/virkailija';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
@@ -23,7 +22,7 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
     MaksullisuusTyyppi.LUKUVUOSIMAKSU,
     MaksullisuusTyyppi.MAKSULLINEN,
   ].includes(value) ? (
-    <Spacing marginTop={2}>
+    <Box marginTop={2}>
       <MaksuInputWrapper>
         <Field
           name={maksuName}
@@ -34,7 +33,7 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
           type="number"
         />
       </MaksuInputWrapper>
-    </Spacing>
+    </Box>
   ) : null;
 };
 

@@ -1,3 +1,4 @@
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { retryOnRedirect } from '#/src/utils';
 // Need to retry getMe a few times, because often session is not created when first called
 // 'kayttooikeus-service.me' is redirected (302) to /cas/login which can be detected checking
@@ -8,4 +9,17 @@ export const getMe = async ({ httpClient, apiUrls }) => {
     httpClient,
     targetUrl: apiUrls.url('kayttooikeus-service.me'),
   });
+};
+
+export const useGetMe = () => {
+  return useApiQuery(
+    'getMe',
+    getMe,
+    {},
+    {
+      staleTime: Infinity,
+      cacheTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
+  );
 };

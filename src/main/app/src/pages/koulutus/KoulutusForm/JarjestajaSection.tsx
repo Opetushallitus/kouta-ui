@@ -11,7 +11,6 @@ import {
 } from '#/src/components/formFields';
 import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import {
   KOULUTUS_ROLE,
@@ -109,14 +108,14 @@ export const JarjestajaSection = ({
       {!disableTarjoajaHierarkia ? (
         <>
           {tarjoajatFromPohja ? (
-            <Spacing mb={2}>
+            <Box mb={2}>
               <Field
                 name={`tarjoajat.kaytaPohjanJarjestajaa`}
                 component={FormFieldCheckbox}
               >
                 {t('koulutuslomake.kaytaPohjanJarjestajaa')}
               </Field>
-            </Spacing>
+            </Box>
           ) : null}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
             <div {...getTestIdProps('jarjestajatSelection')}>

@@ -10,7 +10,6 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
@@ -19,21 +18,21 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
     <FieldArrayList fields={fields}>
       {({ field }) => (
         <>
-          <Spacing marginBottom={2} {...getTestIdProps('osaamisalanNimi')}>
+          <Box marginBottom={2} {...getTestIdProps('osaamisalanNimi')}>
             <Field
               name={`${field}.nimi.${language}`}
               component={FormFieldInput}
               label={t('yleiset.nimi')}
             />
-          </Spacing>
+          </Box>
 
-          <Spacing marginBottom={2} {...getTestIdProps('osaamisalanKuvaus')}>
+          <Box marginBottom={2} {...getTestIdProps('osaamisalanKuvaus')}>
             <Field
               name={`${field}.kuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.kuvaus')}
             />
-          </Spacing>
+          </Box>
           <Box display="flex">
             <Box
               flexGrow={1}

@@ -5,7 +5,6 @@ import { reduxForm, Field, FieldArray } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import { FormFieldInput } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 
 import FieldArrayList from './index';
@@ -19,13 +18,13 @@ const StoryFieldArrayList = ({ fields }) => (
     <FieldArrayList fields={fields}>
       {({ field }) => (
         <>
-          <Spacing marginBottom={2}>
+          <Box marginBottom={2}>
             <Field
               name={`${field}.name`}
               component={FormFieldInput}
               label="Nimi"
             />
-          </Spacing>
+          </Box>
           <Field name={`${field}.age`} component={FormFieldInput} label="Ikä" />
         </>
       )}

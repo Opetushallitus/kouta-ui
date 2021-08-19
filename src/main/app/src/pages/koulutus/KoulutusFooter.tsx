@@ -15,9 +15,9 @@ import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
-import createKoulutus from '#/src/utils/koulutus/createKoulutus';
+import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
-import updateKoulutus from '#/src/utils/koulutus/updateKoulutus';
+import { updateKoulutus } from '#/src/utils/koulutus/updateKoulutus';
 import { validateKoulutusForm } from '#/src/utils/koulutus/validateKoulutusForm';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 

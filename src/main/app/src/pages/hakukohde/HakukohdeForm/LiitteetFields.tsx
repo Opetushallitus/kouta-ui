@@ -15,7 +15,6 @@ import {
   FormFieldPostinumeroSelect,
   FormFieldEditor,
 } from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
@@ -82,32 +81,32 @@ const ToimituspaikkaFields = ({ name, language }) => {
 
   return (
     <>
-      <Spacing marginBottom={2} {...getTestIdProps('osoite')}>
+      <Box marginBottom={2} {...getTestIdProps('osoite')}>
         <Field
           name={`${name}.osoite.${language}`}
           required
           component={FormFieldInput}
           label={t('yleiset.osoite')}
         />
-      </Spacing>
+      </Box>
 
-      <Spacing marginBottom={2} {...getTestIdProps('postinumero')}>
+      <Box marginBottom={2} {...getTestIdProps('postinumero')}>
         <Field
           name={`${name}.postinumero`}
           required
           component={FormFieldPostinumeroSelect}
           label={t('yleiset.postinumero')}
         />
-      </Spacing>
+      </Box>
 
-      <Spacing {...getTestIdProps('sahkoposti')}>
+      <Box {...getTestIdProps('sahkoposti')}>
         <Field
           name={`${name}.sahkoposti`}
           required
           component={FormFieldInput}
           label={t('yleiset.sahkoposti')}
         />
-      </Spacing>
+      </Box>
     </>
   );
 };
@@ -120,18 +119,18 @@ const ToimitustapaPaikkaFields = ({
 }) => {
   if (toimitustapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE) {
     return (
-      <Spacing marginTop={2}>
+      <Box marginTop={2}>
         <ToimituspaikkaFields name={baseName} language={language} />
-      </Spacing>
+      </Box>
     );
   } else if (
     toimitustapa === LIITTEEN_TOIMITUSTAPA.JARJESTAJAN_OSOITE &&
     contactInfo
   ) {
     return (
-      <Spacing marginTop={2}>
+      <Box marginTop={2}>
         <ContactInfo {...contactInfo} language={language} />
-      </Spacing>
+      </Box>
     );
   }
 
@@ -197,7 +196,7 @@ const LiitteetListField = ({
       <FieldArrayList fields={fields}>
         {({ field: liite }) => (
           <>
-            <Spacing marginBottom={2} {...getTestIdProps('tyyppi')}>
+            <Box marginBottom={2} {...getTestIdProps('tyyppi')}>
               <Field
                 name={`${liite}.tyyppi`}
                 required
@@ -205,18 +204,18 @@ const LiitteetListField = ({
                 options={tyyppiOptions}
                 label={t('yleiset.tyyppi')}
               />
-            </Spacing>
+            </Box>
 
-            <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
+            <Box marginBottom={2} {...getTestIdProps('nimi')}>
               <Field
                 name={`${liite}.nimi.${language}`}
                 required
                 component={FormFieldInput}
                 label={t('yleiset.nimi')}
               />
-            </Spacing>
+            </Box>
 
-            <Spacing
+            <Box
               marginBottom={
                 includeToimitusaika || includeToimituspaikka ? 2 : 0
               }
@@ -228,15 +227,15 @@ const LiitteetListField = ({
                 label={t('yleiset.kuvaus')}
                 hideHeaderSelect
               />
-            </Spacing>
+            </Box>
 
             {includeToimitusaika ? (
-              <Spacing
+              <Box
                 marginBottom={includeToimituspaikka ? 2 : 0}
                 {...getTestIdProps('toimitusaika')}
               >
                 <ToimitusaikaFields name={`${liite}.toimitusaika`} />
-              </Spacing>
+              </Box>
             ) : null}
 
             {includeToimituspaikka ? (
@@ -290,7 +289,7 @@ const LiitteetField = ({
 
   return (
     <>
-      <Spacing marginBottom={2} {...getTestIdProps('liitelista')}>
+      <Box marginBottom={2} {...getTestIdProps('liitelista')}>
         <FieldArray
           name={`${baseName}.liitteet`}
           component={LiitteetListField}
@@ -301,32 +300,32 @@ const LiitteetField = ({
           contactInfo={contactInfo}
           t={t}
         />
-      </Spacing>
-      <Spacing>
+      </Box>
+      <Box>
         <Field name={yhteinenToimitusaikaName} component={FormFieldCheckbox}>
           {t('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')}
         </Field>
         {yhteinenToimitusaika ? (
-          <Spacing marginTop={2} marginBottom={2}>
+          <Box marginTop={2} marginBottom={2}>
             <ToimitusaikaFields name={`${baseName}.toimitusaika`} />
-          </Spacing>
+          </Box>
         ) : null}
-      </Spacing>
-      <Spacing>
+      </Box>
+      <Box>
         <Field name={yhteinenToimituspaikkaName} component={FormFieldCheckbox}>
           {t('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')}
         </Field>
         {yhteinenToimituspaikka ? (
-          <Spacing marginTop={2}>
+          <Box marginTop={2}>
             <ToimitustapaFields
               language={language}
               name={`${baseName}.toimitustapa`}
               t={t}
               contactInfo={contactInfo}
             />
-          </Spacing>
+          </Box>
         ) : null}
-      </Spacing>
+      </Box>
     </>
   );
 };

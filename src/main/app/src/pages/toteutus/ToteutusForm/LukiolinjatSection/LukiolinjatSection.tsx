@@ -7,7 +7,6 @@ import { Field } from 'redux-form';
 import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldEditor, FormFieldSwitch } from '#/src/components/formFields';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
-import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { LANGUAGES } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
@@ -270,7 +269,7 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
         koodistoData={koodistoDataPainotukset}
         {...getTestIdProps('painotukset')}
       />
-      <Spacing marginBottom={8} />
+      <Box marginBottom={8} />
       <LukiolinjaOsio
         name={`${name}.erityisetKoulutustehtavat`}
         title={t('toteutuslomake.erityisetKoulutustehtavat')}

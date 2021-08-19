@@ -2,8 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import Spacing from '#/src/components/Spacing';
-import { Typography } from '#/src/components/virkailija';
+import { Box, Typography } from '#/src/components/virkailija';
 
 import OrganisaatioItem from './OrganisaatioItem';
 
@@ -22,14 +21,14 @@ export const OrganisaatioFavouritesList = ({
         {t('etusivu.suosikit')}
       </Typography>
       {items.map((org, index) => (
-        <Spacing marginBottom={index < items.length - 1 ? 1 : 0} key={org?.oid}>
+        <Box marginBottom={index < items.length - 1 ? 1 : 0} key={org?.oid}>
           <OrganisaatioItem
             {...org}
             selected={org?.oid === selected}
             onToggleFavourite={onToggleFavourite}
             onSelect={onSelect}
           />
-        </Spacing>
+        </Box>
       ))}
     </>
   );

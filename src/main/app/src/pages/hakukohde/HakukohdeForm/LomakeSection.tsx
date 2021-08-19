@@ -7,8 +7,7 @@ import Anchor from '#/src/components/Anchor';
 import { FormFieldSwitch } from '#/src/components/formFields';
 import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 import { LomakeFields } from '#/src/components/LomakeFields';
-import Spacing from '#/src/components/Spacing';
-import { Typography } from '#/src/components/virkailija';
+import { Box, Typography } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { getTestIdProps } from '#/src/utils';
@@ -65,9 +64,9 @@ const ConditionalLomakeFields = ({
   language,
 }) => {
   return value ? (
-    <Spacing marginTop={2}>
+    <Box marginTop={2}>
       <LomakeFields name={fieldsName} language={language} />
-    </Spacing>
+    </Box>
   ) : null;
 };
 
@@ -78,9 +77,9 @@ const LomakeSection = ({ language, haku }) => {
 
   return (
     <>
-      <Spacing marginBottom={2}>
+      <Box marginBottom={2}>
         <HakulomakeInfo haku={haku} t={t} />
-      </Spacing>
+      </Box>
       <div {...getTestIdProps('eriHakulomake')}>
         <Field
           name="hakulomake.eriHakulomake"

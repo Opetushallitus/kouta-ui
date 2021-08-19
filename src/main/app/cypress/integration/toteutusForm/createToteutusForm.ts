@@ -158,11 +158,9 @@ const fillTuvaTiedotSection = () => {
       cy.get('input').clear().pipe(paste('toteutuksen nimi'));
     });
 
-    cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' }).should(
-      'be.disabled'
-    );
-    // For some reason this fails in Travis but works on local
-    // .should('have.value', '38 viikkoa');
+    cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' })
+      .should('be.disabled')
+      .should('have.value', '38 viikkoa');
 
     cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
       .clear()

@@ -25,6 +25,7 @@ export const initialValues = ({
     maksullisuustyyppi: MaksullisuusTyyppi.MAKSUTON,
     apurahaMaaraTyyppi: ApurahaMaaraTyyppi.YKSI_ARVO,
     apurahaYksikko: { value: ApurahaYksikko.EURO },
+    suunniteltuKesto: { vuotta: 0, kuukautta: 0 },
   },
   ...(koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
     ? {

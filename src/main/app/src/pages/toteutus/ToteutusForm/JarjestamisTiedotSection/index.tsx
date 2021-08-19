@@ -7,10 +7,10 @@ import { Field } from 'redux-form';
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldSelect,
-  FormFieldInput,
   createFormFieldComponent,
   FormFieldEditor,
   FormFieldSwitch,
+  FormFieldIntegerInput,
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
@@ -105,8 +105,9 @@ const SuunniteltuKestoFields = ({ name }) => {
         <Box>
           <Field
             name={`${name}.suunniteltuKesto.vuotta`}
-            component={FormFieldInput}
-            placeholder={t('toteutuslomake.vuotta')}
+            label={t('toteutuslomake.vuotta')}
+            component={FormFieldIntegerInput}
+            min={0}
             type="number"
             {...getTestIdProps('suunniteltuKestoVuotta')}
           />
@@ -114,8 +115,10 @@ const SuunniteltuKestoFields = ({ name }) => {
         <Box ml={2}>
           <Field
             name={`${name}.suunniteltuKesto.kuukautta`}
-            component={FormFieldInput}
-            placeholder={t('toteutuslomake.kuukautta')}
+            label={t('toteutuslomake.kuukautta')}
+            component={FormFieldIntegerInput}
+            min={0}
+            max={11}
             type="number"
             {...getTestIdProps('suunniteltuKestoKuukautta')}
           />

@@ -2,18 +2,25 @@ import React from 'react';
 
 import _fp from 'lodash/fp';
 
-import { Input } from '#/src/components/virkailija';
+import { Input, InputProps } from '#/src/components/virkailija';
+
+type IntegerInputProps = {
+  min?: number;
+  max?: number;
+  defaultValue?: number;
+  onBlur?: React.EventHandler<React.FocusEvent<HTMLInputElement>>;
+} & InputProps;
 
 export const IntegerInput = ({
-  onBlur,
+  onBlur = _fp.noop,
   min = Number.MIN_SAFE_INTEGER,
   max = Number.MAX_SAFE_INTEGER,
   defaultValue = 0,
   ...props
-}) => {
+}: IntegerInputProps) => {
   const usedOnBlur = e => {
     const value: string = e?.target?.value;
-    const intValue = parseInt(value, 10);
+    const intValue = Number.parseInt(value, 10);
     if (_fp.isNaN(intValue)) {
       e.target.value = defaultValue;
     } else {
@@ -28,5 +35,5 @@ export const IntegerInput = ({
     onBlur(e);
   };
 
-  return <Input onBlur={usedOnBlur} {...props} />;
+  return <Input onBlur={usedOnBlur} defaultValue={defaultValue} {...props} />;
 };

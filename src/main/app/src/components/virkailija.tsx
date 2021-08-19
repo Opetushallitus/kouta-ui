@@ -16,6 +16,7 @@ export { default as FormControl } from '@opetushallitus/virkailija-ui-components
 export { default as FormHelperText } from '@opetushallitus/virkailija-ui-components/FormHelperText';
 export { default as FormLabel } from '@opetushallitus/virkailija-ui-components/FormLabel';
 export { default as Input } from '@opetushallitus/virkailija-ui-components/Input';
+export type { InputProps } from '@opetushallitus/virkailija-ui-components/Input';
 export { default as InputIcon } from '@opetushallitus/virkailija-ui-components/InputIcon';
 export { default as ModalBody } from '@opetushallitus/virkailija-ui-components/ModalBody';
 export { default as ModalHeader } from '@opetushallitus/virkailija-ui-components/ModalHeader';

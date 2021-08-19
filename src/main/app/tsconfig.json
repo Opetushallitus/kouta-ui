@@ -2,7 +2,9 @@
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "types": [
-      "jest"
+      "node",
+      "jest",
+      "@testing-library/jest-dom"
     ],
     "allowJs": true,
     "checkJs": true,

@@ -530,7 +530,7 @@ export const createToteutusForm = () => {
     })
   );
 
-  it.only(
+  it(
     'should be able to create TUVA toteutus',
     mutationTest(() => {
       prepareTest('tuva');

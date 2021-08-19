@@ -19,7 +19,7 @@ const getOrganisaatioHierarkia = async ({
     suunnitellut: suunnitellut ? 'true' : 'false',
     lakkautetut: lakkautetut ? 'true' : 'false',
     skipParents: skipParents ? 'true' : 'false',
-    ...(_.isArray(oids) && { oidResctrictionList: oids }),
+    ...(_.isArray(oids) && { oidRestrictionList: oids }),
   };
 
   const { data } = await httpClient.get(

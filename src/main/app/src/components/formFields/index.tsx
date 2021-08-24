@@ -4,6 +4,7 @@ import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
 import { DateTimeInput } from '#/src/components/DateTimeInput';
 import { Editor } from '#/src/components/Editor';
 import { ImageInput } from '#/src/components/ImageInput';
+import { IntegerInput } from '#/src/components/IntegerInput';
 import { KoulutusalaSelect } from '#/src/components/KoulutusalaSelect';
 import { KoulutustyyppiSelect } from '#/src/components/KoulutustyyppiSelect';
 import { LanguageSelect } from '#/src/components/LanguageSelect';
@@ -151,4 +152,9 @@ export const FormFieldAsyncSelect = createComponent(
 export const FormFieldAsyncKoodistoSelect = createComponent(
   AsyncKoodistoSelect,
   selectMapProps
+);
+
+export const FormFieldIntegerInput = createComponent(
+  IntegerInput,
+  simpleMapProps
 );

@@ -17,6 +17,7 @@ export const TuvaKuvausSection = ({ language, name, koulutus }) => {
           name={`kuvaus.${language}`}
           component={FormFieldEditor}
           label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
+          required
         />
       </Box>
     </>

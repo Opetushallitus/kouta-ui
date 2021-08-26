@@ -14,16 +14,20 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import getOrganisaatioByOid from '#/src/utils/organisaatio/getOrganisaatioByOid';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
 import { FormFieldAsyncSelect } from './formFields';
 
-export const OrganisaatioSection = ({ organisaatioOid }) => {
+export const OrganisaatioSection = () => {
   const language = useUserLanguage();
   const isOphVirkailija = useIsOphVirkailija();
 
-  const { hierarkia, isLoading } = useOrganisaatioHierarkia(organisaatioOid, {
-    skipParents: true,
-    enabled: isOphVirkailija,
-  });
+  const { hierarkia, isLoading } = useOrganisaatioHierarkia(
+    OPETUSHALLITUS_ORGANISAATIO_OID,
+    {
+      skipParents: true,
+      enabled: isOphVirkailija,
+    }
+  );
 
   const options = useMemo(() => {
     const orgs = flattenHierarkia(hierarkia);

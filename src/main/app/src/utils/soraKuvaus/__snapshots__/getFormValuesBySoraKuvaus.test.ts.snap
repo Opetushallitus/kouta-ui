@@ -13,6 +13,7 @@ Object {
     "value": "kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
   },
   "koulutustyyppi": "amm",
+  "organisaatioOid": undefined,
   "tiedot": Object {
     "kuvaus": Object {
       "fi": "<p><strong>Kuvaus fi</strong></p>",

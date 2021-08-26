@@ -53,6 +53,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
   "yhteyshenkilot": Array [
     Object {
@@ -134,6 +135,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
   "yhteyshenkilot": Array [
     Object {
@@ -215,6 +217,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
   "yhteyshenkilot": Array [
     Object {
@@ -298,6 +301,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
   "yhteyshenkilot": Array [
     Object {
@@ -379,6 +383,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "tila": "tallennettu",
   "yhteyshenkilot": Array [
     Object {

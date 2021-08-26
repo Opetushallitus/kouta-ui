@@ -46,6 +46,7 @@ export const EditValintaperustePage = props => {
   ) : (
     <ReduxForm
       form="valintaperusteForm"
+      mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}
     >

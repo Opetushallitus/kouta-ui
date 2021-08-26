@@ -12,14 +12,16 @@ import updateSoraKuvaus from '#/src/utils/soraKuvaus/updateSoraKuvaus';
 import validateSoraKuvausForm from '#/src/utils/soraKuvaus/validateSoraKuvausForm';
 
 type SoraKuvausFooterProps = {
+  organisaatioOid: string;
   formMode: FormMode;
-  soraKuvaus: SoraKuvausModel;
+  soraKuvaus?: SoraKuvausModel;
   canUpdate?: boolean;
 };
 
 export const SoraKuvausFooter = ({
+  organisaatioOid,
   formMode,
-  soraKuvaus,
+  soraKuvaus = {},
   canUpdate,
 }: SoraKuvausFooterProps) => {
   const queryClient = useQueryClient();
@@ -33,21 +35,27 @@ export const SoraKuvausFooter = ({
       const { id } = await dataSendFn({
         httpClient,
         apiUrls,
-        soraKuvaus: {
-          ...soraKuvaus,
-          ...getSoraKuvausByFormValues(values),
-        },
+        soraKuvaus:
+          formMode === FormMode.CREATE
+            ? {
+                ...getSoraKuvausByFormValues(values),
+                organisaatioOid,
+              }
+            : {
+                ...soraKuvaus,
+                ...getSoraKuvausByFormValues(values),
+              },
       });
 
       if (formMode === FormMode.CREATE) {
         history.push(
-          `/organisaatio/${soraKuvaus.organisaatioOid}/sora-kuvaus/${id}/muokkaus`
+          `/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`
         );
       } else {
         queryClient.invalidateQueries(ENTITY.SORA_KUVAUS);
       }
     },
-    [formMode, soraKuvaus, history, queryClient]
+    [formMode, soraKuvaus, history, queryClient, organisaatioOid]
   );
 
   const save = useSaveForm({

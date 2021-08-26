@@ -49,7 +49,11 @@ export const CreateHakukohdePage = ({
     data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
-    <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
+    <ReduxForm
+      form="hakukohdeForm"
+      mode={FormMode.CREATE}
+      initialValues={initialValues}
+    >
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
         header={<EntityFormHeader entityType={ENTITY.HAKUKOHDE} />}

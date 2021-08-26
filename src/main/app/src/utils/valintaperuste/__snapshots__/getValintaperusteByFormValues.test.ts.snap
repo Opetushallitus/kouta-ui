@@ -111,6 +111,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {
@@ -203,6 +204,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {

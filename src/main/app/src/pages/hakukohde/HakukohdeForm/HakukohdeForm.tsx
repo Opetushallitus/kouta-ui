@@ -6,7 +6,9 @@ import { FormCollapse } from '#/src/components/FormCollapse';
 import { FormCollapseGroup } from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { FormMode, KOULUTUSTYYPPI } from '#/src/constants';
+import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 
@@ -34,8 +36,18 @@ export const HakukohdeForm = ({
 
   const opetustapaKoodiUrit = toteutus?.metadata?.opetus?.opetustapaKoodiUrit;
 
+  const formMode = useFormMode();
+
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      {formMode === FormMode.EDIT && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSection}
+          header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
       <FormCollapse
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}

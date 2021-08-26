@@ -69,7 +69,6 @@ type FormPageProps = {
   header?: React.ReactNode;
   steps?: React.ReactNode;
   footer?: React.ReactNode;
-  hasFooterHomeLink?: boolean;
   readOnly?: boolean;
 };
 
@@ -102,7 +101,7 @@ const FormPage: React.FC<FormPageProps> = ({
         <StepsContainer>
           <Container>{steps}</Container>
         </StepsContainer>
-        <FormContent hasFooter={!!footer}>
+        <FormContent>
           <Container>{children}</Container>
         </FormContent>
         <FooterContainer>

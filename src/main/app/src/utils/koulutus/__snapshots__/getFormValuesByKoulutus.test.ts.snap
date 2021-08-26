@@ -70,6 +70,7 @@ Object {
       },
     ],
   },
+  "organisaatioOid": undefined,
   "osaamisala": null,
   "soraKuvaus": null,
   "tarjoajat": Object {
@@ -167,6 +168,7 @@ Object {
       },
     ],
   },
+  "organisaatioOid": undefined,
   "osaamisala": null,
   "soraKuvaus": Object {
     "value": "1234",

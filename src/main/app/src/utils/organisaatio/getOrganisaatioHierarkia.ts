@@ -3,19 +3,23 @@ import queryString from 'query-string';
 
 const getOrganisaatioHierarkia = async ({
   searchString,
+  oid,
   oids,
   aktiiviset = true,
   suunnitellut = true,
   lakkautetut = false,
+  skipParents = false,
   apiUrls,
   httpClient,
 }) => {
   const params = {
+    ...(oid ? { oid } : {}),
     ...(searchString ? { searchStr: searchString } : {}),
     aktiiviset: aktiiviset ? 'true' : 'false',
     suunnitellut: suunnitellut ? 'true' : 'false',
     lakkautetut: lakkautetut ? 'true' : 'false',
-    ...(_.isArray(oids) && { oidResctrictionList: oids }),
+    skipParents: skipParents ? 'true' : 'false',
+    ...(_.isArray(oids) && { oidRestrictionList: oids }),
   };
 
   const { data } = await httpClient.get(

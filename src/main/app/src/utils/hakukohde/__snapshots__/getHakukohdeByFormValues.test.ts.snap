@@ -126,6 +126,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "organisaatioOid": undefined,
   "pohjakoulutusvaatimusKoodiUrit": Array [
     "vaatimus_1#1",
     "vaatimus_2#1",

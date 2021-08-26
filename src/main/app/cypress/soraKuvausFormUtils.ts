@@ -13,7 +13,7 @@ export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**oid=${organisaatioOid}**`,
     },
     { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
   );

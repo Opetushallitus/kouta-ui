@@ -59,15 +59,19 @@ const CreateSoraKuvausPage = props => {
   }, [soraKuvaus, kieliValinnat]);
 
   return (
-    <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
+    <ReduxForm
+      form="soraKuvausForm"
+      mode={FormMode.CREATE}
+      initialValues={initialValues}
+    >
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
       <FormPage
         header={<EntityFormHeader entityType={ENTITY.SORA_KUVAUS} />}
         steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
         footer={
           <SoraKuvausFooter
+            organisaatioOid={organisaatioOid}
             formMode={FormMode.CREATE}
-            soraKuvaus={{ organisaatioOid }}
           />
         }
       >

@@ -24,6 +24,7 @@ Object {
     "fi": "<h1>Fi lisatiedot</h1>",
     "sv": "<h1>Sv lisatiedot</h1>",
   },
+  "organisaatioOid": undefined,
   "perustiedot": Object {
     "hakutapa": "tapa_1#1",
     "kieliversiot": Array [

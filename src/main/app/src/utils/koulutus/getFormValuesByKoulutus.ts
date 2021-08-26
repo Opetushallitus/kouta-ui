@@ -3,6 +3,7 @@ import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
+import { toSelectValue } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -41,6 +42,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     ePerusteId,
     sorakuvausId,
     externalId,
+    organisaatioOid,
   } = koulutus;
 
   const { koulutusKoodiUri, korkeakoulutusKoodiUrit } = getKoulutusKoodiUrit(
@@ -61,6 +63,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
   } = metadata;
 
   return {
+    organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
     tila,
     kieliversiot: kielivalinta,

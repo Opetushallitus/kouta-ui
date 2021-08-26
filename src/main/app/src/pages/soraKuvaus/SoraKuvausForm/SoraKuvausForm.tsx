@@ -6,7 +6,10 @@ import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import { FormMode } from '#/src/constants';
+import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import getSoraKuvaukset from '#/src/utils/soraKuvaus/getSoraKuvaukset';
 
@@ -25,8 +28,18 @@ const SoraKuvausForm = ({
   const kieliversiot = useFieldValue('kieliversiot');
   const languageTabs = kieliversiot || [];
 
+  const formMode = useFormMode();
+
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      {formMode === FormMode.EDIT && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSection}
+          header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
       <FormCollapse
         section="koulutustyyppi"
         header={t('yleiset.koulutustyyppi')}

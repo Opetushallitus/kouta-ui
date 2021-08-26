@@ -1,7 +1,7 @@
 import { HakuFormValues } from '#/src/types/hakuTypes';
+import { toSelectValue } from '#/src/utils';
+import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
-
-import { getAjankohtaFields } from '../form/aloitusajankohtaHelpers';
 
 export const getFormValuesByHaku = (haku): HakuFormValues => {
   const {
@@ -22,6 +22,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     metadata = {},
     tila,
     externalId,
+    organisaatioOid,
   } = haku;
 
   const {
@@ -31,6 +32,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
   } = metadata;
 
   return {
+    organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
     muokkaaja,
     tila,

@@ -9,8 +9,17 @@ const ReduxFormWrapper = reduxForm({
   enableReinitialize: true,
 })(({ children }) => <>{children}</>);
 
-const ReduxForm = ({ form, disabled = false, children, initialValues }) => {
-  const formCtx = useMemo(() => ({ name: form, disabled }), [form, disabled]);
+const ReduxForm = ({
+  form,
+  mode,
+  disabled = false,
+  children,
+  initialValues,
+}) => {
+  const formCtx = useMemo(
+    () => ({ name: form, disabled, mode }),
+    [form, disabled, mode]
+  );
   return (
     <ReduxFormWrapper form={form} initialValues={initialValues}>
       <FormContext.Provider value={formCtx}>{children}</FormContext.Provider>

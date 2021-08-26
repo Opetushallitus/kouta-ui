@@ -108,6 +108,7 @@ Object {
     "yhteinenToimitusaika": false,
     "yhteinenToimituspaikka": false,
   },
+  "organisaatioOid": undefined,
   "perustiedot": Object {
     "nimi": Object {
       "fi": "Fi nimi",

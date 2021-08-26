@@ -57,6 +57,7 @@ export type LukioDiplomiValues = {
 };
 
 export type ToteutusFormValues = {
+  organisaatioOid?: SelectOption;
   externalId?: string;
   koulutustyyppi: KOULUTUSTYYPPI;
   muokkaaja?: string;

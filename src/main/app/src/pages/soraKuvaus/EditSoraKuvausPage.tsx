@@ -43,6 +43,7 @@ const EditSoraKuvausPage = props => {
   return (
     <ReduxForm
       form="soraKuvausForm"
+      mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}
     >
@@ -58,6 +59,7 @@ const EditSoraKuvausPage = props => {
         steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
         footer={
           <SoraKuvausFooter
+            organisaatioOid={organisaatioOid}
             formMode={FormMode.EDIT}
             soraKuvaus={soraKuvaus}
             canUpdate={canUpdate}

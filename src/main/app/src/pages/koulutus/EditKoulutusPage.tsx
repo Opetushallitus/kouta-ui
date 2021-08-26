@@ -59,6 +59,7 @@ const EditKoulutusPage = props => {
   ) : (
     <ReduxForm
       form={FORM_NAME}
+      mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}
     >

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { toSelectValue } from '#/src/utils';
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 
 const parseSisalto = sisalto => {
@@ -33,6 +34,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     valintakokeet,
     esikatselu = false,
     externalId,
+    organisaatioOid,
   } = valintaperuste;
 
   const {
@@ -45,6 +47,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
   } = metadata;
 
   return {
+    organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
     tila,
     perustiedot: {

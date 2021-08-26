@@ -98,7 +98,6 @@ export const OppilaitosPage = ({
   );
 
   const stepsEnabled = !oppilaitos;
-  const showArkistoituTilaOption = !!oppilaitos;
 
   return isFetching ? (
     <FullSpin />
@@ -131,7 +130,7 @@ export const OppilaitosPage = ({
             organisaatioOid={organisaatioOid}
             organisaatio={organisaatio}
             steps={stepsEnabled}
-            showArkistoituTilaOption={showArkistoituTilaOption}
+            oppilaitos={oppilaitos}
           />
         )}
       </FormPage>

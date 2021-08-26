@@ -49,7 +49,6 @@ type ToteutusFormProps = {
   toteutus?: ToteutusModel;
   onAttachHakukohde?: ({ hakuOid }) => void;
   koulutustyyppi?: KOULUTUSTYYPPI;
-  showArkistoituTilaOption?: boolean;
   onSelectBase?: (pohjavalinta: PohjaValinta) => void;
 };
 
@@ -61,7 +60,6 @@ const ToteutusForm = ({
   toteutus,
   onAttachHakukohde,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  showArkistoituTilaOption = true,
   onSelectBase,
 }: ToteutusFormProps) => {
   const { t } = useTranslation();
@@ -232,8 +230,8 @@ const ToteutusForm = ({
           section="tila"
           header={t('toteutuslomake.toteutuksenTila')}
           Component={JulkaisutilaField}
+          entity={toteutus}
           {...getTestIdProps('tilaSection')}
-          showArkistoitu={showArkistoituTilaOption}
         />
         {_fp.isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua ? (
           <FormCollapse

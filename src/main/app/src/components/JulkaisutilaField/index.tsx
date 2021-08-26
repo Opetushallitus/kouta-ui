@@ -47,12 +47,14 @@ const Label = ({ tila, t }) => {
 };
 
 export const JulkaisutilaField = ({
+  entity,
   disabled,
   name,
   label: labelProp,
-  showArkistoitu = true,
   showLabel = true,
 }) => {
+  const savedTila = entity?.tila;
+
   const { t } = useTranslation();
 
   const label = showLabel
@@ -71,11 +73,13 @@ export const JulkaisutilaField = ({
       <Radio value={JULKAISUTILA.JULKAISTU}>
         <Label tila={JULKAISUTILA.JULKAISTU} t={t} />
       </Radio>
-      {showArkistoitu && (
-        <Radio value={JULKAISUTILA.ARKISTOITU}>
-          <Label tila={JULKAISUTILA.ARKISTOITU} t={t} />
-        </Radio>
-      )}
+      {/* savedTila on undefined kun ollaan luomassa entiteettiä */}
+      {!savedTila ||
+        (savedTila !== JULKAISUTILA.TALLENNETTU && (
+          <Radio value={JULKAISUTILA.ARKISTOITU}>
+            <Label tila={JULKAISUTILA.ARKISTOITU} t={t} />
+          </Radio>
+        ))}
     </Field>
   );
 };

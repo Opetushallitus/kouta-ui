@@ -80,6 +80,7 @@ export const EditValintaperustePage = props => {
             canSelectBase={false}
             canEditTyyppi={false}
             organisaatioOid={organisaatioOid}
+            valintaperuste={valintaperuste}
           />
         )}
       </FormPage>

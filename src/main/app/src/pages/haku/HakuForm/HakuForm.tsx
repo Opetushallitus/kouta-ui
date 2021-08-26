@@ -34,7 +34,6 @@ const HakuForm = ({
   onAttachHakukohde = undefined,
   steps = false,
   haku: hakuProp = null,
-  showArkistoituTilaOption = true,
   onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
@@ -129,7 +128,7 @@ const HakuForm = ({
           section="tila"
           header={t('hakulomake.haunTila')}
           Component={JulkaisutilaField}
-          showArkistoitu={showArkistoituTilaOption}
+          entity={hakuProp}
         />
 
         {_fp.isFunction(onAttachHakukohde) ? (

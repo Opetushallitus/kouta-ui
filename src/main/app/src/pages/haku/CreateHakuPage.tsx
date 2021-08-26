@@ -77,7 +77,6 @@ const CreateHakuPage = props => {
           steps
           organisaatioOid={organisaatioOid}
           onSelectBase={selectBase}
-          showArkistoituTilaOption={false}
         />
       </FormPage>
     </ReduxForm>

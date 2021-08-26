@@ -87,7 +87,6 @@ export const CreateHakukohdePage = ({
               toteutus={toteutus}
               tarjoajat={data.tarjoajat}
               koulutustyyppi={koulutustyyppi}
-              showArkistoituTilaOption={false}
             />
           </>
         )}

@@ -92,7 +92,6 @@ export const CreateValintaperustePage = props => {
           steps
           organisaatioOid={luojaOrganisaatioOid}
           onSelectBase={selectBase}
-          showArkistoituTilaOption={false}
         />
       </FormPage>
     </ReduxForm>

@@ -593,7 +593,11 @@
     "hakukohteenLinja": "Hakukohteen linja",
     "valitseHakukohteenLinja": "Valitse hakukohteen linja",
     "lukionYleislinja": "Yleislinja",
-    "alinHyvaksyttyKeskiarvo": "Alin hyväksytty keskiarvo"
+    "alinHyvaksyttyKeskiarvo": "Alin hyväksytty keskiarvo",
+    "painotetutArvosanat": "Painotetut oppiaineet keskiarvoa laskettaessa",
+    "oppiaine": "Oppiaine",
+    "painokerroin": "Painokerroin",
+    "lisaaPainotettavaOppiaine": "Lisää painotettava oppiaine"
   },
   "valintaperustelomake": {
     "valintaperusteenPerustiedot": "Valintaperusteen perustiedot",

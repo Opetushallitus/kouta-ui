@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
+import { Field, FieldArray } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
@@ -21,6 +21,8 @@ import {
   arrayToTranslationObject,
   getLanguageValue,
 } from '#/src/utils/languageUtils';
+
+import PainotetutArvosanatFields from './PainotetutArvosanatFields';
 
 type Props = {
   name: TranslatedField;
@@ -171,6 +173,16 @@ export const HakukohteenLinjaSection = ({
               label={t('yleiset.lisatietoa')}
             />
           </Box>
+
+          <FieldGroup
+            title={t('hakukohdelomake.painotetutArvosanat')}
+            {...getTestIdProps('painotetutArvosanat')}
+          >
+            <FieldArray
+              name={`${name}.painotetutArvosanat`}
+              component={PainotetutArvosanatFields}
+            />
+          </FieldGroup>
         </FieldGroup>
       )}
     </>

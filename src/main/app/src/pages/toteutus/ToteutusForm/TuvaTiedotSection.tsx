@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
 import useKoodi from '#/src/hooks/useKoodi';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
@@ -15,6 +16,8 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
   const { koodi: laajuusKoodi } = useKoodi(
     koulutus.metadata.opintojenLaajuusKoodiUri
   );
+
+  const userLanguage = useUserLanguage();
 
   return (
     <>
@@ -30,7 +33,7 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
         <Box>
           <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
             <Input
-              value={getKoodiNimiTranslation(laajuusKoodi) || ''}
+              value={getKoodiNimiTranslation(laajuusKoodi, userLanguage) || ''}
               {...getTestIdProps('laajuus')}
             />
           </FormControl>

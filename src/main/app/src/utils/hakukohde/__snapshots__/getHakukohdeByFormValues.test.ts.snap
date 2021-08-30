@@ -74,6 +74,15 @@ Object {
         "fi": "<p>Fi lisatietoa</p>",
         "sv": "<p>Sv lisatietoa</p>",
       },
+      "painotetutArvosanat": Array [
+        Object {
+          "painokerroin": "1.2",
+          "painotettuOppiaine": Object {
+            "label": "A1 englanti",
+            "value": "kieli_en#1",
+          },
+        },
+      ],
     },
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": Object {

@@ -29,13 +29,14 @@ const PainotetutArvosanatFields = ({ fields, toteutus }) => {
     <>
       <FormControl>
         {fields.map((hakukohteenLinja, index) => (
-          <Box display="flex" width={0.5} key={index} marginTop={2}>
-            <Box
-              width={'70%'}
-              flexShrink={0}
-              marginRight={2}
-              {...getTestIdProps('painotettuOppiaine')}
-            >
+          <Box
+            display="flex"
+            width={0.5}
+            key={index}
+            marginTop={2}
+            {...getTestIdProps(`painotettuOppiaine-${index}`)}
+          >
+            <Box width={'70%'} flexShrink={0} marginRight={2}>
               <Field
                 component={FormFieldSelect}
                 name={`${hakukohteenLinja}.painotettuOppiaine`}

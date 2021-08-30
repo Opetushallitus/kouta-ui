@@ -39,13 +39,15 @@ const getHakukohteenLinja = values => {
   if (!values?.hakukohteenLinja) {
     return null;
   }
-  const { alinHyvaksyttyKeskiarvo, linja, lisatietoa } =
+  const { alinHyvaksyttyKeskiarvo, linja, lisatietoa, painotetutArvosanat } =
     values.hakukohteenLinja;
+
   return {
     linja: linja !== LUKIO_YLEISLINJA ? linja : null,
     alinHyvaksyttyKeskiarvo:
       alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo),
     lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
+    painotetutArvosanat,
   };
 };
 

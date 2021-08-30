@@ -31,10 +31,12 @@ const getHakukohteenLinjaValues = ({
   linja,
   alinHyvaksyttyKeskiarvo,
   lisatietoa,
+  painotetutArvosanat,
 }) => ({
   linja: !linja ? LUKIO_YLEISLINJA : linja,
   alinHyvaksyttyKeskiarvo: parseKeskiarvo(alinHyvaksyttyKeskiarvo),
   lisatietoa: _.mapValues(lisatietoa, parseEditorState),
+  painotetutArvosanat,
 });
 
 export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {

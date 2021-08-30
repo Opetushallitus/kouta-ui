@@ -1,4 +1,5 @@
 import { getKieletForOppiainevalikoima } from '#/src/utils/hakukohde/getKieletForOppiainevalikoima';
+import { removeKieletFromKoodistoOppiaineet } from '#/src/utils/hakukohde/getKieletForOppiainevalikoima';
 
 test('map one lukio language with its improved label', () => {
   const lukionKielivalikoima = {
@@ -130,6 +131,58 @@ test('maps languages with their labels', () => {
   ];
 
   expect(getKieletForOppiainevalikoima(lukionKielivalikoima, kielet)).toEqual(
+    result
+  );
+});
+
+test('remove kielet from oppiaineet fetched from koodisto', () => {
+  const oppiaineetFromKoodisto = [
+    {
+      value: 'oppiaineetyleissivistava_a1#1',
+      label: 'A1-kieli',
+    },
+    {
+      value: 'oppiaineetyleissivistava_hi#1',
+      label: 'Historia',
+    },
+    {
+      value: 'oppiaineetyleissivistava_b22#1',
+      label: 'B2-kieli',
+    },
+  ];
+
+  const result = [
+    {
+      value: 'oppiaineetyleissivistava_hi#1',
+      label: 'Historia',
+    },
+  ];
+
+  expect(removeKieletFromKoodistoOppiaineet(oppiaineetFromKoodisto)).toEqual(
+    result
+  );
+});
+
+test('does not remove Äidinkieli ja kirjallisuus from oppiaineet', () => {
+  const oppiaineetFromKoodisto = [
+    {
+      value: 'oppiaineetyleissivistava_ai#1',
+      label: 'Äidinkieli ja kirjallisuus',
+    },
+    {
+      value: 'oppiaineetyleissivistava_b22#1',
+      label: 'B2-kieli',
+    },
+  ];
+
+  const result = [
+    {
+      value: 'oppiaineetyleissivistava_ai#1',
+      label: 'Äidinkieli ja kirjallisuus',
+    },
+  ];
+
+  expect(removeKieletFromKoodistoOppiaineet(oppiaineetFromKoodisto)).toEqual(
     result
   );
 });

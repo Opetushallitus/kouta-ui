@@ -26,3 +26,7 @@ export const getKieletForOppiainevalikoima = (
 
   return kielivalikoimaWithNewLabels;
 };
+
+export const removeKieletFromKoodistoOppiaineet = oppiaineet => {
+  return oppiaineet.filter(oppiaine => !oppiaine.label.match(/-kieli/));
+};

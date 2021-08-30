@@ -181,6 +181,7 @@ export const HakukohteenLinjaSection = ({
             <FieldArray
               name={`${name}.painotetutArvosanat`}
               component={PainotetutArvosanatFields}
+              toteutus={toteutus}
             />
           </FieldGroup>
         </FieldGroup>

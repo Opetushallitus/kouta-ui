@@ -1,9 +1,49 @@
-import { getKieletForOppiainevalikoima } from '#/src/utils/hakukohde/getKieletForOppiainevalikoima';
-import { removeKieletFromKoodistoOppiaineet } from '#/src/utils/hakukohde/getKieletForOppiainevalikoima';
+import {
+  getKieletForOppiainevalikoima,
+  removeKieletFromKoodistoOppiaineet,
+} from '#/src/utils/hakukohde/getPainotetutOppiaineetOptions';
 
 test('map one lukio language with its improved label', () => {
   const lukionKielivalikoima = {
     A1Kielet: ['kieli_en#1'],
+  };
+
+  const kielet = [
+    {
+      value: 'kieli_de#1',
+      label: 'saksa',
+    },
+    {
+      value: 'kieli_en#1',
+      label: 'englanti',
+    },
+    {
+      value: 'kieli_es#1',
+      label: 'espanja',
+    },
+  ];
+
+  const result = [
+    {
+      value: 'kieli_en#1',
+      label: 'A1 englanti',
+    },
+  ];
+
+  expect(getKieletForOppiainevalikoima(lukionKielivalikoima, kielet)).toEqual(
+    result
+  );
+});
+
+test('creates labels for lukiokielet for painotetut arvosanat', () => {
+  const lukionKielivalikoima = {
+    A1Kielet: ['kieli_en#1', 'kieli_sv#1'],
+    A2Kielet: ['kieli_en#1', 'kieli_sv#1'],
+    B1Kielet: ['kieli_sv#1'],
+    B2Kielet: ['kieli_de#1'],
+    B3Kielet: ['kieli_de#1'],
+    aidinkielet: [],
+    muutKielet: [],
   };
 
   const kielet = [
@@ -42,6 +82,30 @@ test('map one lukio language with its improved label', () => {
       value: 'kieli_en#1',
       label: 'A1 englanti',
     },
+    {
+      value: 'kieli_sv#1',
+      label: 'A1 ruotsi',
+    },
+    {
+      value: 'kieli_en#1',
+      label: 'A2 englanti',
+    },
+    {
+      value: 'kieli_sv#1',
+      label: 'A2 ruotsi',
+    },
+    {
+      value: 'kieli_sv#1',
+      label: 'B1 ruotsi',
+    },
+    {
+      value: 'kieli_de#1',
+      label: 'B2 saksa',
+    },
+    {
+      value: 'kieli_de#1',
+      label: 'B3 saksa',
+    },
   ];
 
   expect(getKieletForOppiainevalikoima(lukionKielivalikoima, kielet)).toEqual(
@@ -49,7 +113,7 @@ test('map one lukio language with its improved label', () => {
   );
 });
 
-test('maps languages with their labels', () => {
+test('leaves out äidinkielet and muut kielet from painotetut arvosanat language selection', () => {
   const lukionKielivalikoima = {
     A1Kielet: ['kieli_en#1', 'kieli_sv#1'],
     A2Kielet: ['kieli_en#1', 'kieli_sv#1'],
@@ -119,14 +183,6 @@ test('maps languages with their labels', () => {
     {
       value: 'kieli_de#1',
       label: 'B3 saksa',
-    },
-    {
-      value: 'kieli_ru#1',
-      label: 'venäjä',
-    },
-    {
-      value: 'kieli_et#1',
-      label: 'viro',
     },
   ];
 

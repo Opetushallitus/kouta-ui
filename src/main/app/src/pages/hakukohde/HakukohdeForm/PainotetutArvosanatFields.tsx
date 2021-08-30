@@ -8,12 +8,22 @@ import { FormFieldSelect, FormFieldInput } from '#/src/components/formFields';
 import { Box, FormControl } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
+import { getPainotetutOppiaineetOptions } from '#/src/utils/hakukohde/getPainotetutOppiaineetOptions';
 
-const PainotetutArvosanatFields = ({ fields }) => {
+const PainotetutArvosanatFields = ({ fields, toteutus }) => {
   const { t } = useTranslation();
   const { options } = useKoodistoOptions({
     koodisto: 'oppiaineetyleissivistava',
   });
+  const kieliOptions = useKoodistoOptions({ koodisto: 'kieli' }).options;
+
+  const lukionKielivalikoima = toteutus?.metadata?.kielivalikoima;
+
+  const painotetutOppiaineetOptions = getPainotetutOppiaineetOptions(
+    options,
+    kieliOptions,
+    lukionKielivalikoima
+  );
 
   return (
     <>
@@ -29,7 +39,7 @@ const PainotetutArvosanatFields = ({ fields }) => {
               <Field
                 component={FormFieldSelect}
                 name={`${hakukohteenLinja}.painotettuOppiaine`}
-                options={options}
+                options={painotetutOppiaineetOptions}
                 label={t('hakukohdelomake.oppiaine')}
               />
             </Box>

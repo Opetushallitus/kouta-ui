@@ -1,3 +1,17 @@
+export const getPainotetutOppiaineetOptions = (
+  options,
+  kieliOptions,
+  lukionKielivalikoima
+) => {
+  const lukionKielet = getKieletForOppiainevalikoima(
+    lukionKielivalikoima,
+    kieliOptions
+  );
+
+  const oppiaineetWithoutKielet = removeKieletFromKoodistoOppiaineet(options);
+  return [...lukionKielet, ...oppiaineetWithoutKielet];
+};
+
 export const getKieletForOppiainevalikoima = (
   kielivalikoima,
   kieletFromKoodisto
@@ -12,9 +26,9 @@ export const getKieletForOppiainevalikoima = (
         return k === koodistoKieli.value;
       });
 
-      if (foundKieli) {
-        const kieliPrefix = kieli.match(/^[A-Z]\d/g);
+      const kieliPrefix = kieli.match(/^[A-Z]\d/g);
 
+      if (foundKieli && kieliPrefix) {
         const kieliLabel = kieliPrefix
           ? `${kieliPrefix} ${foundKieli.label}`
           : foundKieli.label;

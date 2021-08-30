@@ -12,15 +12,17 @@ export const getKieletForOppiainevalikoima = (
         return k === koodistoKieli.value;
       });
 
-      const kieliPrefix = kieli.match(/^[A-Z]\d/g);
+      if (foundKieli) {
+        const kieliPrefix = kieli.match(/^[A-Z]\d/g);
 
-      const kieliLabel = kieliPrefix
-        ? `${kieliPrefix} ${foundKieli.label}`
-        : foundKieli.label;
-      kielivalikoimaWithNewLabels.push({
-        ...foundKieli,
-        label: kieliLabel,
-      });
+        const kieliLabel = kieliPrefix
+          ? `${kieliPrefix} ${foundKieli.label}`
+          : foundKieli.label;
+        kielivalikoimaWithNewLabels.push({
+          ...foundKieli,
+          label: kieliLabel,
+        });
+      }
     }
   }
 

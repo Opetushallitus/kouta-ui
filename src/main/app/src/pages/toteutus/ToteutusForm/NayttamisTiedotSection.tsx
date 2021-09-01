@@ -18,12 +18,20 @@ import searchAmmattinimikkeetByTerm from '#/src/utils/api/searchAmmattinimikkeet
 import searchAvainsanatByTerm from '#/src/utils/api/searchAvainsanatByTerm';
 import { memoize } from '#/src/utils/memoize';
 
+const notTooLong = (v, maxItems) => {
+  if (_.isArray(v)) {
+    return v.length <= maxItems;
+  } else {
+    return true;
+  }
+};
+
 const CreatableField = createFormFieldComponent(
   AsyncCreatableSelect,
   ({ input: { onChange, ...input }, maxItems, ...props }) => ({
     ...input,
     onBlur: _.noop,
-    onChange: v => _.isArray(v) && v.length <= maxItems && onChange(v),
+    onChange: v => notTooLong(v, maxItems) && onChange(v),
     maxItems,
     ...props,
   })

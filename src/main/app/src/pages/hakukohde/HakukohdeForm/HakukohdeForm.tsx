@@ -29,7 +29,7 @@ export const HakukohdeForm = ({
   toteutus,
   tarjoajat,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  showArkistoituTilaOption = true,
+  hakukohde = undefined,
 }) => {
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
@@ -128,7 +128,7 @@ export const HakukohdeForm = ({
         section="tila"
         header={t('hakukohdelomake.hakukohteenTila')}
         Component={JulkaisutilaField}
-        showArkistoitu={showArkistoituTilaOption}
+        entity={hakukohde}
       />
     </FormCollapseGroup>
   );

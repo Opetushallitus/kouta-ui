@@ -23,20 +23,20 @@ import { ValintatapaSection } from './ValintatapaSection';
 
 type ValintaperusteFormProps = {
   organisaatioOid: string;
+  valintaperuste: any;
   steps?: boolean;
   canEditTyyppi?: boolean;
   canSelectBase?: boolean;
   onSelectBase?: (pohjavalinta: PohjaValinta) => void;
-  showArkistoituTilaOption?: boolean;
 };
 
 export const ValintaperusteForm = ({
   organisaatioOid,
+  valintaperuste,
   steps = true,
   canEditTyyppi = true,
   canSelectBase = true,
   onSelectBase,
-  showArkistoituTilaOption = true,
 }: ValintaperusteFormProps) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('perustiedot.kieliversiot');
@@ -124,7 +124,7 @@ export const ValintaperusteForm = ({
             section="tila"
             header={t('valintaperustelomake.valintaperusteenTila')}
             Component={JulkaisutilaField}
-            showArkistoitu={showArkistoituTilaOption}
+            entity={valintaperuste}
           />
         </>
       )}

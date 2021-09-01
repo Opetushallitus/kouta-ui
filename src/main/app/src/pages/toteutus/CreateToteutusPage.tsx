@@ -133,7 +133,6 @@ const CreateToteutusPage = props => {
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
             onSelectBase={selectBase}
-            showArkistoituTilaOption={false}
           />
         ) : (
           <Spin center />

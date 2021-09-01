@@ -19,10 +19,10 @@ import { TiedotSection } from './TiedotSection';
 const SoraKuvausForm = ({
   steps = false,
   canEditKoulutustyyppi = true,
+  soraKuvaus = undefined,
   canSelectBase = true,
   organisaatioOid,
   onSelectBase = () => {},
-  showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
@@ -71,7 +71,7 @@ const SoraKuvausForm = ({
         section="tila"
         header={t('soraKuvauslomake.soraKuvauksenTila')}
         Component={JulkaisutilaField}
-        showArkistoitu={showArkistoituTilaOption}
+        entity={soraKuvaus}
       />
     </FormCollapseGroup>
   );

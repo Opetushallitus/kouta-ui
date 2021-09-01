@@ -142,9 +142,9 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         },
         painotetutArvosanat: [
           {
-            painotettuOppiaine: {
-              value: 'kieli_en#1',
-              label: 'A1 englanti',
+            koodiUrit: {
+              kieli: 'kieli_en#1',
+              oppiaine: 'oppiaineetyleissivistava_a1#1',
             },
             painokerroin: '1.2',
           },

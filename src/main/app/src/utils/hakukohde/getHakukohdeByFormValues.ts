@@ -47,7 +47,12 @@ const getHakukohteenLinja = values => {
     alinHyvaksyttyKeskiarvo:
       alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo),
     lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
-    painotetutArvosanat,
+    painotetutArvosanat: painotetutArvosanat.map(arvosana => {
+      return {
+        koodiUrit: arvosana.koodiUrit,
+        painokerroin: arvosana.painokerroin,
+      };
+    }),
   };
 };
 

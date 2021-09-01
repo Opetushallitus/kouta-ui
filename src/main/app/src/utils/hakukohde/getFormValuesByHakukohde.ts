@@ -36,7 +36,14 @@ const getHakukohteenLinjaValues = ({
   linja: !linja ? LUKIO_YLEISLINJA : linja,
   alinHyvaksyttyKeskiarvo: parseKeskiarvo(alinHyvaksyttyKeskiarvo),
   lisatietoa: _.mapValues(lisatietoa, parseEditorState),
-  painotetutArvosanat,
+  painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
+    return {
+      painotettuOppiaine: {
+        value: arvosana.koodiUrit,
+      },
+      painokerroin: arvosana.painokerroin,
+    };
+  }),
 });
 
 export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {

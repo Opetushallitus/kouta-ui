@@ -42,9 +42,9 @@ Object {
     },
     "painotetutArvosanat": Array [
       Object {
-        "painokerroin": "1.2",
+        "painokerroin": 1.2,
         "painotettuOppiaine": Object {
-          "value": Object {
+          "koodiUrit": Object {
             "kieli": "kieli_en#1",
             "oppiaine": "oppiaineetyleissivistava_a1#1",
           },

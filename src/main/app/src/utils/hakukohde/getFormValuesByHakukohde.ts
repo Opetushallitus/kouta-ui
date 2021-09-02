@@ -39,7 +39,7 @@ const getHakukohteenLinjaValues = ({
   painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
     return {
       painotettuOppiaine: {
-        value: arvosana.koodiUrit,
+        koodiUrit: arvosana.koodiUrit,
       },
       painokerroin: arvosana.painokerroin,
     };

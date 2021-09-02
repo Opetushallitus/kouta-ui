@@ -146,7 +146,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
               kieli: 'kieli_en#1',
               oppiaine: 'oppiaineetyleissivistava_a1#1',
             },
-            painokerroin: '1.2',
+            painokerroin: 1.2,
           },
         ],
       },

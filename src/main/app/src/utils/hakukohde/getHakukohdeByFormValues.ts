@@ -49,7 +49,7 @@ const getHakukohteenLinja = values => {
     lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
     painotetutArvosanat: painotetutArvosanat.map(arvosana => {
       return {
-        koodiUrit: arvosana.koodiUrit,
+        koodiUrit: arvosana.painotettuOppiaine.koodiUrit,
         painokerroin: arvosana.painokerroin
           ? parseFloatComma(arvosana.painokerroin)
           : null,

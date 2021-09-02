@@ -189,9 +189,13 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
       },
       painotetutArvosanat: [
         {
-          koodiUrit: {
-            oppiaine: 'oppiaineetyleissivistava_a1#1',
-            kieli: 'kieli_en#1',
+          painotettuOppiaine: {
+            koodiUrit: {
+              oppiaine: 'oppiaineetyleissivistava_a1#1',
+              kieli: 'kieli_en#1',
+            },
+            value: 'A1 englanti',
+            label: 'A1 englanti',
           },
           painokerroin: '1.2',
         },

@@ -13300,5 +13300,47 @@
       ],
       "status": 200
     }
+  },
+  {
+    "method": "GET",
+    "url": "https://localhost:3000/koodisto-service/rest/json/opintojenlaajuus/koodi?onlyValidKoodis=true",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "opintojenlaajuus_38",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_38",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "38",
+          "paivitysPvm": "2021-07-07",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2021-07-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "38 viikkoa",
+              "kuvaus": "Tuva laajuus",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
   }
 ]

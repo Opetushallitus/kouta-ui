@@ -37,6 +37,8 @@ import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
 import { TiedotSection } from './TiedotSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
+import { TuvaKuvausSection } from './TuvaKuvausSection';
+import { TuvaTiedotSection } from './TuvaTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
@@ -112,13 +114,32 @@ const ToteutusForm = ({
           header={t('yleiset.kieliversiot')}
           Component={KieliversiotFields}
         />
-        <FormCollapse
-          section="tiedot"
-          header={t('toteutuslomake.toteutuksenTiedot')}
-          languages={languages}
-          Component={TiedotSection}
-          koulutustyyppi={koulutustyyppi}
-        />
+        {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={TiedotSection}
+            koulutustyyppi={koulutustyyppi}
+          />
+        )}
+        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={TuvaTiedotSection}
+            koulutus={koulutus}
+          />
+        )}
+        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+          <FormCollapse
+            section="kuvaus"
+            header={t('toteutuslomake.toteutuksenKuvaus')}
+            languages={languages}
+            Component={TuvaKuvausSection}
+          />
+        )}
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
             section="lukiolinjat"
@@ -199,9 +220,11 @@ const ToteutusForm = ({
           languages={languages}
           organisaatioOid={organisaatioOid}
         />
-        {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
-          koulutustyyppi
-        ) && (
+        {[
+          KOULUTUSTYYPPI.TUTKINNON_OSA,
+          KOULUTUSTYYPPI.OSAAMISALA,
+          KOULUTUSTYYPPI.TUVA,
+        ].includes(koulutustyyppi) && (
           <>
             <FormCollapse
               section="hakeutumisTaiIlmoittautumistapa"
@@ -209,15 +232,16 @@ const ToteutusForm = ({
               Component={HakeutumisTaiIlmoittautumistapaSection}
               languages={languages}
             />
-            {hakeutumisTaiIlmoittautumistapa === MUU && (
-              <FormCollapse
-                section="soraKuvaus"
-                header={t('yleiset.soraKuvaus')}
-                Component={SoraKuvausSection}
-                organisaatioOid={organisaatioOid}
-                languages={languages}
-              />
-            )}
+            {hakeutumisTaiIlmoittautumistapa === MUU &&
+              koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+                <FormCollapse
+                  section="soraKuvaus"
+                  header={t('yleiset.soraKuvaus')}
+                  Component={SoraKuvausSection}
+                  organisaatioOid={organisaatioOid}
+                  languages={languages}
+                />
+              )}
           </>
         )}
         <FormCollapse

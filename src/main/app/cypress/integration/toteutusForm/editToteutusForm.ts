@@ -133,6 +133,19 @@ export const editToteutusForm = () => {
     })
   );
 
+  it(
+    'should be able to edit tuva toteutus',
+    mutationTest(() => {
+      prepareTest('tuva');
+
+      fillKieliversiotSection();
+
+      cy.findByTestId('hakukohteetSection').should('exist');
+
+      tallenna();
+    })
+  );
+
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');
     assertNoUnsavedChangesDialog();

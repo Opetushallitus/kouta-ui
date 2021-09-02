@@ -374,7 +374,7 @@ export const createKoulutusForm = () => {
         getByTestId('tuvaOpintojenlaajuusSelect')
           .click()
           .within(() => {
-            getSelectOption('Vähintään 53 op').click();
+            getSelectOption('38 viikkoa').click();
           });
 
         getByTestId('nimiInput').within(() => {

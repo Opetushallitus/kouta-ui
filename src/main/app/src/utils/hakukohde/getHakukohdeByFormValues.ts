@@ -50,7 +50,9 @@ const getHakukohteenLinja = values => {
     painotetutArvosanat: painotetutArvosanat.map(arvosana => {
       return {
         koodiUrit: arvosana.koodiUrit,
-        painokerroin: arvosana.painokerroin,
+        painokerroin: arvosana.painokerroin
+          ? parseFloatComma(arvosana.painokerroin)
+          : null,
       };
     }),
   };

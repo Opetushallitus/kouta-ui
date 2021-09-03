@@ -36,16 +36,18 @@ function getAloituspaikat(values: HakukohdeFormValues) {
 }
 
 function getPainotetutArvosanatData(arvosanat) {
-  return (arvosanat || []).map(arvosana => {
-    return {
-      koodiUrit: arvosana.painotettuOppiaine
-        ? arvosana.painotettuOppiaine.koodiUrit
-        : null,
-      painokerroin: arvosana.painokerroin
-        ? parseFloatComma(arvosana.painokerroin)
-        : null,
-    };
-  });
+  return (arvosanat || [])
+    .map(arvosana => {
+      return {
+        koodiUrit: arvosana.painotettuOppiaine
+          ? arvosana.painotettuOppiaine.koodiUrit
+          : null,
+        painokerroin: arvosana.painokerroin
+          ? parseFloatComma(arvosana.painokerroin)
+          : null,
+      };
+    })
+    .filter(arvosana => !_fp.isEmpty(arvosana));
 }
 
 const getHakukohteenLinja = values => {

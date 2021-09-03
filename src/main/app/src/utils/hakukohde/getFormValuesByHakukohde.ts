@@ -40,10 +40,12 @@ const getHakukohteenLinjaValues = ({
   painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
     return {
       painotettuOppiaine: {
-        value: concatKoodiUris(
-          arvosana.koodiUrit.oppiaine,
-          arvosana.koodiUrit.kieli
-        ),
+        value: arvosana.koodiurit
+          ? concatKoodiUris(
+              arvosana.koodiUrit.oppiaine,
+              arvosana.koodiUrit.kieli
+            )
+          : '',
         koodiUrit: arvosana.koodiUrit,
       },
       painokerroin: arvosana.painokerroin,

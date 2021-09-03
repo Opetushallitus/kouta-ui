@@ -41,7 +41,7 @@ test('map one lukio language with its improved label', () => {
 
   const result = [
     {
-      value: 'A1 englanti',
+      value: 'oppiaineetyleissivistava_a1#1/kieli_en#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a1#1',
         kieli: 'kieli_en#1',
@@ -114,7 +114,7 @@ test('creates labels for lukiokielet for painotetut arvosanat', () => {
 
   const result = [
     {
-      value: 'A1 englanti',
+      value: 'oppiaineetyleissivistava_a1#1/kieli_en#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a1#1',
         kieli: 'kieli_en#1',
@@ -122,7 +122,7 @@ test('creates labels for lukiokielet for painotetut arvosanat', () => {
       label: 'A1 englanti',
     },
     {
-      value: 'A1 ruotsi',
+      value: 'oppiaineetyleissivistava_a1#1/kieli_sv#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a1#1',
         kieli: 'kieli_sv#1',
@@ -130,7 +130,7 @@ test('creates labels for lukiokielet for painotetut arvosanat', () => {
       label: 'A1 ruotsi',
     },
     {
-      value: 'A2 ruotsi',
+      value: 'oppiaineetyleissivistava_a2#1/kieli_sv#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a2#1',
         kieli: 'kieli_sv#1',
@@ -138,7 +138,7 @@ test('creates labels for lukiokielet for painotetut arvosanat', () => {
       label: 'A2 ruotsi',
     },
     {
-      value: 'B2 saksa',
+      value: 'oppiaineetyleissivistava_b22#1/kieli_de#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_b22#1',
         kieli: 'kieli_de#1',
@@ -211,7 +211,7 @@ test('leaves out äidinkielet and muut kielet from painotetut arvosanat language
 
   const result = [
     {
-      value: 'A1 englanti',
+      value: 'oppiaineetyleissivistava_a1#1/kieli_en#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a1#1',
         kieli: 'kieli_en#1',
@@ -219,7 +219,7 @@ test('leaves out äidinkielet and muut kielet from painotetut arvosanat language
       label: 'A1 englanti',
     },
     {
-      value: 'A2 englanti',
+      value: 'oppiaineetyleissivistava_a2#1/kieli_en#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a2#1',
         kieli: 'kieli_en#1',
@@ -227,7 +227,7 @@ test('leaves out äidinkielet and muut kielet from painotetut arvosanat language
       label: 'A2 englanti',
     },
     {
-      value: 'A2 ruotsi',
+      value: 'oppiaineetyleissivistava_a2#1/kieli_sv#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a2#1',
         kieli: 'kieli_sv#1',
@@ -235,7 +235,7 @@ test('leaves out äidinkielet and muut kielet from painotetut arvosanat language
       label: 'A2 ruotsi',
     },
     {
-      value: 'B1 ruotsi',
+      value: 'oppiaineetyleissivistava_b1#1/kieli_sv#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_b1#1',
         kieli: 'kieli_sv#1',
@@ -243,7 +243,7 @@ test('leaves out äidinkielet and muut kielet from painotetut arvosanat language
       label: 'B1 ruotsi',
     },
     {
-      value: 'B2 saksa',
+      value: 'oppiaineetyleissivistava_b22#1/kieli_de#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_b22#1',
         kieli: 'kieli_de#1',
@@ -279,7 +279,7 @@ test('remove kielet from oppiaineet fetched from koodisto', () => {
 
   const result = [
     {
-      value: 'Historia',
+      value: 'oppiaineetyleissivistava_hi#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_hi#1',
       },
@@ -306,7 +306,7 @@ test('does not remove Äidinkieli ja kirjallisuus from oppiaineet', () => {
 
   const result = [
     {
-      value: 'Äidinkieli ja kirjallisuus',
+      value: 'oppiaineetyleissivistava_ai#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_ai#1',
       },
@@ -378,7 +378,7 @@ test('', () => {
 
   const result = [
     {
-      value: 'A1 englanti',
+      value: 'oppiaineetyleissivistava_a1#1/kieli_en#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a1#1',
         kieli: 'kieli_en#1',
@@ -386,7 +386,7 @@ test('', () => {
       label: 'A1 englanti',
     },
     {
-      value: 'A1 venäjä',
+      value: 'oppiaineetyleissivistava_a1#1/kieli_ru#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a1#1',
         kieli: 'kieli_ru#1',
@@ -394,7 +394,7 @@ test('', () => {
       label: 'A1 venäjä',
     },
     {
-      value: 'A2 ruotsi',
+      value: 'oppiaineetyleissivistava_a2#1/kieli_sv#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_a2#1',
         kieli: 'kieli_sv#1',
@@ -402,7 +402,7 @@ test('', () => {
       label: 'A2 ruotsi',
     },
     {
-      value: 'B1 ruotsi',
+      value: 'oppiaineetyleissivistava_b12#1/kieli_sv#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_b12#1',
         kieli: 'kieli_sv#1',
@@ -410,7 +410,7 @@ test('', () => {
       label: 'B1 ruotsi',
     },
     {
-      value: 'B3 saksa',
+      value: 'oppiaineetyleissivistava_b3#1/kieli_de#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_b3#1',
         kieli: 'kieli_de#1',
@@ -418,7 +418,7 @@ test('', () => {
       label: 'B3 saksa',
     },
     {
-      value: 'Äidinkieli ja kirjallisuus',
+      value: 'oppiaineetyleissivistava_ai#1',
       koodiUrit: {
         oppiaine: 'oppiaineetyleissivistava_ai#1',
       },

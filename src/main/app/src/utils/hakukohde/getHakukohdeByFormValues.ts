@@ -35,6 +35,19 @@ function getAloituspaikat(values: HakukohdeFormValues) {
   };
 }
 
+function getPainotetutArvosanatData(arvosanat) {
+  return arvosanat.map(arvosana => {
+    return {
+      koodiUrit: arvosana.painotettuOppiaine
+        ? arvosana.painotettuOppiaine.koodiUrit
+        : null,
+      painokerroin: arvosana.painokerroin
+        ? parseFloatComma(arvosana.painokerroin)
+        : null,
+    };
+  });
+}
+
 const getHakukohteenLinja = values => {
   if (!values?.hakukohteenLinja) {
     return null;
@@ -47,14 +60,7 @@ const getHakukohteenLinja = values => {
     alinHyvaksyttyKeskiarvo:
       alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo),
     lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
-    painotetutArvosanat: painotetutArvosanat.map(arvosana => {
-      return {
-        koodiUrit: arvosana.painotettuOppiaine.koodiUrit,
-        painokerroin: arvosana.painokerroin
-          ? parseFloatComma(arvosana.painokerroin)
-          : null,
-      };
-    }),
+    painotetutArvosanat: getPainotetutArvosanatData(painotetutArvosanat),
   };
 };
 

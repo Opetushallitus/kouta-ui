@@ -40,7 +40,7 @@ export const getKieletForOppiainevalikoima = (
 
         if (oppiaine) {
           kielivalikoimaWithNewLabels.push({
-            value: kieliLabel,
+            value: concatKoodiUris(oppiaine.value, foundKieli.value),
             koodiUrit: {
               oppiaine: oppiaine.value,
               kieli: foundKieli.value,
@@ -61,10 +61,18 @@ export const removeKieletFromKoodistoOppiaineet = oppiaineet => {
     .map(oppiaine => {
       return {
         ...oppiaine,
-        value: oppiaine.label,
+        value: concatKoodiUris(oppiaine.value),
         koodiUrit: {
           oppiaine: oppiaine.value,
         },
       };
     });
+};
+
+export const concatKoodiUris = (oppiaine, kieli) => {
+  if (kieli) {
+    return `${oppiaine}/${kieli}`;
+  } else {
+    return `${oppiaine}`;
+  }
 };

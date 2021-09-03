@@ -36,7 +36,7 @@ function getAloituspaikat(values: HakukohdeFormValues) {
 }
 
 function getPainotetutArvosanatData(arvosanat) {
-  return arvosanat.map(arvosana => {
+  return (arvosanat || []).map(arvosana => {
     return {
       koodiUrit: arvosana.painotettuOppiaine
         ? arvosana.painotettuOppiaine.koodiUrit

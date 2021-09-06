@@ -44,7 +44,8 @@ const getHakukohteenLinja = values => {
   return {
     linja: linja !== LUKIO_YLEISLINJA ? linja : null,
     alinHyvaksyttyKeskiarvo:
-      alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo),
+      (alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo)) ||
+      null,
     lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
   };
 };

@@ -613,13 +613,6 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
       "painotetutArvosanat": [
         {
           "koodiUrit": {
-            "kieli": "kieli_en#1",
-            "oppiaine": "oppiaineetyleissivistava_a12#1"
-          },
-          "painokerroin": 1.5
-        },
-        {
-          "koodiUrit": {
             "oppiaine": "oppiaineetyleissivistava_mu#1"
           },
           "painokerroin": 2

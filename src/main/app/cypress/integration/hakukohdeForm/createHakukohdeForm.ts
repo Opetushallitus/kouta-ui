@@ -94,6 +94,16 @@ const fillLukiolinjaSection = () => {
           .clear({ force: true })
           .pipe(paste('2'));
       });
+
+      getByTestId('painotettuOppiaine-0').within(() => {
+        cy.findByRole('button', { name: /yleiset\.poistaRivi/ }).click();
+      });
+
+      cy.findAllByTestId('painotettuOppiaine', { exact: false }).within(
+        $oppiaineet => {
+          expect($oppiaineet).to.have.lengthOf(1);
+        }
+      );
     });
   });
 };

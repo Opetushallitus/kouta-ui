@@ -31,17 +31,18 @@ const PainotetutArvosanatFields = ({ fields, toteutus }) => {
         {fields.map((hakukohteenLinja, index) => (
           <Box
             display="flex"
-            width={0.5}
+            width={0.6}
             key={index}
             marginTop={2}
             {...getTestIdProps(`painotettuOppiaine-${index}`)}
           >
-            <Box width={'70%'} flexShrink={0} marginRight={2}>
+            <Box width={'70%'} flexShrink={1} marginRight={2}>
               <Field
                 component={FormFieldSelect}
                 name={`${hakukohteenLinja}.painotettuOppiaine`}
                 options={painotetutOppiaineetOptions}
                 label={t('hakukohdelomake.oppiaine')}
+                required
               />
             </Box>
             <Box marginRight={2} {...getTestIdProps('painokerroin')}>
@@ -50,6 +51,7 @@ const PainotetutArvosanatFields = ({ fields, toteutus }) => {
                 name={`${hakukohteenLinja}.painokerroin`}
                 type="number"
                 label={t('hakukohdelomake.painokerroin')}
+                required
               />
             </Box>
             <Box display="flex" style={{ alignSelf: 'end' }}>

@@ -15,26 +15,27 @@ export const getPainotetutOppiaineetOptions = (
 };
 
 export const getKieletForOppiainevalikoima = (
-  kielivalikoima,
+  lukionKielivalikoima,
   kieletFromKoodisto,
   oppiaineetOptions
 ) => {
   const kielivalikoimaWithNewLabels = [];
 
-  for (const kieli in kielivalikoima) {
-    const kielet = kielivalikoima[kieli];
+  for (const kieliTaso in lukionKielivalikoima) {
+    const kieletInKieliTaso = lukionKielivalikoima[kieliTaso];
 
-    for (const k of kielet) {
+    for (const kieli of kieletInKieliTaso) {
       const foundKieli = kieletFromKoodisto.find(koodistoKieli => {
-        return k === koodistoKieli.value;
+        return kieli === koodistoKieli.value;
       });
 
-      const kieliPrefix = kieli.match(/^[A-Z]\d/g);
+      const kieliPrefix = kieliTaso.match(/^[A-Z]\d/g); // E.g. A1, B3...
 
       if (foundKieli && kieliPrefix) {
-        const kieliLabel = `${kieliPrefix} ${foundKieli.label}`;
+        const kieliLabel = `${kieliPrefix} ${foundKieli.label}`; // E.g. "A1 englanti"
         const oppiaine = oppiaineetOptions.find(oppiaine => {
           const re = new RegExp(`\\w+_${kieliPrefix[0].toLowerCase()}`, 'g');
+          // E.g. "oppiaineetyleissivistava_a1"
           return oppiaine.value.match(re);
         });
 

@@ -47,7 +47,9 @@ function getPainotetutArvosanatData(arvosanat) {
           : null,
       };
     })
-    .filter(arvosana => !_fp.isEmpty(arvosana));
+    .filter(
+      arvosana => arvosana.painokerroin || !_fp.isEmpty(arvosana.koodiUrit)
+    );
 }
 
 const getHakukohteenLinja = values => {

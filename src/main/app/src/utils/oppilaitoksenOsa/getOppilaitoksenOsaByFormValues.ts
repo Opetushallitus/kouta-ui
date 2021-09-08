@@ -72,6 +72,8 @@ export const getOppilaitoksenOsaByFormValues = ({
             nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
           }
         : null,
+      jarjestaaUrheilijanAmmKoulutusta:
+        perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
     },
   };
 };

@@ -9,21 +9,23 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     esikatselu = false,
     logo,
     teemakuva,
-    metadata: {
-      tietoaOpiskelusta,
-      yhteystiedot = [],
-      hakijapalveluidenYhteystiedot: hy,
-      esittely,
-      opiskelijoita,
-      korkeakouluja,
-      tiedekuntia,
-      kampuksia,
-      yksikoita,
-      toimipisteita,
-      akatemioita,
-      wwwSivu,
-    },
+    metadata = {},
   } = oppilaitos;
+
+  const {
+    tietoaOpiskelusta,
+    yhteystiedot = [],
+    hakijapalveluidenYhteystiedot: hy,
+    esittely,
+    opiskelijoita,
+    korkeakouluja,
+    tiedekuntia,
+    kampuksia,
+    yksikoita,
+    toimipisteita,
+    akatemioita,
+    wwwSivu,
+  } = metadata;
 
   return {
     kieliversiot: kielivalinta || [],

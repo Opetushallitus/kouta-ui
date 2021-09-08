@@ -5,9 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
-import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
+import {
+  FormFieldInput,
+  FormFieldSwitch,
+  FormFieldUrlInput,
+} from '#/src/components/formFields';
 import Heading from '#/src/components/Heading';
 import { Box, Typography } from '#/src/components/virkailija';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
@@ -22,6 +27,7 @@ const InfoLabel = props => (
 const InfoValue = props => <Box flexGrow={1} {...props} />;
 
 const TiedotSection = ({ name, t, language }) => {
+  const isOphVirkailija = useIsOphVirkailija();
   return (
     <>
       <Typography as="div" mb={2}>
@@ -29,7 +35,7 @@ const TiedotSection = ({ name, t, language }) => {
       </Typography>
 
       <Box m={-1} display="flex">
-        <Box m={1} flexGrow="1" {...getTestIdProps('opiskelijoita')}>
+        <Box m={1} flexGrow={1} {...getTestIdProps('opiskelijoita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.opiskelijoita`}
@@ -37,7 +43,7 @@ const TiedotSection = ({ name, t, language }) => {
             label={t('oppilaitoslomake.opiskelijoita')}
           />
         </Box>
-        <Box m={1} flexGrow="1" {...getTestIdProps('kampus')}>
+        <Box m={1} flexGrow={1} {...getTestIdProps('kampus')}>
           <Field
             component={FormFieldInput}
             name={`${name}.kampus.${language}`}
@@ -61,6 +67,15 @@ const TiedotSection = ({ name, t, language }) => {
           />
         </Cell>
       </Grid>
+      <Box mt={3} mb={3}>
+        <Field
+          component={FormFieldSwitch}
+          name={`${name}.jarjestaaUrheilijanAmmKoulutusta`}
+          disabled={!isOphVirkailija}
+        >
+          {t('oppilaitoksenOsaLomake.jarjestaaUrheilijanAmmKoulutusta')}
+        </Field>
+      </Box>
     </>
   );
 };

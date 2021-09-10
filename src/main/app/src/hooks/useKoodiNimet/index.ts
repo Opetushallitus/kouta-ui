@@ -4,15 +4,17 @@ import useKoodit from '#/src/hooks/useKoodit';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
-const useKoodiNimet = koodiUris => {
+const useKoodiNimet = (koodiUris, language = undefined) => {
   const { koodit, ...rest } = useKoodit(koodiUris);
-  const language = useUserLanguage();
+  const userLanguage = useUserLanguage();
 
   const nimet = useMemo(() => {
     return koodit.map(koodi => {
-      return koodi ? getKoodiNimiTranslation(koodi, language) : undefined;
+      return koodi
+        ? getKoodiNimiTranslation(koodi, language ?? userLanguage)
+        : undefined;
     });
-  }, [language, koodit]);
+  }, [userLanguage, language, koodit]);
 
   return { nimet, ...rest };
 };

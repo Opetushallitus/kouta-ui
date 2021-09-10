@@ -21,9 +21,7 @@ export const getKieletForOppiainevalikoima = (
 ) => {
   const kielivalikoimaWithNewLabels = [];
 
-  for (const kieliTaso in lukionKielivalikoima) {
-    const kieletInKieliTaso = lukionKielivalikoima[kieliTaso];
-
+  _.forEach(lukionKielivalikoima, (kieletInKieliTaso, kieliTaso) => {
     for (const kieli of kieletInKieliTaso) {
       const foundKieli = kieletFromKoodisto.find(koodistoKieli => {
         return kieli === koodistoKieli.value;
@@ -51,7 +49,7 @@ export const getKieletForOppiainevalikoima = (
         }
       }
     }
-  }
+  });
 
   return kielivalikoimaWithNewLabels;
 };

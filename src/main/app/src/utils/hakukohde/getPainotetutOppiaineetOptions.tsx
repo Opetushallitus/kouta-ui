@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const getPainotetutOppiaineetOptions = (
   oppiaineetOptions,
   kieliOptions,

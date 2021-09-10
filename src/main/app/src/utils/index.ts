@@ -1,13 +1,13 @@
 import { format as formatDate, parseISO } from 'date-fns';
+import DOMPurify from 'dompurify';
 import _ from 'lodash';
 import _fp from 'lodash/fp';
-import stripTags from 'striptags';
 
 import {
   isEditorState,
   isEmptyEditorState,
 } from '#/src/components/Editor/utils';
-import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
+import { LANGUAGES, NDASH } from '#/src/constants';
 import { memoize } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
@@ -127,7 +127,7 @@ export const ifAny = value => predicate =>
 
 export const otherwise = () => true;
 
-export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
+export const sanitizeHTML = html => DOMPurify.sanitize(html);
 
 export const parseKeyVal = memoize(
   _fp.flow(

@@ -7,6 +7,8 @@ import {
 import { EditorState } from 'draft-js';
 import _ from 'lodash';
 
+import { sanitizeHTML } from '#/src/utils';
+
 import linkDecorator from './linkDecorator';
 
 const convertFromHTML = makeConvertFromHTML({
@@ -80,13 +82,13 @@ export const parseEditorState = value => {
     return createEmptyEditorState();
   }
 
-  return createEditorStateWithContent(convertFromHTML(value));
+  return createEditorStateWithContent(convertFromHTML(sanitizeHTML(value)));
 };
 
 export const serializeEditorState = (value?: EditorState) => {
   const currentContent = value?.getCurrentContent?.();
   if (currentContent?.hasText?.()) {
-    return convertToHTML(currentContent);
+    return sanitizeHTML(convertToHTML(currentContent));
   }
 };
 

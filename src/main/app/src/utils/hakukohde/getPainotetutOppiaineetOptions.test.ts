@@ -1,7 +1,7 @@
 import {
   getKieletForOppiainevalikoima,
-  removeKieletFromKoodistoOppiaineet,
   getPainotetutOppiaineetOptions,
+  removeKieletFromKoodistoOppiaineet,
 } from '#/src/utils/hakukohde/getPainotetutOppiaineetOptions';
 
 test('map one lukio language with its improved label', () => {

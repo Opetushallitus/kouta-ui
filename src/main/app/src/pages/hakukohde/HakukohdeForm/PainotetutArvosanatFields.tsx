@@ -54,7 +54,7 @@ const PainotetutArvosanatFields = ({ fields, toteutus }) => {
                 required
               />
             </Box>
-            <Box display="flex" style={{ alignSelf: 'end' }}>
+            <Box display="flex" alignSelf="flex-end">
               <Button
                 type="button"
                 variant="outlined"

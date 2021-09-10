@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import { FormFieldSelect, FormFieldInput } from '#/src/components/formFields';
+import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
 import usePainotetutOppiaineetOptions from '#/src/hooks/usePainotetutOppiaineetOptions';
 import { getTestIdProps } from '#/src/utils';
@@ -46,7 +47,7 @@ const PainotetutArvosanatFields = ({ fields, toteutus }) => {
               />
             </Box>
             <Box display="flex" alignSelf="flex-end">
-              <Button
+              <RemoveButton
                 type="button"
                 variant="outlined"
                 onClick={() => {
@@ -55,7 +56,7 @@ const PainotetutArvosanatFields = ({ fields, toteutus }) => {
                 {...getTestIdProps('poistaButton')}
               >
                 {t('yleiset.poistaRivi')}
-              </Button>
+              </RemoveButton>
             </Box>
           </Box>
         ))}

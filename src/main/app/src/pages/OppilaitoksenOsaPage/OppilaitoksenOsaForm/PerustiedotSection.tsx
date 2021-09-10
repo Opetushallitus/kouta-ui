@@ -1,6 +1,5 @@
 import React from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
@@ -16,7 +15,6 @@ import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
-import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -80,16 +78,14 @@ const TiedotSection = ({ name, t, language }) => {
   );
 };
 
-const OrganisaatioSection = ({ organisaatio, t }) => {
-  const language = useUserLanguage();
-  const opetuskieletUris = _.get(organisaatio, 'kieletUris') || [];
-  const paikkakuntaUri = _.get(organisaatio, 'kotipaikkaUri');
-  const oppilaitostyyppiUri = _.get(organisaatio, 'oppilaitosTyyppiUri');
-  const nimi = getFirstLanguageValue(_.get(organisaatio, 'nimi'), language);
+const OrganisaatioSection = ({ organisaatio, t, language }) => {
+  const opetuskieletUris = organisaatio?.kieletUris ?? [];
+  const paikkakuntaUri = organisaatio?.kotipaikkaUri;
+
+  const nimi = getFirstLanguageValue(organisaatio?.nimi, language);
 
   const { nimet: opetuskielet } = useKoodiNimet(opetuskieletUris);
   const { nimi: paikkakunta } = useKoodiNimi(paikkakuntaUri);
-  const { nimi: oppilaitostyyppi } = useKoodiNimi(oppilaitostyyppiUri);
 
   return (
     <>
@@ -101,16 +97,6 @@ const OrganisaatioSection = ({ organisaatio, t }) => {
         </InfoLabel>
         <InfoValue>
           <Typography>{nimi}</Typography>
-        </InfoValue>
-      </Box>
-      <Box display="flex" mb={2}>
-        <InfoLabel>
-          <Typography color="text.dark">
-            {t('oppilaitoslomake.tyyppi')}:
-          </Typography>
-        </InfoLabel>
-        <InfoValue>
-          <Typography>{oppilaitostyyppi}</Typography>
         </InfoValue>
       </Box>
       <Box display="flex" mb={2}>
@@ -143,7 +129,11 @@ export const PerustiedotSection = ({ name, organisaatioOid, language }) => {
 
   return (
     <>
-      <OrganisaatioSection organisaatio={organisaatio} t={t} />
+      <OrganisaatioSection
+        organisaatio={organisaatio}
+        t={t}
+        language={language}
+      />
       <Heading hasDivider mt={4}>
         {t('oppilaitoslomake.syotaPerustiedot')}
       </Heading>

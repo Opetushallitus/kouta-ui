@@ -69,9 +69,5 @@ export const removeKieletFromKoodistoOppiaineet = oppiaineet => {
 };
 
 export const concatKoodiUris = (oppiaine, kieli) => {
-  if (kieli) {
-    return `${oppiaine}/${kieli}`;
-  } else {
-    return `${oppiaine}`;
-  }
+  return kieli ? `${oppiaine}/${kieli}` : `${oppiaine}`;
 };

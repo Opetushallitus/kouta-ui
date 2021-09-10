@@ -298,7 +298,7 @@ export const KoulutusForm = ({
             header={t('koulutuslomake.koulutuksenTila')}
             Component={JulkaisutilaField}
             disabled={onlyTarjoajaRights}
-            showArkistoitu={!isNewKoulutus}
+            entity={koulutusProp}
           />
 
           {_fp.isFunction(onAttachToteutus) && (

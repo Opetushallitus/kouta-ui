@@ -69,4 +69,11 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       }
     }
   }
+
+  if (path === 'metadata.kuvaus' && errorType === 'invalidKielistetty') {
+    return LANGUAGES.map(lng => ({
+      field: `kuvaus.${lng}`,
+      errorKey: 'validointivirheet.pakollisetKaannokset',
+    }));
+  }
 };

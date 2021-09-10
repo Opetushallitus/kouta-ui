@@ -13,6 +13,7 @@ Object {
   ],
   "oppilaitosOid": "888.888.888",
   "perustiedot": Object {
+    "jarjestaaUrheilijanAmmKoulutusta": false,
     "kampus": Object {
       "fi": "Fi kampus",
       "sv": "Sv kampus",

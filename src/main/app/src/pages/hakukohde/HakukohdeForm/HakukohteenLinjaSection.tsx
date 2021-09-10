@@ -162,7 +162,6 @@ export const HakukohteenLinjaSection = ({
               name={`${name}.alinHyvaksyttyKeskiarvo`}
               type="number"
               label={t('hakukohdelomake.alinHyvaksyttyKeskiarvo')}
-              required
             />
           </Box>
 

@@ -25,6 +25,7 @@ test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given fo
         fi: 'Verkkosivu fi',
         sv: 'Verkkosivu sv',
       },
+      jarjestaaUrheilijanAmmKoulutusta: false,
     },
     yhteystiedot: [
       {

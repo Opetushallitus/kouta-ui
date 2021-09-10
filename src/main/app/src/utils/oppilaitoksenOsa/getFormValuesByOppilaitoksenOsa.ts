@@ -7,10 +7,19 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
     kielivalinta,
     teemakuva,
     tila,
-    metadata: { yhteystiedot, esittely, opiskelijoita, kampus, wwwSivu },
+    metadata = {},
     oppilaitosOid,
     esikatselu = false,
   } = oppilaitoksenOsa;
+
+  const {
+    yhteystiedot,
+    esittely,
+    opiskelijoita,
+    kampus,
+    wwwSivu,
+    jarjestaaUrheilijanAmmKoulutusta,
+  } = metadata;
 
   return {
     tila,
@@ -35,6 +44,7 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
       kampus: kampus || {},
       wwwSivuUrl: wwwSivu?.url || {},
       wwwSivuNimi: wwwSivu?.nimi || {},
+      jarjestaaUrheilijanAmmKoulutusta,
     },
     teemakuva,
     esikatselu,

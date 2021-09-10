@@ -509,6 +509,7 @@
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja toteutuksia uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu toteutus",
     "ammatillinenPerustutkintoErityisopetuksena": "Ammatillinen perustutkinto järjestetään erityisopetuksena",
+    "jarjestetaanErityisopetuksena": "Toteutus järjestetään erityisopetuksena",
     "toteutuksellaErillinenAloitusajankohta": "Toteutuksella on erillinen aloitusajankohta",
     "painotukset": "Painotukset",
     "valitsePainotukset": "Valitse painotukset",
@@ -686,7 +687,8 @@
     "yhteystiedotInfo": "Anna oppilaitokselle tarvittavat yhteystiedot",
     "oppilaitoksenOsanTila": "Oppilaitoksen osan tila",
     "oppilaitoksenOsanTeemakuva": "Oppilaitoksen osan teemakuva",
-    "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitoksen osaa."
+    "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitoksen osaa.",
+    "jarjestaaUrheilijanAmmKoulutusta": "Oppilaitoksen osa järjestää urheilijan ammatillista koulutusta"
   },
   "eperuste": {
     "suorittaneenOsaaminen": "Tutkinnon suorittaneen osaaminen",

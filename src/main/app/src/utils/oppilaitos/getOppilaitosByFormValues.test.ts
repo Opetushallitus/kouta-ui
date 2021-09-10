@@ -35,6 +35,7 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
         fi: 'Verkkosivu fi',
         sv: 'Verkkosivu sv',
       },
+      jarjestaaUrheilijanAmmKoulutusta: false,
     },
     yhteystiedot: [
       {

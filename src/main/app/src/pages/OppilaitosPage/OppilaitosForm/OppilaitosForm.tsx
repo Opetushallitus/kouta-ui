@@ -22,7 +22,7 @@ const OppilaitosForm = ({
   steps = false,
   organisaatioOid,
   organisaatio,
-  showArkistoituTilaOption = true,
+  oppilaitos,
 }) => {
   const { t } = useTranslation();
   const languageTabs = useFieldValue('kieliversiot');
@@ -89,7 +89,7 @@ const OppilaitosForm = ({
         section="tila"
         header={t('oppilaitoslomake.oppilaitoksenTila')}
         Component={JulkaisutilaField}
-        showArkistoitu={showArkistoituTilaOption}
+        entity={oppilaitos}
       />
     </FormCollapseGroup>
   );

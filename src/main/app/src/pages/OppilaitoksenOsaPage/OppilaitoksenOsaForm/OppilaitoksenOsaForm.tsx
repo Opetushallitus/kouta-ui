@@ -16,7 +16,7 @@ import { PerustiedotSection } from './PerustiedotSection';
 const OppilaitoksenOsaForm = ({
   steps = false,
   organisaatioOid,
-  showArkistoituTilaOption = true,
+  oppilaitoksenOsa = undefined,
 }) => {
   const { t } = useTranslation();
   const languageTabs = useFieldValue('kieliversiot');
@@ -61,7 +61,7 @@ const OppilaitoksenOsaForm = ({
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanTila')}
         section="tila"
         Component={JulkaisutilaField}
-        showArkistoitu={showArkistoituTilaOption}
+        entity={oppilaitoksenOsa}
       />
     </FormCollapseGroup>
   );

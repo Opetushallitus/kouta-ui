@@ -68,7 +68,6 @@ export const OppilaitoksenOsaPage = ({
   const { t } = useTranslation();
 
   const stepsEnabled = !oppilaitoksenOsa;
-  const showArkistoituTilaOption = !!oppilaitoksenOsa;
   const contactInfo = useMemo(
     () => getOrganisaatioContactInfo(organisaatio),
     [organisaatio]
@@ -108,6 +107,7 @@ export const OppilaitoksenOsaPage = ({
             ],
             perustiedot: {
               wwwSivuUrl: contactInfo.verkkosivu || '',
+              jarjestaaUrheilijanAmmKoulutusta: false,
             },
           }
         : oppilaitoksenOsa
@@ -147,8 +147,8 @@ export const OppilaitoksenOsaPage = ({
         {organisaatio ? (
           <OppilaitoksenOsaForm
             organisaatioOid={organisaatioOid}
+            oppilaitoksenOsa={oppilaitoksenOsa}
             steps={stepsEnabled}
-            showArkistoituTilaOption={showArkistoituTilaOption}
           />
         ) : null}
       </FormPage>

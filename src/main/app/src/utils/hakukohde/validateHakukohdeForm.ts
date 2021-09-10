@@ -83,8 +83,7 @@ export const validateHakukohdeForm =
           validateExistence('jarjestyspaikkaOid'),
           validateIf(
             koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS,
-            validateExistence('hakukohteenLinja.linja'),
-            validateExistence('hakukohteenLinja.alinHyvaksyttyKeskiarvo')
+            validateExistence('hakukohteenLinja.linja')
           ),
           validateIf(
             values?.hakuajat?.eriHakuaika,

@@ -6,24 +6,15 @@ import { Field } from 'redux-form';
 import Button from '#/src/components/Button';
 import { FormFieldSelect, FormFieldInput } from '#/src/components/formFields';
 import { Box, FormControl } from '#/src/components/virkailija';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import usePainotetutOppiaineetOptions from '#/src/hooks/usePainotetutOppiaineetOptions';
 import { getTestIdProps } from '#/src/utils';
-import { getPainotetutOppiaineetOptions } from '#/src/utils/hakukohde/getPainotetutOppiaineetOptions';
 
 const PainotetutArvosanatFields = ({ fields, toteutus }) => {
   const { t } = useTranslation();
-  const { options } = useKoodistoOptions({
-    koodisto: 'oppiaineetyleissivistava',
-  });
-  const kieliOptions = useKoodistoOptions({ koodisto: 'kieli' }).options;
-
   const lukionKielivalikoima = toteutus?.metadata?.kielivalikoima;
 
-  const painotetutOppiaineetOptions = getPainotetutOppiaineetOptions(
-    options,
-    kieliOptions,
-    lukionKielivalikoima
-  );
+  const painotetutOppiaineetOptions =
+    usePainotetutOppiaineetOptions(lukionKielivalikoima);
 
   return (
     <>

@@ -27,7 +27,7 @@ export const getKieletForOppiainevalikoima = (
         return kieli === koodistoKieli.value;
       });
 
-      const kieliPrefix = kieliTaso.match(/^[A-Z]\d/g); // E.g. A1, B3...
+      const kieliPrefix = kieliTaso.match(/^[A-C]\d/g); // E.g. A1, B3...
 
       if (foundKieli && kieliPrefix) {
         const kieliLabel = `${kieliPrefix} ${foundKieli.label}`; // E.g. "A1 englanti"

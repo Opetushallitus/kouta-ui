@@ -3,8 +3,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import Button from '#/src/components/Button';
 import { FormFieldSelect, FormFieldInput } from '#/src/components/formFields';
+import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
 import usePainotetutOppiaineetOptions from '#/src/hooks/usePainotetutOppiaineetOptions';
@@ -62,16 +62,17 @@ const PainotetutArvosanatFields = ({ fields, toteutus }) => {
         ))}
       </FormControl>
       <Box marginTop={2}>
-        <Button
+        <IconButton
           type="button"
           variant="outlined"
+          iconType="add"
           onClick={() => {
             fields.push({});
           }}
           {...getTestIdProps('lisaaButton')}
         >
           {t('hakukohdelomake.lisaaPainotettavaOppiaine')}
-        </Button>
+        </IconButton>
       </Box>
     </>
   );

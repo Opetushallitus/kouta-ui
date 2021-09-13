@@ -10,6 +10,7 @@ import {
   assertNoUnsavedChangesDialog,
   getByTestId,
   paste,
+  typeToEditor,
   wrapMutationTest,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
@@ -103,6 +104,21 @@ export const editKoulutusForm = () => {
       getByTestId('linkkiEPerusteisiinInput')
         .find('input')
         .pipe(paste('http://testilinkki.fi'));
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to edit TELMA-koulutus',
+    mutationTest(() => {
+      prepareTest('telma');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
+      getByTestId('kuvausInput').within(() => {
+        typeToEditor('Kuvausta on muokattu');
+      });
 
       tallenna();
     })

@@ -41,7 +41,7 @@ import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import { TiedotSection } from './TiedotSection/TiedotSection';
-import { TuvaTiedotSection } from './TiedotSection/TuvaTiedotSection';
+import { TuvaTelmaTiedotSection } from './TiedotSection/TuvaTelmaTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -135,6 +135,7 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.TUTKINNON_OSA,
             KOULUTUSTYYPPI.OSAAMISALA,
             KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.TELMA,
           ].includes(koulutustyyppi) && (
             <FormCollapse
               section="information"
@@ -146,13 +147,16 @@ export const KoulutusForm = ({
             />
           )}
 
-          {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+          {[KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(
+            koulutustyyppi
+          ) && (
             <FormCollapse
               section="information"
               header={t('koulutuslomake.koulutuksenTiedot')}
-              Component={TuvaTiedotSection}
+              Component={TuvaTelmaTiedotSection}
               languages={languageTabs}
               disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
             />
           )}
 
@@ -233,6 +237,7 @@ export const KoulutusForm = ({
           {[
             KOULUTUSTYYPPI.LUKIOKOULUTUS,
             KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.TELMA,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse
@@ -246,7 +251,9 @@ export const KoulutusForm = ({
             />
           )}
 
-          {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+          {![KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(
+            koulutustyyppi
+          ) && (
             <FormCollapse
               section="lisatiedot"
               header={t('koulutuslomake.koulutuksenLisatiedot')}
@@ -256,7 +263,9 @@ export const KoulutusForm = ({
             />
           )}
 
-          {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+          {![KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(
+            koulutustyyppi
+          ) && (
             <FormCollapse
               section="soraKuvaus"
               header={t('yleiset.soraKuvaus')}

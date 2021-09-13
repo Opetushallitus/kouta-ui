@@ -368,7 +368,7 @@ export const createKoulutusForm = () => {
       fillCommon({ koulutustyyppiPath: ['tuva'] });
 
       getByTestId('informationSection').within(() => {
-        getByTestId('tuvaOpintojenlaajuusSelect')
+        getByTestId('opintojenlaajuusSelect')
           .click()
           .within(() => {
             getSelectOption('38 viikkoa').click();
@@ -377,6 +377,54 @@ export const createKoulutusForm = () => {
         getByTestId('nimiInput').within(() => {
           cy.get('input').should('have.value', 'koulutustyypit.tuva');
         });
+
+        jatka();
+      });
+
+      getByTestId('descriptionSection').within(() => {
+        getByTestId('kuvauksenNimiInput').should('not.exist');
+        getByTestId('kuvausInput').within(() => {
+          typeToEditor('Kuvaus');
+        });
+
+        getByTestId('linkkiEPerusteisiinInput').within(() => {
+          cy.get('input').pipe(paste('linkki'));
+        });
+
+        jatka();
+      });
+
+      fillTeemakuvaSection();
+
+      fillJarjestajaSection();
+
+      fillNakyvyysSection();
+
+      fillTilaSection();
+
+      getByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('lisatiedotSection').should('not.exist');
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create TELMA-koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['telma'] });
+
+      getByTestId('informationSection').within(() => {
+        getByTestId('opintojenlaajuusSelect')
+          .click()
+          .within(() => {
+            getSelectOption('60').click();
+          });
+
+        cy.findByLabelText(/koulutuslomake.koulutuksenNimi/).should(
+          'have.value',
+          'koulutustyypit.telma'
+        );
 
         jatka();
       });

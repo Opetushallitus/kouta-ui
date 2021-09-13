@@ -10,23 +10,28 @@ import { getTestIdProps } from '#/src/utils';
 
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 
-export const TuvaTiedotSection = ({ disabled, language, name }) => {
+export const TuvaTelmaTiedotSection = ({
+  disabled,
+  language,
+  name,
+  koulutustyyppi,
+}) => {
   const { t } = useTranslation();
 
   const { change } = useBoundFormActions();
   useEffect(() => {
     change('information.nimi', {
-      fi: t('koulutustyypit.tuva', { lng: 'fi' }),
-      sv: t('koulutustyypit.tuva', { lng: 'sv' }),
-      en: t('koulutustyypit.tuva', { lng: 'en' }),
+      fi: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'fi' }),
+      sv: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'sv' }),
+      en: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'en' }),
     });
 
     return () => change('information.nimi', {});
-  }, [change, t]);
+  }, [change, koulutustyyppi, t]);
 
   return (
     <Box mb={-2}>
-      <Box mb={2} {...getTestIdProps('tuvaOpintojenlaajuusSelect')}>
+      <Box mb={2} {...getTestIdProps('opintojenlaajuusSelect')}>
         <OpintojenlaajuusField disabled={disabled} name={name} required />
       </Box>
       <Box mb={2} {...getTestIdProps('nimiInput')}>

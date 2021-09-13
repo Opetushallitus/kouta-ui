@@ -20,7 +20,8 @@ export const KuvausFieldsSection = ({
     <>
       {/* TODO: Onko kuvauksen nimi ylipäänsä tarpeellinen? */}
       {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS &&
-        koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+        koulutustyyppi !== KOULUTUSTYYPPI.TUVA &&
+        koulutustyyppi !== KOULUTUSTYYPPI.TELMA && (
           <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
             <Field
               disabled={disabled}
@@ -40,7 +41,7 @@ export const KuvausFieldsSection = ({
           required={koulutustyyppi === KOULUTUSTYYPPI.TUVA}
         />
       </Box>
-      {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+      {[KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('linkkiEPerusteisiinInput')}>
           <Field
             disabled={disabled}

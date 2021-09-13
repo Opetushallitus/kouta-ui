@@ -47,6 +47,7 @@ export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
   { value: KOULUTUSTYYPPI.LUVA },
   { value: KOULUTUSTYYPPI.TUVA },
   { value: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },
+  { value: KOULUTUSTYYPPI.TELMA },
 ];
 
 const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`

@@ -93,20 +93,20 @@ export const editKoulutusForm = () => {
     })
   );
 
-  it('should be able to edit TUVA-koulutus', () => {
-    prepareTest('tuva');
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
-    );
-
+  it(
+    'should be able to edit TUVA-koulutus',
     mutationTest(() => {
+      prepareTest('tuva');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
       getByTestId('linkkiEPerusteisiinInput')
         .find('input')
         .pipe(paste('http://testilinkki.fi'));
 
       tallenna();
-    });
-  });
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');

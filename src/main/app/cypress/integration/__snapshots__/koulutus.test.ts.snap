@@ -451,6 +451,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
 {
   "ePerusteId": null,
   "esikatselu": false,
+  "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
   "kielivalinta": [
@@ -479,7 +480,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
         }
       }
     ],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53",
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_38",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],

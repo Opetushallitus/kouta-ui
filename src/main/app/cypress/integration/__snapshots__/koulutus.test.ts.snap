@@ -410,6 +410,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
 {
   "ePerusteId": null,
   "esikatselu": false,
+  "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
   "kielivalinta": [
@@ -428,7 +429,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
       "fi": "linkki"
     },
     "lisatiedot": [],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_38#1",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -496,5 +497,40 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
+  "tila": "tallennettu"
+};
+
+exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "tuva",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "tuva",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_38#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "tuva"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutustyypit.tuva"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [],
   "tila": "tallennettu"
 };

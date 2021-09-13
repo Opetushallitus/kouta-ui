@@ -362,11 +362,8 @@ export const createKoulutusForm = () => {
     })
   );
 
-  it('should be able to create TUVA-koulutus', () => {
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`
-    );
-
+  it(
+    'should be able to create TUVA-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['tuva'] });
 
@@ -409,6 +406,6 @@ export const createKoulutusForm = () => {
       getByTestId('lisatiedotSection').should('not.exist');
 
       tallenna();
-    });
-  });
+    })
+  );
 };

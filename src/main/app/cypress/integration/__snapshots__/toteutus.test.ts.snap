@@ -933,25 +933,25 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [
-        "kieli_1#1"
+        "kieli_en#1"
       ],
       "A2Kielet": [
-        "kieli_2#1"
+        "kieli_sv#1"
       ],
       "B1Kielet": [
-        "kieli_4#1"
+        "kieli_en#1"
       ],
       "B2Kielet": [
-        "kieli_3#1"
+        "kieli_en#1"
       ],
       "B3Kielet": [
-        "kieli_5#1"
+        "kieli_sv#1"
       ],
       "aidinkielet": [
-        "kieli_6#1"
+        "kieli_de#1"
       ],
       "muutKielet": [
-        "kieli_7#1"
+        "kieli_de#1"
       ]
     },
     "kuvaus": {},

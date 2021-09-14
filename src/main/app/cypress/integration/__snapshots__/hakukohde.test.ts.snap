@@ -609,7 +609,15 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
       "linja": null,
       "lisatietoa": {
         "fi": "<p>Lisätietoa</p>"
-      }
+      },
+      "painotetutArvosanat": [
+        {
+          "koodiUrit": {
+            "oppiaine": "oppiaineetyleissivistava_mu#1"
+          },
+          "painokerroin": 2
+        }
+      ]
     },
     "kaytetaanHaunAlkamiskautta": true,
     "koulutuksenAlkamiskausi": null,

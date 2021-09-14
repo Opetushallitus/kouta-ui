@@ -40,6 +40,18 @@ Object {
       "fi": "<p>Fi lisatietoa</p>",
       "sv": "<p>Sv lisatietoa</p>",
     },
+    "painotetutArvosanat": Array [
+      Object {
+        "painokerroin": 1.2,
+        "painotettuOppiaine": Object {
+          "koodiUrit": Object {
+            "kieli": "kieli_en#1",
+            "oppiaine": "oppiaineetyleissivistava_a1#1",
+          },
+          "value": "oppiaineetyleissivistava_a1#1/kieli_en#1",
+        },
+      },
+    ],
   },
   "hakulomake": Object {
     "eriHakulomake": true,

@@ -140,6 +140,15 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
           fi: '<p>Fi lisatietoa</p>',
           sv: '<p>Sv lisatietoa</p>',
         },
+        painotetutArvosanat: [
+          {
+            koodiUrit: {
+              kieli: 'kieli_en#1',
+              oppiaine: 'oppiaineetyleissivistava_a1#1',
+            },
+            painokerroin: 1.2,
+          },
+        ],
       },
     },
     jarjestyspaikkaOid: '2.2.2.2.2',

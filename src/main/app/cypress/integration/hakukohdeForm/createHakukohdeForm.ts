@@ -69,6 +69,42 @@ const fillLukiolinjaSection = () => {
       .pipe(paste('3,5'));
 
     typeToEditor('Lisätietoa');
+
+    cy.findByLabelText(/hakukohdelomake\.painotetutArvosanat/).within(() => {
+      cy.findByRole('button', {
+        name: /hakukohdelomake\.lisaaPainotettavaOppiaine/,
+      }).click();
+
+      getByTestId('painotettuOppiaine-0').within(() => {
+        selectOption('A1 englanti');
+        getByTestId('painokerroin')
+          .find('input')
+          .clear({ force: true })
+          .pipe(paste('1,5'));
+      });
+
+      cy.findByRole('button', {
+        name: /hakukohdelomake\.lisaaPainotettavaOppiaine/,
+      }).click();
+
+      getByTestId('painotettuOppiaine-1').within(() => {
+        selectOption('Musiikki');
+        getByTestId('painokerroin')
+          .find('input')
+          .clear({ force: true })
+          .pipe(paste('2'));
+      });
+
+      getByTestId('painotettuOppiaine-0').within(() => {
+        cy.findByRole('button', { name: /yleiset\.poistaRivi/ }).click();
+      });
+
+      cy.findAllByTestId('painotettuOppiaine', { exact: false }).within(
+        $oppiaineet => {
+          expect($oppiaineet).to.have.lengthOf(1);
+        }
+      );
+    });
   });
 };
 

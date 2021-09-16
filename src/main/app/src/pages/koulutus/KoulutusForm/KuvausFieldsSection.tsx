@@ -38,7 +38,9 @@ export const KuvausFieldsSection = ({
           name={`${name}.kuvaus.${language}`}
           component={FormFieldEditor}
           label={t('yleiset.kuvaus')}
-          required={koulutustyyppi === KOULUTUSTYYPPI.TUVA}
+          required={[KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(
+            koulutustyyppi
+          )}
         />
       </Box>
       {[KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(koulutustyyppi) && (

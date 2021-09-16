@@ -68,7 +68,6 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
           [
             KOULUTUSTYYPPI.VALMA,
             KOULUTUSTYYPPI.TELMA,
-            KOULUTUSTYYPPI.LUVA,
             KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
           ],
           KOULUTUSTYYPIT
@@ -139,7 +138,6 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
           [
             KOULUTUSTYYPPI.VALMA,
             KOULUTUSTYYPPI.TELMA,
-            KOULUTUSTYYPPI.LUVA,
             KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
           ],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT

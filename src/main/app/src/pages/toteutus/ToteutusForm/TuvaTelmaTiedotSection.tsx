@@ -5,19 +5,30 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import useKoodi from '#/src/hooks/useKoodi';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
-export const TuvaTiedotSection = ({ language, name, koulutus }) => {
+export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const { t } = useTranslation();
 
   const { koodi: laajuusKoodi } = useKoodi(
     koulutus.metadata.opintojenLaajuusKoodiUri
   );
 
+  const { koodi: laajuusYksikko } = useKoodi('opintojenlaajuusyksikko_6');
+
   const userLanguage = useUserLanguage();
+
+  let toteutuksenLaajuus = getKoodiNimiTranslation(laajuusKoodi, userLanguage);
+
+  if (koulutus.koulutustyyppi === KOULUTUSTYYPPI.TELMA) {
+    toteutuksenLaajuus =
+      toteutuksenLaajuus +
+      ` ${getKoodiNimiTranslation(laajuusYksikko, userLanguage)}`;
+  }
 
   return (
     <>
@@ -33,7 +44,7 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
         <Box>
           <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
             <Input
-              value={getKoodiNimiTranslation(laajuusKoodi, userLanguage) || ''}
+              value={toteutuksenLaajuus || ''}
               {...getTestIdProps('laajuus')}
             />
           </FormControl>
@@ -49,7 +60,7 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
       </Box>
       <Box mb={2}>
         <Field
-          name={`${name}.tuvaErityisopetuksena`}
+          name={`${name}.jarjestetaanErityisopetuksena`}
           component={FormFieldSwitch}
         >
           {t('toteutuslomake.jarjestetaanErityisopetuksena')}

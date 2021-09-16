@@ -170,6 +170,24 @@ const fillTuvaTiedotSection = () => {
   });
 };
 
+const fillTelmaTiedotSection = () => {
+  getByTestId('tiedotSection').within(() => {
+    getByTestId('toteutuksenNimi').within(() => {
+      cy.get('input').clear().pipe(paste('toteutuksen nimi'));
+    });
+
+    cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' })
+      .should('be.disabled')
+      .should('have.value', '60 osaamispistettä');
+
+    cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
+      .clear()
+      .pipe(paste('25'));
+
+    jatka();
+  });
+};
+
 const fillYhteystiedotSection = () => {
   getByTestId('yhteyshenkilotSection').within(() => {
     fillYhteyshenkilotFields();
@@ -536,6 +554,33 @@ export const createToteutusForm = () => {
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
       fillTuvaTiedotSection();
+
+      fillKuvausSection();
+
+      getByTestId('jarjestamistiedotSection').within(() => {
+        fillCommonJarjestamistiedot();
+        jatka();
+      });
+
+      fillTeemakuvaSection();
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create TELMA toteutus',
+    mutationTest(() => {
+      prepareTest('telma');
+
+      fillPohjaSection();
+      fillKieliversiotSection({ jatka: true });
+      fillTelmaTiedotSection();
 
       fillKuvausSection();
 

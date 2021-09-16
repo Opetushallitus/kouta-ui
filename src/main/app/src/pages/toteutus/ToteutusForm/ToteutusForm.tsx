@@ -38,7 +38,7 @@ import { OsaamisalatSection } from './OsaamisalatSection';
 import { TiedotSection } from './TiedotSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { TuvaKuvausSection } from './TuvaKuvausSection';
-import { TuvaTiedotSection } from './TuvaTiedotSection';
+import { TuvaTelmaTiedotSection } from './TuvaTelmaTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
@@ -114,7 +114,9 @@ const ToteutusForm = ({
           header={t('yleiset.kieliversiot')}
           Component={KieliversiotFields}
         />
-        {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+        {![KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(
+          koulutustyyppi
+        ) && (
           <FormCollapse
             section="tiedot"
             header={t('toteutuslomake.toteutuksenTiedot')}
@@ -123,16 +125,20 @@ const ToteutusForm = ({
             koulutustyyppi={koulutustyyppi}
           />
         )}
-        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+        {[KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(
+          koulutustyyppi
+        ) && (
           <FormCollapse
             section="tiedot"
             header={t('toteutuslomake.toteutuksenTiedot')}
             languages={languages}
-            Component={TuvaTiedotSection}
+            Component={TuvaTelmaTiedotSection}
             koulutus={koulutus}
           />
         )}
-        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+        {[KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA].includes(
+          koulutustyyppi
+        ) && (
           <FormCollapse
             section="kuvaus"
             header={t('toteutuslomake.toteutuksenKuvaus')}
@@ -224,6 +230,7 @@ const ToteutusForm = ({
           KOULUTUSTYYPPI.TUTKINNON_OSA,
           KOULUTUSTYYPPI.OSAAMISALA,
           KOULUTUSTYYPPI.TUVA,
+          KOULUTUSTYYPPI.TELMA,
         ].includes(koulutustyyppi) && (
           <>
             <FormCollapse
@@ -233,7 +240,8 @@ const ToteutusForm = ({
               languages={languages}
             />
             {hakeutumisTaiIlmoittautumistapa === MUU &&
-              koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+              koulutustyyppi !== KOULUTUSTYYPPI.TUVA &&
+              koulutustyyppi !== KOULUTUSTYYPPI.TELMA && (
                 <FormCollapse
                   section="soraKuvaus"
                   header={t('yleiset.soraKuvaus')}

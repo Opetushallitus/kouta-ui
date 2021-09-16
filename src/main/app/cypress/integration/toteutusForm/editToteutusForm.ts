@@ -146,6 +146,19 @@ export const editToteutusForm = () => {
     })
   );
 
+  it(
+    'should be able to edit telma toteutus',
+    mutationTest(() => {
+      prepareTest('telma');
+
+      fillKieliversiotSection();
+
+      cy.findByTestId('hakukohteetSection').should('exist');
+
+      tallenna();
+    })
+  );
+
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');
     assertNoUnsavedChangesDialog();

@@ -328,7 +328,8 @@
     "lk": "Lukiokoulutus",
     "yo": "Yliopistokoulutus",
     "amk": "AMK",
-    "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)"
+    "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)",
+    "telma": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",

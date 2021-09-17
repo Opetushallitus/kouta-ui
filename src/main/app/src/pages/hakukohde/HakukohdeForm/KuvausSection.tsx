@@ -10,6 +10,7 @@ import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import { useValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
 const Buttons = styled.div`
@@ -36,6 +37,7 @@ export const KuvausSection = ({
   const kuvausValues = useFieldValue(name);
   const valintaperusteOid = kuvausValues?.valintaperuste?.value;
   const kieliValinnat = languages;
+  const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
 
   const { data, refetch } = useValintaperusteet({
     hakuOid,
@@ -80,6 +82,7 @@ export const KuvausSection = ({
           as="a"
           href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}/koulutustyyppi/${koulutustyyppi}`}
           target="_blank"
+          disabled={isYhteishaku}
         >
           {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
         </Button>

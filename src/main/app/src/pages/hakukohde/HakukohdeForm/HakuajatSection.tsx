@@ -10,6 +10,7 @@ import { Box, Typography } from '#/src/components/virkailija';
 import { NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { formatDateValue } from '#/src/utils';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 const HakuaikaInterval = ({ haku }) => {
   const { t } = useTranslation();
@@ -53,13 +54,18 @@ const CustomHakuaika = ({ name }) => {
 export const HakuajatSection = ({ haku, name }) => {
   const { t } = useTranslation();
   const eriHakuaika = useFieldValue(`${name}.eriHakuaika`);
+  const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
 
   return (
     <>
       <Box marginBottom={2}>
         <HakuaikaInterval haku={haku} />
       </Box>
-      <Field name={`${name}.eriHakuaika`} component={FormFieldSwitch}>
+      <Field
+        name={`${name}.eriHakuaika`}
+        component={FormFieldSwitch}
+        disabled={isYhteishaku}
+      >
         {t('hakukohdelomake.hakukohteellaEriHakuaika')}
       </Field>
       {eriHakuaika ? <CustomHakuaika name={name} /> : null}

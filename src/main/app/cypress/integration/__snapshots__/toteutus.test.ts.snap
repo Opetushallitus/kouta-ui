@@ -619,6 +619,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -780,6 +781,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -931,6 +933,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [
         "kieli_1#1"
@@ -1084,6 +1087,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "hakulomaketyyppi": "ei sähköistä",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -1364,6 +1368,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -1634,6 +1639,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],

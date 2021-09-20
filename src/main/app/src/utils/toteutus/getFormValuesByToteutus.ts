@@ -93,6 +93,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     toteutusjaksot,
     ammatillinenPerustutkintoErityisopetuksena,
     tuvaErityisopetuksena,
+    jarjestetaanErityisopetuksena,
     painotukset,
     erityisetKoulutustehtavat,
     diplomit,
@@ -131,6 +132,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         ammatillinenPerustutkintoErityisopetuksena
       ),
       tuvaErityisopetuksena: Boolean(tuvaErityisopetuksena),
+      jarjestetaanErityisopetuksena: Boolean(jarjestetaanErityisopetuksena),
       laajuus: _fp.isNumber(laajuus) ? laajuus.toString() : '',
       laajuusyksikko: toSelectValue(laajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},

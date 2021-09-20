@@ -278,6 +278,7 @@ Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
+    "jarjestetaanErityisopetuksena": false,
     "laajuus": "25",
     "laajuusyksikko": Object {
       "value": "laajuus_1#1",

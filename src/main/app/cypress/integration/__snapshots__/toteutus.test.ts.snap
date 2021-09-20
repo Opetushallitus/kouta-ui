@@ -1243,7 +1243,11 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Tuva kuvaus</p>"
     },
-    "laajuus": null,
+    "laajuus": {
+      "en": "38 viikkoa",
+      "fi": "38 viikkoa",
+      "sv": "38 viikkoa"
+    },
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
@@ -1325,7 +1329,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "koulutustyypit.tuva"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -1379,7 +1383,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
+    "laajuus": {},
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
@@ -1460,7 +1464,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
+    "fi": "koulutustyypit.tuva"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
@@ -1514,7 +1518,11 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Tuva kuvaus</p>"
     },
-    "laajuus": null,
+    "laajuus": {
+      "en": "60 ECVET competence points",
+      "fi": "60 osaamispistettä",
+      "sv": "60 kompetenspoäng"
+    },
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
@@ -1596,7 +1604,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "koulutustyypit.telma"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -1650,7 +1658,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
+    "laajuus": {},
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
@@ -1731,7 +1739,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
+    "fi": "koulutustyypit.telma"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",

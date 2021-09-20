@@ -155,10 +155,10 @@ const fillTiedotSection = tyyppi => {
 const fillTuvaTiedotSection = () => {
   getByTestId('tiedotSection').within(() => {
     getByTestId('toteutuksenNimi').within(() => {
-      cy.get('input').clear().pipe(paste('toteutuksen nimi'));
+      cy.get('input').should('have.value', 'koulutustyypit.tuva');
     });
 
-    cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' })
+    cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')
       .should('have.value', '38 viikkoa');
 
@@ -173,10 +173,10 @@ const fillTuvaTiedotSection = () => {
 const fillTelmaTiedotSection = () => {
   getByTestId('tiedotSection').within(() => {
     getByTestId('toteutuksenNimi').within(() => {
-      cy.get('input').clear().pipe(paste('toteutuksen nimi'));
+      cy.get('input').should('have.value', 'koulutustyypit.telma');
     });
 
-    cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' })
+    cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')
       .should('have.value', '60 osaamispistettä');
 

@@ -498,7 +498,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
     "aloituspaikat": {
       "ensikertalaisille": null,
       "kuvaus": {},
-      "lukumaara": null
+      "lukumaara": 50
     },
     "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": true,
@@ -551,7 +551,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
     "aloituspaikat": {
       "ensikertalaisille": null,
       "kuvaus": {},
-      "lukumaara": null
+      "lukumaara": 50
     },
     "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": true,
@@ -602,7 +602,7 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
     "aloituspaikat": {
       "ensikertalaisille": null,
       "kuvaus": {},
-      "lukumaara": null
+      "lukumaara": 50
     },
     "hakukohteenLinja": {
       "alinHyvaksyttyKeskiarvo": 3.5,

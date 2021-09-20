@@ -15,19 +15,15 @@ export const AloituspaikatSection = ({ language, koulutustyyppi, name }) => {
   const aloituspaikkamaaraName = `${name}.aloituspaikkamaara`;
 
   const aloituspaikatField = (
-    <>
-      <FormLabel htmlFor={aloituspaikkamaaraName}>
-        {t('hakukohdelomake.aloituspaikkojenLukumaara')}
-      </FormLabel>
-
-      <Field
-        id={aloituspaikkamaaraName}
-        name={aloituspaikkamaaraName}
-        component={FormFieldInput}
-        type="number"
-        {...getTestIdProps('aloituspaikkamaara')}
-      />
-    </>
+    <Field
+      id={aloituspaikkamaaraName}
+      label={t('hakukohdelomake.aloituspaikkojenLukumaara')}
+      name={aloituspaikkamaaraName}
+      component={FormFieldInput}
+      type="number"
+      required
+      {...getTestIdProps('aloituspaikkamaara')}
+    />
   );
 
   const ensikertalaismaaraName = `${name}.ensikertalaismaara`;

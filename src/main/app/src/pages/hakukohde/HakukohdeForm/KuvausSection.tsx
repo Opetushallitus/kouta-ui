@@ -79,27 +79,20 @@ export const KuvausSection = ({
             {t('hakukohdelomake.avaaValintaperuste')}
           </Button>
         )}
-        {preventCreation ? (
-          <Button
-            variant="outlined"
-            color="primary"
-            as="a"
-            target="_blank"
-            disabled={true}
-          >
-            {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
-          </Button>
-        ) : (
-          <Button
-            variant="outlined"
-            color="primary"
-            as="a"
-            href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}/koulutustyyppi/${koulutustyyppi}`}
-            target="_blank"
-          >
-            {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
-          </Button>
-        )}
+        <Button
+          variant="outlined"
+          color="primary"
+          as="a"
+          target="_blank"
+          disabled={preventCreation}
+          {...(preventCreation
+            ? {}
+            : {
+                href: `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}/koulutustyyppi/${koulutustyyppi}`,
+              })}
+        >
+          {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
+        </Button>
       </Buttons>
       <Field
         name={`${name}.kynnysehto.${language}`}

@@ -12,6 +12,7 @@ import createErrorBuilder, {
   validateExistence,
   validateExistenceOfDate,
   validateTranslations,
+  validateInteger,
 } from '../form/createErrorBuilder';
 import {
   getKielivalinta,
@@ -74,6 +75,7 @@ export const validateHakukohdeForm =
         validateExistence('tila'),
         validateArrayMinLength('kieliversiot', 1),
         validateTranslations('perustiedot.nimi'),
+        validateInteger('aloituspaikat.aloituspaikkamaara', { min: 0 }),
         validateOptionalTranslatedField('aloituspaikat.aloituspaikkakuvaus'),
 
         validateIfJulkaistu(

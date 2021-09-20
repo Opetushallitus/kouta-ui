@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
@@ -74,12 +75,14 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
         </Box>
       </Box>
       <Box mb={2}>
-        <Field
-          name={`${name}.jarjestetaanErityisopetuksena`}
-          component={FormFieldSwitch}
-        >
-          {t('toteutuslomake.jarjestetaanErityisopetuksena')}
-        </Field>
+        {koulutustyyppi !== KOULUTUSTYYPPI.TELMA && (
+          <Field
+            name={`${name}.jarjestetaanErityisopetuksena`}
+            component={FormFieldSwitch}
+          >
+            {t('toteutuslomake.jarjestetaanErityisopetuksena')}
+          </Field>
+        )}
       </Box>
     </>
   );

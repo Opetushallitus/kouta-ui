@@ -4,13 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
-import { Box, FormControl, Input } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import { Box } from '#/src/components/virkailija';
 import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
-import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import { getOpintojenLaajuusWithTranslations } from '#/src/utils/getOpintojenLaajuusWithTranslations';
 
 export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const { t } = useTranslation();
@@ -20,8 +18,9 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   );
 
   const { koodi: laajuusYksikko } = useKoodi('opintojenlaajuusyksikko_6');
+  const laajuusKoodiNimet = laajuusKoodi?.metadata;
+  const laajuusYksikkoNimet = laajuusYksikko?.metadata;
 
-  const userLanguage = useUserLanguage();
   const koulutustyyppi = koulutus.koulutustyyppi;
   const { change } = useBoundFormActions();
   useEffect(() => {
@@ -33,13 +32,16 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
     return () => change(`${name}.nimi`, {});
   }, [change, koulutustyyppi, name, t]);
 
-  let toteutuksenLaajuus = getKoodiNimiTranslation(laajuusKoodi, userLanguage);
-
-  if (koulutus.koulutustyyppi === KOULUTUSTYYPPI.TELMA) {
-    toteutuksenLaajuus =
-      toteutuksenLaajuus +
-      ` ${getKoodiNimiTranslation(laajuusYksikko, userLanguage)}`;
-  }
+  useEffect(() => {
+    change(
+      `${name}.laajuus`,
+      getOpintojenLaajuusWithTranslations(
+        laajuusKoodiNimet,
+        laajuusYksikkoNimet
+      )
+    );
+    return () => change(`${name}.laajuus`, {});
+  }, [change, laajuusKoodiNimet, laajuusYksikkoNimet, name, t]);
 
   return (
     <>
@@ -54,12 +56,13 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
       </Box>
       <Box mb={2} display="flex">
         <Box>
-          <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
-            <Input
-              value={toteutuksenLaajuus || ''}
-              {...getTestIdProps('laajuus')}
-            />
-          </FormControl>
+          <Field
+            name={`${name}.laajuus.${language}`}
+            component={FormFieldInput}
+            label={t('toteutuslomake.laajuus')}
+            required
+            disabled
+          />
         </Box>
         <Box mx={2} {...getTestIdProps('aloituspaikat')}>
           <Field

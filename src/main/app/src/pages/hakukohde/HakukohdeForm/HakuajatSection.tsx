@@ -9,8 +9,9 @@ import { HakuajatFields } from '#/src/components/HakuajatFields';
 import { Box, Typography } from '#/src/components/virkailija';
 import { NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { formatDateValue } from '#/src/utils';
-import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
+import isRestrictedDuetoYhteishaku from '#/src/utils/isRestrictedDuetoYhteishaku';
 
 const HakuaikaInterval = ({ haku }) => {
   const { t } = useTranslation();
@@ -51,10 +52,12 @@ const CustomHakuaika = ({ name }) => {
   );
 };
 
-export const HakuajatSection = ({ haku, name }) => {
+export const HakuajatSection = ({ haku, name, koulutustyyppi }) => {
   const { t } = useTranslation();
   const eriHakuaika = useFieldValue(`${name}.eriHakuaika`);
-  const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
+  const preventHakuaikaModification =
+    !useIsOphVirkailija() &&
+    isRestrictedDuetoYhteishaku(haku?.hakutapaKoodiUri, koulutustyyppi);
 
   return (
     <>
@@ -64,7 +67,7 @@ export const HakuajatSection = ({ haku, name }) => {
       <Field
         name={`${name}.eriHakuaika`}
         component={FormFieldSwitch}
-        disabled={isYhteishaku}
+        disabled={preventHakuaikaModification}
       >
         {t('hakukohdelomake.hakukohteellaEriHakuaika')}
       </Field>

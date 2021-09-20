@@ -10,7 +10,8 @@ import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import isRestrictedDuetoYhteishaku from '#/src/utils/isRestrictedDuetoYhteishaku';
 import { useValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
 const Buttons = styled.div`
@@ -37,7 +38,9 @@ export const KuvausSection = ({
   const kuvausValues = useFieldValue(name);
   const valintaperusteOid = kuvausValues?.valintaperuste?.value;
   const kieliValinnat = languages;
-  const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
+  const preventCreation =
+    !useIsOphVirkailija() &&
+    isRestrictedDuetoYhteishaku(haku?.hakutapaKoodiUri, koulutustyyppi);
 
   const { data, refetch } = useValintaperusteet({
     hakuOid,
@@ -76,16 +79,27 @@ export const KuvausSection = ({
             {t('hakukohdelomake.avaaValintaperuste')}
           </Button>
         )}
-        <Button
-          variant="outlined"
-          color="primary"
-          as="a"
-          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}/koulutustyyppi/${koulutustyyppi}`}
-          target="_blank"
-          disabled={isYhteishaku}
-        >
-          {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
-        </Button>
+        {preventCreation ? (
+          <Button
+            variant="outlined"
+            color="primary"
+            as="a"
+            target="_blank"
+            disabled={true}
+          >
+            {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="primary"
+            as="a"
+            href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}/koulutustyyppi/${koulutustyyppi}`}
+            target="_blank"
+          >
+            {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
+          </Button>
+        )}
       </Buttons>
       <Field
         name={`${name}.kynnysehto.${language}`}

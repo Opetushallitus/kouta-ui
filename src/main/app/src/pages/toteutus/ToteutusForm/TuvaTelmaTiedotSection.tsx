@@ -17,9 +17,9 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const { koodi: laajuusKoodi } = useKoodi(
     koulutus.metadata.opintojenLaajuusKoodiUri
   );
-  const { koodi: laajuusYksikko } = useKoodi('opintojenlaajuusyksikko_6');
+  const { koodi: laajuusyksikko } = useKoodi('opintojenlaajuusyksikko_6');
   const laajuusKoodiNimet = laajuusKoodi?.metadata;
-  const laajuusYksikkoNimet = laajuusYksikko?.metadata;
+  const laajuusyksikkoNimet = laajuusyksikko?.metadata;
 
   const koulutustyyppi = koulutus.koulutustyyppi;
   const { change } = useBoundFormActions();
@@ -35,10 +35,10 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   useEffect(() => {
     change(
       `${name}.laajuus`,
-      getOpintojenLaajuusTranslations(laajuusKoodiNimet, laajuusYksikkoNimet)
+      getOpintojenLaajuusTranslations(laajuusKoodiNimet, laajuusyksikkoNimet)
     );
     return () => change(`${name}.laajuus`, {});
-  }, [change, laajuusKoodiNimet, laajuusYksikkoNimet, name, t]);
+  }, [change, laajuusKoodiNimet, laajuusyksikkoNimet, name, t]);
 
   return (
     <>

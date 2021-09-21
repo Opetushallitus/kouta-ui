@@ -101,6 +101,7 @@ const fillLukiolinjaSection = () => {
 
       cy.findAllByTestId(/^painotettuOppiaine-\d?$/).should('have.length', 1);
     });
+    jatka();
   });
 };
 
@@ -121,6 +122,19 @@ const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
     fillAlkamiskausiSection();
     fillLomakeSection();
 
+    jatka();
+  });
+};
+
+const skipPerustiedot = () => {
+  getByTestId('perustiedotSection').within(() => {
+    jatka();
+  });
+};
+
+const fillLomakeSectionOnly = (type: string = 'ataru') => {
+  getByTestId('perustiedotSection').within(() => {
+    fillLomakeSection(type);
     jatka();
   });
 };
@@ -301,7 +315,8 @@ export const createHakukohdeForm = () => {
 
       fillKieliversiotSection({ jatka: true });
       fillPohjakoulutusvaatimusSection();
-      fillLomakeSection('muu');
+      fillLomakeSectionOnly('muu');
+      fillAloituspaikatSection({ isKorkeakoulu: false });
 
       tallenna();
 
@@ -325,7 +340,8 @@ export const createHakukohdeForm = () => {
 
       fillKieliversiotSection({ jatka: true });
       fillPohjakoulutusvaatimusSection();
-      fillLomakeSection('ei sähköistä');
+      fillLomakeSectionOnly('ei sähköistä');
+      fillAloituspaikatSection({ isKorkeakoulu: true });
 
       tallenna();
 
@@ -350,6 +366,8 @@ export const createHakukohdeForm = () => {
       fillKieliversiotSection({ jatka: true });
       fillPohjakoulutusvaatimusSection();
       fillLukiolinjaSection();
+      skipPerustiedot();
+      fillAloituspaikatSection({ isKorkeakoulu: false });
 
       tallenna();
 

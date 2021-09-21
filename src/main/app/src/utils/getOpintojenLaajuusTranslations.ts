@@ -2,13 +2,13 @@ import _ from 'lodash';
 
 import { LANGUAGES } from '#/src/constants';
 
-export const getOpintojenLaajuusWithTranslations = (
+export const getOpintojenLaajuusTranslations = (
   laajuudetFromKoodisto,
-  laajuusYksikotFromKoodisto
+  laajuusyksikotFromKoodisto
 ) => {
   const translations = {};
   const defaultLanguage = 'FI';
-  if (laajuudetFromKoodisto && laajuusYksikotFromKoodisto) {
+  if (laajuudetFromKoodisto && laajuusyksikotFromKoodisto) {
     _.forEach(LANGUAGES, language => {
       const lang = language.toUpperCase();
       const foundKieli = _.find(laajuudetFromKoodisto, ['kieli', lang]);
@@ -17,16 +17,17 @@ export const getOpintojenLaajuusWithTranslations = (
         ? foundKieli.nimi
         : _.find(laajuudetFromKoodisto, ['kieli', defaultLanguage]).nimi;
 
-      const includesYksikko = /\D+/.test(laajuudenNimi);
+      const includesYksikko = /[A-Za-z]+/.test(laajuudenNimi);
       let yksikko = '';
       if (!includesYksikko) {
         yksikko = ` ${
-          _.find(laajuusYksikotFromKoodisto, ['kieli', lang]).nimi
+          _.find(laajuusyksikotFromKoodisto, ['kieli', lang]).nimi
         }`;
       }
 
       return (translations[language] = `${laajuudenNimi}${yksikko}`);
     });
   }
+
   return translations;
 };

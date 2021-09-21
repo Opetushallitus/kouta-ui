@@ -9,7 +9,7 @@ import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
-import { getOpintojenLaajuusWithTranslations } from '#/src/utils/getOpintojenLaajuusWithTranslations';
+import { getOpintojenLaajuusTranslations } from '#/src/utils/getOpintojenLaajuusTranslations';
 
 export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const { t } = useTranslation();
@@ -17,7 +17,6 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const { koodi: laajuusKoodi } = useKoodi(
     koulutus.metadata.opintojenLaajuusKoodiUri
   );
-
   const { koodi: laajuusYksikko } = useKoodi('opintojenlaajuusyksikko_6');
   const laajuusKoodiNimet = laajuusKoodi?.metadata;
   const laajuusYksikkoNimet = laajuusYksikko?.metadata;
@@ -36,10 +35,7 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   useEffect(() => {
     change(
       `${name}.laajuus`,
-      getOpintojenLaajuusWithTranslations(
-        laajuusKoodiNimet,
-        laajuusYksikkoNimet
-      )
+      getOpintojenLaajuusTranslations(laajuusKoodiNimet, laajuusYksikkoNimet)
     );
     return () => change(`${name}.laajuus`, {});
   }, [change, laajuusKoodiNimet, laajuusYksikkoNimet, name, t]);

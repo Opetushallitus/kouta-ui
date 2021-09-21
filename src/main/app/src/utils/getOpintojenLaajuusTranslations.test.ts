@@ -1,6 +1,26 @@
-import { getOpintojenLaajuusWithTranslations } from './getOpintojenLaajuusWithTranslations';
+import { getOpintojenLaajuusTranslations } from './getOpintojenLaajuusTranslations';
 
-test('getOpintojenLaajuusWithTranslations should give translations for TUVA laajuus', () => {
+test('getOpintojenLaajuusTranslations should give translations for TUVA laajuus', () => {
+  const laajuusyksikotFromKoodisto = [
+    {
+      nimi: 'kompetenspoäng',
+      kuvaus: 'kompetenspoäng',
+      lyhytNimi: 'kp',
+      kieli: 'SV',
+    },
+    {
+      nimi: 'osaamispistettä',
+      kuvaus: 'osaamispistettä',
+      kieli: 'FI',
+    },
+    {
+      nimi: 'ECVET competence points',
+      kuvaus: 'competence points',
+      lyhytNimi: 'competence points',
+      kieli: 'EN',
+    },
+  ];
+
   const laajuudetFromKoodisto = [
     {
       nimi: '38 viikkoa',
@@ -22,12 +42,15 @@ test('getOpintojenLaajuusWithTranslations should give translations for TUVA laaj
     en: '38 weeks',
   };
 
-  expect(getOpintojenLaajuusWithTranslations(laajuudetFromKoodisto)).toEqual(
-    translations
-  );
+  expect(
+    getOpintojenLaajuusTranslations(
+      laajuudetFromKoodisto,
+      laajuusyksikotFromKoodisto
+    )
+  ).toEqual(translations);
 });
 
-test('getOpintojenLaajuusWithTranslations should form translations from laajuus and laajuusyksikko for TELMA', () => {
+test('getOpintojenLaajuusTranslations should form translations from laajuus and laajuusyksikko for TELMA', () => {
   const laajuudetFromKoodisto = [
     {
       nimi: '60',
@@ -35,7 +58,7 @@ test('getOpintojenLaajuusWithTranslations should form translations from laajuus 
     },
   ];
 
-  const laajuusYksikotFromKoodisto = [
+  const laajuusyksikotFromKoodisto = [
     {
       nimi: 'kompetenspoäng',
       kuvaus: 'kompetenspoäng',
@@ -62,9 +85,9 @@ test('getOpintojenLaajuusWithTranslations should form translations from laajuus 
   };
 
   expect(
-    getOpintojenLaajuusWithTranslations(
+    getOpintojenLaajuusTranslations(
       laajuudetFromKoodisto,
-      laajuusYksikotFromKoodisto
+      laajuusyksikotFromKoodisto
     )
   ).toEqual(translations);
 });

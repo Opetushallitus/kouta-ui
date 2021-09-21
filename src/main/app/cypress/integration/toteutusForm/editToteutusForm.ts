@@ -140,6 +140,10 @@ export const editToteutusForm = () => {
 
       fillKieliversiotSection();
 
+      cy.findByLabelText(/toteutuslomake.laajuus/)
+        .should('be.disabled')
+        .should('have.value', '38 viikkoa');
+
       cy.findByTestId('hakukohteetSection').should('exist');
 
       tallenna();
@@ -152,6 +156,10 @@ export const editToteutusForm = () => {
       prepareTest('telma');
 
       fillKieliversiotSection();
+
+      cy.findByLabelText(/toteutuslomake.laajuus/)
+        .should('be.disabled')
+        .should('have.value', '60 osaamispistettä');
 
       cy.findByTestId('hakukohteetSection').should('exist');
 

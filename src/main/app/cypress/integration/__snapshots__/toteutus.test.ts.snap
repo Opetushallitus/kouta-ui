@@ -81,7 +81,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -209,7 +209,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -355,8 +355,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1",
-        "oppilaitoksenopetuskieli_4#1"
+        "oppilaitoksenopetuskieli_1#2",
+        "oppilaitoksenopetuskieli_4#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -521,7 +521,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -1280,7 +1280,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"

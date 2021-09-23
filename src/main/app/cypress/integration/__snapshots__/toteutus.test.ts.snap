@@ -1221,15 +1221,8 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     ],
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
-    "hakuaika": {
-      "alkaa": "2050-04-01T00:00",
-      "paattyy": "2050-09-01T00:00"
-    },
-    "hakulomakeLinkki": {
-      "fi": "http://example.com"
-    },
-    "hakulomaketyyppi": "muu",
-    "hakutermi": "hakeutuminen",
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [],
@@ -1249,12 +1242,8 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
       "sv": "38 viikkoa"
     },
     "laajuusyksikkoKoodiUri": null,
-    "lisatietoaHakeutumisesta": {
-      "fi": "<p>lisätiedot</p>"
-    },
-    "lisatietoaValintaperusteista": {
-      "fi": "<p>lisätiedot valintaperusteista</p>"
-    },
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
       "koulutuksenAlkamiskausi": {
@@ -1500,15 +1489,8 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     ],
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
-    "hakuaika": {
-      "alkaa": "2050-04-01T00:00",
-      "paattyy": "2050-09-01T00:00"
-    },
-    "hakulomakeLinkki": {
-      "fi": "http://example.com"
-    },
-    "hakulomaketyyppi": "muu",
-    "hakutermi": "hakeutuminen",
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [],
@@ -1528,12 +1510,8 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
       "sv": "60 kompetenspoäng"
     },
     "laajuusyksikkoKoodiUri": null,
-    "lisatietoaHakeutumisesta": {
-      "fi": "<p>lisätiedot</p>"
-    },
-    "lisatietoaValintaperusteista": {
-      "fi": "<p>lisätiedot valintaperusteista</p>"
-    },
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
       "koulutuksenAlkamiskausi": {

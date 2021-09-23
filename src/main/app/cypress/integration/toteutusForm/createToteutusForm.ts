@@ -565,7 +565,6 @@ export const createToteutusForm = () => {
       fillTeemakuvaSection();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
-      fillHakeutumisTaiIlmoittautumistapaSection();
       fillYhteystiedotSection();
       fillTilaSection();
 
@@ -592,7 +591,6 @@ export const createToteutusForm = () => {
       fillTeemakuvaSection();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
-      fillHakeutumisTaiIlmoittautumistapaSection();
       fillYhteystiedotSection();
       fillTilaSection();
 

@@ -226,12 +226,9 @@ const ToteutusForm = ({
           languages={languages}
           organisaatioOid={organisaatioOid}
         />
-        {[
-          KOULUTUSTYYPPI.TUTKINNON_OSA,
-          KOULUTUSTYYPPI.OSAAMISALA,
-          KOULUTUSTYYPPI.TUVA,
-          KOULUTUSTYYPPI.TELMA,
-        ].includes(koulutustyyppi) && (
+        {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+          koulutustyyppi
+        ) && (
           <>
             <FormCollapse
               section="hakeutumisTaiIlmoittautumistapa"
@@ -239,17 +236,15 @@ const ToteutusForm = ({
               Component={HakeutumisTaiIlmoittautumistapaSection}
               languages={languages}
             />
-            {hakeutumisTaiIlmoittautumistapa === MUU &&
-              koulutustyyppi !== KOULUTUSTYYPPI.TUVA &&
-              koulutustyyppi !== KOULUTUSTYYPPI.TELMA && (
-                <FormCollapse
-                  section="soraKuvaus"
-                  header={t('yleiset.soraKuvaus')}
-                  Component={SoraKuvausSection}
-                  organisaatioOid={organisaatioOid}
-                  languages={languages}
-                />
-              )}
+            {hakeutumisTaiIlmoittautumistapa === MUU && (
+              <FormCollapse
+                section="soraKuvaus"
+                header={t('yleiset.soraKuvaus')}
+                Component={SoraKuvausSection}
+                organisaatioOid={organisaatioOid}
+                languages={languages}
+              />
+            )}
           </>
         )}
         <FormCollapse

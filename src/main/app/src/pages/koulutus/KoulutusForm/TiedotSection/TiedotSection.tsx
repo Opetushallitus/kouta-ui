@@ -46,7 +46,6 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
         </Box>
       )}
       {[
-        KOULUTUSTYYPPI.VALMA,
         KOULUTUSTYYPPI.TELMA,
         KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
       ].includes(koulutustyyppi) && (

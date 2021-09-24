@@ -412,7 +412,7 @@ export const createKoulutusForm = () => {
   it(
     'should be able to create TELMA-koulutus',
     mutationTest(() => {
-      fillCommon({ koulutustyyppiPath: ['telma'] });
+      fillCommon({ koulutustyyppiPath: ['ammatillinen', 'telma'] });
 
       getByTestId('informationSection').within(() => {
         getByTestId('opintojenlaajuusSelect')

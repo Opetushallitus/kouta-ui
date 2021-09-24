@@ -173,6 +173,7 @@ export const HakukohteenLinjaSection = ({
             />
           </Box>
 
+          {/* 
           <FieldGroup
             title={t('hakukohdelomake.painotetutArvosanat')}
             {...getTestIdProps('painotetutArvosanat')}
@@ -183,6 +184,7 @@ export const HakukohteenLinjaSection = ({
               toteutus={toteutus}
             />
           </FieldGroup>
+           */}
         </FieldGroup>
       )}
     </>

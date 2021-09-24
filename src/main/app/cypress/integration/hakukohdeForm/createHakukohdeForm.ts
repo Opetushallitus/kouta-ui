@@ -70,6 +70,7 @@ const fillLukiolinjaSection = () => {
 
     typeToEditor('Lisätietoa');
 
+    /*
     cy.findByLabelText(/hakukohdelomake\.painotetutArvosanat/).within(() => {
       cy.findByRole('button', {
         name: /hakukohdelomake\.lisaaPainotettavaOppiaine/,
@@ -104,7 +105,7 @@ const fillLukiolinjaSection = () => {
           expect($oppiaineet).to.have.lengthOf(1);
         }
       );
-    });
+    });*/
   });
 };
 

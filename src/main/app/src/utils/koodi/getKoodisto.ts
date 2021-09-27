@@ -18,7 +18,10 @@ const getKoodisto = async ({
     apiUrls.url('koodisto-service.koodi', koodistoUri),
     {
       params: {
-        ...(koodistoVersio ? { koodistoVersio } : {}),
+        ...(koodistoVersio
+          ? // Jos annetaan koodiston versio, täytyy noutaa myös koodit, jotka eivät ole voimassa, koska vanhempi versio ei yleensä ole enää voimassa.
+            { koodistoVersio, onlyValidKoodis: false }
+          : { onlyValidKoodis: true }),
       },
     }
   );

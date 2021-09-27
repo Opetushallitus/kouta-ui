@@ -60,7 +60,7 @@ export const development = ({ isCypress }) => ({
   'koodisto-service.base-url': `${virkailijaDevUrl}/koodisto-service`,
   'koodisto-service.sisaltyy-alakoodit': `${virkailijaDevUrl}/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2`,
   'koodisto-service.sisaltyy-ylakoodit': `${virkailijaDevUrl}/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1`,
-  'koodisto-service.koodi': `${virkailijaDevUrl}/koodisto-service/rest/json/$1/koodi?onlyValidKoodis=true`,
+  'koodisto-service.koodi': `${virkailijaDevUrl}/koodisto-service/rest/json/$1/koodi`,
   'koodisto-service.codeelement': `${virkailijaDevUrl}/koodisto-service/rest/codeelement/$1/$2`,
   'eperusteet-service.base-url': `${virkailijaDevUrl}/eperusteet-service`,
   'eperusteet-service.peruste-by-id': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1`,

@@ -232,6 +232,8 @@ export const KoulutusForm = ({
           {[
             KOULUTUSTYYPPI.LUKIOKOULUTUS,
             KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse
@@ -245,28 +247,27 @@ export const KoulutusForm = ({
             />
           )}
 
-          {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
-            <FormCollapse
-              section="lisatiedot"
-              header={t('koulutuslomake.koulutuksenLisatiedot')}
-              Component={LisatiedotSection}
-              languages={languageTabs}
-              disabled={onlyTarjoajaRights}
-            />
-          )}
-
           {![
             KOULUTUSTYYPPI.TUVA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
           ].includes(koulutustyyppi) && (
-            <FormCollapse
-              section="soraKuvaus"
-              header={t('yleiset.soraKuvaus')}
-              Component={SoraKuvausSection}
-              organisaatioOid={organisaatioOid}
-              languages={languageTabs}
-            />
+            <>
+              <FormCollapse
+                section="lisatiedot"
+                header={t('koulutuslomake.koulutuksenLisatiedot')}
+                Component={LisatiedotSection}
+                languages={languageTabs}
+                disabled={onlyTarjoajaRights}
+              />
+              <FormCollapse
+                section="soraKuvaus"
+                header={t('yleiset.soraKuvaus')}
+                Component={SoraKuvausSection}
+                organisaatioOid={organisaatioOid}
+                languages={languageTabs}
+              />
+            </>
           )}
 
           <FormCollapse

@@ -77,6 +77,7 @@ const ToteutusForm = ({
   const kaytetaanHakemuspalvelua = [
     KOULUTUSTYYPPI.TUTKINNON_OSA,
     KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
   ].includes(koulutustyyppi)
     ? hakeutumisTaiIlmoittautumistapa === ATARU
     : true;
@@ -173,6 +174,7 @@ const ToteutusForm = ({
             ),
           ],
         ])(koulutustyyppi)}
+
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
             section="lukiolinjat"

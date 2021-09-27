@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
+import { LANGUAGES } from '#/src/constants';
+import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
@@ -17,6 +19,23 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
     koulutus.metadata.opintojenLaajuusKoodiUri
   );
 
+  const koulutustyyppi = koulutus.koulutustyyppi;
+  const { change } = useBoundFormActions();
+  useEffect(() => {
+    change(
+      `${name}.nimi`,
+      LANGUAGES.reduce((translations, lng) => {
+        return {
+          ...translations,
+          [lng]: t(`koulutustyypit.${koulutustyyppi}`, {
+            lng: lng,
+          }),
+        };
+      }, {})
+    );
+    return () => change(`${name}.nimi`, {});
+  }, [change, koulutustyyppi, name, t]);
+
   const userLanguage = useUserLanguage();
 
   return (
@@ -27,6 +46,7 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
           component={FormFieldInput}
           label={t('toteutuslomake.toteutuksenNimi')}
           required
+          disabled
         />
       </Box>
       <Box mb={2} display="flex">

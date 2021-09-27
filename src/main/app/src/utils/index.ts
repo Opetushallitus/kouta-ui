@@ -195,7 +195,7 @@ export const toSelectValueList = _fp.map((value: string) => ({
 }));
 
 // Returns field name without language part
-export const getFieldName = (name: string) =>
+export const getFieldNameWithoutLanguage = (name: string) =>
   name.match(`^(.+?)(\\.(${LANGUAGES.join('|')}))?$`)?.[1];
 
 const isEmptyTranslatedField = value =>
@@ -228,13 +228,13 @@ export const getValuesForSaving = (
 
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
   _.forEach(unregisteredFields, ({ name }) => {
-    const fieldName = getFieldName(name);
+    const fieldName = getFieldNameWithoutLanguage(name);
     _.set(saveableValues, fieldName, null);
   });
 
   // Ensure that the fields that are registered (visible) will be saved
   _.forEach(registeredFields, ({ name }) => {
-    const fieldName = getFieldName(name);
+    const fieldName = getFieldNameWithoutLanguage(name);
     const fieldValue = _.get(values, fieldName);
 
     const valueForSave = isEmptyTranslatedField(fieldValue) ? {} : fieldValue;
@@ -285,4 +285,4 @@ export const formatKoodiLabelWithArvo = (koodi, language) =>
   `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`;
 
 export const isIn = (coll: Array<unknown>) => (val: unknown) =>
-  _fp.includes(val, coll);
+  coll?.includes(val);

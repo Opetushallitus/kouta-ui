@@ -7,6 +7,7 @@ import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FormControl, FormLabel } from '#/src/components/virkailija';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import { useFormIsDisabled } from '#/src/contexts/FormContext';
+import { getFieldNameWithoutLanguage } from '#/src/utils';
 
 export const createComponent = (Component, mapProps = simpleMapProps) => {
   const InputComponent = props => {
@@ -35,7 +36,10 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
     const readOnly = useFormIsDisabled();
 
     return (
-      <div className={isError ? FIELD_ERROR_CLASSNAME : ''}>
+      <div
+        className={isError ? FIELD_ERROR_CLASSNAME : ''}
+        data-testid={`form-control_${getFieldNameWithoutLanguage(name)}`}
+      >
         <FormControl
           error={isError}
           helperText={

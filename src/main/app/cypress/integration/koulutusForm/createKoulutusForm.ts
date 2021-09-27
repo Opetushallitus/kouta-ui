@@ -18,11 +18,16 @@ import {
   fillKoulutustyyppiSection,
   typeToEditor,
   wrapMutationTest,
+  withinSection,
+  getSelectByLabel,
+  pFillSelect,
+  getInputByLabel,
+  pFillAsyncSelect,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
 const fillLisatiedotSection = () => {
-  getByTestId('lisatiedotSection').within(() => {
+  withinSection('lisatiedot', () => {
     getByTestId('osiotSelect').click();
 
     getByTestId('osiotSelect').within(() => {
@@ -39,27 +44,17 @@ const fillLisatiedotSection = () => {
   });
 };
 
-const fillTeemakuvaSection = () => {
-  getByTestId('teemakuvaSection').within(() => {
-    jatka();
-  });
-};
-
 const fillSoraKuvausSection = () => {
-  getByTestId('soraKuvausSection').within(() => {
+  withinSection('soraKuvaus', () => {
     selectOption('Sora-kuvaus 1');
-
-    jatka();
   });
 };
 
 const fillJarjestajaSection = () => {
-  getByTestId('tarjoajatSection').within(() => {
+  withinSection('tarjoajat', () => {
     getByTestId('jarjestajatSelection').within(() => {
       fillTreeSelect(['1.2.1.1.1.1']);
     });
-
-    jatka();
   });
 };
 
@@ -70,9 +65,8 @@ const fillCommon = ({ koulutustyyppiPath }) => {
 };
 
 const fillNakyvyysSection = () => {
-  getByTestId('julkinenSection').within(() => {
+  withinSection('julkinen', () => {
     getCheckbox(null).click({ force: true });
-    jatka();
   });
 };
 
@@ -97,7 +91,7 @@ export const createKoulutusForm = () => {
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['amm'] });
 
-      getByTestId('informationSection').within(() => {
+      withinSection('information', () => {
         getByTestId('koulutusSelect').click();
 
         getByTestId('koulutusSelect').within(() => {
@@ -107,19 +101,11 @@ export const createKoulutusForm = () => {
         getByTestId('ePerusteSelect').within(() => {
           fillAsyncSelect('Kaivosalan perustutkinto');
         });
-
-        jatka();
-      });
-
-      getByTestId('descriptionSection').within(() => {
-        jatka();
       });
 
       fillLisatiedotSection();
 
       fillSoraKuvausSection();
-
-      fillTeemakuvaSection();
 
       fillJarjestajaSection();
 
@@ -136,7 +122,7 @@ export const createKoulutusForm = () => {
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-osaamisala'] });
 
-      getByTestId('osaamisalaSection').within(() => {
+      withinSection('osaamisala', () => {
         getByTestId('koulutusSelect').click();
 
         getByTestId('koulutusSelect').within(() => {
@@ -158,19 +144,11 @@ export const createKoulutusForm = () => {
             '#/fi/esitys/6777660/reformi/sisalto/6858226'
           );
         });
-
-        jatka();
-      });
-
-      getByTestId('osaamisalanKuvausSection').within(() => {
-        jatka();
       });
 
       fillLisatiedotSection();
 
       fillSoraKuvausSection();
-
-      fillTeemakuvaSection();
 
       fillJarjestajaSection();
 
@@ -187,14 +165,12 @@ export const createKoulutusForm = () => {
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-tutkinnon-osa'] });
 
-      getByTestId('tutkinnonosatSection').within(() => {
+      withinSection('tutkinnonosat', () => {
         getByTestId('lisaaKoulutusButton').click();
 
-        getByTestId('koulutusSelect').click();
-
-        getByTestId('koulutusSelect').within(() => {
-          fillAsyncSelect('Kaivosalan perustutkinto');
-        });
+        getSelectByLabel('yleiset.valitseKoulutus').pipe(
+          pFillAsyncSelect('Kaivosalan perustutkinto')
+        );
 
         getByTestId('ePerusteSelect').within(() => {
           fillAsyncSelect('Kaivosalan perustutkinto');
@@ -213,14 +189,14 @@ export const createKoulutusForm = () => {
         });
       });
 
-      getByTestId('nimiSection').within(() => {
-        cy.findByLabelText(/koulutuslomake\.lisaaKoulutuksenNimi/).should(
+      withinSection('nimi', () => {
+        getInputByLabel('koulutuslomake.lisaaKoulutuksenNimi').should(
           'have.value',
           'Louhintaporaus'
         );
       });
 
-      getByTestId('tutkinnonosatSection').within(() => {
+      withinSection('tutkinnonosat', () => {
         getByTestId('tutkinnonOsatSelect').within(() => {
           fillAsyncSelect('Kaivosmittaus');
         });
@@ -232,23 +208,11 @@ export const createKoulutusForm = () => {
             '#/fi/esitys/6777660/reformi/tutkinnonosat/6778207'
           );
         });
-
-        jatka();
-      });
-
-      getByTestId('nimiSection').within(() => {
-        jatka();
-      });
-
-      getByTestId('tutkinnonOsienKuvausSection').within(() => {
-        jatka();
       });
 
       fillLisatiedotSection();
 
       fillSoraKuvausSection();
-
-      fillTeemakuvaSection();
 
       fillJarjestajaSection();
 
@@ -265,57 +229,39 @@ export const createKoulutusForm = () => {
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'amk'] });
 
-      getByTestId('informationSection').within(() => {
-        getByTestId('korkeakoulutuskoodiSelect').click();
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.valitseKoulutukset').pipe(
+          pFillAsyncSelect('Fysioterapeutti (AMK)')
+        );
 
-        getByTestId('korkeakoulutuskoodiSelect').within(() => {
-          fillAsyncSelect('Fysioterapeutti (AMK)');
-        });
+        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
+          pFillSelect('300')
+        );
 
-        getByTestId('tutkintonimikeSelect').click();
+        getSelectByLabel('koulutuslomake.valitseTutkintonimike').pipe(
+          pFillAsyncSelect('Fysioterapeutti (AMK)')
+        );
 
-        getByTestId('tutkintonimikeSelect').within(() => {
-          getSelectOption('Arkkitehti').click({ force: true });
-        });
+        getSelectByLabel('koulutuslomake.valitseKoulutusalat').pipe(
+          pFillAsyncSelect('Terveys')
+        );
 
-        getByTestId('koulutusalatSelect').within(() => {
-          selectOption('Arkkitehtuuri ja rakentaminen');
-        });
-
-        getByTestId('opintojenLaajuusSelect').click();
-
-        getByTestId('opintojenLaajuusSelect').within(() => {
-          getSelectOption('300').click({ force: true });
-        });
-
-        getByTestId('nimiInput').within(() => {
-          cy.get('input').clear().pipe(paste('Tiedot nimi'));
-        });
-
-        jatka();
+        getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').pipe(
+          paste('Tiedot nimi')
+        );
       });
 
-      getByTestId('descriptionSection').within(() => {
-        getByTestId('kuvauksenNimiInput').within(() => {
-          cy.get('input').pipe(paste('Kuvauksen nimi'));
-        });
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
 
-        getByTestId('kuvausInput').within(() => {
-          typeToEditor('Kuvaus');
-        });
-
-        jatka();
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 
       fillLisatiedotSection();
 
       fillSoraKuvausSection();
 
-      fillTeemakuvaSection();
-
       fillJarjestajaSection();
-
-      fillNakyvyysSection();
 
       fillTilaSection();
 
@@ -328,33 +274,21 @@ export const createKoulutusForm = () => {
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['lk'] });
 
-      getByTestId('informationSection').within(() => {
-        getByTestId('koulutusSelect').click();
-
-        getByTestId('koulutusSelect').within(() => {
-          fillAsyncSelect('Ylioppilastutkinto');
-        });
-
-        jatka();
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.valitseKoulutus').pipe(
+          pFillAsyncSelect('Ylioppilastutkinto')
+        );
       });
 
-      getByTestId('descriptionSection').within(() => {
-        getByTestId('kuvausInput').within(() => {
-          typeToEditor('Kuvaus');
-        });
-
-        jatka();
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 
       fillLisatiedotSection();
 
       fillSoraKuvausSection();
 
-      fillTeemakuvaSection();
-
       fillJarjestajaSection();
-
-      fillNakyvyysSection();
 
       fillTilaSection();
 
@@ -362,46 +296,33 @@ export const createKoulutusForm = () => {
     })
   );
 
-  it('should be able to create TUVA-koulutus', () => {
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`
-    );
-
+  it(
+    'should be able to create TUVA-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['tuva'] });
 
-      getByTestId('informationSection').within(() => {
-        getByTestId('tuvaOpintojenlaajuusSelect')
-          .click()
-          .within(() => {
-            getSelectOption('38 viikkoa').click();
-          });
+      withinSection('information', () => {
+        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
+          pFillSelect('38 viikkoa')
+        );
 
-        getByTestId('nimiInput').within(() => {
-          cy.get('input').should('have.value', 'koulutustyypit.tuva');
-        });
-
-        jatka();
+        getInputByLabel('koulutuslomake.koulutuksenNimi').should(
+          'have.value',
+          'koulutustyypit.tuva'
+        );
       });
 
-      getByTestId('descriptionSection').within(() => {
-        getByTestId('kuvauksenNimiInput').should('not.exist');
-        getByTestId('kuvausInput').within(() => {
-          typeToEditor('Kuvaus');
-        });
+      withinSection('description', () => {
+        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
 
-        getByTestId('linkkiEPerusteisiinInput').within(() => {
-          cy.get('input').pipe(paste('linkki'));
-        });
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
 
-        jatka();
+        getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
+          paste('http://linkki.fi')
+        );
       });
-
-      fillTeemakuvaSection();
 
       fillJarjestajaSection();
-
-      fillNakyvyysSection();
 
       fillTilaSection();
 
@@ -409,6 +330,85 @@ export const createKoulutusForm = () => {
       getByTestId('lisatiedotSection').should('not.exist');
 
       tallenna();
-    });
-  });
+    })
+  );
+
+  it(
+    'should be able to create "Vapaa Sivistystyö - Opistovuosi"-koulutus',
+    mutationTest(() => {
+      fillCommon({
+        koulutustyyppiPath: [
+          'vapaa-sivistystyo',
+          'vapaa-sivistystyo-opistovuosi',
+        ],
+      });
+
+      withinSection('information', () => {
+        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
+          pFillSelect('Vähintään 53 op')
+        );
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
+          paste('vapaa sivistystyö nimi')
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+
+        getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
+          paste('http://linkki.fi')
+        );
+      });
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      getByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('lisatiedotSection').should('not.exist');
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create "Vapaa Sivistystyö - Muu"-koulutus',
+    mutationTest(() => {
+      fillCommon({
+        koulutustyyppiPath: ['vapaa-sivistystyo', 'vapaa-sivistystyo-muu'],
+      });
+
+      withinSection('information', () => {
+        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
+          pFillSelect('Vähintään 53 op')
+        );
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
+          paste('vapaa sivistystyö nimi')
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+
+        getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
+          paste('http://linkki.fi')
+        );
+      });
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      getByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('lisatiedotSection').should('not.exist');
+
+      tallenna();
+    })
+  );
 };

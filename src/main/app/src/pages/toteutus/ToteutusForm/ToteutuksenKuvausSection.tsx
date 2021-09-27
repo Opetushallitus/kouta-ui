@@ -7,19 +7,17 @@ import { FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-export const ToteutuksenKuvausSection = ({ language, name, koulutus }) => {
+export const ToteutuksenKuvausSection = ({ language }) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
-        <Field
-          name={`kuvaus.${language}`}
-          component={FormFieldEditor}
-          label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
-          required
-        />
-      </Box>
-    </>
+    <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
+      <Field
+        name={`kuvaus.${language}`}
+        component={FormFieldEditor}
+        label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
+        required
+      />
+    </Box>
   );
 };

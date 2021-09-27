@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import {
   formValueExists as exists,
-  getFieldName,
+  getFieldNameWithoutLanguage,
   isPartialDate,
 } from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
@@ -19,7 +19,7 @@ class ErrorBuilder {
     this.errors = {};
     this.registeredFields =
       registeredFields &&
-      _.values(registeredFields).map(v => getFieldName(v.name)!);
+      _.values(registeredFields).map(v => getFieldNameWithoutLanguage(v.name)!);
   }
 
   private languages: Array<LanguageCode>;

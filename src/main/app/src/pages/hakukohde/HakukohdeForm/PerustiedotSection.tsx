@@ -21,6 +21,7 @@ export const PerustiedotSection = ({
   haku,
 }) => {
   const isAmmatillinen = isAmmatillinenKoulutustyyppi(koulutustyyppi);
+  const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
   const nimiReadonly = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
   const { t } = useTranslation();
 
@@ -35,7 +36,7 @@ export const PerustiedotSection = ({
           disabled={nimiReadonly}
         />
       </Box>
-      {isAmmatillinen ? (
+      {isAmmatillinen || isLukio ? (
         <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
           <Field
             name={`${name}.voiSuorittaaKaksoistutkinnon`}

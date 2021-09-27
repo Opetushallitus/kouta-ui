@@ -34,11 +34,12 @@ export enum KOULUTUSTYYPPI {
   AMMATILLINEN_OPETTAJAKOULUTUS = 'ammatillinen_opettajakoulutus',
   AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS = 'ammatillinen_opinto_ohjaaja_koulutus',
   AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS = 'ammatillinen_erityisopettaja_koulutus',
-  VAPAA_SIVISTYSTYO = 'vapaa_sivistystyo',
   LUVA = 'luva',
   TUVA = 'tuva',
   MUUT_KOULUTUKSET = 'muut_koulutukset',
   PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',
+  VAPAA_SIVISTYSTYO_OPISTOVUOSI = 'vapaa_sivistystyo_opistovuosi',
+  VAPAA_SIVISTYSTYO_MUU = 'vapaa_sivistystyo_muu',
 }
 
 export const KOULUTUSTYYPIT = Object.values(KOULUTUSTYYPPI);

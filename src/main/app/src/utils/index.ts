@@ -283,3 +283,6 @@ export const getPostinumeroByPostinumeroUri = uri =>
 
 export const formatKoodiLabelWithArvo = (koodi, language) =>
   `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`;
+
+export const isIn = (coll: Array<unknown>) => (val: unknown) =>
+  _fp.includes(val, coll);

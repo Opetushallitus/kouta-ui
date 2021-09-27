@@ -40,7 +40,11 @@ export const KuvausFieldsSection = ({
           required={koulutustyyppi === KOULUTUSTYYPPI.TUVA}
         />
       </Box>
-      {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+      {[
+        KOULUTUSTYYPPI.TUVA,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+      ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('linkkiEPerusteisiinInput')}>
           <Field
             disabled={disabled}

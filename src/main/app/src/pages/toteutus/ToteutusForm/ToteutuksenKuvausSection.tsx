@@ -7,7 +7,7 @@ import { FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-export const TuvaKuvausSection = ({ language, name, koulutus }) => {
+export const ToteutuksenKuvausSection = ({ language, name, koulutus }) => {
   const { t } = useTranslation();
 
   return (

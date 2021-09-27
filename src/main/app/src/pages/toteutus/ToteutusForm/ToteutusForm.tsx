@@ -24,7 +24,7 @@ import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
-import { getTestIdProps } from '#/src/utils';
+import { getTestIdProps, isIn, otherwise } from '#/src/utils';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
@@ -36,9 +36,10 @@ import { LukiolinjatSection } from './LukiolinjatSection';
 import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
 import { TiedotSection } from './TiedotSection';
+import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
-import { TuvaKuvausSection } from './TuvaKuvausSection';
 import { TuvaTiedotSection } from './TuvaTiedotSection';
+import { VapaaSivistystyoTiedotSection } from './VapaaSivistystyoTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
@@ -114,32 +115,64 @@ const ToteutusForm = ({
           header={t('yleiset.kieliversiot')}
           Component={KieliversiotFields}
         />
-        {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
-          <FormCollapse
-            section="tiedot"
-            header={t('toteutuslomake.toteutuksenTiedot')}
-            languages={languages}
-            Component={TiedotSection}
-            koulutustyyppi={koulutustyyppi}
-          />
-        )}
-        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
-          <FormCollapse
-            section="tiedot"
-            header={t('toteutuslomake.toteutuksenTiedot')}
-            languages={languages}
-            Component={TuvaTiedotSection}
-            koulutus={koulutus}
-          />
-        )}
-        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
-          <FormCollapse
-            section="kuvaus"
-            header={t('toteutuslomake.toteutuksenKuvaus')}
-            languages={languages}
-            Component={TuvaKuvausSection}
-          />
-        )}
+        {_fp.cond([
+          [
+            isIn([KOULUTUSTYYPPI.TUVA]),
+            () => (
+              <>
+                <FormCollapse
+                  section="tiedot"
+                  header={t('toteutuslomake.toteutuksenTiedot')}
+                  languages={languages}
+                  Component={TuvaTiedotSection}
+                  koulutus={koulutus}
+                />
+                <FormCollapse
+                  section="kuvaus"
+                  header={t('toteutuslomake.toteutuksenKuvaus')}
+                  languages={languages}
+                  Component={ToteutuksenKuvausSection}
+                />
+              </>
+            ),
+          ],
+          [
+            isIn([
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            ]),
+            () => (
+              <>
+                <FormCollapse
+                  section="tiedot"
+                  header={t('toteutuslomake.toteutuksenTiedot')}
+                  languages={languages}
+                  Component={VapaaSivistystyoTiedotSection}
+                  koulutustyyppi={koulutustyyppi}
+                  koulutus={koulutus}
+                />
+                <FormCollapse
+                  section="kuvaus"
+                  header={t('toteutuslomake.toteutuksenKuvaus')}
+                  languages={languages}
+                  Component={ToteutuksenKuvausSection}
+                />
+              </>
+            ),
+          ],
+          [
+            otherwise,
+            () => (
+              <FormCollapse
+                section="tiedot"
+                header={t('toteutuslomake.toteutuksenTiedot')}
+                languages={languages}
+                Component={TiedotSection}
+                koulutustyyppi={koulutustyyppi}
+              />
+            ),
+          ],
+        ])(koulutustyyppi)}
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
             section="lukiolinjat"
@@ -220,28 +253,30 @@ const ToteutusForm = ({
           languages={languages}
           organisaatioOid={organisaatioOid}
         />
+        {[
+          KOULUTUSTYYPPI.TUTKINNON_OSA,
+          KOULUTUSTYYPPI.OSAAMISALA,
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+        ].includes(koulutustyyppi) && (
+          <FormCollapse
+            section="hakeutumisTaiIlmoittautumistapa"
+            header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
+            Component={HakeutumisTaiIlmoittautumistapaSection}
+            languages={languages}
+          />
+        )}
         {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
           koulutustyyppi
-        ) && (
-          <>
+        ) &&
+          hakeutumisTaiIlmoittautumistapa === MUU && (
             <FormCollapse
-              section="hakeutumisTaiIlmoittautumistapa"
-              header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
-              Component={HakeutumisTaiIlmoittautumistapaSection}
+              section="soraKuvaus"
+              header={t('yleiset.soraKuvaus')}
+              Component={SoraKuvausSection}
+              organisaatioOid={organisaatioOid}
               languages={languages}
             />
-            {hakeutumisTaiIlmoittautumistapa === MUU &&
-              koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
-                <FormCollapse
-                  section="soraKuvaus"
-                  header={t('yleiset.soraKuvaus')}
-                  Component={SoraKuvausSection}
-                  organisaatioOid={organisaatioOid}
-                  languages={languages}
-                />
-              )}
-          </>
-        )}
+          )}
         <FormCollapse
           section="yhteyshenkilot"
           header={t('toteutuslomake.koulutuksenYhteystiedot')}

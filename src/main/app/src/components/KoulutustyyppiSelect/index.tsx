@@ -44,7 +44,7 @@ export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
     })),
   },
   {
-    value: 'vapaa_sivistystyo',
+    value: 'vapaa-sivistystyo',
     children: [
       {
         value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,

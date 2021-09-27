@@ -9,7 +9,6 @@ import {
   fillTreeSelect,
   fillAsyncSelect,
   getByTestId,
-  jatka,
   paste,
   fillKieliversiotSection,
   fillPohjaSection,
@@ -39,8 +38,6 @@ const fillLisatiedotSection = () => {
     getByTestId('osioKuvaus.koulutuksenlisatiedot_01#1').within(() => {
       typeToEditor('koulutuksenlisatiedot kuvaus');
     });
-
-    jatka();
   });
 };
 

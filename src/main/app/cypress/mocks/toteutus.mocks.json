@@ -13585,6 +13585,735 @@
     "response": {
       "body": [
         {
+          "koodiUri": "opintojenlaajuus_75",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_75",
+          "version": 117,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "75",
+          "paivitysPvm": "2018-01-23",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "75",
+              "kuvaus": "75",
+              "lyhytNimi": "75",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_-",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_-",
+          "version": 787,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "---",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-12-29",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "----",
+              "kuvaus": "",
+              "lyhytNimi": "----",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "----",
+              "kuvaus": "",
+              "lyhytNimi": "----",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "----",
+              "kuvaus": "",
+              "lyhytNimi": "----",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_240",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_240",
+          "version": 400,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "240",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "240",
+              "kuvaus": "240",
+              "lyhytNimi": "240",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_eb",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_eb",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "EB",
+          "paivitysPvm": "2015-09-08",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-09-09",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "EB-opetussuunnitelma",
+              "kuvaus": "",
+              "lyhytNimi": "EB-opetussuunnitelma",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "EB Programme",
+              "kuvaus": "",
+              "lyhytNimi": "EB Programme",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "EB läroplan",
+              "kuvaus": "",
+              "lyhytNimi": "EB läroplan",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_100",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_100",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "100",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-06-26",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "100",
+              "kuvaus": "100",
+              "lyhytNimi": "100",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_10",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_10",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "10",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-06-26",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "10",
+              "kuvaus": "10",
+              "lyhytNimi": "10",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_270",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_270",
+          "version": 24,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "270",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "270",
+              "kuvaus": "270",
+              "lyhytNimi": "270",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_40",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_40",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "40",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "40",
+              "kuvaus": "40",
+              "lyhytNimi": "40",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_60",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_60",
+          "version": 292,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "60",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "60",
+              "kuvaus": "60",
+              "lyhytNimi": "60",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_90",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_90",
+          "version": 286,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "90",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "90",
+              "kuvaus": "90",
+              "lyhytNimi": "90",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_180120",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_180120",
+          "version": 1498,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "180+120",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-06-08",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "180+120",
+              "kuvaus": "",
+              "lyhytNimi": "180+120",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "180+120",
+              "kuvaus": "",
+              "lyhytNimi": "180+120",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "180+120",
+              "kuvaus": "",
+              "lyhytNimi": "180+120",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_46",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_46",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "46",
+          "paivitysPvm": "2018-01-10",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2018-01-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "46",
+              "kuvaus": null,
+              "lyhytNimi": "46",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_20",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_20",
+          "version": 8,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "20",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-06-26",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "20",
+              "kuvaus": "20",
+              "lyhytNimi": "20",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_150",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_150",
+          "version": 35,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "150",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "150",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "150",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "150",
+              "kuvaus": "150",
+              "lyhytNimi": "150",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_300",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_300",
+          "version": 1245,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "300",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "300",
+              "kuvaus": "300",
+              "lyhytNimi": "300",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "300",
+              "kuvaus": "300",
+              "lyhytNimi": "300",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "300",
+              "kuvaus": "300",
+              "lyhytNimi": "300",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_180",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_180",
+          "version": 1645,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "180",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "180",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "180",
+              "kuvaus": "180",
+              "lyhytNimi": "180",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "180",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_ibdp",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_ibdp",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "IBDP",
+          "paivitysPvm": "2014-01-20",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "IBDP-opetussuunnitelma",
+              "kuvaus": "IBDP-opetussuunnitelma",
+              "lyhytNimi": "IBDP-opetussuunnitelma",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "IBDP läroplan",
+              "kuvaus": "IBDP läroplan",
+              "lyhytNimi": "IBDP läroplan",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "IB Diploma Programme",
+              "kuvaus": "IB Diploma Programme",
+              "lyhytNimi": "IB Diploma Programme",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
           "koodiUri": "opintojenlaajuus_38",
           "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_38",
           "version": 1,
@@ -13606,6 +14335,849 @@
             {
               "nimi": "38 viikkoa",
               "kuvaus": "Tuva laajuus",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_44",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_44",
+          "version": 9,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "44",
+          "paivitysPvm": "2018-01-23",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "44",
+              "kuvaus": "44",
+              "lyhytNimi": "44",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_30",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_30",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "30",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-06-26",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "30",
+              "kuvaus": "30",
+              "lyhytNimi": "30",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_220",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_220",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "220",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "220",
+              "kuvaus": "220",
+              "lyhytNimi": "220",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_360",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_360",
+          "version": 24,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "360",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "360",
+              "kuvaus": "360",
+              "lyhytNimi": "360",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "360",
+              "kuvaus": "360",
+              "lyhytNimi": "360",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "360",
+              "kuvaus": "360",
+              "lyhytNimi": "360",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_160",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_160",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "160",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "160",
+              "kuvaus": "160",
+              "lyhytNimi": "160",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_180120150",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_180120150",
+          "version": 6,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "180+120/150",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-09-07",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "180+120/150",
+              "kuvaus": "",
+              "lyhytNimi": "180+120/150",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "180+120/150",
+              "kuvaus": "",
+              "lyhytNimi": "180+120/150",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "180+120/150",
+              "kuvaus": "",
+              "lyhytNimi": "180+120/150",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_v53",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_v53",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "v53",
+          "paivitysPvm": "2021-07-02",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2021-07-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "vähintään 53 op",
+              "kuvaus": "Käyttö Tuva/kouta",
+              "lyhytNimi": null,
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_120",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_120",
+          "version": 1253,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "120",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "120",
+              "kuvaus": "120",
+              "lyhytNimi": "120",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "120",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "120",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_330",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_330",
+          "version": 40,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "330",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-04-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "330",
+              "kuvaus": "330",
+              "lyhytNimi": "330",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "330",
+              "kuvaus": "330",
+              "lyhytNimi": "330",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "330",
+              "kuvaus": "330",
+              "lyhytNimi": "330",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_210",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_210",
+          "version": 288,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "210",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "210",
+              "kuvaus": "210",
+              "lyhytNimi": "210",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_5",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_5",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "5",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-06-26",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "5",
+              "kuvaus": "5",
+              "lyhytNimi": "5",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_180150",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_180150",
+          "version": 23,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "180+150",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-07-28",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "180+150",
+              "kuvaus": "",
+              "lyhytNimi": "180+150",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "180+150",
+              "kuvaus": "",
+              "lyhytNimi": "180+150",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "180+150",
+              "kuvaus": "",
+              "lyhytNimi": "180+150",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_180180",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_180180",
+          "version": 12,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "180+180",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-07-28",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "180+180",
+              "kuvaus": "",
+              "lyhytNimi": "180+180",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "180+180",
+              "kuvaus": "",
+              "lyhytNimi": "180+180",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "180+180",
+              "kuvaus": "",
+              "lyhytNimi": "180+180",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_140",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_140",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "140",
+          "paivitysPvm": "2016-09-19",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "140",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "140",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "140",
+              "kuvaus": "140",
+              "lyhytNimi": "140",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_260",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_260",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "260",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "260",
+              "kuvaus": "260",
+              "lyhytNimi": "260",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_210120",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_210120",
+          "version": 12,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "210+120",
+          "paivitysPvm": "2018-01-03",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-07-28",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "210+120",
+              "kuvaus": "",
+              "lyhytNimi": "210+120",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "210+120",
+              "kuvaus": "",
+              "lyhytNimi": "210+120",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "210+120",
+              "kuvaus": "",
+              "lyhytNimi": "210+120",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_88",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_88",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "88",
+          "paivitysPvm": "2020-10-07",
+          "paivittajaOid": "1.2.246.562.24.51707373173",
+          "voimassaAlkuPvm": "2020-10-06",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "88",
+              "kuvaus": "88",
+              "lyhytNimi": "88",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "88",
+              "kuvaus": "88",
+              "lyhytNimi": "88",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "88",
+              "kuvaus": "88",
+              "lyhytNimi": "88",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_v53",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_v53",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "v53",
+          "paivitysPvm": "2018-01-23",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Vähintään 53 op",
+              "kuvaus": "Vähintään 53 op",
+              "lyhytNimi": "Vähintään 53 op",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opintojenlaajuus_38",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_38",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opintojenlaajuus",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "38",
+          "paivitysPvm": "2018-01-23",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-04-10",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "38 viikkoa",
+              "kuvaus": "",
               "lyhytNimi": "",
               "kayttoohje": "",
               "kasite": "",

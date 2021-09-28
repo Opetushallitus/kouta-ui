@@ -220,11 +220,9 @@ const ToteutusForm = ({
           languages={languages}
           organisaatioOid={organisaatioOid}
         />
-        {[
-          KOULUTUSTYYPPI.TUTKINNON_OSA,
-          KOULUTUSTYYPPI.OSAAMISALA,
-          KOULUTUSTYYPPI.TUVA,
-        ].includes(koulutustyyppi) && (
+        {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+          koulutustyyppi
+        ) && (
           <>
             <FormCollapse
               section="hakeutumisTaiIlmoittautumistapa"

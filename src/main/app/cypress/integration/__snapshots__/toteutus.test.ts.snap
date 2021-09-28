@@ -81,7 +81,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -209,7 +209,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -355,8 +355,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1",
-        "oppilaitoksenopetuskieli_4#1"
+        "oppilaitoksenopetuskieli_1#2",
+        "oppilaitoksenopetuskieli_4#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -521,7 +521,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -1217,15 +1217,8 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     ],
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
-    "hakuaika": {
-      "alkaa": "2050-04-01T00:00",
-      "paattyy": "2050-09-01T00:00"
-    },
-    "hakulomakeLinkki": {
-      "fi": "http://example.com"
-    },
-    "hakulomaketyyppi": "muu",
-    "hakutermi": "hakeutuminen",
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [],
@@ -1241,12 +1234,8 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     },
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
-    "lisatietoaHakeutumisesta": {
-      "fi": "<p>lisätiedot</p>"
-    },
-    "lisatietoaValintaperusteista": {
-      "fi": "<p>lisätiedot valintaperusteista</p>"
-    },
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
     "opetus": {
       "apuraha": null,
       "koulutuksenAlkamiskausi": {
@@ -1280,7 +1269,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#1"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -1321,7 +1310,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "koulutustyypit.tuva"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -1455,7 +1444,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
+    "fi": "koulutustyypit.tuva"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",

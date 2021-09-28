@@ -154,9 +154,9 @@ const fillTiedotSection = tyyppi => {
 
 const fillTuvaTiedotSection = () => {
   getByTestId('tiedotSection').within(() => {
-    getByTestId('toteutuksenNimi').within(() => {
-      cy.get('input').clear().pipe(paste('toteutuksen nimi'));
-    });
+    cy.findByLabelText(/toteutuksenNimi/)
+      .should('be.disabled')
+      .should('have.value', 'koulutustyypit.tuva');
 
     cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' })
       .should('be.disabled')
@@ -547,7 +547,6 @@ export const createToteutusForm = () => {
       fillTeemakuvaSection();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
-      fillHakeutumisTaiIlmoittautumistapaSection();
       fillYhteystiedotSection();
       fillTilaSection();
 

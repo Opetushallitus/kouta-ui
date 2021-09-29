@@ -576,7 +576,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuslomake.lukionYleislinja, 150 yleiset.opintopistetta, Lukion IB-linja (toteutuslomake.lukionPainotus), 150 yleiset.opintopistetta, Lukion ICT-linja (toteutuslomake.lukionPainotus), 150 yleiset.opintopistetta, Lukion IB-linja (toteutuslomake.erityinenKoulutustehtava), 150 yleiset.opintopistetta, Lukion ICT-linja (toteutuslomake.erityinenKoulutustehtava), 150 yleiset.opintopistetta"
+    "fi": "toteutuslomake.lukionYleislinja, 150 yleiset.opintopistetta, Lukion IB-linja  (lukio painotus), 150 yleiset.opintopistetta, Lukion ICT-linja  (lukio painotus), 150 yleiset.opintopistetta, Lukion IB-linja (erityinen koulutustehtävä), 150 yleiset.opintopistetta, Lukion ICT-linja (erityinen koulutustehtävä), 150 yleiset.opintopistetta"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,

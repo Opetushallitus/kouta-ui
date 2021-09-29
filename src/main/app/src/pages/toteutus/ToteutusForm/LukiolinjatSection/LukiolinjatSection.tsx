@@ -23,14 +23,14 @@ import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { arrayToTranslationObject } from '#/src/utils/languageUtils';
 import { mapValues } from '#/src/utils/lodashFpUncapped';
 
-const LukiolinjaKuvaus = ({ name, itemProps, index }) => {
+const LukiolinjaKuvaus = ({ koodiUri, name, itemProps }) => {
   const languageTab = useLanguageTab();
 
   return (
     <Field
       component={FormFieldEditor}
       label={itemProps?.kuvausLabel}
-      name={`${name}.kuvaukset[${index}].${languageTab}`}
+      name={`${name}.kuvaukset.${koodiUri}.${languageTab}`}
     />
   );
 };
@@ -39,6 +39,15 @@ const mapKoodiToTranslateable = koodi =>
   koodi
     ? mapValues(_fp.prop('nimi'), arrayToTranslationObject(koodi?.metadata))
     : undefined;
+
+const makeTranslationsByKoodi =
+  koodistoData =>
+  ({ value }) =>
+    mapKoodiToTranslateable(
+      koodistoData?.find(
+        ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
+      )
+    );
 
 const LukiolinjaOsio = ({
   name,
@@ -72,19 +81,6 @@ const LukiolinjaOsio = ({
     </FieldGroup>
   );
 };
-
-const makeTranslationsByKoodi =
-  (koodistoData, suffixKey, t) =>
-  ({ value }) =>
-    mapValues(
-      (translation, lng) =>
-        translation ? `${translation} (${t(suffixKey, { lng })})` : undefined,
-      mapKoodiToTranslateable(
-        koodistoData?.find(
-          ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
-        )
-      )
-    );
 
 const useSelectedOsioLinjat = osioFieldName => {
   const osioKaytossa = useFieldValue(`${osioFieldName}.kaytossa`);
@@ -122,7 +118,7 @@ export const useLukioToteutusNimi = ({
             _fp.zipObject(
               LANGUAGES,
               LANGUAGES.map(lng =>
-                t('toteutuslomake.lukionYleislinja', {
+                t('toteutuslomake.lukionYleislinjaNimiOsa', {
                   lng,
                 })
               )
@@ -191,24 +187,15 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
         ? []
         : [
             ..._fp.map(
-              makeTranslationsByKoodi(
-                koodistoDataPainotukset,
-                'toteutuslomake.lukionPainotus',
-                t
-              ),
+              makeTranslationsByKoodi(koodistoDataPainotukset),
               selectedPainotukset
             ),
             ..._fp.map(
-              makeTranslationsByKoodi(
-                koodistoDataKoulutustehtavat,
-                'toteutuslomake.erityinenKoulutustehtava',
-                t
-              ),
+              makeTranslationsByKoodi(koodistoDataKoulutustehtavat),
               selectedKoulutustehtavat
             ),
           ],
     [
-      t,
       isLoading,
       selectedPainotukset,
       koodistoDataPainotukset,
@@ -256,8 +243,13 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
           component={FormFieldSwitch}
           name={yleislinjaFieldName}
           disabled={linjaSelectionsEmpty}
+          helperText={
+            linjaSelectionsEmpty
+              ? t('toteutuslomake.lukionYleislinjaOhjeteksti')
+              : ''
+          }
         >
-          {t('toteutuslomake.lukionYleislinja')}
+          {t('toteutuslomake.lukionYleislinjaValinta')}
         </Field>
       </Box>
       <LukiolinjaOsio

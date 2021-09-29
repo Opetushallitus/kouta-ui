@@ -75,16 +75,16 @@ export const validateHakukohdeForm =
         validateArrayMinLength('kieliversiot', 1),
         validateTranslations('perustiedot.nimi'),
         validateOptionalTranslatedField('aloituspaikat.aloituspaikkakuvaus'),
-
+        // Lukio-hakukohteen nimi luodaan hakukohteen linjan perusteella, joten se on pakko olla
+        validateIf(
+          koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS,
+          validateExistence('hakukohteenLinja.linja')
+        ),
         validateIfJulkaistu(
           validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
           validateValintakokeet,
           validateLiitteet,
           validateExistence('jarjestyspaikkaOid'),
-          validateIf(
-            koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS,
-            validateExistence('hakukohteenLinja.linja')
-          ),
           validateIf(
             values?.hakuajat?.eriHakuaika,
             validateArrayMinLength('hakuajat.hakuajat', 1, {

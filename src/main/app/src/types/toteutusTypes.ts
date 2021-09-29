@@ -35,7 +35,7 @@ type Toteutusjakso = {
 export type LukiolinjatOsio = {
   kaytossa: boolean;
   valinnat: SelectOptions;
-  kuvaukset: Array<TranslatedField<EditorState>>;
+  kuvaukset: Record<string, TranslatedField<EditorState>>;
 };
 
 type Kielivalikoima = {

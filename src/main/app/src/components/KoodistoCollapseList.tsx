@@ -30,7 +30,7 @@ export const KoodistoCollapseList = ({
   selectLabel: string;
   CollapseContent: React.ComponentType<CollapseContentProps>;
   koodistoData: Array<Koodi>;
-  formatLabel?: (koodi: string, language: LanguageCode) => string;
+  formatLabel?: (koodi: Koodi, language: LanguageCode) => string;
   itemProps: any;
 }) => {
   const selectedItems = useFieldValue(`${name}.valinnat`);
@@ -70,7 +70,7 @@ export const KoodistoCollapseList = ({
       </Box>
       {selectedItemsWithLabels?.map(({ value, label }, index) => (
         <Box mb={3} key={value}>
-          <SectionInnerCollapse header={label} key={value}>
+          <SectionInnerCollapse header={label}>
             <CollapseContent
               koodiUri={value}
               index={index}

@@ -23,14 +23,14 @@ import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { arrayToTranslationObject } from '#/src/utils/languageUtils';
 import { mapValues } from '#/src/utils/lodashFpUncapped';
 
-const LukiolinjaKuvaus = ({ name, itemProps, index }) => {
+const LukiolinjaKuvaus = ({ koodiUri, name, itemProps }) => {
   const languageTab = useLanguageTab();
 
   return (
     <Field
       component={FormFieldEditor}
       label={itemProps?.kuvausLabel}
-      name={`${name}.kuvaukset[${index}].${languageTab}`}
+      name={`${name}.kuvaukset.${koodiUri}.${languageTab}`}
     />
   );
 };

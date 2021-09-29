@@ -153,7 +153,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   "esikatselu": false,
   "externalId": null,
   "johtaaTutkintoon": true,
-  "julkinen": true,
+  "julkinen": false,
   "kielivalinta": [
     "fi"
   ],
@@ -163,7 +163,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   "koulutustyyppi": "amk",
   "metadata": {
     "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso2_073#1"
+      "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
     "koulutustyyppi": "amk",
     "kuvauksenNimi": {
@@ -185,7 +185,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
-      "tutkintonimikekk_139#2"
+      "tutkintonimikekk_533#2"
     ],
     "tyyppi": "amk"
   },
@@ -207,7 +207,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "esikatselu": false,
   "externalId": null,
   "johtaaTutkintoon": true,
-  "julkinen": true,
+  "julkinen": false,
   "kielivalinta": [
     "fi"
   ],
@@ -412,7 +412,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
   "esikatselu": false,
   "externalId": null,
   "johtaaTutkintoon": false,
-  "julkinen": true,
+  "julkinen": false,
   "kielivalinta": [
     "fi"
   ],
@@ -426,7 +426,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
       "fi": "<p>Kuvaus</p>"
     },
     "linkkiEPerusteisiin": {
-      "fi": "linkki"
+      "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_38#1",
@@ -501,6 +501,88 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
   "tila": "tallennettu"
 };
 
+exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "vapaa-sivistystyo-muu",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "vapaa-sivistystyo-muu",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {
+      "fi": "http://linkki.fi"
+    },
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "vapaa-sivistystyo-muu"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "vapaa sivistystyö nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistovuosi"-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {
+      "fi": "http://linkki.fi"
+    },
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "vapaa-sivistystyo-opistovuosi"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "vapaa sivistystyö nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
 exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
 {
   "ePerusteId": null,
@@ -521,7 +603,7 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
       "fi": "<p>Kuvaus</p>"
     },
     "linkkiEPerusteisiin": {
-      "fi": "linkki"
+      "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",

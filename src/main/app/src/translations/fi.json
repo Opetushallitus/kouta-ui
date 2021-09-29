@@ -319,7 +319,6 @@
     "ammatillinenOpettajakoulutus": "Ammatillinen opettajakoulutus",
     "ammatillinenOpintoOhjaajaKoulutus": "Ammatillinen opinto-ohjaajakoulutus",
     "ammatillinenErityisopettajaKoulutus": "Ammatillinen erityisopettajakoulutus",
-    "vapaaSivistystyo": "Vapaa sivistystyö",
     "yleissivistava": "Yleissivistävä",
     "muutKoulutukset": "Muut koulutukset",
     "perusopetuksenLisaopetus": "Perusopetuksen lisäopetus",
@@ -328,7 +327,10 @@
     "yo": "Yliopistokoulutus",
     "amk": "AMK",
     "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)",
-    "telma": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)"
+    "telma": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)",
+    "vapaaSivistystyo": "Vapaa sivistystyö",
+    "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
+    "vapaaSivistystyoMuu": "Muu"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",
@@ -509,7 +511,7 @@
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja toteutuksia uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu toteutus",
     "ammatillinenPerustutkintoErityisopetuksena": "Ammatillinen perustutkinto järjestetään erityisopetuksena",
-    "jarjestetaanErityisopetuksena": "Toteutus järjestetään erityisopetuksena",
+    "jarjestetaanErityisopetuksena": "Järjestetään erityisenä vaativana tukena",
     "toteutuksellaErillinenAloitusajankohta": "Toteutuksella on erillinen aloitusajankohta",
     "painotukset": "Painotukset",
     "valitsePainotukset": "Valitse painotukset",
@@ -594,7 +596,11 @@
     "hakukohteenLinja": "Hakukohteen linja",
     "valitseHakukohteenLinja": "Valitse hakukohteen linja",
     "lukionYleislinja": "Yleislinja",
-    "alinHyvaksyttyKeskiarvo": "Alin hyväksytty keskiarvo"
+    "alinHyvaksyttyKeskiarvo": "Alin hyväksytty keskiarvo",
+    "painotetutArvosanat": "Painotetut oppiaineet keskiarvoa laskettaessa",
+    "oppiaine": "Oppiaine",
+    "painokerroin": "Painokerroin",
+    "lisaaPainotettavaOppiaine": "Lisää painotettava oppiaine"
   },
   "valintaperustelomake": {
     "valintaperusteenPerustiedot": "Valintaperusteen perustiedot",

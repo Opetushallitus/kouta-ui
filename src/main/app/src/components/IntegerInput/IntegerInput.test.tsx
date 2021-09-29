@@ -7,11 +7,6 @@ import { renderWithTheme } from '#/src/testUtils';
 
 import { IntegerInput } from './index';
 
-test('Sets default value by default', () => {
-  renderWithTheme(<IntegerInput defaultValue={1} />);
-  expect(screen.getByRole('textbox')).toHaveValue('1');
-});
-
 test.each([
   ['', '0'],
   ['asdf', '0'],

@@ -109,6 +109,16 @@ const getTelmaFields = ({ tyyppi }) => {
   });
 };
 
+const getVapaaSivistystyoFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    nimi: { fi: 'Vapaa Sivistystyö Opistovuosi' },
+    metadata: {
+      opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53',
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
 export default ({ tyyppi = 'amm' } = {}) => {
   if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
@@ -120,6 +130,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getTuvaFields({ tyyppi });
   } else if (tyyppi === 'telma') {
     return getTelmaFields({ tyyppi });
+  } else if (tyyppi.startsWith('vapaa-sivistystyo')) {
+    return getVapaaSivistystyoFields({ tyyppi });
   }
 
   return getBaseFields();

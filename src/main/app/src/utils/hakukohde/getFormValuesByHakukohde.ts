@@ -11,6 +11,7 @@ import {
   getKokeetTaiLisanaytotValues,
   getTilaisuusValues,
 } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+import { concatKoodiUris } from '#/src/utils/hakukohde/getPainotetutOppiaineetOptions';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -31,10 +32,25 @@ const getHakukohteenLinjaValues = ({
   linja,
   alinHyvaksyttyKeskiarvo,
   lisatietoa,
+  painotetutArvosanat,
 }) => ({
   linja: !linja ? LUKIO_YLEISLINJA : linja,
   alinHyvaksyttyKeskiarvo: parseKeskiarvo(alinHyvaksyttyKeskiarvo),
   lisatietoa: _.mapValues(lisatietoa, parseEditorState),
+  painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
+    return {
+      painotettuOppiaine: {
+        value: arvosana.koodiUrit
+          ? concatKoodiUris(
+              arvosana.koodiUrit.oppiaine,
+              arvosana.koodiUrit.kieli
+            )
+          : '',
+        koodiUrit: arvosana.koodiUrit,
+      },
+      painokerroin: arvosana.painokerroin,
+    };
+  }),
 });
 
 export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {

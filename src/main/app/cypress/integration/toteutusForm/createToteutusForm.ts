@@ -11,7 +11,6 @@ import {
   selectOption,
   fillAsyncSelect,
   fillTreeSelect,
-  jatka,
   getByTestId,
   paste,
   fillKieliversiotSection,
@@ -24,6 +23,8 @@ import {
   fillAjankohtaFields,
   selectCheckbox,
   wrapMutationTest,
+  withinSection,
+  getInputByLabel,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -102,16 +103,10 @@ const fillCommonJarjestamistiedot = ({
   fillOsiot();
 };
 
-const fillTeemakuvaSection = () => {
-  getByTestId('teemakuvaSection').within(() => {
-    jatka();
-  });
-};
-
 const fillNayttamistiedotSection = (
   { ammattinimikkeet } = { ammattinimikkeet: true }
 ) => {
-  getByTestId('nayttamistiedotSection').within(() => {
+  withinSection('nayttamistiedot', () => {
     if (ammattinimikkeet) {
       getByTestId('ammattinimikkeetSelect').within(() => {
         fillAsyncSelect('ammattinimike', 'yleiset.luoKohde');
@@ -121,23 +116,19 @@ const fillNayttamistiedotSection = (
     getByTestId('avainsanatSelect').within(() => {
       fillAsyncSelect('avainsana', 'yleiset.luoKohde');
     });
-
-    jatka();
   });
 };
 
 const fillJarjestajatSection = () => {
-  getByTestId('tarjoajatSection').within(() => {
+  withinSection('tarjoajat', () => {
     getByTestId('jarjestamispaikatSelection').within(() => {
       fillTreeSelect(['1.2.2.1.1.1']);
     });
-
-    jatka();
   });
 };
 
 const fillTiedotSection = tyyppi => {
-  getByTestId('tiedotSection').within(() => {
+  withinSection('tiedot', () => {
     if (['yo', 'amk'].includes(tyyppi)) {
       getByTestId('toteutuksenNimi')
         .find('input')
@@ -147,16 +138,14 @@ const fillTiedotSection = tyyppi => {
     getByTestId('toteutuksenKuvaus').within(() => {
       typeToEditor('Toteutuksen kuvaus');
     });
-
-    jatka();
   });
 };
 
 const fillTuvaTiedotSection = () => {
-  getByTestId('tiedotSection').within(() => {
-    getByTestId('toteutuksenNimi').within(() => {
-      cy.get('input').should('have.value', 'koulutustyypit.tuva');
-    });
+  withinSection('tiedot', () => {
+    cy.findByLabelText(/toteutuksenNimi/)
+      .should('be.disabled')
+      .should('have.value', 'koulutustyypit.tuva');
 
     cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')
@@ -165,16 +154,24 @@ const fillTuvaTiedotSection = () => {
     cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
       .clear()
       .pipe(paste('25'));
+  });
+};
 
-    jatka();
+const fillVapaaSivistystyoTiedotSection = () => {
+  withinSection('tiedot', () => {
+    getInputByLabel('toteutuslomake.toteutuksenNimi').should('be.disabled');
+
+    getInputByLabel('toteutuslomake.laajuus')
+      .should('be.disabled')
+      .should('have.value', 'vähintään 53 op');
   });
 };
 
 const fillTelmaTiedotSection = () => {
-  getByTestId('tiedotSection').within(() => {
-    getByTestId('toteutuksenNimi').within(() => {
-      cy.get('input').should('have.value', 'koulutustyypit.telma');
-    });
+  withinSection('tiedot', () => {
+    cy.findByLabelText(/toteutuksenNimi/)
+      .should('be.disabled')
+      .should('have.value', 'koulutustyypit.telma');
 
     cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')
@@ -183,15 +180,12 @@ const fillTelmaTiedotSection = () => {
     cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
       .clear()
       .pipe(paste('25'));
-
-    jatka();
   });
 };
 
 const fillYhteystiedotSection = () => {
-  getByTestId('yhteyshenkilotSection').within(() => {
+  withinSection('yhteyshenkilot', () => {
     fillYhteyshenkilotFields();
-    jatka();
   });
 };
 
@@ -212,7 +206,7 @@ const fillKkOsaamisalat = () => {
 */
 
 const fillLukiolinjatSection = () => {
-  getByTestId('lukiolinjatSection').within(() => {
+  withinSection('lukiolinjat', () => {
     cy.findByTestId('painotukset').within(() => {
       cy.findByText('toteutuslomake.lukiollaOnPainotuksia').click();
       fillAsyncSelect('Lukion IB-linja');
@@ -257,7 +251,6 @@ const fillLukiolinjatSection = () => {
         typeToEditor('ICT-linja erityistehtävä kuvaus');
       });
     });
-    jatka();
   });
 };
 
@@ -311,17 +304,15 @@ const fillKielivalikoima = () => {
 };
 
 const fillKuvausSection = () => {
-  getByTestId('kuvausSection').within(() => {
+  withinSection('kuvaus', () => {
     getByTestId('toteutuksenKuvaus').within(() => {
-      typeToEditor('Tuva kuvaus');
+      typeToEditor('Toteutuksen kuvaus');
     });
-
-    jatka();
   });
 };
 
 const fillHakeutumisTaiIlmoittautumistapaSection = () => {
-  getByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+  withinSection('hakeutumisTaiIlmoittautumistapa', () => {
     cy.findByRole('button', {
       name: 'toteutuslomake.hakuTapa.hakeutuminen',
     }).click();
@@ -363,8 +354,6 @@ const fillHakeutumisTaiIlmoittautumistapaSection = () => {
         time: '00:00',
       });
     });
-
-    jatka();
   });
 };
 
@@ -410,25 +399,19 @@ export const createToteutusForm = () => {
       prepareTest('amm-tutkinnon-osa');
 
       fillPohjaSection();
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillTiedotSection('amm-tutkinnon-osa');
 
-      getByTestId('jarjestamistiedotSection').within(() => {
+      withinSection('jarjestamistiedot', () => {
         fillCommonJarjestamistiedot();
-        jatka();
       });
 
-      fillTeemakuvaSection();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
 
       cy.findByTestId('soraKuvausSection').should('not.exist');
 
       fillHakeutumisTaiIlmoittautumistapaSection();
-
-      getByTestId('soraKuvausSection').within(() => {
-        jatka();
-      });
 
       fillYhteystiedotSection();
       fillTilaSection();
@@ -443,10 +426,10 @@ export const createToteutusForm = () => {
       prepareTest('amm');
 
       fillPohjaSection();
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillTiedotSection('amm');
 
-      getByTestId('osaamisalatSection').within(() => {
+      withinSection('osaamisalat', () => {
         getByTestId('osaamisalaSelection').within(() => {
           selectCheckbox('Kaivostyön osaamisala');
         });
@@ -456,16 +439,12 @@ export const createToteutusForm = () => {
         cy.findByLabelText('yleiset.linkinOtsikko').pipe(
           paste('osaamisala_0 otsikko')
         );
-
-        jatka();
       });
 
-      getByTestId('jarjestamistiedotSection').within(() => {
+      withinSection('jarjestamistiedot', () => {
         fillCommonJarjestamistiedot();
-        jatka();
       });
 
-      fillTeemakuvaSection();
       fillNayttamistiedotSection();
       fillJarjestajatSection();
       fillYhteystiedotSection();
@@ -481,7 +460,7 @@ export const createToteutusForm = () => {
       prepareTest('yo');
 
       fillPohjaSection();
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillTiedotSection('yo');
 
       // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175)
@@ -497,7 +476,7 @@ export const createToteutusForm = () => {
     });
     */
 
-      getByTestId('jarjestamistiedotSection').within(() => {
+      withinSection('jarjestamistiedot', () => {
         fillCommonJarjestamistiedot({
           maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
         });
@@ -505,10 +484,8 @@ export const createToteutusForm = () => {
         fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
         cy.findByTestId('apuraha').should('exist');
         fillApuraha();
-        jatka();
       });
 
-      fillTeemakuvaSection();
       fillNayttamistiedotSection();
       fillJarjestajatSection();
       fillYhteystiedotSection();
@@ -524,19 +501,17 @@ export const createToteutusForm = () => {
       prepareTest('lk');
 
       fillPohjaSection();
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillTiedotSection('lk');
 
       fillLukiolinjatSection();
 
-      getByTestId('jarjestamistiedotSection').within(() => {
+      withinSection('jarjestamistiedot', () => {
         fillCommonJarjestamistiedot();
         fillKielivalikoima();
         fillDiplomi();
-        jatka();
       });
 
-      fillTeemakuvaSection();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillYhteystiedotSection();
@@ -552,19 +527,66 @@ export const createToteutusForm = () => {
       prepareTest('tuva');
 
       fillPohjaSection();
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillTuvaTiedotSection();
 
       fillKuvausSection();
 
-      getByTestId('jarjestamistiedotSection').within(() => {
+      withinSection('jarjestamistiedot', () => {
         fillCommonJarjestamistiedot();
-        jatka();
       });
 
-      fillTeemakuvaSection();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create "Vapaa Sivistystyö  - Opistovuosi" toteutus',
+    mutationTest(() => {
+      prepareTest('vapaa-sivistystyo-opistovuosi');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillVapaaSivistystyoTiedotSection();
+
+      fillKuvausSection();
+
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
+
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create "Vapaa Sivistystyö - Muu" toteutus',
+    mutationTest(() => {
+      prepareTest('vapaa-sivistystyo-muu');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillVapaaSivistystyoTiedotSection();
+
+      fillKuvausSection();
+
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
+
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
       fillYhteystiedotSection();
       fillTilaSection();
 
@@ -578,17 +600,15 @@ export const createToteutusForm = () => {
       prepareTest('telma');
 
       fillPohjaSection();
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillTelmaTiedotSection();
 
       fillKuvausSection();
 
-      getByTestId('jarjestamistiedotSection').within(() => {
+      withinSection('jarjestamistiedot', () => {
         fillCommonJarjestamistiedot();
-        jatka();
       });
 
-      fillTeemakuvaSection();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillYhteystiedotSection();

@@ -33,10 +33,11 @@ export enum KOULUTUSTYYPPI {
   AMMATILLINEN_OPETTAJAKOULUTUS = 'ammatillinen_opettajakoulutus',
   AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS = 'ammatillinen_opinto_ohjaaja_koulutus',
   AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS = 'ammatillinen_erityisopettaja_koulutus',
-  VAPAA_SIVISTYSTYO = 'vapaa_sivistystyo',
   TUVA = 'tuva',
   MUUT_KOULUTUKSET = 'muut_koulutukset',
   PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',
+  VAPAA_SIVISTYSTYO_OPISTOVUOSI = 'vapaa-sivistystyo-opistovuosi',
+  VAPAA_SIVISTYSTYO_MUU = 'vapaa-sivistystyo-muu',
 }
 
 export const KOULUTUSTYYPIT = Object.values(KOULUTUSTYYPPI);
@@ -182,6 +183,7 @@ export const LIITTEEN_TOIMITUSTAPA = {
 export const IDLE_TIMEOUT = 30e3; // 30 seconds
 export const ERROR_INTERNET_DISCONNECTED = 'ERROR_INTERNET_DISCONNECTED';
 export const ERROR_KAYTTOOIKEUS_SERVICE = 'ERROR_KAYTTOOIKEUS_SERVICE';
+export const ERROR_REACT_CRASH = 'ERROR_REACT_CRASH';
 
 export const TEEMAKUVA_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png'];
 export const TEEMAKUVA_MAX_SIZE = 2 * 1000 * 1000;

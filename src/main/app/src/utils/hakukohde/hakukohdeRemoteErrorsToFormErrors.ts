@@ -34,5 +34,12 @@ export const hakukohdeRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
         ];
       }
     }
+  } else if (errorType === 'missingMsg' && /painotetutArvosanat/.test(path)) {
+    return {
+      field: path
+        .replace('metadata.', '')
+        .replace('koodiUrit', 'painotettuOppiaine'),
+      errorKey: 'validointivirheet.pakollinen',
+    };
   }
 };

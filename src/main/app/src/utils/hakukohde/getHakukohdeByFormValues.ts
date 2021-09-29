@@ -35,18 +35,37 @@ function getAloituspaikat(values: HakukohdeFormValues) {
   };
 }
 
+function getPainotetutArvosanatData(arvosanat) {
+  return (arvosanat || [])
+    .map(arvosana => {
+      return {
+        koodiUrit: arvosana.painotettuOppiaine
+          ? arvosana.painotettuOppiaine.koodiUrit
+          : null,
+        painokerroin: arvosana.painokerroin
+          ? parseFloatComma(arvosana.painokerroin)
+          : null,
+      };
+    })
+    .filter(
+      arvosana => arvosana.painokerroin || !_fp.isEmpty(arvosana.koodiUrit)
+    );
+}
+
 const getHakukohteenLinja = values => {
   if (!values?.hakukohteenLinja) {
     return null;
   }
-  const { alinHyvaksyttyKeskiarvo, linja, lisatietoa } =
+  const { alinHyvaksyttyKeskiarvo, linja, lisatietoa, painotetutArvosanat } =
     values.hakukohteenLinja;
+
   return {
     linja: linja !== LUKIO_YLEISLINJA ? linja : null,
     alinHyvaksyttyKeskiarvo:
       (alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo)) ||
       null,
     lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
+    painotetutArvosanat: getPainotetutArvosanatData(painotetutArvosanat),
   };
 };
 

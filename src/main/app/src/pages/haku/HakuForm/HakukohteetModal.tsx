@@ -17,6 +17,7 @@ const HakukohteetModal = ({
 
   const { data: toteutukset } = useToteutukset({
     organisaatioOid,
+    vainHakukohteeseenLiitettavat: true,
   });
 
   const options = useEntityOptions(toteutukset);

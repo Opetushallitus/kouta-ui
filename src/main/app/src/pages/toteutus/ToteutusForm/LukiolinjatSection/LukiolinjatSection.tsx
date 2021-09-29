@@ -245,7 +245,7 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
           disabled={linjaSelectionsEmpty}
           helperText={
             linjaSelectionsEmpty
-              ? t('toteutuslomake.lukioYleislinjaOhjeteksti')
+              ? t('toteutuslomake.lukionYleislinjaOhjeteksti')
               : ''
           }
         >

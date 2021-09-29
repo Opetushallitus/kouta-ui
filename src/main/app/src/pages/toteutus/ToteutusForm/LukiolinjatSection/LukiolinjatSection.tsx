@@ -118,7 +118,7 @@ export const useLukioToteutusNimi = ({
             _fp.zipObject(
               LANGUAGES,
               LANGUAGES.map(lng =>
-                t('toteutuslomake.lukionYleislinja', {
+                t('toteutuslomake.lukionYleislinjaNimiOsa', {
                   lng,
                 })
               )
@@ -243,8 +243,13 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
           component={FormFieldSwitch}
           name={yleislinjaFieldName}
           disabled={linjaSelectionsEmpty}
+          helperText={
+            linjaSelectionsEmpty
+              ? t('toteutuslomake.lukioYleislinjaOhjeteksti')
+              : ''
+          }
         >
-          {t('toteutuslomake.lukionYleislinja')}
+          {t('toteutuslomake.lukionYleislinjaValinta')}
         </Field>
       </Box>
       <LukiolinjaOsio

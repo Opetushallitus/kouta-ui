@@ -523,7 +523,9 @@
     "erityisenKoulutustehtavanKuvaus": "Erityisen koulutustehtävän kuvaus",
     "linkkiLisatietoihin": "Linkki lisätietoihin",
     "linkinAltTeksti": "Linkin ALT-teksti",
-    "lukionYleislinja": "Lukion yleislinja"
+    "lukionYleislinjaNimiOsa": "Lukio",
+    "lukionYleislinjaValinta": "Lukion yleislinja",
+    "lukionYleislinjaOhjeteksti": "Toteutuksella on pakko olla vähintään yleislinja, jos muita linjoja ei ole valittu. Valitse painotuksia tai yleisiä koulutustehtäviä poistaaksesi yleislinja-valinnan."
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

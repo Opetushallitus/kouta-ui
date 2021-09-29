@@ -19,28 +19,40 @@ export const KuvausFieldsSection = ({
   return (
     <>
       {/* TODO: Onko kuvauksen nimi ylipäänsä tarpeellinen? */}
-      {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS &&
-        koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
-          <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
-            <Field
-              disabled={disabled}
-              name={`${name}.nimi.${language}`}
-              component={FormFieldInput}
-              label={t('yleiset.kuvauksenNimi')}
-              required
-            />
-          </Box>
-        )}
+      {![
+        KOULUTUSTYYPPI.LUKIOKOULUTUS,
+        KOULUTUSTYYPPI.TUVA,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+      ].includes(koulutustyyppi) && (
+        <Box mb={2}>
+          <Field
+            disabled={disabled}
+            name={`${name}.nimi.${language}`}
+            component={FormFieldInput}
+            label={t('yleiset.kuvauksenNimi')}
+            required
+          />
+        </Box>
+      )}
       <Box {...getTestIdProps('kuvausInput')}>
         <Field
           disabled={disabled}
           name={`${name}.kuvaus.${language}`}
           component={FormFieldEditor}
           label={t('yleiset.kuvaus')}
-          required={koulutustyyppi === KOULUTUSTYYPPI.TUVA}
+          required={[
+            KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+          ].includes(koulutustyyppi)}
         />
       </Box>
-      {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+      {[
+        KOULUTUSTYYPPI.TUVA,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+      ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('linkkiEPerusteisiinInput')}>
           <Field
             disabled={disabled}

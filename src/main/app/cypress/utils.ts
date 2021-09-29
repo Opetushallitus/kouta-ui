@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import { loggable } from 'cypress-pipe';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import { includes, last, merge, toLower, replace } from 'lodash/fp';
+import { isEmpty, includes, last, merge, toLower, replace } from 'lodash/fp';
 
 import commonMocks from '#/cypress/mocks/common.mocks.json';
 import { Alkamiskausityyppi } from '#/src/constants';
@@ -26,13 +26,59 @@ export const paste = loggable('paste', value => $element => {
   return cy.wrap($element);
 });
 
+export const getSelectOption = value =>
+  cy.findAllByRole('option').contains(value);
+
+export const pFillSelect = loggable(
+  'fillSelect',
+  value => $element =>
+    cy
+      .wrap($element)
+      .click()
+      .within(() => {
+        getSelectOption(value).click({ force: true });
+      })
+);
+
+export const pFillAsyncSelect = loggable(
+  'fillAsyncSelect',
+  (input, match = null) =>
+    $element =>
+      cy.wrap($element).within(() => {
+        cy.get('input[type="text"]')
+          .should('not.be.disabled')
+          .pipe(paste(input));
+        cy.findAllByRole('option', { name: includes(match || input) })
+          .first()
+          .click({ force: true });
+      })
+);
+
+export const pFillEditor = loggable(
+  'fillEditor',
+  value => $element =>
+    cy.wrap($element).within(() => {
+      // NOTE: .clear wont work here -> use type instead
+      cy.get('[contenteditable="true"]').type('{selectall}').pipe(paste(value));
+    })
+);
+
+export const getInputByLabel = text =>
+  cy.findByLabelText(text, { exact: false });
+
+export const getSelectByLabel = text =>
+  getInputByLabel(text).closest('.Select__');
+
+export const getEditorByLabel = text =>
+  getInputByLabel(text).closest('.Editor__');
+
 export const getByTestId = cy.findByTestId;
+
+export const getFieldWrapperByName = name =>
+  cy.findByTestId(`form-control_${name}`);
 
 export const getRadio = value =>
   cy.get(`input[type="radio"][value="${value}"]`);
-
-export const getSelectOption = value =>
-  cy.findAllByRole('option').contains(value);
 
 export const getCheckbox = value =>
   cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
@@ -42,23 +88,24 @@ export const selectCheckbox = name =>
 
 export const getSelect = () => cy.get('.Select__');
 
-export const selectOption = value => {
-  getSelect()
-    .click()
-    .within(() => {
-      getSelectOption(value).click({ force: true });
-    });
-};
+export const selectOption = value => getSelect().pipe(pFillSelect(value));
 
 export const fillAsyncSelect = (input, match = null) => {
-  const searchTerm = match || input;
-  getSelect().within(() => {
-    cy.get('input[type="text"]').should('not.be.disabled').pipe(paste(input));
-    cy.findAllByRole('option', { name: includes(searchTerm) })
-      .first()
-      .click({ force: true });
-  });
+  getSelect().pipe(pFillAsyncSelect(input, match));
 };
+
+export const withinSection = (name, fn) =>
+  cy.findByTestId(`${name}Section`).within($sectionEl => {
+    const sectionIsOpen = !isEmpty($sectionEl.children('[open]'));
+
+    if (!sectionIsOpen) {
+      cy.wrap($sectionEl).click();
+    }
+
+    cy.wrap($sectionEl).within(() => {
+      fn();
+    });
+  });
 
 export const stubLokalisaatioRoute = () => {
   cy.intercept(
@@ -67,12 +114,8 @@ export const stubLokalisaatioRoute = () => {
   );
 };
 
-export const typeToEditor = value => {
-  cy.get('.Editor__').within(() => {
-    // NOTE: .clear wont work here -> use type instead
-    cy.get('[contenteditable="true"]').type('{selectall}').pipe(paste(value));
-  });
-};
+export const typeToEditor = value =>
+  cy.get('.Editor__').pipe(pFillEditor(value));
 
 export const getTableInput = () => {
   return cy.get('.TableInput__');
@@ -152,14 +195,14 @@ export const stubAsiointikieliRoute = () => {
 export const stubKoutaBackendLoginRoute = () => {
   cy.intercept(
     { method: 'GET', url: '/kouta-backend/auth/login' },
-    { body: {} }
+    { statusCode: 200, body: {} }
   );
 };
 
 export const stubKoutaBackendSessionRoute = () => {
   cy.intercept(
     { method: 'GET', url: '/kouta-backend/auth/session' },
-    { body: {} }
+    { statusCode: 200, body: {} }
   );
 };
 
@@ -364,7 +407,7 @@ export const fillKieliversiotSection = (
     jatka: false,
   }
 ) => {
-  getByTestId('kieliversiotSection').within(() => {
+  withinSection('kieliversiot', () => {
     chooseKieliversiotLanguages(['fi']);
     if (pressJatka) {
       jatka();
@@ -373,13 +416,13 @@ export const fillKieliversiotSection = (
 };
 
 export const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
+  withinSection('pohja', () => {
     jatka();
   });
 };
 
 export const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
+  withinSection('tila', () => {
     getRadio(tila).check({ force: true });
   });
 };
@@ -410,7 +453,7 @@ export const fillKoulutustyyppiSelect = koulutustyyppiPath => {
 };
 
 export const fillKoulutustyyppiSection = koulutustyyppiPath => {
-  getByTestId('koulutustyyppiSection').within(() => {
+  withinSection('koulutustyyppi', () => {
     fillKoulutustyyppiSelect(koulutustyyppiPath);
     jatka();
   });

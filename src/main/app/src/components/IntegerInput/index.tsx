@@ -7,7 +7,7 @@ import { Input, InputProps } from '#/src/components/virkailija';
 type IntegerInputProps = {
   min?: number;
   max?: number;
-  defaultValue?: number;
+  fallbackValue?: number;
   onBlur?: React.EventHandler<React.FocusEvent<HTMLInputElement>>;
 } & InputProps;
 
@@ -15,14 +15,14 @@ export const IntegerInput = ({
   onBlur = _fp.noop,
   min = Number.MIN_SAFE_INTEGER,
   max = Number.MAX_SAFE_INTEGER,
-  defaultValue = 0,
+  fallbackValue = 0,
   ...props
 }: IntegerInputProps) => {
   const usedOnBlur = e => {
     const value: string = e?.target?.value;
     const intValue = Number.parseInt(value, 10);
     if (_fp.isNaN(intValue)) {
-      e.target.value = defaultValue;
+      e.target.value = fallbackValue;
     } else {
       if (intValue > max) {
         e.target.value = max;
@@ -35,5 +35,5 @@ export const IntegerInput = ({
     onBlur(e);
   };
 
-  return <Input onBlur={usedOnBlur} defaultValue={defaultValue} {...props} />;
+  return <Input onBlur={usedOnBlur} {...props} />;
 };

@@ -30,7 +30,7 @@ const useOpintojenLaajuusOptions = () => {
   );
 };
 
-export const OpintojenlaajuusField = ({ disabled, name, required }) => {
+export const OpintojenlaajuusField = ({ disabled, name, required = false }) => {
   const laajuusOptions = useOpintojenLaajuusOptions();
 
   const { t } = useTranslation();

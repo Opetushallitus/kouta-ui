@@ -80,11 +80,7 @@ const EditToteutusPage = props => {
       <FormPage
         readOnly={!canUpdate}
         header={
-          <EntityFormHeader
-            entityType={ENTITY.TOTEUTUS}
-            entity={toteutus}
-            canUpdate={canUpdate}
-          />
+          <EntityFormHeader entityType={ENTITY.TOTEUTUS} entity={toteutus} />
         }
         steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
         footer={

@@ -319,7 +319,6 @@
     "ammatillinenOpettajakoulutus": "Ammatillinen opettajakoulutus",
     "ammatillinenOpintoOhjaajaKoulutus": "Ammatillinen opinto-ohjaajakoulutus",
     "ammatillinenErityisopettajaKoulutus": "Ammatillinen erityisopettajakoulutus",
-    "vapaaSivistystyo": "Vapaa sivistystyö",
     "yleissivistava": "Yleissivistävä",
     "luva": "Yleissivistävä (LUVA)",
     "muutKoulutukset": "Muut koulutukset",
@@ -328,7 +327,10 @@
     "lk": "Lukiokoulutus",
     "yo": "Yliopistokoulutus",
     "amk": "AMK",
-    "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)"
+    "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)",
+    "vapaaSivistystyo": "Vapaa sivistystyö",
+    "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
+    "vapaaSivistystyoMuu": "Muu"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",

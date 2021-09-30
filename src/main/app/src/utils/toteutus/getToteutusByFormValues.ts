@@ -27,12 +27,12 @@ const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
 
 const getLukiolinjatByValues = (linjaValues, pickTranslations) =>
   (linjaValues?.kaytossa &&
-    linjaValues?.valinnat?.map(({ value }, index) => ({
+    linjaValues?.valinnat?.map(({ value }) => ({
       koodiUri: value,
       kuvaus: _fp.flow(
         pickTranslations,
         _fp.mapValues(serializeEditorState)
-      )(linjaValues.kuvaukset[index] ?? {}),
+      )(linjaValues.kuvaukset[value] ?? {}),
     }))) ||
   [];
 

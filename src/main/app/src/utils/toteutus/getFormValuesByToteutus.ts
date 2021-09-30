@@ -30,13 +30,14 @@ const lukiolinjatiedotToFormValues = (lukiolinjatiedot): LukiolinjatOsio => {
   const result = {
     kaytossa: !_fp.isEmpty(lukiolinjatiedot),
     valinnat: [],
-    kuvaukset: [],
+    kuvaukset: {},
   } as LukiolinjatOsio;
 
   lukiolinjatiedot?.forEach(lukiolinjatieto => {
     result.valinnat.push({ value: lukiolinjatieto.koodiUri });
-    result.kuvaukset.push(
-      _fp.mapValues(parseEditorState, lukiolinjatieto.kuvaus ?? {})
+    result.kuvaukset[lukiolinjatieto.koodiUri] = _fp.mapValues(
+      parseEditorState,
+      lukiolinjatieto.kuvaus ?? {}
     );
   });
 

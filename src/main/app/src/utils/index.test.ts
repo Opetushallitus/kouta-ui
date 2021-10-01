@@ -1,5 +1,5 @@
 import {
-  getFieldName,
+  getFieldNameWithoutLanguage,
   getValuesForSaving,
   isDeepEmptyFormValues,
   formatDateValue,
@@ -162,7 +162,7 @@ test.each([
   ['nimi', 'nimi'],
   ['perustiedot.nimi', 'perustiedot.nimi'],
 ])('getFieldName', (name, fieldName) => {
-  expect(getFieldName(name)).toEqual(fieldName);
+  expect(getFieldNameWithoutLanguage(name)).toEqual(fieldName);
 });
 
 test.each([

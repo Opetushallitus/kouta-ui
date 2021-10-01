@@ -43,7 +43,15 @@ export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
       value: kt,
     })),
   },
-  { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO },
+  {
+    value: 'vapaa-sivistystyo',
+    children: [
+      {
+        value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+      },
+      { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU },
+    ],
+  },
   { value: KOULUTUSTYYPPI.LUVA },
   { value: KOULUTUSTYYPPI.TUVA },
   { value: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },

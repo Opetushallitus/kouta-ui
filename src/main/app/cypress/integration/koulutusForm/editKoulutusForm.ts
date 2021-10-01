@@ -108,6 +108,36 @@ export const editKoulutusForm = () => {
     });
   });
 
+  it('should be able to edit "Vapaa Sivistystyö - Opistovuosi"-koulutus', () => {
+    prepareTest('vapaa-sivistystyo-opistovuosi');
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    mutationTest(() => {
+      getByTestId('linkkiEPerusteisiinInput')
+        .find('input')
+        .pipe(paste('http://testilinkki.fi'));
+
+      tallenna();
+    });
+  });
+
+  it('should be able to edit "Vapaa Sivistystyö - Muu"-koulutus', () => {
+    prepareTest('vapaa-sivistystyo-muu');
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    mutationTest(() => {
+      getByTestId('linkkiEPerusteisiinInput')
+        .find('input')
+        .pipe(paste('http://testilinkki.fi'));
+
+      tallenna();
+    });
+  });
+
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');
     cy.visit(

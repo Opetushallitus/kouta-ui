@@ -319,7 +319,6 @@
     "ammatillinenOpettajakoulutus": "Ammatillinen opettajakoulutus",
     "ammatillinenOpintoOhjaajaKoulutus": "Ammatillinen opinto-ohjaajakoulutus",
     "ammatillinenErityisopettajaKoulutus": "Ammatillinen erityisopettajakoulutus",
-    "vapaaSivistystyo": "Vapaa sivistystyö",
     "yleissivistava": "Yleissivistävä",
     "luva": "Yleissivistävä (LUVA)",
     "muutKoulutukset": "Muut koulutukset",
@@ -328,7 +327,10 @@
     "lk": "Lukiokoulutus",
     "yo": "Yliopistokoulutus",
     "amk": "AMK",
-    "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)"
+    "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)",
+    "vapaaSivistystyo": "Vapaa sivistystyö",
+    "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
+    "vapaaSivistystyoMuu": "Muu"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",
@@ -515,15 +517,15 @@
     "valitsePainotukset": "Valitse painotukset",
     "lukiollaOnPainotuksia": "Lukiolla on painotuksia",
     "painotuksenKuvaus": "Painotuksen kuvaus",
-    "lukionPainotus": "lukion painotus",
     "erityisetKoulutustehtavat": "Erityiset koulutustehtävät",
     "lukiollaOnErityisiaKoulutustehtavia": "Lukiolla on erityisiä koulutustehtäviä",
     "valitseErityisetKoulutustehtavat": "Valitse erityiset koulutustehtävät",
     "erityisenKoulutustehtavanKuvaus": "Erityisen koulutustehtävän kuvaus",
-    "erityinenKoulutustehtava": "erityinen koulutustehtävä",
     "linkkiLisatietoihin": "Linkki lisätietoihin",
     "linkinAltTeksti": "Linkin ALT-teksti",
-    "lukionYleislinja": "Lukion yleislinja"
+    "lukionYleislinjaNimiOsa": "Lukio",
+    "lukionYleislinjaValinta": "Lukion yleislinja",
+    "lukionYleislinjaOhjeteksti": "Toteutuksella on pakko olla vähintään yleislinja, jos muita linjoja ei ole valittu. Valitse painotuksia tai yleisiä koulutustehtäviä poistaaksesi yleislinja-valinnan."
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

@@ -29,7 +29,13 @@ import { initialValues } from './initialToteutusValues';
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
 
-const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
+const {
+  AMMATILLINEN_KOULUTUS,
+  TUTKINNON_OSA,
+  OSAAMISALA,
+  VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+  VAPAA_SIVISTYSTYO_MUU,
+} = KOULUTUSTYYPPI;
 
 const getCopyValues = toteutusOid => ({
   pohja: {
@@ -84,9 +90,13 @@ const CreateToteutusPage = props => {
     useToteutusByOid(kopioToteutusOid);
 
   const initialValues = useMemo(() => {
-    return [AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA].includes(
-      koulutustyyppi
-    )
+    return [
+      AMMATILLINEN_KOULUTUS,
+      TUTKINNON_OSA,
+      OSAAMISALA,
+      VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+      VAPAA_SIVISTYSTYO_MUU,
+    ].includes(koulutustyyppi)
       ? getInitialValues({
           koulutustyyppi,
           toteutus,

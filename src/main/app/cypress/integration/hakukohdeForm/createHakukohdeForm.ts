@@ -99,11 +99,7 @@ const fillLukiolinjaSection = () => {
         cy.findByRole('button', { name: /yleiset\.poistaRivi/ }).click();
       });
 
-      cy.findAllByTestId('painotettuOppiaine', { exact: false }).within(
-        $oppiaineet => {
-          expect($oppiaineet).to.have.lengthOf(1);
-        }
-      );
+      cy.findAllByTestId(/^painotettuOppiaine-\d?$/).should('have.length', 1);
     });
   });
 };

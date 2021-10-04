@@ -1,14 +1,12 @@
 import { KOULUTUSTYYPPI } from '../constants';
 import isYhteishakuHakutapa from './isYhteishakuHakutapa';
 
-// TODO Lisää TELMA ja VAPAA_SIVISTYSTYO (oppivelvollisuuslinja / opistovuosi),
-// Kun niitä aletaan tukemaan
 const RESTRICTED_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   KOULUTUSTYYPPI.LUKIOKOULUTUS,
   KOULUTUSTYYPPI.TUVA,
-  //KOULUTUSTYYPPI.TELMA,
-  //KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO
+  KOULUTUSTYYPPI.TELMA,
+  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
 ];
 
 const isRestrictedDuetoYhteishaku = (hakutapaKoodiUri, koulutustyyppi) => {

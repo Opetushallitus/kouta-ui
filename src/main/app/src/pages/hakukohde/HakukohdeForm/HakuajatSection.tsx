@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +8,7 @@ import { FormFieldSwitch } from '#/src/components/formFields';
 import { HakuajatFields } from '#/src/components/HakuajatFields';
 import { Box, Typography } from '#/src/components/virkailija';
 import { NDASH } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
+import { useFieldValue, useBoundFormActions } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { formatDateValue } from '#/src/utils';
 import isRestrictedDuetoYhteishaku from '#/src/utils/isRestrictedDuetoYhteishaku';
@@ -58,6 +58,14 @@ export const HakuajatSection = ({ haku, name, koulutustyyppi }) => {
   const preventHakuaikaModification =
     !useIsOphVirkailija() &&
     isRestrictedDuetoYhteishaku(haku?.hakutapaKoodiUri, koulutustyyppi);
+
+  const { change } = useBoundFormActions();
+
+  useEffect(() => {
+    if (preventHakuaikaModification) {
+      change(`${name}.eriHakuaika`, false);
+    }
+  }, [preventHakuaikaModification, change, name]);
 
   return (
     <>

@@ -695,7 +695,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
-    "tuvaErityisopetuksena": false,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -847,7 +846,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
-    "tuvaErityisopetuksena": false,
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -1013,7 +1011,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
-    "tuvaErityisopetuksena": false,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -1163,7 +1160,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
-    "tuvaErityisopetuksena": false,
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {
@@ -1431,7 +1427,6 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
-    "tuvaErityisopetuksena": false,
     "tyyppi": "tuva",
     "yhteyshenkilot": [
       {
@@ -1699,7 +1694,6 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
-    "tuvaErityisopetuksena": false,
     "tyyppi": "telma",
     "yhteyshenkilot": [
       {

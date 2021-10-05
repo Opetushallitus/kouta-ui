@@ -287,7 +287,6 @@ Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "tuvaErityisopetuksena": false,
   },
   "tila": "tallennettu",
   "toteutusjaksot": Array [

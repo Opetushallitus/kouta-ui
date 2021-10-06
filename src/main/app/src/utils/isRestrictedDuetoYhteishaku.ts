@@ -1,17 +1,9 @@
-import { KOULUTUSTYYPPI } from '../constants';
+import { TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT } from '../constants';
 import isYhteishakuHakutapa from './isYhteishakuHakutapa';
-
-const RESTRICTED_KOULUTUSTYYPIT = [
-  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  KOULUTUSTYYPPI.LUKIOKOULUTUS,
-  KOULUTUSTYYPPI.TUVA,
-  KOULUTUSTYYPPI.TELMA,
-  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-];
 
 const isRestrictedDuetoYhteishaku = (hakutapaKoodiUri, koulutustyyppi) => {
   if (isYhteishakuHakutapa(hakutapaKoodiUri)) {
-    return RESTRICTED_KOULUTUSTYYPIT.includes(koulutustyyppi);
+    return TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT.includes(koulutustyyppi);
   }
   return false;
 };

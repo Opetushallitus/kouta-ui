@@ -4,22 +4,24 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
-import { Box } from '#/src/components/virkailija';
+import { Box, FormControl, Input } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
+import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
-import { getOpintojenLaajuusTranslations } from '#/src/utils/getOpintojenLaajuusTranslations';
+import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 
 export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const { t } = useTranslation();
+  const selectedLanguage = useLanguageTab();
 
   const { koodi: laajuusKoodi } = useKoodi(
     koulutus.metadata.opintojenLaajuusKoodiUri
   );
   const { koodi: laajuusyksikko } = useKoodi('opintojenlaajuusyksikko_6');
-  const laajuusKoodiNimet = laajuusKoodi?.metadata;
-  const laajuusyksikkoNimet = laajuusyksikko?.metadata;
+  const laajuusKoodiMetadata = laajuusKoodi?.metadata;
+  const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
   const koulutustyyppi = koulutus.koulutustyyppi;
   const { change } = useBoundFormActions();
@@ -31,14 +33,6 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
     });
     return () => change(`${name}.nimi`, {});
   }, [change, koulutustyyppi, name, t]);
-
-  useEffect(() => {
-    change(
-      `${name}.laajuus`,
-      getOpintojenLaajuusTranslations(laajuusKoodiNimet, laajuusyksikkoNimet)
-    );
-    return () => change(`${name}.laajuus`, {});
-  }, [change, laajuusKoodiNimet, laajuusyksikkoNimet, name, t]);
 
   return (
     <>
@@ -52,14 +46,19 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
         />
       </Box>
       <Box mb={2} display="flex">
-        <Box>
-          <Field
-            name={`${name}.laajuus.${language}`}
-            component={FormFieldInput}
-            label={t('toteutuslomake.laajuus')}
-            required
-            disabled
-          />
+        <Box maxWidth="300px">
+          <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
+            <Input
+              value={
+                getOpintojenLaajuusTranslation(
+                  laajuusKoodiMetadata,
+                  laajuusyksikkoMetadata,
+                  selectedLanguage
+                ) || ''
+              }
+              {...getTestIdProps('laajuus')}
+            />
+          </FormControl>
         </Box>
         <Box mx={2} {...getTestIdProps('aloituspaikat')}>
           <Field

@@ -1232,11 +1232,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": {
-      "en": "38 viikkoa",
-      "fi": "38 viikkoa",
-      "sv": "38 viikkoa"
-    },
+    "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
@@ -1368,11 +1364,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": {
-      "en": "38 viikkoa",
-      "fi": "38 viikkoa",
-      "sv": "38 viikkoa"
-    },
+    "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
@@ -1499,11 +1491,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": {
-      "en": "60 ECVET competence points",
-      "fi": "60 osaamispistettä",
-      "sv": "60 kompetenspoäng"
-    },
+    "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
@@ -1635,11 +1623,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": {
-      "en": "60 ECVET competence points",
-      "fi": "60 osaamispistettä",
-      "sv": "60 kompetenspoäng"
-    },
+    "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},

@@ -50,7 +50,11 @@ export const PerustiedotSection = ({
       <Divider marginTop={4} marginBottom={4} />
 
       <div {...getTestIdProps('hakuajatSection')}>
-        <HakuajatSection name="hakuajat" haku={haku} />
+        <HakuajatSection
+          name="hakuajat"
+          haku={haku}
+          koulutustyyppi={koulutustyyppi}
+        />
       </div>
 
       <Divider marginTop={4} marginBottom={4} />

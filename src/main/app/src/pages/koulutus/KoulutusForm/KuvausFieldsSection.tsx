@@ -22,6 +22,7 @@ export const KuvausFieldsSection = ({
       {![
         KOULUTUSTYYPPI.LUKIOKOULUTUS,
         KOULUTUSTYYPPI.TUVA,
+        KOULUTUSTYYPPI.TELMA,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
       ].includes(koulutustyyppi) && (
@@ -43,6 +44,7 @@ export const KuvausFieldsSection = ({
           label={t('yleiset.kuvaus')}
           required={[
             KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
           ].includes(koulutustyyppi)}
@@ -50,6 +52,7 @@ export const KuvausFieldsSection = ({
       </Box>
       {[
         KOULUTUSTYYPPI.TUVA,
+        KOULUTUSTYYPPI.TELMA,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
       ].includes(koulutustyyppi) && (

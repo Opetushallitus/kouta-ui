@@ -451,6 +451,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
 {
   "ePerusteId": null,
   "esikatselu": false,
+  "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
   "kielivalinta": [
@@ -479,7 +480,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
         }
       }
     ],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53",
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_38",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -580,4 +581,97 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
     "1.2.1.1.1.1"
   ],
   "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "telma",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "telma",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {
+      "fi": "http://linkki.fi"
+    },
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "telma"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutustyypit.telma"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi",
+    "sv"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_0#1"
+  ],
+  "koulutustyyppi": "telma",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "telma",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvausta on muokattu</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "telma"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutustyypit.telma",
+    "sv": "koulutustyypit.telma"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "tila": "tallennettu"
 };

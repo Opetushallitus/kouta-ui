@@ -140,6 +140,27 @@ export const editToteutusForm = () => {
 
       fillKieliversiotSection();
 
+      cy.findByLabelText(/toteutuslomake.laajuus/)
+        .should('be.disabled')
+        .should('have.value', '38 viikkoa');
+
+      cy.findByTestId('hakukohteetSection').should('exist');
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to edit telma toteutus',
+    mutationTest(() => {
+      prepareTest('telma');
+
+      fillKieliversiotSection();
+
+      cy.findByLabelText(/toteutuslomake.laajuus/)
+        .should('be.disabled')
+        .should('have.value', '60 osaamispistettä');
+
       cy.findByTestId('hakukohteetSection').should('exist');
 
       tallenna();

@@ -147,7 +147,7 @@ const fillTuvaTiedotSection = () => {
       .should('be.disabled')
       .should('have.value', 'koulutustyypit.tuva');
 
-    cy.findByRole('textbox', { name: 'toteutuslomake.laajuus' })
+    cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')
       .should('have.value', '38 viikkoa');
 
@@ -164,6 +164,22 @@ const fillVapaaSivistystyoTiedotSection = () => {
     getInputByLabel('toteutuslomake.laajuus')
       .should('be.disabled')
       .should('have.value', 'vähintään 53 op');
+  });
+};
+
+const fillTelmaTiedotSection = () => {
+  withinSection('tiedot', () => {
+    cy.findByLabelText(/toteutuksenNimi/)
+      .should('be.disabled')
+      .should('have.value', 'koulutustyypit.telma');
+
+    cy.findByLabelText(/toteutuslomake.laajuus/)
+      .should('be.disabled')
+      .should('have.value', '60 osaamispistettä');
+
+    cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
+      .clear()
+      .pipe(paste('25'));
   });
 };
 
@@ -571,6 +587,30 @@ export const createToteutusForm = () => {
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillHakeutumisTaiIlmoittautumistapaSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create TELMA toteutus',
+    mutationTest(() => {
+      prepareTest('telma');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillTelmaTiedotSection();
+
+      fillKuvausSection();
+
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
+
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
       fillYhteystiedotSection();
       fillTilaSection();
 

@@ -41,7 +41,7 @@ import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import { TiedotSection } from './TiedotSection/TiedotSection';
-import { TuvaTiedotSection } from './TiedotSection/TuvaTiedotSection';
+import { TuvaTelmaTiedotSection } from './TiedotSection/TuvaTelmaTiedotSection';
 import { VapaaSivistystyoTiedotSection } from './TiedotSection/VapaaSivistystyoTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -139,7 +139,10 @@ export const KoulutusForm = ({
               section="information"
               header={t('koulutuslomake.koulutuksenTiedot')}
               Component={_fp.cond([
-                [isIn([KOULUTUSTYYPPI.TUVA]), () => TuvaTiedotSection],
+                [
+                  isIn([KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA]),
+                  () => TuvaTelmaTiedotSection,
+                ],
                 [
                   isIn([
                     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
@@ -232,6 +235,7 @@ export const KoulutusForm = ({
           {[
             KOULUTUSTYYPPI.LUKIOKOULUTUS,
             KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
@@ -249,6 +253,7 @@ export const KoulutusForm = ({
 
           {![
             KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
           ].includes(koulutustyyppi) && (

@@ -38,7 +38,7 @@ import { OsaamisalatSection } from './OsaamisalatSection';
 import { TiedotSection } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
-import { TuvaTiedotSection } from './TuvaTiedotSection';
+import { TuvaTelmaTiedotSection } from './TuvaTelmaTiedotSection';
 import { VapaaSivistystyoTiedotSection } from './VapaaSivistystyoTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
@@ -118,14 +118,14 @@ const ToteutusForm = ({
         />
         {_fp.cond([
           [
-            isIn([KOULUTUSTYYPPI.TUVA]),
+            isIn([KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA]),
             () => (
               <>
                 <FormCollapse
                   section="tiedot"
                   header={t('toteutuslomake.toteutuksenTiedot')}
                   languages={languages}
-                  Component={TuvaTiedotSection}
+                  Component={TuvaTelmaTiedotSection}
                   koulutus={koulutus}
                 />
                 <FormCollapse

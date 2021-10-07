@@ -99,6 +99,16 @@ const getTuvaFields = ({ tyyppi }) => {
   });
 };
 
+const getTelmaFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    nimi: { fi: 'Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)' },
+    metadata: {
+      opintojenLaajuusKoodiUri: 'opintojenlaajuus_60',
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
 const getVapaaSivistystyoFields = ({ tyyppi }) => {
   return merge(getBaseFields({ tyyppi }), {
     nimi: { fi: 'Vapaa Sivistystyö Opistovuosi' },
@@ -118,6 +128,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getLukioFields({ tyyppi });
   } else if (tyyppi === 'tuva') {
     return getTuvaFields({ tyyppi });
+  } else if (tyyppi === 'telma') {
+    return getTelmaFields({ tyyppi });
   } else if (tyyppi.startsWith('vapaa-sivistystyo')) {
     return getVapaaSivistystyoFields({ tyyppi });
   }

@@ -22,7 +22,6 @@ export enum KOULUTUSTYYPPI {
   LUKIOKOULUTUS = 'lk',
   YLIOPISTOKOULUTUS = 'yo',
   AMKKOULUTUS = 'amk',
-  VALMA = 'valma',
   TELMA = 'telma',
   TUTKINNON_OSA = 'amm-tutkinnon-osa',
   OSAAMISALA = 'amm-osaamisala',
@@ -34,7 +33,6 @@ export enum KOULUTUSTYYPPI {
   AMMATILLINEN_OPETTAJAKOULUTUS = 'ammatillinen_opettajakoulutus',
   AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS = 'ammatillinen_opinto_ohjaaja_koulutus',
   AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS = 'ammatillinen_erityisopettaja_koulutus',
-  LUVA = 'luva',
   TUVA = 'tuva',
   MUUT_KOULUTUKSET = 'muut_koulutukset',
   PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',
@@ -76,7 +74,6 @@ export const TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT = [
 ];
 
 export const TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT = [
-  KOULUTUSTYYPPI.VALMA,
   KOULUTUSTYYPPI.TELMA,
   KOULUTUSTYYPPI.TUTKINNON_OSA,
   KOULUTUSTYYPPI.OSAAMISALA,
@@ -91,10 +88,7 @@ export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
 // NOTE: Näitä koulutustyyppejä ei tueta koska niiden toteutus puuttuu backendista, päivitä listaa kun backend tukee näitä
 export const EI_TUETUT_KOULUTUSTYYPIT = [
   ...TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
-  KOULUTUSTYYPPI.VALMA,
-  KOULUTUSTYYPPI.TELMA,
   KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO,
-  KOULUTUSTYYPPI.LUVA,
   KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
   KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
 ];

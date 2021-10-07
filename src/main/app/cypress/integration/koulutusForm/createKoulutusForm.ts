@@ -408,4 +408,43 @@ export const createKoulutusForm = () => {
       tallenna();
     })
   );
+
+  it(
+    'should be able to create TELMA-koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['ammatillinen', 'telma'] });
+
+      withinSection('information', () => {
+        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
+          pFillSelect('60')
+        );
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').should(
+          'have.value',
+          'koulutustyypit.telma'
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+
+        getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
+          paste('http://linkki.fi')
+        );
+      });
+
+      fillJarjestajaSection();
+
+      fillNakyvyysSection();
+
+      fillTilaSection();
+
+      getByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('lisatiedotSection').should('not.exist');
+
+      tallenna();
+    })
+  );
 };

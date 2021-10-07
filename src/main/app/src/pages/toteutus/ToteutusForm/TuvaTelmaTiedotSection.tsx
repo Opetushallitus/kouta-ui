@@ -5,38 +5,34 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
-import { LANGUAGES } from '#/src/constants';
+import { KOULUTUSTYYPPI } from '#/src/constants';
+import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
-import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 
-export const TuvaTiedotSection = ({ language, name, koulutus }) => {
+export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const { t } = useTranslation();
+  const selectedLanguage = useLanguageTab();
 
   const { koodi: laajuusKoodi } = useKoodi(
     koulutus.metadata.opintojenLaajuusKoodiUri
   );
+  const { koodi: laajuusyksikko } = useKoodi('opintojenlaajuusyksikko_6');
+  const laajuusKoodiMetadata = laajuusKoodi?.metadata;
+  const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
   const koulutustyyppi = koulutus.koulutustyyppi;
   const { change } = useBoundFormActions();
   useEffect(() => {
-    change(
-      `${name}.nimi`,
-      LANGUAGES.reduce((translations, lng) => {
-        return {
-          ...translations,
-          [lng]: t(`koulutustyypit.${koulutustyyppi}`, {
-            lng: lng,
-          }),
-        };
-      }, {})
-    );
+    change(`${name}.nimi`, {
+      fi: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'fi' }),
+      sv: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'sv' }),
+      en: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'en' }),
+    });
     return () => change(`${name}.nimi`, {});
   }, [change, koulutustyyppi, name, t]);
-
-  const userLanguage = useUserLanguage();
 
   return (
     <>
@@ -50,10 +46,16 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
         />
       </Box>
       <Box mb={2} display="flex">
-        <Box>
+        <Box maxWidth="300px">
           <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
             <Input
-              value={getKoodiNimiTranslation(laajuusKoodi, userLanguage) || ''}
+              value={
+                getOpintojenLaajuusTranslation(
+                  laajuusKoodiMetadata,
+                  laajuusyksikkoMetadata,
+                  selectedLanguage
+                ) || ''
+              }
               {...getTestIdProps('laajuus')}
             />
           </FormControl>
@@ -68,12 +70,14 @@ export const TuvaTiedotSection = ({ language, name, koulutus }) => {
         </Box>
       </Box>
       <Box mb={2}>
-        <Field
-          name={`${name}.tuvaErityisopetuksena`}
-          component={FormFieldSwitch}
-        >
-          {t('toteutuslomake.jarjestetaanErityisopetuksena')}
-        </Field>
+        {koulutustyyppi !== KOULUTUSTYYPPI.TELMA && (
+          <Field
+            name={`${name}.jarjestetaanErityisopetuksena`}
+            component={FormFieldSwitch}
+          >
+            {t('toteutuslomake.jarjestetaanErityisopetuksena')}
+          </Field>
+        )}
       </Box>
     </>
   );

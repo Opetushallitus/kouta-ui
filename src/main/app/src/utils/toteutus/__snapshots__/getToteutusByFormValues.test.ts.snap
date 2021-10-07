@@ -99,6 +99,7 @@ Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
+    "jarjestetaanErityisopetuksena": undefined,
     "kielivalikoima": Object {
       "A1Kielet": Array [
         "kieli_1#1",
@@ -321,7 +322,6 @@ Object {
         ],
       },
     ],
-    "tuvaErityisopetuksena": undefined,
     "tyyppi": "amk",
     "yhteyshenkilot": Array [
       Object {

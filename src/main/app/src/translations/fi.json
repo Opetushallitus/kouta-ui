@@ -320,7 +320,6 @@
     "ammatillinenOpintoOhjaajaKoulutus": "Ammatillinen opinto-ohjaajakoulutus",
     "ammatillinenErityisopettajaKoulutus": "Ammatillinen erityisopettajakoulutus",
     "yleissivistava": "Yleissivistävä",
-    "luva": "Yleissivistävä (LUVA)",
     "muutKoulutukset": "Muut koulutukset",
     "perusopetuksenLisaopetus": "Perusopetuksen lisäopetus",
     "amm": "Ammatillinen koulutus",
@@ -328,6 +327,7 @@
     "yo": "Yliopistokoulutus",
     "amk": "AMK",
     "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)",
+    "telma": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)",
     "vapaaSivistystyo": "Vapaa sivistystyö",
     "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
     "vapaaSivistystyoMuu": "Muu"

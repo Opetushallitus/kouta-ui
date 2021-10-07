@@ -46,9 +46,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
         </Box>
       )}
       {[
-        KOULUTUSTYYPPI.VALMA,
         KOULUTUSTYYPPI.TELMA,
-        KOULUTUSTYYPPI.LUVA,
         KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
       ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>

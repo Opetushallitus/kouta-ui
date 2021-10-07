@@ -10,6 +10,7 @@ import {
   assertNoUnsavedChangesDialog,
   getByTestId,
   paste,
+  typeToEditor,
   wrapMutationTest,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
@@ -93,20 +94,35 @@ export const editKoulutusForm = () => {
     })
   );
 
-  it('should be able to edit TUVA-koulutus', () => {
-    prepareTest('tuva');
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
-    );
-
+  it(
+    'should be able to edit TUVA-koulutus',
     mutationTest(() => {
+      prepareTest('tuva');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
       getByTestId('linkkiEPerusteisiinInput')
         .find('input')
         .pipe(paste('http://testilinkki.fi'));
 
       tallenna();
-    });
-  });
+    })
+  );
+
+  it(
+    'should be able to edit TELMA-koulutus',
+    mutationTest(() => {
+      prepareTest('telma');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
+      getByTestId('kuvausInput').within(() => {
+        typeToEditor('Kuvausta on muokattu');
+      });
+
+      tallenna();
+    })
+  );
 
   it('should be able to edit "Vapaa Sivistystyö - Opistovuosi"-koulutus', () => {
     prepareTest('vapaa-sivistystyo-opistovuosi');

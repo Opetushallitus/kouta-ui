@@ -369,8 +369,18 @@ class TableInput extends Component {
 
   getRows() {
     const value = this.getValue();
-
-    return _.isObject(value) && _.isArray(value.rows) ? value.rows : [];
+    const rowsFallback = [
+      {
+        columns: [{ index: 0, text: {} }],
+      },
+    ];
+    if (_.isObject(value) && _.isArray(value.rows) && value.rows.length > 0) {
+      return value.rows;
+    } else {
+      console.log('fallback!');
+      this.props.onChange({ rows: rowsFallback });
+      return rowsFallback;
+    }
   }
 
   render() {

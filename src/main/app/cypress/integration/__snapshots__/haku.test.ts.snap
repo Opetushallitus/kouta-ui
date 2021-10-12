@@ -73,7 +73,7 @@ exports[`editHaku > should be able to edit haku #0`] =
     }
   ],
   "hakukohteenLiittamisenTakaraja": "2019-02-08T07:05",
-  "hakukohteenMuokkaamisenTakaraja": "2019-02-08T07:05",
+  "hakukohteenMuokkaamisenTakaraja": "2019-03-08T07:05",
   "hakulomakeAtaruId": "12345",
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},

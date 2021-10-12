@@ -359,4 +359,73 @@ export const createHakukohdeForm = () => {
       );
     })
   );
+
+  it('should not be possible to save hakukohde if haun liittämistakaraja has expired', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenLiittaminenHasExpired: true,
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'hakukohdelomake.eiMuokkausOikeutta',
+    }).should('be.disabled');
+  });
+
+  it('should not be possible to save hakukohde if haun muokkaamistakaraja has expired', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenMuokkaaminenHasExpired: true,
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'hakukohdelomake.eiMuokkausOikeutta',
+    }).should('be.disabled');
+  });
+
+  it("should be possible to save hakukohde if haun lisäämis- ja muokkaamistakarajat haven't been set", () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakuWithoutTakarajat: true,
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'yleiset.tallenna',
+    }).should('not.be.disabled');
+  });
+
+  it('should be possible to save hakukohde if haun lisäämistakaraja has expired but muokkaamistakaraja has not been set', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenLiittaminenHasExpired: true,
+      hakuWithoutMuokkaamisenTakaraja: true,
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'yleiset.tallenna',
+    }).should('not.be.disabled');
+  });
 };

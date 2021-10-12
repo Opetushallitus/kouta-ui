@@ -373,7 +373,7 @@ export const createHakukohdeForm = () => {
     fillKieliversiotSection({ jatka: true });
 
     cy.findByRole('button', {
-      name: 'hakukohdelomake.eiMuokkausOikeutta',
+      name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
     }).should('be.disabled');
   });
 
@@ -390,7 +390,7 @@ export const createHakukohdeForm = () => {
     fillKieliversiotSection({ jatka: true });
 
     cy.findByRole('button', {
-      name: 'hakukohdelomake.eiMuokkausOikeutta',
+      name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
     }).should('be.disabled');
   });
 

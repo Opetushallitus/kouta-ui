@@ -46,23 +46,6 @@ export const CreateHakukohdePage = ({
   const koulutustyyppi =
     data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-  let canUpdate;
-  const hakukohteenLiittamisenTakaraja = haku?.hakukohteenLiittamisenTakaraja;
-  const hakukohteenMuokkaamisenTakaraja = haku?.hakukohteenMuokkaamisenTakaraja;
-  if (hakukohteenLiittamisenTakaraja || hakukohteenMuokkaamisenTakaraja) {
-    const liittamisenTakaraja = hakukohteenLiittamisenTakaraja
-      ? new Date(hakukohteenLiittamisenTakaraja)
-      : null;
-    const muokkaamisenTakaraja = hakukohteenMuokkaamisenTakaraja
-      ? new Date(hakukohteenMuokkaamisenTakaraja)
-      : null;
-
-    const now = new Date();
-    canUpdate =
-      (liittamisenTakaraja ? liittamisenTakaraja >= now : true) &&
-      (muokkaamisenTakaraja ? muokkaamisenTakaraja >= now : true);
-  }
-
   return (
     <ReduxForm
       form="hakukohdeForm"
@@ -80,7 +63,6 @@ export const CreateHakukohdePage = ({
             koulutustyyppi={koulutustyyppi}
             haku={haku}
             toteutus={toteutus}
-            canUpdate={canUpdate}
           />
         }
       >

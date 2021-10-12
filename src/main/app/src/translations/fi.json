@@ -589,6 +589,7 @@
     "avaaValintaperuste": "Avaa valintaperustekuvaus",
     "pohjakoulutuksenTarkennus": "Pohjakoulutuksen tarkennus",
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä hakukohdetta",
+    "muokkaamisenTakarajaYlittynyt": "Hakukohteen muokkaamisen tai lisäämisen takaraja on umpeutunut.",
     "eiVoiAsettaaAjankohtaaJosYhteishaku": "Hakukohteella ei voi asettaa koulutuksen ajankohtaa, jos haussa on valittu hakutavaksi yhteishaku.",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja hakukohteita uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu hakukohde",

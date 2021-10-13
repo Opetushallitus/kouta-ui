@@ -32,6 +32,7 @@ import {
   getBlockType,
   inlineIsActive,
   blockIsActive,
+  parseEditorState,
   getSelectionLinkUrl,
   createEmptyEditorState,
 } from './utils';
@@ -388,8 +389,19 @@ export const Editor = ({
             setHasFocus(false);
             onBlur();
           }}
-          ref={editorRef}
+          handlePastedText={(text, html) => {
+            const replaceIfHtml = () => {
+              if ((text || '').trim().startsWith('<')) {
+                onChange(parseEditorState(text));
+                return true;
+              } else {
+                return false;
+              }
+            };
+            return replaceIfHtml() ? 'handled' : 'unhandled';
+          }}
           editorState={editorState}
+          ref={editorRef}
           onChange={onChange}
           readOnly={disabled}
           {...props}

@@ -18,6 +18,7 @@ import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import getHaut from '#/src/utils/haku/getHaut';
+import isHakukohteenLiittamisenTakarajaExpired from '#/src/utils/haku/isHakukohteenLiittamisenTakarajaExpired';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 import HakukohteetModal from './HakukohteetModal';
@@ -45,6 +46,19 @@ const HakuForm = ({
   const isOphVirkailija = useIsOphVirkailija();
 
   const formMode = useFormMode();
+
+  let hakukohteenLiittaminenDisabled = false;
+  if (hakuProp) {
+    const now = new Date();
+    const liittamisenTakaraja = hakuProp.hakukohteenLiittamisenTakaraja;
+    if (liittamisenTakaraja) {
+      const takaraja = new Date(liittamisenTakaraja);
+      hakukohteenLiittaminenDisabled = isHakukohteenLiittamisenTakarajaExpired(
+        now,
+        takaraja
+      );
+    }
+  }
 
   return (
     <>
@@ -144,7 +158,16 @@ const HakuForm = ({
                 height="100%"
                 flexBasis="100%"
               >
-                <Button onClick={open} type="button">
+                <Button
+                  onClick={open}
+                  disabled={hakukohteenLiittaminenDisabled}
+                  type="button"
+                  title={
+                    hakukohteenLiittaminenDisabled
+                      ? t('hakulomake.liittamisenTakarajaYlittynyt')
+                      : null
+                  }
+                >
                   {t('yleiset.liitaHakukohde')}
                 </Button>
               </Box>

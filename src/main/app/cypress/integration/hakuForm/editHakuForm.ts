@@ -1,3 +1,4 @@
+import { sub } from 'date-fns';
 import { merge } from 'lodash/fp';
 
 import haku from '#/cypress/data/haku';
@@ -61,6 +62,53 @@ export const editHakuForm = () => {
     cy.url().should(
       'include',
       `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/haku/${hakuOid}/muokkaus`
+    );
+  });
+
+  it('should be unable to add hakukohde for haku with expired liittämistakaraja', () => {
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'be.disabled'
+    );
+  });
+
+  it('should be able to add hakukohde for haku without expired liittämistakaraja', () => {
+    const hakuMockData = haku();
+    const takaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
+    const oneDayBeforeDeadline = sub(new Date(takaraja), { days: 1 });
+    cy.clock(oneDayBeforeDeadline, ['Date']);
+
+    cy.intercept(
+      { method: 'GET', url: `**/haku/${hakuOid}` },
+      {
+        body: merge(hakuMockData, {
+          oid: hakuOid,
+          organisaatioOid: organisaatioOid,
+        }),
+      }
+    );
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'not.be.disabled'
+    );
+  });
+
+  it('should be able to add hakukohde for haku if liittämistakaraja has not been set', () => {
+    const hakuMockData = haku();
+    hakuMockData.hakukohteenLiittamisenTakaraja = null;
+
+    cy.intercept(
+      { method: 'GET', url: `**/haku/${hakuOid}` },
+      {
+        body: merge(hakuMockData, {
+          oid: hakuOid,
+          organisaatioOid: organisaatioOid,
+        }),
+      }
+    );
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'not.be.disabled'
     );
   });
 };

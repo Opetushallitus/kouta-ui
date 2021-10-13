@@ -18,7 +18,7 @@ import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import getHaut from '#/src/utils/haku/getHaut';
-import isHakukohteenLiittamisenTakarajaExpired from '#/src/utils/haku/isHakukohteenLiittamisenTakarajaExpired';
+import isHakukohteenTakarajaExpired from '#/src/utils/haku/isHakukohteenTakarajaExpired';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 import HakukohteetModal from './HakukohteetModal';
@@ -53,7 +53,7 @@ const HakuForm = ({
     const liittamisenTakaraja = hakuProp.hakukohteenLiittamisenTakaraja;
     if (liittamisenTakaraja) {
       const takaraja = new Date(liittamisenTakaraja);
-      hakukohteenLiittaminenDisabled = isHakukohteenLiittamisenTakarajaExpired(
+      hakukohteenLiittaminenDisabled = isHakukohteenTakarajaExpired(
         now,
         takaraja
       );

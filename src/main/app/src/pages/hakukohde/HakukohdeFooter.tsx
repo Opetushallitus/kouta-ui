@@ -27,6 +27,7 @@ type HakukohdeFooterProps = {
   haku: HakuModel;
   toteutus: ToteutusModel;
   canUpdate?: boolean;
+  infoTextTranslationKey?: string;
 };
 
 export const HakukohdeFooter = ({
@@ -37,6 +38,7 @@ export const HakukohdeFooter = ({
   haku,
   toteutus,
   canUpdate,
+  infoTextTranslationKey,
 }: HakukohdeFooterProps) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -105,34 +107,12 @@ export const HakukohdeFooter = ({
 
   const apiUrls = useUrls();
 
-  let canUpdateHakukohde;
-  let infoTextTranslationKey;
-  const hakukohteenLiittamisenTakaraja = haku?.hakukohteenLiittamisenTakaraja;
-  const hakukohteenMuokkaamisenTakaraja = haku?.hakukohteenMuokkaamisenTakaraja;
-  if (hakukohteenLiittamisenTakaraja || hakukohteenMuokkaamisenTakaraja) {
-    const liittamisenTakaraja = hakukohteenLiittamisenTakaraja
-      ? new Date(hakukohteenLiittamisenTakaraja)
-      : null;
-    const muokkaamisenTakaraja = hakukohteenMuokkaamisenTakaraja
-      ? new Date(hakukohteenMuokkaamisenTakaraja)
-      : null;
-
-    const now = new Date();
-    canUpdateHakukohde =
-      (liittamisenTakaraja ? liittamisenTakaraja >= now : true) &&
-      (muokkaamisenTakaraja ? muokkaamisenTakaraja >= now : true);
-
-    infoTextTranslationKey = !canUpdateHakukohde
-      ? 'muokkaamisenTakarajaYlittynyt'
-      : '';
-  }
-
   return (
     <FormFooter
       entityType={ENTITY.HAKUKOHDE}
       entity={hakukohde}
       save={save}
-      canUpdate={canUpdateHakukohde}
+      canUpdate={canUpdate}
       esikatseluUrl={apiUrls.url('konfo-ui.toteutus', hakukohde?.toteutusOid)}
       infoTextTranslationKey={infoTextTranslationKey}
     />

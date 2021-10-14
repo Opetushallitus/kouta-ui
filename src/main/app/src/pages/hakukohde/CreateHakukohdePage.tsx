@@ -15,6 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import canUpdateHakukohde from '#/src/utils/hakukohde/canUpdateHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
@@ -46,6 +47,14 @@ export const CreateHakukohdePage = ({
   const koulutustyyppi =
     data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
+  const canUpdate = canUpdateHakukohde(
+    haku?.hakukohteenLiittamisenTakaraja,
+    haku?.hakukohteenMuokkaamisenTakaraja
+  );
+
+  const infoTextTranslationKey = !canUpdate
+    ? 'muokkaamisenTakarajaYlittynyt'
+    : '';
   return (
     <ReduxForm
       form="hakukohdeForm"
@@ -63,6 +72,8 @@ export const CreateHakukohdePage = ({
             koulutustyyppi={koulutustyyppi}
             haku={haku}
             toteutus={toteutus}
+            canUpdate={canUpdate}
+            infoTextTranslationKey={infoTextTranslationKey}
           />
         }
       >

@@ -551,11 +551,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
     "aloituspaikat": {
       "ensikertalaisille": 5,
       "kuvaus": {},
-<<<<<<< HEAD
-      "lukumaara": 10
-=======
       "lukumaara": 50
->>>>>>> babfd93d (KTO-1353: Cypress-testien korjaus)
     },
     "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": true,
@@ -606,11 +602,7 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
     "aloituspaikat": {
       "ensikertalaisille": null,
       "kuvaus": {},
-<<<<<<< HEAD
-      "lukumaara": 10
-=======
       "lukumaara": 50
->>>>>>> babfd93d (KTO-1353: Cypress-testien korjaus)
     },
     "hakukohteenLinja": {
       "alinHyvaksyttyKeskiarvo": 3.5,

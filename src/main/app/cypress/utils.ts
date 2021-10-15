@@ -364,7 +364,7 @@ const fillTilaisuus = () => {
 export const fillValintakokeetSection = ({
   withValintaperusteenKokeet = false,
 } = {}) => {
-  getByTestId('valintakokeetSection').within(() => {
+  withinSection('valintakokeet', () => {
     getByTestId('yleisKuvaus').within(() => {
       typeToEditor('Valintakokeiden kuvaus');
     });

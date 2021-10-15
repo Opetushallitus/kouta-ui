@@ -9,6 +9,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
       "paattyy": "2019-11-25T23:59"
     }
   ],
+  "hakukohdeKoodiUri": "hakukohteet_1019#3",
   "hakulomakeAtaruId": "lomake_1",
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},
@@ -53,17 +54,8 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
       "lukumaara": 10
     },
     "hakukohteenLinja": null,
-    "kaytetaanHaunAlkamiskautta": false,
-    "koulutuksenAlkamiskausi": {
-      "alkamiskausityyppi": "henkilokohtainen suunnitelma",
-      "henkilokohtaisenSuunnitelmanLisatiedot": {
-        "fi": "<p>Henkilökohtaisen suunnitelman lisätiedot</p>"
-      },
-      "koulutuksenAlkamiskausiKoodiUri": null,
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": null,
-      "koulutuksenPaattymispaivamaara": null
-    },
+    "kaytetaanHaunAlkamiskautta": true,
+    "koulutuksenAlkamiskausi": null,
     "kynnysehto": {
       "fi": "<p>Kynnysehto</p>"
     },
@@ -97,9 +89,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
     ]
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": {
-    "fi": "Hakukohteen nimi"
-  },
+  "nimi": null,
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
     "pohjakoulutusvaatimuskouta_pk#1"
@@ -166,6 +156,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
       "paattyy": "2019-11-25T23:59"
     }
   ],
+  "hakukohdeKoodiUri": null,
   "hakulomakeAtaruId": "lomake_1",
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},
@@ -325,6 +316,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
       "paattyy": "2011-11-12T11:45"
     }
   ],
+  "hakukohdeKoodiUri": null,
   "hakulomake": {},
   "hakulomakeAtaruId": "12345",
   "hakulomakeKuvaus": {},
@@ -477,6 +469,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
+  "hakukohdeKoodiUri": null,
   "hakulomakeAtaruId": null,
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {
@@ -530,6 +523,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
+  "hakukohdeKoodiUri": null,
   "hakulomakeAtaruId": null,
   "hakulomakeKuvaus": {
     "fi": "<p>hakulomake kuvaus</p>"
@@ -582,13 +576,19 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
   "esikatselu": false,
   "externalId": null,
   "hakuOid": "4.1.1.1.1.1",
-  "hakuajat": [],
-  "hakulomakeAtaruId": null,
+  "hakuajat": [
+    {
+      "alkaa": "2019-04-02T10:45",
+      "paattyy": "2019-11-25T23:59"
+    }
+  ],
+  "hakukohdeKoodiUri": "hakukohteet_000#5",
+  "hakulomakeAtaruId": "lomake_1",
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},
-  "hakulomaketyyppi": null,
-  "kaytetaanHaunAikataulua": true,
-  "kaytetaanHaunHakulomaketta": true,
+  "hakulomaketyyppi": "ataru",
+  "kaytetaanHaunAikataulua": false,
+  "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
   ],
@@ -626,9 +626,7 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
     "valintaperusteenValintakokeidenLisatilaisuudet": []
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": {
-    "fi": "hakukohdelomake.lukionYleislinja"
-  },
+  "nimi": null,
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
     "pohjakoulutusvaatimuskouta_pk#1"

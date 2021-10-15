@@ -22,11 +22,20 @@ import { AlkamiskausiSection } from './AlkamiskausiSection';
 import { HakuajatSection } from './HakuajatSection';
 import LomakeSection from './LomakeSection';
 
-const HakukohdeKoodiInput = ({ name }) => {
+const checkJarjestetaanErityisopetuksena = toteutus =>
+  toteutus?.metadata?.ammatillinenPerustutkintoErityisopetuksena ||
+  toteutus?.metadata?.jarjestetaanErityisopetuksena;
+
+const HakukohdeKoodiInput = ({ name, toteutus }) => {
   const { t } = useTranslation();
 
-  // TODO: Eri koodisto erityisopetuksella
-  const { data: koodistoData } = useKoodisto({ koodisto: 'hakukohteet' });
+  const isErityisopetus = checkJarjestetaanErityisopetuksena(toteutus);
+
+  const { data: koodistoData } = useKoodisto({
+    koodisto: isErityisopetus
+      ? 'hakukohteeterammatillinenerityisopetus'
+      : 'hakukohteet',
+  });
 
   return (
     <Field
@@ -67,7 +76,10 @@ export const PerustiedotSection = ({
     <>
       {isToisenAsteenYhteishaku ? (
         <Box marginBottom={2}>
-          <HakukohdeKoodiInput name={`${name}.hakukohdeKoodiUri`} />
+          <HakukohdeKoodiInput
+            name={`${name}.hakukohdeKoodiUri`}
+            toteutus={toteutus}
+          />
         </Box>
       ) : (
         <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>

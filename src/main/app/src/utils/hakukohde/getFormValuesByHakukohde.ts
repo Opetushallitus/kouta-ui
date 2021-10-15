@@ -53,7 +53,10 @@ const getHakukohteenLinjaValues = ({
   }),
 });
 
-export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
+export const getFormValuesByHakukohde = (
+  hakukohde,
+  nimiKoodista?: TranslatedField
+): HakukohdeFormValues => {
   const {
     kaytetaanHaunAikataulua,
     kielivalinta = [],
@@ -65,6 +68,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     liitteidenToimitusaika,
     liitteidenToimitustapa,
     nimi = {},
+    hakukohdeKoodiUri,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUrit = [],
@@ -116,7 +120,8 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
       })),
     },
     perustiedot: {
-      nimi,
+      nimi: _fp.isEmpty(nimiKoodista) ? nimi : nimiKoodista,
+      hakukohdeKoodiUri: toSelectValue(hakukohdeKoodiUri),
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
     ajankohta: {

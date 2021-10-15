@@ -3,15 +3,48 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import { FormFieldCheckbox, FormFieldInput } from '#/src/components/formFields';
+import {
+  FormFieldAsyncKoodistoSelect,
+  FormFieldCheckbox,
+  FormFieldInput,
+} from '#/src/components/formFields';
 import { Box, Divider } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+} from '#/src/constants';
+import useKoodisto from '#/src/hooks/useKoodisto';
 import { getTestIdProps } from '#/src/utils';
-import isAmmatillinenKoulutustyyppi from '#/src/utils/koulutus/isAmmatillinenKoulutustyyppi';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 import { AlkamiskausiSection } from './AlkamiskausiSection';
 import { HakuajatSection } from './HakuajatSection';
 import LomakeSection from './LomakeSection';
+
+const HakukohdeKoodiInput = ({ name }) => {
+  const { t } = useTranslation();
+
+  // TODO: Eri koodisto erityisopetuksella
+  const { data: koodistoData } = useKoodisto({ koodisto: 'hakukohteet' });
+
+  return (
+    <Field
+      name={name}
+      component={FormFieldAsyncKoodistoSelect}
+      koodistoData={koodistoData}
+      label={t('yleiset.nimi')}
+      required
+    />
+  );
+};
+
+const checkIsToisenAsteenYhteishaku = (koulutustyyppi, haku) => {
+  return (
+    TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT.includes(koulutustyyppi) &&
+    isYhteishakuHakutapa(haku?.hakutapaKoodiUri)
+  );
+};
 
 export const PerustiedotSection = ({
   language,
@@ -20,23 +53,33 @@ export const PerustiedotSection = ({
   toteutus,
   haku,
 }) => {
-  const isAmmatillinen = isAmmatillinenKoulutustyyppi(koulutustyyppi);
+  const isAmmatillinen =
+    TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(koulutustyyppi);
   const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
-  const nimiReadonly = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
+
+  const isToisenAsteenYhteishaku = checkIsToisenAsteenYhteishaku(
+    koulutustyyppi,
+    haku
+  );
   const { t } = useTranslation();
 
   return (
     <>
-      <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
-        <Field
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('yleiset.nimi')}
-          required
-          disabled={nimiReadonly}
-        />
-      </Box>
-      {isAmmatillinen || isLukio ? (
+      {isToisenAsteenYhteishaku ? (
+        <Box marginBottom={2}>
+          <HakukohdeKoodiInput name={`${name}.hakukohdeKoodiUri`} />
+        </Box>
+      ) : (
+        <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
+          <Field
+            name={`${name}.nimi.${language}`}
+            component={FormFieldInput}
+            label={t('yleiset.nimi')}
+            required
+          />
+        </Box>
+      )}
+      {(isAmmatillinen || isLukio) && (
         <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
           <Field
             name={`${name}.voiSuorittaaKaksoistutkinnon`}
@@ -45,9 +88,9 @@ export const PerustiedotSection = ({
             {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
           </Field>
         </div>
-      ) : null}
+      )}
 
-      <Divider marginTop={4} marginBottom={4} />
+      <Divider marginY={4} />
 
       <div {...getTestIdProps('hakuajatSection')}>
         <HakuajatSection
@@ -57,7 +100,7 @@ export const PerustiedotSection = ({
         />
       </div>
 
-      <Divider marginTop={4} marginBottom={4} />
+      <Divider marginY={4} />
 
       <div {...getTestIdProps('alkamiskausiSection')}>
         <AlkamiskausiSection
@@ -68,7 +111,7 @@ export const PerustiedotSection = ({
         />
       </div>
 
-      <Divider marginTop={4} marginBottom={4} />
+      <Divider marginY={4} />
 
       <div {...getTestIdProps('lomakeSection')}>
         <LomakeSection haku={haku} language={language} />

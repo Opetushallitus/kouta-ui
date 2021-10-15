@@ -148,6 +148,9 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   const nimi = pickTranslations(values?.perustiedot?.nimi || null);
 
+  const hakukohdeKoodiUri =
+    values?.perustiedot?.hakukohdeKoodiUri?.value ?? null;
+
   const toinenAsteOnkoKaksoistutkinto =
     !!values?.perustiedot?.voiSuorittaaKaksoistutkinnon;
 
@@ -165,7 +168,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     kielivalinta
   );
 
-  const kaytetaanHaukukohteenAlkamiskautta =
+  const kaytetaanHakukohteenAlkamiskautta =
     values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta;
 
   // NOTE: Tässä muutetaan object {id: [tilaisuus1, tilaisuus2]} takaisin taulukkomuotoon [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}]
@@ -177,6 +180,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         : a,
     []
   );
+
+  console.log(values?.perustiedot?.hakukohdeKoodiUri?.value);
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
@@ -202,7 +207,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     liitteidenToimitusaika: liitteetOnkoSamaToimitusaika
       ? liitteidenToimitusaika
       : null,
-    nimi,
+    nimi: _fp.isEmpty(hakukohdeKoodiUri) ? nimi : null,
+    hakukohdeKoodiUri: hakukohdeKoodiUri,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,
     pohjakoulutusvaatimusKoodiUrit,
@@ -225,8 +231,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         kuvaus => serializeEditorState(kuvaus)
       ),
       aloituspaikat: getAloituspaikat(values),
-      kaytetaanHaunAlkamiskautta: !kaytetaanHaukukohteenAlkamiskautta,
-      koulutuksenAlkamiskausi: kaytetaanHaukukohteenAlkamiskautta
+      kaytetaanHaunAlkamiskautta: !kaytetaanHakukohteenAlkamiskautta,
+      koulutuksenAlkamiskausi: kaytetaanHakukohteenAlkamiskautta
         ? getAlkamiskausiData(ajankohta, pickTranslations)
         : null,
       hakukohteenLinja: getHakukohteenLinja(values),

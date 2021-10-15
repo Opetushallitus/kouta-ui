@@ -73,6 +73,7 @@ export type HakukohdeFormValues = {
   };
   perustiedot: {
     nimi: TranslatedField<string>;
+    hakukohdeKoodiUri?: SelectOption;
     voiSuorittaaKaksoistutkinnon: boolean;
   };
   pohjakoulutus: {

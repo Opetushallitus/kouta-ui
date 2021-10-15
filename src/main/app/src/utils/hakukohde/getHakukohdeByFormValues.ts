@@ -146,7 +146,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     }
   );
 
-  const nimi = pickTranslations(values?.perustiedot?.nimi || null);
+  const nimi = pickTranslations(values?.perustiedot?.nimi);
 
   const hakukohdeKoodiUri =
     values?.perustiedot?.hakukohdeKoodiUri?.value ?? null;
@@ -207,7 +207,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     liitteidenToimitusaika: liitteetOnkoSamaToimitusaika
       ? liitteidenToimitusaika
       : null,
-    nimi: _fp.isEmpty(hakukohdeKoodiUri) ? nimi : null,
+    nimi: _fp.isEmpty(hakukohdeKoodiUri) ? nimi : {},
     hakukohdeKoodiUri: hakukohdeKoodiUri,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,

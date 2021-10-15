@@ -89,7 +89,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
     ]
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": null,
+  "nimi": {},
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
     "pohjakoulutusvaatimuskouta_pk#1"
@@ -626,7 +626,7 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
     "valintaperusteenValintakokeidenLisatilaisuudet": []
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": null,
+  "nimi": {},
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
     "pohjakoulutusvaatimuskouta_pk#1"

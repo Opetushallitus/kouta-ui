@@ -1,17 +1,16 @@
 import getYear from 'date-fns/getYear';
 
-import {
-  DEFAULT_JULKAISUTILA,
-  TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT,
-} from '#/src/constants';
+import { DEFAULT_JULKAISUTILA } from '#/src/constants';
+
+import { checkHasHakukohdeKoodiUri } from './PerustiedotSection';
 
 export { HakukohdeForm } from './HakukohdeForm';
 
-export const initialValues = (koulutustyyppi, toteutus) => ({
+export const initialValues = (koulutustyyppi, toteutus, haku) => ({
   tila: DEFAULT_JULKAISUTILA,
   esikatselu: false,
   kieliversiot: toteutus?.kielivalinta,
-  perustiedot: TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT.includes(koulutustyyppi)
+  perustiedot: checkHasHakukohdeKoodiUri(koulutustyyppi, haku)
     ? {}
     : {
         nimi: toteutus?.nimi,

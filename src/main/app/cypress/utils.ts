@@ -1,15 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import { loggable } from 'cypress-pipe';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import {
-  isEmpty,
-  includes,
-  last,
-  merge,
-  toLower,
-  replace,
-  uniqueId,
-} from 'lodash/fp';
+import { isEmpty, includes, last, merge, toLower, uniqueId } from 'lodash/fp';
 
 import commonMocks from '#/cypress/mocks/common.mocks.json';
 import { Alkamiskausityyppi } from '#/src/constants';

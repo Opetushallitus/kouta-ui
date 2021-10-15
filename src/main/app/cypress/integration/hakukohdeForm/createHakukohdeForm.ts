@@ -21,6 +21,7 @@ import {
   getSelectByLabel,
   pFillAsyncSelect,
   withinSection,
+  getInputByLabel,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -105,22 +106,27 @@ const fillLukiolinjaSection = () => {
 };
 
 const fillPerustiedotSection = ({
+  isLukio,
+  isYhteishaku,
   fillKaksoistutkinto,
   hakukohdeKoodiNimi,
 }: {
+  isLukio?: boolean;
+  isYhteishaku?: boolean;
   fillKaksoistutkinto?: boolean;
   hakukohdeKoodiNimi?: string;
 } = {}) => {
   withinSection('perustiedot', () => {
-    if (hakukohdeKoodiNimi) {
-      getSelectByLabel('yleiset.nimi').pipe(
-        pFillAsyncSelect(hakukohdeKoodiNimi)
-      );
-    } else {
-      getByTestId('hakukohteenNimi')
-        .find('input')
-        .clear({ force: true })
-        .pipe(paste('Hakukohteen nimi'));
+    if (!isLukio) {
+      if (hakukohdeKoodiNimi) {
+        getSelectByLabel('yleiset.nimi').pipe(
+          pFillAsyncSelect(hakukohdeKoodiNimi)
+        );
+      } else {
+        getInputByLabel('yleiset.nimi')
+          .clear({ force: true })
+          .pipe(paste('Hakukohteen nimi'));
+      }
     }
 
     if (fillKaksoistutkinto) {
@@ -130,7 +136,9 @@ const fillPerustiedotSection = ({
     }
 
     fillHakuajatSection();
-    fillAlkamiskausiSection({ isYhteishaku: Boolean(hakukohdeKoodiNimi) });
+    fillAlkamiskausiSection({
+      isYhteishaku: isYhteishaku || Boolean(hakukohdeKoodiNimi),
+    });
   });
   fillLomakeSection();
 };
@@ -255,7 +263,7 @@ export const createHakukohdeForm = () => {
       fillPohjakoulutusvaatimusSection();
       fillPerustiedotSection({
         fillKaksoistutkinto: true,
-        hakukohdeKoodiNimi: 'Veneenrakennusalan perustutkinto, pk',
+        hakukohdeKoodiNimi: 'Kaivosalan perustutkinto',
       });
       fillAloituspaikatSection();
       fillValintaperusteenKuvausSection();
@@ -364,7 +372,7 @@ export const createHakukohdeForm = () => {
       });
 
       fillKieliversiotSection();
-      fillPerustiedotSection({ hakukohdeKoodiNimi: 'Lukio' });
+      fillPerustiedotSection({ isLukio: true, isYhteishaku: true });
       fillPohjakoulutusvaatimusSection();
       fillLukiolinjaSection();
 

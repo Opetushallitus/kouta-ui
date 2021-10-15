@@ -1,5 +1,6 @@
 import React from 'react';
 
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -34,7 +35,7 @@ const HakukohdeKoodiInput = ({ name, toteutus }) => {
   const { data: koodistoData } = useKoodisto({
     koodisto: isErityisopetus
       ? 'hakukohteeterammatillinenerityisopetus'
-      : 'hakukohteet',
+      : 'hakukohteetperusopetuksenjalkeinenyhteishaku',
   });
 
   return (
@@ -48,9 +49,16 @@ const HakukohdeKoodiInput = ({ name, toteutus }) => {
   );
 };
 
-const checkIsToisenAsteenYhteishaku = (koulutustyyppi, haku) => {
+const KOULUTUSTYYPIT_WITH_HAKUKOHDE_KOODIURI = [
+  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+  KOULUTUSTYYPPI.TUVA,
+  KOULUTUSTYYPPI.TELMA,
+  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+];
+
+export const checkHasHakukohdeKoodiUri = (koulutustyyppi, haku) => {
   return (
-    TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT.includes(koulutustyyppi) &&
+    KOULUTUSTYYPIT_WITH_HAKUKOHDE_KOODIURI.includes(koulutustyyppi) &&
     isYhteishakuHakutapa(haku?.hakutapaKoodiUri)
   );
 };
@@ -66,15 +74,12 @@ export const PerustiedotSection = ({
     TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(koulutustyyppi);
   const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
 
-  const isToisenAsteenYhteishaku = checkIsToisenAsteenYhteishaku(
-    koulutustyyppi,
-    haku
-  );
+  const hasHakukohdeKoodiUri = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
   const { t } = useTranslation();
 
   return (
     <>
-      {isToisenAsteenYhteishaku ? (
+      {hasHakukohdeKoodiUri ? (
         <Box marginBottom={2}>
           <HakukohdeKoodiInput
             name={`${name}.hakukohdeKoodiUri`}
@@ -87,6 +92,7 @@ export const PerustiedotSection = ({
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
             label={t('yleiset.nimi')}
+            disabled={isLukio}
             required
           />
         </Box>

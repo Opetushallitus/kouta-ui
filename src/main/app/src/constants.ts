@@ -88,7 +88,6 @@ export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
 // NOTE: Näitä koulutustyyppejä ei tueta koska niiden toteutus puuttuu backendista, päivitä listaa kun backend tukee näitä
 export const EI_TUETUT_KOULUTUSTYYPIT = [
   ...TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
-  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO,
   KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
   KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
 ];
@@ -342,3 +341,5 @@ export const KOULUTUSALA_YLEISSIVISTAVA_KOODIURI =
   'kansallinenkoulutusluokitus2016koulutusalataso1_00#1';
 
 export const LUKIO_YLEISLINJA = 'yleislinja';
+
+export type Koulutustyyppi = ValueOf<KOULUTUSTYYPPI>;

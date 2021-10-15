@@ -113,7 +113,7 @@ const fillPerustiedotSection = ({
 } = {}) => {
   withinSection('perustiedot', () => {
     if (hakukohdeKoodiNimi) {
-      getSelectByLabel('yleiset.hakukohteenNimiKoodi').pipe(
+      getSelectByLabel('yleiset.nimi').pipe(
         pFillAsyncSelect(hakukohdeKoodiNimi)
       );
     } else {

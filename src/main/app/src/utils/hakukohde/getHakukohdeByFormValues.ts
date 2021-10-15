@@ -181,8 +181,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     []
   );
 
-  console.log(values?.perustiedot?.hakukohdeKoodiUri?.value);
-
   return {
     organisaatioOid: values?.organisaatioOid?.value,
     externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,

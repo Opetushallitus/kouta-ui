@@ -150,7 +150,6 @@ export const createValintaperusteForm = () => {
   const mutationTest = wrapMutationTest({
     id: valintaperusteId,
     entity: ENTITY.VALINTAPERUSTE,
-    stubGet: true,
   });
 
   it(

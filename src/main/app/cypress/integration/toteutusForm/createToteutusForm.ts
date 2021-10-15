@@ -389,7 +389,6 @@ const prepareTest = tyyppi => {
 const mutationTest = wrapMutationTest({
   oid: toteutusOid,
   entity: ENTITY.TOTEUTUS,
-  stubGet: true,
 });
 
 export const createToteutusForm = () => {

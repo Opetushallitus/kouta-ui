@@ -1,6 +1,5 @@
 import React from 'react';
 
-import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -12,7 +11,6 @@ import {
 import { Box, Divider } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
-  TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import useKoodisto from '#/src/hooks/useKoodisto';
@@ -51,9 +49,6 @@ const HakukohdeKoodiInput = ({ name, toteutus }) => {
 
 const KOULUTUSTYYPIT_WITH_HAKUKOHDE_KOODIURI = [
   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  KOULUTUSTYYPPI.TUVA,
-  KOULUTUSTYYPPI.TELMA,
-  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
 ];
 
 export const checkHasHakukohdeKoodiUri = (koulutustyyppi, haku) => {

@@ -122,6 +122,7 @@ Object {
   },
   "organisaatioOid": undefined,
   "perustiedot": Object {
+    "hakukohdeKoodiUri": undefined,
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",

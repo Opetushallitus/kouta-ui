@@ -39,7 +39,9 @@ export const CreateHakukohdePage = ({
   const toteutus = data?.toteutus;
 
   const initialValues = useMemo(
-    () => data && getInitialValues(data?.koulutustyyppi, data?.toteutus),
+    () =>
+      data &&
+      getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
     [data]
   );
 

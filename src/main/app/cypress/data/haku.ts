@@ -1,10 +1,10 @@
 import { Alkamiskausityyppi } from '#/src/constants';
 
-const haku = () => ({
+const haku = ({ hakutapaKoodiUri }: { hakutapaKoodiUri?: string } = {}) => ({
   oid: '1.2.246.562.29.00000000000000000001',
   tila: 'tallennettu',
   nimi: { fi: 'Haku' },
-  hakutapaKoodiUri: 'hakutapa_0#1',
+  hakutapaKoodiUri: hakutapaKoodiUri ?? 'hakutapa_01#1',
   hakukohteenLiittamisenTakaraja: '2019-02-08T07:05',
   hakukohteenMuokkaamisenTakaraja: '2019-02-08T07:05',
 

@@ -155,7 +155,6 @@ export const createHakuForm = () => {
   const mutationTest = wrapMutationTest({
     entity: ENTITY.HAKU,
     oid: hakuOid,
-    stubGet: true,
   });
 
   it(

@@ -1,19 +1,20 @@
 import getYear from 'date-fns/getYear';
 
-import { DEFAULT_JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
+import { DEFAULT_JULKAISUTILA } from '#/src/constants';
+
+import { checkHasHakukohdeKoodiUri } from './PerustiedotSection';
 
 export { HakukohdeForm } from './HakukohdeForm';
 
-export const initialValues = (koulutustyyppi, toteutus) => ({
+export const initialValues = (koulutustyyppi, toteutus, haku) => ({
   tila: DEFAULT_JULKAISUTILA,
   esikatselu: false,
   kieliversiot: toteutus?.kielivalinta,
-  perustiedot:
-    koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
-      ? {}
-      : {
-          nimi: toteutus?.nimi,
-        },
+  perustiedot: checkHasHakukohdeKoodiUri(koulutustyyppi, haku)
+    ? {}
+    : {
+        nimi: toteutus?.nimi,
+      },
   alkamiskausi: {
     vuosi: getYear(new Date()).toString(),
   },

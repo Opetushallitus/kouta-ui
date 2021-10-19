@@ -5,9 +5,10 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
+import { LANGUAGES } from '#/src/constants';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import { useBoundFormActions } from '#/src/hooks/form';
+import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
@@ -24,15 +25,42 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
   const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
   const koulutustyyppi = koulutus.koulutustyyppi;
+  const jarjestetaanErityisopetuksena = useFieldValue(
+    `${name}.jarjestetaanErityisopetuksena`
+  );
+
   const { change } = useBoundFormActions();
   useEffect(() => {
-    change(`${name}.nimi`, {
-      fi: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'fi' }),
-      sv: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'sv' }),
-      en: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'en' }),
-    });
+    if (
+      koulutustyyppi === KOULUTUSTYYPPI.TUVA &&
+      jarjestetaanErityisopetuksena
+    ) {
+      change(`${name}.nimi`, () =>
+        LANGUAGES.reduce(
+          (a, lng) => ({
+            ...a,
+            [lng]: `${t(`koulutustyypit.${koulutustyyppi}`, {
+              lng,
+            })} (${t(`toteutuslomake.erityisenaVaativanaTukena`, {
+              lng,
+            })})`,
+          }),
+          {}
+        )
+      );
+    } else {
+      change(`${name}.nimi`, () =>
+        LANGUAGES.reduce(
+          (a, lng) => ({
+            ...a,
+            [lng]: t(`koulutustyypit.${koulutustyyppi}`, { lng }),
+          }),
+          {}
+        )
+      );
+    }
     return () => change(`${name}.nimi`, {});
-  }, [change, koulutustyyppi, name, t]);
+  }, [change, jarjestetaanErityisopetuksena, koulutustyyppi, name, t]);
 
   return (
     <>

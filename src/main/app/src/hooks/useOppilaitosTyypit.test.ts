@@ -5,6 +5,7 @@ import {
   KOULUTUSTYYPPI,
   EI_TUETUT_KOULUTUSTYYPIT,
   ENTITY,
+  ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT,
 } from '#/src/constants';
 
 import { createIsKoulutustyyppiDisabledGetter } from './useOppilaitosTyypit';
@@ -15,13 +16,17 @@ const getIsDisabledForOPH = createIsKoulutustyyppiDisabledGetter({
   entityType: ENTITY.KOULUTUS,
 });
 
+const getIsDisabledForOppilaitostyypit = oppilaitostyypit => {
+  return createIsKoulutustyyppiDisabledGetter({
+    isOphVirkailija: false,
+    oppilaitostyypit,
+    entityType: ENTITY.KOULUTUS,
+  });
+};
+
 const getIsDisabledForAll = createIsKoulutustyyppiDisabledGetter({
   isOphVirkailija: false,
-  oppilaitostyypit: [
-    'oppilaitostyyppi_15',
-    'oppilaitostyyppi_21',
-    'oppilaitostyyppi_41',
-  ],
+  oppilaitostyypit: [],
   entityType: ENTITY.KOULUTUS,
 });
 
@@ -38,21 +43,71 @@ test.each(_fp.difference(KOULUTUSTYYPIT)(EI_TUETUT_KOULUTUSTYYPIT))(
   }
 );
 
-test.each(_fp.difference(KOULUTUSTYYPIT)(EI_TUETUT_KOULUTUSTYYPIT))(
+test.each(ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)(
+  'Creating KOMO with any koulutustyyppi should be allowed for OPH',
+  kt => {
+    expect(getIsDisabledForAll(kt)).toEqual(true);
+  }
+);
+
+test.each(
+  _fp.difference(KOULUTUSTYYPIT)(
+    _fp.union(EI_TUETUT_KOULUTUSTYYPIT)(
+      ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT
+    )
+  )
+)(
   'Should not disable any koulutustyyppi when not detecting any oppilaitos types',
   kt => {
     expect(getIsDisabledForNone(kt)).toEqual(false);
   }
 );
 
+test('Should disable lukiokoulutus for all oppilaitostyyppis', () => {
+  expect(
+    getIsDisabledForOppilaitostyypit([
+      'oppilaitostyyppi_15',
+      'oppilaitostyyppi_42',
+    ])(KOULUTUSTYYPPI.LUKIOKOULUTUS)
+  ).toEqual(true);
+});
+
 test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.LUKIOKOULUTUS)).toEqual(true);
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.AMKKOULUTUS)).toEqual(false);
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.YLIOPISTOKOULUTUS)).toEqual(false);
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS)).toEqual(
-    true
-  );
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.TUTKINNON_OSA)).toEqual(false);
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.OSAAMISALA)).toEqual(false);
-  expect(getIsDisabledForAll(KOULUTUSTYYPPI.MUUT_KOULUTUKSET)).toEqual(true);
+  expect(
+    getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_41'])(
+      KOULUTUSTYYPPI.AMKKOULUTUS
+    )
+  ).toEqual(false);
+});
+
+test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+  expect(
+    getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_42'])(
+      KOULUTUSTYYPPI.YLIOPISTOKOULUTUS
+    )
+  ).toEqual(false);
+});
+
+test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+  expect(
+    getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_21'])(
+      KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+    )
+  ).toEqual(true);
+});
+
+test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+  expect(
+    getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_21'])(
+      KOULUTUSTYYPPI.TUTKINNON_OSA
+    )
+  ).toEqual(false);
+});
+
+test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+  expect(
+    getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_21'])(
+      KOULUTUSTYYPPI.OSAAMISALA
+    )
+  ).toEqual(false);
 });

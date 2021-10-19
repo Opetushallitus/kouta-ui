@@ -66,6 +66,10 @@ export const createIsKoulutustyyppiDisabledGetter = ({
   isOphVirkailija,
   entityType,
 }) => {
+  const oppilaitostyypitWithoutVersion = oppilaitostyypit.map(
+    oppilaitostyyppi => oppilaitostyyppi.split('#')[0]
+  );
+
   return value => {
     if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
       return true;
@@ -85,9 +89,16 @@ export const createIsKoulutustyyppiDisabledGetter = ({
     const oppilaitostyypitForKoulutustyyppi =
       KOULUTUSTYYPPI_TO_OPPILAITOSTYYPIT[value] || [];
 
+    if (_fp.isEmpty(oppilaitostyypitWithoutVersion)) {
+      return false;
+    }
+
     if (
       !_fp.isEmpty(
-        _fp.intersection(oppilaitostyypitForKoulutustyyppi, oppilaitostyypit)
+        _fp.intersection(
+          oppilaitostyypitForKoulutustyyppi,
+          oppilaitostyypitWithoutVersion
+        )
       )
     ) {
       return false;

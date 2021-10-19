@@ -1,11 +1,8 @@
 import _fp from 'lodash/fp';
 
 import {
-  AMMATILLISET_OPPILAITOSTYYPIT,
   EI_TUETUT_KOULUTUSTYYPIT,
   ENTITY,
-  KORKEAKOULU_OPPILAITOSTYYPIT,
-  LUKIO_OPPILAITOSTYYPIT,
   OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT,
   ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT,
 } from '#/src/constants';
@@ -26,22 +23,7 @@ export const useOppilaitosTyypit = organisaatioOid => {
     }
   });
 
-  const isAmmatillinen = !_fp.isEmpty(
-    _fp.intersection(AMMATILLISET_OPPILAITOSTYYPIT, oppilaitostyypit)
-  );
-
-  const isKorkeakoulutus = !_fp.isEmpty(
-    _fp.intersection(KORKEAKOULU_OPPILAITOSTYYPIT, oppilaitostyypit)
-  );
-
-  const isLukio = !_fp.isEmpty(
-    _fp.intersection(LUKIO_OPPILAITOSTYYPIT, oppilaitostyypit)
-  );
-
   return {
-    isAmmatillinen,
-    isKorkeakoulutus,
-    isLukio,
     isLoading,
     oppilaitostyypit,
   };

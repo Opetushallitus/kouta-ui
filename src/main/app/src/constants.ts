@@ -317,22 +317,22 @@ export const OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT = {
     'amm',
     'lk',
     'tuva',
-    'vapaa-sivistysto-opistovuosi',
+    'vapaa-sivistystyo-opistovuosi',
     'vapaa-sivistystyo-muu',
-  ],
+  ], //Liikunnan koulutuskeskukset
   oppilaitostyyppi_63: [
     'amm',
     'lk',
-    'vapaa-sivistysto-opistovuosi',
+    'vapaa-sivistystyo-opistovuosi',
     'vapaa-sivistystyo-muu',
-  ],
+  ], //Kansanopistot
   oppilaitostyyppi_64: [
     'amm',
     'lk',
     'tuva',
     'vapaa-sivistystyo-opistovuosi',
     'vapaa-sivistystyo-muu',
-  ],
+  ], //Kansalaisopistot
   oppilaitostyyppi_15: ['lk'], // Lukiot
   oppilaitostyyppi_19: ['lk'], // Perus- ja lukioasteen koulut
 };

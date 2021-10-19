@@ -4,29 +4,31 @@ import {
   KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
   EI_TUETUT_KOULUTUSTYYPIT,
+  ENTITY,
 } from '#/src/constants';
 
-import { createIsKoulutustyyppiDisabledGetter } from '../useOppilaitosTyypit';
+import { createIsKoulutustyyppiDisabledGetter } from './useOppilaitosTyypit';
 
 const getIsDisabledForOPH = createIsKoulutustyyppiDisabledGetter({
   isOphVirkailija: true,
-  isKorkeakoulutus: true,
-  isAmmatillinen: true,
-  isLukio: true,
+  oppilaitostyypit: [],
+  entityType: ENTITY.KOULUTUS,
 });
 
 const getIsDisabledForAll = createIsKoulutustyyppiDisabledGetter({
   isOphVirkailija: false,
-  isKorkeakoulutus: true,
-  isAmmatillinen: true,
-  isLukio: true,
+  oppilaitostyypit: [
+    'oppilaitostyyppi_15',
+    'oppilaitostyyppi_21',
+    'oppilaitostyyppi_41',
+  ],
+  entityType: ENTITY.KOULUTUS,
 });
 
 const getIsDisabledForNone = createIsKoulutustyyppiDisabledGetter({
   isOphVirkailija: false,
-  isKorkeakoulutus: false,
-  isAmmatillinen: false,
-  isLukio: false,
+  oppilaitostyypit: [],
+  entityType: ENTITY.KOULUTUS,
 });
 
 test.each(_fp.difference(KOULUTUSTYYPIT)(EI_TUETUT_KOULUTUSTYYPIT))(

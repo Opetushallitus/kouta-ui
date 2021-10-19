@@ -17,18 +17,16 @@ export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
 
   const isOphVirkailija = useIsOphVirkailija();
 
-  const { isAmmatillinen, isKorkeakoulutus, isLukio, isLoading } =
-    useOppilaitosTyypit(organisaatioOid);
+  const { oppilaitostyypit, isLoading } = useOppilaitosTyypit(organisaatioOid);
 
   const getIsDisabled = useMemo(
     () =>
       createIsKoulutustyyppiDisabledGetter({
         isOphVirkailija,
-        isLukio,
-        isAmmatillinen,
-        isKorkeakoulutus,
+        oppilaitostyypit,
+        entityType: ENTITY.KOULUTUS,
       }),
-    [isOphVirkailija, isLukio, isAmmatillinen, isKorkeakoulutus]
+    [isOphVirkailija, oppilaitostyypit]
   );
 
   const canCreate = useCurrentUserHasRole(

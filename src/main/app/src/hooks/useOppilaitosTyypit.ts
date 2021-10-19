@@ -3,45 +3,76 @@ import _fp from 'lodash/fp';
 import {
   AMMATILLISET_OPPILAITOSTYYPIT,
   EI_TUETUT_KOULUTUSTYYPIT,
-  KORKEAKOULU_KOULUTUSTYYPIT,
+  ENTITY,
   KORKEAKOULU_OPPILAITOSTYYPIT,
   KOULUTUSTYYPPI,
   LUKIO_OPPILAITOSTYYPIT,
+  OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useOrganisaatioHierarkia } from '#/src/hooks/useOrganisaatioHierarkia';
 import iterateTree from '#/src/utils/iterateTree';
+import { reduce } from '#/src/utils/lodashFpUncapped';
 
 export const useOppilaitosTyypit = organisaatioOid => {
   const { hierarkia, isLoading } = useOrganisaatioHierarkia(organisaatioOid, {
     skipParents: false,
   });
 
-  const oppilaitosTyypit: Array<any> = [];
+  const oppilaitostyypit: Array<any> = [];
 
   iterateTree(hierarkia, org => {
     if (org?.oppilaitostyyppi) {
-      oppilaitosTyypit.push(org?.oppilaitostyyppi);
+      oppilaitostyypit.push(org?.oppilaitostyyppi);
     }
   });
 
   const isAmmatillinen = !_fp.isEmpty(
-    _fp.intersection(AMMATILLISET_OPPILAITOSTYYPIT, oppilaitosTyypit)
+    _fp.intersection(AMMATILLISET_OPPILAITOSTYYPIT, oppilaitostyypit)
   );
 
   const isKorkeakoulutus = !_fp.isEmpty(
-    _fp.intersection(KORKEAKOULU_OPPILAITOSTYYPIT, oppilaitosTyypit)
+    _fp.intersection(KORKEAKOULU_OPPILAITOSTYYPIT, oppilaitostyypit)
   );
 
   const isLukio = !_fp.isEmpty(
-    _fp.intersection(LUKIO_OPPILAITOSTYYPIT, oppilaitosTyypit)
+    _fp.intersection(LUKIO_OPPILAITOSTYYPIT, oppilaitostyypit)
   );
 
-  return { isAmmatillinen, isKorkeakoulutus, isLukio, isLoading };
+  return {
+    isAmmatillinen,
+    isKorkeakoulutus,
+    isLukio,
+    isLoading,
+    oppilaitostyypit,
+  };
 };
 
-export const createIsKoulutustyyppiDisabledGetter =
-  ({ isOphVirkailija, isAmmatillinen, isKorkeakoulutus, isLukio }) =>
-  value => {
+const KOULUTUSTYYPPI_TO_OPPILAITOSTYYPIT = reduce(
+  (result, koulutustyypit, oppilaitostyyppi) => {
+    koulutustyypit?.forEach(koulutustyyppi => {
+      if (!result[koulutustyyppi]) {
+        result[koulutustyyppi] = [];
+      }
+      result[koulutustyyppi].push(oppilaitostyyppi);
+    });
+    return result;
+  },
+  {},
+  OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT
+);
+
+const ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT = [
+  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+  KOULUTUSTYYPPI.LUKIOKOULUTUS,
+  KOULUTUSTYYPPI.TUVA,
+]; // TODO: Lisää TELMA
+
+export const createIsKoulutustyyppiDisabledGetter = ({
+  oppilaitostyypit,
+  isOphVirkailija,
+  entityType,
+}) => {
+  return value => {
     if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
       return true;
     }
@@ -50,33 +81,24 @@ export const createIsKoulutustyyppiDisabledGetter =
       return false;
     }
 
-    // Don't disable anything, if not detecting any oppilaitos tyyppi
-    if (!isLukio && !isAmmatillinen && !isKorkeakoulutus) {
-      return false;
-    }
-
-    // Lukio koulutustyyppi disabled for all except OPH
-    if (isLukio && !isAmmatillinen && !isKorkeakoulutus) {
+    if (
+      entityType === ENTITY.KOULUTUS &&
+      ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT.includes(value)
+    ) {
       return true;
     }
 
-    let isDisabled = true;
-    // Allow "amm" and "kk" to coexist so that koulutustyyppis for both will
-    // be enabled if both types of oppilaitos found.
+    const oppilaitostyypitForKoulutustyyppi =
+      KOULUTUSTYYPPI_TO_OPPILAITOSTYYPIT[value] || [];
+
     if (
-      isAmmatillinen &&
-      [
-        KOULUTUSTYYPPI.TUTKINNON_OSA,
-        KOULUTUSTYYPPI.OSAAMISALA,
-        KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
-      ].includes(value)
+      !_fp.isEmpty(
+        _fp.intersection(oppilaitostyypitForKoulutustyyppi, oppilaitostyypit)
+      )
     ) {
-      isDisabled = false;
+      return false;
     }
 
-    if (isKorkeakoulutus && KORKEAKOULU_KOULUTUSTYYPIT.includes(value)) {
-      isDisabled = false;
-    }
-
-    return isDisabled;
+    return true;
   };
+};

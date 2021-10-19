@@ -295,46 +295,95 @@ export enum FormMode {
 export const NDASH = '\u2013';
 
 export const OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT = {
+  oppilaitostyyppi_01: [KOULUTUSTYYPPI.MUUT_KOULUTUKSET], //Taiteen perusopetuksen oppilaitokset (ei musiikki)
+  oppilaitostyyppi_11: [KOULUTUSTYYPPI.MUUT_KOULUTUKSET, KOULUTUSTYYPPI.TUVA], //Peruskoulut
+  oppilaitostyyppi_12: [KOULUTUSTYYPPI.MUUT_KOULUTUKSET, KOULUTUSTYYPPI.TUVA], //Peruskouluasteen erityiskoulut
+  oppilaitostyyppi_15: [
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+    KOULUTUSTYYPPI.TUVA,
+  ], // Lukiot
+  oppilaitostyyppi_19: [
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+    KOULUTUSTYYPPI.TUVA,
+  ], // Perus- ja lukioasteen koulut
   oppilaitostyyppi_21: [
-    'amm',
-    'lk',
-    'tuva',
-    'vapaa-sivistystyo-opistovuosi',
-    'vapaa-sivistystyo-muu',
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    KOULUTUSTYYPPI.TUVA,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+    KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
   ], // Ammatilliset oppilaitokset
-  oppilaitostyyppi_22: ['amm', 'tuva'], // Ammatilliset erityisoppilaitokset
-  oppilaitostyyppi_23: ['amm'], // Ammatilliset erikoisoppilaitokset
-  oppilaitostyyppi_24: ['amm'], // Ammatilliset aikuiskoulutuskeskukset
-  oppilaitostyyppi_28: ['amm'], // Palo-, poliisi- ja vartiointialojen oppilaitokset
-  oppilaitostyyppi_29: ['amm'], // Sotilasalan ammatilliset oppilaitokset
-  oppilaitostyyppi_41: ['amk'], // Ammattikorkeakoulut
-  oppilaitostyyppi_42: ['yo'], // Yliopistot
-  oppilaitostyyppi_43: ['yo'], // Sotilaskorkeakoulut
-  oppilaitostyyppi_45: ['yo'], // Lastentarhanopettajaopistot
-  oppilaitostyyppi_46: ['amk'], //Väliaikaiset ammattikorkeakoulut
-  oppilaitostyyppi_61: ['amm', 'muu'],
+  oppilaitostyyppi_22: [
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.TUVA,
+  ], // Ammatilliset erityisoppilaitokset
+  oppilaitostyyppi_23: [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS], // Ammatilliset erikoisoppilaitokset
+  oppilaitostyyppi_24: [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS], // Ammatilliset aikuiskoulutuskeskukset
+  oppilaitostyyppi_28: [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS], // Palo-, poliisi- ja vartiointialojen oppilaitokset
+  oppilaitostyyppi_29: [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS], // Sotilasalan ammatilliset oppilaitokset
+  oppilaitostyyppi_41: [KOULUTUSTYYPPI.AMKKOULUTUS], // Ammattikorkeakoulut
+  oppilaitostyyppi_42: [KOULUTUSTYYPPI.YLIOPISTOKOULUTUS], // Yliopistot
+  oppilaitostyyppi_43: [KOULUTUSTYYPPI.YLIOPISTOKOULUTUS], // Sotilaskorkeakoulut
+  oppilaitostyyppi_45: [KOULUTUSTYYPPI.YLIOPISTOKOULUTUS], // Lastentarhanopettajaopistot
+  oppilaitostyyppi_46: [KOULUTUSTYYPPI.AMKKOULUTUS], //Väliaikaiset ammattikorkeakoulut
+  oppilaitostyyppi_61: [
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+  ], //Musiikkioppilaitokset
   oppilaitostyyppi_62: [
-    'amm',
-    'lk',
-    'tuva',
-    'vapaa-sivistystyo-opistovuosi',
-    'vapaa-sivistystyo-muu',
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.TUVA,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
   ], //Liikunnan koulutuskeskukset
   oppilaitostyyppi_63: [
-    'amm',
-    'lk',
-    'vapaa-sivistystyo-opistovuosi',
-    'vapaa-sivistystyo-muu',
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    KOULUTUSTYYPPI.TUVA,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
   ], //Kansanopistot
   oppilaitostyyppi_64: [
-    'amm',
-    'lk',
-    'tuva',
-    'vapaa-sivistystyo-opistovuosi',
-    'vapaa-sivistystyo-muu',
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
   ], //Kansalaisopistot
-  oppilaitostyyppi_15: ['lk'], // Lukiot
-  oppilaitostyyppi_19: ['lk'], // Perus- ja lukioasteen koulut
+  oppilaitostyyppi_65: [
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+  ], //Opintokeskukset
+  oppilaitostyyppi_66: [
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+  ], //Kesäyliopistot
+  oppilaitostyyppi_91: [KOULUTUSTYYPPI.MUUT_KOULUTUKSET], //Kirjeoppilaitokset
+  oppilaitostyyppi_92: [KOULUTUSTYYPPI.MUUT_KOULUTUKSET], //Neuvontajärjestöt
+  oppilaitostyyppi_93: [
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+  ], //Muut koulutuksen järjestäjät
+  oppilaitostyyppi_99: [
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+  ], //Muut oppilaitokset
+  oppilaitostyyppi_XX: [KOULUTUSTYYPPI.MUUT_KOULUTUKSET], //Ei tiedossa (oppilaitostyyppi)
 };
 
 export const AMMATILLISET_OPPILAITOSTYYPIT = [

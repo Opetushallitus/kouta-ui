@@ -44,7 +44,7 @@ test.each(_fp.difference(KOULUTUSTYYPIT)(EI_TUETUT_KOULUTUSTYYPIT))(
 );
 
 test.each(ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)(
-  'Creating KOMO with any koulutustyyppi should be allowed for OPH',
+  'Koulutustyyppis that only OPH creates should be disabled for others',
   kt => {
     expect(getIsDisabledForAll(kt)).toEqual(true);
   }
@@ -63,7 +63,7 @@ test.each(
   }
 );
 
-test('Should disable lukiokoulutus for all oppilaitostyyppis', () => {
+test('Should disable lukiokoulutus for any oppilaitostyyppi', () => {
   expect(
     getIsDisabledForOppilaitostyypit([
       'oppilaitostyyppi_15',
@@ -72,7 +72,7 @@ test('Should disable lukiokoulutus for all oppilaitostyyppis', () => {
   ).toEqual(true);
 });
 
-test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+test('Should enable amk-koulutustyyppi for amk-oppilaitostyyppi', () => {
   expect(
     getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_41'])(
       KOULUTUSTYYPPI.AMKKOULUTUS
@@ -80,7 +80,7 @@ test('Should disable right koulutustyyppis when having kk, amm and lukio oppilai
   ).toEqual(false);
 });
 
-test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+test('Should enable yo-koulutustyyppi for all yo-oppilaitostyyppi', () => {
   expect(
     getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_42'])(
       KOULUTUSTYYPPI.YLIOPISTOKOULUTUS
@@ -88,7 +88,7 @@ test('Should disable right koulutustyyppis when having kk, amm and lukio oppilai
   ).toEqual(false);
 });
 
-test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+test('Should disable ammatillinen koulutustyyppi for amm-oppilaitostyyppi', () => {
   expect(
     getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_21'])(
       KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
@@ -96,7 +96,7 @@ test('Should disable right koulutustyyppis when having kk, amm and lukio oppilai
   ).toEqual(true);
 });
 
-test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+test('Should enable amm. tutkinnon osa for amm koulutustyyppi', () => {
   expect(
     getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_21'])(
       KOULUTUSTYYPPI.TUTKINNON_OSA
@@ -104,7 +104,7 @@ test('Should disable right koulutustyyppis when having kk, amm and lukio oppilai
   ).toEqual(false);
 });
 
-test('Should disable right koulutustyyppis when having kk, amm and lukio oppilaitos types', () => {
+test('Should enable amm. osaamisala for amm koulutustyyppi', () => {
   expect(
     getIsDisabledForOppilaitostyypit(['oppilaitostyyppi_21'])(
       KOULUTUSTYYPPI.OSAAMISALA

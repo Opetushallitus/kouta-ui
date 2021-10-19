@@ -5,9 +5,9 @@ import {
   EI_TUETUT_KOULUTUSTYYPIT,
   ENTITY,
   KORKEAKOULU_OPPILAITOSTYYPIT,
-  KOULUTUSTYYPPI,
   LUKIO_OPPILAITOSTYYPIT,
   OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT,
+  ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useOrganisaatioHierarkia } from '#/src/hooks/useOrganisaatioHierarkia';
 import iterateTree from '#/src/utils/iterateTree';
@@ -60,12 +60,6 @@ const KOULUTUSTYYPPI_TO_OPPILAITOSTYYPIT = reduce(
   {},
   OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT
 );
-
-const ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT = [
-  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  KOULUTUSTYYPPI.LUKIOKOULUTUS,
-  KOULUTUSTYYPPI.TUVA,
-]; // TODO: Lisää TELMA
 
 export const createIsKoulutustyyppiDisabledGetter = ({
   oppilaitostyypit,

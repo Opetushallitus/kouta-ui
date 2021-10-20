@@ -14,6 +14,7 @@ import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
+import iterateTree from '#/src/utils/iterateTree';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
@@ -44,18 +45,28 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   simpleMapProps
 );
 
+const useOppilaitokset = hierarkia => {
+  const oppilaitokset: Array<any> = [];
+  iterateTree(hierarkia, org => {
+    if (organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)(org)) {
+      oppilaitokset.push(org);
+    }
+  });
+  return oppilaitokset;
+};
+
 export const JarjestyspaikkaSection = ({
   tarjoajat,
-  opetustapaKoodiUrit,
   toteutusOrganisaatioOid,
 }: {
   tarjoajat: Array<string>;
-  opetustapaKoodiUrit: Array<string>;
   toteutusOrganisaatioOid: string;
 }) => {
   const { t } = useTranslation();
 
   const { hierarkia = [] } = useOrganisaatioHierarkia(toteutusOrganisaatioOid);
+
+  const oppilaitokset = useOppilaitokset(hierarkia);
 
   const getCanUpdate = useGetCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
@@ -67,7 +78,13 @@ export const JarjestyspaikkaSection = ({
     () =>
       _fp.flow(
         flattenHierarkia,
-        _fp.filter(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+        (organisaatiot: any) => {
+          const toimipisteet = _fp.filter(
+            organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
+          )(organisaatiot);
+
+          return _fp.isEmpty(toimipisteet) ? oppilaitokset : toimipisteet;
+        },
         _fp.map(org => ({
           value: org?.oid,
           label: getFirstLanguageValue(org?.nimi, language),
@@ -81,7 +98,7 @@ export const JarjestyspaikkaSection = ({
         })),
         _fp.sortBy('label')
       )(hierarkia),
-    [getCanUpdate, hierarkia, language, tarjoajat]
+    [getCanUpdate, hierarkia, language, tarjoajat, oppilaitokset]
   );
 
   const jarjestyspaikkaOidRequired = _fp.difference(opetustapaKoodiUrit)(

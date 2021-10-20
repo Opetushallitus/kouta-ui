@@ -19,12 +19,6 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
-const JARJESTYSPAIKATTOMAT_OPETUSTAVAT = [
-  'opetuspaikkakk_2#1', // Verkko
-  'opetuspaikkakk_3#1', // Eta
-  'opetuspaikkakk_5#1', // Itsenainen
-];
-
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   ({ disabled, options, value, error, onChange }) => {
     return (
@@ -101,11 +95,7 @@ export const JarjestyspaikkaSection = ({
     [getCanUpdate, hierarkia, language, tarjoajat, oppilaitokset]
   );
 
-  const jarjestyspaikkaOidRequired = _fp.difference(opetustapaKoodiUrit)(
-    JARJESTYSPAIKATTOMAT_OPETUSTAVAT
-  );
-
-  return jarjestyspaikkaOidRequired ? (
+  return (
     <div {...getTestIdProps('jarjestyspaikkaOidSelection')}>
       <Field
         label={t('hakukohdelomake.valitseJarjestyspaikka')}
@@ -115,5 +105,5 @@ export const JarjestyspaikkaSection = ({
         required
       />
     </div>
-  ) : null;
+  );
 };

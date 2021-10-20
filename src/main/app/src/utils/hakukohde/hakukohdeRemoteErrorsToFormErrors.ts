@@ -41,5 +41,10 @@ export const hakukohdeRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
         .replace('koodiUrit', 'painotettuOppiaine'),
       errorKey: 'validointivirheet.pakollinen',
     };
+  } else if (errorType === 'missingMsg' && path === 'jarjestyspaikkaOid') {
+    return {
+      field: 'jarjestyspaikkaOid',
+      errorKey: 'validointivirheet.pakollinen',
+    };
   }
 };

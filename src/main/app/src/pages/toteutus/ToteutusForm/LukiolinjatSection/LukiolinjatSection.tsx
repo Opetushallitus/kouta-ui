@@ -134,7 +134,7 @@ export const useLukioToteutusNimi = ({
       mapValues((translatedNimiAcc: any, lng) =>
         _fp.reduce(
           (result, linjaTranslations) => {
-            const translation = linjaTranslations[lng];
+            const translation = linjaTranslations?.[lng];
             if (!_fp.isUndefined(result) && translation) {
               return `${
                 result ? result + ', ' : ''

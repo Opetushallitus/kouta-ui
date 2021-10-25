@@ -1,5 +1,6 @@
 import React from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -8,11 +9,12 @@ import {
   FormFieldCheckbox,
   FormFieldInput,
 } from '#/src/components/formFields';
-import { Box, Divider } from '#/src/components/virkailija';
+import { Box, Divider, FormControl, Input } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
+import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import { getTestIdProps } from '#/src/utils';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
@@ -64,13 +66,20 @@ export const PerustiedotSection = ({
   name,
   toteutus,
   haku,
+  hakukohde = undefined,
 }) => {
   const isAmmatillinen =
     TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(koulutustyyppi);
   const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
+  const isTuva = koulutustyyppi === KOULUTUSTYYPPI.TUVA;
 
   const hasHakukohdeKoodiUri = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
   const { t } = useTranslation();
+  const selectedLanguage = useLanguageTab();
+
+  const esitysnimi = hakukohde
+    ? _.get(hakukohde?.esitysnimi, selectedLanguage)
+    : _.get(toteutus?.nimi, selectedLanguage);
 
   return (
     <>
@@ -80,6 +89,12 @@ export const PerustiedotSection = ({
             name={`${name}.hakukohdeKoodiUri`}
             toteutus={toteutus}
           />
+        </Box>
+      ) : isTuva ? (
+        <Box maxWidth="600px">
+          <FormControl label={t('yleiset.nimi')} disabled={true}>
+            <Input value={esitysnimi} />
+          </FormControl>
         </Box>
       ) : (
         <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>

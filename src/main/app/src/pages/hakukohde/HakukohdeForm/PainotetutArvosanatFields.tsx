@@ -7,8 +7,9 @@ import { FormFieldSelect, FormFieldInput } from '#/src/components/formFields';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
-import usePainotetutOppiaineetOptions from '#/src/hooks/usePainotetutOppiaineetOptions';
 import { getTestIdProps } from '#/src/utils';
+
+import { usePainotetutOppiaineetOptions } from './hooks/usePainotetutOppiaineetOptions';
 
 const PainotetutArvosanatFields = ({ fields, toteutus }) => {
   const { t } = useTranslation();

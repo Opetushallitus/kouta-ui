@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { maybeParseNumber, parseFloatComma } from '#/src/utils';
+import { maybeParseNumber, parseFloatComma, safeArray } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import {
@@ -39,9 +39,7 @@ function getPainotetutArvosanatData(arvosanat) {
   return (arvosanat || [])
     .map(arvosana => {
       return {
-        koodiUrit: arvosana.painotettuOppiaine
-          ? arvosana.painotettuOppiaine.koodiUrit
-          : null,
+        koodiUrit: safeArray(arvosana.painotettuOppiaine),
         painokerroin: arvosana.painokerroin
           ? parseFloatComma(arvosana.painokerroin)
           : null,

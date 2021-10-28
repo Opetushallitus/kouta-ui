@@ -7,16 +7,15 @@ import { FormFieldSelect, FormFieldInput } from '#/src/components/formFields';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
-import { usePainotetutOppiaineetOptions } from './hooks/usePainotetutOppiaineetOptions';
-
-const PainotetutArvosanatFields = ({ fields, toteutus }) => {
+const PainotetutArvosanatFields = ({ fields }) => {
   const { t } = useTranslation();
-  const lukionKielivalikoima = toteutus?.metadata?.kielivalikoima;
 
-  const painotetutOppiaineetOptions =
-    usePainotetutOppiaineetOptions(lukionKielivalikoima);
+  const { options: painotetutOppiaineetOptions } = useKoodistoOptions({
+    koodisto: 'painotettavatoppiaineetlukiossa',
+  });
 
   return (
     <>

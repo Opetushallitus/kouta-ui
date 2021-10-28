@@ -46,5 +46,10 @@ export const hakukohdeRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       field: 'jarjestyspaikkaOid',
       errorKey: 'validointivirheet.pakollinen',
     };
+  } else if (errorType === 'missingMsg' && path === 'valintaperusteId') {
+    return {
+      field: 'valintaperusteenKuvaus.valintaperuste',
+      errorKey: 'validointivirheet.pakollinen',
+    };
   }
 };

@@ -8,7 +8,7 @@ import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
-import { Radio, RadioGroup } from '#/src/components/virkailija';
+import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
@@ -20,8 +20,10 @@ import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
-  ({ disabled, options, value, error, onChange }) => {
-    return (
+  ({ disabled, options, value, error, onChange, isLoading }) => {
+    return isLoading ? (
+      <Spin />
+    ) : (
       <RadioGroup
         value={value}
         disabled={disabled}
@@ -58,9 +60,9 @@ export const JarjestyspaikkaSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const { hierarkia = [] } = useOrganisaatioHierarkia(toteutusOrganisaatioOid);
-
-  const oppilaitokset = useOppilaitokset(hierarkia);
+  const { hierarkia = [], isLoading } = useOrganisaatioHierarkia(
+    toteutusOrganisaatioOid
+  );
 
   const getCanUpdate = useGetCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
@@ -101,8 +103,9 @@ export const JarjestyspaikkaSection = ({
         label={t('hakukohdelomake.valitseJarjestyspaikka')}
         component={JarjestyspaikkaRadioGroup}
         options={jarjestyspaikkaOptions}
-        name={`jarjestyspaikkaOid`}
+        name="jarjestyspaikkaOid"
         required
+        isLoading={isLoading}
       />
     </div>
   );

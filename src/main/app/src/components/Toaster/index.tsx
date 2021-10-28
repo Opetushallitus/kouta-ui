@@ -9,6 +9,7 @@ import AbstractCollapse from '#/src/components/AbstractCollapse';
 import { Box, Icon, Typography } from '#/src/components/virkailija';
 import useToaster from '#/src/hooks/useToaster';
 import { getThemeProp } from '#/src/theme';
+import { isCypress } from '#/src/utils';
 
 const ToasterContainer = styled.div`
   display: flex;
@@ -139,6 +140,7 @@ export const Toaster = ({ ...props }) => {
           opacity: 0,
           transform: 'scale(0.5)',
         }}
+        immediate={isCypress}
       >
         {(item, state, index) => props =>
           (

@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 
 import { FormFieldRadioGroup } from '#/src/components/formFields';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 export const HakutapaSection = ({ name, isOphVirkailija }) => {
   const { options } = useKoodistoOptions({ koodisto: 'hakutapa' });
@@ -12,7 +13,7 @@ export const HakutapaSection = ({ name, isOphVirkailija }) => {
 
   const getIsDisabled = useCallback(
     value => {
-      return !isOphVirkailija && value?.startsWith('hakutapa_01');
+      return !isOphVirkailija && isYhteishakuHakutapa(value);
     },
     [isOphVirkailija]
   );

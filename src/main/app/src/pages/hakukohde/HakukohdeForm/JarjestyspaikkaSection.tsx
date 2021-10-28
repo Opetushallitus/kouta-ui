@@ -14,7 +14,6 @@ import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
-import iterateTree from '#/src/utils/iterateTree';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
@@ -41,16 +40,6 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   simpleMapProps
 );
 
-const useOppilaitokset = hierarkia => {
-  const oppilaitokset: Array<any> = [];
-  iterateTree(hierarkia, org => {
-    if (organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)(org)) {
-      oppilaitokset.push(org);
-    }
-  });
-  return oppilaitokset;
-};
-
 export const JarjestyspaikkaSection = ({
   tarjoajat,
   toteutusOrganisaatioOid,
@@ -75,11 +64,17 @@ export const JarjestyspaikkaSection = ({
       _fp.flow(
         flattenHierarkia,
         (organisaatiot: any) => {
-          const toimipisteet = _fp.filter(
+          let visibleOrgs = _fp.filter(
             organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
           )(organisaatiot);
 
-          return _fp.isEmpty(toimipisteet) ? oppilaitokset : toimipisteet;
+          if (_fp.isEmpty(visibleOrgs)) {
+            visibleOrgs = _fp.filter(
+              organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)
+            )(organisaatiot);
+          }
+
+          return visibleOrgs;
         },
         _fp.map(org => ({
           value: org?.oid,
@@ -94,7 +89,7 @@ export const JarjestyspaikkaSection = ({
         })),
         _fp.sortBy('label')
       )(hierarkia),
-    [getCanUpdate, hierarkia, language, tarjoajat, oppilaitokset]
+    [getCanUpdate, hierarkia, language, tarjoajat]
   );
 
   return (

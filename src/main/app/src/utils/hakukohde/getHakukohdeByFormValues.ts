@@ -39,7 +39,7 @@ function getPainotetutArvosanatData(arvosanat) {
   return (arvosanat || [])
     .map(arvosana => {
       return {
-        koodiUrit: safeArray(arvosana.painotettuOppiaine),
+        koodiUrit: { oppiaine: arvosana.painotettuOppiaine?.value },
         painokerroin: arvosana.painokerroin
           ? parseFloatComma(arvosana.painokerroin)
           : null,

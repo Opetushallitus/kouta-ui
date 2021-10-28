@@ -44,11 +44,7 @@ Object {
       Object {
         "painokerroin": 1.2,
         "painotettuOppiaine": Object {
-          "koodiUrit": Object {
-            "kieli": "kieli_en#1",
-            "oppiaine": "oppiaineetyleissivistava_a1#1",
-          },
-          "value": "oppiaineetyleissivistava_a1#1/kieli_en#1",
+          "value": "painotettavatoppiaineetlukiossa_a1en#1",
         },
       },
     ],

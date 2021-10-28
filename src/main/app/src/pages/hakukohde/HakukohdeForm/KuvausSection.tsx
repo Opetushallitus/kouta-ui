@@ -11,7 +11,7 @@ import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
-import isRestrictedDuetoYhteishaku from '#/src/utils/isRestrictedDuetoYhteishaku';
+import { isToisenAsteenYhteishaku } from '#/src/utils/isToisenAsteenYhteishaku';
 import { useValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
 const Buttons = styled.div`
@@ -40,7 +40,7 @@ export const KuvausSection = ({
   const kieliValinnat = languages;
   const preventCreation =
     !useIsOphVirkailija() &&
-    isRestrictedDuetoYhteishaku(haku?.hakutapaKoodiUri, koulutustyyppi);
+    isToisenAsteenYhteishaku(haku?.hakutapaKoodiUri, koulutustyyppi);
 
   const { data, refetch } = useValintaperusteet({
     hakuOid,
@@ -66,6 +66,10 @@ export const KuvausSection = ({
         onFocus={() => refetch()}
         label={t('hakukohdelomake.valitseValintaperustekuvaus')}
         helperText={t('hakukohdelomake.valintaperustekuvaustenListausperuste')}
+        required={isToisenAsteenYhteishaku(
+          haku?.hakutapaKoodiUri,
+          koulutustyyppi
+        )}
       />
       <Buttons>
         {valintaperusteOid && (

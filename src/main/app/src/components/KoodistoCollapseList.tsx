@@ -64,7 +64,6 @@ export const KoodistoCollapseList = ({
           koodistoData={koodistoData}
           showAllOptions
           formatKoodiLabel={formatLabel}
-          required
           isMulti
         />
       </Box>

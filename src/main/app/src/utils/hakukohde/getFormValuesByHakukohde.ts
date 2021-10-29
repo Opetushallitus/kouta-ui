@@ -11,7 +11,6 @@ import {
   getKokeetTaiLisanaytotValues,
   getTilaisuusValues,
 } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
-import { concatKoodiUris } from '#/src/utils/hakukohde/getPainotetutOppiaineetOptions';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -40,13 +39,7 @@ const getHakukohteenLinjaValues = ({
   painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
     return {
       painotettuOppiaine: {
-        value: arvosana.koodiUrit
-          ? concatKoodiUris(
-              arvosana.koodiUrit.oppiaine,
-              arvosana.koodiUrit.kieli
-            )
-          : '',
-        koodiUrit: arvosana.koodiUrit,
+        value: arvosana.koodiUrit?.oppiaine ?? '',
       },
       painokerroin: arvosana.painokerroin,
     };

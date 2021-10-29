@@ -10,6 +10,7 @@ import {
 } from '#/src/components/formFields';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { Divider } from '#/src/components/virkailija';
+import { ENTITY } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import {
@@ -39,18 +40,16 @@ export const PerustiedotSection = ({
 
   const isOphVirkailija = useIsOphVirkailija();
 
-  const { isAmmatillinen, isKorkeakoulutus, isLukio, isLoading } =
-    useOppilaitosTyypit(organisaatioOid);
+  const { oppilaitostyypit, isLoading } = useOppilaitosTyypit(organisaatioOid);
 
   const getIsDisabled = useMemo(
     () =>
       createIsKoulutustyyppiDisabledGetter({
         isOphVirkailija,
-        isLukio,
-        isAmmatillinen,
-        isKorkeakoulutus,
+        oppilaitostyypit,
+        entityType: ENTITY.SORA_KUVAUS,
       }),
-    [isOphVirkailija, isLukio, isAmmatillinen, isKorkeakoulutus]
+    [isOphVirkailija, oppilaitostyypit]
   );
 
   return (

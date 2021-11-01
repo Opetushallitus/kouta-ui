@@ -10,6 +10,7 @@ import {
 } from '#/src/components/formFields';
 import { Box, Divider } from '#/src/components/virkailija';
 import {
+  KORKEAKOULU_KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
@@ -68,6 +69,7 @@ export const PerustiedotSection = ({
   const isAmmatillinen =
     TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(koulutustyyppi);
   const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
+  const isKK = KORKEAKOULU_KOULUTUSTYYPIT.includes(koulutustyyppi);
 
   const hasHakukohdeKoodiUri = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
   const { t } = useTranslation();
@@ -129,6 +131,22 @@ export const PerustiedotSection = ({
       <div {...getTestIdProps('lomakeSection')}>
         <LomakeSection haku={haku} language={language} />
       </div>
+
+      {isKK && (
+        <div>
+          <Divider marginY={4} />
+          <Box
+            marginBottom={2}
+            {...getTestIdProps('hakukohteenUudenOpiskelijanUrl')}
+          >
+            <Field
+              name="uudenOpiskelijanUrl"
+              component={FormFieldInput}
+              label={t('yleiset.uudenOpiskelijanUrl')}
+            />
+          </Box>
+        </div>
+      )}
     </>
   );
 };

@@ -170,6 +170,19 @@ const fillLomakeSectionOnly = (type: string = 'ataru') => {
   });
 };
 
+const skipPerustiedot = () => {
+  getByTestId('perustiedotSection').within(() => {
+    jatka();
+  });
+};
+
+const fillLomakeSectionOnly = (type: string = 'ataru') => {
+  getByTestId('perustiedotSection').within(() => {
+    fillLomakeSection(type);
+    jatka();
+  });
+};
+
 const fillLomakeSection = (type: string = 'ataru') => {
   withinSection('perustiedot', () => {
     cy.findByTestId('lomakeSection').within(() => {

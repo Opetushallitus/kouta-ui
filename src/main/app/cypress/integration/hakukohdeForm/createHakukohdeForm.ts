@@ -152,8 +152,8 @@ const skipPerustiedot = () => {
 };
 
 const fillLomakeSectionOnly = (type: string = 'ataru') => {
+  fillLomakeSection(type);
   getByTestId('perustiedotSection').within(() => {
-    fillLomakeSection(type);
     jatka();
   });
 };

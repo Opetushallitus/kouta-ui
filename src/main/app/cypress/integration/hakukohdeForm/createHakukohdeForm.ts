@@ -22,6 +22,7 @@ import {
   pFillAsyncSelect,
   withinSection,
   getInputByLabel,
+  jatka,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -142,32 +143,6 @@ const fillPerustiedotSection = ({
     });
   });
   fillLomakeSection();
-};
-
-const skipPerustiedot = () => {
-  getByTestId('perustiedotSection').within(() => {
-    jatka();
-  });
-};
-
-const fillLomakeSectionOnly = (type: string = 'ataru') => {
-  getByTestId('perustiedotSection').within(() => {
-    fillLomakeSection(type);
-    jatka();
-  });
-};
-
-const skipPerustiedot = () => {
-  getByTestId('perustiedotSection').within(() => {
-    jatka();
-  });
-};
-
-const fillLomakeSectionOnly = (type: string = 'ataru') => {
-  getByTestId('perustiedotSection').within(() => {
-    fillLomakeSection(type);
-    jatka();
-  });
 };
 
 const skipPerustiedot = () => {

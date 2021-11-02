@@ -86,4 +86,22 @@ export const editHakukohdeForm = () => {
       `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/hakukohde/${hakukohdeOid}/muokkaus`
     );
   });
+
+  it.only('should not be possible to update hakukohde if hakukohteen muokkaamistakaraja has expired', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      edit: true,
+      tarjoajat: ['1.2.246.562.10.45854578546'],
+      hakukohteenMuokkaaminenHasExpired: true,
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
+    }).should('be.disabled');
+  });
 };

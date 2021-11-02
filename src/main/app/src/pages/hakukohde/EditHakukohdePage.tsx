@@ -15,6 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import canUpdateHakukohde from '#/src/utils/hakukohde/canUpdateHakukohde';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 
@@ -49,12 +50,16 @@ export const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  const canUpdate = useCurrentUserHasRole(
-    ENTITY.HAKUKOHDE,
-    CRUD_ROLES.UPDATE,
-    hakukohde?.organisaatioOid
-  );
-
+  const canUpdate =
+    useCurrentUserHasRole(
+      ENTITY.HAKUKOHDE,
+      CRUD_ROLES.UPDATE,
+      hakukohde?.organisaatioOid
+    ) &&
+    canUpdateHakukohde(
+      haku?.hakukohteenLiittamisenTakaraja,
+      haku?.hakukohteenMuokkaamisenTakaraja
+    );
   const initialValues = useMemo(
     () => (hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
     [hakukohde]

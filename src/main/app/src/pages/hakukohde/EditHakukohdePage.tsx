@@ -50,16 +50,21 @@ export const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  const canUpdate =
-    useCurrentUserHasRole(
-      ENTITY.HAKUKOHDE,
-      CRUD_ROLES.UPDATE,
-      hakukohde?.organisaatioOid
-    ) &&
-    canUpdateHakukohde(
-      haku?.hakukohteenLiittamisenTakaraja,
-      haku?.hakukohteenMuokkaamisenTakaraja
-    );
+  const hasRightToUpdate = useCurrentUserHasRole(
+    ENTITY.HAKUKOHDE,
+    CRUD_ROLES.UPDATE,
+    hakukohde?.organisaatioOid
+  );
+
+  const canUpdate = canUpdateHakukohde(
+    haku?.hakukohteenLiittamisenTakaraja,
+    haku?.hakukohteenMuokkaamisenTakaraja
+  );
+
+  const infoTextTranslationKey = !canUpdate
+    ? 'muokkaamisenTakarajaYlittynyt'
+    : '';
+
   const initialValues = useMemo(
     () => (hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
     [hakukohde]
@@ -72,11 +77,11 @@ export const EditHakukohdePage = props => {
       form={FORM_NAME}
       mode={FormMode.EDIT}
       initialValues={initialValues}
-      disabled={!canUpdate}
+      disabled={!hasRightToUpdate}
     >
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormPage
-        readOnly={!canUpdate}
+        readOnly={!hasRightToUpdate}
         header={
           <EntityFormHeader entityType={ENTITY.HAKUKOHDE} entity={hakukohde} />
         }
@@ -91,7 +96,8 @@ export const EditHakukohdePage = props => {
               koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
             }
             haku={haku}
-            canUpdate={canUpdate}
+            canUpdate={hasRightToUpdate && canUpdate}
+            infoTextTranslationKey={infoTextTranslationKey}
           />
         }
       >

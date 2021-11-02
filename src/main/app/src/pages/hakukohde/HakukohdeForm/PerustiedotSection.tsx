@@ -78,7 +78,7 @@ export const PerustiedotSection = ({
   const selectedLanguage = useLanguageTab();
 
   const esitysnimi = hakukohde
-    ? _.get(hakukohde?.esitysnimi, selectedLanguage)
+    ? _.get(hakukohde?._enrichedData?.esitysnimi, selectedLanguage)
     : _.get(toteutus?.nimi, selectedLanguage);
 
   return (

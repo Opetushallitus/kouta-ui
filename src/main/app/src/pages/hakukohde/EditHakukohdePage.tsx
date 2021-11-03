@@ -15,7 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import canUpdateHakukohde from '#/src/utils/hakukohde/canUpdateHakukohde';
+import { canUpdateHakukohde } from '#/src/utils/hakukohde/canUpdateHakukohde';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 
@@ -56,10 +56,13 @@ export const EditHakukohdePage = props => {
     hakukohde?.organisaatioOid
   );
 
-  const canUpdate = canUpdateHakukohde(
-    haku?.hakukohteenLiittamisenTakaraja,
-    haku?.hakukohteenMuokkaamisenTakaraja
-  );
+  let canUpdate = true;
+  if (haku?.hakukohteenMuokkaamisenTakaraja) {
+    canUpdate = canUpdateHakukohde(
+      new Date(),
+      new Date(haku?.hakukohteenMuokkaamisenTakaraja)
+    );
+  }
 
   const infoTextTranslationKey = !canUpdate
     ? 'muokkaamisenTakarajaYlittynyt'

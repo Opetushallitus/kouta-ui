@@ -1,27 +1,21 @@
-import isHakukohteenTakarajaExpired from '#/src/utils/haku/isHakukohteenTakarajaExpired';
+export const isHakukohteenTakarajaExpired = (now, takaraja) => {
+  return now >= takaraja;
+};
 
-const canUpdateHakukohde = (
-  hakukohteenLiittamisenTakaraja,
-  hakukohteenMuokkaamisenTakaraja
-) => {
-  let canUpdateHakukohde = true;
-  const now = new Date();
-  if (hakukohteenLiittamisenTakaraja || hakukohteenMuokkaamisenTakaraja) {
-    const liittamisenTakaraja = hakukohteenLiittamisenTakaraja
-      ? new Date(hakukohteenLiittamisenTakaraja)
-      : null;
-    const muokkaamisenTakaraja = hakukohteenMuokkaamisenTakaraja
-      ? new Date(hakukohteenMuokkaamisenTakaraja)
-      : null;
-
-    canUpdateHakukohde = liittamisenTakaraja
-      ? !isHakukohteenTakarajaExpired(now, liittamisenTakaraja)
-      : true && muokkaamisenTakaraja
-      ? !isHakukohteenTakarajaExpired(now, muokkaamisenTakaraja)
-      : true;
-  }
+export const canUpdateHakukohde = (now, hakukohteenMuokkaamisenTakaraja) => {
+  let canUpdateHakukohde = !isHakukohteenTakarajaExpired(
+    now,
+    hakukohteenMuokkaamisenTakaraja
+  );
 
   return canUpdateHakukohde;
 };
 
-export default canUpdateHakukohde;
+export const canCreateHakukohde = (now, hakukohteenLiittamisenTakaraja) => {
+  let canUpdateHakukohde = !isHakukohteenTakarajaExpired(
+    now,
+    hakukohteenLiittamisenTakaraja
+  );
+
+  return canUpdateHakukohde;
+};

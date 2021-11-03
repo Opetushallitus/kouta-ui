@@ -55,6 +55,10 @@ const HakuForm = ({
     );
   }
 
+  if (isOphVirkailija) {
+    hakukohteenLiittaminenDisabled = false;
+  }
+
   return (
     <>
       <HakukohteetModal

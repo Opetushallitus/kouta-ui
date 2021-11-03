@@ -15,6 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { canCreateHakukohde } from '#/src/utils/hakukohde/canUpdateHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
@@ -30,6 +31,7 @@ export const CreateHakukohdePage = ({
   },
 }) => {
   const { t } = useTranslation();
+  const isOphVirkailija = useIsOphVirkailija();
 
   const { data, isFetching } = useHakukohdePageData({
     hakuOid: hakuOid,
@@ -53,6 +55,10 @@ export const CreateHakukohdePage = ({
       new Date(),
       new Date(haku.hakukohteenLiittamisenTakaraja)
     );
+  }
+
+  if (isOphVirkailija) {
+    canUpdate = true;
   }
 
   const infoTextTranslationKey = !canUpdate

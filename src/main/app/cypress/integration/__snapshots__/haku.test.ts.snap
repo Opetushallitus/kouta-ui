@@ -78,7 +78,7 @@ exports[`editHaku > should be able to edit haku #0`] =
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
-  "hakutapaKoodiUri": "hakutapa_0#1",
+  "hakutapaKoodiUri": "hakutapa_01#1",
   "kielivalinta": [
     "fi"
   ],

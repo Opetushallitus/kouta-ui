@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { maybeParseNumber, parseFloatComma } from '#/src/utils';
+import { maybeParseNumber, parseFloatComma, safeArray } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import {
@@ -39,9 +39,7 @@ function getPainotetutArvosanatData(arvosanat) {
   return (arvosanat || [])
     .map(arvosana => {
       return {
-        koodiUrit: arvosana.painotettuOppiaine
-          ? arvosana.painotettuOppiaine.koodiUrit
-          : null,
+        koodiUrit: { oppiaine: arvosana.painotettuOppiaine?.value },
         painokerroin: arvosana.painokerroin
           ? parseFloatComma(arvosana.painokerroin)
           : null,
@@ -146,7 +144,10 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     }
   );
 
-  const nimi = pickTranslations(values?.perustiedot?.nimi || null);
+  const nimi = pickTranslations(values?.perustiedot?.nimi);
+
+  const hakukohdeKoodiUri =
+    values?.perustiedot?.hakukohdeKoodiUri?.value ?? null;
 
   const toinenAsteOnkoKaksoistutkinto =
     !!values?.perustiedot?.voiSuorittaaKaksoistutkinnon;
@@ -165,7 +166,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     kielivalinta
   );
 
-  const kaytetaanHaukukohteenAlkamiskautta =
+  const kaytetaanHakukohteenAlkamiskautta =
     values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta;
 
   // NOTE: Tässä muutetaan object {id: [tilaisuus1, tilaisuus2]} takaisin taulukkomuotoon [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}]
@@ -202,7 +203,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     liitteidenToimitusaika: liitteetOnkoSamaToimitusaika
       ? liitteidenToimitusaika
       : null,
-    nimi,
+    nimi: _fp.isEmpty(hakukohdeKoodiUri) ? nimi : {},
+    hakukohdeKoodiUri: hakukohdeKoodiUri,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,
     pohjakoulutusvaatimusKoodiUrit,
@@ -225,8 +227,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         kuvaus => serializeEditorState(kuvaus)
       ),
       aloituspaikat: getAloituspaikat(values),
-      kaytetaanHaunAlkamiskautta: !kaytetaanHaukukohteenAlkamiskautta,
-      koulutuksenAlkamiskausi: kaytetaanHaukukohteenAlkamiskautta
+      kaytetaanHaunAlkamiskautta: !kaytetaanHakukohteenAlkamiskautta,
+      koulutuksenAlkamiskausi: kaytetaanHakukohteenAlkamiskautta
         ? getAlkamiskausiData(ajankohta, pickTranslations)
         : null,
       hakukohteenLinja: getHakukohteenLinja(values),

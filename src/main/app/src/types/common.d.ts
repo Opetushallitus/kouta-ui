@@ -27,3 +27,5 @@ type SelectOption<T = string | undefined> = { label?: string; value: T };
 type SelectOptions = Array<SelectOption<string>>;
 
 type PohjaValinta = { tapa: string; valinta: string };
+
+type ValueOf<T> = T[keyof T];

@@ -13,8 +13,9 @@ import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
-  jatka,
+  withinSection,
 } from '#/cypress/utils';
+import { HAKUTAPA_YHTEISHAKU_KOODI_URI } from '#/src/constants';
 
 const toimipisteTarjoajat = [
   '1.2.246.562.10.16538823663',
@@ -38,8 +39,8 @@ const selectedToimipisteNimi =
 
 const selectedToimipiste = '1.2.246.562.10.45854578546';
 
-export const fillJarjestyspaikkaSection = ({ jatka: jatkaProp = true }) => {
-  cy.findByTestId('jarjestyspaikkaOidSection').within(() => {
+export const fillJarjestyspaikkaSection = () => {
+  withinSection('jarjestyspaikkaOid', () => {
     toimipisteTarjoajat.forEach(oid => {
       cy.get(`[value="${oid}"]`).should('exist');
       if (oid === selectedToimipiste) {
@@ -50,9 +51,6 @@ export const fillJarjestyspaikkaSection = ({ jatka: jatkaProp = true }) => {
     });
 
     cy.findByText(selectedToimipisteNimi).click();
-    if (jatkaProp) {
-      jatka();
-    }
   });
 };
 
@@ -63,6 +61,7 @@ export const prepareTest = ({
   organisaatioOid,
   edit = false,
   tarjoajat,
+  hakutapaKoodiUri = HAKUTAPA_YHTEISHAKU_KOODI_URI,
   hakukohteenLiittaminenHasExpired = false,
   hakukohteenMuokkaaminenHasExpired = false,
   hakuWithoutTakarajat = false,
@@ -87,6 +86,7 @@ export const prepareTest = ({
   stubHakukohdeFormRoutes({
     organisaatioOid,
     hakuOid,
+    hakutapaKoodiUri,
     hakukohteenLiittaminenHasExpired,
     hakukohteenMuokkaaminenHasExpired,
     hakuWithoutTakarajat,
@@ -142,10 +142,12 @@ export const prepareTest = ({
     }
   );
 
-  cy.intercept(
-    { method: 'GET', url: `**/hakukohde/${hakukohdeOid}` },
-    { body: merge(hakukohde(), testHakukohdeFields) }
-  );
+  if (edit) {
+    cy.intercept(
+      { method: 'GET', url: `**/hakukohde/${hakukohdeOid}` },
+      { body: merge(hakukohde(), testHakukohdeFields) }
+    );
+  }
 
   cy.visit(
     edit
@@ -157,6 +159,7 @@ export const prepareTest = ({
 export const stubHakukohdeFormRoutes = ({
   organisaatioOid,
   hakuOid,
+  hakutapaKoodiUri,
   hakukohteenLiittaminenHasExpired,
   hakukohteenMuokkaaminenHasExpired,
   hakuWithoutTakarajat,
@@ -164,7 +167,7 @@ export const stubHakukohdeFormRoutes = ({
 }) => {
   stubCommonRoutes();
 
-  let hakuMockData = haku();
+  let hakuMockData = haku({ hakutapaKoodiUri });
   if (hakuWithoutTakarajat) {
     hakuMockData.hakukohteenLiittamisenTakaraja = null;
     hakuMockData.hakukohteenMuokkaamisenTakaraja = null;

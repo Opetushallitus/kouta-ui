@@ -14,6 +14,7 @@ Object {
       "paattyy": "2019-05-18T05:52",
     },
   ],
+  "hakukohdeKoodiUri": null,
   "hakulomakeAtaruId": "12345",
   "hakulomakeKuvaus": Object {},
   "hakulomakeLinkki": Object {},
@@ -77,8 +78,7 @@ Object {
       "painotetutArvosanat": Array [
         Object {
           "koodiUrit": Object {
-            "kieli": "kieli_en#1",
-            "oppiaine": "oppiaineetyleissivistava_a1#1",
+            "oppiaine": "painotettavatoppiaineetlukiossa_a1en#1",
           },
           "painokerroin": 1.2,
         },

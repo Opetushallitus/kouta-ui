@@ -57,7 +57,6 @@ export const createSoraKuvausForm = () => {
   const mutationTest = wrapMutationTest({
     id: soraKuvaus.id,
     entity: ENTITY.SORA_KUVAUS,
-    stubGet: true,
   });
 
   it(

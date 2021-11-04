@@ -34,8 +34,6 @@ export const HakukohdeForm = ({
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
 
-  const opetustapaKoodiUrit = toteutus?.metadata?.opetus?.opetustapaKoodiUrit;
-
   const formMode = useFormMode();
 
   return (
@@ -119,7 +117,6 @@ export const HakukohdeForm = ({
         section="jarjestyspaikkaOid"
         header={t('hakukohdelomake.hakukohteenJarjestyspaikka')}
         tarjoajat={tarjoajat}
-        opetustapaKoodiUrit={opetustapaKoodiUrit}
         Component={JarjestyspaikkaSection}
         toteutusOrganisaatioOid={toteutus?.organisaatioOid}
       />

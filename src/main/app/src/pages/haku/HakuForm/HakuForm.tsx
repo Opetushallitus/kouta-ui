@@ -111,6 +111,7 @@ const HakuForm = ({
           section="hakutapa"
           header={t('hakulomake.hakutapa')}
           Component={HakutapaSection}
+          isOphVirkailija={isOphVirkailija}
         />
 
         <FormCollapse

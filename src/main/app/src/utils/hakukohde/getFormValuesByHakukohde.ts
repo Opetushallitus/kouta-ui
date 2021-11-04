@@ -11,7 +11,6 @@ import {
   getKokeetTaiLisanaytotValues,
   getTilaisuusValues,
 } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
-import { concatKoodiUris } from '#/src/utils/hakukohde/getPainotetutOppiaineetOptions';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -40,20 +39,17 @@ const getHakukohteenLinjaValues = ({
   painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
     return {
       painotettuOppiaine: {
-        value: arvosana.koodiUrit
-          ? concatKoodiUris(
-              arvosana.koodiUrit.oppiaine,
-              arvosana.koodiUrit.kieli
-            )
-          : '',
-        koodiUrit: arvosana.koodiUrit,
+        value: arvosana.koodiUrit?.oppiaine ?? '',
       },
       painokerroin: arvosana.painokerroin,
     };
   }),
 });
 
-export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
+export const getFormValuesByHakukohde = (
+  hakukohde,
+  nimiKoodista?: TranslatedField
+): HakukohdeFormValues => {
   const {
     kaytetaanHaunAikataulua,
     kielivalinta = [],
@@ -65,6 +61,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     liitteidenToimitusaika,
     liitteidenToimitustapa,
     nimi = {},
+    hakukohdeKoodiUri,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUrit = [],
@@ -116,7 +113,8 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
       })),
     },
     perustiedot: {
-      nimi,
+      nimi: _fp.isEmpty(nimiKoodista) ? nimi : nimiKoodista,
+      hakukohdeKoodiUri: toSelectValue(hakukohdeKoodiUri),
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
     ajankohta: {

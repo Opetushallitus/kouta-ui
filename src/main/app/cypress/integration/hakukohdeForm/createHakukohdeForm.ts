@@ -10,7 +10,6 @@ import {
   fillValintakokeetSection,
   fillAsyncSelect,
   typeToEditor,
-  jatka,
   getByTestId,
   paste,
   fillKieliversiotSection,
@@ -19,6 +18,10 @@ import {
   fillAjankohtaFields,
   getSelectOption,
   wrapMutationTest,
+  getSelectByLabel,
+  pFillAsyncSelect,
+  withinSection,
+  getInputByLabel,
   stubKayttoOikeusMeRoute,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
@@ -28,19 +31,17 @@ const lisaa = () => {
 };
 
 const fillPohjakoulutusvaatimusSection = () => {
-  getByTestId('pohjakoulutusSection').within(() => {
+  withinSection('pohjakoulutus', () => {
     getByTestId('pohjakoulutusvaatimusSelect').within(() => {
       selectOption('Peruskoulu');
     });
 
     typeToEditor('Tarkenne');
-
-    jatka();
   });
 };
 
 const fillHakuajatSection = () => {
-  getByTestId('hakuajatSection').within(() => {
+  withinSection('hakuajat', () => {
     getCheckbox(null).click({ force: true });
     lisaa();
 
@@ -61,7 +62,7 @@ const fillHakuajatSection = () => {
 };
 
 const fillLukiolinjaSection = () => {
-  getByTestId('hakukohteenLinjaSection').within(() => {
+  withinSection('hakukohteenLinja', () => {
     cy.findByText(/Yleislinja/).click();
 
     getByTestId('alinHyvaksytty')
@@ -105,77 +106,100 @@ const fillLukiolinjaSection = () => {
   });
 };
 
-const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
-  getByTestId('perustiedotSection').within(() => {
-    getByTestId('hakukohteenNimi')
-      .find('input')
-      .clear({ force: true })
-      .pipe(paste('Hakukohteen nimi'));
+const fillPerustiedotSection = ({
+  isLukio,
+  isYhteishaku,
+  fillKaksoistutkinto,
+  hakukohdeKoodiNimi,
+}: {
+  isLukio?: boolean;
+  isYhteishaku?: boolean;
+  fillKaksoistutkinto?: boolean;
+  hakukohdeKoodiNimi?: string;
+} = {}) => {
+  withinSection('perustiedot', () => {
+    if (!isLukio) {
+      if (hakukohdeKoodiNimi) {
+        getSelectByLabel('yleiset.nimi').pipe(
+          pFillAsyncSelect(hakukohdeKoodiNimi)
+        );
+      } else {
+        getInputByLabel('yleiset.nimi')
+          .clear({ force: true })
+          .pipe(paste('Hakukohteen nimi'));
+      }
+    }
 
-    if (!isKorkeakoulu) {
+    if (fillKaksoistutkinto) {
       getByTestId('voiSuorittaaKaksoistutkinnon').within(() => {
         getCheckbox(null).click({ force: true });
       });
     }
 
     fillHakuajatSection();
-    fillAlkamiskausiSection();
-    fillLomakeSection();
-
-    jatka();
+    fillAlkamiskausiSection({
+      isYhteishaku: isYhteishaku || Boolean(hakukohdeKoodiNimi),
+    });
   });
+  fillLomakeSection();
 };
 
 const fillLomakeSection = (type: string = 'ataru') => {
-  getByTestId('lomakeSection').within(() => {
-    getByTestId('eriHakulomake').within(() => {
-      getCheckbox(null).click({ force: true });
+  withinSection('perustiedot', () => {
+    cy.findByTestId('lomakeSection').within(() => {
+      getByTestId('eriHakulomake').within(() => {
+        getCheckbox(null).click({ force: true });
+      });
+      if (type === 'ataru') {
+        getRadio(type).click({ force: true });
+        selectOption('Lomake 1');
+      } else if (type === 'muu') {
+        getRadio(type).click({ force: true });
+        cy.get(`input[type="text"]`).click().pipe(paste('http://example.com'));
+      } else if (type === 'ei sähköistä') {
+        getRadio(type).click({ force: true });
+        typeToEditor('hakulomake kuvaus');
+      }
     });
-    if (type === 'ataru') {
-      getRadio(type).click({ force: true });
-      selectOption('Lomake 1');
-    } else if (type === 'muu') {
-      getRadio(type).click({ force: true });
-      cy.get(`input[type="text"]`).click().pipe(paste('http://example.com'));
-    } else if (type === 'ei sähköistä') {
-      getRadio(type).click({ force: true });
-      typeToEditor('hakulomake kuvaus');
-    }
   });
 };
 
-const fillAlkamiskausiSection = () => {
-  cy.findByText('hakukohdelomake.hakukohteellaEriAlkamiskausi').click();
-  fillAjankohtaFields(Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA);
+const fillAlkamiskausiSection = (
+  { isYhteishaku } = { isYhteishaku: false }
+) => {
+  if (isYhteishaku) {
+    cy.findByLabelText('hakukohdelomake.hakukohteellaEriAlkamiskausi').should(
+      'be.disabled'
+    );
+  } else {
+    cy.findByText('hakukohdelomake.hakukohteellaEriAlkamiskausi').click();
+    fillAjankohtaFields(Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA);
+  }
 };
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
-  getByTestId('aloituspaikatSection').within(() => {
+  withinSection('aloituspaikat', () => {
     getByTestId('aloituspaikkamaara').pipe(paste('10'));
 
     if (isKorkeakoulu) {
       getByTestId('ensikertalaismaara').pipe(paste('5'));
     }
-
-    jatka();
   });
 };
 
 const fillValintaperusteenKuvausSection = () => {
-  getByTestId('valintaperusteenKuvausSection').within(() => {
+  withinSection('valintaperusteenKuvaus', () => {
     cy.findByLabelText(/hakukohdelomake\.valitseValintaperustekuvaus/).click({
       force: true,
     });
     getSelectOption('Valintaperusteen nimi').click({ force: true });
 
     typeToEditor('Kynnysehto');
-
-    jatka();
   });
 };
 
 const fillLiitteetSection = () => {
-  getByTestId('liitteetSection').within(() => {
+  withinSection('liitteet', () => {
     lisaa();
 
     getByTestId('liitelista').within(() => {
@@ -208,8 +232,6 @@ const fillLiitteetSection = () => {
         .find('input')
         .pipe(paste('sahkoposti@email.com'));
     });
-
-    jatka();
   });
 };
 
@@ -225,7 +247,6 @@ export const createHakukohdeForm = () => {
   const mutationTest = wrapMutationTest({
     oid: hakukohdeOid,
     entity: ENTITY.HAKUKOHDE,
-    stubGet: true,
   });
 
   it(
@@ -239,16 +260,17 @@ export const createHakukohdeForm = () => {
         tarjoajat,
       });
 
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
-      fillPerustiedotSection();
+      fillPerustiedotSection({
+        fillKaksoistutkinto: true,
+        hakukohdeKoodiNimi: 'Kaivosalan perustutkinto',
+      });
       fillAloituspaikatSection();
       fillValintaperusteenKuvausSection();
       fillValintakokeetSection({ withValintaperusteenKokeet: true });
       fillLiitteetSection();
-      fillJarjestyspaikkaSection({
-        jatka: true,
-      });
+      fillJarjestyspaikkaSection();
       fillTilaSection();
       tallenna();
 
@@ -268,16 +290,17 @@ export const createHakukohdeForm = () => {
         hakukohdeOid,
         organisaatioOid,
         tarjoajat,
+        hakutapaKoodiUri: 'hakutapa_02',
       });
 
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
-      fillPerustiedotSection({ isKorkeakoulu: true });
+      fillPerustiedotSection();
       fillAloituspaikatSection({ isKorkeakoulu: true });
       fillValintaperusteenKuvausSection();
       fillValintakokeetSection({ withValintaperusteenKokeet: true });
       fillLiitteetSection();
-      fillJarjestyspaikkaSection({ jatka: true });
+      fillJarjestyspaikkaSection();
       fillTilaSection();
 
       tallenna();
@@ -300,7 +323,7 @@ export const createHakukohdeForm = () => {
         tarjoajat,
       });
 
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
       fillLomakeSection('muu');
 
@@ -322,9 +345,10 @@ export const createHakukohdeForm = () => {
         hakukohdeOid,
         organisaatioOid,
         tarjoajat,
+        hakutapaKoodiUri: 'hakutapa_02',
       });
 
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
       fillLomakeSection('ei sähköistä');
 
@@ -348,7 +372,8 @@ export const createHakukohdeForm = () => {
         tarjoajat,
       });
 
-      fillKieliversiotSection({ jatka: true });
+      fillKieliversiotSection();
+      fillPerustiedotSection({ isLukio: true, isYhteishaku: true });
       fillPohjakoulutusvaatimusSection();
       fillLukiolinjaSection();
 

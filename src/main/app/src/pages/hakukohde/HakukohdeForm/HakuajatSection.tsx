@@ -11,7 +11,7 @@ import { NDASH } from '#/src/constants';
 import { useFieldValue, useBoundFormActions } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { formatDateValue } from '#/src/utils';
-import isRestrictedDuetoYhteishaku from '#/src/utils/isRestrictedDuetoYhteishaku';
+import { isToisenAsteenYhteishaku } from '#/src/utils/isToisenAsteenYhteishaku';
 
 const HakuaikaInterval = ({ haku }) => {
   const { t } = useTranslation();
@@ -57,7 +57,7 @@ export const HakuajatSection = ({ haku, name, koulutustyyppi }) => {
   const eriHakuaika = useFieldValue(`${name}.eriHakuaika`);
   const preventHakuaikaModification =
     !useIsOphVirkailija() &&
-    isRestrictedDuetoYhteishaku(haku?.hakutapaKoodiUri, koulutustyyppi);
+    isToisenAsteenYhteishaku(haku?.hakutapaKoodiUri, koulutustyyppi);
 
   const { change } = useBoundFormActions();
 

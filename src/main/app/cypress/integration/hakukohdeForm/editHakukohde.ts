@@ -28,7 +28,7 @@ export const editHakukohdeForm = () => {
     'should be able to edit hakukohde',
     mutationTest(() => {
       prepareTest({
-        tyyppi: 'amm',
+        tyyppi: 'yo',
         hakuOid,
         hakukohdeOid,
         organisaatioOid,
@@ -37,9 +37,7 @@ export const editHakukohdeForm = () => {
       });
 
       fillKieliversiotSection();
-      fillJarjestyspaikkaSection({
-        jatka: false,
-      });
+      fillJarjestyspaikkaSection();
       tallenna();
     })
   );

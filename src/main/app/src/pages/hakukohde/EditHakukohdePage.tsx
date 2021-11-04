@@ -16,15 +16,33 @@ import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import useKoodi from '#/src/hooks/useKoodi';
 import { canUpdateHakukohde } from '#/src/utils/hakukohde/canUpdateHakukohde';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
+import { arrayToTranslationObject } from '#/src/utils/languageUtils';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
 import { HakukohdeForm } from './HakukohdeForm';
 
 const FORM_NAME = 'hakukohdeForm';
+
+const useInitialValues = hakukohde => {
+  const { koodi: hakukohdeKoodi } = useKoodi(hakukohde?.hakukohdeKoodiUri);
+
+  const nimiHakukohdeKoodista = arrayToTranslationObject(
+    hakukohdeKoodi?.metadata
+  );
+
+  return useMemo(
+    () =>
+      hakukohde
+        ? getFormValuesByHakukohde(hakukohde, nimiHakukohdeKoodista)
+        : {},
+    [hakukohde, nimiHakukohdeKoodista]
+  );
+};
 
 export const EditHakukohdePage = props => {
   const {
@@ -58,6 +76,8 @@ export const EditHakukohdePage = props => {
     hakukohde?.organisaatioOid
   );
 
+  const initialValues = useInitialValues(hakukohde);
+
   let canUpdate = true;
   if (haku?.hakukohteenMuokkaamisenTakaraja) {
     canUpdate = canUpdateHakukohde(
@@ -69,11 +89,6 @@ export const EditHakukohdePage = props => {
   const infoTextTranslationKey = !canUpdate
     ? 'muokkaamisenTakarajaYlittynyt'
     : '';
-
-  const initialValues = useMemo(
-    () => (hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
-    [hakukohde]
-  );
 
   return isLoading ? (
     <FullSpin />

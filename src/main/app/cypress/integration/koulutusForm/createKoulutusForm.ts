@@ -80,7 +80,6 @@ export const createKoulutusForm = () => {
   const mutationTest = wrapMutationTest({
     oid: koulutusOid,
     entity: ENTITY.KOULUTUS,
-    stubGet: true,
   });
 
   it(

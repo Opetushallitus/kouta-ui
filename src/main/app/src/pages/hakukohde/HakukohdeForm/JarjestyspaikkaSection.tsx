@@ -8,7 +8,7 @@ import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
-import { Radio, RadioGroup } from '#/src/components/virkailija';
+import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
@@ -18,15 +18,11 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
-const JARJESTYSPAIKATTOMAT_OPETUSTAVAT = [
-  'opetuspaikkakk_2#1', // Verkko
-  'opetuspaikkakk_3#1', // Eta
-  'opetuspaikkakk_5#1', // Itsenainen
-];
-
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
-  ({ disabled, options, value, error, onChange }) => {
-    return (
+  ({ disabled, options, value, error, onChange, isLoading }) => {
+    return isLoading ? (
+      <Spin />
+    ) : (
       <RadioGroup
         value={value}
         disabled={disabled}
@@ -46,16 +42,16 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
 
 export const JarjestyspaikkaSection = ({
   tarjoajat,
-  opetustapaKoodiUrit,
   toteutusOrganisaatioOid,
 }: {
   tarjoajat: Array<string>;
-  opetustapaKoodiUrit: Array<string>;
   toteutusOrganisaatioOid: string;
 }) => {
   const { t } = useTranslation();
 
-  const { hierarkia = [] } = useOrganisaatioHierarkia(toteutusOrganisaatioOid);
+  const { hierarkia = [], isLoading } = useOrganisaatioHierarkia(
+    toteutusOrganisaatioOid
+  );
 
   const getCanUpdate = useGetCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
@@ -67,7 +63,19 @@ export const JarjestyspaikkaSection = ({
     () =>
       _fp.flow(
         flattenHierarkia,
-        _fp.filter(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+        (organisaatiot: any) => {
+          let visibleOrgs = _fp.filter(
+            organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
+          )(organisaatiot);
+
+          if (_fp.isEmpty(visibleOrgs)) {
+            visibleOrgs = _fp.filter(
+              organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)
+            )(organisaatiot);
+          }
+
+          return visibleOrgs;
+        },
         _fp.map(org => ({
           value: org?.oid,
           label: getFirstLanguageValue(org?.nimi, language),
@@ -84,19 +92,16 @@ export const JarjestyspaikkaSection = ({
     [getCanUpdate, hierarkia, language, tarjoajat]
   );
 
-  const jarjestyspaikkaOidRequired = _fp.difference(opetustapaKoodiUrit)(
-    JARJESTYSPAIKATTOMAT_OPETUSTAVAT
-  );
-
-  return jarjestyspaikkaOidRequired ? (
+  return (
     <div {...getTestIdProps('jarjestyspaikkaOidSelection')}>
       <Field
         label={t('hakukohdelomake.valitseJarjestyspaikka')}
         component={JarjestyspaikkaRadioGroup}
         options={jarjestyspaikkaOptions}
-        name={`jarjestyspaikkaOid`}
+        name="jarjestyspaikkaOid"
         required
+        isLoading={isLoading}
       />
     </div>
-  ) : null;
+  );
 };

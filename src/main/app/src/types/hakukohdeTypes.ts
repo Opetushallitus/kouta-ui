@@ -45,6 +45,7 @@ type ValintakokeetValues = {
     ohjeetErityisjarjestelyihin: TranslatedField<EditorState>;
     tietoaHakijalle: TranslatedField<EditorState>;
     tilaisuudet: Array<Tilaisuus>;
+    vahimmaispistemaara: string;
   }>;
 };
 
@@ -73,6 +74,7 @@ export type HakukohdeFormValues = {
   };
   perustiedot: {
     nimi: TranslatedField<string>;
+    hakukohdeKoodiUri?: SelectOption;
     voiSuorittaaKaksoistutkinnon: boolean;
   };
   pohjakoulutus: {
@@ -109,5 +111,12 @@ export type HakukohdeFormValues = {
     linja?: string; // NOTE: tyhjä on sama asia kuin yleislinja
     alinHyvaksyttyKeskiarvo: string;
     lisatietoa: TranslatedField<EditorState>;
+    painotetutArvosanat: Array<{
+      painotettuOppiaine: {
+        value: string;
+        label?: string;
+      };
+      painokerroin: string;
+    }>;
   };
 };

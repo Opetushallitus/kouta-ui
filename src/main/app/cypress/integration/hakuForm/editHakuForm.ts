@@ -8,6 +8,7 @@ import {
   fillKieliversiotSection,
   tallenna,
   wrapMutationTest,
+  stubKayttoOikeusMeRoute,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -65,7 +66,13 @@ export const editHakuForm = () => {
     );
   });
 
-  it('should be unable to add hakukohde for haku with expired liittämistakaraja', () => {
+  it('should not be possible for oppilaitos user to add hakukohde for haku with expired liittämistakaraja', () => {
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify(['APP_KOUTA']),
+      },
+    });
+
     cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
     cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
       'be.disabled'

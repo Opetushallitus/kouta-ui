@@ -10,6 +10,7 @@ import {
   fillKieliversiotSection,
   tallenna,
   wrapMutationTest,
+  stubKayttoOikeusMeRoute,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -87,7 +88,7 @@ export const editHakukohdeForm = () => {
     );
   });
 
-  it('should not be possible to update hakukohde if hakukohteen muokkaamistakaraja has expired', () => {
+  it('should not be possible for oppilaitos user to update hakukohde if hakukohteen muokkaamistakaraja has expired', () => {
     prepareTest({
       tyyppi: 'lk',
       hakuOid,
@@ -96,6 +97,12 @@ export const editHakukohdeForm = () => {
       edit: true,
       tarjoajat: ['1.2.246.562.10.45854578546'],
       hakukohteenMuokkaaminenHasExpired: true,
+    });
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify(['APP_KOUTA']),
+      },
     });
 
     cy.findByRole('button', {

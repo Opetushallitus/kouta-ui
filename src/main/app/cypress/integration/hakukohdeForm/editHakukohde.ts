@@ -88,6 +88,22 @@ export const editHakukohdeForm = () => {
     );
   });
 
+  it('should be possible for Oph-virkailija to update hakukohde if hakukohteen muokkaamistakaraja has expired', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      edit: true,
+      tarjoajat: ['1.2.246.562.10.45854578546'],
+      hakukohteenMuokkaaminenHasExpired: true,
+    });
+
+    cy.findByRole('button', {
+      name: 'yleiset.tallenna',
+    }).should('not.be.disabled');
+  });
+
   it('should not be possible for oppilaitos user to update hakukohde if hakukohteen muokkaamistakaraja has expired', () => {
     prepareTest({
       tyyppi: 'lk',

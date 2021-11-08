@@ -22,6 +22,7 @@ import {
   pFillAsyncSelect,
   withinSection,
   getInputByLabel,
+  jatka,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -102,6 +103,7 @@ const fillLukiolinjaSection = () => {
 
       cy.findAllByTestId(/^painotettuOppiaine-\d?$/).should('have.length', 1);
     });
+    jatka();
   });
 };
 
@@ -141,6 +143,19 @@ const fillPerustiedotSection = ({
     });
   });
   fillLomakeSection();
+};
+
+const skipPerustiedot = () => {
+  getByTestId('perustiedotSection').within(() => {
+    jatka();
+  });
+};
+
+const fillLomakeSectionOnly = (type: string = 'ataru') => {
+  fillLomakeSection(type);
+  getByTestId('perustiedotSection').within(() => {
+    jatka();
+  });
 };
 
 const fillLomakeSection = (type: string = 'ataru') => {
@@ -324,7 +339,8 @@ export const createHakukohdeForm = () => {
 
       fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
-      fillLomakeSection('muu');
+      fillLomakeSectionOnly('muu');
+      fillAloituspaikatSection({ isKorkeakoulu: false });
 
       tallenna();
 
@@ -349,7 +365,8 @@ export const createHakukohdeForm = () => {
 
       fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
-      fillLomakeSection('ei sähköistä');
+      fillLomakeSectionOnly('ei sähköistä');
+      fillAloituspaikatSection({ isKorkeakoulu: true });
 
       tallenna();
 
@@ -375,6 +392,8 @@ export const createHakukohdeForm = () => {
       fillPerustiedotSection({ isLukio: true, isYhteishaku: true });
       fillPohjakoulutusvaatimusSection();
       fillLukiolinjaSection();
+      skipPerustiedot();
+      fillAloituspaikatSection({ isKorkeakoulu: false });
 
       tallenna();
 

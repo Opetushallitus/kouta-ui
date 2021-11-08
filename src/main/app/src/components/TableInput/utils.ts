@@ -11,27 +11,27 @@ export const getMaxColumnLength = rows => {
   return _.isArray(rows) ? Math.max(...rows.map(row => (row || []).length)) : 0;
 };
 
-export const getEmptyColumn = () => ({ text: '' });
+export const getEmptyColumn = language => ({ text: { [language]: '' } });
 
-export const getEmptyRow = numColumns => {
+export const getEmptyRow = (numColumns, language) => {
   return {
-    columns: [...new Array(numColumns)].map(getEmptyColumn),
+    columns: [...new Array(numColumns)].map(() => getEmptyColumn(language)),
   };
 };
 
 export const setTable = ({ value, language, table }) => {
-  const addExtraRowsIfNeeded = draft => {
+  const addExtraRowsIfNeeded = (draft, language) => {
     const rows = _.get(draft, 'rows') || [];
     const numberOfColumns = getNumberOfColumns(rows);
     const extraRows = table.length - rows.length;
     if (extraRows > 0) {
       const newRows = [...new Array(extraRows)].map(() =>
-        getEmptyRow(numberOfColumns)
+        getEmptyRow(numberOfColumns, language)
       );
       draft.rows = [...rows, ...newRows];
     }
   };
-  const addExtraColumnsIfNeeded = draft => {
+  const addExtraColumnsIfNeeded = (draft, language) => {
     const numberOfTableColumns = getMaxColumnLength(table);
     const rows = _.get(draft, 'rows') || [];
     const numberOfRowColumns = getNumberOfColumns(rows);
@@ -42,15 +42,15 @@ export const setTable = ({ value, language, table }) => {
 
         row.columns = [
           ...columns,
-          ...[...new Array(extraColumns)].map(getEmptyColumn),
+          ...[...new Array(extraColumns)].map(() => getEmptyColumn(language)),
         ];
       });
     }
   };
 
   return produce(value, draft => {
-    addExtraRowsIfNeeded(draft);
-    addExtraColumnsIfNeeded(draft);
+    addExtraRowsIfNeeded(draft, language);
+    addExtraColumnsIfNeeded(draft, language);
 
     table.forEach((tableRow, tableRowIndex) => {
       const row = draft.rows[tableRowIndex];
@@ -65,7 +65,7 @@ export const setTable = ({ value, language, table }) => {
   });
 };
 
-export const addColumnToIndex = ({ value, columnIndex }) => {
+export const addColumnToIndex = ({ value, columnIndex, language }) => {
   return produce(value, draft => {
     const rows = _.get(draft, 'rows') || [];
 
@@ -79,7 +79,11 @@ export const addColumnToIndex = ({ value, columnIndex }) => {
           ? []
           : columns.slice(columnIndex + 1, columns.length);
 
-      row.columns = [...columnsBefore, getEmptyColumn(), ...columnsAfter];
+      row.columns = [
+        ...columnsBefore,
+        getEmptyColumn(language),
+        ...columnsAfter,
+      ];
     });
   });
 };
@@ -98,7 +102,7 @@ export const removeColumn = ({ value, columnIndex }) => {
   });
 };
 
-export const addRowToIndex = ({ value, rowIndex }) => {
+export const addRowToIndex = ({ value, rowIndex, language }) => {
   return produce(value, draft => {
     const rows = _.get(draft, 'rows') || [];
 
@@ -109,7 +113,7 @@ export const addRowToIndex = ({ value, rowIndex }) => {
 
     draft.rows = [
       ...rowsBefore,
-      getEmptyRow(getNumberOfColumns(rows)),
+      getEmptyRow(getNumberOfColumns(rows), language),
       ...rowsAfter,
     ];
   });

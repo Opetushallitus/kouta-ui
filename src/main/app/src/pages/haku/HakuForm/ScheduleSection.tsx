@@ -14,7 +14,13 @@ import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 
-const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
+const ScheduleSection = ({
+  isOphVirkailija,
+  isYhteishaku,
+  isErillishaku,
+  name,
+  language,
+}) => {
   const { t } = useTranslation();
 
   const haullaErillinenAloitusajankohta = useFieldValue(
@@ -52,7 +58,7 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
         )}
       </FieldGroup>
 
-      {isYhteishaku && isOphVirkailija ? (
+      {(isYhteishaku || isErillishaku) && isOphVirkailija ? (
         <FieldGroup
           title={t('hakulomake.aikatauluTulevaisuudesta')}
           {...getTestIdProps('tulevaisuudenaikataulu')}
@@ -65,7 +71,7 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
         </FieldGroup>
       ) : null}
 
-      {isYhteishaku && isOphVirkailija ? (
+      {(isYhteishaku || isErillishaku) && isOphVirkailija ? (
         <>
           <FieldGroup
             title={t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}

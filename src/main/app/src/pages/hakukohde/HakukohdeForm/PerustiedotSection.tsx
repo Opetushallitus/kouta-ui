@@ -7,6 +7,7 @@ import {
   FormFieldAsyncKoodistoSelect,
   FormFieldCheckbox,
   FormFieldInput,
+  FormFieldUrlInput,
 } from '#/src/components/formFields';
 import { Box, Divider } from '#/src/components/virkailija';
 import {
@@ -141,7 +142,7 @@ export const PerustiedotSection = ({
           >
             <Field
               name="uudenOpiskelijanUrl"
-              component={FormFieldInput}
+              component={FormFieldUrlInput}
               label={t('yleiset.uudenOpiskelijanUrl')}
             />
           </Box>

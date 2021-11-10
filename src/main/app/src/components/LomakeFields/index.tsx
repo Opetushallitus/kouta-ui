@@ -25,13 +25,32 @@ const Buttons = styled.div`
   align-items: center;
 `;
 
+const HaunAsetuksetButton = ({ haku }) => {
+  const { t } = useTranslation();
+  const apiUrls = useUrls();
+
+  return (
+    <>
+      {haku && haku.oid ? (
+        <Button
+          as="a"
+          href={apiUrls.url('hakukohderyhmapalvelu.haun-asetukset', haku.oid)}
+          target="_blank"
+          variant="outlined"
+          color="primary"
+        >
+          {t('yleiset.muokkaaAsetuksia')}
+        </Button>
+      ) : null}
+    </>
+  );
+};
+
 const LomakeSelect = ({ input, haku, getShowUrl, ...props }) => {
   const { value } = input;
   const url = useAtaruLomakeUrl(value);
 
   const { t } = useTranslation();
-
-  const apiUrls = useUrls();
 
   const userLanguage = useUserLanguage();
 
@@ -47,36 +66,25 @@ const LomakeSelect = ({ input, haku, getShowUrl, ...props }) => {
         {...props}
         input={input}
       />
-      {url ? (
-        <Box marginTop={2}>
-          <Buttons>
-            <Button
-              as="a"
-              href={url}
-              target="_blank"
-              variant="outlined"
-              color="primary"
-            >
-              {t('yleiset.avaaLomake')}
-            </Button>
-            <Box marginRight={1} />
-            {haku && haku.oid ? (
+      <Box marginTop={2}>
+        <Buttons>
+          <HaunAsetuksetButton haku={haku} />
+          {url ? (
+            <>
+              <Box marginRight={1} />
               <Button
                 as="a"
-                href={apiUrls.url(
-                  'hakukohderyhmapalvelu.haun-asetukset',
-                  haku.oid
-                )}
+                href={url}
                 target="_blank"
                 variant="outlined"
                 color="primary"
               >
-                {t('yleiset.muokkaaAsetuksia')}
+                {t('yleiset.avaaLomake')}
               </Button>
-            ) : null}
-          </Buttons>
-        </Box>
-      ) : null}
+            </>
+          ) : null}
+        </Buttons>
+      </Box>
     </>
   );
 };
@@ -101,21 +109,35 @@ const AdditionalTyyppiFields = ({
       );
     case HAKULOMAKETYYPPI.MUU:
       return (
-        <Field
-          name={`${baseName}.linkki.${language}`}
-          component={FormFieldUrlInput}
-          label={t('yleiset.linkki')}
-          required
-        />
+        <>
+          <Field
+            name={`${baseName}.linkki.${language}`}
+            component={FormFieldUrlInput}
+            label={t('yleiset.linkki')}
+            required
+          />
+          <Box marginTop={2}>
+            <Buttons>
+              <HaunAsetuksetButton haku={haku} />
+            </Buttons>
+          </Box>
+        </>
       );
     case HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA:
       return (
-        <Field
-          name={`${baseName}.kuvaus.${language}`}
-          component={FormFieldEditor}
-          label={t('yleiset.kuvaus')}
-          hideHeaderSelect
-        />
+        <>
+          <Field
+            name={`${baseName}.kuvaus.${language}`}
+            component={FormFieldEditor}
+            label={t('yleiset.kuvaus')}
+            hideHeaderSelect
+          />
+          <Box marginTop={2}>
+            <Buttons>
+              <HaunAsetuksetButton haku={haku} />
+            </Buttons>
+          </Box>
+        </>
       );
     default:
       return null;

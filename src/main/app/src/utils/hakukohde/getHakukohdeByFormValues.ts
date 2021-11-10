@@ -232,6 +232,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         ? getAlkamiskausiData(ajankohta, pickTranslations)
         : null,
       hakukohteenLinja: getHakukohteenLinja(values),
+      uudenOpiskelijanUrl: values?.uudenOpiskelijanUrl,
     },
   };
 };

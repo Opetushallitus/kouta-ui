@@ -51,5 +51,13 @@ export const hakukohdeRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       field: 'valintaperusteenKuvaus.valintaperuste',
       errorKey: 'validointivirheet.pakollinen',
     };
+  } else if (
+    errorType === 'invalidUrl' &&
+    path === 'metadata.uudenOpiskelijanUrl'
+  ) {
+    return {
+      field: 'uudenOpiskelijanUrl',
+      errorKey: 'validointivirheet.epakelpoUrl',
+    };
   }
 };

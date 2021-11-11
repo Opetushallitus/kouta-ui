@@ -140,6 +140,7 @@ Object {
     },
   },
   "tila": "tallennettu",
+  "uudenOpiskelijanUrl": "https://opiskelu.info",
   "valintakokeet": Object {
     "kokeetTaiLisanaytot": Array [
       Object {

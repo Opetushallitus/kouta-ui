@@ -25,9 +25,7 @@ const convertToHTML = makeConvertToHTML({
           href={_.get(entity, 'data.url') || ''}
           rel="noopener noreferrer"
           target="_blank"
-        >
-          {originalText}
-        </a>
+        />
       );
     }
 

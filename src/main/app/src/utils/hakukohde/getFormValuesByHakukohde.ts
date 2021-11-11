@@ -79,7 +79,6 @@ export const getFormValuesByHakukohde = (
     externalId,
     organisaatioOid,
   } = hakukohde;
-
   const {
     valintakokeidenYleiskuvaus,
     kynnysehto,
@@ -88,11 +87,12 @@ export const getFormValuesByHakukohde = (
     valintaperusteenValintakokeidenLisatilaisuudet = [],
     aloituspaikat,
     hakukohteenLinja,
+    uudenOpiskelijanUrl,
   } = metadata;
-
   return {
     organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
+    uudenOpiskelijanUrl,
     tila,
     esikatselu,
     kieliversiot: kielivalinta,

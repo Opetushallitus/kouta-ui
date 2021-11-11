@@ -206,7 +206,11 @@ class TableInput extends Component {
   };
 
   getValue() {
-    return this.props.value || { rows: [{ columns: [{ text: '' }] }] };
+    return (
+      this.props.value || {
+        rows: [{ columns: [{ text: { [this.props.language]: '' } }] }],
+      }
+    );
   }
 
   makeOnRemoveColumn =
@@ -223,6 +227,7 @@ class TableInput extends Component {
       const nextValue = addColumnToIndex({
         value: this.getValue(),
         columnIndex: columnIndex - 1,
+        language: this.props.language,
       });
 
       this.props.onChange(nextValue);
@@ -233,7 +238,8 @@ class TableInput extends Component {
     () => {
       const nextValue = addColumnToIndex({
         value: this.getValue(),
-        columnIndex,
+        columnIndex: columnIndex,
+        language: this.props.language,
       });
 
       this.props.onChange(nextValue);
@@ -242,7 +248,11 @@ class TableInput extends Component {
   makeOnAddRowBelow =
     ({ rowIndex }) =>
     () => {
-      const nextValue = addRowToIndex({ value: this.getValue(), rowIndex });
+      const nextValue = addRowToIndex({
+        value: this.getValue(),
+        rowIndex: rowIndex,
+        language: this.props.language,
+      });
 
       this.props.onChange(nextValue);
     };
@@ -374,7 +384,7 @@ class TableInput extends Component {
     } else {
       const rowsFallback = [
         {
-          columns: [{ index: 0, text: {} }],
+          columns: [{ index: 0, text: { [this.props.language]: '' } }],
         },
       ];
       this.props.onChange({ rows: rowsFallback });

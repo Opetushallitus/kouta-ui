@@ -188,7 +188,8 @@
     "tallennaLuonnoksenaEsikatsellaksesi": "Tallenna lomake luonnoksena esikatsellaksesi.",
     "naytaJulkaistu": "Näytä julkaistu",
     "naytaJulkaistuTooltip": "Näyttää julkaistun lomakkeen tiedot oppijan puolella",
-    "ulkoinenTunniste": "Ulkoinen tunniste"
+    "ulkoinenTunniste": "Ulkoinen tunniste",
+    "uudenOpiskelijanUrl": "Uuden opiskelijan verkkosivun URL"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

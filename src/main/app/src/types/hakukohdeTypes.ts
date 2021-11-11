@@ -52,6 +52,7 @@ type ValintakokeetValues = {
 export type HakukohdeFormValues = {
   organisaatioOid?: SelectOption;
   externalId?: string;
+  uudenOpiskelijanUrl?: string;
   koulutustyyppi?: KOULUTUSTYYPPI;
   tila: JULKAISUTILA;
   esikatselu?: boolean;

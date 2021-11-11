@@ -14,16 +14,24 @@ type EntityFormHeaderProps = {
   entity?: {
     tila?: JULKAISUTILA;
     nimi?: string;
+    _enrichedData?: {
+      esitysnimi: string;
+    };
   };
+};
+
+const getEntityNimiTranslation = (entity, lng) => {
+  const { _enrichedData, nimi } = entity;
+  return getFirstLanguageValue(_enrichedData?.esitysnimi || nimi, lng);
 };
 
 export default function EntityFormHeader({
   entityType,
-  entity,
+  entity = {},
 }: EntityFormHeaderProps) {
   const { t, i18n } = useTranslation();
-  const { tila, nimi } = entity || {};
-  const translatedNimi = getFirstLanguageValue(nimi, [i18n.language]);
+  const { tila } = entity;
+  const translatedNimi = getEntityNimiTranslation(entity, i18n.language);
   return (
     <FormHeader
       title={translatedNimi || t(`yleiset.${entityType}`)}

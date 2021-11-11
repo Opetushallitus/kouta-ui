@@ -1,6 +1,5 @@
 import React from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -9,12 +8,11 @@ import {
   FormFieldCheckbox,
   FormFieldInput,
 } from '#/src/components/formFields';
-import { Box, Divider, FormControl, Input } from '#/src/components/virkailija';
+import { Box, Divider } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
-import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import { getTestIdProps } from '#/src/utils';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
@@ -75,50 +73,43 @@ export const PerustiedotSection = ({
 
   const hasHakukohdeKoodiUri = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
   const { t } = useTranslation();
-  const selectedLanguage = useLanguageTab();
-
-  const esitysnimi = hakukohde
-    ? _.get(hakukohde?._enrichedData?.esitysnimi, selectedLanguage)
-    : _.get(toteutus?.nimi, selectedLanguage);
 
   return (
     <>
-      {hasHakukohdeKoodiUri ? (
-        <Box marginBottom={2}>
-          <HakukohdeKoodiInput
-            name={`${name}.hakukohdeKoodiUri`}
-            toteutus={toteutus}
-          />
-        </Box>
-      ) : isTuva ? (
-        <Box maxWidth="600px">
-          <FormControl label={t('yleiset.nimi')} disabled={true}>
-            <Input value={esitysnimi} />
-          </FormControl>
-        </Box>
-      ) : (
-        <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
-          <Field
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('yleiset.nimi')}
-            disabled={isLukio}
-            required
-          />
-        </Box>
-      )}
-      {(isAmmatillinen || isLukio) && (
-        <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
-          <Field
-            name={`${name}.voiSuorittaaKaksoistutkinnon`}
-            component={FormFieldCheckbox}
-          >
-            {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
-          </Field>
-        </div>
-      )}
+      {!isTuva && (
+        <>
+          {hasHakukohdeKoodiUri ? (
+            <Box marginBottom={2}>
+              <HakukohdeKoodiInput
+                name={`${name}.hakukohdeKoodiUri`}
+                toteutus={toteutus}
+              />
+            </Box>
+          ) : (
+            <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
+              <Field
+                name={`${name}.nimi.${language}`}
+                component={FormFieldInput}
+                label={t('yleiset.nimi')}
+                disabled={isLukio}
+                required
+              />
+            </Box>
+          )}
+          {(isAmmatillinen || isLukio) && (
+            <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
+              <Field
+                name={`${name}.voiSuorittaaKaksoistutkinnon`}
+                component={FormFieldCheckbox}
+              >
+                {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
+              </Field>
+            </div>
+          )}
 
-      <Divider marginY={4} />
+          <Divider marginY={4} />
+        </>
+      )}
 
       <div {...getTestIdProps('hakuajatSection')}>
         <HakuajatSection

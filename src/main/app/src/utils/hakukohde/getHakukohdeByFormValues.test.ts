@@ -11,6 +11,7 @@ import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 test('getHakukohdeByFormValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByFormValues({
     externalId: 'ext1',
+    uudenOpiskelijanUrl: 'https://opiskelu.info',
     tila: JULKAISUTILA.TALLENNETTU,
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],

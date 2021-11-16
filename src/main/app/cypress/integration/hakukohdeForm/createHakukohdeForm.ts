@@ -415,94 +415,104 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
     '1.2.246.562.10.45854578546', // Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka
   ];
 
-  const mutationTest = wrapMutationTest({
-    oid: hakukohdeOid,
-    entity: ENTITY.HAKUKOHDE,
-    stubGet: true,
-  });
+  it('should not be possible to save hakukohde if haun liittämistakaraja has expired', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenLiittaminenHasExpired: true,
+    });
 
-  beforeEach(() => {
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify(['APP_KOUTA']),
+        roles: JSON.stringify([
+          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
+        ]),
       },
     });
-  });
 
-  it('should not be possible to save hakukohde if haun liittämistakaraja has expired', () => {
-    mutationTest(() => {
-      prepareTest({
-        tyyppi: 'lk',
-        hakuOid,
-        hakukohdeOid,
-        organisaatioOid,
-        tarjoajat,
-        hakukohteenLiittaminenHasExpired: true,
-      });
+    fillKieliversiotSection({ jatka: true });
 
-      fillKieliversiotSection({ jatka: true });
-
-      cy.findByRole('button', {
-        name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
-      }).should('be.disabled');
-    });
+    cy.findByRole('button', {
+      name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
+    }).should('be.disabled');
   });
 
   it('should not be possible to save hakukohde if haun muokkaamistakaraja has expired', () => {
-    mutationTest(() => {
-      prepareTest({
-        tyyppi: 'lk',
-        hakuOid,
-        hakukohdeOid,
-        organisaatioOid,
-        tarjoajat,
-        hakukohteenMuokkaaminenHasExpired: true,
-      });
-
-      fillKieliversiotSection({ jatka: true });
-
-      cy.findByRole('button', {
-        name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
-      }).should('be.disabled');
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenMuokkaaminenHasExpired: true,
     });
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify([
+          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
+        ]),
+      },
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
+    }).should('be.disabled');
   });
 
   it("should be possible to save hakukohde if haun lisäämis- ja muokkaamistakarajat haven't been set", () => {
-    mutationTest(() => {
-      prepareTest({
-        tyyppi: 'lk',
-        hakuOid,
-        hakukohdeOid,
-        organisaatioOid,
-        tarjoajat,
-        hakuWithoutTakarajat: true,
-      });
-
-      fillKieliversiotSection({ jatka: true });
-
-      cy.findByRole('button', {
-        name: 'yleiset.tallenna',
-      }).should('not.be.disabled');
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakuWithoutTakarajat: true,
     });
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify([
+          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
+        ]),
+      },
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'yleiset.tallenna',
+    }).should('not.be.disabled');
   });
 
   it('should be possible to save hakukohde if haun lisäämistakaraja has expired but muokkaamistakaraja has not been set', () => {
-    mutationTest(() => {
-      prepareTest({
-        tyyppi: 'lk',
-        hakuOid,
-        hakukohdeOid,
-        organisaatioOid,
-        tarjoajat,
-        hakukohteenLiittaminenHasExpired: true,
-        hakuWithoutMuokkaamisenTakaraja: true,
-      });
-
-      fillKieliversiotSection({ jatka: true });
-
-      cy.findByRole('button', {
-        name: 'yleiset.tallenna',
-      }).should('not.be.disabled');
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenLiittaminenHasExpired: true,
+      hakuWithoutMuokkaamisenTakaraja: true,
     });
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify([
+          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
+        ]),
+      },
+    });
+
+    fillKieliversiotSection({ jatka: true });
+
+    cy.findByRole('button', {
+      name: 'yleiset.tallenna',
+    }).should('not.be.disabled');
   });
 };

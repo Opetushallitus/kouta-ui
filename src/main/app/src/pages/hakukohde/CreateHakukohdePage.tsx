@@ -15,8 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
-import { canCreateHakukohde } from '#/src/utils/hakukohde/canUpdateHakukohde';
+import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
@@ -31,7 +30,6 @@ export const CreateHakukohdePage = ({
   },
 }) => {
   const { t } = useTranslation();
-  const isOphVirkailija = useIsOphVirkailija();
 
   const { data, isFetching } = useHakukohdePageData({
     hakuOid: hakuOid,
@@ -51,17 +49,10 @@ export const CreateHakukohdePage = ({
   const koulutustyyppi =
     data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-  let canUpdate = true;
-  if (haku?.hakukohteenLiittamisenTakaraja) {
-    canUpdate = canCreateHakukohde(
-      new Date(),
-      new Date(haku.hakukohteenLiittamisenTakaraja)
-    );
-  }
-
-  if (isOphVirkailija) {
-    canUpdate = true;
-  }
+  let canUpdate = useCanCreateHakukohde(
+    new Date(),
+    new Date(haku?.hakukohteenLiittamisenTakaraja)
+  );
 
   const infoTextTranslationKey = !canUpdate
     ? 'muokkaamisenTakarajaYlittynyt'

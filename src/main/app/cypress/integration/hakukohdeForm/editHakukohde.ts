@@ -115,12 +115,64 @@ export const editHakukohdeForm = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify(['APP_KOUTA']),
+        roles: JSON.stringify([
+          'APP_KOUTA',
+          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
+        ]),
       },
     });
 
     cy.findByRole('button', {
       name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
+    }).should('be.disabled');
+  });
+
+  it('should be possible for oppilaitos user to update hakukohde if hakukohteen muokkaamistakaraja has not expired', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      edit: true,
+      tarjoajat: ['1.2.246.562.10.45854578546'],
+      hakukohteenMuokkaaminenHasExpired: false,
+    });
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify([
+          'APP_KOUTA',
+          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
+        ]),
+      },
+    });
+
+    cy.findByRole('button', {
+      name: 'yleiset.tallenna',
+    }).should('not.be.disabled');
+  });
+
+  it("should not be possible for oppilaitos user to update another organizations's hakukohde", () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      edit: true,
+      tarjoajat: ['1.2.246.562.10.45854578546'],
+    });
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify([
+          'APP_KOUTA',
+          `APP_KOUTA_HAKUKOHDE_UPDATE_1.2.246.562.10.52251087111`,
+        ]),
+      },
+    });
+
+    cy.findByRole('button', {
+      name: 'hakukohdelomake.eiMuokkausOikeutta',
     }).should('be.disabled');
   });
 };

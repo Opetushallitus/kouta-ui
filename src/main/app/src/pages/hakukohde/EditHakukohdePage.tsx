@@ -13,11 +13,9 @@ import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
 import useKoodi from '#/src/hooks/useKoodi';
-import { canUpdateHakukohde } from '#/src/utils/hakukohde/canUpdateHakukohde';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import { arrayToTranslationObject } from '#/src/utils/languageUtils';
@@ -69,26 +67,16 @@ export const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  const isOphVirkailija = useIsOphVirkailija();
-  const hasRightToUpdate = useCurrentUserHasRole(
-    ENTITY.HAKUKOHDE,
-    CRUD_ROLES.UPDATE,
-    hakukohde?.organisaatioOid
-  );
-
   const initialValues = useInitialValues(hakukohde);
 
-  let canUpdate = true;
-  if (haku?.hakukohteenMuokkaamisenTakaraja) {
-    canUpdate = canUpdateHakukohde(
-      new Date(),
-      new Date(haku?.hakukohteenMuokkaamisenTakaraja)
-    );
-  }
+  const resultObj = useCanUpdateHakukohde(
+    new Date(),
+    new Date(haku?.hakukohteenMuokkaamisenTakaraja),
+    hakukohde
+  );
 
-  const infoTextTranslationKey = !canUpdate
-    ? 'muokkaamisenTakarajaYlittynyt'
-    : '';
+  const canUpdate = resultObj.canUpdate;
+  const infoTextTranslationKey = !canUpdate ? resultObj.reasonKey : '';
 
   return isLoading ? (
     <FullSpin />
@@ -97,11 +85,11 @@ export const EditHakukohdePage = props => {
       form={FORM_NAME}
       mode={FormMode.EDIT}
       initialValues={initialValues}
-      disabled={!hasRightToUpdate}
+      disabled={!canUpdate}
     >
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormPage
-        readOnly={!hasRightToUpdate}
+        readOnly={!canUpdate}
         header={
           <EntityFormHeader entityType={ENTITY.HAKUKOHDE} entity={hakukohde} />
         }
@@ -116,7 +104,7 @@ export const EditHakukohdePage = props => {
               koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
             }
             haku={haku}
-            canUpdate={(hasRightToUpdate && canUpdate) || isOphVirkailija}
+            canUpdate={canUpdate}
             infoTextTranslationKey={infoTextTranslationKey}
           />
         }

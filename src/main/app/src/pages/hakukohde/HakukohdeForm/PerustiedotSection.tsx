@@ -66,7 +66,6 @@ export const PerustiedotSection = ({
   name,
   toteutus,
   haku,
-  hakukohde = undefined,
 }) => {
   const isAmmatillinen =
     TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(koulutustyyppi);

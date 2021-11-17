@@ -78,7 +78,6 @@ export const HakukohdeForm = ({
         koulutustyyppi={koulutustyyppi}
         haku={haku}
         toteutus={toteutus}
-        hakukohde={hakukohde}
       />
 
       <FormCollapse

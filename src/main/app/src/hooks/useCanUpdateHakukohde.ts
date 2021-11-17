@@ -4,7 +4,10 @@ import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
-export const useCanUpdateHakukohde = (now, takaraja, hakukohde = undefined) => {
+export const useCanUpdateHakukohde = (
+  hakukohteenMuokkaamisenTakaraja,
+  hakukohde = undefined
+) => {
   let result = {
     canUpdate: true,
   };
@@ -17,7 +20,9 @@ export const useCanUpdateHakukohde = (now, takaraja, hakukohde = undefined) => {
 
   if (isOphVirkailija) {
     return result;
-  } else if (hasRightToUpdate) {
+  } else if (hakukohteenMuokkaamisenTakaraja && hasRightToUpdate) {
+    const now = new Date();
+    const takaraja = new Date(hakukohteenMuokkaamisenTakaraja);
     if (isValid(takaraja)) {
       const isBeforeTakaraja = isBefore(now, takaraja);
       if (!isBeforeTakaraja) {

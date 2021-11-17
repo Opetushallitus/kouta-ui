@@ -50,8 +50,7 @@ const HakuForm = ({
   const formMode = useFormMode();
 
   const canAddHakukohde = useCanCreateHakukohde(
-    new Date(),
-    new Date(hakuProp?.hakukohteenLiittamisenTakaraja)
+    hakuProp?.hakukohteenLiittamisenTakaraja
   );
 
   const infoText = !canAddHakukohde

@@ -79,11 +79,24 @@ export const editHakuForm = () => {
     );
   });
 
-  it('should be able to add hakukohde for haku without expired liittämistakaraja', () => {
+  it('should be possible for OPH virkailija to add hakukohde for haku with expired liittämistakaraja', () => {
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'not.be.disabled'
+    );
+  });
+
+  it('should be possible for oppilaitos user to add hakukohde for haku without expired liittämistakaraja', () => {
     const hakuMockData = haku();
     const takaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
     const oneDayBeforeDeadline = sub(new Date(takaraja), { days: 1 });
     cy.clock(oneDayBeforeDeadline, ['Date']);
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify(['APP_KOUTA']),
+      },
+    });
 
     cy.intercept(
       { method: 'GET', url: `**/haku/${hakuOid}` },
@@ -100,9 +113,15 @@ export const editHakuForm = () => {
     );
   });
 
-  it('should be able to add hakukohde for haku if liittämistakaraja has not been set', () => {
+  it('should be possible for oppilaitos user to add hakukohde for haku if liittämistakaraja has not been set', () => {
     const hakuMockData = haku();
     hakuMockData.hakukohteenLiittamisenTakaraja = null;
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify(['APP_KOUTA']),
+      },
+    });
 
     cy.intercept(
       { method: 'GET', url: `**/haku/${hakuOid}` },

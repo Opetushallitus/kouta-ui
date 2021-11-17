@@ -49,10 +49,7 @@ export const CreateHakukohdePage = ({
   const koulutustyyppi =
     data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-  const canUpdate = useCanCreateHakukohde(
-    new Date(),
-    new Date(haku?.hakukohteenLiittamisenTakaraja)
-  );
+  const canUpdate = useCanCreateHakukohde(haku?.hakukohteenLiittamisenTakaraja);
 
   const infoTextTranslationKey = !canUpdate
     ? 'muokkaamisenTakarajaYlittynyt'

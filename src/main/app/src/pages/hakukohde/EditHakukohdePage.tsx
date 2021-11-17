@@ -70,8 +70,7 @@ export const EditHakukohdePage = props => {
   const initialValues = useInitialValues(hakukohde);
 
   const resultObj = useCanUpdateHakukohde(
-    new Date(),
-    new Date(haku?.hakukohteenMuokkaamisenTakaraja),
+    haku?.hakukohteenMuokkaamisenTakaraja,
     hakukohde
   );
 

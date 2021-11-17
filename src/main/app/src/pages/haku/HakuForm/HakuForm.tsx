@@ -15,10 +15,10 @@ import { Box } from '#/src/components/virkailija';
 import { FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
+import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import getHaut from '#/src/utils/haku/getHaut';
-import { canCreateHakukohde } from '#/src/utils/hakukohde/canUpdateHakukohde';
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
@@ -49,17 +49,14 @@ const HakuForm = ({
 
   const formMode = useFormMode();
 
-  let hakukohteenLiittaminenDisabled = false;
-  if (hakuProp?.hakukohteenLiittamisenTakaraja) {
-    hakukohteenLiittaminenDisabled = !canCreateHakukohde(
-      new Date(),
-      new Date(hakuProp.hakukohteenLiittamisenTakaraja)
-    );
-  }
+  const canAddHakukohde = useCanCreateHakukohde(
+    new Date(),
+    new Date(hakuProp?.hakukohteenLiittamisenTakaraja)
+  );
 
-  if (isOphVirkailija) {
-    hakukohteenLiittaminenDisabled = false;
-  }
+  const infoText = !canAddHakukohde
+    ? t('hakulomake.liittamisenTakarajaYlittynyt')
+    : null;
 
   return (
     <>
@@ -163,13 +160,9 @@ const HakuForm = ({
               >
                 <Button
                   onClick={open}
-                  disabled={hakukohteenLiittaminenDisabled}
+                  disabled={!canAddHakukohde}
                   type="button"
-                  title={
-                    hakukohteenLiittaminenDisabled
-                      ? t('hakulomake.liittamisenTakarajaYlittynyt')
-                      : null
-                  }
+                  title={infoText}
                 >
                   {t('yleiset.liitaHakukohde')}
                 </Button>

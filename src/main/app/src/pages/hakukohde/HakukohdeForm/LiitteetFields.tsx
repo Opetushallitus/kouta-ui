@@ -20,6 +20,7 @@ import {
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
@@ -306,6 +307,8 @@ const LiitteetField = ({
     _.get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
   );
 
+  const liitteetFieldValue = useFieldValue(`${baseName}.liitteet`);
+
   return (
     <>
       <Box marginBottom={2} {...getTestIdProps('liitelista')}>
@@ -320,31 +323,41 @@ const LiitteetField = ({
           t={t}
         />
       </Box>
-      <Box>
-        <Field name={yhteinenToimitusaikaName} component={FormFieldCheckbox}>
-          {t('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')}
-        </Field>
-        {yhteinenToimitusaika ? (
-          <Box marginTop={2} marginBottom={2}>
-            <ToimitusaikaFields name={`${baseName}.toimitusaika`} />
+      {!_.isEmpty(liitteetFieldValue) && (
+        <>
+          <Box>
+            <Field
+              name={yhteinenToimitusaikaName}
+              component={FormFieldCheckbox}
+            >
+              {t('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')}
+            </Field>
+            {yhteinenToimitusaika ? (
+              <Box marginTop={2} marginBottom={2}>
+                <ToimitusaikaFields name={`${baseName}.toimitusaika`} />
+              </Box>
+            ) : null}
           </Box>
-        ) : null}
-      </Box>
-      <Box>
-        <Field name={yhteinenToimituspaikkaName} component={FormFieldCheckbox}>
-          {t('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')}
-        </Field>
-        {yhteinenToimituspaikka ? (
-          <Box marginTop={2}>
-            <ToimitustapaFields
-              language={language}
-              name={`${baseName}.toimitustapa`}
-              t={t}
-              contactInfo={contactInfo}
-            />
+          <Box>
+            <Field
+              name={yhteinenToimituspaikkaName}
+              component={FormFieldCheckbox}
+            >
+              {t('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')}
+            </Field>
+            {yhteinenToimituspaikka ? (
+              <Box marginTop={2}>
+                <ToimitustapaFields
+                  language={language}
+                  name={`${baseName}.toimitustapa`}
+                  t={t}
+                  contactInfo={contactInfo}
+                />
+              </Box>
+            ) : null}
           </Box>
-        ) : null}
-      </Box>
+        </>
+      )}
     </>
   );
 };

@@ -36,7 +36,8 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
           },
           "postinumeroKoodiUri": "posti_00350#2"
         },
-        "sahkoposti": "sahkoposti@email.com"
+        "sahkoposti": "sahkoposti@email.com",
+        "verkkosivu": "http://example.com"
       },
       "toimitustapa": "osoite",
       "tyyppiKoodiUri": "liitetyypitamm_4#1"
@@ -183,7 +184,8 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
           },
           "postinumeroKoodiUri": "posti_00350#2"
         },
-        "sahkoposti": "sahkoposti@email.com"
+        "sahkoposti": "sahkoposti@email.com",
+        "verkkosivu": "http://example.com"
       },
       "toimitustapa": "osoite",
       "tyyppiKoodiUri": "liitetyypitamm_4#1"
@@ -344,7 +346,8 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
           },
           "postinumeroKoodiUri": "posti_00350#2"
         },
-        "sahkoposti": "sahkoposti@email.com"
+        "sahkoposti": "sahkoposti@email.com",
+        "verkkosivu": null
       },
       "toimitustapa": "osoite",
       "tyyppiKoodiUri": "liitetyypitamm_4#1"

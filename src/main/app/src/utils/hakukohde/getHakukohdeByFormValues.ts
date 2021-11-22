@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
@@ -11,6 +10,7 @@ import {
   getKokeetTaiLisanaytotData,
   getTilaisuusData,
 } from '#/src/utils/form/getKokeetTaiLisanaytotData';
+import { reduce, mapValues } from '#/src/utils/lodashFpUncapped';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 
@@ -28,9 +28,9 @@ function getAloituspaikat(values: HakukohdeFormValues) {
     ensikertalaisille: maybeParseNumber(
       values?.aloituspaikat?.ensikertalaismaara
     ),
-    kuvaus: _.mapValues(
-      values?.aloituspaikat?.aloituspaikkakuvaus,
-      serializeEditorState
+    kuvaus: mapValues(
+      serializeEditorState,
+      values?.aloituspaikat?.aloituspaikkakuvaus
     ),
   };
 }
@@ -57,6 +57,7 @@ const getLiiteToimitusosoite = (toimitustapa, pickTranslations) => {
       postinumeroKoodiUri: toimitustapa?.paikka?.postinumero?.value || null,
     },
     sahkoposti: toimitustapa?.paikka?.sahkoposti || null,
+    verkkosivu: toimitustapa?.paikka?.verkkosivu || null,
   };
 };
 
@@ -72,7 +73,7 @@ const getHakukohteenLinja = values => {
     alinHyvaksyttyKeskiarvo:
       (alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo)) ||
       null,
-    lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
+    lisatietoa: mapValues(serializeEditorState, lisatietoa),
     painotetutArvosanat: getPainotetutArvosanatData(painotetutArvosanat),
   };
 };
@@ -132,10 +133,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
             ? getLiiteToimitusosoite(toimitustapa, pickTranslations)
             : null,
-        kuvaus: _.mapValues(
-          pickTranslations(kuvaus || {}),
-          serializeEditorState
-        ),
+        kuvaus: mapValues(serializeEditorState, pickTranslations(kuvaus || {})),
       };
     }
   );
@@ -157,22 +155,21 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     values?.pohjakoulutus?.pohjakoulutusvaatimus || []
   ).map(({ value }) => value);
 
-  const pohjakoulutusvaatimusTarkenne = _.pick(
-    _.mapValues(values?.pohjakoulutus?.tarkenne || {}, serializeEditorState),
-    kielivalinta
+  const pohjakoulutusvaatimusTarkenne = pickTranslations(
+    mapValues(serializeEditorState, values?.pohjakoulutus?.tarkenne || {})
   );
 
   const kaytetaanHakukohteenAlkamiskautta =
     values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta;
 
   // NOTE: Tässä muutetaan object {id: [tilaisuus1, tilaisuus2]} takaisin taulukkomuotoon [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}]
-  const valintaperusteenValintakokeidenLisatilaisuudet = _.reduce(
-    values?.valintakokeet?.valintaperusteenValintakokeidenLisatilaisuudet || {},
+  const valintaperusteenValintakokeidenLisatilaisuudet = reduce(
     (a, v, k) =>
       v?.length > 0
         ? [...a, { id: k, tilaisuudet: v.map(getTilaisuusData(kielivalinta)) }]
         : a,
-    []
+    [],
+    values?.valintakokeet?.valintaperusteenValintakokeidenLisatilaisuudet || {}
   );
 
   return {
@@ -213,14 +210,14 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     hakulomakeLinkki,
     hakulomakeKuvaus,
     metadata: {
-      valintakokeidenYleiskuvaus: _.mapValues(
-        values?.valintakokeet?.yleisKuvaus,
-        kuvaus => serializeEditorState(kuvaus)
+      valintakokeidenYleiskuvaus: mapValues(
+        kuvaus => serializeEditorState(kuvaus),
+        values?.valintakokeet?.yleisKuvaus
       ),
       valintaperusteenValintakokeidenLisatilaisuudet,
-      kynnysehto: _.mapValues(
-        values?.valintaperusteenKuvaus?.kynnysehto,
-        kuvaus => serializeEditorState(kuvaus)
+      kynnysehto: mapValues(
+        kuvaus => serializeEditorState(kuvaus),
+        values?.valintaperusteenKuvaus?.kynnysehto
       ),
       aloituspaikat: getAloituspaikat(values),
       kaytetaanHaunAlkamiskautta: !kaytetaanHakukohteenAlkamiskautta,

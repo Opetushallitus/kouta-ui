@@ -11,6 +11,7 @@ import {
   getKokeetTaiLisanaytotValues,
   getTilaisuusValues,
 } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+import { mapValues } from '#/src/utils/lodashFpUncapped';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -20,6 +21,7 @@ const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
       ? { value: toimitusosoite?.osoite?.postinumeroKoodiUri }
       : undefined,
     sahkoposti: toimitusosoite?.sahkoposti || '',
+    verkkosivu: toimitusosoite?.verkkosivu || '',
   },
 });
 
@@ -35,7 +37,7 @@ const getHakukohteenLinjaValues = ({
 }) => ({
   linja: !linja ? LUKIO_YLEISLINJA : linja,
   alinHyvaksyttyKeskiarvo: parseKeskiarvo(alinHyvaksyttyKeskiarvo),
-  lisatietoa: _.mapValues(lisatietoa, parseEditorState),
+  lisatietoa: mapValues(parseEditorState, lisatietoa),
   painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
     return {
       painotettuOppiaine: {
@@ -103,7 +105,7 @@ export const getFormValuesByHakukohde = (
       ensikertalaismaara: isNumeric(aloituspaikat?.ensikertalaisille)
         ? aloituspaikat.ensikertalaisille.toString()
         : '',
-      aloituspaikkakuvaus: _.mapValues(aloituspaikat?.kuvaus, parseEditorState),
+      aloituspaikkakuvaus: mapValues(parseEditorState, aloituspaikat?.kuvaus),
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,

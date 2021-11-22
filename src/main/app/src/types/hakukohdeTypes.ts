@@ -17,6 +17,7 @@ type ToimitustapaFields = {
     postinumero?: {
       value: string;
     };
+    verkkosivu: string;
   };
 };
 

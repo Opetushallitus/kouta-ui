@@ -14,6 +14,7 @@ import {
   FormFieldRadioGroup,
   FormFieldPostinumeroSelect,
   FormFieldEditor,
+  FormFieldUrlInput,
 } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
@@ -99,12 +100,18 @@ const ToimituspaikkaFields = ({ name, language }) => {
         />
       </Box>
 
-      <Box {...getTestIdProps('sahkoposti')}>
+      <Box marginBottom={2} {...getTestIdProps('sahkoposti')}>
         <Field
           name={`${name}.sahkoposti`}
-          required
           component={FormFieldInput}
           label={t('yleiset.sahkoposti')}
+        />
+      </Box>
+      <Box>
+        <Field
+          name={`${name}.verkkosivu`}
+          component={FormFieldUrlInput}
+          label={t('hakukohdelomake.liitteenToimitusosoiteVerkkosivu')}
         />
       </Box>
     </>
@@ -167,7 +174,7 @@ const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
           name={toimitustapaName}
           component={FormFieldRadioGroup}
           options={options}
-          label="Valitse liitteen toimitustapa"
+          label={t('liitteenToimitustapaValinnat.valitseToimitustapa')}
         />
       </div>
       <Field

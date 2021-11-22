@@ -49,6 +49,7 @@ Object {
           "fi": "Fi sahkoposti",
           "sv": "Sv sahkoposti",
         },
+        "verkkosivu": "https://liitelomake.fi",
       },
       "toimitustapa": "osoite",
       "tyyppiKoodiUri": "liitetyyppi_1#1",

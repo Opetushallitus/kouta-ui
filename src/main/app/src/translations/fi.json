@@ -600,7 +600,8 @@
     "painotetutArvosanat": "Painotetut oppiaineet keskiarvoa laskettaessa",
     "oppiaine": "Oppiaine",
     "painokerroin": "Painokerroin",
-    "lisaaPainotettavaOppiaine": "Lisää painotettava oppiaine"
+    "lisaaPainotettavaOppiaine": "Lisää painotettava oppiaine",
+    "liitteenToimitusosoiteVerkkosivu": "Verkkosivu"
   },
   "valintaperustelomake": {
     "valintaperusteenPerustiedot": "Valintaperusteen perustiedot",

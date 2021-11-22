@@ -245,6 +245,10 @@ const fillLiitteetSection = () => {
       getByTestId('sahkoposti')
         .find('input')
         .pipe(paste('sahkoposti@email.com'));
+
+      getInputByLabel('hakukohdelomake.liitteenToimitusosoiteVerkkosivu').pipe(
+        paste('example.com')
+      );
     });
   });
 };

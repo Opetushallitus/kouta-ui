@@ -70,6 +70,7 @@ export const PerustiedotSection = ({
   const isAmmatillinen =
     TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(koulutustyyppi);
   const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
+  const isTuva = koulutustyyppi === KOULUTUSTYYPPI.TUVA;
   const isKK = KORKEAKOULU_KOULUTUSTYYPIT.includes(koulutustyyppi);
 
   const hasHakukohdeKoodiUri = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
@@ -77,36 +78,40 @@ export const PerustiedotSection = ({
 
   return (
     <>
-      {hasHakukohdeKoodiUri ? (
-        <Box marginBottom={2}>
-          <HakukohdeKoodiInput
-            name={`${name}.hakukohdeKoodiUri`}
-            toteutus={toteutus}
-          />
-        </Box>
-      ) : (
-        <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
-          <Field
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('yleiset.nimi')}
-            disabled={isLukio}
-            required
-          />
-        </Box>
-      )}
-      {(isAmmatillinen || isLukio) && (
-        <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
-          <Field
-            name={`${name}.voiSuorittaaKaksoistutkinnon`}
-            component={FormFieldCheckbox}
-          >
-            {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
-          </Field>
-        </div>
-      )}
+      {!isTuva && (
+        <>
+          {hasHakukohdeKoodiUri ? (
+            <Box marginBottom={2}>
+              <HakukohdeKoodiInput
+                name={`${name}.hakukohdeKoodiUri`}
+                toteutus={toteutus}
+              />
+            </Box>
+          ) : (
+            <Box marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
+              <Field
+                name={`${name}.nimi.${language}`}
+                component={FormFieldInput}
+                label={t('yleiset.nimi')}
+                disabled={isLukio}
+                required
+              />
+            </Box>
+          )}
+          {(isAmmatillinen || isLukio) && (
+            <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
+              <Field
+                name={`${name}.voiSuorittaaKaksoistutkinnon`}
+                component={FormFieldCheckbox}
+              >
+                {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
+              </Field>
+            </div>
+          )}
 
-      <Divider marginY={4} />
+          <Divider marginY={4} />
+        </>
+      )}
 
       <div {...getTestIdProps('hakuajatSection')}>
         <HakuajatSection

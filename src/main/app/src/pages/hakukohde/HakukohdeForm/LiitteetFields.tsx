@@ -6,6 +6,7 @@ import { Field, FieldArray, Fields } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldDateTimeInput,
   FormFieldInput,
@@ -16,7 +17,7 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import { Box, FormControl } from '#/src/components/virkailija';
+import { Box, FormControl, FormLabel } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -82,20 +83,25 @@ const ToimituspaikkaFields = ({ name, language }) => {
 
   return (
     <>
-      <FormControl label={t('yleiset.osoite')}>
+      <FieldGroup
+        title={t('yleiset.osoite')}
+        HeadingComponent={FormLabel}
+        required
+        marginBottom={2}
+      >
         <Box marginBottom={2}>
           <Field
             name={`${name}.osoite.${language}[0]`}
             component={FormFieldInput}
           />
         </Box>
-        <Box marginBottom={2}>
+        <Box>
           <Field
             name={`${name}.osoite.${language}[1]`}
             component={FormFieldInput}
           />
         </Box>
-      </FormControl>
+      </FieldGroup>
 
       <Box marginBottom={2} {...getTestIdProps('postinumero')}>
         <Field

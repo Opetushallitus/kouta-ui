@@ -1,6 +1,7 @@
 import React from 'react';
 
 import _ from 'lodash';
+import { SpaceProps } from 'styled-system';
 
 import Heading from '#/src/components/Heading';
 import { Box } from '#/src/components/virkailija';
@@ -10,7 +11,7 @@ type FieldGroupProps = {
   HeadingComponent?: React.ComponentType;
   name?: string;
   required?: boolean;
-};
+} & SpaceProps;
 
 const DefaultHeadingComponent = ({ children, ...props }) => (
   <Heading hasDivider {...props}>
@@ -29,7 +30,7 @@ export const FieldGroup: React.FC<FieldGroupProps> = ({
   const contentId = _.snakeCase(title) + '_FieldGroup_content';
 
   return (
-    <Box mb={4} {...props}>
+    <Box marginBottom={4} {...props}>
       <HeadingComponent id={headerId}>
         {title} {required ? '*' : ''}
       </HeadingComponent>

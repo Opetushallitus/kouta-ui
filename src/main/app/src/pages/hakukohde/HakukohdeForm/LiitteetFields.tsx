@@ -16,7 +16,7 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import { Box } from '#/src/components/virkailija';
+import { Box, FormControl } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -82,14 +82,20 @@ const ToimituspaikkaFields = ({ name, language }) => {
 
   return (
     <>
-      <Box marginBottom={2} {...getTestIdProps('osoite')}>
-        <Field
-          name={`${name}.osoite.${language}`}
-          required
-          component={FormFieldInput}
-          label={t('yleiset.osoite')}
-        />
-      </Box>
+      <FormControl label={t('yleiset.osoite')}>
+        <Box marginBottom={2}>
+          <Field
+            name={`${name}.osoite.${language}[0]`}
+            component={FormFieldInput}
+          />
+        </Box>
+        <Box marginBottom={2}>
+          <Field
+            name={`${name}.osoite.${language}[1]`}
+            component={FormFieldInput}
+          />
+        </Box>
+      </FormControl>
 
       <Box marginBottom={2} {...getTestIdProps('postinumero')}>
         <Field

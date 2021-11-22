@@ -16,7 +16,10 @@ import { mapValues } from '#/src/utils/lodashFpUncapped';
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
   paikka: {
-    osoite: toimitusosoite?.osoite?.osoite || {},
+    osoite: _fp.mapValues(
+      osoite => osoite.split('\n'),
+      toimitusosoite?.osoite?.osoite || {}
+    ),
     postinumero: toimitusosoite?.osoite?.postinumeroKoodiUri
       ? { value: toimitusosoite?.osoite?.postinumeroKoodiUri }
       : undefined,

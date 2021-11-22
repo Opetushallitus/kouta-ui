@@ -50,6 +50,16 @@ function getPainotetutArvosanatData(arvosanat) {
     );
 }
 
+const getLiiteToimitusosoite = (toimitustapa, pickTranslations) => {
+  return {
+    osoite: {
+      osoite: pickTranslations(toimitustapa?.paikka?.osoite || null),
+      postinumeroKoodiUri: toimitustapa?.paikka?.postinumero?.value || null,
+    },
+    sahkoposti: toimitustapa?.paikka?.sahkoposti || null,
+  };
+};
+
 const getHakukohteenLinja = values => {
   if (!values?.hakukohteenLinja) {
     return null;
@@ -91,17 +101,10 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         paattyy: paattyy || null,
       }));
 
-  const liitteidenToimitusosoite = {
-    osoite: {
-      osoite: _.pick(
-        values?.liitteet?.toimitustapa?.paikka?.osoite || null,
-        kielivalinta
-      ),
-      postinumeroKoodiUri:
-        values?.liitteet?.toimitustapa?.paikka?.postinumero?.value || null,
-    },
-    sahkoposti: values?.liitteet?.toimitustapa?.paikka?.sahkoposti || null,
-  };
+  const liitteidenToimitusosoite = getLiiteToimitusosoite(
+    values?.liitteet?.toimitustapa,
+    pickTranslations
+  );
 
   const liitteidenToimitustapa = values?.liitteet?.toimitustapa?.tapa;
 
@@ -127,14 +130,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
           : null,
         toimitusosoite:
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
-            ? {
-                osoite: {
-                  osoite: pickTranslations(toimitustapa?.paikka?.osoite),
-                  postinumeroKoodiUri:
-                    toimitustapa?.paikka?.postinumero?.value || null,
-                },
-                sahkoposti: toimitustapa?.paikka?.sahkoposti || null,
-              }
+            ? getLiiteToimitusosoite(toimitustapa, pickTranslations)
             : null,
         kuvaus: _.mapValues(
           pickTranslations(kuvaus || {}),

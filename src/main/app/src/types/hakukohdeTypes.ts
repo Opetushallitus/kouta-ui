@@ -13,7 +13,7 @@ type ToimitustapaFields = {
   tapa: string;
   paikka: {
     sahkoposti: TranslatedField<string>;
-    osoite: TranslatedField<string>;
+    osoite: Array<TranslatedField<string>>;
     postinumero?: {
       value: string;
     };

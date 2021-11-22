@@ -3,7 +3,7 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { maybeParseNumber, parseFloatComma } from '#/src/utils';
+import { maybeParseNumber, parseFloatComma, safeArray } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import {
@@ -54,8 +54,8 @@ const getLiiteToimitusosoite = (toimitustapa, pickTranslations) => {
   return {
     osoite: {
       osoite: _fp.mapValues(
-        (translationRows = []) =>
-          translationRows
+        translationRows =>
+          safeArray(translationRows)
             .filter(value => !_fp.isEmpty(value))
             .join('\n')
             .trim(),

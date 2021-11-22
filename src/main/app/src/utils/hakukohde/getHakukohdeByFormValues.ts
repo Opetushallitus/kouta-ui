@@ -53,7 +53,7 @@ function getPainotetutArvosanatData(arvosanat) {
 const getLiiteToimitusosoite = (toimitustapa, pickTranslations) => {
   return {
     osoite: {
-      osoite: _fp.mapValues(
+      osoite: mapValues(
         translationRows =>
           safeArray(translationRows)
             .filter(value => !_fp.isEmpty(value))

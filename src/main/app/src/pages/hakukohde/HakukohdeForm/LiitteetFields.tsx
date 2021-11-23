@@ -6,6 +6,7 @@ import { Field, FieldArray, Fields } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldDateTimeInput,
   FormFieldInput,
@@ -14,10 +15,12 @@ import {
   FormFieldRadioGroup,
   FormFieldPostinumeroSelect,
   FormFieldEditor,
+  FormFieldUrlInput,
 } from '#/src/components/formFields';
-import { Box } from '#/src/components/virkailija';
+import { Box, FormLabel } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
@@ -81,14 +84,25 @@ const ToimituspaikkaFields = ({ name, language }) => {
 
   return (
     <>
-      <Box marginBottom={2} {...getTestIdProps('osoite')}>
-        <Field
-          name={`${name}.osoite.${language}`}
-          required
-          component={FormFieldInput}
-          label={t('yleiset.osoite')}
-        />
-      </Box>
+      <FieldGroup
+        title={t('yleiset.osoite')}
+        HeadingComponent={FormLabel}
+        required
+        marginBottom={2}
+      >
+        <Box marginBottom={2}>
+          <Field
+            name={`${name}.osoite.${language}[0]`}
+            component={FormFieldInput}
+          />
+        </Box>
+        <Box>
+          <Field
+            name={`${name}.osoite.${language}[1]`}
+            component={FormFieldInput}
+          />
+        </Box>
+      </FieldGroup>
 
       <Box marginBottom={2} {...getTestIdProps('postinumero')}>
         <Field
@@ -99,12 +113,18 @@ const ToimituspaikkaFields = ({ name, language }) => {
         />
       </Box>
 
-      <Box {...getTestIdProps('sahkoposti')}>
+      <Box marginBottom={2} {...getTestIdProps('sahkoposti')}>
         <Field
           name={`${name}.sahkoposti`}
-          required
           component={FormFieldInput}
           label={t('yleiset.sahkoposti')}
+        />
+      </Box>
+      <Box>
+        <Field
+          name={`${name}.verkkosivu`}
+          component={FormFieldUrlInput}
+          label={t('hakukohdelomake.liitteenToimitusosoiteVerkkosivu')}
         />
       </Box>
     </>
@@ -167,7 +187,7 @@ const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
           name={toimitustapaName}
           component={FormFieldRadioGroup}
           options={options}
-          label="Valitse liitteen toimitustapa"
+          label={t('liitteenToimitustapaValinnat.valitseToimitustapa')}
         />
       </div>
       <Field
@@ -287,6 +307,8 @@ const LiitteetField = ({
     _.get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
   );
 
+  const liitteetFieldValue = useFieldValue(`${baseName}.liitteet`);
+
   return (
     <>
       <Box marginBottom={2} {...getTestIdProps('liitelista')}>
@@ -301,31 +323,41 @@ const LiitteetField = ({
           t={t}
         />
       </Box>
-      <Box>
-        <Field name={yhteinenToimitusaikaName} component={FormFieldCheckbox}>
-          {t('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')}
-        </Field>
-        {yhteinenToimitusaika ? (
-          <Box marginTop={2} marginBottom={2}>
-            <ToimitusaikaFields name={`${baseName}.toimitusaika`} />
+      {!_.isEmpty(liitteetFieldValue) && (
+        <>
+          <Box>
+            <Field
+              name={yhteinenToimitusaikaName}
+              component={FormFieldCheckbox}
+            >
+              {t('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')}
+            </Field>
+            {yhteinenToimitusaika ? (
+              <Box marginTop={2} marginBottom={2}>
+                <ToimitusaikaFields name={`${baseName}.toimitusaika`} />
+              </Box>
+            ) : null}
           </Box>
-        ) : null}
-      </Box>
-      <Box>
-        <Field name={yhteinenToimituspaikkaName} component={FormFieldCheckbox}>
-          {t('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')}
-        </Field>
-        {yhteinenToimituspaikka ? (
-          <Box marginTop={2}>
-            <ToimitustapaFields
-              language={language}
-              name={`${baseName}.toimitustapa`}
-              t={t}
-              contactInfo={contactInfo}
-            />
+          <Box>
+            <Field
+              name={yhteinenToimituspaikkaName}
+              component={FormFieldCheckbox}
+            >
+              {t('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')}
+            </Field>
+            {yhteinenToimituspaikka ? (
+              <Box marginTop={2}>
+                <ToimitustapaFields
+                  language={language}
+                  name={`${baseName}.toimitustapa`}
+                  t={t}
+                  contactInfo={contactInfo}
+                />
+              </Box>
+            ) : null}
           </Box>
-        ) : null}
-      </Box>
+        </>
+      )}
     </>
   );
 };

@@ -8,7 +8,6 @@ import {
   getCheckbox,
   fillDateTimeInput,
   fillValintakokeetSection,
-  fillAsyncSelect,
   typeToEditor,
   getByTestId,
   paste,
@@ -232,19 +231,22 @@ const fillLiitteetSection = () => {
         time: '23:59',
       });
 
-      getByTestId('toimitustapa').within(() => {
-        getRadio('osoite').click({ force: true });
+      getInputByLabel('liitteenToimitustapaValinnat.muuOsoite').click({
+        force: true,
       });
 
-      getByTestId('osoite').find('input').pipe(paste('Osoite'));
-
-      getByTestId('postinumero').within(() => {
-        fillAsyncSelect('00350');
-      });
-
-      getByTestId('sahkoposti')
+      getInputByLabel('yleiset.osoite')
         .find('input')
-        .pipe(paste('sahkoposti@email.com'));
+        .first()
+        .pipe(paste('Osoite'));
+
+      getSelectByLabel('yleiset.postinumero').pipe(pFillAsyncSelect('00350'));
+
+      getInputByLabel('yleiset.sahkoposti').pipe(paste('sahkoposti@email.com'));
+
+      getInputByLabel('hakukohdelomake.liitteenToimitusosoiteVerkkosivu').pipe(
+        paste('example.com')
+      );
     });
   });
 };

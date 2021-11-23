@@ -41,8 +41,7 @@ const validateLiitteet = errorBuilder => {
         values?.liitteet?.toimitustapa?.tapa ===
           LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
       validateTranslations('liitteet.toimitustapa.paikka.osoite'),
-      validateExistence('liitteet.toimitustapa.paikka.postinumero'),
-      validateExistence('liitteet.toimitustapa.paikka.sahkoposti')
+      validateExistence('liitteet.toimitustapa.paikka.postinumero')
     ),
     validateArray('liitteet.liitteet', (liitteetEb, liite) =>
       _fp.flow([
@@ -58,8 +57,7 @@ const validateLiitteet = errorBuilder => {
           !yhteinenToimitusosoite &&
             liite?.toimitustapa?.tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
           validateTranslations('toimitustapa.paikka.osoite'),
-          validateExistence('toimitustapa.paikka.postinumero'),
-          validateExistence('toimitustapa.paikka.sahkoposti')
+          validateExistence('toimitustapa.paikka.postinumero')
         ),
       ])(liitteetEb)
     )

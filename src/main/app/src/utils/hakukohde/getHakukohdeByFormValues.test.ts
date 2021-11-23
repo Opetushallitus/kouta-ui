@@ -132,14 +132,15 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
         tapa: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
         paikka: {
           osoite: {
-            fi: 'Fi osoite',
-            sv: 'Sv osoite',
+            fi: ['Fi osoite'],
+            sv: ['Sv osoite'],
           },
           postinumero: { value: 'posti_1#1' },
           sahkoposti: {
             fi: 'Fi sahkoposti',
             sv: 'Sv sahkoposti',
           },
+          verkkosivu: 'https://liitelomake.fi',
         },
       },
       yhteinenToimituspaikka: false,
@@ -169,6 +170,7 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
                 fi: 'Fi sahkoposti',
                 sv: 'Sv sahkoposti',
               },
+              verkkosivu: 'https://liitelomake.fi',
             },
           },
         },

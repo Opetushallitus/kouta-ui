@@ -20,7 +20,11 @@ import { memoizeOne } from '#/src/utils/memoize';
 const OptionComponent = props => (
   <components.Option
     {...props}
-    innerProps={{ ...props.innerProps, role: 'option' }}
+    innerProps={{
+      ...props.innerProps,
+      role: 'option',
+      style: { whiteSpace: 'pre-wrap' },
+    }}
   />
 );
 

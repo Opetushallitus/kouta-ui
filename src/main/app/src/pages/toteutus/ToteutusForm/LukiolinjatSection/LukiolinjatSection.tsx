@@ -8,20 +8,14 @@ import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldEditor, FormFieldSwitch } from '#/src/components/formFields';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
 import { Box } from '#/src/components/virkailija';
-import { LANGUAGES } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import {
   useBoundFormActions,
   useFieldValue,
   useIsDirty,
-  useSetFieldValue,
 } from '#/src/hooks/form';
 import { useKoodisto } from '#/src/hooks/useKoodisto';
 import { getTestIdProps } from '#/src/utils';
-import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import { arrayToTranslationObject } from '#/src/utils/languageUtils';
-import { mapValues } from '#/src/utils/lodashFpUncapped';
 
 const LukiolinjaKuvaus = ({ koodiUri, name, itemProps }) => {
   const languageTab = useLanguageTab();
@@ -34,20 +28,6 @@ const LukiolinjaKuvaus = ({ koodiUri, name, itemProps }) => {
     />
   );
 };
-
-const mapKoodiToTranslateable = koodi =>
-  koodi
-    ? mapValues(_fp.prop('nimi'), arrayToTranslationObject(koodi?.metadata))
-    : undefined;
-
-const makeTranslationsByKoodi =
-  koodistoData =>
-  ({ value }) =>
-    mapKoodiToTranslateable(
-      koodistoData?.find(
-        ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
-      )
-    );
 
 const LukiolinjaOsio = ({
   name,
@@ -91,70 +71,7 @@ const useSelectedOsioLinjat = osioFieldName => {
   );
 };
 
-const renderOpintojenLaajuus = (opintojenLaajuusNumero, t, lng) =>
-  opintojenLaajuusNumero
-    ? `, ${opintojenLaajuusNumero} ${t('yleiset.opintopistetta', {
-        lng,
-      })}`
-    : '';
-
-type UseLukioToteutusNimiProps = {
-  yleislinjaSelected: boolean;
-  selectedLinjatTranslations: Array<TranslatedField>;
-  opintojenLaajuusNumero?: number;
-};
-
-export const useLukioToteutusNimi = ({
-  yleislinjaSelected,
-  selectedLinjatTranslations,
-  opintojenLaajuusNumero,
-}: UseLukioToteutusNimiProps) => {
-  const { t } = useTranslation();
-
-  const allLinjatTranslations = useMemo(
-    () =>
-      yleislinjaSelected
-        ? [
-            _fp.zipObject(
-              LANGUAGES,
-              LANGUAGES.map(lng =>
-                t('toteutuslomake.lukionYleislinjaNimiOsa', {
-                  lng,
-                })
-              )
-            ),
-            ...selectedLinjatTranslations,
-          ]
-        : selectedLinjatTranslations,
-    [t, yleislinjaSelected, selectedLinjatTranslations]
-  );
-
-  return useMemo(
-    () =>
-      mapValues((translatedNimiAcc: any, lng) =>
-        _fp.reduce(
-          (result, linjaTranslations) => {
-            const translation = linjaTranslations?.[lng];
-            if (!_fp.isUndefined(result) && translation) {
-              return `${
-                result ? result + ', ' : ''
-              }${translation}${renderOpintojenLaajuus(
-                opintojenLaajuusNumero,
-                t,
-                lng
-              )}`;
-            }
-            return undefined;
-          },
-          translatedNimiAcc,
-          allLinjatTranslations
-        )
-      )({ fi: null, sv: null, en: null }),
-    [t, allLinjatTranslations, opintojenLaajuusNumero]
-  );
-};
-
-export const LukiolinjatSection = ({ name, koulutus }) => {
+export const LukiolinjatSection = ({ name }) => {
   const { t } = useTranslation();
 
   const {
@@ -172,7 +89,6 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
   });
 
   const yleislinjaFieldName = `${name}.yleislinja`;
-  const yleislinjaSelected = useFieldValue(yleislinjaFieldName);
 
   const selectedPainotukset = useSelectedOsioLinjat(`${name}.painotukset`);
   const selectedKoulutustehtavat = useSelectedOsioLinjat(
@@ -181,41 +97,6 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
 
   const isLoading = isLoadingPainotukset || isLoadingKoulutustehtavat;
 
-  const selectedLinjatTranslations = useMemo(
-    () =>
-      isLoading
-        ? []
-        : [
-            ..._fp.map(
-              makeTranslationsByKoodi(koodistoDataPainotukset),
-              selectedPainotukset
-            ),
-            ..._fp.map(
-              makeTranslationsByKoodi(koodistoDataKoulutustehtavat),
-              selectedKoulutustehtavat
-            ),
-          ],
-    [
-      isLoading,
-      selectedPainotukset,
-      koodistoDataPainotukset,
-      selectedKoulutustehtavat,
-      koodistoDataKoulutustehtavat,
-    ]
-  );
-
-  const opintojenLaajuusKoodiUri = koulutus?.metadata?.opintojenLaajuusKoodiUri;
-
-  const { koodiArvo: opintojenLaajuusNumero } = parseKoodiUri(
-    opintojenLaajuusKoodiUri
-  );
-
-  const nimi = useLukioToteutusNimi({
-    yleislinjaSelected,
-    selectedLinjatTranslations,
-    opintojenLaajuusNumero,
-  });
-
   const linjaSelectionsEmpty =
     _fp.isEmpty(selectedPainotukset) && _fp.isEmpty(selectedKoulutustehtavat);
 
@@ -223,18 +104,10 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
   const isDirty = useIsDirty();
 
   useEffect(() => {
-    if (isDirty && !isLoading && _fp.isEmpty(selectedLinjatTranslations)) {
+    if (isDirty && !isLoading && linjaSelectionsEmpty) {
       change(yleislinjaFieldName, true);
     }
-  }, [
-    change,
-    isDirty,
-    isLoading,
-    selectedLinjatTranslations,
-    yleislinjaFieldName,
-  ]);
-
-  useSetFieldValue('tiedot.nimi', nimi);
+  }, [change, isDirty, isLoading, linjaSelectionsEmpty, yleislinjaFieldName]);
 
   return (
     <>

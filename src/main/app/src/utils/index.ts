@@ -11,6 +11,7 @@ import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
 import { memoize } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
+import { getFirstLanguageValue } from './languageUtils';
 
 const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 
@@ -286,3 +287,11 @@ export const formatKoodiLabelWithArvo = (koodi, language) =>
 
 export const isIn = (coll: Array<unknown>) => (val: unknown) =>
   coll?.includes(val);
+
+export const getEntityNimiTranslation = (
+  entity: EntityBase | undefined,
+  lng: string
+) => {
+  const { _enrichedData, nimi } = entity ?? {};
+  return getFirstLanguageValue(_enrichedData?.esitysnimi || nimi, lng);
+};

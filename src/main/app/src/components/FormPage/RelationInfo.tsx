@@ -1,16 +1,10 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
 import { Box, Typography } from '#/src/components/virkailija';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-
-const getEntityName = entity => {
-  return entity && _.isObject(entity.nimi)
-    ? getFirstLanguageValue(entity.nimi)
-    : null;
-};
+import { getEntityNimiTranslation } from '#/src/utils';
 
 export const RelationInfoContainer = ({ children }) => {
   return (
@@ -27,9 +21,15 @@ export const RelationInfoContainer = ({ children }) => {
 };
 
 export function RelationInfo({ title = '', entity, linkUrl = undefined }) {
-  const name = getEntityName(entity) || '';
+  const { i18n } = useTranslation();
+  const name = getEntityNimiTranslation(entity, i18n.language) || '';
   return (
-    <Box flexGrow={0}>
+    <Box
+      flexGrow={0}
+      style={{
+        whiteSpace: 'pre-wrap',
+      }}
+    >
       {entity && (
         <>
           <Typography variant="h6" marginBottom={1}>

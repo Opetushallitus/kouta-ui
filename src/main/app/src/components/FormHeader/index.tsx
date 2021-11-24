@@ -34,6 +34,7 @@ const TitleContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  white-space: pre-wrap;
 `;
 
 type FormHeaderProps = {

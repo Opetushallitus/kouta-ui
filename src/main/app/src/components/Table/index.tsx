@@ -32,6 +32,7 @@ export const TableCellBase = styled.td`
   border-spacing: 0px;
   padding: ${spacing(1)} ${spacing(2)};
   text-align: left;
+  white-space: pre-wrap;
   ${getThemeProp('typography.body')};
 
   ${({ textCenter }) =>

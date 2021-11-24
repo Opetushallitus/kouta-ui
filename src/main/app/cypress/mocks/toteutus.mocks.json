@@ -13302,7 +13302,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/oppilaitoksenopetuskieli/koodi?koodistoVersio=1",
+    "url": "https://localhost:3000/koodisto-service/rest/json/oppilaitoksenopetuskieli/koodi?koodistoVersio=1&onlyValidKoodis=false",
     "response": {
       "body": [
         {

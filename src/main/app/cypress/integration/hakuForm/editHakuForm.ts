@@ -1,3 +1,4 @@
+import { sub } from 'date-fns';
 import { merge } from 'lodash/fp';
 
 import haku from '#/cypress/data/haku';
@@ -7,6 +8,7 @@ import {
   fillKieliversiotSection,
   tallenna,
   wrapMutationTest,
+  stubKayttoOikeusMeRoute,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -61,6 +63,78 @@ export const editHakuForm = () => {
     cy.url().should(
       'include',
       `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/haku/${hakuOid}/muokkaus`
+    );
+  });
+
+  it('should not be possible for oppilaitos user to add hakukohde for haku with expired liittämistakaraja', () => {
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify(['APP_KOUTA']),
+      },
+    });
+
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'be.disabled'
+    );
+  });
+
+  it('should be possible for OPH virkailija to add hakukohde for haku with expired liittämistakaraja', () => {
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'not.be.disabled'
+    );
+  });
+
+  it('should be possible for oppilaitos user to add hakukohde for haku without expired liittämistakaraja', () => {
+    const hakuMockData = haku();
+    const takaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
+    const oneDayBeforeDeadline = sub(new Date(takaraja), { days: 1 });
+    cy.clock(oneDayBeforeDeadline, ['Date']);
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify(['APP_KOUTA']),
+      },
+    });
+
+    cy.intercept(
+      { method: 'GET', url: `**/haku/${hakuOid}` },
+      {
+        body: merge(hakuMockData, {
+          oid: hakuOid,
+          organisaatioOid: organisaatioOid,
+        }),
+      }
+    );
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'not.be.disabled'
+    );
+  });
+
+  it('should be possible for oppilaitos user to add hakukohde for haku if liittämistakaraja has not been set', () => {
+    const hakuMockData = haku();
+    hakuMockData.hakukohteenLiittamisenTakaraja = null;
+
+    stubKayttoOikeusMeRoute({
+      user: {
+        roles: JSON.stringify(['APP_KOUTA']),
+      },
+    });
+
+    cy.intercept(
+      { method: 'GET', url: `**/haku/${hakuOid}` },
+      {
+        body: merge(hakuMockData, {
+          oid: hakuOid,
+          organisaatioOid: organisaatioOid,
+        }),
+      }
+    );
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+    cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
+      'not.be.disabled'
     );
   });
 };

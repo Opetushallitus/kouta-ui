@@ -27,6 +27,7 @@ type HakukohdeFooterProps = {
   haku: HakuModel;
   toteutus: ToteutusModel;
   canUpdate?: boolean;
+  infoTextTranslationKey?: string;
 };
 
 export const HakukohdeFooter = ({
@@ -37,6 +38,7 @@ export const HakukohdeFooter = ({
   haku,
   toteutus,
   canUpdate,
+  infoTextTranslationKey,
 }: HakukohdeFooterProps) => {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -112,6 +114,7 @@ export const HakukohdeFooter = ({
       save={save}
       canUpdate={canUpdate}
       esikatseluUrl={apiUrls.url('konfo-ui.toteutus', hakukohde?.toteutusOid)}
+      infoTextTranslationKey={infoTextTranslationKey}
     />
   );
 };

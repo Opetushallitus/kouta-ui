@@ -15,9 +15,11 @@ import { Box } from '#/src/components/virkailija';
 import { FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
+import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import getHaut from '#/src/utils/haku/getHaut';
+import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 import HakukohteetModal from './HakukohteetModal';
@@ -41,10 +43,19 @@ const HakuForm = ({
   const languages = useSelectedLanguages();
   const hakutapa = useFieldValue('hakutapa');
   const isYhteishaku = isYhteishakuHakutapa(hakutapa);
+  const isErillishaku = isErillishakuHakutapa(hakutapa);
 
   const isOphVirkailija = useIsOphVirkailija();
 
   const formMode = useFormMode();
+
+  const canAddHakukohde = useCanCreateHakukohde(
+    hakuProp?.hakukohteenLiittamisenTakaraja
+  );
+
+  const infoText = !canAddHakukohde
+    ? t('hakulomake.liittamisenTakarajaYlittynyt')
+    : null;
 
   return (
     <>
@@ -106,6 +117,7 @@ const HakuForm = ({
           header={t('hakulomake.haunAikataulu')}
           Component={ScheduleSection}
           isYhteishaku={isYhteishaku}
+          isErillishaku={isErillishaku}
           isOphVirkailija={isOphVirkailija}
           languages={languages}
         />
@@ -145,7 +157,12 @@ const HakuForm = ({
                 height="100%"
                 flexBasis="100%"
               >
-                <Button onClick={open} type="button">
+                <Button
+                  onClick={open}
+                  disabled={!canAddHakukohde}
+                  type="button"
+                  title={infoText}
+                >
                   {t('yleiset.liitaHakukohde')}
                 </Button>
               </Box>

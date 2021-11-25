@@ -1,5 +1,6 @@
 import React from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -22,6 +23,7 @@ type FormFooterProps = {
   submitProps?: object;
   hideEsikatselu?: boolean;
   esikatseluUrl?: string;
+  infoTextTranslationKey?: string;
 };
 
 const FormFooter = ({
@@ -32,10 +34,21 @@ const FormFooter = ({
   submitProps = {},
   hideEsikatselu = false,
   esikatseluUrl,
+  infoTextTranslationKey = '',
 }: FormFooterProps) => {
   const { t } = useTranslation();
   const isSubmitting = useIsSubmitting();
   const { modified, muokkaaja } = entity;
+  let title;
+
+  if (!canUpdate) {
+    if (!_.isEmpty(infoTextTranslationKey)) {
+      title = t(`${entityType}lomake.${infoTextTranslationKey}`);
+    } else {
+      title = t(`${entityType}lomake.eiMuokkausOikeutta`);
+    }
+  }
+
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
       <Box display="flex" justifyContent="flex-start" alignItems="center">
@@ -52,9 +65,7 @@ const FormFooter = ({
       <Button
         onClick={save}
         disabled={!canUpdate || isSubmitting}
-        title={
-          !canUpdate ? t(`${entityType}lomake.eiMuokkausOikeutta`) : undefined
-        }
+        title={title}
         {...submitProps}
       >
         {t('yleiset.tallenna')}

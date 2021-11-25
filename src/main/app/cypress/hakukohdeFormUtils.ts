@@ -1,3 +1,4 @@
+import { sub } from 'date-fns';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import { merge } from 'lodash/fp';
 
@@ -61,6 +62,10 @@ export const prepareTest = ({
   edit = false,
   tarjoajat,
   hakutapaKoodiUri = HAKUTAPA_YHTEISHAKU_KOODI_URI,
+  hakukohteenLiittaminenHasExpired = false,
+  hakukohteenMuokkaaminenHasExpired = false,
+  hakuWithoutTakarajat = false,
+  hakuWithoutMuokkaamisenTakaraja = false,
 }) => {
   const toteutusOid = '2.1.1.1.1.1';
   const koulutusOid = '3.1.1.1.1';
@@ -78,7 +83,15 @@ export const prepareTest = ({
   if (tyyppi === 'lk') {
     playMocks(lukioMocks);
   }
-  stubHakukohdeFormRoutes({ organisaatioOid, hakuOid, hakutapaKoodiUri });
+  stubHakukohdeFormRoutes({
+    organisaatioOid,
+    hakuOid,
+    hakutapaKoodiUri,
+    hakukohteenLiittaminenHasExpired,
+    hakukohteenMuokkaaminenHasExpired,
+    hakuWithoutTakarajat,
+    hakuWithoutMuokkaamisenTakaraja,
+  });
 
   cy.intercept(
     { method: 'GET', url: `**/toteutus/${toteutusOid}` },
@@ -147,13 +160,43 @@ export const stubHakukohdeFormRoutes = ({
   organisaatioOid,
   hakuOid,
   hakutapaKoodiUri,
+  hakukohteenLiittaminenHasExpired,
+  hakukohteenMuokkaaminenHasExpired,
+  hakuWithoutTakarajat,
+  hakuWithoutMuokkaamisenTakaraja,
 }) => {
   stubCommonRoutes();
+
+  let hakuMockData = haku({ hakutapaKoodiUri });
+  if (hakuWithoutTakarajat) {
+    hakuMockData.hakukohteenLiittamisenTakaraja = null;
+    hakuMockData.hakukohteenMuokkaamisenTakaraja = null;
+  }
+
+  if (hakuWithoutMuokkaamisenTakaraja) {
+    hakuMockData.hakukohteenMuokkaamisenTakaraja = null;
+  }
+
+  if (
+    (!hakukohteenLiittaminenHasExpired && !hakukohteenMuokkaaminenHasExpired) ||
+    hakuWithoutMuokkaamisenTakaraja
+  ) {
+    let liittamisenTakaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
+    let muokkaamisenTakaraja = hakuMockData.hakukohteenMuokkaamisenTakaraja;
+    let takaraja = liittamisenTakaraja;
+
+    if (muokkaamisenTakaraja && muokkaamisenTakaraja < liittamisenTakaraja) {
+      takaraja = muokkaamisenTakaraja;
+    }
+
+    const now = sub(new Date(takaraja), { days: 1 });
+    cy.clock(now, ['Date']);
+  }
 
   cy.intercept(
     { method: 'GET', url: `**/haku/${hakuOid}` },
     {
-      body: merge(haku({ hakutapaKoodiUri }), {
+      body: merge(hakuMockData, {
         oid: hakuOid,
         organisaatioOid: organisaatioOid,
         hakulomaketyyppi: 'muu',

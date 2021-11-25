@@ -13,8 +13,8 @@ import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
@@ -67,13 +67,15 @@ export const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  const canUpdate = useCurrentUserHasRole(
-    ENTITY.HAKUKOHDE,
-    CRUD_ROLES.UPDATE,
-    hakukohde?.organisaatioOid
+  const initialValues = useInitialValues(hakukohde);
+
+  const resultObj = useCanUpdateHakukohde(
+    haku?.hakukohteenMuokkaamisenTakaraja,
+    hakukohde
   );
 
-  const initialValues = useInitialValues(hakukohde);
+  const canUpdate = resultObj.canUpdate;
+  const infoTextTranslationKey = !canUpdate ? resultObj.reasonKey : '';
 
   return isLoading ? (
     <FullSpin />
@@ -102,6 +104,7 @@ export const EditHakukohdePage = props => {
             }
             haku={haku}
             canUpdate={canUpdate}
+            infoTextTranslationKey={infoTextTranslationKey}
           />
         }
       >

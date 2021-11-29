@@ -46,6 +46,26 @@ const Label = ({ tila, t }) => {
   );
 };
 
+const isAllowedTilaTransition = (currTila, checkedTila) => {
+  /* tila (currTila) on undefined kun ollaan luomassa entiteettiä */
+  if (!currTila)
+    return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.JULKAISTU].includes(
+      checkedTila
+    );
+  if (currTila === checkedTila) return true;
+  if (currTila === JULKAISUTILA.TALLENNETTU)
+    return [JULKAISUTILA.POISTETTU, JULKAISUTILA.JULKAISTU].includes(
+      checkedTila
+    );
+  if (currTila === JULKAISUTILA.JULKAISTU)
+    return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.ARKISTOITU].includes(
+      checkedTila
+    );
+  if (currTila === JULKAISUTILA.ARKISTOITU)
+    return checkedTila === JULKAISUTILA.JULKAISTU;
+  return false;
+};
+
 export const JulkaisutilaField = ({
   entity,
   disabled,
@@ -67,19 +87,26 @@ export const JulkaisutilaField = ({
       component={FormFieldRadioGroup}
       label={label}
     >
-      <Radio value={JULKAISUTILA.TALLENNETTU}>
-        <Label tila={JULKAISUTILA.TALLENNETTU} t={t} />
-      </Radio>
-      <Radio value={JULKAISUTILA.JULKAISTU}>
-        <Label tila={JULKAISUTILA.JULKAISTU} t={t} />
-      </Radio>
-      {/* savedTila on undefined kun ollaan luomassa entiteettiä */}
-      {!savedTila ||
-        (savedTila !== JULKAISUTILA.TALLENNETTU && (
-          <Radio value={JULKAISUTILA.ARKISTOITU}>
-            <Label tila={JULKAISUTILA.ARKISTOITU} t={t} />
-          </Radio>
-        ))}
+      {isAllowedTilaTransition(savedTila, JULKAISUTILA.POISTETTU) && (
+        <Radio value={JULKAISUTILA.POISTETTU}>
+          <Label tila={JULKAISUTILA.POISTETTU} t={t} />
+        </Radio>
+      )}
+      {isAllowedTilaTransition(savedTila, JULKAISUTILA.TALLENNETTU) && (
+        <Radio value={JULKAISUTILA.TALLENNETTU}>
+          <Label tila={JULKAISUTILA.TALLENNETTU} t={t} />
+        </Radio>
+      )}
+      {isAllowedTilaTransition(savedTila, JULKAISUTILA.JULKAISTU) && (
+        <Radio value={JULKAISUTILA.JULKAISTU}>
+          <Label tila={JULKAISUTILA.JULKAISTU} t={t} />
+        </Radio>
+      )}
+      {isAllowedTilaTransition(savedTila, JULKAISUTILA.ARKISTOITU) && (
+        <Radio value={JULKAISUTILA.ARKISTOITU}>
+          <Label tila={JULKAISUTILA.ARKISTOITU} t={t} />
+        </Radio>
+      )}
     </Field>
   );
 };

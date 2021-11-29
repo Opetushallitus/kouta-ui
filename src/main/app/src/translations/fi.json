@@ -230,6 +230,12 @@
       "jatka": "Jatka",
       "peruuta": "Peruuta"
     },
+    "luonnoksenPoisto": {
+      "otsikko": "Luonnoksen poisto",
+      "viesti": "Olet poistamassa luonnosta {{name}}. Haluatko varmasti jatkaa?",
+      "jatka": "Jatka",
+      "peruuta": "Peruuta"
+    },
     "tuntematonVirhe": {
       "otsikko": "Tuntematon virhe",
       "viesti": "Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu"
@@ -274,12 +280,14 @@
   "julkaisutilat": {
     "tallennettu": "Luonnos",
     "julkaistu": "Julkaistu",
-    "arkistoitu": "Arkistoitu"
+    "arkistoitu": "Arkistoitu",
+    "poistettu": "Poistettu"
   },
   "julkaisutilojenSelitteet": {
     "tallennettu": "Luonnoksen tiedot näkyvät vain virkailijalle",
     "julkaistu": "Julkaisemalla tiedot näytetään Opintopolussa",
-    "arkistoitu": "Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä"
+    "arkistoitu": "Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä",
+    "poistettu": "Poistaa tiedot järjestelmästä"
   },
   "validointivirheet": {
     "epakelpoUrl": "Linkki on virheellinen",

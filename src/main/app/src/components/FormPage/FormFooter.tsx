@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -7,9 +7,12 @@ import { Link } from 'react-router-dom';
 import Button from '#/src/components/Button';
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import { Box } from '#/src/components/virkailija';
-import { ENTITY } from '#/src/constants';
-import { useIsSubmitting } from '#/src/hooks/form';
+import { ENTITY, JULKAISUTILA } from '#/src/constants';
+import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
+import DeleteConfirmationDialog from '../DeleteConfirmationDialog';
 import FormEditInfo from '../FormEditInfo';
 
 type FormFooterProps = {
@@ -18,6 +21,7 @@ type FormFooterProps = {
     muokkaaja?: string;
     modified?: string;
   };
+  entityName?: TranslatedField<string>;
   save: () => void;
   canUpdate?: boolean;
   submitProps?: object;
@@ -26,9 +30,14 @@ type FormFooterProps = {
   infoTextTranslationKey?: string;
 };
 
+const aboutToDeleteEntity = (nextState: JULKAISUTILA | undefined) => {
+  return nextState && nextState === JULKAISUTILA.POISTETTU;
+};
+
 const FormFooter = ({
   entityType,
   entity = {},
+  entityName,
   save,
   canUpdate = true,
   submitProps = {},
@@ -48,29 +57,52 @@ const FormFooter = ({
       title = t(`${entityType}lomake.eiMuokkausOikeutta`);
     }
   }
+  const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);
+  const tila = useFieldValue('tila');
+  const language = useUserLanguage();
+  const theEntityName = getFirstLanguageValue(entityName, language);
+
+  const doDelete = () => {
+    toggleConfirmationDialog(false);
+    save();
+  };
 
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
-      <Box display="flex" justifyContent="flex-start" alignItems="center">
-        <Button as={Link} to="/" color="primary" variant="outlined">
-          {t('yleiset.etusivulle')}
-        </Button>
-        {!hideEsikatselu && (
-          <EsikatseluControls esikatseluUrl={esikatseluUrl} />
-        )}
-        <Box marginLeft={2}>
-          {modified && <FormEditInfo date={modified} editorOid={muokkaaja} />}
+    <>
+      <DeleteConfirmationDialog
+        isOpen={isConfirmationDialogOpen}
+        name={theEntityName}
+        onConfirm={() => {
+          doDelete();
+        }}
+        onCancel={() => {
+          toggleConfirmationDialog(false);
+        }}
+      />
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Box display="flex" justifyContent="flex-start" alignItems="center">
+          <Button as={Link} to="/" color="primary" variant="outlined">
+            {t('yleiset.etusivulle')}
+          </Button>
+          {!hideEsikatselu && (
+            <EsikatseluControls esikatseluUrl={esikatseluUrl} />
+          )}
+          <Box marginLeft={2}>
+            {modified && <FormEditInfo date={modified} editorOid={muokkaaja} />}
+          </Box>
         </Box>
+        <Button
+          onClick={() => {
+            aboutToDeleteEntity(tila) ? toggleConfirmationDialog(true) : save();
+          }}
+          disabled={!canUpdate || isSubmitting}
+          title={title}
+          {...submitProps}
+        >
+          {t('yleiset.tallenna')}
+        </Button>
       </Box>
-      <Button
-        onClick={save}
-        disabled={!canUpdate || isSubmitting}
-        title={title}
-        {...submitProps}
-      >
-        {t('yleiset.tallenna')}
-      </Button>
-    </Box>
+    </>
   );
 };
 

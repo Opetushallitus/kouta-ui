@@ -9,7 +9,7 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ORGANISAATIOTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useForm } from '#/src/hooks/form';
+import { useFieldValue, useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
@@ -115,6 +115,7 @@ export const KoulutusFooter = ({
   });
 
   const apiUrls = useUrls();
+  const name = useFieldValue('description.nimi');
 
   return (
     <FormFooter
@@ -122,6 +123,7 @@ export const KoulutusFooter = ({
       save={save}
       canUpdate={canUpdate}
       entity={koulutus}
+      entityName={name}
       esikatseluUrl={
         FormMode.EDIT && apiUrls.url('konfo-ui.koulutus', koulutus?.oid)
       }

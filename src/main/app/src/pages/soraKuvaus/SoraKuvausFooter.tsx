@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { postUpdate } from '#/src/utils/postUpdate';
 import createSoraKuvaus from '#/src/utils/soraKuvaus/createSoraKuvaus';
@@ -65,10 +66,13 @@ export const SoraKuvausFooter = ({
     validate: validateSoraKuvausForm,
   });
 
+  const name = useFieldValue('nimi');
+
   return (
     <FormFooter
       entityType={ENTITY.SORA_KUVAUS}
       entity={soraKuvaus}
+      entityName={name}
       hideEsikatselu
       save={save}
       canUpdate={canUpdate}

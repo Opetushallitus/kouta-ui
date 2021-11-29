@@ -45,6 +45,10 @@ export const createTheme = () => {
         main: '#ffd024',
         contrastText: '#ffffff',
       },
+      red: {
+        main: '#db2828',
+        contrastText: '#ffffff',
+      },
     },
     zIndices: {
       homeNavigation: 400,
@@ -66,6 +70,7 @@ export const createTheme = () => {
   theme.colors.julkaistu = theme.colors.success.main;
   theme.colors.tallennettu = theme.colors.primary.main;
   theme.colors.arkistoitu = theme.colors.yellow.main;
+  theme.colors.poistettu = theme.colors.red.main;
 
   return theme;
 };

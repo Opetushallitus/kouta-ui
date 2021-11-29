@@ -8,7 +8,7 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useForm } from '#/src/hooks/form';
+import { useFieldValue, useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakukohdeModel } from '#/src/types/hakukohdeTypes';
 import { HakuModel } from '#/src/types/hakuTypes';
@@ -107,10 +107,13 @@ export const HakukohdeFooter = ({
 
   const apiUrls = useUrls();
 
+  const name = useFieldValue('perustiedot.nimi');
+
   return (
     <FormFooter
       entityType={ENTITY.HAKUKOHDE}
       entity={hakukohde}
+      entityName={name}
       save={save}
       canUpdate={canUpdate}
       esikatseluUrl={apiUrls.url('konfo-ui.toteutus', hakukohde?.toteutusOid)}

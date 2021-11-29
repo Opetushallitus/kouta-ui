@@ -27,11 +27,13 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
   const { t } = useTranslation();
 
   const tila = useFieldValue('tila');
+  const entityExistsAfterThisEdit =
+    tila !== JULKAISUTILA.POISTETTU && tila !== JULKAISUTILA.ARKISTOITU;
   const isJulkaistu = tila === JULKAISUTILA.JULKAISTU;
   const showCheckbox = _.isNil(tila) || tila === JULKAISUTILA.TALLENNETTU;
   const esikatseluEnabled = useFieldValue('esikatselu');
   const showButton =
-    tila !== JULKAISUTILA.ARKISTOITU && (esikatseluEnabled || isJulkaistu);
+    entityExistsAfterThisEdit && (esikatseluEnabled || isJulkaistu);
   const isDirty = useIsDirty();
 
   const disabled =

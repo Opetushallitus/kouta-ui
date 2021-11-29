@@ -34,6 +34,10 @@ const aboutToDeleteEntity = (nextState: JULKAISUTILA | undefined) => {
   return nextState && nextState === JULKAISUTILA.POISTETTU;
 };
 
+const aboutToDeleteEntity = (nextState: JULKAISUTILA | undefined) => {
+  return nextState && nextState === JULKAISUTILA.POISTETTU;
+};
+
 const FormFooter = ({
   entityType,
   entity = {},

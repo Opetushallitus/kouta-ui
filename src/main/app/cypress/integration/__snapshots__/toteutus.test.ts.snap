@@ -1969,3 +1969,149 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
   ],
   "tila": "julkaistu"
 };
+
+exports[`editToteutus > should be able to delete toteutus #0`] =
+{
+  "esikatselu": false,
+  "externalId": null,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "alemmanKorkeakoulututkinnonOsaamisalat": [],
+    "aloituspaikat": null,
+    "ammatillinenPerustutkintoErityisopetuksena": false,
+    "ammattinimikkeet": [
+      {
+        "arvo": "eläintenhoitaja",
+        "kieli": "fi"
+      }
+    ],
+    "asiasanat": [
+      {
+        "arvo": "koira",
+        "kieli": "fi"
+      },
+      {
+        "arvo": "eläintenhoito",
+        "kieli": "fi"
+      }
+    ],
+    "diplomit": [],
+    "erityisetKoulutustehtavat": [],
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
+    "ilmoittautumislinkki": {},
+    "jarjestetaanErityisopetuksena": false,
+    "kielivalikoima": {
+      "A1Kielet": [],
+      "A2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
+    "kuvaus": {},
+    "laajuus": null,
+    "laajuusyksikkoKoodiUri": null,
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
+    "opetus": {
+      "apuraha": null,
+      "koulutuksenAlkamiskausi": {
+        "alkamiskausityyppi": "tarkka alkamisajankohta",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": null,
+        "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
+        "koulutuksenAlkamisvuosi": null,
+        "koulutuksenPaattymispaivamaara": "2021-12-12T00:00"
+      },
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "teksti": {
+            "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "<p>Maksullisuus kuvaus</p>"
+      },
+      "maksullisuustyyppi": "maksullinen",
+      "maksunMaara": 20,
+      "onkoApuraha": true,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_1#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "<p>Opetusaika kuvaus</p>"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "<p>Opetuskieli kuvaus</p>"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_1#1"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_1#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "<p>Opetustapa kuvaus</p>"
+      },
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "<p>Fi suunniteltuKestoKuvaus</p>"
+      },
+      "suunniteltuKestoVuodet": 2
+    },
+    "osaamisalat": [
+      {
+        "koodiUri": "osaamisala_0",
+        "linkki": {
+          "fi": "https://www.salpaus.fi/koulutusesittely/elaintenhoitaja/"
+        },
+        "otsikko": {
+          "fi": "Otsikko"
+        }
+      }
+    ],
+    "painotukset": [],
+    "toteutusjaksot": [],
+    "tyyppi": "amm",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "Fi nimi"
+        },
+        "puhelinnumero": {
+          "fi": "Fi puhelinnumero"
+        },
+        "sahkoposti": {
+          "fi": "Fi sähköposti"
+        },
+        "titteli": {
+          "fi": "Fi titteli"
+        },
+        "wwwSivu": {
+          "fi": "http://fi-verkkosivu"
+        }
+      }
+    ],
+    "ylemmanKorkeakoulututkinnonOsaamisalat": []
+  },
+  "modified": "2019-03-26T10:19",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
+  },
+  "oid": "1.3.1.1.1.1",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "5.1.1.1.1.1",
+    "3.1.1.1.1.1"
+  ],
+  "tila": "poistettu"
+};

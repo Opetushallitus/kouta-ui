@@ -431,6 +431,12 @@ export const tallenna = () => {
   cy.findByRole('button', { name: 'yleiset.tallenna' }).click();
 };
 
+export const confirmDelete = () => {
+  cy.findByRole('button', {
+    name: 'ilmoitukset.luonnoksenPoisto.jatka',
+  }).click();
+};
+
 const isTutkintoonJohtava = koulutustyyppi =>
   ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
 

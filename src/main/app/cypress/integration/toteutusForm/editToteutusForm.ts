@@ -8,7 +8,9 @@ import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import {
   assertNoUnsavedChangesDialog,
+  confirmDelete,
   fillKieliversiotSection,
+  fillTilaSection,
   tallenna,
   wrapMutationTest,
 } from '#/cypress/utils';
@@ -164,6 +166,19 @@ export const editToteutusForm = () => {
       cy.findByTestId('hakukohteetSection').should('exist');
 
       tallenna();
+    })
+  );
+
+  it(
+    'should be able to delete toteutus',
+    mutationTest(() => {
+      prepareTest('amm');
+
+      fillKieliversiotSection();
+      fillTilaSection('poistettu');
+
+      tallenna();
+      confirmDelete();
     })
   );
 

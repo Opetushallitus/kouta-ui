@@ -333,3 +333,150 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
     }
   ]
 };
+
+exports[`editValintaperuste > should be able to delete valintaperuste #0`] =
+{
+  "esikatselu": false,
+  "externalId": null,
+  "hakutapaKoodiUri": "hakutapa_01#1",
+  "id": "649adb37-cd4d-4846-91a9-84b58b90f928",
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
+  "koulutustyyppi": "amk",
+  "metadata": {
+    "hakukelpoisuus": {},
+    "kuvaus": {
+      "fi": "<p>Loppukuvaus</p>"
+    },
+    "lisatiedot": {},
+    "sisalto": [
+      {
+        "data": {
+          "fi": "<p>Tekstia</p>"
+        },
+        "tyyppi": "teksti"
+      },
+      {
+        "data": {
+          "nimi": {},
+          "rows": [
+            {
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "Solu"
+                  }
+                }
+              ],
+              "index": 0,
+              "isHeader": false
+            }
+          ]
+        },
+        "tyyppi": "taulukko"
+      }
+    ],
+    "tyyppi": "amk",
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+    },
+    "valintatavat": [
+      {
+        "enimmaispisteet": 100.02,
+        "kaytaMuuntotaulukkoa": false,
+        "kuvaus": {},
+        "kynnysehto": {
+          "fi": "<p>Kynnysehto</p>"
+        },
+        "nimi": {
+          "fi": "Valintatavan nimi"
+        },
+        "sisalto": [
+          {
+            "data": {
+              "fi": "<p>Tekstia</p>"
+            },
+            "tyyppi": "teksti"
+          },
+          {
+            "data": {
+              "nimi": {},
+              "rows": [
+                {
+                  "columns": [
+                    {
+                      "index": 0,
+                      "text": {
+                        "fi": "Solu"
+                      }
+                    }
+                  ],
+                  "index": 0,
+                  "isHeader": false
+                }
+              ]
+            },
+            "tyyppi": "taulukko"
+          }
+        ],
+        "vahimmaispisteet": 10.01,
+        "valintatapaKoodiUri": "valintatapajono_tv#1"
+      }
+    ]
+  },
+  "modified": "2019-04-03T13:56",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Valintaperusteen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": "1",
+  "tila": "poistettu",
+  "valintakokeet": [
+    {
+      "id": "testi-id-123",
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa kokeesta - fi</p>"
+        },
+        "vahimmaispisteet": 10.03
+      },
+      "nimi": {
+        "fi": "Kokeen nimi - fi"
+      },
+      "tilaisuudet": [
+        {
+          "aika": {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44"
+          },
+          "jarjestamispaikka": {
+            "fi": "Jarjestamispaikka - fi"
+          },
+          "lisatietoja": {
+            "fi": "<p>fi lisatietoja</p>"
+          },
+          "osoite": {
+            "osoite": {
+              "fi": "fi osoite"
+            },
+            "postinumeroKoodiUri": "posti_00350#2"
+          }
+        }
+      ],
+      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+    }
+  ]
+};

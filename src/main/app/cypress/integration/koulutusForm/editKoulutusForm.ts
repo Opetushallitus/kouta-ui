@@ -12,6 +12,8 @@ import {
   paste,
   typeToEditor,
   wrapMutationTest,
+  fillTilaSection,
+  confirmDelete,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -153,6 +155,22 @@ export const editKoulutusForm = () => {
       tallenna();
     });
   });
+
+  it(
+    'should be able to delete koulutus',
+    mutationTest(() => {
+      prepareTest('amm');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
+
+      fillKieliversiotSection();
+      fillTilaSection('poistettu');
+
+      tallenna();
+      confirmDelete();
+    })
+  );
 
   it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');

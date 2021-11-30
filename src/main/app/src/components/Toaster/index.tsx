@@ -140,7 +140,7 @@ export const Toaster = ({ ...props }) => {
           opacity: 0,
           transform: 'scale(0.5)',
         }}
-        immediate={isCypress}
+        // immediate={isCypress}
       >
         {(item, state, index) => props =>
           (

@@ -5,7 +5,9 @@ import haku from '#/cypress/data/haku';
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 import {
   assertNoUnsavedChangesDialog,
+  confirmDelete,
   fillKieliversiotSection,
+  fillTilaSection,
   tallenna,
   wrapMutationTest,
   stubKayttoOikeusMeRoute,
@@ -50,6 +52,19 @@ export const editHakuForm = () => {
       fillKieliversiotSection();
 
       tallenna();
+    })
+  );
+
+  it(
+    'should be able to delete haku',
+    mutationTest(() => {
+      cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+
+      fillKieliversiotSection();
+      fillTilaSection('poistettu');
+
+      tallenna();
+      confirmDelete();
     })
   );
 

@@ -7,6 +7,8 @@ import {
   tallenna,
   assertNoUnsavedChangesDialog,
   wrapMutationTest,
+  fillTilaSection,
+  confirmDelete,
 } from '#/cypress/utils';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
@@ -46,6 +48,19 @@ export const editValintaperusteForm = () => {
 
       fillKieliversiotSection();
       tallenna();
+    })
+  );
+
+  it(
+    'should be able to delete valintaperuste',
+    mutationTest(() => {
+      prepareTest('amk');
+
+      fillKieliversiotSection();
+      fillTilaSection('poistettu');
+
+      tallenna();
+      confirmDelete();
     })
   );
 

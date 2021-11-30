@@ -675,3 +675,51 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
   ],
   "tila": "tallennettu"
 };
+
+exports[`editKoulutus > should be able to delete koulutus #0`] =
+{
+  "ePerusteId": 6777660,
+  "esikatselu": true,
+  "externalId": null,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_351107#12"
+  ],
+  "koulutustyyppi": "amm",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm"
+  },
+  "muokkaaja": "1.2.246.562.24.26603962037",
+  "nimi": {
+    "fi": "Kaivosalan perustutkinto"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "tila": "poistettu"
+};

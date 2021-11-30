@@ -32,6 +32,8 @@ export const useCanUpdateHakukohde = (
         };
       }
     }
+  } else if (hasRightToUpdate) {
+    return result;
   } else {
     result = {
       canUpdate: false,

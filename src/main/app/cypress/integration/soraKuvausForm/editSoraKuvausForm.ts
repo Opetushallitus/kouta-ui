@@ -6,7 +6,9 @@ import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 import {
   assertNoUnsavedChangesDialog,
+  confirmDelete,
   fillKieliversiotSection,
+  fillTilaSection,
   tallenna,
   wrapMutationTest,
 } from '#/cypress/utils';
@@ -46,6 +48,17 @@ export const editSoraKuvausForm = () => {
     mutationTest(() => {
       fillKieliversiotSection();
       tallenna();
+    })
+  );
+
+  it(
+    'should be able to delete sora-kuvaus',
+    mutationTest(() => {
+      fillKieliversiotSection();
+      fillTilaSection('poistettu');
+
+      tallenna();
+      confirmDelete();
     })
   );
 

@@ -7,7 +7,9 @@ import {
 } from '#/cypress/hakukohdeFormUtils';
 import {
   assertNoUnsavedChangesDialog,
+  confirmDelete,
   fillKieliversiotSection,
+  fillTilaSection,
   tallenna,
   wrapMutationTest,
   stubKayttoOikeusMeRoute,
@@ -39,6 +41,26 @@ export const editHakukohdeForm = () => {
       fillKieliversiotSection();
       fillJarjestyspaikkaSection();
       tallenna();
+    })
+  );
+
+  it(
+    'should be able to delete hakukohde',
+    mutationTest(() => {
+      prepareTest({
+        tyyppi: 'yo',
+        hakuOid,
+        hakukohdeOid,
+        organisaatioOid,
+        edit: true,
+        tarjoajat: ['1.2.246.562.10.45854578546'],
+      });
+
+      fillKieliversiotSection();
+      fillJarjestyspaikkaSection();
+      fillTilaSection('poistettu');
+      tallenna();
+      confirmDelete();
     })
   );
 

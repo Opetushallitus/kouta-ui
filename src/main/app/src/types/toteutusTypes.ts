@@ -65,6 +65,7 @@ export type ToteutusFormValues = {
   tiedot: {
     nimi: TranslatedField<string>;
     ammatillinenPerustutkintoErityisopetuksena: boolean;
+    jarjestetaanErityisopetuksena: boolean;
     laajuus: string;
     laajuusyksikko?: SelectOption;
     ilmoittautumislinkki: TranslatedField<string>;
@@ -130,4 +131,5 @@ export type ToteutusFormValues = {
   };
   soraKuvaus?: SelectOption;
   esikatselu?: boolean;
+  esitysnimi?: string;
 };

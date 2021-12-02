@@ -29,3 +29,11 @@ type SelectOptions = Array<SelectOption<string>>;
 type PohjaValinta = { tapa: string; valinta: string };
 
 type ValueOf<T> = T[keyof T];
+
+type EntityBase = {
+  nimi?: TranslatedField<string>;
+  tila: JULKAISUTILA;
+  _enrichedData?: {
+    esitysnimi: string;
+  };
+};

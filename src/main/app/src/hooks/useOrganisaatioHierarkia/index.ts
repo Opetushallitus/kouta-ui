@@ -3,10 +3,13 @@ import { useMemo } from 'react';
 import {
   LONG_CACHE_QUERY_OPTIONS,
   OPETUSHALLITUS_ORGANISAATIO_OID,
+  ORGANISAATIOTYYPPI,
 } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { oneAndOnlyOne } from '#/src/utils';
 import filterTree from '#/src/utils/filterTree';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
+import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 type UseOrganisaatioHierarkiaOptions =
   | {
@@ -16,11 +19,22 @@ type UseOrganisaatioHierarkiaOptions =
     }
   | undefined;
 
+const defaultFilter = org => {
+  const organisaatiotyypit = getOrganisaatioTyypit(org);
+
+  const onlyOrganisaatiotyyppi = oneAndOnlyOne(organisaatiotyypit);
+
+  return ![
+    ORGANISAATIOTYYPPI.VARHAISKASVATUKSEN_JARJESTAJA,
+    ORGANISAATIOTYYPPI.VARHAISKASVATUKSEN_TOIMIPAIKKA,
+  ].includes(onlyOrganisaatiotyyppi);
+};
+
 export const useOrganisaatioHierarkia = (
   oid: string,
   {
     skipParents = false,
-    filter,
+    filter = defaultFilter,
     enabled = true,
   }: UseOrganisaatioHierarkiaOptions = {}
 ) => {

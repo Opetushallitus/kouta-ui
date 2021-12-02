@@ -161,6 +161,8 @@ export enum ORGANISAATIOTYYPPI {
   KOULUTUSTOIMIJA = 'organisaatiotyyppi_01',
   OPPILAITOS = 'organisaatiotyyppi_02',
   TOIMIPISTE = 'organisaatiotyyppi_03',
+  VARHAISKASVATUKSEN_JARJESTAJA = 'organisaatiotyyppi_07',
+  VARHAISKASVATUKSEN_TOIMIPAIKKA = 'organisaatiotyyppi_08',
 }
 
 export const OPETUSHALLITUS_ORGANISAATIO_OID = '1.2.246.562.10.00000000001';

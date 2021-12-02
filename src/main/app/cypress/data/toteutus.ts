@@ -138,6 +138,7 @@ const getKorkeakouluFields = ({ tyyppi }) =>
 
 const getLukioFields = ({ tyyppi }) =>
   merge(getBaseFields(), {
+    nimi: {},
     metadata: {
       tyyppi,
       yleislinja: true,
@@ -160,6 +161,12 @@ const getLukioFields = ({ tyyppi }) =>
       jaksonKuvaus: {
         fi: 'Fi jakso',
         sv: 'Sv jakso',
+      },
+    },
+    _enrichedData: {
+      esitysnimi: {
+        fi: 'Lukio, 150 opintopistettä',
+        sv: 'Gymnasium, 150 studiepoäng',
       },
     },
   });

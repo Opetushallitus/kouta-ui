@@ -65,7 +65,11 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
     <>
       {_fp
         .without(
-          [KOULUTUSTYYPPI.TELMA, KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS],
+          [
+            KOULUTUSTYYPPI.TELMA,
+            KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+            KOULUTUSTYYPPI.LUKIOKOULUTUS,
+          ],
           KOULUTUSTYYPIT
         )
         .includes(koulutustyyppi) && (
@@ -73,10 +77,7 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
           <Field
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
-            disabled={
-              disableFieldsCopiedFromKoulutus ||
-              koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
-            }
+            disabled={disableFieldsCopiedFromKoulutus}
             label={t('toteutuslomake.toteutuksenNimi')}
             required
           />

@@ -1,8 +1,4 @@
-import getQueryParams from '#/src/utils/api/getQueryParams';
-
-const getHaut = async ({ httpClient, apiUrls, ...rest }) => {
-  const params = getQueryParams(rest);
-
+export const searchHaut = async ({ httpClient, apiUrls, params }) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.search.haut'),
     {
@@ -13,4 +9,4 @@ const getHaut = async ({ httpClient, apiUrls, ...rest }) => {
   return data;
 };
 
-export default getHaut;
+export default searchHaut;

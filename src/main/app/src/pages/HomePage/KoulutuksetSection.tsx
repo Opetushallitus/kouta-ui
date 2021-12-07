@@ -1,33 +1,22 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { RouterAnchor } from '#/src/components/Anchor';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
-import ErrorAlert from '#/src/components/ErrorAlert';
-import ListSpin from '#/src/components/ListSpin';
-import ListTable, {
+import {
   makeModifiedColumn,
   makeMuokkaajaColumn,
+  makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import Pagination from '#/src/components/Pagination';
-import { Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
-import { getTestIdProps } from '#/src/utils';
-import {
-  FILTER_PAGE_SIZE,
-  useSearchKoulutukset,
-} from '#/src/utils/koulutus/searchKoulutukset';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import searchKoulutukset from '#/src/utils/koulutus/searchKoulutukset';
 
-import Filters from './Filters';
+import { EntitySearchList } from './EntitySearchList';
 import ListCollapse from './ListCollapse';
 import NavigationAnchor from './NavigationAnchor';
-import { useFilterState } from './useFilterState';
-import { getIndexParamsByFilters } from './utils';
 
 const { KOULUTUS } = ENTITY;
 
@@ -42,18 +31,10 @@ const Actions = ({ organisaatioOid }) => {
 };
 
 const makeTableColumns = (t, organisaatioOid) => [
-  {
-    title: t('yleiset.nimi'),
-    key: 'nimi',
-    sortable: true,
-    render: ({ nimi, oid, language }) => (
-      <RouterAnchor
-        to={`/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`}
-      >
-        {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
-      </RouterAnchor>
-    ),
-  },
+  makeNimiColumn(t, {
+    getLinkUrl: ({ oid }) =>
+      `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`,
+  }),
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),
@@ -68,44 +49,6 @@ const makeTableColumns = (t, organisaatioOid) => [
 
 export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
-
-  const filterState = useFilterState('koulutukset');
-
-  const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
-
-  const params = useMemo(
-    () => getIndexParamsByFilters({ ...filterState, organisaatioOid }),
-    [filterState, organisaatioOid]
-  );
-
-  const {
-    data: { result: koulutukset, totalCount } = {},
-    isError,
-    isFetching,
-    isSuccess,
-    refetch,
-  } = useSearchKoulutukset(params);
-
-  const [pageCount, setPageCount] = useState(0);
-  useEffect(() => {
-    if (totalCount !== undefined) {
-      setPageCount(Math.ceil(totalCount / FILTER_PAGE_SIZE));
-    }
-  }, [totalCount]);
-
-  const rows = useMemo(
-    () =>
-      koulutukset
-        ? koulutukset.map(koulutus => ({ ...koulutus, key: koulutus.oid }))
-        : null,
-    [koulutukset]
-  );
-
-  const tableColumns = useMemo(
-    () => makeTableColumns(t, organisaatioOid),
-    [t, organisaatioOid]
-  );
-
   return (
     <>
       <NavigationAnchor id="koulutukset" />
@@ -117,28 +60,13 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <Box marginBottom={3}>
-          <Filters
-            {...filtersProps}
-            nimiPlaceholder={t('etusivu.haeKoulutuksia')}
-          />
-        </Box>
-
-        {isFetching && <ListSpin />}
-        {isError && <ErrorAlert onReload={refetch} center />}
-        {isSuccess && (
-          <ListTable
-            rows={rows}
-            columns={tableColumns}
-            onSort={setOrderBy}
-            sort={orderBy}
-            {...getTestIdProps('koulutuksetTable')}
-          />
-        )}
-
-        <Box display="flex" marginTop={3} justifyContent="center">
-          <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-        </Box>
+        <EntitySearchList
+          searchEntities={searchKoulutukset}
+          organisaatioOid={organisaatioOid}
+          entityType={KOULUTUS}
+          makeTableColumns={makeTableColumns}
+          nimiPlaceholder={t('etusivu.haeKoulutuksia')}
+        />
       </ListCollapse>
     </>
   );

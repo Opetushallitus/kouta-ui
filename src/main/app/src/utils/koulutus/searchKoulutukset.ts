@@ -26,6 +26,8 @@ const getSearchKoulutuksetData = async ({ params, httpClient, apiUrls }) => {
   return data;
 };
 
+export default getSearchKoulutuksetData;
+
 const ELASTIC_FIND_ALL_SIZE = 5000; // NOTE: there is no magic number for "no limit"
 
 export const useSearchAllKoulutuksetWithOid = ({ organisaatioOid }) => {

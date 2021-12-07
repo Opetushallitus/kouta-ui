@@ -59,7 +59,10 @@ export const EntitySearchList = ({
 
   const rows = useMemo(() => {
     return entities
-      ? entities.map(entityData => ({ ...entityData, key: entityData.oid }))
+      ? entities.map(entityData => ({
+          ...entityData,
+          key: entityData?.oid ?? entityData?.id,
+        }))
       : null;
   }, [entities]);
 
@@ -67,6 +70,7 @@ export const EntitySearchList = ({
     () => makeTableColumns(t, organisaatioOid),
     [makeTableColumns, t, organisaatioOid]
   );
+
   return (
     <>
       <Box mb={3}>

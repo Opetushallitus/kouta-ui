@@ -90,12 +90,10 @@ const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
     );
   }
 
-  return (
-    <HomeContent kayttajaOid={user.oid} organisaatioOid={organisaatioOid} />
-  );
+  return <HomeContent organisaatioOid={organisaatioOid} />;
 };
 
-const HomePage = ({ kayttajaOid = null, location }) => {
+const HomePage = ({ location }) => {
   const { search } = location;
   const { t } = useTranslation();
   const persistedOrganisaatioOid = useSelector(state =>
@@ -110,7 +108,6 @@ const HomePage = ({ kayttajaOid = null, location }) => {
       <Title>{t('sivuTitlet.etusivu')}</Title>
       <HomeContainer>
         <HomeRoute
-          kayttajOid={kayttajaOid}
           organisaatioOid={organisaatioOid}
           persistedOrganisaatioOid={persistedOrganisaatioOid}
         />

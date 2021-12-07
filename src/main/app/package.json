@@ -42,7 +42,6 @@
     "query-string": "^6.14.1",
     "rc-tooltip": "^5.1.1",
     "react": "^16.14.0",
-    "react-async": "^10.0.1",
     "react-dom": "^16.14.0",
     "react-dropzone": "^11.3.4",
     "react-i18next": "^11.11.4",

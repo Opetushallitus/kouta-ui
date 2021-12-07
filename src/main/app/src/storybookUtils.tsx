@@ -3,9 +3,8 @@ import React, { Suspense } from 'react';
 import { action } from '@storybook/addon-actions';
 import axios from 'axios';
 import { urls as ophUrls } from 'oph-urls-js';
-import Async from 'react-async';
 import { I18nextProvider } from 'react-i18next';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
@@ -39,22 +38,25 @@ const getLocalizationInstance = () => {
   return localizationInstance;
 };
 
+const ApiDecorator = ({ httpClient, children }) => {
+  const { data: urlData } = useQuery('configureUrls', configureOphUrls, {
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  });
+
+  return urlData ? (
+    <HttpContext.Provider value={httpClient}>
+      {urlData ? (
+        <UrlContext.Provider value={urlData}>{children}</UrlContext.Provider>
+      ) : null}
+    </HttpContext.Provider>
+  ) : null;
+};
+
 export const makeApiDecorator =
   ({ httpClient = defaultHttpClient } = {}) =>
   storyFn => {
-    return (
-      <HttpContext.Provider value={httpClient}>
-        <Async promiseFn={configureOphUrls}>
-          {({ data }) =>
-            data ? (
-              <UrlContext.Provider value={data}>
-                {storyFn()}
-              </UrlContext.Provider>
-            ) : null
-          }
-        </Async>
-      </HttpContext.Provider>
-    );
+    return <ApiDecorator httpClient={httpClient}>{storyFn()}</ApiDecorator>;
   };
 
 export const makeStoreDecorator = ({ logging = false } = {}) => {

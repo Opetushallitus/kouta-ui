@@ -20,6 +20,7 @@ import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValue
 import { updateKoulutus } from '#/src/utils/koulutus/updateKoulutus';
 import { validateKoulutusForm } from '#/src/utils/koulutus/validateKoulutusForm';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import { postUpdate } from '#/src/utils/postUpdate';
 
 type KoulutusFooterProps = {
   formMode: FormMode;
@@ -90,7 +91,7 @@ export const KoulutusFooter = ({
           `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`
         );
       } else {
-        queryClient.invalidateQueries(ENTITY.KOULUTUS);
+        postUpdate(queryClient, history, ENTITY.KOULUTUS, valuesForSaving.tila);
       }
     },
     [

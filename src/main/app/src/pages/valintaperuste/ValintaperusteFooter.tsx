@@ -9,6 +9,7 @@ import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue, useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import { postUpdate } from '#/src/utils/postUpdate';
 import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
 import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
 import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
@@ -59,7 +60,7 @@ export const ValintaperusteFooter = ({
           `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`
         );
       } else {
-        queryClient.invalidateQueries(ENTITY.VALINTAPERUSTE);
+        postUpdate(queryClient, history, ENTITY.VALINTAPERUSTE, values.tila);
       }
     },
     [formMode, organisaatioOid, valintaperuste, history, queryClient]

@@ -15,6 +15,7 @@ import createHaku from '#/src/utils/haku/createHaku';
 import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 import updateHaku from '#/src/utils/haku/updateHaku';
 import validateHakuForm from '#/src/utils/haku/validateHakuForm';
+import { postUpdate } from '#/src/utils/postUpdate';
 
 type HakuFooterProps = {
   formMode: FormMode;
@@ -67,7 +68,7 @@ export const HakuFooter = ({
       if (formMode === FormMode.CREATE) {
         history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
       } else {
-        queryClient.invalidateQueries(ENTITY.HAKU);
+        postUpdate(queryClient, history, ENTITY.HAKU, valuesForSaving.tila);
       }
     },
     [

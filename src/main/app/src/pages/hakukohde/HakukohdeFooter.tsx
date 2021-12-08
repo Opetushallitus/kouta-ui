@@ -18,6 +18,7 @@ import createHakukohde from '#/src/utils/hakukohde/createHakukohde';
 import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
 import updateHakukohde from '#/src/utils/hakukohde/updateHakukohde';
 import { validateHakukohdeForm } from '#/src/utils/hakukohde/validateHakukohdeForm';
+import { postUpdate } from '#/src/utils/postUpdate';
 
 type HakukohdeFooterProps = {
   formMode: FormMode;
@@ -82,7 +83,12 @@ export const HakukohdeFooter = ({
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
         );
       } else {
-        queryClient.invalidateQueries(ENTITY.HAKUKOHDE);
+        postUpdate(
+          queryClient,
+          history,
+          ENTITY.HAKUKOHDE,
+          valuesForSaving.tila
+        );
       }
     },
     [

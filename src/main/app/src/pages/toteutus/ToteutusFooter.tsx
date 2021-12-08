@@ -16,6 +16,7 @@ import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
+import { postUpdate } from '#/src/utils/postUpdate';
 import createToteutus from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
@@ -91,7 +92,7 @@ export const ToteutusFooter = ({
           `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`
         );
       } else {
-        queryClient.invalidateQueries(ENTITY.TOTEUTUS);
+        postUpdate(queryClient, history, ENTITY.TOTEUTUS, valuesForSaving.tila);
       }
     },
     [

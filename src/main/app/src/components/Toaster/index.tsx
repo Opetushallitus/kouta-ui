@@ -9,7 +9,7 @@ import AbstractCollapse from '#/src/components/AbstractCollapse';
 import { Box, Icon, Typography } from '#/src/components/virkailija';
 import useToaster from '#/src/hooks/useToaster';
 import { getThemeProp } from '#/src/theme';
-import { isCypress } from '#/src/utils';
+// import { isCypress } from '#/src/utils';
 
 const ToasterContainer = styled.div`
   display: flex;

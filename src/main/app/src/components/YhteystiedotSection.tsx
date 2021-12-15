@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
+import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import {
@@ -13,9 +13,6 @@ import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
-
-import { Button } from './Button';
-import { FieldArrayList } from './FieldArrayList';
 
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
@@ -99,61 +96,13 @@ export const YhteystietoSection = ({ description, name, language }) => {
   );
 };
 
-const YhteystiedotComponent = ({ fields, language, t }) => {
-  const onAddField = useCallback(() => {
-    fields.push({});
-  }, [fields]);
-
-  return (
-    <>
-      <FieldArrayList fields={fields}>
-        {({ field }) => <YhteystietoSection name={field} language={language} />}
-      </FieldArrayList>
-      <Box
-        display="flex"
-        justifyContent="center"
-        marginTop={fields.length > 0 ? 4 : 0}
-      >
-        <Button
-          variant="outlined"
-          color="primary"
-          type="button"
-          onClick={onAddField}
-          {...getTestIdProps('lisaaYhteystietoButton')}
-        >
-          {t('yleiset.lisaaYhteystieto')}
-        </Button>
-      </Box>
-    </>
-  );
-};
-
-export const YhteystiedotSection = ({
-  name = 'yhteyshenkilot',
-  language = 'fi',
-}) => {
-  const { t } = useTranslation();
-
-  return (
-    <FieldArray
-      name={name}
-      component={YhteystiedotComponent}
-      t={t}
-      language={language}
-    />
-  );
-};
-
 const InfoLabel = props => (
   <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
 );
 
 const InfoValue = props => <Box flexGrow={1} {...props} />;
 
-export const OrganisaationYhteystietoSection = ({
-  language = 'fi',
-  organisaatioOid,
-}) => {
+export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
   const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 

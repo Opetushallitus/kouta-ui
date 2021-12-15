@@ -7,7 +7,7 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
-import { OrganisaationYhteystietoSection } from '#/src/components/YhteystiedotSection';
+import { YhteystiedotSection } from '#/src/components/YhteystiedotSection';
 import { useFieldValue } from '#/src/hooks/form';
 
 import EsittelySection from './EsittelySection';
@@ -54,7 +54,7 @@ const OppilaitoksenOsaForm = ({
         languages={languageTabs}
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanYhteystiedot')}
         section="yhteystiedot"
-        Component={OrganisaationYhteystietoSection}
+        Component={YhteystiedotSection}
         organisaatioOid={organisaatioOid}
       />
 

@@ -136,7 +136,11 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
     language
   );
 
-  const postiosoiteStr = `${osoiteInSelectedLang}, ${postinumero} ${postitoimipaikkaInSelectedLang}`;
+  let postiosoiteStr = `${osoiteInSelectedLang}, ${postinumero} ${postitoimipaikkaInSelectedLang}`;
+  if (osoiteInSelectedLang && postinumero && postitoimipaikkaInSelectedLang) {
+    postiosoiteStr = `${kayntiosoiteInSelectedLang}, ${kayntipostinumero} ${kayntipostitoimipaikkaInSelectedLang}`;
+  }
+
   let kayntiosoiteStr;
   if (
     kayntiosoiteInSelectedLang &&

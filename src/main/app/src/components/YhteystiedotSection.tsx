@@ -8,8 +8,11 @@ import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
 } from '#/src/components/formFields';
-import { Box, Divider } from '#/src/components/virkailija';
+import { Box, Divider, Typography } from '#/src/components/virkailija';
+import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
 import { Button } from './Button';
 import { FieldArrayList } from './FieldArrayList';
@@ -138,5 +141,110 @@ export const YhteystiedotSection = ({
       t={t}
       language={language}
     />
+  );
+};
+
+const InfoLabel = props => (
+  <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
+);
+
+const InfoValue = props => <Box flexGrow={1} {...props} />;
+
+export const OrganisaationYhteystietoSection = ({
+  language = 'fi',
+  organisaatioOid,
+}) => {
+  const { t } = useTranslation();
+  const { organisaatio } = useOrganisaatio(organisaatioOid);
+
+  const nimi = getFirstLanguageValue(_.get(organisaatio, 'nimi'), language);
+  const contactInfo = getOrganisaatioContactInfo(organisaatio);
+
+  const {
+    osoite: postiosoite,
+    postinumero,
+    postitoimipaikka,
+  } = contactInfo?.posti;
+
+  const {
+    osoite: kayntiosoite,
+    postinumero: kayntipostinumero,
+    postitoimipaikka: kayntipostitoimipaikka,
+  } = contactInfo?.kaynti;
+
+  const kayntiosoiteInSelectedLang = getFirstLanguageValue(
+    kayntiosoite,
+    language
+  );
+  const kayntipostitoimipaikkaInSelectedLang = getFirstLanguageValue(
+    kayntipostitoimipaikka,
+    language
+  );
+
+  const osoiteInSelectedLang = getFirstLanguageValue(postiosoite, language);
+  const postitoimipaikkaInSelectedLang = getFirstLanguageValue(
+    postitoimipaikka,
+    language
+  );
+
+  const postiosoiteStr = `${osoiteInSelectedLang}, ${postinumero} ${postitoimipaikkaInSelectedLang}`;
+  let kayntiosoiteStr;
+  if (
+    kayntiosoiteInSelectedLang &&
+    kayntipostinumero &&
+    kayntipostitoimipaikkaInSelectedLang
+  ) {
+    kayntiosoiteStr = `${kayntiosoiteInSelectedLang}, ${kayntipostinumero} ${kayntipostitoimipaikkaInSelectedLang}`;
+  }
+
+  return (
+    <>
+      <Box display="flex" mb={2}>
+        <InfoLabel>
+          <Typography color="text.dark">
+            {t('oppilaitoslomake.yhteystiedonNimi')}:
+          </Typography>
+        </InfoLabel>
+        <InfoValue>
+          <Typography>{nimi}</Typography>
+        </InfoValue>
+      </Box>
+      <Box display="flex" mb={2}>
+        <InfoLabel>
+          <Typography color="text.dark">{t('yleiset.postiosoite')}:</Typography>
+        </InfoLabel>
+        <InfoValue>
+          <Typography>{postiosoiteStr}</Typography>
+        </InfoValue>
+      </Box>
+      <Box display="flex" mb={2}>
+        <InfoLabel>
+          <Typography color="text.dark">
+            {t('yleiset.kayntiosoite')}:
+          </Typography>
+        </InfoLabel>
+        <InfoValue>
+          <Typography>{kayntiosoiteStr}</Typography>
+        </InfoValue>
+      </Box>
+      <Box display="flex" mb={2}>
+        <InfoLabel>
+          <Typography color="text.dark">{t('yleiset.sahkoposti')}:</Typography>
+        </InfoLabel>
+        <InfoValue>
+          <Typography>{contactInfo?.sahkoposti}</Typography>
+        </InfoValue>
+      </Box>
+      <Box display="flex" mb={2}>
+        <InfoLabel>
+          <Typography color="text.dark">
+            {t('yleiset.puhelinnumero')}:
+          </Typography>
+        </InfoLabel>
+        <InfoValue>
+          <Typography>{contactInfo?.puhelinnumero}</Typography>
+        </InfoValue>
+      </Box>
+    </>
   );
 };

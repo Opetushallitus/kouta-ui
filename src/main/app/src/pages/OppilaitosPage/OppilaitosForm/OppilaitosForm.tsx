@@ -9,7 +9,7 @@ import KieliversiotFields from '#/src/components/KieliversiotFields';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import {
   YhteystietoSection,
-  YhteystiedotSection,
+  OrganisaationYhteystietoSection,
 } from '#/src/components/YhteystiedotSection';
 import { useFieldValue } from '#/src/hooks/form';
 
@@ -74,7 +74,8 @@ const OppilaitosForm = ({
         section="yhteystiedot"
         languages={languageTabs}
         header={t('oppilaitoslomake.oppilaitoksenYhteystiedot')}
-        Component={YhteystiedotSection}
+        Component={OrganisaationYhteystietoSection}
+        organisaatioOid={organisaatioOid}
       />
 
       <FormCollapse

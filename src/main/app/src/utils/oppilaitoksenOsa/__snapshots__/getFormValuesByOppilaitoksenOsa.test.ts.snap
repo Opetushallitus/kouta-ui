@@ -30,35 +30,5 @@ Object {
   },
   "teemakuva": undefined,
   "tila": "tallennettu",
-  "yhteystiedot": Array [
-    Object {
-      "kayntiosoite": Object {
-        "fi": "Fi osoite",
-        "sv": "Sv osoite",
-      },
-      "kayntiosoitePostinumero": Object {
-        "value": "postinumero_1#1",
-      },
-      "nimi": Object {
-        "fi": "Yhteystiedon nimi",
-        "sv": "Yhteystiedon nimi sv",
-      },
-      "postinumero": Object {
-        "value": "postinumero_1#1",
-      },
-      "postiosoite": Object {
-        "fi": "Fi osoite",
-        "sv": "Sv osoite",
-      },
-      "puhelinnumero": Object {
-        "fi": "1234",
-        "sv": "5678",
-      },
-      "sahkoposti": Object {
-        "fi": "fi@sahkoposti.fi",
-        "sv": "sv@sahkoposti.sv",
-      },
-    },
-  ],
 }
 `;

@@ -66,7 +66,7 @@ export const SoraKuvausFooter = ({
     validate: validateSoraKuvausForm,
   });
 
-  const name = useFieldValue('nimi');
+  const name = useFieldValue('tiedot.nimi');
 
   return (
     <FormFooter

@@ -115,7 +115,7 @@ export const KoulutusFooter = ({
   });
 
   const apiUrls = useUrls();
-  const name = useFieldValue('description.nimi');
+  const name = useFieldValue('information.nimi');
 
   return (
     <FormFooter

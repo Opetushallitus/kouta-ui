@@ -5,9 +5,8 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import { postUpdate } from '#/src/utils/postUpdate';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import createSoraKuvaus from '#/src/utils/soraKuvaus/createSoraKuvaus';
 import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFormValues';
 import updateSoraKuvaus from '#/src/utils/soraKuvaus/updateSoraKuvaus';
@@ -54,7 +53,7 @@ export const SoraKuvausFooter = ({
           `/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`
         );
       } else {
-        postUpdate(queryClient, history, ENTITY.SORA_KUVAUS, values.tila);
+        afterUpdate(queryClient, history, ENTITY.SORA_KUVAUS, values.tila);
       }
     },
     [formMode, soraKuvaus, history, queryClient, organisaatioOid]
@@ -66,13 +65,10 @@ export const SoraKuvausFooter = ({
     validate: validateSoraKuvausForm,
   });
 
-  const name = useFieldValue('tiedot.nimi');
-
   return (
     <FormFooter
       entityType={ENTITY.SORA_KUVAUS}
       entity={soraKuvaus}
-      entityName={name}
       hideEsikatselu
       save={save}
       canUpdate={canUpdate}

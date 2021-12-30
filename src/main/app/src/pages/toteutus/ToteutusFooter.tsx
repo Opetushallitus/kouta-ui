@@ -9,14 +9,14 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useFieldValue, useForm } from '#/src/hooks/form';
+import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
-import { postUpdate } from '#/src/utils/postUpdate';
 import createToteutus from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
@@ -92,7 +92,12 @@ export const ToteutusFooter = ({
           `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`
         );
       } else {
-        postUpdate(queryClient, history, ENTITY.TOTEUTUS, valuesForSaving.tila);
+        afterUpdate(
+          queryClient,
+          history,
+          ENTITY.TOTEUTUS,
+          valuesForSaving.tila
+        );
       }
     },
     [
@@ -122,13 +127,11 @@ export const ToteutusFooter = ({
   });
 
   const apiUrls = useUrls();
-  const name = useFieldValue('tiedot.nimi');
 
   return (
     <FormFooter
       entityType={ENTITY.TOTEUTUS}
       entity={toteutus}
-      entityName={name}
       save={save}
       canUpdate={canUpdate}
       esikatseluUrl={

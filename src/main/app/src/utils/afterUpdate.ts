@@ -2,7 +2,7 @@ import { QueryClient, QueryKey } from 'react-query';
 
 import { JULKAISUTILA } from '../constants';
 
-export const postUpdate = (
+export const afterUpdate = (
   queryClient: QueryClient,
   history,
   entityType: QueryKey,

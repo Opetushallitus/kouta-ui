@@ -8,17 +8,17 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useFieldValue, useForm } from '#/src/hooks/form';
+import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakukohdeModel } from '#/src/types/hakukohdeTypes';
 import { HakuModel } from '#/src/types/hakuTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import createHakukohde from '#/src/utils/hakukohde/createHakukohde';
 import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
 import updateHakukohde from '#/src/utils/hakukohde/updateHakukohde';
 import { validateHakukohdeForm } from '#/src/utils/hakukohde/validateHakukohdeForm';
-import { postUpdate } from '#/src/utils/postUpdate';
 
 type HakukohdeFooterProps = {
   formMode: FormMode;
@@ -83,7 +83,7 @@ export const HakukohdeFooter = ({
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
         );
       } else {
-        postUpdate(
+        afterUpdate(
           queryClient,
           history,
           ENTITY.HAKUKOHDE,
@@ -113,13 +113,10 @@ export const HakukohdeFooter = ({
 
   const apiUrls = useUrls();
 
-  const name = useFieldValue('perustiedot.nimi');
-
   return (
     <FormFooter
       entityType={ENTITY.HAKUKOHDE}
       entity={hakukohde}
-      entityName={name}
       save={save}
       canUpdate={canUpdate}
       esikatseluUrl={apiUrls.url('konfo-ui.toteutus', hakukohde?.toteutusOid)}

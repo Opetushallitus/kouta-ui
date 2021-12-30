@@ -10,7 +10,7 @@ import { Box } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import { getEntityNimiTranslation } from '#/src/utils';
 
 import DeleteConfirmationDialog from '../DeleteConfirmationDialog';
 import FormEditInfo from '../FormEditInfo';
@@ -20,8 +20,11 @@ type FormFooterProps = {
   entity: {
     muokkaaja?: string;
     modified?: string;
+    nimi?: TranslatedField<string>;
+    _enrichedData?: {
+      esitysnimi: string;
+    };
   };
-  entityName?: TranslatedField<string>;
   save: () => void;
   canUpdate?: boolean;
   submitProps?: object;
@@ -37,7 +40,6 @@ const aboutToDeleteEntity = (nextState: JULKAISUTILA | undefined) => {
 const FormFooter = ({
   entityType,
   entity = {},
-  entityName,
   save,
   canUpdate = true,
   submitProps = {},
@@ -59,8 +61,10 @@ const FormFooter = ({
   }
   const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);
   const tila = useFieldValue('tila');
-  const language = useUserLanguage();
-  const theEntityName = getFirstLanguageValue(entityName, language);
+  const theEntityName = getEntityNimiTranslation(
+    { tila: JULKAISUTILA, ...entity },
+    useUserLanguage()
+  );
 
   const doDelete = () => {
     toggleConfirmationDialog(false);

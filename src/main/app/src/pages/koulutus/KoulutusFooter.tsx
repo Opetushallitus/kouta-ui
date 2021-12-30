@@ -9,18 +9,17 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ORGANISAATIOTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useFieldValue, useForm } from '#/src/hooks/form';
+import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
-import { getValuesForSaving } from '#/src/utils';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 import { updateKoulutus } from '#/src/utils/koulutus/updateKoulutus';
 import { validateKoulutusForm } from '#/src/utils/koulutus/validateKoulutusForm';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
-import { postUpdate } from '#/src/utils/postUpdate';
 
 type KoulutusFooterProps = {
   formMode: FormMode;
@@ -91,7 +90,12 @@ export const KoulutusFooter = ({
           `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`
         );
       } else {
-        postUpdate(queryClient, history, ENTITY.KOULUTUS, valuesForSaving.tila);
+        afterUpdate(
+          queryClient,
+          history,
+          ENTITY.KOULUTUS,
+          valuesForSaving.tila
+        );
       }
     },
     [
@@ -115,7 +119,6 @@ export const KoulutusFooter = ({
   });
 
   const apiUrls = useUrls();
-  const name = useFieldValue('information.nimi');
 
   return (
     <FormFooter
@@ -123,7 +126,6 @@ export const KoulutusFooter = ({
       save={save}
       canUpdate={canUpdate}
       entity={koulutus}
-      entityName={name}
       esikatseluUrl={
         FormMode.EDIT && apiUrls.url('konfo-ui.koulutus', koulutus?.oid)
       }

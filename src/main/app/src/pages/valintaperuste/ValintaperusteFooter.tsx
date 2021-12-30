@@ -7,9 +7,9 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useFieldValue, useForm } from '#/src/hooks/form';
+import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import { postUpdate } from '#/src/utils/postUpdate';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
 import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
 import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
@@ -60,7 +60,7 @@ export const ValintaperusteFooter = ({
           `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`
         );
       } else {
-        postUpdate(queryClient, history, ENTITY.VALINTAPERUSTE, values.tila);
+        afterUpdate(queryClient, history, ENTITY.VALINTAPERUSTE, values.tila);
       }
     },
     [formMode, organisaatioOid, valintaperuste, history, queryClient]
@@ -82,13 +82,11 @@ export const ValintaperusteFooter = ({
   });
 
   const apiUrls = useUrls();
-  const name = useFieldValue('kuvaus.nimi');
 
   return (
     <FormFooter
       entityType={ENTITY.VALINTAPERUSTE}
       entity={valintaperuste}
-      entityName={name}
       save={save}
       canUpdate={canUpdate}
       esikatseluUrl={apiUrls.url('konfo-ui.valintaperuste', valintaperuste?.id)}

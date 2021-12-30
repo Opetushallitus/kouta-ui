@@ -11,11 +11,11 @@ import { useFieldValue, useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakuModel } from '#/src/types/hakuTypes';
 import { getValuesForSaving } from '#/src/utils';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import createHaku from '#/src/utils/haku/createHaku';
 import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 import updateHaku from '#/src/utils/haku/updateHaku';
 import validateHakuForm from '#/src/utils/haku/validateHakuForm';
-import { postUpdate } from '#/src/utils/postUpdate';
 
 type HakuFooterProps = {
   formMode: FormMode;
@@ -68,7 +68,7 @@ export const HakuFooter = ({
       if (formMode === FormMode.CREATE) {
         history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
       } else {
-        postUpdate(queryClient, history, ENTITY.HAKU, valuesForSaving.tila);
+        afterUpdate(queryClient, history, ENTITY.HAKU, valuesForSaving.tila);
       }
     },
     [
@@ -89,14 +89,11 @@ export const HakuFooter = ({
     validate: validateHakuForm,
   });
 
-  const name = useFieldValue('nimi');
-
   return (
     <FormFooter
       hideEsikatselu
       entityType={ENTITY.HAKU}
       entity={haku}
-      entityName={name}
       save={save}
       canUpdate={canUpdate}
     />

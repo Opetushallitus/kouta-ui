@@ -48,23 +48,26 @@ const Label = ({ tila, t }) => {
 
 const isAllowedTilaTransition = (currTila, checkedTila) => {
   /* tila (currTila) on undefined kun ollaan luomassa entiteettiä */
-  if (!currTila)
+switch(currTila) {
+  case undefined:
     return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.JULKAISTU].includes(
       checkedTila
     );
-  if (currTila === checkedTila) return true;
-  if (currTila === JULKAISUTILA.TALLENNETTU)
+  case checkedTila:
+    return true;
+  case JULKAISUTILA.TALLENNETTU:
     return [JULKAISUTILA.POISTETTU, JULKAISUTILA.JULKAISTU].includes(
       checkedTila
     );
-  if (currTila === JULKAISUTILA.JULKAISTU)
+  case JULKAISUTILA.JULKAISTU:
     return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.ARKISTOITU].includes(
       checkedTila
     );
-  if (currTila === JULKAISUTILA.ARKISTOITU)
-    return checkedTila === JULKAISUTILA.JULKAISTU;
-  return false;
-};
+  case JULKAISUTILA.ARKISTOITU:
+      return checkedTila === JULKAISUTILA.JULKAISTU;
+  default:
+    return false;  
+}
 
 export const JulkaisutilaField = ({
   entity,

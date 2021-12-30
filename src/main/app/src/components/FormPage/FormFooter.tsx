@@ -17,14 +17,7 @@ import FormEditInfo from '../FormEditInfo';
 
 type FormFooterProps = {
   entityType: ENTITY;
-  entity: {
-    muokkaaja?: string;
-    modified?: string;
-    nimi?: TranslatedField<string>;
-    _enrichedData?: {
-      esitysnimi: string;
-    };
-  };
+  entity: EntityBase;
   save: () => void;
   canUpdate?: boolean;
   submitProps?: object;
@@ -39,7 +32,9 @@ const aboutToDeleteEntity = (nextState: JULKAISUTILA | undefined) => {
 
 const FormFooter = ({
   entityType,
-  entity = {},
+  entity = {
+    tila: undefined,
+  },
   save,
   canUpdate = true,
   submitProps = {},
@@ -61,10 +56,7 @@ const FormFooter = ({
   }
   const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);
   const tila = useFieldValue('tila');
-  const theEntityName = getEntityNimiTranslation(
-    { tila: JULKAISUTILA, ...entity },
-    useUserLanguage()
-  );
+  const theEntityName = getEntityNimiTranslation(entity, useUserLanguage());
 
   const doDelete = () => {
     toggleConfirmationDialog(false);

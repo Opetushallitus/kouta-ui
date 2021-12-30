@@ -99,7 +99,7 @@ export const JulkaisutilaField = ({
       ].map(
         tila =>
           isAllowedTilaTransition(savedTila, tila) && (
-            <Radio value={tila}>
+            <Radio key={tila} value={tila}>
               <Label tila={tila} t={t} />
             </Radio>
           )

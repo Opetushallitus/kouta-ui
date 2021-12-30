@@ -72,9 +72,7 @@ const FormFooter = ({
       <DeleteConfirmationDialog
         isOpen={isConfirmationDialogOpen}
         name={theEntityName}
-        onConfirm={() => {
-          doDelete();
-        }}
+        onConfirm={doDelete}
         onCancel={() => {
           toggleConfirmationDialog(false);
         }}

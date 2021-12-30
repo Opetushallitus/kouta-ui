@@ -90,26 +90,11 @@ export const JulkaisutilaField = ({
       component={FormFieldRadioGroup}
       label={label}
     >
-      {isAllowedTilaTransition(savedTila, JULKAISUTILA.POISTETTU) && (
-        <Radio value={JULKAISUTILA.POISTETTU}>
-          <Label tila={JULKAISUTILA.POISTETTU} t={t} />
+     {[JULKAISUTILA.POISTETTU, JULKAISUTILA.TALLENNETTU, JULKAISUTILA.JULKAISTU, JULKAISUTILA.ARKISTOITU].map(tila => isAllowedTilaTransition(savedTila, tila) && (
+        <Radio value={tila}>
+          <Label tila={tila} t={t} />
         </Radio>
-      )}
-      {isAllowedTilaTransition(savedTila, JULKAISUTILA.TALLENNETTU) && (
-        <Radio value={JULKAISUTILA.TALLENNETTU}>
-          <Label tila={JULKAISUTILA.TALLENNETTU} t={t} />
-        </Radio>
-      )}
-      {isAllowedTilaTransition(savedTila, JULKAISUTILA.JULKAISTU) && (
-        <Radio value={JULKAISUTILA.JULKAISTU}>
-          <Label tila={JULKAISUTILA.JULKAISTU} t={t} />
-        </Radio>
-      )}
-      {isAllowedTilaTransition(savedTila, JULKAISUTILA.ARKISTOITU) && (
-        <Radio value={JULKAISUTILA.ARKISTOITU}>
-          <Label tila={JULKAISUTILA.ARKISTOITU} t={t} />
-        </Radio>
-      )}
+      ))}
     </Field>
   );
 };

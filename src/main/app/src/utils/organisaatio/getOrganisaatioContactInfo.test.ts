@@ -1,7 +1,27 @@
 import {
   getKielistettyOrganisaatioContactInfo,
   getKielistettyOsoite,
+  getKielistetty,
 } from './getOrganisaatioContactInfo.ts';
+
+test('getKielistetty returns finnish and swedish email addresses', () => {
+  const emails = [
+    {
+      kieli: 'kieli_fi#1',
+      email: 'testiosoite@testi.fi',
+    },
+    {
+      kieli: 'kieli_sv#1',
+      email: 'testiosoite@test.sv',
+    },
+  ];
+
+  const result = {
+    fi: 'testiosoite@testi.fi',
+    sv: 'testiosoite@test.sv',
+  };
+  expect(getKielistetty(emails, 'email')).toEqual(result);
+});
 
 test('getOrganisaatioKielistettyContactInfo returns finnish email as the only contact info', () => {
   const contactInfo = [

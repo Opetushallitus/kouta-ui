@@ -135,6 +135,20 @@ export const getKielistettyOsoite = osoitteet => {
   );
 };
 
+export const getKielistetty = (entities, key) => {
+  return entities.reduce((result, entity) => {
+    const kieli = getKieliByKieliUri(entity.kieli);
+
+    const kielistetty = {
+      [kieli]: entity[key],
+    };
+    return {
+      ...result,
+      ...kielistetty,
+    };
+  }, {});
+};
+
 export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
   const emails = {};
   _.forEach(yhteystiedot, yhteystieto => {

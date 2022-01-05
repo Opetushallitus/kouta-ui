@@ -283,3 +283,37 @@ test('getOrganisaatioKielistettyContactInfo returns ulkomainen kayntiosoite as a
   };
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
 });
+
+test('getOrganisaatioKielistettyContactInfo returns postiosoite as contact info', () => {
+  const contactInfo = [
+    {
+      osoiteTyyppi: 'posti',
+      kieli: 'kieli_fi#1',
+      postinumeroUri: 'posti_01230',
+      postitoimipaikka: 'HELSINKI',
+      osoite: 'Veneheittoaukio 328',
+    },
+    {
+      osoiteTyyppi: 'posti',
+      kieli: 'kieli_sv#1',
+      postinumeroUri: 'posti_01110',
+      postitoimipaikka: 'HELSINGFORS',
+      osoite: 'Kurinraitti 799',
+    },
+    {
+      osoiteTyyppi: 'ulkomainen_posti',
+      kieli: 'kieli_en#1',
+      osoite: 'Polvivaara 397\n00920 Helsinki',
+    },
+  ];
+
+  const result = {
+    posti: {
+      katuosoite: { fi: 'Veneheittoaukio 328', sv: 'Kurinraitti 799' },
+      postinumero: { fi: '01230', sv: '01110' },
+      postitoimipaikka: { fi: 'Helsinki', sv: 'Helsingfors' },
+      ulkomainenOsoite: { en: 'Polvivaara 397\n00920 Helsinki' },
+    },
+  };
+  expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
+});

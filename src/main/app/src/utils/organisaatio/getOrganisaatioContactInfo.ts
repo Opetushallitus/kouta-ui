@@ -139,7 +139,6 @@ export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
     !_.isEmpty(ulkomaisetOsoitteet)
   ) {
     const enUlkomainenOsoite = _.find(ulkomaisetOsoitteet, {
-      osoiteTyyppi: 'ulkomainen_kaynti',
       kieli: 'kieli_en#1',
     });
 
@@ -175,6 +174,13 @@ export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
     yhteystieto => yhteystieto.osoiteTyyppi === 'ulkomainen_kaynti'
   );
 
+  const postiosoitteet = yhteystiedot.filter(
+    yhteystieto => yhteystieto.osoiteTyyppi === 'posti'
+  );
+  const ulkomaisetPostiosoitteet = yhteystiedot.filter(
+    yhteystieto => yhteystieto.osoiteTyyppi === 'ulkomainen_posti'
+  );
+
   const puhelinnumerot = yhteystiedot.filter(
     yhteystieto => yhteystieto.tyyppi === 'puhelin'
   );
@@ -182,6 +188,7 @@ export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
   const kielistetytYhteystiedot = {
     sahkoposti: getKielistetty(sahkopostit, 'email'),
     kaynti: getKielistettyOsoite(kayntiosoitteet, ulkomaisetKayntiosoitteet),
+    posti: getKielistettyOsoite(postiosoitteet, ulkomaisetPostiosoitteet),
     puhelinnumero: getKielistetty(puhelinnumerot, 'numero'),
   };
 

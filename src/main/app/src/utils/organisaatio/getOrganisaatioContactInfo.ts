@@ -103,8 +103,8 @@ const getOrganisaatioContactInfo = organisaatio => {
   };
 };
 
-export const getKielistettyOsoite = osoitteet => {
-  return _.reduce(
+export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
+  const kielistetytOsoitteet = _.reduce(
     osoitteet,
     (result, osoite) => {
       const kieli = getKieliByKieliUri(osoite.kieli);
@@ -114,7 +114,9 @@ export const getKielistettyOsoite = osoitteet => {
       };
 
       const postitoimipaikka = {
-        [kieli]: _.upperFirst(osoite.postitoimipaikka.toLowerCase()),
+        [kieli]: osoite.postitoimipaikka
+          ? _.upperFirst(osoite.postitoimipaikka.toLowerCase())
+          : undefined,
       };
 
       const postinumero = {
@@ -129,6 +131,22 @@ export const getKielistettyOsoite = osoitteet => {
     },
     {}
   );
+
+  let enOsoite;
+  const kieli = 'en';
+  if (
+    !_.has(kielistetytOsoitteet.katuosoite, kieli) &&
+    !_.isEmpty(ulkomaisetOsoitteet)
+  ) {
+    const enUlkomainenOsoite = _.find(ulkomaisetOsoitteet, {
+      osoiteTyyppi: 'ulkomainen_kaynti',
+      kieli: 'kieli_en#1',
+    });
+
+    enOsoite = { ulkomainenOsoite: { [kieli]: enUlkomainenOsoite.osoite } };
+  }
+
+  return { ...kielistetytOsoitteet, ...enOsoite };
 };
 
 export const getKielistetty = (entities, key) => {
@@ -150,8 +168,11 @@ export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
     _.has(yhteystieto, 'email')
   );
 
-  const kayntiOsoitteet = yhteystiedot.filter(
+  const kayntiosoitteet = yhteystiedot.filter(
     yhteystieto => yhteystieto.osoiteTyyppi === 'kaynti'
+  );
+  const ulkomaisetKayntiosoitteet = yhteystiedot.filter(
+    yhteystieto => yhteystieto.osoiteTyyppi === 'ulkomainen_kaynti'
   );
 
   const puhelinnumerot = yhteystiedot.filter(
@@ -160,7 +181,7 @@ export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
 
   const kielistetytYhteystiedot = {
     sahkoposti: getKielistetty(sahkopostit, 'email'),
-    kaynti: getKielistettyOsoite(kayntiOsoitteet),
+    kaynti: getKielistettyOsoite(kayntiosoitteet, ulkomaisetKayntiosoitteet),
     puhelinnumero: getKielistetty(puhelinnumerot, 'numero'),
   };
 

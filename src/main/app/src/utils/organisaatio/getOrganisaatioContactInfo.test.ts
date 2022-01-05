@@ -118,3 +118,40 @@ test('getOrganisaatioKielistettyContactInfo returns finnish and swedish emails a
   };
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
 });
+
+test('getOrganisaatioKielistettyContactInfo returns emails and kaynti osoite as contact info', () => {
+  const contactInfo = [
+    {
+      kieli: 'kieli_fi#1',
+      email: 'testiosoite@testi.fi',
+    },
+    {
+      osoiteTyyppi: 'kaynti',
+      kieli: 'kieli_fi#1',
+      postinumeroUri: 'posti_01230',
+      postitoimipaikka: 'HELSINKI',
+      osoite: 'Veneheittoaukio 328',
+    },
+    {
+      osoiteTyyppi: 'kaynti',
+      kieli: 'kieli_sv#1',
+      postinumeroUri: 'posti_01110',
+      postitoimipaikka: 'HELSINGFORS',
+      osoite: 'Kurinraitti 799',
+    },
+    {
+      kieli: 'kieli_sv#1',
+      email: 'testiosoite@test.sv',
+    },
+  ];
+
+  const result = {
+    sahkoposti: { fi: 'testiosoite@testi.fi', sv: 'testiosoite@test.sv' },
+    kaynti: {
+      katuosoite: { fi: 'Veneheittoaukio 328', sv: 'Kurinraitti 799' },
+      postinumero: { fi: '01230', sv: '01110' },
+      postitoimipaikka: { fi: 'Helsinki', sv: 'Helsingfors' },
+    },
+  };
+  expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
+});

@@ -127,11 +127,7 @@ export const getKielistettyOsoite = osoitteet => {
         postitoimipaikka: { ...result.postitoimipaikka, ...postitoimipaikka },
       };
     },
-    {
-      katuosoite: {},
-      postinumero: {},
-      postitoimipaikka: {},
-    }
+    {}
   );
 };
 
@@ -150,14 +146,19 @@ export const getKielistetty = (entities, key) => {
 };
 
 export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
-  const emails = {};
-  _.forEach(yhteystiedot, yhteystieto => {
-    emails[getKieliByKieliUri(yhteystieto.kieli)] = yhteystieto.email;
-  });
+  const sahkopostit = yhteystiedot.filter(yhteystieto =>
+    _.has(yhteystieto, 'email')
+  );
+  const kayntiOsoitteet = yhteystiedot.filter(
+    yhteystieto => yhteystieto.osoiteTyyppi === 'kaynti'
+  );
 
-  return {
-    sahkoposti: emails,
+  const kielistetytYhteystiedot = {
+    sahkoposti: getKielistetty(sahkopostit, 'email'),
+    kaynti: getKielistettyOsoite(kayntiOsoitteet),
   };
+
+  return _.omitBy(kielistetytYhteystiedot, _.isEmpty);
 };
 
 export default getOrganisaatioContactInfo;

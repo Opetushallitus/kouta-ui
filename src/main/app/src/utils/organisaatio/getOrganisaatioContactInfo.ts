@@ -103,4 +103,47 @@ const getOrganisaatioContactInfo = organisaatio => {
   };
 };
 
+export const getKielistettyOsoite = osoitteet => {
+  return _.reduce(
+    osoitteet,
+    (result, osoite) => {
+      const kieli = getKieliByKieliUri(osoite.kieli);
+
+      const katuosoite = {
+        [kieli]: osoite.osoite,
+      };
+
+      const postitoimipaikka = {
+        [kieli]: _.upperFirst(osoite.postitoimipaikka.toLowerCase()),
+      };
+
+      const postinumero = {
+        [kieli]: getPostinumeroByPostinumeroUri(osoite.postinumeroUri),
+      };
+
+      return {
+        katuosoite: { ...result.katuosoite, ...katuosoite },
+        postinumero: { ...result.postinumero, ...postinumero },
+        postitoimipaikka: { ...result.postitoimipaikka, ...postitoimipaikka },
+      };
+    },
+    {
+      katuosoite: {},
+      postinumero: {},
+      postitoimipaikka: {},
+    }
+  );
+};
+
+export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
+  const emails = {};
+  _.forEach(yhteystiedot, yhteystieto => {
+    emails[getKieliByKieliUri(yhteystieto.kieli)] = yhteystieto.email;
+  });
+
+  return {
+    sahkoposti: emails,
+  };
+};
+
 export default getOrganisaatioContactInfo;

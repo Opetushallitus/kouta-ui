@@ -149,13 +149,19 @@ export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {
   const sahkopostit = yhteystiedot.filter(yhteystieto =>
     _.has(yhteystieto, 'email')
   );
+
   const kayntiOsoitteet = yhteystiedot.filter(
     yhteystieto => yhteystieto.osoiteTyyppi === 'kaynti'
+  );
+
+  const puhelinnumerot = yhteystiedot.filter(
+    yhteystieto => yhteystieto.tyyppi === 'puhelin'
   );
 
   const kielistetytYhteystiedot = {
     sahkoposti: getKielistetty(sahkopostit, 'email'),
     kaynti: getKielistettyOsoite(kayntiOsoitteet),
+    puhelinnumero: getKielistetty(puhelinnumerot, 'numero'),
   };
 
   return _.omitBy(kielistetytYhteystiedot, _.isEmpty);

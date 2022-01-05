@@ -155,3 +155,23 @@ test('getOrganisaatioKielistettyContactInfo returns emails and kaynti osoite as 
   };
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
 });
+
+test('getOrganisaatioKielistettyContactInfo returns kielistetty puhelinnumero', () => {
+  const contactInfo = [
+    {
+      kieli: 'kieli_fi#1',
+      numero: '050 33903791',
+      tyyppi: 'puhelin',
+    },
+    {
+      kieli: 'kieli_sv#1',
+      numero: '050 33901111',
+      tyyppi: 'puhelin',
+    },
+  ];
+
+  const result = {
+    puhelinnumero: { fi: '050 33903791', sv: '050 33901111' },
+  };
+  expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
+});

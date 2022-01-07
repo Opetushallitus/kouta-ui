@@ -109,24 +109,19 @@ export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
     (result, osoite) => {
       const kieli = getKieliByKieliUri(osoite.kieli);
 
-      const katuosoite = {
-        [kieli]: osoite.osoite,
-      };
+      const postitoimipaikka = osoite.postitoimipaikka
+        ? _.upperFirst(osoite.postitoimipaikka.toLowerCase())
+        : undefined;
 
-      const postitoimipaikka = {
-        [kieli]: osoite.postitoimipaikka
-          ? _.upperFirst(osoite.postitoimipaikka.toLowerCase())
-          : undefined,
-      };
-
-      const postinumero = {
-        [kieli]: getPostinumeroByPostinumeroUri(osoite.postinumeroUri),
+      const address = {
+        [kieli]: `${osoite.osoite}, ${getPostinumeroByPostinumeroUri(
+          osoite.postinumeroUri
+        )} ${postitoimipaikka}`,
       };
 
       return {
-        katuosoite: { ...result.katuosoite, ...katuosoite },
-        postinumero: { ...result.postinumero, ...postinumero },
-        postitoimipaikka: { ...result.postitoimipaikka, ...postitoimipaikka },
+        ...result,
+        ...address,
       };
     },
     {}
@@ -134,15 +129,12 @@ export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
 
   let enOsoite;
   const kieli = 'en';
-  if (
-    !_.has(kielistetytOsoitteet.katuosoite, kieli) &&
-    !_.isEmpty(ulkomaisetOsoitteet)
-  ) {
+  if (!_.has(kielistetytOsoitteet, kieli) && !_.isEmpty(ulkomaisetOsoitteet)) {
     const enUlkomainenOsoite = _.find(ulkomaisetOsoitteet, {
       kieli: 'kieli_en#1',
     });
 
-    enOsoite = { ulkomainenOsoite: { [kieli]: enUlkomainenOsoite.osoite } };
+    enOsoite = { [kieli]: enUlkomainenOsoite.osoite.replace(/\n/g, ', ') };
   }
 
   return { ...kielistetytOsoitteet, ...enOsoite };

@@ -67,15 +67,13 @@ test('getKielistettyOsoite returns finnish kayntiosoite as the only address', ()
   ];
 
   const result = {
-    katuosoite: { fi: 'Veneheittoaukio 328' },
-    postinumero: { fi: '01230' },
-    postitoimipaikka: { fi: 'Helsinki' },
+    fi: 'Veneheittoaukio 328, 01230 Helsinki',
   };
 
   expect(getKielistettyOsoite(osoite)).toEqual(result);
 });
 
-test('getKielistetytOsoitteet returns finnish and swedish kayntiosoitteet as kaynti object', () => {
+test('getKielistettyOsoite returns finnish and swedish kayntiosoitteet as kaynti object', () => {
   const kayntiosoitteet = [
     {
       osoiteTyyppi: 'kaynti',
@@ -94,9 +92,8 @@ test('getKielistetytOsoitteet returns finnish and swedish kayntiosoitteet as kay
   ];
 
   const result = {
-    katuosoite: { fi: 'Veneheittoaukio 328', sv: 'Kurinraitti 799' },
-    postinumero: { fi: '01230', sv: '01110' },
-    postitoimipaikka: { fi: 'Helsinki', sv: 'Helsingfors' },
+    fi: 'Veneheittoaukio 328, 01230 Helsinki',
+    sv: 'Kurinraitti 799, 01110 Helsingfors',
   };
   expect(getKielistettyOsoite(kayntiosoitteet)).toEqual(result);
 });
@@ -148,9 +145,8 @@ test('getOrganisaatioKielistettyContactInfo returns emails and kaynti osoite as 
   const result = {
     sahkoposti: { fi: 'testiosoite@testi.fi', sv: 'testiosoite@test.sv' },
     kaynti: {
-      katuosoite: { fi: 'Veneheittoaukio 328', sv: 'Kurinraitti 799' },
-      postinumero: { fi: '01230', sv: '01110' },
-      postitoimipaikka: { fi: 'Helsinki', sv: 'Helsingfors' },
+      fi: 'Veneheittoaukio 328, 01230 Helsinki',
+      sv: 'Kurinraitti 799, 01110 Helsingfors',
     },
   };
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
@@ -181,12 +177,12 @@ test('getKielistettyOsoite uses ulkomainen_kaynti data for english ulkomainen os
     {
       osoiteTyyppi: 'ulkomainen_kaynti',
       kieli: 'kieli_en#1',
-      osoite: 'Polvivaara 397\n00920 Helsinki',
+      osoite: '1 Example Street\nNortholt\nLondon\nUB5 4AS\nUK',
     },
   ];
 
   const result = {
-    ulkomainenOsoite: { en: 'Polvivaara 397\n00920 Helsinki' },
+    en: '1 Example Street, Northolt, London, UB5 4AS, UK',
   };
   expect(getKielistettyOsoite([], ulkomaisetOsoitteet)).toEqual(result);
 });
@@ -206,15 +202,13 @@ test('getKielistettyOsoite returns finnish kayntiosoite and ulkomainen_kaynti da
     {
       osoiteTyyppi: 'ulkomainen_kaynti',
       kieli: 'kieli_en#1',
-      osoite: 'Polvivaara 397\n00920 Helsinki',
+      osoite: '1 Example Street\nNortholt\nLondon\nUB5 4AS\nUK',
     },
   ];
 
   const result = {
-    katuosoite: { fi: 'Veneheittoaukio 328' },
-    postinumero: { fi: '01230' },
-    postitoimipaikka: { fi: 'Helsinki' },
-    ulkomainenOsoite: { en: 'Polvivaara 397\n00920 Helsinki' },
+    fi: 'Veneheittoaukio 328, 01230 Helsinki',
+    en: '1 Example Street, Northolt, London, UB5 4AS, UK',
   };
   expect(getKielistettyOsoite(kayntiosoitteet, ulkomaisetOsoitteet)).toEqual(
     result
@@ -236,14 +230,12 @@ test('getKielistettyOsoite does not take ulkomainen_kaynti osoite into account a
     {
       osoiteTyyppi: 'ulkomainen_kaynti',
       kieli: 'kieli_en#1',
-      osoite: 'Polvivaara 397\n00920 Helsinki',
+      osoite: '1 Example Street\nNortholt\nLondon\nUB5 4AS\nUK',
     },
   ];
 
   const result = {
-    katuosoite: { en: 'Polvivaara 3' },
-    postinumero: { en: '00921' },
-    postitoimipaikka: { en: 'Helsinki' },
+    en: 'Polvivaara 3, 00921 Helsinki',
   };
   expect(getKielistettyOsoite(kayntiosoitteet, ulkomaisetOsoitteet)).toEqual(
     result
@@ -269,16 +261,15 @@ test('getOrganisaatioKielistettyContactInfo returns ulkomainen kayntiosoite as a
     {
       osoiteTyyppi: 'ulkomainen_kaynti',
       kieli: 'kieli_en#1',
-      osoite: 'Polvivaara 397\n00920 Helsinki',
+      osoite: '1 Example Street\nNortholt\nLondon\nUB5 4AS\nUK',
     },
   ];
 
   const result = {
     kaynti: {
-      katuosoite: { fi: 'Veneheittoaukio 328', sv: 'Kurinraitti 799' },
-      postinumero: { fi: '01230', sv: '01110' },
-      postitoimipaikka: { fi: 'Helsinki', sv: 'Helsingfors' },
-      ulkomainenOsoite: { en: 'Polvivaara 397\n00920 Helsinki' },
+      fi: 'Veneheittoaukio 328, 01230 Helsinki',
+      sv: 'Kurinraitti 799, 01110 Helsingfors',
+      en: '1 Example Street, Northolt, London, UB5 4AS, UK',
     },
   };
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
@@ -303,16 +294,15 @@ test('getOrganisaatioKielistettyContactInfo returns postiosoite as contact info'
     {
       osoiteTyyppi: 'ulkomainen_posti',
       kieli: 'kieli_en#1',
-      osoite: 'Polvivaara 397\n00920 Helsinki',
+      osoite: '1 Example Street\nNortholt\nLondon\nUB5 4AS\nUK',
     },
   ];
 
   const result = {
     posti: {
-      katuosoite: { fi: 'Veneheittoaukio 328', sv: 'Kurinraitti 799' },
-      postinumero: { fi: '01230', sv: '01110' },
-      postitoimipaikka: { fi: 'Helsinki', sv: 'Helsingfors' },
-      ulkomainenOsoite: { en: 'Polvivaara 397\n00920 Helsinki' },
+      fi: 'Veneheittoaukio 328, 01230 Helsinki',
+      sv: 'Kurinraitti 799, 01110 Helsingfors',
+      en: '1 Example Street, Northolt, London, UB5 4AS, UK',
     },
   };
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);

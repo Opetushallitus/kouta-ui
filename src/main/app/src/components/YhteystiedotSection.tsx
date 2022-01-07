@@ -12,7 +12,7 @@ import { Box, Divider, Typography } from '#/src/components/virkailija';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
+import { getKielistettyOrganisaatioContactInfo } from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
@@ -107,48 +107,32 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const nimi = getFirstLanguageValue(_.get(organisaatio, 'nimi'), language);
-  const contactInfo = getOrganisaatioContactInfo(organisaatio);
 
-  const {
-    osoite: postiosoite,
-    postinumero,
-    postitoimipaikka,
-  } = contactInfo?.posti;
-
-  const {
-    osoite: kayntiosoite,
-    postinumero: kayntipostinumero,
-    postitoimipaikka: kayntipostitoimipaikka,
-  } = contactInfo?.kaynti;
+  const yhteystiedot = organisaatio?.yhteystiedot;
+  let contactInfo;
+  if (yhteystiedot) {
+    contactInfo = getKielistettyOrganisaatioContactInfo(yhteystiedot);
+  }
 
   const kayntiosoiteInSelectedLang = getFirstLanguageValue(
-    kayntiosoite,
-    language
-  );
-  const kayntipostitoimipaikkaInSelectedLang = getFirstLanguageValue(
-    kayntipostitoimipaikka,
+    contactInfo?.kaynti,
     language
   );
 
-  const osoiteInSelectedLang = getFirstLanguageValue(postiosoite, language);
-  const postitoimipaikkaInSelectedLang = getFirstLanguageValue(
-    postitoimipaikka,
+  const postiosoiteInSelectedLang = getFirstLanguageValue(
+    contactInfo?.posti,
     language
   );
 
-  let postiosoiteStr;
-  if (osoiteInSelectedLang && postinumero && postitoimipaikkaInSelectedLang) {
-    postiosoiteStr = `${osoiteInSelectedLang}, ${postinumero} ${postitoimipaikkaInSelectedLang}`;
-  }
+  const sahkopostiInSelectedLang = getFirstLanguageValue(
+    contactInfo?.sahkoposti,
+    language
+  );
 
-  let kayntiosoiteStr;
-  if (
-    kayntiosoiteInSelectedLang &&
-    kayntipostinumero &&
-    kayntipostitoimipaikkaInSelectedLang
-  ) {
-    kayntiosoiteStr = `${kayntiosoiteInSelectedLang}, ${kayntipostinumero} ${kayntipostitoimipaikkaInSelectedLang}`;
-  }
+  const puhelinnumeroInSelectedLang = getFirstLanguageValue(
+    contactInfo?.puhelinnumero,
+    language
+  );
 
   return (
     <>
@@ -167,7 +151,7 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
           <Typography color="text.dark">{t('yleiset.postiosoite')}:</Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{postiosoiteStr}</Typography>
+          <Typography>{postiosoiteInSelectedLang}</Typography>
         </InfoValue>
       </Box>
       <Box display="flex" mb={2}>
@@ -177,7 +161,7 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
           </Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{kayntiosoiteStr}</Typography>
+          <Typography>{kayntiosoiteInSelectedLang}</Typography>
         </InfoValue>
       </Box>
       <Box display="flex" mb={2}>
@@ -185,7 +169,7 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
           <Typography color="text.dark">{t('yleiset.sahkoposti')}:</Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{contactInfo?.sahkoposti}</Typography>
+          <Typography>{sahkopostiInSelectedLang}</Typography>
         </InfoValue>
       </Box>
       <Box display="flex" mb={2}>
@@ -195,7 +179,7 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
           </Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{contactInfo?.puhelinnumero}</Typography>
+          <Typography>{puhelinnumeroInSelectedLang}</Typography>
         </InfoValue>
       </Box>
     </>

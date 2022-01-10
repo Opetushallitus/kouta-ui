@@ -23,7 +23,7 @@ test('getKielistetty returns finnish and swedish email addresses', () => {
   expect(getKielistetty(emails, 'email')).toEqual(result);
 });
 
-test('getOrganisaatioKielistettyContactInfo returns finnish email as the only contact info', () => {
+test('getKielistettyOrganisaatioContactInfo returns finnish email as the only contact info', () => {
   const contactInfo = [
     {
       kieli: 'kieli_fi#1',
@@ -37,7 +37,7 @@ test('getOrganisaatioKielistettyContactInfo returns finnish email as the only co
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
 });
 
-test('getOrganisaatioKielistettyContactInfo returns finnish and swedish emails as contact info', () => {
+test('getKielistettyOrganisaatioContactInfo returns finnish and swedish emails as contact info', () => {
   const contactInfo = [
     {
       kieli: 'kieli_fi#1',
@@ -55,7 +55,7 @@ test('getOrganisaatioKielistettyContactInfo returns finnish and swedish emails a
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
 });
 
-test('getKielistettyOsoite returns finnish kayntiosoite as the only address', () => {
+test('getKielistettyOsoite returns finnish kayntiosoite in its string format of katuosoite, postinumero and -toimipaikka', () => {
   const osoite = [
     {
       osoiteTyyppi: 'kaynti',
@@ -73,7 +73,7 @@ test('getKielistettyOsoite returns finnish kayntiosoite as the only address', ()
   expect(getKielistettyOsoite(osoite)).toEqual(result);
 });
 
-test('getKielistettyOsoite returns finnish and swedish kayntiosoitteet as kaynti object', () => {
+test('getKielistettyOsoite returns finnish and swedish kayntiosoitteet', () => {
   const kayntiosoitteet = [
     {
       osoiteTyyppi: 'kaynti',
@@ -98,25 +98,7 @@ test('getKielistettyOsoite returns finnish and swedish kayntiosoitteet as kaynti
   expect(getKielistettyOsoite(kayntiosoitteet)).toEqual(result);
 });
 
-test('getOrganisaatioKielistettyContactInfo returns finnish and swedish emails as contact info', () => {
-  const contactInfo = [
-    {
-      kieli: 'kieli_fi#1',
-      email: 'testiosoite@testi.fi',
-    },
-    {
-      kieli: 'kieli_sv#1',
-      email: 'testiosoite@test.sv',
-    },
-  ];
-
-  const result = {
-    sahkoposti: { fi: 'testiosoite@testi.fi', sv: 'testiosoite@test.sv' },
-  };
-  expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
-});
-
-test('getOrganisaatioKielistettyContactInfo returns emails and kaynti osoite as contact info', () => {
+test('getKielistettyOrganisaatioContactInfo returns emails and kayntiosoite as contact info', () => {
   const contactInfo = [
     {
       kieli: 'kieli_fi#1',
@@ -152,7 +134,7 @@ test('getOrganisaatioKielistettyContactInfo returns emails and kaynti osoite as 
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
 });
 
-test('getOrganisaatioKielistettyContactInfo returns kielistetty puhelinnumero', () => {
+test('getKielistettyOrganisaatioContactInfo returns kielistetty puhelinnumero', () => {
   const contactInfo = [
     {
       kieli: 'kieli_fi#1',
@@ -187,7 +169,7 @@ test('getKielistettyOsoite uses ulkomainen_kaynti data for english ulkomainen os
   expect(getKielistettyOsoite([], ulkomaisetOsoitteet)).toEqual(result);
 });
 
-test('getKielistettyOsoite returns finnish kayntiosoite and ulkomainen_kaynti data for english kayntiosoite', () => {
+test('getKielistettyOsoite returns finnish kayntiosoite and uses ulkomainen_kaynti for english kayntiosoite', () => {
   const kayntiosoitteet = [
     {
       osoiteTyyppi: 'kaynti',
@@ -242,7 +224,7 @@ test('getKielistettyOsoite does not take ulkomainen_kaynti osoite into account a
   );
 });
 
-test('getOrganisaatioKielistettyContactInfo returns ulkomainen kayntiosoite as a part of contact info', () => {
+test('getKielistettyOrganisaatioContactInfo returns ulkomainen kayntiosoite as a part of contact info', () => {
   const contactInfo = [
     {
       osoiteTyyppi: 'kaynti',
@@ -275,7 +257,7 @@ test('getOrganisaatioKielistettyContactInfo returns ulkomainen kayntiosoite as a
   expect(getKielistettyOrganisaatioContactInfo(contactInfo)).toEqual(result);
 });
 
-test('getOrganisaatioKielistettyContactInfo returns postiosoite as contact info', () => {
+test('getKielistettyOrganisaatioContactInfo returns postiosoite as contact info', () => {
   const contactInfo = [
     {
       osoiteTyyppi: 'posti',

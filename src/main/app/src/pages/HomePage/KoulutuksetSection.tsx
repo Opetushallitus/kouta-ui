@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import {
+  makeJulkinenColumn,
   makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
@@ -47,6 +48,7 @@ const makeTableColumns = (t, organisaatioOid) => [
       <Badge color="primary">{toteutusCount}</Badge>
     ),
   },
+  makeJulkinenColumn(t),
 ];
 
 export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {

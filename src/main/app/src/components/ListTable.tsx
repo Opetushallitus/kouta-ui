@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
+import Box from '@opetushallitus/virkailija-ui-components/Box';
 import _ from 'lodash';
 import styled, { css } from 'styled-components';
 
@@ -66,6 +67,25 @@ export const makeKoulutustyyppiColumn = t => ({
   sortable: true,
   render: ({ koulutustyyppi }) =>
     getKoulutustyyppiTranslation(koulutustyyppi, t),
+});
+
+export const makeJulkinenColumn = (t): Column => ({
+  title: t('yleiset.julkinen'),
+  key: 'julkinen',
+  sortable: false,
+  render: ({ julkinen }) => {
+    console.log({ julkinen });
+    return (
+      <Box textAlign="center">
+        {' '}
+        {julkinen ? (
+          <Icon type="public" color="green" />
+        ) : (
+          <Icon type="public_off" color="red" />
+        )}
+      </Box>
+    );
+  },
 });
 
 export const makeOrganisaatioColumn = (t): Column => ({

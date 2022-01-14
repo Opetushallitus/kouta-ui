@@ -6,7 +6,7 @@ import { ENTITY } from '#/src/constants';
 import { getPagination, setPaginationAction } from '#/src/state/pagination';
 
 export const useFilterState = (name: string) => {
-  const { nimi, koulutustyyppi, page, orderBy, tila } = useSelector(
+  const { nimi, koulutustyyppi, page, orderBy, tila, julkinen } = useSelector(
     getPagination(name)
   );
   const dispatch = useDispatch();
@@ -43,6 +43,7 @@ export const useFilterState = (name: string) => {
       setOrderBy: orderBy => setPagination({ orderBy }),
       tila,
       setTila,
+      julkinen,
       filtersProps: {
         nimi,
         koulutustyyppi,
@@ -62,6 +63,7 @@ export const useFilterState = (name: string) => {
       setTila,
       setKoulutustyyppi,
       setNimi,
+      julkinen,
     ]
   );
 };

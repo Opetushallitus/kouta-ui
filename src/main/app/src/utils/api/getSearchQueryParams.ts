@@ -2,6 +2,8 @@ import _fp from 'lodash/fp';
 
 export const FILTER_PAGE_SIZE = 10;
 
+const isValidQueryStringValue = x => _fp.isNumber(x) || !_fp.isEmpty(x);
+
 export const getSearchQueryParams = ({
   organisaatioOid,
   nimi = '',
@@ -13,7 +15,7 @@ export const getSearchQueryParams = ({
   tila,
   koulutustyyppi,
 }) =>
-  _fp.pickBy(x => !_fp.isEmpty(x), {
+  _fp.pickBy(isValidQueryStringValue, {
     nimi,
     'order-by': orderField,
     order: orderDirection,

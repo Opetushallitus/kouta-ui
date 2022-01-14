@@ -15,6 +15,7 @@ import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { formatDateValue } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
+import { getKoulutustyyppiTranslationKey } from '../constants';
 import SmallStatusTag from './StatusTag/SmallStatusTag';
 
 export const makeOnSort =
@@ -58,6 +59,14 @@ export const makeNimiColumn = (
       {getFirstLanguageValue(item.nimi, item.language) || t('yleiset.nimeton')}
     </RouterAnchor>
   ),
+});
+
+export const makeKoulutustyyppiColumn = t => ({
+  title: t('yleiset.koulutustyyppi'),
+  key: 'koulutustyyppi',
+  sortable: true,
+  render: ({ koulutustyyppi }) =>
+    t(getKoulutustyyppiTranslationKey(koulutustyyppi)),
 });
 
 export const makeOrganisaatioColumn = (t): Column => ({

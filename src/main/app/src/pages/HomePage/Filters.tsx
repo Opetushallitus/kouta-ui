@@ -3,47 +3,84 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
+import {
+  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+} from '#/src/components/KoulutustyyppiSelect';
 import Select from '#/src/components/Select';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
-import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+import {
+  getJulkaisutilaTranslationKey,
+  getKoulutustyyppiTranslationKey,
+  JULKAISUTILA,
+} from '#/src/constants';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 
-const getDefaultOptions = t => [
-  {
-    value: JULKAISUTILA.JULKAISTU,
-    label: t(getJulkaisutilaTranslationKey(JULKAISUTILA.JULKAISTU)),
-  },
-  {
-    value: JULKAISUTILA.TALLENNETTU,
-    label: t(getJulkaisutilaTranslationKey(JULKAISUTILA.TALLENNETTU)),
-  },
-  {
-    value: JULKAISUTILA.ARKISTOITU,
-    label: t(getJulkaisutilaTranslationKey(JULKAISUTILA.ARKISTOITU)),
-  },
-];
+const useTilaOptions = t =>
+  useMemo(
+    () =>
+      Object.keys(JULKAISUTILA).map(key => ({
+        label: t(getJulkaisutilaTranslationKey(JULKAISUTILA[key])),
+        value: JULKAISUTILA[key],
+      })),
+    [t]
+  );
+
+const hierarkiaToOptions = (hierarkia, t) =>
+  hierarkia.flatMap(({ value: topValue, children }) => {
+    if (children) {
+      return children.map(({ value }) => ({
+        label:
+          t(getKoulutustyyppiTranslationKey(topValue)) +
+          ' - ' +
+          t(getKoulutustyyppiTranslationKey(value)),
+        value,
+      }));
+    } else {
+      return [
+        {
+          label: t(getKoulutustyyppiTranslationKey(topValue)),
+          value: topValue,
+        },
+      ];
+    }
+  });
+
+const useKoulutustyyppiOptions = t =>
+  useMemo(
+    () => [
+      {
+        label: t('koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit'),
+        options: hierarkiaToOptions(
+          TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+          t
+        ),
+      },
+      {
+        label: t('koulutustyyppivalikko.muutKoulutustyypit'),
+        options: hierarkiaToOptions(
+          TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+          t
+        ),
+      },
+    ],
+    [t]
+  );
 
 export const Filters = ({
   nimi,
   onNimiChange,
-  onTilaChange: onTilaChangeArg,
+  onTilaChange,
+  onKoulutustyyppiChange,
   nimiPlaceholder = '',
-  tilaOptions: tilaOptionsProp,
+  koulutustyyppi,
 }) => {
   const { t } = useTranslation();
 
-  const onTilaChange = useCallback(
-    value => {
-      onTilaChangeArg(value);
-    },
-    [onTilaChangeArg]
-  );
+  const tilaOptions = useTilaOptions(t);
 
-  const tilaOptions = useMemo(
-    () => tilaOptionsProp || getDefaultOptions(t),
-    [t, tilaOptionsProp]
-  );
+  const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
 
   const [usedNimi, setUsedNimi] = useState(nimi);
   const debouncedNimiChange = useRef(
@@ -65,7 +102,18 @@ export const Filters = ({
           suffix={<InputIcon type="search" />}
         />
       </Box>
-      <Box flexGrow={0} flexBasis="20%" paddingRight={2}>
+      {onKoulutustyyppiChange && (
+        <Box flexGrow={0} flexBasis="350px" paddingRight={2}>
+          <Select
+            options={koulutustyyppiOptions}
+            placeholder={t('yleiset.koulutustyyppi')}
+            value={koulutustyyppi}
+            onChange={onKoulutustyyppiChange}
+            isMulti
+          />
+        </Box>
+      )}
+      <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
         <Select
           options={tilaOptions}
           onChange={onTilaChange}

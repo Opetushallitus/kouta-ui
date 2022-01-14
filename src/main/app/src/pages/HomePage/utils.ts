@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import {
   KOULUTUS_ROLE,
@@ -15,23 +15,36 @@ export const parseSort = sort => {
   return (sort || '').split(':');
 };
 
+const selectValueToSimpleValue = v => {
+  switch (true) {
+    case Array.isArray(v):
+      return v.map(_fp.prop('value'));
+    case v:
+      return v?.value;
+    default:
+      return null;
+  }
+};
+
 export const getIndexParamsByFilters = ({
   organisaatioOid,
   nimi,
   page,
   orderBy,
   tila,
+  koulutustyyppi,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
 
   return {
     organisaatioOid,
     nimi,
-    page: _.isNumber(page) ? page + 1 : 1,
+    page: _fp.isNumber(page) ? page + 1 : 1,
     pageSize: 10,
     orderField,
     orderDirection,
-    tila: tila ? tila.value : null,
+    tila: selectValueToSimpleValue(tila),
+    koulutustyyppi: selectValueToSimpleValue(koulutustyyppi),
   };
 };
 

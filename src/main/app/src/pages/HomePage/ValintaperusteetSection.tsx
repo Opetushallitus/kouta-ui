@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import Button from '#/src/components/Button';
 import {
+  makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeNimiColumn,
@@ -37,6 +38,7 @@ const makeTableColumns = (t, organisaatioOid) => [
     getLinkUrl: ({ id }) =>
       `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`,
   }),
+  makeKoulutustyyppiColumn(t),
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),

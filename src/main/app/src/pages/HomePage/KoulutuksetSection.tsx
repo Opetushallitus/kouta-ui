@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import {
+  makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeNimiColumn,
@@ -35,6 +36,7 @@ const makeTableColumns = (t, organisaatioOid) => [
     getLinkUrl: ({ oid }) =>
       `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`,
   }),
+  makeKoulutustyyppiColumn(t),
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),

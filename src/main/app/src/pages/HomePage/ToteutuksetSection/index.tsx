@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import {
+  makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeNimiColumn,
@@ -26,6 +27,7 @@ const makeTableColumns = (t, organisaatioOid) => [
     getLinkUrl: ({ oid }) =>
       `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
   }),
+  makeKoulutustyyppiColumn(t),
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),

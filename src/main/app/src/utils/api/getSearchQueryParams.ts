@@ -11,6 +11,7 @@ export const getSearchQueryParams = ({
   orderField,
   orderDirection,
   tila,
+  koulutustyyppi,
 }) =>
   _fp.pickBy(x => !_fp.isEmpty(x), {
     nimi,
@@ -21,4 +22,5 @@ export const getSearchQueryParams = ({
     lng: language,
     size: pageSize,
     page,
+    koulutustyyppi,
   });

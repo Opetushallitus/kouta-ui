@@ -11,9 +11,9 @@ import { Box } from '#/src/components/virkailija';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { getTestIdProps } from '#/src/utils';
 import {
-  getQueryParams,
+  getSearchQueryParams,
   FILTER_PAGE_SIZE,
-} from '#/src/utils/api/getQueryParams';
+} from '#/src/utils/api/getSearchQueryParams';
 
 import Filters from './Filters';
 import { useFilterState } from './useFilterState';
@@ -33,7 +33,7 @@ export const EntitySearchList = ({
 
   const queryParams = useMemo(
     () =>
-      getQueryParams(
+      getSearchQueryParams(
         getIndexParamsByFilters({ ...filterState, organisaatioOid })
       ),
     [filterState, organisaatioOid]

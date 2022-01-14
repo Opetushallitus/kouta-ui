@@ -21,7 +21,6 @@ export const getIndexParamsByFilters = ({
   page,
   orderBy,
   tila,
-  showArchived,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
 
@@ -32,7 +31,6 @@ export const getIndexParamsByFilters = ({
     pageSize: 10,
     orderField,
     orderDirection,
-    showArchived,
     tila: tila ? tila.value : null,
   };
 };

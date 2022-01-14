@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Select from '#/src/components/Select';
-import { Box, Checkbox, Input, InputIcon } from '#/src/components/virkailija';
+import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
@@ -27,8 +27,6 @@ const getDefaultOptions = t => [
 export const Filters = ({
   nimi,
   onNimiChange,
-  showArchived,
-  onShowArchivedChange,
   onTilaChange: onTilaChangeArg,
   nimiPlaceholder = '',
   tilaOptions: tilaOptionsProp,
@@ -74,12 +72,6 @@ export const Filters = ({
           placeholder={t('yleiset.tila')}
           isClearable
         />
-      </Box>
-      {/* TODO: Hide this if any tila is chosen */}
-      <Box flexGrow={0}>
-        <Checkbox checked={showArchived} onChange={onShowArchivedChange}>
-          {t('etusivu.naytaArkistoidut')}
-        </Checkbox>
       </Box>
     </Box>
   );

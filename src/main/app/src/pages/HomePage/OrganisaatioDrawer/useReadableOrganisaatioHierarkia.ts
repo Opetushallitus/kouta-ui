@@ -6,14 +6,10 @@ import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getUserRoles from '#/src/utils/getUserRoles';
 import isOid from '#/src/utils/isOid';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
-import {
-  filterByName,
-  flatFilterHierarkia,
-} from '#/src/utils/organisaatio/hierarkiaHelpers';
+import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 import { createCanReadSomethingRoleBuilder } from '../utils';
 
@@ -53,7 +49,6 @@ export const useReadableOrganisaatioHierarkia = ({
   nameSearchEnabled = true,
 }) => {
   const roleBuilder = useAuthorizedUserRoleBuilder();
-  const language = useUserLanguage();
   const user = useAuthorizedUser();
   const roles = useMemo(() => getUserRoles(user), [user]);
   const oids = useMemo(() => getKoutaRolesOrganisaatioOids(roles), [roles]);
@@ -91,7 +86,7 @@ export const useReadableOrganisaatioHierarkia = ({
     [roleBuilder]
   );
 
-  const roleHierarkia = useMemo(() => {
+  const hierarkia = useMemo(() => {
     return _.isArray(data)
       ? flatFilterHierarkia(
           data,
@@ -99,12 +94,6 @@ export const useReadableOrganisaatioHierarkia = ({
         )
       : [];
   }, [data, hasRequiredRoles]);
-
-  const hierarkia = useMemo(() => {
-    return nameSearchEnabled
-      ? filterByName(roleHierarkia, formattedName, language)
-      : roleHierarkia;
-  }, [roleHierarkia, formattedName, language, nameSearchEnabled]);
 
   return { hierarkia, ...rest };
 };

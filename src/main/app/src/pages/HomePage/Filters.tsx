@@ -70,6 +70,7 @@ export const Filters = ({
           options={tilaOptions}
           onChange={onTilaChange}
           placeholder={t('yleiset.tila')}
+          isMultiSelect
           isClearable
         />
       </Box>

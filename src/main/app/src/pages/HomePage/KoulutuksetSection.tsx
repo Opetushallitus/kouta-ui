@@ -12,7 +12,7 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import searchKoulutukset from '#/src/utils/koulutus/searchKoulutukset';
+import { searchKoulutukset } from '#/src/utils/koulutus/searchKoulutukset';
 
 import { EntitySearchList } from './EntitySearchList';
 import ListCollapse from './ListCollapse';

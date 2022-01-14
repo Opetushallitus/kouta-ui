@@ -46,6 +46,30 @@ const Label = ({ tila, t }) => {
   );
 };
 
+const isAllowedTilaTransition = (currTila, checkedTila) => {
+  /* tila (currTila) on undefined kun ollaan luomassa entiteettiä */
+  switch (currTila) {
+    case undefined:
+      return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.JULKAISTU].includes(
+        checkedTila
+      );
+    case checkedTila:
+      return true;
+    case JULKAISUTILA.TALLENNETTU:
+      return [JULKAISUTILA.POISTETTU, JULKAISUTILA.JULKAISTU].includes(
+        checkedTila
+      );
+    case JULKAISUTILA.JULKAISTU:
+      return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.ARKISTOITU].includes(
+        checkedTila
+      );
+    case JULKAISUTILA.ARKISTOITU:
+      return checkedTila === JULKAISUTILA.JULKAISTU;
+    default:
+      return false;
+  }
+};
+
 export const JulkaisutilaField = ({
   entity,
   disabled,
@@ -67,19 +91,19 @@ export const JulkaisutilaField = ({
       component={FormFieldRadioGroup}
       label={label}
     >
-      <Radio value={JULKAISUTILA.TALLENNETTU}>
-        <Label tila={JULKAISUTILA.TALLENNETTU} t={t} />
-      </Radio>
-      <Radio value={JULKAISUTILA.JULKAISTU}>
-        <Label tila={JULKAISUTILA.JULKAISTU} t={t} />
-      </Radio>
-      {/* savedTila on undefined kun ollaan luomassa entiteettiä */}
-      {!savedTila ||
-        (savedTila !== JULKAISUTILA.TALLENNETTU && (
-          <Radio value={JULKAISUTILA.ARKISTOITU}>
-            <Label tila={JULKAISUTILA.ARKISTOITU} t={t} />
-          </Radio>
-        ))}
+      {[
+        JULKAISUTILA.POISTETTU,
+        JULKAISUTILA.TALLENNETTU,
+        JULKAISUTILA.JULKAISTU,
+        JULKAISUTILA.ARKISTOITU,
+      ].map(
+        tila =>
+          isAllowedTilaTransition(savedTila, tila) && (
+            <Radio key={tila} value={tila}>
+              <Label tila={tila} t={t} />
+            </Radio>
+          )
+      )}
     </Field>
   );
 };

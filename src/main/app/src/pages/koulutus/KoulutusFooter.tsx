@@ -14,6 +14,7 @@ import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getValuesForSaving } from '#/src/utils';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
@@ -90,7 +91,12 @@ export const KoulutusFooter = ({
           `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`
         );
       } else {
-        queryClient.invalidateQueries(ENTITY.KOULUTUS);
+        afterUpdate(
+          queryClient,
+          history,
+          ENTITY.KOULUTUS,
+          valuesForSaving.tila
+        );
       }
     },
     [

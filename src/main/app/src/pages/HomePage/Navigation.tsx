@@ -64,28 +64,21 @@ const NavigationItem = styled.div`
     `}
 `;
 
-const anchorOrder = ['koulutukset', 'toteutukset', 'haut', 'valintaperusteet'];
+const anchorOrder = [
+  'koulutukset',
+  'toteutukset',
+  'haut',
+  'hakukohteet',
+  'valintaperusteet',
+];
 
-const getAnchorLabelById = (id, t) => {
-  return {
-    koulutukset: t('yleiset.koulutukset'),
-    toteutukset: t('yleiset.toteutukset'),
-    haut: t('yleiset.haut'),
-    hakukohteet: t('yleiset.hakukohteet'),
-    valintaperusteet: t('yleiset.valintaperusteet'),
-  }[id];
-};
-
-const getNavigationItems = (anchors, t) => {
-  const items = Object.keys(anchors)
-    .filter(([, value]) => !!value)
+const getNavigationItems = (anchors, t) =>
+  anchorOrder
+    .filter(id => anchors[id])
     .map(id => ({
       id,
-      label: getAnchorLabelById(id, t),
+      label: t(`yleiset.${id}`),
     }));
-
-  return items.sort((a, b) => anchorOrder.indexOf(a) - anchorOrder.indexOf(b));
-};
 
 const NavigationItems = ({ items, activeItem, maxInlineItems }) => {
   const inlineItems = useMemo(

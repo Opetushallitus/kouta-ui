@@ -53,6 +53,7 @@ export const Filters = ({
   onKoulutustyyppiChange,
   nimiPlaceholder = '',
   koulutustyyppi,
+  tila,
 }) => {
   const { t } = useTranslation();
 
@@ -96,8 +97,8 @@ export const Filters = ({
           options={tilaOptions}
           onChange={onTilaChange}
           placeholder={t('yleiset.tila')}
+          value={tila}
           isMulti
-          isClearable
         />
       </Box>
     </Box>

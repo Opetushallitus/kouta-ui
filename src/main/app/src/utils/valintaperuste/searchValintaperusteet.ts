@@ -1,17 +1,5 @@
-export const searchValintaperusteet = async ({
-  httpClient,
-  apiUrls,
-  params,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.search.valintaperusteet'),
-    {
-      params,
-      errorNotifier: {
-        silent: true,
-      },
-    }
-  );
+import { makeEntitySearch } from '#/src/utils/api/makeEntitySearch';
 
-  return data;
-};
+export const searchValintaperusteet = makeEntitySearch(
+  'kouta-backend.search.valintaperusteet'
+);

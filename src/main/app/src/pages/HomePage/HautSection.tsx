@@ -12,7 +12,7 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import searchHaut from '#/src/utils/haku/searchHaut';
+import { searchHaut } from '#/src/utils/haku/searchHaut';
 
 import { EntitySearchList } from './EntitySearchList';
 import ListCollapse from './ListCollapse';

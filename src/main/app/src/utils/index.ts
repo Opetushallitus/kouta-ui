@@ -10,6 +10,7 @@ import {
 } from '#/src/components/Editor/utils';
 import {
   ALLOWED_HTML_TAGS,
+  EI_TUETUT_KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
   LANGUAGES,
   NDASH,
@@ -308,29 +309,31 @@ export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
   _.isNil(tyyppi) ? '' : `koulutustyypit.${_.camelCase(tyyppi)}`;
 
 export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
-  hierarkia.flatMap(({ value: topValue, children }) => {
-    if (children) {
-      return children.map(({ value }) => ({
-        label:
-          ([
-            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-            KOULUTUSTYYPPI.TUTKINNON_OSA,
-            KOULUTUSTYYPPI.OSAAMISALA,
-          ].includes(value)
-            ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
-            : '') + t(getKoulutustyyppiTranslationKey(value)),
-        value,
-      }));
-    } else {
-      return [
-        {
-          label: t(getKoulutustyyppiTranslationKey(topValue)),
-          value: topValue,
-        },
-      ];
-    }
-  });
+  hierarkia
+    .flatMap(({ value: topValue, children }) => {
+      if (children) {
+        return children.map(({ value }) => ({
+          label:
+            ([
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+              KOULUTUSTYYPPI.TUTKINNON_OSA,
+              KOULUTUSTYYPPI.OSAAMISALA,
+            ].includes(value)
+              ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
+              : '') + t(getKoulutustyyppiTranslationKey(value)),
+          value,
+        }));
+      } else {
+        return [
+          {
+            label: t(getKoulutustyyppiTranslationKey(topValue)),
+            value: topValue,
+          },
+        ];
+      }
+    })
+    .filter(({ value }) => !EI_TUETUT_KOULUTUSTYYPIT.includes(value));
 
 export const koulutustyyppiHierarkiaToTranslationMap = memoizeOne(
   (hierarkia, t) => {

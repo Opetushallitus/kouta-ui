@@ -312,12 +312,14 @@ export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
     if (children) {
       return children.map(({ value }) => ({
         label:
-          (topValue === 'korkeakoulutus' ||
-          value === KOULUTUSTYYPPI.TELMA ||
-          value === KOULUTUSTYYPPI.TUVA
-            ? ''
-            : t(getKoulutustyyppiTranslationKey(topValue)) + ' - ') +
-          t(getKoulutustyyppiTranslationKey(value)),
+          ([
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            KOULUTUSTYYPPI.TUTKINNON_OSA,
+            KOULUTUSTYYPPI.OSAAMISALA,
+          ].includes(value)
+            ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
+            : '') + t(getKoulutustyyppiTranslationKey(value)),
         value,
       }));
     } else {
@@ -336,7 +338,6 @@ export const koulutustyyppiHierarkiaToTranslationMap = memoizeOne(
       hierarkia,
       t
     );
-    console.log({ koulutustyyppiOptions });
     return _fp.fromPairs(
       koulutustyyppiOptions.map(({ label, value }) => [value, label])
     );

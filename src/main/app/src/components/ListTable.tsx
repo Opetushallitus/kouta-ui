@@ -72,7 +72,7 @@ export const makeKoulutustyyppiColumn = t => ({
 export const makeJulkinenColumn = (t): Column => ({
   title: t('yleiset.nakyvyys'),
   key: 'julkinen',
-  sortable: false,
+  sortable: true,
   render: ({ julkinen }) => {
     return (
       <Box textAlign="center" style={{ userSelect: 'none' }}>

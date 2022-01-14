@@ -57,7 +57,7 @@ export const QueryResultWrapper = ({
     case 'error':
       // TODO: Get Axios response error status codes here.
       console.error(errors);
-      return <ErrorAlert onReload={refetch} />;
+      return <ErrorAlert onReload={refetch} center />;
     case 'loading':
     default:
       return <LoadingWrapper />;

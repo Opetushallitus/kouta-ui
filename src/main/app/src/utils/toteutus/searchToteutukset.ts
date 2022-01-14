@@ -1,8 +1,4 @@
-import getQueryParams from '#/src/utils/api/getQueryParams';
-
-const getToteutukset = async ({ httpClient, apiUrls, ...rest }) => {
-  const params = getQueryParams(rest);
-
+export const searchToteutukset = async ({ httpClient, apiUrls, params }) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.search.toteutukset'),
     { params }
@@ -10,5 +6,3 @@ const getToteutukset = async ({ httpClient, apiUrls, ...rest }) => {
 
   return data;
 };
-
-export default getToteutukset;

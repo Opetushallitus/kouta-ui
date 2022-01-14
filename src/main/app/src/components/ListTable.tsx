@@ -70,18 +70,19 @@ export const makeKoulutustyyppiColumn = t => ({
 });
 
 export const makeJulkinenColumn = (t): Column => ({
-  title: t('yleiset.julkinen'),
+  title: t('yleiset.nakyvyys'),
   key: 'julkinen',
   sortable: false,
   render: ({ julkinen }) => {
     return (
-      <Box textAlign="center">
-        {' '}
+      <Box textAlign="center" style={{ userSelect: 'none' }}>
         {julkinen ? (
-          <Icon type="public" color="green" />
-        ) : (
-          <Icon type="public_off" color="red" />
-        )}
+          <Icon
+            type="people"
+            title={t('yleiset.julkinen')}
+            aria-label={t('yleiset.julkinen')}
+          />
+        ) : null}
       </Box>
     );
   },

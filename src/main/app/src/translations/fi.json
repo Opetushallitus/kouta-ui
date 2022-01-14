@@ -190,7 +190,8 @@
     "naytaJulkaistuTooltip": "Näyttää julkaistun lomakkeen tiedot oppijan puolella",
     "ulkoinenTunniste": "Ulkoinen tunniste",
     "uudenOpiskelijanUrl": "Uuden opiskelijan verkkosivun URL",
-    "julkinen": "Julkinen"
+    "julkinen": "Julkinen",
+    "nakyvyys": "Näkyvyys"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

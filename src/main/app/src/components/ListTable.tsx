@@ -74,7 +74,6 @@ export const makeJulkinenColumn = (t): Column => ({
   key: 'julkinen',
   sortable: false,
   render: ({ julkinen }) => {
-    console.log({ julkinen });
     return (
       <Box textAlign="center">
         {' '}

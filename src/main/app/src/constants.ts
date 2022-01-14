@@ -17,8 +17,8 @@ export function getJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
   throw new Error(`Unknown julkaisutila given: ${tila}`);
 }
 
-export const getKoulutustyyppiTranslationKey = (tyyppi: KOULUTUSTYYPPI) =>
-  `koulutustyypit.${_.camelCase(tyyppi)}`;
+export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
+  _.isNil(tyyppi) ? '' : `koulutustyypit.${_.camelCase(tyyppi)}`;
 
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
 

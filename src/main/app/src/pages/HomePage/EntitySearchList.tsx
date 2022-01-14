@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
+import ListSpin from '#/src/components/ListSpin';
 import ListTable from '#/src/components/ListTable';
 import Pagination from '#/src/components/Pagination';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
@@ -76,7 +77,7 @@ export const EntitySearchList = ({
       <Box mb={3}>
         <Filters {...filtersProps} nimiPlaceholder={nimiPlaceholder} />
       </Box>
-      <QueryResultWrapper queryResult={queryResult}>
+      <QueryResultWrapper queryResult={queryResult} LoadingWrapper={ListSpin}>
         <ListTable
           rows={rows}
           columns={tableColumns}

@@ -2,10 +2,11 @@ import React from 'react';
 
 import { QueryObserverResult } from 'react-query';
 
-import ErrorAlert from './ErrorAlert';
-import ListSpin from './ListSpin';
+import { Spin } from '#/src/components/virkailija';
 
-export const getCombinedQueryResult = (
+import ErrorAlert from './ErrorAlert';
+
+export const getCombinedQueryStatus = (
   responses: Array<QueryObserverResult> = []
 ) => {
   switch (true) {
@@ -23,12 +24,17 @@ export const getCombinedQueryResult = (
 type Props = {
   children: JSX.Element;
   queryResult: QueryObserverResult | Array<QueryObserverResult>;
+  LoadingWrapper?: React.ComponentType;
 };
 
-export const QueryResultWrapper = ({ children, queryResult }: Props) => {
+export const QueryResultWrapper = ({
+  children,
+  queryResult,
+  LoadingWrapper = Spin,
+}: Props) => {
   let status, isFetching, errors, refetch;
   if (Array.isArray(queryResult)) {
-    status = getCombinedQueryResult(queryResult);
+    status = getCombinedQueryStatus(queryResult);
     isFetching = queryResult.some(({ isFetching }) => isFetching);
     errors = queryResult?.map(({ error }) => error).filter(Boolean);
     refetch = () => queryResult.forEach(({ refetch }) => refetch());
@@ -40,7 +46,7 @@ export const QueryResultWrapper = ({ children, queryResult }: Props) => {
   }
 
   if (isFetching) {
-    return <ListSpin />;
+    return <LoadingWrapper />;
   }
 
   switch (status) {
@@ -54,6 +60,6 @@ export const QueryResultWrapper = ({ children, queryResult }: Props) => {
       return <ErrorAlert onReload={refetch} />;
     case 'loading':
     default:
-      return <ListSpin center />;
+      return <LoadingWrapper />;
   }
 };

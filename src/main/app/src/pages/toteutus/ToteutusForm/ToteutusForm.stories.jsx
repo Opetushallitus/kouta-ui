@@ -10,9 +10,9 @@ export default {
   title: 'ToteutusForm',
   argTypes: {
     koulutustyyppi: {
+      options: KOULUTUSTYYPIT,
       control: {
         type: 'select',
-        options: KOULUTUSTYYPIT,
       },
     },
   },

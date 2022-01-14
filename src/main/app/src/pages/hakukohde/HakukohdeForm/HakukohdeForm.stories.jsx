@@ -9,9 +9,9 @@ export default {
   title: 'HakukohdeForm',
   argTypes: {
     koulutustyyppi: {
+      options: KOULUTUSTYYPIT,
       control: {
         type: 'select',
-        options: KOULUTUSTYYPIT,
       },
     },
   },

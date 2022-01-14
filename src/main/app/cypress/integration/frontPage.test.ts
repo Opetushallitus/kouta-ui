@@ -104,7 +104,7 @@ describe('frontPage', () => {
   it('should list koulutukset', () => {
     cy.get('#koulutukset').scrollIntoView();
 
-    getByTestId('koulutuksetTable').should('contain', 'Koulutuksen nimi');
+    getByTestId('koulutusTable').should('contain', 'Koulutuksen nimi');
   });
 
   it('should list toteutukset', () => {

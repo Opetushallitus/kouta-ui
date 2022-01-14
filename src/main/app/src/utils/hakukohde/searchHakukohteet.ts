@@ -3,6 +3,9 @@ export const searchHakukohteet = async ({ httpClient, apiUrls, params }) => {
     apiUrls.url('kouta-backend.search.hakukohteet'),
     {
       params,
+      errorNotifier: {
+        silent: true,
+      },
     }
   );
 

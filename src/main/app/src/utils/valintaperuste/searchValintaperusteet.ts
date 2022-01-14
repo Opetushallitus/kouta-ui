@@ -7,6 +7,9 @@ export const searchValintaperusteet = async ({
     apiUrls.url('kouta-backend.search.valintaperusteet'),
     {
       params,
+      errorNotifier: {
+        silent: true,
+      },
     }
   );
 

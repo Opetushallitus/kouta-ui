@@ -20,7 +20,12 @@ export const useSearchKoulutukset = props => {
 const getSearchKoulutuksetData = async ({ params, httpClient, apiUrls }) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.search.koulutukset'),
-    { params }
+    {
+      params,
+      errorNotifier: {
+        silent: true,
+      },
+    }
   );
 
   return data;

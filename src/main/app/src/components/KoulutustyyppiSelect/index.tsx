@@ -14,6 +14,7 @@ import {
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT,
+  getKoulutustyyppiTranslationKey,
 } from '#/src/constants';
 import { spacing, getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
@@ -62,12 +63,10 @@ const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   border-left: 1px solid ${getThemeProp('palette.divider')};
 `;
 
-const getTranslationKey = tyyppi => `koulutustyypit.${_.camelCase(tyyppi)}`;
-
 const useFirstLevelOptions = (hierarkia, t) =>
   _.map(hierarkia, ({ value, disabled }) => ({
     value,
-    label: t(getTranslationKey(value)),
+    label: t(getKoulutustyyppiTranslationKey(value)),
     disabled,
   }));
 
@@ -77,7 +76,7 @@ const useSecondLevelOptions = (hierarkia, firstLevelValue, t) => {
 
     return _.map(node?.children, ({ value, disabled }) => ({
       value,
-      label: t(getTranslationKey(value)),
+      label: t(getKoulutustyyppiTranslationKey(value)),
       disabled,
     }));
   }, [hierarkia, firstLevelValue, t]);

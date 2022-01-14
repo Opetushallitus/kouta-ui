@@ -3,17 +3,15 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import {
-  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
-  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
-} from '#/src/components/KoulutustyyppiSelect';
 import Select from '#/src/components/Select';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import {
   getJulkaisutilaTranslationKey,
-  getKoulutustyyppiTranslationKey,
   JULKAISUTILA,
+  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
+import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 
@@ -27,39 +25,19 @@ const useTilaOptions = t =>
     [t]
   );
 
-const hierarkiaToOptions = (hierarkia, t) =>
-  hierarkia.flatMap(({ value: topValue, children }) => {
-    if (children) {
-      return children.map(({ value }) => ({
-        label:
-          t(getKoulutustyyppiTranslationKey(topValue)) +
-          ' - ' +
-          t(getKoulutustyyppiTranslationKey(value)),
-        value,
-      }));
-    } else {
-      return [
-        {
-          label: t(getKoulutustyyppiTranslationKey(topValue)),
-          value: topValue,
-        },
-      ];
-    }
-  });
-
 const useKoulutustyyppiOptions = t =>
   useMemo(
     () => [
       {
         label: t('koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit'),
-        options: hierarkiaToOptions(
+        options: koulutustyyppiHierarkiaToOptions(
           TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
           t
         ),
       },
       {
         label: t('koulutustyyppivalikko.muutKoulutustyypit'),
-        options: hierarkiaToOptions(
+        options: koulutustyyppiHierarkiaToOptions(
           TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
           t
         ),

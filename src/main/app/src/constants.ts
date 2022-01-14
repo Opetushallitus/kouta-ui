@@ -17,9 +17,6 @@ export function getJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
   throw new Error(`Unknown julkaisutila given: ${tila}`);
 }
 
-export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
-  _.isNil(tyyppi) ? '' : `koulutustyypit.${_.camelCase(tyyppi)}`;
-
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
 
 export enum KOULUTUSTYYPPI {
@@ -103,6 +100,43 @@ export const TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.TUVA,
   KOULUTUSTYYPPI.TELMA,
   KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+];
+
+export const TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA = [
+  { value: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS },
+  {
+    value: 'korkeakoulutus',
+    children: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
+  },
+  { value: KOULUTUSTYYPPI.LUKIOKOULUTUS },
+];
+
+export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
+  {
+    value: 'ammatillinen',
+    children: TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
+  },
+  {
+    value: 'korkeakoulutus',
+    children: TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
+  },
+  {
+    value: 'vapaa-sivistystyo',
+    children: [
+      {
+        value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+      },
+      { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU },
+    ],
+  },
+  { value: KOULUTUSTYYPPI.TUVA },
+  { value: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },
 ];
 
 const AMM_KOULUTUS_KOODIURIT = [

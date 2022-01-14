@@ -12,10 +12,9 @@ import Table, {
 } from '#/src/components/Table';
 import { Icon, Dropdown } from '#/src/components/virkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { formatDateValue } from '#/src/utils';
+import { formatDateValue, getKoulutustyyppiTranslation } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
-import { getKoulutustyyppiTranslationKey } from '../constants';
 import SmallStatusTag from './StatusTag/SmallStatusTag';
 
 export const makeOnSort =
@@ -66,7 +65,7 @@ export const makeKoulutustyyppiColumn = t => ({
   key: 'koulutustyyppi',
   sortable: true,
   render: ({ koulutustyyppi }) =>
-    t(getKoulutustyyppiTranslationKey(koulutustyyppi)),
+    getKoulutustyyppiTranslation(koulutustyyppi, t),
 });
 
 export const makeOrganisaatioColumn = (t): Column => ({

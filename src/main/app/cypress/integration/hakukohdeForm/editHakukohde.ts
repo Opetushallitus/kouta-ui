@@ -35,7 +35,7 @@ export const editHakukohdeForm = () => {
         hakukohdeOid,
         organisaatioOid,
         edit: true,
-        tarjoajat: ['1.2.246.562.10.45854578546'],
+        tarjoajat: ['1.2.246.562.10.45854578546', '1.2.246.562.10.16538823663'],
       });
 
       fillKieliversiotSection();

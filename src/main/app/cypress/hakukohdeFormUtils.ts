@@ -17,39 +17,11 @@ import {
 } from '#/cypress/utils';
 import { HAKUTAPA_YHTEISHAKU_KOODI_URI } from '#/src/constants';
 
-const toimipisteTarjoajat = [
-  '1.2.246.562.10.16538823663',
-  '1.2.246.562.10.2013081415065445951365',
-  '1.2.246.562.10.20485193278',
-  '1.2.246.562.10.20866993056',
-  '1.2.246.562.10.23017513880',
-  '1.2.246.562.10.45854578546',
-  '1.2.246.562.10.55355715099',
-  '1.2.246.562.10.55711304158',
-  '1.2.246.562.10.56139411567',
-  '1.2.246.562.10.60465978314',
-  '1.2.246.562.10.656909794910',
-  '1.2.246.562.10.78321186062',
-  '1.2.246.562.10.879177258610',
-  '1.2.246.562.10.93115250668',
-];
-
 const selectedToimipisteNimi =
   /stadin ammatti- ja aikuisopisto, myllypuron toimipaikka/i;
 
-const selectedToimipiste = '1.2.246.562.10.45854578546';
-
 export const fillJarjestyspaikkaSection = () => {
   withinSection('jarjestyspaikkaOid', () => {
-    toimipisteTarjoajat.forEach(oid => {
-      cy.get(`[value="${oid}"]`).should('exist');
-      if (oid === selectedToimipiste) {
-        cy.get(`[value="${oid}"]`).should('not.be.disabled');
-      } else {
-        cy.get(`[value="${oid}"]`).should('be.disabled');
-      }
-    });
-
     cy.findByText(selectedToimipisteNimi).click();
   });
 };

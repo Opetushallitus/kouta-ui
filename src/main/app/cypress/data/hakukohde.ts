@@ -5,7 +5,7 @@ const hakukohde = () => ({
   toteutusOid: '1.2.246.562.17.00000000000000000001',
   hakuOid: '1.2.246.562.29.00000000000000000001',
   tila: 'tallennettu',
-  nimi: { fi: 'Hakukohteen nimi' },
+  nimi: { fi: 'Hakukohteen nimi', sv: 'Hakukohde nimi sv' },
   alkamiskausiKoodiUri: 'kausi_k#1',
   alkamisvuosi: '2024',
   hakulomake: {},

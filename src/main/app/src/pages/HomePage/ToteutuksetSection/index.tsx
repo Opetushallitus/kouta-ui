@@ -1,60 +1,33 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { RouterAnchor } from '#/src/components/Anchor';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
-import ErrorAlert from '#/src/components/ErrorAlert';
-import ListSpin from '#/src/components/ListSpin';
-import ListTable, {
+import {
+  makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
+  makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import Pagination from '#/src/components/Pagination';
-import { Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import useModal from '#/src/hooks/useModal';
-import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import searchToteutukset from '#/src/utils/toteutus/searchToteutukset';
+import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
-import Filters from '../Filters';
+import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
-import { useFilterState } from '../useFilterState';
-import { getIndexParamsByFilters } from '../utils';
 import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
 
-const getToteutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
-  const params = getIndexParamsByFilters(filters);
-
-  const { result, totalCount } = await searchToteutukset({
-    httpClient,
-    apiUrls,
-    ...params,
-  });
-
-  return { result, pageCount: Math.ceil(totalCount / 10) };
-};
-
 const makeTableColumns = (t, organisaatioOid) => [
-  {
-    title: t('yleiset.nimi'),
-    key: 'nimi',
-    sortable: true,
-    render: ({ nimi, oid, language }) => (
-      <RouterAnchor
-        to={`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`}
-      >
-        {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
-      </RouterAnchor>
-    ),
-  },
+  makeNimiColumn(t, {
+    getLinkUrl: ({ oid }) =>
+      `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
+  }),
+  makeKoulutustyyppiColumn(t),
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),
@@ -86,52 +59,6 @@ const Actions = ({ organisaatioOid }) => {
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const {
-    nimi,
-    showArchived,
-    page,
-    setPage,
-    orderBy,
-    setOrderBy,
-    tila,
-    filtersProps,
-  } = useFilterState('toteutukset');
-
-  const watch = JSON.stringify([
-    page,
-    nimi,
-    organisaatioOid,
-    showArchived,
-    orderBy,
-    tila,
-  ]);
-
-  const {
-    data: { result: toteutukset, pageCount = 0 } = {},
-    error,
-    reload,
-  } = useApiAsync({
-    promiseFn: getToteutuksetFn,
-    nimi,
-    page,
-    showArchived,
-    organisaatioOid,
-    orderBy,
-    tila,
-    watch,
-  });
-
-  const rows = useMemo(() => {
-    return toteutukset
-      ? toteutukset.map(toteutus => ({ ...toteutus, key: toteutus.oid }))
-      : null;
-  }, [toteutukset]);
-
-  const tableColumns = useMemo(
-    () => makeTableColumns(t, organisaatioOid),
-    [t, organisaatioOid]
-  );
-
   return (
     <>
       <NavigationAnchor id="toteutukset" />
@@ -143,30 +70,13 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <Box mb={3}>
-          <Filters
-            {...filtersProps}
-            nimiPlaceholder={t('etusivu.haeToteutuksia')}
-          />
-        </Box>
-
-        {rows ? (
-          <ListTable
-            rows={rows}
-            columns={tableColumns}
-            onSort={setOrderBy}
-            sort={orderBy}
-            {...getTestIdProps('toteutuksetTable')}
-          />
-        ) : error ? (
-          <ErrorAlert onReload={reload} center />
-        ) : (
-          <ListSpin />
-        )}
-
-        <Box mt={3} display="flex" justifyContent="center">
-          <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-        </Box>
+        <EntitySearchList
+          searchEntities={searchToteutukset}
+          organisaatioOid={organisaatioOid}
+          entityType={TOTEUTUS}
+          makeTableColumns={makeTableColumns}
+          nimiPlaceholder={t('etusivu.haeToteutuksia')}
+        />
       </ListCollapse>
     </>
   );

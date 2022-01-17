@@ -9,52 +9,13 @@ import SegmentTabs from '#/src/components/SegmentTabs';
 import { Box, Radio, RadioGroup } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPIT,
-  KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
-  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
-  TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
 import { spacing, getThemeProp } from '#/src/theme';
-import { getTestIdProps } from '#/src/utils';
+import { getTestIdProps, getKoulutustyyppiTranslationKey } from '#/src/utils';
 import iterateTree, { Order } from '#/src/utils/iterateTree';
-
-export const TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA = [
-  { value: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS },
-  {
-    value: 'korkeakoulutus',
-    children: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
-      value: kt,
-    })),
-  },
-  { value: KOULUTUSTYYPPI.LUKIOKOULUTUS },
-];
-
-export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
-  {
-    value: 'ammatillinen',
-    children: TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT.map(kt => ({
-      value: kt,
-    })),
-  },
-  {
-    value: 'korkeakoulutus',
-    children: TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
-      value: kt,
-    })),
-  },
-  {
-    value: 'vapaa-sivistystyo',
-    children: [
-      {
-        value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-      },
-      { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU },
-    ],
-  },
-  { value: KOULUTUSTYYPPI.TUVA },
-  { value: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },
-];
 
 const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   margin-left: ${spacing(4)};
@@ -62,12 +23,10 @@ const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   border-left: 1px solid ${getThemeProp('palette.divider')};
 `;
 
-const getTranslationKey = tyyppi => `koulutustyypit.${_.camelCase(tyyppi)}`;
-
 const useFirstLevelOptions = (hierarkia, t) =>
   _.map(hierarkia, ({ value, disabled }) => ({
     value,
-    label: t(getTranslationKey(value)),
+    label: t(getKoulutustyyppiTranslationKey(value)),
     disabled,
   }));
 
@@ -77,7 +36,7 @@ const useSecondLevelOptions = (hierarkia, firstLevelValue, t) => {
 
     return _.map(node?.children, ({ value, disabled }) => ({
       value,
-      label: t(getTranslationKey(value)),
+      label: t(getKoulutustyyppiTranslationKey(value)),
       disabled,
     }));
   }, [hierarkia, firstLevelValue, t]);

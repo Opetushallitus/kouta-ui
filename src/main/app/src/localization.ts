@@ -20,6 +20,15 @@ const formatMap = {
   default: _.identity,
 };
 
+type CreateLocalizationProps = {
+  loadLocalization?: (props: { namespace: string; language: string }) => any;
+  fallbackLng?: LanguageCode;
+  language?: LanguageCode;
+  debug?: boolean;
+  defaultNS?: string;
+  ns?: Array<string>;
+};
+
 const createLocalization = ({
   loadLocalization,
   fallbackLng = 'fi',
@@ -27,7 +36,7 @@ const createLocalization = ({
   debug = false,
   defaultNS = 'kouta',
   ns = ['kouta'],
-}) => {
+}: CreateLocalizationProps) => {
   let instance = i18n.createInstance();
 
   if (!REACT_APP_LANG && loadLocalization) {

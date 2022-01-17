@@ -1,4 +1,5 @@
 import { format as formatDate, parseISO } from 'date-fns';
+import { TFunction } from 'i18next';
 import _ from 'lodash';
 import _fp from 'lodash/fp';
 import stripTags from 'striptags';
@@ -7,8 +8,16 @@ import {
   isEditorState,
   isEmptyEditorState,
 } from '#/src/components/Editor/utils';
-import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
-import { memoize } from '#/src/utils/memoize';
+import {
+  ALLOWED_HTML_TAGS,
+  EI_TUETUT_KOULUTUSTYYPIT,
+  KOULUTUSTYYPPI,
+  LANGUAGES,
+  NDASH,
+  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+} from '#/src/constants';
+import { memoize, memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
@@ -294,4 +303,64 @@ export const getEntityNimiTranslation = (
 ) => {
   const { _enrichedData, nimi } = entity ?? {};
   return getFirstLanguageValue(_enrichedData?.esitysnimi || nimi, lng);
+};
+
+export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
+  _.isNil(tyyppi) ? '' : `koulutustyypit.${_.camelCase(tyyppi)}`;
+
+export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
+  hierarkia
+    .flatMap(({ value: topValue, children }) => {
+      if (children) {
+        return children.map(({ value }) => ({
+          label:
+            ([
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+              KOULUTUSTYYPPI.TUTKINNON_OSA,
+              KOULUTUSTYYPPI.OSAAMISALA,
+            ].includes(value)
+              ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
+              : '') + t(getKoulutustyyppiTranslationKey(value)),
+          value,
+        }));
+      } else {
+        return [
+          {
+            label: t(getKoulutustyyppiTranslationKey(topValue)),
+            value: topValue,
+          },
+        ];
+      }
+    })
+    .filter(({ value }) => !EI_TUETUT_KOULUTUSTYYPIT.includes(value));
+
+export const koulutustyyppiHierarkiaToTranslationMap = memoizeOne(
+  (hierarkia, t) => {
+    const koulutustyyppiOptions = koulutustyyppiHierarkiaToOptions(
+      hierarkia,
+      t
+    );
+    return _fp.fromPairs(
+      koulutustyyppiOptions.map(({ label, value }) => [value, label])
+    );
+  }
+);
+
+export const getKoulutustyyppiTranslation = (
+  koulutustyyppi?: string,
+  t?: TFunction
+) => {
+  const koulutustyyppiMapping = {
+    ...koulutustyyppiHierarkiaToTranslationMap(
+      TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+      t
+    ),
+    ...koulutustyyppiHierarkiaToTranslationMap(
+      TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+      t
+    ),
+  };
+
+  return koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '';
 };

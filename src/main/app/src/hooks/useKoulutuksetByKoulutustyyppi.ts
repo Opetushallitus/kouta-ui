@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import _ from 'lodash';
 
-import { getCombinedQueryStatus } from '#/src/components/WithQueryIndicators';
+import { getCombinedQueryStatus } from '#/src/components/QueryResultWrapper';
 import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP,

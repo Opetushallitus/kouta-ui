@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import Collapse from '#/src/components/Collapse';
+import Collapse, { CollapseProps } from '#/src/components/Collapse';
 import { Box, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
@@ -25,14 +25,21 @@ const HeaderTypography = styled(Typography).attrs({ variant: 'h4' })`
   color: ${getThemeProp('palette.text.dark')};
 `;
 
+type ListCollapseProps = {
+  actions: React.ReactNode;
+  defaultOpen?: boolean;
+  header?: React.ReactNode;
+  icon?: string;
+} & Omit<CollapseProps, 'open'>;
+
 const ListCollapse = ({
-  actions = null,
-  header = null,
-  icon = null,
+  actions,
+  header,
+  icon,
   toggleOnHeaderClick = false,
   defaultOpen = true,
   ...props
-}) => {
+}: ListCollapseProps) => {
   const [isOpen, setOpen] = useState(() => defaultOpen);
 
   const collapseHeader = (

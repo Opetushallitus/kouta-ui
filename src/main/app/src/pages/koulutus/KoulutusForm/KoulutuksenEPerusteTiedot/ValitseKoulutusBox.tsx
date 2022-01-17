@@ -3,8 +3,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import KoulutusField from '#/src/components/KoulutusField';
+import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { Box } from '#/src/components/virkailija';
-import { WithQueryIndicators } from '#/src/components/WithQueryIndicators';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
@@ -28,9 +28,10 @@ export const ValitseKoulutusBox = ({
   const { t } = useTranslation();
 
   const koulutusFieldValue = useFieldValue(fieldName)?.value;
-  const { data: koulutus, status } = useKoulutusByKoodi({
+  const queryResult = useKoulutusByKoodi({
     koodiUri: koulutusFieldValue,
   });
+  const { data: koulutus } = queryResult;
 
   const nimi = getLanguageValue(koulutus?.nimi, language);
   const koulutusala = getLanguageValue(koulutus?.koulutusala, language);
@@ -45,7 +46,7 @@ export const ValitseKoulutusBox = ({
         />
       </Box>
       {koulutusFieldValue && (
-        <WithQueryIndicators queryStatus={status}>
+        <QueryResultWrapper queryResult={queryResult}>
           <InfoBoxGrid
             rows={[
               {
@@ -58,7 +59,7 @@ export const ValitseKoulutusBox = ({
               },
             ]}
           />
-        </WithQueryIndicators>
+        </QueryResultWrapper>
       )}
     </StyledInfoBox>
   );

@@ -7,8 +7,8 @@ import { Field } from 'redux-form';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { Box } from '#/src/components/virkailija';
-import { WithQueryIndicators } from '#/src/components/WithQueryIndicators';
 import { useUrls } from '#/src/contexts/UrlContext';
 import {
   useFieldValue,
@@ -108,13 +108,11 @@ export const ValitseTutkinnonOsatBox = ({
 
   const previousEPerusteId = usePrevious(ePeruste?.id);
 
-  const {
-    data: kuvaukset,
-    status,
-    isLoading,
-  } = useTutkinnonOsienKuvaukset({
+  const queryResult = useTutkinnonOsienKuvaukset({
     tutkinnonOsat: selectedTutkinnonosat?.map(t => t?._tutkinnonOsa),
   });
+
+  const { data: kuvaukset, isLoading } = queryResult;
 
   const isDirty = useIsDirty();
 
@@ -149,7 +147,7 @@ export const ValitseTutkinnonOsatBox = ({
         />
       </Box>
       {tutkinnonosatFieldValue && (
-        <WithQueryIndicators queryStatus={status}>
+        <QueryResultWrapper queryResult={queryResult}>
           <Box>
             {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
               <TutkinnonOsaInfo
@@ -160,7 +158,7 @@ export const ValitseTutkinnonOsatBox = ({
               />
             ))}
           </Box>
-        </WithQueryIndicators>
+        </QueryResultWrapper>
       )}
     </StyledInfoBox>
   );

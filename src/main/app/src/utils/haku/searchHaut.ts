@@ -1,16 +1,3 @@
-import getQueryParams from '#/src/utils/api/getQueryParams';
+import { makeEntitySearch } from '#/src/utils/api/makeEntitySearch';
 
-const getHaut = async ({ httpClient, apiUrls, ...rest }) => {
-  const params = getQueryParams(rest);
-
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.search.haut'),
-    {
-      params,
-    }
-  );
-
-  return data;
-};
-
-export default getHaut;
+export const searchHaut = makeEntitySearch('kouta-backend.search.haut');

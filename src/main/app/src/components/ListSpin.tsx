@@ -9,7 +9,7 @@ const ListSpin = props => (
     alignItems="center"
     height="300px"
   >
-    <Spin {...props} />
+    <Spin center {...props} />
   </Box>
 );
 

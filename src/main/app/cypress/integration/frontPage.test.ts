@@ -104,25 +104,25 @@ describe('frontPage', () => {
   it('should list koulutukset', () => {
     cy.get('#koulutukset').scrollIntoView();
 
-    getByTestId('koulutuksetTable').should('contain', 'Koulutuksen nimi');
+    getByTestId('koulutusTable').should('contain', 'Koulutuksen nimi');
   });
 
   it('should list toteutukset', () => {
     cy.get('#toteutukset').scrollIntoView();
 
-    getByTestId('toteutuksetTable').should('contain', 'Toteutuksen nimi');
+    getByTestId('toteutusTable').should('contain', 'Toteutuksen nimi');
   });
 
   it('should list haut', () => {
     cy.get('#haut').scrollIntoView();
 
-    getByTestId('hautTable').should('contain', 'Haun nimi');
+    getByTestId('hakuTable').should('contain', 'Haun nimi');
   });
 
   it('should list valintaperusteet', () => {
     cy.get('#valintaperusteet').scrollIntoView();
 
-    getByTestId('valintaperusteetTable').should(
+    getByTestId('valintaperusteTable').should(
       'contain',
       'Valintaperusteen nimi'
     );
@@ -131,6 +131,6 @@ describe('frontPage', () => {
   it('should list hakukohteet', () => {
     cy.get('#hakukohteet').scrollIntoView();
 
-    getByTestId('hakukohteetTable').should('contain', 'Hakukohteen nimi');
+    getByTestId('hakukohdeTable').should('contain', 'Hakukohteen nimi');
   });
 });

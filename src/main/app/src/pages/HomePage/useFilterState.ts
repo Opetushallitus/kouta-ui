@@ -1,59 +1,82 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ENTITY } from '#/src/constants';
+import { useHasChanged } from '#/src/hooks/useHasChanged';
+import { useSelectedOrganisaatio } from '#/src/hooks/useSelectedOrganisaatio';
 import { getPagination, setPaginationAction } from '#/src/state/pagination';
 
 export const useFilterState = (name: string) => {
-  const { nimi, page, showArchived, orderBy, tila } = useSelector(
+  const dispatch = useDispatch();
+
+  const { nimi, koulutustyyppi, page, orderBy, tila, julkinen } = useSelector(
     getPagination(name)
   );
-  const dispatch = useDispatch();
   const setPagination = useCallback(
-    pagination => {
-      return dispatch(setPaginationAction({ name, ...pagination }));
-    },
+    pagination => dispatch(setPaginationAction({ name, ...pagination })),
     [dispatch, name]
   );
-  const setPage = page => setPagination({ page });
-  const setOrderBy = orderBy => setPagination({ orderBy });
+
+  const [selectedOrganisaatio] = useSelectedOrganisaatio();
+
+  const selectedOrganisaatioHasChanged = useHasChanged(selectedOrganisaatio);
+
+  useEffect(() => {
+    if (selectedOrganisaatioHasChanged) {
+      setPagination({ page: 0 });
+    }
+  }, [selectedOrganisaatioHasChanged, setPagination]);
 
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
-  const setNimi = nimi => setPagination({ page: 0, nimi });
-  const setTila = tila => setPagination({ page: 0, tila });
-  const setShowArchived = showArchived =>
-    setPagination({ page: 0, showArchived });
+  const setTila = useCallback(
+    tila => setPagination({ page: 0, tila }),
+    [setPagination]
+  );
 
-  const onShowArchivedChange = useCallback(
-    e => {
-      setPagination({ page: 0, showArchived: e.target.checked });
-    },
+  const setNimi = useCallback(
+    nimi => setPagination({ page: 0, nimi }),
     [setPagination]
   );
-  const onNimiChange = useCallback(
-    value => {
-      setPagination({ page: 0, nimi: value });
-    },
-    [setPagination]
-  );
-  return {
-    setNimi,
-    nimi,
-    page,
-    setPage,
-    orderBy,
-    setOrderBy,
-    showArchived,
-    setShowArchived,
-    tila,
-    setTila,
-    filtersProps: {
+  let setKoulutustyyppi;
+  if (name !== ENTITY.HAKU) {
+    setKoulutustyyppi = koulutustyyppi =>
+      setPagination({ page: 0, koulutustyyppi });
+  }
+
+  return useMemo(
+    () => ({
       nimi,
-      showArchived,
+      setNimi,
+      koulutustyyppi,
+      setKoulutustyyppi,
+      page,
+      setPage: page => setPagination({ page }),
+      orderBy,
+      setOrderBy: orderBy => setPagination({ orderBy }),
       tila,
-      onNimiChange,
-      onShowArchivedChange,
-      onTilaChange: setTila,
-    },
-  };
+      setTila,
+      julkinen,
+      filtersProps: {
+        nimi,
+        koulutustyyppi,
+        tila,
+        onNimiChange: setNimi,
+        onKoulutustyyppiChange: setKoulutustyyppi,
+        onTilaChange: setTila,
+      },
+    }),
+    [
+      page,
+      setPagination,
+      nimi,
+      koulutustyyppi,
+      tila,
+      orderBy,
+      setTila,
+      setKoulutustyyppi,
+      setNimi,
+      julkinen,
+    ]
+  );
 };

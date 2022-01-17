@@ -189,7 +189,9 @@
     "naytaJulkaistu": "Näytä julkaistu",
     "naytaJulkaistuTooltip": "Näyttää julkaistun lomakkeen tiedot oppijan puolella",
     "ulkoinenTunniste": "Ulkoinen tunniste",
-    "uudenOpiskelijanUrl": "Uuden opiskelijan verkkosivun URL"
+    "uudenOpiskelijanUrl": "Uuden opiskelijan verkkosivun URL",
+    "julkinen": "Julkinen",
+    "nakyvyys": "Näkyvyys"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -227,6 +229,12 @@
     "tallentamattomiaMuutoksia": {
       "otsikko": "Tallentamattomia muutoksia",
       "viesti": "Lomakkeella on tallentamattomia muutoksia. Haluatko varmasti jatkaa?",
+      "jatka": "Jatka",
+      "peruuta": "Peruuta"
+    },
+    "luonnoksenPoisto": {
+      "otsikko": "Luonnoksen poisto",
+      "viesti": "Olet poistamassa luonnosta {{name}}. Haluatko varmasti jatkaa?",
       "jatka": "Jatka",
       "peruuta": "Peruuta"
     },
@@ -274,12 +282,14 @@
   "julkaisutilat": {
     "tallennettu": "Luonnos",
     "julkaistu": "Julkaistu",
-    "arkistoitu": "Arkistoitu"
+    "arkistoitu": "Arkistoitu",
+    "poistettu": "Poistettu"
   },
   "julkaisutilojenSelitteet": {
     "tallennettu": "Luonnoksen tiedot näkyvät vain virkailijalle",
     "julkaistu": "Julkaisemalla tiedot näytetään Opintopolussa",
-    "arkistoitu": "Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä"
+    "arkistoitu": "Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä",
+    "poistettu": "Poistaa tiedot järjestelmästä"
   },
   "validointivirheet": {
     "epakelpoUrl": "Linkki on virheellinen",

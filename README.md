@@ -15,7 +15,7 @@ Lomakkeiden tilan hallinta on toteutettu redux-form-kirjastolla. Redux-form *rek
 
 ### Palvelinkyselyiden hallinta ja muistintaminen
 
-Tämän kirjoitusaikana (joulukuu 2020) Kouta-UI:n API-kutsut on toteutettu usealla eri tavalla ja erilaisilla välimuistiratkaisuilla. Jotkin kyselyistä halutaan muistintaa pitkään (organisaatiopalvelu, eperusteet, koodisto jne.), ja joitakin vain hyvin lyhyen aikaa (kouta-backend). Haasteena on myös saman palvelimelta ladatun tiedon käyttäminen eri komponenteissa. Osittain on otettu käyttöön react-query, joka tarjoaa miellyttävän abstraktion palvelinpyyntöjen hallintaan. Samantyyppinen kouta-ui:ssa käytetty react-async-kirjasto ei tarjoa välimuistiratkaisuja ja jättää edelleen `useEffect`:in tapaan riippuvuuksien serialisoinnin käyttäjälle, mikä johtaa helposti ikuisiin latauslooppeihin ja muihin vastaaviin ongelmiin. Tavoite on korvata React-async kokonaan käyttäen react-query-kirjastoa.
+Jotkin kyselyistä halutaan muistintaa pitkään (organisaatiopalvelu, eperusteet, koodisto jne.), ja joitakin vain hyvin lyhyen aikaa (kouta-backend). Haasteena on myös saman palvelimelta ladatun tiedon käyttäminen eri komponenteissa. Kouta-UI:ssa käytetään [react-query](https://react-query.tanstack.com/)-kirjastoa, joka tarjoaa miellyttävän abstraktion palvelinpyyntöjen hallintaan. Omien `useEffect`-rakennelmien tekeminen tai Reduxin käyttäminen tätä tarkoitusta varten ei ole tarpeen, eikä suotavaa.
 
 ## Käyttöliittymän kehittäminen
 

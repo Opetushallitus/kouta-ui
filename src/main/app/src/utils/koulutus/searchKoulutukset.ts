@@ -1,30 +1,10 @@
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import { getQueryParams } from '#/src/utils/api/getQueryParams';
+import { makeEntitySearch } from '#/src/utils/api/makeEntitySearch';
+export { FILTER_PAGE_SIZE } from '#/src/utils/api/getSearchQueryParams';
 
-export { FILTER_PAGE_SIZE } from '#/src/utils/api/getQueryParams';
-
-export const useSearchKoulutukset = props => {
-  const params = getQueryParams(props);
-
-  return useApiQuery(
-    'searchKoulutukset',
-    getSearchKoulutuksetData,
-    { params },
-    {
-      refetchOnWindowFocus: false,
-      staleTime: 60 * 1000,
-    }
-  );
-};
-
-const getSearchKoulutuksetData = async ({ params, httpClient, apiUrls }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.search.koulutukset'),
-    { params }
-  );
-
-  return data;
-};
+export const searchKoulutukset = makeEntitySearch(
+  'kouta-backend.search.koulutukset'
+);
 
 const ELASTIC_FIND_ALL_SIZE = 5000; // NOTE: there is no magic number for "no limit"
 
@@ -36,7 +16,7 @@ export const useSearchAllKoulutuksetWithOid = ({ organisaatioOid }) => {
 
   return useApiQuery(
     'searchKoulutuksetWithOid',
-    getSearchKoulutuksetData,
+    searchKoulutukset,
     { params },
     {
       refetchOnWindowFocus: false,

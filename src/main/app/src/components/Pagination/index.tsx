@@ -38,7 +38,17 @@ const getPageOptions = pageCount =>
     label: index + 1,
   }));
 
-const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
+type PaginationProps = {
+  value?: number;
+  onChange?: (page: number) => void;
+  pageCount: number;
+};
+
+const Pagination = ({
+  value = 0,
+  onChange = () => {},
+  pageCount = 0,
+}: PaginationProps) => {
   const { t } = useTranslation();
   const options = useMemo(() => getPageOptions(pageCount), [pageCount]);
   const onPrev = useCallback(() => onChange(value - 1), [value, onChange]);

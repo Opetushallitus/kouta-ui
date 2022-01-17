@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
+import Box from '@opetushallitus/virkailija-ui-components/Box';
 import _ from 'lodash';
 import styled, { css } from 'styled-components';
 
@@ -12,7 +13,7 @@ import Table, {
 } from '#/src/components/Table';
 import { Icon, Dropdown } from '#/src/components/virkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { formatDateValue } from '#/src/utils';
+import { formatDateValue, getKoulutustyyppiTranslation } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import SmallStatusTag from './StatusTag/SmallStatusTag';
@@ -58,6 +59,33 @@ export const makeNimiColumn = (
       {getFirstLanguageValue(item.nimi, item.language) || t('yleiset.nimeton')}
     </RouterAnchor>
   ),
+});
+
+export const makeKoulutustyyppiColumn = t => ({
+  title: t('yleiset.koulutustyyppi'),
+  key: 'koulutustyyppi',
+  sortable: true,
+  render: ({ koulutustyyppi }) =>
+    getKoulutustyyppiTranslation(koulutustyyppi, t),
+});
+
+export const makeJulkinenColumn = (t): Column => ({
+  title: t('yleiset.nakyvyys'),
+  key: 'julkinen',
+  sortable: true,
+  render: ({ julkinen }) => {
+    return (
+      <Box textAlign="center" style={{ userSelect: 'none' }}>
+        {julkinen ? (
+          <Icon
+            type="people"
+            title={t('yleiset.julkinen')}
+            aria-label={t('yleiset.julkinen')}
+          />
+        ) : null}
+      </Box>
+    );
+  },
 });
 
 export const makeOrganisaatioColumn = (t): Column => ({

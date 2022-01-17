@@ -11,6 +11,7 @@ import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakuModel } from '#/src/types/hakuTypes';
 import { getValuesForSaving } from '#/src/utils';
+import { afterUpdate } from '#/src/utils/afterUpdate';
 import createHaku from '#/src/utils/haku/createHaku';
 import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 import updateHaku from '#/src/utils/haku/updateHaku';
@@ -67,7 +68,7 @@ export const HakuFooter = ({
       if (formMode === FormMode.CREATE) {
         history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
       } else {
-        queryClient.invalidateQueries(ENTITY.HAKU);
+        afterUpdate(queryClient, history, ENTITY.HAKU, valuesForSaving.tila);
       }
     },
     [

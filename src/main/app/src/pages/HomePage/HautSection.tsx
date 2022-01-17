@@ -1,45 +1,24 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { RouterAnchor } from '#/src/components/Anchor';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
-import ErrorAlert from '#/src/components/ErrorAlert';
-import ListSpin from '#/src/components/ListSpin';
-import ListTable, {
+import {
   makeModifiedColumn,
   makeMuokkaajaColumn,
+  makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import Pagination from '#/src/components/Pagination';
-import { Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import { getTestIdProps } from '#/src/utils';
-import searchHaut from '#/src/utils/haku/searchHaut';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import { searchHaut } from '#/src/utils/haku/searchHaut';
 
-import Filters from './Filters';
+import { EntitySearchList } from './EntitySearchList';
 import ListCollapse from './ListCollapse';
 import NavigationAnchor from './NavigationAnchor';
-import { useFilterState } from './useFilterState';
-import { getIndexParamsByFilters } from './utils';
 
 const { HAKU } = ENTITY;
-
-const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
-  const params = getIndexParamsByFilters(filters);
-
-  const { result, totalCount } = await searchHaut({
-    httpClient,
-    apiUrls,
-    ...params,
-  });
-
-  return { result, pageCount: Math.ceil(totalCount / 10) };
-};
 
 const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
@@ -52,18 +31,10 @@ const Actions = ({ organisaatioOid }) => {
 };
 
 const makeTableColumns = (t, organisaatioOid) => [
-  {
-    title: t('yleiset.nimi'),
-    key: 'nimi',
-    sortable: true,
-    render: ({ nimi, oid, language }) => (
-      <RouterAnchor
-        to={`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`}
-      >
-        {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
-      </RouterAnchor>
-    ),
-  },
+  makeNimiColumn(t, {
+    getLinkUrl: ({ oid }) =>
+      `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
+  }),
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),
@@ -76,52 +47,8 @@ const makeTableColumns = (t, organisaatioOid) => [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
+const HautSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
-
-  const {
-    nimi,
-    showArchived,
-    page,
-    setPage,
-    orderBy,
-    setOrderBy,
-    tila,
-    filtersProps,
-  } = useFilterState('haut');
-
-  const watch = JSON.stringify([
-    page,
-    nimi,
-    organisaatioOid,
-    showArchived,
-    orderBy,
-    tila,
-  ]);
-
-  const {
-    data: { result: haut, pageCount = 0 } = {},
-    error,
-    reload,
-  } = useApiAsync({
-    promiseFn: getHautFn,
-    nimi,
-    page,
-    showArchived,
-    organisaatioOid,
-    orderBy,
-    tila,
-    watch,
-  });
-
-  const rows = useMemo(() => {
-    return haut ? haut.map(haku => ({ ...haku, key: haku.oid })) : null;
-  }, [haut]);
-
-  const tableColumns = useMemo(
-    () => makeTableColumns(t, organisaatioOid),
-    [t, organisaatioOid]
-  );
 
   return (
     <>
@@ -134,30 +61,16 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
         }
         defaultOpen
       >
-        <Box marginBottom={3}>
-          <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
-        </Box>
-
-        {rows ? (
-          <ListTable
-            rows={rows}
-            columns={tableColumns}
-            onSort={setOrderBy}
-            sort={orderBy}
-            {...getTestIdProps('hautTable')}
-          />
-        ) : error ? (
-          <ErrorAlert onReload={reload} center />
-        ) : (
-          <ListSpin />
-        )}
-
-        <Box display="flex" marginTop={3} justifyContent="center">
-          <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-        </Box>
+        <EntitySearchList
+          searchEntities={searchHaut}
+          organisaatioOid={organisaatioOid}
+          entityType={HAKU}
+          makeTableColumns={makeTableColumns}
+          nimiPlaceholder={t('etusivu.haeHakuja')}
+        />
       </ListCollapse>
     </>
   );
 };
 
-export default KoulutuksetSection;
+export default HautSection;

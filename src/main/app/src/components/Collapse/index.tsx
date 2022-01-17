@@ -73,7 +73,7 @@ const renderHeader = header => {
   );
 };
 
-type CollapseProps = {
+export type CollapseProps = {
   header?: React.ReactNode;
   footer?: React.ReactNode;
   children?: React.ReactNode;

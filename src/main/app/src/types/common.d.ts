@@ -36,4 +36,6 @@ type EntityBase = {
   _enrichedData?: {
     esitysnimi: string;
   };
+  muokkaaja?: string;
+  modified?: string;
 };

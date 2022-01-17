@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import _fp from 'lodash/fp';
+
 import {
   LONG_CACHE_QUERY_OPTIONS,
   OPETUSHALLITUS_ORGANISAATIO_OID,
@@ -31,7 +33,7 @@ const defaultFilter = org => {
 };
 
 export const useOrganisaatioHierarkia = (
-  oid: string,
+  oid?: string,
   {
     skipParents = false,
     filter = _fp.T,
@@ -43,8 +45,8 @@ export const useOrganisaatioHierarkia = (
     getOrganisaatioHierarkia,
     {
       // Jostain syystä organisaatio-servicen hierarkia/v4/hae-rajapinta palauttaa tyhjän taulukon kun antaa
-      // oid-parametrina OPH-organisaation, mutta ei kun saman antaa oidRestrictionList-parametrissa.
-      ...(oid === OPETUSHALLITUS_ORGANISAATIO_OID ? { oids: [oid] } : { oid }),
+      // oid-parametrina OPH-organisaation. Jos ei anna oidia, niin palautetaan kaikki muut paitsi OPH
+      ...(oid === OPETUSHALLITUS_ORGANISAATIO_OID ? {} : { oid }),
       skipParents,
     },
     { ...LONG_CACHE_QUERY_OPTIONS, enabled: Boolean(oid) && enabled }

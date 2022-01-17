@@ -285,7 +285,7 @@ export const retryOnRedirect = async ({ httpClient, targetUrl }) => {
   return res?.data;
 };
 
-export const safeArray = v => (_.isNil(v) ? [] : _.castArray(v));
+export const valueToArray = v => (_.isNil(v) ? [] : _.castArray(v));
 
 export const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
 

@@ -11,7 +11,7 @@ import {
   KoulutusFormValues,
   TutkinnonOsa,
 } from '#/src/types/koulutusTypes';
-import { maybeParseNumber, safeArray } from '#/src/utils';
+import { maybeParseNumber, valueToArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const osaamisalaKoodiToKoodiUri = value =>
@@ -27,10 +27,10 @@ function getKoulutuksetKoodiUri(
   }
 
   if (koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA) {
-    return safeArray(osaamisala?.koulutus?.value);
+    return valueToArray(osaamisala?.koulutus?.value);
   }
 
-  return safeArray(information?.koulutus?.value);
+  return valueToArray(information?.koulutus?.value);
 }
 
 const getKoulutusByFormValues = (values: KoulutusFormValues) => {

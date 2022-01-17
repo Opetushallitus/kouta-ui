@@ -26,6 +26,43 @@ import organisaatioMatchesTyyppi, {
   getOrganisaatioTyypit,
 } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
+export const useJarjestyspaikkaOptions = ({ hierarkia, tarjoajat }) => {
+  const { t } = useTranslation();
+  const getCanUpdate = useGetCurrentUserHasRole(
+    ENTITY.HAKUKOHDE,
+    CRUD_ROLES.UPDATE
+  );
+
+  const selectedValues = useFieldValue('jarjestyspaikkaOid');
+
+  const language = useUserLanguage();
+
+  return useMemo(
+    () =>
+      _fp.flow(
+        flattenHierarkia,
+        _fp.filter(
+          (org: any) =>
+            selectedValues?.includes(org?.oid) ||
+            (organisaatioMatchesTyyppi([
+              ORGANISAATIOTYYPPI.TOIMIPISTE,
+              ORGANISAATIOTYYPPI.OPPILAITOS,
+            ])(org) &&
+              _fp.some((tarjoaja: any) =>
+                _fp.includes(tarjoaja, org?.parentOidPath)
+              )(tarjoajat))
+        ),
+        _fp.map(org => ({
+          value: org?.oid,
+          label: getOrganisaatioLabel(org, language, t),
+          disabled: !getCanUpdate(org),
+        })),
+        _fp.sortBy('label')
+      )(hierarkia),
+    [getCanUpdate, hierarkia, language, tarjoajat, selectedValues, t]
+  );
+};
+
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   ({ disabled, options, value, error, onChange, isLoading }) => {
     return isLoading ? (
@@ -71,42 +108,10 @@ export const JarjestyspaikkaSection = ({
     OPETUSHALLITUS_ORGANISAATIO_OID
   );
 
-  const getCanUpdate = useGetCurrentUserHasRole(
-    ENTITY.HAKUKOHDE,
-    CRUD_ROLES.UPDATE
-  );
-
-  const selectedValues = useFieldValue('jarjestyspaikkaOid');
-
-  const language = useUserLanguage();
-  const jarjestyspaikkaOptions = useMemo(
-    () =>
-      _fp.flow(
-        flattenHierarkia,
-        _fp.filter(
-          (org: any) =>
-            selectedValues?.includes(org?.oid) ||
-            (organisaatioMatchesTyyppi([
-              ORGANISAATIOTYYPPI.TOIMIPISTE,
-              ORGANISAATIOTYYPPI.OPPILAITOS,
-            ])(org) &&
-              _fp.some((tarjoaja: any) =>
-                _fp.includes(tarjoaja, org?.parentOidPath)
-              )(tarjoajat))
-        ),
-        _fp.map(org => ({
-          value: org?.oid,
-          label: getOrganisaatioLabel(org, language, t),
-          disabled:
-            // Disabled when none of tarjoajat is found up in the organization's
-            // hierarchy including organization itself  or when user has no
-            // update rights for the organization.
-            !getCanUpdate(org),
-        })),
-        _fp.sortBy('label')
-      )(hierarkia),
-    [getCanUpdate, hierarkia, language, tarjoajat, selectedValues, t]
-  );
+  const jarjestyspaikkaOptions = useJarjestyspaikkaOptions({
+    tarjoajat,
+    hierarkia,
+  });
 
   return (
     <div {...getTestIdProps('jarjestyspaikkaOidSelection')}>

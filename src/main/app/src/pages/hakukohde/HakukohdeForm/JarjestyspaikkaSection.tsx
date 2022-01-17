@@ -9,48 +9,40 @@ import {
   simpleMapProps,
 } from '#/src/components/formFields';
 import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
-import {
-  CRUD_ROLES,
-  ENTITY,
-  OPETUSHALLITUS_ORGANISAATIO_OID,
-  ORGANISAATIOTYYPPI,
-} from '#/src/constants';
+import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi, {
   getOrganisaatioTyypit,
 } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
-export const useJarjestyspaikkaOptions = ({ hierarkia, tarjoajat }) => {
+export const useJarjestyspaikkaOptions = ({ tarjoajaOids }) => {
   const { t } = useTranslation();
   const getCanUpdate = useGetCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
     CRUD_ROLES.UPDATE
   );
 
-  const selectedValues = useFieldValue('jarjestyspaikkaOid');
+  const selectedValue = useFieldValue('jarjestyspaikkaOid');
+
+  const selectableOids = [selectedValue, ...tarjoajaOids].filter(Boolean);
+
+  const { organisaatiot: orgs, ...rest } = useOrganisaatiot(selectableOids);
 
   const language = useUserLanguage();
 
-  return useMemo(
+  const jarjestyspaikkaOptions = useMemo(
     () =>
       _fp.flow(
-        flattenHierarkia,
         _fp.filter(
-          (org: any) =>
-            selectedValues?.includes(org?.oid) ||
-            (organisaatioMatchesTyyppi([
-              ORGANISAATIOTYYPPI.TOIMIPISTE,
-              ORGANISAATIOTYYPPI.OPPILAITOS,
-            ])(org) &&
-              _fp.some((tarjoaja: any) =>
-                _fp.includes(tarjoaja, org?.parentOidPath)
-              )(tarjoajat))
+          organisaatioMatchesTyyppi([
+            ORGANISAATIOTYYPPI.TOIMIPISTE,
+            ORGANISAATIOTYYPPI.OPPILAITOS,
+          ])
         ),
         _fp.map(org => ({
           value: org?.oid,
@@ -58,9 +50,11 @@ export const useJarjestyspaikkaOptions = ({ hierarkia, tarjoajat }) => {
           disabled: !getCanUpdate(org),
         })),
         _fp.sortBy('label')
-      )(hierarkia),
-    [getCanUpdate, hierarkia, language, tarjoajat, selectedValues, t]
+      )(orgs),
+    [getCanUpdate, orgs, language, t]
   );
+
+  return { options: jarjestyspaikkaOptions, ...rest };
 };
 
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
@@ -100,18 +94,13 @@ export const JarjestyspaikkaSection = ({
   tarjoajat,
 }: {
   tarjoajat: Array<string>;
-  toteutusOrganisaatioOid: string;
 }) => {
   const { t } = useTranslation();
 
-  const { hierarkia = [], isLoading } = useOrganisaatioHierarkia(
-    OPETUSHALLITUS_ORGANISAATIO_OID
-  );
-
-  const jarjestyspaikkaOptions = useJarjestyspaikkaOptions({
-    tarjoajat,
-    hierarkia,
-  });
+  const { options: jarjestyspaikkaOptions, isLoading } =
+    useJarjestyspaikkaOptions({
+      tarjoajaOids: tarjoajat,
+    });
 
   return (
     <div {...getTestIdProps('jarjestyspaikkaOidSelection')}>

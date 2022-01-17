@@ -28,12 +28,7 @@ const history = createBrowserHistory({ basename: 'kouta' });
     apiUrls,
   });
 
-  const { store, persistor } = createStore({
-    apiUrls,
-    httpClient,
-    history,
-    localization: localizationInstance,
-  });
+  const { store, persistor } = createStore();
 
   ReactDOM.render(
     <App

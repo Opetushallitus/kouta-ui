@@ -14,7 +14,7 @@ import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatc
 type UseOrganisaatioHierarkiaOptions =
   | {
       skipParents?: boolean;
-      filter?: typeof filterTree;
+      filter?: (org: any) => boolean;
       enabled?: boolean;
     }
   | undefined;
@@ -34,7 +34,7 @@ export const useOrganisaatioHierarkia = (
   oid: string,
   {
     skipParents = false,
-    filter = defaultFilter,
+    filter = _fp.T,
     enabled = true,
   }: UseOrganisaatioHierarkiaOptions = {}
 ) => {
@@ -50,7 +50,10 @@ export const useOrganisaatioHierarkia = (
     { ...LONG_CACHE_QUERY_OPTIONS, enabled: Boolean(oid) && enabled }
   );
 
-  const hierarkia = useMemo(() => filterTree(data, filter), [data, filter]);
+  const hierarkia = useMemo(
+    () => filterTree(data, org => defaultFilter(org) && filter(org)),
+    [data, filter]
+  );
 
   return { hierarkia, ...rest };
 };

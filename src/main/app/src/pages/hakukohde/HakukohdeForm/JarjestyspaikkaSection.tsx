@@ -9,14 +9,22 @@ import {
   simpleMapProps,
 } from '#/src/components/formFields';
 import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
-import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
+import {
+  CRUD_ROLES,
+  ENTITY,
+  OPETUSHALLITUS_ORGANISAATIO_OID,
+  ORGANISAATIOTYYPPI,
+} from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import organisaatioMatchesTyyppi, {
+  getOrganisaatioTyypit,
+} from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   ({ disabled, options, value, error, onChange, isLoading }) => {
@@ -40,9 +48,19 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   simpleMapProps
 );
 
+const getOrganisaatioTyyppiTranslation = (org, t) => {
+  const organisaatioTyyppi = getOrganisaatioTyypit(org)?.[0];
+  return t(`organisaatiotyypit.${organisaatioTyyppi}`);
+};
+
+const getOrganisaatioLabel = (org, language, t) => {
+  const nimi = getFirstLanguageValue(org?.nimi, language);
+  const tyyppi = getOrganisaatioTyyppiTranslation(org, t);
+  return nimi + (tyyppi ? ` (${tyyppi})` : '');
+};
+
 export const JarjestyspaikkaSection = ({
   tarjoajat,
-  toteutusOrganisaatioOid,
 }: {
   tarjoajat: Array<string>;
   toteutusOrganisaatioOid: string;
@@ -50,7 +68,7 @@ export const JarjestyspaikkaSection = ({
   const { t } = useTranslation();
 
   const { hierarkia = [], isLoading } = useOrganisaatioHierarkia(
-    toteutusOrganisaatioOid
+    OPETUSHALLITUS_ORGANISAATIO_OID
   );
 
   const getCanUpdate = useGetCurrentUserHasRole(
@@ -58,38 +76,36 @@ export const JarjestyspaikkaSection = ({
     CRUD_ROLES.UPDATE
   );
 
+  const selectedValues = useFieldValue('jarjestyspaikkaOid');
+
   const language = useUserLanguage();
   const jarjestyspaikkaOptions = useMemo(
     () =>
       _fp.flow(
         flattenHierarkia,
-        (organisaatiot: any) => {
-          let visibleOrgs = _fp.filter(
-            organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
-          )(organisaatiot);
-
-          if (_fp.isEmpty(visibleOrgs)) {
-            visibleOrgs = _fp.filter(
-              organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)
-            )(organisaatiot);
-          }
-
-          return visibleOrgs;
-        },
+        _fp.filter(
+          (org: any) =>
+            selectedValues?.includes(org?.oid) ||
+            (organisaatioMatchesTyyppi([
+              ORGANISAATIOTYYPPI.TOIMIPISTE,
+              ORGANISAATIOTYYPPI.OPPILAITOS,
+            ])(org) &&
+              _fp.some((tarjoaja: any) =>
+                _fp.includes(tarjoaja, org?.parentOidPath)
+              )(tarjoajat))
+        ),
         _fp.map(org => ({
           value: org?.oid,
-          label: getFirstLanguageValue(org?.nimi, language),
+          label: getOrganisaatioLabel(org, language, t),
           disabled:
             // Disabled when none of tarjoajat is found up in the organization's
             // hierarchy including organization itself  or when user has no
             // update rights for the organization.
-            _fp.every(tarjoaja => !_fp.includes(tarjoaja, org?.parentOidPath))(
-              tarjoajat
-            ) || !getCanUpdate(org),
+            !getCanUpdate(org),
         })),
         _fp.sortBy('label')
       )(hierarkia),
-    [getCanUpdate, hierarkia, language, tarjoajat]
+    [getCanUpdate, hierarkia, language, tarjoajat, selectedValues, t]
   );
 
   return (

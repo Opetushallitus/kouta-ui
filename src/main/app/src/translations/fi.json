@@ -342,11 +342,6 @@
     "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
     "vapaaSivistystyoMuu": "Muu"
   },
-  "organisaatiotyypit": {
-    "organisaatiotyyppi_01": "koulutustoimija",
-    "organisaatiotyyppi_02": "oppilaitos",
-    "organisaatiotyyppi_03": "toimipiste"
-  },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",
     "tutkintoonJohtavatKoulutustyypit": "Tutkintoon johtavat"

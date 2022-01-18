@@ -12,16 +12,35 @@ import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import useKoodisto from '#/src/hooks/useKoodisto';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import organisaatioMatchesTyyppi, {
   getOrganisaatioTyypit,
 } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
+const useOrganisaatiotyyppiMap = () => {
+  const { data: organisaatiotyypit } = useKoodisto({
+    koodisto: 'organisaatiotyyppi',
+  });
+
+  return _fp.flow(
+    _fp.map((k: any) => [k?.koodiUri, _fp.toLower(getKoodiNimiTranslation(k))]),
+    _fp.fromPairs
+  )(organisaatiotyypit);
+};
+
+const getOrganisaatioLabel = (org, language, organisaatiotyyppiMap) => {
+  const nimi = getFirstLanguageValue(org?.nimi, language);
+  const organisaatiotyyppi = getOrganisaatioTyypit(org)?.[0];
+  const tyyppi = organisaatiotyyppiMap[organisaatiotyyppi];
+  return nimi + (tyyppi ? ` (${tyyppi})` : '');
+};
+
 export const useJarjestyspaikkaOptions = ({ tarjoajaOids }) => {
-  const { t } = useTranslation();
   const getCanUpdate = useGetCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
     CRUD_ROLES.UPDATE
@@ -29,11 +48,15 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids }) => {
 
   const selectedValue = useFieldValue('jarjestyspaikkaOid');
 
-  const selectableOids = [selectedValue, ...tarjoajaOids].filter(Boolean);
+  const selectableOids = _fp.uniq(
+    [selectedValue, ...tarjoajaOids].filter(Boolean)
+  );
 
   const { organisaatiot: orgs, ...rest } = useOrganisaatiot(selectableOids);
 
   const language = useUserLanguage();
+
+  const organisaatiotyyppiMap = useOrganisaatiotyyppiMap();
 
   const jarjestyspaikkaOptions = useMemo(
     () =>
@@ -46,12 +69,12 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids }) => {
         ),
         _fp.map(org => ({
           value: org?.oid,
-          label: getOrganisaatioLabel(org, language, t),
+          label: getOrganisaatioLabel(org, language, organisaatiotyyppiMap),
           disabled: !getCanUpdate(org),
         })),
         _fp.sortBy('label')
       )(orgs),
-    [getCanUpdate, orgs, language, t]
+    [getCanUpdate, orgs, language, organisaatiotyyppiMap]
   );
 
   return { options: jarjestyspaikkaOptions, ...rest };
@@ -78,17 +101,6 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   },
   simpleMapProps
 );
-
-const getOrganisaatioTyyppiTranslation = (org, t) => {
-  const organisaatioTyyppi = getOrganisaatioTyypit(org)?.[0];
-  return t(`organisaatiotyypit.${organisaatioTyyppi}`);
-};
-
-const getOrganisaatioLabel = (org, language, t) => {
-  const nimi = getFirstLanguageValue(org?.nimi, language);
-  const tyyppi = getOrganisaatioTyyppiTranslation(org, t);
-  return nimi + (tyyppi ? ` (${tyyppi})` : '');
-};
 
 export const JarjestyspaikkaSection = ({
   tarjoajat,

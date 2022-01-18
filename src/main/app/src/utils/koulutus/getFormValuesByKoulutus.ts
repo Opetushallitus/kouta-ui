@@ -67,7 +67,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     externalId,
     tila,
     kieliversiot: kielivalinta,
-    tarjoajat: { tarjoajat, kaytaPohjanJarjestajaa: true },
+    tarjoajat: { tarjoajat },
     information: {
       nimi,
       eperuste: {

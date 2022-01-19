@@ -93,8 +93,8 @@ export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
   let enOsoite;
   const kieli = 'en';
   if (!_.has(kielistetytOsoitteet, kieli) && !_.isEmpty(ulkomaisetOsoitteet)) {
-    const enUlkomainenOsoite = _.find(ulkomaisetOsoitteet, {
-      kieli: 'kieli_en#1',
+    const enUlkomainenOsoite = _.find(ulkomaisetOsoitteet, osoite => {
+      return _.startsWith(osoite.kieli, 'kieli_en');
     });
 
     enOsoite = { [kieli]: enUlkomainenOsoite.osoite.replace(/\n/g, ', ') };

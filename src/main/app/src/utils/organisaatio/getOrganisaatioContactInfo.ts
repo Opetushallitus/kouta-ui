@@ -28,15 +28,6 @@ const getOrganisaatioContactInfo = organisaatio => {
     ({ kieli }) => getKieliByKieliUri(kieli) || '_'
   );
 
-  const postiOsoitteet = yhteystiedot.filter(
-    y => _.get(y, 'osoiteTyyppi') === 'posti'
-  );
-
-  const postiOsoitteetByKieli = _.groupBy(
-    postiOsoitteet,
-    ({ kieli }) => getKieliByKieliUri(kieli) || '_'
-  );
-
   const verkkosivut = yhteystiedot.filter(y => _.isString(_.get(y, 'www')));
   const sahkopostit = yhteystiedot.filter(y => _.isString(_.get(y, 'email')));
   const puhelinnumerot = yhteystiedot.filter(
@@ -46,60 +37,32 @@ const getOrganisaatioContactInfo = organisaatio => {
   const verkkosivu = _.get(verkkosivut, '[0].www');
   const sahkoposti = _.get(sahkopostit, '[0].email');
   const puhelinnumero = _.get(puhelinnumerot, '[0].numero');
-
-  const kayntipostinumero = _.get(kayntiOsoitteet, '[0].postinumeroUri')
+  const postinumero = _.get(kayntiOsoitteet, '[0].postinumeroUri')
     ? getPostinumeroByPostinumeroUri(kayntiOsoitteet[0].postinumeroUri)
     : undefined;
 
-  const kayntipostinumeroKoodiUri = _.get(kayntiOsoitteet, '[0].postinumeroUri')
+  const postinumeroKoodiUri = _.get(kayntiOsoitteet, '[0].postinumeroUri')
     ? _.get(kayntiOsoitteet, '[0].postinumeroUri')
     : null;
 
-  const kayntiosoite = _.mapValues(kayntiOsoitteetByKieli, osoitteet => {
+  const osoite = _.mapValues(kayntiOsoitteetByKieli, osoitteet => {
     return _.get(osoitteet, '[0].osoite');
   });
 
-  const kayntipostitoimipaikka = _.mapValues(
-    kayntiOsoitteetByKieli,
-    osoitteet => {
-      return _.get(osoitteet, '[0].postitoimipaikka')
-        ? _.upperFirst(osoitteet[0].postitoimipaikka.toLowerCase())
-        : undefined;
-    }
-  );
-
-  const postinumero = _.get(postiOsoitteet, '[0].postinumeroUri')
-    ? getPostinumeroByPostinumeroUri(postiOsoitteet[0].postinumeroUri)
-    : undefined;
-
-  const osoite = _.mapValues(postiOsoitteetByKieli, osoitteet => {
-    return _.get(osoitteet, '[0].osoite');
-  });
-
-  const postitoimipaikka = _.mapValues(postiOsoitteetByKieli, osoitteet => {
+  const postitoimipaikka = _.mapValues(kayntiOsoitteetByKieli, osoitteet => {
     return _.get(osoitteet, '[0].postitoimipaikka')
       ? _.upperFirst(osoitteet[0].postitoimipaikka.toLowerCase())
       : undefined;
   });
 
   return {
-    kaynti: {
-      osoite: prune(_.omit(kayntiosoite, ['_'])),
-      postitoimipaikka: prune(_.omit(kayntipostitoimipaikka, ['_'])),
-      postinumero: kayntipostinumero,
-    },
-    posti: {
-      osoite: prune(_.omit(osoite, ['_'])),
-      postitoimipaikka: prune(_.omit(postitoimipaikka, ['_'])),
-      postinumero: postinumero,
-    },
-    osoite: prune(_.omit(kayntiosoite, ['_'])),
-    postitoimipaikka: prune(_.omit(kayntipostitoimipaikka, ['_'])),
-    postinumero: kayntipostinumero,
+    osoite: prune(_.omit(osoite, ['_'])),
+    postitoimipaikka: prune(_.omit(postitoimipaikka, ['_'])),
+    postinumero,
     sahkoposti,
     puhelinnumero,
     verkkosivu,
-    postinumeroKoodiUri: kayntipostinumeroKoodiUri,
+    postinumeroKoodiUri,
   };
 };
 

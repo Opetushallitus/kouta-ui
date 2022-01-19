@@ -58,30 +58,30 @@ const fillTietoaOpiskelustaSection = () => {
 
 const checkYhteystiedotSection = () => {
   getByTestId('yhteystiedotSection').within(() => {
-    cy.findByText(/oppilaitoslomake\.yhteystiedonNimi/)
-      .parent()
-      .next()
-      .should('have.text', 'Organisaatio');
+    cy.findByLabelText(/oppilaitoslomake.yhteystiedonNimi/).should(
+      'have.text',
+      'Organisaatio'
+    );
 
-    cy.findByText(/yleiset\.postiosoite/)
-      .parent()
-      .next()
-      .should('have.text', 'Horonpohjantie 279, 40101 Jyväskylä');
+    cy.findByLabelText(/yleiset\.postiosoite/).should(
+      'have.text',
+      'Horonpohjantie 279, 40101 Jyväskylä'
+    );
 
-    cy.findByText(/yleiset\.kayntiosoite/)
-      .parent()
-      .next()
-      .should('have.text', 'Verhonkulmala 220, 40720 Jyväskylä');
+    cy.findByLabelText(/yleiset\.kayntiosoite/).should(
+      'have.text',
+      'Verhonkulmala 220, 40720 Jyväskylä'
+    );
 
-    cy.findByText(/yleiset\.sahkoposti/)
-      .parent()
-      .next()
-      .should('have.text', 'hakija-31832505@oph.fi');
+    cy.findByLabelText(/yleiset\.sahkoposti/).should(
+      'have.text',
+      'hakija-31832505@oph.fi'
+    );
 
-    cy.findByText(/yleiset\.puhelinnumero/)
-      .parent()
-      .next()
-      .should('have.text', '050 28144921');
+    cy.findByLabelText(/yleiset\.puhelinnumero/).should(
+      'have.text',
+      '050 28144921'
+    );
 
     jatka();
   });

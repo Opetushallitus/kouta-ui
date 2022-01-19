@@ -97,10 +97,21 @@ export const YhteystietoSection = ({ description, name, language }) => {
 };
 
 const InfoLabel = props => (
-  <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
+  <Box flexGrow={0} pr={2} flexBasis="30%" id={props.id} {...props} />
 );
 
 const InfoValue = props => <Box flexGrow={1} {...props} />;
+
+const Yhteystieto = ({ label, value, id, ...props }) => (
+  <Box display="flex" mb={2}>
+    <InfoLabel id={id}>
+      <Typography color="text.dark">{label}:</Typography>
+    </InfoLabel>
+    <InfoValue aria-labelledby={id}>
+      <Typography>{value}</Typography>
+    </InfoValue>
+  </Box>
+);
 
 export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
   const { t } = useTranslation();
@@ -136,52 +147,31 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
 
   return (
     <>
-      <Box display="flex" mb={2}>
-        <InfoLabel>
-          <Typography color="text.dark">
-            {t('oppilaitoslomake.yhteystiedonNimi')}:
-          </Typography>
-        </InfoLabel>
-        <InfoValue>
-          <Typography>{nimi}</Typography>
-        </InfoValue>
-      </Box>
-      <Box display="flex" mb={2}>
-        <InfoLabel>
-          <Typography color="text.dark">{t('yleiset.postiosoite')}:</Typography>
-        </InfoLabel>
-        <InfoValue>
-          <Typography>{postiosoiteInSelectedLang}</Typography>
-        </InfoValue>
-      </Box>
-      <Box display="flex" mb={2}>
-        <InfoLabel>
-          <Typography color="text.dark">
-            {t('yleiset.kayntiosoite')}:
-          </Typography>
-        </InfoLabel>
-        <InfoValue>
-          <Typography>{kayntiosoiteInSelectedLang}</Typography>
-        </InfoValue>
-      </Box>
-      <Box display="flex" mb={2}>
-        <InfoLabel>
-          <Typography color="text.dark">{t('yleiset.sahkoposti')}:</Typography>
-        </InfoLabel>
-        <InfoValue>
-          <Typography>{sahkopostiInSelectedLang}</Typography>
-        </InfoValue>
-      </Box>
-      <Box display="flex" mb={2}>
-        <InfoLabel>
-          <Typography color="text.dark">
-            {t('yleiset.puhelinnumero')}:
-          </Typography>
-        </InfoLabel>
-        <InfoValue>
-          <Typography>{puhelinnumeroInSelectedLang}</Typography>
-        </InfoValue>
-      </Box>
+      <Yhteystieto
+        label={t('oppilaitoslomake.yhteystiedonNimi')}
+        value={nimi}
+        id="organisaationNimi"
+      />
+      <Yhteystieto
+        label={t('yleiset.postiosoite')}
+        value={postiosoiteInSelectedLang}
+        id="postiosoite"
+      />
+      <Yhteystieto
+        label={t('yleiset.kayntiosoite')}
+        value={kayntiosoiteInSelectedLang}
+        id="kayntiosoite"
+      />
+      <Yhteystieto
+        label={t('yleiset.sahkoposti')}
+        value={sahkopostiInSelectedLang}
+        id="sahkoposti"
+      />
+      <Yhteystieto
+        label={t('yleiset.puhelinnumero')}
+        value={puhelinnumeroInSelectedLang}
+        id="puhelinnumero"
+      />
     </>
   );
 };

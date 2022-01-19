@@ -76,15 +76,11 @@ export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
         ? _.upperFirst(osoite.postitoimipaikka.toLowerCase())
         : undefined;
 
-      const address = {
+      return {
+        ...result,
         [kieli]: `${osoite.osoite}, ${getPostinumeroByPostinumeroUri(
           osoite.postinumeroUri
         )} ${postitoimipaikka}`,
-      };
-
-      return {
-        ...result,
-        ...address,
       };
     },
     {}
@@ -107,12 +103,9 @@ export const getKielistetty = (entities, key) => {
   return entities.reduce((result, entity) => {
     const kieli = getKieliByKieliUri(entity.kieli);
 
-    const kielistetty = {
-      [kieli]: entity[key],
-    };
     return {
       ...result,
-      ...kielistetty,
+      [kieli]: entity[key],
     };
   }, {});
 };

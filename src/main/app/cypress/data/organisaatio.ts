@@ -25,7 +25,7 @@ export default ({ oid = '1.2.246.562.10.594252633210' } = {}) => ({
     },
     {
       kieli: 'kieli_fi#1',
-      www: 'http://www.gradia.fi',
+      www: 'https://www.sivusto.fi',
       yhteystietoOid: '1.2.246.562.5.32073585773',
       id: '6752705',
     },

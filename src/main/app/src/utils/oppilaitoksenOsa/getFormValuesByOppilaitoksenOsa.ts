@@ -13,7 +13,6 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   } = oppilaitoksenOsa;
 
   const {
-    yhteystiedot,
     esittely,
     opiskelijoita,
     kampus,
@@ -26,19 +25,6 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
     oppilaitosOid,
     kieliversiot: kielivalinta,
     esittely: _.mapValues(esittely || {}, parseEditorState),
-    yhteystiedot: yhteystiedot.map(yhteystieto => ({
-      nimi: yhteystieto.nimi || {},
-      postiosoite: yhteystieto.postiosoite?.osoite || {},
-      postinumero: yhteystieto.postiosoite?.postinumeroKoodiUri
-        ? { value: yhteystieto.postiosoite.postinumeroKoodiUri }
-        : null,
-      kayntiosoite: yhteystieto.kayntiosoite?.osoite || {},
-      kayntiosoitePostinumero: yhteystieto.kayntiosoite?.postinumeroKoodiUri
-        ? { value: yhteystieto.kayntiosoite.postinumeroKoodiUri }
-        : null,
-      puhelinnumero: yhteystieto.puhelinnumero || {},
-      sahkoposti: yhteystieto.sahkoposti || {},
-    })),
     perustiedot: {
       opiskelijoita: _.isNumber(opiskelijoita) ? opiskelijoita : '',
       kampus: kampus || {},

@@ -73,19 +73,6 @@ export const OppilaitosPage = ({
       ...(formMode === FormMode.CREATE
         ? {
             ...formInitialValues,
-            yhteystiedot: [
-              {
-                postiosoite: contactInfo.osoite || {},
-                postinumero: contactInfo.postinumeroKoodiUri
-                  ? {
-                      value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
-                        ? contactInfo.postinumeroKoodiUri
-                        : `${contactInfo.postinumeroKoodiUri}#2`,
-                    }
-                  : undefined,
-                puhelinnumero: contactInfo.puhelinnumero || '',
-              },
-            ],
             perustiedot: {
               wwwSivuUrl: contactInfo.verkkosivu || '',
             },

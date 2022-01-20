@@ -13,7 +13,6 @@ export const getOppilaitoksenOsaByFormValues = ({
     oppilaitosOid,
     perustiedot,
     esittely,
-    yhteystiedot = [],
     kieliversiot,
     teemakuva,
     esikatselu = false,
@@ -29,35 +28,6 @@ export const getOppilaitoksenOsaByFormValues = ({
     teemakuva,
     esikatselu,
     metadata: {
-      yhteystiedot: yhteystiedot.map(
-        ({
-          nimi,
-          postiosoite,
-          postinumero,
-          kayntiosoite,
-          kayntiosoitePostinumero,
-          sahkoposti,
-          puhelinnumero,
-        }) => ({
-          nimi: pickTranslations(nimi || {}),
-          postiosoite:
-            !_.isEmpty(postiosoite) || postinumero
-              ? {
-                  osoite: pickTranslations(postiosoite || {}),
-                  postinumeroKoodiUri: postinumero?.value || null,
-                }
-              : null,
-          kayntiosoite:
-            !_.isEmpty(kayntiosoite) || kayntiosoitePostinumero
-              ? {
-                  osoite: pickTranslations(kayntiosoite || {}),
-                  postinumeroKoodiUri: kayntiosoitePostinumero?.value || null,
-                }
-              : null,
-          sahkoposti: pickTranslations(sahkoposti || {}),
-          puhelinnumero: pickTranslations(puhelinnumero || {}),
-        })
-      ),
       esittely: _.mapValues(
         pickTranslations(esittely || {}),
         serializeEditorState

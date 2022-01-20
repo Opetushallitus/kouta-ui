@@ -28,36 +28,6 @@ Object {
         "sv": "www.verkkosivu.sv",
       },
     },
-    "yhteystiedot": Array [
-      Object {
-        "kayntiosoite": Object {
-          "osoite": Object {
-            "fi": "Fi osoite",
-            "sv": "Sv osoite",
-          },
-          "postinumeroKoodiUri": "postinumero_1#1",
-        },
-        "nimi": Object {
-          "fi": "Yhteystiedon nimi",
-          "sv": "Yhteystiedon nimi sv",
-        },
-        "postiosoite": Object {
-          "osoite": Object {
-            "fi": "Fi osoite",
-            "sv": "Sv osoite",
-          },
-          "postinumeroKoodiUri": "postinumero_1#1",
-        },
-        "puhelinnumero": Object {
-          "fi": "1234",
-          "sv": "5678",
-        },
-        "sahkoposti": Object {
-          "fi": "fi@sahkoposti.fi",
-          "sv": "sv@sahkoposti.sv",
-        },
-      },
-    ],
   },
   "muokkaaja": "1.1.1.1",
   "oppilaitosOid": "888.888.888",

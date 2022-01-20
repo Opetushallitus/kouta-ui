@@ -28,11 +28,17 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Editor = ({ oid }) => {
-  return oid;
+const Editor = ({ value }) => {
+  return value;
 };
 
-const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
+const FormEditInfo = ({
+  editorOid,
+  editorName,
+  date,
+  historyUrl,
+  ...props
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -44,7 +50,11 @@ const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
         <Box marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Box>
         <Box marginBottom={0.25}>
           {formatDateValue(date)}{' '}
-          {editorOid ? <Editor oid={editorOid} /> : null}
+          {editorName ? (
+            <Editor value={editorName} />
+          ) : editorOid ? (
+            <Editor value={editorOid} />
+          ) : null}
         </Box>
         <div>
           {historyUrl ? (

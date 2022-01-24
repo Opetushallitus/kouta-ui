@@ -56,31 +56,32 @@ const fillTietoaOpiskelustaSection = () => {
   });
 };
 
-const fillYhteystiedotSection = () => {
+const checkYhteystiedotSection = () => {
   getByTestId('yhteystiedotSection').within(() => {
-    getByTestId('lisaaYhteystietoButton').click({ force: true });
-    cy.findByLabelText(/oppilaitoslomake\.yhteystiedonNimi/).pipe(
-      paste('Yhteystiedon nimi')
+    cy.findByLabelText(/oppilaitoslomake.yhteystiedonNimi/).should(
+      'have.text',
+      'Organisaatio'
     );
 
-    cy.findByLabelText(/yleiset.postiosoite/).pipe(paste('Osoite'));
-
-    // NOTE: postinumeros are with testIds for they share the same translationkey
-    getByTestId('postinumero').within(() => {
-      fillAsyncSelect('00350');
-    });
-
-    cy.findByLabelText(/yleiset.kayntiosoite/).pipe(paste('Osoite'));
-
-    getByTestId('kayntiosoitePostinumero').within(() => {
-      fillAsyncSelect('00350');
-    });
-
-    cy.findByLabelText(/yleiset.sahkoposti/).pipe(
-      paste('sahkoposti@sahkoposti.fi')
+    cy.findByLabelText(/yleiset\.postiosoite/).should(
+      'have.text',
+      'Horonpohjantie 279, 40101 Jyväskylä'
     );
 
-    cy.findByLabelText(/yleiset.puhelinnumero/).pipe(paste('12345'));
+    cy.findByLabelText(/yleiset\.kayntiosoite/).should(
+      'have.text',
+      'Verhonkulmala 220, 40720 Jyväskylä'
+    );
+
+    cy.findByLabelText(/yleiset\.sahkoposti/).should(
+      'have.text',
+      'hakija-31832505@oph.fi'
+    );
+
+    cy.findByLabelText(/yleiset\.puhelinnumero/).should(
+      'have.text',
+      '050 28144921'
+    );
 
     jatka();
   });
@@ -163,7 +164,7 @@ export const createOppilaitosForm = () => {
 
       fillTilaSection();
 
-      fillYhteystiedotSection();
+      checkYhteystiedotSection();
 
       skipHakijapalveluidenYhteystiedotSection();
 
@@ -178,7 +179,7 @@ export const createOppilaitosForm = () => {
 
       getByTestId('yhteystiedotSection').click();
 
-      fillYhteystiedotSection();
+      checkYhteystiedotSection();
 
       fillHakijapalveluidenYhteystiedotSection();
 

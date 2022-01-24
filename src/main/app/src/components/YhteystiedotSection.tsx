@@ -1,18 +1,18 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
+import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
 } from '#/src/components/formFields';
-import { Box, Divider } from '#/src/components/virkailija';
+import { Box, Divider, Typography } from '#/src/components/virkailija';
+import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
-
-import { Button } from './Button';
-import { FieldArrayList } from './FieldArrayList';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import { getKielistettyOrganisaatioContactInfo } from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
@@ -96,47 +96,82 @@ export const YhteystietoSection = ({ description, name, language }) => {
   );
 };
 
-const YhteystiedotComponent = ({ fields, language, t }) => {
-  const onAddField = useCallback(() => {
-    fields.push({});
-  }, [fields]);
+const InfoLabel = props => (
+  <Box flexGrow={0} pr={2} flexBasis="30%" id={props.id} {...props} />
+);
+
+const InfoValue = props => <Box flexGrow={1} {...props} />;
+
+const Yhteystieto = ({ label, value, id, ...props }) => (
+  <Box display="flex" mb={2}>
+    <InfoLabel id={id}>
+      <Typography color="text.dark">{label}:</Typography>
+    </InfoLabel>
+    <InfoValue aria-labelledby={id}>
+      <Typography>{value}</Typography>
+    </InfoValue>
+  </Box>
+);
+
+export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
+  const { t } = useTranslation();
+  const { organisaatio } = useOrganisaatio(organisaatioOid);
+
+  const nimi = getFirstLanguageValue(_.get(organisaatio, 'nimi'), language);
+
+  const yhteystiedot = organisaatio?.yhteystiedot;
+  let contactInfo;
+  if (yhteystiedot) {
+    contactInfo = getKielistettyOrganisaatioContactInfo(yhteystiedot);
+  }
+
+  const kayntiosoiteInSelectedLang = getFirstLanguageValue(
+    contactInfo?.kaynti,
+    language
+  );
+
+  const postiosoiteInSelectedLang = getFirstLanguageValue(
+    contactInfo?.posti,
+    language
+  );
+
+  const sahkopostiInSelectedLang = getFirstLanguageValue(
+    contactInfo?.sahkoposti,
+    language
+  );
+
+  const puhelinnumeroInSelectedLang = getFirstLanguageValue(
+    contactInfo?.puhelinnumero,
+    language
+  );
 
   return (
     <>
-      <FieldArrayList fields={fields}>
-        {({ field }) => <YhteystietoSection name={field} language={language} />}
-      </FieldArrayList>
-      <Box
-        display="flex"
-        justifyContent="center"
-        marginTop={fields.length > 0 ? 4 : 0}
-      >
-        <Button
-          variant="outlined"
-          color="primary"
-          type="button"
-          onClick={onAddField}
-          {...getTestIdProps('lisaaYhteystietoButton')}
-        >
-          {t('yleiset.lisaaYhteystieto')}
-        </Button>
-      </Box>
+      <Yhteystieto
+        label={t('oppilaitoslomake.yhteystiedonNimi')}
+        value={nimi}
+        id="organisaationNimi"
+      />
+      <Yhteystieto
+        label={t('yleiset.postiosoite')}
+        value={postiosoiteInSelectedLang}
+        id="postiosoite"
+      />
+      <Yhteystieto
+        label={t('yleiset.kayntiosoite')}
+        value={kayntiosoiteInSelectedLang}
+        id="kayntiosoite"
+      />
+      <Yhteystieto
+        label={t('yleiset.sahkoposti')}
+        value={sahkopostiInSelectedLang}
+        id="sahkoposti"
+      />
+      <Yhteystieto
+        label={t('yleiset.puhelinnumero')}
+        value={puhelinnumeroInSelectedLang}
+        id="puhelinnumero"
+      />
     </>
-  );
-};
-
-export const YhteystiedotSection = ({
-  name = 'yhteyshenkilot',
-  language = 'fi',
-}) => {
-  const { t } = useTranslation();
-
-  return (
-    <FieldArray
-      name={name}
-      component={YhteystiedotComponent}
-      t={t}
-      language={language}
-    />
   );
 };

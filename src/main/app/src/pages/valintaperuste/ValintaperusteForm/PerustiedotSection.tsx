@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -18,6 +18,7 @@ import {
   useOppilaitosTyypit,
 } from '#/src/hooks/useOppilaitosTyypit';
 import { getTestIdProps } from '#/src/utils';
+import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
 
 type Props = {
   name: string;
@@ -40,18 +41,22 @@ export const PerustiedotSection = ({
 
   const isOphVirkailija = useIsOphVirkailija();
 
-  const { oppilaitostyypit, isLoading } = useOppilaitosTyypit(organisaatioOid);
+  const {
+    oppilaitostyypit: allowedOppilaitostyypit,
+    isLoading: loadingTyypit,
+  } = useOppilaitosTyypit(organisaatioOid);
 
-  const getIsDisabled = useMemo(
-    () =>
-      createIsKoulutustyyppiDisabledGetter({
-        isOphVirkailija,
-        oppilaitostyypit,
-        entityType: ENTITY.SORA_KUVAUS,
-      }),
-    [isOphVirkailija, oppilaitostyypit]
-  );
+  const { oppilaitostyypitByKoulutustyypit, isLoading: loadingMappings } =
+    useOppilaitostyypitByKoulutustyypit();
 
+  const getIsDisabled = createIsKoulutustyyppiDisabledGetter({
+    isOphVirkailija,
+    oppilaitostyypitByKoulutustyypit,
+    allowedOppilaitostyypit,
+    entityType: ENTITY.SORA_KUVAUS,
+  });
+
+  const isLoading = loadingTyypit || loadingMappings;
   return (
     <>
       <Field

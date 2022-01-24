@@ -11,7 +11,11 @@ import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
-export const VapaaSivistystyoTiedotSection = ({ koulutus, language, name }) => {
+export const VapaaSivistystyoAmmMuuTiedotSection = ({
+  koulutus,
+  language,
+  name,
+}) => {
   const { t } = useTranslation();
 
   const { koodi: laajuusKoodi } = useKoodi(

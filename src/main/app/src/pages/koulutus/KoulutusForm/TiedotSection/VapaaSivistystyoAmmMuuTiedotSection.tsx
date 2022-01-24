@@ -9,7 +9,11 @@ import { Box } from '#/src/components/virkailija';
 import KoulutusalatField from './KoulutusalatField';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 
-export const VapaaSivistystyoTiedotSection = ({ disabled, language, name }) => {
+export const VapaaSivistystyoAmmMuuTiedotSection = ({
+  disabled,
+  language,
+  name,
+}) => {
   const { t } = useTranslation();
   return (
     <Box mb={-2}>

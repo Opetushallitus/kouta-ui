@@ -40,7 +40,7 @@ import { TiedotSection } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { TuvaTelmaTiedotSection } from './TuvaTelmaTiedotSection';
-import { VapaaSivistystyoTiedotSection } from './VapaaSivistystyoTiedotSection';
+import { VapaaSivistystyoAmmMuuTiedotSection } from './VapaaSivistystyoAmmMuuTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
@@ -75,6 +75,7 @@ const ToteutusForm = ({
     KOULUTUSTYYPPI.TUTKINNON_OSA,
     KOULUTUSTYYPPI.OSAAMISALA,
     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
   ].includes(koulutustyyppi)
     ? hakeutumisTaiIlmoittautumistapa === ATARU
     : true;
@@ -138,6 +139,7 @@ const ToteutusForm = ({
             isIn([
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
             ]),
             () => (
               <>
@@ -145,7 +147,7 @@ const ToteutusForm = ({
                   section="tiedot"
                   header={t('toteutuslomake.toteutuksenTiedot')}
                   languages={languages}
-                  Component={VapaaSivistystyoTiedotSection}
+                  Component={VapaaSivistystyoAmmMuuTiedotSection}
                   koulutustyyppi={koulutustyyppi}
                   koulutus={koulutus}
                 />
@@ -256,6 +258,7 @@ const ToteutusForm = ({
           KOULUTUSTYYPPI.TUTKINNON_OSA,
           KOULUTUSTYYPPI.OSAAMISALA,
           KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+          KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
         ].includes(koulutustyyppi) && (
           <FormCollapse
             section="hakeutumisTaiIlmoittautumistapa"

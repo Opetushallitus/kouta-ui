@@ -42,7 +42,7 @@ import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import { TiedotSection } from './TiedotSection/TiedotSection';
 import { TuvaTelmaTiedotSection } from './TiedotSection/TuvaTelmaTiedotSection';
-import { VapaaSivistystyoTiedotSection } from './TiedotSection/VapaaSivistystyoTiedotSection';
+import { VapaaSivistystyoAmmMuuTiedotSection } from './TiedotSection/VapaaSivistystyoAmmMuuTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -145,8 +145,9 @@ export const KoulutusForm = ({
                   isIn([
                     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
                     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+                    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
                   ]),
-                  () => VapaaSivistystyoTiedotSection,
+                  () => VapaaSivistystyoAmmMuuTiedotSection,
                 ],
                 [otherwise, () => TiedotSection],
               ])(koulutustyyppi)}
@@ -236,6 +237,7 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse
@@ -254,6 +256,7 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
           ].includes(koulutustyyppi) && (
             <>
               <FormCollapse

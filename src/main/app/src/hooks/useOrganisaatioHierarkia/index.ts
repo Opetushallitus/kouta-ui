@@ -33,20 +33,28 @@ const defaultFilter = org => {
 };
 
 export const useOrganisaatioHierarkia = (
-  oid?: string,
+  oid?: string | Array<string>,
   {
     skipParents = false,
     filter = _fp.T,
     enabled = true,
   }: UseOrganisaatioHierarkiaOptions = {}
 ) => {
+  const oidsParams = _fp.isArray(oid)
+    ? {
+        oids: oid,
+      }
+    : oid === OPETUSHALLITUS_ORGANISAATIO_OID
+    ? {}
+    : { oid };
+
   const { data, ...rest } = useApiQuery(
     'getOrganisaatioHierarkia',
     getOrganisaatioHierarkia,
     {
       // Jostain syystä organisaatio-servicen hierarkia/v4/hae-rajapinta palauttaa tyhjän taulukon kun antaa
       // oid-parametrina OPH-organisaation. Jos ei anna oidia, niin palautetaan kaikki muut paitsi OPH
-      ...(oid === OPETUSHALLITUS_ORGANISAATIO_OID ? {} : { oid }),
+      ...oidsParams,
       skipParents,
     },
     { ...LONG_CACHE_QUERY_OPTIONS, enabled: Boolean(oid) && enabled }

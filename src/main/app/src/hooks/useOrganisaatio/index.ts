@@ -13,13 +13,13 @@ import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithR
 import getUserRoles from '#/src/utils/getUserRoles';
 import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
 
-export const useOrganisaatio = oid => {
+export const useOrganisaatio = (oid, options = {}) => {
   const { organisaatiot, ...rest } = useOrganisaatiot(oid);
 
   return { organisaatio: organisaatiot?.[0], ...rest };
 };
 
-export const useOrganisaatiot = oids => {
+export const useOrganisaatiot = (oids, options = {}) => {
   const { data: organisaatiot, ...rest } = useApiQuery(
     'getOrganisaatiot',
     getOrganisaatiotByOids,
@@ -28,6 +28,7 @@ export const useOrganisaatiot = oids => {
       ...LONG_CACHE_QUERY_OPTIONS,
       enabled: !_.isEmpty(oids),
       retry: 0,
+      ...options,
     }
   );
 

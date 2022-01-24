@@ -13,11 +13,13 @@ import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useKoodisto from '#/src/hooks/useKoodisto';
-import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
+import useOrganisaatio from '#/src/hooks/useOrganisaatio';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi, {
   getOrganisaatioTyypit,
 } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
@@ -27,10 +29,17 @@ const useOrganisaatiotyyppiMap = () => {
     koodisto: 'organisaatiotyyppi',
   });
 
-  return _fp.flow(
-    _fp.map((k: any) => [k?.koodiUri, _fp.toLower(getKoodiNimiTranslation(k))]),
-    _fp.fromPairs
-  )(organisaatiotyypit);
+  return useMemo(
+    () =>
+      _fp.flow(
+        _fp.map((k: any) => [
+          k?.koodiUri,
+          _fp.toLower(getKoodiNimiTranslation(k)),
+        ]),
+        _fp.fromPairs
+      )(organisaatiotyypit),
+    [organisaatiotyypit]
+  );
 };
 
 const getOrganisaatioLabel = (org, language, organisaatiotyyppiMap) => {
@@ -48,11 +57,26 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids }) => {
 
   const selectedValue = useFieldValue('jarjestyspaikkaOid');
 
-  const selectableOids = _fp.uniq(
-    [selectedValue, ...tarjoajaOids].filter(Boolean)
+  const { hierarkia, isLoading: isHierarkiaLoading } = useOrganisaatioHierarkia(
+    tarjoajaOids,
+    {
+      skipParents: true,
+    }
   );
 
-  const { organisaatiot: orgs, ...rest } = useOrganisaatiot(selectableOids);
+  const flattenedHierarkia = useMemo(
+    () => flattenHierarkia(hierarkia),
+    [hierarkia]
+  );
+  const hierarkiaOids = flattenedHierarkia.map(org => org.oid);
+
+  const { organisaatio: selectedOrganisaatio, isLoading: isSelectedLoading } =
+    useOrganisaatio(
+      !hierarkiaOids.includes(selectedValue) ? selectedValue : null,
+      { enabled: !isHierarkiaLoading && !hierarkiaOids.includes(selectedValue) }
+    );
+
+  const orgs = [selectedOrganisaatio, ...flattenedHierarkia].filter(Boolean);
 
   const language = useUserLanguage();
 
@@ -74,10 +98,13 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids }) => {
         })),
         _fp.sortBy('label')
       )(orgs),
-    [getCanUpdate, orgs, language, organisaatiotyyppiMap]
+    [getCanUpdate, language, organisaatiotyyppiMap, orgs]
   );
 
-  return { options: jarjestyspaikkaOptions, ...rest };
+  return {
+    options: jarjestyspaikkaOptions,
+    isLoading: isHierarkiaLoading || isSelectedLoading,
+  };
 };
 
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(

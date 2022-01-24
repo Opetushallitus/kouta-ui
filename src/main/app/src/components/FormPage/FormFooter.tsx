@@ -44,8 +44,7 @@ const FormFooter = ({
 }: FormFooterProps) => {
   const { t } = useTranslation();
   const isSubmitting = useIsSubmitting();
-  const { modified, muokkaaja, _enrichedData } = entity;
-  console.log({ _enrichedData });
+  const { modified, muokkaaja, _enrichedData, metadata } = entity;
   let title;
 
   if (!canUpdate) {
@@ -88,6 +87,7 @@ const FormFooter = ({
                 date={modified}
                 editorOid={muokkaaja}
                 editorName={_enrichedData?.muokkaajanNimi}
+                isEditorOphVirkailija={metadata?.isMuokkaajaOphVirkailija}
               />
             )}
           </Box>

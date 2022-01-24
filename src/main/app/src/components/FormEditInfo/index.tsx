@@ -35,11 +35,14 @@ const Editor = ({ value }) => {
 const FormEditInfo = ({
   editorOid,
   editorName,
+  isEditorOphVirkailija,
   date,
   historyUrl,
   ...props
 }) => {
   const { t } = useTranslation();
+
+  const oph = isEditorOphVirkailija ? ` (${t('yleiset.oph')})` : '';
 
   return (
     <Container {...props}>
@@ -51,7 +54,7 @@ const FormEditInfo = ({
         <Box marginBottom={0.25}>
           {formatDateValue(date)}{' '}
           {editorName ? (
-            <Editor value={editorName} />
+            <Editor value={`${editorName}${oph}`} />
           ) : editorOid ? (
             <Editor value={editorOid} />
           ) : null}

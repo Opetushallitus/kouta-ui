@@ -39,17 +39,6 @@ export const createIsKoulutustyyppiDisabledGetter = ({
   entityType,
 }) => {
   return value => {
-    if (
-      _fp.isEmpty(allowedOppilaitostyypit) ||
-      _fp.isEmpty(oppilaitostyypitByKoulutustyypit)
-    ) {
-      return false;
-    }
-
-    if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
-      return true;
-    }
-
     if (isOphVirkailija) {
       return false;
     }
@@ -59,6 +48,17 @@ export const createIsKoulutustyyppiDisabledGetter = ({
       ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT.includes(value)
     ) {
       return true;
+    }
+
+    if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
+      return true;
+    }
+
+    if (
+      _fp.isEmpty(allowedOppilaitostyypit) ||
+      _fp.isEmpty(oppilaitostyypitByKoulutustyypit)
+    ) {
+      return false;
     }
 
     const oppilaitostyypitForKoulutustyyppiWoVersion =

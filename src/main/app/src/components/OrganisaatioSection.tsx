@@ -24,7 +24,6 @@ export const OrganisaatioSection = () => {
   const { hierarkia, isLoading } = useOrganisaatioHierarkia(
     OPETUSHALLITUS_ORGANISAATIO_OID,
     {
-      skipParents: true,
       enabled: isOphVirkailija,
     }
   );

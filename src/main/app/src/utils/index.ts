@@ -12,15 +12,17 @@ import {
   ALLOWED_HTML_TAGS,
   EI_TUETUT_KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
-  LANGUAGES,
-  NDASH,
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+  LANGUAGES,
+  NDASH,
+  ORGANISAATIOTYYPPI,
 } from '#/src/constants';
 import { memoize, memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
+import organisaatioMatchesTyyppi from './organisaatio/organisaatioMatchesTyyppi';
 
 const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 
@@ -283,7 +285,7 @@ export const retryOnRedirect = async ({ httpClient, targetUrl }) => {
   return res?.data;
 };
 
-export const safeArray = v => (_.isNil(v) ? [] : _.castArray(v));
+export const valueToArray = v => (_.isNil(v) ? [] : _.castArray(v));
 
 export const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
 
@@ -364,3 +366,7 @@ export const getKoulutustyyppiTranslation = (
 
   return koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '';
 };
+
+export const notToimipisteOrg = _fp.negate(
+  organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
+);

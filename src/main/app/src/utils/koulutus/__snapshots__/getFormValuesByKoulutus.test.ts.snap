@@ -74,7 +74,6 @@ Object {
   "osaamisala": null,
   "soraKuvaus": null,
   "tarjoajat": Object {
-    "kaytaPohjanJarjestajaa": true,
     "tarjoajat": Array [
       "123.456.789",
     ],
@@ -174,7 +173,6 @@ Object {
     "value": "1234",
   },
   "tarjoajat": Object {
-    "kaytaPohjanJarjestajaa": true,
     "tarjoajat": Array [
       "123.456.789",
     ],

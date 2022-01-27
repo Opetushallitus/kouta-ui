@@ -23,7 +23,7 @@ import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuild
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { getTestIdProps } from '#/src/utils';
+import { getTestIdProps, notToimipisteOrg } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
@@ -41,10 +41,9 @@ export const JarjestajaSection = ({
   disableTarjoajaHierarkia,
 }) => {
   const { t } = useTranslation();
+
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: _fp.negate(
-      organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
-    ),
+    filter: notToimipisteOrg,
   });
 
   const roleBuilder = useAuthorizedUserRoleBuilder();

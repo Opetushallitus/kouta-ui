@@ -118,7 +118,6 @@ export const HakukohdeForm = ({
         header={t('hakukohdelomake.hakukohteenJarjestyspaikka')}
         tarjoajat={tarjoajat}
         Component={JarjestyspaikkaSection}
-        toteutusOrganisaatioOid={toteutus?.organisaatioOid}
       />
 
       <FormCollapse

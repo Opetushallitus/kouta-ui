@@ -7,5 +7,5 @@ export const initialKoulutusValues = {
     tapa: POHJAVALINTA.UUSI,
   },
   kieliversiot: ['fi', 'sv'],
-  tarjoajat: { tarjoajat: [], kaytaPohjanJarjestajaa: true },
+  tarjoajat: { tarjoajat: [], kaytaPohjanJarjestajaa: false },
 };

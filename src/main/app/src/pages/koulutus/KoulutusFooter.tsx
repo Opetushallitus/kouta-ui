@@ -6,21 +6,20 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
-import { ORGANISAATIOTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
-import { getValuesForSaving } from '#/src/utils';
+import { getValuesForSaving, notToimipisteOrg } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 import { updateKoulutus } from '#/src/utils/koulutus/updateKoulutus';
 import { validateKoulutusForm } from '#/src/utils/koulutus/validateKoulutusForm';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 type KoulutusFooterProps = {
   formMode: FormMode;
@@ -39,7 +38,7 @@ export const KoulutusFooter = ({
   const queryClient = useQueryClient();
 
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: _.negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+    filter: notToimipisteOrg,
   });
 
   const form = useForm();

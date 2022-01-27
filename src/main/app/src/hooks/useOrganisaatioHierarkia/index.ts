@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import _fp from 'lodash/fp';
+
 import {
   LONG_CACHE_QUERY_OPTIONS,
   OPETUSHALLITUS_ORGANISAATIO_OID,
@@ -14,7 +16,7 @@ import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatc
 type UseOrganisaatioHierarkiaOptions =
   | {
       skipParents?: boolean;
-      filter?: typeof filterTree;
+      filter?: (org: any) => boolean;
       enabled?: boolean;
     }
   | undefined;
@@ -31,26 +33,37 @@ const defaultFilter = org => {
 };
 
 export const useOrganisaatioHierarkia = (
-  oid: string,
+  oid?: string | Array<string>,
   {
     skipParents = false,
-    filter = defaultFilter,
+    filter = _fp.T,
     enabled = true,
   }: UseOrganisaatioHierarkiaOptions = {}
 ) => {
+  const oidsParams = _fp.isArray(oid)
+    ? {
+        oids: oid,
+      }
+    : oid === OPETUSHALLITUS_ORGANISAATIO_OID
+    ? {}
+    : { oid };
+
   const { data, ...rest } = useApiQuery(
     'getOrganisaatioHierarkia',
     getOrganisaatioHierarkia,
     {
       // Jostain syystä organisaatio-servicen hierarkia/v4/hae-rajapinta palauttaa tyhjän taulukon kun antaa
-      // oid-parametrina OPH-organisaation, mutta ei kun saman antaa oidRestrictionList-parametrissa.
-      ...(oid === OPETUSHALLITUS_ORGANISAATIO_OID ? { oids: [oid] } : { oid }),
+      // oid-parametrina OPH-organisaation. Jos ei anna oidia, niin palautetaan kaikki muut paitsi OPH
+      ...oidsParams,
       skipParents,
     },
     { ...LONG_CACHE_QUERY_OPTIONS, enabled: Boolean(oid) && enabled }
   );
 
-  const hierarkia = useMemo(() => filterTree(data, filter), [data, filter]);
+  const hierarkia = useMemo(
+    () => filterTree(data, org => defaultFilter(org) && filter(org)),
+    [data, filter]
+  );
 
   return { hierarkia, ...rest };
 };

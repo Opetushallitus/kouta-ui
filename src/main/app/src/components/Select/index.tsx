@@ -14,7 +14,7 @@ import ReactCreatable from 'react-select/creatable';
 import { ThemeContext } from 'styled-components';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
-import { safeArray, safeArrayToValue } from '#/src/utils';
+import { valueToArray, safeArrayToValue } from '#/src/utils';
 import { memoizeOne } from '#/src/utils/memoize';
 
 const OptionComponent = props => (
@@ -65,7 +65,7 @@ const getAsyncValue = async (
   options?: Array<any>,
   loadLabel: any = _.identity
 ) => {
-  const newValue = safeArray(getValue(value, options));
+  const newValue = valueToArray(getValue(value, options));
   const result = await Promise.all(
     newValue.map(async singleValue => ({
       ...singleValue,

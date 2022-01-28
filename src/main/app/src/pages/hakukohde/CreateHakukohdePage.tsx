@@ -60,7 +60,7 @@ export const CreateHakukohdePage = () => {
   const initialValues = useMemo(
     () => ({
       ...getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
-      ...getFormValuesByHakukohde(hakukohde ?? {}),
+      ...(hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
       ...getCopyValues(hakukohde?.oid),
     }),
     [data, hakukohde]

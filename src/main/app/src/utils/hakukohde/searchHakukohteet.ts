@@ -13,7 +13,7 @@ export const searchAllHakukohteet = async ({
 }) => {
   const params = {
     organisaatioOid,
-    pageSize: ELASTIC_FIND_ALL_SIZE,
+    size: ELASTIC_FIND_ALL_SIZE,
   };
   const data = await searchHakukohteet({ httpClient, apiUrls, params });
   return data?.result;

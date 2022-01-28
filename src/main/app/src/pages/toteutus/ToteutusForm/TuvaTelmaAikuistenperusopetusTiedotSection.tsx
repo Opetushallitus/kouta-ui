@@ -12,7 +12,11 @@ import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 
-export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
+export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
+  language,
+  name,
+  koulutus,
+}) => {
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
 
@@ -42,7 +46,7 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
           component={FormFieldInput}
           label={t('toteutuslomake.toteutuksenNimi')}
           required
-          disabled
+          disabled={koulutustyyppi !== KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS}
         />
       </Box>
       <Box mb={2} display="flex">
@@ -70,7 +74,7 @@ export const TuvaTelmaTiedotSection = ({ language, name, koulutus }) => {
         </Box>
       </Box>
       <Box mb={2}>
-        {koulutustyyppi !== KOULUTUSTYYPPI.TELMA && (
+        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
           <Field
             name={`${name}.jarjestetaanErityisopetuksena`}
             component={FormFieldSwitch}

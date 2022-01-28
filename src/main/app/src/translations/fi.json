@@ -335,7 +335,7 @@
     "valma": "VALMA",
     "ammTutkinnonOsa": "Tutkinnon osa",
     "ammOsaamisala": "Osaamisala",
-    "ammMuu": "Muut koulutukset",
+    "ammMuu": "Muut ammatilliset koulutukset",
     "korkeakoulutus": "Korkeakoulutus",
     "avoinYo": "Avoin Yo",
     "avoinAmk": "Avoin AMK",
@@ -346,7 +346,6 @@
     "ammatillinenOpintoOhjaajaKoulutus": "Ammatillinen opinto-ohjaajakoulutus",
     "ammatillinenErityisopettajaKoulutus": "Ammatillinen erityisopettajakoulutus",
     "yleissivistava": "Yleissivistävä",
-    "perusopetuksenLisaopetus": "Perusopetuksen lisäopetus",
     "amm": "Ammatillinen koulutus",
     "lk": "Lukiokoulutus",
     "yo": "Yliopistokoulutus",
@@ -355,7 +354,8 @@
     "telma": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)",
     "vapaaSivistystyo": "Vapaa sivistystyö",
     "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
-    "vapaaSivistystyoMuu": "Muu"
+    "vapaaSivistystyoMuu": "Muu",
+    "aikuistenPerusopetus": "Aikuisten perusopetus"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",

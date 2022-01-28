@@ -39,7 +39,7 @@ import { OsaamisalatSection } from './OsaamisalatSection';
 import { TiedotSection } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
-import { TuvaTelmaTiedotSection } from './TuvaTelmaTiedotSection';
+import { TuvaTelmaAikuistenperusopetusTiedotSection } from './TuvaTelmaAikuistenperusopetusTiedotSection';
 import { VapaaSivistystyoAmmMuuTiedotSection } from './VapaaSivistystyoAmmMuuTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
@@ -76,6 +76,7 @@ const ToteutusForm = ({
     KOULUTUSTYYPPI.OSAAMISALA,
     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
     KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
   ].includes(koulutustyyppi)
     ? hakeutumisTaiIlmoittautumistapa === ATARU
     : true;
@@ -116,14 +117,18 @@ const ToteutusForm = ({
         />
         {_fp.cond([
           [
-            isIn([KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA]),
+            isIn([
+              KOULUTUSTYYPPI.TUVA,
+              KOULUTUSTYYPPI.TELMA,
+              KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+            ]),
             () => (
               <>
                 <FormCollapse
                   section="tiedot"
                   header={t('toteutuslomake.toteutuksenTiedot')}
                   languages={languages}
-                  Component={TuvaTelmaTiedotSection}
+                  Component={TuvaTelmaAikuistenperusopetusTiedotSection}
                   koulutus={koulutus}
                 />
                 <FormCollapse
@@ -259,6 +264,7 @@ const ToteutusForm = ({
           KOULUTUSTYYPPI.OSAAMISALA,
           KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
           KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+          KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
         ].includes(koulutustyyppi) && (
           <FormCollapse
             section="hakeutumisTaiIlmoittautumistapa"

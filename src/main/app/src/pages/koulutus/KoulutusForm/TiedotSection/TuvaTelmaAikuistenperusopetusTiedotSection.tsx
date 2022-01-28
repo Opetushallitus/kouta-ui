@@ -6,28 +6,28 @@ import { Field } from 'redux-form';
 import { FormFieldInput } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useBoundFormActions } from '#/src/hooks/form';
-import { getTestIdProps } from '#/src/utils';
+import { getKoulutustyyppiTranslationKey, getTestIdProps } from '#/src/utils';
 
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 
-export const TuvaTelmaTiedotSection = ({
+export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   disabled,
   language,
   name,
   koulutustyyppi,
 }) => {
   const { t } = useTranslation();
-
+  const koulutustyyppiKey = getKoulutustyyppiTranslationKey(koulutustyyppi);
   const { change } = useBoundFormActions();
   useEffect(() => {
     change('information.nimi', {
-      fi: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'fi' }),
-      sv: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'sv' }),
-      en: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'en' }),
+      fi: t(`koulutustyypit.${koulutustyyppiKey}`, { lng: 'fi' }),
+      sv: t(`koulutustyypit.${koulutustyyppiKey}`, { lng: 'sv' }),
+      en: t(`koulutustyypit.${koulutustyyppiKey}`, { lng: 'en' }),
     });
 
     return () => change('information.nimi', {});
-  }, [change, koulutustyyppi, t]);
+  }, [change, koulutustyyppiKey, t]);
 
   return (
     <Box mb={-2}>

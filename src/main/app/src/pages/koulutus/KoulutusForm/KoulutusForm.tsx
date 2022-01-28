@@ -41,7 +41,7 @@ import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import { TiedotSection } from './TiedotSection/TiedotSection';
-import { TuvaTelmaTiedotSection } from './TiedotSection/TuvaTelmaTiedotSection';
+import { TuvaTelmaAikuistenperusopetusTiedotSection } from './TiedotSection/TuvaTelmaAikuistenperusopetusTiedotSection';
 import { VapaaSivistystyoAmmMuuTiedotSection } from './TiedotSection/VapaaSivistystyoAmmMuuTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -138,8 +138,12 @@ export const KoulutusForm = ({
               header={t('koulutuslomake.koulutuksenTiedot')}
               Component={_fp.cond([
                 [
-                  isIn([KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA]),
-                  () => TuvaTelmaTiedotSection,
+                  isIn([
+                    KOULUTUSTYYPPI.TUVA,
+                    KOULUTUSTYYPPI.TELMA,
+                    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+                  ]),
+                  () => TuvaTelmaAikuistenperusopetusTiedotSection,
                 ],
                 [
                   isIn([
@@ -238,6 +242,7 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+            KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse
@@ -257,6 +262,7 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
             KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+            KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
           ].includes(koulutustyyppi) && (
             <>
               <FormCollapse

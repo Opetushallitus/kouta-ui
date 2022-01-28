@@ -18,6 +18,7 @@ import {
   HAKULOMAKETYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
+  ENTITY,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -48,22 +49,18 @@ type ToteutusFormProps = {
   koulutus: KoulutusModel;
   organisaatioOid: string;
   steps?: boolean;
-  canSelectBase?: boolean;
   toteutus?: ToteutusModel;
-  onAttachHakukohde?: ({ hakuOid }) => void;
+  onAttachHakukohde?: (props: { hakuOid }) => void;
   koulutustyyppi?: KOULUTUSTYYPPI;
-  onSelectBase?: (pohjavalinta: PohjaValinta) => void;
 };
 
 const ToteutusForm = ({
   koulutus,
   organisaatioOid,
   steps = false,
-  canSelectBase = true,
   toteutus,
   onAttachHakukohde,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  onSelectBase,
 }: ToteutusFormProps) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
@@ -100,9 +97,9 @@ const ToteutusForm = ({
             header={t('yleiset.organisaatio')}
           />
         )}
-        {canSelectBase && (
+        {formMode === FormMode.CREATE && (
           <PohjaFormCollapse
-            onSelectBase={onSelectBase}
+            entityType={ENTITY.TOTEUTUS}
             scrollOnActive={false}
             getCopyEntities={getToteutukset}
             infoText={t('toteutuslomake.pohjavalintaInfo')}

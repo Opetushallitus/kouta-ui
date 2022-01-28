@@ -6,20 +6,20 @@ import RouterScrollToTop from '#/src/components/RouterScrollToTop';
 import Toaster from '#/src/components/Toaster';
 import { ENTITY } from '#/src/constants';
 
-import CreateHakuPage from './haku/CreateHakuPage';
-import EditHakuPage from './haku/EditHakuPage';
+import { CreateHakuPage } from './haku/CreateHakuPage';
+import { EditHakuPage } from './haku/EditHakuPage';
 import { CreateHakukohdePage } from './hakukohde/CreateHakukohdePage';
 import { EditHakukohdePage } from './hakukohde/EditHakukohdePage';
 import HomePage from './HomePage';
-import CreateKoulutusPage from './koulutus/CreateKoulutusPage';
-import EditKoulutusPage from './koulutus/EditKoulutusPage';
+import { CreateKoulutusPage } from './koulutus/CreateKoulutusPage';
+import { EditKoulutusPage } from './koulutus/EditKoulutusPage';
 import { OppilaitoksenOsaPage } from './OppilaitoksenOsaPage/OppilaitoksenOsaPage';
 import { OppilaitosPage } from './OppilaitosPage/OppilaitosPage';
 import { createRedirectEntityPage } from './RedirectEntityPage';
-import CreateSoraKuvausPage from './soraKuvaus/CreateSoraKuvausPage';
-import EditSoraKuvausPage from './soraKuvaus/EditSoraKuvausPage';
-import CreateToteutusPage from './toteutus/CreateToteutusPage';
-import EditToteutusPage from './toteutus/EditToteutusPage';
+import { CreateSoraKuvausPage } from './soraKuvaus/CreateSoraKuvausPage';
+import { EditSoraKuvausPage } from './soraKuvaus/EditSoraKuvausPage';
+import { CreateToteutusPage } from './toteutus/CreateToteutusPage';
+import { EditToteutusPage } from './toteutus/EditToteutusPage';
 import { CreateValintaperustePage } from './valintaperuste/CreateValintaperustePage';
 import { EditValintaperustePage } from './valintaperuste/EditValintaperustePage';
 
@@ -74,7 +74,7 @@ const Routes = ({ history }) => {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route
-            path="/organisaatio/:oid/koulutus"
+            path="/organisaatio/:organisaatioOid/koulutus"
             component={CreateKoulutusPage}
             exact
           />

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -19,13 +20,8 @@ import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperu
 import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm } from './ValintaperusteForm';
 
-export const EditValintaperustePage = props => {
-  const {
-    match: {
-      params: { organisaatioOid, id },
-    },
-  } = props;
-
+export const EditValintaperustePage = () => {
+  const { organisaatioOid, id } = useParams();
   const { data: valintaperuste, isLoading } = useValintaperusteById(id);
 
   const { t } = useTranslation();
@@ -77,7 +73,6 @@ export const EditValintaperustePage = props => {
         {valintaperuste && (
           <ValintaperusteForm
             steps={false}
-            canSelectBase={false}
             canEditTyyppi={false}
             organisaatioOid={organisaatioOid}
             valintaperuste={valintaperuste}

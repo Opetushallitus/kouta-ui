@@ -11,7 +11,6 @@ import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
-import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
@@ -37,8 +36,6 @@ export const HakukohdeForm = ({
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
 
-  const { selectPohja } = usePohjaEntity(ENTITY.HAKUKOHDE);
-
   const formMode = useFormMode();
 
   return (
@@ -52,7 +49,7 @@ export const HakukohdeForm = ({
       )}
       {formMode === FormMode.CREATE && (
         <PohjaFormCollapse
-          onSelectBase={selectPohja}
+          entityType={ENTITY.HAKUKOHDE}
           scrollOnActive={false}
           getCopyEntities={searchAllHakukohteet}
           infoText={t('hakukohdelomake.pohjavalintaInfo')}

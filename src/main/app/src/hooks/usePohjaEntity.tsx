@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 import { ENTITY } from '#/src/constants';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import useSelectBase from '#/src/hooks/useSelectBase';
+import { useSelectBase } from '#/src/hooks/useSelectBase';
 import { useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
 export const usePohjaEntity = (

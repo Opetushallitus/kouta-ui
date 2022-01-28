@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { KOULUTUSTYYPIT } from '#/src/constants';
+import { FormMode, KOULUTUSTYYPIT } from '#/src/constants';
 
 import { initialValues } from '../initialToteutusValues';
 import ToteutusForm from './index';
@@ -27,6 +27,7 @@ const Wrapper = ({ koulutustyyppi = 'amm' }) => {
         koulutusNimi: 'koulutuksen nimi',
         koulutusKielet: ['fi'],
       })}
+      mode={FormMode.CREATE}
     >
       <ToteutusForm
         organisaatioOid="1.2.246.562.10.594252633210"

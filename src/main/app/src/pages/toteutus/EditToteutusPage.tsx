@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useParams, useHistory } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -21,16 +22,11 @@ import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
-
 const FORM_NAME = 'toteutusForm';
 
-const EditToteutusPage = props => {
-  const {
-    history,
-    match: {
-      params: { organisaatioOid, oid },
-    },
-  } = props;
+export const EditToteutusPage = () => {
+  const history = useHistory();
+  const { organisaatioOid, oid } = useParams();
 
   const { data: toteutus, isFetching: isToteutusFetching } =
     useToteutusByOid(oid);
@@ -108,7 +104,6 @@ const EditToteutusPage = props => {
             toteutus={toteutus}
             koulutus={koulutus}
             steps={false}
-            canSelectBase={false}
             onAttachHakukohde={onAttachHakukohde}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
@@ -120,5 +115,3 @@ const EditToteutusPage = props => {
     </ReduxForm>
   );
 };
-
-export default EditToteutusPage;

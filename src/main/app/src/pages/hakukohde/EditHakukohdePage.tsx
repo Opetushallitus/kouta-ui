@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -42,12 +43,8 @@ const useInitialValues = hakukohde => {
   );
 };
 
-export const EditHakukohdePage = props => {
-  const {
-    match: {
-      params: { organisaatioOid, oid },
-    },
-  } = props;
+export const EditHakukohdePage = () => {
+  const { organisaatioOid, oid } = useParams();
 
   const { data: hakukohde, isFetching: hakukohdeLoading } =
     useHakukohdeByOid(oid);

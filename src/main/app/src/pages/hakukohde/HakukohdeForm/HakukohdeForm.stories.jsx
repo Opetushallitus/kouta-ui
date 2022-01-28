@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { KOULUTUSTYYPIT } from '#/src/constants';
+import { FormMode, KOULUTUSTYYPIT } from '#/src/constants';
 
 import { HakukohdeForm, initialValues } from './index';
 
@@ -22,6 +22,7 @@ const Wrapper = ({ koulutustyyppi = 'amm' }) => {
     <ReduxForm
       form="hakukohde"
       initialValues={initialValues('toteutuksen nimi', ['fi'])}
+      mode={FormMode.CREATE}
     >
       <HakukohdeForm
         organisaatioOid="1.2.246.562.10.594252633210"

@@ -8,7 +8,7 @@ import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import { FormMode } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import getSoraKuvaukset from '#/src/utils/soraKuvaus/getSoraKuvaukset';
@@ -20,9 +20,7 @@ const SoraKuvausForm = ({
   steps = false,
   canEditKoulutustyyppi = true,
   soraKuvaus = undefined,
-  canSelectBase = true,
   organisaatioOid,
-  onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
@@ -46,9 +44,9 @@ const SoraKuvausForm = ({
         Component={KoulutustyyppiSection}
         canEditKoulutustyyppi={canEditKoulutustyyppi}
       />
-      {canSelectBase ? (
+      {formMode === FormMode.CREATE ? (
         <PohjaFormCollapse
-          onSelectBase={onSelectBase}
+          entityType={ENTITY.SORA_KUVAUS}
           organisaatioOid={organisaatioOid}
           getCopyEntities={getSoraKuvaukset}
           infoText={t('soraKuvauslomake.pohjavalintaInfo')}

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
@@ -38,11 +39,8 @@ const getCopyValues = oid => ({
   },
 });
 
-export const CreateHakukohdePage = ({
-  match: {
-    params: { organisaatioOid, toteutusOid, hakuOid },
-  },
-}) => {
+export const CreateHakukohdePage = () => {
+  const { organisaatioOid, toteutusOid, hakuOid } = useParams();
   const { t } = useTranslation();
 
   const { data, isLoading: isPageDataLoading } = useHakukohdePageData({

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -12,9 +12,8 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import useSelectBase from '#/src/hooks/useSelectBase';
+import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
-import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
 
 import { SoraKuvausFooter } from './SoraKuvausFooter';
 import SoraKuvausForm, { initialValues } from './SoraKuvausForm';
@@ -37,25 +36,16 @@ const getInitialValues = (soraKuvaus, kieliValinnat) => {
     : initialValues(kieliValinnatLista);
 };
 
-const CreateSoraKuvausPage = props => {
-  const {
-    match: {
-      params: { organisaatioOid, kieliValinnat },
-    },
-    location: { search },
-  } = props;
-
-  const { kopioSoraKuvausOid = null } = queryString.parse(search);
+export const CreateSoraKuvausPage = () => {
+  const { organisaatioOid, kieliValinnat } = useParams();
   const { t } = useTranslation();
-  const selectBase = useSelectBase({
-    kopioParam: 'kopioSoraKuvausOid',
-  });
 
-  const { data: soraKuvaus } = useSoraKuvausById(kopioSoraKuvausOid);
+  const { data: soraKuvaus } = usePohjaEntity(ENTITY.SORA_KUVAUS);
 
-  const initialValues = useMemo(() => {
-    return getInitialValues(soraKuvaus, kieliValinnat);
-  }, [soraKuvaus, kieliValinnat]);
+  const initialValues = useMemo(
+    () => getInitialValues(soraKuvaus, kieliValinnat),
+    [soraKuvaus, kieliValinnat]
+  );
 
   return (
     <ReduxForm
@@ -77,14 +67,8 @@ const CreateSoraKuvausPage = props => {
         <RelationInfoContainer>
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        <SoraKuvausForm
-          steps
-          organisaatioOid={organisaatioOid}
-          onSelectBase={selectBase}
-        />
+        <SoraKuvausForm steps organisaatioOid={organisaatioOid} />
       </FormPage>
     </ReduxForm>
   );
 };
-
-export default CreateSoraKuvausPage;

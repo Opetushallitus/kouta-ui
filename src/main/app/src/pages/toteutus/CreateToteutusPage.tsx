@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -19,11 +19,10 @@ import {
   ENTITY,
   FormMode,
 } from '#/src/constants';
-import useSelectBase from '#/src/hooks/useSelectBase';
+import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
-import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 
 import { initialValues } from './initialToteutusValues';
 import { ToteutusFooter } from './ToteutusFooter';
@@ -60,24 +59,11 @@ const getInitialValues = ({
     : initialValues({ koulutustyyppi, koulutusNimi, koulutusKielet });
 };
 
-const CreateToteutusPage = props => {
-  const {
-    match: {
-      params: { organisaatioOid, koulutusOid },
-    },
-    location: { search },
-  } = props;
-
-  const {
-    kopioToteutusOid,
-  }: {
-    kopioToteutusOid?: string;
-  } = queryString.parse(search);
-
+export const CreateToteutusPage = () => {
+  const { organisaatioOid, koulutusOid } = useParams();
   const { data: koulutus, isFetching: isKoulutusFetching } =
     useKoulutusByOid(koulutusOid);
 
-  const selectBase = useSelectBase({ kopioParam: 'kopioToteutusOid' });
   const { t } = useTranslation();
 
   const koulutustyyppi = koulutus?.koulutustyyppi ?? AMMATILLINEN_KOULUTUS;
@@ -85,8 +71,9 @@ const CreateToteutusPage = props => {
   const koulutusNimi = koulutus?.nimi;
   const koulutusKielet = koulutus?.kielivalinta;
 
-  const { data: toteutus, isFetching: isToteutusFetching } =
-    useToteutusByOid(kopioToteutusOid);
+  const { data: toteutus, isLoading: isToteutusFetching } = usePohjaEntity(
+    ENTITY.TOTEUTUS
+  );
 
   const initialValues = useMemo(() => {
     return [
@@ -141,7 +128,6 @@ const CreateToteutusPage = props => {
             koulutus={koulutus}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
-            onSelectBase={selectBase}
           />
         ) : (
           <Spin center />
@@ -150,5 +136,3 @@ const CreateToteutusPage = props => {
     </ReduxForm>
   );
 };
-
-export default CreateToteutusPage;

@@ -23,11 +23,9 @@ import { ValintatapaSection } from './ValintatapaSection';
 
 type ValintaperusteFormProps = {
   organisaatioOid: string;
-  valintaperuste: any;
+  valintaperuste?: any;
   steps?: boolean;
   canEditTyyppi?: boolean;
-  canSelectBase?: boolean;
-  onSelectBase?: (pohjavalinta: PohjaValinta) => void;
 };
 
 export const ValintaperusteForm = ({
@@ -35,8 +33,6 @@ export const ValintaperusteForm = ({
   valintaperuste,
   steps = true,
   canEditTyyppi = true,
-  canSelectBase = true,
-  onSelectBase,
 }: ValintaperusteFormProps) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('perustiedot.kieliversiot');
@@ -63,9 +59,9 @@ export const ValintaperusteForm = ({
         organisaatioOid={organisaatioOid}
       />
 
-      {canSelectBase && (
+      {formMode === FormMode.CREATE && (
         <PohjaFormCollapse
-          onSelectBase={onSelectBase}
+          entityType={ENTITY.VALINTAPERUSTE}
           organisaatioOid={organisaatioOid}
           getCopyEntities={getValintaperusteet}
           infoText={t('valintaperustelomake.pohjavalintaInfo')}

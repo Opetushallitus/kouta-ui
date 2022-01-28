@@ -38,12 +38,11 @@ const CreateHakuPage = props => {
       params: { organisaatioOid },
     },
     location: { search },
-    history,
   } = props;
 
   const { kopioHakuOid } = queryString.parse(search);
   const { t } = useTranslation();
-  const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
+  const selectBase = useSelectBase({ kopioParam: 'kopioHakuOid' });
 
   const { data } = useHakuByOid(kopioHakuOid, {
     enabled: Boolean(kopioHakuOid),

@@ -1,9 +1,12 @@
 import { useCallback } from 'react';
 
+import { useHistory } from 'react-router-dom';
+
 import { POHJAVALINTA } from '#/src/constants';
 import assignQueryString from '#/src/utils/assignQueryString';
 
-const useSelectBase = (history, { kopioParam = 'kopio' } = {}) => {
+const useSelectBase = ({ kopioParam = 'kopio' } = {}) => {
+  const history = useHistory();
   return useCallback(
     ({ tapa, valinta }) => {
       const {

@@ -46,10 +46,9 @@ const CreateKoulutusPage = props => {
       params: { oid: valittuOrganisaatioOid },
     },
     location: { search },
-    history,
   } = props;
 
-  const selectBase = useSelectBase(history, { kopioParam: 'kopioKoulutusOid' });
+  const selectBase = useSelectBase({ kopioParam: 'kopioKoulutusOid' });
   const { t } = useTranslation();
 
   const { kopioKoulutusOid = null } = qs.parse(search);

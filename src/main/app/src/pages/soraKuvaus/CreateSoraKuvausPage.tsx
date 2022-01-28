@@ -43,12 +43,11 @@ const CreateSoraKuvausPage = props => {
       params: { organisaatioOid, kieliValinnat },
     },
     location: { search },
-    history,
   } = props;
 
   const { kopioSoraKuvausOid = null } = queryString.parse(search);
   const { t } = useTranslation();
-  const selectBase = useSelectBase(history, {
+  const selectBase = useSelectBase({
     kopioParam: 'kopioSoraKuvausOid',
   });
 

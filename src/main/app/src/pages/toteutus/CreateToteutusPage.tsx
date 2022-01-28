@@ -66,7 +66,6 @@ const CreateToteutusPage = props => {
       params: { organisaatioOid, koulutusOid },
     },
     location: { search },
-    history,
   } = props;
 
   const {
@@ -78,7 +77,7 @@ const CreateToteutusPage = props => {
   const { data: koulutus, isFetching: isKoulutusFetching } =
     useKoulutusByOid(koulutusOid);
 
-  const selectBase = useSelectBase(history, { kopioParam: 'kopioToteutusOid' });
+  const selectBase = useSelectBase({ kopioParam: 'kopioToteutusOid' });
   const { t } = useTranslation();
 
   const koulutustyyppi = koulutus?.koulutustyyppi ?? AMMATILLINEN_KOULUTUS;

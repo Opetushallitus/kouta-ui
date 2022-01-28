@@ -49,12 +49,11 @@ export const CreateValintaperustePage = props => {
       },
     },
     location: { search },
-    history,
   } = props;
 
   const { kopioValintaperusteOid } = queryString.parse(search);
 
-  const selectBase = useSelectBase(history, {
+  const selectBase = useSelectBase({
     kopioParam: 'kopioValintaperusteOid',
   });
 

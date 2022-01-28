@@ -70,22 +70,21 @@ export const ValintaperusteForm = ({
         />
       )}
 
+      <FormCollapse
+        section="hakukelpoisuus"
+        header={t('valintaperustelomake.valintaperusteenHakukelpoisuus')}
+        languages={languages}
+        Component={HakukelpoisuusSection}
+      />
+
+      <FormCollapse
+        section="kuvaus"
+        header={t('valintaperustelomake.valintaperusteenKuvaus')}
+        languages={languages}
+        Component={KuvausSection}
+      />
       {koulutustyyppi && (
         <>
-          <FormCollapse
-            section="hakukelpoisuus"
-            header={t('valintaperustelomake.valintaperusteenHakukelpoisuus')}
-            languages={languages}
-            Component={HakukelpoisuusSection}
-          />
-
-          <FormCollapse
-            section="kuvaus"
-            header={t('valintaperustelomake.valintaperusteenKuvaus')}
-            languages={languages}
-            Component={KuvausSection}
-          />
-
           {KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi) && (
             <FormCollapse
               section="valintatavat"

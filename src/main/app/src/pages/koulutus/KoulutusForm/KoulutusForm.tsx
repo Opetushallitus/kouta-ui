@@ -121,15 +121,15 @@ export const KoulutusForm = ({
         />
       )}
 
+      <FormCollapse
+        section="kieliversiot"
+        header={t('yleiset.kieliversiot')}
+        Component={KieliversiotFields}
+        disabled={onlyTarjoajaRights}
+      />
+
       {koulutustyyppi && (
         <>
-          <FormCollapse
-            section="kieliversiot"
-            header={t('yleiset.kieliversiot')}
-            Component={KieliversiotFields}
-            disabled={onlyTarjoajaRights}
-          />
-
           {![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
             koulutustyyppi
           ) && (

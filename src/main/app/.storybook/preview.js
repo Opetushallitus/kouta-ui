@@ -5,6 +5,7 @@ import {
   makeApiDecorator,
   queryClientDecorator,
   authorizedUserDecorator,
+  routerDecorator
 } from '#/src/storybookUtils';
 
 export const decorators = [
@@ -14,6 +15,7 @@ export const decorators = [
   makeStoreDecorator(),
   queryClientDecorator,
   authorizedUserDecorator,
+  routerDecorator,
 ];
 
 export const parameters = {

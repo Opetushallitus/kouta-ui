@@ -21,6 +21,7 @@ const convertToHTML = makeConvertToHTML({
   entityToHTML: (entity, originalText) => {
     if (entity.type === 'LINK') {
       return (
+        // eslint-disable-next-line jsx-a11y/anchor-has-content
         <a
           href={_.get(entity, 'data.url') || ''}
           rel="noopener noreferrer"

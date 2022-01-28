@@ -14,8 +14,15 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  ENTITY,
+  FormMode,
+  POHJAVALINTA,
+} from '#/src/constants';
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
+import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
+import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
@@ -24,6 +31,13 @@ import {
   initialValues as getInitialValues,
 } from './HakukohdeForm';
 
+const getCopyValues = oid => ({
+  pohja: {
+    tapa: oid ? POHJAVALINTA.KOPIO : POHJAVALINTA.UUSI,
+    valinta: oid ? { value: oid } : null,
+  },
+});
+
 export const CreateHakukohdePage = ({
   match: {
     params: { organisaatioOid, toteutusOid, hakuOid },
@@ -31,7 +45,7 @@ export const CreateHakukohdePage = ({
 }) => {
   const { t } = useTranslation();
 
-  const { data, isFetching } = useHakukohdePageData({
+  const { data, isLoading: isPageDataLoading } = useHakukohdePageData({
     hakuOid: hakuOid,
     toteutusOid: toteutusOid,
   });
@@ -39,12 +53,20 @@ export const CreateHakukohdePage = ({
   const haku = data?.haku;
   const toteutus = data?.toteutus;
 
-  const initialValues = useMemo(
-    () =>
-      data &&
-      getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
-    [data]
-  );
+  const { data: hakukohdeFormData, isLoading: isHakukohdeFetching } =
+    usePohjaEntity(ENTITY.HAKUKOHDE, getFormValuesByHakukohde);
+
+  const isFetching = isPageDataLoading || isHakukohdeFetching;
+
+  const initialValues = useMemo(() => {
+    if (data && !isFetching) {
+      return {
+        ...(hakukohdeFormData ?? {}),
+        ...getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
+        ...getCopyValues(hakukohdeFormData?.oid),
+      };
+    }
+  }, [data, hakukohdeFormData, isFetching]);
 
   const koulutustyyppi =
     data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;

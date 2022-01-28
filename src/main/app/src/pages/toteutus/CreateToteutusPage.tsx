@@ -61,7 +61,7 @@ const getInitialValues = ({
 
 export const CreateToteutusPage = () => {
   const { organisaatioOid, koulutusOid } = useParams();
-  const { data: koulutus, isFetching: isKoulutusFetching } =
+  const { data: koulutus, isLoading: isKoulutusLoading } =
     useKoulutusByOid(koulutusOid);
 
   const { t } = useTranslation();
@@ -71,9 +71,7 @@ export const CreateToteutusPage = () => {
   const koulutusNimi = koulutus?.nimi;
   const koulutusKielet = koulutus?.kielivalinta;
 
-  const { data: toteutus, isLoading: isToteutusFetching } = usePohjaEntity(
-    ENTITY.TOTEUTUS
-  );
+  const { data: toteutus } = usePohjaEntity(ENTITY.TOTEUTUS);
 
   const initialValues = useMemo(() => {
     return [
@@ -122,15 +120,15 @@ export const CreateToteutusPage = () => {
           />
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        {!isKoulutusFetching && !isToteutusFetching ? (
+        {isKoulutusLoading ? (
+          <Spin center />
+        ) : (
           <ToteutusForm
             steps
             koulutus={koulutus}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
           />
-        ) : (
-          <Spin center />
         )}
       </FormPage>
     </ReduxForm>

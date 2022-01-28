@@ -51,11 +51,7 @@ export const CreateHakukohdePage = () => {
   const haku = data?.haku;
   const toteutus = data?.toteutus;
 
-  const { data: hakukohde, isLoading: isHakukohdeLoading } = usePohjaEntity(
-    ENTITY.HAKUKOHDE
-  );
-
-  const isLoading = isPageDataLoading || isHakukohdeLoading;
+  const { data: hakukohde } = usePohjaEntity(ENTITY.HAKUKOHDE);
 
   const initialValues = useMemo(
     () => ({
@@ -97,7 +93,7 @@ export const CreateHakukohdePage = () => {
           />
         }
       >
-        {isLoading ? (
+        {isPageDataLoading ? (
           <Spin center />
         ) : (
           <>

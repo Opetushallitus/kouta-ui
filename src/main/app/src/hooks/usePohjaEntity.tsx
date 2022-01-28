@@ -7,10 +7,7 @@ import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useSelectBase } from '#/src/hooks/useSelectBase';
 import { useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
-export const usePohjaEntity = (
-  entityType: ENTITY,
-  selector?: (data: any) => any
-) => {
+export const usePohjaEntity = (entityType: ENTITY) => {
   const { search } = useLocation();
 
   const searchParams = queryString.parse(search);
@@ -20,12 +17,12 @@ export const usePohjaEntity = (
   const copyId = searchParams[kopioParam] as string;
 
   const copyIdChanged = useHasChanged(copyId);
+
   const { data, isLoading } = useEntityByOid(
     entityType,
     { oid: copyId },
     {
       enabled: Boolean(copyId && copyIdChanged),
-      select: selector,
     }
   );
 
@@ -37,5 +34,6 @@ export const usePohjaEntity = (
     data,
     isLoading,
     selectPohja,
+    copyId,
   };
 };

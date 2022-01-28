@@ -51,20 +51,20 @@ export const CreateHakukohdePage = () => {
   const haku = data?.haku;
   const toteutus = data?.toteutus;
 
-  const { data: hakukohdeFormData, isLoading: isHakukohdeFetching } =
-    usePohjaEntity(ENTITY.HAKUKOHDE, getFormValuesByHakukohde);
+  const { data: hakukohde, isLoading: isHakukohdeLoading } = usePohjaEntity(
+    ENTITY.HAKUKOHDE
+  );
 
-  const isFetching = isPageDataLoading || isHakukohdeFetching;
+  const isLoading = isPageDataLoading || isHakukohdeLoading;
 
-  const initialValues = useMemo(() => {
-    if (data && !isFetching) {
-      return {
-        ...(hakukohdeFormData ?? {}),
-        ...getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
-        ...getCopyValues(hakukohdeFormData?.oid),
-      };
-    }
-  }, [data, hakukohdeFormData, isFetching]);
+  const initialValues = useMemo(
+    () => ({
+      ...getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
+      ...getFormValuesByHakukohde(hakukohde ?? {}),
+      ...getCopyValues(hakukohde?.oid),
+    }),
+    [data, hakukohde]
+  );
 
   const koulutustyyppi =
     data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
@@ -74,6 +74,7 @@ export const CreateHakukohdePage = () => {
   const infoTextTranslationKey = !canUpdate
     ? 'muokkaamisenTakarajaYlittynyt'
     : '';
+
   return (
     <ReduxForm
       form="hakukohdeForm"
@@ -96,7 +97,7 @@ export const CreateHakukohdePage = () => {
           />
         }
       >
-        {isFetching ? (
+        {isLoading ? (
           <Spin center />
         ) : (
           <>

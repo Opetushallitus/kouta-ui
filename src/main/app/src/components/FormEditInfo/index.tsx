@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
 import { Icon, Box } from '#/src/components/virkailija';
+import { useMuokkaajaName } from '#/src/hooks/useMuokkaajaName';
 import { getThemeProp } from '#/src/theme';
 import { formatDateValue } from '#/src/utils';
 
@@ -28,21 +29,11 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Editor = ({ value }) => {
-  return value;
-};
-
-const FormEditInfo = ({
-  editorOid,
-  editorName,
-  isEditorOphVirkailija,
-  date,
-  historyUrl,
-  ...props
-}) => {
+const FormEditInfo = ({ entity, date, historyUrl, ...props }) => {
   const { t } = useTranslation();
 
-  const oph = isEditorOphVirkailija ? ` (${t('yleiset.oph')})` : '';
+  const editorOid = entity?.muokkaaja;
+  const muokkaajaName = useMuokkaajaName(entity);
 
   return (
     <Container {...props}>
@@ -52,12 +43,12 @@ const FormEditInfo = ({
       <InfoContainer>
         <Box marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Box>
         <Box marginBottom={0.25}>
-          {formatDateValue(date)}{' '}
-          {editorName ? (
-            <Editor value={`${editorName}${oph}`} />
-          ) : editorOid ? (
-            <Editor value={editorOid} />
-          ) : null}
+          {formatDateValue(entity?.modified)}{' '}
+          {entity?._enrichedData?.muokkaajanNimi
+            ? muokkaajaName
+            : editorOid
+            ? editorOid
+            : null}
         </Box>
         <div>
           {historyUrl ? (

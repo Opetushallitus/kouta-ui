@@ -44,7 +44,6 @@ const FormFooter = ({
 }: FormFooterProps) => {
   const { t } = useTranslation();
   const isSubmitting = useIsSubmitting();
-  const { modified, muokkaaja, _enrichedData, metadata } = entity;
   let title;
 
   if (!canUpdate) {
@@ -82,14 +81,7 @@ const FormFooter = ({
             <EsikatseluControls esikatseluUrl={esikatseluUrl} />
           )}
           <Box marginLeft={2}>
-            {modified && (
-              <FormEditInfo
-                date={modified}
-                editorOid={muokkaaja}
-                editorName={_enrichedData?.muokkaajanNimi}
-                isEditorOphVirkailija={metadata?.isMuokkaajaOphVirkailija}
-              />
-            )}
+            {entity?.modified && <FormEditInfo entity={entity} />}
           </Box>
         </Box>
         <Button

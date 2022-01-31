@@ -723,3 +723,135 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   ],
   "tila": "poistettu"
 };
+
+exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "aikuisten-perusopetus",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "aikuisten-perusopetus",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {
+      "fi": "http://linkki.fi"
+    },
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "aikuisten-perusopetus"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutustyypit.aikuistenPerusopetus"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "amm-muu",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-muu",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-muu"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "muu ammatillinen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
+{
+  "ePerusteId": 6777660,
+  "esikatselu": true,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi",
+    "sv"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_351107#12"
+  ],
+  "koulutustyyppi": "amm-muu",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-muu",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvausta on muokattu</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-muu"
+  },
+  "muokkaaja": "1.2.246.562.24.26603962037",
+  "nimi": {
+    "fi": "Kaivosalan perustutkinto",
+    "sv": "Grundexamen inom gruvbranschen"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "tila": "tallennettu"
+};

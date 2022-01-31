@@ -1,6 +1,10 @@
 import { merge } from 'lodash/fp';
 
-import { Alkamiskausityyppi, ApurahaYksikko } from '#/src/constants';
+import {
+  Alkamiskausityyppi,
+  ApurahaYksikko,
+  HAKULOMAKETYYPPI,
+} from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const getBaseFields = () => ({
@@ -172,6 +176,9 @@ const getLukioFields = ({ tyyppi }) =>
   });
 
 export default ({ tyyppi = 'amm' }) => {
+  if (tyyppi === 'amm-muu') {
+    return getBaseFields();
+  }
   if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
   } else if (['yo', 'amk'].includes(tyyppi)) {

@@ -21,9 +21,9 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   const { change } = useBoundFormActions();
   useEffect(() => {
     change('information.nimi', {
-      fi: t(`koulutustyypit.${koulutustyyppiKey}`, { lng: 'fi' }),
-      sv: t(`koulutustyypit.${koulutustyyppiKey}`, { lng: 'sv' }),
-      en: t(`koulutustyypit.${koulutustyyppiKey}`, { lng: 'en' }),
+      fi: t(`${koulutustyyppiKey}`, { lng: 'fi' }),
+      sv: t(`${koulutustyyppiKey}`, { lng: 'sv' }),
+      en: t(`${koulutustyyppiKey}`, { lng: 'en' }),
     });
 
     return () => change('information.nimi', {});

@@ -271,6 +271,7 @@ const ToteutusForm = ({
             header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
             Component={HakeutumisTaiIlmoittautumistapaSection}
             languages={languages}
+            {...getTestIdProps('hakeutumisTaiIlmoittautumistapaSection')}
           />
         )}
         {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(

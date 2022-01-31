@@ -806,8 +806,8 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
 
 exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
 {
-  "ePerusteId": 6777660,
-  "esikatselu": true,
+  "ePerusteId": null,
+  "esikatselu": false,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
@@ -816,7 +816,7 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
     "sv"
   ],
   "koulutuksetKoodiUri": [
-    "koulutus_351107#12"
+    "koulutus_0#1"
   ],
   "koulutustyyppi": "amm-muu",
   "metadata": {
@@ -835,16 +835,16 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
         }
       }
     ],
-    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm-muu"
   },
-  "muokkaaja": "1.2.246.562.24.26603962037",
+  "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Kaivosalan perustutkinto",
-    "sv": "Grundexamen inom gruvbranschen"
+    "fi": "Muut ammatilliset koulutukset",
+    "sv": "Muut ammatilliset koulutukset"
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",

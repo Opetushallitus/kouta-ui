@@ -121,9 +121,12 @@ const getVapaaSivistystyoFields = ({ tyyppi }) => {
 
 const getMuuAmmatillinenFields = ({ tyyppi }) => {
   return merge(getBaseFields({ tyyppi }), {
-    nimi: { fi: 'Muut ammatilliset koulutukset' },
+    nimi: {
+      fi: 'Muut ammatilliset koulutukset',
+      sv: 'Muut ammatilliset koulutukset',
+    },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53',
+      opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53#1',
       kuvaus: { fi: 'kuvausteksti' },
     },
   });

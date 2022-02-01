@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
 import _ from 'lodash';
-import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -13,9 +13,8 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import useSelectBase from '#/src/hooks/useSelectBase';
+import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
-import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 
 import { initialKoulutusValues } from './initialKoulutusValues';
 import KoulutusFooter from './KoulutusFooter';
@@ -40,25 +39,13 @@ const getInitialValues = koulutus => {
     : initialKoulutusValues;
 };
 
-const CreateKoulutusPage = props => {
-  const {
-    match: {
-      params: { oid: valittuOrganisaatioOid },
-    },
-    location: { search },
-    history,
-  } = props;
-
-  const selectBase = useSelectBase(history, { kopioParam: 'kopioKoulutusOid' });
+export const CreateKoulutusPage = () => {
+  const { organisaatioOid: valittuOrganisaatioOid } = useParams();
   const { t } = useTranslation();
 
-  const { kopioKoulutusOid = null } = qs.parse(search);
+  const { data } = usePohjaEntity(ENTITY.KOULUTUS);
 
-  const { data } = useKoulutusByOid(kopioKoulutusOid);
-
-  const initialValues = useMemo(() => {
-    return getInitialValues(data);
-  }, [data]);
+  const initialValues = useMemo(() => getInitialValues(data), [data]);
 
   return (
     <ReduxForm
@@ -84,11 +71,8 @@ const CreateKoulutusPage = props => {
           steps
           isNewKoulutus={true}
           organisaatioOid={valittuOrganisaatioOid}
-          onSelectBase={selectBase}
         />
       </FormPage>
     </ReduxForm>
   );
 };
-
-export default CreateKoulutusPage;

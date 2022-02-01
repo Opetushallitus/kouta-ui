@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -12,9 +12,8 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import useSelectBase from '#/src/hooks/useSelectBase';
+import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
-import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
 
 import { HakuFooter } from './HakuFooter';
 import HakuForm, { initialValues } from './HakuForm';
@@ -32,26 +31,13 @@ const getInitialValues = haku => {
     : initialValues;
 };
 
-const CreateHakuPage = props => {
-  const {
-    match: {
-      params: { organisaatioOid },
-    },
-    location: { search },
-    history,
-  } = props;
-
-  const { kopioHakuOid } = queryString.parse(search);
+export const CreateHakuPage = () => {
+  const { organisaatioOid } = useParams();
   const { t } = useTranslation();
-  const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
-  const { data } = useHakuByOid(kopioHakuOid, {
-    enabled: Boolean(kopioHakuOid),
-  });
+  const { data } = usePohjaEntity(ENTITY.HAKU);
 
-  const initialValues = useMemo(() => {
-    return getInitialValues(data);
-  }, [data]);
+  const initialValues = useMemo(() => getInitialValues(data), [data]);
 
   return (
     <ReduxForm
@@ -73,14 +59,8 @@ const CreateHakuPage = props => {
         <RelationInfoContainer>
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        <HakuForm
-          steps
-          organisaatioOid={organisaatioOid}
-          onSelectBase={selectBase}
-        />
+        <HakuForm steps organisaatioOid={organisaatioOid} />
       </FormPage>
     </ReduxForm>
   );
 };
-
-export default CreateHakuPage;

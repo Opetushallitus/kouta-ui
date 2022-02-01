@@ -7,10 +7,12 @@ import { FormCollapseGroup } from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
-import { FormMode, KOULUTUSTYYPPI } from '#/src/constants';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
+import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 import { HakukohteenLinjaSection } from './HakukohteenLinjaSection';
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
@@ -43,6 +45,17 @@ export const HakukohdeForm = ({
           section="organisaatio"
           Component={OrganisaatioSection}
           header={t('yleiset.organisaatio')}
+        />
+      )}
+      {formMode === FormMode.CREATE && (
+        <PohjaFormCollapse
+          entityType={ENTITY.HAKUKOHDE}
+          scrollOnActive={false}
+          getCopyEntities={searchAllHakukohteet}
+          infoText={t('hakukohdelomake.pohjavalintaInfo')}
+          createLabel={t('yleiset.luoUusiHakukohde')}
+          copyLabel={t('hakukohdelomake.kopioiPohjaksi')}
+          organisaatioOid={organisaatioOid}
         />
       )}
       <FormCollapse

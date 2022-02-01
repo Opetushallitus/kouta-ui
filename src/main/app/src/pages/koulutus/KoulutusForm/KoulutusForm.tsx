@@ -57,7 +57,6 @@ type KoulutusFormProps = {
   koulutus?: KoulutusModel;
   isNewKoulutus?: boolean;
   steps?: boolean;
-  onSelectBase?: (pohjavalinta: PohjaValinta) => void;
   onAttachToteutus?: () => void;
 };
 
@@ -67,7 +66,6 @@ export const KoulutusForm = ({
   isNewKoulutus = false,
   koulutus: koulutusProp,
   onAttachToteutus,
-  onSelectBase,
 }: KoulutusFormProps) => {
   const { t } = useTranslation();
 
@@ -111,9 +109,9 @@ export const KoulutusForm = ({
         disabled={!isNewKoulutus || onlyTarjoajaRights}
         organisaatioOid={organisaatioOid}
       />
-      {_fp.isFunction(onSelectBase) && (
+      {formMode === FormMode.CREATE && (
         <PohjaFormCollapse
-          onSelectBase={onSelectBase}
+          entityType={ENTITY.KOULUTUS}
           organisaatioOid={organisaatioOid}
           disabled={onlyTarjoajaRights}
           getCopyEntities={getKoulutukset(koulutustyyppi)}
@@ -123,15 +121,15 @@ export const KoulutusForm = ({
         />
       )}
 
+      <FormCollapse
+        section="kieliversiot"
+        header={t('yleiset.kieliversiot')}
+        Component={KieliversiotFields}
+        disabled={onlyTarjoajaRights}
+      />
+
       {koulutustyyppi && (
         <>
-          <FormCollapse
-            section="kieliversiot"
-            header={t('yleiset.kieliversiot')}
-            Component={KieliversiotFields}
-            disabled={onlyTarjoajaRights}
-          />
-
           {![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
             koulutustyyppi
           ) && (

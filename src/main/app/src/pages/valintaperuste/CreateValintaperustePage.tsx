@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -12,9 +12,8 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import useSelectBase from '#/src/hooks/useSelectBase';
+import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
-import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
 import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm, initialValues } from './ValintaperusteForm';
@@ -39,34 +38,21 @@ const getInitialValues = (valintaperuste, kieliValinnat, koulutustyyppi) => {
     : initialValues(kieliValinnatLista, koulutustyyppi);
 };
 
-export const CreateValintaperustePage = props => {
+export const CreateValintaperustePage = () => {
   const {
-    match: {
-      params: {
-        organisaatioOid: luojaOrganisaatioOid,
-        kieliValinnat,
-        koulutustyyppi,
-      },
-    },
-    location: { search },
-    history,
-  } = props;
-
-  const { kopioValintaperusteOid } = queryString.parse(search);
-
-  const selectBase = useSelectBase(history, {
-    kopioParam: 'kopioValintaperusteOid',
-  });
+    organisaatioOid: luojaOrganisaatioOid,
+    kieliValinnat,
+    koulutustyyppi,
+  } = useParams();
 
   const { t } = useTranslation();
 
-  const { data: valintaperuste } = useValintaperusteById(
-    kopioValintaperusteOid
-  );
+  const { data: valintaperuste } = usePohjaEntity(ENTITY.VALINTAPERUSTE);
 
-  const initialValues = useMemo(() => {
-    return getInitialValues(valintaperuste, kieliValinnat, koulutustyyppi);
-  }, [valintaperuste, kieliValinnat, koulutustyyppi]);
+  const initialValues = useMemo(
+    () => getInitialValues(valintaperuste, kieliValinnat, koulutustyyppi),
+    [valintaperuste, kieliValinnat, koulutustyyppi]
+  );
 
   return (
     <ReduxForm
@@ -88,11 +74,7 @@ export const CreateValintaperustePage = props => {
         <RelationInfoContainer>
           <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
         </RelationInfoContainer>
-        <ValintaperusteForm
-          steps
-          organisaatioOid={luojaOrganisaatioOid}
-          onSelectBase={selectBase}
-        />
+        <ValintaperusteForm steps organisaatioOid={luojaOrganisaatioOid} />
       </FormPage>
     </ReduxForm>
   );

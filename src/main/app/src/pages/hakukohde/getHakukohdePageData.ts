@@ -1,6 +1,5 @@
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
-import getKoulutustyyppiByKoulutusOid from '#/src/utils/koulutus/getKoulutustyyppiByKoulutusOid';
 import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 
 export const getHakukohdePageData = async ({
@@ -14,18 +13,10 @@ export const getHakukohdePageData = async ({
     getHakuByOid({ oid: hakuOid, httpClient, apiUrls }),
   ]);
 
-  const { koulutustyyppi } = await (toteutus && toteutus.koulutusOid
-    ? getKoulutustyyppiByKoulutusOid({
-        oid: toteutus.koulutusOid,
-        httpClient,
-        apiUrls,
-      })
-    : null);
-
   return {
     toteutus,
     haku,
-    koulutustyyppi,
+    koulutustyyppi: toteutus?.metadata?.tyyppi,
     tarjoajat: toteutus?.tarjoajat,
   };
 };

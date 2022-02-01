@@ -6,6 +6,7 @@ import { urls as ophUrls } from 'oph-urls-js';
 import { I18nextProvider } from 'react-i18next';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import UrlContext from '#/src/contexts/UrlContext';
@@ -93,4 +94,8 @@ export const authorizedUserDecorator = storyFn => (
   <AuthorizedUserContext.Provider value={{}}>
     {storyFn()}
   </AuthorizedUserContext.Provider>
+);
+
+export const routerDecorator = storyFn => (
+  <MemoryRouter initialEntries={['/']}>{storyFn()}</MemoryRouter>
 );

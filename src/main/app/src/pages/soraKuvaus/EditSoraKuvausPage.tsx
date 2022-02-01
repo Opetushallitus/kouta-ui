@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -19,12 +20,8 @@ import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
 import { SoraKuvausFooter } from './SoraKuvausFooter';
 import SoraKuvausForm from './SoraKuvausForm';
 
-const EditSoraKuvausPage = props => {
-  const {
-    match: {
-      params: { organisaatioOid, id },
-    },
-  } = props;
+export const EditSoraKuvausPage = props => {
+  const { organisaatioOid, id } = useParams();
 
   const { data: soraKuvaus } = useSoraKuvausById(id);
 
@@ -76,7 +73,6 @@ const EditSoraKuvausPage = props => {
             koulutustyyppi={koulutustyyppi}
             soraKuvaus={soraKuvaus}
             steps={false}
-            canSelectBase={false}
             canEditKoulutustyyppi={false}
           />
         ) : (
@@ -86,5 +82,3 @@ const EditSoraKuvausPage = props => {
     </ReduxForm>
   );
 };
-
-export default EditSoraKuvausPage;

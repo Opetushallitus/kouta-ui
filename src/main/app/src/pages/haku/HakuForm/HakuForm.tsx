@@ -12,7 +12,7 @@ import { LomakeFields } from '#/src/components/LomakeFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { Box } from '#/src/components/virkailija';
-import { FormMode } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
@@ -30,14 +30,19 @@ import { NimiSection } from './NimiSection';
 import ScheduleSection from './ScheduleSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
+type HakuFormProps = {
+  organisaatioOid: string;
+  steps?: boolean;
+  haku?: Record<string, any>;
+  onAttachHakukohde?: (props: { toteutusOid: string }) => void;
+};
+
 const HakuForm = ({
   organisaatioOid,
-  canSelectBase = true,
-  onAttachHakukohde = undefined,
+  onAttachHakukohde,
   steps = false,
-  haku: hakuProp = null,
-  onSelectBase = () => {},
-}) => {
+  haku: hakuProp,
+}: HakuFormProps) => {
   const { t } = useTranslation();
   const { isOpen, open, close } = useModal();
   const languages = useSelectedLanguages();
@@ -73,11 +78,11 @@ const HakuForm = ({
             header={t('yleiset.organisaatio')}
           />
         )}
-        {canSelectBase ? (
+        {formMode === FormMode.CREATE ? (
           <PohjaFormCollapse
+            entityType={ENTITY.HAKU}
             section="pohja"
             scrollOnActive={false}
-            onSelectBase={onSelectBase}
             infoText={t('hakulomake.pohjavalintaInfo')}
             createLabel={t('yleiset.luoUusiHaku')}
             copyLabel={t('hakulomake.kopioiPohjaksi')}

@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useHistory, useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -23,13 +24,9 @@ import { KoulutusForm } from './KoulutusForm';
 
 const FORM_NAME = 'koulutusForm';
 
-const EditKoulutusPage = props => {
-  const {
-    history,
-    match: {
-      params: { organisaatioOid, oid },
-    },
-  } = props;
+export const EditKoulutusPage = () => {
+  const history = useHistory();
+  const { organisaatioOid, oid } = useParams();
 
   const { data: koulutus = null } = useKoulutusByOid(oid);
 
@@ -98,5 +95,3 @@ const EditKoulutusPage = props => {
     </ReduxForm>
   );
 };
-
-export default EditKoulutusPage;

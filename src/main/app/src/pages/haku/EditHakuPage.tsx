@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useParams, useHistory } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -21,12 +22,9 @@ import HakuForm from './HakuForm';
 
 const FORM_NAME = 'hakuForm';
 
-const EditHakuPage = ({
-  history,
-  match: {
-    params: { organisaatioOid, oid },
-  },
-}) => {
+export const EditHakuPage = () => {
+  const history = useHistory();
+  const { organisaatioOid, oid } = useParams();
   const { data: haku, isFetching } = useHakuByOid(oid);
   const { t } = useTranslation();
 
@@ -84,7 +82,6 @@ const EditHakuPage = ({
             organisaatioOid={organisaatioOid}
             steps={false}
             onAttachHakukohde={onAttachHakukohde}
-            canSelectBase={false}
           />
         ) : (
           <Spin center />
@@ -93,5 +90,3 @@ const EditHakuPage = ({
     </ReduxForm>
   );
 };
-
-export default EditHakuPage;

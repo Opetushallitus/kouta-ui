@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 
 import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
@@ -38,11 +39,8 @@ const useOppilaitosOid = oppilaitoksenOsaOrganisaatio => {
   return oppilaitos?.oid;
 };
 
-export const OppilaitoksenOsaPage = ({
-  match: {
-    params: { organisaatioOid },
-  },
-}) => {
+export const OppilaitoksenOsaPage = () => {
+  const { organisaatioOid } = useParams();
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const [formMode, setFormMode] = useState<FormMode>(FormMode.EDIT);
@@ -125,6 +123,7 @@ export const OppilaitoksenOsaPage = ({
       form="oppilaitoksenOsa"
       initialValues={initialValues}
       disabled={readOnly}
+      mode={formMode}
     >
       <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
       <FormPage

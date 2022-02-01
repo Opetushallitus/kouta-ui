@@ -1,9 +1,12 @@
 import { useCallback } from 'react';
 
-import { POHJAVALINTA } from '#/src/constants';
-import assignQueryString from '#/src/utils/assignQueryString';
+import { useHistory } from 'react-router-dom';
 
-const useSelectBase = (history, { kopioParam = 'kopio' } = {}) => {
+import { POHJAVALINTA } from '#/src/constants';
+import { assignQueryString } from '#/src/utils/assignQueryString';
+
+export const useSelectBase = ({ kopioParam = 'kopio' } = {}) => {
+  const history = useHistory();
   return useCallback(
     ({ tapa, valinta }) => {
       const {
@@ -36,5 +39,3 @@ const useSelectBase = (history, { kopioParam = 'kopio' } = {}) => {
     [kopioParam, history]
   );
 };
-
-export default useSelectBase;

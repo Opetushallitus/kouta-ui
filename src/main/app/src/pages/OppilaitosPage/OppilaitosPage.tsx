@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 
 import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
@@ -22,11 +23,8 @@ import OppilaitosForm, {
   initialValues as formInitialValues,
 } from './OppilaitosForm';
 
-export const OppilaitosPage = ({
-  match: {
-    params: { organisaatioOid },
-  },
-}) => {
+export const OppilaitosPage = () => {
+  const { organisaatioOid } = useParams();
   const { hierarkia } = useOrganisaatioHierarkia(organisaatioOid, {
     skipParents: true,
   });
@@ -93,6 +91,7 @@ export const OppilaitosPage = ({
       form={ENTITY.OPPILAITOS}
       initialValues={initialValues}
       disabled={readOnly}
+      mode={formMode}
     >
       <Title>{t('sivuTitlet.oppilaitos')}</Title>
       <FormPage

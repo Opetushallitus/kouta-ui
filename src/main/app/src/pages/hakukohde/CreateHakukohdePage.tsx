@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
@@ -14,8 +15,15 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  ENTITY,
+  FormMode,
+  POHJAVALINTA,
+} from '#/src/constants';
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
+import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
+import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
@@ -24,14 +32,18 @@ import {
   initialValues as getInitialValues,
 } from './HakukohdeForm';
 
-export const CreateHakukohdePage = ({
-  match: {
-    params: { organisaatioOid, toteutusOid, hakuOid },
+const getCopyValues = oid => ({
+  pohja: {
+    tapa: oid ? POHJAVALINTA.KOPIO : POHJAVALINTA.UUSI,
+    valinta: oid ? { value: oid } : null,
   },
-}) => {
+});
+
+export const CreateHakukohdePage = () => {
+  const { organisaatioOid, toteutusOid, hakuOid } = useParams();
   const { t } = useTranslation();
 
-  const { data, isFetching } = useHakukohdePageData({
+  const { data, isLoading: isPageDataLoading } = useHakukohdePageData({
     hakuOid: hakuOid,
     toteutusOid: toteutusOid,
   });
@@ -39,11 +51,15 @@ export const CreateHakukohdePage = ({
   const haku = data?.haku;
   const toteutus = data?.toteutus;
 
+  const { data: hakukohde } = usePohjaEntity(ENTITY.HAKUKOHDE);
+
   const initialValues = useMemo(
-    () =>
-      data &&
-      getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
-    [data]
+    () => ({
+      ...getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
+      ...(hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
+      ...getCopyValues(hakukohde?.oid),
+    }),
+    [data, hakukohde]
   );
 
   const koulutustyyppi =
@@ -54,6 +70,7 @@ export const CreateHakukohdePage = ({
   const infoTextTranslationKey = !canUpdate
     ? 'muokkaamisenTakarajaYlittynyt'
     : '';
+
   return (
     <ReduxForm
       form="hakukohdeForm"
@@ -76,7 +93,7 @@ export const CreateHakukohdePage = ({
           />
         }
       >
-        {isFetching ? (
+        {isPageDataLoading ? (
           <Spin center />
         ) : (
           <>

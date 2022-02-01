@@ -186,8 +186,8 @@ const fillTelmaTiedotSection = () => {
 const fillAikuistenPerusopetusTiedotSection = () => {
   withinSection('tiedot', () => {
     cy.findByLabelText(/toteutuksenNimi/)
-      .should('be.enabled')
-      .should('have.value', 'koulutustyypit.aikuisten-perusopetus');
+      .should('not.be.disabled')
+      .should('have.value', 'koulutustyypit.aikuistenPerusopetus');
 
     cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')

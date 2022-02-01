@@ -9,7 +9,7 @@ import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
-import { getTestIdProps } from '#/src/utils';
+import { getKoulutustyyppiTranslationKey, getTestIdProps } from '#/src/utils';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 
 export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
@@ -27,13 +27,15 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   const laajuusKoodiMetadata = laajuusKoodi?.metadata;
   const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
-  const koulutustyyppi = koulutus.koulutustyyppi;
+  const koulutustyyppi = getKoulutustyyppiTranslationKey(
+    koulutus.koulutustyyppi
+  );
   const { change } = useBoundFormActions();
   useEffect(() => {
     change(`${name}.nimi`, {
-      fi: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'fi' }),
-      sv: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'sv' }),
-      en: t(`koulutustyypit.${koulutustyyppi}`, { lng: 'en' }),
+      fi: t(`${koulutustyyppi}`, { lng: 'fi' }),
+      sv: t(`${koulutustyyppi}`, { lng: 'sv' }),
+      en: t(`${koulutustyyppi}`, { lng: 'en' }),
     });
     return () => change(`${name}.nimi`, {});
   }, [change, koulutustyyppi, name, t]);
@@ -46,7 +48,9 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
           component={FormFieldInput}
           label={t('toteutuslomake.toteutuksenNimi')}
           required
-          disabled={koulutustyyppi !== KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS}
+          disabled={
+            koulutus.koulutustyyppi !== KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS
+          }
         />
       </Box>
       <Box mb={2} display="flex">

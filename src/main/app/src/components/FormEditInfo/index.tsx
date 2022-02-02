@@ -32,7 +32,6 @@ const Container = styled.div`
 const FormEditInfo = ({ entity, date, historyUrl, ...props }) => {
   const { t } = useTranslation();
 
-  const editorOid = entity?.muokkaaja;
   const muokkaajaName = useMuokkaajaName(entity);
 
   return (
@@ -43,12 +42,7 @@ const FormEditInfo = ({ entity, date, historyUrl, ...props }) => {
       <InfoContainer>
         <Box marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Box>
         <Box marginBottom={0.25}>
-          {formatDateValue(entity?.modified)}{' '}
-          {entity?._enrichedData?.muokkaajanNimi
-            ? muokkaajaName
-            : editorOid
-            ? editorOid
-            : null}
+          {formatDateValue(entity?.modified)} {muokkaajaName}
         </Box>
         <div>
           {historyUrl ? (

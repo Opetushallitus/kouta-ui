@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
 import { Icon, Box } from '#/src/components/virkailija';
+import { useMuokkaajaName } from '#/src/hooks/useMuokkaajaName';
 import { getThemeProp } from '#/src/theme';
 import { formatDateValue } from '#/src/utils';
 
@@ -28,12 +29,10 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Editor = ({ oid }) => {
-  return oid;
-};
-
-const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
+const FormEditInfo = ({ entity, date, historyUrl, ...props }) => {
   const { t } = useTranslation();
+
+  const muokkaajaName = useMuokkaajaName(entity);
 
   return (
     <Container {...props}>
@@ -43,8 +42,7 @@ const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
       <InfoContainer>
         <Box marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Box>
         <Box marginBottom={0.25}>
-          {formatDateValue(date)}{' '}
-          {editorOid ? <Editor oid={editorOid} /> : null}
+          {formatDateValue(entity?.modified)} {muokkaajaName}
         </Box>
         <div>
           {historyUrl ? (

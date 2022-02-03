@@ -191,7 +191,8 @@
     "ulkoinenTunniste": "Ulkoinen tunniste",
     "uudenOpiskelijanUrl": "Uuden opiskelijan verkkosivun URL",
     "julkinen": "Julkinen",
-    "nakyvyys": "Näkyvyys"
+    "nakyvyys": "Näkyvyys",
+    "oph": "OPH"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

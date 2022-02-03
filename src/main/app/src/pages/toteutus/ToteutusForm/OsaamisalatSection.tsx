@@ -161,7 +161,10 @@ const OsaamisalatContainer = ({
       })),
     [osaamisalat, language]
   );
-  const { koodiArvo } = parseKoodiUri(_.get(koulutus, 'koulutusKoodiUri'));
+
+  const { koodiArvo } = parseKoodiUri(
+    _.get(koulutus, 'koulutuksetKoodiUri')[0]
+  );
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(

@@ -82,7 +82,10 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
     toinenAsteOnkoKaksoistutkinto: true,
     metadata: {
-      uudenOpiskelijanUrl: 'https://opiskelu.info',
+      uudenOpiskelijanUrl: {
+        fi: 'https://opiskelu.fi',
+        sv: 'https://opiskelu.se',
+      },
       valintakokeidenYleiskuvaus: {
         fi: '<p>Yleiskuvaus - fi</p>',
         sv: '<p>Yleiskuvaus - sv</p>',

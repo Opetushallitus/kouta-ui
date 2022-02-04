@@ -146,7 +146,7 @@ export const PerustiedotSection = ({
             {...getTestIdProps('hakukohteenUudenOpiskelijanUrl')}
           >
             <Field
-              name="uudenOpiskelijanUrl"
+              name={`uudenOpiskelijanUrl.${language}`}
               component={FormFieldUrlInput}
               label={t('yleiset.uudenOpiskelijanUrl')}
             />

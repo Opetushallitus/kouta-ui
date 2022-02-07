@@ -23,6 +23,7 @@ import {
 } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getThemeProp } from '#/src/theme';
 import { sanitizeHTML } from '#/src/utils';
 import { getTestIdProps } from '#/src/utils';
@@ -153,6 +154,25 @@ const OsaamisalatContainer = ({
   const { t } = useTranslation();
   const urls = useUrls();
 
+  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
+  const { options } = useKoodistoOptions({ koodisto: 'osaamisala' });
+
+  let selectedOsaamisalat;
+  if (!_.isEmpty(options)) {
+    selectedOsaamisalat = _.map(osaamisalatValue, uri => {
+      const found = _.find(options, option => {
+        return option.value.split('#')[0] === uri;
+      });
+
+      if (found) {
+        return {
+          ...found,
+          value: found.value.split('#')[0],
+        };
+      }
+    });
+  }
+
   const osaamisalaOptions = useMemo(
     () =>
       osaamisalat.map(({ nimi, uri }) => ({
@@ -162,18 +182,23 @@ const OsaamisalatContainer = ({
     [osaamisalat, language]
   );
 
+  const mergedOsaamisalaOptions = _.unionWith(
+    osaamisalaOptions,
+    selectedOsaamisalat,
+    _.isEqual
+  );
+
   const { koodiArvo } = parseKoodiUri(
     _.get(koulutus, 'koulutuksetKoodiUri')[0]
   );
 
-  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
     _.get(koulutus, 'nimi'),
     language
   )} (${koodiArvo})`;
 
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
-  return _.isEmpty(osaamisalat) ? (
+  return _.isEmpty(mergedOsaamisalaOptions) ? (
     <Typography>
       <Trans
         i18nKey="toteutuslomake.eiOsaamisaloja"
@@ -201,7 +226,7 @@ const OsaamisalatContainer = ({
           <Field
             name={`${name}.osaamisalat`}
             component={FormFieldCheckboxGroup}
-            options={osaamisalaOptions}
+            options={mergedOsaamisalaOptions}
             label={getLanguageValue(nimi, language)}
           />
         </FieldGroup>

@@ -67,10 +67,13 @@ export const ToteutusFooter = ({
         toteutus:
           formMode === FormMode.CREATE
             ? {
-                ...getToteutusByFormValues({
-                  ...valuesForSaving,
-                  koulutustyyppi,
-                }),
+                ...getToteutusByFormValues(
+                  {
+                    ...valuesForSaving,
+                    koulutustyyppi,
+                  },
+                  peruste
+                ),
                 organisaatioOid,
                 koulutusOid: koulutus?.oid,
               }

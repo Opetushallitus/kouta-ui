@@ -14,11 +14,9 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
-import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import { sanitizeHTML } from '#/src/utils';
-import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import useExtendedEPeruste from '#/src/utils/ePeruste/useExtendedEPeruste';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
@@ -26,34 +24,6 @@ import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
 const FORM_NAME = 'toteutusForm';
-
-const useExtendedEPeruste = ePerusteId => {
-  const { data: ePeruste, isLoading: ePerusteLoading } =
-    useEPerusteById(ePerusteId);
-  const { data: osaamisalaKuvaukset, isLoading: osaamisalaKuvauksetLoading } =
-    useEPerusteOsaamisalaKuvaukset({ ePerusteId });
-
-  const osaamisalat = ePeruste?.osaamisalat;
-
-  const osaamisalatWithDescriptions = useMemo(
-    () =>
-      _.map(osaamisalat, osaamisala => ({
-        ...osaamisala,
-        kuvaus: _.mapValues(
-          _.get(osaamisalaKuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-          v => (_.isString(v) ? sanitizeHTML(v) : v)
-        ),
-      })),
-    [osaamisalat, osaamisalaKuvaukset]
-  );
-
-  return {
-    data: ePeruste
-      ? { ...ePeruste, osaamisalat: osaamisalatWithDescriptions }
-      : null,
-    isLoading: ePerusteLoading || osaamisalaKuvauksetLoading,
-  };
-};
 
 export const EditToteutusPage = () => {
   const history = useHistory();
@@ -70,7 +40,8 @@ export const EditToteutusPage = () => {
   );
 
   const { ePerusteId } = koulutus || {};
-  const { data: ePeruste } = useExtendedEPeruste(ePerusteId);
+  const { data: ePeruste, isLoading: isEPerusteFetching } =
+    useExtendedEPeruste(ePerusteId);
 
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
@@ -94,11 +65,14 @@ export const EditToteutusPage = () => {
 
   const initialValues = useMemo(
     () =>
-      toteutus && ePeruste ? getFormValuesByToteutus(toteutus, ePeruste) : {},
-    [toteutus, ePeruste]
+      toteutus && !isEPerusteFetching
+        ? getFormValuesByToteutus(toteutus, ePeruste)
+        : {},
+    [toteutus, isEPerusteFetching, ePeruste]
   );
 
-  return !toteutus ? (
+  return !toteutus ||
+    (koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && !ePeruste) ? (
     <FullSpin />
   ) : (
     <ReduxForm
@@ -115,7 +89,7 @@ export const EditToteutusPage = () => {
         }
         steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
         footer={
-          toteutus && ePeruste ? (
+          toteutus ? (
             <ToteutusFooter
               formMode={FormMode.EDIT}
               toteutus={toteutus}
@@ -135,7 +109,7 @@ export const EditToteutusPage = () => {
           />
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        {!isKoulutusFetching && !isToteutusFetching ? (
+        {!isKoulutusFetching && !isToteutusFetching && !isEPerusteFetching ? (
           <ToteutusForm
             toteutus={toteutus}
             koulutus={koulutus}

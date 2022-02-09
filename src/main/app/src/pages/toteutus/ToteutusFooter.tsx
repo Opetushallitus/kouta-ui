@@ -38,6 +38,7 @@ export const ToteutusFooter = ({
   organisaatioOid,
   koulutus,
   canUpdate,
+  peruste,
 }: ToteutusFooterProps) => {
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
 
@@ -75,10 +76,13 @@ export const ToteutusFooter = ({
               }
             : {
                 ..._.omit(toteutus, '_enrichedData'),
-                ...getToteutusByFormValues({
-                  ...valuesForSaving,
-                  koulutustyyppi,
-                }),
+                ...getToteutusByFormValues(
+                  {
+                    ...valuesForSaving,
+                    koulutustyyppi,
+                  },
+                  peruste
+                ),
                 tarjoajat: getTarjoajaOids({
                   hierarkia,
                   existingTarjoajat: toteutus?.tarjoajat,
@@ -113,6 +117,7 @@ export const ToteutusFooter = ({
       toteutus,
       unregisteredFields,
       queryClient,
+      peruste,
     ]
   );
 

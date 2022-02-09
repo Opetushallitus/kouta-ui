@@ -10,25 +10,18 @@ import Anchor, { RouterAnchor } from '#/src/components/Anchor';
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldInput,
+  createFormFieldComponent,
   FormFieldCheckboxGroup,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import {
-  Box,
-  Divider,
-  Icon,
-  Typography,
-  Spin,
-} from '#/src/components/virkailija';
+import { CheckboxGroup } from '#/src/components/virkailija';
+import { Box, Divider, Icon, Typography } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getThemeProp } from '#/src/theme';
-import { sanitizeHTML } from '#/src/utils';
 import { getTestIdProps } from '#/src/utils';
-import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
@@ -143,6 +136,18 @@ const OsaamisalatInfoFields = ({
   });
 };
 
+const CheckboxWithError = props => {
+  return <CheckboxGroup {...props} error={true} destroyOnUnmount={false} />;
+};
+
+const CheckboxWithErrorField = createFormFieldComponent(
+  CheckboxWithError,
+  ({ input, ...props }) => ({
+    ...input,
+    ...props,
+  })
+);
+
 const OsaamisalatContainer = ({
   peruste,
   koulutus,
@@ -155,11 +160,17 @@ const OsaamisalatContainer = ({
   const urls = useUrls();
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
+  const virheellisetOsaamisalat = useFieldValue(`${name}.osaamisalatWithError`);
   const { options } = useKoodistoOptions({ koodisto: 'osaamisala' });
+  const osaamisalaFieldsValues = _.unionWith(
+    osaamisalatValue,
+    virheellisetOsaamisalat,
+    _.isEqual
+  );
 
   let selectedOsaamisalat;
   if (!_.isEmpty(options)) {
-    selectedOsaamisalat = _.map(osaamisalatValue, uri => {
+    selectedOsaamisalat = _.map(osaamisalaFieldsValues, uri => {
       const found = _.find(options, option => {
         return option.value.split('#')[0] === uri;
       });
@@ -182,9 +193,9 @@ const OsaamisalatContainer = ({
     [osaamisalat, language]
   );
 
-  const mergedOsaamisalaOptions = _.unionWith(
-    osaamisalaOptions,
+  const osaamisalatNotInEPeruste = _.differenceWith(
     selectedOsaamisalat,
+    osaamisalaOptions,
     _.isEqual
   );
 
@@ -198,7 +209,7 @@ const OsaamisalatContainer = ({
   )} (${koodiArvo})`;
 
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
-  return _.isEmpty(mergedOsaamisalaOptions) ? (
+  return _.isEmpty(osaamisalaOptions) && _.isEmpty(osaamisalatNotInEPeruste) ? (
     <Typography>
       <Trans
         i18nKey="toteutuslomake.eiOsaamisaloja"
@@ -226,9 +237,22 @@ const OsaamisalatContainer = ({
           <Field
             name={`${name}.osaamisalat`}
             component={FormFieldCheckboxGroup}
-            options={mergedOsaamisalaOptions}
+            options={osaamisalaOptions}
             label={getLanguageValue(nimi, language)}
           />
+          {!_.isEmpty(osaamisalatNotInEPeruste) ? (
+            <>
+              <Divider marginTop={3} marginBottom={3} />
+              <Typography variant="h6" marginBottom={1}>
+                {t('toteutuslomake.virheellinenOsaamisalaValinta')}:
+              </Typography>
+              <Field
+                name={`${name}.osaamisalatWithError`}
+                component={CheckboxWithErrorField}
+                options={osaamisalatNotInEPeruste}
+              />
+            </>
+          ) : null}
         </FieldGroup>
       </SelectionContainer>
       <InfoContainer>
@@ -243,51 +267,20 @@ const OsaamisalatContainer = ({
   );
 };
 
-const useExtendedEPeruste = ePerusteId => {
-  const { data: ePeruste, isLoading: ePerusteLoading } =
-    useEPerusteById(ePerusteId);
-  const { data: osaamisalaKuvaukset, isLoading: osaamisalaKuvauksetLoading } =
-    useEPerusteOsaamisalaKuvaukset({ ePerusteId });
-
-  const osaamisalat = ePeruste?.osaamisalat;
-
-  const osaamisalatWithDescriptions = useMemo(
-    () =>
-      _.map(osaamisalat, osaamisala => ({
-        ...osaamisala,
-        kuvaus: _.mapValues(
-          _.get(osaamisalaKuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-          v => (_.isString(v) ? sanitizeHTML(v) : v)
-        ),
-      })),
-    [osaamisalat, osaamisalaKuvaukset]
-  );
-
-  return {
-    data: ePeruste
-      ? { ...ePeruste, osaamisalat: osaamisalatWithDescriptions }
-      : null,
-    isLoading: ePerusteLoading || osaamisalaKuvauksetLoading,
-  };
-};
-
 export const OsaamisalatSection = ({
   language,
   koulutus,
   organisaatioOid,
   name,
+  peruste,
 }) => {
   const { t } = useTranslation();
-  const { ePerusteId } = koulutus || {};
-  const { data: ePeruste, isLoading } = useExtendedEPeruste(ePerusteId);
 
   return (
     <Container>
-      {isLoading ? (
-        <Spin />
-      ) : ePeruste ? (
+      {peruste ? (
         <OsaamisalatContainer
-          peruste={ePeruste}
+          peruste={peruste}
           koulutus={koulutus}
           language={language}
           name={name}

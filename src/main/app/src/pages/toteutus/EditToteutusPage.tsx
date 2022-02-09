@@ -16,6 +16,9 @@ import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { sanitizeHTML } from '#/src/utils';
+import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
+import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
@@ -23,6 +26,34 @@ import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
 const FORM_NAME = 'toteutusForm';
+
+const useExtendedEPeruste = ePerusteId => {
+  const { data: ePeruste, isLoading: ePerusteLoading } =
+    useEPerusteById(ePerusteId);
+  const { data: osaamisalaKuvaukset, isLoading: osaamisalaKuvauksetLoading } =
+    useEPerusteOsaamisalaKuvaukset({ ePerusteId });
+
+  const osaamisalat = ePeruste?.osaamisalat;
+
+  const osaamisalatWithDescriptions = useMemo(
+    () =>
+      _.map(osaamisalat, osaamisala => ({
+        ...osaamisala,
+        kuvaus: _.mapValues(
+          _.get(osaamisalaKuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
+          v => (_.isString(v) ? sanitizeHTML(v) : v)
+        ),
+      })),
+    [osaamisalat, osaamisalaKuvaukset]
+  );
+
+  return {
+    data: ePeruste
+      ? { ...ePeruste, osaamisalat: osaamisalatWithDescriptions }
+      : null,
+    isLoading: ePerusteLoading || osaamisalaKuvauksetLoading,
+  };
+};
 
 export const EditToteutusPage = () => {
   const history = useHistory();
@@ -37,6 +68,9 @@ export const EditToteutusPage = () => {
       enabled: Boolean(toteutus?.koulutusOid),
     }
   );
+
+  const { ePerusteId } = koulutus || {};
+  const { data: ePeruste } = useExtendedEPeruste(ePerusteId);
 
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
@@ -59,8 +93,9 @@ export const EditToteutusPage = () => {
   );
 
   const initialValues = useMemo(
-    () => (toteutus ? getFormValuesByToteutus(toteutus) : {}),
-    [toteutus]
+    () =>
+      toteutus && ePeruste ? getFormValuesByToteutus(toteutus, ePeruste) : {},
+    [toteutus, ePeruste]
   );
 
   return !toteutus ? (
@@ -80,7 +115,7 @@ export const EditToteutusPage = () => {
         }
         steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
         footer={
-          toteutus ? (
+          toteutus && ePeruste ? (
             <ToteutusFooter
               formMode={FormMode.EDIT}
               toteutus={toteutus}
@@ -88,6 +123,7 @@ export const EditToteutusPage = () => {
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
               canUpdate={canUpdate}
+              peruste={ePeruste}
             />
           ) : null
         }
@@ -103,6 +139,7 @@ export const EditToteutusPage = () => {
           <ToteutusForm
             toteutus={toteutus}
             koulutus={koulutus}
+            peruste={ePeruste}
             steps={false}
             onAttachHakukohde={onAttachHakukohde}
             organisaatioOid={organisaatioOid}

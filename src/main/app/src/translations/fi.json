@@ -536,7 +536,8 @@
     "linkinAltTeksti": "Linkin ALT-teksti",
     "lukionYleislinjaNimiOsa": "Lukio",
     "lukionYleislinjaValinta": "Lukion yleislinja",
-    "lukionYleislinjaOhjeteksti": "Toteutuksella on pakko olla vähintään yleislinja, jos muita linjoja ei ole valittu. Valitse painotuksia tai yleisiä koulutustehtäviä poistaaksesi yleislinja-valinnan."
+    "lukionYleislinjaOhjeteksti": "Toteutuksella on pakko olla vähintään yleislinja, jos muita linjoja ei ole valittu. Valitse painotuksia tai yleisiä koulutustehtäviä poistaaksesi yleislinja-valinnan.",
+    "virheellinenOsaamisalaValinta": "Seuraavat osaamisalat eivät kuulu valitun koulutuksen eperusteisiin ja tulisi poistaa"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

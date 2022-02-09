@@ -11,6 +11,7 @@ import {
 import { toSelectValue, toSelectValueList } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
+import { getOsaamisalatWithError } from '#/src/utils/toteutus/osaamisalaUtils';
 
 const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
   if (curr?.kieli && curr?.arvo) {
@@ -62,7 +63,7 @@ const diplomitToFormValues = diplomit => {
   return result;
 };
 
-const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
+const getFormValuesByToteutus = (toteutus, peruste): ToteutusFormValues => {
   const {
     koulutustyyppi,
     kielivalinta,
@@ -99,6 +100,13 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     diplomit,
     yleislinja,
   } = metadata;
+
+  const osaamisalatFromEPeruste = peruste?.osaamisalat;
+
+  const osaamisalatWithError = getOsaamisalatWithError(
+    osaamisalat,
+    osaamisalatFromEPeruste
+  );
 
   const {
     lisatiedot,
@@ -228,6 +236,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       osaamisalat: _fp.map(({ koodiUri }) => koodiUri)(osaamisalat),
       osaamisalaLinkit,
       osaamisalaLinkkiOtsikot,
+      osaamisalatWithError,
     },
     ylemmanKorkeakoulututkinnonOsaamisalat:
       _fp.map(({ kuvaus, nimi, linkki, otsikko }) => ({

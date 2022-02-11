@@ -11,12 +11,16 @@ import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldInput,
   createFormFieldComponent,
-  FormFieldCheckboxGroup,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import { CheckboxGroup } from '#/src/components/virkailija';
-import { Box, Divider, Icon, Typography } from '#/src/components/virkailija';
+import {
+  Box,
+  CheckboxGroup,
+  Divider,
+  Icon,
+  Typography,
+} from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -136,15 +140,24 @@ const OsaamisalatInfoFields = ({
   });
 };
 
-const CheckboxWithError = props => {
-  return <CheckboxGroup {...props} error={true} destroyOnUnmount={false} />;
+const CheckboxGroupWithError = props => {
+  return <CheckboxGroup {...props} error={true} />;
 };
 
 const CheckboxWithErrorField = createFormFieldComponent(
-  CheckboxWithError,
+  CheckboxGroupWithError,
   ({ input, ...props }) => ({
     ...input,
     ...props,
+  })
+);
+
+const OsaamisalatCheckboxGroup = createFormFieldComponent(
+  CheckboxGroup,
+  ({ input, ...props }) => ({
+    ...input,
+    ...props,
+    keepOldValuesOnChange: true,
   })
 );
 
@@ -236,7 +249,7 @@ const OsaamisalatContainer = ({
         >
           <Field
             name={`${name}.osaamisalat`}
-            component={FormFieldCheckboxGroup}
+            component={OsaamisalatCheckboxGroup}
             options={osaamisalaOptions}
             label={getLanguageValue(nimi, language)}
           />

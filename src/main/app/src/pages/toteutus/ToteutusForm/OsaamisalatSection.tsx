@@ -245,7 +245,6 @@ export const OsaamisalatSection = ({
   const { osaamisalat } = peruste;
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
-  const wrongOsaamisalat = useFieldValue(`${name}.osaamisalatWithError`);
   const osaamisalaOptions = useMemo(
     () =>
       osaamisalat.map(({ nimi, uri }) => ({
@@ -257,7 +256,6 @@ export const OsaamisalatSection = ({
 
   const osaamisalatNotInEPeruste = useOsaamisalatNotInEPerusteOptions(
     osaamisalatValue,
-    wrongOsaamisalat,
     osaamisalaOptions,
     language
   );

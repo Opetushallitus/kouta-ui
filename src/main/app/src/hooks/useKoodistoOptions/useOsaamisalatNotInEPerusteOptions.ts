@@ -2,10 +2,9 @@ import useKoodisto from '#/src/hooks/useKoodisto';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 
 const useOsaamisalatNotInEPerusteOptions = (
-  osaamisalatFromEPeruste,
-  wrongOsaamisalat: Array,
+  selectedOsaamisalat,
   osaamisalaOptions,
-  language: string
+  language
 ) => {
   const { data: osaamisalatKoodistodata = [] } = useKoodisto({
     koodisto: 'osaamisala',
@@ -16,15 +15,9 @@ const useOsaamisalatNotInEPerusteOptions = (
     lang: language,
   });
 
-  const osaamisalaFieldsValues = _.unionWith(
-    osaamisalatFromEPeruste,
-    wrongOsaamisalat,
-    _.isEqual
-  );
-
-  let selectedOsaamisalat;
+  let selectedOsaamisalaOptions;
   if (!_.isEmpty(options)) {
-    selectedOsaamisalat = _.map(osaamisalaFieldsValues, uri => {
+    selectedOsaamisalaOptions = _.map(selectedOsaamisalat, uri => {
       const found = _.find(options, option => {
         return option.value.split('#')[0] === uri;
       });
@@ -38,7 +31,11 @@ const useOsaamisalatNotInEPerusteOptions = (
     });
   }
 
-  return _.differenceWith(selectedOsaamisalat, osaamisalaOptions, _.isEqual);
+  return _.differenceWith(
+    selectedOsaamisalaOptions,
+    osaamisalaOptions,
+    _.isEqual
+  );
 };
 
 export default useOsaamisalatNotInEPerusteOptions;

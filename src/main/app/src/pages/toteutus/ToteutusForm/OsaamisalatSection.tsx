@@ -24,8 +24,7 @@ import {
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
-import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import useOsaamisalatNotInEPerusteOptions from '#/src/hooks/useKoodistoOptions/useOsaamisalatNotInEPerusteOptions';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
@@ -170,19 +169,11 @@ const OsaamisalatContainer = ({
   language,
   name,
   osaamisalatValue,
+  osaamisalaOptions,
 }) => {
   const { nimi, osaamisalat, id } = peruste;
   const { t } = useTranslation();
   const urls = useUrls();
-
-  const osaamisalaOptions = useMemo(
-    () =>
-      osaamisalat.map(({ nimi, uri }) => ({
-        label: getLanguageValue(nimi, language),
-        value: uri,
-      })),
-    [osaamisalat, language]
-  );
 
   const { koodiArvo } = parseKoodiUri(
     _.get(koulutus, 'koulutuksetKoodiUri')[0]
@@ -254,37 +245,7 @@ export const OsaamisalatSection = ({
   const { osaamisalat } = peruste;
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
-  const virheellisetOsaamisalat = useFieldValue(`${name}.osaamisalatWithError`);
-  const { data: osaamisalatKoodistodata = [] } = useKoodisto({
-    koodisto: 'osaamisala',
-  });
-
-  const options = useKoodistoDataOptions({
-    koodistoData: osaamisalatKoodistodata,
-    lang: language,
-  });
-  const osaamisalaFieldsValues = _.unionWith(
-    osaamisalatValue,
-    virheellisetOsaamisalat,
-    _.isEqual
-  );
-
-  let selectedOsaamisalat;
-  if (!_.isEmpty(options)) {
-    selectedOsaamisalat = _.map(osaamisalaFieldsValues, uri => {
-      const found = _.find(options, option => {
-        return option.value.split('#')[0] === uri;
-      });
-
-      if (found) {
-        return {
-          ...found,
-          value: found.value.split('#')[0],
-        };
-      }
-    });
-  }
-
+  const wrongOsaamisalat = useFieldValue(`${name}.osaamisalatWithError`);
   const osaamisalaOptions = useMemo(
     () =>
       osaamisalat.map(({ nimi, uri }) => ({
@@ -294,10 +255,11 @@ export const OsaamisalatSection = ({
     [osaamisalat, language]
   );
 
-  const osaamisalatNotInEPeruste = _.differenceWith(
-    selectedOsaamisalat,
+  const osaamisalatNotInEPeruste = useOsaamisalatNotInEPerusteOptions(
+    osaamisalatValue,
+    wrongOsaamisalat,
     osaamisalaOptions,
-    _.isEqual
+    language
   );
 
   return (
@@ -312,6 +274,7 @@ export const OsaamisalatSection = ({
               name={name}
               organisaatioOid={organisaatioOid}
               osaamisalatValue={osaamisalatValue}
+              osaamisalaOptions={osaamisalaOptions}
             />
           </>
         ) : (

@@ -23,6 +23,8 @@ import {
 } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
+import useKoodisto from '#/src/hooks/useKoodisto';
+import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
@@ -253,7 +255,14 @@ export const OsaamisalatSection = ({
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const virheellisetOsaamisalat = useFieldValue(`${name}.osaamisalatWithError`);
-  const { options } = useKoodistoOptions({ koodisto: 'osaamisala' });
+  const { data: osaamisalatKoodistodata = [] } = useKoodisto({
+    koodisto: 'osaamisala',
+  });
+
+  const options = useKoodistoDataOptions({
+    koodistoData: osaamisalatKoodistodata,
+    lang: language,
+  });
   const osaamisalaFieldsValues = _.unionWith(
     osaamisalatValue,
     virheellisetOsaamisalat,

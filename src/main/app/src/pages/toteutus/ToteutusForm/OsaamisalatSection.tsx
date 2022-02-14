@@ -14,6 +14,7 @@ import {
   FormFieldUrlInput,
 } from '#/src/components/formFields';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { Spin } from '#/src/components/virkailija';
 import {
   Box,
   CheckboxGroup,
@@ -254,13 +255,20 @@ export const OsaamisalatSection = ({
     [osaamisalat, language]
   );
 
+  const { data: osaamisalatKoodistodata = [], isLoading } = useKoodisto({
+    koodisto: 'osaamisala',
+  });
+
   const osaamisalatNotInEPeruste = useOsaamisalatNotInEPerusteOptions(
     osaamisalatValue,
     osaamisalaOptions,
+    osaamisalatKoodistodata,
     language
   );
 
-  return (
+  return isLoading ? (
+    <Spin center />
+  ) : (
     <>
       <Container>
         {peruste ? (

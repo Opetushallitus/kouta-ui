@@ -1,15 +1,11 @@
-import useKoodisto from '#/src/hooks/useKoodisto';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 
 const useOsaamisalatNotInEPerusteOptions = (
   selectedOsaamisalat,
   osaamisalaOptions,
+  osaamisalatKoodistodata,
   language
 ) => {
-  const { data: osaamisalatKoodistodata = [] } = useKoodisto({
-    koodisto: 'osaamisala',
-  });
-
   const options = useKoodistoDataOptions({
     koodistoData: osaamisalatKoodistodata,
     lang: language,

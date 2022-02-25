@@ -37,7 +37,8 @@ const CreatableField = createFormFieldComponent(
   })
 );
 
-const MAX_ITEMS = 5;
+const MAX_ITEMS_AMMATTINIMIKKEET = 20;
+const MAX_ITEMS_AVAINSANAT = 20;
 
 const makeLoadAmmattinimikkeet = memoize(
   (httpClient, apiUrls, language) => inputValue => {
@@ -100,9 +101,9 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
               )}
               label={t('toteutuslomake.ammattinimikkeet')}
               helperText={t('yleiset.voitValitaEnintaan', {
-                lukumaara: MAX_ITEMS,
+                lukumaara: MAX_ITEMS_AMMATTINIMIKKEET,
               })}
-              maxItems={MAX_ITEMS}
+              maxItems={MAX_ITEMS_AMMATTINIMIKKEET}
             />
           </div>
         </Box>
@@ -117,9 +118,9 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
             label={t('toteutuslomake.avainsanat')}
             helperText={t('yleiset.voitValitaEnintaan', {
-              lukumaara: MAX_ITEMS,
+              lukumaara: MAX_ITEMS_AVAINSANAT,
             })}
-            maxItems={MAX_ITEMS}
+            maxItems={MAX_ITEMS_AVAINSANAT}
           />
         </div>
       </Box>

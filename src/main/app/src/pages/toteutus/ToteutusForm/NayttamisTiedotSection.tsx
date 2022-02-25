@@ -37,7 +37,7 @@ const CreatableField = createFormFieldComponent(
   })
 );
 
-const MAX_ITEMS_AMMATTINIMIKKEET = 20;
+const MAX_ITEMS_AMMATTINIMIKKEET = 5;
 const MAX_ITEMS_AVAINSANAT = 20;
 
 const makeLoadAmmattinimikkeet = memoize(

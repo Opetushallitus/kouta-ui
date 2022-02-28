@@ -201,7 +201,7 @@ const OsaamisalatContainer = ({
               ePeruste={peruste}
               language={language}
               osaamisalatKoodistoData={osaamisalatKoodistoData}
-              value={osaamisalatValue}
+              format={null}
             />
           </FieldGroup>
         </SelectionContainer>

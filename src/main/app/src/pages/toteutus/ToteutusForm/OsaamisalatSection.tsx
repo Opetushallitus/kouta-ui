@@ -15,21 +15,17 @@ import {
 } from '#/src/components/formFields';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Spin } from '#/src/components/virkailija';
-import {
-  Box,
-  CheckboxGroup,
-  Divider,
-  Icon,
-  Typography,
-} from '#/src/components/virkailija';
+import { Box, Divider, Icon, Typography } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
-import useOsaamisalatNotInEPerusteOptions from '#/src/hooks/useKoodistoOptions/useOsaamisalatNotInEPerusteOptions';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
+import useExtendedEPeruste from '#/src/utils/ePeruste/useExtendedEPeruste';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { getLanguageValue } from '#/src/utils/languageUtils';
+
+import { OsaamisalatInput } from '../OsaamisalatInput.tsx';
 
 const Container = styled.div`
   display: flex;
@@ -142,20 +138,8 @@ const OsaamisalatInfoFields = ({
   });
 };
 
-const CheckboxGroupWithError = props => {
-  return <CheckboxGroup {...props} error={true} />;
-};
-
-const CheckboxWithErrorField = createFormFieldComponent(
-  CheckboxGroupWithError,
-  ({ input, ...props }) => ({
-    ...input,
-    ...props,
-  })
-);
-
 const OsaamisalatCheckboxGroup = createFormFieldComponent(
-  CheckboxGroup,
+  OsaamisalatInput,
   ({ input, ...props }) => ({
     ...input,
     ...props,
@@ -169,12 +153,13 @@ const OsaamisalatContainer = ({
   organisaatioOid,
   language,
   name,
-  osaamisalatValue,
-  osaamisalaOptions,
+  osaamisalatKoodistoData,
 }) => {
   const { nimi, osaamisalat, id } = peruste;
-  const { t } = useTranslation();
   const urls = useUrls();
+
+  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
+  console.log({ osaamisalatValue });
 
   const { koodiArvo } = parseKoodiUri(
     _.get(koulutus, 'koulutuksetKoodiUri')[0]
@@ -188,8 +173,8 @@ const OsaamisalatContainer = ({
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
   return (
     <>
-      {_.isEmpty(osaamisalaOptions) ? (
-        <Typography>
+      {_.isEmpty(osaamisalat) && (
+        <Typography style={{ display: 'block', marginBottom: '12px' }}>
           <Trans
             i18nKey="toteutuslomake.eiOsaamisaloja"
             values={{ koulutusLinkText, ePerusteLinkText }}
@@ -205,32 +190,30 @@ const OsaamisalatContainer = ({
             ]}
           />
         </Typography>
-      ) : (
-        <>
-          <SelectionContainer>
-            <Typography variant="h6" marginBottom={1}></Typography>
-            <FieldGroup
-              title={t('toteutuslomake.valitseOsaamisalat')}
-              {...getTestIdProps('osaamisalaSelection')}
-            >
-              <Field
-                name={`${name}.osaamisalat`}
-                component={OsaamisalatCheckboxGroup}
-                options={osaamisalaOptions}
-                label={getLanguageValue(nimi, language)}
-              />
-            </FieldGroup>
-          </SelectionContainer>
-          <InfoContainer>
-            <OsaamisalatInfoFields
-              osaamisalatValue={osaamisalatValue || []}
-              osaamisalat={osaamisalat}
-              language={language}
-              name={name}
-            />
-          </InfoContainer>
-        </>
       )}
+      <Container>
+        <SelectionContainer>
+          <Typography variant="h6" marginBottom={1}></Typography>
+          <FieldGroup {...getTestIdProps('osaamisalaSelection')}>
+            <Field
+              name={`${name}.osaamisalat`}
+              component={OsaamisalatCheckboxGroup}
+              ePeruste={peruste}
+              language={language}
+              osaamisalatKoodistoData={osaamisalatKoodistoData}
+              value={osaamisalatValue}
+            />
+          </FieldGroup>
+        </SelectionContainer>
+        <InfoContainer>
+          <OsaamisalatInfoFields
+            osaamisalatValue={osaamisalatValue || []}
+            osaamisalat={osaamisalat}
+            language={language}
+            name={name}
+          />
+        </InfoContainer>
+      </Container>
     </>
   );
 };
@@ -240,70 +223,37 @@ export const OsaamisalatSection = ({
   koulutus,
   organisaatioOid,
   name,
-  peruste,
 }) => {
   const { t } = useTranslation();
-  const { osaamisalat } = peruste;
+  const { ePerusteId } = koulutus || {};
+  const { data: ePeruste, isLoading } = useExtendedEPeruste(ePerusteId);
 
-  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
-  const osaamisalaOptions = useMemo(
-    () =>
-      osaamisalat.map(({ nimi, uri }) => ({
-        label: getLanguageValue(nimi, language),
-        value: uri,
-      })),
-    [osaamisalat, language]
+  const { data: osaamisalatKoodistodata = [], isKoodistoLoading } = useKoodisto(
+    {
+      koodisto: 'osaamisala',
+    }
   );
 
-  const { data: osaamisalatKoodistodata = [], isLoading } = useKoodisto({
-    koodisto: 'osaamisala',
-  });
-
-  const osaamisalatNotInEPeruste = useOsaamisalatNotInEPerusteOptions(
-    osaamisalatValue,
-    osaamisalaOptions,
-    osaamisalatKoodistodata,
-    language
-  );
-
-  return isLoading ? (
+  return isLoading || isKoodistoLoading ? (
     <Spin center />
   ) : (
     <>
-      <Container>
-        {peruste ? (
-          <>
-            <OsaamisalatContainer
-              peruste={peruste}
-              koulutus={koulutus}
-              language={language}
-              name={name}
-              organisaatioOid={organisaatioOid}
-              osaamisalatValue={osaamisalatValue}
-              osaamisalaOptions={osaamisalaOptions}
-            />
-          </>
-        ) : (
-          <Typography>
-            {t('toteutuslomake.koulutuksellaEiEPerustetta')}
-          </Typography>
-        )}
-      </Container>
-      {!_.isEmpty(osaamisalatNotInEPeruste) ? (
+      {ePeruste ? (
         <>
-          <Divider marginTop={3} marginBottom={3} />
-          <>
-            <Typography variant="h6" marginBottom={1}>
-              {t('toteutuslomake.virheellinenOsaamisalaValinta')}:
-            </Typography>
-            <Field
-              name={`${name}.osaamisalatWithError`}
-              component={CheckboxWithErrorField}
-              options={osaamisalatNotInEPeruste}
-            />
-          </>
+          <OsaamisalatContainer
+            peruste={ePeruste}
+            koulutus={koulutus}
+            language={language}
+            name={name}
+            organisaatioOid={organisaatioOid}
+            osaamisalatKoodistoData={osaamisalatKoodistodata}
+          />
         </>
-      ) : null}
+      ) : (
+        <Typography>
+          {t('toteutuslomake.koulutuksellaEiEPerustetta')}
+        </Typography>
+      )}
     </>
   );
 };

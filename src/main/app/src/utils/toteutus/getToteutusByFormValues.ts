@@ -43,7 +43,7 @@ const getDiplomitByValues = (diplomiValues, pickTranslations) =>
     linkinAltTeksti: pickTranslations(diplomiValues?.linkit[index]?.alt ?? {}),
   })) || [];
 
-const getToteutusByFormValues = (values: ToteutusFormValues, peruste) => {
+const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
     koulutustyyppi,
     tila,
@@ -62,17 +62,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues, peruste) => {
   const maksunMaara = values?.jarjestamistiedot?.maksunMaara;
 
   let osaamisalat = values?.osaamisalat?.osaamisalat;
-  const osaamisalatWithError = values?.osaamisalat?.osaamisalatWithError;
-
-  if (_fp.isEmpty(osaamisalatWithError)) {
-    osaamisalat = _fp.filter(selectedOsaamisala => {
-      return _fp.find(
-        eperusteOsaamisala => selectedOsaamisala === eperusteOsaamisala.uri
-      )(peruste?.osaamisalat);
-    })(osaamisalat);
-  } else {
-    osaamisalat = _fp.uniq(osaamisalat.concat(osaamisalatWithError));
-  }
 
   const osaamisalaLinkit = values?.osaamisalat?.osaamisalaLinkit || {};
   const osaamisalaLinkkiOtsikot =

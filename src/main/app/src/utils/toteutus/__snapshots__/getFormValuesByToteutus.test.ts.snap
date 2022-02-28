@@ -264,7 +264,6 @@ Object {
       "osaamisala1",
       "osaamisala2",
     ],
-    "osaamisalatWithError": Array [],
   },
   "soraKuvaus": undefined,
   "tarjoajat": Array [

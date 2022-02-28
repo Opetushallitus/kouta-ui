@@ -21,7 +21,6 @@ import {
 } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
-import useExtendedEPeruste from '#/src/utils/ePeruste/useExtendedEPeruste';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 
@@ -74,10 +73,6 @@ export const CreateToteutusPage = () => {
 
   const { data: toteutus } = usePohjaEntity(ENTITY.TOTEUTUS);
 
-  const { ePerusteId } = koulutus || {};
-  const { data: ePeruste, isLoading: isEPerusteLoading } =
-    useExtendedEPeruste(ePerusteId);
-
   const initialValues = useMemo(() => {
     return [
       AMMATILLINEN_KOULUTUS,
@@ -114,7 +109,6 @@ export const CreateToteutusPage = () => {
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
               canUpdate={true}
-              peruste={ePeruste}
             />
           ) : null
         }
@@ -126,7 +120,7 @@ export const CreateToteutusPage = () => {
           />
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        {isKoulutusLoading || isEPerusteLoading ? (
+        {isKoulutusLoading ? (
           <Spin center />
         ) : (
           <ToteutusForm
@@ -134,7 +128,6 @@ export const CreateToteutusPage = () => {
             koulutus={koulutus}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
-            peruste={ePeruste}
           />
         )}
       </FormPage>

@@ -14,9 +14,8 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import useExtendedEPeruste from '#/src/utils/ePeruste/useExtendedEPeruste';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
@@ -39,10 +38,6 @@ export const EditToteutusPage = () => {
     }
   );
 
-  const { ePerusteId } = koulutus || {};
-  const { data: ePeruste, isLoading: isEPerusteFetching } =
-    useExtendedEPeruste(ePerusteId);
-
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
 
@@ -64,15 +59,11 @@ export const EditToteutusPage = () => {
   );
 
   const initialValues = useMemo(
-    () =>
-      toteutus && !isEPerusteFetching
-        ? getFormValuesByToteutus(toteutus, ePeruste)
-        : {},
-    [toteutus, isEPerusteFetching, ePeruste]
+    () => (toteutus ? getFormValuesByToteutus(toteutus) : {}),
+    [toteutus]
   );
 
-  return !toteutus ||
-    (koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && !ePeruste) ? (
+  return !toteutus ? (
     <FullSpin />
   ) : (
     <ReduxForm
@@ -97,7 +88,6 @@ export const EditToteutusPage = () => {
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
               canUpdate={canUpdate}
-              peruste={ePeruste}
             />
           ) : null
         }
@@ -109,11 +99,10 @@ export const EditToteutusPage = () => {
           />
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        {!isKoulutusFetching && !isToteutusFetching && !isEPerusteFetching ? (
+        {!isKoulutusFetching && !isToteutusFetching ? (
           <ToteutusForm
             toteutus={toteutus}
             koulutus={koulutus}
-            peruste={ePeruste}
             steps={false}
             onAttachHakukohde={onAttachHakukohde}
             organisaatioOid={organisaatioOid}

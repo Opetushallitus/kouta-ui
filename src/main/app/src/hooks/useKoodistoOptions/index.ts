@@ -45,11 +45,8 @@ export const useKoodistoDataOptions = ({
   koodistoData,
   sortFn,
   formatLabel,
-  lang = null,
 }: UseKoodistoDataOptionsProps) => {
-  const userLanguage = useUserLanguage();
-
-  const language = lang ? lang : userLanguage;
+  const language = useUserLanguage();
   return useMemo(
     () =>
       koodistoData

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
-import { CheckboxGroup } from '#/src/components/virkailija';
+import { CheckboxGroup, Typography } from '#/src/components/virkailija';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 import { getLanguageValue } from '#/src/utils/languageUtils';
@@ -110,9 +110,11 @@ export const OsaamisalatInput = ({
 }: OsaamisalatInputProps) => {
   const { t } = useTranslation();
 
-  const { osaamisalat = [] } = ePeruste;
+  const { osaamisalat = [], nimi: ePerusteNimi } = ePeruste;
 
+  console.log({ value });
   const [allSeenValues, setAllSeenValues] = useState(() => value);
+  console.log({ allSeenValues });
 
   useEffect(() => {
     setAllSeenValues(allVals => _.uniq([...allVals, ...value]));
@@ -143,15 +145,20 @@ export const OsaamisalatInput = ({
 
   return (
     <>
-      <FieldGroup title={t('toteutuslomake.valitseOsaamisalat')}>
-        <CheckboxGroup
-          options={validOptions}
-          value={validValues}
-          onChange={validChangeHandler}
-          disabled={disabled}
-          error={error}
-        />
-      </FieldGroup>
+      {validOptions?.length > 0 && (
+        <FieldGroup title={t('toteutuslomake.valitseOsaamisalat')}>
+          <Typography style={{ display: 'block', marginBottom: '8px' }}>
+            {getLanguageValue(ePerusteNimi, language)}
+          </Typography>
+          <CheckboxGroup
+            options={validOptions}
+            value={validValues}
+            onChange={validChangeHandler}
+            disabled={disabled}
+            error={error}
+          />
+        </FieldGroup>
+      )}
       {invalidOptions?.length > 0 && (
         <FieldGroup title={t('toteutuslomake.virheellinenOsaamisalaValinta')}>
           <CheckboxGroup

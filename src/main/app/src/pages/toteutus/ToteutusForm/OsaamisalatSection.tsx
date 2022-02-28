@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
@@ -7,7 +7,6 @@ import styled from 'styled-components';
 
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import Anchor, { RouterAnchor } from '#/src/components/Anchor';
-import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldInput,
   createFormFieldComponent,
@@ -158,13 +157,11 @@ const OsaamisalatContainer = ({
   const { nimi, osaamisalat, id } = peruste;
   const urls = useUrls();
 
-  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
-  console.log({ osaamisalatValue });
-
   const { koodiArvo } = parseKoodiUri(
     _.get(koulutus, 'koulutuksetKoodiUri')[0]
   );
 
+  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
     _.get(koulutus, 'nimi'),
     language
@@ -192,18 +189,16 @@ const OsaamisalatContainer = ({
         </Typography>
       )}
       <Container>
-        <SelectionContainer>
+        <SelectionContainer {...getTestIdProps('osaamisalaSelection')}>
           <Typography variant="h6" marginBottom={1}></Typography>
-          <FieldGroup {...getTestIdProps('osaamisalaSelection')}>
-            <Field
-              name={`${name}.osaamisalat`}
-              component={OsaamisalatCheckboxGroup}
-              ePeruste={peruste}
-              language={language}
-              osaamisalatKoodistoData={osaamisalatKoodistoData}
-              format={null}
-            />
-          </FieldGroup>
+          <Field
+            name={`${name}.osaamisalat`}
+            component={OsaamisalatCheckboxGroup}
+            ePeruste={peruste}
+            language={language}
+            osaamisalatKoodistoData={osaamisalatKoodistoData}
+            format={null}
+          />
         </SelectionContainer>
         <InfoContainer>
           <OsaamisalatInfoFields
@@ -239,16 +234,14 @@ export const OsaamisalatSection = ({
   ) : (
     <>
       {ePeruste ? (
-        <>
-          <OsaamisalatContainer
-            peruste={ePeruste}
-            koulutus={koulutus}
-            language={language}
-            name={name}
-            organisaatioOid={organisaatioOid}
-            osaamisalatKoodistoData={osaamisalatKoodistodata}
-          />
-        </>
+        <OsaamisalatContainer
+          peruste={ePeruste}
+          koulutus={koulutus}
+          language={language}
+          name={name}
+          organisaatioOid={organisaatioOid}
+          osaamisalatKoodistoData={osaamisalatKoodistodata}
+        />
       ) : (
         <Typography>
           {t('toteutuslomake.koulutuksellaEiEPerustetta')}

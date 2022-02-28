@@ -61,8 +61,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
   const maksunMaara = values?.jarjestamistiedot?.maksunMaara;
 
-  let osaamisalat = values?.osaamisalat?.osaamisalat;
-
   const osaamisalaLinkit = values?.osaamisalat?.osaamisalaLinkit || {};
   const osaamisalaLinkkiOtsikot =
     values?.osaamisalat?.osaamisalaLinkkiOtsikot || {};
@@ -182,7 +180,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         values?.lukiolinjat?.erityisetKoulutustehtavat,
         pickTranslations
       ),
-      osaamisalat: (osaamisalat || []).map(osaamisala => ({
+      osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({
         koodiUri: osaamisala,
         linkki: osaamisalaLinkit[osaamisala] || {},
         otsikko: osaamisalaLinkkiOtsikot[osaamisala] || {},

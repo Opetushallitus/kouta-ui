@@ -99,10 +99,10 @@ type OsaamisalatInputProps = {
   osaamisalatKoodistoData: Array<Koodi>;
 };
 
-const EMTPY_ARRAY = [];
+const EMPTY_ARRAY = [];
 
 export const OsaamisalatInput = ({
-  value = EMTPY_ARRAY,
+  value = EMPTY_ARRAY,
   error = false,
   disabled = false,
   language,
@@ -114,9 +114,7 @@ export const OsaamisalatInput = ({
 
   const { osaamisalat = [], nimi: ePerusteNimi } = ePeruste;
 
-  console.log({ value });
   const [allSeenValues, setAllSeenValues] = useState(() => value);
-  console.log({ allSeenValues });
 
   useEffect(() => {
     setAllSeenValues(allVals => _.uniq([...allVals, ...value]));

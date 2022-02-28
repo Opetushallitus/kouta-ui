@@ -61,7 +61,6 @@ const ToteutusForm = ({
   toteutus,
   onAttachHakukohde,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  peruste,
 }: ToteutusFormProps) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
@@ -223,7 +222,6 @@ const ToteutusForm = ({
             languages={languages}
             Component={OsaamisalatSection}
             koulutus={koulutus}
-            peruste={peruste}
             organisaatioOid={organisaatioOid}
           />
         )}

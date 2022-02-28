@@ -99,8 +99,10 @@ type OsaamisalatInputProps = {
   osaamisalatKoodistoData: Array<Koodi>;
 };
 
+const EMTPY_ARRAY = [];
+
 export const OsaamisalatInput = ({
-  value = [],
+  value = EMTPY_ARRAY,
   error = false,
   disabled = false,
   language,

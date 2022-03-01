@@ -68,6 +68,14 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
         };
       }
     }
+
+    if (errorType === 'integrityViolation' && /hakukohteita/i.test(msg)) {
+      return {
+        field: 'tila',
+        errorKey:
+          'ilmoitukset.poistoEstettyRiippuvuuksienTakia.toteutuksellaHakukohteita',
+      };
+    }
   }
 
   if (path === 'metadata.kuvaus' && errorType === 'invalidKielistetty') {

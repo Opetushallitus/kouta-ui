@@ -98,7 +98,10 @@ Object {
       "fi": "<p>Hakukohteen kynnysehto - fi</p>",
       "sv": "<p>Hakukohteen kynnysehto - sv</p>",
     },
-    "uudenOpiskelijanUrl": "https://opiskelu.info",
+    "uudenOpiskelijanUrl": Object {
+      "fi": "https://opiskelu.fi",
+      "sv": "https://opiskelu.se",
+    },
     "valintakokeidenYleiskuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",

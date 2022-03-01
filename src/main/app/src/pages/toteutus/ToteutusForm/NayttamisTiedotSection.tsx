@@ -13,6 +13,7 @@ import {
 } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import searchAmmattinimikkeetByTerm from '#/src/utils/api/searchAmmattinimikkeetByTerm';
 import searchAvainsanatByTerm from '#/src/utils/api/searchAvainsanatByTerm';
@@ -77,6 +78,11 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
 
+  const ammattinimikkeet = useFieldValue(
+    `${name}.ammattinimikkeet.${language}`
+  );
+  const avainsanat = useFieldValue(`${name}.avainsanat.${language}`);
+
   return (
     <>
       {[
@@ -100,8 +106,11 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
                 language
               )}
               label={t('toteutuslomake.ammattinimikkeet')}
-              helperText={t('yleiset.voitValitaEnintaan', {
-                lukumaara: MAX_ITEMS_AMMATTINIMIKKEET,
+              helperText={t('yleiset.oletValinnut', {
+                lukumaara: _.isArray(ammattinimikkeet)
+                  ? ammattinimikkeet.length
+                  : 0,
+                maksimi: MAX_ITEMS_AMMATTINIMIKKEET,
               })}
               maxItems={MAX_ITEMS_AMMATTINIMIKKEET}
             />
@@ -117,8 +126,9 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             isClearable
             loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
             label={t('toteutuslomake.avainsanat')}
-            helperText={t('yleiset.voitValitaEnintaan', {
-              lukumaara: MAX_ITEMS_AVAINSANAT,
+            helperText={t('yleiset.oletValinnut', {
+              lukumaara: _.isArray(avainsanat) ? avainsanat.length : 0,
+              maksimi: MAX_ITEMS_AVAINSANAT,
             })}
             maxItems={MAX_ITEMS_AVAINSANAT}
           />

@@ -67,6 +67,7 @@
     "maara": "Määrä",
     "tarkempiKuvaus": "Tarkempi kuvaus",
     "voitValitaEnintaan": "Voit valita enintään {{lukumaara}}",
+    "oletValinnut": "Voit valita enintään {{maksimi}}. Olet valinnut {{lukumaara}}.",
     "linkki": "Linkki",
     "poista": "Poista",
     "siirra": "Siirrä",

@@ -106,7 +106,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
                 language
               )}
               label={t('toteutuslomake.ammattinimikkeet')}
-              helperText={t('yleiset.oletValinnut', {
+              helperText={t('toteutuslomake.oletValinnutAmmattinimikkeet', {
                 lukumaara: _.isArray(ammattinimikkeet)
                   ? ammattinimikkeet.length
                   : 0,
@@ -126,7 +126,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             isClearable
             loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
             label={t('toteutuslomake.avainsanat')}
-            helperText={t('yleiset.oletValinnut', {
+            helperText={t('toteutuslomake.oletValinnutAvainsanat', {
               lukumaara: _.isArray(avainsanat) ? avainsanat.length : 0,
               maksimi: MAX_ITEMS_AVAINSANAT,
             })}

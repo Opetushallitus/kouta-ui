@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import Anchor, { RouterAnchor } from '#/src/components/Anchor';
+import { simpleMapProps } from '#/src/components/formFields';
 import {
   FormFieldInput,
   createFormFieldComponent,
@@ -139,11 +140,7 @@ const OsaamisalatInfoFields = ({
 
 const OsaamisalatCheckboxGroup = createFormFieldComponent(
   OsaamisalatInput,
-  ({ input, ...props }) => ({
-    ...input,
-    ...props,
-    keepOldValuesOnChange: true,
-  })
+  simpleMapProps
 );
 
 const OsaamisalatContainer = ({
@@ -157,9 +154,7 @@ const OsaamisalatContainer = ({
   const { nimi, osaamisalat, id } = peruste;
   const urls = useUrls();
 
-  const { koodiArvo } = parseKoodiUri(
-    _.get(koulutus, 'koulutuksetKoodiUri')[0]
-  );
+  const { koodiArvo } = parseKoodiUri(koulutus?.koulutuksetKoodiUri?.[0]);
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
@@ -171,7 +166,7 @@ const OsaamisalatContainer = ({
   return (
     <>
       {_.isEmpty(osaamisalat) && (
-        <Typography style={{ display: 'block', marginBottom: '12px' }}>
+        <Typography style={{ display: 'block', marginBottom: '24px' }}>
           <Trans
             i18nKey="toteutuslomake.eiOsaamisaloja"
             values={{ koulutusLinkText, ePerusteLinkText }}
@@ -190,7 +185,6 @@ const OsaamisalatContainer = ({
       )}
       <Container>
         <SelectionContainer {...getTestIdProps('osaamisalaSelection')}>
-          <Typography variant="h6" marginBottom={1}></Typography>
           <Field
             name={`${name}.osaamisalat`}
             component={OsaamisalatCheckboxGroup}

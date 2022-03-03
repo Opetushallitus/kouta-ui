@@ -1,14 +1,20 @@
 import { AxiosResponse } from 'axios';
 import _ from 'lodash';
 
+import { hakuRemoteErrorsToFormErrors } from '#/src/utils/haku/hakuRemoteErrorsToFormErrors';
 import { hakukohdeRemoteErrorsToFormErrors } from '#/src/utils/hakukohde/hakukohdeRemoteErrorsToFormErrors';
 import { koulutusRemoteErrorsToFormErrors } from '#/src/utils/koulutus/koulutusRemoteErrorsToFormErrors';
+import { sorakuvausRemoteErrorsToFormErrors } from '#/src/utils/soraKuvaus/sorakuvausRemoteErrorsToFormErrors';
 import { toteutusRemoteErrorsToFormErrors } from '#/src/utils/toteutus/toteutusRemoteErrorsToFormErrors';
+import { valintaperusteRemoteErrorsToFormErrors } from '#/src/utils/valintaperuste/valintaperusteRemoteErrorsToFormErrors';
 
 const REMOTE_ERRORS_TO_FORM_ERRORS = {
   koulutusForm: koulutusRemoteErrorsToFormErrors,
   toteutusForm: toteutusRemoteErrorsToFormErrors,
   hakukohdeForm: hakukohdeRemoteErrorsToFormErrors,
+  hakuForm: hakuRemoteErrorsToFormErrors,
+  valintaperusteForm: valintaperusteRemoteErrorsToFormErrors,
+  soraKuvausForm: sorakuvausRemoteErrorsToFormErrors,
 };
 
 const setErrors = (

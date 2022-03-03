@@ -53,6 +53,14 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
         },
       ];
     }
+
+    if (errorType === 'integrityViolation' && /toteutuksia/i.test(msg)) {
+      return {
+        field: 'tila',
+        errorKey:
+          'ilmoitukset.poistoEstettyRiippuvuuksienTakia.koulutuksellaToteutuksia',
+      };
+    }
   }
 
   if (path === 'metadata.kuvaus' && errorType === 'invalidKielistetty') {

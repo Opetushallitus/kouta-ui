@@ -260,7 +260,14 @@
       "viesti": "Yhteys palvelimeen on katkennut. Ole hyvä ja tarkista verkkoyhteytesi."
     },
     "naytaVirhe": "Näytä virhe",
-    "piilotaVirhe": "Piilota virhe"
+    "piilotaVirhe": "Piilota virhe",
+    "poistoEstettyRiippuvuuksienTakia": {
+      "koulutuksellaToteutuksia": "Koulutusta ei voi poistaa koska siihen on liitetty toteutuksia",
+      "toteutuksellaHakukohteita": "Toteutusta ei voi poistaa koska siihen on liitetty hakukohteita",
+      "haullaHakukohteita": "Hakua ei voi poistaa koska siihen on liitetty hakukohteita",
+      "sorakuvauksellaKoulutuksia": "SORA-kuvausta ei voi poistaa koska siihen on liitetty koulutuksia",
+      "valintaperusteellaHakukohteita": "Valintaperustetta ei voi poistaa koska siihen on liitetty hakukohteita"
+    }
   },
   "sivuTitlet": {
     "etuliite": "Tarjonta",

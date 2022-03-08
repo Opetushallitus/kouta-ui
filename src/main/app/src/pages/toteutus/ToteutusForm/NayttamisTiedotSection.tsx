@@ -13,6 +13,7 @@ import {
 } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import searchAmmattinimikkeetByTerm from '#/src/utils/api/searchAmmattinimikkeetByTerm';
 import searchAvainsanatByTerm from '#/src/utils/api/searchAvainsanatByTerm';
@@ -37,7 +38,8 @@ const CreatableField = createFormFieldComponent(
   })
 );
 
-const MAX_ITEMS = 5;
+const MAX_ITEMS_AMMATTINIMIKKEET = 5;
+const MAX_ITEMS_AVAINSANAT = 20;
 
 const makeLoadAmmattinimikkeet = memoize(
   (httpClient, apiUrls, language) => inputValue => {
@@ -76,6 +78,11 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
 
+  const ammattinimikkeet = useFieldValue(
+    `${name}.ammattinimikkeet.${language}`
+  );
+  const avainsanat = useFieldValue(`${name}.avainsanat.${language}`);
+
   return (
     <>
       {[
@@ -99,10 +106,13 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
                 language
               )}
               label={t('toteutuslomake.ammattinimikkeet')}
-              helperText={t('yleiset.voitValitaEnintaan', {
-                lukumaara: MAX_ITEMS,
+              helperText={t('toteutuslomake.oletValinnutAmmattinimikkeet', {
+                lukumaara: _.isArray(ammattinimikkeet)
+                  ? ammattinimikkeet.length
+                  : 0,
+                maksimi: MAX_ITEMS_AMMATTINIMIKKEET,
               })}
-              maxItems={MAX_ITEMS}
+              maxItems={MAX_ITEMS_AMMATTINIMIKKEET}
             />
           </div>
         </Box>
@@ -116,10 +126,11 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             isClearable
             loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
             label={t('toteutuslomake.avainsanat')}
-            helperText={t('yleiset.voitValitaEnintaan', {
-              lukumaara: MAX_ITEMS,
+            helperText={t('toteutuslomake.oletValinnutAvainsanat', {
+              lukumaara: _.isArray(avainsanat) ? avainsanat.length : 0,
+              maksimi: MAX_ITEMS_AVAINSANAT,
             })}
-            maxItems={MAX_ITEMS}
+            maxItems={MAX_ITEMS_AVAINSANAT}
           />
         </div>
       </Box>

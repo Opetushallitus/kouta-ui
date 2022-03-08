@@ -7,7 +7,7 @@ export const getKoulutukset =
         params: {
           organisaatioOid,
           ...(koulutustyyppi && { koulutustyyppi }),
-          myosArkistoidut: false,
+          myosArkistoidut: true,
         },
       }
     );

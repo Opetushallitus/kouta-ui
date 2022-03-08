@@ -12,7 +12,7 @@ export const getToteutukset = async ({
       params: {
         organisaatioOid,
         vainHakukohteeseenLiitettavat,
-        myosArkistoidut: false,
+        myosArkistoidut: true,
       },
     }
   );

@@ -14,7 +14,7 @@ export const getValintaperusteet = async ({
         organisaatioOid,
         ...(hakuOid && { hakuOid }),
         ...(koulutustyyppi && { koulutustyyppi }),
-        myosArkistoidut: false,
+        myosArkistoidut: true,
       },
     }
   );

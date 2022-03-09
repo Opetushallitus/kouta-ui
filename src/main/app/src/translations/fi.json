@@ -260,7 +260,14 @@
       "viesti": "Yhteys palvelimeen on katkennut. Ole hyvä ja tarkista verkkoyhteytesi."
     },
     "naytaVirhe": "Näytä virhe",
-    "piilotaVirhe": "Piilota virhe"
+    "piilotaVirhe": "Piilota virhe",
+    "poistoEstettyRiippuvuuksienTakia": {
+      "koulutuksellaToteutuksia": "Koulutusta ei voi poistaa koska siihen on liitetty toteutuksia",
+      "toteutuksellaHakukohteita": "Toteutusta ei voi poistaa koska siihen on liitetty hakukohteita",
+      "haullaHakukohteita": "Hakua ei voi poistaa koska siihen on liitetty hakukohteita",
+      "sorakuvauksellaKoulutuksia": "SORA-kuvausta ei voi poistaa koska siihen on liitetty koulutuksia",
+      "valintaperusteellaHakukohteita": "Valintaperustetta ei voi poistaa koska siihen on liitetty hakukohteita"
+    }
   },
   "sivuTitlet": {
     "etuliite": "Tarjonta",
@@ -495,6 +502,8 @@
     "eiOsaamisaloja": "Valittuun koulutukseen <0>{{koulutusLinkText}}</0> liitetyllä ePerusteella <1>{{ePerusteLinkText}}</1> ei ole osaamisaloja.",
     "koulutuksellaEiEPerustetta": "Valittuun koulutukseen ei ole liitetty ePerustetta.",
     "valitseMissaJarjestetaan": "Valitse missä toteutus järjestetään",
+    "oletValinnutAmmattinimikkeet": "Olet valinnut {{lukumaara}}/{{maksimi}} ammattinimikettä.",
+    "oletValinnutAvainsanat": "Olet valinnut {{lukumaara}}/{{maksimi}} avainsanaa.",
     "vuotta": "Vuotta",
     "kuukautta": "Kuukautta",
     "hakeutumisTaiIlmoittautumistapa": "Hakeutumis- tai ilmoittautumistapa",
@@ -536,7 +545,8 @@
     "linkinAltTeksti": "Linkin ALT-teksti",
     "lukionYleislinjaNimiOsa": "Lukio",
     "lukionYleislinjaValinta": "Lukion yleislinja",
-    "lukionYleislinjaOhjeteksti": "Toteutuksella on pakko olla vähintään yleislinja, jos muita linjoja ei ole valittu. Valitse painotuksia tai yleisiä koulutustehtäviä poistaaksesi yleislinja-valinnan."
+    "lukionYleislinjaOhjeteksti": "Toteutuksella on pakko olla vähintään yleislinja, jos muita linjoja ei ole valittu. Valitse painotuksia tai yleisiä koulutustehtäviä poistaaksesi yleislinja-valinnan.",
+    "virheellinenOsaamisalaValinta": "Seuraavat osaamisalat eivät kuulu valitun koulutuksen eperusteisiin ja tulisi poistaa toteutukselta"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

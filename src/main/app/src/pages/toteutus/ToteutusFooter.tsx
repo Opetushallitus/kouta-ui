@@ -11,7 +11,6 @@ import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
@@ -21,6 +20,8 @@ import createToteutus from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
 import { validateToteutusForm } from '#/src/utils/toteutus/validateToteutusForm';
+
+import { GetTarjoajatHierarkia } from './GetTarjoajatHierarkia';
 
 type ToteutusFooterProps = {
   formMode: FormMode;
@@ -39,7 +40,10 @@ export const ToteutusFooter = ({
   koulutus,
   canUpdate,
 }: ToteutusFooterProps) => {
-  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
+  const { hierarkia = [] } = GetTarjoajatHierarkia(
+    organisaatioOid,
+    toteutus?.tarjoajat
+  );
 
   const history = useHistory();
   const queryClient = useQueryClient();

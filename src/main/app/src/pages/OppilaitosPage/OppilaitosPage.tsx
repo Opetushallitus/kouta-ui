@@ -13,7 +13,6 @@ import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
 import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
 import { useOppilaitosByOid } from '#/src/utils/oppilaitos/getOppilaitosByOid';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';

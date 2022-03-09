@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
@@ -7,29 +7,25 @@ import styled from 'styled-components';
 
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import Anchor, { RouterAnchor } from '#/src/components/Anchor';
-import { FieldGroup } from '#/src/components/FieldGroup';
+import { simpleMapProps } from '#/src/components/formFields';
 import {
   FormFieldInput,
-  FormFieldCheckboxGroup,
+  createFormFieldComponent,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import {
-  Box,
-  Divider,
-  Icon,
-  Typography,
-  Spin,
-} from '#/src/components/virkailija';
+import { Spin } from '#/src/components/virkailija';
+import { Box, Divider, Icon, Typography } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
+import useKoodisto from '#/src/hooks/useKoodisto';
 import { getThemeProp } from '#/src/theme';
-import { sanitizeHTML } from '#/src/utils';
 import { getTestIdProps } from '#/src/utils';
-import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import useExtendedEPeruste from '#/src/utils/ePeruste/useExtendedEPeruste';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { getLanguageValue } from '#/src/utils/languageUtils';
+
+import { OsaamisalatInput } from '../OsaamisalatInput.tsx';
 
 const Container = styled.div`
   display: flex;
@@ -142,26 +138,23 @@ const OsaamisalatInfoFields = ({
   });
 };
 
+const OsaamisalatCheckboxGroup = createFormFieldComponent(
+  OsaamisalatInput,
+  simpleMapProps
+);
+
 const OsaamisalatContainer = ({
   peruste,
   koulutus,
   organisaatioOid,
   language,
   name,
+  osaamisalatKoodistoData,
 }) => {
   const { nimi, osaamisalat, id } = peruste;
-  const { t } = useTranslation();
   const urls = useUrls();
 
-  const osaamisalaOptions = useMemo(
-    () =>
-      osaamisalat.map(({ nimi, uri }) => ({
-        label: getLanguageValue(nimi, language),
-        value: uri,
-      })),
-    [osaamisalat, language]
-  );
-  const { koodiArvo } = parseKoodiUri(_.get(koulutus, 'koulutusKoodiUri'));
+  const { koodiArvo } = parseKoodiUri(koulutus?.koulutuksetKoodiUri?.[0]);
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
@@ -170,77 +163,48 @@ const OsaamisalatContainer = ({
   )} (${koodiArvo})`;
 
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
-  return _.isEmpty(osaamisalat) ? (
-    <Typography>
-      <Trans
-        i18nKey="toteutuslomake.eiOsaamisaloja"
-        values={{ koulutusLinkText, ePerusteLinkText }}
-        components={[
-          <RouterAnchor
-            to={`/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/muokkaus`}
-          >
-            {koulutusLinkText}
-          </RouterAnchor>,
-          <Anchor href={urls.url('eperusteet.kooste', language, id)}>
-            {ePerusteLinkText}
-          </Anchor>,
-        ]}
-      />
-    </Typography>
-  ) : (
+  return (
     <>
-      <SelectionContainer>
-        <Typography variant="h6" marginBottom={1}></Typography>
-        <FieldGroup
-          title={t('toteutuslomake.valitseOsaamisalat')}
-          {...getTestIdProps('osaamisalaSelection')}
-        >
+      {_.isEmpty(osaamisalat) && (
+        <Typography style={{ display: 'block', marginBottom: '24px' }}>
+          <Trans
+            i18nKey="toteutuslomake.eiOsaamisaloja"
+            values={{ koulutusLinkText, ePerusteLinkText }}
+            components={[
+              <RouterAnchor
+                to={`/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/muokkaus`}
+              >
+                {koulutusLinkText}
+              </RouterAnchor>,
+              <Anchor href={urls.url('eperusteet.kooste', language, id)}>
+                {ePerusteLinkText}
+              </Anchor>,
+            ]}
+          />
+        </Typography>
+      )}
+      <Container>
+        <SelectionContainer {...getTestIdProps('osaamisalaSelection')}>
           <Field
             name={`${name}.osaamisalat`}
-            component={FormFieldCheckboxGroup}
-            options={osaamisalaOptions}
-            label={getLanguageValue(nimi, language)}
+            component={OsaamisalatCheckboxGroup}
+            ePeruste={peruste}
+            language={language}
+            osaamisalatKoodistoData={osaamisalatKoodistoData}
+            format={null}
           />
-        </FieldGroup>
-      </SelectionContainer>
-      <InfoContainer>
-        <OsaamisalatInfoFields
-          osaamisalatValue={osaamisalatValue || []}
-          osaamisalat={osaamisalat}
-          language={language}
-          name={name}
-        />
-      </InfoContainer>
+        </SelectionContainer>
+        <InfoContainer>
+          <OsaamisalatInfoFields
+            osaamisalatValue={osaamisalatValue || []}
+            osaamisalat={osaamisalat}
+            language={language}
+            name={name}
+          />
+        </InfoContainer>
+      </Container>
     </>
   );
-};
-
-const useExtendedEPeruste = ePerusteId => {
-  const { data: ePeruste, isLoading: ePerusteLoading } =
-    useEPerusteById(ePerusteId);
-  const { data: osaamisalaKuvaukset, isLoading: osaamisalaKuvauksetLoading } =
-    useEPerusteOsaamisalaKuvaukset({ ePerusteId });
-
-  const osaamisalat = ePeruste?.osaamisalat;
-
-  const osaamisalatWithDescriptions = useMemo(
-    () =>
-      _.map(osaamisalat, osaamisala => ({
-        ...osaamisala,
-        kuvaus: _.mapValues(
-          _.get(osaamisalaKuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-          v => (_.isString(v) ? sanitizeHTML(v) : v)
-        ),
-      })),
-    [osaamisalat, osaamisalaKuvaukset]
-  );
-
-  return {
-    data: ePeruste
-      ? { ...ePeruste, osaamisalat: osaamisalatWithDescriptions }
-      : null,
-    isLoading: ePerusteLoading || osaamisalaKuvauksetLoading,
-  };
 };
 
 export const OsaamisalatSection = ({
@@ -253,23 +217,30 @@ export const OsaamisalatSection = ({
   const { ePerusteId } = koulutus || {};
   const { data: ePeruste, isLoading } = useExtendedEPeruste(ePerusteId);
 
-  return (
-    <Container>
-      {isLoading ? (
-        <Spin />
-      ) : ePeruste ? (
+  const { data: osaamisalatKoodistodata = [], isKoodistoLoading } = useKoodisto(
+    {
+      koodisto: 'osaamisala',
+    }
+  );
+
+  return isLoading || isKoodistoLoading ? (
+    <Spin center />
+  ) : (
+    <>
+      {ePeruste ? (
         <OsaamisalatContainer
           peruste={ePeruste}
           koulutus={koulutus}
           language={language}
           name={name}
           organisaatioOid={organisaatioOid}
+          osaamisalatKoodistoData={osaamisalatKoodistodata}
         />
       ) : (
         <Typography>
           {t('toteutuslomake.koulutuksellaEiEPerustetta')}
         </Typography>
       )}
-    </Container>
+    </>
   );
 };

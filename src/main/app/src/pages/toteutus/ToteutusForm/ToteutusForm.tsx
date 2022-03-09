@@ -250,6 +250,7 @@ const ToteutusForm = ({
           Component={JarjestamispaikatSection}
           languages={languages}
           organisaatioOid={organisaatioOid}
+          tarjoajat={toteutus?.tarjoajat}
         />
         {[
           KOULUTUSTYYPPI.TUTKINNON_OSA,

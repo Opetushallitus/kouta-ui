@@ -2,7 +2,8 @@ import _fp from 'lodash/fp';
 
 export const FILTER_PAGE_SIZE = 10;
 
-const isValidQueryStringValue = x => _fp.isNumber(x) || !_fp.isEmpty(x);
+const isValidQueryStringValue = x =>
+  _fp.isNumber(x) || !_fp.isEmpty(x) || _fp.isBoolean(x);
 
 export const getSearchQueryParams = ({
   organisaatioOid,

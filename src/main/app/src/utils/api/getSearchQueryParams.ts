@@ -14,6 +14,7 @@ export const getSearchQueryParams = ({
   orderDirection,
   tila,
   koulutustyyppi,
+  julkinen,
 }) =>
   _fp.pickBy(isValidQueryStringValue, {
     nimi,
@@ -25,4 +26,5 @@ export const getSearchQueryParams = ({
     size: pageSize,
     page,
     koulutustyyppi,
+    julkinen: julkinen,
   });

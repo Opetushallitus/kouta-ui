@@ -8,6 +8,7 @@ import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import {
   getJulkaisutilaTranslationKey,
   JULKAISUTILA,
+  NAKYVYYS,
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
@@ -46,6 +47,16 @@ const useKoulutustyyppiOptions = t =>
     [t]
   );
 
+const useNakyvyysOptions = t =>
+  useMemo(
+    () =>
+      Object.keys(NAKYVYYS).map(key => ({
+        label: t(`nakyvyys.${key.toLowerCase()}`),
+        value: NAKYVYYS[key],
+      })),
+    [t]
+  );
+
 export const Filters = ({
   nimi,
   onNimiChange,
@@ -54,12 +65,16 @@ export const Filters = ({
   nimiPlaceholder = '',
   koulutustyyppi,
   tila,
+  nakyvyys,
+  onNakyvyysChange,
 }) => {
   const { t } = useTranslation();
 
   const tilaOptions = useTilaOptions(t);
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
+
+  const nakyvyysOptions = useNakyvyysOptions(t);
 
   const [usedNimi, setUsedNimi] = useState(nimi);
   const debouncedNimiChange = useRef(
@@ -98,6 +113,15 @@ export const Filters = ({
           onChange={onTilaChange}
           placeholder={t('yleiset.tila')}
           value={tila}
+          isMulti
+        />
+      </Box>
+      <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+        <Select
+          options={nakyvyysOptions}
+          onChange={onNakyvyysChange}
+          placeholder={t('yleiset.nakyvyys')}
+          value={nakyvyys}
           isMulti
         />
       </Box>

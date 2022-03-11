@@ -3,7 +3,7 @@ import { useApiQuery } from '#/src/hooks/useApiQuery';
 const getSoraKuvaukset = async ({ httpClient, apiUrls, organisaatioOid }) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.soraKuvaus-list'),
-    { params: { organisaatioOid, myosArkistoidut: false } }
+    { params: { organisaatioOid, myosArkistoidut: true } }
   );
 
   return data;

@@ -65,16 +65,14 @@ export const Filters = ({
   nimiPlaceholder = '',
   koulutustyyppi,
   tila,
-  nakyvyys,
   onNakyvyysChange,
+  nakyvyys,
 }) => {
   const { t } = useTranslation();
 
   const tilaOptions = useTilaOptions(t);
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
-
-  const nakyvyysOptions = useNakyvyysOptions(t);
 
   const [usedNimi, setUsedNimi] = useState(nimi);
   const debouncedNimiChange = useRef(
@@ -85,6 +83,8 @@ export const Filters = ({
     setUsedNimi(value);
     debouncedNimiChange.current(value);
   }, []);
+
+  const nakyvyysOptions = useNakyvyysOptions(t);
 
   return (
     <Box display="flex" alignItems="center">
@@ -116,15 +116,17 @@ export const Filters = ({
           isMulti
         />
       </Box>
-      <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
-        <Select
-          options={nakyvyysOptions}
-          onChange={onNakyvyysChange}
-          placeholder={t('yleiset.nakyvyys')}
-          value={nakyvyys}
-          isMulti
-        />
-      </Box>
+      {onNakyvyysChange && (
+        <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+          <Select
+            options={nakyvyysOptions}
+            onChange={onNakyvyysChange}
+            placeholder={t('yleiset.nakyvyys')}
+            value={nakyvyys}
+            isMulti
+          />
+        </Box>
+      )}
     </Box>
   );
 };

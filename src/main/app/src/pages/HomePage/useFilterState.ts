@@ -44,10 +44,10 @@ export const useFilterState = (name: string) => {
       setPagination({ page: 0, koulutustyyppi });
   }
 
-  const setNakyvyys = useCallback(
-    nakyvyys => setPagination({ page: 0, nakyvyys }),
-    [setPagination]
-  );
+  let setNakyvyys;
+  if (name === ENTITY.KOULUTUS || name === ENTITY.VALINTAPERUSTE) {
+    setNakyvyys = nakyvyys => setPagination({ page: 0, nakyvyys });
+  }
 
   return useMemo(
     () => ({

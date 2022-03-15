@@ -117,6 +117,13 @@ export const makeMuokkaajaColumn = (t): Column => ({
   render: ({ muokkaaja }) => _.get(muokkaaja, 'nimi') || null,
 });
 
+export const makeHakutapaColumn = (t): Column => ({
+  title: t('yleiset.hakutapa'),
+  key: 'hakutapa',
+  sortable: true,
+  render: ({ hakutapa }) => getFirstLanguageValue(hakutapa?.nimi),
+});
+
 const ActionsIcon = styled(Icon).attrs({ type: 'more_horiz' })`
   opacity: 0.6;
   transition: opacity 0.25s;

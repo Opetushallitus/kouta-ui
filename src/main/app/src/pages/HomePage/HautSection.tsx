@@ -10,6 +10,7 @@ import {
   makeMuokkaajaColumn,
   makeNimiColumn,
   makeTilaColumn,
+  makeHakutapaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import { searchHaut } from '#/src/utils/haku/searchHaut';
@@ -38,6 +39,7 @@ const makeTableColumns = (t, organisaatioOid) => [
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),
+  makeHakutapaColumn(t),
   {
     title: t('etusivu.kiinnitetytHakukohteet'),
     key: 'hakukohteet',

@@ -192,7 +192,8 @@
     "uudenOpiskelijanUrl": "Uuden opiskelijan verkkosivun URL",
     "julkinen": "Julkinen",
     "nakyvyys": "Näkyvyys",
-    "oph": "OPH"
+    "oph": "OPH",
+    "hakutapa": "Hakutapa"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

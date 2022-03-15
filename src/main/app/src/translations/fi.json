@@ -193,7 +193,8 @@
     "julkinen": "Julkinen",
     "nakyvyys": "Näkyvyys",
     "oph": "OPH",
-    "hakutapa": "Hakutapa"
+    "hakutapa": "Hakutapa",
+    "koulutuksenAlkamiskausi": "Koulutuksen alkamiskausi ja -vuosi"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

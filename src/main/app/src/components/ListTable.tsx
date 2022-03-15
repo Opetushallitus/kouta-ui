@@ -124,6 +124,18 @@ export const makeHakutapaColumn = (t): Column => ({
   render: ({ hakutapa }) => getFirstLanguageValue(hakutapa?.nimi),
 });
 
+export const makeKoulutuksenAlkamiskausiColumn = (t): Column => ({
+  title: t('yleiset.koulutuksenAlkamiskausi'),
+  key: 'koulutuksenAlkamiskausi',
+  sortable: true,
+  render: ({ koulutuksenAlkamiskausi }) =>
+    koulutuksenAlkamiskausi?.koulutuksenAlkamiskausi
+      ? `${getFirstLanguageValue(
+          koulutuksenAlkamiskausi?.koulutuksenAlkamiskausi?.nimi
+        )} ${koulutuksenAlkamiskausi?.koulutuksenAlkamisvuosi}`
+      : '',
+});
+
 const ActionsIcon = styled(Icon).attrs({ type: 'more_horiz' })`
   opacity: 0.6;
   transition: opacity 0.25s;

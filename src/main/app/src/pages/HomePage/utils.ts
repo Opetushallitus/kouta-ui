@@ -33,6 +33,7 @@ export const getIndexParamsByFilters = ({
   orderBy,
   tila,
   koulutustyyppi,
+  hakutapa,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
 
@@ -45,6 +46,7 @@ export const getIndexParamsByFilters = ({
     orderDirection,
     tila: selectValueToSimpleValue(tila),
     koulutustyyppi: selectValueToSimpleValue(koulutustyyppi),
+    hakutapa: selectValueToSimpleValue(hakutapa),
   };
 };
 

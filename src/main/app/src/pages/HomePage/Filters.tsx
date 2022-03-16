@@ -11,6 +11,7 @@ import {
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
@@ -54,12 +55,18 @@ export const Filters = ({
   nimiPlaceholder = '',
   koulutustyyppi,
   tila,
+  hakutapa,
+  onHakutapaChange,
 }) => {
   const { t } = useTranslation();
 
   const tilaOptions = useTilaOptions(t);
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
+
+  const { options: hakutapaOptions } = useKoodistoOptions({
+    koodisto: 'hakutapa',
+  });
 
   const [usedNimi, setUsedNimi] = useState(nimi);
   const debouncedNimiChange = useRef(
@@ -101,6 +108,17 @@ export const Filters = ({
           isMulti
         />
       </Box>
+      {onHakutapaChange && (
+        <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+          <Select
+            options={hakutapaOptions}
+            onChange={onHakutapaChange}
+            placeholder={t('yleiset.hakutapa')}
+            value={hakutapa}
+            isMulti
+          />
+        </Box>
+      )}
     </Box>
   );
 };

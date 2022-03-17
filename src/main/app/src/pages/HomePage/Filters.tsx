@@ -50,9 +50,9 @@ const useKoulutustyyppiOptions = t =>
 const useNakyvyysOptions = t =>
   useMemo(
     () =>
-      Object.keys(NAKYVYYS).map(key => ({
-        label: t(`nakyvyys.${key.toLowerCase()}`),
-        value: NAKYVYYS[key],
+      Object.values(NAKYVYYS).map(value => ({
+        label: t(`nakyvyys.${value}`),
+        value,
       })),
     [t]
   );
@@ -123,7 +123,6 @@ export const Filters = ({
             onChange={onNakyvyysChange}
             placeholder={t('yleiset.nakyvyys')}
             value={nakyvyys}
-            isMulti
           />
         </Box>
       )}

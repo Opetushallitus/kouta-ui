@@ -27,17 +27,11 @@ const selectValueToSimpleValue = v => {
   }
 };
 
-const nakyvyysToSimpleValue = v => {
+const nakyvyysToBoolean = v => {
   if (v) {
-    const vals = v.map(_fp.prop('value'));
-    if (
-      vals.includes(NAKYVYYS.JULKINEN) &&
-      vals.includes(NAKYVYYS.EI_JULKINEN)
-    ) {
-      return null;
-    } else if (vals.includes(NAKYVYYS.JULKINEN)) {
+    if (v.value === NAKYVYYS.JULKINEN) {
       return true;
-    } else if (vals.includes(NAKYVYYS.EI_JULKINEN)) {
+    } else if (v.value === NAKYVYYS.EI_JULKINEN) {
       return false;
     } else {
       return null;
@@ -65,7 +59,7 @@ export const getIndexParamsByFilters = ({
     orderDirection,
     tila: selectValueToSimpleValue(tila),
     koulutustyyppi: selectValueToSimpleValue(koulutustyyppi),
-    julkinen: nakyvyysToSimpleValue(nakyvyys),
+    julkinen: nakyvyysToBoolean(nakyvyys),
   };
 };
 

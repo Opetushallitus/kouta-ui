@@ -8,6 +8,7 @@ import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import {
   getJulkaisutilaTranslationKey,
   JULKAISUTILA,
+  NAKYVYYS,
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
@@ -46,6 +47,16 @@ const useKoulutustyyppiOptions = t =>
     [t]
   );
 
+const useNakyvyysOptions = t =>
+  useMemo(
+    () =>
+      Object.values(NAKYVYYS).map(value => ({
+        label: t(`nakyvyys.${value}`),
+        value,
+      })),
+    [t]
+  );
+
 export const Filters = ({
   nimi,
   onNimiChange,
@@ -54,6 +65,8 @@ export const Filters = ({
   nimiPlaceholder = '',
   koulutustyyppi,
   tila,
+  onNakyvyysChange,
+  nakyvyys,
 }) => {
   const { t } = useTranslation();
 
@@ -70,6 +83,8 @@ export const Filters = ({
     setUsedNimi(value);
     debouncedNimiChange.current(value);
   }, []);
+
+  const nakyvyysOptions = useNakyvyysOptions(t);
 
   return (
     <Box display="flex" alignItems="center">
@@ -101,6 +116,16 @@ export const Filters = ({
           isMulti
         />
       </Box>
+      {onNakyvyysChange && (
+        <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+          <Select
+            options={nakyvyysOptions}
+            onChange={onNakyvyysChange}
+            placeholder={t('yleiset.nakyvyys')}
+            value={nakyvyys}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

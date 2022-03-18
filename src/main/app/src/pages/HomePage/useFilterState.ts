@@ -10,9 +10,9 @@ import { getPagination, setPaginationAction } from '#/src/state/pagination';
 export const useFilterState = (name: string) => {
   const dispatch = useDispatch();
 
-  const { nimi, koulutustyyppi, page, orderBy, tila, julkinen } = useSelector(
-    getPagination(name)
-  );
+  const { nimi, koulutustyyppi, page, orderBy, tila, julkinen, nakyvyys } =
+    useSelector(getPagination(name));
+
   const setPagination = useCallback(
     pagination => dispatch(setPaginationAction({ name, ...pagination })),
     [dispatch, name]
@@ -44,6 +44,11 @@ export const useFilterState = (name: string) => {
       setPagination({ page: 0, koulutustyyppi });
   }
 
+  let setNakyvyys;
+  if (name === ENTITY.KOULUTUS || name === ENTITY.VALINTAPERUSTE) {
+    setNakyvyys = nakyvyys => setPagination({ page: 0, nakyvyys });
+  }
+
   return useMemo(
     () => ({
       nimi,
@@ -57,6 +62,7 @@ export const useFilterState = (name: string) => {
       tila,
       setTila,
       julkinen,
+      nakyvyys,
       filtersProps: {
         nimi,
         koulutustyyppi,
@@ -64,6 +70,8 @@ export const useFilterState = (name: string) => {
         onNimiChange: setNimi,
         onKoulutustyyppiChange: setKoulutustyyppi,
         onTilaChange: setTila,
+        nakyvyys,
+        onNakyvyysChange: setNakyvyys,
       },
     }),
     [
@@ -77,6 +85,8 @@ export const useFilterState = (name: string) => {
       setKoulutustyyppi,
       setNimi,
       julkinen,
+      nakyvyys,
+      setNakyvyys,
     ]
   );
 };

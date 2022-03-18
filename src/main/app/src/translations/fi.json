@@ -301,6 +301,10 @@
     "arkistoitu": "Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä",
     "poistettu": "Poistaa tiedot järjestelmästä"
   },
+  "nakyvyys": {
+    "julkinen": "Julkinen",
+    "ei_julkinen": "Ei julkinen"
+  },
   "validointivirheet": {
     "epakelpoUrl": "Linkki on virheellinen",
     "pakollinen": "Tämä kenttä on pakollinen",

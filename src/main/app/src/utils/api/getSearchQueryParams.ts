@@ -2,7 +2,8 @@ import _fp from 'lodash/fp';
 
 export const FILTER_PAGE_SIZE = 10;
 
-const isValidQueryStringValue = x => _fp.isNumber(x) || !_fp.isEmpty(x);
+const isValidQueryStringValue = x =>
+  _fp.isNumber(x) || !_fp.isEmpty(x) || _fp.isBoolean(x);
 
 export const getSearchQueryParams = ({
   organisaatioOid,
@@ -15,6 +16,7 @@ export const getSearchQueryParams = ({
   tila,
   koulutustyyppi,
   hakutapa,
+  julkinen,
 }) =>
   _fp.pickBy(isValidQueryStringValue, {
     nimi,
@@ -27,4 +29,5 @@ export const getSearchQueryParams = ({
     page,
     koulutustyyppi,
     hakutapa,
+    julkinen: julkinen,
   });

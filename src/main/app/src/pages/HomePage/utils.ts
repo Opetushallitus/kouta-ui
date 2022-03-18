@@ -8,6 +8,7 @@ import {
   HAKUKOHDE_ROLE,
   OPPILAITOS_ROLE,
   ORGANISAATIOTYYPPI,
+  NAKYVYYS,
 } from '#/src/constants';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
@@ -26,6 +27,18 @@ const selectValueToSimpleValue = v => {
   }
 };
 
+const nakyvyysToBoolean = v => {
+  if (v) {
+    if (v.value === NAKYVYYS.JULKINEN) {
+      return true;
+    } else if (v.value === NAKYVYYS.EI_JULKINEN) {
+      return false;
+    } else {
+      return null;
+    }
+  }
+};
+
 export const getIndexParamsByFilters = ({
   organisaatioOid,
   nimi,
@@ -34,6 +47,7 @@ export const getIndexParamsByFilters = ({
   tila,
   koulutustyyppi,
   hakutapa,
+  nakyvyys,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
 
@@ -47,6 +61,7 @@ export const getIndexParamsByFilters = ({
     tila: selectValueToSimpleValue(tila),
     koulutustyyppi: selectValueToSimpleValue(koulutustyyppi),
     hakutapa: selectValueToSimpleValue(hakutapa),
+    julkinen: nakyvyysToBoolean(nakyvyys),
   };
 };
 

@@ -19,6 +19,11 @@ export function getJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
 
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
 
+export enum NAKYVYYS {
+  JULKINEN = 'julkinen',
+  EI_JULKINEN = 'ei_julkinen',
+}
+
 export enum KOULUTUSTYYPPI {
   AMMATILLINEN_KOULUTUS = 'amm',
   LUKIOKOULUTUS = 'lk',

@@ -19,6 +19,7 @@ export const useFilterState = (name: string) => {
     julkinen,
     nakyvyys,
     hakutapa,
+    koulutuksenAlkamiskausi,
     koulutuksenAlkamisvuosi,
   } = useSelector(getPagination(name));
 
@@ -54,9 +55,12 @@ export const useFilterState = (name: string) => {
   }
 
   let setHakutapa;
+  let setKoulutuksenAlkamiskausi;
   let setKoulutuksenAlkamisvuosi;
   if (name === ENTITY.HAKU) {
     setHakutapa = hakutapa => setPagination({ page: 0, hakutapa });
+    setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi =>
+      setPagination({ page: 0, koulutuksenAlkamiskausi });
     setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi =>
       setPagination({ page: 0, koulutuksenAlkamisvuosi });
   }
@@ -81,6 +85,7 @@ export const useFilterState = (name: string) => {
       julkinen,
       hakutapa,
       nakyvyys,
+      koulutuksenAlkamiskausi,
       koulutuksenAlkamisvuosi,
       filtersProps: {
         nimi,
@@ -93,6 +98,8 @@ export const useFilterState = (name: string) => {
         onHakutapaChange: setHakutapa,
         nakyvyys,
         onNakyvyysChange: setNakyvyys,
+        koulutuksenAlkamiskausi,
+        onKoulutuksenAlkamiskausiChange: setKoulutuksenAlkamiskausi,
         koulutuksenAlkamisvuosi,
         onKoulutuksenAlkamisvuosiChange: setKoulutuksenAlkamisvuosi,
       },
@@ -112,6 +119,8 @@ export const useFilterState = (name: string) => {
       setHakutapa,
       nakyvyys,
       setNakyvyys,
+      koulutuksenAlkamiskausi,
+      setKoulutuksenAlkamiskausi,
       koulutuksenAlkamisvuosi,
       setKoulutuksenAlkamisvuosi,
     ]

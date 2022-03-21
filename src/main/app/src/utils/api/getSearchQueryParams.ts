@@ -17,6 +17,7 @@ export const getSearchQueryParams = ({
   koulutustyyppi,
   hakutapa,
   julkinen,
+  koulutuksenAlkamiskausi,
   koulutuksenAlkamisvuosi,
 }) =>
   _fp.pickBy(isValidQueryStringValue, {
@@ -31,5 +32,6 @@ export const getSearchQueryParams = ({
     koulutustyyppi,
     hakutapa,
     julkinen: julkinen,
+    koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
     koulutuksenAlkamisvuosi: _fp.join(',', koulutuksenAlkamisvuosi),
   });

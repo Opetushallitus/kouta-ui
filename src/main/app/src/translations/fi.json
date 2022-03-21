@@ -194,7 +194,8 @@
     "nakyvyys": "Näkyvyys",
     "oph": "OPH",
     "hakutapa": "Hakutapa",
-    "koulutuksenAlkamiskausi": "Koulutuksen alkamiskausi ja -vuosi"
+    "koulutuksenAlkamiskausi": "Koulutuksen alkamiskausi",
+    "koulutuksenAlkamisvuosi": "Koulutuksen alkamisvuosi"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

@@ -14,6 +14,7 @@ import {
 } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
+import getKoulutuksenAlkamisvuosiOptions from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 
@@ -70,6 +71,8 @@ export const Filters = ({
   onHakutapaChange,
   onNakyvyysChange,
   nakyvyys,
+  koulutuksenAlkamisvuosi,
+  onKoulutuksenAlkamisvuosiChange,
 }) => {
   const { t } = useTranslation();
 
@@ -92,6 +95,7 @@ export const Filters = ({
   }, []);
 
   const nakyvyysOptions = useNakyvyysOptions(t);
+  const koulutuksenAlkamisvuosiOptions = getKoulutuksenAlkamisvuosiOptions(t);
 
   return (
     <Box display="flex" alignItems="center">
@@ -141,6 +145,17 @@ export const Filters = ({
             onChange={onNakyvyysChange}
             placeholder={t('yleiset.nakyvyys')}
             value={nakyvyys}
+          />
+        </Box>
+      )}
+      {onKoulutuksenAlkamisvuosiChange && (
+        <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+          <Select
+            options={koulutuksenAlkamisvuosiOptions}
+            onChange={onKoulutuksenAlkamisvuosiChange}
+            placeholder={t('yleiset.koulutuksenAlkamisaika')}
+            value={koulutuksenAlkamisvuosi}
+            isMulti
           />
         </Box>
       )}

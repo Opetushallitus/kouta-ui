@@ -48,6 +48,7 @@ export const getIndexParamsByFilters = ({
   koulutustyyppi,
   hakutapa,
   nakyvyys,
+  koulutuksenAlkamisvuosi,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
 
@@ -62,6 +63,7 @@ export const getIndexParamsByFilters = ({
     koulutustyyppi: selectValueToSimpleValue(koulutustyyppi),
     hakutapa: selectValueToSimpleValue(hakutapa),
     julkinen: nakyvyysToBoolean(nakyvyys),
+    koulutuksenAlkamisvuosi: selectValueToSimpleValue(koulutuksenAlkamisvuosi),
   };
 };
 

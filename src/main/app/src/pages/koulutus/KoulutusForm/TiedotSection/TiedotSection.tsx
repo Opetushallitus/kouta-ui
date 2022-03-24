@@ -18,6 +18,7 @@ import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkin
 
 import { KoulutuksenEPerusteTiedot } from '../KoulutuksenEPerusteTiedot';
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
+import AmmOpettajaKoulutusTiedotSubSection from './AmmOpettajaKoulutusTiedotSubSection';
 import KoulutusalatField from './KoulutusalatField';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
@@ -111,15 +112,17 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           </Box>
         </>
       )}
+      {koulutustyyppi ===
+        KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS && (
+        <AmmOpettajaKoulutusTiedotSubSection />
+      )}
       {[
         ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
         KOULUTUSTYYPPI.AVOIN_YO,
         KOULUTUSTYYPPI.AVOIN_AMK,
         KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
         KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-        KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
-        KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
-        KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+        KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
         KOULUTUSTYYPPI.LUKIOKOULUTUS,
       ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('nimiInput')}>

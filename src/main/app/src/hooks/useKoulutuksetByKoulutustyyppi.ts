@@ -8,6 +8,7 @@ import {
   KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP,
   LONG_CACHE_QUERY_OPTIONS,
   LUKIO_KOULUTUSKOODIURIT,
+  AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT,
 } from '#/src/constants';
 import { useApiQueries } from '#/src/hooks/useApiQuery';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
@@ -49,11 +50,21 @@ export const useKoulutuksetByKoulutustyyppi = koulutustyyppi => {
   const responses = useApiQueries(queryProps);
   const koulutukset = useMemo(() => {
     const koulutusKoodit = selectValidKoulutusKoodit(responses);
-    return koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
-      ? koulutusKoodit?.filter(k =>
+
+    switch (koulutustyyppi) {
+      case KOULUTUSTYYPPI.LUKIOKOULUTUS:
+        return koulutusKoodit?.filter(k =>
           LUKIO_KOULUTUSKOODIURIT.includes(k.koodiUri)
-        )
-      : koulutusKoodit;
+        );
+      case KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS:
+        return koulutusKoodit?.filter(k =>
+          AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT.includes(
+            k.koodiUri
+          )
+        );
+      default:
+        return koulutusKoodit;
+    }
   }, [responses, koulutustyyppi]);
 
   const status = getCombinedQueryStatus(responses);

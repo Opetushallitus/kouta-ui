@@ -5,6 +5,7 @@ import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
   KOULUTUSALA_YLEISSIVISTAVA_KOODIURI,
+  KOULUTUSALA_KASVATUSALAT_KOODIURI,
 } from '#/src/constants';
 import {
   InformationSectionValues,
@@ -119,7 +120,10 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         _fp.mapValues(serializeEditorState)
       )(values?.description?.kuvaus ?? {}),
       opintojenLaajuusKoodiUri:
-        values?.information?.opintojenLaajuus?.value || null,
+        koulutustyyppi ===
+        KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
+          ? 'opintojenlaajuus_60'
+          : values?.information?.opintojenLaajuus?.value || null,
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),
@@ -127,6 +131,9 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       koulutusalaKoodiUrit:
         koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
           ? [KOULUTUSALA_YLEISSIVISTAVA_KOODIURI]
+          : koulutustyyppi ===
+            KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
+          ? [KOULUTUSALA_KASVATUSALAT_KOODIURI]
           : (values?.information?.koulutusalat ?? []).map(({ value }) => value),
       linkkiEPerusteisiin: pickTranslations(
         values?.description?.linkkiEPerusteisiin ?? {}

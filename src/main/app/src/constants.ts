@@ -37,9 +37,7 @@ export enum KOULUTUSTYYPPI {
   TAYDENNYS_KOULUTUS = 'taydennyskoulutus',
   ERIKOISTUMISKOULUTUS = 'erikoistumiskoulutus',
   VALMENTAVA_KOULUTUS = 'valmentava_koulutus',
-  AMMATILLINEN_OPETTAJAKOULUTUS = 'ammatillinen_opettajakoulutus',
-  AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS = 'ammatillinen_opinto_ohjaaja_koulutus',
-  AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS = 'ammatillinen_erityisopettaja_koulutus',
+  AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS = 'ammatillinen_ope_erityisope_ja_opokoulutus',
   TUVA = 'tuva',
   MUUT_KOULUTUKSET = 'muut_koulutukset',
   PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',
@@ -55,14 +53,13 @@ export const TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT = [
 ];
 
 export const TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT = [
-  KOULUTUSTYYPPI.AVOIN_YO,
-  KOULUTUSTYYPPI.AVOIN_AMK,
-  KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
-  KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-  KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS,
-  KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
-  KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
-  KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
+  // NOTE: Näitä korkeakoulukoulutustyyppejä ei ole vielä lisätty
+  // KOULUTUSTYYPPI.AVOIN_YO,
+  // KOULUTUSTYYPPI.AVOIN_AMK,
+  // KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+  // KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+  // KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS,
+  KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
 ];
 
 export const KORKEAKOULU_KOULUTUSTYYPIT = [
@@ -94,7 +91,6 @@ export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
 
 // NOTE: Näitä koulutustyyppejä ei tueta koska niiden toteutus puuttuu backendista, päivitä listaa kun backend tukee näitä
 export const EI_TUETUT_KOULUTUSTYYPIT = [
-  ...TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
   KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
   KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
 ];
@@ -513,8 +509,17 @@ export const LUKIO_KOULUTUSKOODIURIT = [
   'koulutus_301101', // Ylioppilastutkinto
 ];
 
+export const AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT = [
+  'koulutus_000001', // Ammatillinen opettajankoulutus
+  'koulutus_000002', // Ammatillinen erityisopettajan koulutus
+  'koulutus_000003', // Ammatillinen opinto-ohjaajan koulutus
+];
+
 export const KOULUTUSALA_YLEISSIVISTAVA_KOODIURI =
   'kansallinenkoulutusluokitus2016koulutusalataso1_00#1';
+
+export const KOULUTUSALA_KASVATUSALAT_KOODIURI =
+  'kansallinenkoulutusluokitus2016koulutusalataso1_01#1';
 
 export const LUKIO_YLEISLINJA = 'yleislinja';
 

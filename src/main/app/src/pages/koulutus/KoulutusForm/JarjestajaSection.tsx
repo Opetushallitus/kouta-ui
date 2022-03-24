@@ -124,7 +124,6 @@ export const JarjestajaSection = ({
                 getIsDisabled={getIsDisabled}
                 component={JarjestajatField}
                 label={t('koulutuslomake.valitseJarjestajat')}
-                required
               />
             </div>
           )}

@@ -13,7 +13,6 @@ import {
   validateOptionalTranslatedField,
   validatePohja,
 } from '#/src/utils/form/formConfigUtils';
-import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 const validateCommonFields = _fp.flow(
   validateExistence('koulutustyyppi'),
@@ -25,9 +24,6 @@ const oneAndOnlyOneTutkinnonOsa = values =>
   values?.tutkinnonosat?.osat?.length === 1;
 
 export const validateKoulutusForm = (values, registeredFields) => {
-  const { organisaatioOid } = values;
-  const minTarjoajat = isOphOrganisaatio(organisaatioOid) ? 0 : 1;
-
   const { tila } = values;
   const isJulkaistu = tila === JULKAISUTILA.JULKAISTU;
   const kieliversiot = getKielivalinta(values);
@@ -61,8 +57,7 @@ export const validateKoulutusForm = (values, registeredFields) => {
         _fp.flow(
           validateTranslations('description.nimi'),
           validateExistence('information.eperuste'),
-          validateArrayMinLength('information.korkeakoulutukset', 1),
-          validateArrayMinLength('tarjoajat.tarjoajat', minTarjoajat)
+          validateArrayMinLength('information.korkeakoulutukset', 1)
         )
       )
     )(createErrorBuilder(values, kieliversiot, registeredFields))

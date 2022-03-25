@@ -117,21 +117,22 @@ export const makeMuokkaajaColumn = (t): Column => ({
   render: ({ muokkaaja }) => _.get(muokkaaja, 'nimi') || null,
 });
 
-export const makeHakutapaColumn = (t): Column => ({
+export const makeHakutapaColumn = (t, userLanguage): Column => ({
   title: t('yleiset.hakutapa'),
   key: 'hakutapa',
   sortable: true,
-  render: ({ hakutapa }) => getFirstLanguageValue(hakutapa?.nimi),
+  render: ({ hakutapa }) => getFirstLanguageValue(hakutapa?.nimi, userLanguage),
 });
 
-export const makeKoulutuksenAlkamiskausiColumn = (t): Column => ({
+export const makeKoulutuksenAlkamiskausiColumn = (t, userLanguage): Column => ({
   title: t('yleiset.koulutuksenAlkamiskausi'),
   key: 'koulutuksenAlkamiskausi',
   sortable: true,
   render: ({ koulutuksenAlkamiskausi }) =>
     koulutuksenAlkamiskausi?.koulutuksenAlkamiskausi
       ? `${getFirstLanguageValue(
-          koulutuksenAlkamiskausi?.koulutuksenAlkamiskausi?.nimi
+          koulutuksenAlkamiskausi?.koulutuksenAlkamiskausi?.nimi,
+          userLanguage
         )} ${koulutuksenAlkamiskausi?.koulutuksenAlkamisvuosi}`
       : '',
 });

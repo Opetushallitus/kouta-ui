@@ -32,7 +32,7 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
-const makeTableColumns = (t, organisaatioOid) => [
+const makeTableColumns = (t, organisaatioOid, userLanguage) => [
   makeNimiColumn(t, {
     getLinkUrl: ({ oid }) =>
       `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
@@ -40,8 +40,8 @@ const makeTableColumns = (t, organisaatioOid) => [
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),
-  makeHakutapaColumn(t),
-  makeKoulutuksenAlkamiskausiColumn(t),
+  makeHakutapaColumn(t, userLanguage),
+  makeKoulutuksenAlkamiskausiColumn(t, userLanguage),
   {
     title: t('etusivu.kiinnitetytHakukohteet'),
     key: 'hakukohteet',

@@ -9,6 +9,7 @@ import Pagination from '#/src/components/Pagination';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { Box } from '#/src/components/virkailija';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import {
   getSearchQueryParams,
@@ -27,6 +28,7 @@ export const EntitySearchList = ({
   nimiPlaceholder,
 }) => {
   const { t } = useTranslation();
+  const userLanguage = useUserLanguage();
 
   const filterState = useFilterState(entityType);
   const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
@@ -68,8 +70,8 @@ export const EntitySearchList = ({
   }, [entities]);
 
   const tableColumns = useMemo(
-    () => makeTableColumns(t, organisaatioOid),
-    [makeTableColumns, t, organisaatioOid]
+    () => makeTableColumns(t, organisaatioOid, userLanguage),
+    [makeTableColumns, t, organisaatioOid, userLanguage]
   );
 
   return (

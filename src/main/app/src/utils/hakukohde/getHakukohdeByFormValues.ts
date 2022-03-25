@@ -57,8 +57,8 @@ const getLiiteToimitusosoite = (toimitustapa, kielivalinta) => {
       if (rivi1) {
         return _fp.reduce(
           (acc, kieli) => {
-            const r1 = (rivi1 ? rivi1[kieli] : '') || '';
-            const r2 = (rivi2 ? rivi2[kieli] : '') || '';
+            const r1 = rivi1?.[kieli] ?? '';
+            const r2 = rivi2?.[kieli] ?? '';
             acc[kieli] = `${r1}\n${r2}`.trim();
             return acc;
           },

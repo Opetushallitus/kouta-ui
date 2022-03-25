@@ -1,15 +1,12 @@
-const getKoulutuksenAlkamisvuosiOptions = () => {
-  const thisYear = new Date().getFullYear();
-  const yearOptions = [thisYear];
+import { getYear } from 'date-fns';
+import _ from 'lodash';
 
-  let numOfYearsBeforeAndAfterThisYear = 2;
-  do {
-    yearOptions.push(thisYear + numOfYearsBeforeAndAfterThisYear);
-    yearOptions.push(thisYear - numOfYearsBeforeAndAfterThisYear);
-    numOfYearsBeforeAndAfterThisYear = numOfYearsBeforeAndAfterThisYear - 1;
-  } while (numOfYearsBeforeAndAfterThisYear > 0);
+let YEAR_PADDING = 2;
 
-  return yearOptions
+export const getKoulutuksenAlkamisvuosiOptions = () => {
+  const thisYear = getYear(new Date());
+
+  return _.range(thisYear - YEAR_PADDING, thisYear + YEAR_PADDING + 1)
     .sort((a, b) => a - b)
     .map(year => {
       const yearStr = year.toString();
@@ -19,5 +16,3 @@ const getKoulutuksenAlkamisvuosiOptions = () => {
       };
     });
 };
-
-export default getKoulutuksenAlkamisvuosiOptions;

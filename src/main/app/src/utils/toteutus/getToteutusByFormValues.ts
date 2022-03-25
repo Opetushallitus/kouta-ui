@@ -225,8 +225,9 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         _fp.mapValues(serializeEditorState)
       )(values?.kuvaus || {}),
       tyyppi: koulutustyyppi,
-      laajuus: maybeParseNumber(values?.tiedot?.laajuus),
-      laajuusyksikkoKoodiUri: values?.tiedot?.laajuusyksikko?.value || null,
+      laajuus: maybeParseNumber(values?.tiedot?.opintojenLaajuusnumero),
+      laajuusyksikkoKoodiUri:
+        values?.tiedot?.opintojenLaajuusyksikko?.value || null,
       ilmoittautumislinkki: pickTranslations(
         values?.tiedot?.ilmoittautumislinkki
       ),

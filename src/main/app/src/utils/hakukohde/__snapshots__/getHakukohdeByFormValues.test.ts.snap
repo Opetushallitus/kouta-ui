@@ -39,7 +39,10 @@ Object {
       "toimitusaika": "2019-08-17T05:52",
       "toimitusosoite": Object {
         "osoite": Object {
-          "osoite": undefined,
+          "osoite": Object {
+            "fi": "Fi osoite",
+            "sv": "Sv osoite",
+          },
           "postinumeroKoodiUri": "posti_1#1",
         },
         "sahkoposti": Object {

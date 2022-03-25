@@ -9,13 +9,15 @@ const getKoulutuksenAlkamisvuosiOptions = () => {
     numOfYearsBeforeAndAfterThisYear = numOfYearsBeforeAndAfterThisYear - 1;
   } while (numOfYearsBeforeAndAfterThisYear > 0);
 
-  return yearOptions.sort().map(year => {
-    const yearStr = year.toString();
-    return {
-      label: yearStr,
-      value: yearStr,
-    };
-  });
+  return yearOptions
+    .sort((a, b) => a - b)
+    .map(year => {
+      const yearStr = year.toString();
+      return {
+        label: yearStr,
+        value: yearStr,
+      };
+    });
 };
 
 export default getKoulutuksenAlkamisvuosiOptions;

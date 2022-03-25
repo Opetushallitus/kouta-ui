@@ -92,13 +92,13 @@ const ToimituspaikkaFields = ({ name, language }) => {
       >
         <Box marginBottom={2}>
           <Field
-            name={`${name}.osoite.${language}[0]`}
+            name={`${name}.osoite.rivi1.${language}`}
             component={FormFieldInput}
           />
         </Box>
         <Box>
           <Field
-            name={`${name}.osoite.${language}[1]`}
+            name={`${name}.osoite.rivi2.${language}`}
             component={FormFieldInput}
           />
         </Box>

@@ -78,12 +78,14 @@ Object {
         "toimitustapa": Object {
           "paikka": Object {
             "osoite": Object {
-              "fi": Array [
-                "Fi osoite",
-              ],
-              "sv": Array [
-                "Sv osoite",
-              ],
+              "rivi1": Object {
+                "fi": "Fi osoite",
+                "sv": "Sv osoite",
+              },
+              "rivi2": Object {
+                "fi": undefined,
+                "sv": undefined,
+              },
             },
             "postinumero": Object {
               "value": "posti_1#1",
@@ -105,12 +107,14 @@ Object {
     "toimitustapa": Object {
       "paikka": Object {
         "osoite": Object {
-          "fi": Array [
-            "Fi osoite",
-          ],
-          "sv": Array [
-            "Sv osoite",
-          ],
+          "rivi1": Object {
+            "fi": "Fi osoite",
+            "sv": "Sv osoite",
+          },
+          "rivi2": Object {
+            "fi": undefined,
+            "sv": undefined,
+          },
         },
         "postinumero": Object {
           "value": "posti_1#1",

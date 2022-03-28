@@ -14,7 +14,7 @@ import {
 } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
-import getKoulutuksenAlkamisvuosiOptions from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
+import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 

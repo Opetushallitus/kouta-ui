@@ -8,7 +8,6 @@ import { Box, FormControl, Input } from '#/src/components/virkailija';
 import { KOULUTUSALA_KASVATUSALAT_KOODIURI } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useKoodi from '#/src/hooks/useKoodi';
-import { getTestIdProps } from '#/src/utils';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 
 export const AmmOpettajaKoulutusTiedotSubSection = ({
@@ -27,7 +26,7 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
 
   return (
     <>
-      <Box mb={2} {...getTestIdProps('koulutusSelect')}>
+      <Box mb={2}>
         <KoulutusField
           disabled={disabled}
           name={`${name}.koulutus`}
@@ -50,7 +49,6 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
                 selectedLanguage
               ) || ''
             }
-            {...getTestIdProps('laajuus')}
           />
         </FormControl>
       </Box>
@@ -59,10 +57,7 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
           label={t('koulutuslomake.valitseTutkintonimike')}
           disabled={true}
         >
-          <Input
-            value={t('koulutuslomake.eiTutkintonimiketta')}
-            {...getTestIdProps('laajuus')}
-          />
+          <Input value={t('koulutuslomake.eiTutkintonimiketta')} />
         </FormControl>
       </Box>
       <Box mb={2}>

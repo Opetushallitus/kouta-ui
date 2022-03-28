@@ -120,10 +120,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         _fp.mapValues(serializeEditorState)
       )(values?.description?.kuvaus ?? {}),
       opintojenLaajuusKoodiUri:
-        koulutustyyppi ===
-        KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
-          ? 'opintojenlaajuus_60'
-          : values?.information?.opintojenLaajuus?.value || null,
+        values?.information?.opintojenLaajuus?.value || null,
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),
@@ -131,9 +128,6 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       koulutusalaKoodiUrit:
         koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
           ? [KOULUTUSALA_YLEISSIVISTAVA_KOODIURI]
-          : koulutustyyppi ===
-            KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
-          ? [KOULUTUSALA_KASVATUSALAT_KOODIURI]
           : (values?.information?.koulutusalat ?? []).map(({ value }) => value),
       linkkiEPerusteisiin: pickTranslations(
         values?.description?.linkkiEPerusteisiin ?? {}

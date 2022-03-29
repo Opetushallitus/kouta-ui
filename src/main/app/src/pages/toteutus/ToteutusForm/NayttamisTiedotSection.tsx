@@ -10,6 +10,7 @@ import { Box } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -87,6 +88,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
     <>
       {[
         ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+        ...TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
         KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
         KOULUTUSTYYPPI.AVOIN_YO,
         KOULUTUSTYYPPI.AVOIN_AMK,

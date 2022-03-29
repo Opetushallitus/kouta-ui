@@ -109,7 +109,11 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
 
       {_fp
         .without(
-          [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
+          [
+            KOULUTUSTYYPPI.OSAAMISALA,
+            KOULUTUSTYYPPI.TUTKINNON_OSA,
+            KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+          ],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         )
         .includes(koulutustyyppi) && (
@@ -132,7 +136,11 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
 
       {_fp
         .without(
-          [KOULUTUSTYYPPI.TELMA, KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS],
+          [
+            KOULUTUSTYYPPI.TELMA,
+            KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+            KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+          ],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         )
         .includes(koulutustyyppi) && (

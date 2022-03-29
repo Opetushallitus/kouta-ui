@@ -1,7 +1,7 @@
-import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
+import { KORKEAKOULU_KOULUTUSTYYPIT } from '#/src/constants';
 
 const isKorkeakouluKoulutustyyppi = tyyppi => {
-  return isTutkintoonJohtavaKorkeakoulutus(tyyppi);
+  return KORKEAKOULU_KOULUTUSTYYPIT.includes(tyyppi);
 };
 
 export default isKorkeakouluKoulutustyyppi;

@@ -735,10 +735,10 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
     "fi"
   ],
   "koulutuksetKoodiUri": [],
-  "koulutustyyppi": "ammatillinen_ope_erityisope_ja_opokoulutus",
+  "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
     "koulutusalaKoodiUrit": [],
-    "koulutustyyppi": "ammatillinen_ope_erityisope_ja_opokoulutus",
+    "koulutustyyppi": "amm-ope-erityisope-ja-opo",
     "kuvauksenNimi": {
       "fi": "Kuvauksen nimi"
     },
@@ -758,7 +758,7 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
-    "tyyppi": "ammatillinen_ope_erityisope_ja_opokoulutus"
+    "tyyppi": "amm-ope-erityisope-ja-opo"
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
@@ -770,4 +770,115 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
     "1.2.1.1.1.1"
   ],
   "tila": "julkaistu"
+};
+
+exports[`editKoulutus > should be able to edit AMK-koulutus #1`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_671112#12"
+  ],
+  "koulutustyyppi": "amk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
+    ],
+    "koulutustyyppi": "amk",
+    "kuvauksenNimi": {
+      "fi": "Fi kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "<p>Fi kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [
+      "tutkintonimikekk_1#1",
+      "tutkintonimikekk_2#1"
+    ],
+    "tyyppi": "amk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Fysioterapeutti (AMK)"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "tila": "tallennettu"
+};
+
+exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja opokoulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_000001#12"
+  ],
+  "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
+    ],
+    "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+    "kuvauksenNimi": {
+      "fi": "Fi kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "<p>Fi kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-ope-erityisope-ja-opo"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Ammatillinen opettajankoulutus"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "tila": "tallennettu"
 };

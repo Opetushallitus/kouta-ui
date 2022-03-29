@@ -83,6 +83,20 @@ export const editKoulutusForm = () => {
   );
 
   it(
+    'should be able to edit ammatillinen ope-, erityisope- ja opokoulutus',
+    mutationTest(() => {
+      prepareTest('amm-ope-erityisope-ja-opo');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
+
+      fillKieliversiotSection();
+
+      tallenna();
+    })
+  );
+
+  it(
     'should be able to edit lukiokoulutus',
     mutationTest(() => {
       prepareTest('lk');

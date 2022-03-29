@@ -269,10 +269,7 @@ export const createKoulutusForm = () => {
     'should be able to create Ammatillinen opettaja- erityisopettaja ja opokoulutus',
     mutationTest(() => {
       fillCommon({
-        koulutustyyppiPath: [
-          'korkeakoulutus',
-          'ammatillinen_ope_erityisope_ja_opokoulutus',
-        ],
+        koulutustyyppiPath: ['korkeakoulutus', 'amm-ope-erityisope-ja-opo'],
       });
 
       withinSection('information', () => {

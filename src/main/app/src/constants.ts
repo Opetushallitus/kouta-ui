@@ -37,7 +37,7 @@ export enum KOULUTUSTYYPPI {
   TAYDENNYS_KOULUTUS = 'taydennyskoulutus',
   ERIKOISTUMISKOULUTUS = 'erikoistumiskoulutus',
   VALMENTAVA_KOULUTUS = 'valmentava_koulutus',
-  AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS = 'ammatillinen_ope_erityisope_ja_opokoulutus',
+  AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS = 'amm-ope-erityisope-ja-opo',
   TUVA = 'tuva',
   MUUT_KOULUTUKSET = 'muut_koulutukset',
   PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',

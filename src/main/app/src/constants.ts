@@ -501,10 +501,6 @@ export enum ApurahaYksikko {
   PROSENTTI = 'prosentti',
 }
 
-export enum KOODISTO_VERSIOT {
-  posti = 2,
-}
-
 export const FIELD_ERROR_CLASSNAME = 'field-error';
 
 export const LUKIO_KOULUTUSKOODIURIT = [

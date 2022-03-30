@@ -1,5 +1,3 @@
-import { KOODISTO_VERSIOT } from '#/src/constants';
-
 type GetKoodistoProps = {
   koodistoUri: string;
   httpClient: any;
@@ -13,7 +11,7 @@ const getKoodisto = async ({
   apiUrls,
   versio,
 }: GetKoodistoProps) => {
-  const koodistoVersio = versio ?? KOODISTO_VERSIOT[koodistoUri];
+  const koodistoVersio = versio;
   const { data } = await httpClient.get(
     apiUrls.url('koodisto-service.koodi', koodistoUri),
     {

@@ -123,7 +123,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_00350/2",
+    "url": "https://localhost:3000/koodisto-service/rest/codeelement/latest/posti_00350",
     "response": {
       "body": {
         "koodiUri": "posti_00350",

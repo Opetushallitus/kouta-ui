@@ -114,7 +114,12 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
       )}
       {koulutustyyppi ===
         KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS && (
-        <AmmOpettajaKoulutusTiedotSubSection />
+        <AmmOpettajaKoulutusTiedotSubSection
+          disabled={disabled}
+          name={name}
+          language={language}
+          koulutustyyppi={koulutustyyppi}
+        />
       )}
       {[
         ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,

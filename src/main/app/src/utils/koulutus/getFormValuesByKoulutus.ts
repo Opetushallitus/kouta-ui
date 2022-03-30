@@ -5,7 +5,7 @@ import { KOULUTUSTYYPPI } from '#/src/constants';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
 import { toSelectValue } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
+import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
 
 const koodiUriToKoodi = koodiUri => {
   return parseKoodiUri(koodiUri)?.koodiArvo;
@@ -18,7 +18,7 @@ function getKoulutusKoodiUrit(
   koulutustyyppi: KOULUTUSTYYPPI,
   koulutusKoodiUrit?: Array<string>
 ): { koulutusKoodiUri?: string; korkeakoulutusKoodiUrit: Array<string> } {
-  const isKorkeakoulu = isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
+  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
 
   const firstElement = koulutusKoodiUrit?.[0];
 

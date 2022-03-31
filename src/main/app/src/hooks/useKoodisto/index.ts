@@ -1,4 +1,4 @@
-import { KOODISTO_VERSIOT, LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
 
@@ -11,7 +11,7 @@ export const useKoodisto = ({
   koodisto,
   versio: versioProp,
 }: UseKoodistoProps) => {
-  const versio = versioProp || KOODISTO_VERSIOT[koodisto] || '';
+  const versio = versioProp || '';
 
   return useApiQuery(
     GET_KOODISTO_QUERY_KEY,

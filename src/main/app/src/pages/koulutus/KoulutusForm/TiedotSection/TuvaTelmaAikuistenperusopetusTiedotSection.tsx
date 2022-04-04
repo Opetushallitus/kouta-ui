@@ -7,8 +7,9 @@ import { Field } from 'redux-form';
 import { FormFieldInput } from '#/src/components/formFields';
 import OpintojenLaajuusFieldExtended from '#/src/components/OpintojenLaajuusFieldExtended';
 import { Box } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI } from '#/src/constants';
-import { useBoundFormActions } from '#/src/hooks/form';
+import { KOULUTUSTYYPPI, KOULUTUS_PERUSOPETUS_KOODIURI } from '#/src/constants';
+import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import {
   isIn,
   otherwise,
@@ -16,7 +17,7 @@ import {
   getTestIdProps,
 } from '#/src/utils';
 
-import EnforcedKoulutusSelection from './EnforcedKoulutusSelection';
+import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 
 export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
@@ -28,29 +29,25 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   const { t } = useTranslation();
   const koulutustyyppiKey = getKoulutustyyppiTranslationKey(koulutustyyppi);
   const { change } = useBoundFormActions();
+  const currNimi = useFieldValue(`${name}.nimi`);
   useEffect(() => {
-    change('information.nimi', {
-      fi: t(`${koulutustyyppiKey}`, { lng: 'fi' }),
-      sv: t(`${koulutustyyppiKey}`, { lng: 'sv' }),
-      en: t(`${koulutustyyppiKey}`, { lng: 'en' }),
-    });
+    if (_fp.isUndefined(currNimi)) {
+      change(`${name}.nimi`, {
+        fi: t(`${koulutustyyppiKey}`, { lng: 'fi' }),
+        sv: t(`${koulutustyyppiKey}`, { lng: 'sv' }),
+        en: t(`${koulutustyyppiKey}`, { lng: 'en' }),
+      });
+    }
+  }, [change, currNimi, koulutustyyppiKey, name, t]);
 
-    return () => change('information.nimi', {});
-  }, [change, koulutustyyppiKey, t]);
-
-  // TBD
-  // Lisää tämä ensimmäiseksi ylätason boxin alle:
-  // {koulutustyyppi === KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS && (
-  //  <Box mb={2}>
-  //    <EnforcedKoulutusSelection
-  //      name={name}
-  //      koulutusKoodiUri="koulutus_201101"
-  //    />
-  //  </Box>
-  // )}
-
+  const nimiDisabled = !useIsOphVirkailija();
   return (
     <Box mb={-2}>
+      <Box mb={2}>
+        <EnforcedKoulutusSelect
+          value={{ value: KOULUTUS_PERUSOPETUS_KOODIURI }}
+        />
+      </Box>
       <Box mb={2} {...getTestIdProps('opintojenlaajuusSelect')}>
         {_fp.cond([
           [
@@ -73,7 +70,7 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
       </Box>
       <Box mb={2} {...getTestIdProps('nimiInput')}>
         <Field
-          disabled
+          disabled={nimiDisabled}
           name={`${name}.nimi.${language}`}
           component={FormFieldInput}
           label={t('koulutuslomake.koulutuksenNimi')}

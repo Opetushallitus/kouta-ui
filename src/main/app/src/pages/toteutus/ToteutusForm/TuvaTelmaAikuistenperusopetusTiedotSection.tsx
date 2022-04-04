@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -7,9 +8,9 @@ import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import { useBoundFormActions } from '#/src/hooks/form';
+import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
-import { getKoulutustyyppiTranslationKey, getTestIdProps } from '#/src/utils';
+import { getTestIdProps } from '#/src/utils';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 
 export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
@@ -27,18 +28,15 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   const laajuusKoodiMetadata = laajuusKoodi?.metadata;
   const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
-  const koulutustyyppi = getKoulutustyyppiTranslationKey(
-    koulutus.koulutustyyppi
-  );
+  const koulutusnimi = koulutus.nimi;
   const { change } = useBoundFormActions();
+  const currNimi = useFieldValue(`${name}.nimi`);
+
   useEffect(() => {
-    change(`${name}.nimi`, {
-      fi: t(`${koulutustyyppi}`, { lng: 'fi' }),
-      sv: t(`${koulutustyyppi}`, { lng: 'sv' }),
-      en: t(`${koulutustyyppi}`, { lng: 'en' }),
-    });
-    return () => change(`${name}.nimi`, {});
-  }, [change, koulutustyyppi, name, t]);
+    if (_fp.isUndefined(currNimi)) {
+      change(`${name}.nimi`, koulutusnimi || {});
+    }
+  }, [change, currNimi, koulutusnimi, name, t]);
 
   return (
     <>
@@ -78,7 +76,7 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
         </Box>
       </Box>
       <Box mb={2}>
-        {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+        {koulutus.koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
           <Field
             name={`${name}.jarjestetaanErityisopetuksena`}
             component={FormFieldSwitch}

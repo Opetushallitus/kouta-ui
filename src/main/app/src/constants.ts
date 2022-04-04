@@ -391,4 +391,6 @@ export const KOULUTUSALA_YLEISSIVISTAVA_KOODIURI =
 
 export const LUKIO_YLEISLINJA = 'yleislinja';
 
+export const KOULUTUS_PERUSOPETUS_KOODIURI = 'koulutus_201101';
+
 export type Koulutustyyppi = ValueOf<KOULUTUSTYYPPI>;

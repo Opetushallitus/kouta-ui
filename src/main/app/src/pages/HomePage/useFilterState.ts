@@ -10,8 +10,18 @@ import { getPagination, setPaginationAction } from '#/src/state/pagination';
 export const useFilterState = (name: string) => {
   const dispatch = useDispatch();
 
-  const { nimi, koulutustyyppi, page, orderBy, tila, julkinen, nakyvyys } =
-    useSelector(getPagination(name));
+  const {
+    nimi,
+    koulutustyyppi,
+    page,
+    orderBy,
+    tila,
+    julkinen,
+    nakyvyys,
+    hakutapa,
+    koulutuksenAlkamiskausi,
+    koulutuksenAlkamisvuosi,
+  } = useSelector(getPagination(name));
 
   const setPagination = useCallback(
     pagination => dispatch(setPaginationAction({ name, ...pagination })),
@@ -44,6 +54,17 @@ export const useFilterState = (name: string) => {
       setPagination({ page: 0, koulutustyyppi });
   }
 
+  let setHakutapa;
+  let setKoulutuksenAlkamiskausi;
+  let setKoulutuksenAlkamisvuosi;
+  if (name === ENTITY.HAKU) {
+    setHakutapa = hakutapa => setPagination({ page: 0, hakutapa });
+    setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi =>
+      setPagination({ page: 0, koulutuksenAlkamiskausi });
+    setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi =>
+      setPagination({ page: 0, koulutuksenAlkamisvuosi });
+  }
+
   let setNakyvyys;
   if (name === ENTITY.KOULUTUS || name === ENTITY.VALINTAPERUSTE) {
     setNakyvyys = nakyvyys => setPagination({ page: 0, nakyvyys });
@@ -62,7 +83,10 @@ export const useFilterState = (name: string) => {
       tila,
       setTila,
       julkinen,
+      hakutapa,
       nakyvyys,
+      koulutuksenAlkamiskausi,
+      koulutuksenAlkamisvuosi,
       filtersProps: {
         nimi,
         koulutustyyppi,
@@ -70,8 +94,14 @@ export const useFilterState = (name: string) => {
         onNimiChange: setNimi,
         onKoulutustyyppiChange: setKoulutustyyppi,
         onTilaChange: setTila,
+        hakutapa,
+        onHakutapaChange: setHakutapa,
         nakyvyys,
         onNakyvyysChange: setNakyvyys,
+        koulutuksenAlkamiskausi,
+        onKoulutuksenAlkamiskausiChange: setKoulutuksenAlkamiskausi,
+        koulutuksenAlkamisvuosi,
+        onKoulutuksenAlkamisvuosiChange: setKoulutuksenAlkamisvuosi,
       },
     }),
     [
@@ -85,8 +115,14 @@ export const useFilterState = (name: string) => {
       setKoulutustyyppi,
       setNimi,
       julkinen,
+      hakutapa,
+      setHakutapa,
       nakyvyys,
       setNakyvyys,
+      koulutuksenAlkamiskausi,
+      setKoulutuksenAlkamiskausi,
+      koulutuksenAlkamisvuosi,
+      setKoulutuksenAlkamisvuosi,
     ]
   );
 };

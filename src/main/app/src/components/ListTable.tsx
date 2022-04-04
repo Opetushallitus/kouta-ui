@@ -117,6 +117,26 @@ export const makeMuokkaajaColumn = (t): Column => ({
   render: ({ muokkaaja }) => _.get(muokkaaja, 'nimi') || null,
 });
 
+export const makeHakutapaColumn = (t, userLanguage): Column => ({
+  title: t('yleiset.hakutapa'),
+  key: 'hakutapa',
+  sortable: true,
+  render: ({ hakutapa }) => getFirstLanguageValue(hakutapa?.nimi, userLanguage),
+});
+
+export const makeKoulutuksenAlkamiskausiColumn = (t, userLanguage): Column => ({
+  title: t('yleiset.koulutuksenAlkamiskausi'),
+  key: 'koulutuksenAlkamiskausi',
+  sortable: true,
+  render: ({ koulutuksenAlkamiskausi }) =>
+    koulutuksenAlkamiskausi?.koulutuksenAlkamiskausi
+      ? `${getFirstLanguageValue(
+          koulutuksenAlkamiskausi?.koulutuksenAlkamiskausi?.nimi,
+          userLanguage
+        )} ${koulutuksenAlkamiskausi?.koulutuksenAlkamisvuosi}`
+      : '',
+});
+
 const ActionsIcon = styled(Icon).attrs({ type: 'more_horiz' })`
   opacity: 0.6;
   transition: opacity 0.25s;

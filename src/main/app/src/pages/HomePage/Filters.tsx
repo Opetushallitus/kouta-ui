@@ -12,7 +12,9 @@ import {
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
+import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 
@@ -65,14 +67,24 @@ export const Filters = ({
   nimiPlaceholder = '',
   koulutustyyppi,
   tila,
+  hakutapa,
+  onHakutapaChange,
   onNakyvyysChange,
   nakyvyys,
+  koulutuksenAlkamiskausi,
+  onKoulutuksenAlkamiskausiChange,
+  koulutuksenAlkamisvuosi,
+  onKoulutuksenAlkamisvuosiChange,
 }) => {
   const { t } = useTranslation();
 
   const tilaOptions = useTilaOptions(t);
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
+
+  const { options: hakutapaOptions } = useKoodistoOptions({
+    koodisto: 'hakutapa',
+  });
 
   const [usedNimi, setUsedNimi] = useState(nimi);
   const debouncedNimiChange = useRef(
@@ -85,6 +97,11 @@ export const Filters = ({
   }, []);
 
   const nakyvyysOptions = useNakyvyysOptions(t);
+
+  const koulutuksenAlkamisvuosiOptions = getKoulutuksenAlkamisvuosiOptions(t);
+  const { options: koulutuksenAlkamiskausiOptions } = useKoodistoOptions({
+    koodisto: 'kausi',
+  });
 
   return (
     <Box display="flex" alignItems="center">
@@ -116,6 +133,17 @@ export const Filters = ({
           isMulti
         />
       </Box>
+      {onHakutapaChange && (
+        <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+          <Select
+            options={hakutapaOptions}
+            onChange={onHakutapaChange}
+            placeholder={t('yleiset.hakutapa')}
+            value={hakutapa}
+            isMulti
+          />
+        </Box>
+      )}
       {onNakyvyysChange && (
         <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
           <Select
@@ -126,6 +154,29 @@ export const Filters = ({
           />
         </Box>
       )}
+      <>
+        {onKoulutuksenAlkamiskausiChange && (
+          <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+            <Select
+              options={koulutuksenAlkamiskausiOptions}
+              onChange={onKoulutuksenAlkamiskausiChange}
+              placeholder={t('yleiset.koulutuksenAlkamiskausi')}
+              value={koulutuksenAlkamiskausi}
+            />
+          </Box>
+        )}
+        {onKoulutuksenAlkamisvuosiChange && (
+          <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+            <Select
+              options={koulutuksenAlkamisvuosiOptions}
+              onChange={onKoulutuksenAlkamisvuosiChange}
+              placeholder={t('yleiset.koulutuksenAlkamisvuosi')}
+              value={koulutuksenAlkamisvuosi}
+              isMulti
+            />
+          </Box>
+        )}
+      </>
     </Box>
   );
 };

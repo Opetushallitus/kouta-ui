@@ -10,6 +10,8 @@ import {
   makeMuokkaajaColumn,
   makeNimiColumn,
   makeTilaColumn,
+  makeHakutapaColumn,
+  makeKoulutuksenAlkamiskausiColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import { searchHaut } from '#/src/utils/haku/searchHaut';
@@ -30,7 +32,7 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
-const makeTableColumns = (t, organisaatioOid) => [
+const makeTableColumns = (t, organisaatioOid, userLanguage) => [
   makeNimiColumn(t, {
     getLinkUrl: ({ oid }) =>
       `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
@@ -38,6 +40,8 @@ const makeTableColumns = (t, organisaatioOid) => [
   makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),
+  makeHakutapaColumn(t, userLanguage),
+  makeKoulutuksenAlkamiskausiColumn(t, userLanguage),
   {
     title: t('etusivu.kiinnitetytHakukohteet'),
     key: 'hakukohteet',

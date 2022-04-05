@@ -55,6 +55,7 @@ const TiedotSection = ({ name, t, language }) => {
             component={FormFieldUrlInput}
             name={`${name}.wwwSivuUrl.${language}`}
             label={t('oppilaitoslomake.wwwSivu')}
+            required
           />
         </Cell>
         <Cell width={6}>

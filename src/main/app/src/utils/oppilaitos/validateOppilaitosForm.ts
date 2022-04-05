@@ -6,6 +6,7 @@ import createErrorBuilder, {
 } from '#/src/utils/form/createErrorBuilder';
 import {
   getKielivalinta,
+  validateIfJulkaistu,
   validateOptionalTranslatedField,
 } from '#/src/utils/form/formConfigUtils';
 
@@ -17,7 +18,10 @@ export const validateOppilaitosForm = values => {
       validateArray('yhteystiedot', eb =>
         eb.validateTranslations('nimi', kieliversiot)
       ),
-      validateOptionalTranslatedField('hakijapalveluidenYhteystiedot.nimi')
+      validateOptionalTranslatedField('hakijapalveluidenYhteystiedot.nimi'),
+      validateIfJulkaistu(eb =>
+        eb.validateTranslations('perustiedot.wwwSivuUrl', kieliversiot)
+      )
     )(createErrorBuilder(values))
     .getErrors();
 };

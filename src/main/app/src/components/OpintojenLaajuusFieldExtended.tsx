@@ -20,7 +20,7 @@ const OpintojenLaajuusFieldExtended = ({
 
   return (
     <Box display="flex" mx={-1}>
-      <Box px={1} flexGrow={1} {...getTestIdProps('laajuus')}>
+      <Box px={1} flexGrow={1}>
         <Field
           name={`${name}.opintojenLaajuusnumero`}
           component={FormFieldInput}
@@ -28,6 +28,7 @@ const OpintojenLaajuusFieldExtended = ({
           type="number"
           disabled={disabled}
           required={required}
+          {...getTestIdProps('laajuusnumero')}
         />
       </Box>
 

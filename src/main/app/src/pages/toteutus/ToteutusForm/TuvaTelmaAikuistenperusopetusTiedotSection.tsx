@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
-import { Box, FormControl, Input } from '#/src/components/virkailija';
+import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
-import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
-import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
+
+import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
 
 export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   language,
@@ -21,12 +21,10 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
 
-  const { koodi: laajuusKoodi } = useKoodi(
-    koulutus.metadata.opintojenLaajuusKoodiUri
-  );
-  const { koodi: laajuusyksikko } = useKoodi('opintojenlaajuusyksikko_6');
-  const laajuusKoodiMetadata = laajuusKoodi?.metadata;
-  const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
+  const opintojenLaajuusyksikkoKoodiUri =
+    koulutus.koulutustyyppi === KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS
+      ? koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
+      : 'opintojenlaajuusyksikko_6';
 
   const koulutusnimi = koulutus.nimi;
   const { change } = useBoundFormActions();
@@ -53,18 +51,13 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
       </Box>
       <Box mb={2} display="flex">
         <Box maxWidth="300px">
-          <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
-            <Input
-              value={
-                getOpintojenLaajuusTranslation(
-                  laajuusKoodiMetadata,
-                  laajuusyksikkoMetadata,
-                  selectedLanguage
-                ) || ''
-              }
-              {...getTestIdProps('laajuus')}
-            />
-          </FormControl>
+          <OpintojenLaajuusReadOnlyField
+            selectedLanguage={selectedLanguage}
+            laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+            laajuusyksikkoKoodiUri={opintojenLaajuusyksikkoKoodiUri}
+            laajuusNumero={koulutus?.metadata?.opintojenLaajuusnumero}
+            {...getTestIdProps('laajuus')}
+          />
         </Box>
         <Box mx={2} {...getTestIdProps('aloituspaikat')}>
           <Field

@@ -1308,7 +1308,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.tuva"
+    "fi": "Tutkintokoulutukseen valmentava koulutus (TUVA)"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -1442,7 +1442,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.tuva"
+    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
@@ -1567,7 +1567,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.telma"
+    "fi": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -1701,7 +1701,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.telma"
+    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
@@ -2374,7 +2374,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.aikuistenPerusopetus"
+    "fi": "Aikuisten perusopetus"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -2648,7 +2648,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.aikuistenPerusopetus"
+    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",

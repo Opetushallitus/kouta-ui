@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 import useKoodisto from '#/src/hooks/useKoodisto';
+import { formatKoodiLabelWithArvo } from '#/src/utils';
 
 const EnforcedKoulutusSelect = props => {
   const { t } = useTranslation();
@@ -12,7 +13,12 @@ const EnforcedKoulutusSelect = props => {
 
   return (
     <FormControl label={t('yleiset.valitseKoulutus')} disabled={true}>
-      <AsyncKoodistoSelect koodistoData={data} showAllOptions {...props} />
+      <AsyncKoodistoSelect
+        koodistoData={data}
+        showAllOptions
+        formatKoodiLabel={formatKoodiLabelWithArvo}
+        {...props}
+      />
     </FormControl>
   );
 };

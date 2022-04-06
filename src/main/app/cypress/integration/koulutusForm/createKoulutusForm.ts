@@ -453,9 +453,11 @@ export const createKoulutusForm = () => {
       fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-muu'] });
 
       withinSection('information', () => {
-        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
-          pFillSelect('Vähintään 53 op')
+        getSelectByLabel('yleiset.laajuusyksikko').pipe(
+          pFillSelect('osaamispistettä')
         );
+
+        getByTestId('laajuusnumero').pipe(paste('12'));
 
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
           paste('muu ammatillinen nimi')
@@ -486,9 +488,11 @@ export const createKoulutusForm = () => {
       fillCommon({ koulutustyyppiPath: ['aikuisten-perusopetus'] });
 
       withinSection('information', () => {
-        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
-          pFillSelect('60')
+        getSelectByLabel('yleiset.laajuusyksikko').pipe(
+          pFillSelect('opintopistettä')
         );
+
+        getByTestId('laajuusnumero').pipe(paste('13'));
 
         getInputByLabel('koulutuslomake.koulutuksenNimi').should(
           'have.value',

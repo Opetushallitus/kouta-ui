@@ -126,7 +126,8 @@ const getMuuAmmatillinenFields = ({ tyyppi }) => {
       sv: 'Muut ammatilliset koulutukset',
     },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53#1',
+      opintojenLaajuusnumero: 12,
+      opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_6#1',
       kuvaus: { fi: 'kuvausteksti' },
     },
   });
@@ -136,7 +137,8 @@ const getAikuistenPerusopetusFields = ({ tyyppi }) => {
   return merge(getBaseFields({ tyyppi }), {
     nimi: { fi: 'Aikuisten perusopetus' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_38',
+      opintojenLaajuusnumero: 13,
+      opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
       kuvaus: { fi: 'kuvausteksti' },
     },
   });

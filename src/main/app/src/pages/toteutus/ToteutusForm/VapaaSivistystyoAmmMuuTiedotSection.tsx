@@ -5,11 +5,14 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useBoundFormActions } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+
+import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
 
 export const VapaaSivistystyoAmmMuuTiedotSection = ({
   koulutus,
@@ -29,6 +32,9 @@ export const VapaaSivistystyoAmmMuuTiedotSection = ({
   }, [change, koulutus]);
 
   const userLanguage = useUserLanguage();
+  const opintojenLaajuusyksikkoKoodiUri =
+    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
+  const opintojenLaajuusnumero = koulutus?.metadata?.opintojenLaajuusnumero;
 
   return (
     <>
@@ -42,12 +48,24 @@ export const VapaaSivistystyoAmmMuuTiedotSection = ({
         />
       </Box>
       <Box maxWidth="300px">
-        <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
-          <Input
-            value={getKoodiNimiTranslation(laajuusKoodi, userLanguage) || ''}
-            {...getTestIdProps('laajuus')}
+        {koulutus.koulutustyyppi ===
+          KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS && (
+          <OpintojenLaajuusReadOnlyField
+            selectedLanguage={userLanguage}
+            laajuusKoodiUri=""
+            laajuusyksikkoKoodiUri={opintojenLaajuusyksikkoKoodiUri}
+            laajuusNumero={opintojenLaajuusnumero}
           />
-        </FormControl>
+        )}
+        {koulutus.koulutustyyppi !==
+          KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS && (
+          <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>
+            <Input
+              value={getKoodiNimiTranslation(laajuusKoodi, userLanguage) || ''}
+              {...getTestIdProps('laajuus')}
+            />
+          </FormControl>
+        )}
       </Box>
     </>
   );

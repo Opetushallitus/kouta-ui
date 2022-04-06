@@ -43,11 +43,13 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   const nimiDisabled = !useIsOphVirkailija();
   return (
     <Box mb={-2}>
-      <Box mb={2}>
-        <EnforcedKoulutusSelect
-          value={{ value: KOULUTUS_PERUSOPETUS_KOODIURI }}
-        />
-      </Box>
+      {koulutustyyppi === KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS && (
+        <Box mb={2}>
+          <EnforcedKoulutusSelect
+            value={{ value: KOULUTUS_PERUSOPETUS_KOODIURI }}
+          />
+        </Box>
+      )}
       <Box mb={2} {...getTestIdProps('opintojenlaajuusSelect')}>
         {_fp.cond([
           [
@@ -66,7 +68,7 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
               <OpintojenlaajuusField disabled={disabled} name={name} required />
             ),
           ],
-        ])(koulutustyyppi)}{' '}
+        ])(koulutustyyppi)}
       </Box>
       <Box mb={2} {...getTestIdProps('nimiInput')}>
         <Field

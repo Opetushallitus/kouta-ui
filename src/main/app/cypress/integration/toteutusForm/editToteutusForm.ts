@@ -178,7 +178,7 @@ export const editToteutusForm = () => {
 
       cy.findByLabelText(/toteutuslomake.laajuus/)
         .should('be.disabled')
-        .should('have.value', 'vähintään 53 op');
+        .should('have.value', '12 osaamispistettä');
 
       cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
         cy.findByRole('button', {
@@ -203,7 +203,7 @@ export const editToteutusForm = () => {
 
       cy.findByLabelText(/toteutuslomake.laajuus/)
         .should('be.disabled')
-        .should('have.value', '38 viikkoa');
+        .should('have.value', '13 opintopistettä');
 
       cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
         cy.findByRole('button', {

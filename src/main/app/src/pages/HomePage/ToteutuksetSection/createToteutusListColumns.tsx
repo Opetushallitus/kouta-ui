@@ -1,14 +1,13 @@
 import React from 'react';
 
-import Badge from '#/src/components/Badge';
 import {
+  makeCountColumn,
   makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import { Box } from '#/src/components/virkailija';
 
 import {
   createHeadingCheckbox,
@@ -21,11 +20,16 @@ export const createToteutusListColumns = (
   selectionActor
 ) => {
   const HeadingCheckbox = createHeadingCheckbox(selectionActor);
+  const RowCheckbox = createRowCheckbox(selectionActor);
   return [
     {
       title: ({ rows }) => <HeadingCheckbox rows={rows} />,
       key: 'selected',
-      Component: createRowCheckbox(selectionActor),
+      Component: RowCheckbox,
+      style: {
+        padding: '8px 0px 8px 8px',
+        width: '18px',
+      },
     },
     makeNimiColumn(t, {
       getLinkUrl: ({ oid }) =>
@@ -35,14 +39,10 @@ export const createToteutusListColumns = (
     makeTilaColumn(t),
     makeModifiedColumn(t),
     makeMuokkaajaColumn(t),
-    {
+    makeCountColumn({
       title: t('etusivu.kiinnitetytHakukohteet'),
       key: 'hakukohteet',
-      render: ({ hakukohdeCount = 0 }) => (
-        <Box width="100%" textAlign="center">
-          <Badge color="primary">{hakukohdeCount}</Badge>
-        </Box>
-      ),
-    },
+      propName: 'hakukohdeCount',
+    }),
   ];
 };

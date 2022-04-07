@@ -16,6 +16,7 @@ import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { formatDateValue, getKoulutustyyppiTranslation } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
+import Badge from './Badge';
 import SmallStatusTag from './StatusTag/SmallStatusTag';
 
 export const makeOnSort =
@@ -42,6 +43,7 @@ type Column = {
   key: string;
   sortable: boolean;
   render: (any) => React.ReactNode;
+  style?: Record<string, string | number>;
 };
 
 export const makeNimiColumn = (
@@ -59,6 +61,9 @@ export const makeNimiColumn = (
       {getFirstLanguageValue(item.nimi, item.language) || t('yleiset.nimeton')}
     </RouterAnchor>
   ),
+  style: {
+    width: 'auto',
+  },
 });
 
 export const makeKoulutustyyppiColumn = t => ({
@@ -67,6 +72,20 @@ export const makeKoulutustyyppiColumn = t => ({
   sortable: true,
   render: ({ koulutustyyppi }) =>
     getKoulutustyyppiTranslation(koulutustyyppi, t),
+  style: {
+    width: '180px',
+  },
+});
+
+export const makeCountColumn = ({ title, key, propName }) => ({
+  title,
+  key,
+  render: props => (
+    <Box width="100%" textAlign="center">
+      <Badge color="primary">{props[propName] ?? 0}</Badge>
+    </Box>
+  ),
+  style: { width: 0 },
 });
 
 export const makeJulkinenColumn = (t): Column => ({
@@ -86,6 +105,9 @@ export const makeJulkinenColumn = (t): Column => ({
       </Box>
     );
   },
+  style: {
+    width: 0,
+  },
 });
 
 export const makeOrganisaatioColumn = (t): Column => ({
@@ -101,6 +123,9 @@ export const makeTilaColumn = (t): Column => ({
   key: 'tila',
   sortable: true,
   render: ({ tila }) => <SmallStatusTag status={tila} />,
+  style: {
+    width: 0,
+  },
 });
 
 export const makeModifiedColumn = (t): Column => ({
@@ -108,6 +133,9 @@ export const makeModifiedColumn = (t): Column => ({
   key: 'modified',
   sortable: true,
   render: ({ modified }) => formatDateValue(modified),
+  style: {
+    width: 0,
+  },
 });
 
 export const makeMuokkaajaColumn = (t): Column => ({
@@ -115,6 +143,9 @@ export const makeMuokkaajaColumn = (t): Column => ({
   key: 'muokkaaja',
   sortable: true,
   render: ({ muokkaaja }) => _.get(muokkaaja, 'nimi') || null,
+  style: {
+    width: '170px',
+  },
 });
 
 export const makeHakutapaColumn = (t, userLanguage): Column => ({
@@ -218,7 +249,12 @@ export const ListTable = ({
       <TableHead>
         <TableRow>
           {columns.map(columnProps => {
-            const { key, title, sortable: isColumnSortable } = columnProps;
+            const {
+              key,
+              title,
+              sortable: isColumnSortable,
+              style,
+            } = columnProps;
             const sortable = isTableSortable && isColumnSortable;
             return (
               <TableCell
@@ -227,6 +263,7 @@ export const ListTable = ({
                   sortable ? getSortDirection({ sort, name: key }) : null
                 }
                 onSort={sortable ? makeOnSort({ name: key, onSort }) : null}
+                style={style}
               >
                 {_.isFunction(title) ? title({ rows }) : title}
               </TableCell>
@@ -248,6 +285,7 @@ export const ListTable = ({
                     render,
                     Component,
                     collapsible = false,
+                    style,
                   }) => {
                     const columnIsCollapsed =
                       rowIsCollapsed && columnKey === collapsedColumn;
@@ -257,6 +295,7 @@ export const ListTable = ({
                         key={columnKey}
                         active={columnIsCollapsed}
                         noBorder={columnIsCollapsed}
+                        style={style}
                         onClick={
                           collapsible
                             ? () => {

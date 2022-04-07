@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import {
+  makeCountColumn,
   makeJulkinenColumn,
   makeKoulutustyyppiColumn,
   makeModifiedColumn,
@@ -43,13 +43,11 @@ const useTableColumns = (t, organisaatioOid) =>
       makeTilaColumn(t),
       makeModifiedColumn(t),
       makeMuokkaajaColumn(t),
-      {
+      makeCountColumn({
         title: t('etusivu.kiinnitetytToteutukset'),
         key: 'toteutukset',
-        render: ({ toteutusCount = 0 }) => (
-          <Badge color="primary">{toteutusCount}</Badge>
-        ),
-      },
+        propName: 'toteutusCount',
+      }),
       makeJulkinenColumn(t),
     ],
     [t, organisaatioOid]

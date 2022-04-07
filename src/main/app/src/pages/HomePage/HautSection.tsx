@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import {
+  makeCountColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeNimiColumn,
@@ -45,13 +45,11 @@ const useTableColumns = (t, organisaatioOid, userLanguage) =>
       makeMuokkaajaColumn(t),
       makeHakutapaColumn(t, userLanguage),
       makeKoulutuksenAlkamiskausiColumn(t, userLanguage),
-      {
+      makeCountColumn({
         title: t('etusivu.kiinnitetytHakukohteet'),
         key: 'hakukohteet',
-        render: ({ hakukohdeCount = 0 }) => (
-          <Badge color="primary">{hakukohdeCount}</Badge>
-        ),
-      },
+        propName: 'hakukohdeCount',
+      }),
     ],
     [t, organisaatioOid, userLanguage]
   );

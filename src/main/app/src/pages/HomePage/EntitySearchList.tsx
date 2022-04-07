@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
 import ListSpin from '#/src/components/ListSpin';
 import ListTable from '#/src/components/ListTable';
 import Pagination from '#/src/components/Pagination';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
-import { Box } from '#/src/components/virkailija';
+import { Box, Typography, Icon } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { getTestIdProps } from '#/src/utils';
@@ -76,6 +78,22 @@ export const EntityListTable = ({ entities, ...rest }) => {
   return <ListTable rows={rows} {...rest} />;
 };
 
+const IconCircle = styled(Icon)`
+  display: block;
+  background-color: ${({ theme }) => theme.colors.grayLighten5};
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  border-radius: 28px;
+`;
+
+const NoResults = styled(Box).attrs({ margin: 3 })`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const EntitySearchList = ({
   organisaatioOid,
   entityType,
@@ -94,6 +112,8 @@ export const EntitySearchList = ({
     entityType,
   });
 
+  const { t } = useTranslation();
+
   const { result: entities, totalCount } = queryResult?.data ?? {};
 
   const pageCount = useMemo(
@@ -101,25 +121,40 @@ export const EntitySearchList = ({
     [totalCount]
   );
 
+  const isEmptyResult = entities?.length === 0;
+
   return (
     <Box display="flex" flexDirection="column">
       <Box marginBottom={2}>
         <Filters {...filtersProps} nimiPlaceholder={nimiPlaceholder} />
       </Box>
-      {ActionBar && (
-        <Box marginBottom={2}>
-          <ActionBar />
-        </Box>
-      )}
       <Box marginBottom={2}>
         <QueryResultWrapper queryResult={queryResult} LoadingWrapper={ListSpin}>
-          <EntityListTable
-            entities={entities}
-            columns={columns}
-            onSort={setOrderBy}
-            sort={orderBy}
-            {...getTestIdProps(`${entityType}Table`)}
-          />
+          {isEmptyResult ? (
+            <NoResults>
+              <Typography>
+                <Box mb={2} display="flex" justifyContent="center">
+                  <IconCircle type="folder" />
+                </Box>
+                {t('etusivu.eiTuloksia')}
+              </Typography>
+            </NoResults>
+          ) : (
+            <>
+              {ActionBar && (
+                <Box marginBottom={2}>
+                  <ActionBar />
+                </Box>
+              )}
+              <EntityListTable
+                entities={entities}
+                columns={columns}
+                onSort={setOrderBy}
+                sort={orderBy}
+                {...getTestIdProps(`${entityType}Table`)}
+              />
+            </>
+          )}
         </QueryResultWrapper>
       </Box>
       <Box display="flex" justifyContent="center">

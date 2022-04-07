@@ -1,31 +1,34 @@
 import { useCallback } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useActor, useSelector } from '@xstate/react';
+import { interpret } from 'xstate';
 
-import {
-  getSelection,
-  removeSelection,
-  selectItems,
-  deselectItems,
-} from '#/src/state/homepageSlice';
+import { ENTITY } from '#/src/constants';
 
-export const useEntitySelection = entityType => {
-  const dispatch = useDispatch();
-  const selection = useSelector(getSelection(entityType));
+import { EntitySelectionMachine } from './entitySelectionMachine';
+
+export const SERVICE_BY_ENTITY = {
+  [ENTITY.TOTEUTUS]: interpret(EntitySelectionMachine).start(),
+};
+
+export const useEntitySelectionApi = actor => {
+  const [, send] = useActor(actor);
+
+  const selection = useSelector(actor, state => state.context.selection);
 
   return {
     selection,
     selectItems: useCallback(
-      items => dispatch(selectItems({ name: entityType, items })),
-      [entityType, dispatch]
+      items => send({ type: 'SELECT_ITEMS', items }),
+      [send]
     ),
     deselectItems: useCallback(
-      items => dispatch(deselectItems({ name: entityType, items })),
-      [entityType, dispatch]
+      items => send({ type: 'DESELECT_ITEMS', items }),
+      [send]
     ),
-    removeSelection: useCallback(
-      () => dispatch(removeSelection({ name: entityType })),
-      [entityType, dispatch]
-    ),
+    removeSelection: useCallback(() => send({ type: 'DESELECT_ALL' }), [send]),
   };
 };
+
+export const useEntitySelection = entityType =>
+  useEntitySelectionApi(SERVICE_BY_ENTITY[entityType]);

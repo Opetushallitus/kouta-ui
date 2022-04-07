@@ -12,10 +12,12 @@ const Modal = ({ footer, header, children, onClose, minHeight, ...props }) => {
   const wrapBody = !!(footer || header); // For legacy modal
 
   return (
-    <UiModal onClose={onClose} {...props}>
+    <UiModal onClose={onClose} style={{ maxHeight: '100vh' }} {...props}>
       {header && <ModalHeader onClose={onClose}>{header}</ModalHeader>}
       {wrapBody ? (
-        <ModalBody minHeight={minHeight}>{children}</ModalBody>
+        <ModalBody minHeight={minHeight} maxHeight="calc(90vh - 124px)">
+          {children}
+        </ModalBody>
       ) : (
         children
       )}

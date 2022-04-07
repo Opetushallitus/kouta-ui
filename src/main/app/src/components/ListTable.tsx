@@ -228,7 +228,7 @@ export const ListTable = ({
                 }
                 onSort={sortable ? makeOnSort({ name: key, onSort }) : null}
               >
-                {_.isFunction(title) ? title() : title}
+                {_.isFunction(title) ? title({ rows }) : title}
               </TableCell>
             );
           })}

@@ -1,126 +1,35 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { useMutation } from 'react-query';
 
-import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
-import {
-  makeKoulutustyyppiColumn,
-  makeModifiedColumn,
-  makeMuokkaajaColumn,
-  makeNimiColumn,
-  makeTilaColumn,
-} from '#/src/components/ListTable';
-import { Checkbox, Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import useModal from '#/src/hooks/useModal';
-import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
+import {
+  CopyConfirmationModal,
+  CopyConfirmationWrapper,
+  useCopyConfirmationModal,
+} from '../CopyConfirmationModal';
+import { CopyResultModal } from '../CopyResultModal';
 import { EntityListActionBar } from '../EntityListActionBar';
-import { EntitySearchList, useEntitySearch } from '../EntitySearchList';
+import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
-import { useEntitySelection } from '../useEntitySelection';
-import { useFilterState } from '../useFilterState';
+import {
+  SERVICE_BY_ENTITY,
+  useEntitySelection,
+  useEntitySelectionApi,
+} from '../useEntitySelection';
+import { createToteutusListColumns } from './createToteutusListColumns';
 import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
-
-const HeadingCheckbox = () => {
-  const filterState = useFilterState(TOTEUTUS);
-
-  const { selection, selectItems, deselectItems } =
-    useEntitySelection(TOTEUTUS);
-
-  const organisaatioOid = useSelectedOrganisaatioOid();
-
-  const { data: pageData } = useEntitySearch({
-    filterState,
-    entityType: TOTEUTUS,
-    searchEntities: searchToteutukset,
-    organisaatioOid,
-  });
-
-  const pageItems = pageData?.result;
-
-  const allPageItemsSelected = useMemo(
-    () =>
-      !_.isEmpty(pageItems) &&
-      _.every(pageItems, ({ oid: pageOid }) =>
-        selection.find(({ oid: selectionOid }) => pageOid === selectionOid)
-      ),
-    [selection, pageItems]
-  );
-
-  const onSelectionChange = useCallback(
-    e => {
-      if (e.currentTarget.checked) {
-        selectItems(pageItems);
-      } else {
-        deselectItems(pageItems);
-      }
-    },
-    [selectItems, deselectItems, pageItems]
-  );
-
-  return (
-    <Checkbox onChange={onSelectionChange} checked={allPageItemsSelected} />
-  );
-};
-
-const RowCheckbox = item => {
-  const { selection, selectItems, deselectItems } =
-    useEntitySelection(TOTEUTUS);
-
-  const onSelectionChange = useCallback(
-    e => {
-      if (e.currentTarget.checked) {
-        selectItems([item]);
-      } else {
-        deselectItems([item]);
-      }
-    },
-    [selectItems, deselectItems, item]
-  );
-
-  return (
-    <Checkbox
-      checked={selection?.find(({ oid }) => item?.oid === oid)}
-      onChange={onSelectionChange}
-    />
-  );
-};
-
-const useTableColumns = (t, organisaatioOid) =>
-  useMemo(
-    () => [
-      {
-        title: () => <HeadingCheckbox />,
-        key: 'selected',
-        Component: RowCheckbox,
-      },
-      makeNimiColumn(t, {
-        getLinkUrl: ({ oid }) =>
-          `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
-      }),
-      makeKoulutustyyppiColumn(t),
-      makeTilaColumn(t),
-      makeModifiedColumn(t),
-      makeMuokkaajaColumn(t),
-      {
-        title: t('etusivu.kiinnitetytHakukohteet'),
-        key: 'hakukohteet',
-        render: ({ hakukohdeCount = 0 }) => (
-          <Box width="100%" textAlign="center">
-            <Badge color="primary">{hakukohdeCount}</Badge>
-          </Box>
-        ),
-      },
-    ],
-    [t, organisaatioOid]
-  );
 
 const Actions = ({ organisaatioOid }) => {
   const { isOpen, close, open } = useModal();
@@ -141,24 +50,76 @@ const Actions = ({ organisaatioOid }) => {
 const ToteutusActionBar = () => {
   const { selection, removeSelection } = useEntitySelection(TOTEUTUS);
 
-  const onCopy = useCallback(() => {}, []);
+  const { openModal } = useCopyConfirmationModal();
 
   return (
     <EntityListActionBar
       selection={selection}
       removeSelection={removeSelection}
-      copyEntities={onCopy}
+      copyEntities={openModal}
     />
   );
 };
 
+const useCopyToteutukset = () => {
+  const apiUrls = useUrls();
+  const httpClient = useHttpClient();
+  apiUrls.url('kouta-backend.login');
+  return async toteutukset => {
+    const result = await httpClient.put(
+      apiUrls.url('kouta-backend.copy.toteutukset'),
+      _.map(toteutukset, 'oid')
+    );
+    return result.data;
+  };
+};
+
+type ToteutusCopyResultItem = {
+  oid: string;
+  status: 'success' | 'error';
+  created: {
+    toteutusOid?: string;
+  };
+};
+
+export const createGetToteutusLinkUrl = organisaatioOid => oid =>
+  `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`;
+
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const columns = useTableColumns(t, organisaatioOid);
+  const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[TOTEUTUS]);
 
-  return (
-    <>
+  const columns = useMemo(
+    () =>
+      createToteutusListColumns(
+        t,
+        organisaatioOid,
+        SERVICE_BY_ENTITY[TOTEUTUS]
+      ),
+    [t, organisaatioOid]
+  );
+
+  const copyToteutukset = useCopyToteutukset();
+  const copyMutation =
+    useMutation<Array<ToteutusCopyResultItem>>(copyToteutukset);
+
+  return copyMutation.isLoading ? (
+    'Tallennetaan...'
+  ) : (
+    <CopyConfirmationWrapper>
+      <CopyConfirmationModal
+        onCopySelection={copyMutation.mutate}
+        entities={selection}
+        headerText="Valitse toteutukset"
+        createColumns={createToteutusListColumns}
+      />
+      <CopyResultModal
+        entityType={TOTEUTUS}
+        headerText="Kopioinnin tulokset"
+        mutationResult={copyMutation}
+        getLinkUrl={createGetToteutusLinkUrl(organisaatioOid)}
+      />
       <NavigationAnchor id="toteutukset" />
       <ListCollapse
         icon={ICONS[TOTEUTUS]}
@@ -177,7 +138,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           nimiPlaceholder={t('etusivu.haeToteutuksia')}
         />
       </ListCollapse>
-    </>
+    </CopyConfirmationWrapper>
   );
 };
 

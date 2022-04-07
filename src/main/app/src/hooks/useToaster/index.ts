@@ -1,7 +1,7 @@
-import { useService } from '@xstate/react';
+import { useActor } from '@xstate/react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Machine, interpret, assign, spawn, forwardTo } from 'xstate';
+import { createMachine, interpret, assign, spawn, forwardTo } from 'xstate';
 
 import { isDev } from '#/src/utils';
 
@@ -34,7 +34,7 @@ const createToastActor =
   };
 
 export const toastService = interpret(
-  Machine(
+  createMachine(
     {
       id: 'toastMachine',
       initial: 'empty',
@@ -109,7 +109,7 @@ export const toastService = interpret(
 ).start();
 
 export const useToaster = () => {
-  const [state, send] = useService(toastService);
+  const [state, send] = useActor(toastService);
   const { t } = useTranslation();
 
   const openToast = options => send({ type: OPEN_TOAST, toast: options });

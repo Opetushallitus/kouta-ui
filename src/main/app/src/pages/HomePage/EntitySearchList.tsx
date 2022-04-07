@@ -45,7 +45,7 @@ export const useEntitySearch = ({
 };
 
 type ListTableColumnSpec = {
-  title?: string | (() => React.ReactNode);
+  title?: string | ((x: any) => React.ReactNode);
   key: string;
   sortable?: boolean;
   render?: (props: any) => React.ReactNode;
@@ -59,6 +59,21 @@ type EntitySearchListProps = {
   nimiPlaceholder: string;
   columns: Array<ListTableColumnSpec>;
   ActionBar?: React.ComponentType<any>;
+};
+
+export const EntityListTable = ({ entities, ...rest }) => {
+  const rows = useMemo(
+    () =>
+      _fp.map(
+        entityData => ({
+          ...entityData,
+          key: entityData?.oid ?? entityData?.id,
+        }),
+        entities
+      ),
+    [entities]
+  );
+  return <ListTable rows={rows} {...rest} />;
 };
 
 export const EntitySearchList = ({
@@ -86,18 +101,6 @@ export const EntitySearchList = ({
     [totalCount]
   );
 
-  const rows = useMemo(
-    () =>
-      _fp.map(
-        entityData => ({
-          ...entityData,
-          key: entityData?.oid ?? entityData?.id,
-        }),
-        entities
-      ),
-    [entities]
-  );
-
   return (
     <Box display="flex" flexDirection="column">
       <Box marginBottom={2}>
@@ -110,8 +113,8 @@ export const EntitySearchList = ({
       )}
       <Box marginBottom={2}>
         <QueryResultWrapper queryResult={queryResult} LoadingWrapper={ListSpin}>
-          <ListTable
-            rows={rows}
+          <EntityListTable
+            entities={entities}
             columns={columns}
             onSort={setOrderBy}
             sort={orderBy}

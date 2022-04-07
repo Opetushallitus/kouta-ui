@@ -1,6 +1,5 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 
-import _ from 'lodash';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
@@ -13,6 +12,7 @@ import {
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
+import useDebounceState from '#/src/hooks/useDebounceState';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
@@ -91,15 +91,19 @@ export const Filters = ({
     koodisto: 'hakutapa',
   });
 
-  const [usedNimi, setUsedNimi] = useState(nimi);
-  const debouncedNimiChange = useRef(
-    _.debounce(value => onNimiChange(value), NAME_INPUT_DEBOUNCE_TIME)
+  const [usedNimi, setUsedNimi, debouncedNimi] = useDebounceState(
+    nimi,
+    NAME_INPUT_DEBOUNCE_TIME
   );
-  const onNimiChangeDebounced = useCallback(e => {
-    const value = e.target.value;
-    setUsedNimi(value);
-    debouncedNimiChange.current(value);
-  }, []);
+
+  useEffect(() => {
+    onNimiChange(debouncedNimi);
+  }, [onNimiChange, debouncedNimi]);
+
+  const onNimiChangeDebounced = useCallback(
+    e => setUsedNimi(e.target.value),
+    [setUsedNimi]
+  );
 
   const nakyvyysOptions = useNakyvyysOptions(t);
 
@@ -110,7 +114,7 @@ export const Filters = ({
 
   return (
     <Box display="flex" alignItems="center">
-      <Box flexGrow={1} paddingRight={2}>
+      <Box flexGrow={1} minWidth="100px" flexBasis="400px" paddingRight={2}>
         <Input
           placeholder={nimiPlaceholder}
           value={usedNimi}
@@ -119,7 +123,7 @@ export const Filters = ({
         />
       </Box>
       {onKoulutustyyppiChange && (
-        <Box flexGrow={0} flexBasis="350px" paddingRight={2}>
+        <Box flexGrow={1} minWidth="200px" paddingRight={2}>
           <Select
             options={koulutustyyppiOptions}
             placeholder={t('yleiset.koulutustyyppi')}
@@ -129,7 +133,7 @@ export const Filters = ({
           />
         </Box>
       )}
-      <Box flexGrow={0} flexBasis="200px" paddingRight={2}>
+      <Box flexGrow={0} minWidth="150px" paddingRight={2}>
         <Select
           options={tilaOptions}
           onChange={onTilaChange}

@@ -12,12 +12,13 @@ import {
   makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import { Checkbox } from '#/src/components/virkailija';
+import { Checkbox, Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
+import { EntityListActionBar } from '../EntityListActionBar';
 import { EntitySearchList, useEntitySearch } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
@@ -112,7 +113,9 @@ const useTableColumns = (t, organisaatioOid) =>
         title: t('etusivu.kiinnitetytHakukohteet'),
         key: 'hakukohteet',
         render: ({ hakukohdeCount = 0 }) => (
-          <Badge color="primary">{hakukohdeCount}</Badge>
+          <Box width="100%" textAlign="center">
+            <Badge color="primary">{hakukohdeCount}</Badge>
+          </Box>
         ),
       },
     ],
@@ -135,6 +138,20 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
+const ToteutusActionBar = () => {
+  const { selection, removeSelection } = useEntitySelection(TOTEUTUS);
+
+  const onCopy = useCallback(() => {}, []);
+
+  return (
+    <EntityListActionBar
+      selection={selection}
+      removeSelection={removeSelection}
+      copyEntities={onCopy}
+    />
+  );
+};
+
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
@@ -152,6 +169,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         defaultOpen
       >
         <EntitySearchList
+          ActionBar={ToteutusActionBar}
           searchEntities={searchToteutukset}
           organisaatioOid={organisaatioOid}
           entityType={TOTEUTUS}

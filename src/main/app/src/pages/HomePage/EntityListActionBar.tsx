@@ -56,7 +56,7 @@ export const EntityListActionBar = ({
         onClick={removeSelection}
         disabled={isDisabled}
       >
-        {t('poista-valinta')}
+        {t('etusivu.poistaValinta')}
       </ActionButton>
       <VerticalSeparator />
       <ActionButton
@@ -65,7 +65,7 @@ export const EntityListActionBar = ({
         onClick={copyEntities}
         disabled={isDisabled}
       >
-        {t('kopioi')}
+        {t('etusivu.kopioi')}
       </ActionButton>
     </ButtonBox>
   );

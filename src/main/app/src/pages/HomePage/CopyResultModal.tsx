@@ -3,15 +3,41 @@ import React, { useMemo } from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { UseMutationResult } from 'react-query';
+import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
 import ErrorAlert from '#/src/components/ErrorAlert';
 import ListTable from '#/src/components/ListTable';
 import Modal from '#/src/components/Modal';
-import { Box, Button } from '#/src/components/virkailija';
+import { Box, Button, Icon } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
+import { useEntitySelection } from './useEntitySelection';
+
+const Nimi = ({ item, entityType }) => {
+  const { selection } = useEntitySelection(entityType);
+  const userLanguage = useUserLanguage();
+  return (
+    getFirstLanguageValue(selection?.[item.oid]?.nimi, userLanguage) ?? null
+  );
+};
+
+const SuccessIcon = styled(Icon).attrs({ type: 'done' })`
+  color: ${({ theme }) => theme.colors.success.main};
+`;
+
+const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
+  color: ${({ theme }) => theme.colors.red.main};
+`;
 
 const useTableColumns = (t, entityType, getLinkUrl) => [
+  {
+    title: t('nimi'),
+    key: 'nimi',
+    render: item => <Nimi item={item} entityType={entityType} />,
+  },
   {
     title: t('alkuperainen'),
     key: 'alkuperainen',
@@ -23,8 +49,25 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     title: t('kopio'),
     key: 'kopio',
     render: item => {
-      const oid = item.created[`${entityType}Oid`];
-      return <RouterAnchor to={getLinkUrl(oid)}>{oid}</RouterAnchor>;
+      const oid = item?.created?.[`${entityType}Oid`];
+      return oid ? (
+        <RouterAnchor to={getLinkUrl(oid)}>{oid}</RouterAnchor>
+      ) : null;
+    },
+  },
+  {
+    title: t('tulos'),
+    key: 'tulos',
+    render: item => {
+      const status = item.status;
+      switch (status) {
+        case 'success':
+          return <SuccessIcon />;
+        case 'error':
+          return <ErrorIcon />;
+        default:
+          return null;
+      }
     },
   },
 ];
@@ -36,8 +79,6 @@ export const CopyResultList = ({ data, entityType, getLinkUrl }) => {
     () => _fp.map(result => ({ ...result, key: result.oid }), data),
     [data]
   );
-
-  console.log({ data, rows });
 
   return <ListTable rows={rows} columns={columns} />;
 };
@@ -58,7 +99,11 @@ export const CopyResultModal = ({
 }: {
   entityType: ENTITY;
   headerText: string;
-  mutationResult: UseMutationResult<Array<CopyResultItem>>;
+  mutationResult: UseMutationResult<
+    Array<CopyResultItem>,
+    unknown,
+    Array<string>
+  >;
   getLinkUrl: any;
 }) => {
   const { t } = useTranslation();

@@ -1,30 +1,12 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState } from 'react';
 
-import _ from 'lodash';
+import { useDebounce } from 'react-use';
 
-export const useDebounceState = (initialValue = null, wait = 0) => {
+export const useDebounceState = (initialValue, wait = 0) => {
   const [value, setValue] = useState(initialValue);
   const [debouncedValue, setDebouncedValue] = useState(initialValue);
 
-  const debounceRef = useRef();
+  useDebounce(() => setDebouncedValue(value), wait, [wait, value]);
 
-  useEffect(() => {
-    debounceRef.current = _.debounce(newValue => {
-      setDebouncedValue(newValue);
-    }, wait);
-
-    return () => debounceRef.current.cancel();
-  }, [wait]);
-
-  const setValueFn = useCallback(
-    newValue => {
-      setValue(newValue);
-      debounceRef.current(newValue);
-    },
-    [setValue]
-  );
-
-  return [value, setValueFn, debouncedValue];
+  return [value, setValue, debouncedValue];
 };
-
-export default useDebounceState;

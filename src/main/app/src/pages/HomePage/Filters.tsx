@@ -12,8 +12,8 @@ import {
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
-import useDebounceState from '#/src/hooks/useDebounceState';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useDebounceState } from '#/src/hooks/useDebounceState';
+import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
 

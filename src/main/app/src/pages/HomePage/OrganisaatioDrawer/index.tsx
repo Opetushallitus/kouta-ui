@@ -19,7 +19,7 @@ import {
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useActions } from '#/src/hooks/useActions';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import useDebounceState from '#/src/hooks/useDebounceState';
+import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import {

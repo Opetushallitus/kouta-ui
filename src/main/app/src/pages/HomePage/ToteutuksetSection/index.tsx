@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
 
 import Button from '#/src/components/Button';
+import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -105,7 +106,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     useMutation<Array<ToteutusCopyResultItem>>(copyToteutukset);
 
   return copyMutation.isLoading ? (
-    'Tallennetaan...'
+    <OverlaySpin text="Kopioidaan toteutuksia..." />
   ) : (
     <CopyConfirmationWrapper>
       <CopyConfirmationModal

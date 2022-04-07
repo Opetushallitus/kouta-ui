@@ -228,7 +228,7 @@ export const ListTable = ({
                 }
                 onSort={sortable ? makeOnSort({ name: key, onSort }) : null}
               >
-                {title}
+                {_.isFunction(title) ? title() : title}
               </TableCell>
             );
           })}
@@ -243,7 +243,12 @@ export const ListTable = ({
             <Fragment key={key}>
               <TableRow>
                 {columns.map(
-                  ({ key: columnKey, render, collapsible = false }) => {
+                  ({
+                    key: columnKey,
+                    render,
+                    Component,
+                    collapsible = false,
+                  }) => {
                     const columnIsCollapsed =
                       rowIsCollapsed && columnKey === collapsedColumn;
 
@@ -264,7 +269,11 @@ export const ListTable = ({
                             : null
                         }
                       >
-                        {render({ ...rowProps, language })}
+                        {_.isFunction(Component) ? (
+                          <Component language={language} {...rowProps} />
+                        ) : (
+                          render({ ...rowProps, language })
+                        )}
                       </Cell>
                     );
                   }

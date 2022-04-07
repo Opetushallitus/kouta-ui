@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 
@@ -7,6 +7,7 @@ import ListTable from '#/src/components/ListTable';
 import Pagination from '#/src/components/Pagination';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { Box } from '#/src/components/virkailija';
+import { ENTITY } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { getTestIdProps } from '#/src/utils';
 import {
@@ -43,13 +44,31 @@ export const useEntitySearch = ({
   );
 };
 
+type ListTableColumnSpec = {
+  title?: string | (() => React.ReactNode);
+  key: string;
+  sortable?: boolean;
+  render?: (props: any) => React.ReactNode;
+  Component?: React.ComponentType<any>;
+};
+
+type EntitySearchListProps = {
+  organisaatioOid: string;
+  entityType: ENTITY;
+  searchEntities: (props: any) => any;
+  nimiPlaceholder: string;
+  columns: Array<ListTableColumnSpec>;
+  ActionBar?: React.ComponentType<any>;
+};
+
 export const EntitySearchList = ({
   organisaatioOid,
   entityType,
   searchEntities,
   nimiPlaceholder,
+  ActionBar,
   columns,
-}) => {
+}: EntitySearchListProps) => {
   const filterState = useFilterState(entityType);
   const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
 
@@ -62,39 +81,47 @@ export const EntitySearchList = ({
 
   const { result: entities, totalCount } = queryResult?.data ?? {};
 
-  const [pageCount, setPageCount] = useState(0);
-  useEffect(() => {
-    if (totalCount !== undefined) {
-      setPageCount(Math.ceil(totalCount / FILTER_PAGE_SIZE));
-    }
-  }, [totalCount]);
+  const pageCount = useMemo(
+    () => (totalCount ? Math.ceil(totalCount / FILTER_PAGE_SIZE) : 0),
+    [totalCount]
+  );
 
-  const rows = useMemo(() => {
-    return entities
-      ? entities.map(entityData => ({
+  const rows = useMemo(
+    () =>
+      _fp.map(
+        entityData => ({
           ...entityData,
           key: entityData?.oid ?? entityData?.id,
-        }))
-      : null;
-  }, [entities]);
+        }),
+        entities
+      ),
+    [entities]
+  );
 
   return (
-    <>
-      <Box mb={3}>
+    <Box display="flex" flexDirection="column">
+      <Box marginBottom={2}>
         <Filters {...filtersProps} nimiPlaceholder={nimiPlaceholder} />
       </Box>
-      <QueryResultWrapper queryResult={queryResult} LoadingWrapper={ListSpin}>
-        <ListTable
-          rows={rows}
-          columns={columns}
-          onSort={setOrderBy}
-          sort={orderBy}
-          {...getTestIdProps(`${entityType}Table`)}
-        />
-      </QueryResultWrapper>
-      <Box mt={3} display="flex" marginTop={3} justifyContent="center">
+      {ActionBar && (
+        <Box marginBottom={2}>
+          <ActionBar />
+        </Box>
+      )}
+      <Box marginBottom={2}>
+        <QueryResultWrapper queryResult={queryResult} LoadingWrapper={ListSpin}>
+          <ListTable
+            rows={rows}
+            columns={columns}
+            onSort={setOrderBy}
+            sort={orderBy}
+            {...getTestIdProps(`${entityType}Table`)}
+          />
+        </QueryResultWrapper>
+      </Box>
+      <Box display="flex" justifyContent="center">
         <Pagination value={page} onChange={setPage} pageCount={pageCount} />
       </Box>
-    </>
+    </Box>
   );
 };

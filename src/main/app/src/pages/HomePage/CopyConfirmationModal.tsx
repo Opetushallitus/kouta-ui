@@ -142,7 +142,9 @@ export const CopyConfirmationModal = ({
               {t('yleiset.sulje')}
             </Button>
           </Box>
-          <Button onClick={onConfirm}>{t('yleiset.aloitaKopiointi')}</Button>
+          <Button disabled={_fp.isEmpty(selection)} onClick={onConfirm}>
+            {t('yleiset.aloitaKopiointi')}
+          </Button>
         </Box>
       }
     >

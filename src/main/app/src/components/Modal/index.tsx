@@ -8,11 +8,25 @@ import {
   ModalHeader,
 } from '#/src/components/virkailija';
 
-const Modal = ({ footer, header, children, onClose, minHeight, ...props }) => {
+const Modal = ({
+  footer,
+  header,
+  children,
+  onClose,
+  minHeight,
+  open = false,
+  style = {},
+  ...props
+}) => {
   const wrapBody = !!(footer || header); // For legacy modal
 
   return (
-    <UiModal onClose={onClose} style={{ maxHeight: '100vh' }} {...props}>
+    <UiModal
+      open={open}
+      onClose={onClose}
+      style={{ maxHeight: '100vh', ...style }}
+      {...props}
+    >
       {header && <ModalHeader onClose={onClose}>{header}</ModalHeader>}
       {wrapBody ? (
         <ModalBody minHeight={minHeight} maxHeight="calc(90vh - 124px)">

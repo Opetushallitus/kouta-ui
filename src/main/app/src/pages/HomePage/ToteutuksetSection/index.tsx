@@ -68,7 +68,7 @@ const useCopyToteutukset = () => {
   apiUrls.url('kouta-backend.login');
   return async toteutukset => {
     const result = await httpClient.put(
-      apiUrls.url('kouta-backend.copy.toteutukset'),
+      apiUrls.url('kouta-backend.toteutus-copy'),
       _.map(toteutukset, 'oid')
     );
     return result.data;

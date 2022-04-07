@@ -26,7 +26,10 @@ export const useEntitySelectionApi = actor => {
       items => send({ type: 'DESELECT_ITEMS', items }),
       [send]
     ),
-    removeSelection: useCallback(() => send({ type: 'DESELECT_ALL' }), [send]),
+    removeSelection: useCallback(
+      () => send({ type: 'RESET_SELECTION' }),
+      [send]
+    ),
   };
 };
 

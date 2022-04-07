@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 
 import { useActor, useInterpret, useSelector } from '@xstate/react';
 import { TFunction } from 'i18next';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { createMachine } from 'xstate';
+import { createMachine, spawn, actions } from 'xstate';
 
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
@@ -13,6 +14,8 @@ import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio'
 import { EntityListTable } from './EntitySearchList';
 import { EntitySelectionMachine } from './entitySelectionMachine';
 
+const { pure, assign, send } = actions;
+
 interface OpenEvent {
   type: 'OPEN';
 }
@@ -21,24 +24,73 @@ interface CloseEvent {
   type: 'CLOSE';
 }
 
-export const CopyConfirmationModalMachine = createMachine({
-  schema: {
-    events: {} as OpenEvent | CloseEvent,
-  },
-  initial: 'closed',
-  states: {
-    open: {
-      on: {
-        CLOSE: 'closed',
+type EntitySelection = Record<string, Record<string, any>>;
+
+interface SetEntitiesEvent {
+  type: 'SET_ENTITIES';
+  entities: EntitySelection;
+}
+
+interface CopyConfirmationMachineContext {
+  selectionRef: any;
+  entities?: EntitySelection;
+}
+
+export const CopyConfirmationModalMachine = createMachine(
+  {
+    schema: {
+      events: {} as OpenEvent | CloseEvent | SetEntitiesEvent,
+      context: {
+        entities: {} as EntitySelection,
+        selectionRef: null as any,
       },
     },
-    closed: {
-      on: {
-        OPEN: 'open',
+    context: {
+      entities: {}, // Kaikki valittavissa olevat entiteetit
+      selectionRef: null,
+    },
+    initial: 'initializing',
+    states: {
+      initializing: {
+        entry: assign({
+          selectionRef: () => spawn(EntitySelectionMachine),
+        }),
+        always: {
+          target: 'closed',
+        },
+      },
+      open: {
+        entry: 'selectAll',
+        on: {
+          CLOSE: 'closed',
+        },
+      },
+      closed: {
+        on: {
+          OPEN: 'open',
+        },
+      },
+    },
+    on: {
+      SET_ENTITIES: {
+        actions: 'setEntities',
       },
     },
   },
-});
+  {
+    actions: {
+      setEntities: assign<CopyConfirmationMachineContext, any>({
+        entities: (ctx, e) => e.entities,
+      }),
+      selectAll: pure<CopyConfirmationMachineContext, any>(ctx => {
+        return send(
+          { type: 'RESET_SELECTION', items: ctx.entities },
+          { to: ctx.selectionRef }
+        );
+      }),
+    } as any,
+  }
+);
 
 export const CopyConfirmationModalContext = React.createContext({} as any);
 
@@ -63,9 +115,17 @@ export const useModalSelection = () => {
   return useSelector(selectionService, state => state.context.selection);
 };
 
-export const CopyConfirmationWrapper = ({ children }) => {
-  const selectionService = useInterpret(EntitySelectionMachine as any);
-  const modalService = useInterpret(CopyConfirmationModalMachine as any);
+export const CopyConfirmationWrapper = ({ entities, children }) => {
+  const modalService = useInterpret(CopyConfirmationModalMachine);
+
+  useEffect(() => {
+    modalService.send({ type: 'SET_ENTITIES', entities });
+  }, [entities, modalService]);
+
+  const selectionService = useSelector(
+    modalService,
+    state => state.context.selectionRef
+  );
 
   const modalContext = useMemo(
     () => ({
@@ -101,9 +161,7 @@ export const CopyConfirmationModal = ({
 
   const { isOpen, closeModal } = useCopyConfirmationModal();
 
-  const { selectionService, modalService } = useContextOrThrow(
-    CopyConfirmationModalContext
-  );
+  const { selectionService } = useContextOrThrow(CopyConfirmationModalContext);
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
@@ -114,15 +172,6 @@ export const CopyConfirmationModal = ({
 
   const selection = useModalSelection();
 
-  useEffect(() => {
-    const subscription = modalService.subscribe(state => {
-      if (state.changed && state.value === 'open') {
-        selectionService.send({ type: 'SELECT_ITEMS', items: entities });
-      }
-    });
-    return subscription.unsubscribe;
-  }, [modalService, selectionService, entities]);
-
   const onConfirm = useCallback(() => {
     onCopySelection(selection);
     closeModal();
@@ -130,8 +179,8 @@ export const CopyConfirmationModal = ({
 
   return (
     <Modal
-      minHeight="90vh"
-      style={{ maxWidth: '1200px', width: '90vw' }}
+      minHeight="200px"
+      maxWidth="1200px"
       open={isOpen}
       onClose={closeModal}
       header={headerText}

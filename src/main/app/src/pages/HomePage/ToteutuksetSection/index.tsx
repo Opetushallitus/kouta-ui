@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -62,25 +62,30 @@ const ToteutusActionBar = () => {
   );
 };
 
-const useCopyToteutukset = () => {
-  const apiUrls = useUrls();
-  const httpClient = useHttpClient();
-  apiUrls.url('kouta-backend.login');
-  return async toteutukset => {
-    const result = await httpClient.put(
-      apiUrls.url('kouta-backend.toteutus-copy'),
-      _.map(toteutukset, 'oid')
-    );
-    return result.data;
-  };
-};
-
-type ToteutusCopyResultItem = {
+type ToteutusCopyResponseItem = {
   oid: string;
   status: 'success' | 'error';
   created: {
     toteutusOid?: string;
   };
+};
+
+type ToteutusCopyResponseData = Array<ToteutusCopyResponseItem>;
+
+const useCopyToteutukset = () => {
+  const apiUrls = useUrls();
+  const httpClient = useHttpClient();
+  apiUrls.url('kouta-backend.login');
+  return useCallback(
+    async (toteutukset: Array<string>) => {
+      const result = await httpClient.put(
+        apiUrls.url('kouta-backend.toteutus-copy'),
+        _.map(toteutukset, 'oid')
+      );
+      return result.data as ToteutusCopyResponseData;
+    },
+    [httpClient, apiUrls]
+  );
 };
 
 export const createGetToteutusLinkUrl = organisaatioOid => oid =>
@@ -102,13 +107,16 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   );
 
   const copyToteutukset = useCopyToteutukset();
-  const copyMutation =
-    useMutation<Array<ToteutusCopyResultItem>>(copyToteutukset);
+  const copyMutation = useMutation<
+    ToteutusCopyResponseData,
+    unknown,
+    Array<string>
+  >(copyToteutukset);
 
   return copyMutation.isLoading ? (
     <OverlaySpin text="Kopioidaan toteutuksia..." />
   ) : (
-    <CopyConfirmationWrapper>
+    <CopyConfirmationWrapper entities={selection}>
       <CopyConfirmationModal
         onCopySelection={copyMutation.mutate}
         entities={selection}

@@ -20,15 +20,16 @@ interface DeselectItemsEvent {
   items: Array<EntityListItem>;
 }
 
-interface DeselectAllEvent {
-  type: 'DESELECT_ALL';
+interface ResetSelection {
+  type: 'RESET_SELECTION';
+  items?: Array<EntityListItem>;
 }
 
 export const EntitySelectionMachine = createMachine(
   {
     schema: {
       context: {} as SelectionContext,
-      events: {} as SelectItemsEvent | DeselectItemsEvent | DeselectAllEvent,
+      events: {} as SelectItemsEvent | DeselectItemsEvent | ResetSelection,
     },
     context: {
       selection: {},
@@ -40,8 +41,8 @@ export const EntitySelectionMachine = createMachine(
       DESELECT_ITEMS: {
         actions: 'deselectItems',
       },
-      DESELECT_ALL: {
-        actions: 'deselectAll',
+      RESET_SELECTION: {
+        actions: 'resetSelection',
       },
     },
   },
@@ -57,8 +58,11 @@ export const EntitySelectionMachine = createMachine(
           delete ctx.selection[item.oid];
         }, e.items)
       ),
-      deselectAll: assign<SelectionContext, DeselectAllEvent>(ctx => {
+      resetSelection: assign<SelectionContext, DeselectItemsEvent>((ctx, e) => {
         ctx.selection = {};
+        _fp.forEach(item => {
+          ctx.selection[item.oid] = item;
+        }, e?.items);
       }),
     } as any,
   }

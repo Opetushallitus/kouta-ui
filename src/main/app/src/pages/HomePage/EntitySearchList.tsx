@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import _fp from 'lodash/fp';
-import { useTranslation } from 'react-i18next';
 
 import ListSpin from '#/src/components/ListSpin';
 import ListTable from '#/src/components/ListTable';
@@ -9,7 +8,6 @@ import Pagination from '#/src/components/Pagination';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { Box } from '#/src/components/virkailija';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import {
   getSearchQueryParams,
@@ -20,19 +18,12 @@ import Filters from './Filters';
 import { useFilterState } from './useFilterState';
 import { getIndexParamsByFilters } from './utils';
 
-export const EntitySearchList = ({
+export const useEntitySearch = ({
+  filterState,
   organisaatioOid,
   entityType,
   searchEntities,
-  makeTableColumns,
-  nimiPlaceholder,
 }) => {
-  const { t } = useTranslation();
-  const userLanguage = useUserLanguage();
-
-  const filterState = useFilterState(entityType);
-  const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
-
   const queryParams = useMemo(
     () =>
       getSearchQueryParams(
@@ -41,7 +32,7 @@ export const EntitySearchList = ({
     [filterState, organisaatioOid]
   );
 
-  const queryResult = useApiQuery(
+  return useApiQuery(
     'search' + _fp.capitalize(entityType),
     searchEntities,
     { params: queryParams },
@@ -50,6 +41,24 @@ export const EntitySearchList = ({
       staleTime: 60 * 1000,
     }
   );
+};
+
+export const EntitySearchList = ({
+  organisaatioOid,
+  entityType,
+  searchEntities,
+  nimiPlaceholder,
+  columns,
+}) => {
+  const filterState = useFilterState(entityType);
+  const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
+
+  const queryResult = useEntitySearch({
+    filterState,
+    organisaatioOid,
+    searchEntities,
+    entityType,
+  });
 
   const { result: entities, totalCount } = queryResult?.data ?? {};
 
@@ -69,11 +78,6 @@ export const EntitySearchList = ({
       : null;
   }, [entities]);
 
-  const tableColumns = useMemo(
-    () => makeTableColumns(t, organisaatioOid, userLanguage),
-    [makeTableColumns, t, organisaatioOid, userLanguage]
-  );
-
   return (
     <>
       <Box mb={3}>
@@ -82,7 +86,7 @@ export const EntitySearchList = ({
       <QueryResultWrapper queryResult={queryResult} LoadingWrapper={ListSpin}>
         <ListTable
           rows={rows}
-          columns={tableColumns}
+          columns={columns}
           onSort={setOrderBy}
           sort={orderBy}
           {...getTestIdProps(`${entityType}Table`)}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -22,23 +22,27 @@ import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
 
-const makeTableColumns = (t, organisaatioOid) => [
-  makeNimiColumn(t, {
-    getLinkUrl: ({ oid }) =>
-      `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
-  }),
-  makeKoulutustyyppiColumn(t),
-  makeTilaColumn(t),
-  makeModifiedColumn(t),
-  makeMuokkaajaColumn(t),
-  {
-    title: t('etusivu.kiinnitetytHakukohteet'),
-    key: 'hakukohteet',
-    render: ({ hakukohdeCount = 0 }) => (
-      <Badge color="primary">{hakukohdeCount}</Badge>
-    ),
-  },
-];
+const useTableColumns = (t, organisaatioOid) =>
+  useMemo(
+    () => [
+      makeNimiColumn(t, {
+        getLinkUrl: ({ oid }) =>
+          `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
+      }),
+      makeKoulutustyyppiColumn(t),
+      makeTilaColumn(t),
+      makeModifiedColumn(t),
+      makeMuokkaajaColumn(t),
+      {
+        title: t('etusivu.kiinnitetytHakukohteet'),
+        key: 'hakukohteet',
+        render: ({ hakukohdeCount = 0 }) => (
+          <Badge color="primary">{hakukohdeCount}</Badge>
+        ),
+      },
+    ],
+    [t, organisaatioOid]
+  );
 
 const Actions = ({ organisaatioOid }) => {
   const { isOpen, close, open } = useModal();
@@ -59,6 +63,8 @@ const Actions = ({ organisaatioOid }) => {
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
+  const columns = useTableColumns(t, organisaatioOid);
+
   return (
     <>
       <NavigationAnchor id="toteutukset" />
@@ -74,7 +80,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           searchEntities={searchToteutukset}
           organisaatioOid={organisaatioOid}
           entityType={TOTEUTUS}
-          makeTableColumns={makeTableColumns}
+          columns={columns}
           nimiPlaceholder={t('etusivu.haeToteutuksia')}
         />
       </ListCollapse>

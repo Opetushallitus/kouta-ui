@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
@@ -95,6 +95,10 @@ const usePreviousNonNil = value => {
   return _fp.isEmpty(value) ? prev : value;
 };
 
+const isCopyResultSuccessful = mutationResult =>
+  _fp.isArray(mutationResult?.data) &&
+  _fp.every(result => result.status === 'success', mutationResult?.data);
+
 export const CopyResultModal = ({
   entityType,
   headerText,
@@ -114,7 +118,14 @@ export const CopyResultModal = ({
 
   const isOpen = ['success', 'error'].includes(mutationResult.status);
 
-  const onClose = mutationResult.reset;
+  const { removeSelection } = useEntitySelection(entityType);
+
+  const onClose = useCallback(() => {
+    if (isCopyResultSuccessful(mutationResult)) {
+      removeSelection();
+    }
+    mutationResult.reset();
+  }, [mutationResult, removeSelection]);
 
   const data = usePreviousNonNil(mutationResult.data);
 

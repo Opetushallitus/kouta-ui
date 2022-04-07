@@ -5,9 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ENTITY } from '#/src/constants';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useSelectedOrganisaatio } from '#/src/hooks/useSelectedOrganisaatio';
-import { getPagination, setPaginationAction } from '#/src/state/pagination';
+import {
+  getPagination,
+  setPagination as setPaginationAction,
+} from '#/src/state/homepageSlice';
 
-export const useFilterState = (name: string) => {
+export const useFilterState = (name: ENTITY) => {
   const dispatch = useDispatch();
 
   const {

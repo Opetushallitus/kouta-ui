@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@opetushallitus/virkailija-ui-components": "^0.4.5",
+    "@reduxjs/toolkit": "^1.7.2",
     "@xstate/react": "^1.5.1",
     "axios": "^0.21.1",
     "date-fns": "^2.23.0",
@@ -55,8 +56,6 @@
     "react-spring": "^8.0.27",
     "react-use": "^15.3.8",
     "redux": "^4.1.1",
-    "redux-actions": "^2.6.5",
-    "redux-create-reducer": "^2.0.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-form": "^8.3.7",
     "redux-persist": "^6.0.0",

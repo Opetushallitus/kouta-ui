@@ -72,8 +72,17 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     () =>
       createToteutusListColumns(
         t,
+        organisaatioOid
+      )(SERVICE_BY_ENTITY[TOTEUTUS]),
+    [t, organisaatioOid]
+  );
+
+  const createColumnsForConfirmationModal = useMemo(
+    () =>
+      createToteutusListColumns(
+        t,
         organisaatioOid,
-        SERVICE_BY_ENTITY[TOTEUTUS]
+        ({ key }) => key !== 'hakukohteet'
       ),
     [t, organisaatioOid]
   );
@@ -88,7 +97,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         onCopySelection={copyMutation.mutate}
         entities={selection}
         headerText={t('etusivu.toteutus.vahvistaKopiointiOtsikko')}
-        createColumns={createToteutusListColumns}
+        createColumns={createColumnsForConfirmationModal}
       />
       <CopyResultModal
         entityType={TOTEUTUS}

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 
 import { useActor, useInterpret, useSelector } from '@xstate/react';
-import { TFunction } from 'i18next';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { createMachine, spawn, actions } from 'xstate';
@@ -9,7 +8,6 @@ import { createMachine, spawn, actions } from 'xstate';
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 
 import { EntityListTable } from './EntitySearchList';
 import { EntitySelectionMachine } from './entitySelectionMachine';
@@ -151,11 +149,7 @@ export const CopyConfirmationModal = ({
   headerText: string;
   entities: Array<any>;
   onCopySelection: any;
-  createColumns: (
-    t: TFunction,
-    organisatioOid: string,
-    selectionActor: any
-  ) => any;
+  createColumns: (selectionActor: any) => any;
 }) => {
   const { t } = useTranslation();
 
@@ -163,11 +157,9 @@ export const CopyConfirmationModal = ({
 
   const { selectionService } = useContextOrThrow(CopyConfirmationModalContext);
 
-  const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
-
   const columns = useMemo(
-    () => createColumns(t, selectedOrganisaatioOid, selectionService),
-    [t, createColumns, selectedOrganisaatioOid, selectionService]
+    () => createColumns(selectionService),
+    [createColumns, selectionService]
   );
 
   const selection = useModalSelection();

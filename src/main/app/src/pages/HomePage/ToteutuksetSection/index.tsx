@@ -1,14 +1,10 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from 'react-query';
 
 import Button from '#/src/components/Button';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
-import { useHttpClient } from '#/src/contexts/HttpClientContext';
-import { useUrls } from '#/src/contexts/UrlContext';
 import useModal from '#/src/hooks/useModal';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
@@ -27,6 +23,7 @@ import {
   useEntitySelection,
   useEntitySelectionApi,
 } from '../useEntitySelection';
+import { useCopyToteutuksetMutation } from './copyToteutukset';
 import { createToteutusListColumns } from './createToteutusListColumns';
 import { KoulutusModal } from './KoulutusModal';
 
@@ -63,32 +60,6 @@ const ToteutusActionBar = () => {
   );
 };
 
-type ToteutusCopyResponseItem = {
-  oid: string;
-  status: 'success' | 'error';
-  created: {
-    toteutusOid?: string;
-  };
-};
-
-type ToteutusCopyResponseData = Array<ToteutusCopyResponseItem>;
-
-const useCopyToteutukset = () => {
-  const apiUrls = useUrls();
-  const httpClient = useHttpClient();
-  apiUrls.url('kouta-backend.login');
-  return useCallback(
-    async (toteutukset: Array<string>) => {
-      const result = await httpClient.put(
-        apiUrls.url('kouta-backend.toteutus-copy'),
-        _.map(toteutukset, 'oid')
-      );
-      return result.data as ToteutusCopyResponseData;
-    },
-    [httpClient, apiUrls]
-  );
-};
-
 export const createGetToteutusLinkUrl = organisaatioOid => oid =>
   `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`;
 
@@ -107,12 +78,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     [t, organisaatioOid]
   );
 
-  const copyToteutukset = useCopyToteutukset();
-  const copyMutation = useMutation<
-    ToteutusCopyResponseData,
-    unknown,
-    Array<string>
-  >(copyToteutukset);
+  const copyMutation = useCopyToteutuksetMutation();
 
   return copyMutation.isLoading ? (
     <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />

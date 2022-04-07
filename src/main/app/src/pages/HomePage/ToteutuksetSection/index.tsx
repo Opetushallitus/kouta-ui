@@ -55,6 +55,7 @@ const ToteutusActionBar = () => {
 
   return (
     <EntityListActionBar
+      entityType={TOTEUTUS}
       selection={selection}
       removeSelection={removeSelection}
       copyEntities={openModal}
@@ -114,18 +115,18 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   >(copyToteutukset);
 
   return copyMutation.isLoading ? (
-    <OverlaySpin text="Kopioidaan toteutuksia..." />
+    <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />
   ) : (
     <CopyConfirmationWrapper entities={selection}>
       <CopyConfirmationModal
         onCopySelection={copyMutation.mutate}
         entities={selection}
-        headerText="Valitse toteutukset"
+        headerText={t('etusivu.toteutus.vahvistaKopiointiOtsikko')}
         createColumns={createToteutusListColumns}
       />
       <CopyResultModal
         entityType={TOTEUTUS}
-        headerText="Kopioinnin tulokset"
+        headerText={t('etusivu.kopioinninTuloksetOtsikko')}
         mutationResult={copyMutation}
         getLinkUrl={createGetToteutusLinkUrl(organisaatioOid)}
       />

@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { UseMutationResult } from 'react-query';
+import { usePrevious } from 'react-use';
 import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -34,19 +35,19 @@ const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
 
 const useTableColumns = (t, entityType, getLinkUrl) => [
   {
-    title: t('nimi'),
+    title: t('yleiset.nimi'),
     key: 'nimi',
     render: item => <Nimi item={item} entityType={entityType} />,
   },
   {
-    title: t('alkuperainen'),
+    title: t('etusivu.alkuperainen'),
     key: 'alkuperainen',
     render: item => (
       <RouterAnchor to={getLinkUrl(item.oid)}>{item.oid}</RouterAnchor>
     ),
   },
   {
-    title: t('kopio'),
+    title: t('etusivu.kopio'),
     key: 'kopio',
     render: item => {
       const oid = item?.created?.[`${entityType}Oid`];
@@ -56,8 +57,6 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     },
   },
   {
-    title: t('tulos'),
-    key: 'tulos',
     render: item => {
       const status = item.status;
       switch (status) {
@@ -91,6 +90,11 @@ type CopyResultItem = {
   };
 };
 
+const usePreviousNonNil = value => {
+  const prev = usePrevious(value);
+  return _fp.isEmpty(value) ? prev : value;
+};
+
 export const CopyResultModal = ({
   entityType,
   headerText,
@@ -112,10 +116,12 @@ export const CopyResultModal = ({
 
   const onClose = mutationResult.reset;
 
+  const data = usePreviousNonNil(mutationResult.data);
+
   return (
     <Modal
       minHeight="90vh"
-      style={{ maxWidth: '1200px', width: '90vw' }}
+      maxWidth="1200px"
       open={isOpen}
       onClose={onClose}
       header={headerText}
@@ -127,15 +133,14 @@ export const CopyResultModal = ({
         </Box>
       }
     >
-      {mutationResult.isSuccess && (
+      {mutationResult.isError ? (
+        <ErrorAlert center>{t('etusivu.kopiointiEpaonnistui')}</ErrorAlert>
+      ) : (
         <CopyResultList
-          data={mutationResult.data}
+          data={data}
           entityType={entityType}
           getLinkUrl={getLinkUrl}
         />
-      )}
-      {mutationResult.isError && (
-        <ErrorAlert center>Kopiointi epäonnistui!</ErrorAlert>
       )}
     </Modal>
   );

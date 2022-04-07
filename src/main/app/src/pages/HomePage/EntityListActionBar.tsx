@@ -36,6 +36,7 @@ const VerticalSeparator = styled(Box).attrs({ marginLeft: 2, marginRight: 2 })`
 `;
 
 export const EntityListActionBar = ({
+  entityType,
   selection,
   removeSelection,
   copyEntities,
@@ -45,8 +46,10 @@ export const EntityListActionBar = ({
 
   return (
     <ButtonBox display="flex">
-      <Box padding={1}>{_.size(selection)} Koulutusta valittu</Box>
-      <VerticalSeparator></VerticalSeparator>
+      <Box padding={1}>
+        {t(`etusivu.${entityType}.valitut`, { count: _.size(selection) })}
+      </Box>
+      <VerticalSeparator />
       <ActionButton
         iconType="deselect"
         variant="text"

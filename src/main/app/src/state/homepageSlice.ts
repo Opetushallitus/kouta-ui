@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import _fp from 'lodash';
+import _fp from 'lodash/fp';
 
 import { ENTITY } from '#/src/constants';
 
@@ -34,13 +34,16 @@ export const homepageSlice = createSlice({
       state[name].pagination = { ...state[name].pagination, ...pagination };
     },
     selectItems: (state, { payload: { name, items = [] } }) => {
-      state[name].selection = _fp.uniq(
+      console.log({ items });
+      state[name].selection = _fp.uniqBy(
+        _fp.prop('oid'),
         [...state[name].selection, ...items].filter(Boolean)
       );
     },
     deselectItems: (state, { payload: { name, items = [] } }) => {
-      state[name].selection = state[name].selection.filter(
-        item => !items.includes(item)
+      state[name].selection = _fp.remove(
+        (item: any) => items.find(({ oid }) => oid === item?.oid),
+        state[name].selection
       );
     },
     removeSelection: (state, { payload: { name } }) => {

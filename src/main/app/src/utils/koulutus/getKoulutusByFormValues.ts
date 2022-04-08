@@ -122,7 +122,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         values?.information?.opintojenLaajuus?.value || null,
       opintojenLaajuusyksikkoKoodiUri:
         values?.information?.opintojenLaajuusyksikko?.value || null,
-      opintojenLaajuusnumero: values?.information?.opintojenLaajuusnumero
+      opintojenLaajuusNumero: values?.information?.opintojenLaajuusnumero
         ? parseFloatComma(values.information.opintojenLaajuusnumero)
         : null,
 

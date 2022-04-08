@@ -56,7 +56,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     tutkinnonOsat = [],
     opintojenLaajuusKoodiUri = '',
     opintojenLaajuusyksikkoKoodiUri = '',
-    opintojenLaajuusnumero,
+    opintojenLaajuusNumero,
     tutkintonimikeKoodiUrit = [],
     kuvauksenNimi = {},
     koulutusalaKoodiUrit = [],
@@ -85,8 +85,8 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       opintojenLaajuusyksikko: {
         value: opintojenLaajuusyksikkoKoodiUri,
       },
-      opintojenLaajuusnumero: isNumeric(opintojenLaajuusnumero)
-        ? opintojenLaajuusnumero.toString()
+      opintojenLaajuusnumero: isNumeric(opintojenLaajuusNumero)
+        ? opintojenLaajuusNumero.toString()
         : '',
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
       koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),

@@ -55,7 +55,7 @@ export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
             selectedLanguage={selectedLanguage}
             laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
             laajuusyksikkoKoodiUri={opintojenLaajuusyksikkoKoodiUri}
-            laajuusNumero={koulutus?.metadata?.opintojenLaajuusnumero}
+            laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
             {...getTestIdProps('laajuus')}
           />
         </Box>

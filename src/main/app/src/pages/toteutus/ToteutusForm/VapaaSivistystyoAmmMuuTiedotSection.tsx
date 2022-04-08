@@ -34,7 +34,7 @@ export const VapaaSivistystyoAmmMuuTiedotSection = ({
   const userLanguage = useUserLanguage();
   const opintojenLaajuusyksikkoKoodiUri =
     koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
-  const opintojenLaajuusnumero = koulutus?.metadata?.opintojenLaajuusnumero;
+  const opintojenLaajuusnumero = koulutus?.metadata?.opintojenLaajuusNumero;
 
   return (
     <>

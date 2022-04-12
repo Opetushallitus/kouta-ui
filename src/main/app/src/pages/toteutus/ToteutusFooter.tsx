@@ -21,7 +21,7 @@ import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValue
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
 import { validateToteutusForm } from '#/src/utils/toteutus/validateToteutusForm';
 
-import { GetTarjoajatHierarkia } from './GetTarjoajatHierarkia';
+import { useTarjoajatHierarkia } from './useTarjoajatHierarkia';
 
 type ToteutusFooterProps = {
   formMode: FormMode;
@@ -40,7 +40,7 @@ export const ToteutusFooter = ({
   koulutus,
   canUpdate,
 }: ToteutusFooterProps) => {
-  const { hierarkia = [] } = GetTarjoajatHierarkia(
+  const { hierarkia = [] } = useTarjoajatHierarkia(
     organisaatioOid,
     toteutus?.tarjoajat
   );

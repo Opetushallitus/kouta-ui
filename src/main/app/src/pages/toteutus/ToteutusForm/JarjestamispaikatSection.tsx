@@ -9,7 +9,7 @@ import { TOTEUTUS_ROLE } from '#/src/constants';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { getTestIdProps } from '#/src/utils';
 
-import { GetTarjoajatHierarkia } from '../GetTarjoajatHierarkia';
+import { useTarjoajatHierarkia } from '../useTarjoajatHierarkia';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,
@@ -27,7 +27,7 @@ export const JarjestamispaikatSection = ({
   const { t } = useTranslation();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
-  const { hierarkia = [] } = GetTarjoajatHierarkia(organisaatioOid, tarjoajat);
+  const { hierarkia = [] } = useTarjoajatHierarkia(organisaatioOid, tarjoajat);
 
   const getIsDisabled = useCallback(
     organisaatio =>

@@ -163,7 +163,7 @@ const NavigationBase = ({
       />
 
       <NavigationContainer {...getTestIdProps('navigaatio')}>
-        <Container>
+        <Container maxWidth="1600px">
           <Box display="flex" justifyContent="space-between">
             <Box display="flex" alignItems="flex-end" as="nav">
               <NavigationItems

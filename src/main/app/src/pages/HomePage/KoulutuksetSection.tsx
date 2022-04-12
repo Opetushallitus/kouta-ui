@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import {
+  makeCountColumn,
   makeJulkinenColumn,
   makeKoulutustyyppiColumn,
   makeModifiedColumn,
@@ -32,27 +32,31 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
-const makeTableColumns = (t, organisaatioOid) => [
-  makeNimiColumn(t, {
-    getLinkUrl: ({ oid }) =>
-      `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`,
-  }),
-  makeKoulutustyyppiColumn(t),
-  makeTilaColumn(t),
-  makeModifiedColumn(t),
-  makeMuokkaajaColumn(t),
-  {
-    title: t('etusivu.kiinnitetytToteutukset'),
-    key: 'toteutukset',
-    render: ({ toteutusCount = 0 }) => (
-      <Badge color="primary">{toteutusCount}</Badge>
-    ),
-  },
-  makeJulkinenColumn(t),
-];
+const useTableColumns = (t, organisaatioOid) =>
+  useMemo(
+    () => [
+      makeNimiColumn(t, {
+        getLinkUrl: ({ oid }) =>
+          `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`,
+      }),
+      makeKoulutustyyppiColumn(t),
+      makeTilaColumn(t),
+      makeModifiedColumn(t),
+      makeMuokkaajaColumn(t),
+      makeCountColumn({
+        title: t('etusivu.kiinnitetytToteutukset'),
+        key: 'toteutukset',
+        propName: 'toteutusCount',
+      }),
+      makeJulkinenColumn(t),
+    ],
+    [t, organisaatioOid]
+  );
 
 export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
+
+  const columns = useTableColumns(t, organisaatioOid);
   return (
     <>
       <NavigationAnchor id="koulutukset" />
@@ -68,7 +72,7 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           searchEntities={searchKoulutukset}
           organisaatioOid={organisaatioOid}
           entityType={KOULUTUS}
-          makeTableColumns={makeTableColumns}
+          columns={columns}
           nimiPlaceholder={t('etusivu.haeKoulutuksia')}
         />
       </ListCollapse>

@@ -1,44 +1,33 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
-import {
-  makeKoulutustyyppiColumn,
-  makeModifiedColumn,
-  makeMuokkaajaColumn,
-  makeNimiColumn,
-  makeTilaColumn,
-} from '#/src/components/ListTable';
+import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
+import {
+  CopyConfirmationModal,
+  CopyConfirmationWrapper,
+  useCopyConfirmationModal,
+} from '../CopyConfirmationModal';
+import { CopyResultModal } from '../CopyResultModal';
+import { EntityListActionBar } from '../EntityListActionBar';
 import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
+import {
+  SERVICE_BY_ENTITY,
+  useEntitySelection,
+  useEntitySelectionApi,
+} from '../useEntitySelection';
+import { useCopyToteutuksetMutation } from './copyToteutukset';
+import { createToteutusListColumns } from './createToteutusListColumns';
 import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
-
-const makeTableColumns = (t, organisaatioOid) => [
-  makeNimiColumn(t, {
-    getLinkUrl: ({ oid }) =>
-      `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
-  }),
-  makeKoulutustyyppiColumn(t),
-  makeTilaColumn(t),
-  makeModifiedColumn(t),
-  makeMuokkaajaColumn(t),
-  {
-    title: t('etusivu.kiinnitetytHakukohteet'),
-    key: 'hakukohteet',
-    render: ({ hakukohdeCount = 0 }) => (
-      <Badge color="primary">{hakukohdeCount}</Badge>
-    ),
-  },
-];
 
 const Actions = ({ organisaatioOid }) => {
   const { isOpen, close, open } = useModal();
@@ -56,11 +45,66 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
+const ToteutusActionBar = () => {
+  const { selection, removeSelection } = useEntitySelection(TOTEUTUS);
+
+  const { openModal } = useCopyConfirmationModal();
+
+  return (
+    <EntityListActionBar
+      entityType={TOTEUTUS}
+      selection={selection}
+      removeSelection={removeSelection}
+      copyEntities={openModal}
+    />
+  );
+};
+
+export const createGetToteutusLinkUrl = organisaatioOid => oid =>
+  `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`;
+
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  return (
-    <>
+  const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[TOTEUTUS]);
+
+  const columns = useMemo(
+    () =>
+      createToteutusListColumns(
+        t,
+        organisaatioOid
+      )(SERVICE_BY_ENTITY[TOTEUTUS]),
+    [t, organisaatioOid]
+  );
+
+  const createColumnsForConfirmationModal = useMemo(
+    () =>
+      createToteutusListColumns(
+        t,
+        organisaatioOid,
+        ({ key }) => key !== 'hakukohteet'
+      ),
+    [t, organisaatioOid]
+  );
+
+  const copyMutation = useCopyToteutuksetMutation();
+
+  return copyMutation.isLoading ? (
+    <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />
+  ) : (
+    <CopyConfirmationWrapper entities={selection}>
+      <CopyConfirmationModal
+        onCopySelection={copyMutation.mutate}
+        entities={selection}
+        headerText={t('etusivu.toteutus.vahvistaKopiointiOtsikko')}
+        createColumns={createColumnsForConfirmationModal}
+      />
+      <CopyResultModal
+        entityType={TOTEUTUS}
+        headerText={t('etusivu.kopioinninTuloksetOtsikko')}
+        mutationResult={copyMutation}
+        getLinkUrl={createGetToteutusLinkUrl(organisaatioOid)}
+      />
       <NavigationAnchor id="toteutukset" />
       <ListCollapse
         icon={ICONS[TOTEUTUS]}
@@ -71,14 +115,15 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         defaultOpen
       >
         <EntitySearchList
+          ActionBar={ToteutusActionBar}
           searchEntities={searchToteutukset}
           organisaatioOid={organisaatioOid}
           entityType={TOTEUTUS}
-          makeTableColumns={makeTableColumns}
+          columns={columns}
           nimiPlaceholder={t('etusivu.haeToteutuksia')}
         />
       </ListCollapse>
-    </>
+    </CopyConfirmationWrapper>
   );
 };
 

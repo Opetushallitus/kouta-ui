@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import { getCookie } from '#/src/utils';
 
@@ -14,11 +14,11 @@ const isLomakeEditoriUrl = url => {
 };
 
 const hasBeenRetried = error => {
-  return Boolean(_.get(error, 'config.__retried'));
+  return Boolean(error?.config?.__retried);
 };
 
 const isAuthorizationError = error => {
-  return _.get(error, 'response.status') === 401;
+  return error?.response?.status === 401;
 };
 
 const withAuthorizationInterceptor = apiUrls => client => {
@@ -35,7 +35,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
 
       error.config.__retried = true;
 
-      const responseUrl = _.get(error, 'request.responseURL');
+      const responseUrl = error?.request?.responseURL;
 
       if (isKoutaBackendUrl(responseUrl) && apiUrls) {
         try {
@@ -105,7 +105,7 @@ const createHttpClient = ({ apiUrls, callerId }) => {
     },
   });
 
-  return _.flow(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
+  return _fp.flow(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
 };
 
 export default createHttpClient;

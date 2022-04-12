@@ -20,47 +20,48 @@ type TutkinnonOsaKoulutusNimiSectionProps = {
   disabled?: boolean;
 };
 
-export const TutkinnonOsaKoulutusNimiSection: React.FC<TutkinnonOsaKoulutusNimiSectionProps> =
-  ({ language, languages, name, disabled }) => {
-    const { t } = useTranslation();
+export const TutkinnonOsaKoulutusNimiSection: React.FC<
+  TutkinnonOsaKoulutusNimiSectionProps
+> = ({ language, languages, name, disabled }) => {
+  const { t } = useTranslation();
 
-    const tutkinnonosat = useSelectedTutkinnonOsat();
+  const tutkinnonosat = useSelectedTutkinnonOsat();
 
-    const oneSelectedTutkinnonOsa = oneAndOnlyOne(tutkinnonosat);
+  const oneSelectedTutkinnonOsa = oneAndOnlyOne(tutkinnonosat);
 
-    const { data: ePerusteTutkinnonOsat } = useEPerusteTutkinnonOsat({
-      ePerusteId: oneSelectedTutkinnonOsa?.ePerusteId,
-    });
+  const { data: ePerusteTutkinnonOsat } = useEPerusteTutkinnonOsat({
+    ePerusteId: oneSelectedTutkinnonOsa?.ePerusteId,
+  });
 
-    const selectedTutkinnonosaNimi = ePerusteTutkinnonOsat?.find(
-      t => t.id === oneSelectedTutkinnonOsa?.tutkinnonosaViite
-    )?.nimi;
+  const selectedTutkinnonosaNimi = ePerusteTutkinnonOsat?.find(
+    t => t.id === oneSelectedTutkinnonOsa?.tutkinnonosaViite
+  )?.nimi;
 
-    const { change } = useBoundFormActions();
-    const isDirty = useIsDirty();
+  const { change } = useBoundFormActions();
+  const isDirty = useIsDirty();
 
-    useEffect(() => {
-      if (isDirty && selectedTutkinnonosaNimi) {
-        _fp.each(lang => {
-          change(
-            `${name}.nimi.${lang}`,
-            selectedTutkinnonosaNimi
-              ? getLanguageValue(selectedTutkinnonosaNimi, lang)
-              : null
-          );
-        }, languages);
-      }
-    }, [change, name, isDirty, language, selectedTutkinnonosaNimi, languages]);
+  useEffect(() => {
+    if (isDirty && selectedTutkinnonosaNimi) {
+      _fp.each(lang => {
+        change(
+          `${name}.nimi.${lang}`,
+          selectedTutkinnonosaNimi
+            ? getLanguageValue(selectedTutkinnonosaNimi, lang)
+            : null
+        );
+      }, languages);
+    }
+  }, [change, name, isDirty, language, selectedTutkinnonosaNimi, languages]);
 
-    return (
-      <Box mb={2} {...getTestIdProps('koulutuksenNimi')}>
-        <Field
-          disabled={disabled || selectedTutkinnonosaNimi}
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('koulutuslomake.lisaaKoulutuksenNimi')}
-          required
-        />
-      </Box>
-    );
-  };
+  return (
+    <Box mb={2} {...getTestIdProps('koulutuksenNimi')}>
+      <Field
+        disabled={disabled || selectedTutkinnonosaNimi}
+        name={`${name}.nimi.${language}`}
+        component={FormFieldInput}
+        label={t('koulutuslomake.lisaaKoulutuksenNimi')}
+        required
+      />
+    </Box>
+  );
+};

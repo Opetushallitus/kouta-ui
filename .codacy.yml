@@ -1,6 +1,0 @@
----
-exclude_paths:
-  - '**/cypress/**/__snapshots__/*'
-  - '**/cypress/data/*'
-  - '**/service-worker.js' 
-  - '**/tsconfig*.json'

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import {
+  makeCountColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeNimiColumn,
@@ -14,6 +14,7 @@ import {
   makeKoulutuksenAlkamiskausiColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { searchHaut } from '#/src/utils/haku/searchHaut';
 
 import { EntitySearchList } from './EntitySearchList';
@@ -32,27 +33,33 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
-const makeTableColumns = (t, organisaatioOid, userLanguage) => [
-  makeNimiColumn(t, {
-    getLinkUrl: ({ oid }) =>
-      `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
-  }),
-  makeTilaColumn(t),
-  makeModifiedColumn(t),
-  makeMuokkaajaColumn(t),
-  makeHakutapaColumn(t, userLanguage),
-  makeKoulutuksenAlkamiskausiColumn(t, userLanguage),
-  {
-    title: t('etusivu.kiinnitetytHakukohteet'),
-    key: 'hakukohteet',
-    render: ({ hakukohdeCount = 0 }) => (
-      <Badge color="primary">{hakukohdeCount}</Badge>
-    ),
-  },
-];
+const useTableColumns = (t, organisaatioOid, userLanguage) =>
+  useMemo(
+    () => [
+      makeNimiColumn(t, {
+        getLinkUrl: ({ oid }) =>
+          `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
+      }),
+      makeTilaColumn(t),
+      makeModifiedColumn(t),
+      makeMuokkaajaColumn(t),
+      makeHakutapaColumn(t, userLanguage),
+      makeKoulutuksenAlkamiskausiColumn(t, userLanguage),
+      makeCountColumn({
+        title: t('etusivu.kiinnitetytHakukohteet'),
+        key: 'hakukohteet',
+        propName: 'hakukohdeCount',
+      }),
+    ],
+    [t, organisaatioOid, userLanguage]
+  );
 
 const HautSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
+
+  const userLanguage = useUserLanguage();
+
+  const columns = useTableColumns(t, organisaatioOid, userLanguage);
 
   return (
     <>
@@ -69,7 +76,7 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
           searchEntities={searchHaut}
           organisaatioOid={organisaatioOid}
           entityType={HAKU}
-          makeTableColumns={makeTableColumns}
+          columns={columns}
           nimiPlaceholder={t('etusivu.haeHakuja')}
         />
       </ListCollapse>

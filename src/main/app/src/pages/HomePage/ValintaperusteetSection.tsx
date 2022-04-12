@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -34,20 +34,25 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
-const makeTableColumns = (t, organisaatioOid) => [
-  makeNimiColumn(t, {
-    getLinkUrl: ({ id }) =>
-      `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`,
-  }),
-  makeKoulutustyyppiColumn(t),
-  makeTilaColumn(t),
-  makeModifiedColumn(t),
-  makeMuokkaajaColumn(t),
-  makeJulkinenColumn(t),
-];
+const useTableColumns = (t, organisaatioOid) =>
+  useMemo(
+    () => [
+      makeNimiColumn(t, {
+        getLinkUrl: ({ id }) =>
+          `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`,
+      }),
+      makeKoulutustyyppiColumn(t),
+      makeTilaColumn(t),
+      makeModifiedColumn(t),
+      makeMuokkaajaColumn(t),
+      makeJulkinenColumn(t),
+    ],
+    [t, organisaatioOid]
+  );
 
 const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
+  const columns = useTableColumns(t, organisaatioOid);
 
   return (
     <>
@@ -64,7 +69,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
           searchEntities={searchValintaperusteet}
           organisaatioOid={organisaatioOid}
           entityType={VALINTAPERUSTE}
-          makeTableColumns={makeTableColumns}
+          columns={columns}
           nimiPlaceholder={t('etusivu.haeValintaperusteita')}
         />
       </ListCollapse>

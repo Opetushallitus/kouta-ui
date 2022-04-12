@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { usePrevious } from 'react-use';
 
 import { ENTITY } from '#/src/constants';
-import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { useSelectedOrganisaatio } from '#/src/hooks/useSelectedOrganisaatio';
-import { getPagination, setPaginationAction } from '#/src/state/pagination';
+import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
+import {
+  getPagination,
+  setPagination as setPaginationAction,
+} from '#/src/state/homepageSlice';
 
-export const useFilterState = (name: string) => {
+export const useFilterState = (name: ENTITY) => {
   const dispatch = useDispatch();
 
   const {
@@ -28,15 +31,18 @@ export const useFilterState = (name: string) => {
     [dispatch, name]
   );
 
-  const [selectedOrganisaatio] = useSelectedOrganisaatio();
+  const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
-  const selectedOrganisaatioHasChanged = useHasChanged(selectedOrganisaatio);
+  const previousOrganisaatioOid = usePrevious(selectedOrganisaatioOid);
 
   useEffect(() => {
-    if (selectedOrganisaatioHasChanged) {
+    if (
+      previousOrganisaatioOid != null &&
+      selectedOrganisaatioOid !== previousOrganisaatioOid
+    ) {
       setPagination({ page: 0 });
     }
-  }, [selectedOrganisaatioHasChanged, setPagination]);
+  }, [previousOrganisaatioOid, selectedOrganisaatioOid, setPagination]);
 
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
   const setTila = useCallback(

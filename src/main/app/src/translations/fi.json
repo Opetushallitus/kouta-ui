@@ -389,7 +389,22 @@
     "valitseHakukohteenHaku": "Valitse, mihin hakuun hakukohde liitetään",
     "kiinnitetytToteutukset": "Toteutukset",
     "kiinnitetytHakukohteet": "Hakukohteet",
-    "haeHakukohteita": "Hae hakukohteita"
+    "haeHakukohteita": "Hae hakukohteita",
+    "eiTuloksia": "Hakuehdoilla ei löytynyt tuloksia.",
+    "poistaValinta": "Poista valinta",
+    "kopioi": "Kopioi",
+    "aloitaKopiointi": "Aloita kopiointi",
+    "kopioinninTuloksetOtsikko": "Kopioinnin tulokset",
+    "alkuperainen": "Alkuperäinen",
+    "kopio": "Kopio",
+    "kopiointiEpaonnistui": "Kopiointi epäonnistui!",
+    "toteutus": {
+      "valitut_zero": "Ei toteutuksia valittu",
+      "valitut": "1 toteutus valittu",
+      "valitut_other": "{{count}} toteutusta valittu",
+      "vahvistaKopiointiOtsikko": "Valitse toteutukset",
+      "kopioidaan": "Kopioidaan toteutuksia..."
+    }
   },
   "koulutuslomake": {
     "osaamisalanKuvaus": "Osaamisalan kuvaus",

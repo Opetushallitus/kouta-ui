@@ -29,10 +29,9 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
       <Box mb={2}>
         <KoulutusField
           disabled={disabled}
-          name={`${name}.korkeakoulutukset`}
+          name={`${name}.koulutus`}
           koulutustyyppi={koulutustyyppi}
           language={language}
-          isMultiSelect={true}
           valitseKoulutusLabel={t('yleiset.valitseKoulutus')}
           required
         />

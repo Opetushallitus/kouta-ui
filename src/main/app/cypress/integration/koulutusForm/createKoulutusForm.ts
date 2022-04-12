@@ -290,8 +290,9 @@ export const createKoulutusForm = () => {
           'kansallinenkoulutusluokitus2016koulutusalataso1_01#1'
         );
 
-        getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').pipe(
-          paste('Tiedot nimi')
+        getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
+          'have.value',
+          'Ammatillinen opettajankoulutus'
         );
       });
 

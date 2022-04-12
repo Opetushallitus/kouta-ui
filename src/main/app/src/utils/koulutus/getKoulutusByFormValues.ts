@@ -12,7 +12,7 @@ import {
   TutkinnonOsa,
 } from '#/src/types/koulutusTypes';
 import { maybeParseNumber, valueToArray } from '#/src/utils';
-import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -22,7 +22,7 @@ function getKoulutuksetKoodiUri(
   koulutustyyppi: KOULUTUSTYYPPI,
   information?: InformationSectionValues
 ): Array<string> {
-  if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
+  if (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)) {
     return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
   }
 

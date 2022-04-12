@@ -764,7 +764,7 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Tiedot nimi"
+    "fi": "Ammatillinen opettajankoulutus"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": "1",

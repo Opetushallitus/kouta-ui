@@ -7,8 +7,9 @@ import { createFormFieldComponent } from '#/src/components/formFields';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import { TOTEUTUS_ROLE } from '#/src/constants';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps } from '#/src/utils';
+
+import { useTarjoajatHierarkia } from '../useTarjoajatHierarkia';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,
@@ -18,10 +19,15 @@ const JarjestajatField = createFormFieldComponent(
   })
 );
 
-export const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
+export const JarjestamispaikatSection = ({
+  organisaatioOid,
+  name,
+  tarjoajat,
+}) => {
   const { t } = useTranslation();
-  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
+
+  const { hierarkia = [] } = useTarjoajatHierarkia(organisaatioOid, tarjoajat);
 
   const getIsDisabled = useCallback(
     organisaatio =>

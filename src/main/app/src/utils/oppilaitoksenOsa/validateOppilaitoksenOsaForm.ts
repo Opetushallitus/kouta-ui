@@ -4,7 +4,7 @@ import createErrorBuilder, {
   validateArrayMinLength,
 } from '#/src/utils/form/createErrorBuilder';
 
-import { getKielivalinta, validateIfJulkaistu } from '../form/formConfigUtils';
+import { getKielivalinta, validateIfJulkaistu } from '#/src/utils/form/formConfigUtils';
 
 export const validateOppilaitoksenOsaForm = values => {
   const kieliversiot = getKielivalinta(values);

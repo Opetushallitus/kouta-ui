@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 
 import { getTestIdProps } from '#/src/utils';
 
+import { useLanguageTab } from '../contexts/LanguageTabContext';
 import useKoodistoOptions from '../hooks/useKoodistoOptions';
 import { FormFieldInput, FormFieldSelect } from './formFields';
 import { Box } from './virkailija';
@@ -13,9 +14,10 @@ const OpintojenLaajuusFieldExtended = ({
   required = false,
 }) => {
   const { t } = useTranslation();
-
+  const selectedLanguage = useLanguageTab();
   const { options } = useKoodistoOptions({
     koodisto: 'opintojenlaajuusyksikko',
+    language: selectedLanguage,
   });
 
   return (

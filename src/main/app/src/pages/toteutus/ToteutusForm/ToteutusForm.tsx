@@ -19,6 +19,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
+  TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -36,11 +37,10 @@ import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
 import { LukiolinjatSection } from './LukiolinjatSection';
 import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
-import { TiedotSection } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
-import { TuvaTelmaAikuistenperusopetusTiedotSection } from './TuvaTelmaAikuistenperusopetusTiedotSection';
-import { VapaaSivistystyoAmmMuuTiedotSection } from './VapaaSivistystyoAmmMuuTiedotSection';
+import { TutkintoonjohtamattomatTiedotSection } from './TutkintoonjohtamattomatTiedotSection';
+import { TutkintoonjohtavatTiedotSection } from './TutkintoonjohtavatTiedotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
@@ -117,51 +117,27 @@ const ToteutusForm = ({
         />
         {_fp.cond([
           [
-            isIn([
-              KOULUTUSTYYPPI.TUVA,
-              KOULUTUSTYYPPI.TELMA,
-              KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-            ]),
+            isIn(TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT),
             () => (
               <>
                 <FormCollapse
                   section="tiedot"
                   header={t('toteutuslomake.toteutuksenTiedot')}
                   languages={languages}
-                  Component={TuvaTelmaAikuistenperusopetusTiedotSection}
+                  Component={TutkintoonjohtamattomatTiedotSection}
                   koulutus={koulutus}
                 />
-                <FormCollapse
-                  section="kuvaus"
-                  header={t('toteutuslomake.toteutuksenKuvaus')}
-                  languages={languages}
-                  Component={ToteutuksenKuvausSection}
-                />
-              </>
-            ),
-          ],
-          [
-            isIn([
-              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-              KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-            ]),
-            () => (
-              <>
-                <FormCollapse
-                  section="tiedot"
-                  header={t('toteutuslomake.toteutuksenTiedot')}
-                  languages={languages}
-                  Component={VapaaSivistystyoAmmMuuTiedotSection}
-                  koulutustyyppi={koulutustyyppi}
-                  koulutus={koulutus}
-                />
-                <FormCollapse
-                  section="kuvaus"
-                  header={t('toteutuslomake.toteutuksenKuvaus')}
-                  languages={languages}
-                  Component={ToteutuksenKuvausSection}
-                />
+                {![
+                  KOULUTUSTYYPPI.OSAAMISALA,
+                  KOULUTUSTYYPPI.TUTKINNON_OSA,
+                ].includes(koulutustyyppi) && (
+                  <FormCollapse
+                    section="kuvaus"
+                    header={t('toteutuslomake.toteutuksenKuvaus')}
+                    languages={languages}
+                    Component={ToteutuksenKuvausSection}
+                  />
+                )}
               </>
             ),
           ],
@@ -172,7 +148,7 @@ const ToteutusForm = ({
                 section="tiedot"
                 header={t('toteutuslomake.toteutuksenTiedot')}
                 languages={languages}
-                Component={TiedotSection}
+                Component={TutkintoonjohtavatTiedotSection}
                 koulutustyyppi={koulutustyyppi}
               />
             ),

@@ -18,6 +18,7 @@ import {
   ENTITY,
   FormMode,
   KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
@@ -40,9 +41,8 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import { TiedotSection } from './TiedotSection/TiedotSection';
-import { TuvaTelmaAikuistenperusopetusTiedotSection } from './TiedotSection/TuvaTelmaAikuistenperusopetusTiedotSection';
-import { VapaaSivistystyoAmmMuuTiedotSection } from './TiedotSection/VapaaSivistystyoAmmMuuTiedotSection';
+import { TutkintoonjohtamattomatTiedotSection } from './TiedotSection/TutkintoonjohtamattomatTiedotSection';
+import { TiedotSection } from './TiedotSection/TutkintoonjohtavatTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -138,20 +138,8 @@ export const KoulutusForm = ({
               header={t('koulutuslomake.koulutuksenTiedot')}
               Component={_fp.cond([
                 [
-                  isIn([
-                    KOULUTUSTYYPPI.TUVA,
-                    KOULUTUSTYYPPI.TELMA,
-                    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-                  ]),
-                  () => TuvaTelmaAikuistenperusopetusTiedotSection,
-                ],
-                [
-                  isIn([
-                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-                    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-                  ]),
-                  () => VapaaSivistystyoAmmMuuTiedotSection,
+                  isIn(TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT),
+                  () => TutkintoonjohtamattomatTiedotSection,
                 ],
                 [otherwise, () => TiedotSection],
               ])(koulutustyyppi)}

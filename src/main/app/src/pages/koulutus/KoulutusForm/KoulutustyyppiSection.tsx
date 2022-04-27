@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -11,23 +11,27 @@ import {
   createIsKoulutustyyppiDisabledGetter,
   useOppilaitosTyypit,
 } from '#/src/hooks/useOppilaitosTyypit';
+import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
 
 export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
   const { t } = useTranslation();
 
   const isOphVirkailija = useIsOphVirkailija();
 
-  const { oppilaitostyypit, isLoading } = useOppilaitosTyypit(organisaatioOid);
+  const {
+    oppilaitostyypit: allowedOppilaitostyypit,
+    isLoading: loadingTyypit,
+  } = useOppilaitosTyypit(organisaatioOid);
 
-  const getIsDisabled = useMemo(
-    () =>
-      createIsKoulutustyyppiDisabledGetter({
-        isOphVirkailija,
-        oppilaitostyypit,
-        entityType: ENTITY.KOULUTUS,
-      }),
-    [isOphVirkailija, oppilaitostyypit]
-  );
+  const { oppilaitostyypitByKoulutustyypit, isLoading: loadingMappings } =
+    useOppilaitostyypitByKoulutustyypit();
+
+  const getIsDisabled = createIsKoulutustyyppiDisabledGetter({
+    isOphVirkailija,
+    oppilaitostyypitByKoulutustyypit,
+    allowedOppilaitostyypit,
+    entityType: ENTITY.KOULUTUS,
+  });
 
   const canCreate = useCurrentUserHasRole(
     ENTITY.KOULUTUS,
@@ -35,6 +39,7 @@ export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
     organisaatioOid
   );
 
+  const isLoading = loadingTyypit || loadingMappings;
   return (
     <Field
       name={name}

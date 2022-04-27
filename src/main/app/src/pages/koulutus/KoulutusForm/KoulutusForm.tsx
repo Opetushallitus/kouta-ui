@@ -18,6 +18,7 @@ import {
   ENTITY,
   FormMode,
   KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
@@ -40,9 +41,8 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import { TiedotSection } from './TiedotSection/TiedotSection';
-import { TuvaTelmaTiedotSection } from './TiedotSection/TuvaTelmaTiedotSection';
-import { VapaaSivistystyoTiedotSection } from './TiedotSection/VapaaSivistystyoTiedotSection';
+import { TutkintoonjohtamattomatTiedotSection } from './TiedotSection/TutkintoonjohtamattomatTiedotSection';
+import { TiedotSection } from './TiedotSection/TutkintoonjohtavatTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -138,15 +138,8 @@ export const KoulutusForm = ({
               header={t('koulutuslomake.koulutuksenTiedot')}
               Component={_fp.cond([
                 [
-                  isIn([KOULUTUSTYYPPI.TUVA, KOULUTUSTYYPPI.TELMA]),
-                  () => TuvaTelmaTiedotSection,
-                ],
-                [
-                  isIn([
-                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-                  ]),
-                  () => VapaaSivistystyoTiedotSection,
+                  isIn(TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT),
+                  () => TutkintoonjohtamattomatTiedotSection,
                 ],
                 [otherwise, () => TiedotSection],
               ])(koulutustyyppi)}
@@ -236,6 +229,8 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+            KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse
@@ -254,6 +249,8 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+            KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
           ].includes(koulutustyyppi) && (
             <>
               <FormCollapse

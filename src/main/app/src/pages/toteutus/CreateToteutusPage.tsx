@@ -34,6 +34,7 @@ const {
   OSAAMISALA,
   VAPAA_SIVISTYSTYO_OPISTOVUOSI,
   VAPAA_SIVISTYSTYO_MUU,
+  MUU_AMMATILLINEN_KOULUTUS,
 } = KOULUTUSTYYPPI;
 
 const getCopyValues = toteutusOid => ({
@@ -80,6 +81,7 @@ export const CreateToteutusPage = () => {
       OSAAMISALA,
       VAPAA_SIVISTYSTYO_OPISTOVUOSI,
       VAPAA_SIVISTYSTYO_MUU,
+      MUU_AMMATILLINEN_KOULUTUS,
     ].includes(koulutustyyppi)
       ? getInitialValues({
           koulutustyyppi,

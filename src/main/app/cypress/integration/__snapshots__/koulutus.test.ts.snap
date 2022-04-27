@@ -27,6 +27,8 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -73,6 +75,8 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": "osaamisala_1800",
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -117,6 +121,8 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [
       {
@@ -182,6 +188,8 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_300#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
@@ -234,6 +242,8 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -280,6 +290,8 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -334,6 +346,8 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
@@ -387,6 +401,8 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_150",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -430,6 +446,8 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
     },
     "lisatiedot": [],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_38#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -481,6 +499,8 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_38",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -488,8 +508,8 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.tuva",
-    "sv": "koulutustyypit.tuva"
+    "fi": "Tutkintokoulutukseen valmentava koulutus (TUVA)",
+    "sv": "Grundexamen inom lantbruksbranschen"
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",
@@ -525,6 +545,8 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
     },
     "lisatiedot": [],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -566,6 +588,8 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
     },
     "lisatiedot": [],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -607,6 +631,8 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
     },
     "lisatiedot": [],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -656,6 +682,8 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -663,8 +691,8 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.telma",
-    "sv": "koulutustyypit.telma"
+    "fi": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)",
+    "sv": "Grundexamen inom lantbruksbranschen"
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",
@@ -705,6 +733,8 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -722,4 +752,142 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
     "1.2.1.1.1.1"
   ],
   "tila": "poistettu"
+};
+
+exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "aikuisten-perusopetus",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "aikuisten-perusopetus",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {
+      "fi": "http://linkki.fi"
+    },
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 13,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "aikuisten-perusopetus"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutustyypit.aikuistenPerusopetus"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "amm-muu",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-muu",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 12,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-muu"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "muu ammatillinen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi",
+    "sv"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_0#1"
+  ],
+  "koulutustyyppi": "amm-muu",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-muu",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvausta on muokattu</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 12,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-muu"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Muut ammatilliset koulutukset",
+    "sv": "Muut ammatilliset koulutukset"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "tila": "tallennettu"
 };

@@ -446,4 +446,80 @@ export const createKoulutusForm = () => {
       tallenna();
     })
   );
+
+  it(
+    'should be able to create muu ammatillinen koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-muu'] });
+
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.laajuusyksikko').pipe(
+          pFillSelect('osaamispistettä')
+        );
+
+        getByTestId('laajuusnumero').pipe(paste('12'));
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
+          paste('muu ammatillinen nimi')
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      getByTestId('linkkiEPerusteisiinInput').should('not.exist');
+      getByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('lisatiedotSection').should('not.exist');
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create "Aikuisten perusopetus" -koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['aikuisten-perusopetus'] });
+
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.laajuusyksikko').pipe(
+          pFillSelect('opintopistettä')
+        );
+
+        getByTestId('laajuusnumero').pipe(paste('13'));
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').should(
+          'have.value',
+          'koulutustyypit.aikuistenPerusopetus'
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+
+        getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
+          paste('http://linkki.fi')
+        );
+      });
+
+      fillJarjestajaSection();
+
+      fillNakyvyysSection();
+
+      fillTilaSection();
+
+      getByTestId('soraKuvausSection').should('not.exist');
+      getByTestId('lisatiedotSection').should('not.exist');
+
+      tallenna();
+    })
+  );
 };

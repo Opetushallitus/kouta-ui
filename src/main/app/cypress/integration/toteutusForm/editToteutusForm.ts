@@ -170,6 +170,56 @@ export const editToteutusForm = () => {
   );
 
   it(
+    'should be able to edit muu ammatillinen toteutus',
+    mutationTest(() => {
+      prepareTest('amm-muu');
+
+      fillKieliversiotSection();
+
+      cy.findByLabelText(/toteutuslomake.laajuus/)
+        .should('be.disabled')
+        .should('have.value', '12 osaamispistettä');
+
+      cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+        cy.findByRole('button', {
+          name: 'toteutuslomake.hakuTapa.hakeutuminen',
+        }).click();
+
+        cy.findByText('toteutuslomake.hakemuspalvelu').click();
+      });
+
+      cy.findByTestId('hakukohteetSection').should('exist');
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to edit "Aikuisten perusopetus" -toteutus',
+    mutationTest(() => {
+      prepareTest('aikuisten-perusopetus');
+
+      fillKieliversiotSection();
+
+      cy.findByLabelText(/toteutuslomake.laajuus/)
+        .should('be.disabled')
+        .should('have.value', '13 opintopistettä');
+
+      cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+        cy.findByRole('button', {
+          name: 'toteutuslomake.hakuTapa.hakeutuminen',
+        }).click();
+
+        cy.findByText('toteutuslomake.hakemuspalvelu').click();
+      });
+
+      cy.findByTestId('hakukohteetSection').should('exist');
+
+      tallenna();
+    })
+  );
+
+  it(
     'should be able to delete toteutus',
     mutationTest(() => {
       prepareTest('amm');

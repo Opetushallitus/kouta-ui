@@ -59,6 +59,7 @@
     "koulutusala": "Koulutusala",
     "tutkintonimike": "Tutkintonimike",
     "laajuus": "Laajuus",
+    "laajuusyksikko": "Laajuusyksikkö",
     "osaamisalat": "Osaamisalat",
     "liitaHakukohde": "Liitä hakukohde",
     "lisaaHakukohde": "Lisää hakukohde",
@@ -335,6 +336,7 @@
     "valma": "VALMA",
     "ammTutkinnonOsa": "Tutkinnon osa",
     "ammOsaamisala": "Osaamisala",
+    "ammMuu": "Muut ammatilliset koulutukset",
     "korkeakoulutus": "Korkeakoulutus",
     "avoinYo": "Avoin Yo",
     "avoinAmk": "Avoin AMK",
@@ -345,8 +347,6 @@
     "ammatillinenOpintoOhjaajaKoulutus": "Ammatillinen opinto-ohjaajakoulutus",
     "ammatillinenErityisopettajaKoulutus": "Ammatillinen erityisopettajakoulutus",
     "yleissivistava": "Yleissivistävä",
-    "muutKoulutukset": "Muut koulutukset",
-    "perusopetuksenLisaopetus": "Perusopetuksen lisäopetus",
     "amm": "Ammatillinen koulutus",
     "lk": "Lukiokoulutus",
     "yo": "Yliopistokoulutus",
@@ -355,7 +355,8 @@
     "telma": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)",
     "vapaaSivistystyo": "Vapaa sivistystyö",
     "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
-    "vapaaSivistystyoMuu": "Muu"
+    "vapaaSivistystyoMuu": "Muu",
+    "aikuistenPerusopetus": "Aikuisten perusopetus"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",
@@ -454,7 +455,6 @@
     "toteutuksenYleinenKuvaus": "Toteutuksen yleinen kuvaus",
     "ilmoittautumislinkki": "Ilmoittautumislinkki",
     "laajuus": "Laajuus",
-    "laajuusyksikko": "Laajuusyksikkö",
     "aloituspaikat": "Aloituspaikat",
     "opintojenSuunniteltuKesto": "Opintojen suunniteltu kesto",
     "suunniteltuKesto": "Suunniteltu kesto",

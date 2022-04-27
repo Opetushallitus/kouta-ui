@@ -11,7 +11,7 @@ import {
   KoulutusFormValues,
   TutkinnonOsa,
 } from '#/src/types/koulutusTypes';
-import { maybeParseNumber, valueToArray } from '#/src/utils';
+import { maybeParseNumber, parseFloatComma, valueToArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const osaamisalaKoodiToKoodiUri = value =>
@@ -120,6 +120,12 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       )(values?.description?.kuvaus ?? {}),
       opintojenLaajuusKoodiUri:
         values?.information?.opintojenLaajuus?.value || null,
+      opintojenLaajuusyksikkoKoodiUri:
+        values?.information?.opintojenLaajuusyksikko?.value || null,
+      opintojenLaajuusNumero: values?.information?.opintojenLaajuusnumero
+        ? parseFloatComma(values.information.opintojenLaajuusnumero)
+        : null,
+
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),

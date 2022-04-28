@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 import i18n from 'i18next';
-import XHR from 'i18next-xhr-backend';
+import HttpBackend from 'i18next-http-backend';
 import _ from 'lodash';
 
 import { LANGUAGES } from '#/src/constants';
@@ -40,7 +40,7 @@ const createLocalization = ({
   let instance = i18n.createInstance();
 
   if (!REACT_APP_LANG && loadLocalization) {
-    instance = instance.use(XHR);
+    instance = instance.use(HttpBackend);
   }
 
   instance.init({
@@ -54,14 +54,14 @@ const createLocalization = ({
       loadLocalization && {
         backend: {
           loadPath: '{{ns}}:{{lng}}',
-          ajax: (url, options, callback) => {
+          request: (options, url, payload, callback) => {
             const [namespace, language] = url.split(':');
 
             loadLocalization({ namespace, language })
               .then(data => {
-                callback(data, { status: StatusCodes.OK });
+                callback(null, { status: StatusCodes.OK, data });
               })
-              .catch(() => callback(null, { status: StatusCodes.NOT_FOUND }));
+              .catch(() => callback({ status: StatusCodes.NOT_FOUND }));
           },
           parse: data => data,
         },

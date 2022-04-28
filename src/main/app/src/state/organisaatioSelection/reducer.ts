@@ -1,4 +1,4 @@
-import { createReducer } from 'redux-create-reducer';
+import { createReducer } from '@reduxjs/toolkit';
 
 import { SET_ORGANISAATIO } from './actions';
 

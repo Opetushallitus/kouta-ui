@@ -3,7 +3,7 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { maybeParseNumber, parseFloatComma, valueToArray } from '#/src/utils';
+import { maybeParseNumber, parseFloatComma } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import {
@@ -50,17 +50,27 @@ function getPainotetutArvosanatData(arvosanat) {
     );
 }
 
-const getLiiteToimitusosoite = (toimitustapa, pickTranslations) => {
+const getLiiteToimitusosoite = (toimitustapa, kielivalinta) => {
+  const unpackOsoite = rivit => {
+    if (rivit) {
+      const { rivi1, rivi2 } = rivit;
+      if (rivi1) {
+        return _fp.reduce(
+          (acc, kieli) => {
+            const r1 = rivi1?.[kieli] ?? '';
+            const r2 = rivi2?.[kieli] ?? '';
+            acc[kieli] = `${r1}\n${r2}`.trim();
+            return acc;
+          },
+          {},
+          kielivalinta
+        );
+      }
+    }
+  };
   return {
     osoite: {
-      osoite: mapValues(
-        translationRows =>
-          valueToArray(translationRows)
-            .filter(value => !_fp.isEmpty(value))
-            .join('\n')
-            .trim(),
-        pickTranslations(toimitustapa?.paikka?.osoite || null)
-      ),
+      osoite: unpackOsoite(toimitustapa?.paikka?.osoite || null),
       postinumeroKoodiUri: toimitustapa?.paikka?.postinumero?.value || null,
     },
     sahkoposti: toimitustapa?.paikka?.sahkoposti || null,
@@ -111,7 +121,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   const liitteidenToimitusosoite = getLiiteToimitusosoite(
     values?.liitteet?.toimitustapa,
-    pickTranslations
+    kielivalinta
   );
 
   const liitteidenToimitustapa = values?.liitteet?.toimitustapa?.tapa;
@@ -138,7 +148,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
           : null,
         toimitusosoite:
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
-            ? getLiiteToimitusosoite(toimitustapa, pickTranslations)
+            ? getLiiteToimitusosoite(toimitustapa, kielivalinta)
             : null,
         kuvaus: mapValues(serializeEditorState, pickTranslations(kuvaus || {})),
       };

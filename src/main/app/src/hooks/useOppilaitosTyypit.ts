@@ -1,27 +1,30 @@
+import { useMemo } from 'react';
+
 import _fp from 'lodash/fp';
 
 import {
   EI_TUETUT_KOULUTUSTYYPIT,
   ENTITY,
-  OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT,
   ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useOrganisaatioHierarkia } from '#/src/hooks/useOrganisaatioHierarkia';
 import iterateTree from '#/src/utils/iterateTree';
-import { reduce } from '#/src/utils/lodashFpUncapped';
 
 export const useOppilaitosTyypit = organisaatioOid => {
   const { hierarkia, isLoading } = useOrganisaatioHierarkia(organisaatioOid, {
     skipParents: false,
   });
 
-  const oppilaitostyypit: Array<any> = [];
+  const oppilaitostyypit = useMemo(() => {
+    const tyypit: Array<any> = [];
 
-  iterateTree(hierarkia, org => {
-    if (org?.oppilaitostyyppi) {
-      oppilaitostyypit.push(org?.oppilaitostyyppi);
-    }
-  });
+    iterateTree(hierarkia, org => {
+      if (org?.oppilaitostyyppi) {
+        tyypit.push(org?.oppilaitostyyppi);
+      }
+    });
+    return tyypit.map(oppilaitostyyppi => oppilaitostyyppi.split('#')[0]);
+  }, [hierarkia]);
 
   return {
     isLoading,
@@ -29,34 +32,13 @@ export const useOppilaitosTyypit = organisaatioOid => {
   };
 };
 
-const KOULUTUSTYYPPI_TO_OPPILAITOSTYYPIT = reduce(
-  (result, koulutustyypit, oppilaitostyyppi) => {
-    koulutustyypit?.forEach(koulutustyyppi => {
-      if (!result[koulutustyyppi]) {
-        result[koulutustyyppi] = [];
-      }
-      result[koulutustyyppi].push(oppilaitostyyppi);
-    });
-    return result;
-  },
-  {},
-  OPPILAITOSTYYPPI_TO_KOULUTUSTYYPIT
-);
-
 export const createIsKoulutustyyppiDisabledGetter = ({
-  oppilaitostyypit,
+  allowedOppilaitostyypit,
+  oppilaitostyypitByKoulutustyypit,
   isOphVirkailija,
   entityType,
 }) => {
-  const oppilaitostyypitWithoutVersion = oppilaitostyypit.map(
-    oppilaitostyyppi => oppilaitostyyppi.split('#')[0]
-  );
-
   return value => {
-    if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
-      return true;
-    }
-
     if (isOphVirkailija) {
       return false;
     }
@@ -68,18 +50,27 @@ export const createIsKoulutustyyppiDisabledGetter = ({
       return true;
     }
 
-    const oppilaitostyypitForKoulutustyyppi =
-      KOULUTUSTYYPPI_TO_OPPILAITOSTYYPIT[value] || [];
+    if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
+      return true;
+    }
 
-    if (_fp.isEmpty(oppilaitostyypitWithoutVersion)) {
+    if (
+      _fp.isEmpty(allowedOppilaitostyypit) ||
+      _fp.isEmpty(oppilaitostyypitByKoulutustyypit)
+    ) {
       return false;
     }
+
+    const oppilaitostyypitForKoulutustyyppiWoVersion =
+      oppilaitostyypitByKoulutustyypit.find(
+        entry => entry.koulutustyyppi === value
+      )?.oppilaitostyypit;
 
     if (
       !_fp.isEmpty(
         _fp.intersection(
-          oppilaitostyypitForKoulutustyyppi,
-          oppilaitostyypitWithoutVersion
+          oppilaitostyypitForKoulutustyyppiWoVersion,
+          allowedOppilaitostyypit
         )
       )
     ) {

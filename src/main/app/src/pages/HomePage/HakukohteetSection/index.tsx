@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -21,16 +21,20 @@ import LiitoksetModal from './LiitoksetModal';
 
 const { HAKUKOHDE } = ENTITY;
 
-const makeTableColumns = (t, organisaatioOid) => [
-  makeNimiColumn(t, {
-    getLinkUrl: ({ oid }) =>
-      `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
-  }),
-  makeKoulutustyyppiColumn(t),
-  makeTilaColumn(t),
-  makeModifiedColumn(t),
-  makeMuokkaajaColumn(t),
-];
+const useTableColumns = (t, organisaatioOid) =>
+  useMemo(
+    () => [
+      makeNimiColumn(t, {
+        getLinkUrl: ({ oid }) =>
+          `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+      }),
+      makeKoulutustyyppiColumn(t),
+      makeTilaColumn(t),
+      makeModifiedColumn(t),
+      makeMuokkaajaColumn(t),
+    ],
+    [t, organisaatioOid]
+  );
 
 const Actions = ({ organisaatioOid }) => {
   const { isOpen, close, open } = useModal();
@@ -51,6 +55,7 @@ const Actions = ({ organisaatioOid }) => {
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
+  const columns = useTableColumns(t, organisaatioOid);
   return (
     <>
       <NavigationAnchor id="hakukohteet" />
@@ -66,7 +71,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
           searchEntities={searchHakukohteet}
           organisaatioOid={organisaatioOid}
           entityType={HAKUKOHDE}
-          makeTableColumns={makeTableColumns}
+          columns={columns}
           nimiPlaceholder={t('etusivu.haeHakukohteita')}
         />
       </ListCollapse>

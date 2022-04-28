@@ -3,7 +3,7 @@ import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
-import { toSelectValue } from '#/src/utils';
+import { isNumeric, toSelectValue } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -55,6 +55,8 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     kuvaus = {},
     tutkinnonOsat = [],
     opintojenLaajuusKoodiUri = '',
+    opintojenLaajuusyksikkoKoodiUri = '',
+    opintojenLaajuusNumero,
     tutkintonimikeKoodiUrit = [],
     kuvauksenNimi = {},
     koulutusalaKoodiUrit = [],
@@ -80,6 +82,12 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       opintojenLaajuus: {
         value: opintojenLaajuusKoodiUri,
       },
+      opintojenLaajuusyksikko: {
+        value: opintojenLaajuusyksikkoKoodiUri,
+      },
+      opintojenLaajuusnumero: isNumeric(opintojenLaajuusNumero)
+        ? opintojenLaajuusNumero.toString()
+        : '',
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
       koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),
     },

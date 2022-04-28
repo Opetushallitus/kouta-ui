@@ -1,18 +1,5 @@
-import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { selectOrganisaatio } from '#/src/state/organisaatioSelection';
 
-import {
-  setOrganisaatio,
-  selectOrganisaatio,
-} from '#/src/state/organisaatioSelection';
-
-export const useSelectedOrganisaatio = () => {
-  const dispatch = useDispatch();
-  const selectedOrganisaatio = useSelector(selectOrganisaatio);
-
-  return useMemo(
-    () => [selectedOrganisaatio, () => dispatch(setOrganisaatio())],
-    [dispatch, selectedOrganisaatio]
-  );
-};
+export const useSelectedOrganisaatioOid = () => useSelector(selectOrganisaatio);

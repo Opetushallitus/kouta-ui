@@ -66,8 +66,8 @@ export type ToteutusFormValues = {
     nimi: TranslatedField<string>;
     ammatillinenPerustutkintoErityisopetuksena: boolean;
     jarjestetaanErityisopetuksena: boolean;
-    laajuus: string;
-    laajuusyksikko?: SelectOption;
+    opintojenLaajuusyksikko?: SelectOption;
+    opintojenLaajuusnumero: string;
     ilmoittautumislinkki: TranslatedField<string>;
     aloituspaikat: string;
   };

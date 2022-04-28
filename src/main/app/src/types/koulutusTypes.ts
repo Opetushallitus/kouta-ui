@@ -15,6 +15,8 @@ export type InformationSectionValues = {
   koulutus: SelectOption;
   korkeakoulutukset: SelectOptions;
   opintojenLaajuus: SelectOption;
+  opintojenLaajuusyksikko: SelectOption;
+  opintojenLaajuusnumero: string;
   tutkintonimike: SelectOptions;
   koulutusalat: SelectOptions;
 };

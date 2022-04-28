@@ -1,4 +1,4 @@
-import { createAction } from 'redux-actions';
+import { createAction } from '@reduxjs/toolkit';
 
 export const ADD_FAVOURITE = 'organisaatioFavourites/ADD_FAVOURITE';
 export const REMOVE_FAVOURITE = 'organisaatioFavourites/REMOVE_FAVOURITE';

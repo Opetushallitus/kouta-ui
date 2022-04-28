@@ -135,8 +135,11 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
         tapa: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
         paikka: {
           osoite: {
-            fi: ['Fi osoite'],
-            sv: ['Sv osoite'],
+            rivi1: {
+              fi: 'Fi osoite',
+              sv: 'Sv osoite',
+            },
+            rivi2: {},
           },
           postinumero: { value: 'posti_1#1' },
           sahkoposti: {
@@ -165,8 +168,11 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
             tapa: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
             paikka: {
               osoite: {
-                fi: 'Fi osoite',
-                sv: 'Sv osoite',
+                rivi1: {
+                  fi: 'Fi osoite',
+                  sv: 'Sv osoite',
+                },
+                rivi2: {},
               },
               postinumero: { value: 'posti_1#1' },
               sahkoposti: {

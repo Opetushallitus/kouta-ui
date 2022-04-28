@@ -1,5 +1,5 @@
+import { createReducer } from '@reduxjs/toolkit';
 import produce from 'immer';
-import { createReducer } from 'redux-create-reducer';
 
 import { ADD_FAVOURITE, REMOVE_FAVOURITE } from './actions';
 

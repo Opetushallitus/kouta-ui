@@ -145,7 +145,7 @@ const fillTuvaTiedotSection = () => {
   withinSection('tiedot', () => {
     cy.findByLabelText(/toteutuksenNimi/)
       .should('be.disabled')
-      .should('have.value', 'koulutustyypit.tuva');
+      .should('have.value', 'Tutkintokoulutukseen valmentava koulutus (TUVA)');
 
     cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')
@@ -167,15 +167,46 @@ const fillVapaaSivistystyoTiedotSection = () => {
   });
 };
 
+const fillAmmMuuTiedotSection = () => {
+  withinSection('tiedot', () => {
+    getInputByLabel('toteutuslomake.toteutuksenNimi')
+      .should('be.disabled')
+      .should('have.value', 'Muut ammatilliset koulutukset');
+
+    getInputByLabel('toteutuslomake.laajuus')
+      .should('be.disabled')
+      .should('have.value', '12 osaamispistettä');
+  });
+};
+
 const fillTelmaTiedotSection = () => {
   withinSection('tiedot', () => {
     cy.findByLabelText(/toteutuksenNimi/)
       .should('be.disabled')
-      .should('have.value', 'koulutustyypit.telma');
+      .should(
+        'have.value',
+        'Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)'
+      );
 
     cy.findByLabelText(/toteutuslomake.laajuus/)
       .should('be.disabled')
       .should('have.value', '60 osaamispistettä');
+
+    cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
+      .clear()
+      .pipe(paste('25'));
+  });
+};
+
+const fillAikuistenPerusopetusTiedotSection = () => {
+  withinSection('tiedot', () => {
+    cy.findByLabelText(/toteutuksenNimi/)
+      .should('not.be.disabled')
+      .should('have.value', 'Aikuisten perusopetus');
+
+    cy.findByLabelText(/toteutuslomake.laajuus/)
+      .should('be.disabled')
+      .should('have.value', '13 opintopistettä');
 
     cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
       .clear()
@@ -638,6 +669,56 @@ export const createToteutusForm = () => {
 
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create muu ammatillinen toteutus',
+    mutationTest(() => {
+      prepareTest('amm-muu');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillAmmMuuTiedotSection();
+
+      fillKuvausSection();
+
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
+
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create "Aikuisten perusopetus" -toteutus',
+    mutationTest(() => {
+      prepareTest('aikuisten-perusopetus');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillAikuistenPerusopetusTiedotSection();
+
+      fillKuvausSection();
+
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
+
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
       fillYhteystiedotSection();
       fillTilaSection();
 

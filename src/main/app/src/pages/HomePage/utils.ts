@@ -18,9 +18,9 @@ export const parseSort = sort => {
 
 const selectValueToSimpleValue = v => {
   switch (true) {
-    case Array.isArray(v):
+    case _.isArray(v):
       return v.map(_fp.prop('value'));
-    case v:
+    case _.isObject(v):
       return v?.value;
     default:
       return null;
@@ -46,7 +46,10 @@ export const getIndexParamsByFilters = ({
   orderBy,
   tila,
   koulutustyyppi,
+  hakutapa,
   nakyvyys,
+  koulutuksenAlkamiskausi,
+  koulutuksenAlkamisvuosi,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
 
@@ -59,7 +62,10 @@ export const getIndexParamsByFilters = ({
     orderDirection,
     tila: selectValueToSimpleValue(tila),
     koulutustyyppi: selectValueToSimpleValue(koulutustyyppi),
+    hakutapa: selectValueToSimpleValue(hakutapa),
     julkinen: nakyvyysToBoolean(nakyvyys),
+    koulutuksenAlkamiskausi: selectValueToSimpleValue(koulutuksenAlkamiskausi),
+    koulutuksenAlkamisvuosi: selectValueToSimpleValue(koulutuksenAlkamisvuosi),
   };
 };
 

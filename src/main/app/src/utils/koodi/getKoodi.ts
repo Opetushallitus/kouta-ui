@@ -1,6 +1,3 @@
-import { KOODISTO_VERSIOT } from '#/src/constants';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-
 type GetKoodiProps = {
   apiUrls: any;
   httpClient: any;
@@ -16,14 +13,9 @@ export const getKoodi = async ({
   versio,
   silent = false,
 }: GetKoodiProps) => {
-  const { koodisto } = parseKoodiUri(koodi);
   const { data } = await httpClient.get(
-    versio ?? KOODISTO_VERSIOT[koodisto]
-      ? apiUrls.url(
-          'koodisto-service.codeelement',
-          koodi,
-          versio ?? KOODISTO_VERSIOT[koodisto]
-        )
+    versio
+      ? apiUrls.url('koodisto-service.codeelement', koodi, versio)
       : apiUrls.url('koodisto-service.codeelement', 'latest', koodi),
     {
       errorNotifier: {

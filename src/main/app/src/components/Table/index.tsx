@@ -44,7 +44,6 @@ export const TableCellBase = styled.td`
   ${({ isTableHead }) =>
     isTableHead &&
     css`
-      white-space: nowrap;
       color: ${getThemeProp('palette.text.dark')};
       font-weight: 500;
       border-bottom: 1px solid ${getThemeProp('palette.border')};

@@ -38,6 +38,10 @@ Object {
     "opintojenLaajuus": Object {
       "value": "laajuus_1#1",
     },
+    "opintojenLaajuusnumero": "",
+    "opintojenLaajuusyksikko": Object {
+      "value": "",
+    },
     "tutkintonimike": Array [
       Object {
         "value": "nimike_1#1",
@@ -134,6 +138,10 @@ Object {
     },
     "opintojenLaajuus": Object {
       "value": "laajuus_1#1",
+    },
+    "opintojenLaajuusnumero": "",
+    "opintojenLaajuusyksikko": Object {
+      "value": "",
     },
     "tutkintonimike": Array [
       Object {

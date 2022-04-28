@@ -1,4 +1,4 @@
-import { createAction } from 'redux-actions';
+import { createAction } from '@reduxjs/toolkit';
 
 export const SET_ORGANISAATIO = 'organisaatioSelection/SET_ORGANISAATIO';
 

@@ -1,32 +1,48 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { usePrevious } from 'react-use';
 
 import { ENTITY } from '#/src/constants';
-import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { useSelectedOrganisaatio } from '#/src/hooks/useSelectedOrganisaatio';
-import { getPagination, setPaginationAction } from '#/src/state/pagination';
+import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
+import {
+  getPagination,
+  setPagination as setPaginationAction,
+} from '#/src/state/homepageSlice';
 
-export const useFilterState = (name: string) => {
+export const useFilterState = (name: ENTITY) => {
   const dispatch = useDispatch();
 
-  const { nimi, koulutustyyppi, page, orderBy, tila, julkinen, nakyvyys } =
-    useSelector(getPagination(name));
+  const {
+    nimi,
+    koulutustyyppi,
+    page,
+    orderBy,
+    tila,
+    julkinen,
+    nakyvyys,
+    hakutapa,
+    koulutuksenAlkamiskausi,
+    koulutuksenAlkamisvuosi,
+  } = useSelector(getPagination(name));
 
   const setPagination = useCallback(
     pagination => dispatch(setPaginationAction({ name, ...pagination })),
     [dispatch, name]
   );
 
-  const [selectedOrganisaatio] = useSelectedOrganisaatio();
+  const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
-  const selectedOrganisaatioHasChanged = useHasChanged(selectedOrganisaatio);
+  const previousOrganisaatioOid = usePrevious(selectedOrganisaatioOid);
 
   useEffect(() => {
-    if (selectedOrganisaatioHasChanged) {
+    if (
+      previousOrganisaatioOid != null &&
+      selectedOrganisaatioOid !== previousOrganisaatioOid
+    ) {
       setPagination({ page: 0 });
     }
-  }, [selectedOrganisaatioHasChanged, setPagination]);
+  }, [previousOrganisaatioOid, selectedOrganisaatioOid, setPagination]);
 
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
   const setTila = useCallback(
@@ -42,6 +58,17 @@ export const useFilterState = (name: string) => {
   if (name !== ENTITY.HAKU) {
     setKoulutustyyppi = koulutustyyppi =>
       setPagination({ page: 0, koulutustyyppi });
+  }
+
+  let setHakutapa;
+  let setKoulutuksenAlkamiskausi;
+  let setKoulutuksenAlkamisvuosi;
+  if (name === ENTITY.HAKU) {
+    setHakutapa = hakutapa => setPagination({ page: 0, hakutapa });
+    setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi =>
+      setPagination({ page: 0, koulutuksenAlkamiskausi });
+    setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi =>
+      setPagination({ page: 0, koulutuksenAlkamisvuosi });
   }
 
   let setNakyvyys;
@@ -62,7 +89,10 @@ export const useFilterState = (name: string) => {
       tila,
       setTila,
       julkinen,
+      hakutapa,
       nakyvyys,
+      koulutuksenAlkamiskausi,
+      koulutuksenAlkamisvuosi,
       filtersProps: {
         nimi,
         koulutustyyppi,
@@ -70,8 +100,14 @@ export const useFilterState = (name: string) => {
         onNimiChange: setNimi,
         onKoulutustyyppiChange: setKoulutustyyppi,
         onTilaChange: setTila,
+        hakutapa,
+        onHakutapaChange: setHakutapa,
         nakyvyys,
         onNakyvyysChange: setNakyvyys,
+        koulutuksenAlkamiskausi,
+        onKoulutuksenAlkamiskausiChange: setKoulutuksenAlkamiskausi,
+        koulutuksenAlkamisvuosi,
+        onKoulutuksenAlkamisvuosiChange: setKoulutuksenAlkamisvuosi,
       },
     }),
     [
@@ -85,8 +121,14 @@ export const useFilterState = (name: string) => {
       setKoulutustyyppi,
       setNimi,
       julkinen,
+      hakutapa,
+      setHakutapa,
       nakyvyys,
       setNakyvyys,
+      koulutuksenAlkamiskausi,
+      setKoulutuksenAlkamiskausi,
+      koulutuksenAlkamisvuosi,
+      setKoulutuksenAlkamisvuosi,
     ]
   );
 };

@@ -138,9 +138,36 @@ const getVapaaSivistystyoFields = ({ tyyppi }) => {
   });
 };
 
+const getMuuAmmatillinenFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    nimi: {
+      fi: 'Muut ammatilliset koulutukset',
+      sv: 'Muut ammatilliset koulutukset',
+    },
+    metadata: {
+      opintojenLaajuusNumero: 12,
+      opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_6#1',
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
+const getAikuistenPerusopetusFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    nimi: { fi: 'Aikuisten perusopetus' },
+    metadata: {
+      opintojenLaajuusNumero: 13,
+      opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
 export default ({ tyyppi = 'amm' } = {}) => {
   if (tyyppi === 'amm-ope-erityisope-ja-opo') {
     return getAmmOpeErityisopeJaOpoFields({ tyyppi });
+  } else if (tyyppi === 'amm-muu') {
+    return getMuuAmmatillinenFields({ tyyppi });
   } else if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
   } else if (['yo', 'amk'].includes(tyyppi)) {
@@ -153,6 +180,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getTelmaFields({ tyyppi });
   } else if (tyyppi.startsWith('vapaa-sivistystyo')) {
     return getVapaaSivistystyoFields({ tyyppi });
+  } else if (tyyppi === 'aikuisten-perusopetus') {
+    return getAikuistenPerusopetusFields({ tyyppi });
   }
 
   return getBaseFields();

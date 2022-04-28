@@ -15,7 +15,10 @@ export const getSearchQueryParams = ({
   orderDirection,
   tila,
   koulutustyyppi,
+  hakutapa,
   julkinen,
+  koulutuksenAlkamiskausi,
+  koulutuksenAlkamisvuosi,
 }) =>
   _fp.pickBy(isValidQueryStringValue, {
     nimi,
@@ -27,5 +30,8 @@ export const getSearchQueryParams = ({
     size: pageSize,
     page,
     koulutustyyppi,
+    hakutapa,
     julkinen: julkinen,
+    koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
+    koulutuksenAlkamisvuosi: _fp.join(',', koulutuksenAlkamisvuosi),
   });

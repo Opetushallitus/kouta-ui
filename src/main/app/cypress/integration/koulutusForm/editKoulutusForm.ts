@@ -170,6 +170,35 @@ export const editKoulutusForm = () => {
     });
   });
 
+  it('should be able to edit "Aikuisten perusopetus" -koulutus', () => {
+    prepareTest('aikuisten-perusopetus');
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+    mutationTest(() => {
+      getByTestId('linkkiEPerusteisiinInput')
+        .find('input')
+        .pipe(paste('http://testilinkki.fi'));
+
+      tallenna();
+    });
+  });
+
+  it(
+    'should be able to edit muu ammatillinen koulutus',
+    mutationTest(() => {
+      prepareTest('amm-muu');
+      cy.visit(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      );
+      getByTestId('kuvausInput').within(() => {
+        typeToEditor('Kuvausta on muokattu');
+      });
+
+      tallenna();
+    })
+  );
+
   it(
     'should be able to delete koulutus',
     mutationTest(() => {

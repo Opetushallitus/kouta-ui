@@ -25,6 +25,8 @@ export const KuvausFieldsSection = ({
         KOULUTUSTYYPPI.TELMA,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+        KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+        KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
       ].includes(koulutustyyppi) && (
         <Box mb={2}>
           <Field
@@ -47,6 +49,8 @@ export const KuvausFieldsSection = ({
             KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
             KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+            KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
           ].includes(koulutustyyppi)}
         />
       </Box>
@@ -55,6 +59,7 @@ export const KuvausFieldsSection = ({
         KOULUTUSTYYPPI.TELMA,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+        KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
       ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('linkkiEPerusteisiinInput')}>
           <Field

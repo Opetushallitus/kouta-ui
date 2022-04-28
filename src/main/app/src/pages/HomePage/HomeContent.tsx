@@ -129,7 +129,7 @@ const HomeContent = ({
         organisaatio={organisaatio}
         maxInlineItems={5}
       />
-      <Container>
+      <Container maxWidth="1600px">
         <Box py={4}>
           {organisaatio ? <Box mb={-4}>{listSections}</Box> : <Spin center />}
         </Box>

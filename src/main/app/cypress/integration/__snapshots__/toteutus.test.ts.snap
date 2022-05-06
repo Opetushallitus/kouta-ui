@@ -2510,7 +2510,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Muut ammatilliset koulutukset"
+    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",

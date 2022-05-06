@@ -1,27 +1,26 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import Box from '@opetushallitus/virkailija-ui-components/Box';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
 import OpintojenLaajuusFieldExtended from '#/src/components/OpintojenLaajuusFieldExtended';
+import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, KOULUTUS_PERUSOPETUS_KOODIURI } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import {
-  getKoulutustyyppiTranslationKey,
   isIn,
   otherwise,
+  getKoulutustyyppiTranslationKey,
   getTestIdProps,
 } from '#/src/utils';
 
 import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
-import KoulutusalatField from './KoulutusalatField';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 
-export const TutkintoonjohtamattomatTiedotSection = ({
+export const TuvaTelmaAikuistenperusopetusTiedotSection = ({
   disabled,
   language,
   name,
@@ -31,30 +30,17 @@ export const TutkintoonjohtamattomatTiedotSection = ({
   const koulutustyyppiKey = getKoulutustyyppiTranslationKey(koulutustyyppi);
   const { change } = useBoundFormActions();
   const currNimi = useFieldValue(`${name}.nimi`);
-  const nimiDisabled =
-    !useIsOphVirkailija() ||
-    [KOULUTUSTYYPPI.TELMA, KOULUTUSTYYPPI.TUVA].includes(koulutustyyppi);
-  const defaultNimiShouldBeUsed = [
-    KOULUTUSTYYPPI.TUVA,
-    KOULUTUSTYYPPI.TELMA,
-    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-  ].includes(koulutustyyppi);
-
-  const koulutusAlatAvailable = [
-    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-  ].includes(koulutustyyppi);
   useEffect(() => {
-    if (_fp.isUndefined(currNimi) && defaultNimiShouldBeUsed) {
+    if (_fp.isUndefined(currNimi)) {
       change(`${name}.nimi`, {
         fi: t(`${koulutustyyppiKey}`, { lng: 'fi' }),
         sv: t(`${koulutustyyppiKey}`, { lng: 'sv' }),
         en: t(`${koulutustyyppiKey}`, { lng: 'en' }),
       });
     }
-  }, [change, currNimi, defaultNimiShouldBeUsed, koulutustyyppiKey, name, t]);
+  }, [change, currNimi, koulutustyyppiKey, name, t]);
 
+  const nimiDisabled = !useIsOphVirkailija();
   return (
     <Box mb={-2}>
       {koulutustyyppi === KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS && (
@@ -64,13 +50,10 @@ export const TutkintoonjohtamattomatTiedotSection = ({
           />
         </Box>
       )}
-      <Box mb={2}>
+      <Box mb={2} {...getTestIdProps('opintojenlaajuusSelect')}>
         {_fp.cond([
           [
-            isIn([
-              KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-              KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-            ]),
+            isIn([KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS]),
             () => (
               <OpintojenLaajuusFieldExtended
                 name={name}
@@ -86,11 +69,6 @@ export const TutkintoonjohtamattomatTiedotSection = ({
             ),
           ],
         ])(koulutustyyppi)}
-      </Box>
-      <Box mb={2}>
-        {koulutusAlatAvailable && (
-          <KoulutusalatField disabled={disabled} name={name} />
-        )}
       </Box>
       <Box mb={2} {...getTestIdProps('nimiInput')}>
         <Field

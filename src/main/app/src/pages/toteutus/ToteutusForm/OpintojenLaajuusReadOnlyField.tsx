@@ -18,22 +18,15 @@ export const OpintojenLaajuusReadOnlyField = ({
   const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
   const { koodi: laajuusKoodi } = useKoodi(laajuusKoodiUri);
   const laajuusKoodiMetadata = laajuusKoodi?.metadata;
-  let theValue = '';
-
-  if (laajuusKoodiUri && laajuusyksikkoKoodiUri) {
-    theValue =
-      getOpintojenLaajuusTranslation(
+  const theValue = laajuusKoodiUri
+    ? getOpintojenLaajuusTranslation(
         laajuusKoodiMetadata,
         laajuusyksikkoMetadata,
         selectedLanguage
-      ) || '';
-  } else if (laajuusyksikkoKoodiUri) {
-    theValue = `${laajuusNumero || ''} ${
-      getKoodiNimiTranslation(laajuusyksikko, selectedLanguage) || ''
-    }`;
-  } else if (laajuusKoodiUri) {
-    theValue = getKoodiNimiTranslation(laajuusKoodi, selectedLanguage) || '';
-  }
+      ) || ''
+    : `${laajuusNumero || ''} ${
+        getKoodiNimiTranslation(laajuusyksikko, selectedLanguage) || ''
+      }`;
 
   return (
     <FormControl label={t('toteutuslomake.laajuus')} disabled={true}>

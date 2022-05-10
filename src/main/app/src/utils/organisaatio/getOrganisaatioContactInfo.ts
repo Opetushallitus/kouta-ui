@@ -66,24 +66,38 @@ const getOrganisaatioContactInfo = organisaatio => {
   };
 };
 
+export const getKielistetty = (
+  entities,
+  key: string | ((entity: any) => any)
+) =>
+  entities.reduce((result, entity) => {
+    const kieli = getKieliByKieliUri(entity.kieli);
+
+    return kieli
+      ? {
+          ...result,
+          [kieli]: _.isFunction(key) ? key(entity) : entity[key],
+        }
+      : result;
+  }, {});
+
+const makeOsoiteString = osoite => {
+  const postinumero = getPostinumeroByPostinumeroUri(osoite.postinumeroUri);
+  const postitoimipaikka =
+    !_.isEmpty(osoite.postitoimipaikka) &&
+    _.capitalize(osoite.postitoimipaikka);
+
+  return (
+    osoite.osoite +
+    (postinumero && postitoimipaikka
+      ? `, ${postinumero} ${postitoimipaikka}`
+      : '')
+  );
+};
+
 export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
-  const kielistetytOsoitteet = _.reduce(
-    osoitteet,
-    (result, osoite) => {
-      const kieli = getKieliByKieliUri(osoite.kieli);
-
-      const postitoimipaikka = osoite.postitoimipaikka
-        ? _.upperFirst(osoite.postitoimipaikka.toLowerCase())
-        : undefined;
-
-      return {
-        ...result,
-        [kieli]: `${osoite.osoite}, ${getPostinumeroByPostinumeroUri(
-          osoite.postinumeroUri
-        )} ${postitoimipaikka}`,
-      };
-    },
-    {}
+  const kielistetytOsoitteet = getKielistetty(osoitteet, osoite =>
+    makeOsoiteString(osoite)
   );
 
   let enOsoite;
@@ -97,17 +111,6 @@ export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
   }
 
   return { ...kielistetytOsoitteet, ...enOsoite };
-};
-
-export const getKielistetty = (entities, key) => {
-  return entities.reduce((result, entity) => {
-    const kieli = getKieliByKieliUri(entity.kieli);
-
-    return {
-      ...result,
-      [kieli]: entity[key],
-    };
-  }, {});
 };
 
 export const getKielistettyOrganisaatioContactInfo = yhteystiedot => {

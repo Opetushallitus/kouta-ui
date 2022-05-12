@@ -130,6 +130,7 @@ const ToteutusForm = ({
                 {![
                   KOULUTUSTYYPPI.OSAAMISALA,
                   KOULUTUSTYYPPI.TUTKINNON_OSA,
+                  KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
                 ].includes(koulutustyyppi) && (
                   <FormCollapse
                     section="kuvaus"

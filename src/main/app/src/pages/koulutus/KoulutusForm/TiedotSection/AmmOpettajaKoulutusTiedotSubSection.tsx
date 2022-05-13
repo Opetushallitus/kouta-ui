@@ -83,15 +83,6 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
           />
         </FormControl>
       </Box>
-      <Box mb={2} {...getTestIdProps('nimiInput')}>
-        <Field
-          disabled={disabled}
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
-          required
-        />
-      </Box>
     </>
   );
 };

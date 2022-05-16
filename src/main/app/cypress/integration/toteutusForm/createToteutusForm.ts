@@ -103,6 +103,18 @@ const fillCommonJarjestamistiedot = ({
   fillOsiot();
 };
 
+const fillJarjestamistiedotWithApuraha = () => {
+  withinSection('jarjestamistiedot', () => {
+    fillCommonJarjestamistiedot({
+      maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+    });
+    cy.findByTestId('apuraha').should('not.exist');
+    fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
+    cy.findByTestId('apuraha').should('exist');
+    fillApuraha();
+  });
+};
+
 const fillNayttamistiedotSection = (
   { ammattinimikkeet } = { ammattinimikkeet: true }
 ) => {
@@ -506,16 +518,7 @@ export const createToteutusForm = () => {
     });
     */
 
-      withinSection('jarjestamistiedot', () => {
-        fillCommonJarjestamistiedot({
-          maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-        });
-        cy.findByTestId('apuraha').should('not.exist');
-        fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
-        cy.findByTestId('apuraha').should('exist');
-        fillApuraha();
-      });
-
+      fillJarjestamistiedotWithApuraha();
       fillNayttamistiedotSection();
       fillJarjestajatSection();
       fillYhteystiedotSection();
@@ -534,16 +537,7 @@ export const createToteutusForm = () => {
       fillKieliversiotSection();
       fillTiedotSection('amm-ope-erityisope-ja-opo');
 
-      withinSection('jarjestamistiedot', () => {
-        fillCommonJarjestamistiedot({
-          maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-        });
-        cy.findByTestId('apuraha').should('not.exist');
-        fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
-        cy.findByTestId('apuraha').should('exist');
-        fillApuraha();
-      });
-
+      fillJarjestamistiedotWithApuraha();
       fillNayttamistiedotSection();
       fillJarjestajatSection();
       fillYhteystiedotSection();

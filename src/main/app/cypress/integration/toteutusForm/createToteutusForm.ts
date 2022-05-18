@@ -103,6 +103,18 @@ const fillCommonJarjestamistiedot = ({
   fillOsiot();
 };
 
+const fillJarjestamistiedotWithApuraha = () => {
+  withinSection('jarjestamistiedot', () => {
+    fillCommonJarjestamistiedot({
+      maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+    });
+    cy.findByTestId('apuraha').should('not.exist');
+    fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
+    cy.findByTestId('apuraha').should('exist');
+    fillApuraha();
+  });
+};
+
 const fillNayttamistiedotSection = (
   { ammattinimikkeet } = { ammattinimikkeet: true }
 ) => {
@@ -129,7 +141,7 @@ const fillJarjestajatSection = () => {
 
 const fillTiedotSection = tyyppi => {
   withinSection('tiedot', () => {
-    if (['yo', 'amk'].includes(tyyppi)) {
+    if (['yo', 'amk', 'amm-ope-erityisope-ja-opo'].includes(tyyppi)) {
       getByTestId('toteutuksenNimi')
         .find('input')
         .clear()
@@ -506,16 +518,26 @@ export const createToteutusForm = () => {
     });
     */
 
-      withinSection('jarjestamistiedot', () => {
-        fillCommonJarjestamistiedot({
-          maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-        });
-        cy.findByTestId('apuraha').should('not.exist');
-        fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
-        cy.findByTestId('apuraha').should('exist');
-        fillApuraha();
-      });
+      fillJarjestamistiedotWithApuraha();
+      fillNayttamistiedotSection();
+      fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
 
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create amm. ope-, erityisope- ja opokoulutuksen toteutus',
+    mutationTest(() => {
+      prepareTest('amm-ope-erityisope-ja-opo');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillTiedotSection('amm-ope-erityisope-ja-opo');
+
+      fillJarjestamistiedotWithApuraha();
       fillNayttamistiedotSection();
       fillJarjestajatSection();
       fillYhteystiedotSection();

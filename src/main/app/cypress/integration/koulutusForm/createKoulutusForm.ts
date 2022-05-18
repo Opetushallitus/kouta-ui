@@ -266,6 +266,55 @@ export const createKoulutusForm = () => {
   );
 
   it(
+    'should be able to create Ammatillinen opettaja- erityisopettaja ja opokoulutus',
+    mutationTest(() => {
+      fillCommon({
+        koulutustyyppiPath: ['korkeakoulutus', 'amm-ope-erityisope-ja-opo'],
+      });
+
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.valitseKoulutus').pipe(
+          pFillAsyncSelect('Ammatillinen opettajankoulutus')
+        );
+
+        getInputByLabel('koulutuslomake.valitseOpintojenLaajuus')
+          .should('be.disabled')
+          .should('have.value', '60 opintopistettä');
+
+        getInputByLabel('koulutuslomake.valitseTutkintonimike')
+          .should('be.disabled')
+          .should('have.value', 'koulutuslomake.eiTutkintonimiketta');
+
+        getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
+          'have.text',
+          'kansallinenkoulutusluokitus2016koulutusalataso1_01#1'
+        );
+
+        getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
+          'have.value',
+          'Ammatillinen opettajankoulutus'
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillLisatiedotSection();
+
+      fillSoraKuvausSection();
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
     'should be able to create lukiokoulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['lk'] });

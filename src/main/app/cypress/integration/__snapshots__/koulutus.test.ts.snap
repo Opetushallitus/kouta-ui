@@ -754,7 +754,116 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   "tila": "poistettu"
 };
 
-exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koulutus #0`] =
+exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityisopettaja ja opokoulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_000001#12"
+  ],
+  "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+    "kuvauksenNimi": {
+      "fi": "Kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-ope-erityisope-ja-opo"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Ammatillinen opettajankoulutus"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": "1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`editKoulutus > should be able to edit AMK-koulutus #1`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_671112#12"
+  ],
+  "koulutustyyppi": "amk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
+    ],
+    "koulutustyyppi": "amk",
+    "kuvauksenNimi": {
+      "fi": "Fi kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "<p>Fi kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [
+      "tutkintonimikekk_1#1",
+      "tutkintonimikekk_2#1"
+    ],
+    "tyyppi": "amk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Fysioterapeutti (AMK)"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "tila": "tallennettu"
+};
+
+exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja opokoulutus #0`] =
 {
   "ePerusteId": null,
   "esikatselu": false,
@@ -764,37 +873,50 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
   "kielivalinta": [
     "fi"
   ],
-  "koulutuksetKoodiUri": [],
-  "koulutustyyppi": "aikuisten-perusopetus",
+  "koulutuksetKoodiUri": [
+    "koulutus_000001#12"
+  ],
+  "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
-    "koulutusalaKoodiUrit": [],
-    "koulutustyyppi": "aikuisten-perusopetus",
-    "kuvauksenNimi": {},
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
+    ],
+    "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+    "kuvauksenNimi": {
+      "fi": "Fi kuvauksen nimi"
+    },
     "kuvaus": {
-      "fi": "<p>Kuvaus</p>"
+      "fi": "<p>Fi kuvaus</p>"
     },
-    "linkkiEPerusteisiin": {
-      "fi": "http://linkki.fi"
-    },
-    "lisatiedot": [],
-    "opintojenLaajuusKoodiUri": null,
-    "opintojenLaajuusNumero": 13,
-    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
-    "tyyppi": "aikuisten-perusopetus"
+    "tyyppi": "amm-ope-erityisope-ja-opo"
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutustyypit.aikuistenPerusopetus"
+    "fi": "Ammatillinen opettajankoulutus"
   },
+  "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
   "tarjoajat": [
+    "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu"
+  "tila": "tallennettu"
 };
 
 exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`] =
@@ -829,6 +951,49 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "muu ammatillinen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "aikuisten-perusopetus",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "aikuisten-perusopetus",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {
+      "fi": "http://linkki.fi"
+    },
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 13,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "aikuisten-perusopetus"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutustyypit.aikuistenPerusopetus"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,

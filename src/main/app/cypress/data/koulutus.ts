@@ -79,6 +79,25 @@ const getKorkeakouluFields = ({ tyyppi }) => {
   });
 };
 
+const getAmmOpeErityisopeJaOpoFields = ({ tyyppi }) => {
+  return merge(getBaseFields(), {
+    johtaaTutkintoon: false,
+    koulutustyyppi: tyyppi,
+    koulutuksetKoodiUri: ['koulutus_000001#12'],
+    nimi: { fi: 'Ammatillinen opettajankoulutus', sv: 'Yrkeslärarutbildning' },
+    metadata: {
+      tyyppi,
+      kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
+      tutkintonimikeKoodiUrit: [],
+      opintojenLaajuusKoodiUri: 'opintojenlaajuus_60#1',
+      kuvauksenNimi: { fi: 'Fi kuvauksen nimi', sv: 'Sv kuvauksen nimi' },
+      koulutusalaKoodiUrit: [
+        'kansallinenkoulutusluokitus2016koulutusalataso1_01#1',
+      ],
+    },
+  });
+};
+
 const getLukioFields = ({ tyyppi }) => {
   return merge(getBaseFields({ tyyppi }), {
     koulutuksetKoodiUri: ['koulutus_309902#7'],
@@ -145,11 +164,11 @@ const getAikuistenPerusopetusFields = ({ tyyppi }) => {
 };
 
 export default ({ tyyppi = 'amm' } = {}) => {
-  if (tyyppi === 'amm-muu') {
+  if (tyyppi === 'amm-ope-erityisope-ja-opo') {
+    return getAmmOpeErityisopeJaOpoFields({ tyyppi });
+  } else if (tyyppi === 'amm-muu') {
     return getMuuAmmatillinenFields({ tyyppi });
-  }
-
-  if (tyyppi.startsWith('amm')) {
+  } else if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
   } else if (['yo', 'amk'].includes(tyyppi)) {
     return getKorkeakouluFields({ tyyppi });

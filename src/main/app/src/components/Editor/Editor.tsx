@@ -343,20 +343,6 @@ export const Editor = ({
           {...styleButtonProps}
         />
         <StyleButton
-          icon="format_italic"
-          styleName="ITALIC"
-          title={t('editor.kursivointi')}
-          inline
-          {...styleButtonProps}
-        />
-        <StyleButton
-          icon="format_underline"
-          styleName="UNDERLINE"
-          title={t('editor.alleviivaus')}
-          inline
-          {...styleButtonProps}
-        />
-        <StyleButton
           icon="format_list_bulleted"
           styleName="unordered-list-item"
           title={t('editor.lista')}

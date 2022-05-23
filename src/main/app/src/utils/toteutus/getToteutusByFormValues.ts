@@ -54,7 +54,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   } = values;
   const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
   const kielivalinta = values?.kieliversiot || [];
-  const pickTranslations = _fp.pick(kielivalinta);
+  const pickTranslations = _fp.flow(
+    _fp.pickBy(value => !_fp.isEmpty(value)),
+    _fp.pick(kielivalinta)
+  );
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 

@@ -1,16 +1,13 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
-import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
 import { KOULUTUSALA_KASVATUSALAT_KOODIURI } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useKoodi from '#/src/hooks/useKoodi';
-import { getTestIdProps } from '#/src/utils';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 

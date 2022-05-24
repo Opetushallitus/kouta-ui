@@ -8,6 +8,7 @@ import {
 } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
 import getUserRoles from '#/src/utils/getUserRoles';
@@ -68,6 +69,7 @@ export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
   const roles = getUserRoles(user);
   const orgOids = _.uniq(getUserOrganisaatiotWithRoles(user, roles));
   const { organisaatiot } = useOrganisaatiot(orgOids);
+  const isOphVirkailija = useIsOphVirkailija();
   const { hierarkia } = useOrganisaatioHierarkia(creatorOrganisaatioOid, {
     skipParents: false,
   });
@@ -91,10 +93,12 @@ export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
   const preferredOrganisaatio =
     organisaatiot &&
     hierarkia &&
-    (firstSameKoulutustyyppiOrganisation ||
-      firstChildOrganisation ||
-      firstParentOrganisation ||
-      creatorOrganisaatioOid);
+    (isOphVirkailija
+      ? creatorOrganisaatioOid
+      : firstSameKoulutustyyppiOrganisation ||
+        firstChildOrganisation ||
+        firstParentOrganisation ||
+        creatorOrganisaatioOid);
 
   return { preferredOrganisaatio };
 };

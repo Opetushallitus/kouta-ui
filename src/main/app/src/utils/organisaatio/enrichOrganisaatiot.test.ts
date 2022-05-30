@@ -156,3 +156,84 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for one two orgs', () => {
     enrichOrganisaatiot(orgs_from_organisaatiopalvelu, oppilaitokset_from_kouta)
   ).toEqual(result);
 });
+
+test('does not add jarjestaaUrheilijanAmmKoulutusta for oppilaitos org that does not have the value', () => {
+  const orgs_from_organisaatiopalvelu = [
+    {
+      oid: '1.2.246.562.10.96162204109',
+      parentOid: '1.2.246.562.10.48442622063',
+      parentOidPath:
+        '1.2.246.562.10.96162204109/1.2.246.562.10.48442622063/1.2.246.562.10.00000000001',
+      children: [
+        {
+          oid: '1.2.246.562.10.87939127624',
+          parentOid: '1.2.246.562.10.96162204109',
+          parentOidPath:
+            '1.2.246.562.10.87939127624/1.2.246.562.10.96162204109/1.2.246.562.10.48442622063/1.2.246.562.10.00000000001',
+        },
+        {
+          oid: '1.2.246.562.10.92008999028',
+          parentOid: '1.2.246.562.10.96162204109',
+          parentOidPath:
+            '1.2.246.562.10.92008999028/1.2.246.562.10.96162204109/1.2.246.562.10.48442622063/1.2.246.562.10.00000000001',
+        },
+      ],
+    },
+  ];
+
+  const oppilaitokset_from_kouta = [
+    {
+      oid: '1.2.246.562.10.96162204109',
+      oppilaitos: {
+        oid: '1.2.246.562.10.96162204109',
+        tila: 'julkaistu',
+        metadata: {},
+        organisaatioOid: '1.2.246.562.10.96162204109',
+        osat: [
+          {
+            oid: '1.2.246.562.10.87939127624',
+            oppilaitosOid: '1.2.246.562.10.96162204109',
+            metadata: {
+              jarjestaaUrheilijanAmmKoulutusta: true,
+            },
+            organisaatioOid: '1.2.246.562.10.87939127624',
+          },
+          {
+            oid: '1.2.246.562.10.92008999028',
+            oppilaitosOid: '1.2.246.562.10.96162204109',
+            metadata: {
+              jarjestaaUrheilijanAmmKoulutusta: true,
+            },
+            organisaatioOid: '1.2.246.562.10.92008999028',
+          },
+        ],
+      },
+    },
+  ];
+
+  const result = [
+    {
+      oid: '1.2.246.562.10.96162204109',
+      parentOid: '1.2.246.562.10.48442622063',
+      parentOidPath:
+      '1.2.246.562.10.96162204109/1.2.246.562.10.48442622063/1.2.246.562.10.00000000001',
+      children: [
+        {
+          oid: '1.2.246.562.10.87939127624',
+          parentOid: '1.2.246.562.10.96162204109',
+          parentOidPath:
+          '1.2.246.562.10.87939127624/1.2.246.562.10.96162204109/1.2.246.562.10.48442622063/1.2.246.562.10.00000000001',
+        },
+        {
+          oid: '1.2.246.562.10.92008999028',
+          parentOid: '1.2.246.562.10.96162204109',
+          parentOidPath:
+          '1.2.246.562.10.92008999028/1.2.246.562.10.96162204109/1.2.246.562.10.48442622063/1.2.246.562.10.00000000001',
+        },
+      ],
+    },
+  ];
+  expect(
+    enrichOrganisaatiot(orgs_from_organisaatiopalvelu, oppilaitokset_from_kouta)
+  ).toEqual(result);
+});

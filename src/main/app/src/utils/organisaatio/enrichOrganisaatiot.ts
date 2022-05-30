@@ -5,18 +5,20 @@ export const enrichOrganisaatiot = (orgs, oppilaitokset) => {
     const oid = org.oid;
     const oppilaitos = _.find(oppilaitokset, ['oid', oid]);
     if (oppilaitos) {
-      const jarjestaaUrheilijanAmmKoulutusta = _.find(
-        oppilaitos?.oppilaitos?.osat,
-        ['oid', oid]
-      ).metadata?.jarjestaaUrheilijanAmmKoulutusta;
+      const oppilaitoksenOsa = _.find(oppilaitos?.oppilaitos?.osat, [
+        'oid',
+        oid,
+      ]);
 
-      org['jarjestaaUrheilijanAmmKoulutusta'] =
-        jarjestaaUrheilijanAmmKoulutusta;
+      if (oppilaitoksenOsa) {
+        const jarjestaaUrheilijanAmmKoulutusta =
+          oppilaitoksenOsa.metadata?.jarjestaaUrheilijanAmmKoulutusta;
+        org['jarjestaaUrheilijanAmmKoulutusta'] =
+          jarjestaaUrheilijanAmmKoulutusta;
+      }
     }
     return org;
   });
 
-
-  console.log({enrichedOrgs})
   return enrichedOrgs;
 };

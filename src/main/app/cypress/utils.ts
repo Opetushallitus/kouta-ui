@@ -3,6 +3,7 @@ import { loggable } from 'cypress-pipe';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import { isEmpty, includes, last, merge, toLower, uniqueId } from 'lodash/fp';
 
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import commonMocks from '#/cypress/mocks/common.mocks.json';
 import { Alkamiskausityyppi } from '#/src/constants';
 
@@ -225,6 +226,25 @@ export const stubOppijanumerorekisteriHenkiloRoute = ({
   cy.intercept(
     { method: 'GET', url: '/oppijanumerorekisteri-service/henkilo/' },
     { body: henkilo }
+  );
+};
+
+export const stubKoutaBackendOppilaitoksetRoute = (
+  organisaatioOid,
+  toimipistenimi = undefined,
+  jarjestyspaikkaOid = undefined
+) => {
+  cy.intercept(
+    { method: 'POST', url: '/kouta-backend/oppilaitos/oppilaitokset' },
+    {
+      body: {
+        organisaatioHierarkia: organisaatioHierarkia({
+          rootOid: organisaatioOid,
+          toimipistenimi,
+          jarjestyspaikkaOid,
+        }),
+      },
+    }
   );
 };
 

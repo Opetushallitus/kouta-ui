@@ -3,6 +3,8 @@ const OPH_OID = '1.2.246.562.10.00000000001';
 export default ({
   rootOid = '1.1.1.1.1.1',
   rootName = 'Organisaatio',
+  toimipistenimi = `${rootName}_1_1_1`,
+  jarjestyspaikkaOid = '1.2.2.1.1.1',
 } = {}) => {
   return {
     numHits: 1,
@@ -22,8 +24,8 @@ export default ({
             parentOidPath: `1.2.1.1.1.1/${rootOid}/${OPH_OID}`,
             children: [
               {
-                nimi: { fi: `${rootName}_1_1_1` },
-                oid: '1.2.2.1.1.1',
+                nimi: { fi: toimipistenimi },
+                oid: jarjestyspaikkaOid,
                 parentOid: '1.2.1.1.1.1',
                 organisaatiotyypit: ['organisaatiotyyppi_03'],
                 parentOidPath: `1.2.2.1.1.1/1.2.1.1.1.1/${rootOid}/${OPH_OID}`,

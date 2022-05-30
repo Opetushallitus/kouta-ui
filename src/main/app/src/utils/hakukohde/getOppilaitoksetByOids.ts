@@ -1,5 +1,9 @@
-import { PREVENT_REFETCH_QUERY_OPTIONS } from '#/src/constants';
+import { useMemo } from 'react';
+
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { defaultFilter } from '#/src/hooks/useOrganisaatioHierarkia';
+import filterTree from '#/src/utils/filterTree';
 
 export const getOppilaitoksetByOids = async ({
   tarjoajaOids,
@@ -15,12 +19,21 @@ export const getOppilaitoksetByOids = async ({
 };
 
 export const useOppilaitoksetByOids = tarjoajaOids => {
-  const { data } = useApiQuery(
+  const { data, ...rest } = useApiQuery(
     'getOppilaitoksetByOids',
     getOppilaitoksetByOids,
     { tarjoajaOids },
-    { PREVENT_REFETCH_QUERY_OPTIONS }
+    { ...LONG_CACHE_QUERY_OPTIONS }
   );
 
-  return data;
+  const hierarkia = useMemo(
+    () =>
+      filterTree(data?.organisaatioHierarkia.organisaatiot, org =>
+        defaultFilter(org)
+      ),
+    [data]
+  );
+
+  const oppilaitokset = data?.oppilaitokset;
+  return { hierarkia, oppilaitokset, ...rest };
 };

@@ -14,7 +14,6 @@ import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
@@ -64,27 +63,22 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
 
   const selectedValue = useFieldValue('jarjestyspaikkaOid');
 
-  const { hierarkia, isLoading: isHierarkiaLoading } = useOrganisaatioHierarkia(
-    tarjoajaOids,
-    {
-      skipParents: true,
-    }
-  );
+  const { hierarkia, oppilaitokset } = useOppilaitoksetByOids(tarjoajaOids);
 
   const flattenedHierarkia = useMemo(
     () => flattenHierarkia(hierarkia),
     [hierarkia]
   );
+
   const hierarkiaOids = flattenedHierarkia.map(org => org.oid);
 
   const { organisaatio: selectedOrganisaatio, isLoading: isSelectedLoading } =
     useOrganisaatio(
       !hierarkiaOids.includes(selectedValue) ? selectedValue : null,
-      { enabled: !isHierarkiaLoading && !hierarkiaOids.includes(selectedValue) }
+      { enabled: !hierarkiaOids.includes(selectedValue) }
     );
 
   const orgs = [selectedOrganisaatio, ...flattenedHierarkia].filter(Boolean);
-  const oppilaitokset = useOppilaitoksetByOids(tarjoajaOids);
   const enrichedOrgs = enrichOrganisaatiot(orgs, oppilaitokset);
 
   const language = useUserLanguage();
@@ -112,7 +106,7 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
 
   return {
     options: jarjestyspaikkaOptions,
-    isLoading: isHierarkiaLoading || isSelectedLoading,
+    isLoading: isSelectedLoading,
   };
 };
 

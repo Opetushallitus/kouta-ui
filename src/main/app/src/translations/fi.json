@@ -196,7 +196,8 @@
     "oph": "OPH",
     "hakutapa": "Hakutapa",
     "koulutuksenAlkamiskausi": "Koulutuksen alkamiskausi",
-    "koulutuksenAlkamisvuosi": "Koulutuksen alkamisvuosi"
+    "koulutuksenAlkamisvuosi": "Koulutuksen alkamisvuosi",
+    "urheilijanAmmKoulutus": "Urheilijan ammatillinen koulutus"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

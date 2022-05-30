@@ -1,23 +1,18 @@
 import _ from 'lodash';
 
 export const enrichOrganisaatiot = (orgs, oppilaitokset) => {
-  const enrichedOrgs = orgs.map(org => {
-    const oid = org.oid;
-    const oppilaitos = _.find(oppilaitokset, ['oid', oid]);
-    if (oppilaitos) {
-      const oppilaitoksenOsa = _.find(oppilaitos?.oppilaitos?.osat, [
-        'oid',
-        oid,
-      ]);
+  const osat = oppilaitokset?.flatMap(oppilaitos => oppilaitos.osat);
 
-      if (oppilaitoksenOsa) {
-        const jarjestaaUrheilijanAmmKoulutusta =
-          oppilaitoksenOsa.metadata?.jarjestaaUrheilijanAmmKoulutusta;
-        org['jarjestaaUrheilijanAmmKoulutusta'] =
-          jarjestaaUrheilijanAmmKoulutusta;
-      }
-    }
-    return org;
+  const enrichedOrgs = orgs.map(org => {
+    const osa = _.find(osat, ['oid', org.oid]);
+
+    const jarjestaaUrheilijanAmmKoulutusta =
+      osa?.metadata?.jarjestaaUrheilijanAmmKoulutusta;
+
+    return {
+      ...org,
+      jarjestaaUrheilijanAmmKoulutusta,
+    };
   });
 
   return enrichedOrgs;

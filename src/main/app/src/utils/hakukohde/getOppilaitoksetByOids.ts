@@ -28,6 +28,7 @@ export const useOppilaitoksetByOids = tarjoajaOids => {
 
   const hierarkia = useMemo(
     () =>
+      // TODO: Suodatetaan turhat organisaatiot pois jo kouta-backendissä, jolloin tätä ei tarvita
       filterTree(data?.organisaatioHierarkia.organisaatiot, org =>
         defaultFilter(org)
       ),

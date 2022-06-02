@@ -355,7 +355,8 @@
     "vapaaSivistystyo": "Vapaa sivistystyö",
     "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
     "vapaaSivistystyoMuu": "Muu",
-    "aikuistenPerusopetus": "Aikuisten perusopetus"
+    "aikuistenPerusopetus": "Aikuisten perusopetus",
+    "kkOpintojakso": "Opintojakso"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",

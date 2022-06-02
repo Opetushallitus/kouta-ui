@@ -17,9 +17,14 @@ import {
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
+import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
-export const TiedotSection = ({ language, name, koulutustyyppi }) => {
+export const TiedotSection = ({
+  language,
+  name,
+  koulutustyyppi,
+}: ToteutusTiedotSectionProps) => {
   const { t } = useTranslation();
 
   const disableFieldsCopiedFromKoulutus = [

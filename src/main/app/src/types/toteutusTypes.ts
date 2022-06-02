@@ -133,3 +133,11 @@ export type ToteutusFormValues = {
   esikatselu?: boolean;
   esitysnimi?: string;
 };
+
+export type ToteutusTiedotSectionProps = {
+  name: string;
+  language: LanguageCode;
+  disabled?: boolean;
+  koulutus: any;
+  koulutustyyppi: KOULUTUSTYYPPI;
+};

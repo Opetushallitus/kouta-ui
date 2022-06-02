@@ -21,7 +21,7 @@ type UseOrganisaatioHierarkiaOptions =
     }
   | undefined;
 
-const defaultFilter = org => {
+export const defaultFilter = org => {
   const organisaatiotyypit = getOrganisaatioTyypit(org);
 
   const onlyOrganisaatiotyyppi = oneAndOnlyOne(organisaatiotyypit);

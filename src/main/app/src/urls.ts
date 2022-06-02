@@ -47,6 +47,7 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.soraKuvaus-list': `${koutaBackendDevUrl}/sorakuvaus/list`,
   'kouta-backend.oppilaitos': `${koutaBackendDevUrl}/oppilaitos`,
   'kouta-backend.oppilaitos-by-oid': `${koutaBackendDevUrl}/oppilaitos/$1`,
+  'kouta-backend.oppilaitokset-by-oids': `${koutaBackendDevUrl}/oppilaitos/oppilaitokset`,
   'kouta-backend.oppilaitoksenOsa': `${koutaBackendDevUrl}/oppilaitoksen-osa`,
   'kouta-backend.oppilaitoksenOsa-by-oid': `${koutaBackendDevUrl}/oppilaitoksen-osa/$1`,
   'kouta-backend.search.koulutukset': `${koutaBackendDevUrl}/search/koulutukset`,

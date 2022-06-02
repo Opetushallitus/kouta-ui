@@ -12,6 +12,7 @@ import lukioMocks from '#/cypress/mocks/lukio.mocks.json';
 import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
+  stubKoutaBackendOppilaitoksetRoute,
   stubCommonRoutes,
   withinSection,
 } from '#/cypress/utils';
@@ -63,6 +64,7 @@ export const prepareTest = ({
     hakukohteenMuokkaaminenHasExpired,
     hakuWithoutTakarajat,
     hakuWithoutMuokkaamisenTakaraja,
+    tarjoajat,
   });
 
   cy.intercept(
@@ -136,6 +138,7 @@ export const stubHakukohdeFormRoutes = ({
   hakukohteenMuokkaaminenHasExpired,
   hakuWithoutTakarajat,
   hakuWithoutMuokkaamisenTakaraja,
+  tarjoajat,
 }) => {
   stubCommonRoutes();
 
@@ -181,4 +184,9 @@ export const stubHakukohdeFormRoutes = ({
 
   stubHakemuspalveluLomakkeetRoute();
   stubOppijanumerorekisteriHenkiloRoute();
+  stubKoutaBackendOppilaitoksetRoute(
+    organisaatioOid,
+    selectedToimipisteNimi,
+    tarjoajat[0]
+  );
 };

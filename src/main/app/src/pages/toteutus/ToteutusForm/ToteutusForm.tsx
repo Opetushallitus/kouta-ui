@@ -36,20 +36,31 @@ import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
 import { LukiolinjatSection } from './LukiolinjatSection';
 import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
-import { TiedotSection } from './TiedotSection';
-import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
-import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
+  AmmOpoJaErityisopeTiedotSection,
   KorkeakoulutusOpintojaksoTiedotSection,
   TelmaTiedotSection,
+  TutkinnonOsaTiedotSection,
+  TutkintoonJohtavaTiedotSection,
   TuvaTiedotSection,
   VapaaSivistystyoTiedotSection,
-} from './TutkintoonJohtamatonTiedotSection';
+} from './TiedotSection';
+import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
+import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
+
+const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
+  KOULUTUSTYYPPI.TUTKINNON_OSA,
+  KOULUTUSTYYPPI.OSAAMISALA,
+  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+  KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+  KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+  KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+];
 
 type ToteutusFormProps = {
   koulutus: KoulutusModel;
@@ -77,15 +88,12 @@ const ToteutusForm = ({
     'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
   );
 
-  const kaytetaanHakemuspalvelua = [
-    KOULUTUSTYYPPI.TUTKINNON_OSA,
-    KOULUTUSTYYPPI.OSAAMISALA,
-    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-  ].includes(koulutustyyppi)
-    ? hakeutumisTaiIlmoittautumistapa === ATARU
-    : true;
+  const kaytetaanHakemuspalvelua =
+    KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
+      koulutustyyppi
+    )
+      ? hakeutumisTaiIlmoittautumistapa === ATARU
+      : true;
 
   const formMode = useFormMode();
 
@@ -122,53 +130,57 @@ const ToteutusForm = ({
           Component={KieliversiotFields}
         />
 
-        <FormCollapse
-          section="tiedot"
-          header={t('toteutuslomake.toteutuksenTiedot')}
-          languages={languages}
-          Component={_fp.cond([
-            [_fp.isEqual(KOULUTUSTYYPPI.TUVA), () => TuvaTiedotSection],
-            [_fp.isEqual(KOULUTUSTYYPPI.TELMA), () => TelmaTiedotSection],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
-              () => AikuistenperusopetusTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),
-              () => AmmMuuTiedotSection,
-            ],
-            [
-              isIn([
-                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-              ]),
-              () => VapaaSivistystyoTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
-              () => KorkeakoulutusOpintojaksoTiedotSection,
-            ],
-            [otherwise, () => TiedotSection],
-          ])(koulutustyyppi)}
-          koulutustyyppi={koulutustyyppi}
-          koulutus={koulutus}
-        />
-
-        {[
-          KOULUTUSTYYPPI.TUVA,
-          KOULUTUSTYYPPI.TELMA,
-          KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-          KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-        ].includes(koulutustyyppi) && (
+        {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
-            section="kuvaus"
-            header={t('toteutuslomake.toteutuksenKuvaus')}
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
             languages={languages}
-            Component={ToteutuksenKuvausSection}
+            Component={_fp.cond([
+              [_fp.isEqual(KOULUTUSTYYPPI.TUVA), () => TuvaTiedotSection],
+              [_fp.isEqual(KOULUTUSTYYPPI.TELMA), () => TelmaTiedotSection],
+              [
+                _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
+                () => AikuistenperusopetusTiedotSection,
+              ],
+              [
+                _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),
+                () => AmmMuuTiedotSection,
+              ],
+              [
+                isIn([
+                  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+                  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+                ]),
+                () => VapaaSivistystyoTiedotSection,
+              ],
+
+              [
+                isIn([KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA]),
+                () => TutkinnonOsaTiedotSection,
+              ],
+              [
+                _fp.isEqual(
+                  KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
+                ),
+                () => AmmOpoJaErityisopeTiedotSection,
+              ],
+              [
+                _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
+                () => KorkeakoulutusOpintojaksoTiedotSection,
+              ],
+              [otherwise, () => TutkintoonJohtavaTiedotSection],
+            ])(koulutustyyppi)}
+            koulutustyyppi={koulutustyyppi}
+            koulutus={koulutus}
           />
         )}
+
+        <FormCollapse
+          section="kuvaus"
+          header={t('toteutuslomake.toteutuksenKuvaus')}
+          languages={languages}
+          Component={ToteutuksenKuvausSection}
+        />
 
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
@@ -182,7 +194,7 @@ const ToteutusForm = ({
           KOULUTUSTYYPPI.AVOIN_YO,
           KOULUTUSTYYPPI.AVOIN_AMK,
           KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-          KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+          KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
         ].includes(koulutustyyppi) && (
           <FormCollapse
             section="toteutusjaksot"
@@ -231,14 +243,9 @@ const ToteutusForm = ({
           organisaatioOid={organisaatioOid}
           tarjoajat={toteutus?.tarjoajat}
         />
-        {[
-          KOULUTUSTYYPPI.TUTKINNON_OSA,
-          KOULUTUSTYYPPI.OSAAMISALA,
-          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-          KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-          KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-          KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
-        ].includes(koulutustyyppi) && (
+        {KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
+          koulutustyyppi
+        ) && (
           <FormCollapse
             section="hakeutumisTaiIlmoittautumistapa"
             header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}

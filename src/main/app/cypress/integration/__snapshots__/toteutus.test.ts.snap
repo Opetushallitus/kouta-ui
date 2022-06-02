@@ -2946,8 +2946,8 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": 30,
-    "laajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "laajuus": null,
+    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },

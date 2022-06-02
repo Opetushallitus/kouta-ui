@@ -13,26 +13,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
       tila: JULKAISUTILA.TALLENNETTU,
       kielivalinta: ['fi', 'sv'],
       metadata: {
-        alemmanKorkeakoulututkinnonOsaamisalat: [
-          {
-            kuvaus: {
-              fi: 'Fi alempikuvaus',
-              sv: 'Sv alempikuvaus',
-            },
-            linkki: {
-              fi: 'Fi alempilinkki',
-              sv: 'Sv alempilinkki',
-            },
-            nimi: {
-              fi: 'Fi alempinimi',
-              sv: 'Sv alempinimi',
-            },
-            otsikko: {
-              fi: 'Fi alempiotsikko',
-              sv: 'Sv alempiotsikko',
-            },
-          },
-        ],
         ammattinimikkeet: [
           {
             arvo: 'nimike1',
@@ -197,26 +177,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
             wwwSivu: {
               fi: 'Fi verkkosivu',
               sv: 'Sv verkkosivu',
-            },
-          },
-        ],
-        ylemmanKorkeakoulututkinnonOsaamisalat: [
-          {
-            kuvaus: {
-              fi: 'Fi ylempikuvaus',
-              sv: 'Sv ylempikuvaus',
-            },
-            linkki: {
-              fi: 'Fi ylempilinkki',
-              sv: 'Sv ylempilinkki',
-            },
-            nimi: {
-              fi: 'Fi ylempinimi',
-              sv: 'Sv ylempinimi',
-            },
-            otsikko: {
-              fi: 'Fi ylempiotsikko',
-              sv: 'Sv ylempiotsikko',
             },
           },
         ],

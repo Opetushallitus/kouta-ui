@@ -41,8 +41,15 @@ import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import { TiedotSection } from './TiedotSection/TiedotSection';
-import { TuvaTelmaAikuistenperusopetusTiedotSection } from './TiedotSection/TuvaTelmaAikuistenperusopetusTiedotSection';
-import { VapaaSivistystyoAmmMuuTiedotSection } from './TiedotSection/VapaaSivistystyoAmmMuuTiedotSection';
+import {
+  AikuistenPerusopetusTiedotSection,
+  TelmaTiedotSection,
+  TuvaTiedotSection,
+} from './TiedotSection/TuvaTelmaAikuistenperusopetusTiedotSection';
+import {
+  AmmMuuTiedotSection,
+  VapaaSivistystyoTiedotSection,
+} from './TiedotSection/VapaaSivistystyoAmmMuuTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -137,21 +144,22 @@ export const KoulutusForm = ({
               section="information"
               header={t('koulutuslomake.koulutuksenTiedot')}
               Component={_fp.cond([
+                [_fp.isEqual(KOULUTUSTYYPPI.TUVA), () => TuvaTiedotSection],
+                [_fp.isEqual(KOULUTUSTYYPPI.TELMA), () => TelmaTiedotSection],
                 [
-                  isIn([
-                    KOULUTUSTYYPPI.TUVA,
-                    KOULUTUSTYYPPI.TELMA,
-                    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-                  ]),
-                  () => TuvaTelmaAikuistenperusopetusTiedotSection,
+                  _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
+                  () => AikuistenPerusopetusTiedotSection,
                 ],
                 [
                   isIn([
                     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
                     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-                    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
                   ]),
-                  () => VapaaSivistystyoAmmMuuTiedotSection,
+                  () => VapaaSivistystyoTiedotSection,
+                ],
+                [
+                  _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),
+                  () => AmmMuuTiedotSection,
                 ],
                 [otherwise, () => TiedotSection],
               ])(koulutustyyppi)}

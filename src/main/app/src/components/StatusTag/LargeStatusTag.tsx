@@ -12,7 +12,7 @@ import { getThemeProp } from '#/src/theme';
 import { getColor, getLabel, StatusTagProps } from './utils';
 
 const ICON_BY_STATUS = {
-  [JULKAISUTILA.ARKISTOITU]: 'get_app',
+  [JULKAISUTILA.ARKISTOITU]: 'archive',
   [JULKAISUTILA.JULKAISTU]: 'done',
   [JULKAISUTILA.TALLENNETTU]: 'save',
 };

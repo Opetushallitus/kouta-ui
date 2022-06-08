@@ -29,6 +29,7 @@ import HaunKohdejoukkoFields from './HaunKohdejoukkoFields';
 import { NimiSection } from './NimiSection';
 import ScheduleSection from './ScheduleSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
+import { useHaunHakukohteet } from '#/src/utils/haku/useHaunHakukohteet';
 
 type HakuFormProps = {
   organisaatioOid: string;
@@ -57,6 +58,18 @@ const HakuForm = ({
   const canAddHakukohde = useCanCreateHakukohde(
     hakuProp?.hakukohteenLiittamisenTakaraja
   );
+
+  const { data: enrichedHaku } = useHaunHakukohteet(
+    {
+      organisaatioOid,
+      hakuOid: hakuProp?.oid,
+    },
+    { refetchOnWindowFocus: false }
+  );
+  var hakukohdeAmount = '';
+  if (enrichedHaku && enrichedHaku.hakukohteet) {
+    hakukohdeAmount = ' (' + enrichedHaku.hakukohteet?.length + ')';
+  }
 
   const infoText = !canAddHakukohde
     ? t('hakulomake.liittamisenTakarajaYlittynyt')
@@ -151,7 +164,7 @@ const HakuForm = ({
 
         {_fp.isFunction(onAttachHakukohde) ? (
           <FormCollapse
-            header={t('hakulomake.liitetytHakukohteet')}
+            header={t('hakulomake.liitetytHakukohteet') + ' ' + hakukohdeAmount}
             id="liitetyt-hakukohteet"
             clearable={false}
             actions={

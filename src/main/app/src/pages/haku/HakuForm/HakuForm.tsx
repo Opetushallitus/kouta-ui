@@ -64,7 +64,7 @@ const HakuForm = ({
       organisaatioOid,
       hakuOid: hakuProp?.oid,
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, enabled: formMode == FormMode.EDIT }
   );
   var hakukohdeAmount = '';
   if (enrichedHaku && enrichedHaku.hakukohteet) {

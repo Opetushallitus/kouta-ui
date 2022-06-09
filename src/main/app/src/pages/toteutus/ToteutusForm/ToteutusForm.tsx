@@ -110,7 +110,7 @@ const ToteutusForm = ({
       organisaatioOid,
       toteutusOid: toteutus?.oid,
     },
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, enabled: formMode == FormMode.EDIT }
   );
 
   var hakukohdeAmount = '';

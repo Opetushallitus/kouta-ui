@@ -382,6 +382,7 @@ export const LUKIO_KOULUTUSKOODIURIT = [
   'koulutus_309902', // Lukion oppimäärä
   'koulutus_301102', // IB-tutkinto
   'koulutus_301101', // Ylioppilastutkinto
+  'koulutus_301103', // DIA-tutkinto (Deutsche Internationale Abitur)
 ];
 
 export const AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT = [

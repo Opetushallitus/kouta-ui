@@ -60,7 +60,7 @@ export const SoraKuvausFooter = ({
   );
 
   const save = useSaveForm({
-    formName: 'soraKuvausForm',
+    formName: ENTITY.SORA_KUVAUS,
     submit,
     validate: validateSoraKuvausForm,
   });

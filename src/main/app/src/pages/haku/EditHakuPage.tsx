@@ -20,8 +20,6 @@ import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
 import { HakuFooter } from './HakuFooter';
 import HakuForm from './HakuForm';
 
-const FORM_NAME = 'hakuForm';
-
 export const EditHakuPage = () => {
   const history = useHistory();
   const { organisaatioOid, oid } = useParams();
@@ -52,7 +50,7 @@ export const EditHakuPage = () => {
 
   return (
     <ReduxForm
-      form={FORM_NAME}
+      form={ENTITY.HAKU}
       mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}

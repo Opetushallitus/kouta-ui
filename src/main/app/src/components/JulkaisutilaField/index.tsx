@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import { FormFieldRadioGroup } from '#/src/components/formFields';
 import { Box, Radio, Typography } from '#/src/components/virkailija';
-import { JULKAISUTILA } from '#/src/constants';
+import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
@@ -92,7 +92,7 @@ export const JulkaisutilaField = ({
   const isPaakayttaja = useIsOphVirkailija();
   const formName = useFormName();
   const tilaTransferAllowedWithoutPaakayttaja =
-    formName === 'oppilaitos' || formName === 'oppilaitoksenOsa';
+    formName === ENTITY.OPPILAITOS || formName === ENTITY.OPPILAITOKSEN_OSA;
 
   const label = showLabel
     ? labelProp || t('yleiset.valitseJulkaisutila')

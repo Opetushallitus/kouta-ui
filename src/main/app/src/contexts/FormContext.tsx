@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
-import { FormMode } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 
 type FormContextType = {
-  name?: string;
+  name?: ENTITY;
   disabled?: boolean;
   mode?: FormMode;
 };

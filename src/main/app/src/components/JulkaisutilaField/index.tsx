@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { FormFieldRadioGroup } from '#/src/components/formFields';
 import { Box, Radio, Typography } from '#/src/components/virkailija';
 import { JULKAISUTILA } from '#/src/constants';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 const tilaCss = ({ theme, tila }) => {
   const color = theme.colors[tila] || theme.colors.tallennettu;
@@ -46,7 +47,7 @@ const Label = ({ tila, t }) => {
   );
 };
 
-const isAllowedTilaTransition = (currTila, checkedTila) => {
+const isAllowedTilaTransition = (currTila, checkedTila, isPaakayttaja) => {
   /* tila (currTila) on undefined kun ollaan luomassa entiteettiä */
   switch (currTila) {
     case undefined:
@@ -60,9 +61,11 @@ const isAllowedTilaTransition = (currTila, checkedTila) => {
         checkedTila
       );
     case JULKAISUTILA.JULKAISTU:
-      return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.ARKISTOITU].includes(
-        checkedTila
-      );
+      return isPaakayttaja
+        ? [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.ARKISTOITU].includes(
+            checkedTila
+          )
+        : [JULKAISUTILA.ARKISTOITU].includes(checkedTila);
     case JULKAISUTILA.ARKISTOITU:
       return checkedTila === JULKAISUTILA.JULKAISTU;
     default:
@@ -81,6 +84,8 @@ export const JulkaisutilaField = ({
 
   const { t } = useTranslation();
 
+  const isPaakayttaja = useIsOphVirkailija();
+
   const label = showLabel
     ? labelProp || t('yleiset.valitseJulkaisutila')
     : null;
@@ -98,7 +103,7 @@ export const JulkaisutilaField = ({
         JULKAISUTILA.ARKISTOITU,
       ].map(
         tila =>
-          isAllowedTilaTransition(savedTila, tila) && (
+          isAllowedTilaTransition(savedTila, tila, isPaakayttaja) && (
             <Radio key={tila} value={tila}>
               <Label tila={tila} t={t} />
             </Radio>

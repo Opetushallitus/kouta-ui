@@ -3,13 +3,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { FormMode } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 
 import SoraKuvausForm, { initialValues } from './index';
 
 storiesOf('SoraKuvausForm', module).add('Basic', () => (
   <ReduxForm
-    form="toteutus"
+    form={ENTITY.SORA_KUVAUS}
     initialValues={initialValues(['fi'])}
     mode={FormMode.CREATE}
   >

@@ -39,7 +39,7 @@ export const EditSoraKuvausPage = props => {
 
   return (
     <ReduxForm
-      form="soraKuvausForm"
+      form={ENTITY.SORA_KUVAUS}
       mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}

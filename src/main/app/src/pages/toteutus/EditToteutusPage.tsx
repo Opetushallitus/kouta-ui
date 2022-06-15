@@ -22,7 +22,6 @@ import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
-const FORM_NAME = 'toteutusForm';
 
 export const EditToteutusPage = () => {
   const history = useHistory();
@@ -67,7 +66,7 @@ export const EditToteutusPage = () => {
     <FullSpin />
   ) : (
     <ReduxForm
-      form={FORM_NAME}
+      form={ENTITY.TOTEUTUS}
       mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}

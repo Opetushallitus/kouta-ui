@@ -18,8 +18,6 @@ import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFor
 import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm, initialValues } from './ValintaperusteForm';
 
-const FORM_NAME = 'valintaperusteForm';
-
 const getCopyValues = valintaperusteId => ({
   pohja: {
     tapa: POHJAVALINTA.KOPIO,
@@ -56,7 +54,7 @@ export const CreateValintaperustePage = () => {
 
   return (
     <ReduxForm
-      form={FORM_NAME}
+      form={ENTITY.VALINTAPERUSTE}
       mode={FormMode.CREATE}
       initialValues={initialValues}
     >

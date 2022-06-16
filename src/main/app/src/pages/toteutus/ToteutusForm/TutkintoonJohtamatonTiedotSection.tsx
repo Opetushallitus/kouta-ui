@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import OpintojenLaajuusFieldExtended from '#/src/components/OpintojenLaajuusFieldExtended';
 import { Box } from '#/src/components/virkailija';
 import { OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
@@ -155,7 +156,6 @@ export const VapaaSivistystyoTiedotSection = ({
 }: ToteutusTiedotSectionProps) => {
   useNimiFromKoulutus({ koulutus, name });
 
-  const selectedLanguage = useLanguageTab();
   const opintojenLaajuusyksikkoKoodiUri =
     koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
 
@@ -164,7 +164,7 @@ export const VapaaSivistystyoTiedotSection = ({
       <NimiSection name={name} language={language} disabled={true} />
       <Box maxWidth="300px">
         <OpintojenLaajuusReadOnlyField
-          selectedLanguage={selectedLanguage}
+          selectedLanguage={language}
           laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
           laajuusyksikkoKoodiUri={opintojenLaajuusyksikkoKoodiUri}
           laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
@@ -175,3 +175,17 @@ export const VapaaSivistystyoTiedotSection = ({
 };
 
 export const AmmMuuTiedotSection = VapaaSivistystyoTiedotSection;
+
+export const KorkeakoulutusOpintojaksoTiedotSection = ({
+  koulutus,
+  language,
+  disabled,
+  name,
+}: ToteutusTiedotSectionProps) => (
+  <PaddedSections gutter={2}>
+    <NimiSection name={name} language={language} disabled={true} />
+    <Box mb={2}>
+      <OpintojenLaajuusFieldExtended name={name} disabled={disabled} required />
+    </Box>
+  </PaddedSections>
+);

@@ -42,6 +42,7 @@ import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
+  KorkeakoulutusOpintojaksoTiedotSection,
   TelmaTiedotSection,
   TuvaTiedotSection,
   VapaaSivistystyoTiedotSection,
@@ -142,6 +143,10 @@ const ToteutusForm = ({
                 KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
               ]),
               () => VapaaSivistystyoTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
+              () => KorkeakoulutusOpintojaksoTiedotSection,
             ],
             [otherwise, () => TiedotSection],
           ])(koulutustyyppi)}

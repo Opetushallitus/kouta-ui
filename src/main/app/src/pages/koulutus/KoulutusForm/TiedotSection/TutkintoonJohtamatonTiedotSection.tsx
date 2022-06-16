@@ -157,4 +157,31 @@ export const AmmMuuTiedotSection = ({ disabled, language, name }) => {
   );
 };
 
-export const KorkeakoulutusOpintojaksoTiedotSection = AmmMuuTiedotSection;
+export const KorkeakoulutusOpintojaksoTiedotSection = ({
+  disabled,
+  language,
+  name,
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Box>
+      <Box mb={2}>
+        <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
+      </Box>
+      <Box mb={2}>
+        <KoulutusalatField disabled={disabled} name={name} />
+      </Box>
+      <Box>
+        <Field
+          disabled={disabled}
+          name={`${name}.nimi.${language}`}
+          component={FormFieldInput}
+          label={t('koulutuslomake.koulutuksenNimi')}
+          helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
+          required
+        />
+      </Box>
+    </Box>
+  );
+};

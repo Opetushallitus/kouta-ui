@@ -35,7 +35,7 @@ export enum KOULUTUSTYYPPI {
   MUU_AMMATILLINEN_KOULUTUS = 'amm-muu',
   AVOIN_YO = 'avoin_yo',
   AVOIN_AMK = 'avoin_amk',
-  TAYDENNYS_KOULUTUS = 'taydennyskoulutus',
+  TAYDENNYSKOULUTUS = 'taydennyskoulutus',
   ERIKOISTUMISKOULUTUS = 'erikoistumiskoulutus',
   VALMENTAVA_KOULUTUS = 'valmentava_koulutus',
   AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS = 'amm-ope-erityisope-ja-opo',
@@ -43,6 +43,7 @@ export enum KOULUTUSTYYPPI {
   VAPAA_SIVISTYSTYO_OPISTOVUOSI = 'vapaa-sivistystyo-opistovuosi',
   VAPAA_SIVISTYSTYO_MUU = 'vapaa-sivistystyo-muu',
   AIKUISTEN_PERUSOPETUS = 'aikuisten-perusopetus',
+  KORKEAKOULUTUS_OPINTOJAKSO = 'kk-opintojakso',
 }
 
 export const KOULUTUSTYYPIT = Object.values(KOULUTUSTYYPPI);
@@ -56,10 +57,11 @@ export const TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT = [
   // NOTE: Näitä korkeakoulukoulutustyyppejä ei ole vielä lisätty
   // KOULUTUSTYYPPI.AVOIN_YO,
   // KOULUTUSTYYPPI.AVOIN_AMK,
-  // KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+  // KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
   // KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
   // KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS,
   KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+  KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
 ];
 
 export const KORKEAKOULU_KOULUTUSTYYPIT = [
@@ -91,8 +93,11 @@ export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
 
 // NOTE: Näitä koulutustyyppejä ei tueta koska niiden toteutus puuttuu backendista, päivitä listaa kun backend tukee näitä
 export const EI_TUETUT_KOULUTUSTYYPIT = [
-  KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
-  KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+  KOULUTUSTYYPPI.AVOIN_YO,
+  KOULUTUSTYYPPI.AVOIN_AMK,
+  KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
+  KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+  KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS,
 ];
 
 export const TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT = [
@@ -402,3 +407,8 @@ export const LUKIO_YLEISLINJA = 'yleislinja';
 export const KOULUTUS_PERUSOPETUS_KOODIURI = 'koulutus_201101';
 
 export type Koulutustyyppi = ValueOf<KOULUTUSTYYPPI>;
+
+export enum OpintojenLaajuusyksikko {
+  OPINTOPISTE = 'opintojenlaajuusyksikko_2',
+  OSAAMISPISTE = 'opintojenlaajuusyksikko_6',
+}

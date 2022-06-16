@@ -111,8 +111,6 @@ export type ToteutusFormValues = {
     osaamisalaLinkit: Record<string, TranslatedField<string>>;
     osaamisalaLinkkiOtsikot: Record<string, TranslatedField<string>>;
   };
-  ylemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
-  alemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
   lukiolinjat: {
     yleislinja: boolean;
     painotukset: LukiolinjatOsio;
@@ -132,4 +130,12 @@ export type ToteutusFormValues = {
   soraKuvaus?: SelectOption;
   esikatselu?: boolean;
   esitysnimi?: string;
+};
+
+export type ToteutusTiedotSectionProps = {
+  name: string;
+  language: LanguageCode;
+  disabled?: boolean;
+  koulutus: any;
+  koulutustyyppi: KOULUTUSTYYPPI;
 };

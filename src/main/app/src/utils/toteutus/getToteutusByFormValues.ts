@@ -11,20 +11,6 @@ import { isApurahaVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
-const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
-  return (osaamisalat || []).map(
-    ({ kuvaus = {}, nimi = {}, linkki = {}, otsikko = {} }) => ({
-      kuvaus: _fp.flow(
-        pickTranslations,
-        _fp.mapValues(serializeEditorState)
-      )(kuvaus),
-      nimi: pickTranslations(nimi),
-      linkki: pickTranslations(linkki),
-      otsikko: pickTranslations(otsikko),
-    })
-  );
-};
-
 const getLukiolinjatByValues = (linjaValues, pickTranslations) =>
   (linjaValues?.kaytossa &&
     linjaValues?.valinnat?.map(({ value }) => ({
@@ -215,14 +201,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
             arvo: value,
           }));
         }),
-      ylemmanKorkeakoulututkinnonOsaamisalat: getOsaamisalatByValues({
-        osaamisalat: values?.ylemmanKorkeakoulututkinnonOsaamisalat,
-        pickTranslations,
-      }),
-      alemmanKorkeakoulututkinnonOsaamisalat: getOsaamisalatByValues({
-        osaamisalat: values?.alemmanKorkeakoulututkinnonOsaamisalat,
-        pickTranslations,
-      }),
       kuvaus: _fp.flow(
         pickTranslations,
         _fp.mapValues(serializeEditorState)

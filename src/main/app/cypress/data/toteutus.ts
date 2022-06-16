@@ -1,10 +1,6 @@
 import { merge } from 'lodash/fp';
 
-import {
-  Alkamiskausityyppi,
-  ApurahaYksikko,
-  HAKULOMAKETYYPPI,
-} from '#/src/constants';
+import { Alkamiskausityyppi, ApurahaYksikko } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const getBaseFields = () => ({
@@ -117,29 +113,6 @@ const getAmmatillinenFields = ({ tyyppi }) =>
     },
   });
 
-const getKorkeakouluFields = ({ tyyppi }) =>
-  merge(getBaseFields(), {
-    metadata: {
-      tyyppi,
-      ylemmanKorkeakoulututkinnonOsaamisalat: [
-        {
-          kuvaus: { fi: 'osaamisalan kuvaus' },
-          nimi: { fi: 'osaamisalan nimi' },
-          linkki: { fi: 'http://linkki.com' },
-          otsikko: { fi: 'osaamisalan otsikko' },
-        },
-      ],
-      alemmanKorkeakoulututkinnonOsaamisalat: [
-        {
-          kuvaus: { fi: 'osaamisalan kuvaus' },
-          nimi: { fi: 'osaamisalan nimi' },
-          linkki: { fi: 'http://linkki.com' },
-          otsikko: { fi: 'osaamisalan otsikko' },
-        },
-      ],
-    },
-  });
-
 const getLukioFields = ({ tyyppi }) =>
   merge(getBaseFields(), {
     nimi: {},
@@ -181,8 +154,6 @@ export default ({ tyyppi = 'amm' }) => {
   }
   if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
-  } else if (['yo', 'amk'].includes(tyyppi)) {
-    return getKorkeakouluFields({ tyyppi });
   } else if (tyyppi === 'lk') {
     return getLukioFields({ tyyppi });
   }

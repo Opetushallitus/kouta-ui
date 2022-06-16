@@ -739,22 +739,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
   ],
   "koulutusOid": "1.2.1.1.1.1",
   "metadata": {
-    "alemmanKorkeakoulututkinnonOsaamisalat": [
-      {
-        "kuvaus": {
-          "fi": "<p>osaamisalan kuvaus</p>"
-        },
-        "linkki": {
-          "fi": "http://linkki.com"
-        },
-        "nimi": {
-          "fi": "osaamisalan nimi"
-        },
-        "otsikko": {
-          "fi": "osaamisalan otsikko"
-        }
-      }
-    ],
+    "alemmanKorkeakoulututkinnonOsaamisalat": [],
     "aloituspaikat": null,
     "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": [
@@ -864,22 +849,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
         }
       }
     ],
-    "ylemmanKorkeakoulututkinnonOsaamisalat": [
-      {
-        "kuvaus": {
-          "fi": "<p>osaamisalan kuvaus</p>"
-        },
-        "linkki": {
-          "fi": "http://linkki.com"
-        },
-        "nimi": {
-          "fi": "osaamisalan nimi"
-        },
-        "otsikko": {
-          "fi": "osaamisalan otsikko"
-        }
-      }
-    ]
+    "ylemmanKorkeakoulututkinnonOsaamisalat": []
   },
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
@@ -2932,4 +2902,147 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
     "3.1.1.1.1.1"
   ],
   "tila": "tallennettu"
+};
+
+exports[`createToteutus > should be able to create korkeakoulutus opintojakso toteutus #0`] =
+{
+  "esikatselu": false,
+  "externalId": null,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "alemmanKorkeakoulututkinnonOsaamisalat": [],
+    "aloituspaikat": null,
+    "ammattinimikkeet": [],
+    "asiasanat": [
+      {
+        "arvo": "avainsana",
+        "kieli": "fi"
+      }
+    ],
+    "diplomit": [],
+    "erityisetKoulutustehtavat": [],
+    "hakuaika": {
+      "alkaa": "2050-04-01T00:00",
+      "paattyy": "2050-09-01T00:00"
+    },
+    "hakulomakeLinkki": {
+      "fi": "http://example.com"
+    },
+    "hakulomaketyyppi": "muu",
+    "hakutermi": "hakeutuminen",
+    "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1Kielet": [],
+      "A2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
+    "kuvaus": {
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
+    "laajuus": 30,
+    "laajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "lisatietoaHakeutumisesta": {
+      "fi": "<p>lisätiedot</p>"
+    },
+    "lisatietoaValintaperusteista": {
+      "fi": "<p>lisätiedot valintaperusteista</p>"
+    },
+    "opetus": {
+      "apuraha": {
+        "kuvaus": {
+          "fi": "<p>apuraha kuvaus</p>"
+        },
+        "max": 20,
+        "min": 20,
+        "yksikko": "euro"
+      },
+      "koulutuksenAlkamiskausi": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+          "teksti": {
+            "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "<p>maksullisuus kuvaus</p>"
+      },
+      "maksullisuustyyppi": "lukuvuosimaksu",
+      "maksunMaara": 10,
+      "onkoApuraha": true,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_1#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "<p>opetusaika kuvaus</p>"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "<p>opetuskieli kuvaus</p>"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_1#2",
+        "oppilaitoksenopetuskieli_4#2"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_1#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "<p>opetustapa kuvaus</p>"
+      },
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "<p>suunniteltu kesto kuvaus</p>"
+      },
+      "suunniteltuKestoVuodet": 2
+    },
+    "osaamisalat": [],
+    "painotukset": [],
+    "toteutusjaksot": [],
+    "tyyppi": "kk-opintojakso",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähköposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "http://verkkosivu"
+        }
+      }
+    ],
+    "ylemmanKorkeakoulututkinnonOsaamisalat": []
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "toteutuksen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "tila": "julkaistu"
 };

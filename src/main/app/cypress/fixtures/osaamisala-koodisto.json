@@ -1,0 +1,59 @@
+[
+    {
+        "koodiUri": "osaamisala_1800",
+        "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1800",
+        "version": 3,
+        "versio": 1,
+        "koodisto": {
+            "koodistoUri": "osaamisala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+                3
+            ]
+        },
+        "koodiArvo": "1800",
+        "paivitysPvm": "2019-11-28",
+        "paivittajaOid": "1.2.246.562.24.35128937253",
+        "voimassaAlkuPvm": "2019-10-11",
+        "voimassaLoppuPvm": null,
+        "tila": "LUONNOS",
+        "metadata": [
+            {
+                "nimi": "Kaivostyön osaamisala",
+                "kuvaus": "Kaivostyön osaamisala. Astuu voimaan 1.8.2020.",
+                "lyhytNimi": "Kaivostyön oa",
+                "kayttoohje": "",
+                "kasite": "",
+                "sisaltaaMerkityksen": "",
+                "eiSisallaMerkitysta": "",
+                "huomioitavaKoodi": "",
+                "sisaltaaKoodiston": "",
+                "kieli": "FI"
+            },
+            {
+                "nimi": "Kaivostyön osaamisala",
+                "kuvaus": "Kaivostyön osaamisala. Astuu voimaan 1.8.2020.",
+                "lyhytNimi": "Kaivostyön oa",
+                "kayttoohje": "",
+                "kasite": "",
+                "sisaltaaMerkityksen": "",
+                "eiSisallaMerkitysta": "",
+                "huomioitavaKoodi": "",
+                "sisaltaaKoodiston": "",
+                "kieli": "EN"
+            },
+            {
+                "nimi": "Kompetensområdet för gruvarbete",
+                "kuvaus": "Kompetensområdet för gruvarbete. Träder i kraft 1.8.2020.",
+                "lyhytNimi": "Kompetensområdet för gruvarbete",
+                "kayttoohje": "",
+                "kasite": "",
+                "sisaltaaMerkityksen": "",
+                "eiSisallaMerkitysta": "",
+                "huomioitavaKoodi": "",
+                "sisaltaaKoodiston": "",
+                "kieli": "SV"
+            }
+        ]
+    }
+]

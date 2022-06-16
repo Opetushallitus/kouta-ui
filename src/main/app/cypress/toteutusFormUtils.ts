@@ -7,12 +7,17 @@ import { stubCommonRoutes } from '#/cypress/utils';
 export const stubToteutusFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
 
+  cy.intercept(
+    { method: 'GET', url: '**/koodisto-service/rest/json/osaamisala/koodi**' },
+    { fixture: 'osaamisala-koodisto.json' }
+  );
+
   cy.intercept({ method: 'GET', url: `**/haku/list**` }, { body: [] });
 
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**oid=${organisaatioOid}**`,
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
     },
     { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
   );

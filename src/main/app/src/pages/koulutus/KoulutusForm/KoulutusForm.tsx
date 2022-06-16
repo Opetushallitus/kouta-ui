@@ -43,13 +43,12 @@ import { OsaamisalaSection } from './OsaamisalaSection';
 import { TiedotSection } from './TiedotSection/TiedotSection';
 import {
   AikuistenPerusopetusTiedotSection,
+  AmmMuuTiedotSection,
+  KorkeakoulutusOpintojaksoTiedotSection,
   TelmaTiedotSection,
   TuvaTiedotSection,
-} from './TiedotSection/TuvaTelmaAikuistenperusopetusTiedotSection';
-import {
-  AmmMuuTiedotSection,
   VapaaSivistystyoTiedotSection,
-} from './TiedotSection/VapaaSivistystyoAmmMuuTiedotSection';
+} from './TiedotSection/TutkintoonJohtamatonTiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -161,6 +160,10 @@ export const KoulutusForm = ({
                   _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),
                   () => AmmMuuTiedotSection,
                 ],
+                [
+                  _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
+                  () => KorkeakoulutusOpintojaksoTiedotSection,
+                ],
                 [otherwise, () => TiedotSection],
               ])(koulutustyyppi)}
               languages={languageTabs}
@@ -252,6 +255,7 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
             KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
             KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+            KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse

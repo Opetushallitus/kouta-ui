@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { FormMode } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 
 import { ValintaperusteForm, initialValues } from './index';
 
@@ -13,7 +13,11 @@ const Wrapper = () => {
   const initial = initialValues(['fi']);
 
   return (
-    <ReduxForm form="hakukohde" initialValues={initial} mode={FormMode.CREATE}>
+    <ReduxForm
+      form={ENTITY.VALINTAPERUSTE}
+      initialValues={initial}
+      mode={FormMode.CREATE}
+    >
       <ValintaperusteForm organisaatioOid="1.2.246.562.10.594252633210" />
     </ReduxForm>
   );

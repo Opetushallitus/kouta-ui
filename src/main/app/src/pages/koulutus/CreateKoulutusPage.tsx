@@ -20,8 +20,6 @@ import { initialKoulutusValues } from './initialKoulutusValues';
 import KoulutusFooter from './KoulutusFooter';
 import { KoulutusForm } from './KoulutusForm';
 
-const FORM_NAME = 'koulutusForm';
-
 const getCopyValues = koulutus => ({
   pohja: {
     tarjoajat: koulutus.tarjoajat,
@@ -50,7 +48,7 @@ export const CreateKoulutusPage = () => {
   return (
     <ReduxForm
       mode={FormMode.CREATE}
-      form={FORM_NAME}
+      form={ENTITY.KOULUTUS}
       initialValues={initialValues}
     >
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>

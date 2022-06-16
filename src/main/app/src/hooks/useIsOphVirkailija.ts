@@ -1,6 +1,9 @@
 import { useMemo } from 'react';
 
-import { KOULUTUS_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
+import {
+  OPETUSHALLITUS_ORGANISAATIO_OID,
+  OPH_PAAKAYTTAJA_ROLE,
+} from '../constants';
 import useAuthorizedUserRoleBuilder from './useAuthorizedUserRoleBuilder';
 
 export const useIsOphVirkailija = () => {
@@ -9,7 +12,7 @@ export const useIsOphVirkailija = () => {
   return useMemo(
     () =>
       roleBuilder
-        .hasUpdate(KOULUTUS_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
+        .hasUpdate(OPH_PAAKAYTTAJA_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
         .result(),
     [roleBuilder]
   );

@@ -3,13 +3,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { FormMode } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 
 import OppilaitosForm, { initialValues } from './index';
 
 storiesOf('OppilaitosForm', module).add('Basic', () => (
   <ReduxForm
-    form="oppilaitosForm"
+    form={ENTITY.OPPILAITOS}
     initialValues={initialValues}
     mode={FormMode.CREATE}
   >

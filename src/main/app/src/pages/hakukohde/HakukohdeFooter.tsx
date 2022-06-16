@@ -106,8 +106,8 @@ export const HakukohdeFooter = ({
   );
 
   const save = useSaveForm({
-    submit,
     formName,
+    submit,
     validate: validateHakukohdeForm(koulutustyyppi),
   });
 

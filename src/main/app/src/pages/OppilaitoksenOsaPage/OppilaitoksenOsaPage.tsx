@@ -120,7 +120,7 @@ export const OppilaitoksenOsaPage = () => {
     <FullSpin />
   ) : (
     <ReduxForm
-      form="oppilaitoksenOsa"
+      form={ENTITY.OPPILAITOKSEN_OSA}
       initialValues={initialValues}
       disabled={readOnly}
       mode={formMode}

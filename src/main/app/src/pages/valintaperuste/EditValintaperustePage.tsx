@@ -41,7 +41,7 @@ export const EditValintaperustePage = () => {
     <FullSpin />
   ) : (
     <ReduxForm
-      form="valintaperusteForm"
+      form={ENTITY.VALINTAPERUSTE}
       mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}

@@ -111,8 +111,6 @@ export type ToteutusFormValues = {
     osaamisalaLinkit: Record<string, TranslatedField<string>>;
     osaamisalaLinkkiOtsikot: Record<string, TranslatedField<string>>;
   };
-  ylemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
-  alemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
   lukiolinjat: {
     yleislinja: boolean;
     painotukset: LukiolinjatOsio;

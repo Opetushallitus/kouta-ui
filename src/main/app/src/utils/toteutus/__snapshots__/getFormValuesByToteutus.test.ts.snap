@@ -2,26 +2,6 @@
 
 exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] = `
 Object {
-  "alemmanKorkeakoulututkinnonOsaamisalat": Array [
-    Object {
-      "kuvaus": Object {
-        "fi": "<p>Fi alempikuvaus</p>",
-        "sv": "<p>Sv alempikuvaus</p>",
-      },
-      "linkki": Object {
-        "fi": "Fi alempilinkki",
-        "sv": "Sv alempilinkki",
-      },
-      "nimi": Object {
-        "fi": "Fi alempinimi",
-        "sv": "Sv alempinimi",
-      },
-      "otsikko": Object {
-        "fi": "Fi alempiotsikko",
-        "sv": "Sv alempiotsikko",
-      },
-    },
-  ],
   "esikatselu": false,
   "externalId": "ext1",
   "hakeutumisTaiIlmoittautumistapa": Object {
@@ -385,26 +365,6 @@ Object {
       "verkkosivu": Object {
         "fi": "Fi verkkosivu",
         "sv": "Sv verkkosivu",
-      },
-    },
-  ],
-  "ylemmanKorkeakoulututkinnonOsaamisalat": Array [
-    Object {
-      "kuvaus": Object {
-        "fi": "<p>Fi ylempikuvaus</p>",
-        "sv": "<p>Sv ylempikuvaus</p>",
-      },
-      "linkki": Object {
-        "fi": "Fi ylempilinkki",
-        "sv": "Sv ylempilinkki",
-      },
-      "nimi": Object {
-        "fi": "Fi ylempinimi",
-        "sv": "Sv ylempinimi",
-      },
-      "otsikko": Object {
-        "fi": "Fi ylempiotsikko",
-        "sv": "Sv ylempiotsikko",
       },
     },
   ],

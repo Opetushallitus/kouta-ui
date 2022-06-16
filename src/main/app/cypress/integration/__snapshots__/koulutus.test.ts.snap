@@ -1160,3 +1160,55 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
   ],
   "tila": "julkaistu"
 };
+
+exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": true,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_301103#12"
+  ],
+  "koulutustyyppi": "lk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso1_00#1"
+    ],
+    "koulutustyyppi": "lk",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "lk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Deutsche Internationale Abitur; Reifeprüfung"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": "1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};

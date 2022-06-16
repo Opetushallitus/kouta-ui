@@ -25,8 +25,6 @@ import {
   wrapMutationTest,
   withinSection,
   getInputByLabel,
-  getSelectByLabel,
-  pFillSelect,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -152,13 +150,6 @@ const fillTiedotSection = tyyppi => {
         .find('input')
         .clear()
         .pipe(paste('toteutuksen nimi'));
-    }
-    if (tyyppi === 'kk-opintojakso') {
-      getByTestId('laajuusnumero').pipe(paste('30'));
-
-      getSelectByLabel('yleiset.laajuusyksikko').pipe(
-        pFillSelect('opintopistettä')
-      );
     }
   });
 };

@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
-import OpintojenLaajuusFieldExtended from '#/src/components/OpintojenLaajuusFieldExtended';
 import { Box } from '#/src/components/virkailija';
 import {
   OpintojenLaajuusyksikko,
@@ -41,6 +40,7 @@ const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
         component={FormFieldInput}
         label={t('toteutuslomake.toteutuksenNimi')}
         disabled={disabled}
+        required
       />
     </div>
   );
@@ -159,20 +159,17 @@ export const VapaaSivistystyoTiedotSection = ({
 }: ToteutusTiedotSectionProps) => {
   useNimiFromKoulutus({ koulutus, name });
 
-  const opintojenLaajuusyksikkoKoodiUri =
-    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
-
   return (
     <PaddedSections gutter={2}>
       <NimiSection name={name} language={language} disabled={true} />
-      <Box maxWidth="300px">
-        <OpintojenLaajuusReadOnlyField
-          selectedLanguage={language}
-          laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
-          laajuusyksikkoKoodiUri={opintojenLaajuusyksikkoKoodiUri}
-          laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
-        />
-      </Box>
+      <OpintojenLaajuusReadOnlyField
+        selectedLanguage={language}
+        laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+        laajuusyksikkoKoodiUri={
+          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
+        }
+        laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
+      />
     </PaddedSections>
   );
 };
@@ -183,12 +180,18 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
   language,
   disabled,
   name,
+  koulutus,
 }: ToteutusTiedotSectionProps) => (
   <PaddedSections gutter={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <Box mb={2}>
-      <OpintojenLaajuusFieldExtended name={name} disabled={disabled} required />
-    </Box>
+    <OpintojenLaajuusReadOnlyField
+      selectedLanguage={language}
+      laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+      laajuusyksikkoKoodiUri={
+        koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
+      }
+      laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
+    />
   </PaddedSections>
 );
 
@@ -229,32 +232,23 @@ export const TutkintoonJohtavaTiedotSection = ({
   language,
   name,
   koulutustyyppi,
+  disabled,
 }: ToteutusTiedotSectionProps) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Box mb={2} {...getTestIdProps('toteutuksenNimi')}>
-        <Field
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('toteutuslomake.toteutuksenNimi')}
-          required
-        />
-      </Box>
-
+    <PaddedSections gutter={2}>
+      <NimiSection name={name} language={language} disabled={disabled} />
       {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
         koulutustyyppi
       ) && (
-        <Box mb={2}>
-          <Field
-            name={`${name}.ammatillinenPerustutkintoErityisopetuksena`}
-            component={FormFieldSwitch}
-          >
-            {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
-          </Field>
-        </Box>
+        <Field
+          name={`${name}.ammatillinenPerustutkintoErityisopetuksena`}
+          component={FormFieldSwitch}
+        >
+          {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
+        </Field>
       )}
-    </>
+    </PaddedSections>
   );
 };

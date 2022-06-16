@@ -19,6 +19,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
+  DIA_KOULUTUSKOODIURI,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -26,6 +27,7 @@ import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps, isIn, otherwise } from '#/src/utils';
+import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
@@ -46,6 +48,7 @@ import {
   TutkintoonJohtavaTiedotSection,
   TuvaTiedotSection,
   VapaaSivistystyoTiedotSection,
+  DIATiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -94,6 +97,12 @@ const ToteutusForm = ({
     )
       ? hakeutumisTaiIlmoittautumistapa === ATARU
       : true;
+
+  const isDIAkoulutus =
+    koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
+    koulutus?.koulutuksetKoodiUri
+      .map(koodiuri => koodiUriWithoutVersion(koodiuri))
+      .includes(DIA_KOULUTUSKOODIURI);
 
   const formMode = useFormMode();
 
@@ -170,6 +179,17 @@ const ToteutusForm = ({
               ],
               [otherwise, () => TutkintoonJohtavaTiedotSection],
             ])(koulutustyyppi)}
+            koulutustyyppi={koulutustyyppi}
+            koulutus={koulutus}
+          />
+        )}
+
+        {isDIAkoulutus && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={DIATiedotSection}
             koulutustyyppi={koulutustyyppi}
             koulutus={koulutus}
           />

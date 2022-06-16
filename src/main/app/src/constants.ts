@@ -403,3 +403,8 @@ export const LUKIO_YLEISLINJA = 'yleislinja';
 export const KOULUTUS_PERUSOPETUS_KOODIURI = 'koulutus_201101';
 
 export type Koulutustyyppi = ValueOf<KOULUTUSTYYPPI>;
+
+export enum OpintojenLaajuusyksikko {
+  OPINTOPISTE = 'opintojenlaajuusyksikko_2',
+  OSAAMISPISTE = 'opintojenlaajuusyksikko_6',
+}

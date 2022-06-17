@@ -252,3 +252,17 @@ export const TutkintoonJohtavaTiedotSection = ({
     </PaddedSections>
   );
 };
+
+export const EBTiedotSection = ({
+  koulutus,
+  language,
+  name,
+}: ToteutusTiedotSectionProps) => {
+  useNimiFromKoulutus({ koulutus, name });
+
+  return (
+    <PaddedSections gutter={2}>
+      <NimiSection name={name} language={language} disabled={false} />
+    </PaddedSections>
+  );
+};

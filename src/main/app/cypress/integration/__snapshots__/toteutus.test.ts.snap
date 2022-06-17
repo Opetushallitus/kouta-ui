@@ -3002,3 +3002,154 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
   ],
   "tila": "julkaistu"
 };
+
+exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
+{
+  "esikatselu": false,
+  "externalId": null,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "aloituspaikat": null,
+    "ammattinimikkeet": [],
+    "asiasanat": [
+      {
+        "arvo": "avainsana",
+        "kieli": "fi"
+      }
+    ],
+    "diplomit": [
+      {
+        "koodiUri": "moduulikoodistolops2021_kald3#1",
+        "linkinAltTeksti": {
+          "fi": "Käsityön diplomin lisätietoja"
+        },
+        "linkki": {
+          "fi": "http://example.com"
+        }
+      },
+      {
+        "koodiUri": "moduulikoodistolops2021_tald7#1",
+        "linkinAltTeksti": {},
+        "linkki": {}
+      }
+    ],
+    "erityisetKoulutustehtavat": [],
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
+    "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1Kielet": [
+        "kieli_en#1"
+      ],
+      "A2Kielet": [
+        "kieli_en#1"
+      ],
+      "B1Kielet": [
+        "kieli_sv#1"
+      ],
+      "B2Kielet": [
+        "kieli_de#1"
+      ],
+      "B3Kielet": [
+        "kieli_es#1"
+      ],
+      "aidinkielet": [
+        "kieli_fi#1"
+      ],
+      "muutKielet": [
+        "kieli_zh#1"
+      ]
+    },
+    "kuvaus": {
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
+    "laajuus": null,
+    "laajuusyksikkoKoodiUri": null,
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
+    "opetus": {
+      "apuraha": null,
+      "koulutuksenAlkamiskausi": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+          "teksti": {
+            "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "<p>maksullisuus kuvaus</p>"
+      },
+      "maksullisuustyyppi": "maksullinen",
+      "maksunMaara": 10,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_1#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "<p>opetusaika kuvaus</p>"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "<p>opetuskieli kuvaus</p>"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_1#2"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_1#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "<p>opetustapa kuvaus</p>"
+      },
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "<p>suunniteltu kesto kuvaus</p>"
+      },
+      "suunniteltuKestoVuodet": 2
+    },
+    "osaamisalat": [],
+    "painotukset": [],
+    "toteutusjaksot": [],
+    "tyyppi": "lk",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähköposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "http://verkkosivu"
+        }
+      }
+    ],
+    "yleislinja": true
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "EB-tutkinto (European Baccalaureate)"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "tila": "julkaistu"
+};

@@ -610,4 +610,45 @@ export const createKoulutusForm = () => {
       tallenna();
     })
   );
+
+  it(
+    'should be able to create EB-koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['lk'] });
+
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.valitseKoulutus').pipe(
+          pFillAsyncSelect('EB-tutkinto (European Baccalaureate)')
+        );
+
+        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
+          pFillSelect('60')
+        );
+
+        getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
+          'have.text',
+          'Yleissivistävä koulutus'
+        );
+
+        getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
+          'have.value',
+          'EB-tutkinto (European Baccalaureate)'
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillLisatiedotSection();
+
+      fillSoraKuvausSection();
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
 };

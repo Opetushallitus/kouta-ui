@@ -383,11 +383,12 @@ export enum ApurahaYksikko {
 
 export const FIELD_ERROR_CLASSNAME = 'field-error';
 
+export const EB_KOULUTUSKOODIURI = 'koulutus_301104';
 export const LUKIO_KOULUTUSKOODIURIT = [
   'koulutus_309902', // Lukion oppimäärä
   'koulutus_301102', // IB-tutkinto
   'koulutus_301101', // Ylioppilastutkinto
-  'koulutus_301104', // EB-tutkinto (European Baccalaureate)
+  EB_KOULUTUSKOODIURI,
 ];
 
 export const AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT = [

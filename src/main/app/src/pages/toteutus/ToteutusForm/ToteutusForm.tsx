@@ -202,7 +202,7 @@ const ToteutusForm = ({
           Component={ToteutuksenKuvausSection}
         />
 
-        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && !isEBkoulutus && (
           <FormCollapse
             section="lukiolinjat"
             header={t('toteutuslomake.lukiolinjat')}

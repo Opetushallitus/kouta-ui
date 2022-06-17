@@ -621,10 +621,6 @@ export const createKoulutusForm = () => {
           pFillAsyncSelect('EB-tutkinto (European Baccalaureate)')
         );
 
-        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
-          pFillSelect('60')
-        );
-
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
           'have.text',
           'Yleissivistävä koulutus'

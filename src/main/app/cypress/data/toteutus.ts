@@ -1,13 +1,9 @@
 import { merge } from 'lodash/fp';
 
-import {
-  Alkamiskausityyppi,
-  ApurahaYksikko,
-  HAKULOMAKETYYPPI,
-} from '#/src/constants';
+import { Alkamiskausityyppi, ApurahaYksikko } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
-const getBaseFields = () => ({
+const getBaseFields = ({ tyyppi }) => ({
   oid: '1.2.246.562.17.00000000000000000026',
   koulutusOid: '1.2.246.562.13.00000000000000000041',
   tila: 'tallennettu',
@@ -15,6 +11,7 @@ const getBaseFields = () => ({
   tarjoajat: ['1.2.246.562.10.74534804344'],
   nimi: { fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja' },
   metadata: {
+    tyyppi,
     kuvaus: {},
     opetus: {
       opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_1#1'],
@@ -100,7 +97,7 @@ const getBaseFields = () => ({
 });
 
 const getAmmatillinenFields = ({ tyyppi }) =>
-  merge(getBaseFields(), {
+  merge(getBaseFields({ tyyppi }), {
     metadata: {
       tyyppi,
       osaamisalat: [
@@ -117,31 +114,8 @@ const getAmmatillinenFields = ({ tyyppi }) =>
     },
   });
 
-const getKorkeakouluFields = ({ tyyppi }) =>
-  merge(getBaseFields(), {
-    metadata: {
-      tyyppi,
-      ylemmanKorkeakoulututkinnonOsaamisalat: [
-        {
-          kuvaus: { fi: 'osaamisalan kuvaus' },
-          nimi: { fi: 'osaamisalan nimi' },
-          linkki: { fi: 'http://linkki.com' },
-          otsikko: { fi: 'osaamisalan otsikko' },
-        },
-      ],
-      alemmanKorkeakoulututkinnonOsaamisalat: [
-        {
-          kuvaus: { fi: 'osaamisalan kuvaus' },
-          nimi: { fi: 'osaamisalan nimi' },
-          linkki: { fi: 'http://linkki.com' },
-          otsikko: { fi: 'osaamisalan otsikko' },
-        },
-      ],
-    },
-  });
-
 const getLukioFields = ({ tyyppi }) =>
-  merge(getBaseFields(), {
+  merge(getBaseFields({ tyyppi }), {
     nimi: {},
     metadata: {
       tyyppi,
@@ -177,15 +151,13 @@ const getLukioFields = ({ tyyppi }) =>
 
 export default ({ tyyppi = 'amm' }) => {
   if (tyyppi === 'amm-muu') {
-    return getBaseFields();
+    return getBaseFields({ tyyppi });
   }
   if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
-  } else if (['yo', 'amk'].includes(tyyppi)) {
-    return getKorkeakouluFields({ tyyppi });
   } else if (tyyppi === 'lk') {
     return getLukioFields({ tyyppi });
   }
 
-  return getBaseFields();
+  return getBaseFields({ tyyppi });
 };

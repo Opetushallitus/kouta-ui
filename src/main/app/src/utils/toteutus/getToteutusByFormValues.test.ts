@@ -178,28 +178,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           },
         },
       },
-      ylemmanKorkeakoulututkinnonOsaamisalat: [
-        {
-          nimi: { fi: 'Fi ylempinimi', sv: 'Sv ylempinimi' },
-          kuvaus: {
-            fi: parseEditorState('Fi ylempikuvaus'),
-            sv: parseEditorState('Sv ylempikuvaus'),
-          },
-          linkki: { fi: 'Fi ylempilinkki', sv: 'Sv ylempilinkki' },
-          otsikko: { fi: 'Fi ylempiotsikko', sv: 'Sv ylempiotsikko' },
-        },
-      ],
-      alemmanKorkeakoulututkinnonOsaamisalat: [
-        {
-          nimi: { fi: 'Fi alempinimi', sv: 'Sv alempinimi' },
-          kuvaus: {
-            fi: parseEditorState('Fi alempikuvaus'),
-            sv: parseEditorState('Sv alempikuvaus'),
-          },
-          linkki: { fi: 'Fi alempilinkki', sv: 'Sv alempilinkki' },
-          otsikko: { fi: 'Fi alempiotsikko', sv: 'Sv alempiotsikko' },
-        },
-      ],
       lukiolinjat: {
         yleislinja: true,
         painotukset: {

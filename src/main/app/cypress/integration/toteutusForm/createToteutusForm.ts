@@ -141,15 +141,16 @@ const fillJarjestajatSection = () => {
 
 const fillTiedotSection = tyyppi => {
   withinSection('tiedot', () => {
-    if (['yo', 'amk', 'amm-ope-erityisope-ja-opo'].includes(tyyppi)) {
+    if (
+      ['yo', 'amk', 'amm-ope-erityisope-ja-opo', 'kk-opintojakso'].includes(
+        tyyppi
+      )
+    ) {
       getByTestId('toteutuksenNimi')
         .find('input')
         .clear()
         .pipe(paste('toteutuksen nimi'));
     }
-    getByTestId('toteutuksenKuvaus').within(() => {
-      typeToEditor('Toteutuksen kuvaus');
-    });
   });
 };
 
@@ -231,22 +232,6 @@ const fillYhteystiedotSection = () => {
     fillYhteyshenkilotFields();
   });
 };
-
-/*
-const fillKkOsaamisalat = () => {
-  getByTestId('lisaaOsaamisalaButton').click({ force: true });
-  getByTestId('osaamisalanNimi').find('input').pipe(paste('osaamisalan nimi'));
-  getByTestId('osaamisalanKuvaus').within(() => {
-    typeToEditor('osaamisalan kuvaus');
-  });
-  getByTestId('osaamisalanLinkki')
-    .find('input')
-    .pipe(paste('http://linkki.com'));
-  getByTestId('osaamisalanOtsikko')
-    .find('input')
-    .pipe(paste('osaamisalan otsikko'));
-};
-*/
 
 const fillLukiolinjatSection = () => {
   withinSection('lukiolinjat', () => {
@@ -444,6 +429,8 @@ export const createToteutusForm = () => {
       fillKieliversiotSection();
       fillTiedotSection('amm-tutkinnon-osa');
 
+      fillKuvausSection();
+
       withinSection('jarjestamistiedot', () => {
         fillCommonJarjestamistiedot();
       });
@@ -470,6 +457,8 @@ export const createToteutusForm = () => {
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('amm');
+
+      fillKuvausSection();
 
       withinSection('osaamisalat', () => {
         getByTestId('osaamisalaSelection').within(() => {
@@ -504,20 +493,7 @@ export const createToteutusForm = () => {
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('yo');
-
-      // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175)
-      /*
-    getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
-      fillKkOsaamisalat();
-      jatka();
-    });
-
-    getByTestId('ylemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
-      fillKkOsaamisalat();
-      jatka();
-    });
-    */
-
+      fillKuvausSection();
       fillJarjestamistiedotWithApuraha();
       fillNayttamistiedotSection();
       fillJarjestajatSection();
@@ -536,10 +512,31 @@ export const createToteutusForm = () => {
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('amm-ope-erityisope-ja-opo');
-
+      fillKuvausSection();
       fillJarjestamistiedotWithApuraha();
       fillNayttamistiedotSection();
       fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create korkeakoulutus opintojakso toteutus',
+    mutationTest(() => {
+      prepareTest('kk-opintojakso');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillTiedotSection('kk-opintojakso');
+      fillKuvausSection();
+
+      fillJarjestamistiedotWithApuraha();
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
       fillYhteystiedotSection();
       fillTilaSection();
 
@@ -554,7 +551,8 @@ export const createToteutusForm = () => {
 
       fillPohjaSection();
       fillKieliversiotSection();
-      fillTiedotSection('lk');
+
+      fillKuvausSection();
 
       fillLukiolinjatSection();
 

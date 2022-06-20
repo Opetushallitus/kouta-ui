@@ -105,6 +105,19 @@ const ScheduleSection = ({
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />
           </FieldGroup>
+
+          <FieldGroup
+            title={t(
+              'hakulomake.ajastettuHaunHakukohdeidenArkistointipaivamaara'
+            )}
+            {...getTestIdProps('hakukohteidenArkistointipaivamaara')}
+          >
+            <Field
+              name={`${name}.ajastettuHakukohteidenArkistointi`}
+              component={FormFieldDateTimeInput}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </FieldGroup>
         </>
       ) : null}
     </Box>

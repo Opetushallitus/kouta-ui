@@ -45,6 +45,7 @@ const baseValues: HakuFormValues = {
     lisaamisenTakaraja: '2019-09-16T08:44',
     muokkauksenTakaraja: '2019-10-16T08:44',
     ajastettuJulkaisu: '2019-11-16T08:44',
+    ajastettuHakukohteidenArkistointi: "2019-11-16T09:44",
   },
   hakutapa: 'hakutapa_1#1',
   kohdejoukko: {

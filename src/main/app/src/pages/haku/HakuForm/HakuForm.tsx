@@ -18,7 +18,7 @@ import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
-import getHaut from '#/src/utils/haku/getHaut';
+import { useHaut } from '#/src/utils/haku/getHaut';
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
@@ -62,6 +62,11 @@ const HakuForm = ({
     ? t('hakulomake.liittamisenTakarajaYlittynyt')
     : null;
 
+  const haut = useHaut({
+    organisaatioOid,
+    yhteishaut: false,
+  });
+
   return (
     <>
       <HakukohteetModal
@@ -87,7 +92,7 @@ const HakuForm = ({
             createLabel={t('yleiset.luoUusiHaku')}
             copyLabel={t('hakulomake.kopioiPohjaksi')}
             organisaatioOid={organisaatioOid}
-            getCopyEntities={getHaut}
+            getCopyEntities={() => haut}
           />
         ) : null}
 

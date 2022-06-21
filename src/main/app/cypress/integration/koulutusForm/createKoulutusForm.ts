@@ -428,8 +428,10 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('information', () => {
-        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
-          pFillSelect('Vähintään 53 op')
+        getByTestId('laajuusnumero').pipe(paste('53'));
+
+        getSelectByLabel('yleiset.laajuusyksikko').pipe(
+          pFillSelect('opintopistettä')
         );
 
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(

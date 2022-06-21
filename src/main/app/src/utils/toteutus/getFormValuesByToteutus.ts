@@ -83,8 +83,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     asiasanat,
     opetus = {},
     osaamisalat,
-    ylemmanKorkeakoulututkinnonOsaamisalat,
-    alemmanKorkeakoulututkinnonOsaamisalat,
     yhteyshenkilot,
     laajuus,
     laajuusyksikkoKoodiUri,
@@ -229,20 +227,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       osaamisalaLinkit,
       osaamisalaLinkkiOtsikot,
     },
-    ylemmanKorkeakoulututkinnonOsaamisalat:
-      _fp.map(({ kuvaus, nimi, linkki, otsikko }) => ({
-        kuvaus: _fp.mapValues(parseEditorState, kuvaus),
-        nimi,
-        linkki,
-        otsikko,
-      }))(ylemmanKorkeakoulututkinnonOsaamisalat) ?? [],
-    alemmanKorkeakoulututkinnonOsaamisalat:
-      _fp.map(({ kuvaus, nimi, linkki, otsikko }) => ({
-        kuvaus: _fp.mapValues(parseEditorState, kuvaus),
-        nimi,
-        linkki,
-        otsikko,
-      }))(alemmanKorkeakoulututkinnonOsaamisalat) ?? [],
     lukiolinjat: {
       yleislinja,
       painotukset: lukiolinjatiedotToFormValues(painotukset),

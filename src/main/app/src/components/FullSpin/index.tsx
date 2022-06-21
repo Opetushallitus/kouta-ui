@@ -13,7 +13,7 @@ const SpinContainer = styled.div`
 `;
 
 export const FullSpin = props => (
-  <SpinContainer>
+  <SpinContainer role="progressbar">
     <Spin {...props} />
   </SpinContainer>
 );

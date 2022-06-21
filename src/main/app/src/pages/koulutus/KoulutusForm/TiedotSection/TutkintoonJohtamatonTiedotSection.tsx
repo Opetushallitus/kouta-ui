@@ -104,7 +104,7 @@ export const AikuistenPerusopetusTiedotSection = ({
   );
 };
 
-export const VapaaSivistystyoTiedotSection = ({ disabled, language, name }) => {
+export const VapaaSivistystyoTiedotOpistovuosiSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
   return (
     <Box>
@@ -128,7 +128,7 @@ export const VapaaSivistystyoTiedotSection = ({ disabled, language, name }) => {
   );
 };
 
-export const AmmMuuTiedotSection = ({ disabled, language, name }) => {
+export const MuuTiedotSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
 
   return (

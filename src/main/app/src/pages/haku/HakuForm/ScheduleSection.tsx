@@ -113,7 +113,7 @@ const ScheduleSection = ({
             {...getTestIdProps('hakukohteidenArkistointipaivamaara')}
           >
             <Field
-              name={`${name}.ajastettuHakukohteidenArkistointi`}
+              name={`${name}.ajastettuHaunJaHakukohteidenArkistointi`}
               component={FormFieldDateTimeInput}
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />

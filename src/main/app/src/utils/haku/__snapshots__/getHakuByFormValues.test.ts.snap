@@ -2,7 +2,7 @@
 
 exports[`getHakuByFormValues returns correct haku given different hakulomake variations 1`] = `
 Object {
-  "ajastettuHakukohteidenArkistointi": "2019-11-16T09:44",
+  "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
   "hakuajat": Array [
@@ -86,7 +86,7 @@ Object {
 
 exports[`getHakuByFormValues returns correct haku given different hakulomake variations 2`] = `
 Object {
-  "ajastettuHakukohteidenArkistointi": "2019-11-16T09:44",
+  "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
   "hakuajat": Array [
@@ -170,7 +170,7 @@ Object {
 
 exports[`getHakuByFormValues returns correct haku given form values 1`] = `
 Object {
-  "ajastettuHakukohteidenArkistointi": "2019-11-16T09:44",
+  "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
   "hakuajat": Array [
@@ -252,7 +252,7 @@ Object {
 
 exports[`getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti 1`] = `
 Object {
-  "ajastettuHakukohteidenArkistointi": "2019-11-16T09:44",
+  "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
   "hakuajat": Array [
@@ -337,7 +337,7 @@ Object {
 
 exports[`getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
 Object {
-  "ajastettuHakukohteidenArkistointi": "2019-11-16T09:44",
+  "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
   "hakuajat": Array [

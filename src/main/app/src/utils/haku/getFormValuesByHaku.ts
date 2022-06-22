@@ -17,7 +17,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     hakukohteenLiittamisenTakaraja,
     hakukohteenMuokkaamisenTakaraja,
     ajastettuJulkaisu,
-    ajastettuHakukohteidenArkistointi,
+    ajastettuHaunJaHakukohteidenArkistointi,
     kielivalinta = [],
     nimi = {},
     metadata = {},
@@ -46,7 +46,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
       lisaamisenTakaraja: hakukohteenLiittamisenTakaraja,
       muokkauksenTakaraja: hakukohteenMuokkaamisenTakaraja,
       ajastettuJulkaisu,
-      ajastettuHakukohteidenArkistointi,
+      ajastettuHaunJaHakukohteidenArkistointi,
     },
     hakutapa: hakutapaKoodiUri,
     kohdejoukko: {

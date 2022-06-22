@@ -46,7 +46,7 @@ const haku = ({ hakutapaKoodiUri }: { hakutapaKoodiUri?: string } = {}) => ({
   organisaatioOid: '1.2.246.562.10.594252633210',
   hakuajat: [{ alkaa: '2019-02-08T07:05', paattyy: '2020-02-08T07:05' }],
   ajastettuJulkaisu: '2019-12-05T06:45',
-  ajastettuHakukohteidenArkistointi: null,
+  ajastettuHaunJaHakukohteidenArkistointi: null,
   muokkaaja: '1.2.246.562.24.62301161440',
   kielivalinta: ['fi', 'sv'],
   modified: '2019-03-29T12:48',

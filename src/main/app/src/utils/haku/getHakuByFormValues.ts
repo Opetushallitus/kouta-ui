@@ -72,8 +72,8 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
     hakukohteenMuokkaamisenTakaraja:
       values?.aikataulut?.muokkauksenTakaraja || null,
     ajastettuJulkaisu: values?.aikataulut?.ajastettuJulkaisu || null,
-    ajastettuHakukohteidenArkistointi:
-      values?.aikataulut?.ajastettuHakukohteidenArkistointi || null,
+    ajastettuHaunJaHakukohteidenArkistointi:
+      values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi || null,
     hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,

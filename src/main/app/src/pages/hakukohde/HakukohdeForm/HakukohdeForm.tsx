@@ -32,6 +32,7 @@ export const HakukohdeForm = ({
   tarjoajat,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   hakukohde = undefined,
+  koulutus,
 }) => {
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
@@ -80,6 +81,7 @@ export const HakukohdeForm = ({
           Component={HakukohteenLinjaSection}
           toteutus={toteutus}
           nimiFieldPath={`${PERUSTIEDOT_NAME}.nimi`}
+          koulutus={koulutus}
         />
       )}
 

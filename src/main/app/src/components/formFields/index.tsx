@@ -24,6 +24,9 @@ import {
 import { YearSelect } from '#/src/components/YearSelect';
 
 import { createComponent } from './utils';
+import DatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
+import UiDatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
+import DateInput from "#/src/components/DateInput";
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -90,6 +93,11 @@ export const FormFieldTimeInput = createComponent(TimeInput, simpleMapProps);
 
 export const FormFieldDateTimeInput = createComponent(
   DateTimeInput,
+  simpleMapProps
+);
+
+export const FormFieldDateInput = createComponent(
+  DateInput,
   simpleMapProps
 );
 

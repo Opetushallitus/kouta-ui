@@ -19,7 +19,6 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
-  EB_KOULUTUSKOODIURI,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -27,7 +26,7 @@ import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps, isIn, otherwise } from '#/src/utils';
-import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
+import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
@@ -98,11 +97,7 @@ const ToteutusForm = ({
       ? hakeutumisTaiIlmoittautumistapa === ATARU
       : true;
 
-  const isEBkoulutus =
-    koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
-    koulutus?.koulutuksetKoodiUri
-      .map(koodiuri => koodiUriWithoutVersion(koodiuri))
-      .includes(EB_KOULUTUSKOODIURI);
+  const isEBkoulutus = isEB(koulutus, koulutustyyppi);
 
   const formMode = useFormMode();
 

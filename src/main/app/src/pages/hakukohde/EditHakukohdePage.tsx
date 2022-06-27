@@ -48,7 +48,7 @@ export const EditHakukohdePage = () => {
     useHakukohdeByOid(oid);
 
   const {
-    data: { toteutus, haku, koulutustyyppi, tarjoajat } = {},
+    data: { toteutus, haku, koulutustyyppi, tarjoajat, koulutus } = {},
     isFetching: pageDataLoading,
   } = useHakukohdePageData(
     {
@@ -122,6 +122,7 @@ export const EditHakukohdePage = () => {
             koulutustyyppi={
               koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
             }
+            koulutus={koulutus}
           />
         </>
       </FormPage>

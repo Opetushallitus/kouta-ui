@@ -79,7 +79,7 @@ const useNimiFromKoulutus = ({ koulutus, name }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (_fp.isUndefined(currNimi)) {
+    if (_fp.isUndefined(currNimi) || _fp.isEmpty(currNimi)) {
       change(`${name}.nimi`, koulutusnimi || {});
     }
   }, [change, currNimi, koulutusnimi, name, t]);

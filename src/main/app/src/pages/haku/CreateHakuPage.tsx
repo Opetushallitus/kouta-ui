@@ -41,7 +41,7 @@ export const CreateHakuPage = () => {
 
   return (
     <ReduxForm
-      form="hakuForm"
+      form={ENTITY.HAKU}
       mode={FormMode.CREATE}
       initialValues={initialValues}
     >

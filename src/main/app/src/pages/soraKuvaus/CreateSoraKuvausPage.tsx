@@ -49,7 +49,7 @@ export const CreateSoraKuvausPage = () => {
 
   return (
     <ReduxForm
-      form="soraKuvausForm"
+      form={ENTITY.SORA_KUVAUS}
       mode={FormMode.CREATE}
       initialValues={initialValues}
     >

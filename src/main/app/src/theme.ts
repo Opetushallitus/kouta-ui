@@ -69,7 +69,7 @@ export const createTheme = () => {
   theme.palette = theme.colors;
   theme.colors.julkaistu = theme.colors.success.main;
   theme.colors.tallennettu = theme.colors.primary.main;
-  theme.colors.arkistoitu = theme.colors.yellow.main;
+  theme.colors.arkistoitu = theme.colors.orange.main;
   theme.colors.poistettu = theme.colors.red.main;
 
   return theme;

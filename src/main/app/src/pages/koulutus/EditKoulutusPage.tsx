@@ -22,8 +22,6 @@ import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import { KoulutusFooter } from './KoulutusFooter';
 import { KoulutusForm } from './KoulutusForm';
 
-const FORM_NAME = 'koulutusForm';
-
 export const EditKoulutusPage = () => {
   const history = useHistory();
   const { organisaatioOid, oid } = useParams();
@@ -49,13 +47,13 @@ export const EditKoulutusPage = () => {
     koulutus?.organisaatioOid
   );
 
-  const isJulkinen = useFieldValue('julkinen', FORM_NAME);
+  const isJulkinen = useFieldValue('julkinen', ENTITY.KOULUTUS);
 
   return !koulutus ? (
     <FullSpin />
   ) : (
     <ReduxForm
-      form={FORM_NAME}
+      form={ENTITY.KOULUTUS}
       mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}

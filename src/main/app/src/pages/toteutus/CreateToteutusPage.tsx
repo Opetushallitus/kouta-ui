@@ -94,7 +94,7 @@ export const CreateToteutusPage = () => {
 
   return (
     <ReduxForm
-      form="toteutusForm"
+      form={ENTITY.TOTEUTUS}
       mode={FormMode.CREATE}
       initialValues={initialValues}
     >

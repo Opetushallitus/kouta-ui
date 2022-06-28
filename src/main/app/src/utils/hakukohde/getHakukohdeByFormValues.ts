@@ -124,7 +124,10 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     kielivalinta
   );
 
-  const liitteidenToimitustapa = values?.liitteet?.toimitustapa?.tapa;
+  const liitteidenToimitustapa =
+      _fp.isEmpty(values?.liitteet?.toimitustapa?.tapa)
+      ? null
+      : values?.liitteet?.toimitustapa?.tapa;
 
   const liitteidenToimitusaika = values?.liitteet?.toimitusaika || null;
 

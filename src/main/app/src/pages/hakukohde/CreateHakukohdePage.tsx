@@ -74,7 +74,7 @@ export const CreateHakukohdePage = () => {
 
   return (
     <ReduxForm
-      form="hakukohdeForm"
+      form={ENTITY.HAKUKOHDE}
       mode={FormMode.CREATE}
       initialValues={initialValues}
     >

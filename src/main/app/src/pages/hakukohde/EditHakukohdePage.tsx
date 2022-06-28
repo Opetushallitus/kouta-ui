@@ -25,8 +25,6 @@ import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
 import { HakukohdeForm } from './HakukohdeForm';
 
-const FORM_NAME = 'hakukohdeForm';
-
 const useInitialValues = hakukohde => {
   const { koodi: hakukohdeKoodi } = useKoodi(hakukohde?.hakukohdeKoodiUri);
 
@@ -78,7 +76,7 @@ export const EditHakukohdePage = () => {
     <FullSpin />
   ) : (
     <ReduxForm
-      form={FORM_NAME}
+      form={ENTITY.HAKUKOHDE}
       mode={FormMode.EDIT}
       initialValues={initialValues}
       disabled={!canUpdate}

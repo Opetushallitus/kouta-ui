@@ -7,7 +7,9 @@ import styled from 'styled-components';
 
 import { FormFieldRadioGroup } from '#/src/components/formFields';
 import { Box, Radio, Typography } from '#/src/components/virkailija';
-import { JULKAISUTILA } from '#/src/constants';
+import { ENTITY, JULKAISUTILA } from '#/src/constants';
+import { useFormName } from '#/src/contexts/FormContext';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 const tilaCss = ({ theme, tila }) => {
   const color = theme.colors[tila] || theme.colors.tallennettu;
@@ -46,7 +48,12 @@ const Label = ({ tila, t }) => {
   );
 };
 
-const isAllowedTilaTransition = (currTila, checkedTila) => {
+const isAllowedTilaTransition = (
+  currTila,
+  checkedTila,
+  isPaakayttaja,
+  tilaTransferAllowedWithoutPaakayttaja
+) => {
   /* tila (currTila) on undefined kun ollaan luomassa entiteettiä */
   switch (currTila) {
     case undefined:
@@ -60,9 +67,11 @@ const isAllowedTilaTransition = (currTila, checkedTila) => {
         checkedTila
       );
     case JULKAISUTILA.JULKAISTU:
-      return [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.ARKISTOITU].includes(
-        checkedTila
-      );
+      return isPaakayttaja || tilaTransferAllowedWithoutPaakayttaja
+        ? [JULKAISUTILA.TALLENNETTU, JULKAISUTILA.ARKISTOITU].includes(
+            checkedTila
+          )
+        : [JULKAISUTILA.ARKISTOITU].includes(checkedTila);
     case JULKAISUTILA.ARKISTOITU:
       return checkedTila === JULKAISUTILA.JULKAISTU;
     default:
@@ -80,6 +89,10 @@ export const JulkaisutilaField = ({
   const savedTila = entity?.tila;
 
   const { t } = useTranslation();
+  const isPaakayttaja = useIsOphVirkailija();
+  const formName = useFormName();
+  const tilaTransferAllowedWithoutPaakayttaja =
+    formName === ENTITY.OPPILAITOS || formName === ENTITY.OPPILAITOKSEN_OSA;
 
   const label = showLabel
     ? labelProp || t('yleiset.valitseJulkaisutila')
@@ -98,7 +111,12 @@ export const JulkaisutilaField = ({
         JULKAISUTILA.ARKISTOITU,
       ].map(
         tila =>
-          isAllowedTilaTransition(savedTila, tila) && (
+          isAllowedTilaTransition(
+            savedTila,
+            tila,
+            isPaakayttaja,
+            tilaTransferAllowedWithoutPaakayttaja
+          ) && (
             <Radio key={tila} value={tila}>
               <Label tila={tila} t={t} />
             </Radio>

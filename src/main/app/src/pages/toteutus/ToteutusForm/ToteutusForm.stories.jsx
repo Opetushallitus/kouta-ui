@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { FormMode, KOULUTUSTYYPIT } from '#/src/constants';
+import { ENTITY, FormMode, KOULUTUSTYYPIT } from '#/src/constants';
 
 import { initialValues } from '../initialToteutusValues';
 import ToteutusForm from './index';
@@ -21,7 +21,7 @@ export default {
 const Wrapper = ({ koulutustyyppi = 'amm' }) => {
   return (
     <ReduxForm
-      form="toteutus"
+      form={ENTITY.TOTEUTUS}
       initialValues={initialValues({
         koulutustyyppi,
         koulutusNimi: 'koulutuksen nimi',

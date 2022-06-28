@@ -13,6 +13,7 @@ import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
+import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 
 import { HakukohteenLinjaSection } from './HakukohteenLinjaSection';
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
@@ -38,6 +39,8 @@ export const HakukohdeForm = ({
   const languages = useFieldValue('kieliversiot') || [];
 
   const formMode = useFormMode();
+
+  const isEBkoulutus = isEB(koulutus, koulutus?.koulutustyyppi);
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
@@ -73,7 +76,7 @@ export const HakukohdeForm = ({
         Component={PohjakoulutusSection}
       />
 
-      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && !isEBkoulutus && (
         <FormCollapse
           section="hakukohteenLinja"
           header={t('hakukohdelomake.hakukohteenLinja')}

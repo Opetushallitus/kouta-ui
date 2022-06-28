@@ -17,7 +17,6 @@ import useKoodisto from '#/src/hooks/useKoodisto';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
-import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import {
   arrayToTranslationObject,
   getLanguageValue,
@@ -136,25 +135,21 @@ export const HakukohteenLinjaSection = ({
   );
 
   useSetFieldValue(nimiFieldPath, hakukohdeNimi);
-  const isDIAkoulutus = isDIA(koulutus, koulutus?.koulutustyyppi);
 
   return loading ? (
     <Spin />
   ) : (
     <>
-      {!isDIAkoulutus && (
-        <Box {...getTestIdProps('valitseHakukohteenLinja')} mb={4}>
-          <Field
-            label={t('hakukohdelomake.valitseHakukohteenLinja')}
-            component={FormFieldRadioGroup}
-            options={options}
-            name={`${name}.linja`}
-            required
-          />
-        </Box>
-      )}
-
-      {(linja || isDIAkoulutus) && (
+      <Box {...getTestIdProps('valitseHakukohteenLinja')} mb={4}>
+        <Field
+          label={t('hakukohdelomake.valitseHakukohteenLinja')}
+          component={FormFieldRadioGroup}
+          options={options}
+          name={`${name}.linja`}
+          required
+        />
+      </Box>
+      {linja && (
         <FieldGroup
           title={
             getLanguageValue(hakukohdeNimi, language) ||

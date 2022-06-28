@@ -31,13 +31,33 @@ import {
   HakukohdeForm,
   initialValues as getInitialValues,
 } from './HakukohdeForm';
+import {checkHasHakukohdeKoodiUri} from "#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection";
+import {toSelectValue} from "#/src/utils";
 
-const getCopyValues = oid => ({
-  pohja: {
+const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
+  const pohja = {
     tapa: oid ? POHJAVALINTA.KOPIO : POHJAVALINTA.UUSI,
     valinta: oid ? { value: oid } : null,
-  },
-});
+  };
+  if(oid) {
+    const {
+      nimi,
+      hakukohdeKoodiUri,
+      toinenAsteOnkoKaksoistutkinto,
+    } = hakukohde;
+    return {
+      pohja: pohja,
+      perustiedot: {
+        nimi: isNimiKoodi ? null : nimi,
+        hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,
+        voiSuorittaaKaksoistutkinnon: Boolean(toinenAsteOnkoKaksoistutkinto),
+      }
+    }
+  }
+  return {
+    pohja: pohja,
+  };
+};
 
 export const CreateHakukohdePage = () => {
   const { organisaatioOid, toteutusOid, hakuOid } = useParams();
@@ -53,17 +73,19 @@ export const CreateHakukohdePage = () => {
 
   const { data: hakukohde } = usePohjaEntity(ENTITY.HAKUKOHDE);
 
+  const koulutustyyppi =
+      data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+
+  const isNimiKoodi = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
+
   const initialValues = useMemo(
     () => ({
       ...getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku),
       ...(hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
-      ...getCopyValues(hakukohde?.oid),
+      ...getCopyValues(hakukohde?.oid, isNimiKoodi, hakukohde),
     }),
     [data, hakukohde]
   );
-
-  const koulutustyyppi =
-    data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   const canUpdate = useCanCreateHakukohde(haku?.hakukohteenLiittamisenTakaraja);
 

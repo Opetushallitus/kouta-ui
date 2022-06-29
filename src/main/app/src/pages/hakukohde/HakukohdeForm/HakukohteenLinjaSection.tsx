@@ -122,7 +122,6 @@ export const HakukohteenLinjaSection = ({
   language,
   toteutus,
   nimiFieldPath,
-  koulutus,
 }: Props) => {
   const { t } = useTranslation();
 

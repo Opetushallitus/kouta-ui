@@ -97,7 +97,7 @@ const ToteutusForm = ({
       ? hakeutumisTaiIlmoittautumistapa === ATARU
       : true;
 
-  const isEBkoulutus = isEB(koulutus, koulutustyyppi);
+  const isEBkoulutus = isEB(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const formMode = useFormMode();
 

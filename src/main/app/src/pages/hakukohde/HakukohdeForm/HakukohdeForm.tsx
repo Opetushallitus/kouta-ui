@@ -33,14 +33,13 @@ export const HakukohdeForm = ({
   tarjoajat,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   hakukohde = undefined,
-  koulutus,
 }) => {
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
 
   const formMode = useFormMode();
 
-  const isEBkoulutus = isEB(koulutus, koulutus?.koulutustyyppi);
+  const isEBkoulutus = isEB(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
@@ -84,7 +83,6 @@ export const HakukohdeForm = ({
           Component={HakukohteenLinjaSection}
           toteutus={toteutus}
           nimiFieldPath={`${PERUSTIEDOT_NAME}.nimi`}
-          koulutus={koulutus}
         />
       )}
 

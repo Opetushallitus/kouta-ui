@@ -50,7 +50,6 @@ export const CreateHakukohdePage = () => {
 
   const haku = data?.haku;
   const toteutus = data?.toteutus;
-  const koulutus = data?.koulutus;
 
   const { data: hakukohde } = usePohjaEntity(ENTITY.HAKUKOHDE);
 
@@ -113,7 +112,6 @@ export const CreateHakukohdePage = () => {
               toteutus={toteutus}
               tarjoajat={data.tarjoajat}
               koulutustyyppi={koulutustyyppi}
-              koulutus={koulutus}
             />
           </>
         )}

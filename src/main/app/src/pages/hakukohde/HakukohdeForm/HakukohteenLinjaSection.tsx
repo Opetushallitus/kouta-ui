@@ -122,7 +122,6 @@ export const HakukohteenLinjaSection = ({
   language,
   toteutus,
   nimiFieldPath,
-  koulutus,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -149,6 +148,7 @@ export const HakukohteenLinjaSection = ({
           required
         />
       </Box>
+
       {linja && (
         <FieldGroup
           title={

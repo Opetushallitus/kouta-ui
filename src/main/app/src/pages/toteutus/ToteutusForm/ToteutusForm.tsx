@@ -97,7 +97,7 @@ const ToteutusForm = ({
       ? hakeutumisTaiIlmoittautumistapa === ATARU
       : true;
 
-  const isDIAkoulutus = isDIA(koulutus, koulutustyyppi);
+  const isDIAkoulutus = isDIA(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const formMode = useFormMode();
 

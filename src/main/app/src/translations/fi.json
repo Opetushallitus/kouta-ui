@@ -197,7 +197,8 @@
     "hakutapa": "Hakutapa",
     "koulutuksenAlkamiskausi": "Koulutuksen alkamiskausi",
     "koulutuksenAlkamisvuosi": "Koulutuksen alkamisvuosi",
-    "urheilijanAmmKoulutus": "Urheilijan ammatillinen koulutus"
+    "urheilijanAmmKoulutus": "Urheilijan ammatillinen koulutus",
+    "aliorganisaatio": "Organisaatio"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

@@ -96,7 +96,6 @@ export const Filters = ({
   const parseChildOrgs = (hierarkia, selectedOrg, lang) => {
     let flatHierarkia = flattenHierarkia(hierarkia)
     let result = []
-      console.log('parse child orgs for lang ', lang)
     flatHierarkia.forEach(org => {
         if (org?.oid != selectedOrg && org?.nimi) {
             const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi

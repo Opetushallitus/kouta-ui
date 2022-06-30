@@ -63,7 +63,7 @@ export const useFilterState = (name: ENTITY) => {
 
 
   let setOrgWhitelist;
-  if (name === ENTITY.HAKUKOHDE) { //fixme
+  if (name === ENTITY.HAKUKOHDE) {
     setOrgWhitelist = orgWhitelist => {
       setPagination({page: 0, orgWhitelist})
     }

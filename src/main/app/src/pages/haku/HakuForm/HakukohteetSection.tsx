@@ -39,7 +39,7 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
     { refetchOnWindowFocus: false }
   );
 
-   const { HAKUKOHDE } = ENTITY;
+  const { HAKUKOHDE } = ENTITY;
 
   const columns = useTableColumns(t, organisaatioOid, "fi");
 

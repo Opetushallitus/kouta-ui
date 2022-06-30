@@ -42,6 +42,7 @@ export const useEntitySearch = ({
     {
       refetchOnWindowFocus: false,
       staleTime: 60 * 1000,
+      refetchOnMount: "always"
     }
   );
 };

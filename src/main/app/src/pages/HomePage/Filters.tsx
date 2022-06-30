@@ -19,6 +19,7 @@ import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlk
 import useOrganisaatioHierarkia from "#/src/hooks/useOrganisaatioHierarkia";
 import {flattenHierarkia} from "#/src/utils/organisaatio/hierarkiaHelpers";
 import {useSelectedOrganisaatioOid} from "#/src/hooks/useSelectedOrganisaatio";
+import {useAsiointiKieli} from "#/src/utils/api/getAsiointiKieli";
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 
@@ -95,17 +96,18 @@ export const Filters = ({
   const parseChildOrgs = (hierarkia, selectedOrg, lang) => {
     let flatHierarkia = flattenHierarkia(hierarkia)
     let result = []
-      console.log('parse child orgs for lang ' + lang)
+      console.log('parse child orgs for lang ', lang)
     flatHierarkia.forEach(org => {
-        if (org && org.oid && org.oid != selectedOrg && org && org.lyhytNimi) {
-            result.push({label: org.nimi.fi, value: org.oid}) //fixme, nimi oikealle kielelle. Nyt aina fi
+        if (org?.oid != selectedOrg && org?.nimi) {
+            const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi
+            result.push({label: label, value: org.oid})
         }})
     return result
   }
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
-  const selectedLanguage = "fi" //fixme
+  const { data: selectedLanguage } = useAsiointiKieli();
 
   const { hierarkia } = useOrganisaatioHierarkia(selectedOrganisaatioOid, {skipParents: true})
 

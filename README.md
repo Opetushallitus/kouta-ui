@@ -49,6 +49,10 @@ Käynnistä kouta-ui lokaalisti komennolla:
 
 Käynnistä Opintopolun VPN, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan. 
 
+Kirjaudu selaimella linkistä http://localhost:8099/kouta-backend/auth/login
+
+Tämän jälkeen mene selaimella osoitteeseen https://localhost:3000/kouta
+
 ## Ajaminen lokaalisti kouta-backendin kanssa testiympäristöä vasten
 
 Käynnistä Opintopolun VPN
@@ -57,7 +61,7 @@ Käynnistä kouta-backend sen README:ssa olevan osion (3.4.1 Ajo testiympärist�
 
 Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.local`-tiedostossa): 
 
-`KOUTA_BACKEND_URL=http://localhost:8099
+`KOUTA_BACKEND_URL=http://localhost:8099`
 
 Käynnistä kouta-ui lokaalisti komennolla: 
 

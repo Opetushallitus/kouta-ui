@@ -30,6 +30,7 @@ import { NimiSection } from './NimiSection';
 import ScheduleSection from './ScheduleSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 import { useHaunHakukohteet } from '#/src/utils/haku/useHaunHakukohteet';
+import {useFilteredHakukohteet} from "#/src/utils/hakukohde/searchHakukohteet";
 
 type HakuFormProps = {
   organisaatioOid: string;
@@ -59,16 +60,11 @@ const HakuForm = ({
     hakuProp?.hakukohteenLiittamisenTakaraja
   );
 
-  const { data: enrichedHaku } = useHaunHakukohteet(
-    {
-      organisaatioOid,
-      hakuOid: hakuProp?.oid,
-    },
-    { refetchOnWindowFocus: false, enabled: formMode == FormMode.EDIT }
-  );
+  const { data } = useFilteredHakukohteet({hakuOid: hakuProp?.oid}, organisaatioOid)
+
   var hakukohdeAmount = '';
-  if (enrichedHaku && enrichedHaku.hakukohteet) {
-    hakukohdeAmount = ' (' + enrichedHaku.hakukohteet?.length + ')';
+  if (data?.totalCount) {
+    hakukohdeAmount = ' (' + data.totalCount + ')';
   }
 
   const infoText = !canAddHakukohde

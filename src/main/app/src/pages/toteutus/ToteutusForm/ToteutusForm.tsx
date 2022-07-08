@@ -26,6 +26,7 @@ import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps, isIn, otherwise } from '#/src/utils';
+import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
@@ -46,6 +47,7 @@ import {
   TutkintoonJohtavaTiedotSection,
   TuvaTiedotSection,
   VapaaSivistystyoTiedotSection,
+  DIATiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -94,6 +96,8 @@ const ToteutusForm = ({
     )
       ? hakeutumisTaiIlmoittautumistapa === ATARU
       : true;
+
+  const isDIAkoulutus = isDIA(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const formMode = useFormMode();
 
@@ -175,6 +179,17 @@ const ToteutusForm = ({
           />
         )}
 
+        {isDIAkoulutus && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={DIATiedotSection}
+            koulutustyyppi={koulutustyyppi}
+            koulutus={koulutus}
+          />
+        )}
+
         <FormCollapse
           section="kuvaus"
           header={t('toteutuslomake.toteutuksenKuvaus')}
@@ -182,7 +197,7 @@ const ToteutusForm = ({
           Component={ToteutuksenKuvausSection}
         />
 
-        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && !isDIAkoulutus && (
           <FormCollapse
             section="lukiolinjat"
             header={t('toteutuslomake.lukiolinjat')}

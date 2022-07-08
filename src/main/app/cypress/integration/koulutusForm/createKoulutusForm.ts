@@ -610,4 +610,41 @@ export const createKoulutusForm = () => {
       tallenna();
     })
   );
+
+  it(
+    'should be able to create DIA-koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['lk'] });
+
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.valitseKoulutus').pipe(
+          pFillAsyncSelect('Deutsche Internationale Abitur; Reifeprüfung')
+        );
+
+        getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
+          'have.text',
+          'Yleissivistävä koulutus'
+        );
+
+        getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
+          'have.value',
+          'Deutsche Internationale Abitur; Reifeprüfung'
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillLisatiedotSection();
+
+      fillSoraKuvausSection();
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
 };

@@ -227,6 +227,14 @@ const fillAikuistenPerusopetusTiedotSection = () => {
   });
 };
 
+const fillDIATiedotSection = () => {
+  withinSection('tiedot', () => {
+    cy.findByLabelText(/toteutuksenNimi/)
+      .should('not.be.disabled')
+      .should('have.value', 'Deutsche Internationale Abitur; Reifeprüfung');
+  });
+};
+
 const fillYhteystiedotSection = () => {
   withinSection('yhteyshenkilot', () => {
     fillYhteyshenkilotFields();
@@ -401,7 +409,7 @@ const prepareTest = tyyppi => {
 
   playMocks(toteutusMocks);
 
-  if (tyyppi === 'lk') {
+  if (tyyppi === 'lk' || tyyppi === 'dia') {
     playMocks(lukioMocks);
   }
 
@@ -711,6 +719,32 @@ export const createToteutusForm = () => {
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillHakeutumisTaiIlmoittautumistapaSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create "DIA" -toteutus',
+    mutationTest(() => {
+      prepareTest('dia');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillDIATiedotSection();
+
+      fillKuvausSection();
+
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+        fillKielivalikoima();
+        fillDiplomi();
+      });
+
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
       fillYhteystiedotSection();
       fillTilaSection();
 

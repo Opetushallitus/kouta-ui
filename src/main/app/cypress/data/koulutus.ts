@@ -108,6 +108,13 @@ const getLukioFields = ({ tyyppi }) => {
   });
 };
 
+const getDIAFields = () => {
+  return merge(getBaseFields({ tyyppi: 'lk' }), {
+    koulutuksetKoodiUri: ['koulutus_301103#7'],
+    nimi: { fi: 'Deutsche Internationale Abitur; Reifeprüfung' },
+  });
+};
+
 const getTuvaFields = ({ tyyppi }) => {
   return merge(getBaseFields({ tyyppi }), {
     nimi: { fi: 'Tutkintokoulutukseen valmentava koulutus (TUVA)' },
@@ -195,6 +202,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getAikuistenPerusopetusFields({ tyyppi });
   } else if (tyyppi === 'kk-opintojakso') {
     return getKorkeakoulutusOpintojaksoFields({ tyyppi });
+  } else if (tyyppi === 'dia') {
+    return getDIAFields();
   }
 
   return getBaseFields();

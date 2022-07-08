@@ -544,9 +544,9 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 53,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],

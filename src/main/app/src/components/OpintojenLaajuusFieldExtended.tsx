@@ -5,7 +5,7 @@ import { getTestIdProps } from '#/src/utils';
 
 import { useLanguageTab } from '../contexts/LanguageTabContext';
 import useKoodistoOptions from '../hooks/useKoodistoOptions';
-import { FormFieldInput, FormFieldSelect } from './formFields';
+import { FormFieldIntegerInput, FormFieldSelect } from './formFields';
 import { Box } from './virkailija';
 
 const OpintojenLaajuusFieldExtended = ({
@@ -25,9 +25,10 @@ const OpintojenLaajuusFieldExtended = ({
       <Box px={1} flexGrow={1}>
         <Field
           name={`${name}.opintojenLaajuusnumero`}
-          component={FormFieldInput}
+          component={FormFieldIntegerInput}
           label={t('yleiset.laajuus')}
-          type="number"
+          max={999}
+          min={0}
           disabled={disabled}
           required={required}
           {...getTestIdProps('laajuusnumero')}

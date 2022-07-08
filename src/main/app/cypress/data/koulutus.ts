@@ -181,6 +181,13 @@ const getKorkeakoulutusOpintojaksoFields = ({ tyyppi }) => {
   });
 };
 
+const getEBFields = () => {
+  return merge(getBaseFields({ tyyppi: 'lk' }), {
+    koulutuksetKoodiUri: ['koulutus_301104#7'],
+    nimi: { fi: 'EB-tutkinto (European Baccalaureate)' },
+  });
+};
+
 export default ({ tyyppi = 'amm' } = {}) => {
   if (tyyppi === 'amm-ope-erityisope-ja-opo') {
     return getAmmOpeErityisopeJaOpoFields({ tyyppi });
@@ -202,6 +209,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getAikuistenPerusopetusFields({ tyyppi });
   } else if (tyyppi === 'kk-opintojakso') {
     return getKorkeakoulutusOpintojaksoFields({ tyyppi });
+  } else if (tyyppi === 'eb') {
+    return getEBFields();
   } else if (tyyppi === 'dia') {
     return getDIAFields();
   }

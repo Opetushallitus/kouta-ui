@@ -383,11 +383,13 @@ export enum ApurahaYksikko {
 
 export const FIELD_ERROR_CLASSNAME = 'field-error';
 
+export const EB_KOULUTUSKOODIURI = 'koulutus_301104';
 export const DIA_KOULUTUSKOODIURI = 'koulutus_301103';
 export const LUKIO_KOULUTUSKOODIURIT = [
   'koulutus_309902', // Lukion oppimäärä
   'koulutus_301102', // IB-tutkinto
   'koulutus_301101', // Ylioppilastutkinto
+  EB_KOULUTUSKOODIURI, // European Baccalaureate
   DIA_KOULUTUSKOODIURI, // DIA-tutkinto (Deutsche Internationale Abitur)
 ];
 

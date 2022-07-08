@@ -13,6 +13,7 @@ import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
+import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 
 import { HakukohteenLinjaSection } from './HakukohteenLinjaSection';
@@ -39,6 +40,8 @@ export const HakukohdeForm = ({
 
   const formMode = useFormMode();
   const isDIAkoulutus = isDIA(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
+
+  const isEBkoulutus = isEB(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
@@ -74,16 +77,18 @@ export const HakukohdeForm = ({
         Component={PohjakoulutusSection}
       />
 
-      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && !isDIAkoulutus && (
-        <FormCollapse
-          section="hakukohteenLinja"
-          header={t('hakukohdelomake.hakukohteenLinja')}
-          languages={languages}
-          Component={HakukohteenLinjaSection}
-          toteutus={toteutus}
-          nimiFieldPath={`${PERUSTIEDOT_NAME}.nimi`}
-        />
-      )}
+      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
+        !isDIAkoulutus &&
+        !isEBkoulutus && (
+          <FormCollapse
+            section="hakukohteenLinja"
+            header={t('hakukohdelomake.hakukohteenLinja')}
+            languages={languages}
+            Component={HakukohteenLinjaSection}
+            toteutus={toteutus}
+            nimiFieldPath={`${PERUSTIEDOT_NAME}.nimi`}
+          />
+        )}
 
       <FormCollapse
         section={PERUSTIEDOT_NAME}

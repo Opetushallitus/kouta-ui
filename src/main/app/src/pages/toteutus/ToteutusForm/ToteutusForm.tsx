@@ -27,6 +27,7 @@ import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps, isIn, otherwise } from '#/src/utils';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
+import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
@@ -47,6 +48,7 @@ import {
   TutkintoonJohtavaTiedotSection,
   TuvaTiedotSection,
   VapaaSivistystyoTiedotSection,
+  EBTiedotSection,
   DIATiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
@@ -97,6 +99,7 @@ const ToteutusForm = ({
       ? hakeutumisTaiIlmoittautumistapa === ATARU
       : true;
 
+  const isEBkoulutus = isEB(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
   const isDIAkoulutus = isDIA(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const formMode = useFormMode();
@@ -190,6 +193,17 @@ const ToteutusForm = ({
           />
         )}
 
+        {isEBkoulutus && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={EBTiedotSection}
+            koulutustyyppi={koulutustyyppi}
+            koulutus={koulutus}
+          />
+        )}
+
         <FormCollapse
           section="kuvaus"
           header={t('toteutuslomake.toteutuksenKuvaus')}
@@ -197,14 +211,16 @@ const ToteutusForm = ({
           Component={ToteutuksenKuvausSection}
         />
 
-        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && !isDIAkoulutus && (
-          <FormCollapse
-            section="lukiolinjat"
-            header={t('toteutuslomake.lukiolinjat')}
-            languages={languages}
-            Component={LukiolinjatSection}
-          />
-        )}
+        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
+          !isDIAkoulutus &&
+          !isEBkoulutus && (
+            <FormCollapse
+              section="lukiolinjat"
+              header={t('toteutuslomake.lukiolinjat')}
+              languages={languages}
+              Component={LukiolinjatSection}
+            />
+          )}
         {[
           KOULUTUSTYYPPI.AVOIN_YO,
           KOULUTUSTYYPPI.AVOIN_AMK,

@@ -26,6 +26,7 @@ import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps, isIn, otherwise } from '#/src/utils';
+import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
@@ -48,6 +49,7 @@ import {
   TuvaTiedotSection,
   VapaaSivistystyoTiedotSection,
   EBTiedotSection,
+  DIATiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -98,6 +100,7 @@ const ToteutusForm = ({
       : true;
 
   const isEBkoulutus = isEB(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
+  const isDIAkoulutus = isDIA(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const formMode = useFormMode();
 
@@ -179,6 +182,17 @@ const ToteutusForm = ({
           />
         )}
 
+        {isDIAkoulutus && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={DIATiedotSection}
+            koulutustyyppi={koulutustyyppi}
+            koulutus={koulutus}
+          />
+        )}
+
         {isEBkoulutus && (
           <FormCollapse
             section="tiedot"
@@ -197,14 +211,16 @@ const ToteutusForm = ({
           Component={ToteutuksenKuvausSection}
         />
 
-        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && !isEBkoulutus && (
-          <FormCollapse
-            section="lukiolinjat"
-            header={t('toteutuslomake.lukiolinjat')}
-            languages={languages}
-            Component={LukiolinjatSection}
-          />
-        )}
+        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
+          !isDIAkoulutus &&
+          !isEBkoulutus && (
+            <FormCollapse
+              section="lukiolinjat"
+              header={t('toteutuslomake.lukiolinjat')}
+              languages={languages}
+              Component={LukiolinjatSection}
+            />
+          )}
         {[
           KOULUTUSTYYPPI.AVOIN_YO,
           KOULUTUSTYYPPI.AVOIN_AMK,

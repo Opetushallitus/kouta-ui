@@ -10,7 +10,6 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
-import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
@@ -51,42 +50,40 @@ export const EditKoulutusPage = () => {
   return !koulutus ? (
     <FullSpin />
   ) : (
-    <>
-      <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-      <FormPage
-        entityType={ENTITY.KOULUTUS}
-        formMode={FormMode.EDIT}
-        initialValues={initialValues}
-        readOnly={!canUpdate}
-        header={
-          <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
-        }
-        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-        footer={
-          koulutus ? (
-            <KoulutusFooter
-              formMode={FormMode.EDIT}
-              koulutus={koulutus}
-              organisaatioOid={organisaatioOid}
-              canUpdate={canUpdate || isJulkinen}
-            />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {koulutus ? (
-          <KoulutusForm
-            isNewKoulutus={false}
-            onAttachToteutus={onAttachToteutus}
+    <FormPage
+      title={t('sivuTitlet.koulutuksenMuokkaus')}
+      entityType={ENTITY.KOULUTUS}
+      formMode={FormMode.EDIT}
+      initialValues={initialValues}
+      readOnly={!canUpdate}
+      header={
+        <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
+      }
+      steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
+      footer={
+        koulutus ? (
+          <KoulutusFooter
+            formMode={FormMode.EDIT}
             koulutus={koulutus}
             organisaatioOid={organisaatioOid}
+            canUpdate={canUpdate || isJulkinen}
           />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+        ) : null
+      }
+    >
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      {koulutus ? (
+        <KoulutusForm
+          isNewKoulutus={false}
+          onAttachToteutus={onAttachToteutus}
+          koulutus={koulutus}
+          organisaatioOid={organisaatioOid}
+        />
+      ) : (
+        <Spin center />
+      )}
+    </FormPage>
   );
 };

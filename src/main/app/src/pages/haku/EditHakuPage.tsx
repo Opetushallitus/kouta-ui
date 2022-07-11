@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -48,40 +47,38 @@ export const EditHakuPage = () => {
   );
 
   return (
-    <>
-      <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
-      <FormPage
-        entityType={ENTITY.HAKU}
-        formMode={FormMode.EDIT}
-        initialValues={initialValues}
-        readOnly={!canUpdate}
-        header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
-        steps={<FormSteps activeStep={ENTITY.HAKU} />}
-        footer={
-          haku ? (
-            <HakuFooter
-              haku={haku}
-              organisaatioOid={organisaatioOid}
-              formMode={FormMode.EDIT}
-              canUpdate={canUpdate}
-            />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {!isFetching && haku ? (
-          <HakuForm
+    <FormPage
+      title={t('sivuTitlet.haunMuokkaus')}
+      entityType={ENTITY.HAKU}
+      formMode={FormMode.EDIT}
+      initialValues={initialValues}
+      readOnly={!canUpdate}
+      header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
+      steps={<FormSteps activeStep={ENTITY.HAKU} />}
+      footer={
+        haku ? (
+          <HakuFooter
             haku={haku}
             organisaatioOid={organisaatioOid}
-            steps={false}
-            onAttachHakukohde={onAttachHakukohde}
+            formMode={FormMode.EDIT}
+            canUpdate={canUpdate}
           />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+        ) : null
+      }
+    >
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      {!isFetching && haku ? (
+        <HakuForm
+          haku={haku}
+          organisaatioOid={organisaatioOid}
+          steps={false}
+          onAttachHakukohde={onAttachHakukohde}
+        />
+      ) : (
+        <Spin center />
+      )}
+    </FormPage>
   );
 };

@@ -10,7 +10,6 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
-import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
@@ -39,43 +38,41 @@ export const EditValintaperustePage = () => {
   return isLoading ? (
     <FullSpin />
   ) : (
-    <>
-      <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-      <FormPage
-        entityType={ENTITY.VALINTAPERUSTE}
-        formMode={FormMode.EDIT}
-        initialValues={initialValues}
-        readOnly={!canUpdate}
-        header={
-          <EntityFormHeader
-            entityType={ENTITY.VALINTAPERUSTE}
-            entity={valintaperuste}
-          />
-        }
-        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
-        footer={
-          valintaperuste ? (
-            <ValintaperusteFooter
-              formMode={FormMode.EDIT}
-              organisaatioOid={organisaatioOid}
-              valintaperuste={valintaperuste}
-              canUpdate={canUpdate}
-            />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {valintaperuste && (
-          <ValintaperusteForm
-            steps={false}
-            canEditTyyppi={false}
+    <FormPage
+      title={t('sivuTitlet.valintaperusteenMuokkaus')}
+      entityType={ENTITY.VALINTAPERUSTE}
+      formMode={FormMode.EDIT}
+      initialValues={initialValues}
+      readOnly={!canUpdate}
+      header={
+        <EntityFormHeader
+          entityType={ENTITY.VALINTAPERUSTE}
+          entity={valintaperuste}
+        />
+      }
+      steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
+      footer={
+        valintaperuste ? (
+          <ValintaperusteFooter
+            formMode={FormMode.EDIT}
             organisaatioOid={organisaatioOid}
             valintaperuste={valintaperuste}
+            canUpdate={canUpdate}
           />
-        )}
-      </FormPage>
-    </>
+        ) : null
+      }
+    >
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      {valintaperuste && (
+        <ValintaperusteForm
+          steps={false}
+          canEditTyyppi={false}
+          organisaatioOid={organisaatioOid}
+          valintaperuste={valintaperuste}
+        />
+      )}
+    </FormPage>
   );
 };

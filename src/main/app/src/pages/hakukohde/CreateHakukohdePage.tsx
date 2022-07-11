@@ -12,7 +12,6 @@ import {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
@@ -84,49 +83,47 @@ export const CreateHakukohdePage = () => {
     : '';
 
   return (
-    <>
-      <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
-      <FormPage
-        entityType={ENTITY.HAKUKOHDE}
-        formMode={FormMode.CREATE}
-        initialValues={initialValues}
-        header={<EntityFormHeader entityType={ENTITY.HAKUKOHDE} />}
-        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-        footer={
-          <HakukohdeFooter
-            formMode={FormMode.CREATE}
+    <FormPage
+      title={t('sivuTitlet.uusiHakukohde')}
+      entityType={ENTITY.HAKUKOHDE}
+      formMode={FormMode.CREATE}
+      initialValues={initialValues}
+      header={<EntityFormHeader entityType={ENTITY.HAKUKOHDE} />}
+      steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
+      footer={
+        <HakukohdeFooter
+          formMode={FormMode.CREATE}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+          haku={haku}
+          toteutus={toteutus}
+          canUpdate={canUpdate}
+          infoTextTranslationKey={infoTextTranslationKey}
+        />
+      }
+    >
+      {isPageDataLoading ? (
+        <Spin center />
+      ) : (
+        <>
+          <RelationInfoContainer>
+            <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+            <ToteutusRelation
+              organisaatioOid={organisaatioOid}
+              toteutus={toteutus}
+            />
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
+          <HakukohdeForm
+            steps
             organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
             haku={haku}
             toteutus={toteutus}
-            canUpdate={canUpdate}
-            infoTextTranslationKey={infoTextTranslationKey}
+            tarjoajat={data.tarjoajat}
+            koulutustyyppi={koulutustyyppi}
           />
-        }
-      >
-        {isPageDataLoading ? (
-          <Spin center />
-        ) : (
-          <>
-            <RelationInfoContainer>
-              <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
-              <ToteutusRelation
-                organisaatioOid={organisaatioOid}
-                toteutus={toteutus}
-              />
-              <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-            </RelationInfoContainer>
-            <HakukohdeForm
-              steps
-              organisaatioOid={organisaatioOid}
-              haku={haku}
-              toteutus={toteutus}
-              tarjoajat={data.tarjoajat}
-              koulutustyyppi={koulutustyyppi}
-            />
-          </>
-        )}
-      </FormPage>
-    </>
+        </>
+      )}
+    </FormPage>
   );
 };

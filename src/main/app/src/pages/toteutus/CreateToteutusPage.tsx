@@ -11,7 +11,6 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import { FullSpin } from '#/src/components/FullSpin';
-import Title from '#/src/components/Title';
 import {
   KOULUTUSTYYPPI,
   POHJAVALINTA,
@@ -94,41 +93,39 @@ export const CreateToteutusPage = () => {
   return isKoulutusLoading ? (
     <FullSpin />
   ) : (
-    <>
-      <Title>{t('sivuTitlet.uusiToteutus')}</Title>
-      <FormPage
-        entityType={ENTITY.TOTEUTUS}
-        formMode={FormMode.CREATE}
-        initialValues={initialValues}
-        header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}
-        steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
-        footer={
-          koulutus ? (
-            <ToteutusFooter
-              formMode={FormMode.CREATE}
-              toteutus={toteutus}
-              koulutus={koulutus}
-              koulutustyyppi={koulutustyyppi}
-              organisaatioOid={organisaatioOid}
-              canUpdate={true}
-            />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <KoulutusRelation
-            organisaatioOid={organisaatioOid}
+    <FormPage
+      title={t('sivuTitlet.uusiToteutus')}
+      entityType={ENTITY.TOTEUTUS}
+      formMode={FormMode.CREATE}
+      initialValues={initialValues}
+      header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}
+      steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
+      footer={
+        koulutus ? (
+          <ToteutusFooter
+            formMode={FormMode.CREATE}
+            toteutus={toteutus}
             koulutus={koulutus}
+            koulutustyyppi={koulutustyyppi}
+            organisaatioOid={organisaatioOid}
+            canUpdate={true}
           />
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        <ToteutusForm
-          steps
-          koulutus={koulutus}
+        ) : null
+      }
+    >
+      <RelationInfoContainer>
+        <KoulutusRelation
           organisaatioOid={organisaatioOid}
-          koulutustyyppi={koulutustyyppi}
+          koulutus={koulutus}
         />
-      </FormPage>
-    </>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      <ToteutusForm
+        steps
+        koulutus={koulutus}
+        organisaatioOid={organisaatioOid}
+        koulutustyyppi={koulutustyyppi}
+      />
+    </FormPage>
   );
 };

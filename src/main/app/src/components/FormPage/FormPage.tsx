@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 
 import Container from '#/src/components/Container';
 import { ReduxForm } from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useIsDirty, useIsSubmitting } from '#/src/hooks/form';
@@ -68,6 +69,7 @@ const Wrapper = styled.div`
 `;
 
 type FormPageProps = {
+  title: string;
   entityType: ENTITY;
   formMode: FormMode;
   initialValues: Record<string, any>;
@@ -78,6 +80,7 @@ type FormPageProps = {
 };
 
 const FormPage: React.FC<FormPageProps> = ({
+  title,
   entityType,
   formMode,
   initialValues,
@@ -97,6 +100,7 @@ const FormPage: React.FC<FormPageProps> = ({
       initialValues={initialValues}
       disabled={readOnly}
     >
+      <Title>{title}</Title>
       <NavigationPrompt
         when={(currentLoc, nextLoc) => {
           const samePath =

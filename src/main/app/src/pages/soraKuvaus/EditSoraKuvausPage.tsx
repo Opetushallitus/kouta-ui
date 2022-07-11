@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -37,45 +36,40 @@ export const EditSoraKuvausPage = props => {
   );
 
   return (
-    <>
-      <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
-      <FormPage
-        entityType={ENTITY.SORA_KUVAUS}
-        formMode={FormMode.EDIT}
-        initialValues={initialValues}
-        readOnly={!canUpdate}
-        header={
-          <EntityFormHeader
-            entityType={ENTITY.SORA_KUVAUS}
-            entity={soraKuvaus}
-          />
-        }
-        steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
-        footer={
-          <SoraKuvausFooter
-            organisaatioOid={organisaatioOid}
-            formMode={FormMode.EDIT}
-            soraKuvaus={soraKuvaus}
-            canUpdate={canUpdate}
-          />
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {soraKuvaus ? (
-          <SoraKuvausForm
-            {...props}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-            soraKuvaus={soraKuvaus}
-            steps={false}
-            canEditKoulutustyyppi={false}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <FormPage
+      title={t('sivuTitlet.soraKuvauksenMuokkaus')}
+      entityType={ENTITY.SORA_KUVAUS}
+      formMode={FormMode.EDIT}
+      initialValues={initialValues}
+      readOnly={!canUpdate}
+      header={
+        <EntityFormHeader entityType={ENTITY.SORA_KUVAUS} entity={soraKuvaus} />
+      }
+      steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
+      footer={
+        <SoraKuvausFooter
+          organisaatioOid={organisaatioOid}
+          formMode={FormMode.EDIT}
+          soraKuvaus={soraKuvaus}
+          canUpdate={canUpdate}
+        />
+      }
+    >
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      {soraKuvaus ? (
+        <SoraKuvausForm
+          {...props}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+          soraKuvaus={soraKuvaus}
+          steps={false}
+          canEditKoulutustyyppi={false}
+        />
+      ) : (
+        <Spin center />
+      )}
+    </FormPage>
   );
 };

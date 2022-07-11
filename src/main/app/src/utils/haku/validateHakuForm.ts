@@ -41,11 +41,11 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
       validateExistence('tila'),
       validateArrayMinLength('kieliversiot', 1),
       validateTranslations('nimi'),
+      validateExistence('hakutapa'),
+      validateExistence('kohdejoukko.kohdejoukko'),
       validateIf(
         isJulkaistu,
         _fp.flow(
-          validateExistence('kohdejoukko.kohdejoukko'),
-          validateExistence('hakutapa'),
           validateIf(
             isYhteishaku,
             validate('aikataulut.ajankohtaKaytossa', v => v === true, {

@@ -402,11 +402,8 @@ export const AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT = [
 ];
 
 export const ERIKOISLAAKARI_KOULUTUSKOODIURIT = [
-  'koulutus_775100', // Erikoislääkäri
   'koulutus_775101', // Erikoislääkäri
-  'koulutus_775200', // Erikoishammaslääkäri
   'koulutus_775201', // Erikoishammaslääkäri
-  'koulutus_775300', // Erikoiseläinlääkäri
   'koulutus_775301', // Erikoiseläinlääkäri
 ];
 

@@ -10,8 +10,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import FullSpin from '#/src/components/FullSpin';
-import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
@@ -25,15 +23,15 @@ export const EditToteutusPage = () => {
   const history = useHistory();
   const { organisaatioOid, oid } = useParams();
 
-  const { data: toteutus, isFetching: isToteutusFetching } =
-    useToteutusByOid(oid);
+  const toteutusQueryResult = useToteutusByOid(oid);
 
-  const { data: koulutus, isFetching: isKoulutusFetching } = useKoulutusByOid(
-    toteutus?.koulutusOid,
-    {
-      enabled: Boolean(toteutus?.koulutusOid),
-    }
-  );
+  const { data: toteutus } = toteutusQueryResult;
+
+  const koulutusQueryResult = useKoulutusByOid(toteutus?.koulutusOid, {
+    enabled: Boolean(toteutus?.koulutusOid),
+  });
+
+  const { data: koulutus } = koulutusQueryResult;
 
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
@@ -60,13 +58,12 @@ export const EditToteutusPage = () => {
     [toteutus]
   );
 
-  return !toteutus ? (
-    <FullSpin />
-  ) : (
+  return (
     <FormPage
       title={t('sivuTitlet.toteutuksenMuokkaus')}
       entityType={ENTITY.TOTEUTUS}
       formMode={FormMode.EDIT}
+      queryResult={[toteutusQueryResult, koulutusQueryResult]}
       initialValues={initialValues}
       readOnly={!canUpdate}
       header={
@@ -74,16 +71,14 @@ export const EditToteutusPage = () => {
       }
       steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
       footer={
-        toteutus ? (
-          <ToteutusFooter
-            formMode={FormMode.EDIT}
-            toteutus={toteutus}
-            koulutus={koulutus}
-            koulutustyyppi={koulutustyyppi}
-            organisaatioOid={organisaatioOid}
-            canUpdate={canUpdate}
-          />
-        ) : null
+        <ToteutusFooter
+          formMode={FormMode.EDIT}
+          toteutus={toteutus}
+          koulutus={koulutus}
+          koulutustyyppi={koulutustyyppi}
+          organisaatioOid={organisaatioOid}
+          canUpdate={canUpdate}
+        />
       }
     >
       <RelationInfoContainer>
@@ -93,18 +88,14 @@ export const EditToteutusPage = () => {
         />
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
-      {!isKoulutusFetching && !isToteutusFetching ? (
-        <ToteutusForm
-          toteutus={toteutus}
-          koulutus={koulutus}
-          steps={false}
-          onAttachHakukohde={onAttachHakukohde}
-          organisaatioOid={organisaatioOid}
-          koulutustyyppi={koulutustyyppi}
-        />
-      ) : (
-        <Spin center />
-      )}
+      <ToteutusForm
+        toteutus={toteutus}
+        koulutus={koulutus}
+        steps={false}
+        onAttachHakukohde={onAttachHakukohde}
+        organisaatioOid={organisaatioOid}
+        koulutustyyppi={koulutustyyppi}
+      />
     </FormPage>
   );
 };

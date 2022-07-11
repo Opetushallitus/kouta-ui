@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import FullSpin from '#/src/components/FullSpin';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
@@ -20,7 +19,8 @@ import { ValintaperusteForm } from './ValintaperusteForm';
 
 export const EditValintaperustePage = () => {
   const { organisaatioOid, id } = useParams();
-  const { data: valintaperuste, isLoading } = useValintaperusteById(id);
+  const valintaperusteQueryResult = useValintaperusteById(id);
+  const { data: valintaperuste } = valintaperusteQueryResult;
 
   const { t } = useTranslation();
 
@@ -35,14 +35,13 @@ export const EditValintaperustePage = () => {
     [valintaperuste]
   );
 
-  return isLoading ? (
-    <FullSpin />
-  ) : (
+  return (
     <FormPage
       title={t('sivuTitlet.valintaperusteenMuokkaus')}
       entityType={ENTITY.VALINTAPERUSTE}
       formMode={FormMode.EDIT}
       initialValues={initialValues}
+      queryResult={valintaperusteQueryResult}
       readOnly={!canUpdate}
       header={
         <EntityFormHeader
@@ -65,14 +64,12 @@ export const EditValintaperustePage = () => {
       <RelationInfoContainer>
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
-      {valintaperuste && (
-        <ValintaperusteForm
-          steps={false}
-          canEditTyyppi={false}
-          organisaatioOid={organisaatioOid}
-          valintaperuste={valintaperuste}
-        />
-      )}
+      <ValintaperusteForm
+        steps={false}
+        canEditTyyppi={false}
+        organisaatioOid={organisaatioOid}
+        valintaperuste={valintaperuste}
+      />
     </FormPage>
   );
 };

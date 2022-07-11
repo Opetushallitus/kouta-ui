@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
@@ -21,7 +20,8 @@ import HakuForm from './HakuForm';
 export const EditHakuPage = () => {
   const history = useHistory();
   const { organisaatioOid, oid } = useParams();
-  const { data: haku, isFetching } = useHakuByOid(oid);
+  const hakuQueryResult = useHakuByOid(oid);
+  const { data: haku } = hakuQueryResult;
   const { t } = useTranslation();
 
   const onAttachHakukohde = useCallback(
@@ -51,34 +51,29 @@ export const EditHakuPage = () => {
       title={t('sivuTitlet.haunMuokkaus')}
       entityType={ENTITY.HAKU}
       formMode={FormMode.EDIT}
+      queryResult={hakuQueryResult}
       initialValues={initialValues}
       readOnly={!canUpdate}
       header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
       steps={<FormSteps activeStep={ENTITY.HAKU} />}
       footer={
-        haku ? (
-          <HakuFooter
-            haku={haku}
-            organisaatioOid={organisaatioOid}
-            formMode={FormMode.EDIT}
-            canUpdate={canUpdate}
-          />
-        ) : null
+        <HakuFooter
+          haku={haku}
+          organisaatioOid={organisaatioOid}
+          formMode={FormMode.EDIT}
+          canUpdate={canUpdate}
+        />
       }
     >
       <RelationInfoContainer>
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
-      {!isFetching && haku ? (
-        <HakuForm
-          haku={haku}
-          organisaatioOid={organisaatioOid}
-          steps={false}
-          onAttachHakukohde={onAttachHakukohde}
-        />
-      ) : (
-        <Spin center />
-      )}
+      <HakuForm
+        haku={haku}
+        organisaatioOid={organisaatioOid}
+        steps={false}
+        onAttachHakukohde={onAttachHakukohde}
+      />
     </FormPage>
   );
 };

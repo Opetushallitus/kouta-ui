@@ -11,7 +11,6 @@ import FormPage, {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import FullSpin from '#/src/components/FullSpin';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
 import useKoodi from '#/src/hooks/useKoodi';
@@ -42,13 +41,10 @@ const useInitialValues = hakukohde => {
 export const EditHakukohdePage = () => {
   const { organisaatioOid, oid } = useParams();
 
-  const { data: hakukohde, isFetching: hakukohdeLoading } =
-    useHakukohdeByOid(oid);
+  const hakukohdeQueryResult = useHakukohdeByOid(oid);
+  const { data: hakukohde } = hakukohdeQueryResult;
 
-  const {
-    data: { toteutus, haku, koulutustyyppi, tarjoajat } = {},
-    isFetching: pageDataLoading,
-  } = useHakukohdePageData(
+  const hakukohdePageDataQueryResult = useHakukohdePageData(
     {
       hakuOid: hakukohde?.hakuOid,
       toteutusOid: hakukohde?.toteutusOid,
@@ -56,7 +52,8 @@ export const EditHakukohdePage = () => {
     { enabled: Boolean(hakukohde) }
   );
 
-  const isLoading = hakukohdeLoading || pageDataLoading;
+  const { data: { toteutus, haku, koulutustyyppi, tarjoajat } = {} } =
+    hakukohdePageDataQueryResult;
 
   const { t } = useTranslation();
 
@@ -70,13 +67,12 @@ export const EditHakukohdePage = () => {
   const canUpdate = resultObj.canUpdate;
   const infoTextTranslationKey = !canUpdate ? resultObj.reasonKey : '';
 
-  return isLoading ? (
-    <FullSpin />
-  ) : (
+  return (
     <FormPage
       title={t('sivuTitlet.hakukohteenMuokkaus')}
       entityType={ENTITY.HAKUKOHDE}
       formMode={FormMode.EDIT}
+      queryResult={[hakukohdeQueryResult, hakukohdePageDataQueryResult]}
       initialValues={initialValues}
       readOnly={!canUpdate}
       header={
@@ -98,27 +94,23 @@ export const EditHakukohdePage = () => {
         />
       }
     >
-      <>
-        <RelationInfoContainer>
-          <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
-          <ToteutusRelation
-            organisaatioOid={organisaatioOid}
-            toteutus={toteutus}
-          />
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        <HakukohdeForm
-          steps={false}
+      <RelationInfoContainer>
+        <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+        <ToteutusRelation
           organisaatioOid={organisaatioOid}
-          haku={haku}
-          hakukohde={hakukohde}
           toteutus={toteutus}
-          tarjoajat={tarjoajat}
-          koulutustyyppi={
-            koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-          }
         />
-      </>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      <HakukohdeForm
+        steps={false}
+        organisaatioOid={organisaatioOid}
+        haku={haku}
+        hakukohde={hakukohde}
+        toteutus={toteutus}
+        tarjoajat={tarjoajat}
+        koulutustyyppi={koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS}
+      />
     </FormPage>
   );
 };

@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
@@ -21,7 +20,8 @@ import SoraKuvausForm from './SoraKuvausForm';
 export const EditSoraKuvausPage = props => {
   const { organisaatioOid, id } = useParams();
 
-  const { data: soraKuvaus } = useSoraKuvausById(id);
+  const soraKuvausQueryResult = useSoraKuvausById(id);
+  const { data: soraKuvaus } = soraKuvausQueryResult;
 
   const koulutustyyppi =
     soraKuvaus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
@@ -40,6 +40,7 @@ export const EditSoraKuvausPage = props => {
       title={t('sivuTitlet.soraKuvauksenMuokkaus')}
       entityType={ENTITY.SORA_KUVAUS}
       formMode={FormMode.EDIT}
+      queryResult={soraKuvausQueryResult}
       initialValues={initialValues}
       readOnly={!canUpdate}
       header={
@@ -58,18 +59,14 @@ export const EditSoraKuvausPage = props => {
       <RelationInfoContainer>
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
-      {soraKuvaus ? (
-        <SoraKuvausForm
-          {...props}
-          organisaatioOid={organisaatioOid}
-          koulutustyyppi={koulutustyyppi}
-          soraKuvaus={soraKuvaus}
-          steps={false}
-          canEditKoulutustyyppi={false}
-        />
-      ) : (
-        <Spin center />
-      )}
+      <SoraKuvausForm
+        {...props}
+        organisaatioOid={organisaatioOid}
+        koulutustyyppi={koulutustyyppi}
+        soraKuvaus={soraKuvaus}
+        steps={false}
+        canEditKoulutustyyppi={false}
+      />
     </FormPage>
   );
 };

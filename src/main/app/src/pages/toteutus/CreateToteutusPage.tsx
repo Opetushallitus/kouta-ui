@@ -10,7 +10,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { FullSpin } from '#/src/components/FullSpin';
 import {
   KOULUTUSTYYPPI,
   POHJAVALINTA,
@@ -60,8 +59,8 @@ const getInitialValues = ({
 
 export const CreateToteutusPage = () => {
   const { organisaatioOid, koulutusOid } = useParams();
-  const { data: koulutus, isLoading: isKoulutusLoading } =
-    useKoulutusByOid(koulutusOid);
+  const koulutusQueryResult = useKoulutusByOid(koulutusOid);
+  const { data: koulutus } = koulutusQueryResult;
 
   const { t } = useTranslation();
 
@@ -90,27 +89,24 @@ export const CreateToteutusPage = () => {
       : getInitialValues({ koulutustyyppi, toteutus, koulutusKielet });
   }, [toteutus, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
-  return isKoulutusLoading ? (
-    <FullSpin />
-  ) : (
+  return (
     <FormPage
       title={t('sivuTitlet.uusiToteutus')}
       entityType={ENTITY.TOTEUTUS}
       formMode={FormMode.CREATE}
+      queryResult={koulutusQueryResult}
       initialValues={initialValues}
       header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}
       steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
       footer={
-        koulutus ? (
-          <ToteutusFooter
-            formMode={FormMode.CREATE}
-            toteutus={toteutus}
-            koulutus={koulutus}
-            koulutustyyppi={koulutustyyppi}
-            organisaatioOid={organisaatioOid}
-            canUpdate={true}
-          />
-        ) : null
+        <ToteutusFooter
+          formMode={FormMode.CREATE}
+          toteutus={toteutus}
+          koulutus={koulutus}
+          koulutustyyppi={koulutustyyppi}
+          organisaatioOid={organisaatioOid}
+          canUpdate={true}
+        />
       }
     >
       <RelationInfoContainer>

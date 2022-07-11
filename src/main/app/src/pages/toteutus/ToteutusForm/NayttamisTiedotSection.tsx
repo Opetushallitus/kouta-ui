@@ -93,6 +93,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
         KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
         KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
         KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+        KOULUTUSTYYPPI.ERIKOISLAAKARI,
       ].includes(koulutustyyppi) && (
         <Box marginBottom={2}>
           <div {...getTestIdProps('ammattinimikkeetSelect')}>

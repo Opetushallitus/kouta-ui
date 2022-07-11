@@ -35,11 +35,12 @@ export const useOrganisaatiot = (oids, options = {}) => {
   return { ...rest, organisaatiot };
 };
 
+// TODO: Tässä pitäisi käyttää koulutustyyppi->oppilaitostyyppi mäppäystä kouta-backendistä (useOppilaitostyypitByKoulutustyyppi)
 const oppilaitostyyppiToKoulutustyyppi = o =>
   _.cond([
-    [_ => AMMATILLISET_OPPILAITOSTYYPIT.includes(_), _ => 'Amm'],
-    [_ => KORKEAKOULU_OPPILAITOSTYYPIT.includes(_), _ => 'Yo'],
-    [_ => LUKIO_OPPILAITOSTYYPIT.includes(_), _ => 'Lk'],
+    [ot => AMMATILLISET_OPPILAITOSTYYPIT.includes(ot), _ => 'Amm'],
+    [ot => KORKEAKOULU_OPPILAITOSTYYPIT.includes(ot), _ => 'Yo'],
+    [ot => LUKIO_OPPILAITOSTYYPIT.includes(ot), _ => 'Lk'],
   ])(o?.oppilaitostyyppi);
 
 const isParent = parentOid => org => org.parentOidPath.includes(parentOid);

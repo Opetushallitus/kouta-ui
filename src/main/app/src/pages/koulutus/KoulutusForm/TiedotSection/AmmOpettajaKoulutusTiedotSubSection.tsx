@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
-import { KOULUTUSALA_KASVATUSALAT_KOODIURI } from '#/src/constants';
+import { KoulutusalaKoodi, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
@@ -23,7 +23,9 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
   const selectedLanguage = useLanguageTab();
 
   const { koodi: laajuusKoodi } = useKoodi('opintojenlaajuus_60');
-  const { koodi: laajuusyksikko } = useKoodi('opintojenlaajuusyksikko_2');
+  const { koodi: laajuusyksikko } = useKoodi(
+    OpintojenLaajuusyksikko.OPINTOPISTE
+  );
   const laajuusKoodiMetadata = laajuusKoodi?.metadata;
   const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
@@ -75,13 +77,9 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
           label={t('koulutuslomake.valitseKoulutusalat')}
           disabled={true}
         >
-          <KoulutusalaSelect
-            value={{ value: KOULUTUSALA_KASVATUSALAT_KOODIURI }}
-          />
+          <KoulutusalaSelect value={{ value: KoulutusalaKoodi.KASVATUSALAT }} />
         </FormControl>
       </Box>
     </>
   );
 };
-
-export default AmmOpettajaKoulutusTiedotSubSection;

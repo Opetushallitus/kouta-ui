@@ -401,11 +401,20 @@ export const AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT = [
   'koulutus_000003', // Ammatillinen opinto-ohjaajan koulutus
 ];
 
-export const KOULUTUSALA_YLEISSIVISTAVA_KOODIURI =
-  'kansallinenkoulutusluokitus2016koulutusalataso1_00#1';
+export const ERIKOISLAAKARI_KOULUTUSKOODIURIT = [
+  'koulutus_775100', // Erikoislääkäri
+  'koulutus_775101', // Erikoislääkäri
+  'koulutus_775200', // Erikoishammaslääkäri
+  'koulutus_775201', // Erikoishammaslääkäri
+  'koulutus_775300', // Erikoiseläinlääkäri
+  'koulutus_775301', // Erikoiseläinlääkäri
+];
 
-export const KOULUTUSALA_KASVATUSALAT_KOODIURI =
-  'kansallinenkoulutusluokitus2016koulutusalataso1_01#1';
+export enum KoulutusalaKoodi {
+  YLEISSIVISTAVA = 'kansallinenkoulutusluokitus2016koulutusalataso1_00',
+  KASVATUSALAT = 'kansallinenkoulutusluokitus2016koulutusalataso1_01',
+  TERVEYS = 'kansallinenkoulutusluokitus2016koulutusalataso2_091',
+}
 
 export const LUKIO_YLEISLINJA = 'yleislinja';
 

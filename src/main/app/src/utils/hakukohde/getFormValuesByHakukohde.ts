@@ -126,7 +126,7 @@ export const getFormValuesByHakukohde = (
     perustiedot: {
       nimi: _fp.isEmpty(nimiKoodista) ? nimi : nimiKoodista,
       hakukohdeKoodiUri: toSelectValue(hakukohdeKoodiUri),
-      voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
+      voiSuorittaaKaksoistutkinnon: Boolean(toinenAsteOnkoKaksoistutkinto),
     },
     ajankohta: {
       kaytetaanHakukohteenAlkamiskautta:

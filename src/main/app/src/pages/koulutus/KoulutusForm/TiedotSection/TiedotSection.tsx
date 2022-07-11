@@ -184,7 +184,7 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
   );
 };
 
-const ReadOnlyKoulutusalaSection = ({ koodiUri }) => {
+export const ReadOnlyKoulutusalaSection = ({ koodiUri }) => {
   const { t } = useTranslation();
   return (
     <FormControl

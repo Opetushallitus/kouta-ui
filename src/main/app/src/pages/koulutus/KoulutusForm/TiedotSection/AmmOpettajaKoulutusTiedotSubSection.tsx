@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
 import { KoulutusalaKoodi, OpintojenLaajuusyksikko } from '#/src/constants';
@@ -12,6 +11,7 @@ import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusT
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
+import { ReadOnlyKoulutusalaSection } from './TiedotSection';
 
 export const AmmOpettajaKoulutusTiedotSubSection = ({
   disabled,
@@ -73,12 +73,7 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
         </FormControl>
       </Box>
       <Box mb={2}>
-        <FormControl
-          label={t('koulutuslomake.valitseKoulutusalat')}
-          disabled={true}
-        >
-          <KoulutusalaSelect value={{ value: KoulutusalaKoodi.KASVATUSALAT }} />
-        </FormControl>
+        <ReadOnlyKoulutusalaSection koodiUri={KoulutusalaKoodi.KASVATUSALAT} />
       </Box>
     </>
   );

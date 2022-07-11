@@ -573,6 +573,35 @@ export const createKoulutusForm = () => {
   );
 
   it(
+    'should be able to create erikoislääkäri-koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'erikoislaakari'] });
+
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.valitseKoulutus').pipe(
+          pFillAsyncSelect('Erikoislääkäri (775100)')
+        );
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
+          paste('erikoislääkäri-koulutus nimi')
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
     'should be able to create "Aikuisten perusopetus" -koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['aikuisten-perusopetus'] });

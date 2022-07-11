@@ -219,8 +219,6 @@ export const ErikoislaakariTiedotSection = ({
         valitseKoulutusLabel={t('yleiset.valitseKoulutus')}
         required
       />
-      <OpintojenLaajuusFieldExtended name={name} disabled={disabled} required />
-      <KoulutusalatField disabled={disabled} name={name} />
       <TutkintonimikeField disabled={disabled} name={name} />
       <ReadOnlyKoulutusalaSection koodiUri={KoulutusalaKoodi.TERVEYS} />
       <Field

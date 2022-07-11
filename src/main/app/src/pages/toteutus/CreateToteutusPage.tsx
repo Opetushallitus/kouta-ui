@@ -10,9 +10,8 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
+import { FullSpin } from '#/src/components/FullSpin';
 import Title from '#/src/components/Title';
-import { Spin } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   POHJAVALINTA,
@@ -92,14 +91,15 @@ export const CreateToteutusPage = () => {
       : getInitialValues({ koulutustyyppi, toteutus, koulutusKielet });
   }, [toteutus, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
-  return (
-    <ReduxForm
-      form={ENTITY.TOTEUTUS}
-      mode={FormMode.CREATE}
-      initialValues={initialValues}
-    >
+  return isKoulutusLoading ? (
+    <FullSpin />
+  ) : (
+    <>
       <Title>{t('sivuTitlet.uusiToteutus')}</Title>
       <FormPage
+        entityType={ENTITY.TOTEUTUS}
+        formMode={FormMode.CREATE}
+        initialValues={initialValues}
         header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}
         steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
         footer={
@@ -122,17 +122,13 @@ export const CreateToteutusPage = () => {
           />
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        {isKoulutusLoading ? (
-          <Spin center />
-        ) : (
-          <ToteutusForm
-            steps
-            koulutus={koulutus}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-          />
-        )}
+        <ToteutusForm
+          steps
+          koulutus={koulutus}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+        />
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

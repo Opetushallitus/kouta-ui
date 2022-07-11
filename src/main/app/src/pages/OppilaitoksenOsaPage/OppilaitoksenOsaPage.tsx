@@ -8,7 +8,6 @@ import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import {
   ENTITY,
@@ -119,14 +118,12 @@ export const OppilaitoksenOsaPage = () => {
   return isFetching ? (
     <FullSpin />
   ) : (
-    <ReduxForm
-      form={ENTITY.OPPILAITOKSEN_OSA}
-      initialValues={initialValues}
-      disabled={readOnly}
-      mode={formMode}
-    >
+    <>
       <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
       <FormPage
+        entityType={ENTITY.OPPILAITOKSEN_OSA}
+        formMode={formMode}
+        initialValues={initialValues}
         readOnly={readOnly}
         steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
         header={
@@ -151,6 +148,6 @@ export const OppilaitoksenOsaPage = () => {
           />
         ) : null}
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

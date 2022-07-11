@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
@@ -38,14 +37,12 @@ export const EditSoraKuvausPage = props => {
   );
 
   return (
-    <ReduxForm
-      form={ENTITY.SORA_KUVAUS}
-      mode={FormMode.EDIT}
-      initialValues={initialValues}
-      disabled={!canUpdate}
-    >
+    <>
       <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
       <FormPage
+        entityType={ENTITY.SORA_KUVAUS}
+        formMode={FormMode.EDIT}
+        initialValues={initialValues}
         readOnly={!canUpdate}
         header={
           <EntityFormHeader
@@ -79,6 +76,6 @@ export const EditSoraKuvausPage = props => {
           <Spin center />
         )}
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

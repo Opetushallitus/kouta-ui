@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
@@ -48,13 +47,12 @@ export const CreateSoraKuvausPage = () => {
   );
 
   return (
-    <ReduxForm
-      form={ENTITY.SORA_KUVAUS}
-      mode={FormMode.CREATE}
-      initialValues={initialValues}
-    >
+    <>
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
       <FormPage
+        entityType={ENTITY.SORA_KUVAUS}
+        formMode={FormMode.CREATE}
+        initialValues={initialValues}
         header={<EntityFormHeader entityType={ENTITY.SORA_KUVAUS} />}
         steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
         footer={
@@ -69,6 +67,6 @@ export const CreateSoraKuvausPage = () => {
         </RelationInfoContainer>
         <SoraKuvausForm steps organisaatioOid={organisaatioOid} />
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

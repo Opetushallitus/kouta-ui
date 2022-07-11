@@ -12,7 +12,6 @@ import {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import {
@@ -85,13 +84,12 @@ export const CreateHakukohdePage = () => {
     : '';
 
   return (
-    <ReduxForm
-      form={ENTITY.HAKUKOHDE}
-      mode={FormMode.CREATE}
-      initialValues={initialValues}
-    >
+    <>
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
+        entityType={ENTITY.HAKUKOHDE}
+        formMode={FormMode.CREATE}
+        initialValues={initialValues}
         header={<EntityFormHeader entityType={ENTITY.HAKUKOHDE} />}
         steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
         footer={
@@ -129,6 +127,6 @@ export const CreateHakukohdePage = () => {
           </>
         )}
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

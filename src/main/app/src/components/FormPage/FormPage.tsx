@@ -4,7 +4,9 @@ import NavigationPrompt from 'react-router-navigation-prompt';
 import styled, { css } from 'styled-components';
 
 import Container from '#/src/components/Container';
+import { ReduxForm } from '#/src/components/ReduxForm';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
+import { ENTITY, FormMode } from '#/src/constants';
 import { useIsDirty, useIsSubmitting } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
 
@@ -66,6 +68,9 @@ const Wrapper = styled.div`
 `;
 
 type FormPageProps = {
+  entityType: ENTITY;
+  formMode: FormMode;
+  initialValues: Record<string, any>;
   header?: React.ReactNode;
   steps?: React.ReactNode;
   footer?: React.ReactNode;
@@ -73,6 +78,9 @@ type FormPageProps = {
 };
 
 const FormPage: React.FC<FormPageProps> = ({
+  entityType,
+  formMode,
+  initialValues,
   header = null,
   steps = null,
   children = null,
@@ -83,7 +91,12 @@ const FormPage: React.FC<FormPageProps> = ({
   const isDirty = useIsDirty();
 
   return (
-    <>
+    <ReduxForm
+      form={entityType}
+      mode={formMode}
+      initialValues={initialValues}
+      disabled={readOnly}
+    >
       <NavigationPrompt
         when={(currentLoc, nextLoc) => {
           const samePath =
@@ -110,7 +123,7 @@ const FormPage: React.FC<FormPageProps> = ({
           </Container>
         </FooterContainer>
       </Wrapper>
-    </>
+    </ReduxForm>
   );
 };
 

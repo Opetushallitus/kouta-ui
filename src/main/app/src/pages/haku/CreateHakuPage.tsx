@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
@@ -40,13 +39,12 @@ export const CreateHakuPage = () => {
   const initialValues = useMemo(() => getInitialValues(data), [data]);
 
   return (
-    <ReduxForm
-      form={ENTITY.HAKU}
-      mode={FormMode.CREATE}
-      initialValues={initialValues}
-    >
+    <>
       <Title>{t('sivuTitlet.uusiHaku')}</Title>
       <FormPage
+        entityType={ENTITY.HAKU}
+        formMode={FormMode.CREATE}
+        initialValues={initialValues}
         header={<EntityFormHeader entityType={ENTITY.HAKU} />}
         steps={<FormSteps activeStep={ENTITY.HAKU} />}
         footer={
@@ -61,6 +59,6 @@ export const CreateHakuPage = () => {
         </RelationInfoContainer>
         <HakuForm steps organisaatioOid={organisaatioOid} />
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
@@ -53,13 +52,12 @@ export const CreateValintaperustePage = () => {
   );
 
   return (
-    <ReduxForm
-      form={ENTITY.VALINTAPERUSTE}
-      mode={FormMode.CREATE}
-      initialValues={initialValues}
-    >
+    <>
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
       <FormPage
+        entityType={ENTITY.VALINTAPERUSTE}
+        formMode={FormMode.CREATE}
+        initialValues={initialValues}
         header={<EntityFormHeader entityType={ENTITY.VALINTAPERUSTE} />}
         steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
         footer={
@@ -74,6 +72,6 @@ export const CreateValintaperustePage = () => {
         </RelationInfoContainer>
         <ValintaperusteForm steps organisaatioOid={luojaOrganisaatioOid} />
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

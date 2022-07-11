@@ -8,7 +8,6 @@ import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -86,14 +85,12 @@ export const OppilaitosPage = () => {
   return isFetching ? (
     <FullSpin />
   ) : (
-    <ReduxForm
-      form={ENTITY.OPPILAITOS}
-      initialValues={initialValues}
-      disabled={readOnly}
-      mode={formMode}
-    >
+    <>
       <Title>{t('sivuTitlet.oppilaitos')}</Title>
       <FormPage
+        entityType={ENTITY.OPPILAITOS}
+        initialValues={initialValues}
+        formMode={formMode}
         readOnly={readOnly}
         steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}
         header={
@@ -119,6 +116,6 @@ export const OppilaitosPage = () => {
           />
         )}
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

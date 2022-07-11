@@ -12,7 +12,6 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
@@ -75,14 +74,12 @@ export const EditHakukohdePage = () => {
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm
-      form={ENTITY.HAKUKOHDE}
-      mode={FormMode.EDIT}
-      initialValues={initialValues}
-      disabled={!canUpdate}
-    >
+    <>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormPage
+        entityType={ENTITY.HAKUKOHDE}
+        formMode={FormMode.EDIT}
+        initialValues={initialValues}
         readOnly={!canUpdate}
         header={
           <EntityFormHeader entityType={ENTITY.HAKUKOHDE} entity={hakukohde} />
@@ -125,6 +122,6 @@ export const EditHakukohdePage = () => {
           />
         </>
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

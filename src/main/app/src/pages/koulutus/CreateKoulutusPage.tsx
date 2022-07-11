@@ -10,7 +10,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
@@ -46,13 +45,12 @@ export const CreateKoulutusPage = () => {
   const initialValues = useMemo(() => getInitialValues(data), [data]);
 
   return (
-    <ReduxForm
-      mode={FormMode.CREATE}
-      form={ENTITY.KOULUTUS}
-      initialValues={initialValues}
-    >
+    <>
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
       <FormPage
+        entityType={ENTITY.KOULUTUS}
+        formMode={FormMode.CREATE}
+        initialValues={initialValues}
         header={<EntityFormHeader entityType={ENTITY.KOULUTUS} />}
         steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
         footer={
@@ -71,6 +69,6 @@ export const CreateKoulutusPage = () => {
           organisaatioOid={valittuOrganisaatioOid}
         />
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

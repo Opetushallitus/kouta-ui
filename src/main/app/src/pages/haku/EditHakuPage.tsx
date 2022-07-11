@@ -9,7 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
@@ -49,14 +48,12 @@ export const EditHakuPage = () => {
   );
 
   return (
-    <ReduxForm
-      form={ENTITY.HAKU}
-      mode={FormMode.EDIT}
-      initialValues={initialValues}
-      disabled={!canUpdate}
-    >
+    <>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
       <FormPage
+        entityType={ENTITY.HAKU}
+        formMode={FormMode.EDIT}
+        initialValues={initialValues}
         readOnly={!canUpdate}
         header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
         steps={<FormSteps activeStep={ENTITY.HAKU} />}
@@ -85,6 +82,6 @@ export const EditHakuPage = () => {
           <Spin center />
         )}
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

@@ -10,7 +10,6 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -40,14 +39,12 @@ export const EditValintaperustePage = () => {
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm
-      form={ENTITY.VALINTAPERUSTE}
-      mode={FormMode.EDIT}
-      initialValues={initialValues}
-      disabled={!canUpdate}
-    >
+    <>
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
       <FormPage
+        entityType={ENTITY.VALINTAPERUSTE}
+        formMode={FormMode.EDIT}
+        initialValues={initialValues}
         readOnly={!canUpdate}
         header={
           <EntityFormHeader
@@ -79,6 +76,6 @@ export const EditValintaperustePage = () => {
           />
         )}
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

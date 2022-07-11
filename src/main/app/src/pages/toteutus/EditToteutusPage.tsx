@@ -11,7 +11,6 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
-import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
@@ -65,14 +64,12 @@ export const EditToteutusPage = () => {
   return !toteutus ? (
     <FullSpin />
   ) : (
-    <ReduxForm
-      form={ENTITY.TOTEUTUS}
-      mode={FormMode.EDIT}
-      initialValues={initialValues}
-      disabled={!canUpdate}
-    >
+    <>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
       <FormPage
+        entityType={ENTITY.TOTEUTUS}
+        formMode={FormMode.EDIT}
+        initialValues={initialValues}
         readOnly={!canUpdate}
         header={
           <EntityFormHeader entityType={ENTITY.TOTEUTUS} entity={toteutus} />
@@ -111,6 +108,6 @@ export const EditToteutusPage = () => {
           <Spin center />
         )}
       </FormPage>
-    </ReduxForm>
+    </>
   );
 };

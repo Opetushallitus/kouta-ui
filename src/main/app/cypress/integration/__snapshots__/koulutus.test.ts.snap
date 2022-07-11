@@ -1172,9 +1172,7 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
-    "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso1_00#1"
-    ],
+    "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvauksenNimi": {},
     "kuvaus": {
@@ -1248,6 +1246,56 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create EB-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": true,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_301104#12"
+  ],
+  "koulutustyyppi": "lk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "lk",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "lk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "EB-tutkinto (European Baccalaureate)"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": "1",
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],

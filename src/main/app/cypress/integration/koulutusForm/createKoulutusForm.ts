@@ -656,7 +656,7 @@ export const createKoulutusForm = () => {
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
           'have.text',
-          'Yleissivistävä koulutus'
+          'kansallinenkoulutusluokitus2016koulutusalataso1_00'
         );
 
         getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
@@ -693,7 +693,7 @@ export const createKoulutusForm = () => {
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
           'have.text',
-          'Yleissivistävä koulutus'
+          'kansallinenkoulutusluokitus2016koulutusalataso1_00'
         );
 
         getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(

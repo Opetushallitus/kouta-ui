@@ -572,7 +572,7 @@ export const createKoulutusForm = () => {
     })
   );
 
-  it.only(
+  it(
     'should be able to create erikoislääkäri-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'erikoislaakari'] });

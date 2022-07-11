@@ -9,10 +9,17 @@ import {
 } from '#/src/constants';
 import { useOrganisaatioHierarkia } from '#/src/hooks/useOrganisaatioHierarkia';
 import iterateTree from '#/src/utils/iterateTree';
+import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
 
-export const useOppilaitosTyypit = organisaatioOid => {
+import { useIsOphVirkailija } from './useIsOphVirkailija';
+
+export const useOppilaitosTyypit = (
+  organisaatioOid,
+  options: { enabled?: boolean } = {}
+) => {
   const { hierarkia, isLoading } = useOrganisaatioHierarkia(organisaatioOid, {
     skipParents: false,
+    enabled: options?.enabled,
   });
 
   const oppilaitostyypit = useMemo(() => {
@@ -78,5 +85,43 @@ export const createIsKoulutustyyppiDisabledGetter = ({
     }
 
     return true;
+  };
+};
+
+export const useIsKoulutustyyppiDisabledGetter = ({
+  entityType,
+  organisaatioOid,
+}) => {
+  const isOphVirkailija = useIsOphVirkailija();
+
+  const {
+    oppilaitostyypit: allowedOppilaitostyypit,
+    isLoading: loadingTyypit,
+  } = useOppilaitosTyypit(organisaatioOid, {
+    enabled: isOphVirkailija === false,
+  });
+
+  const { oppilaitostyypitByKoulutustyypit, isLoading: loadingMappings } =
+    useOppilaitostyypitByKoulutustyypit({ enabled: isOphVirkailija === false });
+
+  const getIsDisabled = useMemo(
+    () =>
+      createIsKoulutustyyppiDisabledGetter({
+        isOphVirkailija,
+        oppilaitostyypitByKoulutustyypit,
+        allowedOppilaitostyypit,
+        entityType,
+      }),
+    [
+      isOphVirkailija,
+      oppilaitostyypitByKoulutustyypit,
+      allowedOppilaitostyypit,
+      entityType,
+    ]
+  );
+
+  return {
+    isLoading: loadingTyypit || loadingMappings,
+    getIsDisabled,
   };
 };

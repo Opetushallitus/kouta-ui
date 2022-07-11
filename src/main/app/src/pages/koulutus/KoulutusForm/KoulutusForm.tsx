@@ -283,22 +283,31 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
             KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
           ].includes(koulutustyyppi) && (
-            <>
-              <FormCollapse
-                section="lisatiedot"
-                header={t('koulutuslomake.koulutuksenLisatiedot')}
-                Component={LisatiedotSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-              />
-              <FormCollapse
-                section="soraKuvaus"
-                header={t('yleiset.soraKuvaus')}
-                Component={SoraKuvausSection}
-                organisaatioOid={organisaatioOid}
-                languages={languageTabs}
-              />
-            </>
+            <FormCollapse
+              section="lisatiedot"
+              header={t('koulutuslomake.koulutuksenLisatiedot')}
+              Component={LisatiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+            />
+          )}
+
+          {![
+            KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.TELMA,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+            KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+            KOULUTUSTYYPPI.ERIKOISLAAKARI,
+          ].includes(koulutustyyppi) && (
+            <FormCollapse
+              section="soraKuvaus"
+              header={t('yleiset.soraKuvaus')}
+              Component={SoraKuvausSection}
+              organisaatioOid={organisaatioOid}
+              languages={languageTabs}
+            />
           )}
 
           <FormCollapse

@@ -597,6 +597,8 @@ export const createKoulutusForm = () => {
 
       fillTilaSection();
 
+      getByTestId('soraKuvausSection').should('not.exist');
+
       tallenna();
     })
   );

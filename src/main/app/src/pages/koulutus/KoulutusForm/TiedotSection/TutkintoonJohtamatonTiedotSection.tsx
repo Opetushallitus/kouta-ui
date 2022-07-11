@@ -6,7 +6,7 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
 import OpintojenLaajuusFieldExtended from '#/src/components/OpintojenLaajuusFieldExtended';
-import { Box } from '#/src/components/virkailija';
+import { VerticalBox } from '#/src/components/VerticalBox';
 import { KOULUTUS_PERUSOPETUS_KOODIURI } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -40,7 +40,7 @@ const NimiFieldFromKoulutustyyppi = ({ name, koulutustyyppi, language }) => {
   useNimiFromKoulutustyyppi({ koulutustyyppi, name });
 
   return (
-    <Box {...getTestIdProps('nimiInput')}>
+    <div {...getTestIdProps('nimiInput')}>
       <Field
         disabled={nimiDisabled}
         name={`${name}.nimi.${language}`}
@@ -49,7 +49,7 @@ const NimiFieldFromKoulutustyyppi = ({ name, koulutustyyppi, language }) => {
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
-    </Box>
+    </div>
   );
 };
 
@@ -60,16 +60,14 @@ export const TuvaTiedotSection = ({
   koulutustyyppi,
 }) => {
   return (
-    <Box>
-      <Box mb={2} {...getTestIdProps('opintojenlaajuusSelect')}>
-        <OpintojenlaajuusField disabled={disabled} name={name} required />
-      </Box>
+    <VerticalBox gap={2}>
+      <OpintojenlaajuusField disabled={disabled} name={name} required />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
         name={name}
         language={language}
       />
-    </Box>
+    </VerticalBox>
   );
 };
 
@@ -82,49 +80,41 @@ export const AikuistenPerusopetusTiedotSection = ({
   koulutustyyppi,
 }) => {
   return (
-    <Box>
-      <Box mb={2}>
-        <EnforcedKoulutusSelect
-          value={{ value: KOULUTUS_PERUSOPETUS_KOODIURI }}
-        />
-      </Box>
-      <Box mb={2} {...getTestIdProps('opintojenlaajuusSelect')}>
+    <VerticalBox gap={2}>
+      <EnforcedKoulutusSelect
+        value={{ value: KOULUTUS_PERUSOPETUS_KOODIURI }}
+      />
+      <div {...getTestIdProps('opintojenlaajuusSelect')}>
         <OpintojenLaajuusFieldExtended
           name={name}
           disabled={disabled}
           required
         />
-      </Box>
+      </div>
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
         name={name}
         language={language}
       />
-    </Box>
+    </VerticalBox>
   );
 };
 
 export const VapaaSivistystyoTiedotOpistovuosiSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
   return (
-    <Box>
-      <Box mb={2}>
-        <OpintojenlaajuusField disabled={disabled} name={name} required />
-      </Box>
-      <Box mb={2}>
-        <KoulutusalatField disabled={disabled} name={name} />
-      </Box>
-      <Box>
-        <Field
-          disabled={disabled}
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('koulutuslomake.koulutuksenNimi')}
-          helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
-          required
-        />
-      </Box>
-    </Box>
+    <VerticalBox gap={2}>
+      <OpintojenlaajuusField disabled={disabled} name={name} required />
+      <KoulutusalatField disabled={disabled} name={name} />
+      <Field
+        disabled={disabled}
+        name={`${name}.nimi.${language}`}
+        component={FormFieldInput}
+        label={t('koulutuslomake.koulutuksenNimi')}
+        helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
+        required
+      />
+    </VerticalBox>
   );
 };
 
@@ -132,28 +122,18 @@ export const MuuTiedotSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
 
   return (
-    <Box>
-      <Box mb={2}>
-        <OpintojenLaajuusFieldExtended
-          name={name}
-          disabled={disabled}
-          required
-        />
-      </Box>
-      <Box mb={2}>
-        <KoulutusalatField disabled={disabled} name={name} />
-      </Box>
-      <Box>
-        <Field
-          disabled={disabled}
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('koulutuslomake.koulutuksenNimi')}
-          helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
-          required
-        />
-      </Box>
-    </Box>
+    <VerticalBox gap={2}>
+      <OpintojenLaajuusFieldExtended name={name} disabled={disabled} required />
+      <KoulutusalatField disabled={disabled} name={name} />
+      <Field
+        disabled={disabled}
+        name={`${name}.nimi.${language}`}
+        component={FormFieldInput}
+        label={t('koulutuslomake.koulutuksenNimi')}
+        helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
+        required
+      />
+    </VerticalBox>
   );
 };
 

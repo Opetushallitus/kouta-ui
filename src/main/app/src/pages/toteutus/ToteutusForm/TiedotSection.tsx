@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
 import {
   OpintojenLaajuusyksikko,
@@ -22,13 +23,6 @@ type NimiSectionProps = {
   language: LanguageCode;
   disabled?: boolean;
 };
-
-const PaddedSections = ({ children, gutter }) =>
-  React.Children.map(children, (child, index) => (
-    <Box mb={index < React.Children.count(children) - 1 ? gutter : 0}>
-      {child}
-    </Box>
-  ));
 
 const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   const { t } = useTranslation();
@@ -95,7 +89,7 @@ export const TuvaTiedotSection = ({
   useNimiFromKoulutus({ koulutus, name });
 
   return (
-    <PaddedSections gutter={2}>
+    <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
       <LaajuusJaAloituspaikat
         name={name}
@@ -108,7 +102,7 @@ export const TuvaTiedotSection = ({
       >
         {t('toteutuslomake.jarjestetaanErityisopetuksena')}
       </Field>
-    </PaddedSections>
+    </VerticalBox>
   );
 };
 
@@ -120,14 +114,14 @@ export const TelmaTiedotSection = ({
   useNimiFromKoulutus({ koulutus, name });
 
   return (
-    <PaddedSections gutter={2}>
+    <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
       <LaajuusJaAloituspaikat
         name={name}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
       />
-    </PaddedSections>
+    </VerticalBox>
   );
 };
 
@@ -139,7 +133,7 @@ export const AikuistenperusopetusTiedotSection = ({
   useNimiFromKoulutus({ koulutus, name });
 
   return (
-    <PaddedSections gutter={2}>
+    <VerticalBox gap={2}>
       <NimiSection name={name} language={language} />
       <LaajuusJaAloituspaikat
         name={name}
@@ -148,7 +142,7 @@ export const AikuistenperusopetusTiedotSection = ({
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
       />
-    </PaddedSections>
+    </VerticalBox>
   );
 };
 
@@ -160,7 +154,7 @@ export const VapaaSivistystyoTiedotSection = ({
   useNimiFromKoulutus({ koulutus, name });
 
   return (
-    <PaddedSections gutter={2}>
+    <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
       <OpintojenLaajuusReadOnlyField
         selectedLanguage={language}
@@ -170,7 +164,7 @@ export const VapaaSivistystyoTiedotSection = ({
         }
         laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
       />
-    </PaddedSections>
+    </VerticalBox>
   );
 };
 
@@ -182,7 +176,7 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
   name,
   koulutus,
 }: ToteutusTiedotSectionProps) => (
-  <PaddedSections gutter={2}>
+  <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
     <OpintojenLaajuusReadOnlyField
       selectedLanguage={language}
@@ -192,7 +186,7 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
       }
       laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
-  </PaddedSections>
+  </VerticalBox>
 );
 
 export const AmmOpoJaErityisopeTiedotSection = ({
@@ -201,14 +195,14 @@ export const AmmOpoJaErityisopeTiedotSection = ({
   disabled,
   name,
 }: ToteutusTiedotSectionProps) => (
-  <PaddedSections gutter={2}>
+  <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
     <LaajuusJaAloituspaikat
       name={name}
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
-  </PaddedSections>
+  </VerticalBox>
 );
 
 export const TutkinnonOsaTiedotSection = ({
@@ -216,14 +210,14 @@ export const TutkinnonOsaTiedotSection = ({
   language,
   name,
 }: ToteutusTiedotSectionProps) => (
-  <PaddedSections gutter={2}>
+  <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={true} />
     <LaajuusJaAloituspaikat
       name={name}
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
-  </PaddedSections>
+  </VerticalBox>
 );
 
 export const OsaamisalaTiedotSection = TutkinnonOsaTiedotSection;
@@ -237,7 +231,7 @@ export const TutkintoonJohtavaTiedotSection = ({
   const { t } = useTranslation();
 
   return (
-    <PaddedSections gutter={2}>
+    <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={disabled} />
       {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
         koulutustyyppi
@@ -249,7 +243,7 @@ export const TutkintoonJohtavaTiedotSection = ({
           {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
         </Field>
       )}
-    </PaddedSections>
+    </VerticalBox>
   );
 };
 
@@ -261,22 +255,10 @@ export const DIATiedotSection = ({
   useNimiFromKoulutus({ koulutus, name });
 
   return (
-    <PaddedSections gutter={2}>
+    <Box>
       <NimiSection name={name} language={language} disabled={false} />
-    </PaddedSections>
+    </Box>
   );
 };
 
-export const EBTiedotSection = ({
-  koulutus,
-  language,
-  name,
-}: ToteutusTiedotSectionProps) => {
-  useNimiFromKoulutus({ koulutus, name });
-
-  return (
-    <PaddedSections gutter={2}>
-      <NimiSection name={name} language={language} disabled={false} />
-    </PaddedSections>
-  );
-};
+export const EBTiedotSection = DIATiedotSection;

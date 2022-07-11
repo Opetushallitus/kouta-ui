@@ -41,6 +41,7 @@ export type KoulutusFormValues = {
   description: {
     kuvaus: TranslatedField<EditorState>;
     nimi: TranslatedField<string>;
+    linkkiEPerusteisiin?: TranslatedField<string>;
   };
   tarjoajat: { tarjoajat: Array<string>; kaytaPohjanJarjestajaa?: boolean };
   julkinen?: boolean;

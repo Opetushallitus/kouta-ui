@@ -5,6 +5,7 @@ import NavigationPrompt from 'react-router-navigation-prompt';
 import styled, { css } from 'styled-components';
 
 import Container from '#/src/components/Container';
+import FullSpin from '#/src/components/FullSpin';
 import { ReduxForm } from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
@@ -85,7 +86,7 @@ type FormPageProps = {
 
 const ConditionalQueryResult = ({ queryResult, children }) =>
   queryResult ? (
-    <QueryResultWrapper queryResult={queryResult}>
+    <QueryResultWrapper queryResult={queryResult} LoadingWrapper={FullSpin}>
       {children}
     </QueryResultWrapper>
   ) : (

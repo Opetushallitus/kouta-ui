@@ -225,7 +225,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso1_00#1"
+      "kansallinenkoulutusluokitus2016koulutusalataso1_00"
     ],
     "koulutustyyppi": "lk",
     "kuvauksenNimi": {},
@@ -386,7 +386,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso1_00#1"
+      "kansallinenkoulutusluokitus2016koulutusalataso1_00"
     ],
     "koulutustyyppi": "lk",
     "kuvauksenNimi": {},
@@ -1207,6 +1207,51 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": "1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_775101#12"
+  ],
+  "koulutustyyppi": "erikoislaakari",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "erikoislaakari",
+    "kuvauksenNimi": {
+      "fi": "Kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "erikoislaakari"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Erikoislääkäri"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],

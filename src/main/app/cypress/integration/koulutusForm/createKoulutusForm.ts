@@ -326,7 +326,7 @@ export const createKoulutusForm = () => {
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
           'have.text',
-          'kansallinenkoulutusluokitus2016koulutusalataso1_01#1'
+          'kansallinenkoulutusluokitus2016koulutusalataso1_01'
         );
 
         getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
@@ -572,14 +572,14 @@ export const createKoulutusForm = () => {
     })
   );
 
-  it(
+  it.only(
     'should be able to create erikoislääkäri-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'erikoislaakari'] });
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.valitseKoulutus').pipe(
-          pFillAsyncSelect('Erikoislääkäri (775100)')
+          pFillAsyncSelect('Erikoislääkäri')
         );
 
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(

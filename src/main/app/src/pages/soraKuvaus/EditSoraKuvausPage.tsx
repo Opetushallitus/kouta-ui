@@ -9,9 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
-import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
@@ -23,7 +20,8 @@ import SoraKuvausForm from './SoraKuvausForm';
 export const EditSoraKuvausPage = props => {
   const { organisaatioOid, id } = useParams();
 
-  const { data: soraKuvaus } = useSoraKuvausById(id);
+  const soraKuvausQueryResult = useSoraKuvausById(id);
+  const { data: soraKuvaus } = soraKuvausQueryResult;
 
   const koulutustyyppi =
     soraKuvaus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
@@ -38,47 +36,37 @@ export const EditSoraKuvausPage = props => {
   );
 
   return (
-    <ReduxForm
-      form={ENTITY.SORA_KUVAUS}
-      mode={FormMode.EDIT}
+    <FormPage
+      title={t('sivuTitlet.soraKuvauksenMuokkaus')}
+      entityType={ENTITY.SORA_KUVAUS}
+      formMode={FormMode.EDIT}
+      queryResult={soraKuvausQueryResult}
       initialValues={initialValues}
-      disabled={!canUpdate}
+      readOnly={!canUpdate}
+      header={
+        <EntityFormHeader entityType={ENTITY.SORA_KUVAUS} entity={soraKuvaus} />
+      }
+      steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
+      footer={
+        <SoraKuvausFooter
+          organisaatioOid={organisaatioOid}
+          formMode={FormMode.EDIT}
+          soraKuvaus={soraKuvaus}
+          canUpdate={canUpdate}
+        />
+      }
     >
-      <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
-      <FormPage
-        readOnly={!canUpdate}
-        header={
-          <EntityFormHeader
-            entityType={ENTITY.SORA_KUVAUS}
-            entity={soraKuvaus}
-          />
-        }
-        steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
-        footer={
-          <SoraKuvausFooter
-            organisaatioOid={organisaatioOid}
-            formMode={FormMode.EDIT}
-            soraKuvaus={soraKuvaus}
-            canUpdate={canUpdate}
-          />
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {soraKuvaus ? (
-          <SoraKuvausForm
-            {...props}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-            soraKuvaus={soraKuvaus}
-            steps={false}
-            canEditKoulutustyyppi={false}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </ReduxForm>
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      <SoraKuvausForm
+        {...props}
+        organisaatioOid={organisaatioOid}
+        koulutustyyppi={koulutustyyppi}
+        soraKuvaus={soraKuvaus}
+        steps={false}
+        canEditKoulutustyyppi={false}
+      />
+    </FormPage>
   );
 };

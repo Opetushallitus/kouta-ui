@@ -12,9 +12,6 @@ import {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
-import { Spin } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   ENTITY,
@@ -55,10 +52,12 @@ export const CreateHakukohdePage = () => {
   const { organisaatioOid, toteutusOid, hakuOid } = useParams();
   const { t } = useTranslation();
 
-  const { data, isLoading: isPageDataLoading } = useHakukohdePageData({
+  const pageDataQueryResult = useHakukohdePageData({
     hakuOid: hakuOid,
     toteutusOid: toteutusOid,
   });
+
+  const { data } = pageDataQueryResult;
 
   const haku = data?.haku;
   const toteutus = data?.toteutus;
@@ -85,50 +84,42 @@ export const CreateHakukohdePage = () => {
     : '';
 
   return (
-    <ReduxForm
-      form={ENTITY.HAKUKOHDE}
-      mode={FormMode.CREATE}
+    <FormPage
+      title={t('sivuTitlet.uusiHakukohde')}
+      entityType={ENTITY.HAKUKOHDE}
+      formMode={FormMode.CREATE}
+      queryResult={pageDataQueryResult}
       initialValues={initialValues}
+      header={<EntityFormHeader entityType={ENTITY.HAKUKOHDE} />}
+      steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
+      footer={
+        <HakukohdeFooter
+          formMode={FormMode.CREATE}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+          haku={haku}
+          toteutus={toteutus}
+          canUpdate={canUpdate}
+          infoTextTranslationKey={infoTextTranslationKey}
+        />
+      }
     >
-      <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
-      <FormPage
-        header={<EntityFormHeader entityType={ENTITY.HAKUKOHDE} />}
-        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-        footer={
-          <HakukohdeFooter
-            formMode={FormMode.CREATE}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-            haku={haku}
-            toteutus={toteutus}
-            canUpdate={canUpdate}
-            infoTextTranslationKey={infoTextTranslationKey}
-          />
-        }
-      >
-        {isPageDataLoading ? (
-          <Spin center />
-        ) : (
-          <>
-            <RelationInfoContainer>
-              <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
-              <ToteutusRelation
-                organisaatioOid={organisaatioOid}
-                toteutus={toteutus}
-              />
-              <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-            </RelationInfoContainer>
-            <HakukohdeForm
-              steps
-              organisaatioOid={organisaatioOid}
-              haku={haku}
-              toteutus={toteutus}
-              tarjoajat={data.tarjoajat}
-              koulutustyyppi={koulutustyyppi}
-            />
-          </>
-        )}
-      </FormPage>
-    </ReduxForm>
+      <RelationInfoContainer>
+        <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+        <ToteutusRelation
+          organisaatioOid={organisaatioOid}
+          toteutus={toteutus}
+        />
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      <HakukohdeForm
+        steps
+        organisaatioOid={organisaatioOid}
+        haku={haku}
+        toteutus={toteutus}
+        tarjoajat={data?.tarjoajat}
+        koulutustyyppi={koulutustyyppi}
+      />
+    </FormPage>
   );
 };

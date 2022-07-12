@@ -9,8 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
@@ -53,27 +51,24 @@ export const CreateValintaperustePage = () => {
   );
 
   return (
-    <ReduxForm
-      form={ENTITY.VALINTAPERUSTE}
-      mode={FormMode.CREATE}
+    <FormPage
+      title={t('sivuTitlet.uusiValintaperuste')}
+      entityType={ENTITY.VALINTAPERUSTE}
+      formMode={FormMode.CREATE}
       initialValues={initialValues}
+      header={<EntityFormHeader entityType={ENTITY.VALINTAPERUSTE} />}
+      steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
+      footer={
+        <ValintaperusteFooter
+          formMode={FormMode.CREATE}
+          organisaatioOid={luojaOrganisaatioOid}
+        />
+      }
     >
-      <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
-      <FormPage
-        header={<EntityFormHeader entityType={ENTITY.VALINTAPERUSTE} />}
-        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
-        footer={
-          <ValintaperusteFooter
-            formMode={FormMode.CREATE}
-            organisaatioOid={luojaOrganisaatioOid}
-          />
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
-        </RelationInfoContainer>
-        <ValintaperusteForm steps organisaatioOid={luojaOrganisaatioOid} />
-      </FormPage>
-    </ReduxForm>
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
+      </RelationInfoContainer>
+      <ValintaperusteForm steps organisaatioOid={luojaOrganisaatioOid} />
+    </FormPage>
   );
 };

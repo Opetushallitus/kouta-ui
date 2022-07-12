@@ -62,7 +62,7 @@ const HakuForm = ({
     ? t('hakulomake.liittamisenTakarajaYlittynyt')
     : null;
 
-  const { data: haut }  = useHaut({
+  const { data: haut } = useHaut({
     organisaatioOid,
     yhteishaut: false,
   });

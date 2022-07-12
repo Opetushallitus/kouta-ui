@@ -10,9 +10,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
-import { Spin } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   POHJAVALINTA,
@@ -62,8 +59,8 @@ const getInitialValues = ({
 
 export const CreateToteutusPage = () => {
   const { organisaatioOid, koulutusOid } = useParams();
-  const { data: koulutus, isLoading: isKoulutusLoading } =
-    useKoulutusByOid(koulutusOid);
+  const koulutusQueryResult = useKoulutusByOid(koulutusOid);
+  const { data: koulutus } = koulutusQueryResult;
 
   const { t } = useTranslation();
 
@@ -93,46 +90,38 @@ export const CreateToteutusPage = () => {
   }, [toteutus, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
   return (
-    <ReduxForm
-      form={ENTITY.TOTEUTUS}
-      mode={FormMode.CREATE}
+    <FormPage
+      title={t('sivuTitlet.uusiToteutus')}
+      entityType={ENTITY.TOTEUTUS}
+      formMode={FormMode.CREATE}
+      queryResult={koulutusQueryResult}
       initialValues={initialValues}
+      header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}
+      steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
+      footer={
+        <ToteutusFooter
+          formMode={FormMode.CREATE}
+          toteutus={toteutus}
+          koulutus={koulutus}
+          koulutustyyppi={koulutustyyppi}
+          organisaatioOid={organisaatioOid}
+          canUpdate={true}
+        />
+      }
     >
-      <Title>{t('sivuTitlet.uusiToteutus')}</Title>
-      <FormPage
-        header={<EntityFormHeader entityType={ENTITY.TOTEUTUS} />}
-        steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
-        footer={
-          koulutus ? (
-            <ToteutusFooter
-              formMode={FormMode.CREATE}
-              toteutus={toteutus}
-              koulutus={koulutus}
-              koulutustyyppi={koulutustyyppi}
-              organisaatioOid={organisaatioOid}
-              canUpdate={true}
-            />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <KoulutusRelation
-            organisaatioOid={organisaatioOid}
-            koulutus={koulutus}
-          />
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {isKoulutusLoading ? (
-          <Spin center />
-        ) : (
-          <ToteutusForm
-            steps
-            koulutus={koulutus}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-          />
-        )}
-      </FormPage>
-    </ReduxForm>
+      <RelationInfoContainer>
+        <KoulutusRelation
+          organisaatioOid={organisaatioOid}
+          koulutus={koulutus}
+        />
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      <ToteutusForm
+        steps
+        koulutus={koulutus}
+        organisaatioOid={organisaatioOid}
+        koulutustyyppi={koulutustyyppi}
+      />
+    </FormPage>
   );
 };

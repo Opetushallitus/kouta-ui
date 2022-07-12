@@ -9,7 +9,7 @@ const ReduxFormWrapper = reduxForm({
   enableReinitialize: true,
 })(({ children }) => <>{children}</>);
 
-const ReduxForm = ({
+export const ReduxForm = ({
   form,
   mode,
   disabled = false,

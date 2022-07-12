@@ -9,10 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import FullSpin from '#/src/components/FullSpin';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
-import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -26,7 +22,9 @@ export const EditKoulutusPage = () => {
   const history = useHistory();
   const { organisaatioOid, oid } = useParams();
 
-  const { data: koulutus = null } = useKoulutusByOid(oid);
+  const koulutusQueryResult = useKoulutusByOid(oid);
+
+  const { data: koulutus = null } = koulutusQueryResult;
 
   const { t } = useTranslation();
   const initialValues = useMemo(() => {
@@ -49,47 +47,36 @@ export const EditKoulutusPage = () => {
 
   const isJulkinen = useFieldValue('julkinen', ENTITY.KOULUTUS);
 
-  return !koulutus ? (
-    <FullSpin />
-  ) : (
-    <ReduxForm
-      form={ENTITY.KOULUTUS}
-      mode={FormMode.EDIT}
+  return (
+    <FormPage
+      title={t('sivuTitlet.koulutuksenMuokkaus')}
+      entityType={ENTITY.KOULUTUS}
+      formMode={FormMode.EDIT}
+      queryResult={koulutusQueryResult}
       initialValues={initialValues}
-      disabled={!canUpdate}
+      readOnly={!canUpdate}
+      header={
+        <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
+      }
+      steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
+      footer={
+        <KoulutusFooter
+          formMode={FormMode.EDIT}
+          koulutus={koulutus}
+          organisaatioOid={organisaatioOid}
+          canUpdate={canUpdate || isJulkinen}
+        />
+      }
     >
-      <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-      <FormPage
-        readOnly={!canUpdate}
-        header={
-          <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
-        }
-        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-        footer={
-          koulutus ? (
-            <KoulutusFooter
-              formMode={FormMode.EDIT}
-              koulutus={koulutus}
-              organisaatioOid={organisaatioOid}
-              canUpdate={canUpdate || isJulkinen}
-            />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {koulutus ? (
-          <KoulutusForm
-            isNewKoulutus={false}
-            onAttachToteutus={onAttachToteutus}
-            koulutus={koulutus}
-            organisaatioOid={organisaatioOid}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </ReduxForm>
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      <KoulutusForm
+        isNewKoulutus={false}
+        onAttachToteutus={onAttachToteutus}
+        koulutus={koulutus}
+        organisaatioOid={organisaatioOid}
+      />
+    </FormPage>
   );
 };

@@ -44,6 +44,7 @@ export enum KOULUTUSTYYPPI {
   VAPAA_SIVISTYSTYO_MUU = 'vapaa-sivistystyo-muu',
   AIKUISTEN_PERUSOPETUS = 'aikuisten-perusopetus',
   KORKEAKOULUTUS_OPINTOJAKSO = 'kk-opintojakso',
+  ERIKOISLAAKARI = 'erikoislaakari',
 }
 
 export const KOULUTUSTYYPIT = Object.values(KOULUTUSTYYPPI);
@@ -62,6 +63,7 @@ export const TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT = [
   // KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS,
   KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
   KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+  KOULUTUSTYYPPI.ERIKOISLAAKARI,
 ];
 
 export const KORKEAKOULU_KOULUTUSTYYPIT = [
@@ -399,11 +401,17 @@ export const AMM_OPETTAJA_ERIKOISOPETTAJA_OPO_KOULUTUSKOODIURIT = [
   'koulutus_000003', // Ammatillinen opinto-ohjaajan koulutus
 ];
 
-export const KOULUTUSALA_YLEISSIVISTAVA_KOODIURI =
-  'kansallinenkoulutusluokitus2016koulutusalataso1_00#1';
+export const ERIKOISLAAKARI_KOULUTUSKOODIURIT = [
+  'koulutus_775101', // Erikoislääkäri
+  'koulutus_775201', // Erikoishammaslääkäri
+  'koulutus_775301', // Erikoiseläinlääkäri
+];
 
-export const KOULUTUSALA_KASVATUSALAT_KOODIURI =
-  'kansallinenkoulutusluokitus2016koulutusalataso1_01#1';
+export enum KoulutusalaKoodi {
+  YLEISSIVISTAVA = 'kansallinenkoulutusluokitus2016koulutusalataso1_00',
+  KASVATUSALAT = 'kansallinenkoulutusluokitus2016koulutusalataso1_01',
+  TERVEYS = 'kansallinenkoulutusluokitus2016koulutusalataso2_091',
+}
 
 export const LUKIO_YLEISLINJA = 'yleislinja';
 

@@ -6,30 +6,13 @@ import { Field } from 'redux-form';
 import { FormFieldKoulutustyyppiSelect } from '#/src/components/formFields';
 import { CRUD_ROLES, ENTITY } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
-import {
-  createIsKoulutustyyppiDisabledGetter,
-  useOppilaitosTyypit,
-} from '#/src/hooks/useOppilaitosTyypit';
-import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
+import { useIsKoulutustyyppiDisabledGetter } from '#/src/hooks/useOppilaitosTyypit';
 
 export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
   const { t } = useTranslation();
 
-  const isOphVirkailija = useIsOphVirkailija();
-
-  const {
-    oppilaitostyypit: allowedOppilaitostyypit,
-    isLoading: loadingTyypit,
-  } = useOppilaitosTyypit(organisaatioOid);
-
-  const { oppilaitostyypitByKoulutustyypit, isLoading: loadingMappings } =
-    useOppilaitostyypitByKoulutustyypit();
-
-  const getIsDisabled = createIsKoulutustyyppiDisabledGetter({
-    isOphVirkailija,
-    oppilaitostyypitByKoulutustyypit,
-    allowedOppilaitostyypit,
+  const { getIsDisabled, isLoading } = useIsKoulutustyyppiDisabledGetter({
+    organisaatioOid,
     entityType: ENTITY.KOULUTUS,
   });
 
@@ -39,7 +22,6 @@ export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
     organisaatioOid
   );
 
-  const isLoading = loadingTyypit || loadingMappings;
   return (
     <Field
       name={name}

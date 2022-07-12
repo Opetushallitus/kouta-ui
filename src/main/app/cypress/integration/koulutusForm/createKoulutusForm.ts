@@ -326,7 +326,7 @@ export const createKoulutusForm = () => {
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
           'have.text',
-          'kansallinenkoulutusluokitus2016koulutusalataso1_01#1'
+          'kansallinenkoulutusluokitus2016koulutusalataso1_01'
         );
 
         getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
@@ -573,6 +573,37 @@ export const createKoulutusForm = () => {
   );
 
   it(
+    'should be able to create erikoislääkäri-koulutus',
+    mutationTest(() => {
+      fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'erikoislaakari'] });
+
+      withinSection('information', () => {
+        getSelectByLabel('yleiset.valitseKoulutus').pipe(
+          pFillAsyncSelect('Erikoislääkäri')
+        );
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
+          paste('erikoislääkäri-koulutus nimi')
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      getByTestId('soraKuvausSection').should('not.exist');
+
+      tallenna();
+    })
+  );
+
+  it(
     'should be able to create "Aikuisten perusopetus" -koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['aikuisten-perusopetus'] });
@@ -625,7 +656,7 @@ export const createKoulutusForm = () => {
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
           'have.text',
-          'Yleissivistävä koulutus'
+          'kansallinenkoulutusluokitus2016koulutusalataso1_00'
         );
 
         getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
@@ -662,7 +693,7 @@ export const createKoulutusForm = () => {
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').should(
           'have.text',
-          'Yleissivistävä koulutus'
+          'kansallinenkoulutusluokitus2016koulutusalataso1_00'
         );
 
         getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(

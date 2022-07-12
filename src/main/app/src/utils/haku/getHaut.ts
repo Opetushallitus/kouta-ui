@@ -1,6 +1,11 @@
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 
-const getHaut = async ({ organisaatioOid, httpClient, apiUrls, yhteishaut = true }) => {
+const getHaut = async ({
+  organisaatioOid,
+  httpClient,
+  apiUrls,
+  yhteishaut = true,
+}) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.haku-list'),
     {

@@ -10,8 +10,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
@@ -46,31 +44,28 @@ export const CreateKoulutusPage = () => {
   const initialValues = useMemo(() => getInitialValues(data), [data]);
 
   return (
-    <ReduxForm
-      mode={FormMode.CREATE}
-      form={ENTITY.KOULUTUS}
+    <FormPage
+      title={t('sivuTitlet.uusiKoulutus')}
+      entityType={ENTITY.KOULUTUS}
+      formMode={FormMode.CREATE}
       initialValues={initialValues}
-    >
-      <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
-      <FormPage
-        header={<EntityFormHeader entityType={ENTITY.KOULUTUS} />}
-        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-        footer={
-          <KoulutusFooter
-            formMode={FormMode.CREATE}
-            organisaatioOid={valittuOrganisaatioOid}
-          />
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={valittuOrganisaatioOid} />
-        </RelationInfoContainer>
-        <KoulutusForm
-          steps
-          isNewKoulutus={true}
+      header={<EntityFormHeader entityType={ENTITY.KOULUTUS} />}
+      steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
+      footer={
+        <KoulutusFooter
+          formMode={FormMode.CREATE}
           organisaatioOid={valittuOrganisaatioOid}
         />
-      </FormPage>
-    </ReduxForm>
+      }
+    >
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={valittuOrganisaatioOid} />
+      </RelationInfoContainer>
+      <KoulutusForm
+        steps
+        isNewKoulutus={true}
+        organisaatioOid={valittuOrganisaatioOid}
+      />
+    </FormPage>
   );
 };

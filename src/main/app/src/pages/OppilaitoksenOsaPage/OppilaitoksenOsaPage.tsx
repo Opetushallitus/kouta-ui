@@ -8,8 +8,6 @@ import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
 import {
   ENTITY,
   CRUD_ROLES,
@@ -119,38 +117,34 @@ export const OppilaitoksenOsaPage = () => {
   return isFetching ? (
     <FullSpin />
   ) : (
-    <ReduxForm
-      form={ENTITY.OPPILAITOKSEN_OSA}
+    <FormPage
+      title={t('sivuTitlet.oppilaitoksenOsa')}
+      entityType={ENTITY.OPPILAITOKSEN_OSA}
+      formMode={formMode}
       initialValues={initialValues}
-      disabled={readOnly}
-      mode={formMode}
+      readOnly={readOnly}
+      steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
+      header={
+        <EntityFormHeader
+          entityType={ENTITY.OPPILAITOKSEN_OSA}
+          entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
+        />
+      }
+      footer={
+        <OppilaitoksenOsaFooter
+          oppilaitoksenOsa={oppilaitoksenOsa}
+          organisaatioOid={organisaatioOid}
+          readOnly={readOnly}
+        />
+      }
     >
-      <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
-      <FormPage
-        readOnly={readOnly}
-        steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
-        header={
-          <EntityFormHeader
-            entityType={ENTITY.OPPILAITOKSEN_OSA}
-            entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
-          />
-        }
-        footer={
-          <OppilaitoksenOsaFooter
-            oppilaitoksenOsa={oppilaitoksenOsa}
-            organisaatioOid={organisaatioOid}
-            readOnly={readOnly}
-          />
-        }
-      >
-        {organisaatio ? (
-          <OppilaitoksenOsaForm
-            organisaatioOid={organisaatioOid}
-            oppilaitoksenOsa={oppilaitoksenOsa}
-            steps={stepsEnabled}
-          />
-        ) : null}
-      </FormPage>
-    </ReduxForm>
+      {organisaatio ? (
+        <OppilaitoksenOsaForm
+          organisaatioOid={organisaatioOid}
+          oppilaitoksenOsa={oppilaitoksenOsa}
+          steps={stepsEnabled}
+        />
+      ) : null}
+    </FormPage>
   );
 };

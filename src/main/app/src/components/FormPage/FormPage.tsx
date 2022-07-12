@@ -1,12 +1,19 @@
 import React from 'react';
 
+import { QueryObserverResult } from 'react-query';
 import NavigationPrompt from 'react-router-navigation-prompt';
 import styled, { css } from 'styled-components';
 
 import Container from '#/src/components/Container';
+import FullSpin from '#/src/components/FullSpin';
+import { ReduxForm } from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
+import { ENTITY, FormMode } from '#/src/constants';
 import { useIsDirty, useIsSubmitting } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
+
+import { QueryResultWrapper } from '../QueryResultWrapper';
 
 const HeaderContainer = styled.div`
   background-color: white;
@@ -66,13 +73,32 @@ const Wrapper = styled.div`
 `;
 
 type FormPageProps = {
+  title: string;
+  entityType: ENTITY;
+  formMode: FormMode;
+  initialValues: Record<string, any>;
+  queryResult?: QueryObserverResult | Array<QueryObserverResult>;
   header?: React.ReactNode;
   steps?: React.ReactNode;
   footer?: React.ReactNode;
   readOnly?: boolean;
 };
 
+const ConditionalQueryResult = ({ queryResult, children }) =>
+  queryResult ? (
+    <QueryResultWrapper queryResult={queryResult} LoadingWrapper={FullSpin}>
+      {children}
+    </QueryResultWrapper>
+  ) : (
+    children
+  );
+
 const FormPage: React.FC<FormPageProps> = ({
+  title,
+  entityType,
+  formMode,
+  initialValues,
+  queryResult,
   header = null,
   steps = null,
   children = null,
@@ -83,34 +109,42 @@ const FormPage: React.FC<FormPageProps> = ({
   const isDirty = useIsDirty();
 
   return (
-    <>
-      <NavigationPrompt
-        when={(currentLoc, nextLoc) => {
-          const samePath =
-            (nextLoc && nextLoc.pathname) ===
-            (currentLoc && currentLoc.pathname);
-          return !samePath && !isSubmitting && isDirty;
-        }}
+    <ConditionalQueryResult queryResult={queryResult}>
+      <ReduxForm
+        form={entityType}
+        mode={formMode}
+        initialValues={initialValues}
+        disabled={readOnly}
       >
-        {props => <UnsavedChangesDialog {...props} />}
-      </NavigationPrompt>
-      <Wrapper readOnly={readOnly}>
-        <HeaderContainer>
-          <Container>{header}</Container>
-        </HeaderContainer>
-        <StepsContainer>
-          <Container>{steps}</Container>
-        </StepsContainer>
-        <FormContent>
-          <Container>{children}</Container>
-        </FormContent>
-        <FooterContainer>
-          <Container>
-            <FooterActions>{footer}</FooterActions>
-          </Container>
-        </FooterContainer>
-      </Wrapper>
-    </>
+        <Title>{title}</Title>
+        <NavigationPrompt
+          when={(currentLoc, nextLoc) => {
+            const samePath =
+              (nextLoc && nextLoc.pathname) ===
+              (currentLoc && currentLoc.pathname);
+            return !samePath && !isSubmitting && isDirty;
+          }}
+        >
+          {props => <UnsavedChangesDialog {...props} />}
+        </NavigationPrompt>
+        <Wrapper readOnly={readOnly}>
+          <HeaderContainer>
+            <Container>{header}</Container>
+          </HeaderContainer>
+          <StepsContainer>
+            <Container>{steps}</Container>
+          </StepsContainer>
+          <FormContent>
+            <Container>{children}</Container>
+          </FormContent>
+          <FooterContainer>
+            <Container>
+              <FooterActions>{footer}</FooterActions>
+            </Container>
+          </FooterContainer>
+        </Wrapper>
+      </ReduxForm>
+    </ConditionalQueryResult>
   );
 };
 

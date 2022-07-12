@@ -9,8 +9,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import ReduxForm from '#/src/components/ReduxForm';
-import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
@@ -48,27 +46,24 @@ export const CreateSoraKuvausPage = () => {
   );
 
   return (
-    <ReduxForm
-      form={ENTITY.SORA_KUVAUS}
-      mode={FormMode.CREATE}
+    <FormPage
+      title={t('sivuTitlet.uusiSoraKuvaus')}
+      entityType={ENTITY.SORA_KUVAUS}
+      formMode={FormMode.CREATE}
       initialValues={initialValues}
+      header={<EntityFormHeader entityType={ENTITY.SORA_KUVAUS} />}
+      steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
+      footer={
+        <SoraKuvausFooter
+          organisaatioOid={organisaatioOid}
+          formMode={FormMode.CREATE}
+        />
+      }
     >
-      <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
-      <FormPage
-        header={<EntityFormHeader entityType={ENTITY.SORA_KUVAUS} />}
-        steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
-        footer={
-          <SoraKuvausFooter
-            organisaatioOid={organisaatioOid}
-            formMode={FormMode.CREATE}
-          />
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        <SoraKuvausForm steps organisaatioOid={organisaatioOid} />
-      </FormPage>
-    </ReduxForm>
+      <RelationInfoContainer>
+        <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+      </RelationInfoContainer>
+      <SoraKuvausForm steps organisaatioOid={organisaatioOid} />
+    </FormPage>
   );
 };

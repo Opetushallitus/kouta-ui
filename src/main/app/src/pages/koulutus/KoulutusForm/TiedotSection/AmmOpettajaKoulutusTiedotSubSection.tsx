@@ -2,16 +2,16 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
-import { KOULUTUSALA_KASVATUSALAT_KOODIURI } from '#/src/constants';
+import { KoulutusalaKoodi, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
+import { ReadOnlyKoulutusalaSection } from './TiedotSection';
 
 export const AmmOpettajaKoulutusTiedotSubSection = ({
   disabled,
@@ -23,7 +23,9 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
   const selectedLanguage = useLanguageTab();
 
   const { koodi: laajuusKoodi } = useKoodi('opintojenlaajuus_60');
-  const { koodi: laajuusyksikko } = useKoodi('opintojenlaajuusyksikko_2');
+  const { koodi: laajuusyksikko } = useKoodi(
+    OpintojenLaajuusyksikko.OPINTOPISTE
+  );
   const laajuusKoodiMetadata = laajuusKoodi?.metadata;
   const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
@@ -71,17 +73,8 @@ export const AmmOpettajaKoulutusTiedotSubSection = ({
         </FormControl>
       </Box>
       <Box mb={2}>
-        <FormControl
-          label={t('koulutuslomake.valitseKoulutusalat')}
-          disabled={true}
-        >
-          <KoulutusalaSelect
-            value={{ value: KOULUTUSALA_KASVATUSALAT_KOODIURI }}
-          />
-        </FormControl>
+        <ReadOnlyKoulutusalaSection koodiUri={KoulutusalaKoodi.KASVATUSALAT} />
       </Box>
     </>
   );
 };
-
-export default AmmOpettajaKoulutusTiedotSubSection;

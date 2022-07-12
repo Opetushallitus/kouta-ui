@@ -22,12 +22,12 @@ type Mapping = {
   oppilaitostyypit: Array<string>;
 };
 
-export const useOppilaitostyypitByKoulutustyypit = () => {
+export const useOppilaitostyypitByKoulutustyypit = (options = {}) => {
   const { data, ...rest } = useApiQuery(
     'getOppilaitostyypitByKoulutustyypit',
     getOppilaitostyypitByKoulutustyypit,
     {},
-    { ...PREVENT_REFETCH_QUERY_OPTIONS }
+    { ...PREVENT_REFETCH_QUERY_OPTIONS, ...options }
   );
 
   const oppilaitostyypitByKoulutustyypit = useMemo(() => {

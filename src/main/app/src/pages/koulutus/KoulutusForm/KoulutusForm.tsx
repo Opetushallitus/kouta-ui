@@ -40,15 +40,16 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import { TiedotSection } from './TiedotSection/TiedotSection';
 import {
+  TiedotSection,
+  TuvaTiedotSection,
+  TelmaTiedotSection,
   AikuistenPerusopetusTiedotSection,
+  VapaaSivistystyoOpistovuosiTiedotSection,
   MuuTiedotSection,
   KorkeakoulutusOpintojaksoTiedotSection,
-  TelmaTiedotSection,
-  TuvaTiedotSection,
-  VapaaSivistystyoTiedotOpistovuosiSection,
-} from './TiedotSection/TutkintoonJohtamatonTiedotSection';
+  ErikoislaakariTiedotSection,
+} from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -151,7 +152,7 @@ export const KoulutusForm = ({
                 ],
                 [
                   _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI),
-                  () => VapaaSivistystyoTiedotOpistovuosiSection,
+                  () => VapaaSivistystyoOpistovuosiTiedotSection,
                 ],
                 [
                   isIn([
@@ -163,6 +164,10 @@ export const KoulutusForm = ({
                 [
                   _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
                   () => KorkeakoulutusOpintojaksoTiedotSection,
+                ],
+                [
+                  _fp.isEqual(KOULUTUSTYYPPI.ERIKOISLAAKARI),
+                  () => ErikoislaakariTiedotSection,
                 ],
                 [otherwise, () => TiedotSection],
               ])(koulutustyyppi)}
@@ -256,6 +261,7 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
             KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
             KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+            KOULUTUSTYYPPI.ERIKOISLAAKARI,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse
@@ -277,22 +283,31 @@ export const KoulutusForm = ({
             KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
             KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
           ].includes(koulutustyyppi) && (
-            <>
-              <FormCollapse
-                section="lisatiedot"
-                header={t('koulutuslomake.koulutuksenLisatiedot')}
-                Component={LisatiedotSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-              />
-              <FormCollapse
-                section="soraKuvaus"
-                header={t('yleiset.soraKuvaus')}
-                Component={SoraKuvausSection}
-                organisaatioOid={organisaatioOid}
-                languages={languageTabs}
-              />
-            </>
+            <FormCollapse
+              section="lisatiedot"
+              header={t('koulutuslomake.koulutuksenLisatiedot')}
+              Component={LisatiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+            />
+          )}
+
+          {![
+            KOULUTUSTYYPPI.TUVA,
+            KOULUTUSTYYPPI.TELMA,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+            KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+            KOULUTUSTYYPPI.ERIKOISLAAKARI,
+          ].includes(koulutustyyppi) && (
+            <FormCollapse
+              section="soraKuvaus"
+              header={t('yleiset.soraKuvaus')}
+              Component={SoraKuvausSection}
+              organisaatioOid={organisaatioOid}
+              languages={languageTabs}
+            />
           )}
 
           <FormCollapse

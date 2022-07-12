@@ -11,14 +11,9 @@ import {
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { Divider } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
-import {
-  createIsKoulutustyyppiDisabledGetter,
-  useOppilaitosTyypit,
-} from '#/src/hooks/useOppilaitosTyypit';
+import { useIsKoulutustyyppiDisabledGetter } from '#/src/hooks/useOppilaitosTyypit';
 import { getTestIdProps } from '#/src/utils';
-import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
 
 type Props = {
   name: string;
@@ -39,24 +34,11 @@ export const PerustiedotSection = ({
     koodisto: 'haunkohdejoukko',
   });
 
-  const isOphVirkailija = useIsOphVirkailija();
-
-  const {
-    oppilaitostyypit: allowedOppilaitostyypit,
-    isLoading: loadingTyypit,
-  } = useOppilaitosTyypit(organisaatioOid);
-
-  const { oppilaitostyypitByKoulutustyypit, isLoading: loadingMappings } =
-    useOppilaitostyypitByKoulutustyypit();
-
-  const getIsDisabled = createIsKoulutustyyppiDisabledGetter({
-    isOphVirkailija,
-    oppilaitostyypitByKoulutustyypit,
-    allowedOppilaitostyypit,
+  const { getIsDisabled, isLoading } = useIsKoulutustyyppiDisabledGetter({
     entityType: ENTITY.SORA_KUVAUS,
+    organisaatioOid,
   });
 
-  const isLoading = loadingTyypit || loadingMappings;
   return (
     <>
       <Field

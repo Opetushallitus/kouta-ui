@@ -93,11 +93,11 @@ export const Filters = ({
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
 
-  const parseChildOrgs = (hierarkia, selectedOrg, lang) => {
+  const parseChildOrgs = (hierarkia, lang) => {
     let flatHierarkia = flattenHierarkia(hierarkia)
     let result = []
     flatHierarkia.forEach(org => {
-        if (org?.oid != selectedOrg && org?.nimi) {
+        if (org?.nimi) {
             const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi
             result.push({label: label, value: org.oid})
         }})
@@ -110,7 +110,7 @@ export const Filters = ({
 
   const { hierarkia } = useOrganisaatioHierarkia(selectedOrganisaatioOid, {skipParents: true})
 
-  const childOrgOptions = useMemo(() => parseChildOrgs(hierarkia, selectedOrganisaatioOid, selectedLanguage), [hierarkia, selectedOrganisaatioOid, selectedLanguage])
+  const childOrgOptions = useMemo(() => parseChildOrgs(hierarkia, selectedLanguage), [hierarkia, selectedLanguage])
 
   const { options: hakutapaOptions } = useKoodistoOptions({
     koodisto: 'hakutapa',

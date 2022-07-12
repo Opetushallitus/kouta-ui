@@ -15,7 +15,6 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
-    "kuvauksenNimi": {},
     "kuvaus": {},
     "linkkiEPerusteisiin": {},
     "lisatiedot": [
@@ -63,7 +62,6 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-osaamisala",
-    "kuvauksenNimi": {},
     "kuvaus": {},
     "linkkiEPerusteisiin": {},
     "lisatiedot": [
@@ -109,7 +107,6 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-tutkinnon-osa",
-    "kuvauksenNimi": {},
     "kuvaus": {},
     "linkkiEPerusteisiin": {},
     "lisatiedot": [
@@ -172,9 +169,6 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
     "koulutustyyppi": "amk",
-    "kuvauksenNimi": {
-      "fi": "Kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -226,7 +220,6 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -276,7 +269,6 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
-    "kuvauksenNimi": {},
     "kuvaus": {},
     "linkkiEPerusteisiin": {},
     "lisatiedot": [
@@ -328,9 +320,6 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
     "koulutustyyppi": "amk",
-    "kuvauksenNimi": {
-      "fi": "Fi kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Fi kuvaus</p>"
     },
@@ -385,7 +374,6 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
-    "kuvauksenNimi": {},
     "kuvaus": {},
     "linkkiEPerusteisiin": {},
     "lisatiedot": [
@@ -433,7 +421,6 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -479,7 +466,6 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>kuvausteksti</p>"
     },
@@ -532,7 +518,6 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-muu",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -575,7 +560,6 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -618,7 +602,6 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -664,7 +647,6 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvausta on muokattu</p>"
     },
@@ -717,7 +699,6 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
-    "kuvauksenNimi": {},
     "kuvaus": {},
     "linkkiEPerusteisiin": {},
     "lisatiedot": [
@@ -767,9 +748,6 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-ope-erityisope-ja-opo",
-    "kuvauksenNimi": {
-      "fi": "Kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -821,9 +799,6 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #1`] =
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
     "koulutustyyppi": "amk",
-    "kuvauksenNimi": {
-      "fi": "Fi kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Fi kuvaus</p>"
     },
@@ -878,9 +853,6 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
       "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
     ],
     "koulutustyyppi": "amm-ope-erityisope-ja-opo",
-    "kuvauksenNimi": {
-      "fi": "Fi kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Fi kuvaus</p>"
     },
@@ -930,7 +902,6 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -971,7 +942,6 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "aikuisten-perusopetus",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -1017,7 +987,6 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvausta on muokattu</p>"
     },
@@ -1070,9 +1039,6 @@ exports[`createKoulutus > should be able to create "Korkeakoulutus opintojakso"-
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
     "koulutustyyppi": "kk-opintojakso",
-    "kuvauksenNimi": {
-      "fi": "Kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -1122,9 +1088,6 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
     "koulutustyyppi": "kk-opintojakso",
-    "kuvauksenNimi": {
-      "fi": "Kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -1174,7 +1137,6 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -1224,9 +1186,6 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "erikoislaakari",
-    "kuvauksenNimi": {
-      "fi": "Kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
@@ -1269,7 +1228,6 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
   "metadata": {
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
-    "kuvauksenNimi": {},
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },

@@ -9,10 +9,6 @@ test('getFormValuesByKoulutus returns correct form values given koulutus', () =>
     koulutuksetKoodiUri: ['koulutus_371101#1', 'koulutus_201000#1'],
     koulutustyyppi: 'yo',
     metadata: {
-      kuvauksenNimi: {
-        fi: 'Fi nimi',
-        sv: 'Sv nimi',
-      },
       kuvaus: {
         fi: 'Fi kuvaus',
         sv: 'Sv kuvaus',
@@ -54,10 +50,6 @@ test('getFormValuesByKoulutus returns correct form values for ammatillinen koulu
     koulutuksetKoodiUri: ['koulutus_371101#1'],
     koulutustyyppi: 'amm',
     metadata: {
-      kuvauksenNimi: {
-        fi: 'Fi nimi',
-        sv: 'Sv nimi',
-      },
       kuvaus: {
         fi: 'Fi kuvaus',
         sv: 'Sv kuvaus',

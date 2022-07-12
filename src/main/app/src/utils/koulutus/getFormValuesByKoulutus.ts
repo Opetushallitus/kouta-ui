@@ -58,7 +58,6 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     opintojenLaajuusyksikkoKoodiUri = '',
     opintojenLaajuusNumero,
     tutkintonimikeKoodiUrit = [],
-    kuvauksenNimi = {},
     koulutusalaKoodiUrit = [],
     osaamisalaKoodiUri,
     linkkiEPerusteisiin = {},
@@ -133,7 +132,6 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     },
     description: {
       kuvaus: _fp.mapValues(parseEditorState, kuvaus),
-      nimi: kuvauksenNimi,
       linkkiEPerusteisiin,
     },
     esikatselu,

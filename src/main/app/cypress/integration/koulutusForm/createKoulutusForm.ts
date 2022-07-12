@@ -248,8 +248,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 
@@ -289,8 +287,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 
@@ -336,8 +332,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 
@@ -397,10 +391,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
-
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
           paste('http://linkki.fi')
         );
@@ -438,8 +429,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
@@ -478,8 +467,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
@@ -515,8 +502,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
@@ -555,8 +540,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 
@@ -588,8 +571,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 
@@ -622,8 +603,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('koulutuslomake.kuvauksenNimi').should('not.exist');
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(

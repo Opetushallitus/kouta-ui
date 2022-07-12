@@ -15,7 +15,6 @@ Object {
   "metadata": Object {
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "amm-osaamisala",
-    "kuvauksenNimi": Object {},
     "kuvaus": Object {},
     "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [],
@@ -55,7 +54,6 @@ Object {
       "koulutusala_2#1",
     ],
     "koulutustyyppi": "amm",
-    "kuvauksenNimi": Object {},
     "kuvaus": Object {},
     "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [],
@@ -102,10 +100,6 @@ Object {
       "koulutusala_2#1",
     ],
     "koulutustyyppi": "yo",
-    "kuvauksenNimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
     "kuvaus": Object {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
@@ -163,7 +157,6 @@ Object {
   "metadata": Object {
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "yo",
-    "kuvauksenNimi": Object {},
     "kuvaus": Object {},
     "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [],

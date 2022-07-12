@@ -18,26 +18,6 @@ export const KuvausFieldsSection = ({
 
   return (
     <>
-      {/* TODO: Onko kuvauksen nimi ylipäänsä tarpeellinen? */}
-      {![
-        KOULUTUSTYYPPI.LUKIOKOULUTUS,
-        KOULUTUSTYYPPI.TUVA,
-        KOULUTUSTYYPPI.TELMA,
-        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-        KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-        KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-      ].includes(koulutustyyppi) && (
-        <Box mb={2}>
-          <Field
-            disabled={disabled}
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('yleiset.kuvauksenNimi')}
-            required
-          />
-        </Box>
-      )}
       <Box {...getTestIdProps('kuvausInput')}>
         <Field
           disabled={disabled}

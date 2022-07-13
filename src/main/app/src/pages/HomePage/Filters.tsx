@@ -16,10 +16,10 @@ import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
-import useOrganisaatioHierarkia from "#/src/hooks/useOrganisaatioHierarkia";
-import {flattenHierarkia} from "#/src/utils/organisaatio/hierarkiaHelpers";
-import {useSelectedOrganisaatioOid} from "#/src/hooks/useSelectedOrganisaatio";
-import {useAsiointiKieli} from "#/src/utils/api/getAsiointiKieli";
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
+import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 
@@ -94,23 +94,29 @@ export const Filters = ({
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
 
   const parseChildOrgs = (hierarkia, lang) => {
-    let flatHierarkia = flattenHierarkia(hierarkia)
-    let result = []
+    let flatHierarkia = flattenHierarkia(hierarkia);
+    let result = [];
     flatHierarkia.forEach(org => {
-        if (org?.nimi) {
-            const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi
-            result.push({label: label, value: org.oid})
-        }})
-    return result
-  }
+      if (org?.nimi) {
+        const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi;
+        result.push({ label: label, value: org.oid });
+      }
+    });
+    return result;
+  };
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
   const { data: selectedLanguage } = useAsiointiKieli();
 
-  const { hierarkia } = useOrganisaatioHierarkia(selectedOrganisaatioOid, {skipParents: true})
+  const { hierarkia } = useOrganisaatioHierarkia(selectedOrganisaatioOid, {
+    skipParents: true,
+  });
 
-  const childOrgOptions = useMemo(() => parseChildOrgs(hierarkia, selectedLanguage), [hierarkia, selectedLanguage])
+  const childOrgOptions = useMemo(
+    () => parseChildOrgs(hierarkia, selectedLanguage),
+    [hierarkia, selectedLanguage]
+  );
 
   const { options: hakutapaOptions } = useKoodistoOptions({
     koodisto: 'hakutapa',
@@ -158,17 +164,17 @@ export const Filters = ({
           />
         </Box>
       )}
-        {onOrgWhitelistChange && (
-            <Box flexGrow={1} minWidth="200px" paddingRight={2}>
-                <Select
-                    options={childOrgOptions}
-                    placeholder={t('yleiset.aliorganisaatio')}
-                    value={orgWhitelist}
-                    onChange={onOrgWhitelistChange}
-                    isMulti
-                />
-            </Box>
-        )}
+      {onOrgWhitelistChange && (
+        <Box flexGrow={1} minWidth="200px" paddingRight={2}>
+          <Select
+            options={childOrgOptions}
+            placeholder={t('yleiset.aliorganisaatio')}
+            value={orgWhitelist}
+            onChange={onOrgWhitelistChange}
+            isMulti
+          />
+        </Box>
+      )}
       <Box flexGrow={0} minWidth="150px" paddingRight={2}>
         <Select
           options={tilaOptions}

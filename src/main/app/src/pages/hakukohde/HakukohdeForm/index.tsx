@@ -1,9 +1,6 @@
 import getYear from 'date-fns/getYear';
 
-import { 
-  DEFAULT_JULKAISUTILA,
-  POHJAVALINTA 
-} from '#/src/constants';
+import { DEFAULT_JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 
 import { checkHasHakukohdeKoodiUri } from './PerustiedotSection';
 
@@ -24,5 +21,5 @@ export const initialValues = (koulutustyyppi, toteutus, haku, oid) => ({
   pohja: {
     tapa: oid ? POHJAVALINTA.KOPIO : POHJAVALINTA.UUSI,
     valinta: oid ? { value: oid } : null,
-  }
+  },
 });

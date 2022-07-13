@@ -54,9 +54,7 @@ import {
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
-import { useToteutuksenHakukohteet } from '#/src/utils/toteutus/useToteutuksenHakukohteet';
-import {searchFilteredHakukohteet, useFilteredHakukohteet} from "#/src/utils/hakukohde/searchHakukohteet";
-import {useApiQuery} from "#/src/hooks/useApiQuery";
+import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 
@@ -107,7 +105,10 @@ const ToteutusForm = ({
 
   const formMode = useFormMode();
 
-  const { data } = useFilteredHakukohteet({toteutusOid: toteutus?.oid}, organisaatioOid)
+  const { data } = useFilteredHakukohteet(
+    { toteutusOid: toteutus?.oid },
+    organisaatioOid
+  );
 
   var hakukohdeAmount = '';
   if (data?.totalCount) {

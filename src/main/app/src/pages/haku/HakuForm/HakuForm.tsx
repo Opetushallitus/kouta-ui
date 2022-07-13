@@ -29,8 +29,7 @@ import HaunKohdejoukkoFields from './HaunKohdejoukkoFields';
 import { NimiSection } from './NimiSection';
 import ScheduleSection from './ScheduleSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
-import { useHaunHakukohteet } from '#/src/utils/haku/useHaunHakukohteet';
-import {useFilteredHakukohteet} from "#/src/utils/hakukohde/searchHakukohteet";
+import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 type HakuFormProps = {
   organisaatioOid: string;
@@ -60,7 +59,10 @@ const HakuForm = ({
     hakuProp?.hakukohteenLiittamisenTakaraja
   );
 
-  const { data } = useFilteredHakukohteet({hakuOid: hakuProp?.oid}, organisaatioOid)
+  const { data } = useFilteredHakukohteet(
+    { hakuOid: hakuProp?.oid },
+    organisaatioOid
+  );
 
   var hakukohdeAmount = '';
   if (data?.totalCount) {

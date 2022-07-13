@@ -28,24 +28,18 @@ import {
   HakukohdeForm,
   initialValues as getInitialValues,
 } from './HakukohdeForm';
-import {checkHasHakukohdeKoodiUri} from "#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection";
-import {toSelectValue} from "#/src/utils";
+import { checkHasHakukohdeKoodiUri } from '#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection';
+import { toSelectValue } from '#/src/utils';
 import { merge } from 'lodash/fp';
 
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
-  const {
-    nimi,
-    hakukohdeKoodiUri,
-  } = hakukohde;
-  return merge(
-    getFormValuesByHakukohde(hakukohde),
-    {
-      perustiedot: {
-        nimi: isNimiKoodi ? null : nimi,
-        hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,
-      }
-    }
-  );
+  const { nimi, hakukohdeKoodiUri } = hakukohde;
+  return merge(getFormValuesByHakukohde(hakukohde), {
+    perustiedot: {
+      nimi: isNimiKoodi ? null : nimi,
+      hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,
+    },
+  });
 };
 
 export const CreateHakukohdePage = () => {
@@ -65,14 +59,21 @@ export const CreateHakukohdePage = () => {
   const { data: hakukohde } = usePohjaEntity(ENTITY.HAKUKOHDE);
 
   const koulutustyyppi =
-      data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   const isNimiKoodi = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
 
   const initialValues = useMemo(
     () => ({
-      ...getInitialValues(data?.koulutustyyppi, data?.toteutus, data?.haku, hakukohde?.oid),
-      ...(hakukohde ? getCopyValues(hakukohde?.oid, isNimiKoodi, hakukohde) : {}),
+      ...getInitialValues(
+        data?.koulutustyyppi,
+        data?.toteutus,
+        data?.haku,
+        hakukohde?.oid
+      ),
+      ...(hakukohde
+        ? getCopyValues(hakukohde?.oid, isNimiKoodi, hakukohde)
+        : {}),
     }),
     [data, hakukohde]
   );

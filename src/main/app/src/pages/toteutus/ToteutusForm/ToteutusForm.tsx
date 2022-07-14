@@ -54,6 +54,7 @@ import {
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
+import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 
@@ -103,6 +104,16 @@ const ToteutusForm = ({
   const isDIAkoulutus = isDIA(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const formMode = useFormMode();
+
+  const { data } = useFilteredHakukohteet(
+    { toteutusOid: toteutus?.oid },
+    organisaatioOid
+  );
+
+  var hakukohdeAmount = '';
+  if (data?.totalCount) {
+    hakukohdeAmount = ' (' + data.totalCount + ')';
+  }
 
   return (
     <>
@@ -312,7 +323,10 @@ const ToteutusForm = ({
         />
         {_fp.isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua && (
           <FormCollapse
-            header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}
+            header={
+              t('toteutuslomake.toteutukseenLiitetytHakukohteet') +
+              hakukohdeAmount
+            }
             id="toteutukseen-liitetetyt-hakukohteet"
             actions={
               <Box

@@ -206,12 +206,12 @@ exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
     "fi": "http://example.com"
   },
   "hakulomaketyyppi": "muu",
-  "hakutapaKoodiUri": null,
+  "hakutapaKoodiUri": "hakutapa_01#1",
   "kielivalinta": [
     "fi"
   ],
-  "kohdejoukkoKoodiUri": null,
-  "kohdejoukonTarkenneKoodiUri": null,
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
+  "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_2#1",
   "metadata": {
     "koulutuksenAlkamiskausi": null,
     "tulevaisuudenAikataulu": [],
@@ -238,12 +238,12 @@ exports[`createHaku > should be able to create haku with "ei sähköistä" hakul
   },
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ei sähköistä",
-  "hakutapaKoodiUri": null,
+  "hakutapaKoodiUri": "hakutapa_01#1",
   "kielivalinta": [
     "fi"
   ],
-  "kohdejoukkoKoodiUri": null,
-  "kohdejoukonTarkenneKoodiUri": null,
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
+  "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_2#1",
   "metadata": {
     "koulutuksenAlkamiskausi": null,
     "tulevaisuudenAikataulu": [],

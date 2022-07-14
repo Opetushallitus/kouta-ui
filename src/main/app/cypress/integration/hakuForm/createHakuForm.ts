@@ -180,6 +180,8 @@ export const createHakuForm = () => {
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
       fillNimiSection();
+      fillKohdejoukkoSection();
+      fillHakutapaSection();
       getByTestId('hakulomakeSection').click();
       fillHakulomakeSection('muu');
 
@@ -193,6 +195,8 @@ export const createHakuForm = () => {
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
       fillNimiSection();
+      fillKohdejoukkoSection();
+      fillHakutapaSection();
       getByTestId('hakulomakeSection').click();
       fillHakulomakeSection('ei sähköistä');
 

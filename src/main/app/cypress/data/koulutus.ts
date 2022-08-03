@@ -71,7 +71,6 @@ const getKorkeakouluFields = ({ tyyppi }) => {
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
       tutkintonimikeKoodiUrit: ['tutkintonimikekk_1#1', 'tutkintonimikekk_2#1'],
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
-      kuvauksenNimi: { fi: 'Fi kuvauksen nimi', sv: 'Sv kuvauksen nimi' },
       koulutusalaKoodiUrit: [
         'kansallinenkoulutusluokitus2016koulutusalataso2_052#1',
       ],
@@ -90,7 +89,6 @@ const getAmmOpeErityisopeJaOpoFields = ({ tyyppi }) => {
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
       tutkintonimikeKoodiUrit: [],
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_60#1',
-      kuvauksenNimi: { fi: 'Fi kuvauksen nimi', sv: 'Sv kuvauksen nimi' },
       koulutusalaKoodiUrit: [
         'kansallinenkoulutusluokitus2016koulutusalataso1_01#1',
       ],

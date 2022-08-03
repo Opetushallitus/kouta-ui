@@ -128,7 +128,6 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),
-      kuvauksenNimi: pickTranslations(values?.description?.nimi ?? {}),
       koulutusalaKoodiUrit: (values?.information?.koulutusalat ?? []).map(
         ({ value }) => value
       ),

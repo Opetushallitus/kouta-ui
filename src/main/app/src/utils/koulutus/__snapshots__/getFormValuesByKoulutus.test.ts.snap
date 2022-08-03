@@ -8,10 +8,6 @@ Object {
       "sv": "<p>Sv kuvaus</p>",
     },
     "linkkiEPerusteisiin": Object {},
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
   },
   "esikatselu": false,
   "externalId": undefined,
@@ -102,10 +98,6 @@ Object {
       "sv": "<p>Sv kuvaus</p>",
     },
     "linkkiEPerusteisiin": Object {},
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
   },
   "esikatselu": false,
   "externalId": "ext1",

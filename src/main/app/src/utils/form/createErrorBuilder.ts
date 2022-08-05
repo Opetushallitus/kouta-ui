@@ -224,10 +224,10 @@ class ErrorBuilder {
   }
 
   validateArchiveDate(path, months) {
-    const hakuaikaPaattyyPvm = new Date(this.getValue(path + '.hakuaika').map(h => h.paattyy));
+    const viimeisinHakuaikaPaattyyPvm = this.getValue(path + '.hakuaika').map(h => new Date(h.paattyy)).sort((a, b) => b - a)[0];
     const arkistointipvm = new Date(this.getValue(path + '.ajastettuHaunJaHakukohteidenArkistointi'));
 
-    if (differenceInMonths(arkistointipvm, hakuaikaPaattyyPvm) < months) {
+    if (differenceInMonths(arkistointipvm, viimeisinHakuaikaPaattyyPvm) < months) {
       this.setError(path + '.ajastettuHaunJaHakukohteidenArkistointi', t => t('validointivirheet.arkistointiAikavaliLiianLyhyt', {months: months}));
     }
 

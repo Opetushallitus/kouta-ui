@@ -13,6 +13,7 @@ import createErrorBuilder, {
   validateExistence,
   validateExistenceOfDate,
   validateTranslations,
+  validateArchiveDate,
 } from '#/src/utils/form/createErrorBuilder';
 import {
   getKielivalinta,
@@ -96,7 +97,11 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
           validateIf(
             hakulomaketyyppi === HAKULOMAKETYYPPI.MUU,
             validateTranslations('hakulomake.linkki')
-          )
+          ),
+          validateIf(
+            values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi && values?.aikataulut?.hakuaika.map(h => h.paattyy),
+            validateArchiveDate('aikataulut', 3)
+          ),
         )
       )
     )(createErrorBuilder(values, kieliversiot, registeredFields))

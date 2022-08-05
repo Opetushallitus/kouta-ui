@@ -311,6 +311,7 @@
     "ei_julkinen": "Ei julkinen"
   },
   "validointivirheet": {
+    "arkistointiAikavaliLiianLyhyt": "Haku voidaan arkistoida aikaisintaan {{months}} kuukauden päästä haun päättymisajankohdasta",
     "epakelpoUrl": "Linkki on virheellinen",
     "pakollinen": "Tämä kenttä on pakollinen",
     "pakollisetKaannokset": "Tämän kentän kaikille käännöksille täytyy syöttää arvo",

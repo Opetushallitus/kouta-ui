@@ -6,6 +6,7 @@ import {
   isPartialDate,
 } from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
+import { differenceInMonths } from "date-fns";
 
 // TODO: Remove ErrorBuilder and replace all form validations with just _fp.flow(...validators)({values})
 class ErrorBuilder {
@@ -221,6 +222,17 @@ class ErrorBuilder {
 
     return this;
   }
+
+  validateArchiveDate(path, months) {
+    const hakuaikaPaattyyPvm = new Date(this.getValue(path + '.hakuaika').map(h => h.paattyy));
+    const arkistointipvm = new Date(this.getValue(path + '.ajastettuHaunJaHakukohteidenArkistointi'));
+
+    if (differenceInMonths(arkistointipvm, hakuaikaPaattyyPvm) < months) {
+      this.setError(path + '.ajastettuHaunJaHakukohteidenArkistointi', t => t('validointivirheet.arkistointiAikavaliLiianLyhyt', {months: months}));
+    }
+
+    return this;
+  }
 }
 
 const bindValidator =
@@ -238,6 +250,7 @@ export const validateExistenceOfDate = bindValidator('validateExistenceOfDate');
 export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
+export const validateArchiveDate = bindValidator('validateArchiveDate');
 
 export const createErrorBuilder = (
   values,

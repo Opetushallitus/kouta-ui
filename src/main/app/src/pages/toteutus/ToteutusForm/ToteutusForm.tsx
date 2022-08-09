@@ -26,6 +26,7 @@ import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps, isIn, otherwise } from '#/src/utils';
+import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
@@ -54,7 +55,6 @@ import {
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
-import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 
@@ -148,7 +148,9 @@ const ToteutusForm = ({
           Component={KieliversiotFields}
         />
 
-        {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        {(koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS ||
+          isDIAkoulutus ||
+          isEBkoulutus) && (
           <FormCollapse
             section="tiedot"
             header={t('toteutuslomake.toteutuksenTiedot')}
@@ -186,30 +188,10 @@ const ToteutusForm = ({
                 _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
                 () => KorkeakoulutusOpintojaksoTiedotSection,
               ],
+              [_fp.conforms(isDIAkoulutus), () => DIATiedotSection],
+              [_fp.conforms(isEBkoulutus), () => EBTiedotSection],
               [otherwise, () => TutkintoonJohtavaTiedotSection],
             ])(koulutustyyppi)}
-            koulutustyyppi={koulutustyyppi}
-            koulutus={koulutus}
-          />
-        )}
-
-        {isDIAkoulutus && (
-          <FormCollapse
-            section="tiedot"
-            header={t('toteutuslomake.toteutuksenTiedot')}
-            languages={languages}
-            Component={DIATiedotSection}
-            koulutustyyppi={koulutustyyppi}
-            koulutus={koulutus}
-          />
-        )}
-
-        {isEBkoulutus && (
-          <FormCollapse
-            section="tiedot"
-            header={t('toteutuslomake.toteutuksenTiedot')}
-            languages={languages}
-            Component={EBTiedotSection}
             koulutustyyppi={koulutustyyppi}
             koulutus={koulutus}
           />

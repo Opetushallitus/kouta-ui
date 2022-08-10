@@ -143,6 +143,7 @@ export const editHakukohdeForm = () => {
         ]),
       },
     });
+    cy.reload();
 
     cy.findByRole('button', {
       name: 'hakukohdelomake.muokkaamisenTakarajaYlittynyt',
@@ -168,6 +169,7 @@ export const editHakukohdeForm = () => {
         ]),
       },
     });
+    cy.reload();
 
     cy.findByRole('button', {
       name: 'yleiset.tallenna',
@@ -192,6 +194,7 @@ export const editHakukohdeForm = () => {
         ]),
       },
     });
+    cy.reload();
 
     cy.findByRole('button', {
       name: 'hakukohdelomake.eiMuokkausOikeutta',

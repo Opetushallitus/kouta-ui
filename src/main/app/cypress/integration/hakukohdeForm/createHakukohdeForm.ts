@@ -434,6 +434,7 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
         ]),
       },
     });
+    cy.reload();
 
     fillKieliversiotSection({ jatka: true });
 
@@ -459,6 +460,7 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
         ]),
       },
     });
+    cy.reload();
 
     fillKieliversiotSection({ jatka: true });
 
@@ -484,6 +486,7 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
         ]),
       },
     });
+    cy.reload();
 
     fillKieliversiotSection({ jatka: true });
 
@@ -510,6 +513,7 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
         ]),
       },
     });
+    cy.reload();
 
     fillKieliversiotSection({ jatka: true });
 

@@ -254,6 +254,7 @@ Object {
   "tiedot": Object {
     "aloituspaikat": "251",
     "ammatillinenPerustutkintoErityisopetuksena": true,
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",

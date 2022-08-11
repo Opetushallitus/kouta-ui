@@ -44,6 +44,7 @@ import {
   AmmMuuTiedotSection,
   AmmOpoJaErityisopeTiedotSection,
   KorkeakoulutusOpintojaksoTiedotSection,
+  LukioTiedotSection,
   TelmaTiedotSection,
   TutkinnonOsaTiedotSection,
   TutkintoonJohtavaTiedotSection,
@@ -148,54 +149,57 @@ const ToteutusForm = ({
           Component={KieliversiotFields}
         />
 
-        {(koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS ||
-          isDIAkoulutus ||
-          isEBkoulutus) && (
-          <FormCollapse
-            section="tiedot"
-            header={t('toteutuslomake.toteutuksenTiedot')}
-            languages={languages}
-            Component={_fp.cond([
-              [_fp.isEqual(KOULUTUSTYYPPI.TUVA), () => TuvaTiedotSection],
-              [_fp.isEqual(KOULUTUSTYYPPI.TELMA), () => TelmaTiedotSection],
-              [
-                _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
-                () => AikuistenperusopetusTiedotSection,
-              ],
-              [
-                _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),
-                () => AmmMuuTiedotSection,
-              ],
-              [
-                isIn([
-                  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-                  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-                ]),
-                () => VapaaSivistystyoTiedotSection,
-              ],
+        <FormCollapse
+          section="tiedot"
+          header={t('toteutuslomake.toteutuksenTiedot')}
+          languages={languages}
+          Component={_fp.cond([
+            [_fp.isEqual(KOULUTUSTYYPPI.TUVA), () => TuvaTiedotSection],
+            [_fp.isEqual(KOULUTUSTYYPPI.TELMA), () => TelmaTiedotSection],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
+              () => AikuistenperusopetusTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),
+              () => AmmMuuTiedotSection,
+            ],
+            [
+              isIn([
+                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              ]),
+              () => VapaaSivistystyoTiedotSection,
+            ],
 
-              [
-                isIn([KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA]),
-                () => TutkinnonOsaTiedotSection,
-              ],
-              [
-                _fp.isEqual(
-                  KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
-                ),
-                () => AmmOpoJaErityisopeTiedotSection,
-              ],
-              [
-                _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
-                () => KorkeakoulutusOpintojaksoTiedotSection,
-              ],
-              [_fp.conforms(isDIAkoulutus), () => DIATiedotSection],
-              [_fp.conforms(isEBkoulutus), () => EBTiedotSection],
-              [otherwise, () => TutkintoonJohtavaTiedotSection],
-            ])(koulutustyyppi)}
-            koulutustyyppi={koulutustyyppi}
-            koulutus={koulutus}
-          />
-        )}
+            [
+              isIn([KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA]),
+              () => TutkinnonOsaTiedotSection,
+            ],
+            [
+              _fp.isEqual(
+                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
+              ),
+              () => AmmOpoJaErityisopeTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
+              () => KorkeakoulutusOpintojaksoTiedotSection,
+            ],
+            [
+              tyyppi =>
+                _fp.isEqual(KOULUTUSTYYPPI.LUKIOKOULUTUS, tyyppi) &&
+                !isDIAkoulutus &&
+                !isEBkoulutus,
+              () => LukioTiedotSection,
+            ],
+            [_fp.constant(isDIAkoulutus), () => DIATiedotSection],
+            [_fp.constant(isEBkoulutus), () => EBTiedotSection],
+            [otherwise, () => TutkintoonJohtavaTiedotSection],
+          ])(koulutustyyppi)}
+          koulutustyyppi={koulutustyyppi}
+          koulutus={koulutus}
+        />
 
         <FormCollapse
           section="kuvaus"

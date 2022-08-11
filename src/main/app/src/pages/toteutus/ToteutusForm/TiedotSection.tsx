@@ -24,6 +24,10 @@ type NimiSectionProps = {
   disabled?: boolean;
 };
 
+type JotpaSectionProps = {
+  name: string;
+};
+
 const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   const { t } = useTranslation();
 
@@ -66,6 +70,18 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
   );
 };
 
+const JotpaSection = ({ name }: JotpaSectionProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <div {...getTestIdProps('jotpaRahoitus')}>
+      <Field name={`${name}.hasJotpaRahoitus`} component={FormFieldSwitch}>
+        {t('toteutuslomake.jotpaRahoitus')}
+      </Field>
+    </div>
+  );
+};
+
 const useNimiFromKoulutus = ({ koulutus, name }) => {
   const koulutusnimi = koulutus.nimi;
   const { change } = useBoundFormActions();
@@ -102,6 +118,7 @@ export const TuvaTiedotSection = ({
       >
         {t('toteutuslomake.jarjestetaanErityisopetuksena')}
       </Field>
+      <JotpaSection name={name} />
     </VerticalBox>
   );
 };
@@ -121,6 +138,7 @@ export const TelmaTiedotSection = ({
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
       />
+      <JotpaSection name={name} />
     </VerticalBox>
   );
 };
@@ -142,6 +160,7 @@ export const AikuistenperusopetusTiedotSection = ({
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
       />
+      <JotpaSection name={name} />
     </VerticalBox>
   );
 };
@@ -164,6 +183,7 @@ export const VapaaSivistystyoTiedotSection = ({
         }
         laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
       />
+      <JotpaSection name={name} />
     </VerticalBox>
   );
 };
@@ -186,6 +206,7 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
       }
       laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
+    <JotpaSection name={name} />
   </VerticalBox>
 );
 
@@ -202,6 +223,7 @@ export const AmmOpoJaErityisopeTiedotSection = ({
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
+    <JotpaSection name={name} />
   </VerticalBox>
 );
 
@@ -217,6 +239,7 @@ export const TutkinnonOsaTiedotSection = ({
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
+    <JotpaSection name={name} />
   </VerticalBox>
 );
 
@@ -243,6 +266,7 @@ export const TutkintoonJohtavaTiedotSection = ({
           {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
         </Field>
       )}
+      <JotpaSection name={name} />
     </VerticalBox>
   );
 };
@@ -255,10 +279,19 @@ export const DIATiedotSection = ({
   useNimiFromKoulutus({ koulutus, name });
 
   return (
-    <Box>
+    <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
-    </Box>
+      <JotpaSection name={name} />
+    </VerticalBox>
   );
 };
 
 export const EBTiedotSection = DIATiedotSection;
+
+export const LukioTiedotSection = ({ name }: ToteutusTiedotSectionProps) => {
+  return (
+    <VerticalBox gap={2}>
+      <JotpaSection name={name} />
+    </VerticalBox>
+  );
+};

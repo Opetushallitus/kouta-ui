@@ -75,6 +75,7 @@ Object {
     "hakulomakeLinkki": Object {},
     "hakulomaketyyppi": "muu",
     "hakutermi": "ilmoittautuminen",
+    "hasJotpaRahoitus": undefined,
     "ilmoittautumislinkki": Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",

@@ -3,5 +3,5 @@ server:
     context-path: /kouta
 host:
   host-virkailija: {{host_virkailija}}
-  host-oppija: {{host_beta}}
+  host-oppija: {{host_oppija}}
   host-eperusteet: {{host_eperusteet}}

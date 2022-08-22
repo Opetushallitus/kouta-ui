@@ -19,7 +19,6 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
       required,
       input: { name },
     } = props;
-
     const { error } = meta;
     const isError = !_.isNil(error);
     const labelId = `FormLabel_${name}`;
@@ -64,3 +63,42 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
 
   return InputComponent;
 };
+
+export const createErrorPlaceholderComponent = (Component, mapProps = simpleMapProps) => {
+  const ErrorComponent = props => {
+    const {
+      disabled,
+      label = '',
+      helperText,
+      meta,
+      required,
+      input: { name },
+    } = props;
+    const { error } = meta;
+    const isError = !_.isNil(error);
+    const labelId = `FormLabel_${name}`;
+    return (
+        <div
+            className={isError ? FIELD_ERROR_CLASSNAME : ''}
+            data-testid={`form-control_${getFieldNameWithoutLanguage(name)}`}
+        >
+          <FormControl
+              error={isError}
+              helperText={
+                <FormHelperTextMulti errorMessage={error} helperText={helperText} />
+              }
+              label={
+                label ? (
+                    <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
+                      {`${label}${required ? ' *' : ''}`}
+                    </FormLabel>
+                ) : undefined
+              }
+          >
+          </FormControl>
+        </div>
+    );
+  }
+  ErrorComponent.displayName = `FormField${Component.name}`;
+  return ErrorComponent;
+}

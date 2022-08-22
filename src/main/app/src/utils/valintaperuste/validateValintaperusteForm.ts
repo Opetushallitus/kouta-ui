@@ -16,7 +16,7 @@ import {
 const validateValintatavat = _fp.flow(
   validateIfJulkaistu(
     validateArrayMinLength('valintatavat', 1, {
-      isFieldArray: true,
+      isFieldArray: false,
     }),
     validateArray(
       'valintatavat',

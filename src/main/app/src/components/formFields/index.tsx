@@ -23,7 +23,7 @@ import {
 } from '#/src/components/virkailija';
 import { YearSelect } from '#/src/components/YearSelect';
 
-import { createComponent } from './utils';
+import {createComponent, createErrorPlaceholderComponent} from './utils';
 import DatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
 import UiDatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
 import DateInput from "#/src/components/DateInput";
@@ -44,6 +44,8 @@ export const createFormFieldComponent = createComponent;
 export const FormFieldInput = createComponent(Input, simpleMapProps);
 
 export const FormFieldUrlInput = createComponent(UrlInput, simpleMapProps);
+
+export const ErrorPlaceholder = createErrorPlaceholderComponent(Input, simpleMapProps)
 
 export const FormFieldRadio = createComponent(
   Radio,

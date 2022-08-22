@@ -7,9 +7,9 @@ import { Grid, Cell } from 'styled-css-grid';
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import {
-  FormFieldEditor,
-  FormFieldInput,
-  FormFieldSelect,
+    FormFieldEditor,
+    FormFieldInput, ErrorPlaceholder,
+    FormFieldSelect,
 } from '#/src/components/formFields';
 import { SisaltoFields } from '#/src/components/SisaltoFields';
 import { Box } from '#/src/components/virkailija';
@@ -76,7 +76,11 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
     {fields.length === 0 && (
       <Box marginBottom={2}>
-        {t('valintaperustelomake.lisaaVahintaanYksiValintatapa') + ' *'}
+          <Field
+            name={'valintatavat'}
+            component={ErrorPlaceholder}
+          >
+          </Field>
       </Box>
     )}
     <FieldArrayList fields={fields}>

@@ -7,14 +7,15 @@ import { Grid, Cell } from 'styled-css-grid';
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import {
-    FormFieldEditor,
-    FormFieldInput, ErrorPlaceholder,
-    FormFieldSelect,
+  FormFieldEditor,
+  FormFieldInput,
+  FormFieldSelect,
 } from '#/src/components/formFields';
 import { SisaltoFields } from '#/src/components/SisaltoFields';
 import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
+import {ErrorPlaceholder} from "#/src/components/formFields/utils";
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
   <div {...getTestIdProps('valintatapalista')}>
@@ -75,19 +76,16 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
 const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
     {fields.length === 0 && (
-      <Box marginBottom={2}>
-          <Field
-            name={'valintatavat'}
-            component={ErrorPlaceholder}
-          >
-          </Field>
-      </Box>
+      <ErrorPlaceholder
+        name={'valintatavat'}>
+      </ErrorPlaceholder>
     )}
     <FieldArrayList fields={fields}>
       {({ field: valintatapa }) =>
         renderValintatapaFields({ valintatapa, tapaOptions, language, t })
       }
     </FieldArrayList>
+
     <Box
       display="flex"
       justifyContent="center"

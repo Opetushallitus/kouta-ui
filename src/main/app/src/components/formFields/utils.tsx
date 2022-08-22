@@ -8,6 +8,7 @@ import { FormControl, FormLabel } from '#/src/components/virkailija';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import { useFormIsDisabled } from '#/src/contexts/FormContext';
 import { getFieldNameWithoutLanguage } from '#/src/utils';
+import {useSubmitErrors} from "#/src/hooks/form";
 
 export const createComponent = (Component, mapProps = simpleMapProps) => {
   const InputComponent = props => {
@@ -64,41 +65,18 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
   return InputComponent;
 };
 
-export const createErrorPlaceholderComponent = (Component, mapProps = simpleMapProps) => {
-  const ErrorComponent = props => {
-    const {
-      disabled,
-      label = '',
-      helperText,
-      meta,
-      required,
-      input: { name },
-    } = props;
-    const { error } = meta;
-    const isError = !_.isNil(error);
-    const labelId = `FormLabel_${name}`;
-    return (
-        <div
-            className={isError ? FIELD_ERROR_CLASSNAME : ''}
-            data-testid={`form-control_${getFieldNameWithoutLanguage(name)}`}
-        >
-          <FormControl
-              error={isError}
-              helperText={
-                <FormHelperTextMulti errorMessage={error} helperText={helperText} />
-              }
-              label={
-                label ? (
-                    <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
-                      {`${label}${required ? ' *' : ''}`}
-                    </FormLabel>
-                ) : undefined
-              }
-          >
-          </FormControl>
-        </div>
-    );
-  }
-  ErrorComponent.displayName = `FormField${Component.name}`;
-  return ErrorComponent;
+export const ErrorPlaceholder = props => {
+  const { name } = props;
+  const errors = useSubmitErrors(null);
+  const error = _.get(errors, name)
+  const isError = !_.isNil(error);
+
+  return (
+      <div
+          className={isError ? FIELD_ERROR_CLASSNAME : ''}
+          data-testid={`form-control_${getFieldNameWithoutLanguage(name)}`}
+      >
+        <FormHelperTextMulti errorMessage={error}/>
+      </div>
+  );
 }

@@ -67,7 +67,6 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     valintatavat: (valintatavat || []).map(
       ({
         nimi: valintatapaNimi,
-        kuvaus: valintatapaKuvaus,
         sisalto: valintatapaSisalto,
         valintatapaKoodiUri,
         kynnysehto,
@@ -75,7 +74,6 @@ export const getFormValuesByValintaperuste = valintaperuste => {
         vahimmaispisteet,
       }) => ({
         nimi: valintatapaNimi || {},
-        kuvaus: valintatapaKuvaus || {},
         sisalto: parseSisalto(valintatapaSisalto),
         tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
         kynnysehto: _.mapValues(kynnysehto || {}, parseEditorState),

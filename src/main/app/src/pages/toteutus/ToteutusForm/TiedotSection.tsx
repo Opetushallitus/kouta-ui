@@ -8,8 +8,8 @@ import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
 import {
+  KOULUTUSTYYPPI,
   OpintojenLaajuusyksikko,
-  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
@@ -17,6 +17,7 @@ import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
 import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
+import VaativaErityinenTukiField from "#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField";
 
 type NimiSectionProps = {
   name: string;
@@ -227,22 +228,21 @@ export const TutkintoonJohtavaTiedotSection = ({
   name,
   koulutustyyppi,
   disabled,
+  koulutus,
 }: ToteutusTiedotSectionProps) => {
   const { t } = useTranslation();
 
   return (
     <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={disabled} />
-      {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
-        koulutustyyppi
-      ) && (
-        <Field
-          name={`${name}.ammatillinenPerustutkintoErityisopetuksena`}
-          component={FormFieldSwitch}
-        >
-          {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
-        </Field>
-      )}
+      <NimiSection name={name} language={language} disabled={disabled}/>
+      {
+        koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+        && (
+          <VaativaErityinenTukiField
+            name={name}
+            koulutus={koulutus}
+            />
+        )}
     </VerticalBox>
   );
 };

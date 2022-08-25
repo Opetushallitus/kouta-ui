@@ -69,6 +69,10 @@ export const getKoulutusByKoodi = async ({
     ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri)
   );
 
+  const koulutustyyppiKoodit = alakooditData.map(
+    ( {koodiUri} ) => koodiUri?.startsWith('koulutustyyppi_') && koodiUri
+  ).filter(Boolean);
+
   const koulutusala =
     koulutusalaKoodi && _.isArray(koulutusalaKoodi.metadata)
       ? _.keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
@@ -121,6 +125,7 @@ export const getKoulutusByKoodi = async ({
       opintojenlaajuusYksikko,
       ({ nimi }) => nimi || null
     ),
+    koulutustyyppiKoodit,
     nimi: _.mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
   };
 };

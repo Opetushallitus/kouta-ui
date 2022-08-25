@@ -82,6 +82,7 @@
     "alkaa": "Alkaa",
     "paattyy": "Päättyy",
     "paivamaaraJaKellonaika": "Päivämäärä ja kellonaika",
+    "paivamaara": "Päivämäärä",
     "hakulomakkeenValinta": "Hakulomakkeen valinta",
     "valitseHakulomake": "Valitse hakulomake",
     "lisaaHakuaika": "Lisää hakuaika",
@@ -310,6 +311,7 @@
     "ei_julkinen": "Ei julkinen"
   },
   "validointivirheet": {
+    "arkistointiAikavaliLiianLyhyt": "Haku voidaan arkistoida aikaisintaan {{months}} kuukauden päästä haun päättymisajankohdasta",
     "epakelpoUrl": "Linkki on virheellinen",
     "pakollinen": "Tämä kenttä on pakollinen",
     "pakollisetKaannokset": "Tämän kentän kaikille käännöksille täytyy syöttää arvo",
@@ -582,6 +584,7 @@
     "hakukohteenLisaamisenJaPerumisenTakaraja": "Hakukohteen lisäämisen ja perumisen takaraja",
     "hakukohteenMuokkauksenTakaraja": "Hakukohteen muokkauksen takaraja",
     "ajastettuHaunJulkaisupaivamaara": "Ajastettu haun julkaisupäivämäärä",
+    "ajastettuHaunHakukohdeidenArkistointipaivamaara": "Ajastettu haun hakukohteiden arkistointipäivämäärä",
     "haunYhteystiedot": "Haun yhteystiedot",
     "liitetytHakukohteet": "Liitetyt hakukohteet",
     "hakuaika": "Hakuaika",

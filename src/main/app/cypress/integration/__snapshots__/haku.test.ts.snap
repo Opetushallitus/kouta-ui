@@ -1,5 +1,6 @@
 exports[`createHaku > should be able to create haku #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": "2019-12-05T06:45",
   "hakuajat": [
     {
@@ -64,6 +65,7 @@ exports[`createHaku > should be able to create haku #0`] =
 
 exports[`editHaku > should be able to edit haku #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": "2019-12-05T06:45",
   "externalId": null,
   "hakuajat": [
@@ -130,6 +132,7 @@ exports[`editHaku > should be able to edit haku #0`] =
 
 exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": "2019-12-05T06:45",
   "externalId": null,
   "hakuajat": [
@@ -195,6 +198,7 @@ exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
 
 exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": null,
   "externalId": null,
   "hakuajat": [],
@@ -227,6 +231,7 @@ exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
 
 exports[`createHaku > should be able to create haku with "ei sähköistä" hakulomake #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": null,
   "externalId": null,
   "hakuajat": [],
@@ -259,6 +264,7 @@ exports[`createHaku > should be able to create haku with "ei sähköistä" hakul
 
 exports[`editHaku > should be unable to save add hakukohde for haku with expired liittämistakaraja #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": "2019-12-05T06:45",
   "externalId": null,
   "hakuajat": [
@@ -325,6 +331,7 @@ exports[`editHaku > should be unable to save add hakukohde for haku with expired
 
 exports[`editHaku > should be able to delete haku #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": "2019-12-05T06:45",
   "externalId": null,
   "hakuajat": [

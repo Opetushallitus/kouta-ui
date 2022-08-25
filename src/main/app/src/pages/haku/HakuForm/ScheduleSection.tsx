@@ -5,6 +5,7 @@ import { Field, FieldArray } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
+  FormFieldDateInput,
   FormFieldDateTimeInput,
   FormFieldSwitch,
 } from '#/src/components/formFields';
@@ -107,6 +108,20 @@ const ScheduleSection = ({
           </FieldGroup>
         </>
       ) : null}
+      <>
+        <FieldGroup
+          title={t(
+            'hakulomake.ajastettuHaunHakukohdeidenArkistointipaivamaara'
+          )}
+          {...getTestIdProps('hakukohteidenArkistointipaivamaara')}
+        >
+          <Field
+            name={`${name}.ajastettuHaunJaHakukohteidenArkistointi`}
+            component={FormFieldDateInput}
+            helperText={t('yleiset.paivamaara')}
+          />
+        </FieldGroup>
+      </>
     </Box>
   );
 };

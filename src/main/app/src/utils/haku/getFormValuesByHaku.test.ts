@@ -43,6 +43,7 @@ const baseHaku = {
   },
   hakukohteenMuokkaamisenTakaraja: '2019-03-11T09:45',
   ajastettuJulkaisu: '2020-01-20T05:00',
+  ajastettuHaunJaHakukohteidenArkistointi: '2019-11-16T09:44',
   hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
   hakulomakeAtaruId: '12345',
 };

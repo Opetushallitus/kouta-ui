@@ -808,6 +808,7 @@ exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #
 
 exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": "2019-12-05T06:45",
   "externalId": null,
   "hakuajat": [
@@ -937,6 +938,7 @@ exports[`createHaku > should be able to create haku with "ei sähköistä" hakul
 
 exports[`editHaku > should be able to edit haku #0`] =
 {
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "ajastettuJulkaisu": "2019-12-05T06:45",
   "externalId": null,
   "hakuajat": [

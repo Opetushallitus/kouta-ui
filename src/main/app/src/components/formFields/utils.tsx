@@ -8,7 +8,6 @@ import { FormControl, FormLabel } from '#/src/components/virkailija';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import { useFormIsDisabled } from '#/src/contexts/FormContext';
 import { getFieldNameWithoutLanguage } from '#/src/utils';
-import {useSubmitErrors} from "#/src/hooks/form";
 
 export const createComponent = (Component, mapProps = simpleMapProps) => {
   const InputComponent = props => {
@@ -64,19 +63,3 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
 
   return InputComponent;
 };
-
-export const ErrorPlaceholder = props => {
-  const { name } = props;
-  const errors = useSubmitErrors(null);
-  const error = _.get(errors, name)
-  const isError = !_.isNil(error);
-
-  return (
-      <div
-          className={isError ? FIELD_ERROR_CLASSNAME : ''}
-          data-testid={`form-control_${getFieldNameWithoutLanguage(name)}`}
-      >
-        <FormHelperTextMulti errorMessage={error}/>
-      </div>
-  );
-}

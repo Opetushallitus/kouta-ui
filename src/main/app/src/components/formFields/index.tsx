@@ -26,7 +26,7 @@ import { YearSelect } from '#/src/components/YearSelect';
 import DatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
 import UiDatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
 import DateInput from "#/src/components/DateInput";
-import {createComponent} from './utils';
+import { createComponent } from './utils';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,

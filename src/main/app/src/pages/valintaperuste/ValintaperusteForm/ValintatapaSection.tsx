@@ -15,7 +15,7 @@ import { SisaltoFields } from '#/src/components/SisaltoFields';
 import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
-import {ErrorPlaceholder} from "#/src/components/formFields/utils";
+import {ErrorPlaceholder} from "#/src/components/ErrorPlaceholder";
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
   <div {...getTestIdProps('valintatapalista')}>
@@ -77,7 +77,7 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
     {fields.length === 0 && (
       <ErrorPlaceholder
-        name={'valintatavat'}>
+        name="valintatavat">
       </ErrorPlaceholder>
     )}
     <FieldArrayList fields={fields}>

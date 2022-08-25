@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
-import _ from 'lodash';
+import { isString } from 'lodash';
 
 import { DatePickerInput } from '#/src/components/DatePickerInput';
 import { Box, FormControl } from '#/src/components/virkailija';
@@ -25,7 +25,7 @@ const useId = () => {
 };
 
 const parseValue = value => {
-  if (!_.isString(value)) {
+  if (!isString(value)) {
     return {
       date: undefined,
       time: '00:00',

@@ -35,6 +35,7 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
   const kieliversiot = getKielivalinta(values);
 
   const hakulomaketyyppi = values?.hakulomake?.tyyppi;
+  const arkistointiHaunPaattymisestaKk = 3;
 
   return _fp
     .flow(
@@ -100,7 +101,7 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
           ),
           validateIf(
             values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi && values?.aikataulut?.hakuaika.map(h => h.paattyy),
-            validateArchiveDate('aikataulut', 3)
+            validateArchiveDate('aikataulut', arkistointiHaunPaattymisestaKk)
           ),
         )
       )

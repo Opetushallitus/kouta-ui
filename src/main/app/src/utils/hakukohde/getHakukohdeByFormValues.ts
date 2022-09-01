@@ -109,8 +109,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   } = kaytetaanHaunHakulomaketta
     ? {
         hakulomakeAtaruId: null,
-        hakulomakeKuvaus: null,
-        hakulomakeLinkki: null,
+        hakulomakeKuvaus: {},
+        hakulomakeLinkki: {},
         hakulomaketyyppi: null,
       }
     : getHakulomakeFieldsData({

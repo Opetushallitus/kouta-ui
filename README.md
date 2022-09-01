@@ -32,7 +32,7 @@ https://localhost:3000
 
 ## Ajaminen lokaalisti kouta-backendin kanssa
 
-Korvaa kouta-backendissä dev-vars.yml-tiedostoon: 
+Korvaa kouta-backendissä `dev-vars.yml`-tiedostoon: 
 
     cas_url: https://localhost:3000/cas
     kouta_backend_cas_service: https://localhost:3000/kouta-backend/auth/login
@@ -98,7 +98,7 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
 
-Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:integration`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
+Yksikkötestit voi ajaa komennolla `npm run test`. Integraatiotestejä varten täytyy käynnistää ensin kouta-ui integraatio-moodissa komennolla `npm run start:integration` ja sen jälkeen ajaa integraatiotestit komennolla `npm run test:integration`.
 
 ### Integraatiotestien ajaminen interaktiivisesti (Cypress)
 
@@ -111,7 +111,7 @@ ja sitten samassa kansiossa, mutta toisessa shellissä:
 
     npm run cypress:open
     
-Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm start:integration`tai `npm start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
+Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm run start:integration`tai `npm run start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
 
 ### API-kutsujen mockaaminen
 

@@ -14,12 +14,12 @@ import {
 } from '#/src/constants';
 import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
-import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
-import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
+import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
+import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
+import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 const NAME_INPUT_DEBOUNCE_TIME = 300;
 

@@ -30,7 +30,7 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
   const [errorCode, setErrorCode] = useState<string | number | null>(null);
 
   const { data, error: getMeError } = useGetMe();
-  const isLoaded = !!data?.oid;
+  const isLoaded = Boolean(data?.oid);
   const isIdle = useIdle(IDLE_TIMEOUT);
   const { i18n, t } = useTranslation();
 

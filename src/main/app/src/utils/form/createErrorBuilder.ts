@@ -1,3 +1,4 @@
+import { differenceInMonths } from 'date-fns';
 import _ from 'lodash';
 
 import {
@@ -6,7 +7,6 @@ import {
   isPartialDate,
 } from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
-import { differenceInMonths } from "date-fns";
 
 // TODO: Remove ErrorBuilder and replace all form validations with just _fp.flow(...validators)({values})
 class ErrorBuilder {
@@ -224,11 +224,19 @@ class ErrorBuilder {
   }
 
   validateArchiveDate(path, months) {
-    const viimeisinHakuaikaPaattyyPvm = this.getValue(path + '.hakuaika').map(h => new Date(h.paattyy)).sort((a, b) => b - a)[0];
-    const arkistointipvm = new Date(this.getValue(path + '.ajastettuHaunJaHakukohteidenArkistointi'));
+    const viimeisinHakuaikaPaattyyPvm = this.getValue(path + '.hakuaika')
+      .map(h => new Date(h.paattyy))
+      .sort((a, b) => b - a)[0];
+    const arkistointipvm = new Date(
+      this.getValue(path + '.ajastettuHaunJaHakukohteidenArkistointi')
+    );
 
-    if (differenceInMonths(arkistointipvm, viimeisinHakuaikaPaattyyPvm) < months) {
-      this.setError(path + '.ajastettuHaunJaHakukohteidenArkistointi', t => t('validointivirheet.arkistointiAikavaliLiianLyhyt', {months: months}));
+    if (
+      differenceInMonths(arkistointipvm, viimeisinHakuaikaPaattyyPvm) < months
+    ) {
+      this.setError(path + '.ajastettuHaunJaHakukohteidenArkistointi', t =>
+        t('validointivirheet.arkistointiAikavaliLiianLyhyt', { months: months })
+      );
     }
 
     return this;

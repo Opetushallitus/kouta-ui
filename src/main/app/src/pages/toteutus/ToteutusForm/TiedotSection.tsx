@@ -7,17 +7,14 @@ import { Field } from 'redux-form';
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
-import {
-  KOULUTUSTYYPPI,
-  OpintojenLaajuusyksikko,
-} from '#/src/constants';
+import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
+import VaativaErityinenTukiField from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
 import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
-import VaativaErityinenTukiField from "#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField";
 
 type NimiSectionProps = {
   name: string;
@@ -230,19 +227,12 @@ export const TutkintoonJohtavaTiedotSection = ({
   disabled,
   koulutus,
 }: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
   return (
     <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={disabled}/>
-      {
-        koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-        && (
-          <VaativaErityinenTukiField
-            name={name}
-            koulutus={koulutus}
-            />
-        )}
+      <NimiSection name={name} language={language} disabled={disabled} />
+      {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS && (
+        <VaativaErityinenTukiField name={name} koulutus={koulutus} />
+      )}
     </VerticalBox>
   );
 };

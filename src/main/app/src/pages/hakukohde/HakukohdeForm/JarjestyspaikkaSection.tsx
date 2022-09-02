@@ -74,7 +74,7 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
 
   const { organisaatio: selectedOrganisaatio, isLoading: isSelectedLoading } =
     useOrganisaatio(
-      !hierarkiaOids.includes(selectedValue) ? selectedValue : null,
+      hierarkiaOids.includes(selectedValue) ? null : selectedValue,
       { enabled: !hierarkiaOids.includes(selectedValue) }
     );
 

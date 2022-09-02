@@ -102,7 +102,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         return acc;
       }, {}),
       osiot: lisatiedot
-        .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
+        .filter(({ otsikkoKoodiUri }) => Boolean(otsikkoKoodiUri))
         .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })),
     },
     tutkinnonosat: {

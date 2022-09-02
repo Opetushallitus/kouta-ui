@@ -19,6 +19,7 @@ import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import { useHaut } from '#/src/utils/haku/getHaut';
+import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
@@ -29,7 +30,6 @@ import HaunKohdejoukkoFields from './HaunKohdejoukkoFields';
 import { NimiSection } from './NimiSection';
 import ScheduleSection from './ScheduleSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
-import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 type HakuFormProps = {
   organisaatioOid: string;
@@ -64,14 +64,14 @@ const HakuForm = ({
     organisaatioOid
   );
 
-  var hakukohdeAmount = '';
+  let hakukohdeAmount = '';
   if (data?.totalCount) {
     hakukohdeAmount = ' (' + data.totalCount + ')';
   }
 
-  const infoText = !canAddHakukohde
-    ? t('hakulomake.liittamisenTakarajaYlittynyt')
-    : null;
+  const infoText = canAddHakukohde
+    ? null
+    : t('hakulomake.liittamisenTakarajaYlittynyt');
 
   const { data: haut } = useHaut({
     organisaatioOid,

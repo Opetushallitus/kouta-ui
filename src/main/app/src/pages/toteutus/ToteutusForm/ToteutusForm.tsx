@@ -26,6 +26,7 @@ import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps, isIn, otherwise } from '#/src/utils';
+import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
@@ -54,7 +55,6 @@ import {
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
-import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 
@@ -110,7 +110,7 @@ const ToteutusForm = ({
     organisaatioOid
   );
 
-  var hakukohdeAmount = '';
+  let hakukohdeAmount = '';
   if (data?.totalCount) {
     hakukohdeAmount = ' (' + data.totalCount + ')';
   }

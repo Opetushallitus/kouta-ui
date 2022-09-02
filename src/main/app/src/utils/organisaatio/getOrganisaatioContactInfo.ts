@@ -4,7 +4,7 @@ import { getPostinumeroByPostinumeroUri } from '#/src/utils';
 
 const kieliUriRegExp = /^kieli_([a-z]+)#.+$/;
 
-const prune = value => _.pickBy(value, v => !!v);
+const prune = value => _.pickBy(value, Boolean);
 
 const getKieliByKieliUri = uri => {
   if (!_.isString(uri)) {

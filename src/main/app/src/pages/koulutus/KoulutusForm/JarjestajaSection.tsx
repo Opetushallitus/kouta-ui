@@ -104,9 +104,9 @@ export const JarjestajaSection = ({
           <ListTable rows={rows} columns={columns} />
         </Box>
       )}
-      {!disableTarjoajaHierarkia ? (
+      {!disableTarjoajaHierarkia && (
         <>
-          {tarjoajatFromPohja ? (
+          {tarjoajatFromPohja && (
             <Box mb={2}>
               <Field
                 name={`tarjoajat.kaytaPohjanJarjestajaa`}
@@ -115,7 +115,7 @@ export const JarjestajaSection = ({
                 {t('koulutuslomake.kaytaPohjanJarjestajaa')}
               </Field>
             </Box>
-          ) : null}
+          )}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
             <div {...getTestIdProps('jarjestajatSelection')}>
               <Field
@@ -128,7 +128,7 @@ export const JarjestajaSection = ({
             </div>
           )}
         </>
-      ) : null}
+      )}
     </>
   );
 };

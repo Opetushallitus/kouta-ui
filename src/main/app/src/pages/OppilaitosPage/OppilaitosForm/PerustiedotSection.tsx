@@ -164,7 +164,7 @@ const OrganisaatioSection = ({ language, organisaatio, t }) => {
           </Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{opetuskielet.filter(k => !!k).join(', ')}</Typography>
+          <Typography>{opetuskielet.filter(Boolean).join(', ')}</Typography>
         </InfoValue>
       </Box>
     </>

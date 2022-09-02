@@ -65,7 +65,7 @@ export const EditHakukohdePage = () => {
   );
 
   const canUpdate = resultObj.canUpdate;
-  const infoTextTranslationKey = !canUpdate ? resultObj.reasonKey : '';
+  const infoTextTranslationKey = canUpdate ? '' : resultObj.reasonKey;
 
   return (
     <FormPage

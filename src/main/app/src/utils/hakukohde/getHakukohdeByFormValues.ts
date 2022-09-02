@@ -15,10 +15,10 @@ import { reduce, mapValues } from '#/src/utils/lodashFpUncapped';
 const getKielivalinta = values => values?.kieliversiot || [];
 
 const getLiitteillaYhteinenToimitusaika = values =>
-  !!values?.liitteet?.yhteinenToimitusaika;
+  Boolean(values?.liitteet?.yhteinenToimitusaika);
 
 const getLiitteillaYhteinenToimitusosoite = values =>
-  !!values?.liitteet?.yhteinenToimituspaikka;
+  Boolean(values?.liitteet?.yhteinenToimituspaikka);
 
 const getKaytetaanHaunAikataulua = values => !values?.hakuajat.eriHakuaika;
 
@@ -86,7 +86,7 @@ const getHakukohteenLinja = values => {
     values.hakukohteenLinja;
 
   return {
-    linja: linja !== LUKIO_YLEISLINJA ? linja : null,
+    linja: linja === LUKIO_YLEISLINJA ? null : linja,
     alinHyvaksyttyKeskiarvo:
       (alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo)) ||
       null,
@@ -147,9 +147,9 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         toimitustapa: tapa,
         tyyppiKoodiUri: tyyppi?.value || null,
         nimi: pickTranslations(nimi),
-        toimitusaika: !liitteetOnkoSamaToimitusaika
-          ? toimitusaika || null
-          : null,
+        toimitusaika: liitteetOnkoSamaToimitusaika
+          ? null
+          : toimitusaika || null,
         toimitusosoite:
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
             ? getLiiteToimitusosoite(toimitustapa, kielivalinta)
@@ -164,8 +164,9 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const hakukohdeKoodiUri =
     values?.perustiedot?.hakukohdeKoodiUri?.value ?? null;
 
-  const toinenAsteOnkoKaksoistutkinto =
-    !!values?.perustiedot?.voiSuorittaaKaksoistutkinnon;
+  const toinenAsteOnkoKaksoistutkinto = Boolean(
+    values?.perustiedot?.voiSuorittaaKaksoistutkinnon
+  );
 
   const valintakokeet = getKokeetTaiLisanaytotData({
     valintakoeValues: values?.valintakokeet,

@@ -100,9 +100,10 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
             validateTranslations('hakulomake.linkki')
           ),
           validateIf(
-            values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi && values?.aikataulut?.hakuaika.map(h => h.paattyy),
+            values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi &&
+              values?.aikataulut?.hakuaika.map(h => h.paattyy),
             validateArchiveDate('aikataulut', arkistointiHaunPaattymisestaKk)
-          ),
+          )
         )
       )
     )(createErrorBuilder(values, kieliversiot, registeredFields))

@@ -20,9 +20,9 @@ const getOrganisaatioParentOidPath = organisaatio => {
   }
 
   const separator = getSeparator(pathStr);
-  const path = pathStr.split(separator).filter(v => !!v);
+  const path = pathStr.split(separator).filter(Boolean);
 
-  return [...path, organisaatio.oid].filter(v => !!v);
+  return [...path, organisaatio.oid].filter(Boolean);
 };
 
 export default getOrganisaatioParentOidPath;

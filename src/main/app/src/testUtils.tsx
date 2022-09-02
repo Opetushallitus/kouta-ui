@@ -19,7 +19,7 @@ export const mountWithTheme = tree => {
 export const setMockDate = date => {
   const _Date = Date;
 
-  global.Date.now = () => +date;
+  global.Date.now = () => Number(date);
 
   return () => {
     global.Date = _Date;

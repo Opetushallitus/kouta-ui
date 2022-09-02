@@ -5,8 +5,7 @@ import { transparentize } from 'polished';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 
-import { Box } from '#/src/components/virkailija';
-import { Typography } from '#/src/components/virkailija';
+import { Box, Typography } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
 
 export const StyledInfoBox = styled(Box)`

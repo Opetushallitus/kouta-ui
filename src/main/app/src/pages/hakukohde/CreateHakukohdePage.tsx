@@ -1,25 +1,22 @@
 import React, { useMemo } from 'react';
 
+import { merge } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import FormPage from '#/src/components/FormPage';
-import {
+import FormPage, {
   RelationInfoContainer,
   OrganisaatioRelation,
   HakuRelation,
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import {
-  KOULUTUSTYYPPI,
-  ENTITY,
-  FormMode,
-  POHJAVALINTA,
-} from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
+import { checkHasHakukohdeKoodiUri } from '#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection';
+import { toSelectValue } from '#/src/utils';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
@@ -28,9 +25,6 @@ import {
   HakukohdeForm,
   initialValues as getInitialValues,
 } from './HakukohdeForm';
-import { checkHasHakukohdeKoodiUri } from '#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection';
-import { toSelectValue } from '#/src/utils';
-import { merge } from 'lodash/fp';
 
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
@@ -75,14 +69,14 @@ export const CreateHakukohdePage = () => {
         ? getCopyValues(hakukohde?.oid, isNimiKoodi, hakukohde)
         : {}),
     }),
-    [data, hakukohde]
+    [data, hakukohde, isNimiKoodi]
   );
 
   const canUpdate = useCanCreateHakukohde(haku?.hakukohteenLiittamisenTakaraja);
 
-  const infoTextTranslationKey = !canUpdate
-    ? 'muokkaamisenTakarajaYlittynyt'
-    : '';
+  const infoTextTranslationKey = canUpdate
+    ? ''
+    : 'muokkaamisenTakarajaYlittynyt';
 
   return (
     <FormPage

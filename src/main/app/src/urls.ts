@@ -53,7 +53,6 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.search.koulutukset': `${koutaBackendDevUrl}/search/koulutukset`,
   'kouta-backend.search.koulutus': `${koutaBackendDevUrl}/search/koulutus/$1`,
   'kouta-backend.search.toteutukset': `${koutaBackendDevUrl}/search/toteutukset`,
-  'kouta-backend.search.toteutus': `${koutaBackendDevUrl}/search/toteutus/$1`,
   'kouta-backend.search.haut': `${koutaBackendDevUrl}/search/haut`,
   'kouta-backend.search.hakukohteet': `${koutaBackendDevUrl}/search/hakukohteet`,
   'kouta-backend.search.valintaperusteet': `${koutaBackendDevUrl}/search/valintaperusteet`,

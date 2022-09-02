@@ -100,15 +100,23 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const kielivalinta = getKielivalinta(values);
   const pickTranslations = _fp.pick(kielivalinta);
 
+  const kaytetaanHaunHakulomaketta = !values?.hakulomake?.eriHakulomake;
   const {
     hakulomakeAtaruId,
     hakulomakeKuvaus,
     hakulomakeLinkki,
     hakulomaketyyppi,
-  } = getHakulomakeFieldsData({
-    hakulomakeValues: values?.hakulomake,
-    kielivalinta,
-  });
+  } = kaytetaanHaunHakulomaketta
+    ? {
+        hakulomakeAtaruId: null,
+        hakulomakeKuvaus: {},
+        hakulomakeLinkki: {},
+        hakulomaketyyppi: null,
+      }
+    : getHakulomakeFieldsData({
+        hakulomakeValues: values?.hakulomake,
+        kielivalinta,
+      });
 
   const kaytetaanHaunAikataulua = getKaytetaanHaunAikataulua(values);
 
@@ -225,7 +233,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     pohjakoulutusvaatimusTarkenne,
     valintaperusteId:
       values?.valintaperusteenKuvaus?.valintaperuste?.value || null,
-    kaytetaanHaunHakulomaketta: !values?.hakulomake?.eriHakulomake,
+    kaytetaanHaunHakulomaketta: kaytetaanHaunHakulomaketta,
     hakulomaketyyppi,
     hakulomakeAtaruId,
     hakulomakeLinkki,

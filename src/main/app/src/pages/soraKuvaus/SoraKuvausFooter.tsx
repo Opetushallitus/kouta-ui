@@ -7,9 +7,9 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { afterUpdate } from '#/src/utils/afterUpdate';
-import createSoraKuvaus from '#/src/utils/soraKuvaus/createSoraKuvaus';
+import { createSoraKuvaus } from '#/src/utils/soraKuvaus/createSoraKuvaus';
 import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFormValues';
-import updateSoraKuvaus from '#/src/utils/soraKuvaus/updateSoraKuvaus';
+import { updateSoraKuvaus } from '#/src/utils/soraKuvaus/updateSoraKuvaus';
 import validateSoraKuvausForm from '#/src/utils/soraKuvaus/validateSoraKuvausForm';
 
 type SoraKuvausFooterProps = {

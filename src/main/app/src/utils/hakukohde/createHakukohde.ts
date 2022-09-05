@@ -1,10 +1,7 @@
-const createHakukohde = async ({ httpClient, apiUrls, hakukohde }) => {
-  const { data } = await httpClient.put(
-    apiUrls.url('kouta-backend.hakukohde'),
-    hakukohde
-  );
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  return data;
-};
-
-export default createHakukohde;
+export const createHakukohde = makeEntityMutator(
+  'put',
+  'hakukohde',
+  'kouta-backend.hakukohde'
+);

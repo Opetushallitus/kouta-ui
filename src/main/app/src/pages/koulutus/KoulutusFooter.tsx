@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
 import { useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -66,23 +65,19 @@ export const KoulutusFooter = ({
                 ...getKoulutusByFormValues(valuesForSaving),
                 organisaatioOid,
               }
-            : _.omit(
-                {
-                  ...koulutus,
-                  ...getKoulutusByFormValues(valuesForSaving),
-                  tarjoajat: getTarjoajaOids({
-                    hierarkia,
-                    existingTarjoajat: koulutus.tarjoajat,
-                    newTarjoajat: values?.tarjoajat?.tarjoajat,
-                  }),
-                  // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
-                  // but backend requires it when creating new ones.
-                  // TODO: Remove this when backend works without muokkaaja
-                  muokkaaja: koulutus?.muokkaaja,
-                },
-                // modified-field also prevented updating tarjoajat, this is a workaround. See above.
-                'modified'
-              ),
+            : {
+                ...koulutus,
+                ...getKoulutusByFormValues(valuesForSaving),
+                tarjoajat: getTarjoajaOids({
+                  hierarkia,
+                  existingTarjoajat: koulutus.tarjoajat,
+                  newTarjoajat: values?.tarjoajat?.tarjoajat,
+                }),
+                // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
+                // but backend requires it when creating new ones.
+                // TODO: Remove this when backend works without muokkaaja
+                muokkaaja: koulutus?.muokkaaja,
+              },
       });
 
       if (formMode === FormMode.CREATE) {

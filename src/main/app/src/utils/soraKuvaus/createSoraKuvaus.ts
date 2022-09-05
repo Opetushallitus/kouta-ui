@@ -1,10 +1,7 @@
-const createSoraKuvaus = async ({ httpClient, apiUrls, soraKuvaus }) => {
-  const { data } = await httpClient.put(
-    apiUrls.url('kouta-backend.soraKuvaus'),
-    soraKuvaus
-  );
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  return data;
-};
-
-export default createSoraKuvaus;
+export const createSoraKuvaus = makeEntityMutator(
+  'put',
+  'soraKuvaus',
+  'kouta-backend.soraKuvaus'
+);

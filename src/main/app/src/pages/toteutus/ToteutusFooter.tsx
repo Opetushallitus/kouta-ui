@@ -16,9 +16,9 @@ import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
-import createToteutus from '#/src/utils/toteutus/createToteutus';
+import { createToteutus } from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
-import updateToteutus from '#/src/utils/toteutus/updateToteutus';
+import { updateToteutus } from '#/src/utils/toteutus/updateToteutus';
 import { validateToteutusForm } from '#/src/utils/toteutus/validateToteutusForm';
 
 import { useTarjoajatHierarkia } from './useTarjoajatHierarkia';

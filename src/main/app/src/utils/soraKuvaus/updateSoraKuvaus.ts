@@ -1,17 +1,7 @@
-const updateSoraKuvaus = async ({ httpClient, apiUrls, soraKuvaus }) => {
-  const { lastModified = '', ...rest } = soraKuvaus;
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  const headers = {
-    'X-If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.soraKuvaus'),
-    rest,
-    { headers }
-  );
-
-  return data;
-};
-
-export default updateSoraKuvaus;
+export const updateSoraKuvaus = makeEntityMutator(
+  'post',
+  'soraKuvaus',
+  'kouta-backend.soraKuvaus'
+);

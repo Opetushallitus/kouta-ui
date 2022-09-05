@@ -128,10 +128,11 @@ export const useToaster = () => {
         label: t('ilmoitukset.tallennusOnnistui'),
         status: 'success',
       }),
-    openSavingErrorToast: () =>
+    openSavingErrorToast: error =>
       openToast({
         label: t('ilmoitukset.tallennusEpaonnistui'),
         status: 'danger',
+        error,
       }),
     openGenericErrorToast: () =>
       openToast({

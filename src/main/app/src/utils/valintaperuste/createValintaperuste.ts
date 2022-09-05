@@ -1,14 +1,7 @@
-const createValintaperuste = async ({
-  httpClient,
-  apiUrls,
-  valintaperuste,
-}) => {
-  const { data } = await httpClient.put(
-    apiUrls.url('kouta-backend.valintaperuste'),
-    valintaperuste
-  );
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  return data;
-};
-
-export default createValintaperuste;
+export const createValintaperuste = makeEntityMutator(
+  'put',
+  'valintaperuste',
+  'kouta-backend.valintaperuste'
+);

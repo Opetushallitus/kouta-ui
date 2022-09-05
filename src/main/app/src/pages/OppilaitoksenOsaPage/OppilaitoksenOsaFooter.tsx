@@ -6,9 +6,9 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import createOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/createOppilaitoksenOsa';
+import { createOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/createOppilaitoksenOsa';
 import { getOppilaitoksenOsaByFormValues } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
-import updateOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/updateOppilaitoksenOsa';
+import { updateOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/updateOppilaitoksenOsa';
 import { validateOppilaitoksenOsaForm } from '#/src/utils/oppilaitoksenOsa/validateOppilaitoksenOsaForm';
 
 export const OppilaitoksenOsaFooter = ({

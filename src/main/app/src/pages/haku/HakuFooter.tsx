@@ -12,9 +12,9 @@ import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakuModel } from '#/src/types/hakuTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
-import createHaku from '#/src/utils/haku/createHaku';
+import { createHaku } from '#/src/utils/haku/createHaku';
 import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
-import updateHaku from '#/src/utils/haku/updateHaku';
+import { updateHaku } from '#/src/utils/haku/updateHaku';
 import validateHakuForm from '#/src/utils/haku/validateHakuForm';
 
 type HakuFooterProps = {

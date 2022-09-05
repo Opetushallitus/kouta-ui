@@ -1,14 +1,7 @@
-const createOppilaitoksenOsa = async ({
-  oppilaitoksenOsa,
-  httpClient,
-  apiUrls,
-}) => {
-  const { data } = await httpClient.put(
-    apiUrls.url('kouta-backend.oppilaitoksenOsa'),
-    oppilaitoksenOsa
-  );
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  return data;
-};
-
-export default createOppilaitoksenOsa;
+export const createOppilaitoksenOsa = makeEntityMutator(
+  'put',
+  'oppilaitoksenOsa',
+  'kouta-backend.oppilaitoksenOsa'
+);

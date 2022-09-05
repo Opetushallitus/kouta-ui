@@ -1,15 +1,7 @@
-export const updateKoulutus = async ({ koulutus, httpClient, apiUrls }) => {
-  const { lastModified = '', ...restKoulutus } = koulutus;
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.koulutus'),
-    restKoulutus,
-    {
-      headers: {
-        'X-If-Unmodified-Since': lastModified,
-      },
-    }
-  );
-
-  return data;
-};
+export const updateKoulutus = makeEntityMutator(
+  'post',
+  'koulutus',
+  'kouta-backend.koulutus'
+);

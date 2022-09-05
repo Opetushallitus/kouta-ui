@@ -1,21 +1,7 @@
-const updateValintaperuste = async ({
-  valintaperuste,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = valintaperuste;
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  const headers = {
-    'X-If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.valintaperuste'),
-    rest,
-    { headers }
-  );
-
-  return data;
-};
-
-export default updateValintaperuste;
+export const updateValintaperuste = makeEntityMutator(
+  'post',
+  'valintaperuste',
+  'kouta-backend.valintaperuste'
+);

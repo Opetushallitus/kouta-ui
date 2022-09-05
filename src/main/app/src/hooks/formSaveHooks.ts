@@ -23,18 +23,19 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   const { openSavingSuccessToast, openSavingErrorToast } = useToaster();
   const form = useForm(formName);
 
-  const startSubmit = useCallback(() => {
-    return dispatch(startSubmitAction(formName));
-  }, [formName, dispatch]);
+  const startSubmit = useCallback(
+    () => dispatch(startSubmitAction(formName)),
+    [formName, dispatch]
+  );
 
   const stopSubmit = useCallback(
-    ({ errors, errorToast, successToast }) => {
+    ({ errors, response }) => {
       batch(() => {
         dispatch(stopSubmitAction(formName, errors));
 
-        if (errorToast) {
-          errors && openSavingErrorToast();
-        } else if (successToast) {
+        if (errors) {
+          openSavingErrorToast(response?.data);
+        } else {
           openSavingSuccessToast();
         }
       });
@@ -54,24 +55,26 @@ export const useSaveForm = ({ formName, validate, submit }) => {
     try {
       errors = await validate(enhancedValues, form.registeredFields);
       if (_.isEmpty(errors)) {
-        await submit({ values: enhancedValues, httpClient, apiUrls }).then(
-          () => {
-            stopSubmit({ successToast: true });
-            // NOTE: initialize values with the saved ones to update the dirty state
-            // This shouldn't be needed, because page data is refetched after save
-            // (in Edit*Page components) and initial values are recalculated when data changes.
-            dispatch(initialize(formName, currentValues));
-          }
-        );
+        await submit({
+          values: enhancedValues,
+          httpClient,
+          apiUrls,
+        }).then(() => {
+          stopSubmit({ errors: null });
+          // NOTE: initialize values with the saved ones to update the dirty state
+          // This shouldn't be needed, because page data is refetched after save
+          // (in Edit*Page components) and initial values are recalculated when data changes.
+          dispatch(initialize(formName, currentValues));
+        });
       } else {
         console.error(errors);
-        stopSubmit({ errors, errorToast: true });
+        stopSubmit({ errors });
       }
     } catch (e) {
       console.error(e);
       errors = withRemoteErrors(formName, e?.response, errors);
 
-      stopSubmit({ errors, errorToast: false });
+      stopSubmit({ errors, response: e?.response });
     }
   }, [
     form,

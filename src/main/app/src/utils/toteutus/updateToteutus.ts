@@ -1,17 +1,7 @@
-const updateToteutus = async ({ toteutus, httpClient, apiUrls }) => {
-  const { lastModified = '', ...rest } = toteutus;
+import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
 
-  const headers = {
-    'X-If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.toteutus'),
-    rest,
-    { headers }
-  );
-
-  return data;
-};
-
-export default updateToteutus;
+export const updateToteutus = makeEntityMutator(
+  'post',
+  'toteutus',
+  'kouta-backend.toteutus'
+);

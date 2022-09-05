@@ -25,6 +25,8 @@ import {
   wrapMutationTest,
   withinSection,
   getInputByLabel,
+  getSelectByLabel,
+  pFillSelect,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -151,6 +153,21 @@ const fillTiedotSection = tyyppi => {
         .clear()
         .pipe(paste('toteutuksen nimi'));
     }
+  });
+};
+
+const fillKkOpintokokonaisuusTiedotSection = () => {
+  withinSection('tiedot', () => {
+    getByTestId('toteutuksenNimi')
+      .find('input')
+      .clear()
+      .pipe(paste('toteutuksen nimi'));
+
+    getByTestId('laajuusnumero').pipe(paste('10'));
+
+    cy.findByLabelText(/toteutuslomake.laajuusyksikko/)
+      .should('be.disabled')
+      .should('have.value', 'opintopistettä');
   });
 };
 
@@ -547,6 +564,27 @@ export const createToteutusForm = () => {
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('kk-opintojakso');
+      fillKuvausSection();
+
+      fillJarjestamistiedotWithApuraha();
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create korkeakoulutus opintokokonaisuustoteutus',
+    mutationTest(() => {
+      prepareTest('kk-opintokokonaisuus');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillKkOpintokokonaisuusTiedotSection();
       fillKuvausSection();
 
       fillJarjestamistiedotWithApuraha();

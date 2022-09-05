@@ -3,6 +3,7 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
+  MaaraTyyppi,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import {
@@ -10,12 +11,7 @@ import {
   KoulutusFormValues,
   TutkinnonOsa,
 } from '#/src/types/koulutusTypes';
-import {
-  maybeParseNumber,
-  parseFloatComma,
-  valueToArray,
-  parseOpintojenLaajuusRange,
-} from '#/src/utils';
+import { maybeParseNumber, parseFloatComma, valueToArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const osaamisalaKoodiToKoodiUri = value =>
@@ -51,9 +47,9 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const osaamisala = values?.osaamisala;
 
   const sorakuvausId = values?.soraKuvaus?.value || null;
-  const opintojenLaajuusRange = parseOpintojenLaajuusRange(
-    values?.information?.opintojenLaajuusRange
-  );
+
+  const isLaajuusRange =
+    values?.information?.laajuusNumeroTyyppi === MaaraTyyppi.VAIHTELUVALI;
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
@@ -129,11 +125,15 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         values?.information?.opintojenLaajuus?.value || null,
       opintojenLaajuusyksikkoKoodiUri:
         values?.information?.opintojenLaajuusyksikko?.value || null,
-      opintojenLaajuusNumero: values?.information?.opintojenLaajuusnumero
-        ? parseFloatComma(values.information.opintojenLaajuusnumero)
+      opintojenLaajuusNumero: values?.information?.opintojenLaajuusNumero
+        ? parseFloatComma(values.information.opintojenLaajuusNumero)
         : null,
-      opintojenLaajuusNumeroMin: maybeParseNumber(opintojenLaajuusRange.min),
-      opintojenLaajuusNumeroMax: maybeParseNumber(opintojenLaajuusRange.max),
+      opintojenLaajuusNumeroMin: maybeParseNumber(
+        values?.information?.opintojenLaajuusNumeroMin
+      ),
+      opintojenLaajuusNumeroMax: isLaajuusRange
+        ? maybeParseNumber(values?.information?.opintojenLaajuusNumeroMax)
+        : maybeParseNumber(values?.information?.opintojenLaajuusNumeroMin),
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),

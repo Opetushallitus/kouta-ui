@@ -43,8 +43,8 @@ import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
   AmmOpoJaErityisopeTiedotSection,
-  KorkeakoulutusOpintojaksoTiedotSection,
-  KorkeakoulutusOpintokokonaisuusTiedotSection,
+  KkOpintojaksoTiedotSection,
+  KkOpintokokonaisuusTiedotSection,
   TelmaTiedotSection,
   TutkinnonOsaTiedotSection,
   TutkintoonJohtavaTiedotSection,
@@ -186,11 +186,11 @@ const ToteutusForm = ({
               ],
               [
                 _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
-                () => KorkeakoulutusOpintojaksoTiedotSection,
+                () => KkOpintojaksoTiedotSection,
               ],
               [
                 _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS),
-                () => KorkeakoulutusOpintokokonaisuusTiedotSection,
+                () => KkOpintokokonaisuusTiedotSection,
               ],
               [otherwise, () => TutkintoonJohtavaTiedotSection],
             ])(koulutustyyppi)}

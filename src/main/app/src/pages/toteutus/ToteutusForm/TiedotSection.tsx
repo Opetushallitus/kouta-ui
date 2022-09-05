@@ -1,22 +1,19 @@
 import React, { useEffect } from 'react';
 
-import FormControl from '@opetushallitus/virkailija-ui-components/FormControl';
-import Input from '@opetushallitus/virkailija-ui-components/Input';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
-import useKoodi from '#/src/hooks/useKoodi';
 import VaativaErityinenTukiField from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
 
@@ -172,7 +169,7 @@ export const VapaaSivistystyoTiedotSection = ({
 
 export const AmmMuuTiedotSection = VapaaSivistystyoTiedotSection;
 
-export const KorkeakoulutusOpintojaksoTiedotSection = ({
+export const KkOpintojaksoTiedotSection = ({
   language,
   disabled,
   name,
@@ -191,48 +188,17 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
   </VerticalBox>
 );
 
-export const KorkeakoulutusOpintokokonaisuusTiedotSection = ({
+export const KkOpintokokonaisuusTiedotSection = ({
   language,
   disabled,
   name,
   koulutus,
-}: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-  const laajuusyksikkoKoodiUri =
-    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
-  const { koodi: laajuusyksikko } = useKoodi(laajuusyksikkoKoodiUri);
-
-  const laajuusyksikkoTranslation =
-    getKoodiNimiTranslation(laajuusyksikko, language) || '';
-
-  return (
-    <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={disabled} />
-      <Box display="flex" mx={-1}>
-        <Box px={1} flexGrow={1}>
-          <Field
-            name={`${name}.opintojenLaajuusnumero`}
-            component={FormFieldInput}
-            label={t('yleiset.laajuus')}
-            type="number"
-            disabled={disabled}
-            required={true}
-            {...getTestIdProps('laajuusnumero')}
-          />
-        </Box>
-
-        <Box px={1} flexGrow={1} {...getTestIdProps('laajuusyksikko')}>
-          <FormControl
-            label={t('toteutuslomake.laajuusyksikko')}
-            disabled={true}
-          >
-            <Input value={laajuusyksikkoTranslation} />
-          </FormControl>
-        </Box>
-      </Box>
-    </VerticalBox>
-  );
-};
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
+  </VerticalBox>
+);
 
 export const AmmOpoJaErityisopeTiedotSection = ({
   koulutus,

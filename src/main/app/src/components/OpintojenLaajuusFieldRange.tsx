@@ -1,47 +1,94 @@
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import { MaaraTyyppi, NDASH } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 
-import { useLanguageTab } from '../contexts/LanguageTabContext';
-import useKoodistoOptions from '../hooks/useKoodistoOptions';
-import { FormFieldInput, FormFieldSelect } from './formFields';
+import useKoodisto from '../hooks/useKoodisto';
+import {
+  FormFieldAsyncKoodistoSelect,
+  FormFieldIntegerInput,
+  FormFieldRadioGroup,
+} from './formFields';
 import { Box } from './virkailija';
 
-const OpintojenLaajuusFieldRange = ({ name, disabled, required = false }) => {
+export const OpintojenLaajuusFieldRange = ({
+  name,
+  disabled,
+  required = false,
+}) => {
   const { t } = useTranslation();
-  const selectedLanguage = useLanguageTab();
-  const { options } = useKoodistoOptions({
+  const laajuusNumeroTyyppi = useFieldValue<MaaraTyyppi>(
+    `${name}.laajuusNumeroTyyppi`
+  );
+
+  const { data: koodistoData } = useKoodisto({
     koodisto: 'opintojenlaajuusyksikko',
-    language: selectedLanguage,
   });
 
   return (
-    <Box display="flex" mx={-1}>
-      <Box px={1} flexGrow={1}>
+    <Box {...getTestIdProps('laajuusNumero')}>
+      <legend>{t('yleiset.laajuus')}</legend>
+      <Box mt={1}>
         <Field
-          name={`${name}.opintojenLaajuusRange`}
-          component={FormFieldInput}
-          label={t('yleiset.laajuus')}
+          name={`${name}.laajuusNumeroTyyppi`}
+          component={FormFieldRadioGroup}
+          options={[
+            {
+              label: t('toteutuslomake.yksiArvo'),
+              value: MaaraTyyppi.YKSI_ARVO,
+            },
+            {
+              label: t('toteutuslomake.vaihteluvali'),
+              value: MaaraTyyppi.VAIHTELUVALI,
+            },
+          ]}
           disabled={disabled}
-          required={required}
-          {...getTestIdProps('laajuusnumero')}
         />
       </Box>
-
-      <Box px={1} flexGrow={1} {...getTestIdProps('laajuusyksikko')}>
-        <Field
-          name={`${name}.opintojenLaajuusyksikko`}
-          component={FormFieldSelect}
-          label={t('yleiset.laajuusyksikko')}
-          options={options}
-          disabled={disabled}
-          required={required}
-          isClearable
-        />
+      <Box
+        display="flex"
+        mt={1}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Box flexBasis="70px" flexGrow={0}>
+          <Field
+            name={`${name}.opintojenLaajuusNumeroMin`}
+            component={FormFieldIntegerInput}
+            type="number"
+            fallbackValue={null}
+            disabled={disabled}
+          />
+        </Box>
+        {laajuusNumeroTyyppi === MaaraTyyppi.VAIHTELUVALI && (
+          <>
+            <Box style={{ textAlign: 'center', width: '20px', flexGrow: 0 }}>
+              {NDASH}
+            </Box>
+            <Box flexBasis="70px" flexGrow={0}>
+              <Field
+                name={`${name}.opintojenLaajuusNumeroMax`}
+                component={FormFieldIntegerInput}
+                type="number"
+                disabled={disabled}
+                fallbackValue={null}
+                max={999}
+              />
+            </Box>
+          </>
+        )}
+        <Box flexGrow={2} ml={1}>
+          <Field
+            component={FormFieldAsyncKoodistoSelect}
+            name={`${name}.opintojenLaajuusyksikko`}
+            placeholder={t('yleiset.laajuusyksikko')}
+            koodistoData={koodistoData}
+            showAllOptions
+          />
+        </Box>
       </Box>
     </Box>
   );
 };
-
-export default OpintojenLaajuusFieldRange;

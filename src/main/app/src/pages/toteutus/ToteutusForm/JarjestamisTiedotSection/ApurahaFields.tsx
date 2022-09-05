@@ -13,7 +13,7 @@ import {
   createFormFieldComponent,
 } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
-import { ApurahaMaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
+import { MaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import { isApurahaVisible } from '#/src/utils/toteutus/toteutusVisibilities';
@@ -46,7 +46,7 @@ const ApurahaYksikkoField = ({ name, disabled }) => {
 export const ApurahaMaaraFields = createFormFieldComponent(
   ({ section, disabled }) => {
     const { t } = useTranslation();
-    const apurahaMaaraTyyppi = useFieldValue<ApurahaMaaraTyyppi>(
+    const apurahaMaaraTyyppi = useFieldValue<MaaraTyyppi>(
       `${section}.apurahaMaaraTyyppi`
     );
     return (
@@ -59,11 +59,11 @@ export const ApurahaMaaraFields = createFormFieldComponent(
             options={[
               {
                 label: t('toteutuslomake.yksiArvo'),
-                value: ApurahaMaaraTyyppi.YKSI_ARVO,
+                value: MaaraTyyppi.YKSI_ARVO,
               },
               {
                 label: t('toteutuslomake.vaihteluvali'),
-                value: ApurahaMaaraTyyppi.VAIHTELUVALI,
+                value: MaaraTyyppi.VAIHTELUVALI,
               },
             ]}
             disabled={disabled}
@@ -79,7 +79,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
             <Field
               name={`${section}.apurahaMin`}
               placeholder={
-                apurahaMaaraTyyppi === ApurahaMaaraTyyppi.YKSI_ARVO
+                apurahaMaaraTyyppi === MaaraTyyppi.YKSI_ARVO
                   ? t('toteutuslomake.maara')
                   : t('toteutuslomake.min')
               }
@@ -88,7 +88,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
               disabled={disabled}
             />
           </Box>
-          {apurahaMaaraTyyppi === ApurahaMaaraTyyppi.VAIHTELUVALI && (
+          {apurahaMaaraTyyppi === MaaraTyyppi.VAIHTELUVALI && (
             <>
               <Box style={{ textAlign: 'center', width: '20px' }}>{NDASH}</Box>
               <Box flexBasis="60px" flexGrow={1}>

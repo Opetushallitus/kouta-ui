@@ -1,7 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
-import { ApurahaMaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
+import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -119,7 +119,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
                   ? {
                       min: maybeParseNumber(apurahaMin),
                       max: maybeParseNumber(
-                        apurahaMaaraTyyppi === ApurahaMaaraTyyppi.YKSI_ARVO
+                        apurahaMaaraTyyppi === MaaraTyyppi.YKSI_ARVO
                           ? apurahaMin
                           : apurahaMax
                       ),
@@ -206,9 +206,11 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         _fp.mapValues(serializeEditorState)
       )(values?.kuvaus || {}),
       tyyppi: koulutustyyppi,
-      laajuus: maybeParseNumber(values?.tiedot?.opintojenLaajuusnumero),
-      laajuusyksikkoKoodiUri:
+      opintojenLaajuusyksikkoKoodiUri:
         values?.tiedot?.opintojenLaajuusyksikko?.value || null,
+      opintojenLaajuusNumero: maybeParseNumber(
+        values?.tiedot?.opintojenLaajuusNumero
+      ),
       ilmoittautumislinkki: pickTranslations(
         values?.tiedot?.ilmoittautumislinkki
       ),

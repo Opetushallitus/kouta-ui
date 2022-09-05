@@ -378,11 +378,8 @@ export const parseOpintojenLaajuusRange = laajuus => {
     }
 
     const maybeNumber = Number(num);
-    if (_.isNaN(maybeNumber)) {
-      return maybeNumber;
-    }
 
-    if (_.isNumber(maybeNumber)) {
+    if (_.isFinite(maybeNumber)) {
       return maybeNumber;
     }
 
@@ -395,9 +392,13 @@ export const parseOpintojenLaajuusRange = laajuus => {
   };
 };
 
-export const getOpintojenLaajuusRange = (min = null, max = null) => {
-  const minStr = isNumeric(min) ? min.toString() : '';
-  const maxStr = isNumeric(max) ? max.toString() : '';
+export const getOpintojenLaajuusRange = (min?: number, max?: number) => {
+  const minStr = isNumeric(min) ? min!.toString() : '';
+  const maxStr = isNumeric(max) ? max!.toString() : '';
+
+  if (min === max) {
+    return `${min}`;
+  }
 
   if (_.isEmpty(minStr)) {
     return maxStr;

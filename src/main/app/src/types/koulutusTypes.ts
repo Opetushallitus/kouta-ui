@@ -1,5 +1,5 @@
 import { EditorState } from '#/src/components/Editor/Editor';
-import { JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
+import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 
 export type KoulutusModel = any;
 
@@ -14,9 +14,12 @@ export type InformationSectionValues = {
   eperuste?: SelectOption;
   koulutus: SelectOption;
   korkeakoulutukset: SelectOptions;
-  opintojenLaajuus: SelectOption;
-  opintojenLaajuusyksikko: SelectOption;
-  opintojenLaajuusnumero: string;
+  opintojenLaajuus?: SelectOption;
+  opintojenLaajuusyksikko?: SelectOption;
+  opintojenLaajuusNumero?: string;
+  opintojenLaajuusNumeroMin?: string;
+  opintojenLaajuusNumeroMax?: string;
+  laajuusNumeroTyyppi?: MaaraTyyppi;
   tutkintonimike: SelectOptions;
   koulutusalat: SelectOptions;
 };
@@ -40,7 +43,6 @@ export type KoulutusFormValues = {
   };
   description: {
     kuvaus: TranslatedField<EditorState>;
-    nimi: TranslatedField<string>;
     linkkiEPerusteisiin?: TranslatedField<string>;
   };
   tarjoajat: { tarjoajat: Array<string>; kaytaPohjanJarjestajaa?: boolean };

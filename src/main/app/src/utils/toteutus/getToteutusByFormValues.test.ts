@@ -1,7 +1,7 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
 import {
   Alkamiskausityyppi,
-  ApurahaMaaraTyyppi,
+  MaaraTyyppi,
   ApurahaYksikko,
   Hakeutumistapa,
   HAKULOMAKETYYPPI,
@@ -27,7 +27,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: 'Sv linkki',
         },
         aloituspaikat: '56',
-        opintojenLaajuusnumero: '252',
+        opintojenLaajuusNumero: '252',
         opintojenLaajuusyksikko: { value: 'laajuus_1#1' },
         jarjestetaanErityisopetuksena: false,
         ammatillinenPerustutkintoErityisopetuksena: false,
@@ -87,7 +87,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         onkoApuraha: true,
         apurahaMin: 100,
         apurahaMax: 200,
-        apurahaMaaraTyyppi: ApurahaMaaraTyyppi.VAIHTELUVALI,
+        apurahaMaaraTyyppi: MaaraTyyppi.VAIHTELUVALI,
         apurahaYksikko: { value: ApurahaYksikko.EURO },
         apurahaKuvaus: {
           fi: parseEditorState('Fi apurahakuvaus'),

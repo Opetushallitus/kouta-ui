@@ -8,7 +8,7 @@ import useKoodistoOptions from '../hooks/useKoodistoOptions';
 import { FormFieldIntegerInput, FormFieldSelect } from './formFields';
 import { Box } from './virkailija';
 
-const OpintojenLaajuusFieldExtended = ({
+export const OpintojenLaajuusFieldExtended = ({
   name,
   disabled,
   required = false,
@@ -24,7 +24,7 @@ const OpintojenLaajuusFieldExtended = ({
     <Box display="flex" mx={-1}>
       <Box px={1} flexGrow={1}>
         <Field
-          name={`${name}.opintojenLaajuusnumero`}
+          name={`${name}.opintojenLaajuusNumero`}
           component={FormFieldIntegerInput}
           label={t('yleiset.laajuus')}
           max={999}
@@ -49,5 +49,3 @@ const OpintojenLaajuusFieldExtended = ({
     </Box>
   );
 };
-
-export default OpintojenLaajuusFieldExtended;

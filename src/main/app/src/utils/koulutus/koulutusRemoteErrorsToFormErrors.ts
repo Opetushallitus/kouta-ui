@@ -81,12 +81,14 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   }
 
   if (
-    path === 'metadata.opintojenLaajuusNumeroMin' &&
-    errorType === 'minmaxMsg'
+    (path === 'metadata.opintojenLaajuusNumeroMin' ||
+      path === 'metadata.opintojenLaajuusNumeroMax') &&
+    errorType === 'invalidKoulutusOpintojenLaajuusNumeroIntegrity' // TODO: korjaa tyyppi backendissä!
   ) {
     return {
       field: `information.opintojenLaajuusRange`,
-      errorKey: 'validointivirheet.minSuurempiKuinMax',
+      errorKey:
+        'validointivirheet.invalidKoulutusOpintojenLaajuusNumeroIntegrity',
     };
   }
 };

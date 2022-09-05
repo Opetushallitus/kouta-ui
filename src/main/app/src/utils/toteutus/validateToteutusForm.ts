@@ -2,7 +2,7 @@ import _fp from 'lodash/fp';
 
 import {
   Alkamiskausityyppi,
-  ApurahaMaaraTyyppi,
+  MaaraTyyppi,
   ApurahaYksikko,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
@@ -80,7 +80,7 @@ const validateApuraha = eb => {
         }
       ),
       validateIf(
-        apurahaMaaraTyyppi === ApurahaMaaraTyyppi.VAIHTELUVALI,
+        apurahaMaaraTyyppi === MaaraTyyppi.VAIHTELUVALI,
         _fp.flow(
           validate('jarjestamistiedot.apurahaGroup', () => apurahaMax >= 0, {
             message: ['validointivirheet.eiNegatiivinenKokonaisluku'],

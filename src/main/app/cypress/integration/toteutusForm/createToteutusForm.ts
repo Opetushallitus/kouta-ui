@@ -25,8 +25,6 @@ import {
   wrapMutationTest,
   withinSection,
   getInputByLabel,
-  getSelectByLabel,
-  pFillSelect,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';

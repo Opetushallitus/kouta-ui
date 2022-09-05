@@ -35,5 +35,5 @@ export const IntegerInput = ({
     onBlur(e);
   };
 
-  return <Input onBlur={usedOnBlur} {...props} />;
+  return <Input type="number" onBlur={usedOnBlur} {...props} />;
 };

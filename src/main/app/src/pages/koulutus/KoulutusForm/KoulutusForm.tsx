@@ -43,12 +43,12 @@ import { OsaamisalaSection } from './OsaamisalaSection';
 import {
   TiedotSection,
   AikuistenPerusopetusTiedotSection,
-  KorkeakoulutusOpintokokonaisuusTiedotSection,
+  KkOpintokokonaisuusTiedotSection,
   TuvaTiedotSection,
   TelmaTiedotSection,
   VapaaSivistystyoOpistovuosiTiedotSection,
   MuuTiedotSection,
-  KorkeakoulutusOpintojaksoTiedotSection,
+  KkOpintojaksoTiedotSection,
   ErikoislaakariTiedotSection,
 } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
@@ -164,15 +164,15 @@ export const KoulutusForm = ({
                 ],
                 [
                   _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
-                  () => KorkeakoulutusOpintojaksoTiedotSection,
+                  () => KkOpintojaksoTiedotSection,
                 ],
                 [
                   _fp.isEqual(KOULUTUSTYYPPI.ERIKOISLAAKARI),
                   () => ErikoislaakariTiedotSection,
-                
-                ], [
+                ],
+                [
                   _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS),
-                  () => KorkeakoulutusOpintokokonaisuusTiedotSection,
+                  () => KkOpintokokonaisuusTiedotSection,
                 ],
                 [otherwise, () => TiedotSection],
               ])(koulutustyyppi)}

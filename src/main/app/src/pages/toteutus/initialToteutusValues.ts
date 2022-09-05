@@ -1,7 +1,7 @@
 import {
   POHJAVALINTA,
   DEFAULT_JULKAISUTILA,
-  ApurahaMaaraTyyppi,
+  MaaraTyyppi,
   ApurahaYksikko,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
@@ -23,7 +23,7 @@ export const initialValues = ({
   },
   jarjestamistiedot: {
     maksullisuustyyppi: MaksullisuusTyyppi.MAKSUTON,
-    apurahaMaaraTyyppi: ApurahaMaaraTyyppi.YKSI_ARVO,
+    apurahaMaaraTyyppi: MaaraTyyppi.YKSI_ARVO,
     apurahaYksikko: { value: ApurahaYksikko.EURO },
     suunniteltuKesto: { vuotta: 0, kuukautta: 0 },
   },

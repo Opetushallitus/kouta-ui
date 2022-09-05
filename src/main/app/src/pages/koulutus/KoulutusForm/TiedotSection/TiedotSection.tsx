@@ -7,8 +7,8 @@ import { Field } from 'redux-form';
 import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
-import OpintojenLaajuusFieldExtended from '#/src/components/OpintojenLaajuusFieldExtended';
-import OpintojenLaajuusFieldRange from '#/src/components/OpintojenLaajuusFieldRange';
+import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
+import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box, FormControl } from '#/src/components/virkailija';
 import {
@@ -156,11 +156,7 @@ export const MuuTiedotSection = ({ disabled, language, name }) => {
   );
 };
 
-export const KorkeakoulutusOpintojaksoTiedotSection = ({
-  disabled,
-  language,
-  name,
-}) => {
+export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
 
   return (
@@ -318,7 +314,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
   );
 };
 
-export const KorkeakoulutusOpintokokonaisuusTiedotSection = ({
+export const KkOpintokokonaisuusTiedotSection = ({
   disabled,
   language,
   name,

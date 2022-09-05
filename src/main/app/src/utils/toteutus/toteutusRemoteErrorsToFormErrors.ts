@@ -85,10 +85,23 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
     }));
   }
 
-  if (path === 'metadata.laajuus' && errorType === 'notInTheRangeMsg') {
+  if (
+    path === 'metadata.opintojenLaajuusNumero' &&
+    errorType === 'notInTheRangeMsg'
+  ) {
     return {
-      field: 'tiedot.opintojenLaajuusnumero',
+      field: 'tiedot.opintojenLaajuusNumero',
       errorKey: 'validointivirheet.laajuusEiOleValilla',
+    };
+  }
+
+  if (
+    path === 'metadata.opintojenLaajuusyksikko' &&
+    errorType === 'invalidToteutusOpintojenlaajuusyksikkoIntegrity'
+  ) {
+    return {
+      field: 'tiedot.opintojenLaajuusyksikko',
+      errorKey: 'validointivirheet.laajuusyksikkoEriKuinKoulutuksella',
     };
   }
 };

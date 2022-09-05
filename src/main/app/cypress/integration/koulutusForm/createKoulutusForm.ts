@@ -301,6 +301,45 @@ export const createKoulutusForm = () => {
   );
 
   it(
+    'should be able to create korkeakoulutus opintokokonaisuuskoulutus',
+    mutationTest(() => {
+      fillCommon({
+        koulutustyyppiPath: ['korkeakoulutus', 'kk-opintokokonaisuus'],
+      });
+
+      withinSection('information', () => {
+        getByTestId('laajuusnumero').pipe(paste('5 - 10'));
+
+        getSelectByLabel('yleiset.laajuusyksikko').pipe(
+          pFillSelect('opintopistettä')
+        );
+
+        getSelectByLabel('koulutuslomake.valitseKoulutusalat').pipe(
+          pFillAsyncSelect('Terveys')
+        );
+
+        getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
+          paste('Opintojakso nimi')
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
+
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillLisatiedotSection();
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
     'should be able to create Ammatillinen opettaja- erityisopettaja ja opokoulutus',
     mutationTest(() => {
       fillCommon({

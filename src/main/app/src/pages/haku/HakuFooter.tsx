@@ -8,7 +8,7 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useForm } from '#/src/hooks/form';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { HakuModel } from '#/src/types/hakuTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';

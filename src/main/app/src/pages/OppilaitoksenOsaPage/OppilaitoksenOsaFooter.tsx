@@ -5,7 +5,7 @@ import { useQueryClient } from 'react-query';
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { createOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/createOppilaitoksenOsa';
 import { getOppilaitoksenOsaByFormValues } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 import { updateOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/updateOppilaitoksenOsa';

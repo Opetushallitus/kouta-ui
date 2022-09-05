@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { createSoraKuvaus } from '#/src/utils/soraKuvaus/createSoraKuvaus';
 import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFormValues';

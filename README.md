@@ -102,7 +102,9 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
 
-Yksikkötestit voi ajaa komennolla `npm run test`. Integraatiotestejä varten täytyy käynnistää ensin kouta-ui integraatio-moodissa komennolla `npm run start:integration` ja sen jälkeen ajaa integraatiotestit komennolla `npm run test:integration`.
+Yksikkötestit voi ajaa komennolla `npm run test`. Integraatiotestejä varten täytyy käynnistää ensin kouta-ui integraatio-moodissa komennolla `npm run start:integration` ja sen jälkeen ajaa integraatiotestit komennolla `npm run cypress:run`.
+
+CI-ympäristössä integraatiotestit ajetaan hieman eri tavalla. Ensin luodaan sovelluksesta testi-bundle komennolla `npm run build:test` ja sen jälkeen komennolla `npm run test:ci` servataan testi-bundle ja ajetaan sekä yksikkö- että integraatiotestit. Tämä tapa on kaikki testit ajettaessa hieman nopeampi kuin edellisessä kappaleessa kuvattu. On myös mahdollista servata testi-bundle komennolla `npm run serve:test` ja sitten ajaa pelkät cypress-testit komennolla `npm run cypress:run`.
 
 ### Integraatiotestien ajaminen interaktiivisesti (Cypress)
 

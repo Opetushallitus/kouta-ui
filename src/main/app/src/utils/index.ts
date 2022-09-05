@@ -390,8 +390,8 @@ export const parseOpintojenLaajuusRange = laajuus => {
   });
 
   return {
-    opintojenlaajuusMin: numericParts[0],
-    opintojenlaajuusMax: numericParts[1],
+    min: numericParts[0],
+    max: numericParts[1],
   };
 };
 

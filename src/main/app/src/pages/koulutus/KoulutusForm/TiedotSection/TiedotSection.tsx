@@ -8,6 +8,7 @@ import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import OpintojenLaajuusFieldExtended from '#/src/components/OpintojenLaajuusFieldExtended';
+import OpintojenLaajuusFieldRange from '#/src/components/OpintojenLaajuusFieldRange';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box, FormControl } from '#/src/components/virkailija';
 import {
@@ -326,7 +327,7 @@ export const KorkeakoulutusOpintokokonaisuusTiedotSection = ({
 
   return (
     <VerticalBox gap={2}>
-      <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
+      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}

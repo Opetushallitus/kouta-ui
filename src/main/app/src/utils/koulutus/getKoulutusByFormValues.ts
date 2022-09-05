@@ -10,7 +10,12 @@ import {
   KoulutusFormValues,
   TutkinnonOsa,
 } from '#/src/types/koulutusTypes';
-import { maybeParseNumber, parseFloatComma, valueToArray } from '#/src/utils';
+import {
+  maybeParseNumber,
+  parseFloatComma,
+  valueToArray,
+  parseOpintojenLaajuusRange,
+} from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const osaamisalaKoodiToKoodiUri = value =>
@@ -46,6 +51,9 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const osaamisala = values?.osaamisala;
 
   const sorakuvausId = values?.soraKuvaus?.value || null;
+  const opintojenLaajuusRange = parseOpintojenLaajuusRange(
+    values?.information?.opintojenLaajuusRange
+  );
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
@@ -124,7 +132,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       opintojenLaajuusNumero: values?.information?.opintojenLaajuusnumero
         ? parseFloatComma(values.information.opintojenLaajuusnumero)
         : null,
-
+      opintojenLaajuusNumeroMin: maybeParseNumber(opintojenLaajuusRange.min),
+      opintojenLaajuusNumeroMax: maybeParseNumber(opintojenLaajuusRange.max),
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),

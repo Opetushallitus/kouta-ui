@@ -5,6 +5,7 @@ import {
   formValueExists as exists,
   getFieldNameWithoutLanguage,
   isPartialDate,
+  parseOpintojenLaajuusRange,
 } from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
 
@@ -241,6 +242,23 @@ class ErrorBuilder {
 
     return this;
   }
+
+  validateOpintojenLaajuusRange(path, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
+    const errorMessage =
+      message ||
+      'validointivirheet.yksittainenKokonaislukuTaiKokonaislukuValilta';
+    const parsedLaajuus = parseOpintojenLaajuusRange(this.getValue(path));
+
+    if (_.isNaN(parsedLaajuus.min) || _.isNaN(parsedLaajuus.max)) {
+      this.setError(path, errorMessage);
+    }
+
+    return this;
+  }
 }
 
 const bindValidator =
@@ -259,6 +277,9 @@ export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
 export const validateArchiveDate = bindValidator('validateArchiveDate');
+export const validateOpintojenLaajuusRange = bindValidator(
+  'validateOpintojenLaajuusRange'
+);
 
 export const createErrorBuilder = (
   values,

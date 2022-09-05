@@ -19,6 +19,7 @@ export const getOppilaitoksenOsaByFormValues = ({
     hakijapalveluidenYhteystiedot: hy,
   } = values;
   const pickTranslations = _fp.pick(kieliversiot || []);
+  const hpy = Object.values(pickTranslations(hy?.nimi)).some(n => String(n).trim().length > 0)
 
   return {
     oppilaitosOid,
@@ -44,7 +45,7 @@ export const getOppilaitoksenOsaByFormValues = ({
         : null,
       jarjestaaUrheilijanAmmKoulutusta:
         perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
-      hakijapalveluidenYhteystiedot: hy
+      hakijapalveluidenYhteystiedot: hpy
           ? {
             nimi: pickTranslations(hy.nimi || {}),
             postiosoite:

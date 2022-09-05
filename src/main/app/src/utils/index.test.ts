@@ -3,6 +3,7 @@ import {
   getValuesForSaving,
   isDeepEmptyFormValues,
   formatDateValue,
+  parseOpintojenlaajuusRange,
 } from '#/src/utils';
 
 const OBJECT_IN_ARRAY = [
@@ -172,3 +173,53 @@ test.each([
 ])('formatDateValue', (dateString, result) => {
   expect(formatDateValue(dateString)).toEqual(result);
 });
+
+test('Should parse number from a string with one number', () => {
+  expect(parseOpintojenlaajuusRange('5')).toEqual({
+    opintojenlaajuusMin: 5,
+    opintojenlaajuusMax: undefined,
+  });
+});
+
+test('Should parse min and max numbers from a string with range', () => {
+  expect(parseOpintojenlaajuusRange('5 - 10')).toEqual({
+    opintojenlaajuusMin: 5,
+    opintojenlaajuusMax: 10,
+  });
+});
+
+test('Should parse min and max numbers from a string with range without whitespace', () => {
+  expect(parseOpintojenlaajuusRange('5 - 10')).toEqual({
+    opintojenlaajuusMin: 5,
+    opintojenlaajuusMax: 10,
+  });
+});
+
+test('Should set max laajuus as NaN if there are other chars for it than numbers', () => {
+  expect(parseOpintojenlaajuusRange('5 - 10xyz5')).toEqual({
+    opintojenlaajuusMin: 5,
+    opintojenlaajuusMax: NaN,
+  });
+});
+
+test('Should set min laajuus as NaN if there are other chars for it than numbers', () => {
+  expect(parseOpintojenlaajuusRange('xyz35 - 10')).toEqual({
+    opintojenlaajuusMin: NaN,
+    opintojenlaajuusMax: 10,
+  });
+});
+
+test('Should set min laajuus as NaN because string cannot be parsed as single number', () => {
+  expect(parseOpintojenlaajuusRange('xyz35')).toEqual({
+    opintojenlaajuusMin: NaN,
+    opintojenlaajuusMax: undefined,
+  });
+});
+
+test('Should set min laajuus as undefined if opintojenlaajuus range not defined', () => {
+  expect(parseOpintojenlaajuusRange(undefined)).toEqual({
+    opintojenlaajuusMin: undefined,
+    opintojenlaajuusMax: undefined,
+  });
+});
+

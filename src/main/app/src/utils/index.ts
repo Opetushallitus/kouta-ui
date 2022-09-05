@@ -370,3 +370,33 @@ export const getKoulutustyyppiTranslation = (
 export const notToimipisteOrg = _fp.negate(
   organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
 );
+
+export const parseOpintojenlaajuusRange = laajuus => {
+  const numericParts = _.split(laajuus, '-').map(num => {
+    if (_.isEmpty(num)) {
+      return undefined;
+    }
+
+    const maybeNumber = Number(num);
+    if (_.isNaN(maybeNumber)) {
+      return maybeNumber;
+    }
+
+    if (_.isNumber(maybeNumber)) {
+      return maybeNumber;
+    }
+
+    return undefined;
+  });
+
+  return {
+    opintojenlaajuusMin: numericParts[0],
+    opintojenlaajuusMax: numericParts[1],
+  };
+};
+
+  return {
+    opintojenlaajuusMin: numericParts[0],
+    opintojenlaajuusMax: numericParts[1],
+  };
+};

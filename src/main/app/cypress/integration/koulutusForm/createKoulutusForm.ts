@@ -324,8 +324,6 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvauksenNimi').pipe(paste('Kuvauksen nimi'));
-
         getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
       });
 

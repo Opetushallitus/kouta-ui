@@ -1325,9 +1325,6 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
     "koulutustyyppi": "kk-opintokokonaisuus",
-    "kuvauksenNimi": {
-      "fi": "Kuvauksen nimi"
-    },
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },

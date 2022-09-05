@@ -7,14 +7,13 @@ import styled, { css } from 'styled-components';
 import Container from '#/src/components/Container';
 import FullSpin from '#/src/components/FullSpin';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
+import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { ReduxForm } from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useIsDirty, useIsSubmitting } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
-
-import { QueryResultWrapper } from '../QueryResultWrapper';
 
 const HeaderContainer = styled.div`
   background-color: white;

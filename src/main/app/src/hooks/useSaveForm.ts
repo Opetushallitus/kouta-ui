@@ -12,6 +12,7 @@ import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
+import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
 import useToaster from '#/src/hooks/useToaster';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
 
@@ -21,6 +22,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
   const { openSavingSuccessToast, openSavingErrorToast } = useToaster();
+  const { setRemoteErrors } = useFormSaveRemoteErrors();
   const form = useForm(formName);
 
   const startSubmit = useCallback(
@@ -35,15 +37,22 @@ export const useSaveForm = ({ formName, validate, submit }) => {
 
         if (errors) {
           openSavingErrorToast(response?.data);
+          setRemoteErrors(response.data);
         } else {
           openSavingSuccessToast();
         }
       });
     },
-    [formName, dispatch, openSavingSuccessToast, openSavingErrorToast]
+    [
+      formName,
+      dispatch,
+      openSavingSuccessToast,
+      openSavingErrorToast,
+      setRemoteErrors,
+    ]
   );
 
-  const save = useCallback(async () => {
+  return useCallback(async () => {
     const muokkaaja = user?.oid;
     const currentValues = form?.values ?? {};
     const enhancedValues = { muokkaaja, ...currentValues };
@@ -88,6 +97,4 @@ export const useSaveForm = ({ formName, validate, submit }) => {
     apiUrls,
     stopSubmit,
   ]);
-
-  return save;
 };

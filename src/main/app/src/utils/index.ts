@@ -371,7 +371,7 @@ export const notToimipisteOrg = _fp.negate(
   organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
 );
 
-export const parseOpintojenlaajuusRange = laajuus => {
+export const parseOpintojenLaajuusRange = laajuus => {
   const numericParts = _.split(laajuus, '-').map(num => {
     if (_.isEmpty(num)) {
       return undefined;
@@ -395,8 +395,16 @@ export const parseOpintojenlaajuusRange = laajuus => {
   };
 };
 
-  return {
-    opintojenlaajuusMin: numericParts[0],
-    opintojenlaajuusMax: numericParts[1],
-  };
+export const getOpintojenLaajuusRange = (min = null, max = null) => {
+  const minStr = isNumeric(min) ? min.toString() : '';
+  const maxStr = isNumeric(max) ? max.toString() : '';
+
+  if (_.isEmpty(minStr)) {
+    return maxStr;
+  }
+
+  if (_.isEmpty(maxStr)) {
+    return minStr;
+  }
+  return `${minStr} - ${maxStr}`;
 };

@@ -12,5 +12,6 @@
   "defaultCommandTimeout": 8000,
   "video": false,
   "useRelativeSnapshots": true,
-  "testFiles": ["**/*.test.ts"]
+  "testFiles": ["**/*.test.ts"],
+  "numTestsKeptInMemory": 2
 }

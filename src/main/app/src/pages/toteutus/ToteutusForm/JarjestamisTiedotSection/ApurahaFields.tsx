@@ -43,6 +43,8 @@ const ApurahaYksikkoField = ({ name, disabled }) => {
   );
 };
 
+// Tämä on samankaltainen kuin OpintojenLaajuusFieldRange. Jos tulee lisää samanlaisia syötekenttiä, pitää pohtia
+// yleiskäyttöisen komponentin luomista.
 export const ApurahaMaaraFields = createFormFieldComponent(
   ({ section, disabled }) => {
     const { t } = useTranslation();

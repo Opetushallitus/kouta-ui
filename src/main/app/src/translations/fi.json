@@ -329,7 +329,11 @@
     "koulutusEiVastaaSoraKuvauksenKoulutuksia": "Valittu koulutus ei vastaa SORA-kuvauksen koulutuksia.",
     "yksittainenKokonaislukuTaiKokonaislukuValilta": "Arvon tulee olla joko yksittäinen kokonaisluku tai kenttään tulee määritellä arvoalue, esim. 5 - 15",
     "minSuurempiKuinMax": "Minimiarvon tulee olla suurempi kuin maksimiarvon",
-    "laajuusEiOleValilla": "Syötetty arvo ei ole koulutuksella laajuudelle määritetyllä välillä"
+    "invalidKoulutusOpintojenLaajuusNumeroIntegrity": "Koulutuksella on ainakin yksi toteutus, jonka laajuus ei vastaa koulutuksen laajuusrajoitetta.",
+    "invalidKoulutusOpintojenLaajuusyksikkoIntegrity": "Koulutuksella on ainakin yksi toteutus, jonka laajuusyksikkö ei vastaa koulutuksen laajuusyksikköä.",
+    "invalidToteutusOpintojenLaajuusNumeroIntegrity": "Laajuus ei vastaa koulutukselle syötettyä laajuusrajoitetta.",
+    "invalidToteutusOpintojenLaajuusyksikkoIntegrity": "Laajuusyksikkö ei vastaa koulutukselle syötettyä laajuusyksikköä.",
+    "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon"
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

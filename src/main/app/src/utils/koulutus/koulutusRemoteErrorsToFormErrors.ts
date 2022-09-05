@@ -81,14 +81,33 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   }
 
   if (
-    (path === 'metadata.opintojenLaajuusNumeroMin' ||
-      path === 'metadata.opintojenLaajuusNumeroMax') &&
-    errorType === 'invalidKoulutusOpintojenLaajuusNumeroIntegrity' // TODO: korjaa tyyppi backendissä!
+    path === 'metadata.opintojenLaajuusNumeroMin' ||
+    path === 'metadata.opintojenLaajuusNumeroMax'
   ) {
-    return {
-      field: `information.opintojenLaajuusRange`,
-      errorKey:
-        'validointivirheet.invalidKoulutusOpintojenLaajuusNumeroIntegrity',
-    };
+    return [
+      {
+        field: 'information.opintojenLaajuusGroup',
+      },
+      {
+        field: 'information.opintojenLaajuusNumeroMin',
+        errorKey: null,
+      },
+      {
+        field: 'information.opintojenLaajuusNumeroMax',
+        errorKey: null,
+      },
+    ];
+  }
+
+  if (path === 'metadata.opintojenLaajuusyksikkoKoodiUri') {
+    return [
+      {
+        field: `information.opintojenLaajuusGroup`,
+      },
+      {
+        field: 'information.opintojenLaajuusyksikko',
+        errorKey: null,
+      },
+    ];
   }
 };

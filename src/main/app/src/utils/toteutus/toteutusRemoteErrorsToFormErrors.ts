@@ -91,17 +91,17 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   ) {
     return {
       field: 'tiedot.opintojenLaajuusNumero',
-      errorKey: 'validointivirheet.laajuusEiOleValilla',
+      errorKey:
+        'validointivirheet.invalidToteutusOpintojenLaajuusNumeroIntegrity',
     };
   }
 
   if (
-    path === 'metadata.opintojenLaajuusyksikko' &&
-    errorType === 'invalidToteutusOpintojenlaajuusyksikkoIntegrity'
+    path === 'metadata.opintojenLaajuusyksikkoKoodiUri' &&
+    errorType === 'invalidToteutusOpintojenLaajuusyksikkoIntegrity'
   ) {
     return {
       field: 'tiedot.opintojenLaajuusyksikko',
-      errorKey: 'validointivirheet.laajuusyksikkoEriKuinKoulutuksella',
     };
   }
 };

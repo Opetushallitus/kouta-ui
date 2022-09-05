@@ -8,7 +8,7 @@ import { parseFloatComma } from '#/src/utils';
 type NumberInputProps = {
   min?: number;
   max?: number;
-  fallbackValue?: number;
+  fallbackValue?: number | null;
   onBlur?: React.EventHandler<React.FocusEvent<HTMLInputElement>>;
   parseValue?: (value: string) => number | null;
 } & InputProps;
@@ -20,7 +20,7 @@ const NumberInput = ({
   onBlur = _fp.noop,
   min = 0,
   max,
-  fallbackValue,
+  fallbackValue = null,
   parseValue = _fp.identity,
   ...props
 }: NumberInputProps) => {

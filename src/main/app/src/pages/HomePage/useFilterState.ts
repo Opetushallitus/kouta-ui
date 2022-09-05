@@ -24,7 +24,7 @@ export const useFilterState = (name: ENTITY) => {
     hakutapa,
     koulutuksenAlkamiskausi,
     koulutuksenAlkamisvuosi,
-    orgWhitelist
+    orgWhitelist,
   } = useSelector(getPagination(name));
 
   const setPagination = useCallback(
@@ -61,12 +61,11 @@ export const useFilterState = (name: ENTITY) => {
       setPagination({ page: 0, koulutustyyppi });
   }
 
-
   let setOrgWhitelist;
   if (name === ENTITY.HAKUKOHDE) {
     setOrgWhitelist = orgWhitelist => {
-      setPagination({page: 0, orgWhitelist})
-    }
+      setPagination({ page: 0, orgWhitelist });
+    };
   }
 
   let setHakutapa;
@@ -119,7 +118,7 @@ export const useFilterState = (name: ENTITY) => {
         koulutuksenAlkamisvuosi,
         onKoulutuksenAlkamisvuosiChange: setKoulutuksenAlkamisvuosi,
         orgWhitelist,
-        onOrgWhitelistChange: setOrgWhitelist
+        onOrgWhitelistChange: setOrgWhitelist,
       },
     }),
     [
@@ -142,7 +141,7 @@ export const useFilterState = (name: ENTITY) => {
       koulutuksenAlkamisvuosi,
       setKoulutuksenAlkamisvuosi,
       orgWhitelist,
-      setOrgWhitelist
+      setOrgWhitelist,
     ]
   );
 };

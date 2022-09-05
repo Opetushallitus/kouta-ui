@@ -14,9 +14,9 @@ import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  KOULUTUS_PERUSOPETUS_KOODIURI,
   KoulutusalaKoodi,
 } from '#/src/constants';
-import { KOULUTUS_PERUSOPETUS_KOODIURI } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { getKoulutustyyppiTranslationKey, getTestIdProps } from '#/src/utils';

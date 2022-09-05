@@ -17,7 +17,7 @@ const Modal = ({
   open = false,
   ...props
 }) => {
-  const wrapBody = !!(footer || header); // For legacy modal
+  const wrapBody = Boolean(footer || header); // For legacy modal
 
   return (
     <UiModal open={open} onClose={onClose} {...props}>

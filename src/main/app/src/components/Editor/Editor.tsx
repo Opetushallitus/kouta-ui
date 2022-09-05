@@ -245,11 +245,12 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
     const contentState = editorState.getCurrentContent();
     const linkKey = getLinkKey(editorState);
 
-    const contentStateWithEntity = linkKey == '' ? contentState.createEntity(
-      'LINK',
-      'MUTABLE',
-      { url: link }
-    ) : contentState.replaceEntityData(getLinkKey(editorState), { url: link });
+    const contentStateWithEntity =
+      linkKey === ''
+        ? contentState.createEntity('LINK', 'MUTABLE', { url: link })
+        : contentState.replaceEntityData(getLinkKey(editorState), {
+            url: link,
+          });
 
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 

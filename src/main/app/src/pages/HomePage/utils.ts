@@ -50,7 +50,7 @@ export const getIndexParamsByFilters = ({
   nakyvyys,
   koulutuksenAlkamiskausi,
   koulutuksenAlkamisvuosi,
-  orgWhitelist
+  orgWhitelist,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
 
@@ -67,7 +67,7 @@ export const getIndexParamsByFilters = ({
     julkinen: nakyvyysToBoolean(nakyvyys),
     koulutuksenAlkamiskausi: selectValueToSimpleValue(koulutuksenAlkamiskausi),
     koulutuksenAlkamisvuosi: selectValueToSimpleValue(koulutuksenAlkamisvuosi),
-    orgWhitelist: selectValueToSimpleValue(orgWhitelist)
+    orgWhitelist: selectValueToSimpleValue(orgWhitelist),
   };
 };
 

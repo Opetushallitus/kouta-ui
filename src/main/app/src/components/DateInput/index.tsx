@@ -1,15 +1,10 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
-import { isString } from 'lodash';
+import { isString } from 'lodash/fp';
 
 import { DatePickerInput } from '#/src/components/DatePickerInput';
 import { Box, FormControl } from '#/src/components/virkailija';
-import {
-  getKoutaDateString,
-  isValidDate,
-  isNumeric,
-  getTestIdProps,
-} from '#/src/utils';
+import { getKoutaDateString, isValidDate, getTestIdProps } from '#/src/utils';
 
 const generateId = () =>
   `DateTimeInput__${Math.round(Math.random() * 10000).toString()}`;
@@ -34,8 +29,6 @@ const parseValue = value => {
 
   const maybeDate = new Date(value);
 
-  const [, timePart] = value.split('T');
-
   return {
     date: isValidDate(maybeDate) ? maybeDate : undefined,
     time: '00:00',
@@ -56,12 +49,12 @@ const formatValue = ({ date }) => {
 };
 
 export const DateInput = ({
-                                value,
-                                onChange,
-                                disabled = false,
-                                error = false,
-                                datePlaceholder = '',
-                              }) => {
+  value,
+  onChange,
+  disabled = false,
+  error = false,
+  datePlaceholder = '',
+}) => {
   const { date: dateValue } = parseValue(value);
   const dateId = useId();
   const [date, setDate] = useState(dateValue);

@@ -171,7 +171,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         opetus?.maksullisuusKuvaus || {}
       ),
       osiot: _fp.flow(
-        _fp.filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri),
+        _fp.filter(({ otsikkoKoodiUri }) => Boolean(otsikkoKoodiUri)),
         _fp.map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }))
       )(lisatiedot),
       osioKuvaukset: _fp.reduce((acc, curr: any) => {

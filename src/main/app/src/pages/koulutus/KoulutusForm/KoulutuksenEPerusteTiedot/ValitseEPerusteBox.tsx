@@ -27,9 +27,7 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getListNimiLanguageValues = (list = [], language) =>
-  list
-    .map(({ nimi }) => getLanguageValue(nimi, language))
-    .filter(name => !!name);
+  list.map(({ nimi }) => getLanguageValue(nimi, language)).filter(Boolean);
 
 const TilaBadge = ({ status = '', className }) => {
   const { t } = useTranslation();

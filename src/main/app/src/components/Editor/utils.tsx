@@ -45,7 +45,7 @@ export const getLinkKey = editorState => {
     return linkKey;
   }
   return '';
-}
+};
 
 export const getSelectionLinkUrl = editorState => {
   const contentState = editorState.getCurrentContent();

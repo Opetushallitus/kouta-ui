@@ -17,8 +17,7 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import { Box, FormLabel } from '#/src/components/virkailija';
-import { Typography } from '#/src/components/virkailija';
+import { Box, FormLabel, Typography } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';

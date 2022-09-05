@@ -69,9 +69,9 @@ export const getKoulutusByKoodi = async ({
     ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri)
   );
 
-  const koulutustyyppiKoodit = alakooditData.map(
-    ( {koodiUri} ) => koodiUri?.startsWith('koulutustyyppi_') && koodiUri
-  ).filter(Boolean);
+  const koulutustyyppiKoodit = alakooditData
+    .map(({ koodiUri }) => koodiUri?.startsWith('koulutustyyppi_') && koodiUri)
+    .filter(Boolean);
 
   const koulutusala =
     koulutusalaKoodi && _.isArray(koulutusalaKoodi.metadata)

@@ -14,6 +14,7 @@
     "cypress/globals": true
   },
   "rules": {
+    "@typescript-eslint/no-duplicate-imports": ["warn"],
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -66,6 +67,9 @@
     "lodash/prefer-constant": "off",
     "lodash/prefer-noop": "off",
     "lodash/prefer-includes": "off",
-    "lodash/path-style": "off"
+    "lodash/path-style": "off",
+    "no-negated-condition": ["warn"],
+    "no-implicit-coercion": ["warn"],
+    "no-var": ["warn"]
   }
 }

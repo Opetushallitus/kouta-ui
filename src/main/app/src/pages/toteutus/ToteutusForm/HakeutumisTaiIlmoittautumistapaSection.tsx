@@ -9,8 +9,8 @@ import DateTimeRange from '#/src/components/DateTimeRange';
 import {
   FormFieldEditor,
   FormFieldUrlInput,
+  createFormFieldComponent,
 } from '#/src/components/formFields';
-import { createFormFieldComponent } from '#/src/components/formFields';
 import SegmentTab from '#/src/components/SegmentTab';
 import SegmentTabs from '#/src/components/SegmentTabs';
 import { Box, Radio } from '#/src/components/virkailija';

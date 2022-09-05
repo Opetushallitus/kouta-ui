@@ -13,8 +13,8 @@ import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
-import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
+import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 
 import { HakukohteenLinjaSection } from './HakukohteenLinjaSection';
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';

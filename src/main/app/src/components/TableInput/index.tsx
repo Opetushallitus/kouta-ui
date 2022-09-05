@@ -272,7 +272,9 @@ class TableInput extends Component {
     ({ rowIndex }) =>
     () => {
       const value = this.getValue();
-      const currentStatus = !!_.get(value, ['rows', rowIndex, 'isHeader']);
+      const currentStatus = Boolean(
+        _.get(value, ['rows', rowIndex, 'isHeader'])
+      );
 
       this.props.onChange(
         setRowHeaderStatus({
@@ -348,7 +350,7 @@ class TableInput extends Component {
   };
 
   renderRow = ({ row, index: rowIndex, isLast, numRows }) => {
-    const isHeader = !!row.isHeader;
+    const isHeader = Boolean(row.isHeader);
 
     return (
       <RowContainer key={rowIndex}>

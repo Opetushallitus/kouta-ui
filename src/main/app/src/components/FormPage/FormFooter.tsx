@@ -47,10 +47,10 @@ const FormFooter = ({
   let title;
 
   if (!canUpdate) {
-    if (!_.isEmpty(infoTextTranslationKey)) {
-      title = t(`${entityType}lomake.${infoTextTranslationKey}`);
-    } else {
+    if (_.isEmpty(infoTextTranslationKey)) {
       title = t(`${entityType}lomake.eiMuokkausOikeutta`);
+    } else {
+      title = t(`${entityType}lomake.${infoTextTranslationKey}`);
     }
   }
   const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);

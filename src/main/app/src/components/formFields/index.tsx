@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
+import DateInput from '#/src/components/DateInput';
 import { DateTimeInput } from '#/src/components/DateTimeInput';
 import { Editor } from '#/src/components/Editor';
 import { ImageInput } from '#/src/components/ImageInput';
@@ -23,9 +24,6 @@ import {
 } from '#/src/components/virkailija';
 import { YearSelect } from '#/src/components/YearSelect';
 
-import DatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
-import UiDatePickerInput from "@opetushallitus/virkailija-ui-components/DatePickerInput";
-import DateInput from "#/src/components/DateInput";
 import { createComponent } from './utils';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
@@ -49,7 +47,7 @@ export const FormFieldRadio = createComponent(
   Radio,
   ({ meta, input: { value, ...input }, ...props }) => ({
     ...input,
-    checked: !!value,
+    checked: Boolean(value),
     ...props,
   })
 );
@@ -60,7 +58,7 @@ export const FormFieldCheckbox = createComponent(
   Checkbox,
   ({ meta, input: { value, ...input }, ...props }) => ({
     ...input,
-    checked: !!value,
+    checked: Boolean(value),
     ...props,
   })
 );
@@ -69,7 +67,7 @@ export const FormFieldSwitch = createComponent(
   Switch,
   ({ meta, input: { value, checked, ...input }, ...props }) => ({
     ...input,
-    checked: !!value,
+    checked: Boolean(value),
     ...props,
   })
 );
@@ -96,10 +94,7 @@ export const FormFieldDateTimeInput = createComponent(
   simpleMapProps
 );
 
-export const FormFieldDateInput = createComponent(
-  DateInput,
-  simpleMapProps
-);
+export const FormFieldDateInput = createComponent(DateInput, simpleMapProps);
 
 export const FormFieldEditor = createComponent(Editor, simpleMapProps);
 

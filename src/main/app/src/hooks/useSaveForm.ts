@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import _ from 'lodash';
 import { useDispatch, batch } from 'react-redux';
@@ -11,7 +11,7 @@ import {
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useForm } from '#/src/hooks/form';
+import { useForm, useSubmitErrors } from '#/src/hooks/form';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
 import useToaster from '#/src/hooks/useToaster';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
@@ -24,6 +24,14 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   const { openSavingSuccessToast, openSavingErrorToast } = useToaster();
   const { setRemoteErrors } = useFormSaveRemoteErrors();
   const form = useForm(formName);
+
+  const submitErrors = useSubmitErrors();
+  // Resetoidaan remote-errorit, ettei tallennusvirhe-modaali jää kummittelemaan
+  useEffect(() => {
+    if (_.isEmpty(submitErrors)) {
+      setRemoteErrors(null);
+    }
+  }, [submitErrors, setRemoteErrors]);
 
   const startSubmit = useCallback(
     () => dispatch(startSubmitAction(formName)),

@@ -8,7 +8,7 @@ import { getTestIdProps } from '#/src/utils';
 import useKoodisto from '../hooks/useKoodisto';
 import {
   FormFieldAsyncKoodistoSelect,
-  FormFieldIntegerInput,
+  FormFieldFloatInput,
   FormFieldRadioGroup,
 } from './formFields';
 import { Box } from './virkailija';
@@ -29,7 +29,7 @@ export const OpintojenLaajuusFieldRange = ({
 
   return (
     <Box {...getTestIdProps('laajuusNumero')}>
-      <legend>{t('yleiset.laajuus')}</legend>
+      <legend>{t('koulutuslomake.valitseOpintojenLaajuus')}</legend>
       <Box mt={1}>
         <Field
           name={`${name}.laajuusNumeroTyyppi`}
@@ -53,10 +53,10 @@ export const OpintojenLaajuusFieldRange = ({
         alignItems="center"
         justifyContent="space-between"
       >
-        <Box flexBasis="70px" flexGrow={0}>
+        <Box flexBasis="70px" flexGrow={0} data-testid="laajuusMin">
           <Field
             name={`${name}.opintojenLaajuusNumeroMin`}
-            component={FormFieldIntegerInput}
+            component={FormFieldFloatInput}
             type="number"
             fallbackValue={null}
             disabled={disabled}
@@ -67,19 +67,18 @@ export const OpintojenLaajuusFieldRange = ({
             <Box style={{ textAlign: 'center', width: '20px', flexGrow: 0 }}>
               {NDASH}
             </Box>
-            <Box flexBasis="70px" flexGrow={0}>
+            <Box flexBasis="70px" flexGrow={0} data-testid="laajuusMax">
               <Field
                 name={`${name}.opintojenLaajuusNumeroMax`}
-                component={FormFieldIntegerInput}
+                component={FormFieldFloatInput}
                 type="number"
                 disabled={disabled}
-                fallbackValue={null}
                 max={999}
               />
             </Box>
           </>
         )}
-        <Box flexGrow={2} ml={1}>
+        <Box flexGrow={2} ml={1} data-testid="laajuusyksikko">
           <Field
             component={FormFieldAsyncKoodistoSelect}
             name={`${name}.opintojenLaajuusyksikko`}

@@ -125,15 +125,16 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         values?.information?.opintojenLaajuus?.value || null,
       opintojenLaajuusyksikkoKoodiUri:
         values?.information?.opintojenLaajuusyksikko?.value || null,
-      opintojenLaajuusNumero: values?.information?.opintojenLaajuusNumero
-        ? parseFloatComma(values.information.opintojenLaajuusNumero)
-        : null,
-      opintojenLaajuusNumeroMin: maybeParseNumber(
-        values?.information?.opintojenLaajuusNumeroMin
-      ),
-      opintojenLaajuusNumeroMax: isLaajuusRange
-        ? maybeParseNumber(values?.information?.opintojenLaajuusNumeroMax)
-        : maybeParseNumber(values?.information?.opintojenLaajuusNumeroMin),
+      opintojenLaajuusNumero:
+        parseFloatComma(values.information.opintojenLaajuusNumero) || null,
+      opintojenLaajuusNumeroMin:
+        parseFloatComma(values?.information?.opintojenLaajuusNumeroMin) || null,
+      opintojenLaajuusNumeroMax:
+        parseFloatComma(
+          isLaajuusRange
+            ? maybeParseNumber(values?.information?.opintojenLaajuusNumeroMax)
+            : maybeParseNumber(values?.information?.opintojenLaajuusNumeroMin)
+        ) || null,
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),

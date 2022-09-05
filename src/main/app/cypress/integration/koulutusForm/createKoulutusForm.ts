@@ -22,6 +22,8 @@ import {
   pFillSelect,
   getInputByLabel,
   pFillAsyncSelect,
+  getRadio,
+  findSelect,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -308,11 +310,12 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('information', () => {
-        getByTestId('laajuusnumero').pipe(paste('5 - 10'));
-
-        getSelectByLabel('yleiset.laajuusyksikko').pipe(
-          pFillSelect('opintopistettä')
-        );
+        getRadio('range').click({ force: true });
+        getByTestId('laajuusMin').find('input').pipe(paste('5'));
+        getByTestId('laajuusMax').find('input').pipe(paste('10'));
+        getByTestId('laajuusyksikko')
+          .pipe(findSelect)
+          .pipe(pFillSelect('opintopistettä'));
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').pipe(
           pFillAsyncSelect('Terveys')

@@ -27,6 +27,7 @@ Object {
         "value": "koulutusala_2#1",
       },
     ],
+    "laajuusNumeroTyyppi": "single",
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
@@ -34,8 +35,9 @@ Object {
     "opintojenLaajuus": Object {
       "value": "laajuus_1#1",
     },
-    "opintojenLaajuusRange": "",
     "opintojenLaajuusNumero": "",
+    "opintojenLaajuusNumeroMax": undefined,
+    "opintojenLaajuusNumeroMin": undefined,
     "opintojenLaajuusyksikko": Object {
       "value": "",
     },
@@ -125,6 +127,7 @@ Object {
         "value": "koulutusala_2#1",
       },
     ],
+    "laajuusNumeroTyyppi": "single",
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
@@ -132,8 +135,9 @@ Object {
     "opintojenLaajuus": Object {
       "value": "laajuus_1#1",
     },
-    "opintojenLaajuusRange": "",
     "opintojenLaajuusNumero": "",
+    "opintojenLaajuusNumeroMax": undefined,
+    "opintojenLaajuusNumeroMin": undefined,
     "opintojenLaajuusyksikko": Object {
       "value": "",
     },

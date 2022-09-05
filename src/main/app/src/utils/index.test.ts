@@ -3,8 +3,6 @@ import {
   getValuesForSaving,
   isDeepEmptyFormValues,
   formatDateValue,
-  parseOpintojenLaajuusRange,
-  getOpintojenLaajuusRange,
 } from '#/src/utils';
 
 const OBJECT_IN_ARRAY = [
@@ -173,56 +171,4 @@ test.each([
   ['2020-01-01', '01.01.2020 00:00'],
 ])('formatDateValue', (dateString, result) => {
   expect(formatDateValue(dateString)).toEqual(result);
-});
-
-test('Should parse number from a string with one number', () => {
-  expect(parseOpintojenLaajuusRange('5')).toEqual({ min: 5, max: undefined });
-});
-
-test('Should parse min and max numbers from a string with range', () => {
-  expect(parseOpintojenLaajuusRange('5 - 10')).toEqual({ min: 5, max: 10 });
-});
-
-test('Should parse min and max numbers from a string with range without whitespace', () => {
-  expect(parseOpintojenLaajuusRange('5 - 10')).toEqual({ min: 5, max: 10 });
-});
-
-test('Should set max laajuus as NaN if there are other chars for it than numbers', () => {
-  expect(parseOpintojenLaajuusRange('5 - 10xyz5')).toEqual({
-    min: 5,
-    max: NaN,
-  });
-});
-
-test('Should set min laajuus as NaN if there are other chars for it than numbers', () => {
-  expect(parseOpintojenLaajuusRange('xyz35 - 10')).toEqual({
-    min: NaN,
-    max: 10,
-  });
-});
-
-test('Should set min laajuus as NaN because string cannot be parsed as single number', () => {
-  expect(parseOpintojenLaajuusRange('xyz35')).toEqual({
-    min: NaN,
-    max: undefined,
-  });
-});
-
-test('Should set min laajuus as undefined if opintojenlaajuus range not defined', () => {
-  expect(parseOpintojenLaajuusRange(undefined)).toEqual({
-    min: undefined,
-    max: undefined,
-  });
-});
-
-test('Should form range string from min opintojenlaajuus', () => {
-  expect(getOpintojenLaajuusRange(5)).toEqual('5');
-});
-
-test('Should form range string from min and max opintojenlaajuus numbers', () => {
-  expect(getOpintojenLaajuusRange(5, 15)).toEqual('5 - 15');
-});
-
-test('Should form range string from max opintojenlaajuus', () => {
-  expect(getOpintojenLaajuusRange(null, 15)).toEqual('15');
 });

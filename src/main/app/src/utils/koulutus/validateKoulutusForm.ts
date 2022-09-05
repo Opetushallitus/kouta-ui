@@ -6,7 +6,6 @@ import createErrorBuilder, {
   validateArrayMinLength,
   validateExistence,
   validateTranslations,
-  validateOpintojenLaajuusRange,
 } from '#/src/utils/form/createErrorBuilder';
 import {
   getKielivalinta,
@@ -35,7 +34,6 @@ export const validateKoulutusForm = (values, registeredFields) => {
       validateCommonFields,
       validateArrayMinLength('kieliversiot', 1),
       validateTranslations('information.nimi'),
-      validateOpintojenLaajuusRange('information.opintojenLaajuusRange'),
       validateExistence('information.koulutus'),
       validateExistence('osaamisala.koulutus'),
       validateExistence('osaamisala.eperuste'),

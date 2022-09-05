@@ -39,8 +39,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -94,6 +92,8 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -169,8 +169,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -220,6 +218,8 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_1800",
@@ -305,8 +305,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -365,6 +363,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -477,8 +477,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -528,6 +526,8 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [
       {
@@ -619,8 +619,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -671,6 +669,8 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_0",
@@ -763,8 +763,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -815,6 +813,8 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -911,8 +911,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       ]
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -963,6 +961,8 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1048,8 +1048,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1100,6 +1098,8 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_0",
@@ -1183,8 +1183,6 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1234,6 +1232,8 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1313,8 +1313,6 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1365,6 +1363,8 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1438,8 +1438,6 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1489,6 +1487,8 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1568,8 +1568,8 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1700,8 +1700,6 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -1755,6 +1753,8 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1825,8 +1825,6 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1876,6 +1874,8 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1955,8 +1955,8 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2095,8 +2095,8 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope ja opot
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2230,8 +2230,6 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2290,6 +2288,8 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2367,8 +2367,8 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2499,8 +2499,8 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2635,8 +2635,8 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2771,8 +2771,8 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2903,8 +2903,6 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2967,6 +2965,8 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -3066,8 +3066,8 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -3217,8 +3217,6 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -3268,6 +3266,8 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -3346,8 +3346,6 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": 10,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -3410,6 +3408,8 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": 10,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],

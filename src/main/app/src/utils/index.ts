@@ -45,8 +45,13 @@ export const isPartialDate = date => {
   }
 };
 
-export const parseFloatComma = (value: string | number) =>
-  _.isNumber(value) ? value : parseFloat(value.replace(',', '.'));
+export const parseFloatComma = (value?: string | number | null) => {
+  if (_.isNil(value)) {
+    return null;
+  } else {
+    return _.isNumber(value) ? value : parseFloat(value.replace(',', '.'));
+  }
+};
 
 export const isNumeric = value => {
   if (_.isNumber(value)) {
@@ -370,42 +375,3 @@ export const getKoulutustyyppiTranslation = (
 export const notToimipisteOrg = _fp.negate(
   organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
 );
-
-export const parseOpintojenLaajuusRange = laajuus => {
-  const numericParts = _.split(laajuus, '-').map(num => {
-    if (_.isEmpty(num)) {
-      return undefined;
-    }
-
-    const maybeNumber = Number(num);
-
-    if (_.isFinite(maybeNumber)) {
-      return maybeNumber;
-    }
-
-    return undefined;
-  });
-
-  return {
-    min: numericParts[0],
-    max: numericParts[1],
-  };
-};
-
-export const getOpintojenLaajuusRange = (min?: number, max?: number) => {
-  const minStr = isNumeric(min) ? min!.toString() : '';
-  const maxStr = isNumeric(max) ? max!.toString() : '';
-
-  if (min === max) {
-    return `${min}`;
-  }
-
-  if (_.isEmpty(minStr)) {
-    return maxStr;
-  }
-
-  if (_.isEmpty(maxStr)) {
-    return minStr;
-  }
-  return `${minStr} - ${maxStr}`;
-};

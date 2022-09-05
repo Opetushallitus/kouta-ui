@@ -5,7 +5,7 @@ import { getTestIdProps } from '#/src/utils';
 
 import { useLanguageTab } from '../contexts/LanguageTabContext';
 import useKoodistoOptions from '../hooks/useKoodistoOptions';
-import { FormFieldIntegerInput, FormFieldSelect } from './formFields';
+import { FormFieldFloatInput, FormFieldSelect } from './formFields';
 import { Box } from './virkailija';
 
 export const OpintojenLaajuusFieldExtended = ({
@@ -25,8 +25,8 @@ export const OpintojenLaajuusFieldExtended = ({
       <Box px={1} flexGrow={1}>
         <Field
           name={`${name}.opintojenLaajuusNumero`}
-          component={FormFieldIntegerInput}
-          label={t('yleiset.laajuus')}
+          component={FormFieldFloatInput}
+          label={t('koulutuslomake.valitseOpintojenLaajuus')}
           max={999}
           min={0}
           disabled={disabled}

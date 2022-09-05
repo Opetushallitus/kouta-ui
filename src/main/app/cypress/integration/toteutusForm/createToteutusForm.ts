@@ -25,6 +25,8 @@ import {
   wrapMutationTest,
   withinSection,
   getInputByLabel,
+  getSelectByLabel,
+  pFillSelect,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -163,9 +165,9 @@ const fillKkOpintokokonaisuusTiedotSection = () => {
 
     getByTestId('laajuusnumero').pipe(paste('10'));
 
-    cy.findByLabelText(/toteutuslomake.laajuusyksikko/)
-      .should('be.disabled')
-      .should('have.value', 'opintopistettä');
+    getSelectByLabel('yleiset.laajuusyksikko').pipe(
+      pFillSelect('opintopistettä')
+    );
   });
 };
 

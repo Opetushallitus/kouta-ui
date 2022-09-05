@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { renderWithTheme } from '#/src/testUtils';
 
-import { IntegerInput } from './index';
+import { FloatInput, IntegerInput } from './index';
 
 test.each([
   ['', '0'],
@@ -21,6 +21,30 @@ test.each([
   (inputValue, parsedValue) => {
     // defaultValue is 0 by default
     renderWithTheme(<IntegerInput min={-100} max={100} />);
+    const inputEl = screen.getByRole('textbox');
+    userEvent.clear(inputEl);
+    if (inputValue !== '') {
+      userEvent.type(inputEl, inputValue);
+    }
+    userEvent.click(document.body); // click outside the input element to blur
+    expect(inputEl).toHaveValue(parsedValue);
+  }
+);
+
+test.each([
+  ['', undefined],
+  ['asdf', undefined],
+  ['123asdf', '100'],
+  ['asdfasdf12324535', undefined],
+  ['12,3', '12,3'],
+  ['12.3', '12,3'],
+  ['-423423', '-100'],
+  ['0001', '1'],
+])(
+  'Input value "%s" should change to "%s" on blur when min="-100" and max="100"',
+  (inputValue, parsedValue) => {
+    // defaultValue is 0 by default
+    renderWithTheme(<FloatInput min={-100} max={100} />);
     const inputEl = screen.getByRole('textbox');
     userEvent.clear(inputEl);
     if (inputValue !== '') {

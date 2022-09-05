@@ -1,4 +1,8 @@
-import { DEFAULT_JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
+import {
+  DEFAULT_JULKAISUTILA,
+  MaaraTyyppi,
+  POHJAVALINTA,
+} from '#/src/constants';
 
 export const initialKoulutusValues = {
   tila: DEFAULT_JULKAISUTILA,
@@ -8,4 +12,7 @@ export const initialKoulutusValues = {
   },
   kieliversiot: ['fi', 'sv'],
   tarjoajat: { tarjoajat: [], kaytaPohjanJarjestajaa: false },
+  information: {
+    laajuusNumeroTyyppi: MaaraTyyppi.VAIHTELUVALI,
+  },
 };

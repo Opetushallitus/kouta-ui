@@ -32,10 +32,10 @@ test.each([
 );
 
 test.each([
-  ['', undefined],
-  ['asdf', undefined],
+  ['', ''],
+  ['asdf', ''],
   ['123asdf', '100'],
-  ['asdfasdf12324535', undefined],
+  ['asdfasdf12324535', ''],
   ['12,3', '12,3'],
   ['12.3', '12,3'],
   ['-423423', '-100'],

@@ -360,7 +360,8 @@
     "vapaaSivistystyoMuu": "Muu",
     "aikuistenPerusopetus": "Aikuisten perusopetus",
     "kkOpintojakso": "Opintojakso",
-    "erikoislaakari": "Erikoislääkärikoulutukset"
+    "erikoislaakari": "Erikoislääkärikoulutukset",
+    "kkOpintokokonaisuus": "Opintokokonaisuus"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",

@@ -705,7 +705,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -839,7 +838,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -988,7 +986,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     ],
     "yleislinja": true
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1134,7 +1131,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1389,7 +1385,6 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1568,8 +1563,6 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1620,6 +1613,8 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1644,7 +1639,6 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1955,8 +1949,6 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2007,6 +1999,8 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_0",
@@ -2041,7 +2035,6 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -2635,8 +2628,6 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2687,6 +2678,8 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2711,7 +2704,6 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -2771,8 +2763,6 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       "muutKielet": []
     },
     "kuvaus": {},
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2823,6 +2813,8 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2847,7 +2839,6 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"

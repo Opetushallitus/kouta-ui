@@ -61,7 +61,7 @@ const OppilaitoksenOsaForm = ({
       <FormCollapse
         section="hakijapalveluidenYhteystiedot"
         languages={languageTabs}
-        header={t('oppilaitoslomake.hakijapalveluidenYhteystiedot') + " OPPILAITOKSEN OSALLE fixme"}
+        header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanHakijapalveluidenYhteystiedot')}
         description={t('oppilaitoslomake.hakijapalveluidenYhteystiedotOhje')}
         Component={YhteystietoSection}
       />

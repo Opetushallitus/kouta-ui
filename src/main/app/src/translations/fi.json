@@ -328,7 +328,9 @@
     "pakollinenAjankohtaJosJulkaistuYhteishaku": "Alkamisajankohta on pakollinen, jos haku on julkaistu ja hakutapa on yhteishaku.",
     "koulutustyyppiEiVastaaSorakuvauksenTyyppia": "Valittu koulutustyyppi ei vastaa SORA-kuvauksen koulutustyyppiä.",
     "koulutusEiVastaaSoraKuvauksenKoulutuksia": "Valittu koulutus ei vastaa SORA-kuvauksen koulutuksia.",
-    "yksittainenKokonaislukuTaiKokonaislukuValilta": "Arvon tulee olla joko yksittäinen kokonaisluku tai kenttään tulee määritellä arvoalue, esim. 5 - 15"
+    "yksittainenKokonaislukuTaiKokonaislukuValilta": "Arvon tulee olla joko yksittäinen kokonaisluku tai kenttään tulee määritellä arvoalue, esim. 5 - 15",
+    "minSuurempiKuinMax": "Minimiarvon tulee olla suurempi kuin maksimiarvon",
+    "laajuusEiOleValilla": "Syötetty arvo ei ole koulutuksella laajuudelle määritetyllä välillä"
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

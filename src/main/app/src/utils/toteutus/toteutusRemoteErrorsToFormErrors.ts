@@ -84,4 +84,11 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       errorKey: 'validointivirheet.pakollisetKaannokset',
     }));
   }
+
+  if (path === 'metadata.laajuus' && errorType === 'notInTheRangeMsg') {
+    return {
+      field: 'tiedot.opintojenLaajuusnumero',
+      errorKey: 'validointivirheet.laajuusEiOleValilla',
+    };
+  }
 };

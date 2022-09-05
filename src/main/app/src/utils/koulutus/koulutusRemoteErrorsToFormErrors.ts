@@ -79,4 +79,14 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       errorKey: 'validointivirheet.pakollinen',
     };
   }
+
+  if (
+    path === 'metadata.opintojenLaajuusNumeroMin' &&
+    errorType === 'minmaxMsg'
+  ) {
+    return {
+      field: `information.opintojenLaajuusRange`,
+      errorKey: 'validointivirheet.minSuurempiKuinMax',
+    };
+  }
 };

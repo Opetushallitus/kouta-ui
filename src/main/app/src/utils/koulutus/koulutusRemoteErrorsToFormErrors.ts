@@ -87,14 +87,15 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
     return [
       {
         field: 'information.opintojenLaajuusGroup',
+        errorKey: `validointivirheet.${errorType}`, // Virheteksti group-tasolla
       },
       {
         field: 'information.opintojenLaajuusNumeroMin',
-        errorKey: null,
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
       },
       {
         field: 'information.opintojenLaajuusNumeroMax',
-        errorKey: null,
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
       },
     ];
   }
@@ -103,10 +104,11 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
     return [
       {
         field: `information.opintojenLaajuusGroup`,
+        errorKey: `validointivirheet.${errorType}`, // Virheteksti group-tasolla
       },
       {
         field: 'information.opintojenLaajuusyksikko',
-        errorKey: null,
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
       },
     ];
   }

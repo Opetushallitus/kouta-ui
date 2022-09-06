@@ -102,6 +102,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   ) {
     return {
       field: 'tiedot.opintojenLaajuusyksikko',
+      errorKey: `validointivirheet.${errorType}`,
     };
   }
 };

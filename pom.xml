@@ -129,7 +129,7 @@
                     </execution -->
                 </executions>
                 <configuration>
-                    <nodeVersion>latest-v16.x</nodeVersion>
+                    <nodeVersion>v16.17.0</nodeVersion>
                     <failOnError>true</failOnError>
                     <workingDirectory>src/main/app</workingDirectory>
                 </configuration>

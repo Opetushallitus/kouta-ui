@@ -39,8 +39,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -94,6 +92,8 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -169,8 +169,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -220,6 +218,8 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_1800",
@@ -305,8 +305,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -365,6 +363,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -477,8 +477,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -528,6 +526,8 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [
       {
@@ -619,8 +619,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -671,6 +669,8 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_0",
@@ -705,7 +705,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -763,8 +762,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -815,6 +812,8 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -839,7 +838,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -911,8 +909,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       ]
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -963,6 +959,8 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -988,7 +986,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     ],
     "yleislinja": true
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1048,8 +1045,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1100,6 +1095,8 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_0",
@@ -1134,7 +1131,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1183,8 +1179,6 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1234,6 +1228,8 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1313,8 +1309,6 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1365,6 +1359,8 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1389,7 +1385,6 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1438,8 +1433,6 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1489,6 +1482,8 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1568,8 +1563,6 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1620,6 +1613,8 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1644,7 +1639,6 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -1700,8 +1694,6 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -1755,6 +1747,8 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1825,8 +1819,6 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1876,6 +1868,8 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -1955,8 +1949,6 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2007,6 +1999,8 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
         "koodiUri": "osaamisala_0",
@@ -2041,7 +2035,6 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -2095,8 +2088,8 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope ja opot
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2230,8 +2223,6 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2290,6 +2281,8 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2367,8 +2360,8 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2499,8 +2492,8 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2635,8 +2628,6 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2687,6 +2678,8 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2711,7 +2704,6 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -2771,8 +2763,6 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       "muutKielet": []
     },
     "kuvaus": {},
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2823,6 +2813,8 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2847,7 +2839,6 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       }
     ]
   },
-  "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
@@ -2903,8 +2894,6 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2967,6 +2956,8 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -3066,8 +3057,8 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -3217,8 +3208,6 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "laajuus": null,
-    "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -3268,6 +3257,8 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -3296,6 +3287,147 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "EB-tutkinto (European Baccalaureate)"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createToteutus > should be able to create korkeakoulutus opintokokonaisuustoteutus #0`] =
+{
+  "esikatselu": false,
+  "externalId": null,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "aloituspaikat": null,
+    "ammattinimikkeet": [],
+    "asiasanat": [
+      {
+        "arvo": "avainsana",
+        "kieli": "fi"
+      }
+    ],
+    "diplomit": [],
+    "erityisetKoulutustehtavat": [],
+    "hakuaika": {
+      "alkaa": "2050-04-01T00:00",
+      "paattyy": "2050-09-01T00:00"
+    },
+    "hakulomakeLinkki": {
+      "fi": "http://example.com"
+    },
+    "hakulomaketyyppi": "muu",
+    "hakutermi": "hakeutuminen",
+    "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1Kielet": [],
+      "A2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
+    "kuvaus": {
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
+    "lisatietoaHakeutumisesta": {
+      "fi": "<p>lisätiedot</p>"
+    },
+    "lisatietoaValintaperusteista": {
+      "fi": "<p>lisätiedot valintaperusteista</p>"
+    },
+    "opetus": {
+      "apuraha": {
+        "kuvaus": {
+          "fi": "<p>apuraha kuvaus</p>"
+        },
+        "max": 20,
+        "min": 20,
+        "yksikko": "euro"
+      },
+      "koulutuksenAlkamiskausi": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+          "teksti": {
+            "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "<p>maksullisuus kuvaus</p>"
+      },
+      "maksullisuustyyppi": "lukuvuosimaksu",
+      "maksunMaara": 10,
+      "onkoApuraha": true,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_1#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "<p>opetusaika kuvaus</p>"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "<p>opetuskieli kuvaus</p>"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_1#2",
+        "oppilaitoksenopetuskieli_4#2"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_1#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "<p>opetustapa kuvaus</p>"
+      },
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "<p>suunniteltu kesto kuvaus</p>"
+      },
+      "suunniteltuKestoVuodet": 2
+    },
+    "opintojenLaajuusNumero": 10,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "osaamisalat": [],
+    "painotukset": [],
+    "toteutusjaksot": [],
+    "tyyppi": "kk-opintokokonaisuus",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähköposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "http://verkkosivu"
+        }
+      }
+    ]
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "toteutuksen nimi"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,

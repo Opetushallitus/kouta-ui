@@ -1,7 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import { KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
 import { isNumeric, toSelectValue } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
@@ -57,6 +57,8 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     opintojenLaajuusKoodiUri = '',
     opintojenLaajuusyksikkoKoodiUri = '',
     opintojenLaajuusNumero,
+    opintojenLaajuusNumeroMin,
+    opintojenLaajuusNumeroMax,
     tutkintonimikeKoodiUrit = [],
     koulutusalaKoodiUrit = [],
     osaamisalaKoodiUri,
@@ -84,9 +86,15 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       opintojenLaajuusyksikko: {
         value: opintojenLaajuusyksikkoKoodiUri,
       },
-      opintojenLaajuusnumero: isNumeric(opintojenLaajuusNumero)
+      opintojenLaajuusNumero: isNumeric(opintojenLaajuusNumero)
         ? opintojenLaajuusNumero.toString()
         : '',
+      laajuusNumeroTyyppi:
+        opintojenLaajuusNumeroMin === opintojenLaajuusNumeroMax
+          ? MaaraTyyppi.YKSI_ARVO
+          : MaaraTyyppi.VAIHTELUVALI,
+      opintojenLaajuusNumeroMin: opintojenLaajuusNumeroMin,
+      opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
       koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),
     },

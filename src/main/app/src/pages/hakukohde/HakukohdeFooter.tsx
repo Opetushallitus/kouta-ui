@@ -9,15 +9,15 @@ import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { HakukohdeModel } from '#/src/types/hakukohdeTypes';
 import { HakuModel } from '#/src/types/hakuTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
-import createHakukohde from '#/src/utils/hakukohde/createHakukohde';
+import { createHakukohde } from '#/src/utils/hakukohde/createHakukohde';
 import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
-import updateHakukohde from '#/src/utils/hakukohde/updateHakukohde';
+import { updateHakukohde } from '#/src/utils/hakukohde/updateHakukohde';
 import { validateHakukohdeForm } from '#/src/utils/hakukohde/validateHakukohdeForm';
 
 type HakukohdeFooterProps = {

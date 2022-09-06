@@ -263,7 +263,7 @@ Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "opintojenLaajuusnumero": "25",
+    "opintojenLaajuusNumero": "25",
     "opintojenLaajuusyksikko": Object {
       "value": "laajuus_1#1",
     },

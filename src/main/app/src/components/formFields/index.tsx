@@ -5,10 +5,10 @@ import DateInput from '#/src/components/DateInput';
 import { DateTimeInput } from '#/src/components/DateTimeInput';
 import { Editor } from '#/src/components/Editor';
 import { ImageInput } from '#/src/components/ImageInput';
-import { IntegerInput } from '#/src/components/IntegerInput';
 import { KoulutusalaSelect } from '#/src/components/KoulutusalaSelect';
 import { KoulutustyyppiSelect } from '#/src/components/KoulutustyyppiSelect';
 import { LanguageSelect } from '#/src/components/LanguageSelect';
+import { FloatInput, IntegerInput } from '#/src/components/NumberInput';
 import { PostinumeroSelect } from '#/src/components/PostinumeroSelect';
 import { Select, AsyncSelect } from '#/src/components/Select';
 import { SoraKuvausSelect } from '#/src/components/SoraKuvausSelect';
@@ -161,3 +161,5 @@ export const FormFieldIntegerInput = createComponent(
   IntegerInput,
   simpleMapProps
 );
+
+export const FormFieldFloatInput = createComponent(FloatInput, simpleMapProps);

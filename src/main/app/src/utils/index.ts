@@ -45,8 +45,21 @@ export const isPartialDate = date => {
   }
 };
 
-export const parseFloatComma = (value: string | number) =>
-  _.isNumber(value) ? value : parseFloat(value.replace(',', '.'));
+/* Parsii pilkulla erotetun desimaaliluvun äärelliseksi numeroksi.
+Palautetaan äärellinen numero (muu kuin Inifinity, -Inifnity tai Nan) tai null, jos ei onnistu
+ */
+export const parseFloatComma = (
+  value?: string | number | null
+): number | null => {
+  if (_.isNumber(value) && _.isFinite(value)) {
+    return value;
+  } else if (_.isString(value)) {
+    const parsedValue = parseFloat(value.replace(',', '.'));
+    return _.isFinite(parsedValue) ? parsedValue : null;
+  } else {
+    return null;
+  }
+};
 
 export const isNumeric = value => {
   if (_.isNumber(value)) {

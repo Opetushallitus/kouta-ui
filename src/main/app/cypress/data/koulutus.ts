@@ -186,6 +186,17 @@ const getEBFields = () => {
   });
 };
 
+const getKorkeakoulutusOpintokokonaisuusFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    nimi: { fi: 'KK-opintokokonaisuus' },
+    metadata: {
+      opintojenLaajuusNumero: '10 - 20',
+      opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
 export default ({ tyyppi = 'amm' } = {}) => {
   if (tyyppi === 'amm-ope-erityisope-ja-opo') {
     return getAmmOpeErityisopeJaOpoFields({ tyyppi });
@@ -211,6 +222,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getEBFields();
   } else if (tyyppi === 'dia') {
     return getDIAFields();
+  } else if (tyyppi === 'kk-opintokokonaisuus') {
+    return getKorkeakoulutusOpintokokonaisuusFields({ tyyppi });
   }
 
   return getBaseFields();

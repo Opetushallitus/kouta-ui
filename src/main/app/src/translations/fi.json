@@ -49,7 +49,6 @@
     "suomeksi": "Suomeksi",
     "ruotsiksi": "Ruotsiksi",
     "englanniksi": "Englanniksi",
-    "kuvauksenNimi": "Kuvauksen nimi",
     "valitseKoulutus": "Valitse koulutus",
     "valitseKoulutukset": "Valitse koulutukset",
     "valitseToteutus": "Valitse toteutus",
@@ -327,7 +326,12 @@
     "yliSataProsenttia": "Syötetty prosenttiluku ei voi olla yli 100.",
     "pakollinenAjankohtaJosJulkaistuYhteishaku": "Alkamisajankohta on pakollinen, jos haku on julkaistu ja hakutapa on yhteishaku.",
     "koulutustyyppiEiVastaaSorakuvauksenTyyppia": "Valittu koulutustyyppi ei vastaa SORA-kuvauksen koulutustyyppiä.",
-    "koulutusEiVastaaSoraKuvauksenKoulutuksia": "Valittu koulutus ei vastaa SORA-kuvauksen koulutuksia."
+    "koulutusEiVastaaSoraKuvauksenKoulutuksia": "Valittu koulutus ei vastaa SORA-kuvauksen koulutuksia.",
+    "invalidKoulutusOpintojenLaajuusNumeroIntegrity": "Koulutuksella on ainakin yksi toteutus, jonka laajuus ei vastaa koulutuksen laajuusrajoitetta",
+    "invalidKoulutusOpintojenLaajuusyksikkoIntegrity": "Koulutuksella on ainakin yksi toteutus, jonka laajuusyksikkö ei vastaa koulutuksen laajuusyksikköä",
+    "invalidToteutusOpintojenLaajuusNumeroIntegrity": "Laajuus ei vastaa koulutukselle syötettyä laajuusrajoitetta",
+    "invalidToteutusOpintojenLaajuusyksikkoIntegrity": "Laajuusyksikkö ei vastaa koulutukselle syötettyä laajuusyksikköä",
+    "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon"
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",
@@ -360,7 +364,8 @@
     "vapaaSivistystyoMuu": "Muu",
     "aikuistenPerusopetus": "Aikuisten perusopetus",
     "kkOpintojakso": "Opintojakso",
-    "erikoislaakari": "Erikoislääkärikoulutukset"
+    "erikoislaakari": "Erikoislääkärikoulutukset",
+    "kkOpintokokonaisuus": "Opintokokonaisuus"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",
@@ -452,7 +457,8 @@
     "lisaaKoulutus": "Lisää uusi koulutus",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu koulutus",
     "koulutuksenNimiNakyyOppijalleVaroitus": "HUOM! Teksti näkyy oppijalle Opintopolun sivuilla.",
-    "linkkiEPerusteisiin": "Linkki ePerusteisiin"
+    "linkkiEPerusteisiin": "Linkki ePerusteisiin",
+    "epayhteensopiviaToteutuksia": "Koulutuksen arvot eivät ole yhteensopivia kaikkien siihen liitettyjen toteutusten kanssa"
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",

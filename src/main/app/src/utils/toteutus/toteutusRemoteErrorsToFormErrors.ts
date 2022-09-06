@@ -84,4 +84,25 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       errorKey: 'validointivirheet.pakollisetKaannokset',
     }));
   }
+
+  if (
+    path === 'metadata.opintojenLaajuusNumero' &&
+    errorType === 'notInTheRangeMsg'
+  ) {
+    return {
+      field: 'tiedot.opintojenLaajuusNumero',
+      errorKey:
+        'validointivirheet.invalidToteutusOpintojenLaajuusNumeroIntegrity',
+    };
+  }
+
+  if (
+    path === 'metadata.opintojenLaajuusyksikkoKoodiUri' &&
+    errorType === 'invalidToteutusOpintojenLaajuusyksikkoIntegrity'
+  ) {
+    return {
+      field: 'tiedot.opintojenLaajuusyksikko',
+      errorKey: `validointivirheet.${errorType}`,
+    };
+  }
 };

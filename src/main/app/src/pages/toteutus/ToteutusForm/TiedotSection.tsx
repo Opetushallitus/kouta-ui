@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
@@ -168,7 +169,7 @@ export const VapaaSivistystyoTiedotSection = ({
 
 export const AmmMuuTiedotSection = VapaaSivistystyoTiedotSection;
 
-export const KorkeakoulutusOpintojaksoTiedotSection = ({
+export const KkOpintojaksoTiedotSection = ({
   language,
   disabled,
   name,
@@ -184,6 +185,18 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
       }
       laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
+  </VerticalBox>
+);
+
+export const KkOpintokokonaisuusTiedotSection = ({
+  language,
+  disabled,
+  name,
+  koulutus,
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
   </VerticalBox>
 );
 

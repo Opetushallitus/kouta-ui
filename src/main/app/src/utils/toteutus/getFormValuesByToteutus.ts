@@ -1,7 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { ApurahaMaaraTyyppi, ApurahaYksikko } from '#/src/constants';
+import { MaaraTyyppi, ApurahaYksikko } from '#/src/constants';
 import {
   ToteutusFormValues,
   MaksullisuusTyyppi,
@@ -84,8 +84,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     opetus = {},
     osaamisalat,
     yhteyshenkilot,
-    laajuus,
-    laajuusyksikkoKoodiUri,
+    opintojenLaajuusNumero,
+    opintojenLaajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
     kielivalikoima = {},
@@ -130,8 +130,10 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         ammatillinenPerustutkintoErityisopetuksena
       ),
       jarjestetaanErityisopetuksena: Boolean(jarjestetaanErityisopetuksena),
-      opintojenLaajuusnumero: _fp.isNumber(laajuus) ? laajuus.toString() : '',
-      opintojenLaajuusyksikko: toSelectValue(laajuusyksikkoKoodiUri),
+      opintojenLaajuusNumero: _fp.isNumber(opintojenLaajuusNumero)
+        ? opintojenLaajuusNumero.toString()
+        : '',
+      opintojenLaajuusyksikko: toSelectValue(opintojenLaajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},
       aloituspaikat: _fp.isNumber(aloituspaikat)
         ? aloituspaikat.toString()
@@ -188,8 +190,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       apurahaMax: opetus?.apuraha?.max,
       apurahaMaaraTyyppi:
         opetus?.apuraha?.min === opetus?.apuraha?.max
-          ? ApurahaMaaraTyyppi.YKSI_ARVO
-          : ApurahaMaaraTyyppi.VAIHTELUVALI,
+          ? MaaraTyyppi.YKSI_ARVO
+          : MaaraTyyppi.VAIHTELUVALI,
       apurahaYksikko: toSelectValue(
         opetus?.apuraha?.yksikko ?? ApurahaYksikko.EURO
       ),

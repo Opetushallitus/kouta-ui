@@ -404,7 +404,6 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
       }
     ]
   },
-  "modified": "2019-04-04T08:28",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "muuPohjakoulutusvaatimus": {},
   "nimi": {
@@ -565,7 +564,6 @@ exports[`editHakukohde > should be able to delete hakukohde #0`] =
       }
     ]
   },
-  "modified": "2019-04-04T08:28",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "muuPohjakoulutusvaatimus": {},
   "nimi": {

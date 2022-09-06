@@ -1,5 +1,6 @@
 import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
 import _ from 'lodash';
+import { mix } from 'polished';
 
 const breakpoints = ['576px', '768px', '992px'];
 
@@ -30,6 +31,7 @@ export const createTheme = () => {
       grayLighten5: '#f5f5f5',
       grayLighten6: '#f0f3f7',
       blueLighten4: '#def2ff',
+      visitedLink: mix(0.5, 'purple', theme.colors.primary.main),
       border: theme.colors.divider,
       text: {
         dark: theme.colors.text.heading,

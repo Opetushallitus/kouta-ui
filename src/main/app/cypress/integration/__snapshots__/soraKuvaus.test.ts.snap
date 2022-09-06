@@ -40,7 +40,6 @@ exports[`editSoraKuvaus > should be able to edit sora-kuvaus #0`] =
       "fi": "<p><strong>Kuvaus fi</strong></p>"
     }
   },
-  "modified": "2019-04-01T13:01",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Fi nimi"
@@ -66,7 +65,6 @@ exports[`editSoraKuvaus > [r] should be able to edit sora-kuvaus #0`] =
       "fi": "<p><strong>Kuvaus fi</strong></p>"
     }
   },
-  "modified": "2019-04-01T13:01",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Fi nimi"
@@ -93,7 +91,6 @@ exports[`editSoraKuvaus > should be able to delete sora-kuvaus #0`] =
       "fi": "<p><strong>Kuvaus fi</strong></p>"
     }
   },
-  "modified": "2019-04-01T13:01",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Fi nimi"

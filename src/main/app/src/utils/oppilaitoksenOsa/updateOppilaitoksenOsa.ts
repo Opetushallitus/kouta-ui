@@ -1,6 +1,6 @@
-import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-export const updateOppilaitoksenOsa = makeEntityMutator(
+export const updateOppilaitoksenOsa = makeBackendEntityMutator(
   'post',
   'oppilaitoksenOsa',
   'kouta-backend.oppilaitoksenOsa'

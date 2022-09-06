@@ -1,6 +1,6 @@
-import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-export const updateSoraKuvaus = makeEntityMutator(
+export const updateSoraKuvaus = makeBackendEntityMutator(
   'post',
   'soraKuvaus',
   'kouta-backend.soraKuvaus'

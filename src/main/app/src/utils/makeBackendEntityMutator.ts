@@ -1,4 +1,4 @@
-export const makeEntityMutator =
+export const makeBackendEntityMutator =
   (method: 'put' | 'post', dataProp: string, urlKey: string) => async props => {
     // "modified" on backendin generoima ja "lastModified" tulee "x-last-modified"-headerissa (muokkaus)
     // Ei lähetetä näitä kenttiä datan mukana tallennettaessa

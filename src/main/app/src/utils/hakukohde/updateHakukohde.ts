@@ -1,6 +1,6 @@
-import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-export const updateHakukohde = makeEntityMutator(
+export const updateHakukohde = makeBackendEntityMutator(
   'post',
   'hakukohde',
   'kouta-backend.hakukohde'

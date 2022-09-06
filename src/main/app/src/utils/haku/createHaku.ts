@@ -1,6 +1,6 @@
-import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-export const createHaku = makeEntityMutator(
+export const createHaku = makeBackendEntityMutator(
   'put',
   'haku',
   'kouta-backend.haku'

@@ -1,6 +1,6 @@
-import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-export const createValintaperuste = makeEntityMutator(
+export const createValintaperuste = makeBackendEntityMutator(
   'put',
   'valintaperuste',
   'kouta-backend.valintaperuste'

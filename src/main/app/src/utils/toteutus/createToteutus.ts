@@ -1,6 +1,6 @@
-import { makeEntityMutator } from '#/src/utils/makeEntityMutator';
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-export const createToteutus = makeEntityMutator(
+export const createToteutus = makeBackendEntityMutator(
   'put',
   'toteutus',
   'kouta-backend.toteutus'

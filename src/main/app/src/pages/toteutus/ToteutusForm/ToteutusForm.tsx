@@ -43,7 +43,8 @@ import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
   AmmOpoJaErityisopeTiedotSection,
-  KorkeakoulutusOpintojaksoTiedotSection,
+  KkOpintojaksoTiedotSection,
+  KkOpintokokonaisuusTiedotSection,
   LukioTiedotSection,
   TelmaTiedotSection,
   TutkinnonOsaTiedotSection,
@@ -66,6 +67,7 @@ const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
   KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
   KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
   KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+  KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
 ];
 
 type ToteutusFormProps = {
@@ -111,7 +113,7 @@ const ToteutusForm = ({
     organisaatioOid
   );
 
-  var hakukohdeAmount = '';
+  let hakukohdeAmount = '';
   if (data?.totalCount) {
     hakukohdeAmount = ' (' + data.totalCount + ')';
   }
@@ -171,7 +173,6 @@ const ToteutusForm = ({
               ]),
               () => VapaaSivistystyoTiedotSection,
             ],
-
             [
               isIn([KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA]),
               () => TutkinnonOsaTiedotSection,
@@ -184,7 +185,11 @@ const ToteutusForm = ({
             ],
             [
               _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
-              () => KorkeakoulutusOpintojaksoTiedotSection,
+              () => KkOpintojaksoTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS),
+              () => KkOpintokokonaisuusTiedotSection,
             ],
             [
               tyyppi =>

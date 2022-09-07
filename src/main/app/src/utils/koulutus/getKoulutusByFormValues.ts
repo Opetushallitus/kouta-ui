@@ -3,6 +3,7 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
+  MaaraTyyppi,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import {
@@ -46,6 +47,9 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const osaamisala = values?.osaamisala;
 
   const sorakuvausId = values?.soraKuvaus?.value || null;
+
+  const isLaajuusRange =
+    values?.information?.laajuusNumeroTyyppi === MaaraTyyppi.VAIHTELUVALI;
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
@@ -121,10 +125,16 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         values?.information?.opintojenLaajuus?.value || null,
       opintojenLaajuusyksikkoKoodiUri:
         values?.information?.opintojenLaajuusyksikko?.value || null,
-      opintojenLaajuusNumero: values?.information?.opintojenLaajuusnumero
-        ? parseFloatComma(values.information.opintojenLaajuusnumero)
-        : null,
-
+      opintojenLaajuusNumero:
+        parseFloatComma(values.information.opintojenLaajuusNumero) || null,
+      opintojenLaajuusNumeroMin:
+        parseFloatComma(values?.information?.opintojenLaajuusNumeroMin) || null,
+      opintojenLaajuusNumeroMax:
+        parseFloatComma(
+          isLaajuusRange
+            ? maybeParseNumber(values?.information?.opintojenLaajuusNumeroMax)
+            : maybeParseNumber(values?.information?.opintojenLaajuusNumeroMin)
+        ) || null,
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
         ({ value }) => value
       ),

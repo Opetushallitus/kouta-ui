@@ -1,3 +1,4 @@
+import { differenceInMonths } from 'date-fns';
 import _ from 'lodash';
 
 import {
@@ -221,6 +222,25 @@ class ErrorBuilder {
 
     return this;
   }
+
+  validateArchiveDate(path, months) {
+    const viimeisinHakuaikaPaattyyPvm = this.getValue(path + '.hakuaika')
+      .map(h => new Date(h.paattyy))
+      .sort((a, b) => b - a)[0];
+    const arkistointipvm = new Date(
+      this.getValue(path + '.ajastettuHaunJaHakukohteidenArkistointi')
+    );
+
+    if (
+      differenceInMonths(arkistointipvm, viimeisinHakuaikaPaattyyPvm) < months
+    ) {
+      this.setError(path + '.ajastettuHaunJaHakukohteidenArkistointi', t =>
+        t('validointivirheet.arkistointiAikavaliLiianLyhyt', { months: months })
+      );
+    }
+
+    return this;
+  }
 }
 
 const bindValidator =
@@ -238,6 +258,7 @@ export const validateExistenceOfDate = bindValidator('validateExistenceOfDate');
 export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
+export const validateArchiveDate = bindValidator('validateArchiveDate');
 
 export const createErrorBuilder = (
   values,

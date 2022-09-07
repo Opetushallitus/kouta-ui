@@ -11,6 +11,7 @@ Object {
     ],
     "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
+    "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -93,6 +94,7 @@ Object {
     ],
     "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
+    "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -175,6 +177,7 @@ Object {
     ],
     "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
+    "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -257,6 +260,7 @@ Object {
     ],
     "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "henkilokohtainen suunnitelma",
+    "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -341,6 +345,7 @@ Object {
     ],
     "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "tarkka alkamisajankohta",
+    "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {

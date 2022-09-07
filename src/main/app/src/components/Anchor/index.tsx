@@ -13,6 +13,10 @@ const Anchor = styled.a`
   &:hover {
     text-decoration: none;
   }
+
+  &:visited {
+    color: ${({ theme }) => theme.colors.visitedLink};
+  }
 `;
 
 export const RouterAnchor = props =>

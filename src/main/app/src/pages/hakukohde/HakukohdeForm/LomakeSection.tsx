@@ -86,9 +86,9 @@ const LomakeSection = ({ language, haku }) => {
           component={FormFieldSwitch}
           disabled={!canSelectHakulomake}
           helperText={
-            !canSelectHakulomake
-              ? t('hakukohdelomake.hakuunEiLiitettyMuuLomake')
-              : null
+            canSelectHakulomake
+              ? null
+              : t('hakukohdelomake.hakuunEiLiitettyMuuLomake')
           }
         >
           {t('hakukohdelomake.eriHakulomake')}

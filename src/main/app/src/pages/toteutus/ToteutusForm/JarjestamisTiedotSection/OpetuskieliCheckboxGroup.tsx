@@ -15,7 +15,7 @@ const OpetuskieliCheckboxGroup = props => {
     const byLabel = ({ label }) => label;
     const byFixedOrder = ({ label }) => {
       const order = fixedOrder.indexOf(label);
-      return order !== -1 ? order : Number.MAX_SAFE_INTEGER;
+      return order === -1 ? Number.MAX_SAFE_INTEGER : order;
     };
     return _.sortBy(options, [byFixedOrder, byLabel]);
   };

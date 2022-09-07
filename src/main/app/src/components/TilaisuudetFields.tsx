@@ -15,8 +15,7 @@ import Heading from '#/src/components/Heading';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box } from '#/src/components/virkailija';
-import { getThemeProp } from '#/src/theme';
-import { spacing } from '#/src/theme';
+import { getThemeProp, spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 
 const SubSectionBox = styled(Box)`

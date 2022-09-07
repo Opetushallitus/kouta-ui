@@ -5,10 +5,10 @@ import { getTestIdProps } from '#/src/utils';
 
 import { useLanguageTab } from '../contexts/LanguageTabContext';
 import useKoodistoOptions from '../hooks/useKoodistoOptions';
-import { FormFieldIntegerInput, FormFieldSelect } from './formFields';
+import { FormFieldFloatInput, FormFieldSelect } from './formFields';
 import { Box } from './virkailija';
 
-const OpintojenLaajuusFieldExtended = ({
+export const OpintojenLaajuusFieldExtended = ({
   name,
   disabled,
   required = false,
@@ -24,9 +24,9 @@ const OpintojenLaajuusFieldExtended = ({
     <Box display="flex" mx={-1}>
       <Box px={1} flexGrow={1}>
         <Field
-          name={`${name}.opintojenLaajuusnumero`}
-          component={FormFieldIntegerInput}
-          label={t('yleiset.laajuus')}
+          name={`${name}.opintojenLaajuusNumero`}
+          component={FormFieldFloatInput}
+          label={t('koulutuslomake.valitseOpintojenLaajuus')}
           max={999}
           min={0}
           disabled={disabled}
@@ -49,5 +49,3 @@ const OpintojenLaajuusFieldExtended = ({
     </Box>
   );
 };
-
-export default OpintojenLaajuusFieldExtended;

@@ -19,7 +19,6 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
       required,
       input: { name },
     } = props;
-
     const { error } = meta;
     const isError = !_.isNil(error);
     const labelId = `FormLabel_${name}`;

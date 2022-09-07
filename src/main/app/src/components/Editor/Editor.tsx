@@ -34,6 +34,7 @@ import {
   blockIsActive,
   parseEditorState,
   getSelectionLinkUrl,
+  getLinkKey,
   createEmptyEditorState,
 } from './utils';
 
@@ -242,11 +243,14 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
 
   const onAddLink = useCallback(() => {
     const contentState = editorState.getCurrentContent();
-    const contentStateWithEntity = contentState.createEntity(
-      'LINK',
-      'MUTABLE',
-      { url: link }
-    );
+    const linkKey = getLinkKey(editorState);
+
+    const contentStateWithEntity =
+      linkKey === ''
+        ? contentState.createEntity('LINK', 'MUTABLE', { url: link })
+        : contentState.replaceEntityData(getLinkKey(editorState), {
+            url: link,
+          });
 
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
 

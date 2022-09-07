@@ -44,7 +44,7 @@ const getHakukohteenLinjaValues = ({
   lisatietoa,
   painotetutArvosanat,
 }) => ({
-  linja: !linja ? LUKIO_YLEISLINJA : linja,
+  linja: linja || LUKIO_YLEISLINJA,
   alinHyvaksyttyKeskiarvo: parseKeskiarvo(alinHyvaksyttyKeskiarvo),
   lisatietoa: mapValues(parseEditorState, lisatietoa),
   painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {

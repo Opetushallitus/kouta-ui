@@ -2,3 +2,4 @@ cypress/**/__snapshots__/*
 cypress/fixtures/*
 cypress/mocks/*
 tsconfig.json
+package-lock.json

@@ -8,17 +8,11 @@ import {
   makeTilaColumn,
   makeOrganisaatioColumn,
 } from '#/src/components/ListTable';
-
-import { useHaunHakukohteet } from '#/src/utils/haku/useHaunHakukohteet';
 import { ENTITY } from '#/src/constants';
-import { searchHaut } from '#/src/utils/haku/searchHaut';
 import { EntitySearchList } from '#/src/pages/HomePage/EntitySearchList';
-import {
-  searchFilteredHakukohteet,
-  searchHakukohteet,
-} from '#/src/utils/hakukohde/searchHakukohteet';
+import { searchFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
-const useTableColumns = (t, organisaatioOid, userLanguage) =>
+const useTableColumns = (t, organisaatioOid) =>
   useMemo(
     () => [
       makeNimiColumn(t, {
@@ -29,22 +23,15 @@ const useTableColumns = (t, organisaatioOid, userLanguage) =>
       makeTilaColumn(t),
       makeModifiedColumn(t),
     ],
-    [t, organisaatioOid, userLanguage]
+    [t, organisaatioOid]
   );
+
+const { HAKUKOHDE } = ENTITY;
 
 export const HakukohteetSection = function ({ haku, organisaatioOid }) {
   const { t } = useTranslation();
-  const { data: enrichedHaku } = useHaunHakukohteet(
-    {
-      organisaatioOid,
-      hakuOid: haku?.oid,
-    },
-    { refetchOnWindowFocus: false }
-  );
 
-  const { HAKUKOHDE } = ENTITY;
-
-  const columns = useTableColumns(t, organisaatioOid, 'fi');
+  const columns = useTableColumns(t, organisaatioOid);
 
   let filterParams = { hakuOid: haku?.oid };
 

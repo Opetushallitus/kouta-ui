@@ -4,7 +4,7 @@ import {
   KOULUTUSTYYPPI,
   HAKULOMAKETYYPPI,
   Hakeutumistapa,
-  ApurahaMaaraTyyppi,
+  MaaraTyyppi,
   ApurahaYksikko,
 } from '#/src/constants';
 
@@ -67,7 +67,7 @@ export type ToteutusFormValues = {
     ammatillinenPerustutkintoErityisopetuksena: boolean;
     jarjestetaanErityisopetuksena: boolean;
     opintojenLaajuusyksikko?: SelectOption;
-    opintojenLaajuusnumero: string;
+    opintojenLaajuusNumero: string;
     ilmoittautumislinkki: TranslatedField<string>;
     aloituspaikat: string;
   };
@@ -92,7 +92,7 @@ export type ToteutusFormValues = {
     osiot: Array<{ value: string }>;
     osioKuvaukset: Record<string, any>;
     onkoApuraha?: boolean;
-    apurahaMaaraTyyppi?: ApurahaMaaraTyyppi;
+    apurahaMaaraTyyppi?: MaaraTyyppi;
     apurahaMin?: number;
     apurahaMax?: number;
     apurahaKuvaus?: Kuvaus;

@@ -36,12 +36,12 @@ export const getOppilaitoksenOsaByFormValues = ({
         ? parseInt(perustiedot.opiskelijoita)
         : null,
       kampus: pickTranslations(perustiedot?.kampus || {}),
-      wwwSivu: !_.isEmpty(perustiedot?.wwwSivuUrl)
-        ? {
+      wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
+        ? null
+        : {
             url: pickTranslations(perustiedot.wwwSivuUrl || {}),
             nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
-          }
-        : null,
+          },
       jarjestaaUrheilijanAmmKoulutusta:
         perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
     },

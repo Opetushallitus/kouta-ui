@@ -79,4 +79,37 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       errorKey: 'validointivirheet.pakollinen',
     };
   }
+
+  if (
+    path === 'metadata.opintojenLaajuusNumeroMin' ||
+    path === 'metadata.opintojenLaajuusNumeroMax'
+  ) {
+    return [
+      {
+        field: 'information.opintojenLaajuusGroup',
+        errorKey: `validointivirheet.${errorType}`, // Virheteksti group-tasolla
+      },
+      {
+        field: 'information.opintojenLaajuusNumeroMin',
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
+      },
+      {
+        field: 'information.opintojenLaajuusNumeroMax',
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
+      },
+    ];
+  }
+
+  if (path === 'metadata.opintojenLaajuusyksikkoKoodiUri') {
+    return [
+      {
+        field: `information.opintojenLaajuusGroup`,
+        errorKey: `validointivirheet.${errorType}`, // Virheteksti group-tasolla
+      },
+      {
+        field: 'information.opintojenLaajuusyksikko',
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
+      },
+    ];
+  }
 };

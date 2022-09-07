@@ -1,10 +1,7 @@
-const createToteutus = async ({ httpClient, apiUrls, toteutus }) => {
-  const { data } = await httpClient.put(
-    apiUrls.url('kouta-backend.toteutus'),
-    toteutus
-  );
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-  return data;
-};
-
-export default createToteutus;
+export const createToteutus = makeBackendEntityMutator(
+  'put',
+  'toteutus',
+  'kouta-backend.toteutus'
+);

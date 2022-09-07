@@ -28,14 +28,12 @@ const setErrors = (
 
   let val = existingError;
 
-  if (errorKey) {
-    if (_.isNil(existingError)) {
-      val = [errorKey];
-    } else if (_.isArray(existingError)) {
-      val = [...existingError, errorKey];
-    } else {
-      val = [existingError, errorKey];
-    }
+  if (_.isNil(existingError)) {
+    val = [errorKey];
+  } else if (_.isArray(existingError)) {
+    val = [...existingError, errorKey];
+  } else {
+    val = [existingError, errorKey];
   }
 
   _.set(errors, fieldName, val);

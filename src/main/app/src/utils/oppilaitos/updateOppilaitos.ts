@@ -1,17 +1,7 @@
-const updateOppilaitos = async ({ oppilaitos, httpClient, apiUrls }) => {
-  const { lastModified = '', ...rest } = oppilaitos;
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-  const headers = {
-    'X-If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.oppilaitos'),
-    rest,
-    { headers }
-  );
-
-  return data;
-};
-
-export default updateOppilaitos;
+export const updateOppilaitos = makeBackendEntityMutator(
+  'post',
+  'oppilaitos',
+  'kouta-backend.oppilaitos'
+);

@@ -24,6 +24,7 @@ export type HakuFormValues = {
     lisaamisenTakaraja: FormDate;
     muokkauksenTakaraja: FormDate;
     ajastettuJulkaisu: FormDate;
+    ajastettuHaunJaHakukohteidenArkistointi: FormDate;
   };
   hakutapa: string;
   kohdejoukko: {

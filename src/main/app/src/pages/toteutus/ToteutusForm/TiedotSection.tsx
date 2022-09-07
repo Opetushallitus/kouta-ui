@@ -5,14 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
-import {
-  OpintojenLaajuusyksikko,
-  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
-} from '#/src/constants';
+import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
+import VaativaErityinenTukiField from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
@@ -190,7 +189,7 @@ export const VapaaSivistystyoTiedotSection = ({
 
 export const AmmMuuTiedotSection = VapaaSivistystyoTiedotSection;
 
-export const KorkeakoulutusOpintojaksoTiedotSection = ({
+export const KkOpintojaksoTiedotSection = ({
   language,
   disabled,
   name,
@@ -207,6 +206,18 @@ export const KorkeakoulutusOpintojaksoTiedotSection = ({
       laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
     <JotpaSection name={name} />
+  </VerticalBox>
+);
+
+export const KkOpintokokonaisuusTiedotSection = ({
+  language,
+  disabled,
+  name,
+  koulutus,
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
   </VerticalBox>
 );
 
@@ -250,21 +261,13 @@ export const TutkintoonJohtavaTiedotSection = ({
   name,
   koulutustyyppi,
   disabled,
+  koulutus,
 }: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={disabled} />
-      {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
-        koulutustyyppi
-      ) && (
-        <Field
-          name={`${name}.ammatillinenPerustutkintoErityisopetuksena`}
-          component={FormFieldSwitch}
-        >
-          {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
-        </Field>
+      {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS && (
+        <VaativaErityinenTukiField name={name} koulutus={koulutus} />
       )}
       <JotpaSection name={name} />
     </VerticalBox>

@@ -67,6 +67,8 @@ export const pFillEditor = loggable(
 export const getInputByLabel = text =>
   cy.findByLabelText(text, { exact: false });
 
+export const findSelect = $el => cy.wrap($el).within(() => cy.get('.Select__'));
+
 export const getSelectByLabel = text =>
   getInputByLabel(text).closest('.Select__');
 

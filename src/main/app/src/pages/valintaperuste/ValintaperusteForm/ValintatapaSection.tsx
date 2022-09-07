@@ -5,6 +5,7 @@ import { Field, FieldArray } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import Button from '#/src/components/Button';
+import { ErrorPlaceholder } from '#/src/components/ErrorPlaceholder';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import {
   FormFieldEditor,
@@ -75,15 +76,14 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
 const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
     {fields.length === 0 && (
-      <Box marginBottom={2}>
-        {t('valintaperustelomake.lisaaVahintaanYksiValintatapa') + ' *'}
-      </Box>
+      <ErrorPlaceholder name="valintatavat"></ErrorPlaceholder>
     )}
     <FieldArrayList fields={fields}>
       {({ field: valintatapa }) =>
         renderValintatapaFields({ valintatapa, tapaOptions, language, t })
       }
     </FieldArrayList>
+
     <Box
       display="flex"
       justifyContent="center"

@@ -77,7 +77,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
     <>
       {osiotArrWithLabels.map(({ value, label }, index) => (
         <Box
-          marginBottom={index !== osiot.length - 1 ? 2 : 0}
+          marginBottom={index === osiot.length - 1 ? 0 : 2}
           key={value}
           {...getTestIdProps(`osioKuvaus.${value}`)}
         >

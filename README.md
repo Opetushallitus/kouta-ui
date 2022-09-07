@@ -30,9 +30,13 @@ https://localhost:3000
 
 **Huom! HTTPS-protokolla käytössä.** Webpack-dev-serverin proxy on konfiguroitu oletuksena ohjaamaan kaikki muut polut paitsi `/`, `/kouta` ja `/kouta/*` osoitteeseen `https://virkailija.hahtuvaopintopolku.fi`. Käytetään oletuksena self-signed-sertifikaatteja, eikä CORS-rajoituksia ei tarvitse kiertää selaimessa. Kehitysympäristön virkailija-osoitetta, johon proxytaan voi vaihtaa asettamalla ympäristömuuttujan `DEV_VIRKAILIJA_URL` eri arvoon (esim. `.env.local`-tiedostossa).
 
+## Koodin tyyli ja tarkistus
+
+Käytössä on ESlint ja Prettier koodin tyylin yhdenmukaistamiseksi ja staattiseen tarkistamiseen. Prettier ajetaan eslint-sääntönä, joten prettierin ajaminen JS/TS-tiedostoille erikseen ei ole tarpeen. Lisäksi eslint ajetaan Huskyn ja Lint-staged:n avulla Git precommit-hookissa, jolloin korjataan ne virheet/varoitukset, jotka pystytään. Jos ei kaikkea pystytty korjaamaan, commit epäonnistuu ja käyttäjän täytyy korjata jäljellä olevat ongelmat käsin.
+
 ## Ajaminen lokaalisti kouta-backendin kanssa
 
-Korvaa kouta-backendissä dev-vars.yml-tiedostoon: 
+Korvaa kouta-backendissä `dev-vars.yml`-tiedostoon: 
 
     cas_url: https://localhost:3000/cas
     kouta_backend_cas_service: https://localhost:3000/kouta-backend/auth/login
@@ -98,7 +102,9 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
 
-Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:integration`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
+Yksikkötestit voi ajaa komennolla `npm run test`. Integraatiotestejä varten täytyy käynnistää ensin kouta-ui integraatio-moodissa komennolla `npm run start:integration` ja sen jälkeen ajaa integraatiotestit komennolla `npm run cypress:run`.
+
+CI-ympäristössä integraatiotestit ajetaan hieman eri tavalla. Ensin luodaan sovelluksesta testi-bundle komennolla `npm run build:test` ja sen jälkeen komennolla `npm run test:ci` servataan testi-bundle ja ajetaan sekä yksikkö- että integraatiotestit. Tämä tapa on kaikki testit ajettaessa hieman nopeampi kuin edellisessä kappaleessa kuvattu. On myös mahdollista servata testi-bundle komennolla `npm run serve:test` ja sitten ajaa pelkät cypress-testit komennolla `npm run cypress:run`.
 
 ### Integraatiotestien ajaminen interaktiivisesti (Cypress)
 
@@ -111,7 +117,7 @@ ja sitten samassa kansiossa, mutta toisessa shellissä:
 
     npm run cypress:open
     
-Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm start:integration`tai `npm start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
+Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm run start:integration`tai `npm run start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
 
 ### API-kutsujen mockaaminen
 

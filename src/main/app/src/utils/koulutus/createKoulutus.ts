@@ -1,8 +1,7 @@
-export const createKoulutus = async ({ httpClient, apiUrls, koulutus }) => {
-  const { data } = await httpClient.put(
-    apiUrls.url('kouta-backend.koulutus'),
-    koulutus
-  );
+import { makeBackendEntityMutator } from '#/src/utils/makeBackendEntityMutator';
 
-  return data;
-};
+export const createKoulutus = makeBackendEntityMutator(
+  'put',
+  'koulutus',
+  'kouta-backend.koulutus'
+);

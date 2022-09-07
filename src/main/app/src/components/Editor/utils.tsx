@@ -34,7 +34,7 @@ const convertToHTML = makeConvertToHTML({
   },
 });
 
-export const getSelectionLinkUrl = editorState => {
+export const getLinkKey = editorState => {
   const contentState = editorState.getCurrentContent();
   const startKey = editorState.getSelection().getStartKey();
   const startOffset = editorState.getSelection().getStartOffset();
@@ -42,10 +42,19 @@ export const getSelectionLinkUrl = editorState => {
   const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset);
 
   if (linkKey) {
+    return linkKey;
+  }
+  return '';
+};
+
+export const getSelectionLinkUrl = editorState => {
+  const contentState = editorState.getCurrentContent();
+  const linkKey = getLinkKey(editorState);
+
+  if (linkKey) {
     const linkInstance = contentState.getEntity(linkKey);
     return linkInstance.getData().url || '';
   }
-
   return '';
 };
 

@@ -108,8 +108,6 @@ Object {
       "fi": "<p>Fi toteutuksenkuvaus</p>",
       "sv": "<p>Sv toteutuksenkuvaus</p>",
     },
-    "laajuus": 252,
-    "laajuusyksikkoKoodiUri": "laajuus_1#1",
     "lisatietoaHakeutumisesta": Object {
       "fi": "<p>Fi lisatiedot</p>",
       "sv": "<p>Sv sisalto</p>",
@@ -188,6 +186,8 @@ Object {
       },
       "suunniteltuKestoVuodet": 2,
     },
+    "opintojenLaajuusNumero": 252,
+    "opintojenLaajuusyksikkoKoodiUri": "laajuus_1#1",
     "osaamisalat": Array [
       Object {
         "koodiUri": "osaamisala1",

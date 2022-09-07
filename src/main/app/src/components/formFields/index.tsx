@@ -1,13 +1,14 @@
 import _ from 'lodash';
 
 import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
+import DateInput from '#/src/components/DateInput';
 import { DateTimeInput } from '#/src/components/DateTimeInput';
 import { Editor } from '#/src/components/Editor';
 import { ImageInput } from '#/src/components/ImageInput';
-import { IntegerInput } from '#/src/components/IntegerInput';
 import { KoulutusalaSelect } from '#/src/components/KoulutusalaSelect';
 import { KoulutustyyppiSelect } from '#/src/components/KoulutustyyppiSelect';
 import { LanguageSelect } from '#/src/components/LanguageSelect';
+import { FloatInput, IntegerInput } from '#/src/components/NumberInput';
 import { PostinumeroSelect } from '#/src/components/PostinumeroSelect';
 import { Select, AsyncSelect } from '#/src/components/Select';
 import { SoraKuvausSelect } from '#/src/components/SoraKuvausSelect';
@@ -46,7 +47,7 @@ export const FormFieldRadio = createComponent(
   Radio,
   ({ meta, input: { value, ...input }, ...props }) => ({
     ...input,
-    checked: !!value,
+    checked: Boolean(value),
     ...props,
   })
 );
@@ -57,7 +58,7 @@ export const FormFieldCheckbox = createComponent(
   Checkbox,
   ({ meta, input: { value, ...input }, ...props }) => ({
     ...input,
-    checked: !!value,
+    checked: Boolean(value),
     ...props,
   })
 );
@@ -66,7 +67,7 @@ export const FormFieldSwitch = createComponent(
   Switch,
   ({ meta, input: { value, checked, ...input }, ...props }) => ({
     ...input,
-    checked: !!value,
+    checked: Boolean(value),
     ...props,
   })
 );
@@ -92,6 +93,8 @@ export const FormFieldDateTimeInput = createComponent(
   DateTimeInput,
   simpleMapProps
 );
+
+export const FormFieldDateInput = createComponent(DateInput, simpleMapProps);
 
 export const FormFieldEditor = createComponent(Editor, simpleMapProps);
 
@@ -158,3 +161,5 @@ export const FormFieldIntegerInput = createComponent(
   IntegerInput,
   simpleMapProps
 );
+
+export const FormFieldFloatInput = createComponent(FloatInput, simpleMapProps);

@@ -10,15 +10,15 @@ import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
-import createToteutus from '#/src/utils/toteutus/createToteutus';
+import { createToteutus } from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
-import updateToteutus from '#/src/utils/toteutus/updateToteutus';
+import { updateToteutus } from '#/src/utils/toteutus/updateToteutus';
 import { validateToteutusForm } from '#/src/utils/toteutus/validateToteutusForm';
 
 import { useTarjoajatHierarkia } from './useTarjoajatHierarkia';

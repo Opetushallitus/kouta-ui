@@ -21,11 +21,11 @@ const Overlay = styled.div`
   align-items: center;
 `;
 
-export const OverlaySpin = ({ text }) => (
+export const OverlaySpin = (props?: { text?: string }) => (
   <Overlay>
     <Box marginBottom={2}>
       <Spin center />
     </Box>
-    {text && <Typography>{text}</Typography>}
+    {props?.text && <Typography>{props.text}</Typography>}
   </Overlay>
 );

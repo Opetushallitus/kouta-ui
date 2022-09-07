@@ -281,7 +281,6 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
       }
     ]
   },
-  "modified": "2019-04-03T13:56",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Valintaperusteen nimi"
@@ -428,7 +427,6 @@ exports[`editValintaperuste > should be able to delete valintaperuste #0`] =
       }
     ]
   },
-  "modified": "2019-04-03T13:56",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Valintaperusteen nimi"

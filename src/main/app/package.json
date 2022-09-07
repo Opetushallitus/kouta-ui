@@ -4,6 +4,7 @@
   "homepage": "/kouta",
   "private": true,
   "scripts": {
+    "prepare": "cd ../../../ && husky install",
     "start": "craco start",
     "start:integration": "cross-env REACT_APP_CYPRESS=true DISABLE_LOCAL_PROXY=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
     "start:integration:debug": "cross-env REACT_APP_CYPRESS=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
@@ -111,10 +112,10 @@
     "eslint-plugin-react": "^7.29.3",
     "glob": "^7.2.0",
     "http-proxy-middleware": "^2.0.3",
-    "husky": "^7.0.4",
+    "husky": "^8.0.1",
     "jest-styled-components": "^7.0.8",
     "kto-ui-common": "github:opetushallitus/kto-ui-common#ee04b5aacac1a8a56a1bb56091f3819d5d7b95fb",
-    "lint-staged": "^12.3.5",
+    "lint-staged": "^13.0.3",
     "pem": "^1.14.6",
     "prettier": "^2.5.1",
     "react-scripts": "^4.0.3",
@@ -131,17 +132,12 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{json,css,md}": [
       "prettier --write"
     ],
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint --fix --max-warnings 0"
     ]
   },
   "jest": {

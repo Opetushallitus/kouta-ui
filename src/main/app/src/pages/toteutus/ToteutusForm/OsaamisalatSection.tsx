@@ -7,15 +7,20 @@ import styled from 'styled-components';
 
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import Anchor, { RouterAnchor } from '#/src/components/Anchor';
-import { simpleMapProps } from '#/src/components/formFields';
 import {
   FormFieldInput,
   createFormFieldComponent,
   FormFieldUrlInput,
+  simpleMapProps,
 } from '#/src/components/formFields';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import { Spin } from '#/src/components/virkailija';
-import { Box, Divider, Icon, Typography } from '#/src/components/virkailija';
+import {
+  Box,
+  Divider,
+  Icon,
+  Typography,
+  Spin,
+} from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
@@ -25,7 +30,7 @@ import useExtendedEPeruste from '#/src/utils/ePeruste/useExtendedEPeruste';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
-import { OsaamisalatInput } from '../OsaamisalatInput.tsx';
+import { OsaamisalatInput } from '../OsaamisalatInput';
 
 const Container = styled.div`
   display: flex;

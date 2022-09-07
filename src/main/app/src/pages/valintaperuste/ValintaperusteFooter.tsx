@@ -8,11 +8,11 @@ import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { afterUpdate } from '#/src/utils/afterUpdate';
-import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
+import { createValintaperuste } from '#/src/utils/valintaperuste/createValintaperuste';
 import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
-import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
+import { updateValintaperuste } from '#/src/utils/valintaperuste/updateValintaperuste';
 import { validateValintaperusteForm } from '#/src/utils/valintaperuste/validateValintaperusteForm';
 
 type ValintaperusteFooterProps = {

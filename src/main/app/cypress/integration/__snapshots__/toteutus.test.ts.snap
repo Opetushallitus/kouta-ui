@@ -450,6 +450,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     ],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": true,
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [
@@ -3039,6 +3040,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": true,
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [
@@ -3066,8 +3068,6 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -3117,6 +3117,8 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],

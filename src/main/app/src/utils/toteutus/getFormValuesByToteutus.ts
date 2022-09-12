@@ -96,6 +96,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     erityisetKoulutustehtavat,
     diplomit,
     yleislinja,
+    hasJotpaRahoitus,
   } = metadata;
 
   const {
@@ -130,6 +131,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         ammatillinenPerustutkintoErityisopetuksena
       ),
       jarjestetaanErityisopetuksena: Boolean(jarjestetaanErityisopetuksena),
+      hasJotpaRahoitus: Boolean(hasJotpaRahoitus),
       opintojenLaajuusNumero: _fp.isNumber(opintojenLaajuusNumero)
         ? opintojenLaajuusNumero.toString()
         : '',

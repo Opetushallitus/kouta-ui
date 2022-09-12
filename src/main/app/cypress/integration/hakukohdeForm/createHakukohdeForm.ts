@@ -434,6 +434,7 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
         ]),
       },
     });
+
     // cy.reload-kutsu lisätty kaikkialle, missä prepareTestin jälkeen yritetään stubata käyttöoikeudet
     // uudestaan, sillä uudelleenstubbaus ei aina ehdi valmistua ennen kuin prepareTestistä on kutsuttu
     // cy.visitiä. Reloadin kutsumisella varmistetaan että halutut käyttöoikeudet on asetettu.

@@ -450,6 +450,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     ],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": true,
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [
@@ -607,6 +608,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -750,6 +752,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -883,6 +886,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -1033,6 +1037,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "hakulomakeLinkki": {},
     "hakulomaketyyppi": "ei sähköistä",
     "hakutermi": "hakeutuminen",
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -1297,6 +1302,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -1551,6 +1557,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -1937,6 +1944,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -2616,6 +2624,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
     "hakulomakeLinkki": {},
     "hakulomaketyyppi": "ataru",
     "hakutermi": "hakeutuminen",
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -2751,6 +2760,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
     "hakulomakeLinkki": {},
     "hakulomaketyyppi": "ataru",
     "hakutermi": "hakeutuminen",
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
@@ -3030,6 +3040,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
+    "hasJotpaRahoitus": true,
     "ilmoittautumislinkki": {},
     "kielivalikoima": {
       "A1Kielet": [
@@ -3057,8 +3068,6 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -3108,6 +3117,8 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],

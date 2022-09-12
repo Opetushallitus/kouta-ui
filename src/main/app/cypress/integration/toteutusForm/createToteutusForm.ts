@@ -171,6 +171,12 @@ const fillKkOpintokokonaisuusTiedotSection = () => {
   });
 };
 
+const fillLukioTiedotSection = () => {
+  withinSection('tiedot', () => {
+    selectCheckbox(/jotpaRahoitus/);
+  });
+};
+
 const fillTuvaTiedotSection = () => {
   withinSection('tiedot', () => {
     cy.findByLabelText(/toteutuksenNimi/)
@@ -257,6 +263,7 @@ const fillDIATiedotSection = () => {
     cy.findByLabelText(/toteutuksenNimi/)
       .should('not.be.disabled')
       .should('have.value', 'Deutsche Internationale Abitur; Reifeprüfung');
+    selectCheckbox(/jotpaRahoitus/);
   });
 };
 
@@ -605,6 +612,7 @@ export const createToteutusForm = () => {
 
       fillPohjaSection();
       fillKieliversiotSection();
+      fillLukioTiedotSection();
 
       fillKuvausSection();
 

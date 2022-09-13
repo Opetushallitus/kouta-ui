@@ -38,6 +38,7 @@ import { JarjestamispaikatSection } from './JarjestamispaikatSection';
 import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
 import { LukiolinjatSection } from './LukiolinjatSection';
 import { NayttamisTiedotSection } from './NayttamisTiedotSection';
+import { OpintojaksojenLiittamisSection } from './OpintojaksojenLiittamisSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
 import {
   AikuistenperusopetusTiedotSection,
@@ -212,7 +213,15 @@ const ToteutusForm = ({
           languages={languages}
           Component={ToteutuksenKuvausSection}
         />
-
+        {koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS && (
+          <FormCollapse
+            section="opintojaksojenLiittaminen"
+            header={t('toteutuslomake.opintojaksojenLiittaminen')}
+            Component={OpintojaksojenLiittamisSection}
+            organisaatioOid={organisaatioOid}
+            entity={toteutus}
+          />
+        )}
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
           !isDIAkoulutus &&
           !isEBkoulutus && (

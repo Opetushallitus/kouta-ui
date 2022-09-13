@@ -2,6 +2,7 @@ import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import toteutusListItems from '#/cypress/data/toteutusListItems';
 import { stubCommonRoutes } from '#/cypress/utils';
 
 export const stubToteutusFormRoutes = ({ organisaatioOid }) => {
@@ -49,6 +50,11 @@ export const stubToteutusFormRoutes = ({ organisaatioOid }) => {
   );
 
   cy.intercept({ method: 'GET', url: '**/toteutus/list**' }, { body: [] });
+
+  cy.intercept(
+    { method: 'GET', url: '**/toteutus/opintojaksot/list**' },
+    { body: toteutusListItems(organisaatioOid) }
+  );
 
   cy.intercept({ method: 'GET', url: '**/sorakuvaus/list**' }, { body: [] });
 

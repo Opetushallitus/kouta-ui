@@ -140,15 +140,17 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   const liitteidenToimitusaika = values?.liitteet?.toimitusaika || null;
 
-  const liitteetOnkoSamaToimitusosoite =
-    getLiitteillaYhteinenToimitusosoite(values);
-
-  const liitteetOnkoSamaToimitusaika =
-    getLiitteillaYhteinenToimitusaika(values);
-
   const ajankohta = values?.ajankohta;
 
-  const liitteet = (values?.liitteet?.liitteet || []).map(
+  const liiteValues = values?.liitteet?.liitteet || []
+
+  const liitteetOnkoSamaToimitusosoite =
+      liiteValues.length > 0 ? getLiitteillaYhteinenToimitusosoite(values) : false;
+
+  const liitteetOnkoSamaToimitusaika =
+      liiteValues.length > 0 ? getLiitteillaYhteinenToimitusaika(values) : false;
+
+  const liitteet = liiteValues.map(
     ({ tyyppi, nimi, kuvaus, toimitusaika, toimitustapa }) => {
       const tapa = toimitustapa?.tapa || null;
       return {

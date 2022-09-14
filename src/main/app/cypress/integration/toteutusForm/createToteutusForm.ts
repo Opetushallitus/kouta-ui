@@ -193,7 +193,17 @@ const fillTuvaTiedotSection = () => {
   });
 };
 
-const fillVapaaSivistystyoTiedotSection = () => {
+const fillVapaaSivistystyoOpistovuosiTiedotSection = () => {
+  withinSection('tiedot', () => {
+    getInputByLabel('toteutuslomake.toteutuksenNimi').should('be.disabled');
+
+    getInputByLabel('toteutuslomake.laajuus')
+      .should('be.disabled')
+      .should('have.value', 'vähintään 53 op');
+  });
+};
+
+const fillVapaaSivistystyoMuuTiedotSection = () => {
   withinSection('tiedot', () => {
     getInputByLabel('toteutuslomake.toteutuksenNimi').should('not.be.disabled');
 
@@ -664,7 +674,7 @@ export const createToteutusForm = () => {
 
       fillPohjaSection();
       fillKieliversiotSection();
-      fillVapaaSivistystyoTiedotSection();
+      fillVapaaSivistystyoOpistovuosiTiedotSection();
 
       fillKuvausSection();
 
@@ -688,7 +698,7 @@ export const createToteutusForm = () => {
 
       fillPohjaSection();
       fillKieliversiotSection();
-      fillVapaaSivistystyoTiedotSection();
+      fillVapaaSivistystyoMuuTiedotSection();
 
       fillKuvausSection();
 

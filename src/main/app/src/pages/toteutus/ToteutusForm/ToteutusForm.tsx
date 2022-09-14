@@ -42,7 +42,7 @@ import { OsaamisalatSection } from './OsaamisalatSection';
 import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
-  AmmOpoJaErityisopeTiedotSection,
+  OpettajaTiedotSection,
   KkOpintojaksoTiedotSection,
   KkOpintokokonaisuusTiedotSection,
   LukioTiedotSection,
@@ -178,10 +178,11 @@ const ToteutusForm = ({
               () => TutkinnonOsaTiedotSection,
             ],
             [
-              _fp.isEqual(
-                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
-              ),
-              () => AmmOpoJaErityisopeTiedotSection,
+              isIn([
+                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+                KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
+              ]),
+              () => OpettajaTiedotSection,
             ],
             [
               _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),

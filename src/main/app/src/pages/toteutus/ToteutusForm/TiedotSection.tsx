@@ -244,7 +244,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
   </VerticalBox>
 );
 
-export const AmmOpoJaErityisopeTiedotSection = ({
+export const OpettajaTiedotSection = ({
   koulutus,
   language,
   disabled,

@@ -173,7 +173,7 @@ export const VapaaSivistystyoTiedotSection = ({
 
   return (
     <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={true} />
+      <NimiSection name={name} language={language} disabled={false} />
       <OpintojenLaajuusReadOnlyField
         selectedLanguage={language}
         laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}

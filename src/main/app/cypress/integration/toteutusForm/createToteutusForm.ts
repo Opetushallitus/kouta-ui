@@ -195,7 +195,7 @@ const fillTuvaTiedotSection = () => {
 
 const fillVapaaSivistystyoTiedotSection = () => {
   withinSection('tiedot', () => {
-    getInputByLabel('toteutuslomake.toteutuksenNimi').should('be.disabled');
+    getInputByLabel('toteutuslomake.toteutuksenNimi').should('not.be.disabled');
 
     getInputByLabel('toteutuslomake.laajuus')
       .should('be.disabled')
@@ -206,7 +206,7 @@ const fillVapaaSivistystyoTiedotSection = () => {
 const fillAmmMuuTiedotSection = () => {
   withinSection('tiedot', () => {
     getInputByLabel('toteutuslomake.toteutuksenNimi')
-      .should('be.disabled')
+      .should('not.be.disabled')
       .should('have.value', 'Muut ammatilliset koulutukset');
 
     getInputByLabel('toteutuslomake.laajuus')

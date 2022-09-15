@@ -148,6 +148,7 @@ const HakuForm = ({
           header={t('yleiset.hakulomakkeenValinta')}
           languages={languages}
           haku={hakuProp}
+          hakutapa={hakutapa}
           Component={LomakeFields}
         />
 

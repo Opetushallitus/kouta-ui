@@ -94,10 +94,6 @@ Object {
   "valintatavat": Array [
     Object {
       "enimmaispistemaara": "20,2",
-      "kuvaus": Object {
-        "fi": "Fi kuvaus",
-        "sv": "Sv kuvaus",
-      },
       "kynnysehto": Object {
         "fi": "<p>Fi kynnysehto</p>",
         "sv": "<p>Sv kynnysehto</p>",

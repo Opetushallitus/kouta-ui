@@ -85,10 +85,6 @@ test('Should convert valintaperuste form with valintatapa', () => {
     ...BASE_VALINTAPERUSTE_FORM_DATA,
     valintatavat: [
       {
-        kuvaus: {
-          fi: 'Fi kuvaus',
-          sv: 'Sv kuvaus',
-        },
         nimi: {
           fi: 'Fi nimi',
           sv: 'Sv nimi',

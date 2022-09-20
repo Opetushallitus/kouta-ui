@@ -42,10 +42,9 @@ export const useSaveForm = ({ formName, validate, submit }) => {
     ({ errors, response }) => {
       batch(() => {
         dispatch(stopSubmitAction(formName, errors));
-
         if (errors) {
           openSavingErrorToast(response?.data);
-          setRemoteErrors(response.data);
+          setRemoteErrors(response?.data);
         } else {
           openSavingSuccessToast();
         }

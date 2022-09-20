@@ -91,7 +91,6 @@ export const getValintaperusteByFormValues = values => {
     ? getArrayValue(values, 'valintatavat').map(
         ({
           nimi: valintatapaNimi,
-          kuvaus: valintatapaKuvaus,
           sisalto: valintatapaSisalto,
           tapa,
           kynnysehto,
@@ -99,7 +98,6 @@ export const getValintaperusteByFormValues = values => {
           vahimmaispistemaara,
         }) => ({
           nimi: _.pick(valintatapaNimi || {}, kielivalinta),
-          kuvaus: _.pick(valintatapaKuvaus || {}, kielivalinta),
           sisalto: serializeSisalto(valintatapaSisalto, kielivalinta),
           valintatapaKoodiUri: tapa?.value,
           kaytaMuuntotaulukkoa: false,

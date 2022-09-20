@@ -76,7 +76,6 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
       {
         "enimmaispisteet": 100.02,
         "kaytaMuuntotaulukkoa": false,
-        "kuvaus": {},
         "kynnysehto": {
           "fi": "<p>Kynnysehto</p>"
         },
@@ -241,7 +240,6 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
       {
         "enimmaispisteet": 100.02,
         "kaytaMuuntotaulukkoa": false,
-        "kuvaus": {},
         "kynnysehto": {
           "fi": "<p>Kynnysehto</p>"
         },
@@ -387,7 +385,6 @@ exports[`editValintaperuste > should be able to delete valintaperuste #0`] =
       {
         "enimmaispisteet": 100.02,
         "kaytaMuuntotaulukkoa": false,
-        "kuvaus": {},
         "kynnysehto": {
           "fi": "<p>Kynnysehto</p>"
         },

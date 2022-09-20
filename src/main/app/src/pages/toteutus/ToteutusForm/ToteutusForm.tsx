@@ -51,9 +51,10 @@ import {
   TutkinnonOsaTiedotSection,
   TutkintoonJohtavaTiedotSection,
   TuvaTiedotSection,
-  VapaaSivistystyoTiedotSection,
   EBTiedotSection,
   DIATiedotSection,
+  VapaaSivistystyoMuuTiedotSection,
+  VapaaSivistystyoOpistovuosiTiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -168,11 +169,12 @@ const ToteutusForm = ({
               () => AmmMuuTiedotSection,
             ],
             [
-              isIn([
-                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-              ]),
-              () => VapaaSivistystyoTiedotSection,
+              _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI),
+              () => VapaaSivistystyoOpistovuosiTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU),
+              () => VapaaSivistystyoMuuTiedotSection,
             ],
             [
               isIn([KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA]),

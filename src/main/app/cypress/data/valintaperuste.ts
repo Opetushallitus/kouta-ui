@@ -7,7 +7,6 @@ const withKorkeakouluFields = valintaperuste =>
         valintatavat: [
           {
             valintatapaKoodiUri: 'valintatapajono_tv#1',
-            kuvaus: {},
             nimi: { fi: 'Valintatavan nimi' },
             sisalto: [
               { tyyppi: 'teksti', data: { fi: '<p>Tekstia</p>' } },

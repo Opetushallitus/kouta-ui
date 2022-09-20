@@ -735,7 +735,8 @@
     "oppilaitoksenTeemakuva": "Oppilaitoksen teemakuva",
     "logo": "Oppilaitoksen logo",
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitosta.",
-    "eiOppilaitoksenOsia": "Oppilaitoksella ei ole osia"
+    "eiOppilaitoksenOsia": "Oppilaitoksella ei ole osia",
+    "yhteystietojen-muokkaus": "Muokkaa yhteystietoja"
   },
   "oppilaitoksenOsaLomake": {
     "oppilaitoksenOsanPerustiedot": "Oppilaitoksen osan perustiedot",

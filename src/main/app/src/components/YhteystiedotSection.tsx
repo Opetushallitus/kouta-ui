@@ -9,6 +9,7 @@ import {
   FormFieldPostinumeroSelect,
 } from '#/src/components/formFields';
 import { Box, Divider, Typography } from '#/src/components/virkailija';
+import { YhteystiedotMuokkausButton } from '#/src/components/YhteystiedotMuokkausButton';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
@@ -115,6 +116,7 @@ const Yhteystieto = ({ label, value, id, ...props }) => (
 
 export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
   const { t } = useTranslation();
+
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const nimi = getFirstLanguageValue(organisaatio?.nimi, language);
@@ -172,6 +174,7 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
         value={puhelinnumeroInSelectedLang}
         id="puhelinnumero"
       />
+      <YhteystiedotMuokkausButton organisaatioOid={organisaatioOid} />
     </>
   );
 };

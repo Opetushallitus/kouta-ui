@@ -115,5 +115,6 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("oppijanumerorekisteri-service.asiointiKieli", this.require("oppijanumerorekisteri-service.asiointiKieli"));
 
         this.frontProperties.setProperty("hakukohderyhmapalvelu.haun-asetukset", this.require("hakukohderyhmapalvelu.haun-asetukset"));
+        this.frontProperties.setProperty("organisaatiopalvelu.organisaation-muokkaus-ui", this.require("organisaatiopalvelu.organisaation-muokkaus-ui"));
     }
 }

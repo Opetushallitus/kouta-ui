@@ -14,7 +14,7 @@ export const useAtaruLomakeUrl = option => {
 
 const filterOutOnlyYhteishakuForms = (hakutapa: string) => {
   const noYhteishakuForms = !(isYhteishakuHakutapa(hakutapa));
-  return (form: any) => !noYhteishakuForms || form?.properties['allow-only-yhteishaut'] !== true
+  return (form: any) => !noYhteishakuForms || form?.properties?.['allow-only-yhteishaut'] !== true
 }
 
 export const useLomakeOptions = ({ language, hakutapa }) => {

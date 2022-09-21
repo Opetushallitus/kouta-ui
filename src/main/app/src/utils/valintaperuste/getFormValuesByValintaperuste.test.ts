@@ -17,10 +17,6 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
         {
           enimmaispisteet: 20.2,
           kaytaMuuntotaulukkoa: false,
-          kuvaus: {
-            fi: 'Fi kuvaus',
-            sv: 'Sv kuvaus',
-          },
           kynnysehto: {
             fi: '<p>Fi kynnysehto</p>',
             sv: '<p>Sv kynnysehto</p>',

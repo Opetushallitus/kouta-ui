@@ -332,7 +332,8 @@
     "invalidToteutusOpintojenLaajuusNumeroIntegrity": "Laajuus ei vastaa koulutukselle syötettyä laajuusrajoitetta",
     "invalidToteutusOpintojenLaajuusyksikkoIntegrity": "Laajuusyksikkö ei vastaa koulutukselle syötettyä laajuusyksikköä",
     "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon",
-    "invalidTilaForLiitettyOpintojaksoOnJulkaisu": "Väärä julkaisutila: kaikkien julkaistuun opintokokonaisuuteen liitettyjen opintojaksojen tulee olla julkaistuja."
+    "invalidTilaForLiitettyOpintojaksoOnJulkaisu": "Väärä julkaisutila: kaikkien julkaistuun opintokokonaisuuteen liitettyjen opintojaksojen tulee olla julkaistuja.",
+    "nimiJollainKielellaPakollinen": "Lisää yhteystiedon nimi"
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

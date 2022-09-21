@@ -26,7 +26,6 @@ export const YhteystietoSection = ({ description, name, language }) => {
       )}
       <Cell css={'margin-top: 24px'} width={12}>
         <Field
-          required
           component={FormFieldInput}
           name={`${name}.nimi.${language}`}
           label={t('oppilaitoslomake.yhteystiedonNimi')}

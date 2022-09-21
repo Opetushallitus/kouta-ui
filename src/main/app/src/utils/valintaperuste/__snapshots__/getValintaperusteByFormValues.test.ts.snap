@@ -35,10 +35,6 @@ Object {
       Object {
         "enimmaispisteet": 20.2,
         "kaytaMuuntotaulukkoa": false,
-        "kuvaus": Object {
-          "fi": "Fi kuvaus",
-          "sv": "Sv kuvaus",
-        },
         "kynnysehto": Object {
           "fi": "<p>Fi kynnysehto</p>",
           "sv": "<p>Sv kynnysehto</p>",

@@ -331,7 +331,8 @@
     "invalidKoulutusOpintojenLaajuusyksikkoIntegrity": "Koulutuksella on ainakin yksi toteutus, jonka laajuusyksikkö ei vastaa koulutuksen laajuusyksikköä",
     "invalidToteutusOpintojenLaajuusNumeroIntegrity": "Laajuus ei vastaa koulutukselle syötettyä laajuusrajoitetta",
     "invalidToteutusOpintojenLaajuusyksikkoIntegrity": "Laajuusyksikkö ei vastaa koulutukselle syötettyä laajuusyksikköä",
-    "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon"
+    "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon",
+    "invalidTilaForLiitettyOpintojaksoOnJulkaisu": "Väärä julkaisutila: kaikkien julkaistuun opintokokonaisuuteen liitettyjen opintojaksojen tulee olla julkaistuja."
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

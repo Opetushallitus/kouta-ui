@@ -32,7 +32,11 @@ const useInitialValues = hakukohde => {
   return useMemo(
     () =>
       hakukohde
-        ? getFormValuesByHakukohde(hakukohde, nimiHakukohdeKoodista)
+        ? getFormValuesByHakukohde(
+            hakukohde,
+            FormMode.EDIT,
+            nimiHakukohdeKoodista
+          )
         : {},
     [hakukohde, nimiHakukohdeKoodista]
   );

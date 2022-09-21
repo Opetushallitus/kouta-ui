@@ -28,7 +28,7 @@ import {
 
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
-  return merge(getFormValuesByHakukohde(hakukohde), {
+  return merge(getFormValuesByHakukohde(hakukohde, FormMode.CREATE), {
     perustiedot: {
       nimi: isNimiKoodi ? null : nimi,
       hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,

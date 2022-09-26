@@ -255,7 +255,7 @@ export const OpettajaTiedotSection = ({
     <LaajuusJaAloituspaikat
       name={name}
       koulutus={koulutus}
-      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
+      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
     />
     <JotpaSection name={name} />
   </VerticalBox>

@@ -29,6 +29,8 @@ export const OpettajaKoulutusTiedotSubSection = ({
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
 
+  // !!!!Jatkossa opintojenlaajuus -koodistoa ei enää tule käyttää laajuuden määrittämiseen!!!!!
+  // Sen sijaan tulee käyttää opintojenlaajuusyksikko -koodistoa yksikön määrittämiseen + erillistä numeroarvoa varsinaisen laajuuden määritykseen
   const { koodi: laajuusKoodi } = useKoodi('opintojenlaajuus_60');
   const { koodi: laajuusyksikko } = useKoodi(
     OpintojenLaajuusyksikko.OPINTOPISTE
@@ -52,16 +54,14 @@ export const OpettajaKoulutusTiedotSubSection = ({
       )}
       {koulutustyyppi ===
         KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS && (
-        <Box mb={2}>
-          <KoulutusField
-            disabled={disabled}
-            name={`${name}.koulutus`}
-            koulutustyyppi={koulutustyyppi}
-            language={language}
-            valitseKoulutusLabel={t('yleiset.valitseKoulutus')}
-            required
-          />
-        </Box>
+        <KoulutusField
+          disabled={disabled}
+          name={`${name}.koulutus`}
+          koulutustyyppi={koulutustyyppi}
+          language={language}
+          valitseKoulutusLabel={t('yleiset.valitseKoulutus')}
+          required
+        />
       )}
       <Box maxWidth="300px" mb={2}>
         <FormControl

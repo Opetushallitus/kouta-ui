@@ -1,7 +1,8 @@
 import _fp from 'lodash/fp';
 
 import createErrorBuilder, {
-  validateArrayMinLength, validateHakijapalveluidenYhteystiedot
+  validateArrayMinLength,
+  validateHakijapalveluidenYhteystiedot,
 } from '#/src/utils/form/createErrorBuilder';
 import {
   getKielivalinta,
@@ -17,8 +18,10 @@ export const validateOppilaitoksenOsaForm = values => {
       validateIfJulkaistu(eb =>
         eb.validateTranslations('perustiedot.wwwSivuUrl', kieliversiot)
       ),
-      validateHakijapalveluidenYhteystiedot('hakijapalveluidenYhteystiedot',
-          { message: 'validointivirheet.nimiJollainKielellaPakollinen', languages: kieliversiot})
+      validateHakijapalveluidenYhteystiedot('hakijapalveluidenYhteystiedot', {
+        message: 'validointivirheet.nimiJollainKielellaPakollinen',
+        languages: kieliversiot,
+      })
     )(createErrorBuilder(values))
     .getErrors();
 };

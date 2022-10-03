@@ -244,7 +244,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
   </VerticalBox>
 );
 
-export const AmmOpoJaErityisopeTiedotSection = ({
+export const OpettajaTiedotSection = ({
   koulutus,
   language,
   disabled,
@@ -255,7 +255,7 @@ export const AmmOpoJaErityisopeTiedotSection = ({
     <LaajuusJaAloituspaikat
       name={name}
       koulutus={koulutus}
-      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
+      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
     />
     <JotpaSection name={name} />
   </VerticalBox>

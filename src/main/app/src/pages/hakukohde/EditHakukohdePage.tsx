@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -11,9 +12,15 @@ import FormPage, {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  ENTITY,
+  FormMode,
+  LUKIO_YLEISLINJA,
+} from '#/src/constants';
 import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
 import useKoodi from '#/src/hooks/useKoodi';
+import { useLukiolinjaKoodit } from '#/src/hooks/useLukiolinjaKoodit';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import { arrayToTranslationObject } from '#/src/utils/languageUtils';
@@ -22,23 +29,40 @@ import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
 import { HakukohdeForm } from './HakukohdeForm';
 
-const useInitialValues = hakukohde => {
+const useInitialValues = (hakukohde, toteutus, koulutustyyppi) => {
   const { koodi: hakukohdeKoodi } = useKoodi(hakukohde?.hakukohdeKoodiUri);
 
   const nimiHakukohdeKoodista = arrayToTranslationObject(
     hakukohdeKoodi?.metadata
   );
 
+  const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
+  const { nimiLookupArray } = useLukiolinjaKoodit(toteutus);
+  const lukioLinja =
+    hakukohde?.metadata?.hakukohteenLinja?.linja || LUKIO_YLEISLINJA;
+  const lukioHakukohdeNimi = useMemo(
+    () => nimiLookupArray.find(v => v.koodiUri === lukioLinja)?.nimi,
+    [lukioLinja, nimiLookupArray]
+  );
+
+  const formValuesByHakukohde = useMemo(
+    () =>
+      getFormValuesByHakukohde(hakukohde, FormMode.EDIT, nimiHakukohdeKoodista),
+    [hakukohde, nimiHakukohdeKoodista]
+  );
+
   return useMemo(
     () =>
       hakukohde
-        ? getFormValuesByHakukohde(
-            hakukohde,
-            FormMode.EDIT,
-            nimiHakukohdeKoodista
-          )
+        ? isLukio
+          ? _fp.merge(formValuesByHakukohde, {
+              perustiedot: {
+                nimi: lukioHakukohdeNimi,
+              },
+            })
+          : formValuesByHakukohde
         : {},
-    [hakukohde, nimiHakukohdeKoodista]
+    [hakukohde, formValuesByHakukohde, isLukio, lukioHakukohdeNimi]
   );
 };
 
@@ -61,7 +85,7 @@ export const EditHakukohdePage = () => {
 
   const { t } = useTranslation();
 
-  const initialValues = useInitialValues(hakukohde);
+  const initialValues = useInitialValues(hakukohde, toteutus, koulutustyyppi);
 
   const resultObj = useCanUpdateHakukohde(
     haku?.hakukohteenMuokkaamisenTakaraja,

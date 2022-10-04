@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -45,24 +44,16 @@ const useInitialValues = (hakukohde, toteutus, koulutustyyppi) => {
     [lukioLinja, nimiLookupArray]
   );
 
-  const formValuesByHakukohde = useMemo(
-    () =>
-      getFormValuesByHakukohde(hakukohde, FormMode.EDIT, nimiHakukohdeKoodista),
-    [hakukohde, nimiHakukohdeKoodista]
-  );
-
   return useMemo(
     () =>
-      hakukohde
-        ? isLukio
-          ? _fp.merge(formValuesByHakukohde, {
-              perustiedot: {
-                nimi: lukioHakukohdeNimi,
-              },
-            })
-          : formValuesByHakukohde
+      hakukohde && toteutus
+        ? getFormValuesByHakukohde(
+            hakukohde,
+            FormMode.EDIT,
+            isLukio ? lukioHakukohdeNimi : nimiHakukohdeKoodista
+          )
         : {},
-    [hakukohde, formValuesByHakukohde, isLukio, lukioHakukohdeNimi]
+    [hakukohde, toteutus, nimiHakukohdeKoodista, isLukio, lukioHakukohdeNimi]
   );
 };
 

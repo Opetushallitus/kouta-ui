@@ -12,7 +12,7 @@ import {
 } from '#/src/components/formFields';
 import { Box, Spin } from '#/src/components/virkailija';
 import { LANGUAGES, LUKIO_YLEISLINJA } from '#/src/constants';
-import { useFieldValue, useSetFieldValue } from '#/src/hooks/form';
+import { useFieldValue, useIsDirty, useSetFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
@@ -133,7 +133,12 @@ export const HakukohteenLinjaSection = ({
     [linja, nimiLookupArray]
   );
 
-  useSetFieldValue(nimiFieldPath, hakukohdeNimi);
+  const isDirty = useIsDirty();
+
+  // Asetetaan nimi-kenttä vain kun isDirty on true, eli käyttäjä on muokannut arvoja.
+  // Ei haluta asettaa nimi-kenttää heti initialisoinnin jälkeen, koska se sotkee
+  // mm. esikatselu-napin enablointilogiikan ja tallentamattomien muutosten tarkistuksen
+  useSetFieldValue(nimiFieldPath, hakukohdeNimi, isDirty);
 
   return loading ? (
     <Spin />

@@ -11,9 +11,15 @@ import FormPage, {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  ENTITY,
+  FormMode,
+  LUKIO_YLEISLINJA,
+} from '#/src/constants';
 import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
 import useKoodi from '#/src/hooks/useKoodi';
+import { useLukiolinjaKoodit } from '#/src/hooks/useLukiolinjaKoodit';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import { arrayToTranslationObject } from '#/src/utils/languageUtils';
@@ -22,23 +28,32 @@ import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
 import { HakukohdeForm } from './HakukohdeForm';
 
-const useInitialValues = hakukohde => {
+const useInitialValues = (hakukohde, toteutus, koulutustyyppi) => {
   const { koodi: hakukohdeKoodi } = useKoodi(hakukohde?.hakukohdeKoodiUri);
 
   const nimiHakukohdeKoodista = arrayToTranslationObject(
     hakukohdeKoodi?.metadata
   );
 
+  const isLukio = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
+  const { nimiLookupArray } = useLukiolinjaKoodit(toteutus);
+  const lukioLinja =
+    hakukohde?.metadata?.hakukohteenLinja?.linja || LUKIO_YLEISLINJA;
+  const lukioHakukohdeNimi = useMemo(
+    () => nimiLookupArray.find(v => v.koodiUri === lukioLinja)?.nimi,
+    [lukioLinja, nimiLookupArray]
+  );
+
   return useMemo(
     () =>
-      hakukohde
+      hakukohde && toteutus
         ? getFormValuesByHakukohde(
             hakukohde,
             FormMode.EDIT,
-            nimiHakukohdeKoodista
+            isLukio ? lukioHakukohdeNimi : nimiHakukohdeKoodista
           )
         : {},
-    [hakukohde, nimiHakukohdeKoodista]
+    [hakukohde, toteutus, nimiHakukohdeKoodista, isLukio, lukioHakukohdeNimi]
   );
 };
 
@@ -61,7 +76,7 @@ export const EditHakukohdePage = () => {
 
   const { t } = useTranslation();
 
-  const initialValues = useInitialValues(hakukohde);
+  const initialValues = useInitialValues(hakukohde, toteutus, koulutustyyppi);
 
   const resultObj = useCanUpdateHakukohde(
     haku?.hakukohteenMuokkaamisenTakaraja,

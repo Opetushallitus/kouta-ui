@@ -60,15 +60,15 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
   return useSelector(selector);
 }
 
-export const useSetFieldValue = (name, value) => {
+export const useSetFieldValue = (name, value, condition = true) => {
   const form = useFormName();
   const dispatch = useDispatch();
   const valueHasChanged = useHasChanged(value, _.isEqual);
   useEffect(() => {
-    if (valueHasChanged) {
+    if (condition && valueHasChanged) {
       dispatch(change(form, name, value));
     }
-  }, [dispatch, form, name, value, valueHasChanged]);
+  }, [dispatch, form, name, value, valueHasChanged, condition]);
 };
 
 export const useSelectedLanguages = () => {

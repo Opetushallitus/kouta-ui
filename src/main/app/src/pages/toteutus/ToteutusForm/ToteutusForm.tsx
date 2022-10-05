@@ -43,7 +43,7 @@ import { OsaamisalatSection } from './OsaamisalatSection';
 import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
-  AmmOpoJaErityisopeTiedotSection,
+  OpettajaTiedotSection,
   KkOpintojaksoTiedotSection,
   KkOpintokokonaisuusTiedotSection,
   LukioTiedotSection,
@@ -51,9 +51,10 @@ import {
   TutkinnonOsaTiedotSection,
   TutkintoonJohtavaTiedotSection,
   TuvaTiedotSection,
-  VapaaSivistystyoTiedotSection,
   EBTiedotSection,
   DIATiedotSection,
+  VapaaSivistystyoMuuTiedotSection,
+  VapaaSivistystyoOpistovuosiTiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -168,21 +169,23 @@ const ToteutusForm = ({
               () => AmmMuuTiedotSection,
             ],
             [
-              isIn([
-                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-                KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-              ]),
-              () => VapaaSivistystyoTiedotSection,
+              _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI),
+              () => VapaaSivistystyoOpistovuosiTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU),
+              () => VapaaSivistystyoMuuTiedotSection,
             ],
             [
               isIn([KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA]),
               () => TutkinnonOsaTiedotSection,
             ],
             [
-              _fp.isEqual(
-                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
-              ),
-              () => AmmOpoJaErityisopeTiedotSection,
+              isIn([
+                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+                KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
+              ]),
+              () => OpettajaTiedotSection,
             ],
             [
               _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),

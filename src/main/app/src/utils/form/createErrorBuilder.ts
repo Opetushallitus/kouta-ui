@@ -1,5 +1,6 @@
 import { differenceInMonths } from 'date-fns';
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import {
   formValueExists as exists,
@@ -149,6 +150,37 @@ class ErrorBuilder {
     return this;
   }
 
+  //Jos oppilaitoksen osan hakijapalveluille on annettu yhteystietoja, on nimi pakollinen ainakin yhdellä kielellä.
+  validateHakijapalveluidenYhteystiedot(
+    path,
+    { message = null, languages = [] } = {}
+  ) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
+    const hpy = this.getValue(path);
+    const pickTranslations = _fp.pick(languages || []);
+    const hasNonemptyKieliversio = v =>
+      v &&
+      Object.values(pickTranslations(v)).some(n => String(n).trim().length > 0);
+
+    const validateYhteystiedot = (Object.values(hpy) || []).some(v =>
+      hasNonemptyKieliversio(v)
+    );
+
+    if (
+      validateYhteystiedot &&
+      !Object.values(pickTranslations(hpy.nimi)).some(
+        n => String(n).trim().length > 0
+      )
+    ) {
+      languages.forEach(l => this.setError(`${path}.nimi.${l}`, message));
+    }
+
+    return this;
+  }
+
   validateArrayMinLength(
     path,
     min,
@@ -259,6 +291,9 @@ export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
 export const validateArchiveDate = bindValidator('validateArchiveDate');
+export const validateHakijapalveluidenYhteystiedot = bindValidator(
+  'validateHakijapalveluidenYhteystiedot'
+);
 
 export const createErrorBuilder = (
   values,

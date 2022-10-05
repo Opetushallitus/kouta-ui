@@ -18,6 +18,7 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
     kampus,
     wwwSivu,
     jarjestaaUrheilijanAmmKoulutusta,
+    hakijapalveluidenYhteystiedot: hy,
   } = metadata;
 
   return {
@@ -32,6 +33,23 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
       wwwSivuNimi: wwwSivu?.nimi || {},
       jarjestaaUrheilijanAmmKoulutusta,
     },
+    hakijapalveluidenYhteystiedot: hy
+      ? {
+          nimi: hy.nimi || {},
+          postiosoite: hy.postiosoite?.osoite || {},
+          postinumero: hy.postiosoite?.postinumeroKoodiUri
+            ? {
+                value: hy.postiosoite.postinumeroKoodiUri,
+              }
+            : null,
+          kayntiosoite: hy.kayntiosoite?.osoite || {},
+          kayntiosoitePostinumero: hy.kayntiosoite?.postinumeroKoodiUri
+            ? { value: hy.kayntiosoite.postinumeroKoodiUri }
+            : null,
+          puhelinnumero: hy.puhelinnumero || {},
+          sahkoposti: hy.sahkoposti || {},
+        }
+      : null,
     teemakuva,
     esikatselu,
   };

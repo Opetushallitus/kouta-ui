@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { FormMode } from '#/src/constants';
 
 export const getTilaisuusValues = ({
   osoite,
@@ -20,7 +21,8 @@ export const getTilaisuusValues = ({
 
 export const getKokeetTaiLisanaytotValues = (
   valintakokeet = [],
-  yleisKuvaus
+  yleisKuvaus,
+  formMode?
 ) => {
   return {
     yleisKuvaus: _.mapValues(yleisKuvaus, kuvaus => parseEditorState(kuvaus)),
@@ -39,7 +41,7 @@ export const getKokeetTaiLisanaytotValues = (
           ohjeetErityisjarjestelyihin,
         } = {},
       }) => ({
-        id,
+        id: formMode === FormMode.CREATE ? undefined : id,
         tyyppi: { value: tyyppiKoodiUri },
         nimi,
         liittyyEnnakkovalmistautumista,

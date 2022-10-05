@@ -164,7 +164,7 @@ export const AikuistenperusopetusTiedotSection = ({
   );
 };
 
-export const VapaaSivistystyoTiedotSection = ({
+export const VapaaSivistystyoOpistovuosiTiedotSection = ({
   koulutus,
   language,
   name,
@@ -187,7 +187,30 @@ export const VapaaSivistystyoTiedotSection = ({
   );
 };
 
-export const AmmMuuTiedotSection = VapaaSivistystyoTiedotSection;
+export const VapaaSivistystyoMuuTiedotSection = ({
+  koulutus,
+  language,
+  name,
+}: ToteutusTiedotSectionProps) => {
+  useNimiFromKoulutus({ koulutus, name });
+
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} disabled={false} />
+      <OpintojenLaajuusReadOnlyField
+        selectedLanguage={language}
+        laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+        laajuusyksikkoKoodiUri={
+          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
+        }
+        laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
+      />
+      <JotpaSection name={name} />
+    </VerticalBox>
+  );
+};
+
+export const AmmMuuTiedotSection = VapaaSivistystyoMuuTiedotSection;
 
 export const KkOpintojaksoTiedotSection = ({
   language,
@@ -221,7 +244,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
   </VerticalBox>
 );
 
-export const AmmOpoJaErityisopeTiedotSection = ({
+export const OpettajaTiedotSection = ({
   koulutus,
   language,
   disabled,
@@ -232,7 +255,7 @@ export const AmmOpoJaErityisopeTiedotSection = ({
     <LaajuusJaAloituspaikat
       name={name}
       koulutus={koulutus}
-      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
+      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
     />
     <JotpaSection name={name} />
   </VerticalBox>

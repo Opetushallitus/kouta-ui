@@ -16,9 +16,12 @@ export const getOppilaitoksenOsaByFormValues = ({
     kieliversiot,
     teemakuva,
     esikatselu = false,
+    hakijapalveluidenYhteystiedot: hy,
   } = values;
-
   const pickTranslations = _fp.pick(kieliversiot || []);
+  const hpy = Object.values(pickTranslations(hy?.nimi)).some(
+    n => String(n).trim().length > 0
+  );
 
   return {
     oppilaitosOid,
@@ -44,6 +47,28 @@ export const getOppilaitoksenOsaByFormValues = ({
           },
       jarjestaaUrheilijanAmmKoulutusta:
         perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
+      hakijapalveluidenYhteystiedot: hpy
+        ? {
+            nimi: pickTranslations(hy.nimi || {}),
+            postiosoite:
+              !_.isEmpty(hy.postiosoite) || hy.postinumero
+                ? {
+                    osoite: pickTranslations(hy.postiosoite || {}),
+                    postinumeroKoodiUri: hy.postinumero?.value || null,
+                  }
+                : null,
+            kayntiosoite:
+              !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
+                ? {
+                    osoite: pickTranslations(hy.kayntiosoite || {}),
+                    postinumeroKoodiUri:
+                      hy.kayntiosoitePostinumero?.value || null,
+                  }
+                : null,
+            sahkoposti: pickTranslations(hy.sahkoposti || {}),
+            puhelinnumero: pickTranslations(hy.puhelinnumero || {}),
+          }
+        : null,
     },
   };
 };

@@ -59,6 +59,7 @@ const getHakukohteenLinjaValues = ({
 
 export const getFormValuesByHakukohde = (
   hakukohde,
+  formMode,
   nimiKoodista?: TranslatedField
 ): HakukohdeFormValues => {
   const {
@@ -157,7 +158,8 @@ export const getFormValuesByHakukohde = (
     valintakokeet: {
       ...getKokeetTaiLisanaytotValues(
         valintakokeet,
-        valintakokeidenYleiskuvaus
+        valintakokeidenYleiskuvaus,
+        formMode
       ),
       // NOTE: tässä muutetaan taulukko [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}] objektiksi {id: [tilaisuus1, tilaisuus2]} käsittelyn helpottamiseksi
       valintaperusteenValintakokeidenLisatilaisuudet: _fp.flow(

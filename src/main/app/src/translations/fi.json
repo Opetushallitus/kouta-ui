@@ -332,7 +332,8 @@
     "invalidToteutusOpintojenLaajuusNumeroIntegrity": "Laajuus ei vastaa koulutukselle syötettyä laajuusrajoitetta",
     "invalidToteutusOpintojenLaajuusyksikkoIntegrity": "Laajuusyksikkö ei vastaa koulutukselle syötettyä laajuusyksikköä",
     "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon",
-    "invalidTilaForLiitettyOpintojaksoOnJulkaisu": "Väärä julkaisutila: kaikkien julkaistuun opintokokonaisuuteen liitettyjen opintojaksojen tulee olla julkaistuja."
+    "invalidTilaForLiitettyOpintojaksoOnJulkaisu": "Väärä julkaisutila: kaikkien julkaistuun opintokokonaisuuteen liitettyjen opintojaksojen tulee olla julkaistuja.",
+    "nimiJollainKielellaPakollinen": "Lisää yhteystiedon nimi"
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",
@@ -353,6 +354,7 @@
     "erikoistumiskoulutus": "Erikoistumiskoulutus",
     "valmentavaKoulutus": "Valmentava koulutus",
     "ammOpeErityisopeJaOpo": "Ammatillinen opettaja-, erityisopettaja- ja opinto-ohjaajakoulutus",
+    "opePedagOpinnot": "Opettajien pedagogiset opinnot",
     "yleissivistava": "Yleissivistävä",
     "amm": "Ammatillinen koulutus",
     "lk": "Lukiokoulutus",
@@ -741,7 +743,8 @@
     "oppilaitoksenTeemakuva": "Oppilaitoksen teemakuva",
     "logo": "Oppilaitoksen logo",
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitosta.",
-    "eiOppilaitoksenOsia": "Oppilaitoksella ei ole osia"
+    "eiOppilaitoksenOsia": "Oppilaitoksella ei ole osia",
+    "yhteystietojen-muokkaus": "Muokkaa yhteystietoja"
   },
   "oppilaitoksenOsaLomake": {
     "oppilaitoksenOsanPerustiedot": "Oppilaitoksen osan perustiedot",
@@ -751,6 +754,7 @@
     "lisaaOppilaitoksenOsanEsittelyteksti": "Lisää oppilaitoksen osan esittelyteksti",
     "oppilaitoksenOsanEsittely": "Oppilaitoksen osan esittely",
     "oppilaitoksenOsanYhteystiedot": "Oppilaitoksen osan yhteystiedot",
+    "oppilaitoksenOsanHakijapalveluidenYhteystiedot": "Oppilaitoksen osan hakijapalveluiden yhteystiedot",
     "yhteystiedotInfo": "Anna oppilaitokselle tarvittavat yhteystiedot",
     "oppilaitoksenOsanTila": "Oppilaitoksen osan tila",
     "oppilaitoksenOsanTeemakuva": "Oppilaitoksen osan teemakuva",

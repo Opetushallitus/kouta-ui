@@ -48,6 +48,7 @@ export const ValintaperusteForm = ({
           section="organisaatio"
           Component={OrganisaatioSection}
           header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
         />
       )}
 

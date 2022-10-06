@@ -6,7 +6,7 @@ import {
 
 export const initialKoulutusValues = {
   tila: DEFAULT_JULKAISUTILA,
-  esikatselu: false,
+  esikatselu: true,
   pohja: {
     tapa: POHJAVALINTA.UUSI,
   },

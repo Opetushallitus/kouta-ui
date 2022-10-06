@@ -29,7 +29,7 @@ const getInitialValues = (valintaperuste, kieliValinnat, koulutustyyppi) => {
   return valintaperuste && valintaperuste.id
     ? {
         ...getCopyValues(valintaperuste.id),
-        ...getFormValuesByValintaperuste(valintaperuste),
+        ...getFormValuesByValintaperuste(valintaperuste, FormMode.CREATE),
       }
     : initialValues(kieliValinnatLista, koulutustyyppi);
 };

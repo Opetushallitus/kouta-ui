@@ -18,7 +18,7 @@ export const AvoinKorkeakoulutusField = ({
   return (
     <div {...getTestIdProps('avoinKorkeakoulutus')}>
       <Field name={`${name}.avoinKorkeakoulutus`} component={FormFieldSwitch}>
-        {t('toteutuslomake.avoinKorkeakoulutus')}
+        {t('yleiset.avoinKorkeakoulutus')}
       </Field>
     </div>
   );

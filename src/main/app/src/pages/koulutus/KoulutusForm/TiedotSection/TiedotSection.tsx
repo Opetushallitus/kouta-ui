@@ -335,6 +335,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <AvoinKorkeakoulutusField name={name} />
     </VerticalBox>
   );
 };

@@ -43,6 +43,8 @@ export const HakukohdeForm = ({
 
   const isEBkoulutus = isEB(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
+  const hakutapa = haku?.hakutapaKoodiUri;
+
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       {formMode === FormMode.EDIT && (
@@ -106,6 +108,7 @@ export const HakukohdeForm = ({
         languages={languages}
         Component={AloituspaikatSection}
         koulutustyyppi={koulutustyyppi}
+        hakutapa={hakutapa}
       />
 
       <FormCollapse

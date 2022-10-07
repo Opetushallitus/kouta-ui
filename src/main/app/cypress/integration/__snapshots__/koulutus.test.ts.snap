@@ -1,7 +1,7 @@
 exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
 {
   "ePerusteId": 6777660,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": true,
   "julkinen": true,
@@ -50,7 +50,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
 exports[`createKoulutus > should be able to create ammatillinen osaamisala koulutus #0`] =
 {
   "ePerusteId": 6777660,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
@@ -99,7 +99,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
 exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
@@ -159,7 +159,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
 exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": true,
   "julkinen": false,
@@ -214,7 +214,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
 exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": true,
   "julkinen": false,
@@ -425,7 +425,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
 exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
@@ -526,7 +526,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
 exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
@@ -570,7 +570,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
 exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistovuosi"-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
@@ -614,7 +614,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
 exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
@@ -764,7 +764,7 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
 exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityisopettaja ja opokoulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
@@ -924,7 +924,7 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
 exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
@@ -966,7 +966,7 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
 exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": true,
@@ -1114,7 +1114,7 @@ exports[`createKoulutus > should be able to create "Korkeakoulutus opintojakso"-
 exports[`createKoulutus > should be able to create korkeakoulutus opintojakso koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
@@ -1165,7 +1165,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
 exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": true,
   "julkinen": false,
@@ -1216,7 +1216,7 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
 exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
@@ -1260,7 +1260,7 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
 exports[`createKoulutus > should be able to create EB-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": true,
   "julkinen": false,
@@ -1311,7 +1311,7 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
 exports[`createKoulutus > should be able to create korkeakoulutus opintokokonaisuuskoulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,

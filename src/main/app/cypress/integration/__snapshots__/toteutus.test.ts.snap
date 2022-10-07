@@ -1,6 +1,6 @@
 exports[`createToteutus > should be able to create ammatillinen tutkinnon osa toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -132,7 +132,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
 
 exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -268,7 +268,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
 
 exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -403,7 +403,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
 
 exports[`createToteutus > should be able to create lukio toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -1152,7 +1152,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
 
 exports[`createToteutus > should be able to create TUVA toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -1407,7 +1407,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
 
 exports[`createToteutus > should be able to create TELMA toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -1662,7 +1662,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
 
 exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -1794,7 +1794,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
 
 exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opistovuosi" toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -2194,7 +2194,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope ja opot
 
 exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opokoulutuksen toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -2329,7 +2329,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
 
 exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -2865,7 +2865,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
 
 exports[`createToteutus > should be able to create korkeakoulutus opintojakso toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -3006,7 +3006,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
 
 exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -3158,7 +3158,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
 
 exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"
@@ -3309,7 +3309,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
 
 exports[`createToteutus > should be able to create korkeakoulutus opintokokonaisuustoteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"

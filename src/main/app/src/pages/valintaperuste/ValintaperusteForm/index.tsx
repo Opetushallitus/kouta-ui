@@ -6,7 +6,7 @@ export { ValintaperusteForm } from './ValintaperusteForm';
 
 export const initialValues = (kieliValinnat, koulutustyyppi) => ({
   tila: DEFAULT_JULKAISUTILA,
-  esikatselu: false,
+  esikatselu: true,
   pohja: {
     tapa: POHJAVALINTA.UUSI,
   },

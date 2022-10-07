@@ -13,7 +13,7 @@ export const initialValues = ({
   koulutusKielet,
 }) => ({
   tila: DEFAULT_JULKAISUTILA,
-  esikatselu: false,
+  esikatselu: true,
   kieliversiot: koulutusKielet,
   tiedot: {
     nimi: koulutusNimi,

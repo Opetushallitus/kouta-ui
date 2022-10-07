@@ -1,6 +1,6 @@
 exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "hakutapaKoodiUri": "hakutapa_01#1",
   "julkinen": true,

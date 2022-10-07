@@ -2461,7 +2461,7 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
 
 exports[`createToteutus > should be able to create "Aikuisten perusopetus" -toteutus #0`] =
 {
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "kielivalinta": [
     "fi"

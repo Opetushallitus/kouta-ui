@@ -31,7 +31,10 @@ export const EditValintaperustePage = () => {
   );
 
   const initialValues = useMemo(
-    () => (valintaperuste ? getFormValuesByValintaperuste(valintaperuste) : {}),
+    () =>
+      valintaperuste
+        ? getFormValuesByValintaperuste(valintaperuste, FormMode.EDIT)
+        : {},
     [valintaperuste]
   );
 

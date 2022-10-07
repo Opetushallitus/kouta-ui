@@ -21,7 +21,7 @@ const parseSisalto = sisalto => {
   });
 };
 
-export const getFormValuesByValintaperuste = valintaperuste => {
+export const getFormValuesByValintaperuste = (valintaperuste, formMode) => {
   const {
     hakutapaKoodiUri = null,
     kielivalinta = [],
@@ -85,7 +85,8 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     ),
     valintakokeet: getKokeetTaiLisanaytotValues(
       valintakokeet,
-      valintakokeidenYleiskuvaus
+      valintakokeidenYleiskuvaus,
+      formMode
     ),
     esikatselu,
   };

@@ -214,7 +214,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
 exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": false,
+  "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": true,
   "julkinen": false,

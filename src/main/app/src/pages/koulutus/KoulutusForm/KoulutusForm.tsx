@@ -110,6 +110,7 @@ export const KoulutusForm = ({
             section="organisaatio"
             Component={OrganisaatioSection}
             header={t('yleiset.organisaatio')}
+            organisaatioOid={organisaatioOid}
           />
         )}
         <FormCollapse

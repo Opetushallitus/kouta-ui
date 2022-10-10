@@ -199,7 +199,8 @@
     "koulutuksenAlkamisvuosi": "Koulutuksen alkamisvuosi",
     "urheilijanAmmKoulutus": "Urheilijan ammatillinen koulutus",
     "aliorganisaatio": "Organisaatio",
-    "avoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta"
+    "avoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta",
+    "tunniste": "Hakijalle näkyvä tunniste"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

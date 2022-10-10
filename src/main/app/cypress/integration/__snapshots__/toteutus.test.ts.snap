@@ -98,6 +98,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {
@@ -235,6 +236,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -371,6 +373,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -549,6 +552,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       }
     ],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -691,6 +695,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -826,6 +831,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -975,6 +981,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -1123,6 +1130,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {
@@ -1247,6 +1255,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "tuva",
     "yhteyshenkilot": [
       {
@@ -1380,6 +1389,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "tuva",
     "yhteyshenkilot": [
       {
@@ -1504,6 +1514,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "telma",
     "yhteyshenkilot": [
       {
@@ -1637,6 +1648,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "telma",
     "yhteyshenkilot": [
       {
@@ -1772,6 +1784,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "vapaa-sivistystyo-muu",
     "yhteyshenkilot": [
       {
@@ -1894,6 +1907,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "vapaa-sivistystyo-opistovuosi",
     "yhteyshenkilot": [
       {
@@ -2037,6 +2051,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -2310,6 +2325,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-ope-erityisope-ja-opo",
     "yhteyshenkilot": [
       {
@@ -2443,6 +2459,7 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-muu",
     "yhteyshenkilot": [
       {
@@ -2576,6 +2593,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "aikuisten-perusopetus",
     "yhteyshenkilot": [
       {
@@ -2711,6 +2729,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-muu",
     "yhteyshenkilot": [
       {
@@ -2848,6 +2867,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "aikuisten-perusopetus",
     "yhteyshenkilot": [
       {
@@ -2992,6 +3012,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "kk-opintojakso",
     "yhteyshenkilot": [
       {
@@ -3144,6 +3165,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -3296,6 +3318,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -3439,6 +3462,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": "OPHJOD-12345",
     "tyyppi": "kk-opintokokonaisuus",
     "yhteyshenkilot": [
       {

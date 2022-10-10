@@ -6,10 +6,17 @@ import { Field } from 'redux-form';
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
 
-export const AloituspaikatSection = ({ language, koulutustyyppi, name }) => {
+export const AloituspaikatSection = ({
+  language,
+  koulutustyyppi,
+  name,
+  hakutapa,
+}) => {
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
+  const isYhteishaku = isYhteishakuHakutapa(hakutapa);
   const { t } = useTranslation();
 
   const aloituspaikkamaaraName = `${name}.aloituspaikkamaara`;
@@ -46,15 +53,17 @@ export const AloituspaikatSection = ({ language, koulutustyyppi, name }) => {
 
   return (
     <>
-      {isKorkeakoulu ? (
+      {isKorkeakoulu || !isYhteishaku ? (
         <>
           <Box display="flex">
             <Box flexGrow={1} paddingRight={1}>
               {aloituspaikatField}
             </Box>
-            <Box flexGrow={1} paddingLeft={1}>
-              {ensikertalaisetField}
-            </Box>
+            {isKorkeakoulu ? (
+              <Box flexGrow={1} paddingLeft={1}>
+                {ensikertalaisetField}
+              </Box>
+            ) : null}
           </Box>
           <Box marginTop={2}>
             <Field

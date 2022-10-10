@@ -62,8 +62,8 @@ export const createSoraKuvausForm = () => {
   it(
     'should be able to create sora-kuvaus',
     mutationTest(() => {
-      fillKoulutustyyppiSection();
       fillPohjaSection();
+      fillKoulutustyyppiSection();
       fillKieliversiotSection({ jatka: true });
       fillTiedotSection();
       fillTilaSection();

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
 import {
+  makeHakuColumn,
   makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
@@ -27,6 +28,10 @@ const useTableColumns = (t, organisaatioOid) =>
       makeNimiColumn(t, {
         getLinkUrl: ({ oid }) =>
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+      }),
+      makeHakuColumn(t, {
+        getLinkUrl: ({ hakuOid }) =>
+          `/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus/`,
       }),
       makeKoulutustyyppiColumn(t),
       makeTilaColumn(t),

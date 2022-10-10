@@ -66,6 +66,26 @@ export const makeNimiColumn = (
   },
 });
 
+export const makeHakuColumn = (
+  t,
+  {
+    getLinkUrl,
+  }: { getLinkUrl: (unknown) => string | undefined; title?: string }
+): Column => ({
+  title: t('yleiset.haku'),
+  key: 'hakuNimi',
+  sortable: true,
+  render: item => (
+    <RouterAnchor to={getLinkUrl(item)}>
+      {getFirstLanguageValue(item.hakuNimi, item.language) ||
+        t('yleiset.nimeton')}
+    </RouterAnchor>
+  ),
+  style: {
+    width: 'auto',
+  },
+});
+
 export const makeKoulutustyyppiColumn = t => ({
   title: t('yleiset.koulutustyyppi'),
   key: 'koulutustyyppi',

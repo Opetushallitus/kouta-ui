@@ -160,6 +160,10 @@ class ErrorBuilder {
     }
 
     const hpy = this.getValue(path);
+    if (!hpy) {
+      return this;
+    }
+
     const pickTranslations = _fp.pick(languages || []);
     const hasNonemptyKieliversio = v =>
       v &&

@@ -1,5 +1,6 @@
 import { differenceInMonths } from 'date-fns';
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import {
   formValueExists as exists,
@@ -7,7 +8,6 @@ import {
   isPartialDate,
 } from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
-import _fp from "lodash/fp";
 
 // TODO: Remove ErrorBuilder and replace all form validations with just _fp.flow(...validators)({values})
 class ErrorBuilder {
@@ -152,8 +152,8 @@ class ErrorBuilder {
 
   //Jos oppilaitoksen osan hakijapalveluille on annettu yhteystietoja, on nimi pakollinen ainakin yhdellä kielellä.
   validateHakijapalveluidenYhteystiedot(
-      path,
-      { message = null, languages = [] } = {}
+    path,
+    { message = null, languages = [] } = {}
   ) {
     if (!this.isVisible(path)) {
       return this;
@@ -161,11 +161,20 @@ class ErrorBuilder {
 
     const hpy = this.getValue(path);
     const pickTranslations = _fp.pick(languages || []);
-    const hasNonemptyKieliversio = (v) => v && Object.values(pickTranslations(v)).some(n => String(n).trim().length > 0)
+    const hasNonemptyKieliversio = v =>
+      v &&
+      Object.values(pickTranslations(v)).some(n => String(n).trim().length > 0);
 
-    const validateYhteystiedot = (Object.values(hpy) || []).some(v => hasNonemptyKieliversio(v))
+    const validateYhteystiedot = (Object.values(hpy) || []).some(v =>
+      hasNonemptyKieliversio(v)
+    );
 
-    if (validateYhteystiedot && !Object.values(pickTranslations(hpy.nimi)).some(n => String(n).trim().length > 0)) {
+    if (
+      validateYhteystiedot &&
+      !Object.values(pickTranslations(hpy.nimi)).some(
+        n => String(n).trim().length > 0
+      )
+    ) {
       languages.forEach(l => this.setError(`${path}.nimi.${l}`, message));
     }
 
@@ -282,7 +291,9 @@ export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
 export const validateArchiveDate = bindValidator('validateArchiveDate');
-export const validateHakijapalveluidenYhteystiedot = bindValidator('validateHakijapalveluidenYhteystiedot')
+export const validateHakijapalveluidenYhteystiedot = bindValidator(
+  'validateHakijapalveluidenYhteystiedot'
+);
 
 export const createErrorBuilder = (
   values,

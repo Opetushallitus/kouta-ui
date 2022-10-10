@@ -168,6 +168,8 @@ const fillKkOpintokokonaisuusTiedotSection = () => {
     getSelectByLabel('yleiset.laajuusyksikko').pipe(
       pFillSelect('opintopistettä')
     );
+
+    selectCheckbox(/avoinKorkeakoulutus/);
   });
 };
 

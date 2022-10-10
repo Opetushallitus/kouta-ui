@@ -97,6 +97,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     diplomit,
     yleislinja,
     hasJotpaRahoitus,
+    avoinKorkeakoulutus,
   } = metadata;
 
   const {
@@ -140,6 +141,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       aloituspaikat: _fp.isNumber(aloituspaikat)
         ? aloituspaikat.toString()
         : '',
+      avoinKorkeakoulutus: Boolean(avoinKorkeakoulutus),
     },
     kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
     kieliversiot: kielivalinta ?? [],

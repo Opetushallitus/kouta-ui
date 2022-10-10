@@ -4,6 +4,7 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { VerticalBox } from '#/src/components/VerticalBox';
@@ -229,6 +230,7 @@ export const KkOpintojaksoTiedotSection = ({
       laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
     <JotpaSection name={name} />
+    <AvoinKorkeakoulutusField name={name} />
   </VerticalBox>
 );
 
@@ -241,6 +243,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
     <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
+    <AvoinKorkeakoulutusField name={name} />
   </VerticalBox>
 );
 

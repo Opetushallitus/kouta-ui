@@ -15,6 +15,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -152,6 +153,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -288,6 +290,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -418,6 +421,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -604,6 +608,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -748,6 +753,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -882,6 +888,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1031,6 +1038,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1167,6 +1175,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1298,6 +1307,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1422,6 +1432,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1553,6 +1564,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1677,6 +1689,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -1809,6 +1822,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1940,6 +1954,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2214,6 +2229,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2344,6 +2360,7 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -2368,8 +2385,6 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2423,6 +2438,8 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2476,6 +2493,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -2500,8 +2518,6 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2555,6 +2571,8 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
@@ -2618,6 +2636,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2754,6 +2773,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2880,6 +2900,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -3021,6 +3042,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -3173,6 +3195,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -3324,6 +3347,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
         "kieli": "fi"
       }
     ],
+    "avoinKorkeakoulutus": true,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {

@@ -11,12 +11,14 @@ export const initialValues = ({
   koulutustyyppi,
   koulutusNimi,
   koulutusKielet,
+  avoinKorkeakoulutus,
 }) => ({
   tila: DEFAULT_JULKAISUTILA,
   esikatselu: false,
   kieliversiot: koulutusKielet,
   tiedot: {
     nimi: koulutusNimi,
+    avoinKorkeakoulutus,
   },
   pohja: {
     tapa: POHJAVALINTA.UUSI,

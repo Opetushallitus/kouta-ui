@@ -259,6 +259,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
                 : HTIT?.hakuaikaPaattyy,
             }
           : null,
+      avoinKorkeakoulutus: values?.tiedot?.avoinKorkeakoulutus || false,
     },
   };
 };

@@ -15192,5 +15192,584 @@
       ],
       "status": 200
     }
+  },
+  {
+    "method": "GET",
+    "url": "https://localhost:3000/koodisto-service/rest/json/opinnontyyppi/koodi?onlyValidKoodis=true",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "opinnontyyppi_2",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_2",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "2",
+          "paivitysPvm": "2015-12-21",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-09-15",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Aineopinnot",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Intermediate studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Ämnesstudier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_6",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_6",
+          "version": 4,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "6",
+          "paivitysPvm": "2016-05-20",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-09-15",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Allmänna/gemensamma studier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Yleiset/yhteiset opinnot",
+              "kuvaus": "Yleiset/yhteiset opinnot",
+              "lyhytNimi": "Yleiset/yhteiset opinnot",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "General/common studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_10",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_10",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "10",
+          "paivitysPvm": "2015-12-21",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-12-16",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Muut opinnot",
+              "kuvaus": "",
+              "lyhytNimi": "Muut opinnot",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Other Studies",
+              "kuvaus": "",
+              "lyhytNimi": "Other Studies",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Övriga studier",
+              "kuvaus": "",
+              "lyhytNimi": "Övriga studier",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_8",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_8",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "8",
+          "paivitysPvm": "2016-05-20",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-08-26",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Ammattiopinnot",
+              "kuvaus": "",
+              "lyhytNimi": "Ammattiopinnot",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Yrkesstudier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Vocational studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_1",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_1",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "1",
+          "paivitysPvm": "2015-12-21",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-09-15",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Core studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Grundstudier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Perusopinnot",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_5",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_5",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "5",
+          "paivitysPvm": "2016-05-20",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-09-15",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Kieliopinnot",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Språkstudier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Language studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_9",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_9",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "9",
+          "paivitysPvm": "2015-12-21",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-12-16",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Perus- ja aineopintoja",
+              "kuvaus": "",
+              "lyhytNimi": "Perus- ja aineopintoja",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Core and intermediate studies",
+              "kuvaus": "",
+              "lyhytNimi": "Core and intermediate studies",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Grund- och ämnesstudier",
+              "kuvaus": "",
+              "lyhytNimi": "Grund- och ämnesstudier",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_4",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_4",
+          "version": 4,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "4",
+          "paivitysPvm": "2016-05-20",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-09-15",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Soveltavat opinnot",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Tillämpade studier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Applied studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_7",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_7",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "7",
+          "paivitysPvm": "2016-05-20",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-01-28",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Fritt valbara studier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Free-choice studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Vapaasti valittavat opinnot",
+              "kuvaus": "Vapaasti valittavat opinnot",
+              "lyhytNimi": "Vapaasti valittavat opinnot",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "opinnontyyppi_3",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opinnontyyppi_3",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "opinnontyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "3",
+          "paivitysPvm": "2015-12-21",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-09-15",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Fördjupade studier",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Syventävät opinnot",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Advanced studies",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "EN"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
   }
 ]

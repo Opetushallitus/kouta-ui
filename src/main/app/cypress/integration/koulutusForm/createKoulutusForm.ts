@@ -288,7 +288,11 @@ export const createKoulutusForm = () => {
           paste('Opintojakso nimi')
         );
 
-        getInputByLabel('yleiset.tunniste').pipe(paste('OPHJOD-12345'));
+        getInputByLabel('yleiset.tunniste').pipe(paste('ABC-123'));
+
+        getSelectByLabel('yleiset.opinnonTyyppi').pipe(
+          pFillAsyncSelect('Aineopinnot')
+        );
 
         selectCheckbox(/avoinKorkeakoulutus/);
       });
@@ -330,7 +334,11 @@ export const createKoulutusForm = () => {
           paste('Opintojakso nimi')
         );
 
-        getInputByLabel('yleiset.tunniste').pipe(paste('OPHJOD-12345'));
+        getInputByLabel('yleiset.tunniste').pipe(paste('ABC-123'));
+
+        getSelectByLabel('yleiset.opinnonTyyppi').pipe(
+          pFillAsyncSelect('Muut opinnot')
+        );
       });
 
       withinSection('description', () => {

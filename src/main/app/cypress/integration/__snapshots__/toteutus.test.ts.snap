@@ -3492,13 +3492,13 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
       },
       "suunniteltuKestoVuodet": 2
     },
-    "opinnonTyyppiKoodiUri": null,
+    "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
     "opintojenLaajuusNumero": 10,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
-    "tunniste": "OPHJOD-12345",
+    "tunniste": "ABC-123",
     "tyyppi": "kk-opintokokonaisuus",
     "yhteyshenkilot": [
       {

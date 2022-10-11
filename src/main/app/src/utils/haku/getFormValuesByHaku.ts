@@ -3,7 +3,7 @@ import { toSelectValue } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
 
-export const getFormValuesByHaku = (haku): HakuFormValues => {
+export const getFormValuesByHaku = (haku, formMode?): HakuFormValues => {
   const {
     muokkaaja,
     hakuajat = [],

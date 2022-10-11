@@ -1,7 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
+import { FormMode, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
 import { isNumeric, toSelectValue } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
@@ -28,7 +28,10 @@ function getKoulutusKoodiUrit(
   };
 }
 
-export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
+export const getFormValuesByKoulutus = (
+  koulutus,
+  formMode?
+): KoulutusFormValues => {
   const {
     kielivalinta = [],
     koulutustyyppi = '',
@@ -142,7 +145,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       kuvaus: _fp.mapValues(parseEditorState, kuvaus),
       linkkiEPerusteisiin,
     },
-    esikatselu,
+    esikatselu: formMode === FormMode.CREATE ? true : esikatselu,
     julkinen,
     teemakuva,
     osaamisala: osaamisalaKoodiUri

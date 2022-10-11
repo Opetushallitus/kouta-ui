@@ -1,7 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { MaaraTyyppi, ApurahaYksikko } from '#/src/constants';
+import { MaaraTyyppi, ApurahaYksikko, FormMode } from '#/src/constants';
 import {
   ToteutusFormValues,
   MaksullisuusTyyppi,
@@ -62,7 +62,10 @@ const diplomitToFormValues = diplomit => {
   return result;
 };
 
-const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
+const getFormValuesByToteutus = (
+  toteutus,
+  formMode?: FormMode
+): ToteutusFormValues => {
   const {
     koulutustyyppi,
     kielivalinta,
@@ -124,7 +127,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     externalId,
     koulutustyyppi,
     tila,
-    esikatselu,
+    esikatselu: formMode === FormMode.CREATE ? true : esikatselu,
     tiedot: {
       nimi: nimi ?? {},
       ammatillinenPerustutkintoErityisopetuksena: Boolean(

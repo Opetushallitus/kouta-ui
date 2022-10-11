@@ -261,6 +261,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           : null,
       avoinKorkeakoulutus: values?.tiedot?.avoinKorkeakoulutus || false,
       tunniste: values?.tiedot?.tunniste || null,
+      opinnonTyyppiKoodiUri: values?.tiedot?.opinnonTyyppi?.value || null,
     },
   };
 };

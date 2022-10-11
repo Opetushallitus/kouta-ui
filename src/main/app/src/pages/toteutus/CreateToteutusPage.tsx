@@ -48,6 +48,7 @@ const getInitialValues = ({
   koulutusKielet,
   avoinKorkeakoulutus,
   tunniste,
+  opinnonTyyppiKoodiUri,
 }: {
   toteutus: ToteutusModel;
   koulutustyyppi: KOULUTUSTYYPPI;
@@ -55,6 +56,7 @@ const getInitialValues = ({
   koulutusKielet?: Array<LanguageCode>;
   avoinKorkeakoulutus?: boolean;
   tunniste?: string;
+  opinnonTyyppiKoodiUri?: string;
 }) => {
   return toteutus
     ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
@@ -64,6 +66,7 @@ const getInitialValues = ({
         koulutusKielet,
         avoinKorkeakoulutus,
         tunniste,
+        opinnonTyyppiKoodiUri,
       });
 };
 
@@ -80,6 +83,7 @@ export const CreateToteutusPage = () => {
   const koulutusKielet = koulutus?.kielivalinta;
   const avoinKorkeakoulutus = koulutus?.metadata?.avoinKorkeakoulutus;
   const tunniste = koulutus?.metadata?.tunniste;
+  const opinnonTyyppiKoodiUri = koulutus?.metadata?.opinnonTyyppiKoodiUri;
 
   const { data: toteutus } = usePohjaEntity(ENTITY.TOTEUTUS);
 
@@ -99,6 +103,7 @@ export const CreateToteutusPage = () => {
           koulutusKielet,
           avoinKorkeakoulutus,
           tunniste,
+          opinnonTyyppiKoodiUri,
         })
       : getInitialValues({
           koulutustyyppi,
@@ -106,6 +111,7 @@ export const CreateToteutusPage = () => {
           koulutusKielet,
           avoinKorkeakoulutus,
           tunniste,
+          opinnonTyyppiKoodiUri,
         });
   }, [
     toteutus,
@@ -114,6 +120,7 @@ export const CreateToteutusPage = () => {
     koulutusKielet,
     avoinKorkeakoulutus,
     tunniste,
+    opinnonTyyppiKoodiUri,
   ]);
 
   return (

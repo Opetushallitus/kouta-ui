@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { TunnisteField } from '#/src/components/TunnisteField';
 import { VerticalBox } from '#/src/components/VerticalBox';
@@ -232,6 +233,7 @@ export const KkOpintojaksoTiedotSection = ({
     />
     <JotpaSection name={name} />
     <TunnisteField name={name} />
+    <OpinnonTyyppiField name={name} />
     <AvoinKorkeakoulutusField name={name} />
   </VerticalBox>
 );
@@ -246,6 +248,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
     <NimiSection name={name} language={language} disabled={disabled} />
     <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
     <TunnisteField name={name} />
+    <OpinnonTyyppiField name={name} />
     <AvoinKorkeakoulutusField name={name} />
   </VerticalBox>
 );

@@ -93,6 +93,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -221,6 +222,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -368,6 +370,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -534,6 +537,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -680,6 +684,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -826,6 +831,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -976,6 +982,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -1115,6 +1122,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -1250,6 +1258,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -1384,6 +1393,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -1509,6 +1519,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -1643,6 +1654,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -1779,6 +1791,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -1902,6 +1915,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -2036,6 +2050,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -2320,6 +2335,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -2454,6 +2470,7 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -2588,6 +2605,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -2724,6 +2742,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -2862,6 +2881,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -3007,6 +3027,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -3160,6 +3181,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -3313,6 +3335,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -3457,6 +3480,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": 10,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalat": [],

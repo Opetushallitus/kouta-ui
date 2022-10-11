@@ -26,6 +26,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -77,6 +78,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -126,6 +128,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -194,6 +197,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_300#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -249,6 +253,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -300,6 +305,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -357,6 +363,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -413,6 +420,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_150",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -461,6 +469,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_38#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -517,6 +526,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_38",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -566,6 +576,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 53,
     "opintojenLaajuusNumeroMax": null,
@@ -612,6 +623,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -658,6 +670,7 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -712,6 +725,7 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -766,6 +780,7 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -821,6 +836,7 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -930,6 +946,7 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -976,6 +993,7 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
     },
     "linkkiEPerusteisiin": {},
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 12,
     "opintojenLaajuusNumeroMax": null,
@@ -1022,6 +1040,7 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 13,
     "opintojenLaajuusNumeroMax": null,
@@ -1076,6 +1095,7 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 12,
     "opintojenLaajuusNumeroMax": null,
@@ -1181,6 +1201,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 30,
     "opintojenLaajuusNumeroMax": null,
@@ -1234,6 +1255,7 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -1280,6 +1302,7 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
     },
     "linkkiEPerusteisiin": {},
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -1333,6 +1356,7 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -1386,6 +1410,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": 10,

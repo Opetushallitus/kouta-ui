@@ -8,6 +8,7 @@ import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusFi
 import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
+import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
 import { TunnisteField } from '#/src/components/TunnisteField';
@@ -174,6 +175,7 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
         required
       />
       <TunnisteField name={name} />
+      <OpinnonTyyppiField name={name} />
       <AvoinKorkeakoulutusField name={name} />
     </VerticalBox>
   );
@@ -338,6 +340,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
         required
       />
       <TunnisteField name={name} />
+      <OpinnonTyyppiField name={name} />
       <AvoinKorkeakoulutusField name={name} />
     </VerticalBox>
   );

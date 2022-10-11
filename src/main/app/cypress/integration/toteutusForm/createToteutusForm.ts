@@ -169,7 +169,10 @@ const fillKkOpintokokonaisuusTiedotSection = () => {
       pFillSelect('opintopistettä')
     );
 
-    getInputByLabel('yleiset.tunniste').pipe(paste('OPHJOD-12345'));
+    getInputByLabel('yleiset.tunniste').pipe(paste('ABC-123'));
+
+    getSelectByLabel('yleiset.opinnonTyyppi').pipe(pFillSelect('Aineopinnot'));
+
     selectCheckbox(/avoinKorkeakoulutus/);
   });
 };

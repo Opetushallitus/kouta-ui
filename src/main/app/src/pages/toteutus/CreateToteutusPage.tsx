@@ -53,7 +53,10 @@ const getInitialValues = ({
   koulutusKielet?: Array<LanguageCode>;
 }) => {
   return toteutus
-    ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
+    ? {
+        ...getCopyValues(toteutus.oid),
+        ...getFormValuesByToteutus(toteutus, FormMode.CREATE),
+      }
     : initialValues({ koulutustyyppi, koulutusNimi, koulutusKielet });
 };
 

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { FormMode } from '#/src/constants';
 import { toSelectValue } from '#/src/utils';
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 
@@ -88,6 +89,6 @@ export const getFormValuesByValintaperuste = (valintaperuste, formMode) => {
       valintakokeidenYleiskuvaus,
       formMode
     ),
-    esikatselu,
+    esikatselu: formMode === FormMode.CREATE ? true : esikatselu,
   };
 };

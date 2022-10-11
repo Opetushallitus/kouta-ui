@@ -2,7 +2,7 @@ import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { LUKIO_YLEISLINJA } from '#/src/constants';
+import { FormMode, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { isNumeric, toSelectValue } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -106,7 +106,7 @@ export const getFormValuesByHakukohde = (
     externalId,
     uudenOpiskelijanUrl,
     tila,
-    esikatselu,
+    esikatselu: formMode === FormMode.CREATE ? true : esikatselu,
     kieliversiot: kielivalinta,
     aloituspaikat: {
       aloituspaikkamaara: isNumeric(aloituspaikat?.lukumaara)

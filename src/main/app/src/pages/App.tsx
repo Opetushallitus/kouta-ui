@@ -20,7 +20,15 @@ import { isDev } from '#/src/utils';
 
 import Routes from './Routes';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      retry: 1,
+    },
+  },
+});
 
 const App = ({
   store,

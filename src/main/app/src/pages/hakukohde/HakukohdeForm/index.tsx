@@ -8,7 +8,7 @@ export { HakukohdeForm } from './HakukohdeForm';
 
 export const initialValues = (koulutustyyppi, toteutus, haku, oid) => ({
   tila: DEFAULT_JULKAISUTILA,
-  esikatselu: false,
+  esikatselu: true,
   kieliversiot: toteutus?.kielivalinta,
   perustiedot: checkHasHakukohdeKoodiUri(koulutustyyppi, haku)
     ? {}

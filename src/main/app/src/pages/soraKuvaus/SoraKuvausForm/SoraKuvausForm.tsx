@@ -37,13 +37,7 @@ const SoraKuvausForm = ({
           header={t('yleiset.organisaatio')}
         />
       )}
-      <FormCollapse
-        section="koulutustyyppi"
-        header={t('yleiset.koulutustyyppi')}
-        scrollOnActive={false}
-        Component={KoulutustyyppiSection}
-        canEditKoulutustyyppi={canEditKoulutustyyppi}
-      />
+
       {formMode === FormMode.CREATE ? (
         <PohjaFormCollapse
           entityType={ENTITY.SORA_KUVAUS}
@@ -54,17 +48,28 @@ const SoraKuvausForm = ({
           copyLabel={t('soraKuvauslomake.kopioiPohjaksi')}
         />
       ) : null}
+
+      <FormCollapse
+        section="koulutustyyppi"
+        header={t('yleiset.koulutustyyppi')}
+        scrollOnActive={false}
+        Component={KoulutustyyppiSection}
+        canEditKoulutustyyppi={canEditKoulutustyyppi}
+      />
+
       <FormCollapse
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}
         Component={KieliversiotFields}
       />
+
       <FormCollapse
         section="tiedot"
         header={t('soraKuvauslomake.soraKuvauksenTiedot')}
         languages={languageTabs}
         Component={TiedotSection}
       />
+
       <FormCollapse
         section="tila"
         header={t('soraKuvauslomake.soraKuvauksenTila')}

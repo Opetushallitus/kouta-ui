@@ -50,14 +50,6 @@ export const ValintaperusteForm = ({
           header={t('yleiset.organisaatio')}
         />
       )}
-      <FormCollapse
-        section="perustiedot"
-        header={t('valintaperustelomake.valintaperusteenPerustiedot')}
-        scrollOnActive={false}
-        Component={PerustiedotSection}
-        canEditTyyppi={canEditTyyppi}
-        organisaatioOid={organisaatioOid}
-      />
 
       {formMode === FormMode.CREATE && (
         <PohjaFormCollapse
@@ -69,6 +61,15 @@ export const ValintaperusteForm = ({
           copyLabel={t('valintaperustelomake.kopioiPohjaksi')}
         />
       )}
+
+      <FormCollapse
+        section="perustiedot"
+        header={t('valintaperustelomake.valintaperusteenPerustiedot')}
+        scrollOnActive={false}
+        Component={PerustiedotSection}
+        canEditTyyppi={canEditTyyppi}
+        organisaatioOid={organisaatioOid}
+      />
 
       <FormCollapse
         section="hakukelpoisuus"
@@ -83,6 +84,7 @@ export const ValintaperusteForm = ({
         languages={languages}
         Component={KuvausSection}
       />
+
       {koulutustyyppi && (
         <>
           {KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi) && (

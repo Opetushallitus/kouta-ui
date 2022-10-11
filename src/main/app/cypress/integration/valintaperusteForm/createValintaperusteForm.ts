@@ -166,8 +166,8 @@ export const createValintaperusteForm = () => {
         }
       );
 
-      fillPerustiedotSection();
       fillPohjaSection();
+      fillPerustiedotSection();
       fillHakukelpoisuusSection();
       fillKuvausSection();
       fillValintatapaSection();

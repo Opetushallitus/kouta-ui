@@ -46,7 +46,7 @@ const HaunAsetuksetButton = ({ haku }) => {
   );
 };
 
-const LomakeSelect = ({ input, haku, getShowUrl, ...props }) => {
+const LomakeSelect = ({ input, haku, getShowUrl, hakutapa, ...props }) => {
   const { value } = input;
   const url = useAtaruLomakeUrl(value);
 
@@ -56,6 +56,7 @@ const LomakeSelect = ({ input, haku, getShowUrl, ...props }) => {
 
   const ataruOptions = useLomakeOptions({
     language: userLanguage,
+    hakutapa,
   });
 
   return (
@@ -94,6 +95,7 @@ const AdditionalTyyppiFields = ({
   baseName,
   haku,
   language,
+  hakutapa,
 }) => {
   const { t } = useTranslation();
   switch (value) {
@@ -105,6 +107,7 @@ const AdditionalTyyppiFields = ({
           label={t('yleiset.valitseHakulomake')}
           haku={haku}
           required
+          hakutapa={hakutapa}
         />
       );
     case HAKULOMAKETYYPPI.MUU:
@@ -163,6 +166,7 @@ type LomakeFieldsProps = {
   tyypit?: Array<HAKULOMAKETYYPPI>;
   optionsLabel?: string;
   language?: LanguageCode;
+  hakutapa?: string;
 };
 
 export const LomakeFields = ({
@@ -171,6 +175,7 @@ export const LomakeFields = ({
   tyypit = defaultTyypit,
   optionsLabel,
   language: translationLanguage = 'fi',
+  hakutapa,
 }: LomakeFieldsProps) => {
   const { t } = useTranslation();
 
@@ -201,6 +206,7 @@ export const LomakeFields = ({
           component={AdditionalTyyppiFields}
           language={translationLanguage}
           haku={haku}
+          hakutapa={hakutapa}
         />
       </Box>
     </Box>

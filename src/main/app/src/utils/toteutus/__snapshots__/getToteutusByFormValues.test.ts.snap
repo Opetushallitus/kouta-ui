@@ -109,6 +109,7 @@ Object {
       "fi": "<p>Fi toteutuksenkuvaus</p>",
       "sv": "<p>Sv toteutuksenkuvaus</p>",
     },
+    "liitetytOpintojaksot": undefined,
     "lisatietoaHakeutumisesta": Object {
       "fi": "<p>Fi lisatiedot</p>",
       "sv": "<p>Sv sisalto</p>",

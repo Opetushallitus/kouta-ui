@@ -634,6 +634,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -781,6 +782,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -932,6 +934,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       ]
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1072,6 +1075,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1343,6 +1347,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -1604,6 +1609,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2000,6 +2006,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2692,6 +2699,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -2831,6 +2839,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       "muutKielet": []
     },
     "kuvaus": {},
+    "liitetytOpintojaksot": [],
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
@@ -3418,6 +3427,9 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
+    "liitetytOpintojaksot": [
+      "1.2.246.562.17.00000000000000008264"
+    ],
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },

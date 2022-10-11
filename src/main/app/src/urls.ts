@@ -28,6 +28,7 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.toteutus-by-oid': `${koutaBackendDevUrl}/toteutus/$1`,
   'kouta-backend.toteutus-list': `${koutaBackendDevUrl}/toteutus/list`,
   'kouta-backend.toteutus-hakukohteet': `${koutaBackendDevUrl}/toteutus/$1/hakukohteet/list`,
+  'kouta-backend.toteutus-opintojaksot': `${koutaBackendDevUrl}/toteutus/opintojaksot/list`,
   'kouta-backend.toteutus-copy': `${koutaBackendDevUrl}/toteutus/copy`,
   'kouta-backend.haku': `${koutaBackendDevUrl}/haku`,
   'kouta-backend.haku-by-oid': `${koutaBackendDevUrl}/haku/$1`,

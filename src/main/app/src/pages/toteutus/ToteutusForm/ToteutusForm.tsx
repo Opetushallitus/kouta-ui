@@ -38,11 +38,12 @@ import { JarjestamispaikatSection } from './JarjestamispaikatSection';
 import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
 import { LukiolinjatSection } from './LukiolinjatSection';
 import { NayttamisTiedotSection } from './NayttamisTiedotSection';
+import { OpintojaksojenLiittamisSection } from './OpintojaksojenLiittamisSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
 import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
-  AmmOpoJaErityisopeTiedotSection,
+  OpettajaTiedotSection,
   KkOpintojaksoTiedotSection,
   KkOpintokokonaisuusTiedotSection,
   LukioTiedotSection,
@@ -180,10 +181,11 @@ const ToteutusForm = ({
               () => TutkinnonOsaTiedotSection,
             ],
             [
-              _fp.isEqual(
-                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS
-              ),
-              () => AmmOpoJaErityisopeTiedotSection,
+              isIn([
+                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+                KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
+              ]),
+              () => OpettajaTiedotSection,
             ],
             [
               _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
@@ -214,7 +216,15 @@ const ToteutusForm = ({
           languages={languages}
           Component={ToteutuksenKuvausSection}
         />
-
+        {koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS && (
+          <FormCollapse
+            section="opintojaksojenLiittaminen"
+            header={t('toteutuslomake.opintojaksojenLiittaminen')}
+            Component={OpintojaksojenLiittamisSection}
+            organisaatioOid={organisaatioOid}
+            entity={toteutus}
+          />
+        )}
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
           !isDIAkoulutus &&
           !isEBkoulutus && (

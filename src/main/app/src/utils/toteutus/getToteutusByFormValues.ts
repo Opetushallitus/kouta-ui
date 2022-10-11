@@ -259,6 +259,9 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
                 : HTIT?.hakuaikaPaattyy,
             }
           : null,
+      liitetytOpintojaksot: values?.opintojaksojenLiittaminen?.opintojaksot
+        ?.map(opintojakso => opintojakso?.opintojakso?.value)
+        .filter(Boolean),
       avoinKorkeakoulutus: values?.tiedot?.avoinKorkeakoulutus || false,
       tunniste: values?.tiedot?.tunniste || null,
       opinnonTyyppiKoodiUri: values?.tiedot?.opinnonTyyppi?.value || null,

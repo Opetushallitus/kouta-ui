@@ -280,6 +280,15 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       hakuaikaPaattyy: metadata?.hakuaika?.paattyy,
     },
     soraKuvaus: toSelectValue(sorakuvausId),
+    opintojaksojenLiittaminen: {
+      opintojaksot: (metadata?.liitetytOpintojaksot || []).map(opintojakso => {
+        return {
+          opintojakso: {
+            value: opintojakso,
+          },
+        };
+      }),
+    },
   };
 };
 

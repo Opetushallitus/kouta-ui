@@ -69,8 +69,10 @@ const useNakyvyysOptions = t =>
   );
 
 export const Filters = ({
-  nimi,
+  nimi = '',
+  hakuNimi = '',
   onNimiChange,
+  onHakuNimiChange,
   onTilaChange,
   onKoulutustyyppiChange,
   nimiPlaceholder = '',
@@ -86,6 +88,7 @@ export const Filters = ({
   onKoulutuksenAlkamisvuosiChange,
   orgWhitelist,
   onOrgWhitelistChange,
+  entityType,
 }) => {
   const { t } = useTranslation();
 
@@ -127,13 +130,27 @@ export const Filters = ({
     NAME_INPUT_DEBOUNCE_TIME
   );
 
+  const [usedHakuNimi, setUsedHakuNimi, debouncedHakuNimi] = useDebounceState(
+    hakuNimi,
+    NAME_INPUT_DEBOUNCE_TIME
+  );
+
   useEffect(() => {
     onNimiChange(debouncedNimi);
   }, [onNimiChange, debouncedNimi]);
 
+  useEffect(() => {
+    onHakuNimiChange(debouncedHakuNimi);
+  }, [onHakuNimiChange, debouncedHakuNimi]);
+
   const onNimiChangeDebounced = useCallback(
     e => setUsedNimi(e.target.value),
     [setUsedNimi]
+  );
+
+  const onHakuNimiChangeDebounced = useCallback(
+    e => setUsedHakuNimi(e.target.value),
+    [setUsedHakuNimi]
   );
 
   const nakyvyysOptions = useNakyvyysOptions(t);
@@ -153,6 +170,16 @@ export const Filters = ({
           suffix={<InputIcon type="search" />}
         />
       </Box>
+      {entityType === 'hakukohde' ? (
+        <Box flexGrow={1} minWidth="100px" flexBasis="400px" paddingRight={2}>
+          <Input
+            placeholder={t('etusivu.haeHakuja')}
+            value={usedHakuNimi}
+            onChange={onHakuNimiChangeDebounced}
+            suffix={<InputIcon type="search" />}
+          />
+        </Box>
+      ) : null}
       {onKoulutustyyppiChange && (
         <Box flexGrow={1} minWidth="200px" paddingRight={2}>
           <Select

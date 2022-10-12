@@ -15,6 +15,7 @@ export const useFilterState = (name: ENTITY) => {
 
   const {
     nimi,
+    hakuNimi,
     koulutustyyppi,
     page,
     orderBy,
@@ -26,6 +27,8 @@ export const useFilterState = (name: ENTITY) => {
     koulutuksenAlkamisvuosi,
     orgWhitelist,
   } = useSelector(getPagination(name));
+
+  const entityType = name;
 
   const setPagination = useCallback(
     pagination => dispatch(setPaginationAction({ name, ...pagination })),
@@ -55,6 +58,12 @@ export const useFilterState = (name: ENTITY) => {
     nimi => setPagination({ page: 0, nimi }),
     [setPagination]
   );
+
+  const setHakuNimi = useCallback(
+    hakuNimi => setPagination({ page: 0, hakuNimi }),
+    [setPagination]
+  );
+
   let setKoulutustyyppi;
   if (name !== ENTITY.HAKU) {
     setKoulutustyyppi = koulutustyyppi =>
@@ -88,6 +97,8 @@ export const useFilterState = (name: ENTITY) => {
     () => ({
       nimi,
       setNimi,
+      hakuNimi,
+      setHakuNimi,
       koulutustyyppi,
       setKoulutustyyppi,
       page,
@@ -102,11 +113,14 @@ export const useFilterState = (name: ENTITY) => {
       koulutuksenAlkamiskausi,
       koulutuksenAlkamisvuosi,
       orgWhitelist,
+      entityType,
       filtersProps: {
         nimi,
+        hakuNimi,
         koulutustyyppi,
         tila,
         onNimiChange: setNimi,
+        onHakuNimiChange: setHakuNimi,
         onKoulutustyyppiChange: setKoulutustyyppi,
         onTilaChange: setTila,
         hakutapa,
@@ -119,18 +133,21 @@ export const useFilterState = (name: ENTITY) => {
         onKoulutuksenAlkamisvuosiChange: setKoulutuksenAlkamisvuosi,
         orgWhitelist,
         onOrgWhitelistChange: setOrgWhitelist,
+        entityType,
       },
     }),
     [
       page,
       setPagination,
       nimi,
+      hakuNimi,
       koulutustyyppi,
       tila,
       orderBy,
       setTila,
       setKoulutustyyppi,
       setNimi,
+      setHakuNimi,
       julkinen,
       hakutapa,
       setHakutapa,
@@ -142,6 +159,7 @@ export const useFilterState = (name: ENTITY) => {
       setKoulutuksenAlkamisvuosi,
       orgWhitelist,
       setOrgWhitelist,
+      entityType,
     ]
   );
 };

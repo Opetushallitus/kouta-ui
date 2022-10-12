@@ -42,6 +42,7 @@ const nakyvyysToBoolean = v => {
 export const getIndexParamsByFilters = ({
   organisaatioOid,
   nimi,
+  hakuNimi,
   page,
   orderBy,
   tila,
@@ -53,10 +54,10 @@ export const getIndexParamsByFilters = ({
   orgWhitelist,
 }) => {
   const [orderField, orderDirection] = parseSort(orderBy);
-
   return {
     organisaatioOid,
     nimi,
+    hakuNimi,
     page: _fp.isNumber(page) ? page + 1 : 1,
     pageSize: 10,
     orderField,

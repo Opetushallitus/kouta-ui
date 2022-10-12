@@ -8,6 +8,7 @@ const isValidQueryStringValue = x =>
 export const getSearchQueryParams = ({
   organisaatioOid,
   nimi = '',
+  hakuNimi = '',
   language = 'fi',
   pageSize = FILTER_PAGE_SIZE,
   page = 1,
@@ -23,6 +24,7 @@ export const getSearchQueryParams = ({
 }) =>
   _fp.pickBy(isValidQueryStringValue, {
     nimi,
+    hakuNimi,
     'order-by': orderField,
     order: orderDirection,
     tila: _fp.join(',', tila),

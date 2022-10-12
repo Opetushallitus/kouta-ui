@@ -17,7 +17,6 @@ export const OpintojaksojenLiittamisSection = ({
 }) => {
   const { t } = useTranslation();
 
-  console.log({ name });
   return (
     <Box mb={2} {...getTestIdProps('opintojaksojenLiittaminen')}>
       <FieldGroup

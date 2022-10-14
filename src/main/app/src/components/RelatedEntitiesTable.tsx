@@ -19,6 +19,8 @@ export const RelatedEntitiesTable = function ({
 }) {
   const { t, i18n } = useTranslation();
 
+  console.log('DATA: ' + JSON.stringify(data, null, 4));
+
   const rows = useMemo(() => {
     return (
       data &&

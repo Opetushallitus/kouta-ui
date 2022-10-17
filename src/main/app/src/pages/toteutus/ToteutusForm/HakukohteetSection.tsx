@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
   makeModifiedColumn,
   makeNimiColumn,
+  makeHakuColumn,
   makeTilaColumn,
   makeOrganisaatioColumn,
 } from '#/src/components/ListTable';
@@ -18,6 +19,10 @@ const useTableColumns = (t, organisaatioOid) =>
       makeNimiColumn(t, {
         getLinkUrl: ({ oid }) =>
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+      }),
+      makeHakuColumn(t, {
+        getLinkUrl: ({ hakuOid }) =>
+          `/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus/`,
       }),
       makeOrganisaatioColumn(t),
       makeTilaColumn(t),

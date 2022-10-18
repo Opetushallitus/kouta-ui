@@ -36,6 +36,7 @@ function getAloituspaikat(values: HakukohdeFormValues) {
 }
 
 function getPainotetutArvosanatData(arvosanat) {
+  console.log(JSON.stringify(arvosanat, null, 4));
   return (arvosanat || [])
     .map(arvosana => {
       return {
@@ -46,7 +47,8 @@ function getPainotetutArvosanatData(arvosanat) {
       };
     })
     .filter(
-      arvosana => arvosana.painokerroin || !_fp.isEmpty(arvosana.koodiUrit)
+      arvosana =>
+        arvosana.painokerroin || !_fp.isEmpty(arvosana.koodiUrit?.oppiaine)
     );
 }
 

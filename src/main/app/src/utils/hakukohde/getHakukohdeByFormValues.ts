@@ -46,7 +46,8 @@ function getPainotetutArvosanatData(arvosanat) {
       };
     })
     .filter(
-      arvosana => arvosana.painokerroin || !_fp.isEmpty(arvosana.koodiUrit)
+      arvosana =>
+        arvosana.painokerroin || !_fp.isEmpty(arvosana.koodiUrit?.oppiaine)
     );
 }
 

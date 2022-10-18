@@ -36,7 +36,6 @@ function getAloituspaikat(values: HakukohdeFormValues) {
 }
 
 function getPainotetutArvosanatData(arvosanat) {
-  console.log(JSON.stringify(arvosanat, null, 4));
   return (arvosanat || [])
     .map(arvosana => {
       return {

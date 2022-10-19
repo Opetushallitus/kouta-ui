@@ -18,7 +18,6 @@ import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { HakuModel } from '#/src/types/hakuTypes';
 
 import { useAtaruLomakeUrl, useLomakeOptions } from './utils';
-import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 const Buttons = styled.div`
   display: flex;
@@ -57,7 +56,7 @@ const LomakeSelect = ({ input, haku, getShowUrl, hakutapa, ...props }) => {
 
   const ataruOptions = useLomakeOptions({
     language: userLanguage,
-    hakutapa
+    hakutapa,
   });
 
   return (
@@ -96,7 +95,7 @@ const AdditionalTyyppiFields = ({
   baseName,
   haku,
   language,
-  hakutapa
+  hakutapa,
 }) => {
   const { t } = useTranslation();
   switch (value) {
@@ -176,7 +175,7 @@ export const LomakeFields = ({
   tyypit = defaultTyypit,
   optionsLabel,
   language: translationLanguage = 'fi',
-  hakutapa
+  hakutapa,
 }: LomakeFieldsProps) => {
   const { t } = useTranslation();
 

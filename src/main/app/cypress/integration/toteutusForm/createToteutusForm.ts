@@ -389,6 +389,32 @@ const fillKuvausSection = () => {
   });
 };
 
+const fillLiitetytOpintojaksotSection = () => {
+  withinSection('opintojaksojenLiittaminen', () => {
+    cy.findByRole('button', {
+      name: /toteutuslomake\.lisaaOpintojakso/,
+    }).click();
+
+    getByTestId('opintojakso-0').within(() => {
+      selectOption('Testitoteutus 1');
+    });
+
+    cy.findByRole('button', {
+      name: /toteutuslomake\.lisaaOpintojakso/,
+    }).click();
+
+    getByTestId('opintojakso-1').within(() => {
+      selectOption('Testitoteutus 2');
+    });
+
+    getByTestId('opintojakso-0').within(() => {
+      cy.findByRole('button', { name: /yleiset\.poistaRivi/ }).click();
+    });
+
+    cy.findAllByTestId(/^opintojakso-\d?$/).should('have.length', 1);
+  });
+};
+
 const fillHakeutumisTaiIlmoittautumistapaSection = () => {
   withinSection('hakeutumisTaiIlmoittautumistapa', () => {
     cy.findByRole('button', {
@@ -603,7 +629,7 @@ export const createToteutusForm = () => {
       fillKieliversiotSection();
       fillKkOpintokokonaisuusTiedotSection();
       fillKuvausSection();
-
+      fillLiitetytOpintojaksotSection();
       fillJarjestamistiedotWithApuraha();
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();

@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useHakemuspalveluLomakkeet } from '#/src/utils/api/getHakemuspalveluLomakkeet';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 export const useAtaruLomakeUrl = option => {
   const apiUrls = useUrls();
@@ -13,9 +13,10 @@ export const useAtaruLomakeUrl = option => {
 };
 
 const filterOutOnlyYhteishakuForms = (hakutapa: string) => {
-  const noYhteishakuForms = !(isYhteishakuHakutapa(hakutapa));
-  return (form: any) => !noYhteishakuForms || form?.properties?.['allow-only-yhteishaut'] !== true
-}
+  const noYhteishakuForms = !isYhteishakuHakutapa(hakutapa);
+  return (form: any) =>
+    !noYhteishakuForms || form?.properties?.['allow-only-yhteishaut'] !== true;
+};
 
 export const useLomakeOptions = ({ language, hakutapa }) => {
   const { data: ataruLomakkeet = [] } = useHakemuspalveluLomakkeet();
@@ -23,11 +24,11 @@ export const useLomakeOptions = ({ language, hakutapa }) => {
   return useMemo(
     () =>
       ataruLomakkeet
-      .filter(filterOutOnlyYhteishakuForms(hakutapa))
-      .map(({ name, key }) => ({
-        value: key,
-        label: getFirstLanguageValue(name, language),
-      })),
+        .filter(filterOutOnlyYhteishakuForms(hakutapa))
+        .map(({ name, key }) => ({
+          value: key,
+          label: getFirstLanguageValue(name, language),
+        })),
     [ataruLomakkeet, language, hakutapa]
   );
 };

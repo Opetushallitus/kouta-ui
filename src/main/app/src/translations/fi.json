@@ -332,6 +332,7 @@
     "invalidToteutusOpintojenLaajuusNumeroIntegrity": "Laajuus ei vastaa koulutukselle syötettyä laajuusrajoitetta",
     "invalidToteutusOpintojenLaajuusyksikkoIntegrity": "Laajuusyksikkö ei vastaa koulutukselle syötettyä laajuusyksikköä",
     "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon",
+    "invalidTilaForLiitettyOpintojaksoOnJulkaisu": "Väärä julkaisutila: kaikkien julkaistuun opintokokonaisuuteen liitettyjen opintojaksojen tulee olla julkaistuja.",
     "nimiJollainKielellaPakollinen": "Lisää yhteystiedon nimi"
   },
   "hakulomakeValinnat": {
@@ -582,7 +583,12 @@
     "lukionYleislinjaNimiOsa": "Lukio",
     "lukionYleislinjaValinta": "Lukion yleislinja",
     "lukionYleislinjaOhjeteksti": "Toteutuksella on pakko olla vähintään yleislinja, jos muita linjoja ei ole valittu. Valitse painotuksia tai yleisiä koulutustehtäviä poistaaksesi yleislinja-valinnan.",
-    "virheellinenOsaamisalaValinta": "Seuraavat osaamisalat eivät kuulu valitun koulutuksen eperusteisiin ja tulisi poistaa toteutukselta"
+    "virheellinenOsaamisalaValinta": "Seuraavat osaamisalat eivät kuulu valitun koulutuksen eperusteisiin ja tulisi poistaa toteutukselta",
+    "opintojakso": "Opintojakso",
+    "opintojaksot": "Opintojaksot",
+    "opintojaksojenLiittaminen": "Opintojaksojen liittäminen opintokokonaisuuteen",
+    "lisaaOpintojakso": "Lisää opintojakso",
+    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

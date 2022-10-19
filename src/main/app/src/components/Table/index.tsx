@@ -16,10 +16,11 @@ const Wrapper = styled.div`
 `;
 
 const SortIcon = styled(Icon)`
-  margin-left: ${spacing(0.5)};
+  margin-left: ${spacing(1.0)};
   color: ${getThemeProp('palette.text.primary')};
   cursor: pointer;
   font-size: 1.2rem;
+  width: 100%;
 `;
 
 const SortContainer = styled.div`
@@ -134,6 +135,7 @@ type TableCellProps = {
 } & React.HTMLProps<HTMLTableCellElement>;
 
 export const TableCell = ({
+  key,
   sortDirection,
   onSort,
   children,
@@ -144,17 +146,21 @@ export const TableCell = ({
       {_.isFunction(onSort) ? (
         <SortContainer
           onClick={() => {
-            onSort(sortDirection === 'desc' ? 'asc' : 'desc');
+            onSort(sortDirection === 'asc' ? 'desc' : 'asc');
           }}
         >
           {children}
           {sortDirection ? (
             <SortIcon
               type={
-                sortDirection === 'desc' ? 'arrow_drop_down' : 'arrow_drop_up'
+                sortDirection === 'desc'
+                  ? 'keyboard_arrow_down'
+                  : 'keyboard_arrow_up'
               }
             />
-          ) : null}
+          ) : (
+            <SortIcon type={'unfold_more'} />
+          )}
         </SortContainer>
       ) : (
         children

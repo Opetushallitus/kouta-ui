@@ -276,11 +276,17 @@ export const ListTable = ({
               style,
             } = columnProps;
             const sortable = isTableSortable && isColumnSortable;
+            const sortWithDefault = key === 'nimi' && !sort ? 'nimi:asc' : sort;
             return (
               <TableCell
                 key={key}
                 sortDirection={
-                  sortable ? getSortDirection({ sort, name: key }) : null
+                  sortable
+                    ? getSortDirection({
+                        sort: sortWithDefault,
+                        name: key,
+                      })
+                    : null
                 }
                 onSort={sortable ? makeOnSort({ name: key, onSort }) : null}
                 style={style}

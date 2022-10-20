@@ -23,6 +23,9 @@ export const makeFilteredEntitySearch =
     if (filterParams.toteutusOid) {
       params.toteutusOid = filterParams.toteutusOid;
     }
+    if (filterParams.koulutusOid) {
+      params.koulutusOid = filterParams.koulutusOid;
+    }
     const { data } = await httpClient.get(apiUrls.url(urlKey), {
       params,
       errorNotifier: {

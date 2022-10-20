@@ -3,22 +3,22 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
-import { useKoulutuksenToteutukset } from '#/src/utils/koulutus/useKoulutuksenToteutukset';
+import { useFilteredToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
 export const ToteutuksetSection = function ({ koulutus, organisaatioOid }) {
   const { t } = useTranslation();
-  const { data: enrichedKoulutus } = useKoulutuksenToteutukset(
-    {
-      organisaatioOid,
-      koulutusOid: koulutus?.oid,
-    },
-    { refetchOnWindowFocus: false }
+
+  const { data } = useFilteredToteutukset(
+    { koulutusOid: koulutus?.oid },
+    organisaatioOid
   );
+
+  const toteutukset = data?.result;
 
   return (
     <RelatedEntitiesTable
       {...{
-        data: enrichedKoulutus?.toteutukset,
+        data: toteutukset,
         getLinkUrl: ({ oid }) =>
           `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
         noResultsMessage: t('koulutuslomake.koulutuksellaEiToteutuksia'),

@@ -25,8 +25,8 @@ export const getSearchQueryParams = ({
   _fp.pickBy(isValidQueryStringValue, {
     nimi,
     hakuNimi,
-    'order-by': orderField,
-    order: orderDirection,
+    'order-by': orderField || 'nimi',
+    order: orderDirection || 'asc',
     tila: _fp.join(',', tila),
     organisaatioOid,
     lng: language,

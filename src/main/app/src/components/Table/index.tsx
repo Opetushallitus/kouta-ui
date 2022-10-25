@@ -134,6 +134,17 @@ type TableCellProps = {
   active?: boolean;
 } & React.HTMLProps<HTMLTableCellElement>;
 
+const getSortIconType = (sortDirection: any) => {
+  switch (sortDirection) {
+    case 'asc':
+      return 'keyboard_arrow_up';
+    case 'desc':
+      return 'keyboard_arrow_down';
+    default:
+      return 'unfold_more';
+  }
+};
+
 export const TableCell = ({
   key,
   sortDirection,
@@ -150,17 +161,7 @@ export const TableCell = ({
           }}
         >
           {children}
-          {sortDirection ? (
-            <SortIcon
-              type={
-                sortDirection === 'desc'
-                  ? 'keyboard_arrow_down'
-                  : 'keyboard_arrow_up'
-              }
-            />
-          ) : (
-            <SortIcon type={'unfold_more'} />
-          )}
+          <SortIcon type={getSortIconType(sortDirection)} />
         </SortContainer>
       ) : (
         children

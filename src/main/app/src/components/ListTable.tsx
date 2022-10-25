@@ -25,11 +25,13 @@ export const makeOnSort =
     onSort(`${name}:${dir}`);
 
 export const getSortDirection = ({ sort, name }) => {
-  if (!sort) {
+  const sortWithDefault = name === 'nimi' && !sort ? 'nimi:asc' : sort;
+
+  if (!sortWithDefault) {
     return null;
   }
 
-  const [sortName, dir] = sort.split(':');
+  const [sortName, dir] = sortWithDefault.split(':');
 
   if (!dir) {
     return null;
@@ -276,14 +278,13 @@ export const ListTable = ({
               style,
             } = columnProps;
             const sortable = isTableSortable && isColumnSortable;
-            const sortWithDefault = key === 'nimi' && !sort ? 'nimi:asc' : sort;
             return (
               <TableCell
                 key={key}
                 sortDirection={
                   sortable
                     ? getSortDirection({
-                        sort: sortWithDefault,
+                        sort: sort,
                         name: key,
                       })
                     : null

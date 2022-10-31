@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -12,14 +14,18 @@ export const OpintojenLaajuusFieldExtended = ({
   name,
   disabled,
   required = false,
+  hardcodedLaajuusYksikko = '',
 }) => {
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
-  const { options } = useKoodistoOptions({
+  let { options } = useKoodistoOptions({
     koodisto: 'opintojenlaajuusyksikko',
     language: selectedLanguage,
   });
 
+  if (hardcodedLaajuusYksikko !== '') {
+    options = options.filter(o => o.value === hardcodedLaajuusYksikko);
+  }
   return (
     <Box display="flex" mx={-1}>
       <Box px={1} flexGrow={1}>

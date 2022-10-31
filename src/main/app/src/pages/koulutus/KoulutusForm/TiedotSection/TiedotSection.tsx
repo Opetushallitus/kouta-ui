@@ -29,7 +29,6 @@ import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
 import KoulutusalatField from './KoulutusalatField';
 import { OpettajaKoulutusTiedotSubSection } from './OpettajaKoulutusTiedotSubSection';
-import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
 
 const useNimiFromKoulutustyyppi = ({ name, koulutustyyppi }) => {
@@ -77,7 +76,12 @@ export const TuvaTiedotSection = ({
 }) => {
   return (
     <VerticalBox gap={2}>
-      <OpintojenlaajuusField disabled={disabled} name={name} required />
+      <OpintojenLaajuusFieldExtended
+        disabled={disabled}
+        name={name}
+        required
+        hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_8#1'}
+      />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
         name={name}
@@ -87,7 +91,28 @@ export const TuvaTiedotSection = ({
   );
 };
 
-export const TelmaTiedotSection = TuvaTiedotSection;
+export const TelmaTiedotSection = ({
+  disabled,
+  language,
+  name,
+  koulutustyyppi,
+}) => {
+  return (
+    <VerticalBox gap={2}>
+      <OpintojenLaajuusFieldExtended
+        disabled={disabled}
+        name={name}
+        required
+        hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_6#1'}
+      />
+      <NimiFieldFromKoulutustyyppi
+        koulutustyyppi={koulutustyyppi}
+        name={name}
+        language={language}
+      />
+    </VerticalBox>
+  );
+};
 
 export const AikuistenPerusopetusTiedotSection = ({
   disabled,
@@ -124,7 +149,12 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
   const { t } = useTranslation();
   return (
     <VerticalBox gap={2}>
-      <OpintojenlaajuusField disabled={disabled} name={name} required />
+      <OpintojenLaajuusFieldExtended
+        disabled={disabled}
+        name={name}
+        required
+        hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_2#1'}
+      />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}
@@ -234,7 +264,6 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
       ? `${name}.korkeakoulutukset`
       : `${name}.koulutus`,
   });
-
   return (
     <VerticalBox gap={2}>
       {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
@@ -260,7 +289,11 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
             />
           </Box>
 
-          <OpintojenlaajuusField disabled={disabled} name={name} />
+          <OpintojenLaajuusFieldExtended
+            disabled={disabled}
+            name={name}
+            hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_2#1'}
+          />
           <TutkintonimikeField disabled={disabled} name={name} />
           <KoulutusalatField disabled={disabled} name={name} />
         </>
@@ -277,7 +310,11 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
               required
             />
           </Box>
-          <OpintojenlaajuusField disabled={disabled} name={name} />
+          <OpintojenLaajuusFieldExtended
+            disabled={disabled}
+            name={name}
+            hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_2#1'}
+          />
           <ReadOnlyKoulutusalaSection
             koodiUri={KoulutusalaKoodi.YLEISSIVISTAVA}
           />

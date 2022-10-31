@@ -232,8 +232,8 @@ export const createKoulutusForm = () => {
           pFillAsyncSelect('Fysioterapeutti (AMK)')
         );
 
-        getSelectByLabel('koulutuslomake.valitseOpintojenLaajuus').pipe(
-          pFillSelect('300')
+        getSelectByLabel('yleiset.laajuusyksikko').pipe(
+          pFillSelect('opintopistettä')
         );
 
         getSelectByLabel('koulutuslomake.valitseTutkintonimike').pipe(

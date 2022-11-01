@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
+import { useActor } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
@@ -13,6 +14,8 @@ import {
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
+import { FilterStateContext } from '#/src/pages/HomePage/FilterStateProvider';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 import { EntitySearchList } from '../EntitySearchList';
@@ -59,6 +62,12 @@ const Actions = ({ organisaatioOid }) => {
 
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
+  const filterServices = useContext(FilterStateContext);
+
+  const [state] = useActor(filterServices.filterService);
+  const { send } = filterServices.filterService;
+
+  const filterState = useFilterState(HAKUKOHDE, state, send);
 
   const columns = useTableColumns(t, organisaatioOid);
   return (
@@ -78,6 +87,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
           entityType={HAKUKOHDE}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeHakukohteita')}
+          filterState={filterState}
         />
       </ListCollapse>
     </>

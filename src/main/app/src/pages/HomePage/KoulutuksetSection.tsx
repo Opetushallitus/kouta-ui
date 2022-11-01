@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
+import { useActor } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +15,8 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
+import { FilterStateContext } from '#/src/pages/HomePage/FilterStateProvider';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchKoulutukset } from '#/src/utils/koulutus/searchKoulutukset';
 
 import { EntitySearchList } from './EntitySearchList';
@@ -57,6 +60,13 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const columns = useTableColumns(t, organisaatioOid);
+
+  const filterServices = useContext(FilterStateContext);
+
+  const [state] = useActor(filterServices.filterService);
+  const { send } = filterServices.filterService;
+
+  const filterState = useFilterState(KOULUTUS, state, send);
   return (
     <>
       <NavigationAnchor id="koulutukset" />
@@ -74,6 +84,7 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           entityType={KOULUTUS}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeKoulutuksia')}
+          filterState={filterState}
         />
       </ListCollapse>
     </>

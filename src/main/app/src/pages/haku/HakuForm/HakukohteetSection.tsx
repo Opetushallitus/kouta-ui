@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
+import { useActor } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -10,6 +11,8 @@ import {
 } from '#/src/components/ListTable';
 import { ENTITY } from '#/src/constants';
 import { EntitySearchList } from '#/src/pages/HomePage/EntitySearchList';
+import { FilterStateContext } from '#/src/pages/HomePage/FilterStateProvider';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 const useTableColumns = (t, organisaatioOid) =>
@@ -35,6 +38,12 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
 
   let filterParams = { hakuOid: haku?.oid };
 
+  const filterServices = useContext(FilterStateContext);
+  const [state] = useActor(filterServices.filterService);
+  const send = filterServices.filterService;
+
+  const filterState = useFilterState(HAKUKOHDE, state, send);
+
   return (
     <EntitySearchList
       searchEntities={searchFilteredHakukohteet(filterParams)}
@@ -42,6 +51,7 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
       entityType={HAKUKOHDE}
       columns={columns}
       nimiPlaceholder={t('etusivu.haeHakukohteita')}
+      filterState={filterState}
     />
   );
 };

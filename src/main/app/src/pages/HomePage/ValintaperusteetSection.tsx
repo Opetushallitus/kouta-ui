@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
+import { useActor } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +14,8 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
+import { FilterStateContext } from '#/src/pages/HomePage/FilterStateProvider';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchValintaperusteet } from '#/src/utils/valintaperuste/searchValintaperusteet';
 
 import { EntitySearchList } from './EntitySearchList';
@@ -54,6 +57,12 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
   const columns = useTableColumns(t, organisaatioOid);
 
+  const filterServices = useContext(FilterStateContext);
+  const [state] = useActor(filterServices.filterService);
+  const { send } = filterServices.filterService;
+
+  const filterState = useFilterState(VALINTAPERUSTE, state, send);
+
   return (
     <>
       <NavigationAnchor id="valintaperusteet" />
@@ -71,6 +80,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
           entityType={VALINTAPERUSTE}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeValintaperusteita')}
+          filterState={filterState}
         />
       </ListCollapse>
     </>

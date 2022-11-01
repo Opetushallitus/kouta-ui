@@ -18,7 +18,6 @@ import {
 } from '#/src/utils/api/getSearchQueryParams';
 
 import Filters from './Filters';
-import { useFilterState } from './useFilterState';
 import { getIndexParamsByFilters } from './utils';
 
 export const useEntitySearch = ({
@@ -62,6 +61,7 @@ type EntitySearchListProps = {
   nimiPlaceholder: string;
   columns: Array<ListTableColumnSpec>;
   ActionBar?: React.ComponentType<any>;
+  filterState: any;
 };
 
 export const EntityListTable = ({ entities, ...rest }) => {
@@ -102,8 +102,8 @@ export const EntitySearchList = ({
   nimiPlaceholder,
   ActionBar,
   columns,
+  filterState,
 }: EntitySearchListProps) => {
-  const filterState = useFilterState(entityType);
   const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
 
   const queryResult = useEntitySearch({

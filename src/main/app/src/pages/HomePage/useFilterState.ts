@@ -10,7 +10,7 @@ import {
   setPagination as setPaginationAction,
 } from '#/src/state/homepageSlice';
 
-export const useFilterState = (name: ENTITY) => {
+export const useFilterState = (name: ENTITY, state: any, send: any) => {
   const dispatch = useDispatch();
 
   const {
@@ -55,13 +55,19 @@ export const useFilterState = (name: ENTITY) => {
   );
 
   const setNimi = useCallback(
-    nimi => setPagination({ page: 0, nimi }),
-    [setPagination]
+    nimi => {
+      send({ type: 'SET_NIMI', nimi: nimi });
+      setPagination({ page: 0, nimi });
+    },
+    [send, setPagination]
   );
 
   const setHakuNimi = useCallback(
-    hakuNimi => setPagination({ page: 0, hakuNimi }),
-    [setPagination]
+    hakuNimi => {
+      send({ type: 'SET_HAKUNIMI', hakuNimi: hakuNimi });
+      setPagination({ page: 0, hakuNimi });
+    },
+    [send, setPagination]
   );
 
   let setKoulutustyyppi;

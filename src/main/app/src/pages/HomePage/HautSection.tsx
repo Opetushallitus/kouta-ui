@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
+import { useActor } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +16,8 @@ import {
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { FilterStateContext } from '#/src/pages/HomePage/FilterStateProvider';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHaut } from '#/src/utils/haku/searchHaut';
 
 import { EntitySearchList } from './EntitySearchList';
@@ -61,6 +64,12 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
 
   const columns = useTableColumns(t, organisaatioOid, userLanguage);
 
+  const filterServices = useContext(FilterStateContext);
+  const [state] = useActor(filterServices.filterService);
+  const { send } = filterServices.filterService;
+
+  const filterState = useFilterState(HAKU, state, send);
+
   return (
     <>
       <NavigationAnchor id="haut" />
@@ -78,6 +87,7 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
           entityType={HAKU}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeHakuja')}
+          filterState={filterState}
         />
       </ListCollapse>
     </>

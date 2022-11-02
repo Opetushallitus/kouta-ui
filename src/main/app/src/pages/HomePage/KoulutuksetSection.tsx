@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useActor } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,7 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import { FilterStateContext } from '#/src/pages/HomePage/FilterStateProvider';
+import { filterService } from '#/src/hooks/useFilter';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchKoulutukset } from '#/src/utils/koulutus/searchKoulutukset';
 
@@ -61,10 +61,7 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const columns = useTableColumns(t, organisaatioOid);
 
-  const filterServices = useContext(FilterStateContext);
-
-  const [state] = useActor(filterServices.filterService);
-  const { send } = filterServices.filterService;
+  const [state, send] = useActor(filterService);
 
   const filterState = useFilterState(KOULUTUS, state, send);
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useActor } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 import Button from '#/src/components/Button';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
+import { filterService } from '#/src/hooks/useFilter';
 import useModal from '#/src/hooks/useModal';
-import { FilterStateContext } from '#/src/pages/HomePage/FilterStateProvider';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
@@ -91,10 +91,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   );
 
   const copyMutation = useCopyToteutuksetMutation();
-
-  const filterServices = useContext(FilterStateContext);
-  const [state] = useActor(filterServices.filterService);
-  const { send } = filterServices.filterService;
+  const [state, send] = useActor(filterService);
 
   const filterState = useFilterState(TOTEUTUS, state, send);
 

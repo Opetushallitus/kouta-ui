@@ -14,7 +14,6 @@ import {
 } from '#/src/constants';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
-import FilterStateProvider from '#/src/pages/HomePage/FilterStateProvider';
 import { setOrganisaatio } from '#/src/state/organisaatioSelection';
 
 import HakukohteetSection from './HakukohteetSection';
@@ -132,9 +131,7 @@ const HomeContent = ({
       />
       <Container maxWidth="1600px">
         <Box py={4}>
-          <FilterStateProvider>
-            {organisaatio ? <Box mb={-4}>{listSections}</Box> : <Spin center />}
-          </FilterStateProvider>
+          {organisaatio ? <Box mb={-4}>{listSections}</Box> : <Spin center />}
         </Box>
       </Container>
     </NavigationProvider>

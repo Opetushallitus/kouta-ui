@@ -1,4 +1,4 @@
-import { assign, createMachine } from 'xstate';
+import { assign, createMachine, interpret } from 'xstate';
 
 export const filterMachine = createMachine({
   id: 'filterMachine',
@@ -19,16 +19,14 @@ export const filterMachine = createMachine({
   on: {
     SET_NIMI: {
       actions: [
-        context => console.log(`nimi Before: ${context.nimi}`),
         assign({ nimi: (context, event) => event.nimi }),
-        context => console.log(`nimi After: ${context.nimi}`),
+        context => console.log(`nimi set: ${context.nimi}`),
       ],
     },
     SET_HAKUNIMI: {
       actions: [
-        context => console.log(`hakuNimi Before: ${context.hakuNimi}`),
         assign({ hakuNimi: (context, event) => event.hakuNimi }),
-        context => console.log(`hakuNimi After: ${context.hakuNimi}`),
+        context => console.log(`hakuNimi set: ${context.hakuNimi}`),
       ],
     },
     // SET_KOULUTUSTYYPPI: {
@@ -39,7 +37,7 @@ export const filterMachine = createMachine({
   },
 });
 
-// export const filterService = interpret(filterMachine).start();
+export const filterService = interpret(filterMachine).start();
 
 // nimi,
 //   hakuNimi,

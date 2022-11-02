@@ -94,6 +94,8 @@ export const Filters = ({
   const { t } = useTranslation();
 
   console.log('-->');
+  console.log('state id: ');
+  console.log(state._sessionid);
   console.log('nimi:' + nimi);
   console.log('hakunimi:' + hakuNimi);
   console.log('state nimi:' + state.context.nimi);

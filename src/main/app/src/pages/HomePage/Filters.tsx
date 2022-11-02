@@ -89,8 +89,16 @@ export const Filters = ({
   orgWhitelist,
   onOrgWhitelistChange,
   entityType,
+  state,
 }) => {
   const { t } = useTranslation();
+
+  console.log('-->');
+  console.log('nimi:' + nimi);
+  console.log('hakunimi:' + hakuNimi);
+  console.log('state nimi:' + state.context.nimi);
+  console.log('state hakunimi:' + state.context.hakuNimi);
+  console.log('<--');
 
   const tilaOptions = useTilaOptions(t);
 
@@ -126,12 +134,12 @@ export const Filters = ({
   });
 
   const [usedNimi, setUsedNimi, debouncedNimi] = useDebounceState(
-    nimi,
+    state.context.nimi,
     NAME_INPUT_DEBOUNCE_TIME
   );
 
   const [usedHakuNimi, setUsedHakuNimi, debouncedHakuNimi] = useDebounceState(
-    hakuNimi,
+    state.context.hakuNimi,
     NAME_INPUT_DEBOUNCE_TIME
   );
 

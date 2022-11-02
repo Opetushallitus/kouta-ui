@@ -40,7 +40,7 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
 
   const filterServices = useContext(FilterStateContext);
   const [state] = useActor(filterServices.filterService);
-  const send = filterServices.filterService;
+  const { send } = filterServices.filterService;
 
   const filterState = useFilterState(HAKUKOHDE, state, send);
 

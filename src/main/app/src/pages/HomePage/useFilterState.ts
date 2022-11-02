@@ -39,6 +39,8 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   const previousOrganisaatioOid = usePrevious(selectedOrganisaatioOid);
 
+  console.log(state);
+
   useEffect(() => {
     if (
       previousOrganisaatioOid != null &&
@@ -140,6 +142,7 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
         orgWhitelist,
         onOrgWhitelistChange: setOrgWhitelist,
         entityType,
+        state,
       },
     }),
     [
@@ -166,6 +169,7 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
       orgWhitelist,
       setOrgWhitelist,
       entityType,
+      state,
     ]
   );
 };

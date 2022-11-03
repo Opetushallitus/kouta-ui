@@ -93,15 +93,6 @@ export const Filters = ({
 }) => {
   const { t } = useTranslation();
 
-  console.log('-->');
-  console.log('state id: ');
-  console.log(state._sessionid);
-  console.log('nimi:' + nimi);
-  console.log('hakunimi:' + hakuNimi);
-  console.log('state nimi:' + state.context.nimi);
-  console.log('state hakunimi:' + state.context.hakuNimi);
-  console.log('<--');
-
   const tilaOptions = useTilaOptions(t);
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
@@ -136,12 +127,12 @@ export const Filters = ({
   });
 
   const [usedNimi, setUsedNimi, debouncedNimi] = useDebounceState(
-    state.context.nimi,
+    state.context[entityType]?.nimi,
     NAME_INPUT_DEBOUNCE_TIME
   );
 
   const [usedHakuNimi, setUsedHakuNimi, debouncedHakuNimi] = useDebounceState(
-    state.context.hakuNimi,
+    state.context[entityType]?.hakuNimi,
     NAME_INPUT_DEBOUNCE_TIME
   );
 

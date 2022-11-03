@@ -31,15 +31,18 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
   const entityType = name;
 
   const setPagination = useCallback(
-    pagination => dispatch(setPaginationAction({ name, ...pagination })),
+    pagination => {
+      // console.log("set pagination")
+      // console.log(name)
+      // console.log(pagination)
+      dispatch(setPaginationAction({ name, ...pagination }));
+    },
     [dispatch, name]
   );
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
   const previousOrganisaatioOid = usePrevious(selectedOrganisaatioOid);
-
-  console.log(state);
 
   useEffect(() => {
     if (
@@ -50,6 +53,10 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
     }
   }, [previousOrganisaatioOid, selectedOrganisaatioOid, setPagination]);
 
+  function getStateActionByName(name: string): string {
+    return 'SET_' + name.toUpperCase();
+  }
+
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
   const setTila = useCallback(
     tila => setPagination({ page: 0, tila }),
@@ -58,18 +65,24 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   const setNimi = useCallback(
     nimi => {
-      send({ type: 'SET_NIMI', nimi: nimi });
-      setPagination({ page: 0, nimi });
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, nimi: nimi },
+      });
+      return setPagination({ page: 0, nimi });
     },
-    [send, setPagination]
+    [send, setPagination, name]
   );
 
   const setHakuNimi = useCallback(
     hakuNimi => {
-      send({ type: 'SET_HAKUNIMI', hakuNimi: hakuNimi });
-      setPagination({ page: 0, hakuNimi });
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, hakuNimi: hakuNimi },
+      });
+      return setPagination({ page: 0, hakuNimi });
     },
-    [send, setPagination]
+    [send, setPagination, name]
   );
 
   let setKoulutustyyppi;

@@ -30,6 +30,8 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   const entityType = name;
 
+  console.log(state);
+
   const setPagination = useCallback(
     pagination => {
       // console.log("set pagination")
@@ -59,8 +61,15 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
   const setTila = useCallback(
-    tila => setPagination({ page: 0, tila }),
-    [setPagination]
+    tila => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, tila: tila },
+      });
+
+      return setPagination({ page: 0, tila });
+    },
+    [send, setPagination, name]
   );
 
   const setNimi = useCallback(
@@ -87,8 +96,13 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   let setKoulutustyyppi;
   if (name !== ENTITY.HAKU) {
-    setKoulutustyyppi = koulutustyyppi =>
-      setPagination({ page: 0, koulutustyyppi });
+    setKoulutustyyppi = koulutustyyppi => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, koulutustyyppi: koulutustyyppi },
+      });
+      return setPagination({ page: 0, koulutustyyppi });
+    };
   }
 
   let setOrgWhitelist;

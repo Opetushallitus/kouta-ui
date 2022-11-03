@@ -6,23 +6,32 @@ export const filterMachine = createMachine({
     haku: {
       page: 0,
       nimi: '',
+      tila: [],
     },
     hakukohde: {
       page: 0,
       nimi: '',
       hakuNimi: '',
+      koulutustyyppi: [],
+      tila: [],
     },
     koulutus: {
       page: 0,
       nimi: '',
+      koulutustyyppi: [],
+      tila: [],
     },
     toteutus: {
       page: 0,
       nimi: '',
+      koulutustyyppi: [],
+      tila: [],
     },
     valintaperuste: {
       page: 0,
       nimi: '',
+      koulutustyyppi: [],
+      tila: [],
     },
   },
   on: {
@@ -78,12 +87,7 @@ export const filterMachine = createMachine({
 
 export const filterService = interpret(filterMachine).start();
 
-// nimi,
-//   hakuNimi,
-//   koulutustyyppi,
-//   page,
 //   orderBy,
-//   tila,
 //   julkinen,
 //   nakyvyys,
 //   hakutapa,

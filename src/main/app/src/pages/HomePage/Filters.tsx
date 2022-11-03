@@ -186,7 +186,7 @@ export const Filters = ({
           <Select
             options={koulutustyyppiOptions}
             placeholder={t('yleiset.koulutustyyppi')}
-            value={koulutustyyppi}
+            value={state.context[entityType]?.koulutustyyppi}
             onChange={onKoulutustyyppiChange}
             isMulti
           />
@@ -208,7 +208,7 @@ export const Filters = ({
           options={tilaOptions}
           onChange={onTilaChange}
           placeholder={t('yleiset.tila')}
-          value={tila}
+          value={state.context[entityType]?.tila}
           isMulti
         />
       </Box>

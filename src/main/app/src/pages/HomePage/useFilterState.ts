@@ -1,43 +1,12 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { usePrevious } from 'react-use';
 
 import { ENTITY } from '#/src/constants';
 import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
-import {
-  getPagination,
-  setPagination as setPaginationAction,
-} from '#/src/state/homepageSlice';
 
 export const useFilterState = (name: ENTITY, state: any, send: any) => {
-  const dispatch = useDispatch();
-
-  const {
-    nimi,
-    hakuNimi,
-    koulutustyyppi,
-    page,
-    orderBy,
-    tila,
-    julkinen,
-    nakyvyys,
-    hakutapa,
-    koulutuksenAlkamiskausi,
-    koulutuksenAlkamisvuosi,
-    orgWhitelist,
-  } = useSelector(getPagination(name));
-
   const entityType = name;
-
-  console.log(state);
-
-  const setPagination = useCallback(
-    pagination => {
-      dispatch(setPaginationAction({ name, ...pagination }));
-    },
-    [dispatch, name]
-  );
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
@@ -48,9 +17,9 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
       previousOrganisaatioOid != null &&
       selectedOrganisaatioOid !== previousOrganisaatioOid
     ) {
-      setPagination({ page: 0 });
+      send({ type: 'RESET_PAGINATION' });
     }
-  }, [previousOrganisaatioOid, selectedOrganisaatioOid, setPagination]);
+  }, [previousOrganisaatioOid, selectedOrganisaatioOid, send]);
 
   function getStateActionByName(name: string): string {
     return 'SET_' + name.toUpperCase();
@@ -152,72 +121,39 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   return useMemo(
     () => ({
-      nimi,
       setNimi,
-      hakuNimi,
       setHakuNimi,
-      koulutustyyppi,
       setKoulutustyyppi,
-      page,
       setPage,
-      orderBy,
       setOrderBy,
-      tila,
       setTila,
-      julkinen,
-      hakutapa,
-      nakyvyys,
-      koulutuksenAlkamiskausi,
-      koulutuksenAlkamisvuosi,
-      orgWhitelist,
       entityType,
       state,
       filtersProps: {
-        nimi,
-        hakuNimi,
-        koulutustyyppi,
-        tila,
         onNimiChange: setNimi,
         onHakuNimiChange: setHakuNimi,
         onKoulutustyyppiChange: setKoulutustyyppi,
         onTilaChange: setTila,
-        hakutapa,
         onHakutapaChange: setHakutapa,
-        nakyvyys,
         onNakyvyysChange: setNakyvyys,
-        koulutuksenAlkamiskausi,
         onKoulutuksenAlkamiskausiChange: setKoulutuksenAlkamiskausi,
-        koulutuksenAlkamisvuosi,
         onKoulutuksenAlkamisvuosiChange: setKoulutuksenAlkamisvuosi,
-        orgWhitelist,
         onOrgWhitelistChange: setOrgWhitelist,
         entityType,
         state,
       },
     }),
     [
-      page,
       setPage,
-      nimi,
-      hakuNimi,
-      koulutustyyppi,
-      tila,
-      orderBy,
       setOrderBy,
       setTila,
       setKoulutustyyppi,
       setNimi,
       setHakuNimi,
-      julkinen,
-      hakutapa,
       setHakutapa,
-      nakyvyys,
       setNakyvyys,
-      koulutuksenAlkamiskausi,
       setKoulutuksenAlkamiskausi,
-      koulutuksenAlkamisvuosi,
       setKoulutuksenAlkamisvuosi,
-      orgWhitelist,
       setOrgWhitelist,
       entityType,
       state,

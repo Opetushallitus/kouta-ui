@@ -93,6 +93,25 @@ export const filterMachine = createMachine({
         }),
       ],
     },
+    RESET_PAGINATION: {
+      actions: [
+        assign({
+          haku: context => (context.haku.page = 0),
+        }),
+        assign({
+          hakukohde: context => (context.hakukohde.page = 0),
+        }),
+        assign({
+          koulutus: context => (context.koulutus.page = 0),
+        }),
+        assign({
+          toteutus: context => (context.toteutus.page = 0),
+        }),
+        assign({
+          valintaperuste: context => (context.valintaperuste.page = 0),
+        }),
+      ],
+    },
   },
 });
 

@@ -21,7 +21,7 @@ import Filters from './Filters';
 import { getIndexParamsByFilters } from './utils';
 
 export const useEntitySearch = ({
-  filterState,
+  filtersProps,
   organisaatioOid,
   entityType,
   searchEntities,
@@ -29,9 +29,9 @@ export const useEntitySearch = ({
   const queryParams = useMemo(
     () =>
       getSearchQueryParams(
-        getIndexParamsByFilters({ ...filterState, organisaatioOid })
+        getIndexParamsByFilters({ ...filtersProps, organisaatioOid })
       ),
-    [filterState, organisaatioOid]
+    [filtersProps, organisaatioOid]
   );
 
   return useApiQuery(
@@ -104,15 +104,15 @@ export const EntitySearchList = ({
   columns,
   filterState,
 }: EntitySearchListProps) => {
-  const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
+  const { page, setPage, orderBy, setOrderBy, filtersProps, state } =
+    filterState;
 
   const queryResult = useEntitySearch({
-    filterState,
+    filtersProps: state.context[entityType],
     organisaatioOid,
     searchEntities,
     entityType,
   });
-
   const { t } = useTranslation();
 
   const { result: entities, totalCount } = queryResult?.data ?? {};

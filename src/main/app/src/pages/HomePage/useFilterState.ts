@@ -58,120 +58,96 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
   const setTila = useCallback(
-    tila => {
+    tila =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, tila: tila },
-      });
-
-      return setPagination({ page: 0, tila });
-    },
-    [send, setPagination, name]
+      }),
+    [send, name]
   );
 
   const setNimi = useCallback(
-    nimi => {
+    nimi =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, nimi: nimi },
-      });
-      return setPagination({ page: 0, nimi });
-    },
-    [send, setPagination, name]
+      }),
+    [send, name]
   );
 
   const setHakuNimi = useCallback(
-    hakuNimi => {
+    hakuNimi =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, hakuNimi: hakuNimi },
-      });
-      return setPagination({ page: 0, hakuNimi });
-    },
-    [send, setPagination, name]
+      }),
+    [send, name]
   );
 
   let setKoulutustyyppi;
   if (name !== ENTITY.HAKU) {
-    setKoulutustyyppi = koulutustyyppi => {
+    setKoulutustyyppi = koulutustyyppi =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, koulutustyyppi: koulutustyyppi },
       });
-      return setPagination({ page: 0, koulutustyyppi });
-    };
   }
 
   let setOrgWhitelist;
   if (name === ENTITY.HAKUKOHDE) {
-    setOrgWhitelist = orgWhitelist => {
+    setOrgWhitelist = orgWhitelist =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, orgWhitelist: orgWhitelist },
       });
-
-      return setPagination({ page: 0, orgWhitelist });
-    };
   }
 
   let setHakutapa;
   let setKoulutuksenAlkamiskausi;
   let setKoulutuksenAlkamisvuosi;
   if (name === ENTITY.HAKU) {
-    setHakutapa = hakutapa => {
+    setHakutapa = hakutapa =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, hakutapa: hakutapa },
       });
-      return setPagination({ page: 0, hakutapa });
-    };
-    setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi => {
+    setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, koulutuksenAlkamiskausi: koulutuksenAlkamiskausi },
       });
-      return setPagination({ page: 0, koulutuksenAlkamiskausi });
-    };
-    setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi => {
+    setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi },
       });
-      return setPagination({ page: 0, koulutuksenAlkamisvuosi });
-    };
   }
 
   let setNakyvyys;
   if (name === ENTITY.KOULUTUS || name === ENTITY.VALINTAPERUSTE) {
-    setNakyvyys = nakyvyys => {
+    setNakyvyys = nakyvyys =>
       send({
         type: getStateActionByName(name),
         [name]: { page: 0, nakyvyys: nakyvyys },
       });
-      return setPagination({ page: 0, nakyvyys });
-    };
   }
 
   const setOrderBy = useCallback(
-    orderBy => {
+    orderBy =>
       send({
         type: getStateActionByName(name),
         [name]: { orderBy: orderBy },
-      });
-      return setPagination({ orderBy });
-    },
-    [send, setPagination, name]
+      }),
+    [send, name]
   );
 
   const setPage = useCallback(
-    page => {
+    page =>
       send({
         type: getStateActionByName(name),
         [name]: { page: page },
-      });
-      return setPagination({ page });
-    },
-    [send, setPagination, name]
+      }),
+    [send, name]
   );
 
   return useMemo(
@@ -195,6 +171,7 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
       koulutuksenAlkamisvuosi,
       orgWhitelist,
       entityType,
+      state,
       filtersProps: {
         nimi,
         hakuNimi,

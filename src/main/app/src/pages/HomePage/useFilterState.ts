@@ -34,9 +34,6 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
 
   const setPagination = useCallback(
     pagination => {
-      // console.log("set pagination")
-      // console.log(name)
-      // console.log(pagination)
       dispatch(setPaginationAction({ name, ...pagination }));
     },
     [dispatch, name]
@@ -108,7 +105,12 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
   let setOrgWhitelist;
   if (name === ENTITY.HAKUKOHDE) {
     setOrgWhitelist = orgWhitelist => {
-      setPagination({ page: 0, orgWhitelist });
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, orgWhitelist: orgWhitelist },
+      });
+
+      return setPagination({ page: 0, orgWhitelist });
     };
   }
 
@@ -116,17 +118,61 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
   let setKoulutuksenAlkamiskausi;
   let setKoulutuksenAlkamisvuosi;
   if (name === ENTITY.HAKU) {
-    setHakutapa = hakutapa => setPagination({ page: 0, hakutapa });
-    setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi =>
-      setPagination({ page: 0, koulutuksenAlkamiskausi });
-    setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi =>
-      setPagination({ page: 0, koulutuksenAlkamisvuosi });
+    setHakutapa = hakutapa => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, hakutapa: hakutapa },
+      });
+      return setPagination({ page: 0, hakutapa });
+    };
+    setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, koulutuksenAlkamiskausi: koulutuksenAlkamiskausi },
+      });
+      return setPagination({ page: 0, koulutuksenAlkamiskausi });
+    };
+    setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi },
+      });
+      return setPagination({ page: 0, koulutuksenAlkamisvuosi });
+    };
   }
 
   let setNakyvyys;
   if (name === ENTITY.KOULUTUS || name === ENTITY.VALINTAPERUSTE) {
-    setNakyvyys = nakyvyys => setPagination({ page: 0, nakyvyys });
+    setNakyvyys = nakyvyys => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: 0, nakyvyys: nakyvyys },
+      });
+      return setPagination({ page: 0, nakyvyys });
+    };
   }
+
+  const setOrderBy = useCallback(
+    orderBy => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { orderBy: orderBy },
+      });
+      return setPagination({ orderBy });
+    },
+    [send, setPagination, name]
+  );
+
+  const setPage = useCallback(
+    page => {
+      send({
+        type: getStateActionByName(name),
+        [name]: { page: page },
+      });
+      return setPagination({ page });
+    },
+    [send, setPagination, name]
+  );
 
   return useMemo(
     () => ({
@@ -137,9 +183,9 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
       koulutustyyppi,
       setKoulutustyyppi,
       page,
-      setPage: page => setPagination({ page }),
+      setPage,
       orderBy,
-      setOrderBy: orderBy => setPagination({ orderBy }),
+      setOrderBy,
       tila,
       setTila,
       julkinen,
@@ -174,12 +220,13 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
     }),
     [
       page,
-      setPagination,
+      setPage,
       nimi,
       hakuNimi,
       koulutustyyppi,
       tila,
       orderBy,
+      setOrderBy,
       setTila,
       setKoulutustyyppi,
       setNimi,

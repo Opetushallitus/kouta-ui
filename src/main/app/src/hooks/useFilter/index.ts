@@ -7,6 +7,10 @@ export const filterMachine = createMachine({
       page: 0,
       nimi: '',
       tila: [],
+      orderBy: '',
+      hakutapa: [],
+      koulutuksenAlkamiskausi: null,
+      koulutuksenAlkamisvuosi: [],
     },
     hakukohde: {
       page: 0,
@@ -14,24 +18,31 @@ export const filterMachine = createMachine({
       hakuNimi: '',
       koulutustyyppi: [],
       tila: [],
+      orgWhitelist: [],
+      orderBy: '',
     },
     koulutus: {
       page: 0,
       nimi: '',
       koulutustyyppi: [],
       tila: [],
+      nakyvyys: null,
+      orderBy: '',
     },
     toteutus: {
       page: 0,
       nimi: '',
       koulutustyyppi: [],
       tila: [],
+      orderBy: '',
     },
     valintaperuste: {
       page: 0,
       nimi: '',
       koulutustyyppi: [],
       tila: [],
+      nakyvyys: null,
+      orderBy: '',
     },
   },
   on: {
@@ -86,11 +97,3 @@ export const filterMachine = createMachine({
 });
 
 export const filterService = interpret(filterMachine).start();
-
-//   orderBy,
-//   julkinen,
-//   nakyvyys,
-//   hakutapa,
-//   koulutuksenAlkamiskausi,
-//   koulutuksenAlkamisvuosi,
-//   orgWhitelist,

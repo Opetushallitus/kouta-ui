@@ -197,7 +197,7 @@ export const Filters = ({
           <Select
             options={childOrgOptions}
             placeholder={t('yleiset.aliorganisaatio')}
-            value={orgWhitelist}
+            value={state.context[entityType].orgWhitelist}
             onChange={onOrgWhitelistChange}
             isMulti
           />
@@ -218,7 +218,7 @@ export const Filters = ({
             options={hakutapaOptions}
             onChange={onHakutapaChange}
             placeholder={t('yleiset.hakutapa')}
-            value={hakutapa}
+            value={state.context[entityType].hakutapa}
             isMulti
           />
         </Box>
@@ -229,7 +229,7 @@ export const Filters = ({
             options={nakyvyysOptions}
             onChange={onNakyvyysChange}
             placeholder={t('yleiset.nakyvyys')}
-            value={nakyvyys}
+            value={state.context[entityType]?.nakyvyys}
           />
         </Box>
       )}
@@ -240,7 +240,7 @@ export const Filters = ({
               options={koulutuksenAlkamiskausiOptions}
               onChange={onKoulutuksenAlkamiskausiChange}
               placeholder={t('yleiset.koulutuksenAlkamiskausi')}
-              value={koulutuksenAlkamiskausi}
+              value={state.context[entityType].koulutuksenAlkamiskausi}
             />
           </Box>
         )}
@@ -250,7 +250,7 @@ export const Filters = ({
               options={koulutuksenAlkamisvuosiOptions}
               onChange={onKoulutuksenAlkamisvuosiChange}
               placeholder={t('yleiset.koulutuksenAlkamisvuosi')}
-              value={koulutuksenAlkamisvuosi}
+              value={state.context[entityType].koulutuksenAlkamisvuosi}
               isMulti
             />
           </Box>

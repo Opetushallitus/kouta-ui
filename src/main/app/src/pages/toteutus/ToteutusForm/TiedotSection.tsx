@@ -241,6 +241,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
     <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
+    <JotpaSection name={name} />
   </VerticalBox>
 );
 

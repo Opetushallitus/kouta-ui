@@ -85,6 +85,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
           columns={columns}
           nimiPlaceholder={t('etusivu.haeHakukohteita')}
           filterState={filterState}
+          source={'homepage.hakukohteet'}
         />
       </ListCollapse>
     </>

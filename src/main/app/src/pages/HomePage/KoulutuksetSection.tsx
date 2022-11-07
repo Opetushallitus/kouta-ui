@@ -82,6 +82,7 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           columns={columns}
           nimiPlaceholder={t('etusivu.haeKoulutuksia')}
           filterState={filterState}
+          source={'homepage.koulutukset'}
         />
       </ListCollapse>
     </>

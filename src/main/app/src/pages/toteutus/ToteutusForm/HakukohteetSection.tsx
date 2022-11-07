@@ -55,6 +55,7 @@ export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
       columns={columns}
       nimiPlaceholder={t('etusivu.haeHakukohteita')}
       filterState={filterState}
+      source={'toteutus.hakukohteet'}
     />
   );
 };

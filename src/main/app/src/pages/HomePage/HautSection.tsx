@@ -86,6 +86,7 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
           columns={columns}
           nimiPlaceholder={t('etusivu.haeHakuja')}
           filterState={filterState}
+          source={'homepage.haut'}
         />
       </ListCollapse>
     </>

@@ -77,6 +77,15 @@ export const FormFieldCheckboxGroup = createComponent(
   simpleMapProps
 );
 
+export const FormFieldHardcoded = value =>
+  createComponent(Select, ({ disabled, meta, input, id, ...props }) => ({
+    ...input,
+    value: { value: value },
+    onBlur: _.noop,
+    ...props,
+    id,
+  }));
+
 export const FormFieldSelect = createComponent(
   Select,
   ({ disabled, meta, input, id, ...props }) => ({

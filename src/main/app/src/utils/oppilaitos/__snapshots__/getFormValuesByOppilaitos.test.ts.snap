@@ -41,6 +41,7 @@ Object {
   ],
   "perustiedot": Object {
     "akatemioita": 1,
+    "jarjestaaUrheilijanAmmKoulutusta": true,
     "kampuksia": 3,
     "korkeakouluja": 5,
     "logo": undefined,

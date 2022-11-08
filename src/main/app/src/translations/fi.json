@@ -667,7 +667,8 @@
     "oppiaine": "Oppiaine",
     "painokerroin": "Painokerroin",
     "lisaaPainotettavaOppiaine": "Lisää painotettava oppiaine",
-    "liitteenToimitusosoiteVerkkosivu": "Verkkosivu"
+    "liitteenToimitusosoiteVerkkosivu": "Verkkosivu",
+    "urheilijanAmmKoulutus": "Hakukohde on urheilijoille tarkoitettua ammatillista koulutusta"
   },
   "valintaperustelomake": {
     "valintaperusteenPerustiedot": "Valintaperusteen perustiedot",

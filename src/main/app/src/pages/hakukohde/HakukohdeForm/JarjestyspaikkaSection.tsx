@@ -6,11 +6,22 @@ import { Field } from 'redux-form';
 
 import {
   createFormFieldComponent,
+  FormFieldSwitch,
   simpleMapProps,
 } from '#/src/components/formFields';
-import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
-import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
+import { Box, Radio, RadioGroup, Spin } from '#/src/components/virkailija';
+import {
+  CRUD_ROLES,
+  ENTITY,
+  KOULUTUSTYYPPI,
+  ORGANISAATIOTYYPPI,
+} from '#/src/constants';
+import {
+  useFieldValue,
+  useInitalFieldValue,
+  useIsDirty,
+  useSetFieldValue,
+} from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
@@ -98,6 +109,8 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
           value: org?.oid,
           label: getOrganisaatioLabel(org, language, organisaatiotyyppiMap, t),
           disabled: !getCanUpdate(org),
+          jarjestaaUrheilijanAmmKoulutusta:
+            org.jarjestaaUrheilijanAmmKoulutusta,
         })),
         _fp.sortBy('label')
       )(enrichedOrgs),
@@ -111,22 +124,61 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
 };
 
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
-  ({ disabled, options, value, error, onChange, isLoading }) => {
+  ({
+    disabled,
+    options,
+    value,
+    error,
+    onChange,
+    isLoading,
+    koulutustyyppi,
+  }) => {
+    const { t } = useTranslation();
+    const jarjestyspaikkaOid = useFieldValue('jarjestyspaikkaOid');
+    const jarjestyspaikka = options.find(
+      option => option.value === jarjestyspaikkaOid
+    );
+    const isDirty = useIsDirty();
+    const urheilijanAmmKoulutus = useFieldValue('urheilijanAmmKoulutus');
+    const initialUrheilijanAmmKoulutus = useInitalFieldValue(
+      'urheilijanAmmKoulutus'
+    );
+    useSetFieldValue(
+      'urheilijanAmmKoulutus',
+      false,
+      !isLoading &&
+        !jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta &&
+        urheilijanAmmKoulutus !== initialUrheilijanAmmKoulutus &&
+        isDirty
+    );
     return isLoading ? (
       <Spin />
     ) : (
-      <RadioGroup
-        value={value}
-        disabled={disabled}
-        error={error}
-        onChange={onChange}
-      >
-        {options.map(({ value, disabled, label }) => (
-          <Radio key={value} value={value} disabled={disabled}>
-            {label}
-          </Radio>
-        ))}
-      </RadioGroup>
+      <>
+        <RadioGroup
+          value={value}
+          disabled={disabled}
+          error={error}
+          onChange={onChange}
+        >
+          {options.map(({ value, disabled, label }) => (
+            <Radio key={value} value={value} disabled={disabled}>
+              {label}
+            </Radio>
+          ))}
+        </RadioGroup>
+        {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ? (
+          <Box mt={3} mb={3}>
+            <Field
+              component={FormFieldSwitch}
+              name={'urheilijanAmmKoulutus'}
+              disabled={!jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta}
+            >
+              {t('hakukohdelomake.urheilijanAmmKoulutus')}
+            </Field>
+          </Box>
+        ) : null}
+      </>
     );
   },
   simpleMapProps
@@ -134,8 +186,10 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
 
 export const JarjestyspaikkaSection = ({
   tarjoajat,
+  koulutustyyppi,
 }: {
   tarjoajat: Array<string>;
+  koulutustyyppi: KOULUTUSTYYPPI;
 }) => {
   const { t } = useTranslation();
 
@@ -154,6 +208,7 @@ export const JarjestyspaikkaSection = ({
         name="jarjestyspaikkaOid"
         required
         isLoading={isLoading}
+        koulutustyyppi={koulutustyyppi}
       />
     </div>
   );

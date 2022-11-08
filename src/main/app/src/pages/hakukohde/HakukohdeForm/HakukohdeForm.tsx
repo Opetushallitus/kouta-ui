@@ -140,6 +140,7 @@ export const HakukohdeForm = ({
         section="jarjestyspaikkaOid"
         header={t('hakukohdelomake.hakukohteenJarjestyspaikka')}
         tarjoajat={tarjoajat}
+        koulutustyyppi={koulutustyyppi}
         Component={JarjestyspaikkaSection}
       />
 

@@ -92,6 +92,7 @@ export type HakukohdeFormValues = {
   };
   valintakokeet: ValintakokeetValues;
   jarjestyspaikkaOid: string;
+  urheilijanAmmKoulutus: boolean;
   liitteet: {
     toimitustapa: ToimitustapaFields;
     yhteinenToimituspaikka: boolean;

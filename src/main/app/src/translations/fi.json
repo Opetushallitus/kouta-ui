@@ -745,7 +745,8 @@
     "logo": "Oppilaitoksen logo",
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitosta.",
     "eiOppilaitoksenOsia": "Oppilaitoksella ei ole osia",
-    "yhteystietojen-muokkaus": "Muokkaa yhteystietoja"
+    "yhteystietojen-muokkaus": "Muokkaa yhteystietoja",
+    "jarjestaaUrheilijanAmmKoulutusta": "Oppilaitos järjestää urheilijan ammatillista koulutusta"
   },
   "oppilaitoksenOsaLomake": {
     "oppilaitoksenOsanPerustiedot": "Oppilaitoksen osan perustiedot",

@@ -135,22 +135,26 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   }) => {
     const { t } = useTranslation();
     const jarjestyspaikkaOid = useFieldValue('jarjestyspaikkaOid');
+    const initialJarjestyspaikkaOid = useInitalFieldValue('jarjestyspaikkaOid');
     const jarjestyspaikka = options.find(
       option => option.value === jarjestyspaikkaOid
     );
     const isDirty = useIsDirty();
-    const urheilijanAmmKoulutus = useFieldValue('urheilijanAmmKoulutus');
-    const initialUrheilijanAmmKoulutus = useInitalFieldValue(
-      'urheilijanAmmKoulutus'
+    const jarjestaaUrheilijanAmmKoulutusta = useFieldValue(
+      'jarjestaaUrheilijanAmmKoulutusta'
     );
+    const hasJarjestyspaikkaChanged =
+      !isLoading && jarjestyspaikkaOid !== initialJarjestyspaikkaOid && isDirty;
     useSetFieldValue(
-      'urheilijanAmmKoulutus',
+      'jarjestaaUrheilijanAmmKoulutusta',
       false,
-      !isLoading &&
-        !jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta &&
-        urheilijanAmmKoulutus !== initialUrheilijanAmmKoulutus &&
-        isDirty
+      hasJarjestyspaikkaChanged &&
+        !jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta
     );
+    const showUrheilijanAmmKoulutusField =
+      koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS &&
+      (jarjestaaUrheilijanAmmKoulutusta === true ||
+        jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta);
     return isLoading ? (
       <Spin />
     ) : (
@@ -167,14 +171,14 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
             </Radio>
           ))}
         </RadioGroup>
-        {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ? (
+        {showUrheilijanAmmKoulutusField ? (
           <Box mt={3} mb={3}>
             <Field
               component={FormFieldSwitch}
-              name={'urheilijanAmmKoulutus'}
+              name={'jarjestaaUrheilijanAmmKoulutusta'}
               disabled={!jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta}
             >
-              {t('hakukohdelomake.urheilijanAmmKoulutus')}
+              {t('hakukohdelomake.jarjestaaUrheilijanAmmKoulutusta')}
             </Field>
           </Box>
         ) : null}

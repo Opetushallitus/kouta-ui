@@ -85,6 +85,7 @@ Object {
         },
       ],
     },
+    "jarjestaaUrheilijanAmmKoulutusta": false,
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": Object {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
@@ -98,7 +99,6 @@ Object {
       "fi": "<p>Hakukohteen kynnysehto - fi</p>",
       "sv": "<p>Hakukohteen kynnysehto - sv</p>",
     },
-    "urheilijanAmmKoulutus": false,
     "uudenOpiskelijanUrl": Object {
       "fi": "https://opiskelu.fi",
       "sv": "https://opiskelu.se",

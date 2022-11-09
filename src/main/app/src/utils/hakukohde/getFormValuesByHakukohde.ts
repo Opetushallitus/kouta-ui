@@ -100,7 +100,7 @@ export const getFormValuesByHakukohde = (
     aloituspaikat,
     hakukohteenLinja,
     uudenOpiskelijanUrl,
-    urheilijanAmmKoulutus = false,
+    jarjestaaUrheilijanAmmKoulutusta = false,
   } = metadata;
   return {
     organisaatioOid: toSelectValue(organisaatioOid),
@@ -169,7 +169,7 @@ export const getFormValuesByHakukohde = (
       )(valintaperusteenValintakokeidenLisatilaisuudet),
     },
     jarjestyspaikkaOid,
-    urheilijanAmmKoulutus,
+    jarjestaaUrheilijanAmmKoulutusta,
     liitteet: {
       toimitustapa: getToimitustapaValues(
         liitteidenToimitustapa,

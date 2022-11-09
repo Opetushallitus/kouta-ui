@@ -58,6 +58,7 @@ Object {
     },
     "tyyppi": "ataru",
   },
+  "jarjestaaUrheilijanAmmKoulutusta": false,
   "jarjestyspaikkaOid": "2.2.2.2.2",
   "kieliversiot": Array [
     "fi",
@@ -154,7 +155,6 @@ Object {
     },
   },
   "tila": "tallennettu",
-  "urheilijanAmmKoulutus": false,
   "uudenOpiskelijanUrl": Object {
     "fi": "https://opiskelu.fi",
     "sv": "https://opiskelu.se",

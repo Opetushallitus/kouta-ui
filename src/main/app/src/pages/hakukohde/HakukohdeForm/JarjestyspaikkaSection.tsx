@@ -152,9 +152,10 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
         !jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta
     );
     const showUrheilijanAmmKoulutusField =
+      !isLoading &&
       koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS &&
       (jarjestaaUrheilijanAmmKoulutusta === true ||
-        jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta);
+        jarjestyspaikka?.jarjestaaUrheilijanAmmKoulutusta);
     return isLoading ? (
       <Spin />
     ) : (

@@ -102,7 +102,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     tila,
     esikatselu = false,
     jarjestyspaikkaOid,
-    urheilijanAmmKoulutus,
+    jarjestaaUrheilijanAmmKoulutusta,
   } = values;
   const kielivalinta = getKielivalinta(values);
   const pickTranslations = _fp.pick(kielivalinta);
@@ -251,7 +251,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     hakulomakeLinkki,
     hakulomakeKuvaus,
     metadata: {
-      urheilijanAmmKoulutus,
+      jarjestaaUrheilijanAmmKoulutusta,
       valintakokeidenYleiskuvaus: mapValues(
         kuvaus => serializeEditorState(kuvaus),
         values?.valintakokeet?.yleisKuvaus

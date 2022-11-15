@@ -24,7 +24,7 @@ export const useEntitySearch = ({
   filtersProps,
   organisaatioOid,
   searchEntities,
-  source,
+  searchPage,
 }) => {
   const queryParams = useMemo(
     () =>
@@ -35,7 +35,7 @@ export const useEntitySearch = ({
   );
 
   return useApiQuery(
-    'search.' + source,
+    'search.' + searchPage,
     searchEntities,
     { params: queryParams },
     {
@@ -62,7 +62,7 @@ type EntitySearchListProps = {
   columns: Array<ListTableColumnSpec>;
   ActionBar?: React.ComponentType<any>;
   filterState: any;
-  source: string;
+  searchPage: string;
 };
 
 export const EntityListTable = ({ entities, ...rest }) => {
@@ -104,7 +104,7 @@ export const EntitySearchList = ({
   ActionBar,
   columns,
   filterState,
-  source,
+  searchPage,
 }: EntitySearchListProps) => {
   const { setPage, setOrderBy, filtersProps, state } = filterState;
 
@@ -113,7 +113,7 @@ export const EntitySearchList = ({
     filtersProps: entityState,
     organisaatioOid,
     searchEntities,
-    source,
+    searchPage,
   });
   const { t } = useTranslation();
 

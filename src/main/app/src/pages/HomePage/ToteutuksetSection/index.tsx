@@ -128,7 +128,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           columns={columns}
           nimiPlaceholder={t('etusivu.haeToteutuksia')}
           filterState={filterState}
-          source={'homepage.toteutukset'}
+          searchPage="homepage.toteutukset"
         />
       </ListCollapse>
     </CopyConfirmationWrapper>

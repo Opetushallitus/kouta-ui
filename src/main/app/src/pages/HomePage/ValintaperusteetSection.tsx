@@ -79,7 +79,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
           columns={columns}
           nimiPlaceholder={t('etusivu.haeValintaperusteita')}
           filterState={filterState}
-          source={'homepage.valintaperusteet'}
+          searchPage="homepage.valintaperusteet"
         />
       </ListCollapse>
     </>

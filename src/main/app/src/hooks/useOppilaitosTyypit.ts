@@ -121,7 +121,8 @@ export const useIsKoulutustyyppiDisabledGetter = ({
   );
 
   return {
-    isLoading: loadingTyypit || loadingMappings,
+    // OPH-pääkäyttäjälle kaikki on sallittua. Ei tarvitse odotella latautumista.
+    isLoading: isOphVirkailija ? false : loadingTyypit || loadingMappings,
     getIsDisabled,
   };
 };

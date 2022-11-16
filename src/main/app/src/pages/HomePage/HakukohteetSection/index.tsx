@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
@@ -13,8 +13,8 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import { filterService } from '#/src/hooks/useFilter';
 import useModal from '#/src/hooks/useModal';
+import { hakukohdeMachine } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
@@ -62,9 +62,9 @@ const Actions = ({ organisaatioOid }) => {
 
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
-  const [state, send] = useActor(filterService);
+  const hakukohdeService = useInterpret(hakukohdeMachine);
 
-  const filterState = useFilterState(HAKUKOHDE, state, send);
+  const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
   const columns = useTableColumns(t, organisaatioOid);
   return (

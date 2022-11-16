@@ -108,7 +108,7 @@ export const EntitySearchList = ({
 }: EntitySearchListProps) => {
   const { setPage, setOrderBy, filtersProps, state } = filterState;
 
-  const entityState = state.context[entityType];
+  const entityState = state?.context?.values;
   const queryResult = useEntitySearch({
     filtersProps: entityState,
     organisaatioOid,
@@ -153,7 +153,7 @@ export const EntitySearchList = ({
                 entities={entities}
                 columns={columns}
                 onSort={setOrderBy}
-                sort={entityState.orderBy}
+                sort={entityState?.orderBy}
                 {...getTestIdProps(`${entityType}Table`)}
               />
             </>
@@ -162,7 +162,7 @@ export const EntitySearchList = ({
       </Box>
       <Box display="flex" justifyContent="center">
         <Pagination
-          value={entityState.page}
+          value={entityState?.page}
           onChange={setPage}
           pageCount={pageCount}
         />

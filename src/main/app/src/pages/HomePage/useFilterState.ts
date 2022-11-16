@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
+import { useActor } from '@xstate/react';
 import { usePrevious } from 'react-use';
 
 import { ENTITY } from '#/src/constants';
 import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 
-export const useFilterState = (name: ENTITY, state: any, send: any) => {
+export const useFilterState = (name: ENTITY, service: any) => {
   const entityType = name;
+
+  const [state, send] = useActor(service);
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
@@ -17,48 +20,45 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
       previousOrganisaatioOid != null &&
       selectedOrganisaatioOid !== previousOrganisaatioOid
     ) {
-      send({ type: 'RESET_PAGINATION' });
+      send({ type: 'SET_VALUES', values: { page: 0 } });
     }
   }, [previousOrganisaatioOid, selectedOrganisaatioOid, send]);
-
-  function getStateActionByName(name: string): string {
-    return 'SET_' + name.toUpperCase();
-  }
 
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
   const setTila = useCallback(
     tila =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, tila: tila },
+        type: 'SET_VALUES',
+        values: { page: 0, tila: tila },
       }),
-    [send, name]
+    [send]
   );
 
   const setNimi = useCallback(
-    nimi =>
+    nimi => {
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, nimi: nimi },
-      }),
-    [send, name]
+        type: 'SET_VALUES',
+        values: { page: 0, nimi: nimi },
+      });
+    },
+    [send]
   );
 
   const setHakuNimi = useCallback(
     hakuNimi =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, hakuNimi: hakuNimi },
+        type: 'SET_VALUES',
+        values: { page: 0, hakuNimi: hakuNimi },
       }),
-    [send, name]
+    [send]
   );
 
   let setKoulutustyyppi;
   if (name !== ENTITY.HAKU) {
     setKoulutustyyppi = koulutustyyppi =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, koulutustyyppi: koulutustyyppi },
+        type: 'SET_VALUES',
+        values: { page: 0, koulutustyyppi: koulutustyyppi },
       });
   }
 
@@ -66,8 +66,8 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
   if (name === ENTITY.HAKUKOHDE) {
     setOrgWhitelist = orgWhitelist =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, orgWhitelist: orgWhitelist },
+        type: 'SET_VALUES',
+        values: { page: 0, orgWhitelist: orgWhitelist },
       });
   }
 
@@ -77,18 +77,18 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
   if (name === ENTITY.HAKU) {
     setHakutapa = hakutapa =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, hakutapa: hakutapa },
+        type: 'SET_VALUES',
+        values: { page: 0, hakutapa: hakutapa },
       });
     setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, koulutuksenAlkamiskausi: koulutuksenAlkamiskausi },
+        type: 'SET_VALUES',
+        values: { page: 0, koulutuksenAlkamiskausi: koulutuksenAlkamiskausi },
       });
     setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi },
+        type: 'SET_VALUES',
+        values: { page: 0, koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi },
       });
   }
 
@@ -96,27 +96,27 @@ export const useFilterState = (name: ENTITY, state: any, send: any) => {
   if (name === ENTITY.KOULUTUS || name === ENTITY.VALINTAPERUSTE) {
     setNakyvyys = nakyvyys =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: 0, nakyvyys: nakyvyys },
+        type: 'SET_VALUES',
+        values: { page: 0, nakyvyys: nakyvyys },
       });
   }
 
   const setOrderBy = useCallback(
     orderBy =>
       send({
-        type: getStateActionByName(name),
-        [name]: { orderBy: orderBy },
+        type: 'SET_VALUES',
+        values: { orderBy: orderBy },
       }),
-    [send, name]
+    [send]
   );
 
   const setPage = useCallback(
     page =>
       send({
-        type: getStateActionByName(name),
-        [name]: { page: page },
+        type: 'SET_VALUES',
+        values: { page: page },
       }),
-    [send, name]
+    [send]
   );
 
   return useMemo(

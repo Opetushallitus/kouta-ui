@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -15,8 +15,8 @@ import {
   makeKoulutuksenAlkamiskausiColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import { filterService } from '#/src/hooks/useFilter';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { hakuMachine } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHaut } from '#/src/utils/haku/searchHaut';
 
@@ -64,9 +64,9 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
 
   const columns = useTableColumns(t, organisaatioOid, userLanguage);
 
-  const [state, send] = useActor(filterService);
+  const hakuService = useInterpret(hakuMachine);
 
-  const filterState = useFilterState(HAKU, state, send);
+  const filterState = useFilterState(HAKU, hakuService);
 
   return (
     <>

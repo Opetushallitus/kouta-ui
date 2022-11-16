@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import { filterService } from '#/src/hooks/useFilter';
+import { koulutusMachine } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchKoulutukset } from '#/src/utils/koulutus/searchKoulutukset';
 
@@ -61,9 +61,11 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const columns = useTableColumns(t, organisaatioOid);
 
-  const [state, send] = useActor(filterService);
+  const koulutusService = useInterpret(koulutusMachine);
 
-  const filterState = useFilterState(KOULUTUS, state, send);
+  // const [state, send] = useActor(koulutusService);
+
+  const filterState = useFilterState(KOULUTUS, koulutusService);
   return (
     <>
       <NavigationAnchor id="koulutukset" />

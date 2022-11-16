@@ -11,7 +11,7 @@ import {
   makeOrganisaatioColumn,
 } from '#/src/components/ListTable';
 import { ENTITY } from '#/src/constants';
-import { filterMachine } from '#/src/hooks/useFilter';
+import { hakukohdeMachine } from '#/src/machines/filterMachines';
 import { EntitySearchList } from '#/src/pages/HomePage/EntitySearchList';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
@@ -41,11 +41,11 @@ export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
 
   const columns = useTableColumns(t, organisaatioOid);
 
-  const [state, send] = useMachine(filterMachine);
+  const toteutusHakukohdeService = useMachine(hakukohdeMachine);
 
   let filterParams = { toteutusOid: toteutus?.oid };
 
-  const filterState = useFilterState(HAKUKOHDE, state, send);
+  const filterState = useFilterState(HAKUKOHDE, toteutusHakukohdeService);
 
   return (
     <EntitySearchList

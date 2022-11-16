@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
-import { filterService } from '#/src/hooks/useFilter';
 import useModal from '#/src/hooks/useModal';
+import { toteutusMachine } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
@@ -91,9 +91,10 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   );
 
   const copyMutation = useCopyToteutuksetMutation();
-  const [state, send] = useActor(filterService);
 
-  const filterState = useFilterState(TOTEUTUS, state, send);
+  const toteutusService = useInterpret(toteutusMachine);
+
+  const filterState = useFilterState(TOTEUTUS, toteutusService);
 
   return copyMutation.isLoading ? (
     <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />

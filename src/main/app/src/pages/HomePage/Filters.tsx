@@ -88,7 +88,7 @@ export const Filters = ({
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
 
-  const entityState = state.context[entityType];
+  const entityState = state?.context?.values;
 
   const parseChildOrgs = (hierarkia, lang) => {
     let flatHierarkia = flattenHierarkia(hierarkia);

@@ -69,7 +69,6 @@ export const koulutusMachine = createMachine({
   on: {
     SET_VALUES: {
       actions: [
-        console.log('setting values'),
         assign({
           values: (context, event) => ({
             ...context.values,

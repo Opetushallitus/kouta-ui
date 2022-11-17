@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +14,7 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import { koulutusMachine } from '#/src/machines/filterMachines';
+import { koulutusService } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchKoulutukset } from '#/src/utils/koulutus/searchKoulutukset';
 
@@ -60,10 +59,6 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const columns = useTableColumns(t, organisaatioOid);
-
-  const koulutusService = useInterpret(koulutusMachine);
-
-  // const [state, send] = useActor(koulutusService);
 
   const filterState = useFilterState(KOULUTUS, koulutusService);
   return (

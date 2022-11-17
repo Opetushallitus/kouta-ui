@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
@@ -14,7 +13,7 @@ import {
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
-import { hakukohdeMachine } from '#/src/machines/filterMachines';
+import { hakukohdeService } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
@@ -62,7 +61,6 @@ const Actions = ({ organisaatioOid }) => {
 
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
-  const hakukohdeService = useInterpret(hakukohdeMachine);
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 

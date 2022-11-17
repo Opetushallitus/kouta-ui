@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
 
-import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
-import { toteutusMachine } from '#/src/machines/filterMachines';
+import { toteutusService } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
@@ -91,8 +90,6 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   );
 
   const copyMutation = useCopyToteutuksetMutation();
-
-  const toteutusService = useInterpret(toteutusMachine);
 
   const filterState = useFilterState(TOTEUTUS, toteutusService);
 

@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
-import { valintaperusteMachine } from '#/src/machines/filterMachines';
+import { valintaperusteService } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchValintaperusteet } from '#/src/utils/valintaperuste/searchValintaperusteet';
 
@@ -56,8 +55,6 @@ const useTableColumns = (t, organisaatioOid) =>
 const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
   const columns = useTableColumns(t, organisaatioOid);
-
-  const valintaperusteService = useInterpret(valintaperusteMachine);
 
   const filterState = useFilterState(VALINTAPERUSTE, valintaperusteService);
 

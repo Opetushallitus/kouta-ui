@@ -1,18 +1,7 @@
-import { assign, createMachine } from 'xstate';
+import { assign, createMachine, interpret } from 'xstate';
 
-export const hakuMachine = createMachine({
-  id: 'hakuMachine',
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      tila: [],
-      orderBy: '',
-      hakutapa: [],
-      koulutuksenAlkamiskausi: null,
-      koulutuksenAlkamisvuosi: [],
-    },
-  },
+const initialMachine = createMachine({
+  id: 'initialMachine',
   on: {
     SET_VALUES: {
       actions: [
@@ -27,109 +16,81 @@ export const hakuMachine = createMachine({
   },
 });
 
-export const hakukohdeMachine = createMachine({
-  id: 'hakukohdeMachine',
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      hakuNimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      orgWhitelist: [],
-      orderBy: '',
+export const hakuMachine = initialMachine
+  .withConfig({ id: 'hakuMachine' })
+  .withContext({
+    context: {
+      values: {
+        page: 0,
+        nimi: '',
+        tila: [],
+        orderBy: '',
+        hakutapa: [],
+        koulutuksenAlkamiskausi: null,
+        koulutuksenAlkamisvuosi: [],
+      },
     },
-  },
-  on: {
-    SET_VALUES: {
-      actions: [
-        assign({
-          values: (context, event) => ({
-            ...context.values,
-            ...event.values,
-          }),
-        }),
-      ],
-    },
-  },
-});
+  });
 
-export const koulutusMachine = createMachine({
-  id: 'koulutusMachine',
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      nakyvyys: null,
-      orderBy: '',
+export const hakukohdeMachine = initialMachine
+  .withConfig({ id: 'hakukohdeMachine' })
+  .withContext({
+    context: {
+      values: {
+        page: 0,
+        nimi: '',
+        hakuNimi: '',
+        koulutustyyppi: [],
+        tila: [],
+        orgWhitelist: [],
+        orderBy: '',
+      },
     },
-  },
-  on: {
-    SET_VALUES: {
-      actions: [
-        assign({
-          values: (context, event) => ({
-            ...context.values,
-            ...event.values,
-          }),
-        }),
-      ],
-    },
-  },
-});
+  });
 
-export const toteutusMachine = createMachine({
-  id: 'toteutusMachine',
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      orderBy: '',
+export const koulutusMachine = initialMachine
+  .withConfig({ id: 'koulutusMachine' })
+  .withContext({
+    context: {
+      values: {
+        page: 0,
+        nimi: '',
+        koulutustyyppi: [],
+        tila: [],
+        nakyvyys: null,
+        orderBy: '',
+      },
     },
-  },
-  on: {
-    SET_VALUES: {
-      actions: [
-        assign({
-          values: (context, event) => ({
-            ...context.values,
-            ...event.values,
-          }),
-        }),
-      ],
-    },
-  },
-});
+  });
 
-export const valintaperusteMachine = createMachine({
-  id: 'valintaperusteMachine',
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      nakyvyys: null,
-      orderBy: '',
+export const toteutusMachine = initialMachine
+  .withConfig({ id: 'toteutusMachine' })
+  .withContext({
+    context: {
+      values: {
+        page: 0,
+        nimi: '',
+        koulutustyyppi: [],
+        tila: [],
+        orderBy: '',
+      },
     },
-  },
-  on: {
-    SET_VALUES: {
-      actions: [
-        assign({
-          values: (context, event) => ({
-            ...context.values,
-            ...event.values,
-          }),
-        }),
-      ],
+  });
+
+export const valintaperusteMachine = initialMachine
+  .withConfig({ id: 'valintaperusteMachine' })
+  .withContext({
+    context: {
+      values: {
+        page: 0,
+        nimi: '',
+        koulutustyyppi: [],
+        tila: [],
+        nakyvyys: null,
+        orderBy: '',
+      },
     },
-  },
-});
+  });
 
 //TODO RESET PAGINATION IN ALL MACHINES:
 // RESET_PAGINATION: {
@@ -150,8 +111,8 @@ export const valintaperusteMachine = createMachine({
 //       valintaperuste: context => (context.valintaperuste.page = 0),
 //     }),
 //
-// export const hakuService = useInterpret(hakuMachine)
-// export const hakukohdeService = useInterpret(hakukohdeMachine)
-// export const koulutusService = useInterpret(koulutusMachine)
-// export const toteutusService = useInterpret(toteutusMachine)
-// export const valintaperusteService = useInterpret(valintaperusteMachine)
+export const hakuService = interpret(hakuMachine).start();
+export const hakukohdeService = interpret(hakukohdeMachine).start();
+export const koulutusService = interpret(koulutusMachine).start();
+export const toteutusService = interpret(toteutusMachine).start();
+export const valintaperusteService = interpret(valintaperusteMachine).start();

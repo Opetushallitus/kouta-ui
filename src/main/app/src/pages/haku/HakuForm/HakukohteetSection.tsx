@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useMachine } from '@xstate/react';
+import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -38,9 +38,9 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
 
   let filterParams = { hakuOid: haku?.oid };
 
-  const hakuHakukohdeService = useMachine(hakukohdeMachine);
+  const hakukohdeService = useInterpret(hakukohdeMachine);
 
-  const filterState = useFilterState(HAKUKOHDE, hakuHakukohdeService);
+  const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
   return (
     <EntitySearchList

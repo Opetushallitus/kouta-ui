@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useMachine } from '@xstate/react';
+import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -41,11 +41,11 @@ export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
 
   const columns = useTableColumns(t, organisaatioOid);
 
-  const toteutusHakukohdeService = useMachine(hakukohdeMachine);
+  const hakukohdeService = useInterpret(hakukohdeMachine);
 
   let filterParams = { toteutusOid: toteutus?.oid };
 
-  const filterState = useFilterState(HAKUKOHDE, toteutusHakukohdeService);
+  const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
   return (
     <EntitySearchList

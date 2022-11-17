@@ -6,7 +6,7 @@ import { usePrevious } from 'react-use';
 import { ENTITY } from '#/src/constants';
 import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 
-export const useFilterState = (name: ENTITY, service: any) => {
+export const useFilterState = (name: ENTITY, service) => {
   const entityType = name;
 
   const [state, send] = useActor(service);

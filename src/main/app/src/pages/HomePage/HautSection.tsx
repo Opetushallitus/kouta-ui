@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +15,7 @@ import {
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { hakuMachine } from '#/src/machines/filterMachines';
+import { hakuService } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHaut } from '#/src/utils/haku/searchHaut';
 
@@ -63,8 +62,6 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
   const userLanguage = useUserLanguage();
 
   const columns = useTableColumns(t, organisaatioOid, userLanguage);
-
-  const hakuService = useInterpret(hakuMachine);
 
   const filterState = useFilterState(HAKU, hakuService);
 

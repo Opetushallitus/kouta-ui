@@ -20,7 +20,7 @@ export const useFilterState = (name: ENTITY, service) => {
       previousOrganisaatioOid != null &&
       selectedOrganisaatioOid !== previousOrganisaatioOid
     ) {
-      send({ type: 'SET_VALUES', values: { page: 0 } });
+      send({ type: 'RESET_PAGINATION' });
     }
   }, [previousOrganisaatioOid, selectedOrganisaatioOid, send]);
 

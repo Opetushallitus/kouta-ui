@@ -21,68 +21,58 @@ const initialMachine = createMachine({
 });
 
 export const hakuMachine = initialMachine.withContext({
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      tila: [],
-      orderBy: '',
-      hakutapa: [],
-      koulutuksenAlkamiskausi: null,
-      koulutuksenAlkamisvuosi: [],
-    },
+  values: {
+    page: 0,
+    nimi: '',
+    tila: [],
+    orderBy: '',
+    hakutapa: [],
+    koulutuksenAlkamiskausi: null,
+    koulutuksenAlkamisvuosi: [],
   },
 });
 
 export const hakukohdeMachine = initialMachine.withContext({
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      hakuNimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      orgWhitelist: [],
-      orderBy: '',
-    },
+  values: {
+    page: 0,
+    nimi: '',
+    hakuNimi: '',
+    koulutustyyppi: [],
+    tila: [],
+    orgWhitelist: [],
+    orderBy: '',
   },
 });
 
 export const koulutusMachine = initialMachine.withContext({
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      nakyvyys: null,
-      orderBy: '',
-    },
+  values: {
+    page: 0,
+    nimi: '',
+    koulutustyyppi: [],
+    tila: [],
+    nakyvyys: null,
+    orderBy: '',
   },
 });
 
 export const toteutusMachine = initialMachine.withContext({
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      orderBy: '',
-    },
+  values: {
+    page: 0,
+    nimi: '',
+    koulutustyyppi: [],
+    tila: [],
+    orderBy: '',
   },
 });
 
 export const valintaperusteMachine = initialMachine.withContext({
-  context: {
-    values: {
-      page: 0,
-      nimi: '',
-      koulutustyyppi: [],
-      tila: [],
-      nakyvyys: null,
-      orderBy: '',
-    },
+  values: {
+    page: 0,
+    nimi: '',
+    koulutustyyppi: [],
+    tila: [],
+    nakyvyys: null,
+    orderBy: '',
   },
 });
 

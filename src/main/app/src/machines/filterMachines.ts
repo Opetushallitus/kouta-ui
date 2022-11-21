@@ -12,11 +12,6 @@ const initialMachine = createMachine({
         }),
       ],
     },
-    RESET_PAGINATION: {
-      actions: assign(context => {
-        return (context.values.page = 0);
-      }),
-    },
   },
 });
 

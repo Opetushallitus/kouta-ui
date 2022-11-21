@@ -16,11 +16,8 @@ export const useFilterState = (name: ENTITY, service) => {
   const previousOrganisaatioOid = usePrevious(selectedOrganisaatioOid);
 
   useEffect(() => {
-    if (
-      previousOrganisaatioOid != null &&
-      selectedOrganisaatioOid !== previousOrganisaatioOid
-    ) {
-      send({ type: 'RESET_PAGINATION' });
+    if (selectedOrganisaatioOid !== previousOrganisaatioOid) {
+      send({ type: 'SET_VALUES', values: { page: 0 } });
     }
   }, [previousOrganisaatioOid, selectedOrganisaatioOid, send]);
 

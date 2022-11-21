@@ -234,10 +234,6 @@ export const createKoulutusForm = () => {
 
         getByTestId('laajuusnumero').pipe(paste('300'));
 
-        getSelectByLabel('yleiset.laajuusyksikko').pipe(
-          pFillSelect('opintopistettä')
-        );
-
         getSelectByLabel('koulutuslomake.valitseTutkintonimike').pipe(
           pFillAsyncSelect('Fysioterapeutti (AMK)')
         );
@@ -424,8 +420,6 @@ export const createKoulutusForm = () => {
       withinSection('information', () => {
         getByTestId('laajuusnumero').pipe(paste('38'));
 
-        getSelectByLabel('yleiset.laajuusyksikko').pipe(pFillSelect('viikkoa'));
-
         getInputByLabel('koulutuslomake.koulutuksenNimi').should(
           'have.value',
           'koulutustyypit.tuva'
@@ -462,10 +456,6 @@ export const createKoulutusForm = () => {
 
       withinSection('information', () => {
         getByTestId('laajuusnumero').pipe(paste('53'));
-
-        getSelectByLabel('yleiset.laajuusyksikko').pipe(
-          pFillSelect('opintopistettä')
-        );
 
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
           paste('vapaa sivistystyö nimi')
@@ -536,10 +526,6 @@ export const createKoulutusForm = () => {
 
       withinSection('information', () => {
         getByTestId('laajuusnumero').pipe(paste('60'));
-
-        getSelectByLabel('yleiset.laajuusyksikko').pipe(
-          pFillSelect('osaamispistettä')
-        );
 
         getInputByLabel('koulutuslomake.koulutuksenNimi').should(
           'have.value',

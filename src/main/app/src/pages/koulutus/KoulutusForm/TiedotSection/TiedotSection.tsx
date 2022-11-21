@@ -80,7 +80,7 @@ export const TuvaTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_8#1'}
+        defaultLaajuusYksikko="viikkoa"
       />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
@@ -103,7 +103,7 @@ export const TelmaTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_6#1'}
+        defaultLaajuusYksikko="osaamispistettä"
       />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
@@ -153,7 +153,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_2#1'}
+        defaultLaajuusYksikko="opintopistettä"
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
@@ -292,7 +292,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           <OpintojenLaajuusFieldExtended
             disabled={disabled}
             name={name}
-            hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_2#1'}
+            defaultLaajuusYksikko="opintopistettä"
           />
           <TutkintonimikeField disabled={disabled} name={name} />
           <KoulutusalatField disabled={disabled} name={name} />
@@ -313,7 +313,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           <OpintojenLaajuusFieldExtended
             disabled={disabled}
             name={name}
-            hardcodedLaajuusYksikko={'opintojenlaajuusyksikko_2#1'}
+            defaultLaajuusYksikko="opintopistettä"
           />
           <ReadOnlyKoulutusalaSection
             koodiUri={KoulutusalaKoodi.YLEISSIVISTAVA}

@@ -23,7 +23,7 @@ const getOrganisaatioHierarkia = async ({
   };
 
   const { data } = await httpClient.get(
-    apiUrls.url('organisaatio-service.hierarkia-haku'),
+    apiUrls.url('kouta-backend.organisaatio-hierarkia'),
     {
       params,
       paramsSerializer: queryString.stringify,

@@ -14,7 +14,7 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
+      url: `**/kouta-backend/organisaatio/hierarkia**`,
     },
     { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
   );

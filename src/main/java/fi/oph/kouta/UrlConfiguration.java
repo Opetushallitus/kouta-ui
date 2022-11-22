@@ -74,6 +74,7 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("kouta-backend.organisaatio-by-oid", this.require("kouta-backend.organisaatio-by-oid"));
         this.frontProperties.setProperty("kouta-backend.organisaatiot-by-oids", this.require("kouta-backend.organisaatiot-by-oids"));
+        this.frontProperties.setProperty("kouta-backend.organisaatio-hierarkia", this.require("kouta-backend.organisaatio-hierarkia"));
 
         this.frontProperties.setProperty("koodisto-service.base-url", this.require("koodisto-service.base-url"));
         this.frontProperties.setProperty("koodisto-service.sisaltyy-alakoodit", this.require("koodisto-service.sisaltyy-alakoodit"));
@@ -98,7 +99,6 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("organisaatio-service.base-url", this.require("organisaatio-service.base-url"));
         this.frontProperties.setProperty("organisaatio-service.children", this.require("organisaatio-service.children"));
-        this.frontProperties.setProperty("organisaatio-service.hierarkia-haku", this.require("organisaatio-service.hierarkia-haku"));
 
         this.frontProperties.setProperty("lokalisaatio-service.localisation", this.require("lokalisaatio-service.localisation"));
 

@@ -52,7 +52,7 @@ const fillSoraKuvausSection = () => {
 
 const fillJarjestajaSection = () => {
   withinSection('tarjoajat', () => {
-    getByTestId('jarjestajatSelection').within(() => {
+    getByTestId('tarjoajatSelection').within(() => {
       fillTreeSelect(['1.2.1.1.1.1']);
     });
   });

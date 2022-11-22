@@ -117,7 +117,7 @@ export const TarjoajatSection = ({
             </Box>
           )}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
-            <div {...getTestIdProps('jarjestajatSelection')}>
+            <div {...getTestIdProps('tarjoajatSelection')}>
               <Field
                 name={`tarjoajat.tarjoajat`}
                 hierarkia={hierarkia}

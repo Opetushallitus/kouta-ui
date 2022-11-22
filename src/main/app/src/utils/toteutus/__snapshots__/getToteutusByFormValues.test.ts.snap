@@ -188,6 +188,7 @@ Object {
       },
       "suunniteltuKestoVuodet": 2,
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": 252,
     "opintojenLaajuusyksikkoKoodiUri": "laajuus_1#1",
     "osaamisalat": Array [

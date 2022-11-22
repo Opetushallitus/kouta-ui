@@ -268,6 +268,9 @@ Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
+    "opinnonTyyppi": Object {
+      "value": undefined,
+    },
     "opintojenLaajuusNumero": "25",
     "opintojenLaajuusyksikko": Object {
       "value": "laajuus_1#1",

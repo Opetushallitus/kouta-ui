@@ -200,7 +200,8 @@
     "urheilijanAmmKoulutus": "Urheilijan ammatillinen koulutus",
     "aliorganisaatio": "Organisaatio",
     "avoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta",
-    "tunniste": "Hakijalle näkyvä tunniste"
+    "tunniste": "Hakijalle näkyvä tunniste",
+    "opinnonTyyppi": "Valitse opinnon tyyppi"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

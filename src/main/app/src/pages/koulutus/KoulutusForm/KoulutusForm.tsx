@@ -86,10 +86,10 @@ export const KoulutusForm = ({
   const isNewOphKoulutus = isOphOrganisaatio(organisaatioOid) && isNewKoulutus;
   const isExistingOphKoulutus =
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
-  const isKkOpintojaksoOrOpintokokonaisuus = [
-    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
-    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
-  ].includes(koulutustyyppi);
+
+  const isAvoinKorkeakoulutus = useFieldValue(
+    'information.avoinKorkeakoulutus'
+  );
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { hierarkia = [] } = useOrganisaatioHierarkia(
@@ -335,10 +335,10 @@ export const KoulutusForm = ({
               disabled={onlyTarjoajaRights}
             />
 
-            {!isNewOphKoulutus && !isKkOpintojaksoOrOpintokokonaisuus && (
+            {!isNewOphKoulutus && (
               <FormCollapse
                 section="tarjoajat"
-                header={t('koulutuslomake.koulutuksenJarjestaja')}
+                header={t('koulutuslomake.koulutuksenTarjoajat')}
                 Component={TarjoajatSection}
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}
@@ -346,10 +346,10 @@ export const KoulutusForm = ({
               />
             )}
 
-            {isKkOpintojaksoOrOpintokokonaisuus && (
+            {isAvoinKorkeakoulutus && (
               <FormCollapse
-                section="tarjoajat"
-                header={t('koulutuslomake.koulutuksenJarjestaja')}
+                section="jarjestajat"
+                header={t('koulutuslomake.koulutuksenJarjestajat')}
                 Component={JarjestajatSectionForAvoinKorkeakoulutus}
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}

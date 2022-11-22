@@ -20,6 +20,7 @@ const JarjestajatWithPagination = ({
   value,
   onChange,
   language,
+  t,
 }) => {
   const [currentPage, setPage] = useState(0);
   const [usedNimi, setNimi] = useState('');
@@ -66,7 +67,7 @@ const JarjestajatWithPagination = ({
       <Box display="flex" alignItems="center">
         <Box width={1} marginBottom={2}>
           <Input
-            placeholder={'Hae'}
+            placeholder={t('koulutuslomake.haeJarjestajanNimella')}
             value={usedNimi}
             onChange={e => {
               setNimi(e.target.value);
@@ -126,6 +127,7 @@ export const JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus = ({
           label={t(
             'koulutuslomake.valitseOpintojaksonTaiKokonaisuudenJarjestajat'
           )}
+          t={t}
         />
       )}
     </div>

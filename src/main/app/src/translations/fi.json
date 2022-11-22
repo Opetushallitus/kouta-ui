@@ -198,7 +198,8 @@
     "koulutuksenAlkamiskausi": "Koulutuksen alkamiskausi",
     "koulutuksenAlkamisvuosi": "Koulutuksen alkamisvuosi",
     "urheilijanAmmKoulutus": "Urheilijan ammatillinen koulutus",
-    "aliorganisaatio": "Organisaatio"
+    "aliorganisaatio": "Organisaatio",
+    "avoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -588,8 +589,7 @@
     "opintojaksot": "Opintojaksot",
     "opintojaksojenLiittaminen": "Opintojaksojen liittäminen opintokokonaisuuteen",
     "lisaaOpintojakso": "Lisää opintojakso",
-    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa",
-    "avoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta"
+    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

@@ -14,6 +14,7 @@ import {
   fillPohjaSection,
   fillTilaSection,
   tallenna,
+  selectCheckbox,
   fillKoulutustyyppiSection,
   typeToEditor,
   wrapMutationTest,
@@ -284,6 +285,8 @@ export const createKoulutusForm = () => {
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
           paste('Opintojakso nimi')
         );
+
+        selectCheckbox(/avoinKorkeakoulutus/);
       });
 
       withinSection('description', () => {

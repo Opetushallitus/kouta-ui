@@ -98,7 +98,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
       koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),
-      avoinKorkeakoulutus,
+      avoinKorkeakoulutus: Boolean(avoinKorkeakoulutus),
     },
     koulutustyyppi,
     lisatiedot: {

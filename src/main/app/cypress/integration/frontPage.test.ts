@@ -8,18 +8,6 @@ const stubMyOrganisations = () => {
 
   cy.intercept(
     {
-      method: 'GET',
-      url: `/organisaatio-service/rest/organisaatio/v4/${oid}`,
-    },
-    {
-      body: merge(organisaatio(), {
-        oid,
-      }),
-    }
-  );
-
-  cy.intercept(
-    {
       method: 'POST',
       url: '/kouta-backend/organisaatio/organisaatiot',
     },

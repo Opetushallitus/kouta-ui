@@ -4,6 +4,7 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
 import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
@@ -202,6 +203,7 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <AvoinKorkeakoulutusField name={name} />
     </VerticalBox>
   );
 };

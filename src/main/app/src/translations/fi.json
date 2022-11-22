@@ -588,7 +588,8 @@
     "opintojaksot": "Opintojaksot",
     "opintojaksojenLiittaminen": "Opintojaksojen liittäminen opintokokonaisuuteen",
     "lisaaOpintojakso": "Lisää opintojakso",
-    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa"
+    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa",
+    "avoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

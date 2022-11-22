@@ -1,5 +1,6 @@
 import { merge } from 'lodash/fp';
 
+import oppilaitosorganisaatioHierarkia from '#/cypress/data/oppilaitosorganisaatioHierarkia';
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import soraKuvaus from '#/cypress/data/soraKuvaus';
@@ -17,6 +18,14 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
       url: `**/kouta-backend/organisaatio/hierarkia**`,
     },
     { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/kouta-backend/organisaatio/oppilaitokset-for-opintojakso-and-opintokokonaisuus`,
+    },
+    { body: oppilaitosorganisaatioHierarkia({ rootOid: organisaatioOid }) }
   );
 
   cy.intercept(

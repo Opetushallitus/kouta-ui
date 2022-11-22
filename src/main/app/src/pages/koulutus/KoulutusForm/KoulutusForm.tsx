@@ -35,6 +35,7 @@ import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
 import { JarjestajaSection } from './JarjestajaSection';
+import { JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus } from './JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
 import { KuvausFieldsSection } from './KuvausFieldsSection';
@@ -85,6 +86,10 @@ export const KoulutusForm = ({
   const isNewOphKoulutus = isOphOrganisaatio(organisaatioOid) && isNewKoulutus;
   const isExistingOphKoulutus =
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
+  const isKkOpintojaksoOrOpintokokonaisuus = [
+    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+  ].includes(koulutustyyppi);
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { hierarkia = [] } = useOrganisaatioHierarkia(
@@ -330,7 +335,7 @@ export const KoulutusForm = ({
               disabled={onlyTarjoajaRights}
             />
 
-            {!isNewOphKoulutus && (
+            {!isNewOphKoulutus && !isKkOpintojaksoOrOpintokokonaisuus && (
               <FormCollapse
                 section="tarjoajat"
                 header={t('koulutuslomake.koulutuksenJarjestaja')}
@@ -338,6 +343,19 @@ export const KoulutusForm = ({
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}
                 disableTarjoajaHierarkia={isExistingOphKoulutus}
+              />
+            )}
+
+            {isKkOpintojaksoOrOpintokokonaisuus && (
+              <FormCollapse
+                section="tarjoajat"
+                header={t('koulutuslomake.koulutuksenJarjestaja')}
+                Component={
+                  JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus
+                }
+                organisaatioOid={organisaatioOid}
+                koulutus={koulutusProp}
+                disableTarjoajaHierarkia={false}
               />
             )}
 

@@ -3,7 +3,11 @@ import _fp from 'lodash/fp';
 import { valueToArray } from '#/src/utils';
 
 export const getOrganisaatioTyypit = organisaatio =>
-  organisaatio?.organisaatiotyypit ?? organisaatio?.tyypit ?? [];
+  _fp.isEmpty(organisaatio?.organisaatiotyypit)
+    ? _fp.isEmpty(organisaatio?.tyypit)
+      ? []
+      : organisaatio?.tyypit
+    : organisaatio?.organisaatiotyypit;
 
 export const organisaatioMatchesTyyppi = _fp.curry((tyyppi, organisaatio) => {
   const tyypit = valueToArray(tyyppi);

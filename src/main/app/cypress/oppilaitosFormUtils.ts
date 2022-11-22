@@ -13,7 +13,7 @@ export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'POST',
-      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+      url: '**/kouta-backend/organisaatio/organisaatiot',
     },
     {
       body: [

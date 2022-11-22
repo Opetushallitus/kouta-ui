@@ -5,6 +5,7 @@ import { merge } from 'lodash/fp';
 import haku from '#/cypress/data/haku';
 import hakukohde from '#/cypress/data/hakukohde';
 import koulutus from '#/cypress/data/koulutus';
+import organisaatio from '#/cypress/data/organisaatio';
 import toteutus from '#/cypress/data/toteutus';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import hakukohdeMocks from '#/cypress/mocks/hakukohde.mock.json';
@@ -113,6 +114,20 @@ export const prepareTest = ({
         nimi: { fi: 'Valintaperusteen nimi' },
         tila: 'julkaistu',
       }),
+    }
+  );
+
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/kouta-backend/organisaatio/organisaatiot',
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
     }
   );
 

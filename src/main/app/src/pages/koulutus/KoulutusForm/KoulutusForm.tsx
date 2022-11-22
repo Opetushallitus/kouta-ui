@@ -88,7 +88,7 @@ export const KoulutusForm = ({
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
   const isAvoinKorkeakoulutus = useFieldValue(
-    'information.avoinKorkeakoulutus'
+    'information.isAvoinKorkeakoulutus'
   );
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);

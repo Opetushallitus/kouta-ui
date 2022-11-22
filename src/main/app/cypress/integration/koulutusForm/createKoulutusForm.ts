@@ -292,7 +292,7 @@ export const createKoulutusForm = () => {
           pFillAsyncSelect('Aineopinnot')
         );
 
-        selectCheckbox(/avoinKorkeakoulutus/);
+        selectCheckbox(/isAvoinKorkeakoulutus/);
       });
 
       withinSection('description', () => {

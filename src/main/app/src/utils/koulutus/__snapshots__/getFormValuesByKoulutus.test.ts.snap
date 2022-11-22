@@ -12,7 +12,7 @@ Object {
   "esikatselu": false,
   "externalId": undefined,
   "information": Object {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "eperuste": Object {
       "value": undefined,
     },
@@ -110,7 +110,7 @@ Object {
   "esikatselu": false,
   "externalId": "ext1",
   "information": Object {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "eperuste": Object {
       "value": undefined,
     },

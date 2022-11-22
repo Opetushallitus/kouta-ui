@@ -70,6 +70,13 @@ export type ToteutusFormValues = {
     opintojenLaajuusNumero: string;
     ilmoittautumislinkki: TranslatedField<string>;
     aloituspaikat: string;
+    hasJotpaRahoitus: boolean;
+    isAvoinKorkeakoulutus?: boolean;
+    tunniste?: string;
+    opinnonTyyppi?: SelectOption;
+  };
+  opintojaksojenLiittaminen?: {
+    opintojaksot: Array<{ opintojakso: SelectOption }>;
   };
   kuvaus: TranslatedField<EditorState>;
   kieliversiot: Array<LanguageCode>;
@@ -121,7 +128,7 @@ export type ToteutusFormValues = {
   hakeutumisTaiIlmoittautumistapa: {
     hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
     hakuTapa?: Hakeutumistapa;
-    linkki?: string;
+    linkki?: TranslatedField;
     lisatiedot?: TranslatedField<EditorState>;
     lisatiedotValintaperusteista?: TranslatedField<EditorState>;
     hakuaikaAlkaa?: string;

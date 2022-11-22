@@ -173,7 +173,7 @@ const fillKkOpintokokonaisuusTiedotSection = () => {
 
     getSelectByLabel('yleiset.opinnonTyyppi').pipe(pFillSelect('Aineopinnot'));
 
-    selectCheckbox(/avoinKorkeakoulutus/);
+    selectCheckbox(/isAvoinKorkeakoulutus/);
   });
 };
 

@@ -16,9 +16,9 @@ export const AvoinKorkeakoulutusField = ({
   const { t } = useTranslation();
 
   return (
-    <div {...getTestIdProps('avoinKorkeakoulutus')}>
-      <Field name={`${name}.avoinKorkeakoulutus`} component={FormFieldSwitch}>
-        {t('yleiset.avoinKorkeakoulutus')}
+    <div {...getTestIdProps('isAvoinKorkeakoulutus')}>
+      <Field name={`${name}.isAvoinKorkeakoulutus`} component={FormFieldSwitch}>
+        {t('yleiset.isAvoinKorkeakoulutus')}
       </Field>
     </div>
   );

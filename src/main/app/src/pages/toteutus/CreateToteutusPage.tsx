@@ -46,7 +46,7 @@ const getInitialValues = ({
   koulutustyyppi,
   koulutusNimi,
   koulutusKielet,
-  avoinKorkeakoulutus,
+  isAvoinKorkeakoulutus,
   tunniste,
   opinnonTyyppiKoodiUri,
 }: {
@@ -54,7 +54,7 @@ const getInitialValues = ({
   koulutustyyppi: KOULUTUSTYYPPI;
   koulutusNimi?: string;
   koulutusKielet?: Array<LanguageCode>;
-  avoinKorkeakoulutus?: boolean;
+  isAvoinKorkeakoulutus?: boolean;
   tunniste?: string;
   opinnonTyyppiKoodiUri?: string;
 }) => {
@@ -64,7 +64,7 @@ const getInitialValues = ({
         koulutustyyppi,
         koulutusNimi,
         koulutusKielet,
-        avoinKorkeakoulutus,
+        isAvoinKorkeakoulutus,
         tunniste,
         opinnonTyyppiKoodiUri,
       });
@@ -81,7 +81,7 @@ export const CreateToteutusPage = () => {
 
   const koulutusNimi = koulutus?.nimi;
   const koulutusKielet = koulutus?.kielivalinta;
-  const avoinKorkeakoulutus = koulutus?.metadata?.avoinKorkeakoulutus;
+  const isAvoinKorkeakoulutus = koulutus?.metadata?.isAvoinKorkeakoulutus;
   const tunniste = koulutus?.metadata?.tunniste;
   const opinnonTyyppiKoodiUri = koulutus?.metadata?.opinnonTyyppiKoodiUri;
 
@@ -101,7 +101,7 @@ export const CreateToteutusPage = () => {
           toteutus,
           koulutusNimi,
           koulutusKielet,
-          avoinKorkeakoulutus,
+          isAvoinKorkeakoulutus,
           tunniste,
           opinnonTyyppiKoodiUri,
         })
@@ -109,7 +109,7 @@ export const CreateToteutusPage = () => {
           koulutustyyppi,
           toteutus,
           koulutusKielet,
-          avoinKorkeakoulutus,
+          isAvoinKorkeakoulutus,
           tunniste,
           opinnonTyyppiKoodiUri,
         });
@@ -118,7 +118,7 @@ export const CreateToteutusPage = () => {
     koulutustyyppi,
     koulutusNimi,
     koulutusKielet,
-    avoinKorkeakoulutus,
+    isAvoinKorkeakoulutus,
     tunniste,
     opinnonTyyppiKoodiUri,
   ]);

@@ -13,7 +13,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -65,7 +65,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   ],
   "koulutustyyppi": "amm-osaamisala",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": {},
@@ -115,7 +115,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-tutkinnon-osa",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-tutkinnon-osa",
     "kuvaus": {},
@@ -180,7 +180,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -238,7 +238,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -292,7 +292,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -346,7 +346,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
@@ -407,7 +407,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {},
@@ -459,7 +459,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "tuva",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -509,7 +509,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
   ],
   "koulutustyyppi": "tuva",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -566,7 +566,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "vapaa-sivistystyo-muu",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-muu",
     "kuvaus": {
@@ -613,7 +613,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
     "kuvaus": {
@@ -660,7 +660,7 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "telma",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -710,7 +710,7 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
   ],
   "koulutustyyppi": "telma",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -767,7 +767,7 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -821,7 +821,7 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
   ],
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-ope-erityisope-ja-opo",
     "kuvaus": {
@@ -929,7 +929,7 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
   ],
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
     ],
@@ -985,7 +985,7 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-muu",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -1030,7 +1030,7 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "aikuisten-perusopetus",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "aikuisten-perusopetus",
     "kuvaus": {
@@ -1080,7 +1080,7 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm-muu",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -1184,7 +1184,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "kk-opintojakso",
   "metadata": {
-    "avoinKorkeakoulutus": true,
+    "isAvoinKorkeakoulutus": true,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1240,7 +1240,7 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1294,7 +1294,7 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
   ],
   "koulutustyyppi": "erikoislaakari",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "erikoislaakari",
     "kuvaus": {
@@ -1341,7 +1341,7 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1393,7 +1393,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "kk-opintokokonaisuus",
   "metadata": {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],

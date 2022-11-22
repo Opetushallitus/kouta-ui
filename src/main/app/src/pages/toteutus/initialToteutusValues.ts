@@ -11,7 +11,7 @@ export const initialValues = ({
   koulutustyyppi,
   koulutusNimi,
   koulutusKielet,
-  avoinKorkeakoulutus,
+  isAvoinKorkeakoulutus,
   tunniste,
   opinnonTyyppiKoodiUri,
 }) => ({
@@ -20,7 +20,7 @@ export const initialValues = ({
   kieliversiot: koulutusKielet,
   tiedot: {
     nimi: koulutusNimi,
-    avoinKorkeakoulutus,
+    isAvoinKorkeakoulutus,
     tunniste,
     opinnonTyyppi: { value: opinnonTyyppiKoodiUri },
   },

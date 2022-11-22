@@ -13,7 +13,7 @@ Object {
   ],
   "koulutustyyppi": "amm-osaamisala",
   "metadata": Object {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": Object {},
@@ -54,7 +54,7 @@ Object {
   ],
   "koulutustyyppi": "amm",
   "metadata": Object {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [
       "koulutusala_1#1",
       "koulutusala_2#1",
@@ -105,7 +105,7 @@ Object {
   ],
   "koulutustyyppi": "yo",
   "metadata": Object {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [
       "koulutusala_1#1",
       "koulutusala_2#1",
@@ -170,7 +170,7 @@ Object {
   "koulutuksetKoodiUri": Array [],
   "koulutustyyppi": "yo",
   "metadata": Object {
-    "avoinKorkeakoulutus": false,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "yo",
     "kuvaus": Object {},

@@ -7,7 +7,7 @@ import { Field } from 'redux-form';
 import { createFormFieldComponent } from '#/src/components/formFields';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import Pagination from '#/src/components/Pagination';
-import { Box, Input, InputIcon } from '#/src/components/virkailija';
+import { Box, Input, InputIcon, Spin } from '#/src/components/virkailija';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus from '#/src/hooks/useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
 import { getTestIdProps } from '#/src/utils';
@@ -20,6 +20,7 @@ const JarjestajatWithPagination = ({
   value,
   onChange,
   language,
+  isLoading,
   t,
 }) => {
   const [currentPage, setPage] = useState(0);
@@ -62,7 +63,9 @@ const JarjestajatWithPagination = ({
 
   const pageOids = itemsOnPage.map(oids).flat();
 
-  return (
+  return isLoading ? (
+    <Spin center />
+  ) : (
     <>
       <Box display="flex" alignItems="center">
         <Box width={1} marginBottom={2}>
@@ -113,7 +116,7 @@ export const JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus = ({
   const { t } = useTranslation();
   const language = useLanguageTab();
 
-  const { organisaatiot } =
+  const { organisaatiot, isLoading } =
     useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus(language);
 
   return (
@@ -124,6 +127,7 @@ export const JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus = ({
           hierarkia={organisaatiot}
           component={JarjestajatField}
           language={language}
+          isLoading={isLoading}
           label={t(
             'koulutuslomake.valitseOpintojaksonTaiKokonaisuudenJarjestajat'
           )}

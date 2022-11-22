@@ -25,6 +25,7 @@ Object {
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": Array [],
     "tutkintonimikeKoodiUrit": Array [],
     "tyyppi": "amm-osaamisala",
@@ -67,6 +68,7 @@ Object {
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": Array [],
     "tutkintonimikeKoodiUrit": Array [
       "nimike_1#1",
@@ -131,6 +133,7 @@ Object {
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": Array [],
     "tutkintonimikeKoodiUrit": Array [
       "nimike_1#1",
@@ -176,6 +179,7 @@ Object {
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": Array [],
     "tutkintonimikeKoodiUrit": Array [],
     "tyyppi": "yo",

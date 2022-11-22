@@ -266,6 +266,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         ?.map(opintojakso => opintojakso?.opintojakso?.value)
         .filter(Boolean),
       avoinKorkeakoulutus: values?.tiedot?.avoinKorkeakoulutus || false,
+      tunniste: values?.tiedot?.tunniste || null,
     },
   };
 };

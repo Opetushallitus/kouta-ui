@@ -272,6 +272,7 @@ Object {
     "opintojenLaajuusyksikko": Object {
       "value": "laajuus_1#1",
     },
+    "tunniste": undefined,
   },
   "tila": "tallennettu",
   "toteutusjaksot": Array [

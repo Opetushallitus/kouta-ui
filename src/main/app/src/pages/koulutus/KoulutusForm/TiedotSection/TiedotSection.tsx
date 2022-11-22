@@ -10,6 +10,7 @@ import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
+import { TunnisteField } from '#/src/components/TunnisteField';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box, FormControl } from '#/src/components/virkailija';
 import {
@@ -203,6 +204,7 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <TunnisteField name={name} />
       <AvoinKorkeakoulutusField name={name} />
     </VerticalBox>
   );
@@ -373,6 +375,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <TunnisteField name={name} />
       <AvoinKorkeakoulutusField name={name} />
     </VerticalBox>
   );

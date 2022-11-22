@@ -286,6 +286,8 @@ export const createKoulutusForm = () => {
           paste('Opintojakso nimi')
         );
 
+        getInputByLabel('yleiset.tunniste').pipe(paste('OPHJOD-12345'));
+
         selectCheckbox(/avoinKorkeakoulutus/);
       });
 
@@ -325,6 +327,8 @@ export const createKoulutusForm = () => {
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
           paste('Opintojakso nimi')
         );
+
+        getInputByLabel('yleiset.tunniste').pipe(paste('OPHJOD-12345'));
       });
 
       withinSection('description', () => {

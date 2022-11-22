@@ -305,6 +305,7 @@ Object {
         ],
       },
     ],
+    "tunniste": null,
     "tyyppi": "amk",
     "yhteyshenkilot": Array [
       Object {

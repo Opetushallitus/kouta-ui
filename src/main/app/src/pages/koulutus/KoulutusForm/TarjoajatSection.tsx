@@ -35,7 +35,7 @@ const JarjestajatField = createFormFieldComponent(
   })
 );
 
-export const JarjestajaSection = ({
+export const TarjoajatSection = ({
   organisaatioOid,
   koulutus,
   disableTarjoajaHierarkia,

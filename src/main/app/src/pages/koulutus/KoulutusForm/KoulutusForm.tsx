@@ -34,7 +34,6 @@ import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
-import { JarjestajaSection } from './JarjestajaSection';
 import { JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus } from './JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
@@ -42,6 +41,7 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
+import { TarjoajatSection } from './TarjoajatSection';
 import {
   TiedotSection,
   AikuistenPerusopetusTiedotSection,
@@ -339,7 +339,7 @@ export const KoulutusForm = ({
               <FormCollapse
                 section="tarjoajat"
                 header={t('koulutuslomake.koulutuksenJarjestaja')}
-                Component={JarjestajaSection}
+                Component={TarjoajatSection}
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}
                 disableTarjoajaHierarkia={isExistingOphKoulutus}

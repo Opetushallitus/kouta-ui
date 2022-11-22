@@ -9,10 +9,9 @@ import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
-import { getValuesForSaving, notToimipisteOrg } from '#/src/utils';
+import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
@@ -35,10 +34,6 @@ export const KoulutusFooter = ({
 }: KoulutusFooterProps) => {
   const history = useHistory();
   const queryClient = useQueryClient();
-
-  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: notToimipisteOrg,
-  });
 
   const form = useForm();
   const formName = useFormName();
@@ -69,7 +64,7 @@ export const KoulutusFooter = ({
                 ...koulutus,
                 ...getKoulutusByFormValues(valuesForSaving),
                 tarjoajat: getTarjoajaOids({
-                  hierarkia,
+                  hierarkia: [],
                   existingTarjoajat: koulutus.tarjoajat,
                   newTarjoajat: values?.tarjoajat?.tarjoajat,
                 }),
@@ -97,7 +92,6 @@ export const KoulutusFooter = ({
       dataSendFn,
       form.registeredFields,
       formMode,
-      hierarkia,
       history,
       initialValues,
       koulutus,

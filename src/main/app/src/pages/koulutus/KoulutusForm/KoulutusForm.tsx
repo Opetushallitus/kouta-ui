@@ -355,7 +355,6 @@ export const KoulutusForm = ({
                 }
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}
-                disableTarjoajaHierarkia={false}
               />
             )}
 

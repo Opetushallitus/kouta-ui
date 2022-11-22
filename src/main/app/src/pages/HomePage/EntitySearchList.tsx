@@ -18,25 +18,24 @@ import {
 } from '#/src/utils/api/getSearchQueryParams';
 
 import Filters from './Filters';
-import { useFilterState } from './useFilterState';
 import { getIndexParamsByFilters } from './utils';
 
 export const useEntitySearch = ({
-  filterState,
+  filtersProps,
   organisaatioOid,
-  entityType,
   searchEntities,
+  searchPage,
 }) => {
   const queryParams = useMemo(
     () =>
       getSearchQueryParams(
-        getIndexParamsByFilters({ ...filterState, organisaatioOid })
+        getIndexParamsByFilters({ ...filtersProps, organisaatioOid })
       ),
-    [filterState, organisaatioOid]
+    [filtersProps, organisaatioOid]
   );
 
   return useApiQuery(
-    'search' + _fp.capitalize(entityType),
+    'search.' + searchPage,
     searchEntities,
     { params: queryParams },
     {
@@ -62,6 +61,8 @@ type EntitySearchListProps = {
   nimiPlaceholder: string;
   columns: Array<ListTableColumnSpec>;
   ActionBar?: React.ComponentType<any>;
+  filterState: any;
+  searchPage: string;
 };
 
 export const EntityListTable = ({ entities, ...rest }) => {
@@ -102,17 +103,18 @@ export const EntitySearchList = ({
   nimiPlaceholder,
   ActionBar,
   columns,
+  filterState,
+  searchPage,
 }: EntitySearchListProps) => {
-  const filterState = useFilterState(entityType);
-  const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
+  const { setPage, setOrderBy, filtersProps, state } = filterState;
 
+  const entityState = state?.context?.values;
   const queryResult = useEntitySearch({
-    filterState,
+    filtersProps: entityState,
     organisaatioOid,
     searchEntities,
-    entityType,
+    searchPage,
   });
-
   const { t } = useTranslation();
 
   const { result: entities, totalCount } = queryResult?.data ?? {};
@@ -151,7 +153,7 @@ export const EntitySearchList = ({
                 entities={entities}
                 columns={columns}
                 onSort={setOrderBy}
-                sort={orderBy}
+                sort={entityState?.orderBy}
                 {...getTestIdProps(`${entityType}Table`)}
               />
             </>
@@ -159,7 +161,11 @@ export const EntitySearchList = ({
         </QueryResultWrapper>
       </Box>
       <Box display="flex" justifyContent="center">
-        <Pagination value={page} onChange={setPage} pageCount={pageCount} />
+        <Pagination
+          value={entityState?.page}
+          onChange={setPage}
+          pageCount={pageCount}
+        />
       </Box>
     </Box>
   );

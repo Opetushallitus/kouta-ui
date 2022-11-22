@@ -13,6 +13,8 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
+import { valintaperusteService } from '#/src/machines/filterMachines';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchValintaperusteet } from '#/src/utils/valintaperuste/searchValintaperusteet';
 
 import { EntitySearchList } from './EntitySearchList';
@@ -54,6 +56,8 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
   const columns = useTableColumns(t, organisaatioOid);
 
+  const filterState = useFilterState(VALINTAPERUSTE, valintaperusteService);
+
   return (
     <>
       <NavigationAnchor id="valintaperusteet" />
@@ -71,6 +75,8 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
           entityType={VALINTAPERUSTE}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeValintaperusteita')}
+          filterState={filterState}
+          searchPage="homepage.valintaperusteet"
         />
       </ListCollapse>
     </>

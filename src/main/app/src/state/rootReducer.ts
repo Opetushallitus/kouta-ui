@@ -4,13 +4,11 @@ import { persistReducer } from 'redux-persist';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import storage from 'redux-persist/lib/storage';
 
-import homepage from './homepageSlice';
 import organisaatioFavourites from './organisaatioFavourites';
 import organisaatioSelection from './organisaatioSelection';
 
 export const createRootReducer = (reducers = {}) =>
   combineReducers({
-    homepage,
     organisaatioFavourites: persistReducer(
       {
         storage,

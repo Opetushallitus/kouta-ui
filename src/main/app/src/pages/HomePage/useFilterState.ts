@@ -1,165 +1,159 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useActor } from '@xstate/react';
 import { usePrevious } from 'react-use';
 
 import { ENTITY } from '#/src/constants';
 import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
-import {
-  getPagination,
-  setPagination as setPaginationAction,
-} from '#/src/state/homepageSlice';
 
-export const useFilterState = (name: ENTITY) => {
-  const dispatch = useDispatch();
-
-  const {
-    nimi,
-    hakuNimi,
-    koulutustyyppi,
-    page,
-    orderBy,
-    tila,
-    julkinen,
-    nakyvyys,
-    hakutapa,
-    koulutuksenAlkamiskausi,
-    koulutuksenAlkamisvuosi,
-    orgWhitelist,
-  } = useSelector(getPagination(name));
-
+export const useFilterState = (name: ENTITY, service) => {
   const entityType = name;
 
-  const setPagination = useCallback(
-    pagination => dispatch(setPaginationAction({ name, ...pagination })),
-    [dispatch, name]
-  );
+  const [state, send] = useActor(service);
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 
   const previousOrganisaatioOid = usePrevious(selectedOrganisaatioOid);
 
   useEffect(() => {
-    if (
-      previousOrganisaatioOid != null &&
-      selectedOrganisaatioOid !== previousOrganisaatioOid
-    ) {
-      setPagination({ page: 0 });
+    if (selectedOrganisaatioOid !== previousOrganisaatioOid) {
+      send({ type: 'SET_VALUES', values: { page: 0 } });
     }
-  }, [previousOrganisaatioOid, selectedOrganisaatioOid, setPagination]);
+  }, [previousOrganisaatioOid, selectedOrganisaatioOid, send]);
 
   // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
   const setTila = useCallback(
-    tila => setPagination({ page: 0, tila }),
-    [setPagination]
+    tila =>
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, tila: tila },
+      }),
+    [send]
   );
 
   const setNimi = useCallback(
-    nimi => setPagination({ page: 0, nimi }),
-    [setPagination]
+    nimi => {
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, nimi: nimi },
+      });
+    },
+    [send]
   );
 
   const setHakuNimi = useCallback(
-    hakuNimi => setPagination({ page: 0, hakuNimi }),
-    [setPagination]
+    hakuNimi =>
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, hakuNimi: hakuNimi },
+      }),
+    [send]
   );
 
   let setKoulutustyyppi;
   if (name !== ENTITY.HAKU) {
     setKoulutustyyppi = koulutustyyppi =>
-      setPagination({ page: 0, koulutustyyppi });
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, koulutustyyppi: koulutustyyppi },
+      });
   }
 
   let setOrgWhitelist;
   if (name === ENTITY.HAKUKOHDE) {
-    setOrgWhitelist = orgWhitelist => {
-      setPagination({ page: 0, orgWhitelist });
-    };
+    setOrgWhitelist = orgWhitelist =>
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, orgWhitelist: orgWhitelist },
+      });
   }
 
   let setHakutapa;
   let setKoulutuksenAlkamiskausi;
   let setKoulutuksenAlkamisvuosi;
   if (name === ENTITY.HAKU) {
-    setHakutapa = hakutapa => setPagination({ page: 0, hakutapa });
+    setHakutapa = hakutapa =>
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, hakutapa: hakutapa },
+      });
     setKoulutuksenAlkamiskausi = koulutuksenAlkamiskausi =>
-      setPagination({ page: 0, koulutuksenAlkamiskausi });
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, koulutuksenAlkamiskausi: koulutuksenAlkamiskausi },
+      });
     setKoulutuksenAlkamisvuosi = koulutuksenAlkamisvuosi =>
-      setPagination({ page: 0, koulutuksenAlkamisvuosi });
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi },
+      });
   }
 
   let setNakyvyys;
   if (name === ENTITY.KOULUTUS || name === ENTITY.VALINTAPERUSTE) {
-    setNakyvyys = nakyvyys => setPagination({ page: 0, nakyvyys });
+    setNakyvyys = nakyvyys =>
+      send({
+        type: 'SET_VALUES',
+        values: { page: 0, nakyvyys: nakyvyys },
+      });
   }
+
+  const setOrderBy = useCallback(
+    orderBy =>
+      send({
+        type: 'SET_VALUES',
+        values: { orderBy: orderBy },
+      }),
+    [send]
+  );
+
+  const setPage = useCallback(
+    page =>
+      send({
+        type: 'SET_VALUES',
+        values: { page: page },
+      }),
+    [send]
+  );
 
   return useMemo(
     () => ({
-      nimi,
       setNimi,
-      hakuNimi,
       setHakuNimi,
-      koulutustyyppi,
       setKoulutustyyppi,
-      page,
-      setPage: page => setPagination({ page }),
-      orderBy,
-      setOrderBy: orderBy => setPagination({ orderBy }),
-      tila,
+      setPage,
+      setOrderBy,
       setTila,
-      julkinen,
-      hakutapa,
-      nakyvyys,
-      koulutuksenAlkamiskausi,
-      koulutuksenAlkamisvuosi,
-      orgWhitelist,
       entityType,
+      state,
       filtersProps: {
-        nimi,
-        hakuNimi,
-        koulutustyyppi,
-        tila,
         onNimiChange: setNimi,
         onHakuNimiChange: setHakuNimi,
         onKoulutustyyppiChange: setKoulutustyyppi,
         onTilaChange: setTila,
-        hakutapa,
         onHakutapaChange: setHakutapa,
-        nakyvyys,
         onNakyvyysChange: setNakyvyys,
-        koulutuksenAlkamiskausi,
         onKoulutuksenAlkamiskausiChange: setKoulutuksenAlkamiskausi,
-        koulutuksenAlkamisvuosi,
         onKoulutuksenAlkamisvuosiChange: setKoulutuksenAlkamisvuosi,
-        orgWhitelist,
         onOrgWhitelistChange: setOrgWhitelist,
         entityType,
+        state,
       },
     }),
     [
-      page,
-      setPagination,
-      nimi,
-      hakuNimi,
-      koulutustyyppi,
-      tila,
-      orderBy,
+      setPage,
+      setOrderBy,
       setTila,
       setKoulutustyyppi,
       setNimi,
       setHakuNimi,
-      julkinen,
-      hakutapa,
       setHakutapa,
-      nakyvyys,
       setNakyvyys,
-      koulutuksenAlkamiskausi,
       setKoulutuksenAlkamiskausi,
-      koulutuksenAlkamisvuosi,
       setKoulutuksenAlkamisvuosi,
-      orgWhitelist,
       setOrgWhitelist,
       entityType,
+      state,
     ]
   );
 };

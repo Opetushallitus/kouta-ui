@@ -14,6 +14,8 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
+import { koulutusService } from '#/src/machines/filterMachines';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchKoulutukset } from '#/src/utils/koulutus/searchKoulutukset';
 
 import { EntitySearchList } from './EntitySearchList';
@@ -57,6 +59,8 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const columns = useTableColumns(t, organisaatioOid);
+
+  const filterState = useFilterState(KOULUTUS, koulutusService);
   return (
     <>
       <NavigationAnchor id="koulutukset" />
@@ -74,6 +78,8 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           entityType={KOULUTUS}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeKoulutuksia')}
+          filterState={filterState}
+          searchPage="homepage.koulutukset"
         />
       </ListCollapse>
     </>

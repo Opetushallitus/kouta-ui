@@ -15,6 +15,8 @@ import {
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { hakuService } from '#/src/machines/filterMachines';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHaut } from '#/src/utils/haku/searchHaut';
 
 import { EntitySearchList } from './EntitySearchList';
@@ -61,6 +63,8 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
 
   const columns = useTableColumns(t, organisaatioOid, userLanguage);
 
+  const filterState = useFilterState(HAKU, hakuService);
+
   return (
     <>
       <NavigationAnchor id="haut" />
@@ -78,6 +82,8 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
           entityType={HAKU}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeHakuja')}
+          filterState={filterState}
+          searchPage="homepage.haut"
         />
       </ListCollapse>
     </>

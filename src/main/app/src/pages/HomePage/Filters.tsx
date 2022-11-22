@@ -69,32 +69,26 @@ const useNakyvyysOptions = t =>
   );
 
 export const Filters = ({
-  nimi = '',
-  hakuNimi = '',
   onNimiChange,
   onHakuNimiChange,
   onTilaChange,
   onKoulutustyyppiChange,
   nimiPlaceholder = '',
-  koulutustyyppi,
-  tila,
-  hakutapa,
   onHakutapaChange,
   onNakyvyysChange,
-  nakyvyys,
-  koulutuksenAlkamiskausi,
   onKoulutuksenAlkamiskausiChange,
-  koulutuksenAlkamisvuosi,
   onKoulutuksenAlkamisvuosiChange,
-  orgWhitelist,
   onOrgWhitelistChange,
   entityType,
+  state,
 }) => {
   const { t } = useTranslation();
 
   const tilaOptions = useTilaOptions(t);
 
   const koulutustyyppiOptions = useKoulutustyyppiOptions(t);
+
+  const entityState = state?.context?.values;
 
   const parseChildOrgs = (hierarkia, lang) => {
     let flatHierarkia = flattenHierarkia(hierarkia);
@@ -126,12 +120,12 @@ export const Filters = ({
   });
 
   const [usedNimi, setUsedNimi, debouncedNimi] = useDebounceState(
-    nimi,
+    entityState?.nimi,
     NAME_INPUT_DEBOUNCE_TIME
   );
 
   const [usedHakuNimi, setUsedHakuNimi, debouncedHakuNimi] = useDebounceState(
-    hakuNimi,
+    entityState?.hakuNimi,
     NAME_INPUT_DEBOUNCE_TIME
   );
 
@@ -185,7 +179,7 @@ export const Filters = ({
           <Select
             options={koulutustyyppiOptions}
             placeholder={t('yleiset.koulutustyyppi')}
-            value={koulutustyyppi}
+            value={entityState?.koulutustyyppi}
             onChange={onKoulutustyyppiChange}
             isMulti
           />
@@ -196,7 +190,7 @@ export const Filters = ({
           <Select
             options={childOrgOptions}
             placeholder={t('yleiset.aliorganisaatio')}
-            value={orgWhitelist}
+            value={entityState?.orgWhitelist}
             onChange={onOrgWhitelistChange}
             isMulti
           />
@@ -207,7 +201,7 @@ export const Filters = ({
           options={tilaOptions}
           onChange={onTilaChange}
           placeholder={t('yleiset.tila')}
-          value={tila}
+          value={entityState?.tila}
           isMulti
         />
       </Box>
@@ -217,7 +211,7 @@ export const Filters = ({
             options={hakutapaOptions}
             onChange={onHakutapaChange}
             placeholder={t('yleiset.hakutapa')}
-            value={hakutapa}
+            value={entityState?.hakutapa}
             isMulti
           />
         </Box>
@@ -228,7 +222,7 @@ export const Filters = ({
             options={nakyvyysOptions}
             onChange={onNakyvyysChange}
             placeholder={t('yleiset.nakyvyys')}
-            value={nakyvyys}
+            value={entityState?.nakyvyys}
           />
         </Box>
       )}
@@ -239,7 +233,7 @@ export const Filters = ({
               options={koulutuksenAlkamiskausiOptions}
               onChange={onKoulutuksenAlkamiskausiChange}
               placeholder={t('yleiset.koulutuksenAlkamiskausi')}
-              value={koulutuksenAlkamiskausi}
+              value={entityState?.koulutuksenAlkamiskausi}
             />
           </Box>
         )}
@@ -249,7 +243,7 @@ export const Filters = ({
               options={koulutuksenAlkamisvuosiOptions}
               onChange={onKoulutuksenAlkamisvuosiChange}
               placeholder={t('yleiset.koulutuksenAlkamisvuosi')}
-              value={koulutuksenAlkamisvuosi}
+              value={entityState?.koulutuksenAlkamisvuosi}
               isMulti
             />
           </Box>

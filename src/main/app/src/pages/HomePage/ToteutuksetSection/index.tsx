@@ -6,6 +6,8 @@ import Button from '#/src/components/Button';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
+import { toteutusService } from '#/src/machines/filterMachines';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
 import {
@@ -89,6 +91,8 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const copyMutation = useCopyToteutuksetMutation();
 
+  const filterState = useFilterState(TOTEUTUS, toteutusService);
+
   return copyMutation.isLoading ? (
     <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />
   ) : (
@@ -121,6 +125,8 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           entityType={TOTEUTUS}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeToteutuksia')}
+          filterState={filterState}
+          searchPage="homepage.toteutukset"
         />
       </ListCollapse>
     </CopyConfirmationWrapper>

@@ -13,6 +13,8 @@ import {
 } from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
+import { hakukohdeService } from '#/src/machines/filterMachines';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 import { EntitySearchList } from '../EntitySearchList';
@@ -60,6 +62,8 @@ const Actions = ({ organisaatioOid }) => {
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
+  const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
+
   const columns = useTableColumns(t, organisaatioOid);
   return (
     <>
@@ -78,6 +82,8 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
           entityType={HAKUKOHDE}
           columns={columns}
           nimiPlaceholder={t('etusivu.haeHakukohteita')}
+          filterState={filterState}
+          searchPage="homepage.hakukohteet"
         />
       </ListCollapse>
     </>

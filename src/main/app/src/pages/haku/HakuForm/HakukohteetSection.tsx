@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import { useInterpret } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -9,7 +10,9 @@ import {
   makeOrganisaatioColumn,
 } from '#/src/components/ListTable';
 import { ENTITY } from '#/src/constants';
+import { hakukohdeMachine } from '#/src/machines/filterMachines';
 import { EntitySearchList } from '#/src/pages/HomePage/EntitySearchList';
+import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
 const useTableColumns = (t, organisaatioOid) =>
@@ -35,6 +38,10 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
 
   let filterParams = { hakuOid: haku?.oid };
 
+  const hakukohdeService = useInterpret(hakukohdeMachine);
+
+  const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
+
   return (
     <EntitySearchList
       searchEntities={searchFilteredHakukohteet(filterParams)}
@@ -42,6 +49,8 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
       entityType={HAKUKOHDE}
       columns={columns}
       nimiPlaceholder={t('etusivu.haeHakukohteita')}
+      filterState={filterState}
+      searchPage="haku.hakukohteet"
     />
   );
 };

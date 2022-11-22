@@ -11,6 +11,7 @@ import { Box, Input, InputIcon, Spin } from '#/src/components/virkailija';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus from '#/src/hooks/useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
 import { getTestIdProps } from '#/src/utils';
+import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 
 const NUM_OF_ITEMS_ON_PAGE = 10;
 const countPageNumber = orgs => Math.ceil(orgs.length / NUM_OF_ITEMS_ON_PAGE);
@@ -31,13 +32,11 @@ const JarjestajatWithPagination = ({
   const currentPageFirstItemIndex = currentPage * NUM_OF_ITEMS_ON_PAGE;
 
   if (!_.isEmpty(usedNimi)) {
-    const foundOrgs = hierarkia.filter(org => {
-      const regex = new RegExp(`${usedNimi}.+`, 'gmi');
-      return org.nimi[language]
-        ? org.nimi[language].match(regex)
-        : org.nimi.fi.match(regex);
-    });
-
+    const foundOrgs = searchOrgsFromHierarkiaWithName(
+      hierarkia,
+      usedNimi,
+      language
+    );
     pageCount = countPageNumber(foundOrgs);
     itemsToShow = foundOrgs;
   }

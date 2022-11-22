@@ -72,6 +72,9 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.upload-teemakuva", this.require("kouta-backend.upload-teemakuva"));
         this.frontProperties.setProperty("kouta-backend.upload-logo", this.require("kouta-backend.upload-logo"));
 
+        this.frontProperties.setProperty("kouta-backend.organisaatio-by-oid", this.require("kouta-backend.organisaatio-by-oid"));
+        this.frontProperties.setProperty("kouta-backend.organisaatiot-by-oids", this.require("kouta-backend.organisaatiot-by-oids"));
+
         this.frontProperties.setProperty("koodisto-service.base-url", this.require("koodisto-service.base-url"));
         this.frontProperties.setProperty("koodisto-service.sisaltyy-alakoodit", this.require("koodisto-service.sisaltyy-alakoodit"));
         this.frontProperties.setProperty("koodisto-service.sisaltyy-ylakoodit", this.require("koodisto-service.sisaltyy-ylakoodit"));
@@ -95,14 +98,13 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("organisaatio-service.base-url", this.require("organisaatio-service.base-url"));
         this.frontProperties.setProperty("organisaatio-service.children", this.require("organisaatio-service.children"));
-        this.frontProperties.setProperty("organisaatio-service.organisaatio-by-oid", this.require("organisaatio-service.organisaatio-by-oid"));
         this.frontProperties.setProperty("organisaatio-service.organisaatiot-by-oids", this.require("organisaatio-service.organisaatiot-by-oids"));
         this.frontProperties.setProperty("organisaatio-service.hierarkia-haku", this.require("organisaatio-service.hierarkia-haku"));
 
         this.frontProperties.setProperty("lokalisaatio-service.localisation", this.require("lokalisaatio-service.localisation"));
-    
+
         this.frontProperties.setProperty("virkailija-raamit.raamitJs", this.require("virkailija-raamit.raamitJs"));
-        
+
         this.frontProperties.setProperty("kayttooikeus-service.me", this.require("kayttooikeus-service.me"));
         this.frontProperties.setProperty("kayttooikeus-service.kayttajan-organisaatiot", this.require("kayttooikeus-service.kayttajan-organisaatiot"));
 

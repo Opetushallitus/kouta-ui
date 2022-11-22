@@ -23,7 +23,7 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/kouta-backend/organisaatio/oppilaitokset-for-opintojakso-and-opintokokonaisuus`,
+      url: `**/kouta-backend/organisaatio/oppilaitokset-for-avoin-korkeakoulutus`,
     },
     { body: oppilaitosorganisaatioHierarkia({ rootOid: organisaatioOid }) }
   );

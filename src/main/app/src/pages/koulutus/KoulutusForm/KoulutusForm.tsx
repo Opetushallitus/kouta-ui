@@ -34,7 +34,7 @@ import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
-import { JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus } from './JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus';
+import { JarjestajatSectionForAvoinKorkeakoulutus } from './JarjestajaSectionForAvoinKorkeakoulutus';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
 import { KuvausFieldsSection } from './KuvausFieldsSection';
@@ -350,9 +350,7 @@ export const KoulutusForm = ({
               <FormCollapse
                 section="tarjoajat"
                 header={t('koulutuslomake.koulutuksenJarjestaja')}
-                Component={
-                  JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus
-                }
+                Component={JarjestajatSectionForAvoinKorkeakoulutus}
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}
               />

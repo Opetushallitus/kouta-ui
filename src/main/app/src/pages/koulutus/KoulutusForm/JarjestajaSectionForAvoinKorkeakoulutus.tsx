@@ -9,7 +9,7 @@ import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierar
 import Pagination from '#/src/components/Pagination';
 import { Box, Input, InputIcon, Spin } from '#/src/components/virkailija';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus from '#/src/hooks/useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
+import useOppilaitoksetForAvoinKorkeakoulutus from '#/src/hooks/useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
 import { getTestIdProps } from '#/src/utils';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 
@@ -107,7 +107,7 @@ const JarjestajatField = createFormFieldComponent(
   })
 );
 
-export const JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus = ({
+export const JarjestajatSectionForAvoinKorkeakoulutus = ({
   organisaatioOid,
   koulutus,
   disableTarjoajaHierarkia,
@@ -116,13 +116,13 @@ export const JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus = ({
   const language = useLanguageTab();
 
   const { organisaatiot, isLoading } =
-    useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus(language);
+    useOppilaitoksetForAvoinKorkeakoulutus(language);
 
   return (
     <div {...getTestIdProps('jarjestajatSelection')}>
       {organisaatiot && (
         <Field
-          name={`tarjoajat.tarjoajat`}
+          name="jarjestajat"
           hierarkia={organisaatiot}
           component={JarjestajatField}
           language={language}

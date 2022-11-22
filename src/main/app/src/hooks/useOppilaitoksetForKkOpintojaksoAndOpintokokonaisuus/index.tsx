@@ -2,21 +2,20 @@ import _ from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import getOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus from '#/src/utils/organisaatio/getOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
+import { getOppilaitosOrgsForAvoinKorkeakoulutus } from '#/src/utils/organisaatio/getOppilaitosOrgsForAvoinKorkeakoulutus';
 
-export const useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus =
-  selectedLanguage => {
-    const { data, ...rest } = useApiQuery(
-      'getOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus',
-      getOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus,
-      {},
-      { ...LONG_CACHE_QUERY_OPTIONS }
-    );
+export const useOppilaitoksetForAvoinKorkeakoulutus = selectedLanguage => {
+  const { data, ...rest } = useApiQuery(
+    'getOppilaitoksetForAvoinKorkeakoulutus',
+    getOppilaitosOrgsForAvoinKorkeakoulutus,
+    {},
+    {
+      ...LONG_CACHE_QUERY_OPTIONS,
+      select: data => _.sortBy(data, [org => org.nimi[selectedLanguage]]),
+    }
+  );
 
-    const sortedOrganisaatiot = _.sortBy(data, [
-      org => org.nimi[selectedLanguage],
-    ]);
-    return { organisaatiot: sortedOrganisaatiot, ...rest };
-  };
+  return { organisaatiot: data, ...rest };
+};
 
-export default useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus;
+export default useOppilaitoksetForAvoinKorkeakoulutus;

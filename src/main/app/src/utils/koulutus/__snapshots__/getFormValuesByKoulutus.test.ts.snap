@@ -12,10 +12,10 @@ Object {
   "esikatselu": false,
   "externalId": undefined,
   "information": Object {
-    "isAvoinKorkeakoulutus": false,
     "eperuste": Object {
       "value": undefined,
     },
+    "isAvoinKorkeakoulutus": false,
     "korkeakoulutukset": Array [],
     "koulutus": Object {
       "value": "koulutus_371101#1",
@@ -110,10 +110,10 @@ Object {
   "esikatselu": false,
   "externalId": "ext1",
   "information": Object {
-    "isAvoinKorkeakoulutus": false,
     "eperuste": Object {
       "value": undefined,
     },
+    "isAvoinKorkeakoulutus": false,
     "korkeakoulutukset": Array [
       Object {
         "value": "koulutus_371101#1",

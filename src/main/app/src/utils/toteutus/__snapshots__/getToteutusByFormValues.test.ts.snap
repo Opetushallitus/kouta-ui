@@ -31,7 +31,6 @@ Object {
         "kieli": "sv",
       },
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": Array [
       Object {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -81,6 +80,7 @@ Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
+    "isAvoinKorkeakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": Object {
       "A1Kielet": Array [

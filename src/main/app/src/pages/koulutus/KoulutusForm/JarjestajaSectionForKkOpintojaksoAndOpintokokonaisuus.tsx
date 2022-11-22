@@ -7,42 +7,86 @@ import { Field } from 'redux-form';
 import { createFormFieldComponent } from '#/src/components/formFields';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import Pagination from '#/src/components/Pagination';
+import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus from '#/src/hooks/useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
 import { getTestIdProps } from '#/src/utils';
 
-const JarjestajatWithPagination = ({ hierarkia, value, onChange }) => {
-  const [currentPage, setPage] = useState(0);
-  const numOfItemsOnPage = 10;
-  const pageCount = Math.ceil(hierarkia.length / numOfItemsOnPage);
-  const currentPageFirstItemIndex = currentPage * numOfItemsOnPage;
+const NUM_OF_ITEMS_ON_PAGE = 10;
+const countPageNumber = orgs => Math.ceil(orgs.length / NUM_OF_ITEMS_ON_PAGE);
 
-  const itemsOnPage = hierarkia.slice(
-    currentPageFirstItemIndex,
-    currentPageFirstItemIndex + numOfItemsOnPage
-  );
+const JarjestajatWithPagination = ({
+  hierarkia,
+  value,
+  onChange,
+  language,
+}) => {
+  const [currentPage, setPage] = useState(0);
+  const [usedNimi, setNimi] = useState('');
+  let itemsToShow = hierarkia || [];
+  let itemsOnPage = [];
+  let pageCount = countPageNumber(hierarkia || []);
+  const currentPageFirstItemIndex = currentPage * NUM_OF_ITEMS_ON_PAGE;
+
+  if (!_.isEmpty(usedNimi)) {
+    const foundOrgs = hierarkia.filter(org => {
+      const regex = new RegExp(`${usedNimi}.+`, 'gmi');
+      return org.nimi[language]
+        ? org.nimi[language].match(regex)
+        : org.nimi.fi.match(regex);
+    });
+
+    pageCount = countPageNumber(foundOrgs);
+    itemsToShow = foundOrgs;
+  }
+
+  itemsOnPage = [
+    itemsToShow.slice(
+      currentPageFirstItemIndex,
+      currentPageFirstItemIndex + NUM_OF_ITEMS_ON_PAGE
+    ),
+  ].flat();
 
   const oids = item => {
-    if (_.isEmpty(item.children)) {
-      return [item.oid];
+    if (item) {
+      if (_.isEmpty(item.children)) {
+        return [item.oid];
+      }
+
+      return [item.oid, ...item.children.map(oids).flat()];
     }
 
-    return [item.oid, ...item.children.map(oids).flat()];
+    return [];
   };
 
   const pageOids = itemsOnPage.map(oids).flat();
+
   return (
     <>
-      <OrganisaatioHierarkiaTreeSelect
-        hierarkia={itemsOnPage}
-        onChange={selectedPageOids => {
-          onChange([
-            ...value.filter(oid => !pageOids.includes(oid)),
-            ...selectedPageOids,
-          ]);
-        }}
-        value={value}
-      />
+      <Box display="flex" alignItems="center">
+        <Box width={1} marginBottom={2}>
+          <Input
+            placeholder={'Hae'}
+            value={usedNimi}
+            onChange={e => {
+              setNimi(e.target.value);
+            }}
+            suffix={<InputIcon type="search" />}
+          />
+        </Box>
+      </Box>
+      <Box marginBottom={2}>
+        <OrganisaatioHierarkiaTreeSelect
+          hierarkia={itemsOnPage}
+          onChange={selectedPageOids => {
+            onChange([
+              ...value.filter(oid => !pageOids.includes(oid)),
+              ...selectedPageOids,
+            ]);
+          }}
+          value={value}
+        />
+      </Box>
       <Pagination
         value={currentPage}
         onChange={setPage}
@@ -66,10 +110,10 @@ export const JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus = ({
   disableTarjoajaHierarkia,
 }) => {
   const { t } = useTranslation();
-  const selectedLanguage = useLanguageTab();
+  const language = useLanguageTab();
 
   const { organisaatiot } =
-    useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus(selectedLanguage);
+    useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus(language);
 
   return (
     <div {...getTestIdProps('jarjestajatSelection')}>
@@ -78,6 +122,7 @@ export const JarjestajaSectionForKkOpintojaksoAndOpintokokonaisuus = ({
           name={`tarjoajat.tarjoajat`}
           hierarkia={organisaatiot}
           component={JarjestajatField}
+          language={language}
           label={t(
             'koulutuslomake.valitseOpintojaksonTaiKokonaisuudenJarjestajat'
           )}

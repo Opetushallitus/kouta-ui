@@ -436,6 +436,7 @@
     "koulutuksenLisatiedot": "Koulutuksen lisätiedot",
     "koulutuksenJarjestaja": "Koulutuksen järjestävä organisaatio",
     "valitseJarjestajat": "Valitse ne organisaatiot, jotka järjestävät koulutusta",
+    "valitseOpintojaksonTaiKokonaisuudenJarjestajat": "Valitse ne organisaatiot, jotka voivat luoda koulutukseen liitettäviä toteutuksia",
     "kaytaPohjanJarjestajaa": "Käytä pohjaksi kopioidun koulutuksen järjestäjää",
     "valitseKaytettavaEperuste": "Valitse käytettävä ePeruste",
     "valitseKaytettavaTutkinnonOsa": "Valitse tutkinnon osat",

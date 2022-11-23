@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -8,10 +8,12 @@ import Alert from '#/src/components/Alert';
 import {
   createFormFieldComponent,
   FormFieldCheckbox,
+  simpleMapProps,
 } from '#/src/components/formFields';
 import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
-import { Box } from '#/src/components/virkailija';
+import Pagination from '#/src/components/Pagination';
+import { Box, Input, InputIcon, Spin } from '#/src/components/virkailija';
 import {
   KOULUTUS_ROLE,
   OPH_PAAKAYTTAJA_ROLE,
@@ -26,13 +28,96 @@ import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps, notToimipisteOrg } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 
-const JarjestajatField = createFormFieldComponent(
-  OrganisaatioHierarkiaTreeSelect,
-  ({ input, ...props }) => ({
-    ...input,
-    ...props,
-  })
+const NUM_OF_ITEMS_ON_PAGE = 10;
+const countPageNumber = orgs => Math.ceil(orgs.length / NUM_OF_ITEMS_ON_PAGE);
+
+const JarjestajatWithPagination = ({
+  hierarkia,
+  value,
+  onChange,
+  language,
+  isLoading,
+}) => {
+  const { t } = useTranslation();
+  const [currentPage, setPage] = useState(0);
+  const [usedNimi, setNimi] = useState('');
+  let itemsToShow = hierarkia || [];
+  let pageCount = countPageNumber(hierarkia);
+  const currentPageFirstItemIndex = currentPage * NUM_OF_ITEMS_ON_PAGE;
+
+  if (!_.isEmpty(usedNimi)) {
+    const foundOrgs = searchOrgsFromHierarkiaWithName(
+      hierarkia,
+      usedNimi,
+      language
+    );
+    pageCount = countPageNumber(foundOrgs);
+    itemsToShow = foundOrgs;
+  }
+
+  const itemsOnPage = [
+    itemsToShow.slice(
+      currentPageFirstItemIndex,
+      currentPageFirstItemIndex + NUM_OF_ITEMS_ON_PAGE
+    ),
+  ].flat();
+
+  const oids = item => {
+    if (item) {
+      if (_.isEmpty(item.children)) {
+        return [item.oid];
+      }
+
+      return [item.oid, ...item.children.map(oids).flat()];
+    }
+
+    return [];
+  };
+
+  const pageOids = itemsOnPage.map(oids).flat();
+
+  return isLoading ? (
+    <Spin center />
+  ) : (
+    <>
+      <Box display="flex" alignItems="center">
+        <Box width={1} marginBottom={2}>
+          <Input
+            placeholder={t('koulutuslomake.haeJarjestajanNimella')}
+            value={usedNimi}
+            onChange={e => {
+              setNimi(e.target.value);
+            }}
+            suffix={<InputIcon type="search" />}
+          />
+        </Box>
+      </Box>
+      <Box marginBottom={2}>
+        <OrganisaatioHierarkiaTreeSelect
+          hierarkia={itemsOnPage}
+          onChange={selectedPageOids => {
+            onChange([
+              ...value.filter(oid => !pageOids.includes(oid)),
+              ...selectedPageOids,
+            ]);
+          }}
+          value={value}
+        />
+      </Box>
+      <Pagination
+        value={currentPage}
+        onChange={setPage}
+        pageCount={pageCount}
+      />
+    </>
+  );
+};
+
+const TarjoajatFormField = createFormFieldComponent(
+  JarjestajatWithPagination,
+  simpleMapProps
 );
 
 export const TarjoajatSection = ({
@@ -42,15 +127,16 @@ export const TarjoajatSection = ({
 }) => {
   const { t } = useTranslation();
 
+  // TODO: Voisi noutaa näytettävät tarjoajat kouta-backendistä
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
     filter: notToimipisteOrg,
   });
 
   const roleBuilder = useAuthorizedUserRoleBuilder();
-  const tarjoajaOids = koulutus?.tarjoajat ?? [];
+  const koulutusTarjoajaOids = koulutus?.tarjoajat ?? [];
   const isOphVirkailija = useIsOphVirkailija();
 
-  const { organisaatiot: tarjoajat } = useOrganisaatiot(tarjoajaOids);
+  const { organisaatiot: tarjoajat } = useOrganisaatiot(koulutusTarjoajaOids);
   const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
   const kaytaPohjanJarjestajaa = useFieldValue(
     'tarjoajat.kaytaPohjanJarjestajaa'
@@ -58,7 +144,7 @@ export const TarjoajatSection = ({
 
   const getIsDisabled = useCallback(
     organisaatio => {
-      const kt = koulutus ? koulutus.koulutustyyppi : 'unknown';
+      const kt = koulutus?.koulutustyyppi ?? 'unknown';
       const requiredRole =
         kt === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
           ? OPH_PAAKAYTTAJA_ROLE
@@ -80,24 +166,25 @@ export const TarjoajatSection = ({
   ];
 
   const rows = useMemo(() => {
-    return _fp.flow(
-      _fp.filter(Boolean),
-      _fp.map((entity: any = {}) => ({ ...entity, key: entity.oid })),
-      _fp.sortBy(e => getFirstLanguageValue(e.nimi))
+    return _.flow(
+      _.compact,
+      ts => _.map(ts, (entity: any = {}) => ({ ...entity, key: entity.oid })),
+      ts => _.sortBy(ts, e => getFirstLanguageValue(e.nimi))
     )(tarjoajat);
   }, [tarjoajat]);
 
   return (
     <>
-      {tarjoajaOids.length > 0 || disableTarjoajaHierarkia ? (
-        <Box mb={2}>
-          <Alert status="info">
-            {t('koulutuslomake.tarjoajienLukumaara', {
-              lukumaara: tarjoajaOids.length,
-            })}
-          </Alert>
-        </Box>
-      ) : null}
+      {koulutusTarjoajaOids.length > 0 ||
+        (disableTarjoajaHierarkia && (
+          <Box mb={2}>
+            <Alert status="info">
+              {t('koulutuslomake.tarjoajienLukumaara', {
+                lukumaara: koulutusTarjoajaOids.length,
+              })}
+            </Alert>
+          </Box>
+        ))}
 
       {isOphVirkailija && (
         <Box mb={2}>
@@ -119,10 +206,10 @@ export const TarjoajatSection = ({
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
             <div {...getTestIdProps('tarjoajatSelection')}>
               <Field
-                name={`tarjoajat.tarjoajat`}
+                name="tarjoajat.tarjoajat"
                 hierarkia={hierarkia}
                 getIsDisabled={getIsDisabled}
-                component={JarjestajatField}
+                component={TarjoajatFormField}
                 label={t('koulutuslomake.valitseJarjestajat')}
               />
             </div>

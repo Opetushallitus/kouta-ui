@@ -34,7 +34,6 @@ import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
-import { JarjestajatSectionForAvoinKorkeakoulutus } from './JarjestajaSectionForAvoinKorkeakoulutus';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
 import { KuvausFieldsSection } from './KuvausFieldsSection';
@@ -86,10 +85,6 @@ export const KoulutusForm = ({
   const isNewOphKoulutus = isOphOrganisaatio(organisaatioOid) && isNewKoulutus;
   const isExistingOphKoulutus =
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
-
-  const isAvoinKorkeakoulutus = useFieldValue(
-    'information.isAvoinKorkeakoulutus'
-  );
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { hierarkia = [] } = useOrganisaatioHierarkia(
@@ -343,16 +338,6 @@ export const KoulutusForm = ({
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}
                 disableTarjoajaHierarkia={isExistingOphKoulutus}
-              />
-            )}
-
-            {isAvoinKorkeakoulutus && (
-              <FormCollapse
-                section="jarjestajat"
-                header={t('koulutuslomake.koulutuksenJarjestajat')}
-                Component={JarjestajatSectionForAvoinKorkeakoulutus}
-                organisaatioOid={organisaatioOid}
-                koulutus={koulutusProp}
               />
             )}
 

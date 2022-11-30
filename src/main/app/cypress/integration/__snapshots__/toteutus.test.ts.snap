@@ -994,9 +994,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "yleislinja": true
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": {
-    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
-  },
+  "nimi": {},
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -3154,9 +3152,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "yleislinja": true
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": {
-    "fi": "Deutsche Internationale Abitur; Reifeprüfung"
-  },
+  "nimi": {},
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
   "tarjoajat": [
@@ -3305,9 +3301,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
     "yleislinja": true
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": {
-    "fi": "EB-tutkinto (European Baccalaureate)"
-  },
+  "nimi": {},
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
   "tarjoajat": [

@@ -1041,7 +1041,7 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
     "opintojenLaajuusNumero": 12,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6#1",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],

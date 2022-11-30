@@ -144,6 +144,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       linkkiEPerusteisiin: pickTranslations(
         values?.description?.linkkiEPerusteisiin ?? {}
       ),
+      erikoistumiskoulutusKoodiUri:
+        values?.information?.erikoistumiskoulutus?.value || null,
     },
   };
 };

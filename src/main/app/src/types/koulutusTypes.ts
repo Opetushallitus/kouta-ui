@@ -22,6 +22,7 @@ export type InformationSectionValues = {
   laajuusNumeroTyyppi?: MaaraTyyppi;
   tutkintonimike: SelectOptions;
   koulutusalat: SelectOptions;
+  erikoistumiskoulutus: SelectOption;
 };
 
 export type KoulutusFormValues = {

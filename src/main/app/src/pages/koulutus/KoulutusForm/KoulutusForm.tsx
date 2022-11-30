@@ -51,6 +51,7 @@ import {
   MuuTiedotSection,
   KkOpintojaksoTiedotSection,
   ErikoislaakariTiedotSection,
+  ErikoistumisKoulutusTiedotSection,
 } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -180,6 +181,10 @@ export const KoulutusForm = ({
                     ),
                     () => KkOpintokokonaisuusTiedotSection,
                   ],
+                  [
+                    _fp.isEqual(KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS),
+                    () => ErikoistumisKoulutusTiedotSection,
+                  ],
                   [otherwise, () => TiedotSection],
                 ])(koulutustyyppi)}
                 languages={languageTabs}
@@ -275,6 +280,7 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
               KOULUTUSTYYPPI.ERIKOISLAAKARI,
               KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+              KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
               ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
             ].includes(koulutustyyppi) && (
               <FormCollapse

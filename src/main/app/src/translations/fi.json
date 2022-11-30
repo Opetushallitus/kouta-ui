@@ -461,7 +461,8 @@
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu koulutus",
     "koulutuksenNimiNakyyOppijalleVaroitus": "HUOM! Teksti näkyy oppijalle Opintopolun sivuilla.",
     "linkkiEPerusteisiin": "Linkki ePerusteisiin",
-    "epayhteensopiviaToteutuksia": "Koulutuksen arvot eivät ole yhteensopivia kaikkien siihen liitettyjen toteutusten kanssa"
+    "epayhteensopiviaToteutuksia": "Koulutuksen arvot eivät ole yhteensopivia kaikkien siihen liitettyjen toteutusten kanssa",
+    "valitseErikoistumiskoulutus": "Valitse erikoistumiskoulutus"
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",

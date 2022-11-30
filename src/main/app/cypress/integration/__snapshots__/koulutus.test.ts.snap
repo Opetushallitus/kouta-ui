@@ -187,8 +187,8 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
         }
       }
     ],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_300#1",
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 300,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
@@ -444,8 +444,8 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_38#1",
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 38,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
@@ -589,8 +589,8 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 53,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
@@ -633,8 +633,8 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": 60,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,

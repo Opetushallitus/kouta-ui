@@ -67,7 +67,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   return {
     organisaatioOid: values?.organisaatioOid?.value,
     externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
-    nimi: pickTranslations(values?.tiedot?.nimi || {}),
+    nimi:
+      koulutustyyppi === 'lk'
+        ? {}
+        : pickTranslations(values?.tiedot?.nimi || {}),
     tarjoajat: values?.tarjoajat || [],
     kielivalinta,
     tila,

@@ -55,6 +55,7 @@ import {
   DIATiedotSection,
   VapaaSivistystyoMuuTiedotSection,
   VapaaSivistystyoOpistovuosiTiedotSection,
+  ErikoistumiskoulutusTiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -70,6 +71,7 @@ const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
   KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
   KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
   KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+  KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
 ];
 
 type ToteutusFormProps = {
@@ -194,6 +196,10 @@ const ToteutusForm = ({
             [
               _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS),
               () => KkOpintokokonaisuusTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS),
+              () => ErikoistumiskoulutusTiedotSection,
             ],
             [
               tyyppi =>

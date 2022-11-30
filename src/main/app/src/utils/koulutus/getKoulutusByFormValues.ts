@@ -148,6 +148,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         values?.information?.isAvoinKorkeakoulutus || false,
       tunniste: values?.information?.tunniste || null,
       opinnonTyyppiKoodiUri: values?.information?.opinnonTyyppi?.value || null,
+      erikoistumiskoulutusKoodiUri:
+        values?.information?.erikoistumiskoulutus?.value || null,
     },
   };
 };

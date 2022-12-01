@@ -4,18 +4,18 @@ import Input from '@opetushallitus/virkailija-ui-components/Input';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import { useLanguageTab } from '../contexts/LanguageTabContext';
-import useKoodistoOptions from '../hooks/useKoodistoOptions';
+import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 import { FormFieldFloatInput, FormFieldSelect } from './formFields';
 import { Box, FormControl } from './virkailija';
 
 type Props = {
-    name: string;
-    disabled?: boolean;
-    required?: boolean;
-    defaultLaajuusYksikko?: string;
+  name: string;
+  disabled?: boolean;
+  required?: boolean;
+  defaultLaajuusYksikko?: string;
 };
 
 export const OpintojenLaajuusFieldExtended = ({

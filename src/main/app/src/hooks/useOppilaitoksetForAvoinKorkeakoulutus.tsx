@@ -24,5 +24,3 @@ export const useOppilaitoksetForAvoinKorkeakoulutus = (
 
   return { organisaatiot: data, ...rest };
 };
-
-export default useOppilaitoksetForAvoinKorkeakoulutus;

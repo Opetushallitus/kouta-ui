@@ -31,7 +31,7 @@ import { useFieldValue, useIsDirty } from '#/src/hooks/form';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
-import useOppilaitoksetForAvoinKorkeakoulutus from '#/src/hooks/useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
+import { useOppilaitoksetForAvoinKorkeakoulutus } from '#/src/hooks/useOppilaitoksetForAvoinKorkeakoulutus';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps, notToimipisteOrg } from '#/src/utils';

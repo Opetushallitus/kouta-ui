@@ -80,37 +80,12 @@ const getItemsToShow = (
     });
 };
 
-const TarjoajatWithPagination = ({
-  organisaatioOid,
-  hierarkia,
+const useResetAvoinTarjoajat = ({
   value,
-  onChange,
-  language,
-  isLoading,
+  organisaatioOid,
   isAvoinKorkeakoulutus,
+  onChange,
 }) => {
-  const { t } = useTranslation();
-  const [currentPage, setPage] = useState(0);
-  const [usedNimi, setNimi] = useState('');
-  const [naytaVainValitut, setNaytaVainValitut] = useState(false);
-  const filteredHierarkia = getItemsToShow(hierarkia, value, naytaVainValitut);
-  let itemsToShow = filteredHierarkia;
-  let pageCount = countPageNumber(itemsToShow);
-  const currentPageFirstItemIndex = currentPage * PAGE_SIZE;
-
-  if (!_.isEmpty(usedNimi)) {
-    itemsToShow = searchOrgsFromHierarkiaWithName(
-      filteredHierarkia,
-      usedNimi,
-      language
-    );
-    pageCount = countPageNumber(itemsToShow);
-  }
-
-  useEffect(() => {
-    setPage(0);
-  }, [usedNimi, isAvoinKorkeakoulutus, naytaVainValitut]);
-
   const isAvoinKorkeakoulutusChanged = useHasChanged(isAvoinKorkeakoulutus);
   const isDirty = useIsDirty();
 
@@ -126,8 +101,6 @@ const TarjoajatWithPagination = ({
   const { organisaatiot = [] } = useOppilaitoksetForAvoinKorkeakoulutus({
     enabled: !isAvoinKorkeakoulutus,
   });
-
-  console.log({ omatOppilaitokset });
 
   const avoinKkOppilaitosOids = useMemo(
     () =>
@@ -173,6 +146,45 @@ const TarjoajatWithPagination = ({
     value,
     avoinKkOppilaitosOids,
   ]);
+};
+
+const TarjoajatWithPagination = ({
+  organisaatioOid,
+  hierarkia,
+  value,
+  onChange,
+  language,
+  isLoading,
+  isAvoinKorkeakoulutus,
+}) => {
+  const { t } = useTranslation();
+  const [currentPage, setPage] = useState(0);
+  const [usedNimi, setNimi] = useState('');
+  const [naytaVainValitut, setNaytaVainValitut] = useState(false);
+  const filteredHierarkia = getItemsToShow(hierarkia, value, naytaVainValitut);
+  let itemsToShow = filteredHierarkia;
+  let pageCount = countPageNumber(itemsToShow);
+  const currentPageFirstItemIndex = currentPage * PAGE_SIZE;
+
+  if (!_.isEmpty(usedNimi)) {
+    itemsToShow = searchOrgsFromHierarkiaWithName(
+      filteredHierarkia,
+      usedNimi,
+      language
+    );
+    pageCount = countPageNumber(itemsToShow);
+  }
+
+  useEffect(() => {
+    setPage(0);
+  }, [usedNimi, isAvoinKorkeakoulutus, naytaVainValitut]);
+
+  useResetAvoinTarjoajat({
+    isAvoinKorkeakoulutus,
+    organisaatioOid,
+    value,
+    onChange,
+  });
 
   const itemsOnPage = [
     itemsToShow.slice(

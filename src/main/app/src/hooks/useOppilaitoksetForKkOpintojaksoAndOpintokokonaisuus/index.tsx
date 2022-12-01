@@ -1,17 +1,24 @@
-import _ from 'lodash';
-
-import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { getOppilaitosOrgsForAvoinKorkeakoulutus } from '#/src/utils/organisaatio/getOppilaitosOrgsForAvoinKorkeakoulutus';
+import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
-export const useOppilaitoksetForAvoinKorkeakoulutus = selectedLanguage => {
+export const useOppilaitoksetForAvoinKorkeakoulutus = (
+  { enabled }: any = { enabled: true }
+) => {
   const { data, ...rest } = useApiQuery(
     'getOppilaitoksetForAvoinKorkeakoulutus',
     getOppilaitosOrgsForAvoinKorkeakoulutus,
     {},
     {
       ...LONG_CACHE_QUERY_OPTIONS,
-      select: data => _.sortBy(data, [org => org.nimi[selectedLanguage]]),
+      enabled,
+      select: data =>
+        flatFilterHierarkia(
+          data,
+          organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)
+        ),
     }
   );
 

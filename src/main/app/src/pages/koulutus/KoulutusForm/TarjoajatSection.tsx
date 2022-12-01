@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useState, useEffect } from 'react';
+import React, {
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -21,16 +27,19 @@ import {
   ORGANISAATIOTYYPPI,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
-import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import { useFieldValue } from '#/src/hooks/form';
+import { useFieldValue, useIsDirty } from '#/src/hooks/form';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useOppilaitoksetForAvoinKorkeakoulutus from '#/src/hooks/useOppilaitoksetForKkOpintojaksoAndOpintokokonaisuus';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps, notToimipisteOrg } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import {
+  flatFilterHierarkia,
+  flattenHierarkia,
+} from '#/src/utils/organisaatio/hierarkiaHelpers';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 
@@ -72,6 +81,7 @@ const getItemsToShow = (
 };
 
 const TarjoajatWithPagination = ({
+  organisaatioOid,
   hierarkia,
   value,
   onChange,
@@ -100,6 +110,69 @@ const TarjoajatWithPagination = ({
   useEffect(() => {
     setPage(0);
   }, [usedNimi, isAvoinKorkeakoulutus, naytaVainValitut]);
+
+  const isAvoinKorkeakoulutusChanged = useHasChanged(isAvoinKorkeakoulutus);
+  const isDirty = useIsDirty();
+
+  const { hierarkia: h } = useOrganisaatioHierarkia(organisaatioOid, {
+    enabled: !isAvoinKorkeakoulutus,
+  });
+
+  const omatOppilaitokset = flatFilterHierarkia(
+    h,
+    organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)
+  );
+
+  const { organisaatiot = [] } = useOppilaitoksetForAvoinKorkeakoulutus({
+    enabled: !isAvoinKorkeakoulutus,
+  });
+
+  console.log({ omatOppilaitokset });
+
+  const avoinKkOppilaitosOids = useMemo(
+    () =>
+      isAvoinKorkeakoulutus
+        ? []
+        : organisaatiot
+            .filter(
+              org =>
+                !omatOppilaitokset.some(
+                  oppilaitos => oppilaitos.oid === org.oid
+                )
+            )
+            .map(org => org.oid),
+    [organisaatiot, omatOppilaitokset, isAvoinKorkeakoulutus]
+  );
+
+  const hiddenOppilaitosOids = useRef<Array<string>>([]);
+
+  useEffect(() => {
+    if (isDirty && isAvoinKorkeakoulutusChanged) {
+      if (isAvoinKorkeakoulutus) {
+        onChange(_.uniq([...value, ...hiddenOppilaitosOids.current]));
+        hiddenOppilaitosOids.current = [];
+      } else {
+        const oidsToHide: Array<string> = [];
+
+        avoinKkOppilaitosOids.forEach(oid => {
+          if (value.includes(oid)) {
+            oidsToHide.push(oid);
+          }
+        });
+
+        // Jos isAvoinKorkeakoulutus vaihtuu falseksi, karsitaan pois tarjoajia
+        onChange(_.difference(value, oidsToHide));
+        hiddenOppilaitosOids.current = oidsToHide;
+      }
+    }
+  }, [
+    isAvoinKorkeakoulutus,
+    isAvoinKorkeakoulutusChanged,
+    isDirty,
+    onChange,
+    value,
+    avoinKkOppilaitosOids,
+  ]);
 
   const itemsOnPage = [
     itemsToShow.slice(
@@ -192,21 +265,23 @@ const TarjoajatLinkList = ({ koulutus }) => {
   return <ListTable rows={rows} columns={columns} />;
 };
 
-const useSelectableTarjoajat = ({ organisaatioOid, isAvoinKorkeakoulutus }) => {
-  const language = useLanguageTab();
+export const useSelectableKoulutusTarjoajat = ({ organisaatioOid }) => {
+  const isAvoinKorkeakoulutus = useFieldValue(
+    'information.isAvoinKorkeakoulutus'
+  );
 
   const { organisaatiot = [], isLoading: isLoadingOppilaitokset } =
-    useOppilaitoksetForAvoinKorkeakoulutus(language);
+    useOppilaitoksetForAvoinKorkeakoulutus({ enabled: isAvoinKorkeakoulutus });
 
   const { hierarkia = [], isLoading: isLoadingHierarkia } =
     useOrganisaatioHierarkia(organisaatioOid, {
       filter: notToimipisteOrg,
     });
 
-  const hierarkiaOppilaitokset = useMemo(
+  const tarjoajat = useMemo(
     () =>
       _.flow(
-        h => (isAvoinKorkeakoulutus ? h.concat(organisaatiot) : h),
+        h => (isAvoinKorkeakoulutus ? [...h, ...organisaatiot] : h),
         h => flattenHierarkia(h),
         h => _.sortBy(h, e => getFirstLanguageValue(e.nimi)),
         h => _.sortedUniqBy(h, 'oid')
@@ -215,21 +290,20 @@ const useSelectableTarjoajat = ({ organisaatioOid, isAvoinKorkeakoulutus }) => {
   );
 
   return {
-    hierarkia: hierarkiaOppilaitokset,
+    tarjoajat,
     isLoading: isLoadingHierarkia || isLoadingOppilaitokset,
   };
 };
 
-const TarjoajatSelector = ({
-  organisaatioOid,
-  koulutus,
-  isAvoinKorkeakoulutus,
-}) => {
+const TarjoajatSelector = ({ organisaatioOid, koulutus }) => {
   const { t } = useTranslation();
 
-  const { hierarkia, isLoading } = useSelectableTarjoajat({
+  const isAvoinKorkeakoulutus = useFieldValue(
+    'information.isAvoinKorkeakoulutus'
+  );
+
+  const { tarjoajat, isLoading } = useSelectableKoulutusTarjoajat({
     organisaatioOid,
-    isAvoinKorkeakoulutus,
   });
 
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -252,11 +326,12 @@ const TarjoajatSelector = ({
     <div {...getTestIdProps('tarjoajatSelection')}>
       <Field
         name="tarjoajat.tarjoajat"
-        hierarkia={hierarkia}
+        hierarkia={tarjoajat}
         getIsDisabled={getIsDisabled}
         component={TarjoajatFormField}
         isAvoinKorkeakoulutus={isAvoinKorkeakoulutus}
         label={t('koulutuslomake.valitseJarjestajat')}
+        organisaatioOid={organisaatioOid}
       />
     </div>
   );
@@ -275,10 +350,6 @@ export const TarjoajatSection = ({
   const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
   const kaytaPohjanJarjestajaa = useFieldValue(
     'tarjoajat.kaytaPohjanJarjestajaa'
-  );
-
-  const isAvoinKorkeakoulutus = useFieldValue(
-    'information.isAvoinKorkeakoulutus'
   );
 
   return (
@@ -314,7 +385,6 @@ export const TarjoajatSection = ({
             <TarjoajatSelector
               koulutus={koulutus}
               organisaatioOid={organisaatioOid}
-              isAvoinKorkeakoulutus={isAvoinKorkeakoulutus}
             />
           )}
         </>

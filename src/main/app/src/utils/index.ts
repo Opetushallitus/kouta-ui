@@ -267,12 +267,12 @@ export const getValuesForSaving = (
   });
 
   // Some exceptions (fields that should be saved even though they are not visible)
-  // TODO: There might be a few other exceptions. Check before using in other forms and add here.
   copyPathsIfDefined(values, saveableValues, [
     'esikatselu',
     'koulutustyyppi',
     'muokkaaja',
     'information.nimi',
+    'tarjoajat.tarjoajat',
   ]);
 
   return saveableValues;

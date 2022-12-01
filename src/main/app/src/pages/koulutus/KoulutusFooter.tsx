@@ -13,7 +13,6 @@ import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
-import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 import { updateKoulutus } from '#/src/utils/koulutus/updateKoulutus';
@@ -63,11 +62,6 @@ export const KoulutusFooter = ({
             : {
                 ...koulutus,
                 ...getKoulutusByFormValues(valuesForSaving),
-                tarjoajat: getTarjoajaOids({
-                  hierarkia: [],
-                  existingTarjoajat: koulutus.tarjoajat,
-                  newTarjoajat: values?.tarjoajat?.tarjoajat,
-                }),
                 // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
                 // but backend requires it when creating new ones.
                 // TODO: Remove this when backend works without muokkaaja

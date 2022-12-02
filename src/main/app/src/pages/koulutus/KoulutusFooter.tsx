@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
-import { useFormName } from '#/src/contexts/FormContext';
+import { useFormMode, useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
@@ -19,14 +19,12 @@ import { updateKoulutus } from '#/src/utils/koulutus/updateKoulutus';
 import { validateKoulutusForm } from '#/src/utils/koulutus/validateKoulutusForm';
 
 type KoulutusFooterProps = {
-  formMode: FormMode;
   organisaatioOid: string;
   koulutus?: KoulutusModel;
   canUpdate?: boolean;
 };
 
 export const KoulutusFooter = ({
-  formMode,
   organisaatioOid,
   koulutus,
   canUpdate,
@@ -36,6 +34,7 @@ export const KoulutusFooter = ({
 
   const form = useForm();
   const formName = useFormName();
+  const formMode = useFormMode();
   const unregisteredFields = useSelector(state => state?.unregisteredFields);
   const initialValues = useSelector(state => state.form?.[formName]?.initial);
 

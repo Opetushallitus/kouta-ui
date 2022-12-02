@@ -271,11 +271,12 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('information', () => {
-        getByTestId('laajuusnumero').pipe(paste('30'));
+        getRadio('single').click({ force: true });
+        getByTestId('laajuusMin').find('input').pipe(paste('30'));
 
-        getSelectByLabel('yleiset.laajuusyksikko').pipe(
-          pFillSelect('opintopistettä')
-        );
+        getByTestId('forcedLaajuusyksikko')
+          .find('input')
+          .should('have.value', 'opintopistettä');
 
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').pipe(
           pFillAsyncSelect('Terveys')

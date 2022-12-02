@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved 1`] = `
+Object {
+  "ePerusteId": null,
+  "esikatselu": false,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": Array [],
+  "koulutuksetKoodiUri": Array [],
+  "koulutustyyppi": "erikoistumiskoulutus",
+  "metadata": Object {
+    "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
+    "koulutusalaKoodiUrit": Array [
+      "koulutusala_1#1",
+      "koulutusala_2#1",
+    ],
+    "koulutustyyppi": "erikoistumiskoulutus",
+    "kuvaus": Object {},
+    "linkkiEPerusteisiin": Object {},
+    "lisatiedot": Array [],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMax": 10,
+    "opintojenLaajuusNumeroMin": 5,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": Array [],
+    "tutkintonimikeKoodiUrit": Array [],
+    "tyyppi": "erikoistumiskoulutus",
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {},
+  "organisaatioOid": undefined,
+  "sorakuvausId": null,
+  "tarjoajat": Array [],
+  "teemakuva": undefined,
+  "tila": undefined,
+}
+`;
+
 exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
 Object {
   "ePerusteId": null,
@@ -13,6 +53,7 @@ Object {
   ],
   "koulutustyyppi": "amm-osaamisala",
   "metadata": Object {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": Object {},
@@ -51,6 +92,7 @@ Object {
   ],
   "koulutustyyppi": "amm",
   "metadata": Object {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": Array [
       "koulutusala_1#1",
       "koulutusala_2#1",
@@ -99,6 +141,7 @@ Object {
   ],
   "koulutustyyppi": "yo",
   "metadata": Object {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": Array [
       "koulutusala_1#1",
       "koulutusala_2#1",
@@ -161,6 +204,7 @@ Object {
   "koulutuksetKoodiUri": Array [],
   "koulutustyyppi": "yo",
   "metadata": Object {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "yo",
     "kuvaus": Object {},

@@ -13,6 +13,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -62,6 +63,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   ],
   "koulutustyyppi": "amm-osaamisala",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": {},
@@ -109,6 +111,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-tutkinnon-osa",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-tutkinnon-osa",
     "kuvaus": {},
@@ -171,6 +174,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -226,6 +230,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -277,6 +282,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -328,6 +334,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
@@ -386,6 +393,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {},
@@ -435,6 +443,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "tuva",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -482,6 +491,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
   ],
   "koulutustyyppi": "tuva",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -536,6 +546,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "vapaa-sivistystyo-muu",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-muu",
     "kuvaus": {
@@ -580,6 +591,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
     "kuvaus": {
@@ -624,6 +636,7 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "telma",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -671,6 +684,7 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
   ],
   "koulutustyyppi": "telma",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -725,6 +739,7 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -776,6 +791,7 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
   ],
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-ope-erityisope-ja-opo",
     "kuvaus": {
@@ -827,6 +843,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #1`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
@@ -881,6 +898,7 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
   ],
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
     ],
@@ -934,6 +952,7 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-muu",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -976,6 +995,7 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "aikuisten-perusopetus",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "aikuisten-perusopetus",
     "kuvaus": {
@@ -1023,6 +1043,7 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm-muu",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -1075,6 +1096,7 @@ exports[`createKoulutus > should be able to create "Korkeakoulutus opintojakso"-
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "kk-opintojakso",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1124,6 +1146,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "kk-opintojakso",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1177,6 +1200,7 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1228,6 +1252,7 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
   ],
   "koulutustyyppi": "erikoislaakari",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "erikoislaakari",
     "kuvaus": {
@@ -1272,6 +1297,7 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1321,6 +1347,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "kk-opintokokonaisuus",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1341,7 +1368,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": 10,
     "opintojenLaajuusNumeroMin": 5,
-    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -1350,6 +1377,58 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Opintojakso nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create erikoistumiskoulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": true,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "erikoistumiskoulutus",
+  "metadata": {
+    "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_061#1"
+    ],
+    "koulutustyyppi": "erikoistumiskoulutus",
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMax": 10,
+    "opintojenLaajuusNumeroMin": 5,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "erikoistumiskoulutus"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Big Data Analytics"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,

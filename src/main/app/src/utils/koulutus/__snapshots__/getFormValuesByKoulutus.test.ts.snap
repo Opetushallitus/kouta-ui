@@ -15,6 +15,9 @@ Object {
     "eperuste": Object {
       "value": undefined,
     },
+    "erikoistumiskoulutus": Object {
+      "value": "",
+    },
     "korkeakoulutukset": Array [],
     "koulutus": Object {
       "value": "koulutus_371101#1",
@@ -93,6 +96,71 @@ Object {
 }
 `;
 
+exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskoulutus 1`] = `
+Object {
+  "description": Object {
+    "kuvaus": Object {
+      "fi": "<p>Fi kuvaus</p>",
+      "sv": "<p>Sv kuvaus</p>",
+    },
+    "linkkiEPerusteisiin": Object {},
+  },
+  "esikatselu": false,
+  "externalId": undefined,
+  "information": Object {
+    "eperuste": Object {
+      "value": undefined,
+    },
+    "erikoistumiskoulutus": Object {
+      "value": "erikoistumiskoulutukset_001#2",
+    },
+    "korkeakoulutukset": Array [],
+    "koulutus": Object {
+      "value": undefined,
+    },
+    "koulutusalat": Array [
+      Object {
+        "value": "koulutusala_1#1",
+      },
+      Object {
+        "value": "koulutusala_2#1",
+      },
+    ],
+    "laajuusNumeroTyyppi": "range",
+    "nimi": Object {},
+    "opintojenLaajuus": Object {
+      "value": "",
+    },
+    "opintojenLaajuusNumero": "",
+    "opintojenLaajuusNumeroMax": 10,
+    "opintojenLaajuusNumeroMin": 5,
+    "opintojenLaajuusyksikko": Object {
+      "value": "",
+    },
+    "tutkintonimike": Array [],
+  },
+  "julkinen": false,
+  "kieliversiot": Array [],
+  "koulutustyyppi": "erikoistumiskoulutus",
+  "lisatiedot": Object {
+    "osioKuvaukset": Object {},
+    "osiot": Array [],
+  },
+  "organisaatioOid": undefined,
+  "osaamisala": null,
+  "soraKuvaus": null,
+  "tarjoajat": Object {
+    "tarjoajat": Array [],
+  },
+  "teemakuva": undefined,
+  "tila": undefined,
+  "tutkinnonosat": Object {
+    "nimi": Object {},
+    "osat": Array [],
+  },
+}
+`;
+
 exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] = `
 Object {
   "description": Object {
@@ -107,6 +175,9 @@ Object {
   "information": Object {
     "eperuste": Object {
       "value": undefined,
+    },
+    "erikoistumiskoulutus": Object {
+      "value": "",
     },
     "korkeakoulutukset": Array [
       Object {

@@ -23,7 +23,6 @@ import {
   getInputByLabel,
   pFillAsyncSelect,
   getRadio,
-  findSelect,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -311,10 +310,9 @@ export const createKoulutusForm = () => {
         getRadio('range').click({ force: true });
         getByTestId('laajuusMin').find('input').pipe(paste('5'));
         getByTestId('laajuusMax').find('input').pipe(paste('10'));
-        getByTestId('laajuusyksikko')
-          .pipe(findSelect)
-          .pipe(pFillSelect('opintopistettä'));
-
+        getByTestId('forcedLaajuusyksikko')
+          .find('input')
+          .should('have.value', 'opintopistettä');
         getSelectByLabel('koulutuslomake.valitseKoulutusalat').pipe(
           pFillAsyncSelect('Terveys')
         );
@@ -720,6 +718,46 @@ export const createKoulutusForm = () => {
       fillLisatiedotSection();
 
       fillSoraKuvausSection();
+
+      fillJarjestajaSection();
+
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create erikoistumiskoulutus',
+    mutationTest(() => {
+      fillCommon({
+        koulutustyyppiPath: ['korkeakoulutus', 'erikoistumiskoulutus'],
+      });
+
+      withinSection('information', () => {
+        getSelectByLabel('koulutuslomake.valitseErikoistumiskoulutus').pipe(
+          pFillAsyncSelect('Big Data Analytics')
+        );
+        getRadio('range').click({ force: true });
+        getByTestId('laajuusMin').find('input').pipe(paste('5'));
+        getByTestId('laajuusMax').find('input').pipe(paste('10'));
+        getByTestId('forcedLaajuusyksikko')
+          .find('input')
+          .should('have.value', 'opintopistettä');
+        getSelectByLabel('koulutuslomake.valitseKoulutusalat').pipe(
+          pFillAsyncSelect('Tietojenkäsittely ja tietoliikenne (ICT)')
+        );
+        getInputByLabel('koulutuslomake.muokkaaKoulutuksenNimea').should(
+          'have.value',
+          'Big Data Analytics'
+        );
+      });
+
+      withinSection('description', () => {
+        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+      });
+
+      fillLisatiedotSection();
 
       fillJarjestajaSection();
 

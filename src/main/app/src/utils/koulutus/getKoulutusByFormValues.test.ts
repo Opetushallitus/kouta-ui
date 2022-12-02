@@ -1,5 +1,5 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
+import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 
 test('getKoulutusByFormValues returns correct koulutus given form values', () => {
@@ -117,6 +117,29 @@ test('it should return empty array if no koulutusKoodiUri given', () => {
   const koulutus = getKoulutusByFormValues({
     information: {},
     koulutustyyppi: 'yo',
+  });
+
+  expect(koulutus).toMatchSnapshot();
+});
+
+test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () => {
+  const koulutus = getKoulutusByFormValues({
+    information: {
+      erikoistumiskoulutus: {
+        value: 'erikoistumiskoulutukset_001#2',
+      },
+      opintojenLaajuusyksikko: {
+        value: 'opintojenlaajuusyksikko_2#1',
+      },
+      laajuusNumeroTyyppi: MaaraTyyppi.VAIHTELUVALI,
+      opintojenLaajuusNumeroMin: '5.0',
+      opintojenLaajuusNumeroMax: '10',
+      koulutusalat: [
+        { value: 'koulutusala_1#1' },
+        { value: 'koulutusala_2#1' },
+      ],
+    },
+    koulutustyyppi: 'erikoistumiskoulutus',
   });
 
   expect(koulutus).toMatchSnapshot();

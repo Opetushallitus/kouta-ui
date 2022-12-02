@@ -21,6 +21,7 @@ import {
   KOULUTUS_PERUSOPETUS_KOODIURI,
   KoulutusalaKoodi,
   OPETTAJA_KOULUTUSTYYPIT,
+  OpintojenLaajuusyksikko,
 } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -340,7 +341,6 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
         KOULUTUSTYYPPI.AVOIN_YO,
         KOULUTUSTYYPPI.AVOIN_AMK,
         KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
-        KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
         KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
         KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
         KOULUTUSTYYPPI.LUKIOKOULUTUS,
@@ -368,7 +368,11 @@ export const KkOpintokokonaisuusTiedotSection = ({
 
   return (
     <VerticalBox gap={2}>
-      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <OpintojenLaajuusFieldRange
+        name={name}
+        disabled={disabled}
+        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+      />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}
@@ -404,13 +408,17 @@ export const ErikoistumisKoulutusTiedotSection = ({
         required={true}
         disabled={disabled}
       />
-      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <OpintojenLaajuusFieldRange
+        name={name}
+        disabled={disabled}
+        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+      />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}
         name={`${name}.nimi.${language}`}
         component={FormFieldInput}
-        label={t('koulutuslomake.koulutuksenNimi')}
+        label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />

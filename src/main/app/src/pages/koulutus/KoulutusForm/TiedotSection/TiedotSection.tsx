@@ -194,7 +194,11 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
 
   return (
     <VerticalBox gap={2}>
-      <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
+      <OpintojenLaajuusFieldRange
+        name={name}
+        disabled={disabled}
+        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+      />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}

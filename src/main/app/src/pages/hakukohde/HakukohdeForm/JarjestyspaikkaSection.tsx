@@ -6,26 +6,21 @@ import { Field } from 'redux-form';
 
 import {
   createFormFieldComponent,
-  FormFieldSwitch,
   simpleMapProps,
 } from '#/src/components/formFields';
-import { Box, Radio, RadioGroup, Spin } from '#/src/components/virkailija';
+import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
 import {
   CRUD_ROLES,
   ENTITY,
   KOULUTUSTYYPPI,
   ORGANISAATIOTYYPPI,
 } from '#/src/constants';
-import {
-  useFieldValue,
-  useInitalFieldValue,
-  useIsDirty,
-  useSetFieldValue,
-} from '#/src/hooks/form';
+import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import JarjestaaUrheilijanAmmatillistaKoulutustaField from '#/src/pages/hakukohde/HakukohdeForm/JarjestaaUrheilijanAmmatillistaKoulutustaField';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { useOppilaitoksetByOids } from '#/src/utils/hakukohde/getOppilaitoksetByOids';
@@ -133,29 +128,6 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
     isLoading,
     koulutustyyppi,
   }) => {
-    const { t } = useTranslation();
-    const jarjestyspaikkaOid = useFieldValue('jarjestyspaikkaOid');
-    const initialJarjestyspaikkaOid = useInitalFieldValue('jarjestyspaikkaOid');
-    const jarjestyspaikka = options.find(
-      option => option.value === jarjestyspaikkaOid
-    );
-    const isDirty = useIsDirty();
-    const jarjestaaUrheilijanAmmKoulutusta = useFieldValue(
-      'jarjestaaUrheilijanAmmKoulutusta'
-    );
-    const hasJarjestyspaikkaChanged =
-      !isLoading && jarjestyspaikkaOid !== initialJarjestyspaikkaOid && isDirty;
-    useSetFieldValue(
-      'jarjestaaUrheilijanAmmKoulutusta',
-      false,
-      hasJarjestyspaikkaChanged &&
-        !jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta
-    );
-    const showUrheilijanAmmKoulutusField =
-      !isLoading &&
-      koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS &&
-      (jarjestaaUrheilijanAmmKoulutusta === true ||
-        jarjestyspaikka?.jarjestaaUrheilijanAmmKoulutusta);
     return isLoading ? (
       <Spin />
     ) : (
@@ -172,17 +144,10 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
             </Radio>
           ))}
         </RadioGroup>
-        {showUrheilijanAmmKoulutusField ? (
-          <Box mt={3} mb={3}>
-            <Field
-              component={FormFieldSwitch}
-              name={'jarjestaaUrheilijanAmmKoulutusta'}
-              disabled={!jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta}
-            >
-              {t('hakukohdelomake.jarjestaaUrheilijanAmmKoulutusta')}
-            </Field>
-          </Box>
-        ) : null}
+        <JarjestaaUrheilijanAmmatillistaKoulutustaField
+          options={options}
+          koulutustyyppi={koulutustyyppi}
+        />
       </>
     );
   },

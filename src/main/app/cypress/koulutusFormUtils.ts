@@ -1,6 +1,6 @@
 import { merge } from 'lodash/fp';
 
-import oppilaitosorganisaatioHierarkia from '#/cypress/data/oppilaitosorganisaatioHierarkia';
+import oppilaitoksetFlat from '#/cypress/data/oppilaitoksetFlat';
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import soraKuvaus from '#/cypress/data/soraKuvaus';
@@ -25,7 +25,7 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
       method: 'GET',
       url: `**/kouta-backend/organisaatio/oppilaitokset-for-avoin-korkeakoulutus`,
     },
-    { body: oppilaitosorganisaatioHierarkia({ rootOid: organisaatioOid }) }
+    { body: oppilaitoksetFlat({ rootOid: organisaatioOid }) }
   );
 
   cy.intercept(

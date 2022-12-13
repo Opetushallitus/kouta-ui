@@ -9,12 +9,18 @@ import {
   simpleMapProps,
 } from '#/src/components/formFields';
 import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
-import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
+import {
+  CRUD_ROLES,
+  ENTITY,
+  KOULUTUSTYYPPI,
+  ORGANISAATIOTYYPPI,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import JarjestaaUrheilijanAmmatillistaKoulutustaField from '#/src/pages/hakukohde/HakukohdeForm/JarjestaaUrheilijanAmmatillistaKoulutustaField';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { useOppilaitoksetByOids } from '#/src/utils/hakukohde/getOppilaitoksetByOids';
@@ -98,6 +104,8 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
           value: org?.oid,
           label: getOrganisaatioLabel(org, language, organisaatiotyyppiMap, t),
           disabled: !getCanUpdate(org),
+          jarjestaaUrheilijanAmmKoulutusta:
+            org.jarjestaaUrheilijanAmmKoulutusta,
         })),
         _fp.sortBy('label')
       )(enrichedOrgs),
@@ -111,22 +119,36 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
 };
 
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
-  ({ disabled, options, value, error, onChange, isLoading }) => {
+  ({
+    disabled,
+    options,
+    value,
+    error,
+    onChange,
+    isLoading,
+    koulutustyyppi,
+  }) => {
     return isLoading ? (
       <Spin />
     ) : (
-      <RadioGroup
-        value={value}
-        disabled={disabled}
-        error={error}
-        onChange={onChange}
-      >
-        {options.map(({ value, disabled, label }) => (
-          <Radio key={value} value={value} disabled={disabled}>
-            {label}
-          </Radio>
-        ))}
-      </RadioGroup>
+      <>
+        <RadioGroup
+          value={value}
+          disabled={disabled}
+          error={error}
+          onChange={onChange}
+        >
+          {options.map(({ value, disabled, label }) => (
+            <Radio key={value} value={value} disabled={disabled}>
+              {label}
+            </Radio>
+          ))}
+        </RadioGroup>
+        <JarjestaaUrheilijanAmmatillistaKoulutustaField
+          options={options}
+          koulutustyyppi={koulutustyyppi}
+        />
+      </>
     );
   },
   simpleMapProps
@@ -134,8 +156,10 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
 
 export const JarjestyspaikkaSection = ({
   tarjoajat,
+  koulutustyyppi,
 }: {
   tarjoajat: Array<string>;
+  koulutustyyppi: KOULUTUSTYYPPI;
 }) => {
   const { t } = useTranslation();
 
@@ -154,6 +178,7 @@ export const JarjestyspaikkaSection = ({
         name="jarjestyspaikkaOid"
         required
         isLoading={isLoading}
+        koulutustyyppi={koulutustyyppi}
       />
     </div>
   );

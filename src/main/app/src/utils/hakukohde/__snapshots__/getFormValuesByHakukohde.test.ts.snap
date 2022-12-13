@@ -58,6 +58,7 @@ Object {
     },
     "tyyppi": "ataru",
   },
+  "jarjestaaUrheilijanAmmKoulutusta": false,
   "jarjestyspaikkaOid": "2.2.2.2.2",
   "kieliversiot": Array [
     "fi",

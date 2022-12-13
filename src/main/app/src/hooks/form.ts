@@ -10,7 +10,6 @@ import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
 import { useActions } from './useActions';
-import { useHasChanged } from './useHasChanged';
 
 export const useForm = (formNameProp?: string) => {
   const formName = useFormName();
@@ -37,6 +36,7 @@ export function useIsDirty() {
   const formName = useFormName();
   return useSelector(isDirty(formName));
 }
+
 export function useIsSubmitting(formNameProp?: string) {
   const formName = useFormName();
   return useSelector(isSubmitting(formNameProp ?? formName));
@@ -60,10 +60,24 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
   return useSelector(selector);
 }
 
+export function useInitalFieldValue<T = any>(name, formNameProp?: string): T {
+  const contextFormName = useFormName();
+  const formName = formNameProp || contextFormName;
+
+  assert(formName != null);
+
+  const selector = useCallback(
+    state => _.get(state, `form.${formName}.initial.${name}`),
+    [formName, name]
+  );
+
+  return useSelector(selector);
+}
 export const useSetFieldValue = (name, value, condition = true) => {
   const form = useFormName();
   const dispatch = useDispatch();
-  const valueHasChanged = useHasChanged(value, _.isEqual);
+  const currentValue = useFieldValue(name, form);
+  const valueHasChanged = !_.isEqual(currentValue, value);
   useEffect(() => {
     if (condition && valueHasChanged) {
       dispatch(change(form, name, value));

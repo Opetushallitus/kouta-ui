@@ -63,6 +63,8 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
         pickTranslations(esittely || {}),
         serializeEditorState
       ),
+      jarjestaaUrheilijanAmmKoulutusta:
+        perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
       tietoaOpiskelusta,
       opiskelijoita: parseNumeric(perustiedot?.opiskelijoita),
       korkeakouluja: parseNumeric(perustiedot?.korkeakouluja),

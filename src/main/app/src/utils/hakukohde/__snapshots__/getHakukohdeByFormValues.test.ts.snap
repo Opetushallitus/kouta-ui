@@ -85,6 +85,7 @@ Object {
         },
       ],
     },
+    "jarjestaaUrheilijanAmmKoulutusta": false,
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": Object {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",

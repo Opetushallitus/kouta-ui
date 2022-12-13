@@ -365,6 +365,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
       "lukumaara": 150
     },
     "hakukohteenLinja": null,
+    "jarjestaaUrheilijanAmmKoulutusta": false,
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",
@@ -525,6 +526,7 @@ exports[`editHakukohde > should be able to delete hakukohde #0`] =
       "lukumaara": 150
     },
     "hakukohteenLinja": null,
+    "jarjestaaUrheilijanAmmKoulutusta": false,
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",

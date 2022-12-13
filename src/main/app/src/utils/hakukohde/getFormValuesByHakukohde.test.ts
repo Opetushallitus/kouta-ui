@@ -84,6 +84,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
       nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
       toinenAsteOnkoKaksoistutkinto: true,
       metadata: {
+        jarjestaaUrheilijanAmmKoulutusta: false,
         uudenOpiskelijanUrl: {
           fi: 'https://opiskelu.fi',
           sv: 'https://opiskelu.se',

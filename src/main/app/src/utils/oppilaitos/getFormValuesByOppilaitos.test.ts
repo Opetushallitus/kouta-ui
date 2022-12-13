@@ -6,6 +6,7 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
     tila: 'tallennettu',
     metadata: {
       akatemioita: 1,
+      jarjestaaUrheilijanAmmKoulutusta: true,
       esittely: {
         fi: '<p><em>Fi esittely</em></p>',
         sv: '<p><em>Sv esittely</em></p>',

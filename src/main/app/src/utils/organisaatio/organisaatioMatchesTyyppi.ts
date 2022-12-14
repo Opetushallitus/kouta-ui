@@ -14,5 +14,3 @@ export const organisaatioMatchesTyyppi = _fp.curry((tyyppi, organisaatio) => {
   const orgTyypit = getOrganisaatioTyypit(organisaatio);
   return orgTyypit.some(t => tyypit.includes(t));
 });
-
-export default organisaatioMatchesTyyppi;

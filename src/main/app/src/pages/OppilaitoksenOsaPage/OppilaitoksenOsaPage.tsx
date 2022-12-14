@@ -21,7 +21,7 @@ import { getFormValuesByOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/ge
 import { useOppilaitoksenOsaByOid } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 import { OppilaitoksenOsaFooter } from './OppilaitoksenOsaFooter';
 import OppilaitoksenOsaForm, {

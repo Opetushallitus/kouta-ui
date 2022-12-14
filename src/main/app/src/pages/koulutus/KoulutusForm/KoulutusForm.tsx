@@ -40,7 +40,7 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import { TarjoajatSection } from './TarjoajatSection';
+import { TarjoajatSection } from './tarjoajat/TarjoajatSection';
 import {
   TiedotSection,
   AikuistenPerusopetusTiedotSection,

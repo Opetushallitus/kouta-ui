@@ -22,7 +22,7 @@ import { memoize, memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
-import organisaatioMatchesTyyppi from './organisaatio/organisaatioMatchesTyyppi';
+import { organisaatioMatchesTyyppi } from './organisaatio/organisaatioMatchesTyyppi';
 
 const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 
@@ -113,7 +113,7 @@ export const createChainedFunction =
   (...fns) =>
   (...args) => {
     // eslint-disable-next-line
-  for (const fn of fns) {
+    for (const fn of fns) {
       if (_.isFunction(fn)) {
         fn(...args);
       }
@@ -380,6 +380,5 @@ export const getKoulutustyyppiTranslation = (
   return koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '';
 };
 
-export const notToimipisteOrg = _fp.negate(
-  organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
-);
+export const notToimipisteOrg = org =>
+  !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE, org);

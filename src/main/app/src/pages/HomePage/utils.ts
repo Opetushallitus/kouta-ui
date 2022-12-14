@@ -10,7 +10,7 @@ import {
   ORGANISAATIOTYYPPI,
   NAKYVYYS,
 } from '#/src/constants';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 export const parseSort = sort => {
   return (sort || '').split(':');

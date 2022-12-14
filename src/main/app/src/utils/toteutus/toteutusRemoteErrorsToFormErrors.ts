@@ -116,4 +116,11 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       errorKey: `validointivirheet.${errorType}`,
     };
   }
+
+  if (errorType === 'invalidIsAvoinKorkeakoulutusIntegrity') {
+    return {
+      field: 'tiedot.isAvoinKorkeakoulutus',
+      errorKey: `validointivirheet.${errorType}`,
+    };
+  }
 };

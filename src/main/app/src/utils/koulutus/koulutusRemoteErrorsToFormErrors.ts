@@ -112,4 +112,11 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       },
     ];
   }
+
+  if (errorType === 'cannotChangeIsAvoinKorkeakoulutus') {
+    return {
+      field: 'information.isAvoinKorkeakoulutus',
+      errorKey: `validointivirheet.${errorType}`,
+    };
+  }
 };

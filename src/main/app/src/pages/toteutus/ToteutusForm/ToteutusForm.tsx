@@ -244,7 +244,6 @@ const ToteutusForm = ({
         {[
           KOULUTUSTYYPPI.AVOIN_YO,
           KOULUTUSTYYPPI.AVOIN_AMK,
-          KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
           KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
         ].includes(koulutustyyppi) && (
           <FormCollapse

@@ -6,17 +6,21 @@ import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import { getTestIdProps } from '#/src/utils';
 
+import { useLanguageTab } from '../contexts/LanguageTabContext';
+import useKoodi from '../hooks/useKoodi';
+import getKoodiNimiTranslation from '../utils/getKoodiNimiTranslation';
 import {
   createFormFieldComponent,
   FormFieldAsyncKoodistoSelect,
   FormFieldFloatInput,
   FormFieldRadioGroup,
 } from './formFields';
-import { Box } from './virkailija';
+import { Box, FormControl, Input } from './virkailija';
 
 const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
-  ({ disabled, section }) => {
+  ({ disabled, section, forcedLaajuusYksikko }) => {
     const { t } = useTranslation();
+    const selectedLanguage = useLanguageTab();
     const laajuusNumeroTyyppi = useFieldValue<MaaraTyyppi>(
       `${section}.laajuusNumeroTyyppi`
     );
@@ -24,6 +28,12 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
     const { data: koodistoData } = useKoodisto({
       koodisto: 'opintojenlaajuusyksikko',
     });
+
+    const { koodi: forcedLaajuusKoodi } = useKoodi(forcedLaajuusYksikko);
+
+    const laajuusYksikkoTextValue = forcedLaajuusYksikko
+      ? getKoodiNimiTranslation(forcedLaajuusKoodi, selectedLanguage) || ''
+      : '';
 
     return (
       <Box {...getTestIdProps('laajuusNumero')}>
@@ -76,26 +86,47 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
               </Box>
             </>
           )}
-          <Box flexGrow={2} ml={1} data-testid="laajuusyksikko">
-            <Field
-              component={FormFieldAsyncKoodistoSelect}
-              name={`${section}.opintojenLaajuusyksikko`}
-              placeholder={t('yleiset.laajuusyksikko')}
-              koodistoData={koodistoData}
-              showAllOptions
-            />
-          </Box>
+          {forcedLaajuusYksikko ? (
+            <Box flexGrow={2} ml={1} data-testid="forcedLaajuusyksikko">
+              <FormControl disabled={true}>
+                <Input value={laajuusYksikkoTextValue} />
+              </FormControl>
+            </Box>
+          ) : (
+            <Box flexGrow={2} ml={1} data-testid="laajuusyksikko">
+              <Field
+                component={FormFieldAsyncKoodistoSelect}
+                name={`${section}.opintojenLaajuusyksikko`}
+                placeholder={t('yleiset.laajuusyksikko')}
+                koodistoData={koodistoData}
+                selectedLanguage={selectedLanguage}
+                showAllOptions
+              />
+            </Box>
+          )}
         </Box>
       </Box>
     );
   }
 );
 
-export const OpintojenLaajuusFieldRange = ({ name, disabled }) => (
+type Props = {
+  name: string;
+  disabled?: boolean;
+  required?: boolean;
+  forcedLaajuusYksikko?: string;
+};
+
+export const OpintojenLaajuusFieldRange = ({
+  name,
+  disabled,
+  forcedLaajuusYksikko,
+}: Props) => (
   <Field
     component={OpintojenLaajuusRangeGroupInput}
     name={`${name}.opintojenLaajuusGroup`}
     disabled={disabled}
     section={name}
+    forcedLaajuusYksikko={forcedLaajuusYksikko}
   />
 );

@@ -324,6 +324,8 @@ export const DIATiedotSection = ({
 
 export const EBTiedotSection = DIATiedotSection;
 
+export const ErikoistumiskoulutusTiedotSection = DIATiedotSection;
+
 export const LukioTiedotSection = ({ name }: ToteutusTiedotSectionProps) => {
   return (
     <VerticalBox gap={2}>

@@ -81,3 +81,22 @@ test('getFormValuesByKoulutus returns correct form values for ammatillinen koulu
 
   expect(values).toMatchSnapshot();
 });
+
+test('getFormValuesByKoulutus returns correct form values for erikoistumiskoulutus', () => {
+  const values = getFormValuesByKoulutus({
+    koulutustyyppi: 'erikoistumiskoulutus',
+    metadata: {
+      kuvaus: {
+        fi: 'Fi kuvaus',
+        sv: 'Sv kuvaus',
+      },
+      erikoistumiskoulutusKoodiUri: 'erikoistumiskoulutukset_001#2',
+      opintojenLaajuusyksikko: 'opintojenlaajuusyksikko_2#1',
+      opintojenLaajuusNumeroMax: 10,
+      opintojenLaajuusNumeroMin: 5,
+      koulutusalaKoodiUrit: ['koulutusala_1#1', 'koulutusala_2#1'],
+    },
+  });
+
+  expect(values).toMatchSnapshot();
+});

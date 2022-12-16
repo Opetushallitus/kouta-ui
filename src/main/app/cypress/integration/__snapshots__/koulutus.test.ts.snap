@@ -14,6 +14,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   "koulutustyyppi": "amm",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -66,6 +67,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   "koulutustyyppi": "amm-osaamisala",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": {},
@@ -116,6 +118,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "koulutustyyppi": "amm-tutkinnon-osa",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-tutkinnon-osa",
     "kuvaus": {},
@@ -181,6 +184,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   "koulutustyyppi": "amk",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -239,6 +243,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -293,6 +298,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   "koulutustyyppi": "amm",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -347,6 +353,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
   "koulutustyyppi": "amk",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
@@ -408,6 +415,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {},
@@ -460,6 +468,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
   "koulutustyyppi": "tuva",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -510,6 +519,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
   "koulutustyyppi": "tuva",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -567,6 +577,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
   "koulutustyyppi": "vapaa-sivistystyo-muu",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-muu",
     "kuvaus": {
@@ -614,6 +625,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
   "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
     "kuvaus": {
@@ -661,6 +673,7 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
   "koulutustyyppi": "telma",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -711,6 +724,7 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
   "koulutustyyppi": "telma",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -768,6 +782,7 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   "koulutustyyppi": "amm",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -822,6 +837,7 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-ope-erityisope-ja-opo",
     "kuvaus": {
@@ -875,6 +891,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #1`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
@@ -930,6 +947,7 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
     ],
@@ -986,6 +1004,7 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
   "koulutustyyppi": "amm-muu",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -1031,6 +1050,7 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
   "koulutustyyppi": "aikuisten-perusopetus",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "aikuisten-perusopetus",
     "kuvaus": {
@@ -1081,6 +1101,7 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
   "koulutustyyppi": "amm-muu",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -1122,55 +1143,6 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
   "tila": "tallennettu"
 };
 
-exports[`createKoulutus > should be able to create "Korkeakoulutus opintojakso"-koulutus #0`] =
-{
-  "ePerusteId": null,
-  "esikatselu": false,
-  "externalId": null,
-  "johtaaTutkintoon": false,
-  "julkinen": false,
-  "kielivalinta": [
-    "fi"
-  ],
-  "koulutuksetKoodiUri": [],
-  "koulutustyyppi": "kk-opintojakso",
-  "metadata": {
-    "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
-    ],
-    "koulutustyyppi": "kk-opintojakso",
-    "kuvaus": {
-      "fi": "<p>Kuvaus</p>"
-    },
-    "linkkiEPerusteisiin": {},
-    "lisatiedot": [
-      {
-        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
-        "teksti": {
-          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
-        }
-      }
-    ],
-    "opintojenLaajuusKoodiUri": null,
-    "opintojenLaajuusNumero": 30,
-    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
-    "osaamisalaKoodiUri": null,
-    "tutkinnonOsat": [],
-    "tutkintonimikeKoodiUrit": [],
-    "tyyppi": "kk-opintojakso"
-  },
-  "muokkaaja": "1.2.246.562.24.62301161440",
-  "nimi": {
-    "fi": "Opintojakso nimi"
-  },
-  "organisaatioOid": "1.1.1.1.1.1",
-  "sorakuvausId": null,
-  "tarjoajat": [
-    "1.2.1.1.1.1"
-  ],
-  "tila": "julkaistu"
-};
-
 exports[`createKoulutus > should be able to create korkeakoulutus opintojakso koulutus #0`] =
 {
   "ePerusteId": null,
@@ -1185,6 +1157,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
   "koulutustyyppi": "kk-opintojakso",
   "metadata": {
     "isAvoinKorkeakoulutus": true,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1203,10 +1176,10 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
     ],
     "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
     "opintojenLaajuusKoodiUri": null,
-    "opintojenLaajuusNumero": 30,
-    "opintojenLaajuusNumeroMax": null,
-    "opintojenLaajuusNumeroMin": null,
-    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMax": 30,
+    "opintojenLaajuusNumeroMin": 30,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tunniste": "ABC-123",
     "tutkinnonOsat": [],
@@ -1241,6 +1214,7 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1295,6 +1269,7 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
   "koulutustyyppi": "erikoislaakari",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "erikoislaakari",
     "kuvaus": {
@@ -1342,6 +1317,7 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1394,6 +1370,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
   "koulutustyyppi": "kk-opintokokonaisuus",
   "metadata": {
     "isAvoinKorkeakoulutus": false,
+    "erikoistumiskoulutusKoodiUri": null,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1415,7 +1392,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": 10,
     "opintojenLaajuusNumeroMin": 5,
-    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tunniste": "ABC-123",
     "tutkinnonOsat": [],
@@ -1425,6 +1402,61 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Opintojakso nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create erikoistumiskoulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": true,
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "erikoistumiskoulutus",
+  "metadata": {
+    "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
+    "isAvoinKorkeakoulutus": false,
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_061#1"
+    ],
+    "koulutustyyppi": "erikoistumiskoulutus",
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "opinnonTyyppiKoodiUri": null,
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMax": 10,
+    "opintojenLaajuusNumeroMin": 5,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tunniste": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "erikoistumiskoulutus"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Big Data Analytics"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,

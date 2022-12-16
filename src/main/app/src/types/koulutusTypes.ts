@@ -26,6 +26,7 @@ export type InformationSectionValues = {
   isAvoinKorkeakoulutus?: boolean;
   tunniste?: string;
   opinnonTyyppi?: SelectOption;
+  erikoistumiskoulutus: SelectOption;
 };
 
 export type KoulutusFormValues = {

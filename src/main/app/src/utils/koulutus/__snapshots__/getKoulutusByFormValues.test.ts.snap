@@ -12,6 +12,7 @@ Object {
   "koulutustyyppi": "erikoistumiskoulutus",
   "metadata": Object {
     "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [
       "koulutusala_1#1",
       "koulutusala_2#1",
@@ -20,12 +21,14 @@ Object {
     "kuvaus": Object {},
     "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": 10,
     "opintojenLaajuusNumeroMin": 5,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": Array [],
     "tutkintonimikeKoodiUrit": Array [],
     "tyyppi": "erikoistumiskoulutus",
@@ -53,8 +56,8 @@ Object {
   ],
   "koulutustyyppi": "amm-osaamisala",
   "metadata": Object {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": Object {},
@@ -95,8 +98,8 @@ Object {
   ],
   "koulutustyyppi": "amm",
   "metadata": Object {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [
       "koulutusala_1#1",
       "koulutusala_2#1",
@@ -147,8 +150,8 @@ Object {
   ],
   "koulutustyyppi": "yo",
   "metadata": Object {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [
       "koulutusala_1#1",
       "koulutusala_2#1",
@@ -213,8 +216,8 @@ Object {
   "koulutuksetKoodiUri": Array [],
   "koulutustyyppi": "yo",
   "metadata": Object {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": Array [],
     "koulutustyyppi": "yo",
     "kuvaus": Object {},

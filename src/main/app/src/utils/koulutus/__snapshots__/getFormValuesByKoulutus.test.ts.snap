@@ -15,10 +15,10 @@ Object {
     "eperuste": Object {
       "value": undefined,
     },
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutus": Object {
       "value": "",
     },
+    "isAvoinKorkeakoulutus": false,
     "korkeakoulutukset": Array [],
     "koulutus": Object {
       "value": "koulutus_371101#1",
@@ -119,6 +119,7 @@ Object {
     "erikoistumiskoulutus": Object {
       "value": "erikoistumiskoulutukset_001#2",
     },
+    "isAvoinKorkeakoulutus": false,
     "korkeakoulutukset": Array [],
     "koulutus": Object {
       "value": undefined,
@@ -133,6 +134,9 @@ Object {
     ],
     "laajuusNumeroTyyppi": "range",
     "nimi": Object {},
+    "opinnonTyyppi": Object {
+      "value": undefined,
+    },
     "opintojenLaajuus": Object {
       "value": "",
     },
@@ -142,6 +146,7 @@ Object {
     "opintojenLaajuusyksikko": Object {
       "value": "",
     },
+    "tunniste": undefined,
     "tutkintonimike": Array [],
   },
   "julkinen": false,
@@ -181,10 +186,10 @@ Object {
     "eperuste": Object {
       "value": undefined,
     },
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutus": Object {
       "value": "",
     },
+    "isAvoinKorkeakoulutus": false,
     "korkeakoulutukset": Array [
       Object {
         "value": "koulutus_371101#1",

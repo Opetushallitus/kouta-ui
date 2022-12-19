@@ -155,6 +155,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       jarjestetaanErityisopetuksena:
         values?.tiedot?.jarjestetaanErityisopetuksena,
       hasJotpaRahoitus: values?.tiedot?.hasJotpaRahoitus,
+      isTaydennyskoulutus: values?.tiedot?.isTaydennyskoulutus,
+      isTyovoimakoulutus: values?.tiedot?.isTyovoimakoulutus,
       yleislinja: values?.lukiolinjat?.yleislinja,
       painotukset: getLukiolinjatByValues(
         values?.lukiolinjat?.painotukset,

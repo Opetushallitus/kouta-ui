@@ -71,6 +71,8 @@ export type ToteutusFormValues = {
     ilmoittautumislinkki: TranslatedField<string>;
     aloituspaikat: string;
     hasJotpaRahoitus: boolean;
+    isTyovoimakoulutus: boolean;
+    isTaydennyskoulutus: boolean;
     isAvoinKorkeakoulutus?: boolean;
     tunniste?: string;
     opinnonTyyppi?: SelectOption;

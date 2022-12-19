@@ -623,6 +623,8 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
@@ -771,6 +773,8 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
@@ -909,6 +913,8 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [
@@ -1062,6 +1068,8 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "hakutermi": "hakeutuminen",
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
@@ -1334,6 +1342,8 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
@@ -1596,6 +1606,8 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
@@ -1993,6 +2005,8 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
@@ -2686,6 +2700,8 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
     "hakutermi": "hakeutuminen",
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],
@@ -2826,6 +2842,8 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
     "hakutermi": "hakeutuminen",
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [],

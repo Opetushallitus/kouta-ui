@@ -72,15 +72,21 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
   );
 };
 
-const JotpaSection = ({ name }: JotpaSectionProps) => {
+const CommonTiedotFields = ({ name }: JotpaSectionProps) => {
   const { t } = useTranslation();
 
   return (
-    <div {...getTestIdProps('jotpaRahoitus')}>
+    <VerticalBox gap={2}>
+      <Field name={`${name}.isTaydennyskoulutus`} component={FormFieldSwitch}>
+        {t('toteutuslomake.isTaydennyskoulutus')}
+      </Field>
       <Field name={`${name}.hasJotpaRahoitus`} component={FormFieldSwitch}>
         {t('toteutuslomake.jotpaRahoitus')}
       </Field>
-    </div>
+      <Field name={`${name}.isTyovoimakoulutus`} component={FormFieldSwitch}>
+        {t('toteutuslomake.isTyovoimakoulutus')}
+      </Field>
+    </VerticalBox>
   );
 };
 
@@ -120,7 +126,7 @@ export const TuvaTiedotSection = ({
       >
         {t('toteutuslomake.jarjestetaanErityisopetuksena')}
       </Field>
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };
@@ -140,7 +146,7 @@ export const TelmaTiedotSection = ({
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
       />
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };
@@ -162,7 +168,7 @@ export const AikuistenperusopetusTiedotSection = ({
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
       />
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };
@@ -185,7 +191,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         }
         laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
       />
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };
@@ -208,7 +214,7 @@ export const VapaaSivistystyoMuuTiedotSection = ({
         }
         laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
       />
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };
@@ -231,7 +237,7 @@ export const KkOpintojaksoTiedotSection = ({
       }
       laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
-    <JotpaSection name={name} />
+    <CommonTiedotFields name={name} />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
     <AvoinKorkeakoulutusField name={name} />
@@ -250,7 +256,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
     <AvoinKorkeakoulutusField name={name} />
-    <JotpaSection name={name} />
+    <CommonTiedotFields name={name} />
   </VerticalBox>
 );
 
@@ -267,7 +273,7 @@ export const OpettajaTiedotSection = ({
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
     />
-    <JotpaSection name={name} />
+    <CommonTiedotFields name={name} />
   </VerticalBox>
 );
 
@@ -283,7 +289,7 @@ export const TutkinnonOsaTiedotSection = ({
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
-    <JotpaSection name={name} />
+    <CommonTiedotFields name={name} />
   </VerticalBox>
 );
 
@@ -302,7 +308,7 @@ export const TutkintoonJohtavaTiedotSection = ({
       {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS && (
         <VaativaErityinenTukiField name={name} koulutus={koulutus} />
       )}
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };
@@ -317,7 +323,7 @@ export const DIATiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };
@@ -329,7 +335,7 @@ export const ErikoistumiskoulutusTiedotSection = DIATiedotSection;
 export const LukioTiedotSection = ({ name }: ToteutusTiedotSectionProps) => {
   return (
     <VerticalBox gap={2}>
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };

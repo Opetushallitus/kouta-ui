@@ -97,9 +97,12 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     diplomit,
     yleislinja,
     hasJotpaRahoitus,
+    isTaydennyskoulutus,
+    isTyovoimakoulutus,
     isAvoinKorkeakoulutus,
     tunniste,
     opinnonTyyppiKoodiUri,
+
   } = metadata;
 
   const {
@@ -135,6 +138,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       ),
       jarjestetaanErityisopetuksena: Boolean(jarjestetaanErityisopetuksena),
       hasJotpaRahoitus: Boolean(hasJotpaRahoitus),
+      isTaydennyskoulutus: Boolean(isTaydennyskoulutus),
+      isTyovoimakoulutus: Boolean(isTyovoimakoulutus),
       opintojenLaajuusNumero: _fp.isNumber(opintojenLaajuusNumero)
         ? opintojenLaajuusNumero.toString()
         : '',

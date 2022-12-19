@@ -81,6 +81,8 @@ Object {
       "sv": "Sv linkki",
     },
     "isAvoinKorkeakoulutus": false,
+    "isTaydennyskoulutus": undefined,
+    "isTyovoimakoulutus": undefined,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": Object {
       "A1Kielet": Array [

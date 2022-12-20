@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import {
   FormFieldRadioGroup,
-  FormFieldInput,
+  FormFieldFloatInput,
 } from '#/src/components/formFields';
 import { Box, InputIcon } from '#/src/components/virkailija';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -26,11 +26,11 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
       <MaksuInputWrapper>
         <Field
           name={maksuName}
-          component={FormFieldInput}
+          component={FormFieldFloatInput}
           placeholder={t('yleiset.maara')}
           helperText={t('yleiset.euroa')}
           suffix={<InputIcon type="euro_symbol" />}
-          type="number"
+          decimals={2}
         />
       </MaksuInputWrapper>
     </Box>

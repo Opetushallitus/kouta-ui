@@ -46,16 +46,24 @@ export const isPartialDate = date => {
 };
 
 /* Parsii pilkulla erotetun desimaaliluvun äärelliseksi numeroksi.
+Pyöristää annettuun tarkkuuteen (decimals), jos määritelty.
 Palautetaan äärellinen numero (muu kuin Inifinity, -Inifnity tai Nan) tai null, jos ei onnistu
  */
 export const parseFloatComma = (
-  value?: string | number | null
+  value?: string | number | null,
+  decimals?: number
 ): number | null => {
   if (_.isNumber(value) && _.isFinite(value)) {
     return value;
   } else if (_.isString(value)) {
     const parsedValue = parseFloat(value.replace(',', '.'));
-    return _.isFinite(parsedValue) ? parsedValue : null;
+    if (_.isFinite(parsedValue)) {
+      return _.isUndefined(decimals)
+        ? parsedValue
+        : _.round(parsedValue, decimals);
+    } else {
+      return null;
+    }
   } else {
     return null;
   }
@@ -113,7 +121,7 @@ export const createChainedFunction =
   (...fns) =>
   (...args) => {
     // eslint-disable-next-line
-  for (const fn of fns) {
+    for (const fn of fns) {
       if (_.isFunction(fn)) {
         fn(...args);
       }

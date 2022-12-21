@@ -450,7 +450,9 @@ export const fillTilaSection = (tila = 'julkaistu') => {
 };
 
 export const tallenna = () => {
-  cy.findByRole('button', { name: 'yleiset.tallenna' }).click();
+  cy.findByRole('button', { name: 'yleiset.tallenna' })
+    .should('not.be.disabled')
+    .click();
 };
 
 export const confirmDelete = () => {

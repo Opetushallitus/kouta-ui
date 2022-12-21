@@ -13,6 +13,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -25,12 +26,14 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
@@ -62,6 +65,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   ],
   "koulutustyyppi": "amm-osaamisala",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": {},
@@ -74,12 +78,14 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": "osaamisala_1800",
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm-osaamisala"
@@ -109,6 +115,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-tutkinnon-osa",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-tutkinnon-osa",
     "kuvaus": {},
@@ -121,12 +128,14 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [
       {
         "ePerusteId": 6777660,
@@ -171,6 +180,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -187,12 +197,14 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 300,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
       "tutkintonimikekk_533#2"
@@ -226,6 +238,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -240,12 +253,14 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "lk"
@@ -277,6 +292,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -289,12 +305,14 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
@@ -328,6 +346,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
   ],
   "koulutustyyppi": "amk",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_052#1"
     ],
@@ -344,12 +363,14 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
       "tutkintonimikekk_1#1",
@@ -386,6 +407,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {},
@@ -398,12 +420,14 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_150",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "lk"
@@ -435,6 +459,7 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "tuva",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -444,12 +469,14 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 38,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "tuva"
@@ -482,6 +509,7 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
   ],
   "koulutustyyppi": "tuva",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "tuva",
     "kuvaus": {
@@ -498,12 +526,14 @@ exports[`editKoulutus > should be able to edit TUVA-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_38",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "tuva"
@@ -536,6 +566,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "vapaa-sivistystyo-muu",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-muu",
     "kuvaus": {
@@ -545,12 +576,14 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Muu"-ko
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 53,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "vapaa-sivistystyo-muu"
@@ -580,6 +613,7 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
     "kuvaus": {
@@ -589,12 +623,14 @@ exports[`createKoulutus > should be able to create "Vapaa Sivistystyö - Opistov
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 53,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "vapaa-sivistystyo-opistovuosi"
@@ -624,6 +660,7 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "telma",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -633,12 +670,14 @@ exports[`createKoulutus > should be able to create TELMA-koulutus #0`] =
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 60,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "telma"
@@ -671,6 +710,7 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
   ],
   "koulutustyyppi": "telma",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "telma",
     "kuvaus": {
@@ -685,12 +725,14 @@ exports[`editKoulutus > should be able to edit TELMA-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "telma"
@@ -725,6 +767,7 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -737,12 +780,14 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
@@ -776,6 +821,7 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
   ],
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-ope-erityisope-ja-opo",
     "kuvaus": {
@@ -790,12 +836,14 @@ exports[`createKoulutus > should be able to create Ammatillinen opettaja- erityi
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm-ope-erityisope-ja-opo"
@@ -881,6 +929,7 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
   ],
   "koulutustyyppi": "amm-ope-erityisope-ja-opo",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
     ],
@@ -897,12 +946,14 @@ exports[`editKoulutus > should be able to edit ammatillinen ope-, erityisope- ja
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm-ope-erityisope-ja-opo"
@@ -934,6 +985,7 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-muu",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -941,12 +993,14 @@ exports[`createKoulutus > should be able to create muu ammatillinen koulutus #0`
     },
     "linkkiEPerusteisiin": {},
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 12,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6#1",
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm-muu"
@@ -976,6 +1030,7 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "aikuisten-perusopetus",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "aikuisten-perusopetus",
     "kuvaus": {
@@ -985,12 +1040,14 @@ exports[`createKoulutus > should be able to create "Aikuisten perusopetus" -koul
       "fi": "http://linkki.fi"
     },
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 13,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "aikuisten-perusopetus"
@@ -1023,6 +1080,7 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm-muu",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-muu",
     "kuvaus": {
@@ -1037,12 +1095,14 @@ exports[`editKoulutus > should be able to edit muu ammatillinen koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 12,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6#1",
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm-muu"
@@ -1124,6 +1184,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "kk-opintojakso",
   "metadata": {
+    "isAvoinKorkeakoulutus": true,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1140,12 +1201,14 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintojakso ko
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": 30,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
+    "tunniste": "ABC-123",
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "kk-opintojakso"
@@ -1177,6 +1240,7 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1191,12 +1255,14 @@ exports[`createKoulutus > should be able to create DIA-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "lk"
@@ -1228,6 +1294,7 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
   ],
   "koulutustyyppi": "erikoislaakari",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "erikoislaakari",
     "kuvaus": {
@@ -1235,12 +1302,14 @@ exports[`createKoulutus > should be able to create erikoislääkäri-koulutus #0
     },
     "linkkiEPerusteisiin": {},
     "lisatiedot": [],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "erikoislaakari"
@@ -1272,6 +1341,7 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
   ],
   "koulutustyyppi": "lk",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "lk",
     "kuvaus": {
@@ -1286,12 +1356,14 @@ exports[`createKoulutus > should be able to create EB-koulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "lk"
@@ -1321,6 +1393,7 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "kk-opintokokonaisuus",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
     ],
@@ -1337,12 +1410,14 @@ exports[`createKoulutus > should be able to create korkeakoulutus opintokokonais
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": "opinnontyyppi_10#1",
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": 10,
     "opintojenLaajuusNumeroMin": 5,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
+    "tunniste": "ABC-123",
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "kk-opintokokonaisuus"

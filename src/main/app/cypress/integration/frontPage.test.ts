@@ -1,7 +1,6 @@
 import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
-import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import { stubCommonRoutes, getByTestId } from '#/cypress/utils';
 
 const stubMyOrganisations = () => {
@@ -9,28 +8,8 @@ const stubMyOrganisations = () => {
 
   cy.intercept(
     {
-      method: 'GET',
-      url: `/organisaatio-service/rest/organisaatio/v4/${oid}`,
-    },
-    {
-      body: merge(organisaatio(), {
-        oid,
-      }),
-    }
-  );
-
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**oid=${oid}`,
-    },
-    { body: organisaatioHierarkia() }
-  );
-
-  cy.intercept(
-    {
       method: 'POST',
-      url: '/organisaatio-service/rest/organisaatio/v4/findbyoids',
+      url: '/kouta-backend/organisaatio/organisaatiot',
     },
     {
       body: [

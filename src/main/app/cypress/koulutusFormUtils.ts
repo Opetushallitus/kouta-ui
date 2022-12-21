@@ -1,5 +1,6 @@
 import { merge } from 'lodash/fp';
 
+import oppilaitoksetFlat from '#/cypress/data/oppilaitoksetFlat';
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import soraKuvaus from '#/cypress/data/soraKuvaus';
@@ -14,7 +15,7 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
+      url: `**/kouta-backend/organisaatio/hierarkia**`,
     },
     { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
   );
@@ -22,19 +23,15 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+      url: `**/kouta-backend/organisaatio/oppilaitokset-for-avoin-korkeakoulutus`,
     },
-    {
-      body: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    }
+    { body: oppilaitoksetFlat({ rootOid: organisaatioOid }) }
   );
 
   cy.intercept(
     {
       method: 'POST',
-      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+      url: '**/kouta-backend/organisaatio/organisaatiot',
     },
     {
       body: [

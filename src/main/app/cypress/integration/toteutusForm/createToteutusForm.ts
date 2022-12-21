@@ -168,6 +168,12 @@ const fillKkOpintokokonaisuusTiedotSection = () => {
     getSelectByLabel('yleiset.laajuusyksikko').pipe(
       pFillSelect('opintopistettä')
     );
+
+    getInputByLabel('yleiset.tunniste').pipe(paste('ABC-123'));
+
+    getSelectByLabel('yleiset.opinnonTyyppi').pipe(pFillSelect('Aineopinnot'));
+
+    selectCheckbox(/isAvoinKorkeakoulutus/);
   });
 };
 

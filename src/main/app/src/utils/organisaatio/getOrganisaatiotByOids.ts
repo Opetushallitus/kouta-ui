@@ -1,6 +1,6 @@
 const getOrganisaatiotByOids = async ({ oids, httpClient, apiUrls }) => {
   const { data } = await httpClient.post(
-    apiUrls.url('organisaatio-service.organisaatiot-by-oids'),
+    apiUrls.url('kouta-backend.organisaatiot-by-oids'),
     oids
   );
 

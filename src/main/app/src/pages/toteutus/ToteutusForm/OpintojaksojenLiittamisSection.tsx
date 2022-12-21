@@ -7,7 +7,7 @@ import { FieldGroup } from '#/src/components/FieldGroup';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-import { OpintojaksotFields } from './OpintojaksotFields.tsx';
+import { OpintojaksotFields } from './OpintojaksotFields';
 
 export const OpintojaksojenLiittamisSection = ({
   language,

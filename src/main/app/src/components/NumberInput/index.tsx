@@ -59,9 +59,18 @@ export const IntegerInput = ({
   />
 );
 
+type FloatInputProps = Omit<NumberInputProps, 'parseValue'> & {
+  decimals?: number;
+};
+
 export const FloatInput = ({
   min = 0,
+  decimals,
   ...props
-}: Omit<NumberInputProps, 'parseValue'>) => (
-  <NumberInput min={min} parseValue={parseFloatComma} {...props} />
+}: FloatInputProps) => (
+  <NumberInput
+    min={min}
+    parseValue={n => parseFloatComma(n, decimals)}
+    {...props}
+  />
 );

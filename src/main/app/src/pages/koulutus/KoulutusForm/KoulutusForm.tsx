@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
@@ -34,13 +34,13 @@ import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
-import { JarjestajaSection } from './JarjestajaSection';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
 import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
+import { TarjoajatSection } from './tarjoajat/TarjoajatSection';
 import {
   TiedotSection,
   AikuistenPerusopetusTiedotSection,
@@ -64,7 +64,6 @@ const isInHierarkia = org => hierarkia =>
 type KoulutusFormProps = {
   organisaatioOid: string;
   koulutus?: KoulutusModel;
-  isNewKoulutus?: boolean;
   steps?: boolean;
   onAttachToteutus?: () => void;
 };
@@ -72,7 +71,6 @@ type KoulutusFormProps = {
 export const KoulutusForm = ({
   organisaatioOid,
   steps = false,
-  isNewKoulutus = false,
   koulutus: koulutusProp,
   onAttachToteutus,
 }: KoulutusFormProps) => {
@@ -82,6 +80,9 @@ export const KoulutusForm = ({
   const kieliversiotValue = useFieldValue('kieliversiot');
   const koulutuskoodi = useFieldValue('information.koulutus');
   const languageTabs = kieliversiotValue || [];
+  const formMode = useFormMode();
+  const isNewKoulutus = formMode === FormMode.CREATE;
+
   const isNewOphKoulutus = isOphOrganisaatio(organisaatioOid) && isNewKoulutus;
   const isExistingOphKoulutus =
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
@@ -91,15 +92,16 @@ export const KoulutusForm = ({
     koulutusProp?.organisaatioOid
   );
 
-  const onlyTarjoajaRights =
-    !isNewKoulutus &&
-    organisaatio &&
-    hierarkia &&
-    !isOphOrganisaatio(organisaatioOid) &&
-    !isInHierarkia(organisaatio)(hierarkia) &&
-    isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia);
-
-  const formMode = useFormMode();
+  const onlyTarjoajaRights = useMemo(
+    () =>
+      !isNewKoulutus &&
+      organisaatio &&
+      hierarkia &&
+      !isOphOrganisaatio(organisaatio.oid) &&
+      !isInHierarkia(organisaatio)(hierarkia) &&
+      isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia),
+    [isNewKoulutus, organisaatio, hierarkia]
+  );
 
   return (
     <>
@@ -333,8 +335,8 @@ export const KoulutusForm = ({
             {!isNewOphKoulutus && (
               <FormCollapse
                 section="tarjoajat"
-                header={t('koulutuslomake.koulutuksenJarjestaja')}
-                Component={JarjestajaSection}
+                header={t('koulutuslomake.koulutuksenTarjoajat')}
+                Component={TarjoajatSection}
                 organisaatioOid={organisaatioOid}
                 koulutus={koulutusProp}
                 disableTarjoajaHierarkia={isExistingOphKoulutus}

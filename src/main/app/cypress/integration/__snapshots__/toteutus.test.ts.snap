@@ -15,6 +15,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -92,11 +93,13 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {
@@ -152,6 +155,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -218,6 +222,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -233,6 +238,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -288,6 +294,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -363,11 +370,13 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -418,6 +427,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -527,6 +537,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
@@ -545,6 +556,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       }
     ],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -604,6 +616,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -672,6 +685,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -687,6 +701,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -749,6 +764,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -817,11 +833,13 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -884,6 +902,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -966,11 +985,13 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -1032,6 +1053,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1102,6 +1124,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -1117,6 +1140,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {
@@ -1169,6 +1193,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1235,11 +1260,13 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "tuva",
     "yhteyshenkilot": [
       {
@@ -1300,6 +1327,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1368,11 +1396,13 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "tuva",
     "yhteyshenkilot": [
       {
@@ -1425,6 +1455,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1491,11 +1522,13 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "telma",
     "yhteyshenkilot": [
       {
@@ -1556,6 +1589,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1624,11 +1658,13 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "telma",
     "yhteyshenkilot": [
       {
@@ -1681,6 +1717,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -1758,11 +1795,13 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "vapaa-sivistystyo-muu",
     "yhteyshenkilot": [
       {
@@ -1813,6 +1852,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1879,11 +1919,13 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "vapaa-sivistystyo-opistovuosi",
     "yhteyshenkilot": [
       {
@@ -1944,6 +1986,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2012,6 +2055,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
@@ -2027,6 +2071,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
     ],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -2219,6 +2264,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2294,11 +2340,13 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-ope-erityisope-ja-opo",
     "yhteyshenkilot": [
       {
@@ -2349,6 +2397,7 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -2373,8 +2422,6 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2428,9 +2475,13 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-muu",
     "yhteyshenkilot": [
       {
@@ -2481,6 +2532,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -2505,8 +2557,6 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "opintojenLaajuusNumero": null,
-    "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>lisätiedot</p>"
     },
@@ -2560,9 +2610,13 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "aikuisten-perusopetus",
     "yhteyshenkilot": [
       {
@@ -2623,6 +2677,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2693,11 +2748,13 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "amm-muu",
     "yhteyshenkilot": [
       {
@@ -2760,6 +2817,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2830,11 +2888,13 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "aikuisten-perusopetus",
     "yhteyshenkilot": [
       {
@@ -2887,6 +2947,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -2973,11 +3034,13 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "kk-opintojakso",
     "yhteyshenkilot": [
       {
@@ -3028,6 +3091,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -3124,11 +3188,13 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -3178,6 +3244,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -3273,11 +3340,13 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": null,
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -3327,6 +3396,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
         "kieli": "fi"
       }
     ],
+    "isAvoinKorkeakoulutus": true,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -3416,11 +3486,13 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
       },
       "suunniteltuKestoVuodet": 2
     },
+    "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
     "opintojenLaajuusNumero": 10,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalat": [],
     "painotukset": [],
     "toteutusjaksot": [],
+    "tunniste": "ABC-123",
     "tyyppi": "kk-opintokokonaisuus",
     "yhteyshenkilot": [
       {

@@ -13,9 +13,9 @@ import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio'
 export const KoulutusSaveErrorModal = () => {
   const { t } = useTranslation();
 
-  const { remoteErrors, setRemoteErrors } = useFormSaveRemoteErrors();
+  const { remoteErrors = [], setRemoteErrors } = useFormSaveRemoteErrors();
   const errorsWithToteutukset = useMemo(
-    () => remoteErrors?.filter(e => !_fp.isEmpty(e?.meta?.toteutukset)),
+    () => remoteErrors?.filter?.(e => !_fp.isEmpty(e?.meta?.toteutukset)),
     [remoteErrors]
   );
 

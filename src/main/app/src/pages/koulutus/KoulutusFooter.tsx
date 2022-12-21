@@ -6,29 +6,25 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
-import { useFormName } from '#/src/contexts/FormContext';
+import { useFormMode, useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
-import { getValuesForSaving, notToimipisteOrg } from '#/src/utils';
+import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
-import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 import { updateKoulutus } from '#/src/utils/koulutus/updateKoulutus';
 import { validateKoulutusForm } from '#/src/utils/koulutus/validateKoulutusForm';
 
 type KoulutusFooterProps = {
-  formMode: FormMode;
   organisaatioOid: string;
   koulutus?: KoulutusModel;
   canUpdate?: boolean;
 };
 
 export const KoulutusFooter = ({
-  formMode,
   organisaatioOid,
   koulutus,
   canUpdate,
@@ -36,12 +32,9 @@ export const KoulutusFooter = ({
   const history = useHistory();
   const queryClient = useQueryClient();
 
-  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: notToimipisteOrg,
-  });
-
   const form = useForm();
   const formName = useFormName();
+  const formMode = useFormMode();
   const unregisteredFields = useSelector(state => state?.unregisteredFields);
   const initialValues = useSelector(state => state.form?.[formName]?.initial);
 
@@ -68,11 +61,6 @@ export const KoulutusFooter = ({
             : {
                 ...koulutus,
                 ...getKoulutusByFormValues(valuesForSaving),
-                tarjoajat: getTarjoajaOids({
-                  hierarkia,
-                  existingTarjoajat: koulutus.tarjoajat,
-                  newTarjoajat: values?.tarjoajat?.tarjoajat,
-                }),
                 // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
                 // but backend requires it when creating new ones.
                 // TODO: Remove this when backend works without muokkaaja
@@ -97,7 +85,6 @@ export const KoulutusFooter = ({
       dataSendFn,
       form.registeredFields,
       formMode,
-      hierarkia,
       history,
       initialValues,
       koulutus,

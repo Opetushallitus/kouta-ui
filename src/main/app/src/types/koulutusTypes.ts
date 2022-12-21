@@ -22,6 +22,10 @@ export type InformationSectionValues = {
   laajuusNumeroTyyppi?: MaaraTyyppi;
   tutkintonimike: SelectOptions;
   koulutusalat: SelectOptions;
+  // Avoimen korkeakoulutuksen kentät:
+  isAvoinKorkeakoulutus?: boolean;
+  tunniste?: string;
+  opinnonTyyppi?: SelectOption;
 };
 
 export type KoulutusFormValues = {

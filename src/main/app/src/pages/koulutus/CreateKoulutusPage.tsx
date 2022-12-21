@@ -51,21 +51,12 @@ export const CreateKoulutusPage = () => {
       initialValues={initialValues}
       header={<EntityFormHeader entityType={ENTITY.KOULUTUS} />}
       steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-      footer={
-        <KoulutusFooter
-          formMode={FormMode.CREATE}
-          organisaatioOid={valittuOrganisaatioOid}
-        />
-      }
+      footer={<KoulutusFooter organisaatioOid={valittuOrganisaatioOid} />}
     >
       <RelationInfoContainer>
         <OrganisaatioRelation organisaatioOid={valittuOrganisaatioOid} />
       </RelationInfoContainer>
-      <KoulutusForm
-        steps
-        isNewKoulutus={true}
-        organisaatioOid={valittuOrganisaatioOid}
-      />
+      <KoulutusForm steps organisaatioOid={valittuOrganisaatioOid} />
     </FormPage>
   );
 };

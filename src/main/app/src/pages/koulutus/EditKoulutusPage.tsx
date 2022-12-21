@@ -61,7 +61,6 @@ export const EditKoulutusPage = () => {
       steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
       footer={
         <KoulutusFooter
-          formMode={FormMode.EDIT}
           koulutus={koulutus}
           organisaatioOid={organisaatioOid}
           canUpdate={canUpdate || isJulkinen}
@@ -72,7 +71,6 @@ export const EditKoulutusPage = () => {
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
       <KoulutusForm
-        isNewKoulutus={false}
         onAttachToteutus={onAttachToteutus}
         koulutus={koulutus}
         organisaatioOid={organisaatioOid}

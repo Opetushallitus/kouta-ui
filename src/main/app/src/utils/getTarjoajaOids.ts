@@ -15,10 +15,11 @@ const getAvailableTarjoajaOids = hierarkia => {
 const getTarjoajaOperations = (availableOids, oids) => {
   const normalizedOids = _.isArray(oids) ? oids : [];
   const normalizedAvailableOids = _.isArray(availableOids) ? availableOids : [];
+  let inserted = normalizedOids;
 
-  const inserted = normalizedOids.filter(o =>
-    normalizedAvailableOids.includes(o)
-  );
+  if (!_.isEmpty(normalizedAvailableOids)) {
+    inserted = normalizedOids.filter(o => normalizedAvailableOids.includes(o));
+  }
 
   return {
     inserted,

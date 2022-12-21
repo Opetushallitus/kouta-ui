@@ -80,6 +80,7 @@ Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
+    "isAvoinKorkeakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": Object {
       "A1Kielet": Array [
@@ -187,6 +188,7 @@ Object {
       },
       "suunniteltuKestoVuodet": 2,
     },
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": 252,
     "opintojenLaajuusyksikkoKoodiUri": "laajuus_1#1",
     "osaamisalat": Array [
@@ -304,6 +306,7 @@ Object {
         ],
       },
     ],
+    "tunniste": null,
     "tyyppi": "amk",
     "yhteyshenkilot": Array [
       Object {

@@ -262,15 +262,20 @@ Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
+    "isAvoinKorkeakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
+    "opinnonTyyppi": Object {
+      "value": undefined,
+    },
     "opintojenLaajuusNumero": "25",
     "opintojenLaajuusyksikko": Object {
       "value": "laajuus_1#1",
     },
+    "tunniste": undefined,
   },
   "tila": "tallennettu",
   "toteutusjaksot": Array [

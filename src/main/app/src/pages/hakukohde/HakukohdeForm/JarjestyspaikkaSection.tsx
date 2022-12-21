@@ -27,7 +27,8 @@ import { useOppilaitoksetByOids } from '#/src/utils/hakukohde/getOppilaitoksetBy
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { enrichOrganisaatiot } from '#/src/utils/organisaatio/enrichOrganisaatiot';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
-import organisaatioMatchesTyyppi, {
+import {
+  organisaatioMatchesTyyppi,
   getOrganisaatioTyypit,
 } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 

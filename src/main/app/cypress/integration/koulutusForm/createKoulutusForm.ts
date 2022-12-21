@@ -14,6 +14,7 @@ import {
   fillPohjaSection,
   fillTilaSection,
   tallenna,
+  selectCheckbox,
   fillKoulutustyyppiSection,
   typeToEditor,
   wrapMutationTest,
@@ -51,7 +52,7 @@ const fillSoraKuvausSection = () => {
 
 const fillJarjestajaSection = () => {
   withinSection('tarjoajat', () => {
-    getByTestId('jarjestajatSelection').within(() => {
+    getByTestId('tarjoajatSelection').within(() => {
       fillTreeSelect(['1.2.1.1.1.1']);
     });
   });
@@ -284,6 +285,14 @@ export const createKoulutusForm = () => {
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
           paste('Opintojakso nimi')
         );
+
+        getInputByLabel('yleiset.tunniste').pipe(paste('ABC-123'));
+
+        getSelectByLabel('yleiset.opinnonTyyppi').pipe(
+          pFillAsyncSelect('Aineopinnot')
+        );
+
+        selectCheckbox(/isAvoinKorkeakoulutus/);
       });
 
       withinSection('description', () => {
@@ -321,6 +330,12 @@ export const createKoulutusForm = () => {
 
         getInputByLabel('koulutuslomake.koulutuksenNimi').pipe(
           paste('Opintojakso nimi')
+        );
+
+        getInputByLabel('yleiset.tunniste').pipe(paste('ABC-123'));
+
+        getSelectByLabel('yleiset.opinnonTyyppi').pipe(
+          pFillAsyncSelect('Muut opinnot')
         );
       });
 

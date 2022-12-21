@@ -13,7 +13,7 @@ export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'POST',
-      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+      url: '**/kouta-backend/organisaatio/organisaatiot',
     },
     {
       body: [
@@ -27,7 +27,7 @@ export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**oid=${organisaatioOid}**`,
+      url: `**/kouta-backend/organisaatio/hierarkia**oid=${organisaatioOid}**`,
     },
     { body: createOrganisaatioHierarkia({ rootOid: organisaatioOid }) }
   );

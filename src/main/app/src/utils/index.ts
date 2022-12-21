@@ -22,7 +22,7 @@ import { memoize, memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
-import organisaatioMatchesTyyppi from './organisaatio/organisaatioMatchesTyyppi';
+import { organisaatioMatchesTyyppi } from './organisaatio/organisaatioMatchesTyyppi';
 
 const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 
@@ -46,16 +46,24 @@ export const isPartialDate = date => {
 };
 
 /* Parsii pilkulla erotetun desimaaliluvun äärelliseksi numeroksi.
+Pyöristää annettuun tarkkuuteen (decimals), jos määritelty.
 Palautetaan äärellinen numero (muu kuin Inifinity, -Inifnity tai Nan) tai null, jos ei onnistu
  */
 export const parseFloatComma = (
-  value?: string | number | null
+  value?: string | number | null,
+  decimals?: number
 ): number | null => {
   if (_.isNumber(value) && _.isFinite(value)) {
     return value;
   } else if (_.isString(value)) {
     const parsedValue = parseFloat(value.replace(',', '.'));
-    return _.isFinite(parsedValue) ? parsedValue : null;
+    if (_.isFinite(parsedValue)) {
+      return _.isUndefined(decimals)
+        ? parsedValue
+        : _.round(parsedValue, decimals);
+    } else {
+      return null;
+    }
   } else {
     return null;
   }
@@ -113,7 +121,7 @@ export const createChainedFunction =
   (...fns) =>
   (...args) => {
     // eslint-disable-next-line
-  for (const fn of fns) {
+    for (const fn of fns) {
       if (_.isFunction(fn)) {
         fn(...args);
       }
@@ -267,12 +275,12 @@ export const getValuesForSaving = (
   });
 
   // Some exceptions (fields that should be saved even though they are not visible)
-  // TODO: There might be a few other exceptions. Check before using in other forms and add here.
   copyPathsIfDefined(values, saveableValues, [
     'esikatselu',
     'koulutustyyppi',
     'muokkaaja',
     'information.nimi',
+    'tarjoajat.tarjoajat',
   ]);
 
   return saveableValues;
@@ -380,6 +388,5 @@ export const getKoulutustyyppiTranslation = (
   return koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '';
 };
 
-export const notToimipisteOrg = _fp.negate(
-  organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
-);
+export const notToimipisteOrg = org =>
+  !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE, org);

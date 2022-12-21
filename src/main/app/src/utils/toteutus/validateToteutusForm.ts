@@ -8,10 +8,7 @@ import {
   JULKAISUTILA,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
-import {
-  MaksullisuusTyyppi,
-  ToteutusFormValues,
-} from '#/src/types/toteutusTypes';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import createErrorBuilder, {
   validate,
   validateArrayMinLength,
@@ -198,15 +195,6 @@ export const validateToteutusForm = (
       validateOptionalTranslatedField('jarjestamistiedot.opetusaikaKuvaus'),
       validateOptionalTranslatedField('jarjestamistiedot.opetustapaKuvaus'),
       validateOptionalTranslatedField('jarjestamistiedot.maksullisuusKuvaus'),
-      validateIf(
-        values?.jarjestamistiedot?.maksullisuustyyppi !==
-          MaksullisuusTyyppi.MAKSUTON,
-        validateInteger(
-          'jarjestamistiedot.maksunMaara',
-          { min: 1 },
-          'validointivirheet.eiNegatiivinenKokonaisluku'
-        )
-      ),
       validateApuraha,
       validateOptionalTranslatedField('jarjestamistiedot.apurahaKuvaus'),
       validateHakeutumisTaiIlmoittautumisTapa,

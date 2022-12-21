@@ -39,3 +39,13 @@ type EntityBase = {
   muokkaaja?: string;
   modified?: string;
 };
+
+type Organisaatio = {
+  oid: string;
+  parentOidPath: string;
+  nimi: TranslatedField;
+  organisaatiotyypit: Array<string>;
+  tyypit: Array<string>;
+  children: Array<Organisaatio>;
+  oppilaitostyyppi?: string;
+};

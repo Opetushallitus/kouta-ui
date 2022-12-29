@@ -8,6 +8,7 @@ import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusFi
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
+import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
 import { TunnisteField } from '#/src/components/TunnisteField';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
@@ -19,6 +20,7 @@ import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
 import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
+import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
 
 type NimiSectionProps = {
   name: string;
@@ -169,6 +171,24 @@ export const AikuistenperusopetusTiedotSection = ({
         }
       />
       <CommonTiedotFields name={name} />
+    </VerticalBox>
+  );
+};
+
+export const TaiteenperusopetusTiedotSection = ({
+  name,
+  language,
+  disabled,
+  koulutus,
+}: ToteutusTiedotSectionProps) => {
+  useNimiFromKoulutus({ koulutus, name });
+
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} />
+      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <TaiteenalatField name={name} disabled={disabled} />
+      <JotpaSection name={name} />
     </VerticalBox>
   );
 };

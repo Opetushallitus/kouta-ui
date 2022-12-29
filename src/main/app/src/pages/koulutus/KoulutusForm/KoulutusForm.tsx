@@ -10,6 +10,7 @@ import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
@@ -23,6 +24,7 @@ import {
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
@@ -88,6 +90,8 @@ export const KoulutusForm = ({
   const isExistingOphKoulutus =
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
+  const isOphVirkailija = useIsOphVirkailija();
+
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { hierarkia = [] } = useOrganisaatioHierarkia(
     koulutusProp?.organisaatioOid
@@ -108,11 +112,18 @@ export const KoulutusForm = ({
     <>
       <KoulutusSaveErrorModal />
       <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-        {formMode === FormMode.EDIT && (
+        {(formMode === FormMode.EDIT || isOphVirkailija) && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSection}
             header={t('yleiset.organisaatio')}
+          />
+        )}
+        {formMode === FormMode.CREATE && !isOphVirkailija && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
           />
         )}
         <FormCollapse

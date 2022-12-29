@@ -44,6 +44,47 @@ const organisaatioHasCorrectType = organisaatio => {
   return !organisaatiotyypit.find(t => Boolean(invalidOrganisaatioTypeMap[t]));
 };
 
+export const useAllowedOrgs = () => {
+  const roleBuilder = useAuthorizedUserRoleBuilder();
+  const user = useAuthorizedUser();
+  const roles = useMemo(() => getUserRoles(user), [user]);
+  const oids = useMemo(() => getKoutaRolesOrganisaatioOids(roles), [roles]);
+
+  const promiseFn = useMemo(() => {
+    return getOrganisaatioHierarkia;
+  }, []);
+
+  const { data, ...rest } = useApiQuery(
+    'searchOrganisaatioHierarkia',
+    promiseFn,
+    {
+      oids,
+    },
+    { ...LONG_CACHE_QUERY_OPTIONS }
+  );
+
+  const hasRequiredRoles = useCallback(
+    organisaatio => {
+      return createCanReadSomethingRoleBuilder(
+        roleBuilder,
+        organisaatio
+      ).result();
+    },
+    [roleBuilder]
+  );
+
+  const hierarkia = useMemo(() => {
+    return _.isArray(data)
+      ? flatFilterHierarkia(
+          data,
+          org => organisaatioHasCorrectType(org) && hasRequiredRoles(org)
+        )
+      : [];
+  }, [data, hasRequiredRoles]);
+
+  return { hierarkia, ...rest };
+};
+
 export const useReadableOrganisaatioHierarkia = ({
   name,
   nameSearchEnabled = true,

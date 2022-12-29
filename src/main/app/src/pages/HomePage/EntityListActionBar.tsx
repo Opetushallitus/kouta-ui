@@ -68,14 +68,18 @@ export const EntityListActionBar = ({
       <Box padding={1}>
         {t(`etusivu.${entityType}.valitut`, { count: _.size(selection) })}
       </Box>
-      <VerticalSeparator />
-      <Box flexGrow={0} minWidth="180px" paddingRight={2}>
-        <Select
-          options={tilaOptions}
-          placeholder={t('yleiset.vaihdaTila')}
-          onChange={changeTila}
-        />
-      </Box>
+      {changeTila ? (
+        <>
+          <VerticalSeparator />
+          <Box flexGrow={0} minWidth="180px" paddingRight={2}>
+            <Select
+              options={tilaOptions}
+              placeholder={t('yleiset.vaihdaTila')}
+              onChange={changeTila}
+            />
+          </Box>
+        </>
+      ) : null}
 
       <VerticalSeparator />
       <ActionButton

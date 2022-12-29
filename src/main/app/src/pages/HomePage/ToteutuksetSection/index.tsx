@@ -58,6 +58,7 @@ const ToteutusActionBar = () => {
       selection={selection}
       removeSelection={removeSelection}
       copyEntities={openModal}
+      changeTila={undefined}
     />
   );
 };

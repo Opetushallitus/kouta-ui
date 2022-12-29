@@ -7,10 +7,12 @@ import { FormCollapseGroup } from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
@@ -41,17 +43,26 @@ export const HakukohdeForm = ({
   const formMode = useFormMode();
   const isDIAkoulutus = isDIA(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
+  const isOphVirkailija = useIsOphVirkailija();
+
   const isEBkoulutus = isEB(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const hakutapa = haku?.hakutapaKoodiUri;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-      {formMode === FormMode.EDIT && (
+      {(formMode === FormMode.EDIT || isOphVirkailija) && (
         <FormCollapse
           section="organisaatio"
           Component={OrganisaatioSection}
           header={t('yleiset.organisaatio')}
+        />
+      )}
+      {formMode === FormMode.CREATE && !isOphVirkailija && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSectionCreate}
+          header={t('yleiset.organisaatiovalinta')}
         />
       )}
       {formMode === FormMode.CREATE && (

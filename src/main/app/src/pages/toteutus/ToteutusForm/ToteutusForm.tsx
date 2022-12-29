@@ -9,6 +9,7 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
@@ -22,6 +23,7 @@ import {
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
@@ -93,6 +95,7 @@ const ToteutusForm = ({
   const kieliversiot = useFieldValue('kieliversiot');
   const languages = kieliversiot || [];
   const { isOpen, open, close } = useModal();
+  const isOphVirkailija = useIsOphVirkailija();
 
   const hakeutumisTaiIlmoittautumistapa = useFieldValue(
     'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
@@ -129,11 +132,18 @@ const ToteutusForm = ({
         onSave={onAttachHakukohde}
       />
       <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-        {formMode === FormMode.EDIT && (
+        {(formMode === FormMode.EDIT || isOphVirkailija) && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSection}
             header={t('yleiset.organisaatio')}
+          />
+        )}
+        {formMode === FormMode.CREATE && !isOphVirkailija && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
           />
         )}
         {formMode === FormMode.CREATE && (

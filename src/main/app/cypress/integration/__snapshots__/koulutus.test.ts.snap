@@ -1424,6 +1424,7 @@ exports[`createKoulutus > should be able to create erikoistumiskoulutus #0`] =
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "erikoistumiskoulutus",
   "metadata": {
+    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_061#1"
@@ -1441,12 +1442,14 @@ exports[`createKoulutus > should be able to create erikoistumiskoulutus #0`] =
         }
       }
     ],
+    "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": 10,
     "opintojenLaajuusNumeroMin": 5,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
+    "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "erikoistumiskoulutus"

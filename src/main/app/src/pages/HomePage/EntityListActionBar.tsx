@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import IconButton from '#/src/components/IconButton';
+import Select from '#/src/components/Select';
 import { Box } from '#/src/components/virkailija';
+import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 import { getThemeProp, spacing } from '#/src/theme';
 
 const ButtonBox = styled(Box)`
@@ -40,15 +43,40 @@ export const EntityListActionBar = ({
   selection,
   removeSelection,
   copyEntities,
+  changeTila,
 }) => {
   const { t } = useTranslation();
   const isDisabled = _.size(selection) === 0;
+  const useTilaOptions = t =>
+    useMemo(
+      () =>
+        _fp.flow(
+          _fp.values,
+          _fp.remove(_fp.isEqual(JULKAISUTILA.POISTETTU)),
+          _fp.map(tila => ({
+            label: t(getJulkaisutilaTranslationKey(tila)),
+            value: tila,
+          }))
+        )(JULKAISUTILA),
+      [t]
+    );
+
+  const tilaOptions = useTilaOptions(t);
 
   return (
     <ButtonBox display="flex">
       <Box padding={1}>
         {t(`etusivu.${entityType}.valitut`, { count: _.size(selection) })}
       </Box>
+      <VerticalSeparator />
+      <Box flexGrow={0} minWidth="180px" paddingRight={2}>
+        <Select
+          options={tilaOptions}
+          placeholder={t('yleiset.vaihdaTila')}
+          onChange={changeTila}
+        />
+      </Box>
+
       <VerticalSeparator />
       <ActionButton
         iconType="deselect"
@@ -59,14 +87,16 @@ export const EntityListActionBar = ({
         {t('etusivu.poistaValinta')}
       </ActionButton>
       <VerticalSeparator />
-      <ActionButton
-        iconType="file_copy"
-        variant="text"
-        onClick={copyEntities}
-        disabled={isDisabled}
-      >
-        {t('etusivu.kopioi')}
-      </ActionButton>
+      {copyEntities ? (
+        <ActionButton
+          iconType="file_copy"
+          variant="text"
+          onClick={copyEntities}
+          disabled={isDisabled}
+        >
+          {t('etusivu.kopioi')}
+        </ActionButton>
+      ) : null}
     </ButtonBox>
   );
 };

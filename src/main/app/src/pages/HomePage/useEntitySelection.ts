@@ -9,6 +9,7 @@ import { EntitySelectionMachine } from './entitySelectionMachine';
 
 export const SERVICE_BY_ENTITY = {
   [ENTITY.TOTEUTUS]: interpret(EntitySelectionMachine).start(),
+  [ENTITY.HAKUKOHDE]: interpret(EntitySelectionMachine).start(),
 };
 
 export const useEntitySelectionApi = actor => {

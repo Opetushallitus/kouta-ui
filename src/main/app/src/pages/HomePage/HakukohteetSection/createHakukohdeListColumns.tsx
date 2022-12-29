@@ -3,9 +3,11 @@ import React from 'react';
 import { TFunction } from 'i18next';
 
 import {
+  makeHakuColumn,
+  makeKoulutustyyppiColumn,
   makeModifiedColumn,
+  makeMuokkaajaColumn,
   makeNimiColumn,
-  makeOrganisaatioColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import {
@@ -31,8 +33,13 @@ export const createHakukohdeListColumns =
         getLinkUrl: ({ oid }) =>
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
       }),
-      makeOrganisaatioColumn(t),
+      makeHakuColumn(t, {
+        getLinkUrl: ({ hakuOid }) =>
+          `/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus/`,
+      }),
+      makeKoulutustyyppiColumn(t),
       makeTilaColumn(t),
       makeModifiedColumn(t),
+      makeMuokkaajaColumn(t),
     ];
   };

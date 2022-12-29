@@ -56,6 +56,7 @@ import {
   VapaaSivistystyoMuuTiedotSection,
   VapaaSivistystyoOpistovuosiTiedotSection,
   ErikoistumiskoulutusTiedotSection,
+  TaiteenperusopetusTiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -69,6 +70,7 @@ const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
   KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
   KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
   KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+  KOULUTUSTYYPPI.TAITEIDEN_PERUSOPETUS,
   KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
   KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
   KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
@@ -165,6 +167,10 @@ const ToteutusForm = ({
             [
               _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
               () => AikuistenperusopetusTiedotSection,
+            ],
+            [
+              _fp.isEqual(KOULUTUSTYYPPI.TAITEIDEN_PERUSOPETUS),
+              () => TaiteenperusopetusTiedotSection,
             ],
             [
               _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),

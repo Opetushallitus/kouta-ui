@@ -598,7 +598,8 @@
     "opintojaksot": "Opintojaksot",
     "opintojaksojenLiittaminen": "Opintojaksojen liittäminen opintokokonaisuuteen",
     "lisaaOpintojakso": "Lisää opintojakso",
-    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa"
+    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa",
+    "valitseTaiteenalat": "Valitse taiteenalat"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

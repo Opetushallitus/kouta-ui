@@ -597,7 +597,9 @@
     "opintojaksot": "Opintojaksot",
     "opintojaksojenLiittaminen": "Opintojaksojen liittäminen opintokokonaisuuteen",
     "lisaaOpintojakso": "Lisää opintojakso",
-    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa"
+    "muokkaaOpintojaksoa": "Muokkaa opintojaksoa",
+    "isTaydennyskoulutus": "Koulutus on täydennyskoulutusta",
+    "isTyovoimakoulutus": "Koulutus on työvoimakoulutusta"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

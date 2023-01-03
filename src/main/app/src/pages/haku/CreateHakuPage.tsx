@@ -9,7 +9,12 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
+import {
+  POHJAVALINTA,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 
@@ -25,7 +30,11 @@ const getCopyValues = hakuOid => ({
 
 const getInitialValues = haku => {
   return haku
-    ? { ...getCopyValues(haku.oid), ...getFormValuesByHaku(haku) }
+    ? {
+        ...getCopyValues(haku.oid),
+        ...getFormValuesByHaku(haku),
+        tila: DEFAULT_JULKAISUTILA,
+      }
     : initialValues;
 };
 

@@ -9,7 +9,12 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
+import {
+  POHJAVALINTA,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 
@@ -30,6 +35,7 @@ const getInitialValues = (valintaperuste, kieliValinnat, koulutustyyppi) => {
     ? {
         ...getCopyValues(valintaperuste.id),
         ...getFormValuesByValintaperuste(valintaperuste, FormMode.CREATE),
+        tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues(kieliValinnatLista, koulutustyyppi);
 };

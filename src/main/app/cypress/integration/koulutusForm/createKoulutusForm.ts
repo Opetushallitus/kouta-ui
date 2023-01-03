@@ -24,6 +24,8 @@ import {
   getInputByLabel,
   pFillAsyncSelect,
   getRadio,
+  fillPohjaSectionCopyingValuesFrom,
+  tilaShouldBe,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -782,4 +784,10 @@ export const createKoulutusForm = () => {
       tallenna();
     })
   );
+
+  it('using an existing object as baseline it should not copy publishing state', () => {
+    fillKoulutustyyppiSection(['korkeakoulutus', 'amk']);
+    fillPohjaSectionCopyingValuesFrom('Koulutuksen nimi');
+    tilaShouldBe('tallennettu');
+  });
 };

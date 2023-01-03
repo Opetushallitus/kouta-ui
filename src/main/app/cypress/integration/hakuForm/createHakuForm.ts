@@ -14,6 +14,8 @@ import {
   typeToEditor,
   fillAjankohtaFields,
   wrapMutationTest,
+  fillPohjaSectionCopyingValuesFrom,
+  tilaShouldBe,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -203,4 +205,9 @@ export const createHakuForm = () => {
       tallenna();
     })
   );
+
+  it('using an existing object as baseline it should not copy publishing state', () => {
+    fillPohjaSectionCopyingValuesFrom('Korkeakoulujen yhteishaku');
+    tilaShouldBe('tallennettu');
+  });
 };

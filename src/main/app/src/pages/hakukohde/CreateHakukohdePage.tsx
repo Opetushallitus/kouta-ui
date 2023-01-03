@@ -12,7 +12,12 @@ import FormPage, {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { checkHasHakukohdeKoodiUri } from '#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection';
@@ -29,6 +34,7 @@ import {
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
   return merge(getFormValuesByHakukohde(hakukohde, FormMode.CREATE), {
+    tila: DEFAULT_JULKAISUTILA,
     perustiedot: {
       nimi: isNimiKoodi ? null : nimi,
       hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,

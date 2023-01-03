@@ -23,6 +23,8 @@ import {
   getInputByLabel,
   stubKayttoOikeusMeRoute,
   jatka,
+  fillPohjaSectionCopyingValuesFrom,
+  tilaShouldBe,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -406,6 +408,19 @@ export const createHakukohdeForm = () => {
       );
     })
   );
+
+  it('using an existing object as baseline it should not copy publishing state', () => {
+    prepareTest({
+      tyyppi: 'yo',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+      hakutapaKoodiUri: 'hakutapa_02',
+    });
+    fillPohjaSectionCopyingValuesFrom('Hakukohteen nimi');
+    tilaShouldBe('tallennettu');
+  });
 };
 
 export const createHakukohdeFormAsOppilaitosUser = () => {

@@ -10,7 +10,12 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
+import {
+  POHJAVALINTA,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 
@@ -31,6 +36,7 @@ const getInitialValues = koulutus => {
     ? {
         ...getFormValuesByKoulutus(_.omit(koulutus, ['tarjoajat'])),
         ...getCopyValues(koulutus),
+        tila: DEFAULT_JULKAISUTILA,
       }
     : initialKoulutusValues;
 };

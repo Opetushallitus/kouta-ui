@@ -15,6 +15,7 @@ import {
   POHJAVALINTA,
   ENTITY,
   FormMode,
+  DEFAULT_JULKAISUTILA,
 } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
@@ -59,7 +60,11 @@ const getInitialValues = ({
   opinnonTyyppiKoodiUri?: string;
 }) => {
   return toteutus
-    ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
+    ? {
+        ...getCopyValues(toteutus.oid),
+        ...getFormValuesByToteutus(toteutus),
+        tila: DEFAULT_JULKAISUTILA,
+      }
     : initialValues({
         koulutustyyppi,
         koulutusNimi,

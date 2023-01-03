@@ -7,6 +7,7 @@ import soraKuvaus from '#/cypress/data/soraKuvaus';
 import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
+  koutaSearchItem,
 } from '#/cypress/utils';
 
 export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
@@ -76,7 +77,22 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
     }
   );
 
-  cy.intercept({ method: 'GET', url: '**/koulutus/list**' }, { body: [] });
+  const koulutusItem = merge(koutaSearchItem(), {
+    nimi: { fi: 'Koulutuksen nimi' },
+    kielivalinta: ['fi', 'sv', 'en'],
+    tila: 'julkaistu',
+    koulutustyyppi: 'amk',
+  });
+
+  cy.intercept(
+    { method: 'GET', url: '**/koulutus/1.1.1.1.1.1' },
+    { body: koulutusItem }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/koulutus/list**' },
+    { body: [koulutusItem] }
+  );
   cy.intercept({ method: 'GET', url: '**/search/koulutus/**' }, { body: [] });
 
   stubOppijanumerorekisteriHenkiloRoute();

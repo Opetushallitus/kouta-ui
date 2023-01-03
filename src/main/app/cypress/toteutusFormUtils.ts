@@ -37,7 +37,15 @@ export const stubToteutusFormRoutes = ({ organisaatioOid }) => {
     }
   );
 
-  cy.intercept({ method: 'GET', url: '**/toteutus/list**' }, { body: [] });
+  cy.intercept(
+    { method: 'GET', url: '**/toteutus/list**' },
+    { body: toteutusListItems(organisaatioOid) }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/toteutus/1.2.246.562.17.00000000000000008265' },
+    { body: toteutusListItems(organisaatioOid)[0] }
+  );
 
   cy.intercept(
     { method: 'GET', url: '**/toteutus/opintojaksot/list**' },

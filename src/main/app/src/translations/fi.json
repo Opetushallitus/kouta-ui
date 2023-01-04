@@ -428,7 +428,9 @@
     "hakukohde": {
       "valitut_zero": "Ei hakukohteita valittu",
       "valitut": "1 hakukohde valittu",
-      "valitut_other": "{{count}} hakukohdetta valittu"
+      "valitut_other": "{{count}} hakukohdetta valittu",
+      "vahvistaTilanmuutosOtsikko": "Valitse hakukohteet",
+      "vahvistaTilanmuutos": "Vaihda hakukohteiden tila"
     }
   },
   "koulutuslomake": {

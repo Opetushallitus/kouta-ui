@@ -55,9 +55,9 @@ export const HakuFooter = ({
         haku:
           formMode === FormMode.CREATE
             ? {
+                organisaatioOid: organisaatioOid,
                 ...haku,
                 ...getHakuByFormValues(valuesForSaving),
-                organisaatioOid,
               }
             : {
                 ...haku,

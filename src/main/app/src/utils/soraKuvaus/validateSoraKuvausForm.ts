@@ -25,6 +25,7 @@ const validateSoraKuvausForm = values => {
   return _fp
     .flow(
       validateCommonFields,
+      validateExistence('organisaatioOid'),
       validateArrayMinLength('kieliversiot', 1),
       validateIf(
         isJulkaistu,

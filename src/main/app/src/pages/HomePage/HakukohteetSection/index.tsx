@@ -1,6 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
@@ -10,8 +9,14 @@ import { hakukohdeService } from '#/src/machines/filterMachines';
 import { EntityListActionBar } from '#/src/pages/HomePage/EntityListActionBar';
 import { createHakukohdeListColumns } from '#/src/pages/HomePage/HakukohteetSection/createHakukohdeListColumns';
 import {
+  StateChangeConfirmationModal,
+  StateChangeConfirmationWrapper,
+  useStateChangeConfirmationModal,
+} from '#/src/pages/HomePage/StateChangeConfirmationModal';
+import {
   SERVICE_BY_ENTITY,
   useEntitySelection,
+  useEntitySelectionApi,
 } from '#/src/pages/HomePage/useEntitySelection';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
@@ -26,28 +31,30 @@ const { HAKUKOHDE } = ENTITY;
 const HakukohdeActionBar = () => {
   const { selection, removeSelection } = useEntitySelection(HAKUKOHDE);
 
-  const changeTila = useCallback(
-    tila => {
-      //TODO seivataan tallennuksen yhteydessä.
-      if (tila !== null && !_fp.isEmpty(selection)) {
-        console.log('testi tila');
-        console.log(tila);
-        console.log('testi selection');
-        _fp.forEach(hakukohde => {
-          console.log(hakukohde);
-          // hakukohde.tila = tila?.value;
-        }, selection);
-      }
-    },
-    [selection]
-  );
+  const { openModal } = useStateChangeConfirmationModal();
+
+  // const changeTila = useCallback(
+  //   tila => {
+  //     //TODO seivataan tallennuksen yhteydessä.
+  //     if (tila !== null && !_fp.isEmpty(selection)) {
+  //       console.log('testi tila');
+  //       console.log(tila);
+  //       console.log('testi selection');
+  //       useStateChangeConfirmationModal(tila);
+  //       // _fp.forEach(hakukohde => {
+  //       //   console.log(hakukohde);
+  //       //   // hakukohde.tila = tila?.value;
+  //       // }, selection);
+  //     }
+  //   }
+  // );
   return (
     <EntityListActionBar
       entityType={HAKUKOHDE}
       selection={selection}
       removeSelection={removeSelection}
-      changeTila={changeTila}
       copyEntities={undefined}
+      changeTila={openModal}
     />
   );
 };
@@ -71,6 +78,8 @@ const Actions = ({ organisaatioOid }) => {
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
+  const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[HAKUKOHDE]);
+
   // const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
 
   const columns = useMemo(
@@ -82,13 +91,23 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     [t, organisaatioOid]
   );
 
+  const createColumnsForConfirmationModal = useMemo(
+    () => createHakukohdeListColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
+
   // const actionBar = isYhteishaku ? HakukohdeActionBar : undefined;
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
-  // const columns = useTableColumns(t, organisaatioOid);
   return (
-    <>
+    <StateChangeConfirmationWrapper entities={selection}>
+      <StateChangeConfirmationModal
+        onStateChangeSelection={undefined}
+        entities={selection}
+        headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
+        createColumns={createColumnsForConfirmationModal}
+      />
       <NavigationAnchor id="hakukohteet" />
       <ListCollapse
         icon={ICONS[HAKUKOHDE]}
@@ -109,7 +128,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
           searchPage="homepage.hakukohteet"
         />
       </ListCollapse>
-    </>
+    </StateChangeConfirmationWrapper>
   );
 };
 

@@ -85,6 +85,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     osaamisalat,
     yhteyshenkilot,
     opintojenLaajuusNumero,
+    opintojenLaajuusNumeroMin,
+    opintojenLaajuusNumeroMax,
     opintojenLaajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
@@ -100,6 +102,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     isAvoinKorkeakoulutus,
     tunniste,
     opinnonTyyppiKoodiUri,
+    taiteenalaKoodiUrit,
   } = metadata;
 
   const {
@@ -138,6 +141,12 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opintojenLaajuusNumero: _fp.isNumber(opintojenLaajuusNumero)
         ? opintojenLaajuusNumero.toString()
         : '',
+      laajuusNumeroTyyppi:
+        opintojenLaajuusNumeroMin === opintojenLaajuusNumeroMax
+          ? MaaraTyyppi.YKSI_ARVO
+          : MaaraTyyppi.VAIHTELUVALI,
+      opintojenLaajuusNumeroMin: opintojenLaajuusNumeroMin,
+      opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
       opintojenLaajuusyksikko: toSelectValue(opintojenLaajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},
       aloituspaikat: _fp.isNumber(aloituspaikat)
@@ -148,6 +157,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opinnonTyyppi: {
         value: opinnonTyyppiKoodiUri,
       },
+      taiteenalat: taiteenalaKoodiUrit.map(value => ({ value })),
     },
     kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
     kieliversiot: kielivalinta ?? [],

@@ -26,10 +26,6 @@ type NimiSectionProps = {
   disabled?: boolean;
 };
 
-type JotpaSectionProps = {
-  name: string;
-};
-
 const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   const { t } = useTranslation();
 
@@ -72,7 +68,11 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
   );
 };
 
-const CommonTiedotFields = ({ name }: JotpaSectionProps) => {
+type CommonTiedotProps = {
+  name: string;
+};
+
+const CommonTiedotFields = ({ name }: CommonTiedotProps) => {
   const { t } = useTranslation();
 
   return (

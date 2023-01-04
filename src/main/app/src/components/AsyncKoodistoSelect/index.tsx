@@ -18,14 +18,18 @@ export const AsyncKoodistoSelect = ({
   koodistoData,
   loadOptions: loadOptionsProp,
   showAllOptions = false,
+  selectedLanguage,
   ...props
 }) => {
+  const userLanguage = useUserLanguage();
+
+  const usedLanguage = selectedLanguage ? selectedLanguage : userLanguage;
+
   const options = useKoodistoDataOptions({
     koodistoData,
     formatLabel: formatKoodiLabel,
+    language: usedLanguage,
   });
-
-  const userLanguage = useUserLanguage();
 
   const loadOptions = useLoadOptions(options);
   const apiUrls = useUrls();
@@ -48,13 +52,13 @@ export const AsyncKoodistoSelect = ({
           });
 
           return (
-            formatKoodiLabel?.(koodiObj, userLanguage) ??
-            getKoodiNimiTranslation(koodiObj, userLanguage)
+            formatKoodiLabel?.(koodiObj, usedLanguage) ??
+            getKoodiNimiTranslation(koodiObj, usedLanguage)
           );
         }
       }
     },
-    [httpClient, apiUrls, loadLabelProp, userLanguage, formatKoodiLabel]
+    [httpClient, apiUrls, loadLabelProp, usedLanguage, formatKoodiLabel]
   );
   return (
     <AsyncSelect

@@ -21,6 +21,7 @@ import {
   KOULUTUS_PERUSOPETUS_KOODIURI,
   KoulutusalaKoodi,
   OPETTAJA_KOULUTUSTYYPIT,
+  OpintojenLaajuusyksikko,
 } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -30,6 +31,7 @@ import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkin
 import { KoulutuksenEPerusteTiedot } from '../KoulutuksenEPerusteTiedot';
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
+import { ErikoistumiskoulutusField } from './ErikoistumiskoulutusField';
 import KoulutusalatField from './KoulutusalatField';
 import { OpettajaKoulutusTiedotSubSection } from './OpettajaKoulutusTiedotSubSection';
 import TutkintonimikeField from './TutkintonimikeField';
@@ -195,7 +197,11 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
 
   return (
     <VerticalBox gap={2}>
-      <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
+      <OpintojenLaajuusFieldRange
+        name={name}
+        disabled={disabled}
+        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+      />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}
@@ -339,7 +345,6 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
         KOULUTUSTYYPPI.AVOIN_YO,
         KOULUTUSTYYPPI.AVOIN_AMK,
         KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
-        KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
         KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
         KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
         KOULUTUSTYYPPI.LUKIOKOULUTUS,
@@ -367,7 +372,11 @@ export const KkOpintokokonaisuusTiedotSection = ({
 
   return (
     <VerticalBox gap={2}>
-      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <OpintojenLaajuusFieldRange
+        name={name}
+        disabled={disabled}
+        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+      />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}
@@ -380,6 +389,43 @@ export const KkOpintokokonaisuusTiedotSection = ({
       <TunnisteField name={name} />
       <OpinnonTyyppiField name={name} />
       <AvoinKorkeakoulutusField name={name} />
+    </VerticalBox>
+  );
+};
+
+export const ErikoistumisKoulutusTiedotSection = ({
+  disabled,
+  language,
+  name,
+}) => {
+  const { t } = useTranslation();
+
+  useNimiFromKoulutusKoodi({
+    nimiFieldName: `${name}.nimi`,
+    koulutusFieldName: `${name}.erikoistumiskoulutus`,
+  });
+
+  return (
+    <VerticalBox gap={2}>
+      <ErikoistumiskoulutusField
+        name={name}
+        required={true}
+        disabled={disabled}
+      />
+      <OpintojenLaajuusFieldRange
+        name={name}
+        disabled={disabled}
+        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+      />
+      <KoulutusalatField disabled={disabled} name={name} />
+      <Field
+        disabled={disabled}
+        name={`${name}.nimi.${language}`}
+        component={FormFieldInput}
+        label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
+        helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
+        required
+      />
     </VerticalBox>
   );
 };

@@ -83,7 +83,7 @@ const HakuForm = ({
         onSave={onAttachHakukohde}
       />
       <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-        {(formMode === FormMode.EDIT || isOphVirkailija) && (
+        {formMode === FormMode.EDIT && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSection}

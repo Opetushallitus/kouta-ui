@@ -6,6 +6,7 @@ import { createGlobalState } from 'react-use';
 
 import Button from '#/src/components/Button';
 import { ENTITY, ICONS } from '#/src/constants';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import { hakukohdeService } from '#/src/machines/filterMachines';
 import { EntityListActionBar } from '#/src/pages/HomePage/EntityListActionBar';
@@ -42,6 +43,8 @@ export const useNewTila = () => {
 };
 
 const HakukohdeActionBar = () => {
+  const isOphVirkailija = useIsOphVirkailija();
+
   const { selection, removeSelection } = useEntitySelection(HAKUKOHDE);
 
   const { openModal } = useStateChangeConfirmationModal();
@@ -56,7 +59,7 @@ const HakukohdeActionBar = () => {
     },
     [selection, openModal, setNewTila]
   );
-  return (
+  return isOphVirkailija ? (
     <EntityListActionBar
       entityType={HAKUKOHDE}
       selection={selection}
@@ -64,7 +67,7 @@ const HakukohdeActionBar = () => {
       copyEntities={undefined}
       changeTila={changeTila}
     />
-  );
+  ) : null;
 };
 
 const Actions = ({ organisaatioOid }) => {

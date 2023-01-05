@@ -23,6 +23,7 @@ import {
   getInputByLabel,
   stubKayttoOikeusMeRoute,
   jatka,
+  fillOrgSection,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -277,6 +278,7 @@ export const createHakukohdeForm = () => {
         tarjoajat,
       });
 
+      fillOrgSection(organisaatioOid);
       fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
       fillPerustiedotSection({
@@ -310,6 +312,8 @@ export const createHakukohdeForm = () => {
         hakutapaKoodiUri: 'hakutapa_02',
       });
 
+      fillOrgSection(organisaatioOid);
+
       fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
       fillPerustiedotSection();
@@ -340,6 +344,7 @@ export const createHakukohdeForm = () => {
         tarjoajat,
       });
 
+      fillOrgSection(organisaatioOid);
       fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
       fillLomakeSectionOnly('muu');
@@ -366,6 +371,7 @@ export const createHakukohdeForm = () => {
         hakutapaKoodiUri: 'hakutapa_02',
       });
 
+      fillOrgSection(organisaatioOid);
       fillKieliversiotSection();
       fillPohjakoulutusvaatimusSection();
       fillLomakeSectionOnly('ei sähköistä');
@@ -390,7 +396,7 @@ export const createHakukohdeForm = () => {
         organisaatioOid,
         tarjoajat,
       });
-
+      fillOrgSection(organisaatioOid);
       fillKieliversiotSection();
       fillPerustiedotSection({ isLukio: true, isYhteishaku: true });
       fillPohjakoulutusvaatimusSection();

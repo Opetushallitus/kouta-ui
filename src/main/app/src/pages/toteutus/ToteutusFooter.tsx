@@ -70,7 +70,6 @@ export const ToteutusFooter = ({
         toteutus:
           formMode === FormMode.CREATE
             ? {
-                organisaatioOid: organisaatioOid,
                 ...getToteutusByFormValues({
                   ...valuesForSaving,
                   koulutustyyppi,

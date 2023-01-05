@@ -47,7 +47,6 @@ export const ValintaperusteFooter = ({
             ? {
                 ...valintaperuste,
                 ...getValintaperusteByFormValues(values),
-                organisaatioOid,
               }
             : {
                 ...valintaperuste,

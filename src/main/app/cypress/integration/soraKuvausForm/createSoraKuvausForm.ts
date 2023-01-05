@@ -15,6 +15,7 @@ import {
   fillKoulutustyyppiSelect,
   fillAsyncSelect,
   wrapMutationTest,
+  fillOrgSection,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -62,6 +63,7 @@ export const createSoraKuvausForm = () => {
   it(
     'should be able to create sora-kuvaus',
     mutationTest(() => {
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKoulutustyyppiSection();
       fillKieliversiotSection({ jatka: true });

@@ -8,6 +8,7 @@ import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import { KokeetTaiLisanaytotSection } from '#/src/components/KokeetTaiLisanaytotSection';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
@@ -48,6 +49,14 @@ export const ValintaperusteForm = ({
           section="organisaatio"
           Component={OrganisaatioSection}
           header={t('yleiset.organisaatio')}
+        />
+      )}
+      {formMode === FormMode.CREATE && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSectionCreate}
+          header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
         />
       )}
 

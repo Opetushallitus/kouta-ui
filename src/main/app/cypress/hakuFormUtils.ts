@@ -26,6 +26,14 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {

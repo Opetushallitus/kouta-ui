@@ -5,6 +5,7 @@ import { merge } from 'lodash/fp';
 import haku from '#/cypress/data/haku';
 import hakukohde from '#/cypress/data/hakukohde';
 import koulutus from '#/cypress/data/koulutus';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import toteutus from '#/cypress/data/toteutus';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import hakukohdeMocks from '#/cypress/mocks/hakukohde.mock.json';
@@ -66,6 +67,14 @@ export const prepareTest = ({
     hakuWithoutMuokkaamisenTakaraja,
     tarjoajat,
   });
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
 
   cy.intercept(
     { method: 'GET', url: `**/toteutus/${toteutusOid}` },

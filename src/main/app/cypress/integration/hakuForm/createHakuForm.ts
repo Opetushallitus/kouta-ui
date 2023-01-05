@@ -14,6 +14,7 @@ import {
   typeToEditor,
   fillAjankohtaFields,
   wrapMutationTest,
+  fillOrgSection,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -160,6 +161,7 @@ export const createHakuForm = () => {
   it(
     'should be able to create haku with ataru hakulomake',
     mutationTest(() => {
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
       fillNimiSection();
@@ -177,6 +179,7 @@ export const createHakuForm = () => {
   it(
     'should be able to create haku with muu hakulomake',
     mutationTest(() => {
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
       fillNimiSection();
@@ -192,6 +195,7 @@ export const createHakuForm = () => {
   it(
     'should be able to create haku with "ei sähköistä" hakulomake',
     mutationTest(() => {
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection({ jatka: true });
       fillNimiSection();

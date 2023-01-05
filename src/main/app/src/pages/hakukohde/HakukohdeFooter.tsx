@@ -67,7 +67,6 @@ export const HakukohdeFooter = ({
         hakukohde:
           formMode === FormMode.CREATE
             ? {
-                organisaatioOid: organisaatioOid,
                 ...getHakukohdeByFormValues(valuesForSaving),
                 hakuOid: haku?.oid,
                 toteutusOid: toteutus?.oid,

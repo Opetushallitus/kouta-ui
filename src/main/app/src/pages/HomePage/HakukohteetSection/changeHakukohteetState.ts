@@ -4,6 +4,7 @@ import { useMutation } from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { useNewTila } from '#/src/pages/HomePage/HakukohteetSection/index';
 import { map } from '#/src/utils/lodashFpUncapped';
 
 type HakukohdeTilaChangeResponseItem = {
@@ -19,15 +20,21 @@ type HakukohteetTilaChangeResponseData = Array<HakukohdeTilaChangeResponseItem>;
 const useChangeHakukohteidenTila = () => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
+  const { tila } = useNewTila();
   return useCallback(
     async (hakukohteet: Array<string>) => {
+      console.log('Vaihdetaan hakukohteiden:');
+      console.log(hakukohteet);
+      console.log(map('oid', hakukohteet));
+      console.log('tilaksi:');
+      console.log(tila);
       const result = await httpClient.put(
-        apiUrls.url('kouta-backendXXXX.toteutus-copy'),
+        apiUrls.url('kouta-backend.hakukohteet-tilamuutos'),
         map('oid', hakukohteet)
       );
       return result.data as HakukohteetTilaChangeResponseData;
     },
-    [httpClient, apiUrls]
+    [httpClient, apiUrls, tila]
   );
 };
 

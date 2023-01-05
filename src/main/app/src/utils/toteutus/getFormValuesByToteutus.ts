@@ -161,7 +161,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opinnonTyyppi: {
         value: opinnonTyyppiKoodiUri,
       },
-      taiteenalat: taiteenalaKoodiUrit.map(value => ({ value })),
+      taiteenalat: toSelectValueList(taiteenalaKoodiUrit),
     },
     kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
     kieliversiot: kielivalinta ?? [],

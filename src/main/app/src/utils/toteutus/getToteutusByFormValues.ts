@@ -281,7 +281,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       tunniste: values?.tiedot?.tunniste || null,
       opinnonTyyppiKoodiUri: values?.tiedot?.opinnonTyyppi?.value || null,
       taiteenalaKoodiUrit: (values?.tiedot?.taiteenalat ?? []).map(
-        ({ value }) => value
+        _fp.prop('value')
       ),
     },
   };

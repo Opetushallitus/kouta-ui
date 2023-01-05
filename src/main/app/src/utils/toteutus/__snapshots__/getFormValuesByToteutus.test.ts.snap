@@ -266,6 +266,7 @@ Object {
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
+    "laajuusNumeroTyyppi": "range",
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
@@ -274,9 +275,19 @@ Object {
       "value": undefined,
     },
     "opintojenLaajuusNumero": "25",
+    "opintojenLaajuusNumeroMax": 35,
+    "opintojenLaajuusNumeroMin": 30,
     "opintojenLaajuusyksikko": Object {
       "value": "laajuus_1#1",
     },
+    "taiteenalat": Array [
+      Object {
+        "value": "taiteenperusopetustaiteenala_sirkustaide",
+      },
+      Object {
+        "value": "taiteenperusopetustaiteenala_sanataide",
+      },
+    ],
     "tunniste": undefined,
   },
   "tila": "tallennettu",

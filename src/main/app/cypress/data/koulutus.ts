@@ -197,6 +197,15 @@ const getKorkeakoulutusOpintokokonaisuusFields = ({ tyyppi }) => {
   });
 };
 
+const getTaiteidenPerusopetusFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    nimi: { fi: 'Taiteiden perusopetus' },
+    metadata: {
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
 export default ({ tyyppi = 'amm' } = {}) => {
   if (tyyppi === 'amm-ope-erityisope-ja-opo') {
     return getAmmOpeErityisopeJaOpoFields({ tyyppi });
@@ -224,6 +233,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     return getDIAFields();
   } else if (tyyppi === 'kk-opintokokonaisuus') {
     return getKorkeakoulutusOpintokokonaisuusFields({ tyyppi });
+  } else if (tyyppi === 'taiteiden-perusopetus') {
+    return getTaiteidenPerusopetusFields({ tyyppi });
   }
 
   return getBaseFields();

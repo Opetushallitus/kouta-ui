@@ -15771,5 +15771,527 @@
       ],
       "status": 200
     }
+  },
+  {
+    "method": "GET",
+    "url": "https://localhost:3000/koodisto-service/rest/json/taiteenperusopetustaiteenala/koodi?onlyValidKoodis=true",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_sirkustaide",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_sirkustaide",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "sirkustaide",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Sirkustaide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Sirkustaide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Sirkustaide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_sanataide",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_sanataide",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "sanataide",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Sanataide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Sanataide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Sanataide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_arkkitehtuuri",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_arkkitehtuuri",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "arkkitehtuuri",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Arkkitehtuuri",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Arkkitehtuuri",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Arkkitehtuuri",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_teatteritaide",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_teatteritaide",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "teatteritaide",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Teatteritaide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Teatteritaide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Teatteritaide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_tanssi",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_tanssi",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "tanssi",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Tanssi",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Tanssi",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Tanssi",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_kasityo",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_kasityo",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "kasityo",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Käsityö",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Käsityö",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Käsityö",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_kuvataide",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_kuvataide",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "kuvataide",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Kuvataide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Kuvataide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Kuvataide",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_musiikki",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_musiikki",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "musiikki",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Musiikki",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Musiikki",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Musiikki",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "taiteenperusopetustaiteenala_mediataiteet",
+          "resourceUri": "https://virkailija.untuvaopintopolku.fi/koodisto-service/rest/codeelement/taiteenperusopetustaiteenala_mediataiteet",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "taiteenperusopetustaiteenala",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "mediataiteet",
+          "paivitysPvm": "2022-12-12",
+          "paivittajaOid": "1.2.246.562.24.98063222086",
+          "voimassaAlkuPvm": "2022-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Mediataiteet",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Mediataiteet",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Mediataiteet",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
   }
 ]

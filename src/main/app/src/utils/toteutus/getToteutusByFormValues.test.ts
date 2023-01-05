@@ -27,6 +27,10 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: 'Sv linkki',
         },
         aloituspaikat: '56',
+        aloituspaikkakuvaus: {
+          fi: parseEditorState('aloituspaikan kuvaus fi'),
+          sv: parseEditorState('aloituspaikan kuvaus sv'),
+        },
         opintojenLaajuusNumero: '252',
         laajuusNumeroTyyppi: 'single',
         opintojenLaajuusNumeroMin: 300,

@@ -255,7 +255,11 @@ Object {
   ],
   "teemakuva": undefined,
   "tiedot": Object {
-    "aloituspaikat": "251",
+  "aloituspaikat": "251",
+   "aloituspaikkakuvaus": Object {
+    "fi": "<p>Aloituspaikan kuvaus - fi</p>",
+    "sv": "<p>Aloituspaikan kuvaus - sv</p>",
+    },
     "ammatillinenPerustutkintoErityisopetuksena": true,
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": Object {

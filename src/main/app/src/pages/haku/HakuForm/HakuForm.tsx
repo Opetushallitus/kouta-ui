@@ -90,11 +90,12 @@ const HakuForm = ({
             header={t('yleiset.organisaatio')}
           />
         )}
-        {formMode === FormMode.CREATE && !isOphVirkailija && (
+        {formMode === FormMode.CREATE && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSectionCreate}
             header={t('yleiset.organisaatiovalinta')}
+            organisaatioOid={organisaatioOid}
           />
         )}
         {formMode === FormMode.CREATE ? (

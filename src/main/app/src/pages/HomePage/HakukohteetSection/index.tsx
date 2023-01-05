@@ -9,6 +9,7 @@ import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { hakukohdeService } from '#/src/machines/filterMachines';
 import { EntityListActionBar } from '#/src/pages/HomePage/EntityListActionBar';
+import { useChangeHakukohteetTilaMutation } from '#/src/pages/HomePage/HakukohteetSection/changeHakukohteetState';
 import { createHakukohdeListColumns } from '#/src/pages/HomePage/HakukohteetSection/createHakukohdeListColumns';
 import {
   StateChangeConfirmationModal,
@@ -35,7 +36,7 @@ const useTilaState = createGlobalState(null);
 export const useNewTila = () => {
   const [newTila, setNewTila] = useTilaState();
   return {
-    newTila,
+    tila: newTila,
     setNewTila: tila => setNewTila(tila),
   };
 };
@@ -101,12 +102,14 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     [t, organisaatioOid]
   );
 
+  const changeHakukohteetTilaMutation = useChangeHakukohteetTilaMutation();
+
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
   return (
     <StateChangeConfirmationWrapper entities={selection}>
       <StateChangeConfirmationModal
-        onStateChangeSelection={undefined}
+        onStateChangeSelection={changeHakukohteetTilaMutation}
         entities={selection}
         headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}

@@ -112,12 +112,23 @@ export const useStateChangeConfirmationModal = () => {
   );
 };
 
-export const useModalSelection = () => {
+export const useFilteredModalSelection = () => {
   const { selectionService } = useContextOrThrow(
     StateChangeConfirmationModalContext
   );
 
-  return useSelector(selectionService, state => state.context.selection);
+  const selection = useSelector(
+    selectionService,
+    state => state.context.selection
+  );
+
+  const { tila } = useNewTila();
+
+  const tilaFilteredSelection = Object.values(selection).filter(
+    hakukohde => hakukohde?.tila !== tila?.value
+  );
+
+  return tilaFilteredSelection;
 };
 
 export const StateChangeConfirmationWrapper = ({ entities, children }) => {
@@ -171,19 +182,17 @@ export const StateChangeConfirmationModal = ({
     [createColumns, selectionService]
   );
 
-  const selection = useModalSelection();
+  const selection = useFilteredModalSelection();
+
+  const { tila } = useNewTila();
 
   const onConfirm = useCallback(() => {
-    onStateChangeSelection(selection);
+    onStateChangeSelection(selection, tila);
     closeModal();
-  }, [closeModal, onStateChangeSelection, selection]);
+  }, [closeModal, onStateChangeSelection, selection, tila]);
 
-  const { newTila } = useNewTila();
-  console.log('modal->');
-  console.log('newTila');
-  console.log(newTila);
-  console.log(selection);
-  console.log('<-modal');
+  const tilaLabel = tila?.label || '';
+
   return (
     <Modal
       minHeight="200px"
@@ -200,13 +209,13 @@ export const StateChangeConfirmationModal = ({
           </Box>
           <Button disabled={_fp.isEmpty(selection)} onClick={onConfirm}>
             {t('etusivu.hakukohde.vahvistaTilanmuutos', {
-              tila: newTila?.label,
+              tila: tilaLabel,
             })}
           </Button>
         </Box>
       }
     >
-      <EntityListTable entities={entities} columns={columns} />
+      <EntityListTable entities={selection} columns={columns} />
     </Modal>
   );
 };

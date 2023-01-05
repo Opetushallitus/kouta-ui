@@ -10,10 +10,39 @@ import {
   stubCommonRoutes,
   koutaSearchItem,
 } from './utils';
+import organisaatioHierarkia from "#/cypress/data/organisaatioHierarkia";
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
   playMocks(hakuMocks);
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**oid=${organisaatioOid}**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+    },
+    {
+      body: merge(organisaatio(), {
+        oid: organisaatioOid,
+      }),
+    }
+  );
 
   cy.intercept(
     {

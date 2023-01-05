@@ -19,6 +19,7 @@ import {
   wrapMutationTest,
   fillPohjaSectionCopyingValuesFrom,
   tilaShouldBe,
+  fillOrgSection,
 } from '#/cypress/utils';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 import { ENTITY } from '#/src/constants';
@@ -168,6 +169,7 @@ export const createValintaperusteForm = () => {
         }
       );
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillPerustiedotSection();
       fillHakukelpoisuusSection();

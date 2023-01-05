@@ -26,6 +26,7 @@ import {
   getRadio,
   fillPohjaSectionCopyingValuesFrom,
   tilaShouldBe,
+  fillOrgSection,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -102,6 +103,7 @@ export const createKoulutusForm = () => {
           fillAsyncSelect('Kaivosalan perustutkinto');
         });
       });
+      fillOrgSection(organisaatioOid);
 
       fillLisatiedotSection();
 
@@ -121,6 +123,7 @@ export const createKoulutusForm = () => {
     'should be able to create ammatillinen osaamisala koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-osaamisala'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('osaamisala', () => {
         getByTestId('koulutusSelect').click();
@@ -164,6 +167,7 @@ export const createKoulutusForm = () => {
     'should be able to create ammatillinen tutkinnon osa koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-tutkinnon-osa'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('tutkinnonosat', () => {
         getByTestId('lisaaKoulutusButton').click();
@@ -228,6 +232,7 @@ export const createKoulutusForm = () => {
     'should be able to create AMK-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'amk'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.valitseKoulutukset').pipe(
@@ -271,6 +276,7 @@ export const createKoulutusForm = () => {
       fillCommon({
         koulutustyyppiPath: ['korkeakoulutus', 'kk-opintojakso'],
       });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getRadio('single').click({ force: true });
@@ -317,6 +323,7 @@ export const createKoulutusForm = () => {
       fillCommon({
         koulutustyyppiPath: ['korkeakoulutus', 'kk-opintokokonaisuus'],
       });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getRadio('range').click({ force: true });
@@ -360,6 +367,8 @@ export const createKoulutusForm = () => {
       fillCommon({
         koulutustyyppiPath: ['korkeakoulutus', 'amm-ope-erityisope-ja-opo'],
       });
+
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.valitseKoulutus').pipe(
@@ -405,7 +414,7 @@ export const createKoulutusForm = () => {
     'should be able to create lukiokoulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['lk'] });
-
+      fillOrgSection(organisaatioOid);
       withinSection('information', () => {
         getSelectByLabel('yleiset.valitseKoulutus').pipe(
           pFillAsyncSelect('Ylioppilastutkinto')
@@ -432,6 +441,7 @@ export const createKoulutusForm = () => {
     'should be able to create TUVA-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['tuva'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getByTestId('laajuusnumero').pipe(paste('38'));
@@ -469,6 +479,7 @@ export const createKoulutusForm = () => {
           'vapaa-sivistystyo-opistovuosi',
         ],
       });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getByTestId('laajuusnumero').pipe(paste('53'));
@@ -503,6 +514,7 @@ export const createKoulutusForm = () => {
       fillCommon({
         koulutustyyppiPath: ['vapaa-sivistystyo', 'vapaa-sivistystyo-muu'],
       });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getByTestId('laajuusnumero').pipe(paste('53'));
@@ -539,6 +551,7 @@ export const createKoulutusForm = () => {
     'should be able to create TELMA-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['ammatillinen', 'telma'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getByTestId('laajuusnumero').pipe(paste('60'));
@@ -574,6 +587,7 @@ export const createKoulutusForm = () => {
     'should be able to create muu ammatillinen koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-muu'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.laajuusyksikko').pipe(
@@ -607,6 +621,7 @@ export const createKoulutusForm = () => {
     'should be able to create erikoislääkäri-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'erikoislaakari'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.valitseKoulutus').pipe(
@@ -636,6 +651,7 @@ export const createKoulutusForm = () => {
     'should be able to create "Aikuisten perusopetus" -koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['aikuisten-perusopetus'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.laajuusyksikko').pipe(
@@ -675,6 +691,7 @@ export const createKoulutusForm = () => {
     'should be able to create DIA-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['lk'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.valitseKoulutus').pipe(
@@ -712,6 +729,7 @@ export const createKoulutusForm = () => {
     'should be able to create EB-koulutus',
     mutationTest(() => {
       fillCommon({ koulutustyyppiPath: ['lk'] });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('yleiset.valitseKoulutus').pipe(

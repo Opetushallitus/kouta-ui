@@ -1,6 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { createGlobalState } from 'react-use';
 
 import Button from '#/src/components/Button';
 import { ENTITY, ICONS } from '#/src/constants';
@@ -28,33 +30,38 @@ import LiitoksetModal from './LiitoksetModal';
 
 const { HAKUKOHDE } = ENTITY;
 
+const useTilaState = createGlobalState(null);
+
+export const useNewTila = () => {
+  const [newTila, setNewTila] = useTilaState();
+  return {
+    newTila,
+    setNewTila: tila => setNewTila(tila),
+  };
+};
+
 const HakukohdeActionBar = () => {
   const { selection, removeSelection } = useEntitySelection(HAKUKOHDE);
 
   const { openModal } = useStateChangeConfirmationModal();
+  const { setNewTila } = useNewTila();
 
-  // const changeTila = useCallback(
-  //   tila => {
-  //     //TODO seivataan tallennuksen yhteydessä.
-  //     if (tila !== null && !_fp.isEmpty(selection)) {
-  //       console.log('testi tila');
-  //       console.log(tila);
-  //       console.log('testi selection');
-  //       useStateChangeConfirmationModal(tila);
-  //       // _fp.forEach(hakukohde => {
-  //       //   console.log(hakukohde);
-  //       //   // hakukohde.tila = tila?.value;
-  //       // }, selection);
-  //     }
-  //   }
-  // );
+  const changeTila = useCallback(
+    tila => {
+      if (tila !== null && !_fp.isEmpty(selection)) {
+        setNewTila(tila);
+        return openModal();
+      }
+    },
+    [selection, openModal, setNewTila]
+  );
   return (
     <EntityListActionBar
       entityType={HAKUKOHDE}
       selection={selection}
       removeSelection={removeSelection}
       copyEntities={undefined}
-      changeTila={openModal}
+      changeTila={changeTila}
     />
   );
 };
@@ -80,8 +87,6 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[HAKUKOHDE]);
 
-  // const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
-
   const columns = useMemo(
     () =>
       createHakukohdeListColumns(
@@ -95,8 +100,6 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     () => createHakukohdeListColumns(t, organisaatioOid),
     [t, organisaatioOid]
   );
-
-  // const actionBar = isYhteishaku ? HakukohdeActionBar : undefined;
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 

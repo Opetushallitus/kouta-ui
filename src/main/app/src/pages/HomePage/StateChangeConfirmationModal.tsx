@@ -8,6 +8,7 @@ import { createMachine, spawn, actions } from 'xstate';
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
+import { useNewTila } from '#/src/pages/HomePage/HakukohteetSection';
 
 import { EntityListTable } from './EntitySearchList';
 import { EntitySelectionMachine } from './entitySelectionMachine';
@@ -177,11 +178,13 @@ export const StateChangeConfirmationModal = ({
     closeModal();
   }, [closeModal, onStateChangeSelection, selection]);
 
-  const showModal = !_fp.isEmpty(selection);
-  console.log('testing');
-  console.log(_fp.isEmpty(selection));
+  const { newTila } = useNewTila();
+  console.log('modal->');
+  console.log('newTila');
+  console.log(newTila);
   console.log(selection);
-  return showModal ? (
+  console.log('<-modal');
+  return (
     <Modal
       minHeight="200px"
       maxWidth="1200px"
@@ -196,12 +199,14 @@ export const StateChangeConfirmationModal = ({
             </Button>
           </Box>
           <Button disabled={_fp.isEmpty(selection)} onClick={onConfirm}>
-            {t('etusivu.hakukohde.vahvistaTilanmuutos')}
+            {t('etusivu.hakukohde.vahvistaTilanmuutos', {
+              tila: newTila?.label,
+            })}
           </Button>
         </Box>
       }
     >
       <EntityListTable entities={entities} columns={columns} />
     </Modal>
-  ) : null;
+  );
 };

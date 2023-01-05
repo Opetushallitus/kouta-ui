@@ -5,16 +5,17 @@ import { Field } from 'redux-form';
 
 import { Box } from '#/src/components/virkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { useAllowedOrgs } from '#/src/pages/HomePage/OrganisaatioDrawer/useReadableOrganisaatioHierarkia';
+import { useOrgCreateHierarkia } from '#/src/pages/HomePage/OrganisaatioDrawer/useReadableOrganisaatioHierarkia';
+import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 import { FormFieldSelect } from './formFields';
 
-export const OrganisaatioSectionCreate = () => {
+export const OrganisaatioSectionCreate = ({ organisaatioOid }) => {
   const language = useUserLanguage();
 
-  const { hierarkia, isLoading } = useAllowedOrgs();
+  const { hierarkia, isLoading } = useOrgCreateHierarkia(organisaatioOid);
 
   const options = useMemo(() => {
     const orgs = flattenHierarkia(hierarkia);
@@ -27,7 +28,7 @@ export const OrganisaatioSectionCreate = () => {
 
   return (
     <Box>
-      <Box mb={2}>
+      <Box {...getTestIdProps('organisaatioSelect')} mb={2}>
         <Field
           name="organisaatioOid"
           component={FormFieldSelect}

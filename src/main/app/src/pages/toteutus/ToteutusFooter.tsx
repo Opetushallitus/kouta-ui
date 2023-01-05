@@ -74,7 +74,6 @@ export const ToteutusFooter = ({
                   ...valuesForSaving,
                   koulutustyyppi,
                 }),
-                organisaatioOid,
                 koulutusOid: koulutus?.oid,
               }
             : {

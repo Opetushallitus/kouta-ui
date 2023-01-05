@@ -23,7 +23,6 @@ import {
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
@@ -97,7 +96,6 @@ const ToteutusForm = ({
   const kieliversiot = useFieldValue('kieliversiot');
   const languages = kieliversiot || [];
   const { isOpen, open, close } = useModal();
-  const isOphVirkailija = useIsOphVirkailija();
 
   const hakeutumisTaiIlmoittautumistapa = useFieldValue(
     'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
@@ -134,18 +132,19 @@ const ToteutusForm = ({
         onSave={onAttachHakukohde}
       />
       <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-        {(formMode === FormMode.EDIT || isOphVirkailija) && (
+        {formMode === FormMode.EDIT && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSection}
             header={t('yleiset.organisaatio')}
           />
         )}
-        {formMode === FormMode.CREATE && !isOphVirkailija && (
+        {formMode === FormMode.CREATE && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSectionCreate}
             header={t('yleiset.organisaatiovalinta')}
+            organisaatioOid={organisaatioOid}
           />
         )}
         {formMode === FormMode.CREATE && (

@@ -6,6 +6,8 @@ import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import getUserRoles from '#/src/utils/getUserRoles';
 import isOid from '#/src/utils/isOid';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
@@ -42,6 +44,23 @@ const organisaatioHasCorrectType = organisaatio => {
   }
 
   return !organisaatiotyypit.find(t => Boolean(invalidOrganisaatioTypeMap[t]));
+};
+
+//OY-3929 oph-oikeuksisille virkailijoille haetaan organisaatiopuusta valitun organisaation lapsiorganisaatiot,
+//muille virkailijoille kaikki joihin on oikeudet
+export const useOrgCreateHierarkia = organisaatioOid => {
+  const isOph = useIsOphVirkailija();
+  const allowedHierarkia = useAllowedOrgs();
+  const ophHierarkia = useOrganisaatioHierarkia(organisaatioOid, {
+    skipParents: true,
+  });
+
+  if (isOph) {
+    return ophHierarkia;
+  } else {
+    console.log('allowed hierarkia!');
+    return allowedHierarkia;
+  }
 };
 
 export const useAllowedOrgs = () => {

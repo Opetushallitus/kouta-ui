@@ -12,7 +12,6 @@ import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import getSoraKuvaukset from '#/src/utils/soraKuvaus/getSoraKuvaukset';
 
 import KoulutustyyppiSection from './KoulutustyyppiSection';
@@ -27,13 +26,12 @@ const SoraKuvausForm = ({
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
   const languageTabs = kieliversiot || [];
-  const isOphVirkailija = useIsOphVirkailija();
 
   const formMode = useFormMode();
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-      {(formMode === FormMode.EDIT || isOphVirkailija) && (
+      {formMode === FormMode.EDIT && (
         <FormCollapse
           section="organisaatio"
           Component={OrganisaatioSection}
@@ -45,6 +43,7 @@ const SoraKuvausForm = ({
           section="organisaatio"
           Component={OrganisaatioSectionCreate}
           header={t('yleiset.organisaatiovalinta')}
+          organisaatioOid={organisaatioOid}
         />
       )}
       {formMode === FormMode.CREATE ? (

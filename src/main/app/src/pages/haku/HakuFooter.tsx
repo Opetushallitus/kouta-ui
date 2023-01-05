@@ -57,7 +57,6 @@ export const HakuFooter = ({
             ? {
                 ...haku,
                 ...getHakuByFormValues(valuesForSaving),
-                organisaatioOid,
               }
             : {
                 ...haku,

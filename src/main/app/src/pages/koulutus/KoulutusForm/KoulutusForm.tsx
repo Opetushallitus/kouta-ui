@@ -24,7 +24,6 @@ import {
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
@@ -90,8 +89,6 @@ export const KoulutusForm = ({
   const isExistingOphKoulutus =
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
-  const isOphVirkailija = useIsOphVirkailija();
-
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { hierarkia = [] } = useOrganisaatioHierarkia(
     koulutusProp?.organisaatioOid
@@ -112,18 +109,19 @@ export const KoulutusForm = ({
     <>
       <KoulutusSaveErrorModal />
       <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-        {(formMode === FormMode.EDIT || isOphVirkailija) && (
+        {formMode === FormMode.EDIT && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSection}
             header={t('yleiset.organisaatio')}
           />
         )}
-        {formMode === FormMode.CREATE && !isOphVirkailija && (
+        {formMode === FormMode.CREATE && (
           <FormCollapse
             section="organisaatio"
             Component={OrganisaatioSectionCreate}
             header={t('yleiset.organisaatiovalinta')}
+            organisaatioOid={organisaatioOid}
           />
         )}
         <FormCollapse

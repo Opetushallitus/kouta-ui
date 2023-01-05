@@ -160,12 +160,10 @@ export const StateChangeConfirmationWrapper = ({ entities, children }) => {
 
 export const StateChangeConfirmationModal = ({
   headerText,
-  entities = [],
   onStateChangeSelection,
   createColumns,
 }: {
   headerText: string;
-  entities: Array<any>;
   onStateChangeSelection: any;
   createColumns: (selectionActor: any) => any;
 }) => {
@@ -187,9 +185,9 @@ export const StateChangeConfirmationModal = ({
   const { tila } = useNewTila();
 
   const onConfirm = useCallback(() => {
-    onStateChangeSelection(selection, tila);
+    onStateChangeSelection(selection);
     closeModal();
-  }, [closeModal, onStateChangeSelection, selection, tila]);
+  }, [closeModal, onStateChangeSelection, selection]);
 
   const tilaLabel = tila?.label || '';
 

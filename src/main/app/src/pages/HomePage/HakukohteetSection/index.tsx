@@ -109,7 +109,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   return (
     <StateChangeConfirmationWrapper entities={selection}>
       <StateChangeConfirmationModal
-        onStateChangeSelection={changeHakukohteetTilaMutation}
+        onStateChangeSelection={changeHakukohteetTilaMutation.mutate}
         entities={selection}
         headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}

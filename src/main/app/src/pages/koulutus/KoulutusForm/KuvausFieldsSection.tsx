@@ -35,7 +35,7 @@ export const KuvausFieldsSection = ({
             KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
             KOULUTUSTYYPPI.ERIKOISLAAKARI,
             KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-            KOULUTUSTYYPPI.TAITEIDEN_PERUSOPETUS,
+            KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
           ].includes(koulutustyyppi)}
         />
       </Box>
@@ -45,7 +45,7 @@ export const KuvausFieldsSection = ({
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
         KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-        KOULUTUSTYYPPI.TAITEIDEN_PERUSOPETUS,
+        KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
       ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('linkkiEPerusteisiinInput')}>
           <Field

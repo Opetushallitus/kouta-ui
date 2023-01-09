@@ -3619,7 +3619,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
   "tila": "julkaistu"
 };
 
-exports[`createToteutus > should be able to create "Taiteiden perusopetus" -toteutus #0`] =
+exports[`createToteutus > should be able to create "Taiteen perusopetus" -toteutus #0`] =
 {
   "esikatselu": true,
   "externalId": null,
@@ -3727,7 +3727,7 @@ exports[`createToteutus > should be able to create "Taiteiden perusopetus" -tote
     ],
     "toteutusjaksot": [],
     "tunniste": null,
-    "tyyppi": "taiteiden-perusopetus",
+    "tyyppi": "taiteen-perusopetus",
     "yhteyshenkilot": [
       {
         "nimi": {

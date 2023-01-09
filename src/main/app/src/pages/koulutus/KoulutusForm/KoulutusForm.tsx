@@ -52,7 +52,7 @@ import {
   KkOpintojaksoTiedotSection,
   ErikoislaakariTiedotSection,
   ErikoistumisKoulutusTiedotSection,
-  TaiteidenPerusopetusTiedotSection,
+  TaiteenPerusopetusTiedotSection,
 } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -160,8 +160,8 @@ export const KoulutusForm = ({
                     () => AikuistenPerusopetusTiedotSection,
                   ],
                   [
-                    _fp.isEqual(KOULUTUSTYYPPI.TAITEIDEN_PERUSOPETUS),
-                    () => TaiteidenPerusopetusTiedotSection,
+                    _fp.isEqual(KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS),
+                    () => TaiteenPerusopetusTiedotSection,
                   ],
                   [
                     _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI),
@@ -284,7 +284,7 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
               KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
               KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-              KOULUTUSTYYPPI.TAITEIDEN_PERUSOPETUS,
+              KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
               KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
               KOULUTUSTYYPPI.ERIKOISLAAKARI,
               KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,

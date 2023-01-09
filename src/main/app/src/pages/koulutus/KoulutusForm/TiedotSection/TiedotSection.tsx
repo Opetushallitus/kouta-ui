@@ -23,7 +23,7 @@ import {
   KoulutusalaKoodi,
   OPETTAJA_KOULUTUSTYYPIT,
   OpintojenLaajuusyksikko,
-  TAITEIDEN_PERUSOPETUS_KOULUTUS_KOODIURI,
+  TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI,
 } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -172,7 +172,7 @@ export const AikuistenPerusopetusTiedotSection = ({
   );
 };
 
-export const TaiteidenPerusopetusTiedotSection = ({
+export const TaiteenPerusopetusTiedotSection = ({
   disabled,
   language,
   name,
@@ -181,13 +181,13 @@ export const TaiteidenPerusopetusTiedotSection = ({
 
   useNimiFromFixedKoulutusKoodi({
     nimiFieldName: `${name}.nimi`,
-    koodiUri: TAITEIDEN_PERUSOPETUS_KOULUTUS_KOODIURI,
+    koodiUri: TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI,
   });
 
   return (
     <VerticalBox gap={2}>
       <EnforcedKoulutusSelect
-        value={{ value: TAITEIDEN_PERUSOPETUS_KOULUTUS_KOODIURI }}
+        value={{ value: TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI }}
       />
       <Field
         disabled={disabled}

@@ -28,7 +28,7 @@ const useChangeHakukohteidenTila = () => {
       console.log(map('oid', hakukohteet));
       console.log('tilaksi:');
       console.log(tila);
-      const result = await httpClient.put(
+      const result = await httpClient.post(
         apiUrls.url('kouta-backend.hakukohteet-tilamuutos'),
         map('oid', hakukohteet)
       );

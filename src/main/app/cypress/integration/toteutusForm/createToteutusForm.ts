@@ -916,6 +916,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('taiteen-perusopetus');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTaiteenPerusopetusTiedotSection();

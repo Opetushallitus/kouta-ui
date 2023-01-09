@@ -284,6 +284,25 @@ const fillDIATiedotSection = () => {
   });
 };
 
+const fillTaiteenPerusopetusTiedotSection = () => {
+  withinSection('tiedot', () => {
+    getByTestId('toteutuksenNimi')
+      .find('input')
+      .clear()
+      .pipe(paste('toteutuksen nimi'));
+
+    getRadio('range').click({ force: true });
+    getByTestId('laajuusMin').find('input').pipe(paste('10'));
+    getByTestId('laajuusMax').find('input').pipe(paste('20'));
+
+    getByTestId('laajuusyksikko').pipe(pFillSelect('opintopistettä'));
+    getByTestId('taiteenalatSelect').within(() => {
+      fillAsyncSelect('Sirkustaide');
+      fillAsyncSelect('Sanataide');
+    });
+  });
+};
+
 const fillYhteystiedotSection = () => {
   withinSection('yhteyshenkilot', () => {
     fillYhteyshenkilotFields();
@@ -885,6 +904,31 @@ export const createToteutusForm = () => {
 
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
+      fillYhteystiedotSection();
+      fillTilaSection();
+
+      tallenna();
+    })
+  );
+
+  it(
+    'should be able to create "Taiteen perusopetus" -toteutus',
+    mutationTest(() => {
+      prepareTest('taiteen-perusopetus');
+
+      fillPohjaSection();
+      fillKieliversiotSection();
+      fillTaiteenPerusopetusTiedotSection();
+
+      fillKuvausSection();
+
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
+
+      fillNayttamistiedotSection({ ammattinimikkeet: false });
+      fillJarjestajatSection();
+      fillHakeutumisTaiIlmoittautumistapaSection();
       fillYhteystiedotSection();
       fillTilaSection();
 

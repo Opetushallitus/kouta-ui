@@ -95,9 +95,12 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm-tutkinnon-osa",
@@ -224,6 +227,8 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -237,6 +242,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       }
     ],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm",
@@ -372,9 +378,12 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "yo",
@@ -539,6 +548,8 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [
@@ -555,6 +566,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         }
       }
     ],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "lk",
@@ -687,6 +699,8 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -700,6 +714,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       }
     ],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm",
@@ -835,9 +850,12 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "yo",
@@ -987,9 +1005,12 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "lk",
@@ -1126,6 +1147,8 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -1139,6 +1162,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       }
     ],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm-tutkinnon-osa",
@@ -1262,9 +1286,12 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "tuva",
@@ -1398,9 +1425,12 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "tuva",
@@ -1524,9 +1554,12 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "telma",
@@ -1660,9 +1693,12 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "telma",
@@ -1797,9 +1833,12 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "vapaa-sivistystyo-muu",
@@ -1921,9 +1960,12 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "vapaa-sivistystyo-opistovuosi",
@@ -2057,6 +2099,8 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -2070,6 +2114,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       }
     ],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm",
@@ -2147,6 +2192,8 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope ja opot
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
@@ -2208,6 +2255,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope ja opot
     },
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tyyppi": "yo",
     "yhteyshenkilot": [
@@ -2342,9 +2390,12 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm-ope-erityisope-ja-opo",
@@ -2477,9 +2528,12 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm-muu",
@@ -2612,9 +2666,12 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "aikuisten-perusopetus",
@@ -2750,9 +2807,12 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "amm-muu",
@@ -2890,9 +2950,12 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "aikuisten-perusopetus",
@@ -3036,9 +3099,12 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "kk-opintojakso",
@@ -3190,9 +3256,12 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "lk",
@@ -3342,9 +3411,12 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": null,
     "tyyppi": "lk",
@@ -3488,12 +3560,156 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
     },
     "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
     "opintojenLaajuusNumero": 10,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalat": [],
     "painotukset": [],
+    "taiteenalaKoodiUrit": [],
     "toteutusjaksot": [],
     "tunniste": "ABC-123",
     "tyyppi": "kk-opintokokonaisuus",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähköposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "http://verkkosivu"
+        }
+      }
+    ]
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "toteutuksen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "tila": "julkaistu"
+};
+
+exports[`createToteutus > should be able to create "Taiteen perusopetus" -toteutus #0`] =
+{
+  "esikatselu": true,
+  "externalId": null,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "aloituspaikat": null,
+    "ammattinimikkeet": [],
+    "asiasanat": [
+      {
+        "arvo": "avainsana",
+        "kieli": "fi"
+      }
+    ],
+    "diplomit": [],
+    "erityisetKoulutustehtavat": [],
+    "hakuaika": {
+      "alkaa": "2050-04-01T00:00",
+      "paattyy": "2050-09-01T00:00"
+    },
+    "hakulomakeLinkki": {
+      "fi": "http://example.com"
+    },
+    "hakulomaketyyppi": "muu",
+    "hakutermi": "hakeutuminen",
+    "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
+    "kielivalikoima": {
+      "A1Kielet": [],
+      "A2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
+    "kuvaus": {
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
+    "lisatietoaHakeutumisesta": {
+      "fi": "<p>lisätiedot</p>"
+    },
+    "lisatietoaValintaperusteista": {
+      "fi": "<p>lisätiedot valintaperusteista</p>"
+    },
+    "opetus": {
+      "apuraha": null,
+      "koulutuksenAlkamiskausi": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+          "teksti": {
+            "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "<p>maksullisuus kuvaus</p>"
+      },
+      "maksullisuustyyppi": "maksullinen",
+      "maksunMaara": 10,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_1#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "<p>opetusaika kuvaus</p>"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "<p>opetuskieli kuvaus</p>"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_1#2"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_1#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "<p>opetustapa kuvaus</p>"
+      },
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "<p>suunniteltu kesto kuvaus</p>"
+      },
+      "suunniteltuKestoVuodet": 2
+    },
+    "opinnonTyyppiKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMax": 20,
+    "opintojenLaajuusNumeroMin": 10,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "osaamisalat": [],
+    "painotukset": [],
+    "taiteenalaKoodiUrit": [
+      "taiteenperusopetustaiteenala_sirkustaide#1",
+      "taiteenperusopetustaiteenala_sanataide#1"
+    ],
+    "toteutusjaksot": [],
+    "tunniste": null,
+    "tyyppi": "taiteen-perusopetus",
     "yhteyshenkilot": [
       {
         "nimi": {

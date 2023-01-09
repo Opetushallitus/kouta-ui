@@ -28,9 +28,16 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         },
         aloituspaikat: '56',
         opintojenLaajuusNumero: '252',
+        laajuusNumeroTyyppi: 'single',
+        opintojenLaajuusNumeroMin: 300,
+        opintojenLaajuusNumeroMax: 300,
         opintojenLaajuusyksikko: { value: 'laajuus_1#1' },
         jarjestetaanErityisopetuksena: false,
         ammatillinenPerustutkintoErityisopetuksena: false,
+        taiteenalat: [
+          { value: 'taiteenperusopetustaiteenala_sirkustaide' },
+          { value: 'taiteenperusopetustaiteenala_sanataide' },
+        ],
       },
       kuvaus: {
         fi: parseEditorState('Fi toteutuksenkuvaus'),

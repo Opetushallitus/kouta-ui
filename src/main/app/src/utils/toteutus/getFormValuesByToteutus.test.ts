@@ -187,6 +187,8 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         },
       ],
       opintojenLaajuusNumero: 25,
+      opintojenLaajuusNumeroMin: 30,
+      opintojenLaajuusNumeroMax: 35,
       opintojenLaajuusyksikkoKoodiUri: 'laajuus_1#1',
       ilmoittautumislinkki: {
         fi: 'Fi linkki',
@@ -271,6 +273,10 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
             },
           ],
         },
+      ],
+      taiteenalaKoodiUrit: [
+        'taiteenperusopetustaiteenala_sirkustaide',
+        'taiteenperusopetustaiteenala_sanataide',
       ],
     },
     nimi: {

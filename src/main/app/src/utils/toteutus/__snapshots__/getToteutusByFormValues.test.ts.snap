@@ -11,9 +11,9 @@ Object {
   "metadata": Object {
     "aloituspaikat": 56,
     "aloituspaikkakuvaus": Object {
-        "fi": "<p>aloituspaikan kuvaus fi</p>",
-        "sv": "<p>aloituspaikan kuvaus sv</p>",
-     },
+      "fi": "<p>aloituspaikan kuvaus fi</p>",
+      "sv": "<p>aloituspaikan kuvaus sv</p>",
+    },
     "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": Array [
       Object {

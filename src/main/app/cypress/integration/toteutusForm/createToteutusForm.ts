@@ -283,7 +283,7 @@ const fillDIATiedotSection = () => {
   });
 };
 
-const fillTaiteidenPerusopetusTiedotSection = () => {
+const fillTaiteenPerusopetusTiedotSection = () => {
   withinSection('tiedot', () => {
     getByTestId('toteutuksenNimi')
       .find('input')
@@ -894,13 +894,13 @@ export const createToteutusForm = () => {
   );
 
   it(
-    'should be able to create "Taiteiden perusopetus" -toteutus',
+    'should be able to create "Taiteen perusopetus" -toteutus',
     mutationTest(() => {
-      prepareTest('taiteiden-perusopetus');
+      prepareTest('taiteen-perusopetus');
 
       fillPohjaSection();
       fillKieliversiotSection();
-      fillTaiteidenPerusopetusTiedotSection();
+      fillTaiteenPerusopetusTiedotSection();
 
       fillKuvausSection();
 

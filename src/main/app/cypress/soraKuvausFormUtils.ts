@@ -1,6 +1,7 @@
 import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
@@ -21,6 +22,14 @@ export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
         }),
       ],
     }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/kouta-backend/organisaatio/hierarkia**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
   );
 
   cy.intercept({ method: 'GET', url: '**/sorakuvaus/list**' }, { body: [] });

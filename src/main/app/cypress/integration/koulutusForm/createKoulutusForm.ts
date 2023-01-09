@@ -767,6 +767,7 @@ export const createKoulutusForm = () => {
       fillCommon({
         koulutustyyppiPath: ['korkeakoulutus', 'erikoistumiskoulutus'],
       });
+      fillOrgSection(organisaatioOid);
 
       withinSection('information', () => {
         getSelectByLabel('koulutuslomake.valitseErikoistumiskoulutus').pipe(

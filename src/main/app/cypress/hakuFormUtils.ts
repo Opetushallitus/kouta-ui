@@ -2,6 +2,7 @@ import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import hakuMocks from '#/cypress/mocks/haku.mocks.json';
 
 import {
@@ -9,7 +10,6 @@ import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
 } from './utils';
-import organisaatioHierarkia from "#/cypress/data/organisaatioHierarkia";
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
@@ -18,7 +18,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**oid=${organisaatioOid}**`,
+      url: `**/kouta-backend/organisaatio/hierarkia**oid=${organisaatioOid}**`,
     },
     { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
   );
@@ -26,20 +26,22 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     {
       method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
+      url: `**/kouta-backend/organisaatio/hierarkia/**`,
     },
     { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
   );
 
   cy.intercept(
     {
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+      method: 'POST',
+      url: `**/kouta-backend/organisaatio/${organisaatioOid}`,
     },
     {
-      body: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
     }
   );
 

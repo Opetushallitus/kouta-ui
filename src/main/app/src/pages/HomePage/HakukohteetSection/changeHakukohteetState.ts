@@ -10,9 +10,6 @@ import { map } from '#/src/utils/lodashFpUncapped';
 type HakukohdeTilaChangeResponseItem = {
   oid: string;
   status: 'success' | 'error';
-  created: {
-    hakukohdeOid?: string;
-  };
 };
 
 type HakukohteetTilaChangeResponseData = Array<HakukohdeTilaChangeResponseItem>;
@@ -21,16 +18,19 @@ const useChangeHakukohteidenTila = () => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
   const { tila } = useHakukohdeTila();
+
   return useCallback(
     async (hakukohteet: Array<string>) => {
-      console.log('Vaihdetaan hakukohteiden:');
-      console.log(hakukohteet);
-      console.log(map('oid', hakukohteet));
-      console.log('tilaksi:');
-      console.log(tila?.value);
+      const lastModified = new Date().toUTCString();
+
       const result = await httpClient.post(
         apiUrls.url('kouta-backend.hakukohteet-tilamuutos', tila?.value),
-        map('oid', hakukohteet)
+        map('oid', hakukohteet),
+        {
+          headers: {
+            'X-If-Unmodified-Since': lastModified,
+          },
+        }
       );
       return result.data as HakukohteetTilaChangeResponseData;
     },

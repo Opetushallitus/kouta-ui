@@ -13,6 +13,7 @@ import Modal from '#/src/components/Modal';
 import { Box, Button, Icon } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import { useEntitySelection } from './useEntitySelection';
@@ -116,12 +117,15 @@ export const StateChangeResultModal = ({
 
   const { removeSelection } = useEntitySelection(entityType);
 
+  const { setHakukohdeTila } = useHakukohdeTila();
+
   const onClose = useCallback(() => {
     if (isStateChangeResultSuccessful(mutationResult)) {
       removeSelection();
     }
+    setHakukohdeTila(null);
     mutationResult.reset();
-  }, [mutationResult, removeSelection]);
+  }, [mutationResult, removeSelection, setHakukohdeTila]);
 
   const data = usePreviousNonNil(mutationResult.data);
 

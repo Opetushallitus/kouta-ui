@@ -9,6 +9,7 @@ import IconButton from '#/src/components/IconButton';
 import Select from '#/src/components/Select';
 import { Box } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
 import { getThemeProp, spacing } from '#/src/theme';
 
 const ButtonBox = styled(Box)`
@@ -63,6 +64,8 @@ export const EntityListActionBar = ({
 
   const tilaOptions = useTilaOptions(t);
 
+  const { tila } = useHakukohdeTila();
+
   return (
     <ButtonBox display="flex">
       <Box padding={1}>
@@ -76,6 +79,7 @@ export const EntityListActionBar = ({
               options={tilaOptions}
               placeholder={t('yleiset.vaihdaTila')}
               onChange={changeTila}
+              value={tila}
             />
           </Box>
         </>

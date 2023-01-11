@@ -8,7 +8,7 @@ import { createMachine, spawn, actions } from 'xstate';
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import { useNewTila } from '#/src/pages/HomePage/HakukohteetSection';
+import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
 
 import { EntityListTable } from './EntitySearchList';
 import { EntitySelectionMachine } from './entitySelectionMachine';
@@ -122,7 +122,7 @@ export const useFilteredModalSelection = () => {
     state => state.context.selection
   );
 
-  const { tila } = useNewTila();
+  const { tila } = useHakukohdeTila();
 
   const tilaFilteredSelection = Object.values(selection).filter(
     hakukohde => hakukohde?.tila !== tila?.value
@@ -182,7 +182,7 @@ export const StateChangeConfirmationModal = ({
 
   const selection = useFilteredModalSelection();
 
-  const { tila } = useNewTila();
+  const { tila } = useHakukohdeTila();
 
   const onConfirm = useCallback(() => {
     onStateChangeSelection(selection);

@@ -36,11 +36,11 @@ const { HAKUKOHDE } = ENTITY;
 
 const useTilaState = createGlobalState(null);
 
-export const useNewTila = () => {
-  const [newTila, setNewTila] = useTilaState();
+export const useHakukohdeTila = () => {
+  const [hakukohdeTila, setHakukohdeTila] = useTilaState();
   return {
-    tila: newTila,
-    setNewTila: tila => setNewTila(tila),
+    tila: hakukohdeTila,
+    setHakukohdeTila: tila => setHakukohdeTila(tila),
   };
 };
 
@@ -48,16 +48,16 @@ const HakukohdeActionBar = () => {
   const { selection, removeSelection } = useEntitySelection(HAKUKOHDE);
 
   const { openModal } = useStateChangeConfirmationModal();
-  const { setNewTila } = useNewTila();
+  const { setHakukohdeTila } = useHakukohdeTila();
 
   const changeTila = useCallback(
     tila => {
       if (tila !== null && !_fp.isEmpty(selection)) {
-        setNewTila(tila);
+        setHakukohdeTila(tila);
         return openModal();
       }
     },
-    [selection, openModal, setNewTila]
+    [selection, openModal, setHakukohdeTila]
   );
   return (
     <EntityListActionBar
@@ -132,7 +132,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
       />
       <StateChangeResultModal
         entityType={HAKUKOHDE}
-        headerText={t('etusivu.kopioinninTuloksetOtsikko')}
+        headerText={t('etusivu.tilamuutosTuloksetOtsikko')}
         mutationResult={changeHakukohteetTilaMutation}
         getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
       />

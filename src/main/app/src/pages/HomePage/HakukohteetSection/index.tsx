@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { createGlobalState } from 'react-use';
 
 import Button from '#/src/components/Button';
-import { ENTITY, ICONS } from '#/src/constants';
+import { CRUD_ROLES, ENTITY, ICONS } from '#/src/constants';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useModal from '#/src/hooks/useModal';
 import { hakukohdeService } from '#/src/machines/filterMachines';
@@ -17,6 +18,7 @@ import {
   StateChangeConfirmationWrapper,
   useStateChangeConfirmationModal,
 } from '#/src/pages/HomePage/StateChangeConfirmationModal';
+import { StateChangeResultModal } from '#/src/pages/HomePage/StateChangeResultModal';
 import {
   SERVICE_BY_ENTITY,
   useEntitySelection,
@@ -43,8 +45,6 @@ export const useNewTila = () => {
 };
 
 const HakukohdeActionBar = () => {
-  const isOphVirkailija = useIsOphVirkailija();
-
   const { selection, removeSelection } = useEntitySelection(HAKUKOHDE);
 
   const { openModal } = useStateChangeConfirmationModal();
@@ -59,7 +59,7 @@ const HakukohdeActionBar = () => {
     },
     [selection, openModal, setNewTila]
   );
-  return isOphVirkailija ? (
+  return (
     <EntityListActionBar
       entityType={HAKUKOHDE}
       selection={selection}
@@ -67,7 +67,7 @@ const HakukohdeActionBar = () => {
       copyEntities={undefined}
       changeTila={changeTila}
     />
-  ) : null;
+  );
 };
 
 const Actions = ({ organisaatioOid }) => {
@@ -86,8 +86,21 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
+export const createGetHakukohdeLinkUrl = organisaatioOid => oid =>
+  `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`;
+
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
+
+  const isOphVirkailija = useIsOphVirkailija();
+
+  const canEditHakukohde = useCurrentUserHasRole(
+    ENTITY.HAKUKOHDE,
+    CRUD_ROLES.UPDATE,
+    organisaatioOid
+  );
+
+  const showTilaActionBar = isOphVirkailija || canEditHakukohde;
 
   const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[HAKUKOHDE]);
 
@@ -117,6 +130,12 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
         headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}
       />
+      <StateChangeResultModal
+        entityType={HAKUKOHDE}
+        headerText={t('etusivu.kopioinninTuloksetOtsikko')}
+        mutationResult={changeHakukohteetTilaMutation}
+        getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
+      />
       <NavigationAnchor id="hakukohteet" />
       <ListCollapse
         icon={ICONS[HAKUKOHDE]}
@@ -127,7 +146,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
         defaultOpen
       >
         <EntitySearchList
-          ActionBar={HakukohdeActionBar}
+          ActionBar={showTilaActionBar ? HakukohdeActionBar : undefined}
           searchEntities={searchHakukohteet}
           organisaatioOid={organisaatioOid}
           entityType={HAKUKOHDE}

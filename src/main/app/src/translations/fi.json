@@ -422,7 +422,9 @@
     "kopioinninTuloksetOtsikko": "Kopioinnin tulokset",
     "alkuperainen": "Alkuperäinen",
     "kopio": "Kopio",
+    "tilamuutos": "Uusi tila",
     "kopiointiEpaonnistui": "Kopiointi epäonnistui!",
+    "tilanmuutosEpaonnistui": "Hakukohteiden tilanvaihto epäonnistui!",
     "toteutus": {
       "valitut_zero": "Ei toteutuksia valittu",
       "valitut": "1 toteutus valittu",

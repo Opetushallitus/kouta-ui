@@ -263,6 +263,8 @@ Object {
       "sv": "Sv linkki",
     },
     "isAvoinKorkeakoulutus": false,
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "nimi": Object {
       "fi": "Fi nimi",

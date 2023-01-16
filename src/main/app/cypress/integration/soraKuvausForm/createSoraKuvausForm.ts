@@ -15,6 +15,8 @@ import {
   fillKoulutustyyppiSelect,
   fillAsyncSelect,
   wrapMutationTest,
+  fillPohjaSectionCopyingValuesFrom,
+  tilaShouldBe,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -76,4 +78,9 @@ export const createSoraKuvausForm = () => {
       );
     })
   );
+
+  it('using an existing object as baseline it should not copy publishing state', () => {
+    fillPohjaSectionCopyingValuesFrom('Sorakuvauksen nimi');
+    tilaShouldBe('tallennettu');
+  });
 };

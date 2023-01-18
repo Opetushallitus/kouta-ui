@@ -8,6 +8,7 @@ import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
+  koutaSearchItem,
 } from './utils';
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
@@ -28,7 +29,19 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
     }
   );
 
-  cy.intercept({ method: 'GET', url: '**/haku/list**' }, { body: [] });
+  const hakuItem = merge(koutaSearchItem(), {
+    nimi: {
+      fi: 'Korkeakoulujen yhteishaku',
+    },
+    tila: 'julkaistu',
+  });
+
+  cy.intercept({ method: 'GET', url: '**/haku/list**' }, { body: [hakuItem] });
+
+  cy.intercept(
+    { method: 'GET', url: '**/haku/1.1.1.1.1.1' },
+    { body: hakuItem }
+  );
 
   cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
 

@@ -27,6 +27,8 @@ import {
   getInputByLabel,
   getSelectByLabel,
   pFillSelect,
+  fillPohjaSectionCopyingValuesFrom,
+  tilaShouldBe,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -917,4 +919,10 @@ export const createToteutusForm = () => {
       tallenna();
     })
   );
+
+  it('using an existing object as baseline it should not copy publishing state', () => {
+    prepareTest('yo');
+    fillPohjaSectionCopyingValuesFrom('Testitoteutus 1');
+    tilaShouldBe('tallennettu');
+  });
 };

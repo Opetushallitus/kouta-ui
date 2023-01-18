@@ -17,6 +17,8 @@ import {
   tallenna,
   fillKoulutustyyppiSelect,
   wrapMutationTest,
+  fillPohjaSectionCopyingValuesFrom,
+  tilaShouldBe,
 } from '#/cypress/utils';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 import { ENTITY } from '#/src/constants';
@@ -184,4 +186,12 @@ export const createValintaperusteForm = () => {
       );
     })
   );
+
+  it('using an existing object as baseline it should not copy publishing state', () => {
+    fillPohjaSectionCopyingValuesFrom('Valintaperusteen nimi');
+    fillPerustiedotSection();
+    fillHakukelpoisuusSection();
+    fillKuvausSection();
+    tilaShouldBe('tallennettu');
+  });
 };

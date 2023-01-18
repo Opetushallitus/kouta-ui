@@ -9,7 +9,12 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
+import {
+  POHJAVALINTA,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
 
@@ -30,6 +35,7 @@ const getInitialValues = (soraKuvaus, kieliValinnat) => {
     ? {
         ...getCopyValues(soraKuvaus.id),
         ...getFormValuesBySoraKuvaus(soraKuvaus),
+        tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues(kieliValinnatLista);
 };

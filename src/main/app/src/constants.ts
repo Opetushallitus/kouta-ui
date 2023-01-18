@@ -44,6 +44,7 @@ export enum KOULUTUSTYYPPI {
   VAPAA_SIVISTYSTYO_OPISTOVUOSI = 'vapaa-sivistystyo-opistovuosi',
   VAPAA_SIVISTYSTYO_MUU = 'vapaa-sivistystyo-muu',
   AIKUISTEN_PERUSOPETUS = 'aikuisten-perusopetus',
+  TAITEEN_PERUSOPETUS = 'taiteen-perusopetus',
   KORKEAKOULUTUS_OPINTOJAKSO = 'kk-opintojakso',
   ERIKOISLAAKARI = 'erikoislaakari',
   KORKEAKOULUTUS_OPINTOKOKONAISUUS = 'kk-opintokokonaisuus',
@@ -148,6 +149,7 @@ export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
   },
   { value: KOULUTUSTYYPPI.TUVA },
   { value: KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS },
+  { value: KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS },
 ];
 
 export const OPETTAJA_KOULUTUSTYYPIT = [
@@ -426,6 +428,8 @@ export const LUKIO_YLEISLINJA = 'yleislinja';
 export const KOULUTUS_PERUSOPETUS_KOODIURI = 'koulutus_201101';
 
 export const YO_OPETTAJA_KOULUTUS_KOODIURI = 'koulutus_919999';
+
+export const TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI = 'koulutus_999907';
 
 export type Koulutustyyppi = ValueOf<KOULUTUSTYYPPI>;
 

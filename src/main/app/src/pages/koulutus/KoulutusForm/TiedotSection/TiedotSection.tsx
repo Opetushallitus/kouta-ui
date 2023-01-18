@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import _ from 'lodash';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -22,9 +23,11 @@ import {
   KoulutusalaKoodi,
   OPETTAJA_KOULUTUSTYYPIT,
   OpintojenLaajuusyksikko,
+  TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI,
 } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import useKoodi from '#/src/hooks/useKoodi';
 import { getKoulutustyyppiTranslationKey, getTestIdProps } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -50,6 +53,29 @@ const useNimiFromKoulutustyyppi = ({ name, koulutustyyppi }) => {
       });
     }
   }, [change, currNimi, koulutustyyppiKey, name, t]);
+};
+
+const useNimiFromFixedKoulutusKoodi = ({ nimiFieldName, koodiUri }) => {
+  const byLng = ({ koodiObject, lng }) => {
+    const metadata = koodiObject.metadata;
+    const eqLow = (kieli, lng) => _.toLower(kieli) === lng;
+    const retVal = _.find(metadata, ({ kieli }) => eqLow(kieli, lng))?.nimi;
+    return retVal || _.find(metadata, ({ kieli }) => eqLow(kieli, 'fi'))?.nimi;
+  };
+
+  const { change } = useBoundFormActions();
+  const currNimi = useFieldValue(nimiFieldName);
+  const koulutusKoodi = useKoodi(koodiUri)?.koodi;
+
+  useEffect(() => {
+    if (_fp.isUndefined(currNimi) && koulutusKoodi) {
+      change(nimiFieldName, {
+        fi: byLng({ koodiObject: koulutusKoodi, lng: 'fi' }),
+        sv: byLng({ koodiObject: koulutusKoodi, lng: 'sv' }),
+        en: byLng({ koodiObject: koulutusKoodi, lng: 'en' }),
+      });
+    }
+  }, [change, currNimi, nimiFieldName, koulutusKoodi]);
 };
 
 const NimiFieldFromKoulutustyyppi = ({ name, koulutustyyppi, language }) => {
@@ -141,6 +167,35 @@ export const AikuistenPerusopetusTiedotSection = ({
         koulutustyyppi={koulutustyyppi}
         name={name}
         language={language}
+      />
+    </VerticalBox>
+  );
+};
+
+export const TaiteenPerusopetusTiedotSection = ({
+  disabled,
+  language,
+  name,
+}) => {
+  const { t } = useTranslation();
+
+  useNimiFromFixedKoulutusKoodi({
+    nimiFieldName: `${name}.nimi`,
+    koodiUri: TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI,
+  });
+
+  return (
+    <VerticalBox gap={2}>
+      <EnforcedKoulutusSelect
+        value={{ value: TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI }}
+      />
+      <Field
+        disabled={disabled}
+        name={`${name}.nimi.${language}`}
+        component={FormFieldInput}
+        label={t('koulutuslomake.koulutuksenNimi')}
+        helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
+        required
       />
     </VerticalBox>
   );

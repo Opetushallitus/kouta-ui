@@ -64,6 +64,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
 
   const apurahaMin = values?.jarjestamistiedot?.apurahaMin;
   const apurahaMax = values?.jarjestamistiedot?.apurahaMax;
+
+  const isLaajuusRange =
+    values?.tiedot?.laajuusNumeroTyyppi === MaaraTyyppi.VAIHTELUVALI;
+
   return {
     organisaatioOid: values?.organisaatioOid?.value,
     externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
@@ -217,6 +221,12 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       opintojenLaajuusNumero: maybeParseNumber(
         values?.tiedot?.opintojenLaajuusNumero
       ),
+      opintojenLaajuusNumeroMin: maybeParseNumber(
+        values?.tiedot?.opintojenLaajuusNumeroMin
+      ),
+      opintojenLaajuusNumeroMax: isLaajuusRange
+        ? maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMax)
+        : maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMin),
       ilmoittautumislinkki: pickTranslations(
         values?.tiedot?.ilmoittautumislinkki
       ),
@@ -270,6 +280,9 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       isAvoinKorkeakoulutus: values?.tiedot?.isAvoinKorkeakoulutus || false,
       tunniste: values?.tiedot?.tunniste || null,
       opinnonTyyppiKoodiUri: values?.tiedot?.opinnonTyyppi?.value || null,
+      taiteenalaKoodiUrit: (values?.tiedot?.taiteenalat ?? []).map(
+        _fp.prop('value')
+      ),
     },
   };
 };

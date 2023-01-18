@@ -373,6 +373,7 @@
     "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
     "vapaaSivistystyoMuu": "Muu",
     "aikuistenPerusopetus": "Aikuisten perusopetus",
+    "taiteenPerusopetus": "Taiteen perusopetus",
     "kkOpintojakso": "Opintojakso",
     "erikoislaakari": "Erikoislääkärikoulutukset",
     "kkOpintokokonaisuus": "Opintokokonaisuus"
@@ -601,7 +602,8 @@
     "lisaaOpintojakso": "Lisää opintojakso",
     "muokkaaOpintojaksoa": "Muokkaa opintojaksoa",
     "isTaydennyskoulutus": "Koulutus on täydennyskoulutusta",
-    "isTyovoimakoulutus": "Koulutus on työvoimakoulutusta"
+    "isTyovoimakoulutus": "Koulutus on työvoimakoulutusta",
+    "valitseTaiteenalat": "Valitse taiteenalat"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

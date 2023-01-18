@@ -192,6 +192,8 @@ Object {
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": 252,
+    "opintojenLaajuusNumeroMax": 300,
+    "opintojenLaajuusNumeroMin": 300,
     "opintojenLaajuusyksikkoKoodiUri": "laajuus_1#1",
     "osaamisalat": Array [
       Object {
@@ -232,6 +234,10 @@ Object {
           "sv": "<p>Sv painotus 2 kuvaus</p>",
         },
       },
+    ],
+    "taiteenalaKoodiUrit": Array [
+      "taiteenperusopetustaiteenala_sirkustaide",
+      "taiteenperusopetustaiteenala_sanataide",
     ],
     "toteutusjaksot": Array [
       Object {

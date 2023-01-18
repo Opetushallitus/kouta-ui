@@ -68,6 +68,9 @@ export type ToteutusFormValues = {
     jarjestetaanErityisopetuksena: boolean;
     opintojenLaajuusyksikko?: SelectOption;
     opintojenLaajuusNumero: string;
+    opintojenLaajuusNumeroMin?: string;
+    opintojenLaajuusNumeroMax?: string;
+    laajuusNumeroTyyppi?: MaaraTyyppi;
     ilmoittautumislinkki: TranslatedField<string>;
     aloituspaikat: string;
     hasJotpaRahoitus: boolean;
@@ -76,6 +79,7 @@ export type ToteutusFormValues = {
     isAvoinKorkeakoulutus?: boolean;
     tunniste?: string;
     opinnonTyyppi?: SelectOption;
+    taiteenalat?: SelectOptions;
   };
   opintojaksojenLiittaminen?: {
     opintojaksot: Array<{ opintojakso: SelectOption }>;

@@ -188,7 +188,7 @@ export const TaiteenperusopetusTiedotSection = ({
       <NimiSection name={name} language={language} />
       <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
       <TaiteenalatField name={name} disabled={disabled} />
-      <JotpaSection name={name} />
+      <CommonTiedotFields name={name} />
     </VerticalBox>
   );
 };

@@ -119,4 +119,11 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       errorKey: `validointivirheet.${errorType}`,
     };
   }
+
+  if (errorType === 'cannotRemoveTarjoajaFromAvoinKorkeakoulutus') {
+    return {
+      field: 'tarjoajat.tarjoajat',
+      errorKey: `validointivirheet.${errorType}`,
+    };
+  }
 };

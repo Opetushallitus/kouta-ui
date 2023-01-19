@@ -1,17 +1,17 @@
 import React from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash/fp';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { match } from 'ts-pattern';
 
 import EditButton from '#/src/components/EditButton';
 import { Typography, Box } from '#/src/components/virkailija';
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { getThemeProp } from '#/src/theme';
-import { otherwise } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
@@ -29,11 +29,16 @@ export const SelectedOrganisaatioBox = ({ organisaatioOid }) => {
 
   const tyypit = getOrganisaatioTyypit(organisaatio);
 
-  const orgEntityType = _fp.cond([
-    [_fp.includes(ORGANISAATIOTYYPPI.OPPILAITOS), () => 'oppilaitos'],
-    [_fp.includes(ORGANISAATIOTYYPPI.TOIMIPISTE), () => 'oppilaitoksen-osa'],
-    [otherwise, () => undefined],
-  ])(tyypit);
+  const orgEntityType = match(tyypit)
+    .when(
+      t => _.includes(t, ORGANISAATIOTYYPPI.OPPILAITOS),
+      () => 'oppilaitos'
+    )
+    .when(
+      t => _.includes(t, ORGANISAATIOTYYPPI.TOIMIPISTE),
+      () => 'oppilaitoksen-osa'
+    )
+    .otherwise(() => undefined);
 
   return (
     <StyledBlueBox>

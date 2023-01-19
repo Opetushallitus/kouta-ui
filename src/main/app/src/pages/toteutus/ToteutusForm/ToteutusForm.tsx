@@ -2,6 +2,7 @@ import React from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { match } from 'ts-pattern';
 
 import Button from '#/src/components/Button';
 import FormCollapse from '#/src/components/FormCollapse';
@@ -26,7 +27,7 @@ import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
-import { getTestIdProps, isIn, otherwise } from '#/src/utils';
+import { getTestIdProps } from '#/src/utils';
 import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
@@ -170,63 +171,67 @@ const ToteutusForm = ({
           section="tiedot"
           header={t('toteutuslomake.toteutuksenTiedot')}
           languages={languages}
-          Component={_fp.cond([
-            [_fp.isEqual(KOULUTUSTYYPPI.TUVA), () => TuvaTiedotSection],
-            [_fp.isEqual(KOULUTUSTYYPPI.TELMA), () => TelmaTiedotSection],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
-              () => AikuistenperusopetusTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS),
-              () => TaiteenperusopetusTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS),
-              () => AmmMuuTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI),
-              () => VapaaSivistystyoOpistovuosiTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU),
-              () => VapaaSivistystyoMuuTiedotSection,
-            ],
-            [
-              isIn([KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA]),
-              () => TutkinnonOsaTiedotSection,
-            ],
-            [
-              isIn([
-                KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
-                KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
-              ]),
-              () => OpettajaTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
-              () => KkOpintojaksoTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS),
-              () => KkOpintokokonaisuusTiedotSection,
-            ],
-            [
-              _fp.isEqual(KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS),
-              () => ErikoistumiskoulutusTiedotSection,
-            ],
-            [
-              tyyppi =>
-                _fp.isEqual(KOULUTUSTYYPPI.LUKIOKOULUTUS, tyyppi) &&
+          Component={match(koulutustyyppi)
+            .with(KOULUTUSTYYPPI.TUVA, () => TuvaTiedotSection)
+            .with(KOULUTUSTYYPPI.TELMA, () => TelmaTiedotSection)
+            .with(
+              KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+              () => AikuistenperusopetusTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
+              () => TaiteenperusopetusTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+              () => AmmMuuTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+              () => VapaaSivistystyoOpistovuosiTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              () => VapaaSivistystyoMuuTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.TUTKINNON_OSA,
+              KOULUTUSTYYPPI.OSAAMISALA,
+              () => TutkinnonOsaTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+              KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
+              () => OpettajaTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+              () => KkOpintojaksoTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+              () => KkOpintokokonaisuusTiedotSection
+            )
+            .with(
+              KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+              () => ErikoistumiskoulutusTiedotSection
+            )
+            .when(
+              kt =>
+                kt === KOULUTUSTYYPPI.LUKIOKOULUTUS &&
                 !isDIAkoulutus &&
                 !isEBkoulutus,
-              () => LukioTiedotSection,
-            ],
-            [_fp.constant(isDIAkoulutus), () => DIATiedotSection],
-            [_fp.constant(isEBkoulutus), () => EBTiedotSection],
-            [otherwise, () => TutkintoonJohtavaTiedotSection],
-          ])(koulutustyyppi)}
+              () => LukioTiedotSection
+            )
+            .when(
+              () => isDIAkoulutus,
+              () => DIATiedotSection
+            )
+            .when(
+              () => isEBkoulutus,
+              () => EBTiedotSection
+            )
+            .otherwise(() => TutkintoonJohtavaTiedotSection)}
           koulutustyyppi={koulutustyyppi}
           koulutus={koulutus}
         />

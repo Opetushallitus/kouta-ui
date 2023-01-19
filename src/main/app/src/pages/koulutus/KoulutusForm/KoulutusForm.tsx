@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { match } from 'ts-pattern';
 
 import Button from '#/src/components/Button';
 import FormCollapse from '#/src/components/FormCollapse';
@@ -30,7 +31,7 @@ import {
 } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
-import { getTestIdProps, isIn, otherwise } from '#/src/utils';
+import { getTestIdProps } from '#/src/utils';
 import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
@@ -54,6 +55,7 @@ import {
   ErikoislaakariTiedotSection,
   ErikoistumisKoulutusTiedotSection,
   TaiteenPerusopetusTiedotSection,
+  MuuMuuTiedotSection,
 } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -160,48 +162,43 @@ export const KoulutusForm = ({
               <FormCollapse
                 section="information"
                 header={t('koulutuslomake.koulutuksenTiedot')}
-                Component={_fp.cond([
-                  [_fp.isEqual(KOULUTUSTYYPPI.TUVA), () => TuvaTiedotSection],
-                  [_fp.isEqual(KOULUTUSTYYPPI.TELMA), () => TelmaTiedotSection],
-                  [
-                    _fp.isEqual(KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS),
-                    () => AikuistenPerusopetusTiedotSection,
-                  ],
-                  [
-                    _fp.isEqual(KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS),
-                    () => TaiteenPerusopetusTiedotSection,
-                  ],
-                  [
-                    _fp.isEqual(KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI),
-                    () => VapaaSivistystyoOpistovuosiTiedotSection,
-                  ],
-                  [
-                    isIn([
-                      KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-                    ]),
-                    () => MuuTiedotSection,
-                  ],
-                  [
-                    _fp.isEqual(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO),
-                    () => KkOpintojaksoTiedotSection,
-                  ],
-                  [
-                    _fp.isEqual(KOULUTUSTYYPPI.ERIKOISLAAKARI),
-                    () => ErikoislaakariTiedotSection,
-                  ],
-                  [
-                    _fp.isEqual(
-                      KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS
-                    ),
-                    () => KkOpintokokonaisuusTiedotSection,
-                  ],
-                  [
-                    _fp.isEqual(KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS),
-                    () => ErikoistumisKoulutusTiedotSection,
-                  ],
-                  [otherwise, () => TiedotSection],
-                ])(koulutustyyppi)}
+                Component={match(koulutustyyppi)
+                  .with(KOULUTUSTYYPPI.TUVA, () => TuvaTiedotSection)
+                  .with(KOULUTUSTYYPPI.TELMA, () => TelmaTiedotSection)
+                  .with(
+                    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+                    () => AikuistenPerusopetusTiedotSection
+                  )
+                  .with(
+                    KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
+                    () => TaiteenPerusopetusTiedotSection
+                  )
+                  .with(
+                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+                    () => VapaaSivistystyoOpistovuosiTiedotSection
+                  )
+                  .with(
+                    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+                    () => MuuTiedotSection
+                  )
+                  .with(
+                    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+                    () => KkOpintojaksoTiedotSection
+                  )
+                  .with(
+                    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+                    () => KkOpintokokonaisuusTiedotSection
+                  )
+                  .with(
+                    KOULUTUSTYYPPI.ERIKOISLAAKARI,
+                    () => ErikoislaakariTiedotSection
+                  )
+                  .with(
+                    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+                    () => ErikoistumisKoulutusTiedotSection
+                  )
+                  .otherwise(() => TiedotSection)}
                 languages={languageTabs}
                 disabled={onlyTarjoajaRights}
                 koulutustyyppi={koulutustyyppi}

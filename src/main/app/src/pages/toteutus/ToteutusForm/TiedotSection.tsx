@@ -5,7 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
-import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import {
+  FormFieldEditor,
+  FormFieldInput,
+  FormFieldSwitch,
+} from '#/src/components/formFields';
 import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
@@ -44,7 +48,12 @@ const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   );
 };
 
-const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
+const LaajuusJaAloituspaikat = ({
+  name,
+  koulutus,
+  language,
+  laajuusyksikkoKoodiUri,
+}) => {
   const selectedLanguage = useLanguageTab();
   const { t } = useTranslation();
 
@@ -64,6 +73,13 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
           component={FormFieldInput}
           label={t('toteutuslomake.aloituspaikat')}
           type="number"
+        />
+      </Box>
+      <Box ml={2} {...getTestIdProps('aloituspaikkakuvaus')}>
+        <Field
+          name={`${name}.aloituspaikkakuvaus.${language}`}
+          component={FormFieldEditor}
+          label={t('toteutuslomake.aloituspaikkojenKuvaus')}
         />
       </Box>
     </Box>
@@ -119,6 +135,7 @@ export const TuvaTiedotSection = ({
       <NimiSection name={name} language={language} disabled={true} />
       <LaajuusJaAloituspaikat
         name={name}
+        language={language}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
       />
@@ -145,6 +162,7 @@ export const TelmaTiedotSection = ({
       <NimiSection name={name} language={language} disabled={true} />
       <LaajuusJaAloituspaikat
         name={name}
+        language={language}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
       />
@@ -165,6 +183,7 @@ export const AikuistenperusopetusTiedotSection = ({
       <NimiSection name={name} language={language} />
       <LaajuusJaAloituspaikat
         name={name}
+        language={language}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
@@ -290,6 +309,7 @@ export const OpettajaTiedotSection = ({
     <NimiSection name={name} language={language} disabled={disabled} />
     <LaajuusJaAloituspaikat
       name={name}
+      language={language}
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
     />
@@ -306,6 +326,7 @@ export const TutkinnonOsaTiedotSection = ({
     <NimiSection name={name} language={language} disabled={true} />
     <LaajuusJaAloituspaikat
       name={name}
+      language={language}
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />

@@ -195,6 +195,10 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv linkki',
       },
       aloituspaikat: 251,
+      aloituspaikkakuvaus: {
+        fi: '<p>Aloituspaikan kuvaus - fi</p>',
+        sv: '<p>Aloituspaikan kuvaus - sv</p>',
+      },
       suunniteltuKesto: {
         fi: 'Fi kesto',
         sv: 'Sv kesto',

@@ -187,6 +187,7 @@ export const validateToteutusForm = (
         },
         'validointivirheet.positiivinenKokonaisluku'
       ),
+      validateOptionalTranslatedField('tiedot.aloituspaikkakuvaus'),
       validateExistence('lukiolinjat.lukiolinja'),
       validateOptionalTranslatedField('jarjestamistiedot.opetuskieliKuvaus'),
       validateOptionalTranslatedField(

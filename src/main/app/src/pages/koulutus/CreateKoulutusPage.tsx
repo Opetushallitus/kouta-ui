@@ -34,7 +34,9 @@ const getCopyValues = koulutus => ({
 const getInitialValues = koulutus => {
   return koulutus
     ? {
-        ...getFormValuesByKoulutus(_.omit(koulutus, ['tarjoajat'])),
+        ...getFormValuesByKoulutus(
+          _.omit(koulutus, ['tarjoajat', 'organisaatioOid'])
+        ),
         ...getCopyValues(koulutus),
         tila: DEFAULT_JULKAISUTILA,
       }

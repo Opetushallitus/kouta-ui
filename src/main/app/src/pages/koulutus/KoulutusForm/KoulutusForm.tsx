@@ -117,14 +117,6 @@ export const KoulutusForm = ({
             header={t('yleiset.organisaatio')}
           />
         )}
-        {formMode === FormMode.CREATE && (
-          <FormCollapse
-            section="organisaatio"
-            Component={OrganisaatioSectionCreate}
-            header={t('yleiset.organisaatiovalinta')}
-            organisaatioOid={organisaatioOid}
-          />
-        )}
         <FormCollapse
           section="koulutustyyppi"
           header={t('yleiset.koulutustyyppi')}
@@ -144,7 +136,14 @@ export const KoulutusForm = ({
             copyLabel={t('koulutuslomake.kopioiPohjaksi')}
           />
         )}
-
+        {formMode === FormMode.CREATE && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
         <FormCollapse
           section="kieliversiot"
           header={t('yleiset.kieliversiot')}

@@ -90,14 +90,6 @@ const HakuForm = ({
             header={t('yleiset.organisaatio')}
           />
         )}
-        {formMode === FormMode.CREATE && (
-          <FormCollapse
-            section="organisaatio"
-            Component={OrganisaatioSectionCreate}
-            header={t('yleiset.organisaatiovalinta')}
-            organisaatioOid={organisaatioOid}
-          />
-        )}
         {formMode === FormMode.CREATE ? (
           <PohjaFormCollapse
             entityType={ENTITY.HAKU}
@@ -110,6 +102,14 @@ const HakuForm = ({
             getCopyEntities={getHaut(false)}
           />
         ) : null}
+        {formMode === FormMode.CREATE && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
 
         <FormCollapse
           section="kieliversiot"

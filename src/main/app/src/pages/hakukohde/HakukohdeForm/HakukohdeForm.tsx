@@ -56,14 +56,6 @@ export const HakukohdeForm = ({
         />
       )}
       {formMode === FormMode.CREATE && (
-        <FormCollapse
-          section="organisaatio"
-          Component={OrganisaatioSectionCreate}
-          header={t('yleiset.organisaatiovalinta')}
-          organisaatioOid={organisaatioOid}
-        />
-      )}
-      {formMode === FormMode.CREATE && (
         <PohjaFormCollapse
           entityType={ENTITY.HAKUKOHDE}
           scrollOnActive={false}
@@ -71,6 +63,14 @@ export const HakukohdeForm = ({
           infoText={t('hakukohdelomake.pohjavalintaInfo')}
           createLabel={t('yleiset.luoUusiHakukohde')}
           copyLabel={t('hakukohdelomake.kopioiPohjaksi')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
+      {formMode === FormMode.CREATE && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSectionCreate}
+          header={t('yleiset.organisaatiovalinta')}
           organisaatioOid={organisaatioOid}
         />
       )}

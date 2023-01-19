@@ -1226,9 +1226,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
   "koulutusOid": "1.2.1.1.1.1",
   "metadata": {
     "aloituspaikat": 25,
-    "aloituspaikkakuvaus": {
-      "fi": "<p>Aloituspaikkojen kuvaus</p>"
-    },
+    "aloituspaikkakuvaus": {"fi": "<p>Aloituspaikkojen kuvaus</p>"},
     "ammattinimikkeet": [],
     "asiasanat": [
       {
@@ -1500,9 +1498,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
   "koulutusOid": "1.2.1.1.1.1",
   "metadata": {
     "aloituspaikat": 25,
-    "aloituspaikkakuvaus": {
-      "fi": "<p>Aloituspaikkojen kuvaus</p>"
-    },
+    "aloituspaikkakuvaus": {"fi": "<p>Aloituspaikkojen kuvaus</p>"},
     "ammattinimikkeet": [],
     "asiasanat": [
       {
@@ -2476,9 +2472,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
   "koulutusOid": "1.2.1.1.1.1",
   "metadata": {
     "aloituspaikat": 25,
-    "aloituspaikkakuvaus": {
-      "fi": "<p>Aloituspaikkojen kuvaus</p>"
-    },
+    "aloituspaikkakuvaus": {"fi": "<p>Aloituspaikkojen kuvaus</p>"},
     "ammattinimikkeet": [],
     "asiasanat": [
       {
@@ -3521,7 +3515,7 @@ exports[`createToteutus > should be able to create "Taiteen perusopetus" -toteut
   "koulutusOid": "1.2.1.1.1.1",
   "metadata": {
     "aloituspaikat": null,
-    "aloituspaikkakuvaus": {}
+    "aloituspaikkakuvaus": {},
     "ammattinimikkeet": [],
     "asiasanat": [
       {

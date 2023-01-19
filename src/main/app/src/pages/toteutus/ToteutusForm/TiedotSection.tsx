@@ -375,3 +375,17 @@ export const LukioTiedotSection = ({ name }: ToteutusTiedotSectionProps) => {
     </VerticalBox>
   );
 };
+
+export const MuuTiedotSection = ({
+  name,
+  language,
+  disabled,
+}: ToteutusTiedotSectionProps) => {
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} />
+      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <CommonTiedotFields name={name} />
+    </VerticalBox>
+  );
+};

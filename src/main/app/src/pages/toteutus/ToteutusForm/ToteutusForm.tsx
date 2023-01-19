@@ -59,6 +59,7 @@ import {
   VapaaSivistystyoOpistovuosiTiedotSection,
   ErikoistumiskoulutusTiedotSection,
   TaiteenperusopetusTiedotSection,
+  MuuTiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -216,6 +217,7 @@ const ToteutusForm = ({
               KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
               () => ErikoistumiskoulutusTiedotSection
             )
+            .with(KOULUTUSTYYPPI.MUU, () => MuuTiedotSection)
             .when(
               kt =>
                 kt === KOULUTUSTYYPPI.LUKIOKOULUTUS &&

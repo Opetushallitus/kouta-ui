@@ -228,12 +228,33 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
   );
 };
 
-export const MuuTiedotSection = ({ disabled, language, name }) => {
+export const AmmMuuTiedotSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
 
   return (
     <VerticalBox gap={2}>
       <OpintojenLaajuusFieldExtended name={name} disabled={disabled} required />
+      <KoulutusalatField disabled={disabled} name={name} />
+      <Field
+        disabled={disabled}
+        name={`${name}.nimi.${language}`}
+        component={FormFieldInput}
+        label={t('koulutuslomake.koulutuksenNimi')}
+        helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
+        required
+      />
+    </VerticalBox>
+  );
+};
+
+export const VapaaSivistystyoMuuTiedotSection = AmmMuuTiedotSection;
+
+export const MuuTiedotSection = ({ disabled, language, name }) => {
+  const { t } = useTranslation();
+
+  return (
+    <VerticalBox gap={2}>
+      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
         disabled={disabled}

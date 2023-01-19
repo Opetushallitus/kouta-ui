@@ -55,7 +55,8 @@ import {
   ErikoislaakariTiedotSection,
   ErikoistumisKoulutusTiedotSection,
   TaiteenPerusopetusTiedotSection,
-  MuuMuuTiedotSection,
+  AmmMuuTiedotSection,
+  VapaaSivistystyoMuuTiedotSection,
 } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -179,8 +180,11 @@ export const KoulutusForm = ({
                   )
                   .with(
                     KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+                    () => AmmMuuTiedotSection
+                  )
+                  .with(
                     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-                    () => MuuTiedotSection
+                    () => VapaaSivistystyoMuuTiedotSection
                   )
                   .with(
                     KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
@@ -198,6 +202,7 @@ export const KoulutusForm = ({
                     KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
                     () => ErikoistumisKoulutusTiedotSection
                   )
+                  .with(KOULUTUSTYYPPI.MUU, () => MuuTiedotSection)
                   .otherwise(() => TiedotSection)}
                 languages={languageTabs}
                 disabled={onlyTarjoajaRights}

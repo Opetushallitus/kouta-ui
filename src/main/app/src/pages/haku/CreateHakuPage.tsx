@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -25,7 +26,10 @@ const getCopyValues = hakuOid => ({
 
 const getInitialValues = haku => {
   return haku
-    ? { ...getCopyValues(haku.oid), ...getFormValuesByHaku(haku) }
+    ? {
+        ...getCopyValues(haku.oid),
+        ...getFormValuesByHaku(_.omit(haku, ['organisaatioOid'])),
+      }
     : initialValues;
 };
 

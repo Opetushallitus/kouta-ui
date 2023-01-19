@@ -140,14 +140,6 @@ const ToteutusForm = ({
           />
         )}
         {formMode === FormMode.CREATE && (
-          <FormCollapse
-            section="organisaatio"
-            Component={OrganisaatioSectionCreate}
-            header={t('yleiset.organisaatiovalinta')}
-            organisaatioOid={organisaatioOid}
-          />
-        )}
-        {formMode === FormMode.CREATE && (
           <PohjaFormCollapse
             entityType={ENTITY.TOTEUTUS}
             scrollOnActive={false}
@@ -155,6 +147,14 @@ const ToteutusForm = ({
             infoText={t('toteutuslomake.pohjavalintaInfo')}
             createLabel={t('yleiset.luoUusiToteutus')}
             copyLabel={t('toteutuslomake.kopioiPohjaksi')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
+        {formMode === FormMode.CREATE && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
             organisaatioOid={organisaatioOid}
           />
         )}

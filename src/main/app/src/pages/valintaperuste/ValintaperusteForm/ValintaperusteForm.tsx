@@ -52,15 +52,6 @@ export const ValintaperusteForm = ({
         />
       )}
       {formMode === FormMode.CREATE && (
-        <FormCollapse
-          section="organisaatio"
-          Component={OrganisaatioSectionCreate}
-          header={t('yleiset.organisaatio')}
-          organisaatioOid={organisaatioOid}
-        />
-      )}
-
-      {formMode === FormMode.CREATE && (
         <PohjaFormCollapse
           entityType={ENTITY.VALINTAPERUSTE}
           organisaatioOid={organisaatioOid}
@@ -70,7 +61,14 @@ export const ValintaperusteForm = ({
           copyLabel={t('valintaperustelomake.kopioiPohjaksi')}
         />
       )}
-
+      {formMode === FormMode.CREATE && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSectionCreate}
+          header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
       <FormCollapse
         section="perustiedot"
         header={t('valintaperustelomake.valintaperusteenPerustiedot')}

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -29,7 +30,10 @@ const getInitialValues = (valintaperuste, kieliValinnat, koulutustyyppi) => {
   return valintaperuste && valintaperuste.id
     ? {
         ...getCopyValues(valintaperuste.id),
-        ...getFormValuesByValintaperuste(valintaperuste, FormMode.CREATE),
+        ...getFormValuesByValintaperuste(
+          _.omit(valintaperuste, ['organisaatioOid']),
+          FormMode.CREATE
+        ),
       }
     : initialValues(kieliValinnatLista, koulutustyyppi);
 };

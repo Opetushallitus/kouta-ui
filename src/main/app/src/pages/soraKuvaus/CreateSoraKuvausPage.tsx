@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -29,7 +30,7 @@ const getInitialValues = (soraKuvaus, kieliValinnat) => {
   return soraKuvaus && soraKuvaus.id
     ? {
         ...getCopyValues(soraKuvaus.id),
-        ...getFormValuesBySoraKuvaus(soraKuvaus),
+        ...getFormValuesBySoraKuvaus(_.omit(soraKuvaus, ['organisaatioOid'])),
       }
     : initialValues(kieliValinnatLista);
 };

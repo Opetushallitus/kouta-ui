@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { merge } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -28,12 +29,20 @@ import {
 
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
-  return merge(getFormValuesByHakukohde(hakukohde, FormMode.CREATE), {
-    perustiedot: {
-      nimi: isNimiKoodi ? null : nimi,
-      hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,
-    },
-  });
+  return merge(
+    getFormValuesByHakukohde(
+      _.omit(hakukohde, ['organisaatioOid']),
+      FormMode.CREATE
+    ),
+    {
+      perustiedot: {
+        nimi: isNimiKoodi ? null : nimi,
+        hakukohdeKoodiUri: isNimiKoodi
+          ? toSelectValue(hakukohdeKoodiUri)
+          : null,
+      },
+    }
+  );
 };
 
 export const CreateHakukohdePage = () => {

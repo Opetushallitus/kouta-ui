@@ -43,7 +43,8 @@ const setErrors = (
 export const withRemoteErrors = (
   formName: ENTITY,
   response: AxiosResponse,
-  errors = {}
+  errors = {},
+  formValues = {}
 ) => {
   const errorConverter = REMOTE_ERRORS_TO_FORM_ERRORS[formName];
   // Kaikki lomakkeet käyttävät useSaveFormia, mutta kaikille ei ole toteutettuna converteria
@@ -53,7 +54,7 @@ export const withRemoteErrors = (
 
   const resData = response?.data;
   resData?.forEach?.(remoteError => {
-    const formError = errorConverter?.(remoteError);
+    const formError = errorConverter?.(remoteError, formValues);
 
     // formError merkkijonona on vain lomakkeen kentän nimi. Virheavain päätellään backend-virheen errorType-kentästä.
     if (_.isString(formError)) {

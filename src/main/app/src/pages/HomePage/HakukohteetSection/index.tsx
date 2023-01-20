@@ -132,7 +132,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
       />
       <StateChangeResultModal
         entityType={HAKUKOHDE}
-        headerText={t('etusivu.tilamuutosTuloksetOtsikko')}
+        headerText={t('etusivu.hakukohde.tilamuutosTuloksetOtsikko')}
         mutationResult={changeHakukohteetTilaMutation}
         getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
       />

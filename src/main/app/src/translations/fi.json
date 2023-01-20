@@ -415,12 +415,9 @@
     "kopioi": "Kopioi",
     "aloitaKopiointi": "Aloita kopiointi",
     "kopioinninTuloksetOtsikko": "Kopioinnin tulokset",
-    "tilamuutosTuloksetOtsikko": "Hakukohteiden tilamuutoksen tulokset",
     "alkuperainen": "Alkuperäinen",
     "kopio": "Kopio",
-    "tilamuutos": "Uusi tila",
     "kopiointiEpaonnistui": "Kopiointi epäonnistui!",
-    "tilanmuutosEpaonnistui": "Hakukohteiden tilanvaihto epäonnistui!",
     "toteutus": {
       "valitut_zero": "Ei toteutuksia valittu",
       "valitut": "1 toteutus valittu",
@@ -433,7 +430,12 @@
       "valitut": "1 hakukohde valittu",
       "valitut_other": "{{count}} hakukohdetta valittu",
       "vahvistaTilanmuutosOtsikko": "Valitse hakukohteet",
-      "vahvistaTilanmuutos": "Vaihda hakukohteet tilaan {{tila}}"
+      "vahvistaTilanmuutos": "Vaihda hakukohteet tilaan {{tila}}",
+      "tilamuutosTuloksetOtsikko": "Hakukohteiden tilamuutoksen tulokset",
+      "tilamuutos": "Tila",
+      "tilamuuttunut": "Muuttunut",
+      "tilanmuutosEpaonnistui": "Hakukohteiden tilanvaihto epäonnistui!",
+      "tilaVirhe": "Virheen selite"
     }
   },
   "koulutuslomake": {

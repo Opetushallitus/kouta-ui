@@ -10,6 +10,7 @@ import { RouterAnchor } from '#/src/components/Anchor';
 import ErrorAlert from '#/src/components/ErrorAlert';
 import ListTable from '#/src/components/ListTable';
 import Modal from '#/src/components/Modal';
+import SmallStatusTag from '#/src/components/StatusTag/SmallStatusTag';
 import { Box, Button, Icon } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
@@ -18,12 +19,37 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import { useEntitySelection } from './useEntitySelection';
 
-const Nimi = ({ item, entityType }) => {
+const NimiLink = ({ item, entityType, getLinkUrl }) => {
   const { selection } = useEntitySelection(entityType);
   const userLanguage = useUserLanguage();
+  console.log(selection);
   return (
-    getFirstLanguageValue(selection?.[item.oid]?.nimi, userLanguage) ?? null
+    <RouterAnchor to={getLinkUrl(item.oid)}>
+      {getFirstLanguageValue(selection?.[item.oid]?.nimi, userLanguage) ?? null}
+    </RouterAnchor>
   );
+};
+
+const Tila = ({ item, entityType }) => {
+  const { selection } = useEntitySelection(entityType);
+  const vanhaTila = selection?.[item.oid]?.tila;
+  const { tila } = useHakukohdeTila();
+  const status = item.status;
+
+  switch (status) {
+    case 'success':
+      return <SmallStatusTag status={tila?.value} />;
+    case 'error':
+      return <SmallStatusTag status={vanhaTila} />;
+    default:
+      return null;
+  }
+};
+
+const Virhe = ({ item }) => {
+  const errorPaths = item.errorPaths;
+  const errorMessages = item.errorMessages;
+  return errorPaths.toString() + ' | ' + errorMessages.toString();
 };
 
 const SuccessIcon = styled(Icon).attrs({ type: 'done' })`
@@ -38,26 +64,18 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
-    render: item => <Nimi item={item} entityType={entityType} />,
-  },
-  {
-    title: t('etusivu.alkuperainen'),
-    key: 'alkuperainen',
     render: item => (
-      <RouterAnchor to={getLinkUrl(item.oid)}>{item.oid}</RouterAnchor>
+      <NimiLink item={item} entityType={entityType} getLinkUrl={getLinkUrl} />
     ),
   },
   {
-    title: t('etusivu.tilamuutos'),
+    title: t('etusivu.hakukohde.tilamuutos'),
     key: 'tilamuutos',
-    render: item => {
-      const oid = item?.created?.[`${entityType}Oid`];
-      return oid ? (
-        <RouterAnchor to={getLinkUrl(oid)}>{oid}</RouterAnchor>
-      ) : null;
-    },
+    render: item => <Tila item={item} entityType={entityType} />,
   },
   {
+    title: t('etusivu.hakukohde.tilamuuttunut'),
+    key: 'tilamuuttunut',
     render: item => {
       const status = item.status;
       switch (status) {
@@ -68,6 +86,14 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
         default:
           return null;
       }
+    },
+  },
+  {
+    title: t('etusivu.hakukohde.tilaVirhe'),
+    key: 'tilaVirhe',
+    render: item => {
+      const status = item.status;
+      return status === 'error' ? <Virhe item={item} /> : null;
     },
   },
 ];
@@ -122,8 +148,8 @@ export const StateChangeResultModal = ({
   const onClose = useCallback(() => {
     if (isStateChangeResultSuccessful(mutationResult)) {
       removeSelection();
+      setHakukohdeTila(null);
     }
-    setHakukohdeTila(null);
     mutationResult.reset();
   }, [mutationResult, removeSelection, setHakukohdeTila]);
 
@@ -145,7 +171,9 @@ export const StateChangeResultModal = ({
       }
     >
       {mutationResult.isError ? (
-        <ErrorAlert center>{t('etusivu.tilanmuutosEpaonnistui')}</ErrorAlert>
+        <ErrorAlert center>
+          {t('etusivu.hakukohde.tilanmuutosEpaonnistui')}
+        </ErrorAlert>
       ) : (
         <StateChangeResultList
           data={data}

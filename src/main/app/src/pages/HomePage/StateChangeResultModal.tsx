@@ -46,10 +46,10 @@ const Tila = ({ item, entityType }) => {
   }
 };
 
-const Virhe = ({ item }) => {
-  const errorPaths = item.errorPaths;
-  const errorMessages = item.errorMessages;
-  return errorPaths.toString() + ' | ' + errorMessages.toString();
+const Virhe = ({ errors }) => {
+  const errorList = errors?.map(error => <p key={error}>{error}</p>);
+
+  return <div>{errorList}</div>;
 };
 
 const SuccessIcon = styled(Icon).attrs({ type: 'done' })`
@@ -93,7 +93,15 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     key: 'tilaVirhe',
     render: item => {
       const status = item.status;
-      return status === 'error' ? <Virhe item={item} /> : null;
+      return status === 'error' ? <Virhe errors={item.errorPaths} /> : null;
+    },
+  },
+  {
+    title: t('etusivu.hakukohde.tilaVirheSyy'),
+    key: 'tilaVirheSyy',
+    render: item => {
+      const status = item.status;
+      return status === 'error' ? <Virhe errors={item.errorMessages} /> : null;
     },
   },
 ];

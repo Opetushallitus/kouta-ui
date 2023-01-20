@@ -101,18 +101,14 @@ export const useStateChangeConfirmationModal = () => {
   );
 
   const [state, send] = useActor(modalService);
-  const { setHakukohdeTila } = useHakukohdeTila();
 
   return useMemo(
     () => ({
       isOpen: state.value === 'open',
       openModal: () => send('OPEN'),
-      closeModal: () => {
-        send('CLOSE');
-        setHakukohdeTila(null);
-      },
+      closeModal: () => send('CLOSE'),
     }),
-    [state, send, setHakukohdeTila]
+    [state, send]
   );
 };
 

@@ -435,7 +435,8 @@
       "tilamuutos": "Tila",
       "tilamuuttunut": "Muuttunut",
       "tilanmuutosEpaonnistui": "Hakukohteiden tilanvaihto epäonnistui!",
-      "tilaVirhe": "Virheen selite"
+      "tilaVirhe": "Virhe",
+      "tilaVirheSyy": "Virheen syy"
     }
   },
   "koulutuslomake": {

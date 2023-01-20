@@ -151,15 +151,12 @@ export const StateChangeResultModal = ({
 
   const { removeSelection } = useEntitySelection(entityType);
 
-  const { setHakukohdeTila } = useHakukohdeTila();
-
   const onClose = useCallback(() => {
     if (isStateChangeResultSuccessful(mutationResult)) {
       removeSelection();
-      setHakukohdeTila(null);
     }
     mutationResult.reset();
-  }, [mutationResult, removeSelection, setHakukohdeTila]);
+  }, [mutationResult, removeSelection]);
 
   const data = usePreviousNonNil(mutationResult.data);
 

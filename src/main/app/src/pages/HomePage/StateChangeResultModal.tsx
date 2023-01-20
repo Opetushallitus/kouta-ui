@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { UseMutationResult } from 'react-query';
+import { UseMutationResult, useQueryClient } from 'react-query';
 import { usePrevious } from 'react-use';
 import styled from 'styled-components';
 
@@ -151,12 +151,16 @@ export const StateChangeResultModal = ({
 
   const { removeSelection } = useEntitySelection(entityType);
 
+  const queryClient = useQueryClient();
+
   const onClose = useCallback(() => {
     if (isStateChangeResultSuccessful(mutationResult)) {
       removeSelection();
     }
     mutationResult.reset();
-  }, [mutationResult, removeSelection]);
+
+    queryClient.invalidateQueries('search.homepage.hakukohteet');
+  }, [mutationResult, removeSelection, queryClient]);
 
   const data = usePreviousNonNil(mutationResult.data);
 

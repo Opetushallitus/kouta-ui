@@ -113,23 +113,9 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   ) {
     const liitetytOpintojaksot =
       formValues?.opintojaksojenLiittaminen?.opintojaksot || [];
-    const indicesForOpintojaksotWithInvalidTila = liitetytOpintojaksot.reduce(
-      (invalidOpintojaksoIndices, { opintojakso }, index) => {
-        const indexOfInvalidOpintojakso = _.includes(
-          meta.toteutukset,
-          opintojakso.value
-        )
-          ? index
-          : null;
-
-        if (_.isNull(indexOfInvalidOpintojakso)) {
-          return invalidOpintojaksoIndices;
-        }
-
-        return [...invalidOpintojaksoIndices, indexOfInvalidOpintojakso];
-      },
-      []
-    );
+    const indicesForOpintojaksotWithInvalidTila = _.map(meta.toteutukset, oid =>
+      _.findIndex(liitetytOpintojaksot, ['opintojakso.value', oid])
+    ).filter(i => i >= 0);
 
     return indicesForOpintojaksotWithInvalidTila.map(index => {
       return {

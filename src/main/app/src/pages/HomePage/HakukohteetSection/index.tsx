@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { createGlobalState } from 'react-use';
 
 import Button from '#/src/components/Button';
+import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { CRUD_ROLES, ENTITY, ICONS } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -122,11 +123,12 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
-  return (
+  return changeHakukohteetTilaMutation.isLoading ? (
+    <OverlaySpin text={t('etusivu.hakukohde.tilaaVaihdetaan')} />
+  ) : (
     <StateChangeConfirmationWrapper entities={selection}>
       <StateChangeConfirmationModal
         onStateChangeSelection={changeHakukohteetTilaMutation.mutate}
-        entities={selection}
         headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}
       />

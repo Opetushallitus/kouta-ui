@@ -11,6 +11,7 @@ import {
   makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
+import { ENTITY } from '#/src/constants';
 
 import {
   createHeadingCheckbox,
@@ -24,8 +25,11 @@ export const createToteutusListColumns =
     filter: (item: { key: string }) => boolean = _fp.T
   ) =>
   selectionActor => {
-    const HeadingCheckbox = createHeadingCheckbox(selectionActor);
-    const RowCheckbox = createRowCheckbox(selectionActor);
+    const HeadingCheckbox = createHeadingCheckbox(
+      selectionActor,
+      ENTITY.TOTEUTUS
+    );
+    const RowCheckbox = createRowCheckbox(selectionActor, ENTITY.TOTEUTUS);
     return [
       {
         title: ({ rows }) => <HeadingCheckbox rows={rows} />,

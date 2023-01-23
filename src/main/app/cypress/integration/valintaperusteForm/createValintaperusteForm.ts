@@ -191,6 +191,7 @@ export const createValintaperusteForm = () => {
 
   it('using an existing object as baseline it should not copy publishing state', () => {
     fillPohjaSectionCopyingValuesFrom('Valintaperusteen nimi');
+    fillOrgSection(organisaatioOid);
     fillPerustiedotSection();
     fillHakukelpoisuusSection();
     fillKuvausSection();

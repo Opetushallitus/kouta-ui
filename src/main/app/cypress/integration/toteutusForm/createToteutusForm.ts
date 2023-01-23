@@ -919,6 +919,7 @@ export const createToteutusForm = () => {
       prepareTest('taiteen-perusopetus');
 
       fillPohjaSection();
+      fillOrgSection(organisaatioOid);
       fillKieliversiotSection();
       fillTaiteenPerusopetusTiedotSection();
 

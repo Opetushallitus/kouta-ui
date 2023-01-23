@@ -40,7 +40,6 @@ export const SoraKuvausFooter = ({
           formMode === FormMode.CREATE
             ? {
                 ...getSoraKuvausByFormValues(values),
-                organisaatioOid,
               }
             : {
                 ...soraKuvaus,

@@ -40,6 +40,7 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
   return _fp
     .flow(
       validatePohja,
+      validateExistence('organisaatioOid'),
       validateExistence('tila'),
       validateArrayMinLength('kieliversiot', 1),
       validateTranslations('nimi'),

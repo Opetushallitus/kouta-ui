@@ -7,6 +7,7 @@ import { FormCollapseGroup } from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
@@ -62,6 +63,14 @@ export const HakukohdeForm = ({
           infoText={t('hakukohdelomake.pohjavalintaInfo')}
           createLabel={t('yleiset.luoUusiHakukohde')}
           copyLabel={t('hakukohdelomake.kopioiPohjaksi')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
+      {formMode === FormMode.CREATE && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSectionCreate}
+          header={t('yleiset.organisaatiovalinta')}
           organisaatioOid={organisaatioOid}
         />
       )}

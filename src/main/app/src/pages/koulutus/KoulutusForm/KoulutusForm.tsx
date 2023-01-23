@@ -10,6 +10,7 @@ import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
@@ -135,7 +136,14 @@ export const KoulutusForm = ({
             copyLabel={t('koulutuslomake.kopioiPohjaksi')}
           />
         )}
-
+        {formMode === FormMode.CREATE && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
         <FormCollapse
           section="kieliversiot"
           header={t('yleiset.kieliversiot')}

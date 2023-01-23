@@ -7,6 +7,7 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
@@ -37,7 +38,6 @@ const SoraKuvausForm = ({
           header={t('yleiset.organisaatio')}
         />
       )}
-
       {formMode === FormMode.CREATE ? (
         <PohjaFormCollapse
           entityType={ENTITY.SORA_KUVAUS}
@@ -48,6 +48,14 @@ const SoraKuvausForm = ({
           copyLabel={t('soraKuvauslomake.kopioiPohjaksi')}
         />
       ) : null}
+      {formMode === FormMode.CREATE && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSectionCreate}
+          header={t('yleiset.organisaatiovalinta')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
 
       <FormCollapse
         section="koulutustyyppi"

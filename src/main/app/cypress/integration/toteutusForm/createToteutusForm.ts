@@ -29,6 +29,7 @@ import {
   pFillSelect,
   fillPohjaSectionCopyingValuesFrom,
   tilaShouldBe,
+  fillOrgSection,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -523,11 +524,14 @@ const mutationTest = wrapMutationTest({
 });
 
 export const createToteutusForm = () => {
+  const organisaatioOid = '1.1.1.1.1.1';
+
   it(
     'should be able to create ammatillinen tutkinnon osa toteutus',
     mutationTest(() => {
       prepareTest('amm-tutkinnon-osa');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('amm-tutkinnon-osa');
@@ -557,6 +561,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('amm');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('amm');
@@ -593,6 +598,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('yo');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('yo');
@@ -612,6 +618,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('amm-ope-erityisope-ja-opo');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('amm-ope-erityisope-ja-opo');
@@ -631,6 +638,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('kk-opintojakso');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTiedotSection('kk-opintojakso');
@@ -652,6 +660,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('kk-opintokokonaisuus');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillKkOpintokokonaisuusTiedotSection();
@@ -673,6 +682,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('lk');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillLukioTiedotSection();
@@ -701,6 +711,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('tuva');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTuvaTiedotSection();
@@ -725,6 +736,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('vapaa-sivistystyo-opistovuosi');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillVapaaSivistystyoOpistovuosiTiedotSection();
@@ -749,6 +761,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('vapaa-sivistystyo-muu');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillVapaaSivistystyoMuuTiedotSection();
@@ -774,6 +787,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('telma');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillTelmaTiedotSection();
@@ -798,6 +812,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('amm-muu');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillAmmMuuTiedotSection();
@@ -823,6 +838,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('aikuisten-perusopetus');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillAikuistenPerusopetusTiedotSection();
@@ -848,6 +864,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('dia');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillDIATiedotSection();
@@ -874,6 +891,7 @@ export const createToteutusForm = () => {
     mutationTest(() => {
       prepareTest('eb');
 
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKieliversiotSection();
       fillEBTiedotSection();
@@ -901,6 +919,7 @@ export const createToteutusForm = () => {
       prepareTest('taiteen-perusopetus');
 
       fillPohjaSection();
+      fillOrgSection(organisaatioOid);
       fillKieliversiotSection();
       fillTaiteenPerusopetusTiedotSection();
 

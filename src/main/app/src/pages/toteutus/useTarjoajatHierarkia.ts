@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _ from 'lodash';
 
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';

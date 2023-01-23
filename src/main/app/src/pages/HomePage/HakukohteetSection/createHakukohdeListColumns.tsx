@@ -10,6 +10,7 @@ import {
   makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
+import { ENTITY } from '#/src/constants';
 import {
   createHeadingCheckbox,
   createRowCheckbox,
@@ -17,8 +18,11 @@ import {
 
 export const createHakukohdeListColumns =
   (t: TFunction, organisaatioOid: string) => selectionActor => {
-    const HeadingCheckbox = createHeadingCheckbox(selectionActor);
-    const RowCheckbox = createRowCheckbox(selectionActor);
+    const HeadingCheckbox = createHeadingCheckbox(
+      selectionActor,
+      ENTITY.HAKUKOHDE
+    );
+    const RowCheckbox = createRowCheckbox(selectionActor, ENTITY.HAKUKOHDE);
     return [
       {
         title: ({ rows }) => <HeadingCheckbox rows={rows} />,

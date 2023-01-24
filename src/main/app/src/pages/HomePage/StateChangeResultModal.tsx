@@ -153,14 +153,17 @@ export const StateChangeResultModal = ({
 
   const queryClient = useQueryClient();
 
+  const { setHakukohdeTila } = useHakukohdeTila();
+
   const onClose = useCallback(() => {
     if (isStateChangeResultSuccessful(mutationResult)) {
       removeSelection();
+      setHakukohdeTila(null);
     }
     mutationResult.reset();
 
     queryClient.invalidateQueries('search.homepage.hakukohteet');
-  }, [mutationResult, removeSelection, queryClient]);
+  }, [mutationResult, removeSelection, queryClient, setHakukohdeTila]);
 
   const data = usePreviousNonNil(mutationResult.data);
 

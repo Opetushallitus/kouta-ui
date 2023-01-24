@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import IconButton from '#/src/components/IconButton';
 import Select from '#/src/components/Select';
 import { Box } from '#/src/components/virkailija';
-import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+import { JULKAISUTILA } from '#/src/constants';
 import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
 import { getThemeProp, spacing } from '#/src/theme';
 
@@ -39,6 +39,15 @@ const VerticalSeparator = styled(Box).attrs({ marginLeft: 2, marginRight: 2 })`
   align-self: stretch;
 `;
 
+function getJulkaisutilaTranslationKeyForDropdown(tila: JULKAISUTILA): string {
+  if (tila === JULKAISUTILA.TALLENNETTU) return 'julkaisutilat.tallennettu';
+  if (tila === JULKAISUTILA.ARKISTOITU) return 'julkaisutilat.arkistoitu';
+  if (tila === JULKAISUTILA.JULKAISTU) return 'julkaisutilat.julkaistu';
+  if (tila === JULKAISUTILA.POISTETTU) return 'julkaisutilat.poistettu';
+  if (tila === undefined) return '';
+  throw new Error(`Unknown julkaisutila given: ${tila}`);
+}
+
 export const EntityListActionBar = ({
   entityType,
   selection,
@@ -55,7 +64,7 @@ export const EntityListActionBar = ({
           _fp.values,
           _fp.remove(_fp.isEqual(JULKAISUTILA.POISTETTU)),
           _fp.map(tila => ({
-            label: t(getJulkaisutilaTranslationKey(tila)),
+            label: t(getJulkaisutilaTranslationKeyForDropdown(tila)),
             value: tila,
           }))
         )(JULKAISUTILA),

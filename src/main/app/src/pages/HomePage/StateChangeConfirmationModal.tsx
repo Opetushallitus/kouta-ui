@@ -3,93 +3,14 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { useActor, useInterpret, useSelector } from '@xstate/react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { createMachine, spawn, actions } from 'xstate';
 
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
+import { ModalMachine } from '#/src/machines/modalMachine';
 import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
 
 import { EntityListTable } from './EntitySearchList';
-import { EntitySelectionMachine } from './entitySelectionMachine';
-
-const { pure, assign, send } = actions;
-
-interface OpenEvent {
-  type: 'OPEN';
-}
-
-interface CloseEvent {
-  type: 'CLOSE';
-}
-
-type EntitySelection = Record<string, Record<string, any>>;
-
-interface SetEntitiesEvent {
-  type: 'SET_ENTITIES';
-  entities: EntitySelection;
-}
-
-interface StateChangeConfirmationMachineContext {
-  selectionRef: any;
-  entities?: EntitySelection;
-}
-
-export const StateChangeConfirmationModalMachine = createMachine(
-  {
-    schema: {
-      events: {} as OpenEvent | CloseEvent | SetEntitiesEvent,
-      context: {
-        entities: {} as EntitySelection,
-        selectionRef: null as any,
-      },
-    },
-    context: {
-      entities: {}, // Kaikki valittavissa olevat entiteetit
-      selectionRef: null,
-    },
-    initial: 'initializing',
-    states: {
-      initializing: {
-        entry: assign({
-          selectionRef: () => spawn(EntitySelectionMachine),
-        }),
-        always: {
-          target: 'closed',
-        },
-      },
-      open: {
-        entry: 'selectAll',
-        on: {
-          CLOSE: 'closed',
-        },
-      },
-      closed: {
-        on: {
-          OPEN: 'open',
-        },
-      },
-    },
-    on: {
-      SET_ENTITIES: {
-        actions: 'setEntities',
-      },
-    },
-  },
-  {
-    actions: {
-      setEntities: assign<StateChangeConfirmationMachineContext, any>({
-        entities: (ctx, e) => e.entities,
-      }),
-      selectAll: pure<StateChangeConfirmationMachineContext, any>(ctx => {
-        return send(
-          { type: 'RESET_SELECTION', items: ctx.entities },
-          { to: ctx.selectionRef }
-        );
-      }),
-    } as any,
-  }
-);
 
 export const StateChangeConfirmationModalContext = React.createContext(
   {} as any
@@ -102,13 +23,18 @@ export const useStateChangeConfirmationModal = () => {
 
   const [state, send] = useActor(modalService);
 
+  const { setHakukohdeTila } = useHakukohdeTila();
+
   return useMemo(
     () => ({
       isOpen: state.value === 'open',
       openModal: () => send('OPEN'),
-      closeModal: () => send('CLOSE'),
+      closeModal: () => {
+        send('CLOSE');
+        setHakukohdeTila(null);
+      },
     }),
-    [state, send]
+    [state, send, setHakukohdeTila]
   );
 };
 
@@ -132,7 +58,7 @@ export const useFilteredModalSelection = () => {
 };
 
 export const StateChangeConfirmationWrapper = ({ entities, children }) => {
-  const modalService = useInterpret(StateChangeConfirmationModalMachine);
+  const modalService = useInterpret(ModalMachine);
 
   useEffect(() => {
     modalService.send({ type: 'SET_ENTITIES', entities });
@@ -145,7 +71,7 @@ export const StateChangeConfirmationWrapper = ({ entities, children }) => {
 
   const modalContext = useMemo(
     () => ({
-      modalService,
+      modalService: modalService,
       selectionService,
     }),
     [modalService, selectionService]

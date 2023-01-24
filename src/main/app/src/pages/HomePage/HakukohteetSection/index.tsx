@@ -6,9 +6,7 @@ import { createGlobalState } from 'react-use';
 
 import Button from '#/src/components/Button';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
-import { CRUD_ROLES, ENTITY, ICONS } from '#/src/constants';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { hakukohdeService } from '#/src/machines/filterMachines';
 import { EntityListActionBar } from '#/src/pages/HomePage/EntityListActionBar';
@@ -93,16 +91,6 @@ export const createGetHakukohdeLinkUrl = organisaatioOid => oid =>
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const isOphVirkailija = useIsOphVirkailija();
-
-  const canEditHakukohde = useCurrentUserHasRole(
-    ENTITY.HAKUKOHDE,
-    CRUD_ROLES.UPDATE,
-    organisaatioOid
-  );
-
-  const showTilaActionBar = isOphVirkailija || canEditHakukohde;
-
   const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[HAKUKOHDE]);
 
   const columns = useMemo(
@@ -148,7 +136,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
         defaultOpen
       >
         <EntitySearchList
-          ActionBar={showTilaActionBar ? HakukohdeActionBar : undefined}
+          ActionBar={HakukohdeActionBar}
           searchEntities={searchHakukohteet}
           organisaatioOid={organisaatioOid}
           entityType={HAKUKOHDE}

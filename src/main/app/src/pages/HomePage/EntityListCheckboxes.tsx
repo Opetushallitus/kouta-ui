@@ -17,8 +17,6 @@ export const createHeadingCheckbox =
 
     const isOphVirkailija = useIsOphVirkailija();
 
-    console.log(rows);
-
     const pageItems =
       entityType === ENTITY.HAKUKOHDE
         ? _fp.flow(
@@ -70,11 +68,6 @@ export const createRowCheckbox = (selectionActor, entityType) => item => {
       CRUD_ROLES.UPDATE,
       item?.organisaatio?.oid
     );
-
-  console.log('item ');
-  console.log(item);
-  console.log('hasRightsToUpdate ' + hasRightsToUpdate);
-  console.log('isOphVirkailija ' + isOphVirkailija);
 
   const onSelectionChange = useCallback(
     e => {

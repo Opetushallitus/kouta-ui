@@ -63,7 +63,7 @@ const HakukohdeActionBar = () => {
       entityType={HAKUKOHDE}
       selection={selection}
       removeSelection={removeSelection}
-      copyEntities={undefined}
+      copyEntities={null}
       changeTila={changeTila}
     />
   );

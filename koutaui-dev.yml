@@ -3,5 +3,5 @@ server:
     context-path: /kouta
 host:
   host-virkailija: http://localhost:8099
-  host-oppija: https://beta.untuvaopintopolku.fi
+  host-oppija: https://beta.hahtuvaopintopolku.fi
   host-eperusteet: http://eperusteet.hahtuvaopintopolku.fi

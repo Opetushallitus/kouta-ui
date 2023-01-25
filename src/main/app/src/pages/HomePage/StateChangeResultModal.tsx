@@ -22,7 +22,7 @@ import { useEntitySelection } from './useEntitySelection';
 const NimiLink = ({ item, entityType, getLinkUrl }) => {
   const { selection } = useEntitySelection(entityType);
   const userLanguage = useUserLanguage();
-  console.log(selection);
+
   return (
     <RouterAnchor to={getLinkUrl(item.oid)}>
       {getFirstLanguageValue(selection?.[item.oid]?.nimi, userLanguage) ?? null}

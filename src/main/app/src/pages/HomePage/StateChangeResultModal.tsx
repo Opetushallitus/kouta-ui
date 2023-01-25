@@ -1,20 +1,16 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import _fp from 'lodash/fp';
-import { useTranslation } from 'react-i18next';
 import { UseMutationResult, useQueryClient } from 'react-query';
-import { usePrevious } from 'react-use';
 import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
-import ErrorAlert from '#/src/components/ErrorAlert';
-import ListTable from '#/src/components/ListTable';
-import Modal from '#/src/components/Modal';
 import SmallStatusTag from '#/src/components/StatusTag/SmallStatusTag';
-import { Box, Button, Icon } from '#/src/components/virkailija';
+import { Icon } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
+import { ResultModal } from '#/src/pages/HomePage/ResultModal';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import { useEntitySelection } from './useEntitySelection';
@@ -106,24 +102,8 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
   },
 ];
 
-export const StateChangeResultList = ({ data, entityType, getLinkUrl }) => {
-  const { t } = useTranslation();
-  const columns = useTableColumns(t, entityType, getLinkUrl);
-  const rows = useMemo(
-    () => _fp.map(result => ({ ...result, key: result.oid }), data),
-    [data]
-  );
-
-  return <ListTable rows={rows} columns={columns} />;
-};
-
 type StateChangeResultItem = {
   oid: string;
-};
-
-const usePreviousNonNil = value => {
-  const prev = usePrevious(value);
-  return _fp.isEmpty(value) ? prev : value;
 };
 
 const isStateChangeResultSuccessful = mutationResult =>
@@ -145,10 +125,6 @@ export const StateChangeResultModal = ({
   >;
   getLinkUrl: any;
 }) => {
-  const { t } = useTranslation();
-
-  const isOpen = ['success', 'error'].includes(mutationResult.status);
-
   const { removeSelection } = useEntitySelection(entityType);
 
   const queryClient = useQueryClient();
@@ -165,34 +141,14 @@ export const StateChangeResultModal = ({
     queryClient.invalidateQueries('search.homepage.hakukohteet');
   }, [mutationResult, removeSelection, queryClient, setHakukohdeTila]);
 
-  const data = usePreviousNonNil(mutationResult.data);
-
   return (
-    <Modal
-      minHeight="90vh"
-      maxWidth="1200px"
-      open={isOpen}
+    <ResultModal
       onClose={onClose}
-      header={headerText}
-      footer={
-        <Box display="flex" justifyContent="flex-end">
-          <Button variant="outlined" onClick={onClose}>
-            {t('yleiset.sulje')}
-          </Button>
-        </Box>
-      }
-    >
-      {mutationResult.isError ? (
-        <ErrorAlert center>
-          {t('etusivu.hakukohde.tilanmuutosEpaonnistui')}
-        </ErrorAlert>
-      ) : (
-        <StateChangeResultList
-          data={data}
-          entityType={entityType}
-          getLinkUrl={getLinkUrl}
-        />
-      )}
-    </Modal>
+      headerText={headerText}
+      mutationResult={mutationResult}
+      entityType={entityType}
+      getLinkUrl={getLinkUrl}
+      useTableColumns={useTableColumns}
+    />
   );
 };

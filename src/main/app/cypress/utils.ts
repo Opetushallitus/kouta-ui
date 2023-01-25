@@ -260,7 +260,7 @@ export const fillDatePickerInput = value => {
   cy.get('.DatePickerInput__').find('input').pipe(paste(value));
 };
 
-const koutaSearchItem = ({ idProp = 'oid' } = { idProp: 'oid' }) => ({
+export const koutaSearchItem = ({ idProp = 'oid' } = { idProp: 'oid' }) => ({
   modified: '2019-02-20T07:55',
   muokkaaja: { nimi: 'John Doe', oid: '1.2.246.562.24.62301161440' },
   nimi: { fi: 'Nimi' },
@@ -275,7 +275,10 @@ const stubEntityLists = () => {
     {
       body: {
         result: [
-          merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
+          merge(koutaSearchItem(), {
+            nimi: { fi: 'Koulutuksen nimi' },
+            tila: 'julkaistu',
+          }),
         ],
         totalCount: 1,
       },
@@ -287,7 +290,10 @@ const stubEntityLists = () => {
     {
       body: {
         result: [
-          merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
+          merge(koutaSearchItem(), {
+            nimi: { fi: 'Toteutuksen nimi' },
+            tila: 'julkaistu',
+          }),
         ],
         totalCount: 1,
       },
@@ -298,7 +304,12 @@ const stubEntityLists = () => {
     { method: 'GET', url: '/kouta-backend/search/haut?*' },
     {
       body: {
-        result: [merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
+        result: [
+          merge(koutaSearchItem(), {
+            nimi: { fi: 'Haun nimi' },
+            tila: 'julkaistu',
+          }),
+        ],
         totalCount: 1,
       },
     }
@@ -311,6 +322,7 @@ const stubEntityLists = () => {
         result: [
           merge(koutaSearchItem({ idProp: 'id' }), {
             nimi: { fi: 'Valintaperusteen nimi' },
+            tila: 'julkaistu',
           }),
         ],
         totalCount: 1,
@@ -323,7 +335,10 @@ const stubEntityLists = () => {
     {
       body: {
         result: [
-          merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
+          merge(koutaSearchItem(), {
+            nimi: { fi: 'Hakukohteen nimi' },
+            tila: 'julkaistu',
+          }),
         ],
         totalCount: 1,
       },
@@ -437,8 +452,27 @@ export const fillKieliversiotSection = (
   });
 };
 
+export const fillOrgSection = orgOid => {
+  withinSection('organisaatio', () => {
+    getByTestId('organisaatioSelect').within(() => {
+      selectOption(orgOid);
+    });
+    jatka();
+  });
+};
+
 export const fillPohjaSection = () => {
   withinSection('pohja', () => {
+    jatka();
+  });
+};
+
+export const fillPohjaSectionCopyingValuesFrom = from => {
+  withinSection('pohja', () => {
+    getRadio('kopio').click({ force: true });
+    getFieldWrapperByName('pohja.valinta').within(e => {
+      fillAsyncSelect(from);
+    });
     jatka();
   });
 };
@@ -446,6 +480,12 @@ export const fillPohjaSection = () => {
 export const fillTilaSection = (tila = 'julkaistu') => {
   withinSection('tila', () => {
     getRadio(tila).check({ force: true });
+  });
+};
+
+export const tilaShouldBe = expected => {
+  withinSection('tila', () => {
+    getRadio('tallennettu').should('be.checked');
   });
 };
 

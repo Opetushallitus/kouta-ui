@@ -10,6 +10,7 @@ import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { LomakeFields } from '#/src/components/LomakeFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { Box } from '#/src/components/virkailija';
 import { ENTITY, FormMode } from '#/src/constants';
@@ -101,6 +102,14 @@ const HakuForm = ({
             getCopyEntities={getHaut(false)}
           />
         ) : null}
+        {formMode === FormMode.CREATE && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
 
         <FormCollapse
           section="kieliversiot"

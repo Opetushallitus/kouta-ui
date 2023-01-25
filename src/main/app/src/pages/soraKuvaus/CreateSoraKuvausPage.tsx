@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -9,7 +10,12 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
+import {
+  POHJAVALINTA,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
 
@@ -29,7 +35,8 @@ const getInitialValues = (soraKuvaus, kieliValinnat) => {
   return soraKuvaus && soraKuvaus.id
     ? {
         ...getCopyValues(soraKuvaus.id),
-        ...getFormValuesBySoraKuvaus(soraKuvaus),
+        ...getFormValuesBySoraKuvaus(_.omit(soraKuvaus, ['organisaatioOid'])),
+        tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues(kieliValinnatLista);
 };

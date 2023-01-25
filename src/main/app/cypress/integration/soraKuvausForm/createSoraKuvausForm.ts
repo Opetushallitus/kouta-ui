@@ -15,6 +15,9 @@ import {
   fillKoulutustyyppiSelect,
   fillAsyncSelect,
   wrapMutationTest,
+  fillPohjaSectionCopyingValuesFrom,
+  tilaShouldBe,
+  fillOrgSection,
 } from '#/cypress/utils';
 import { ENTITY } from '#/src/constants';
 
@@ -62,6 +65,7 @@ export const createSoraKuvausForm = () => {
   it(
     'should be able to create sora-kuvaus',
     mutationTest(() => {
+      fillOrgSection(organisaatioOid);
       fillPohjaSection();
       fillKoulutustyyppiSection();
       fillKieliversiotSection({ jatka: true });
@@ -76,4 +80,9 @@ export const createSoraKuvausForm = () => {
       );
     })
   );
+
+  it('using an existing object as baseline it should not copy publishing state', () => {
+    fillPohjaSectionCopyingValuesFrom('Sorakuvauksen nimi');
+    tilaShouldBe('tallennettu');
+  });
 };

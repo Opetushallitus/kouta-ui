@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ import {
   POHJAVALINTA,
   ENTITY,
   FormMode,
+  DEFAULT_JULKAISUTILA,
 } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
@@ -59,7 +61,11 @@ const getInitialValues = ({
   opinnonTyyppiKoodiUri?: string;
 }) => {
   return toteutus
-    ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
+    ? {
+        ...getCopyValues(toteutus.oid),
+        ...getFormValuesByToteutus(_.omit(toteutus, ['organisaatioOid'])),
+        tila: DEFAULT_JULKAISUTILA,
+      }
     : initialValues({
         koulutustyyppi,
         koulutusNimi,

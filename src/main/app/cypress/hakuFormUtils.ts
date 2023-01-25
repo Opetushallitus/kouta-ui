@@ -2,17 +2,49 @@ import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import { merge } from 'lodash/fp';
 
 import organisaatio from '#/cypress/data/organisaatio';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import hakuMocks from '#/cypress/mocks/haku.mocks.json';
 
 import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
+  koutaSearchItem,
 } from './utils';
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
   playMocks(hakuMocks);
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/kouta-backend/organisaatio/hierarkia**oid=${organisaatioOid}**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/kouta-backend/organisaatio/hierarkia/**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
+
+  cy.intercept(
+    {
+      method: 'POST',
+      url: `**/kouta-backend/organisaatio/${organisaatioOid}`,
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
   cy.intercept(
     {
@@ -28,7 +60,19 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
     }
   );
 
-  cy.intercept({ method: 'GET', url: '**/haku/list**' }, { body: [] });
+  const hakuItem = merge(koutaSearchItem(), {
+    nimi: {
+      fi: 'Korkeakoulujen yhteishaku',
+    },
+    tila: 'julkaistu',
+  });
+
+  cy.intercept({ method: 'GET', url: '**/haku/list**' }, { body: [hakuItem] });
+
+  cy.intercept(
+    { method: 'GET', url: '**/haku/1.1.1.1.1.1' },
+    { body: hakuItem }
+  );
 
   cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
 

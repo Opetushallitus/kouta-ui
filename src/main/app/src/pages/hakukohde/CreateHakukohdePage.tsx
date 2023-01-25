@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { merge } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -12,7 +13,12 @@ import FormPage, {
   ToteutusRelation,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { checkHasHakukohdeKoodiUri } from '#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection';
@@ -28,7 +34,8 @@ import {
 
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
-  return merge(getFormValuesByHakukohde(hakukohde, FormMode.CREATE), {
+  return merge(getFormValuesByHakukohde(_.omit(hakukohde, ['organisaatioOid']), FormMode.CREATE), {
+    tila: DEFAULT_JULKAISUTILA,
     perustiedot: {
       nimi: isNimiKoodi ? null : nimi,
       hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,

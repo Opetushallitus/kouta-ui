@@ -56,7 +56,6 @@ export const KoulutusFooter = ({
           formMode === FormMode.CREATE
             ? {
                 ...getKoulutusByFormValues(valuesForSaving),
-                organisaatioOid,
               }
             : {
                 ...koulutus,

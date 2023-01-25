@@ -80,7 +80,7 @@ export const EntityListActionBar = ({
       <Box padding={1}>
         {t(`etusivu.${entityType}.valitut`, { count: _.size(selection) })}
       </Box>
-      {changeTila ? (
+      {changeTila && (
         <>
           <VerticalSeparator />
           <Box flexGrow={0} minWidth="180px" paddingRight={2}>
@@ -92,7 +92,7 @@ export const EntityListActionBar = ({
             />
           </Box>
         </>
-      ) : null}
+      )}
 
       <VerticalSeparator />
       <ActionButton
@@ -104,7 +104,7 @@ export const EntityListActionBar = ({
         {t('etusivu.poistaValinta')}
       </ActionButton>
       <VerticalSeparator />
-      {copyEntities ? (
+      {copyEntities && (
         <ActionButton
           iconType="file_copy"
           variant="text"
@@ -113,7 +113,7 @@ export const EntityListActionBar = ({
         >
           {t('etusivu.kopioi')}
         </ActionButton>
-      ) : null}
+      )}
     </ButtonBox>
   );
 };

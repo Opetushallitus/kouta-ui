@@ -15,9 +15,11 @@ import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
+import useKoodi from '#/src/hooks/useKoodi';
 import VaativaErityinenTukiField from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
@@ -269,16 +271,36 @@ export const KkOpintokokonaisuusTiedotSection = ({
   disabled,
   name,
   koulutus,
-}: ToteutusTiedotSectionProps) => (
-  <VerticalBox gap={2}>
-    <NimiSection name={name} language={language} disabled={disabled} />
-    <OpintojenLaajuusFieldExtended name={name} disabled={disabled} />
-    <TunnisteField name={name} />
-    <OpinnonTyyppiField name={name} />
-    <AvoinKorkeakoulutusField name={name} />
-    <CommonTiedotFields name={name} />
-  </VerticalBox>
-);
+}: ToteutusTiedotSectionProps) => {
+  const laajuusyksikkoKoodiUri =
+    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
+  const { koodi: forcedLaajuusKoodi } = useKoodi(laajuusyksikkoKoodiUri);
+
+  const laajuusYksikkoTextValue = laajuusyksikkoKoodiUri
+    ? getKoodiNimiTranslation(forcedLaajuusKoodi, language) || ''
+    : '';
+
+  const defaultLaajuusNumero =
+    koulutus?.metadata?.opintojenLaajuusNumeroMin ===
+    koulutus?.metadata?.opintojenLaajuusNumeroMax
+      ? koulutus?.metadata?.opintojenLaajuusNumeroMin
+      : '';
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} disabled={disabled} />
+      <OpintojenLaajuusFieldExtended
+        name={name}
+        disabled={disabled}
+        defaultLaajuusYksikko={laajuusYksikkoTextValue}
+        defaultLaajuusNumero={defaultLaajuusNumero}
+      />
+      <TunnisteField name={name} />
+      <OpinnonTyyppiField name={name} />
+      <AvoinKorkeakoulutusField name={name} />
+      <CommonTiedotFields name={name} />
+    </VerticalBox>
+  );
+};
 
 export const OpettajaTiedotSection = ({
   koulutus,

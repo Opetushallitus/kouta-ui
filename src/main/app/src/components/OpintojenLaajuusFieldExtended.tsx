@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Input from '@opetushallitus/virkailija-ui-components/Input';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
+import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
@@ -23,6 +25,7 @@ export const OpintojenLaajuusFieldExtended = ({
   disabled = false,
   required = false,
   defaultLaajuusYksikko,
+  defaultLaajuusNumero,
 }: Props) => {
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
@@ -30,6 +33,15 @@ export const OpintojenLaajuusFieldExtended = ({
     koodisto: 'opintojenlaajuusyksikko',
     language: selectedLanguage,
   });
+
+  const { change } = useBoundFormActions();
+  const currLaajuusNumero = useFieldValue(`${name}.opintojenLaajuusNumero`);
+
+  useEffect(() => {
+    if (_.isUndefined(currLaajuusNumero)) {
+      change(`${name}.opintojenLaajuusNumero`, defaultLaajuusNumero);
+    }
+  }, [change, currLaajuusNumero, name, defaultLaajuusNumero]);
 
   return (
     <Box display="flex" mx={-1}>

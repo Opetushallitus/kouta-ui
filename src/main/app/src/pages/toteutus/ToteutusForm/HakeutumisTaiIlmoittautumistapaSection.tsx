@@ -51,6 +51,7 @@ const MuuHakulomakeBox = ({ tapa, section, language, ...props }) => {
             component={FormFieldEditor}
             label={t(`toteutuslomake.${tapa}.lisatiedot`)}
             name={`${section}.lisatiedot.${language}`}
+            required
           />
         </Box>
         <Box mb="20px">

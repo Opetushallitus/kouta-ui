@@ -58,7 +58,6 @@ export const useOrgCreateHierarkia = organisaatioOid => {
   if (isOph) {
     return ophHierarkia;
   } else {
-    console.log('allowed hierarkia!');
     return allowedHierarkia;
   }
 };

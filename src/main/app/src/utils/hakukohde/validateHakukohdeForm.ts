@@ -28,6 +28,7 @@ const validateLiitteet = errorBuilder => {
   const yhteinenToimitusosoite = values?.liitteet?.yhteinenToimituspaikka;
 
   return _fp.flow(
+    validateExistence('organisaatioOid'),
     validateIf(
       yhteinenToimitusaika,
       validateExistence('liitteet.toimitusaika')

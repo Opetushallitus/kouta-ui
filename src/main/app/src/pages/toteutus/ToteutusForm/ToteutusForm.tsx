@@ -9,6 +9,7 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
@@ -148,6 +149,14 @@ const ToteutusForm = ({
             infoText={t('toteutuslomake.pohjavalintaInfo')}
             createLabel={t('yleiset.luoUusiToteutus')}
             copyLabel={t('toteutuslomake.kopioiPohjaksi')}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
+        {formMode === FormMode.CREATE && (
+          <FormCollapse
+            section="organisaatio"
+            Component={OrganisaatioSectionCreate}
+            header={t('yleiset.organisaatiovalinta')}
             organisaatioOid={organisaatioOid}
           />
         )}

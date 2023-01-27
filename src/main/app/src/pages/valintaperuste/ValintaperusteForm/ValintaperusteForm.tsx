@@ -8,6 +8,7 @@ import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import { KokeetTaiLisanaytotSection } from '#/src/components/KokeetTaiLisanaytotSection';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
+import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
@@ -50,7 +51,6 @@ export const ValintaperusteForm = ({
           header={t('yleiset.organisaatio')}
         />
       )}
-
       {formMode === FormMode.CREATE && (
         <PohjaFormCollapse
           entityType={ENTITY.VALINTAPERUSTE}
@@ -61,7 +61,14 @@ export const ValintaperusteForm = ({
           copyLabel={t('valintaperustelomake.kopioiPohjaksi')}
         />
       )}
-
+      {formMode === FormMode.CREATE && (
+        <FormCollapse
+          section="organisaatio"
+          Component={OrganisaatioSectionCreate}
+          header={t('yleiset.organisaatio')}
+          organisaatioOid={organisaatioOid}
+        />
+      )}
       <FormCollapse
         section="perustiedot"
         header={t('valintaperustelomake.valintaperusteenPerustiedot')}

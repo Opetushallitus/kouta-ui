@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -62,7 +63,7 @@ const getInitialValues = ({
   return toteutus
     ? {
         ...getCopyValues(toteutus.oid),
-        ...getFormValuesByToteutus(toteutus),
+        ...getFormValuesByToteutus(_.omit(toteutus, ['organisaatioOid'])),
         tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues({

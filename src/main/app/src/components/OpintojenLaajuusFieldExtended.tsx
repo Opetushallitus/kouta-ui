@@ -41,7 +41,8 @@ export const OpintojenLaajuusFieldExtended = ({
     if (_.isUndefined(currLaajuusNumero)) {
       change(`${name}.opintojenLaajuusNumero`, defaultLaajuusNumero);
     }
-  }, [change, currLaajuusNumero, name, defaultLaajuusNumero]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box display="flex" mx={-1}>

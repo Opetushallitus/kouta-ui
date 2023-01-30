@@ -38,7 +38,7 @@ export const OpintojenLaajuusFieldExtended = ({
   const currLaajuusNumero = useFieldValue(`${name}.opintojenLaajuusNumero`);
 
   useEffect(() => {
-    if (_.isUndefined(currLaajuusNumero) || _.isEmpty(currLaajuusNumero)) {
+    if (_.isUndefined(currLaajuusNumero)) {
       change(`${name}.opintojenLaajuusNumero`, defaultLaajuusNumero);
     }
   }, [change, currLaajuusNumero, name, defaultLaajuusNumero]);

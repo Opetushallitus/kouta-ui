@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 
 import { createFormFieldComponent } from '#/src/components/formFields';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
+import { Spin } from '#/src/components/virkailija';
 import { TOTEUTUS_ROLE } from '#/src/constants';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { getTestIdProps } from '#/src/utils';
@@ -27,7 +28,10 @@ export const JarjestamispaikatSection = ({
   const { t } = useTranslation();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
-  const { hierarkia = [] } = useTarjoajatHierarkia(organisaatioOid, tarjoajat);
+  const { hierarkia = [], isLoading } = useTarjoajatHierarkia(
+    organisaatioOid,
+    tarjoajat
+  );
 
   const getIsDisabled = useCallback(
     organisaatio =>
@@ -36,7 +40,9 @@ export const JarjestamispaikatSection = ({
     [roleBuilder]
   );
 
-  return (
+  return isLoading ? (
+    <Spin />
+  ) : (
     <div {...getTestIdProps('jarjestamispaikatSelection')}>
       <Field
         name={name}

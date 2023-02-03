@@ -35,8 +35,10 @@ const getInitialValues = (valintaperuste, kieliValinnat, koulutustyyppi) => {
   return valintaperuste && valintaperuste.id
     ? {
         ...getCopyValues(valintaperuste.id),
-        ...getFormValuesByValintaperuste(_.omit(valintaperuste, ['organisaatioOid']),
-        FormMode.CREATE),
+        ...getFormValuesByValintaperuste(
+          _.omit(valintaperuste, ['organisaatioOid']),
+          FormMode.CREATE
+        ),
         tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues(kieliValinnatLista, koulutustyyppi);

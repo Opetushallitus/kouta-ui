@@ -199,6 +199,10 @@ const fillTuvaTiedotSection = () => {
     cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
       .clear()
       .pipe(paste('25'));
+
+    cy.findByTestId('aloituspaikkakuvaus').within(() => {
+      typeToEditor('Aloituspaikkojen kuvaus');
+    });
   });
 };
 
@@ -250,6 +254,10 @@ const fillTelmaTiedotSection = () => {
     cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
       .clear()
       .pipe(paste('25'));
+
+    cy.findByTestId('aloituspaikkakuvaus').within(() => {
+      typeToEditor('Aloituspaikkojen kuvaus');
+    });
   });
 };
 
@@ -274,6 +282,10 @@ const fillAikuistenPerusopetusTiedotSection = () => {
     cy.findByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
       .clear()
       .pipe(paste('25'));
+
+    cy.findByTestId('aloituspaikkakuvaus').within(() => {
+      typeToEditor('Aloituspaikkojen kuvaus');
+    });
   });
 };
 

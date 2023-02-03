@@ -280,11 +280,6 @@ export const KkOpintokokonaisuusTiedotSection = ({
     ? getKoodiNimiTranslation(forcedLaajuusKoodi, language) || ''
     : '';
 
-  const defaultLaajuusNumero =
-    koulutus?.metadata?.opintojenLaajuusNumeroMin ===
-    koulutus?.metadata?.opintojenLaajuusNumeroMax
-      ? koulutus?.metadata?.opintojenLaajuusNumeroMin
-      : '';
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={disabled} />
@@ -292,7 +287,6 @@ export const KkOpintokokonaisuusTiedotSection = ({
         name={name}
         disabled={disabled}
         defaultLaajuusYksikko={laajuusYksikkoTextValue}
-        defaultLaajuusNumero={defaultLaajuusNumero}
       />
       <TunnisteField name={name} />
       <OpinnonTyyppiField name={name} />

@@ -50,6 +50,7 @@ const getInitialValues = ({
   isAvoinKorkeakoulutus,
   tunniste,
   opinnonTyyppiKoodiUri,
+  koulutusOpintojenLaajuusNumero,
 }: {
   toteutus: ToteutusModel;
   koulutustyyppi: KOULUTUSTYYPPI;
@@ -58,6 +59,7 @@ const getInitialValues = ({
   isAvoinKorkeakoulutus?: boolean;
   tunniste?: string;
   opinnonTyyppiKoodiUri?: string;
+  koulutusOpintojenLaajuusNumero?: number;
 }) => {
   return toteutus
     ? {
@@ -72,6 +74,7 @@ const getInitialValues = ({
         isAvoinKorkeakoulutus,
         tunniste,
         opinnonTyyppiKoodiUri,
+        koulutusOpintojenLaajuusNumero,
       });
 };
 
@@ -89,6 +92,11 @@ export const CreateToteutusPage = () => {
   const isAvoinKorkeakoulutus = koulutus?.metadata?.isAvoinKorkeakoulutus;
   const tunniste = koulutus?.metadata?.tunniste;
   const opinnonTyyppiKoodiUri = koulutus?.metadata?.opinnonTyyppiKoodiUri;
+  const koulutusOpintojenLaajuusNumero =
+    koulutus?.metadata?.opintojenLaajuusNumeroMin ===
+    koulutus?.metadata?.opintojenLaajuusNumeroMax
+      ? koulutus?.metadata?.opintojenLaajuusNumeroMin
+      : '';
 
   const { data: toteutus } = usePohjaEntity(ENTITY.TOTEUTUS);
 
@@ -117,6 +125,7 @@ export const CreateToteutusPage = () => {
           isAvoinKorkeakoulutus,
           tunniste,
           opinnonTyyppiKoodiUri,
+          koulutusOpintojenLaajuusNumero,
         });
   }, [
     toteutus,
@@ -126,6 +135,7 @@ export const CreateToteutusPage = () => {
     isAvoinKorkeakoulutus,
     tunniste,
     opinnonTyyppiKoodiUri,
+    koulutusOpintojenLaajuusNumero,
   ]);
 
   return (

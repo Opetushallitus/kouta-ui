@@ -6,6 +6,8 @@ import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import getUserRoles from '#/src/utils/getUserRoles';
 import isOid from '#/src/utils/isOid';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
@@ -42,6 +44,63 @@ const organisaatioHasCorrectType = organisaatio => {
   }
 
   return !organisaatiotyypit.find(t => Boolean(invalidOrganisaatioTypeMap[t]));
+};
+
+//OY-3929 oph-oikeuksisille virkailijoille haetaan organisaatiopuusta valitun organisaation lapsiorganisaatiot,
+//muille virkailijoille kaikki joihin on oikeudet
+export const useOrgCreateHierarkia = organisaatioOid => {
+  const isOph = useIsOphVirkailija();
+  const allowedHierarkia = useAllowedOrgs();
+  const ophHierarkia = useOrganisaatioHierarkia(organisaatioOid, {
+    skipParents: true,
+  });
+
+  if (isOph) {
+    return ophHierarkia;
+  } else {
+    return allowedHierarkia;
+  }
+};
+
+export const useAllowedOrgs = () => {
+  const roleBuilder = useAuthorizedUserRoleBuilder();
+  const user = useAuthorizedUser();
+  const roles = useMemo(() => getUserRoles(user), [user]);
+  const oids = useMemo(() => getKoutaRolesOrganisaatioOids(roles), [roles]);
+
+  const promiseFn = useMemo(() => {
+    return getOrganisaatioHierarkia;
+  }, []);
+
+  const { data, ...rest } = useApiQuery(
+    'searchOrganisaatioHierarkia',
+    promiseFn,
+    {
+      oids,
+    },
+    { ...LONG_CACHE_QUERY_OPTIONS }
+  );
+
+  const hasRequiredRoles = useCallback(
+    organisaatio => {
+      return createCanReadSomethingRoleBuilder(
+        roleBuilder,
+        organisaatio
+      ).result();
+    },
+    [roleBuilder]
+  );
+
+  const hierarkia = useMemo(() => {
+    return _.isArray(data)
+      ? flatFilterHierarkia(
+          data,
+          org => organisaatioHasCorrectType(org) && hasRequiredRoles(org)
+        )
+      : [];
+  }, [data, hasRequiredRoles]);
+
+  return { hierarkia, ...rest };
 };
 
 export const useReadableOrganisaatioHierarkia = ({

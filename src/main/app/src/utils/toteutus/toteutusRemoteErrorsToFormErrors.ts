@@ -1,11 +1,12 @@
+import _ from 'lodash';
+
 import { LANGUAGES } from '#/src/constants';
 import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
 
-export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
-  errorType,
-  msg,
-  path,
-}) => {
+export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
+  { errorType, msg, path, meta },
+  formValues = {}
+) => {
   if (path.endsWith('kuvaus') && errorType === 'InvalidKielistetty') {
     const painotusIndex = path.match(/painotukset\[(\d+)\]/)?.[1];
     const erityinenKoulutustehtavaIndex = path.match(
@@ -106,20 +107,34 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
     };
   }
 
-  const opintojaksoIndex = path.match(/liitetytOpintojaksot\[(\d+)\]/)?.[1];
   if (
-    /metadata.liitetytOpintojaksot\[\d+]\.julkaisutila/.test(path) &&
+    /metadata.liitetytOpintojaksot.julkaisutila/.test(path) &&
     errorType === 'invalidTilaForLiitettyOpintojaksoOnJulkaisu'
   ) {
-    return {
-      field: `opintojaksojenLiittaminen.opintojaksot[${opintojaksoIndex}].opintojakso`,
-      errorKey: `validointivirheet.${errorType}`,
-    };
+    const liitetytOpintojaksot =
+      formValues?.opintojaksojenLiittaminen?.opintojaksot || [];
+    const indicesForOpintojaksotWithInvalidTila = _.map(meta.toteutukset, oid =>
+      _.findIndex(liitetytOpintojaksot, ['opintojakso.value', oid])
+    ).filter(i => i >= 0);
+
+    return indicesForOpintojaksotWithInvalidTila.map(index => {
+      return {
+        field: `opintojaksojenLiittaminen.opintojaksot[${index}].opintojakso`,
+        errorKey: `validointivirheet.${errorType}`,
+      };
+    });
   }
 
   if (errorType === 'invalidIsAvoinKorkeakoulutusIntegrity') {
     return {
       field: 'tiedot.isAvoinKorkeakoulutus',
+      errorKey: `validointivirheet.${errorType}`,
+    };
+  }
+
+  if (errorType === 'invalidJarjestajaForAvoinKorkeakoulutus') {
+    return {
+      field: 'tarjoajat',
       errorKey: `validointivirheet.${errorType}`,
     };
   }

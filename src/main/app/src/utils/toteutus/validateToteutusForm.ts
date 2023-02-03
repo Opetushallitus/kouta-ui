@@ -175,6 +175,7 @@ export const validateToteutusForm = (
   return _fp
     .flow(
       validatePohja,
+      validateExistence('organisaatioOid'),
       validateExistence('tila'),
       validateArrayMinLength('kieliversiot', 1),
       validateTranslations('tiedot.nimi'),

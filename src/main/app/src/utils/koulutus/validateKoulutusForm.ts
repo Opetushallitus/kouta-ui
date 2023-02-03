@@ -32,6 +32,7 @@ export const validateKoulutusForm = (values, registeredFields) => {
   return _fp
     .flow(
       validateCommonFields,
+      validateExistence('organisaatioOid'),
       validateArrayMinLength('kieliversiot', 1),
       validateTranslations('information.nimi'),
       validateExistence('information.koulutus'),

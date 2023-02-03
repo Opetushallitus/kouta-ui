@@ -452,6 +452,15 @@ export const fillKieliversiotSection = (
   });
 };
 
+export const fillOrgSection = orgOid => {
+  withinSection('organisaatio', () => {
+    getByTestId('organisaatioSelect').within(() => {
+      selectOption(orgOid);
+    });
+    jatka();
+  });
+};
+
 export const fillPohjaSection = () => {
   withinSection('pohja', () => {
     jatka();

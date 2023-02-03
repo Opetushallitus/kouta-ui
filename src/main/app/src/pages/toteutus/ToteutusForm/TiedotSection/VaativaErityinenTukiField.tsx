@@ -4,12 +4,23 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldSwitch } from '#/src/components/formFields';
-import isAmmatillinenPerustutkinto from '#/src/utils/koulutus/isAmmatillinenPerustutkinto';
+import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 
-const VaativaErityinenTukiField = ({ name, koulutus }) => {
+const useIsAmmatillinenPerustutkinto = koulutus => {
+  // Ammatillisella koulutuksella voi olla vain yksi koulutusKoodiUri
+  const koodiUri = koulutus?.koulutuksetKoodiUri?.[0];
+
+  const { data: koulutusByKoodiUri } = useKoulutusByKoodi({
+    koodiUri,
+  });
+
+  return koulutusByKoodiUri?.koulutustyyppiKoodit?.includes('koulutustyyppi_1');
+};
+
+export const VaativaErityinenTukiField = ({ name, koulutus }) => {
   const { t } = useTranslation();
 
-  return isAmmatillinenPerustutkinto(koulutus) ? (
+  return useIsAmmatillinenPerustutkinto(koulutus) ? (
     <Field
       name={`${name}.ammatillinenPerustutkintoErityisopetuksena`}
       component={FormFieldSwitch}
@@ -18,4 +29,3 @@ const VaativaErityinenTukiField = ({ name, koulutus }) => {
     </Field>
   ) : null;
 };
-export default VaativaErityinenTukiField;

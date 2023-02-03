@@ -1,7 +1,12 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { ENTITY, FormMode, KOULUTUSTYYPIT } from '#/src/constants';
+import {
+  ENTITY,
+  FormMode,
+  KOULUTUSTYYPIT,
+  KOULUTUSTYYPPI,
+} from '#/src/constants';
 
 import { initialValues } from '../initialToteutusValues';
 import ToteutusForm from './index';
@@ -18,14 +23,16 @@ export default {
   },
 };
 
-const Wrapper = ({ koulutustyyppi = 'amm' }) => {
+const Wrapper = ({ koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS }) => {
   return (
     <ReduxForm
       form={ENTITY.TOTEUTUS}
       initialValues={initialValues({
-        koulutustyyppi,
-        koulutusNimi: 'koulutuksen nimi',
-        koulutusKielet: ['fi'],
+        koulutus: {
+          koulutustyyppi,
+          nimi: 'koulutuksen nimi',
+          kielivalinta: ['fi'],
+        },
       })}
       mode={FormMode.CREATE}
     >
@@ -35,13 +42,12 @@ const Wrapper = ({ koulutustyyppi = 'amm' }) => {
         koulutus={{
           koulutustyyppi,
         }}
-        koulutustyyppi={koulutustyyppi}
       />
     </ReduxForm>
   );
 };
 Wrapper.args = {
-  koulutustyyppi: 'amm',
+  koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 };
 
 export const basic = ({ koulutustyyppi }) => (

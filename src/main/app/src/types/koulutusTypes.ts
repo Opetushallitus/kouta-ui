@@ -1,7 +1,10 @@
 import { EditorState } from '#/src/components/Editor/Editor';
 import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 
-export type KoulutusModel = any;
+// TODO: Täydennä KoulutusModel
+export type KoulutusModel = {
+  koulutustyyppi: KOULUTUSTYYPPI;
+} & Record<string, any>;
 
 export type TutkinnonOsa = {
   koulutus: SelectOption;

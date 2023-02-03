@@ -377,7 +377,8 @@
     "taiteenPerusopetus": "Taiteen perusopetus",
     "kkOpintojakso": "Opintojakso",
     "erikoislaakari": "Erikoislääkärikoulutukset",
-    "kkOpintokokonaisuus": "Opintokokonaisuus"
+    "kkOpintokokonaisuus": "Opintokokonaisuus",
+    "muu": "Muu koulutus"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",

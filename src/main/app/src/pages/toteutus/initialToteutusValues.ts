@@ -7,42 +7,72 @@ import {
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
-export const initialValues = ({
-  koulutustyyppi,
-  koulutusNimi,
-  koulutusKielet,
-  isAvoinKorkeakoulutus,
-  tunniste,
-  opinnonTyyppiKoodiUri,
-  koulutusOpintojenLaajuusNumero,
-}) => ({
-  tila: DEFAULT_JULKAISUTILA,
-  esikatselu: true,
-  kieliversiot: koulutusKielet,
-  tiedot: {
-    nimi: koulutusNimi,
-    isAvoinKorkeakoulutus,
-    tunniste,
-    opinnonTyyppi: { value: opinnonTyyppiKoodiUri },
-    opintojenLaajuusNumero:
-      koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS
-        ? koulutusOpintojenLaajuusNumero
-        : undefined,
-  },
-  pohja: {
-    tapa: POHJAVALINTA.UUSI,
-  },
-  jarjestamistiedot: {
-    maksullisuustyyppi: MaksullisuusTyyppi.MAKSUTON,
-    apurahaMaaraTyyppi: MaaraTyyppi.YKSI_ARVO,
-    apurahaYksikko: { value: ApurahaYksikko.EURO },
-    suunniteltuKesto: { vuotta: 0, kuukautta: 0 },
-  },
-  ...(koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
-    ? {
-        lukiolinjat: {
-          yleislinja: true,
-        },
-      }
-    : {}),
-});
+export const initialValues = ({ koulutus }) => {
+  const koulutustyyppi = koulutus?.koulutustyyppi;
+  const koulutusKielet = koulutus?.kielivalinta;
+  const isAvoinKorkeakoulutus = koulutus?.metadata?.isAvoinKorkeakoulutus;
+  const tunniste = koulutus?.metadata?.tunniste;
+  const opinnonTyyppiKoodiUri = koulutus?.metadata?.opinnonTyyppiKoodiUri;
+  const opintojenLaajuusNumeroMin =
+    koulutus?.metadata?.opintojenLaajuusNumeroMin;
+  const opintojenLaajuusNumeroMax =
+    koulutus?.metadata?.opintojenLaajuusNumeroMax;
+
+  const opintojenLaajuusNumero =
+    koulutus?.metadata?.opintojenLaajuusNumeroMin ===
+    koulutus?.metadata?.opintojenLaajuusNumeroMax
+      ? koulutus?.metadata?.opintojenLaajuusNumeroMin
+      : '';
+
+  return {
+    tila: DEFAULT_JULKAISUTILA,
+    esikatselu: true,
+    kieliversiot: koulutusKielet,
+    tiedot: {
+      nimi: [
+        KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+        KOULUTUSTYYPPI.TUTKINNON_OSA,
+        KOULUTUSTYYPPI.OSAAMISALA,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+        KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+        KOULUTUSTYYPPI.MUU,
+      ].includes(koulutustyyppi)
+        ? koulutus?.nimi
+        : null,
+      isAvoinKorkeakoulutus,
+      tunniste,
+      opinnonTyyppi: { value: opinnonTyyppiKoodiUri },
+      opintojenLaajuusNumero:
+        koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS
+          ? opintojenLaajuusNumero
+          : undefined,
+      ...(koulutustyyppi === KOULUTUSTYYPPI.MUU
+        ? {
+            laajuusNumeroTyyppi:
+              opintojenLaajuusNumeroMin === opintojenLaajuusNumeroMax
+                ? MaaraTyyppi.YKSI_ARVO
+                : MaaraTyyppi.VAIHTELUVALI,
+            opintojenLaajuusNumeroMin: opintojenLaajuusNumeroMin,
+            opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
+          }
+        : {}),
+    },
+    pohja: {
+      tapa: POHJAVALINTA.UUSI,
+    },
+    jarjestamistiedot: {
+      maksullisuustyyppi: MaksullisuusTyyppi.MAKSUTON,
+      apurahaMaaraTyyppi: MaaraTyyppi.YKSI_ARVO,
+      apurahaYksikko: { value: ApurahaYksikko.EURO },
+      suunniteltuKesto: { vuotta: 0, kuukautta: 0 },
+    },
+    ...(koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
+      ? {
+          lukiolinjat: {
+            yleislinja: true,
+          },
+        }
+      : {}),
+  };
+};

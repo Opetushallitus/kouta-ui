@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
@@ -351,7 +351,7 @@ const ToteutusForm = ({
           entity={toteutus}
           {...getTestIdProps('tilaSection')}
         />
-        {_fp.isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua && (
+        {_.isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua && (
           <FormCollapse
             header={
               t('toteutuslomake.toteutukseenLiitetytHakukohteet') +

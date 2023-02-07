@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 
 import { Checkbox } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY } from '#/src/constants';
@@ -19,23 +19,22 @@ export const createHeadingCheckbox =
 
     const pageItems =
       entityType === ENTITY.HAKUKOHDE
-        ? _fp.flow(
-            _fp.filter(
-              ({ organisaatio }) =>
-                isOphVirkailija ||
-                useCurrentUserHasRole(
-                  ENTITY.HAKUKOHDE,
-                  CRUD_ROLES.UPDATE,
-                  organisaatio?.oid
-                )
-            )
-          )(rows)
+        ? _.filter(
+            rows,
+            ({ organisaatio }) =>
+              isOphVirkailija ||
+              useCurrentUserHasRole(
+                ENTITY.HAKUKOHDE,
+                CRUD_ROLES.UPDATE,
+                organisaatio?.oid
+              )
+          )
         : rows;
 
     const allPageItemsSelected = useMemo(
       () =>
-        !_fp.isEmpty(pageItems) &&
-        _fp.every(({ oid: pageOid }) => Boolean(selection[pageOid]), pageItems),
+        !_.isEmpty(pageItems) &&
+        _.every(pageItems, ({ oid: pageOid }) => Boolean(selection[pageOid])),
       [selection, pageItems]
     );
 

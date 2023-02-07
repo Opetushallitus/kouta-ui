@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -33,7 +32,7 @@ const ActionButton = styled(IconButton).attrs({ variant: 'text' })`
 const VerticalSeparator = styled(Box).attrs({ marginLeft: 2, marginRight: 2 })`
   display: block;
   height: auto;
-  width: px;
+  width: 1px;
   border-left: 1px solid #00526c;
   padding: 0;
   align-self: stretch;
@@ -48,6 +47,21 @@ function getJulkaisutilaTranslationKeyForDropdown(tila: JULKAISUTILA): string {
   throw new Error(`Unknown julkaisutila given: ${tila}`);
 }
 
+const useTilaOptions = t =>
+  useMemo(
+    () =>
+      _.flow(
+        _.values,
+        tilat => _.filter(tilat, x => x !== JULKAISUTILA.POISTETTU),
+        tilat =>
+          _.map(tilat, tila => ({
+            label: t(getJulkaisutilaTranslationKeyForDropdown(tila)),
+            value: tila,
+          }))
+      )(JULKAISUTILA),
+    [t]
+  );
+
 export const EntityListActionBar = ({
   entityType,
   selection,
@@ -57,19 +71,6 @@ export const EntityListActionBar = ({
 }) => {
   const { t } = useTranslation();
   const isDisabled = _.size(selection) === 0;
-  const useTilaOptions = t =>
-    useMemo(
-      () =>
-        _fp.flow(
-          _fp.values,
-          _fp.remove(_fp.isEqual(JULKAISUTILA.POISTETTU)),
-          _fp.map(tila => ({
-            label: t(getJulkaisutilaTranslationKeyForDropdown(tila)),
-            value: tila,
-          }))
-        )(JULKAISUTILA),
-      [t]
-    );
 
   const tilaOptions = useTilaOptions(t);
 

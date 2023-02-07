@@ -24,10 +24,12 @@ export const initialValues = ({
     isAvoinKorkeakoulutus,
     tunniste,
     opinnonTyyppi: { value: opinnonTyyppiKoodiUri },
-    opintojenLaajuusNumero:
-      koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS
-        ? koulutusOpintojenLaajuusNumero
-        : undefined,
+    opintojenLaajuusNumero: [
+      KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+      KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+    ].includes(koulutustyyppi)
+      ? koulutusOpintojenLaajuusNumero
+      : undefined,
   },
   pohja: {
     tapa: POHJAVALINTA.UUSI,

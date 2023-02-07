@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
@@ -65,7 +65,7 @@ import { TutkinnonOsatSection } from './TutkinnonOsatSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
-  _fp.head(hierarkia.children.filter(isInHierarkia(org)));
+  _.head(hierarkia.children.filter(isInHierarkia(org)));
 
 type KoulutusFormProps = {
   organisaatioOid: string;
@@ -382,7 +382,7 @@ export const KoulutusForm = ({
               entity={koulutusProp}
             />
 
-            {_fp.isFunction(onAttachToteutus) && (
+            {_.isFunction(onAttachToteutus) && (
               <FormCollapse
                 header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
                 id="koulutukseen-liitetetyt-toteutukset"

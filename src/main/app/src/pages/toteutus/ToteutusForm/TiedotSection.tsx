@@ -262,6 +262,16 @@ export const VapaaSivistystyoMuuTiedotSection = ({
 
 export const AmmMuuTiedotSection = VapaaSivistystyoMuuTiedotSection;
 
+const useLaajuusYksikkoTextValue = (koulutus, language) => {
+  const laajuusyksikkoKoodiUri =
+    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
+  const { koodi: forcedLaajuusKoodi } = useKoodi(laajuusyksikkoKoodiUri);
+
+  return laajuusyksikkoKoodiUri
+    ? getKoodiNimiTranslation(forcedLaajuusKoodi, language) || ''
+    : '';
+};
+
 export const KkOpintojaksoTiedotSection = ({
   language,
   disabled,
@@ -270,13 +280,10 @@ export const KkOpintojaksoTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <OpintojenLaajuusReadOnlyField
-      selectedLanguage={language}
-      laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
-      laajuusyksikkoKoodiUri={
-        koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
-      }
-      laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
+    <OpintojenLaajuusFieldExtended
+      name={name}
+      disabled={disabled}
+      defaultLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
     />
     <CommonTiedotFields name={name} />
     <TunnisteField name={name} />
@@ -290,30 +297,20 @@ export const KkOpintokokonaisuusTiedotSection = ({
   disabled,
   name,
   koulutus,
-}: ToteutusTiedotSectionProps) => {
-  const laajuusyksikkoKoodiUri =
-    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
-  const { koodi: forcedLaajuusKoodi } = useKoodi(laajuusyksikkoKoodiUri);
-
-  const laajuusYksikkoTextValue = laajuusyksikkoKoodiUri
-    ? getKoodiNimiTranslation(forcedLaajuusKoodi, language) || ''
-    : '';
-
-  return (
-    <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={disabled} />
-      <OpintojenLaajuusFieldExtended
-        name={name}
-        disabled={disabled}
-        defaultLaajuusYksikko={laajuusYksikkoTextValue}
-      />
-      <TunnisteField name={name} />
-      <OpinnonTyyppiField name={name} />
-      <AvoinKorkeakoulutusField name={name} />
-      <CommonTiedotFields name={name} />
-    </VerticalBox>
-  );
-};
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <OpintojenLaajuusFieldExtended
+      name={name}
+      disabled={disabled}
+      defaultLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
+    />
+    <TunnisteField name={name} />
+    <OpinnonTyyppiField name={name} />
+    <AvoinKorkeakoulutusField name={name} />
+    <CommonTiedotFields name={name} />
+  </VerticalBox>
+);
 
 export const OpettajaTiedotSection = ({
   koulutus,

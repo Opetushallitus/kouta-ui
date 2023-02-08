@@ -20,8 +20,6 @@ type Yhteystieto = {
   verkkosivu: TranslatedField<string>;
 };
 
-type SoraKuvausModel = any;
-
 type SelectOption<T = string | undefined> = { label?: string; value: T };
 
 type SelectOptions = Array<SelectOption<string>>;
@@ -29,16 +27,6 @@ type SelectOptions = Array<SelectOption<string>>;
 type PohjaValinta = { tapa: string; valinta: string };
 
 type ValueOf<T> = T[keyof T];
-
-type EntityBase = {
-  nimi?: TranslatedField<string>;
-  tila: JULKAISUTILA;
-  _enrichedData?: {
-    esitysnimi: string;
-  };
-  muokkaaja?: string;
-  modified?: string;
-};
 
 type Organisaatio = {
   oid: string;

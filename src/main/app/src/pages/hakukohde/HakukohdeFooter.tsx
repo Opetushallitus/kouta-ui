@@ -10,9 +10,11 @@ import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
-import { HakukohdeModel } from '#/src/types/hakukohdeTypes';
-import { HakuModel } from '#/src/types/hakuTypes';
-import { ToteutusModel } from '#/src/types/toteutusTypes';
+import {
+  ToteutusModel,
+  HakuModel,
+  HakukohdeModel,
+} from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { createHakukohde } from '#/src/utils/hakukohde/createHakukohde';

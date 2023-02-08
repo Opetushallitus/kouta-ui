@@ -30,7 +30,7 @@ import {
   useOrganisaatio,
 } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { KoulutusModel } from '#/src/types/koulutusTypes';
+import { KoulutusModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';

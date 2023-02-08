@@ -25,8 +25,7 @@ import {
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
-import { KoulutusModel } from '#/src/types/koulutusTypes';
-import { ToteutusModel } from '#/src/types/toteutusTypes';
+import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';

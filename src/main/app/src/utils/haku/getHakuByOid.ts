@@ -1,4 +1,5 @@
 import { ENTITY } from '#/src/constants';
+import { HakuModel } from '#/src/types/domainTypes';
 
 import { getEntityByOid, useEntityByOid } from '../api/getEntityByOid';
 
@@ -11,6 +12,6 @@ export const getHakuByOid = async ({ oid, httpClient, apiUrls }) =>
   });
 
 export const useHakuByOid = (oid, options = {}) =>
-  useEntityByOid(ENTITY.HAKU, { oid }, options);
+  useEntityByOid<HakuModel>(ENTITY.HAKU, { oid }, options);
 
 export default getHakuByOid;

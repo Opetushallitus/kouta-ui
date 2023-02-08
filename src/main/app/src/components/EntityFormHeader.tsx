@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import FormHeader from '#/src/components/FormHeader';
 import { ENTITY } from '#/src/constants';
+import { EntityModelBase } from '#/src/types/domainTypes';
 
 import { getEntityNimiTranslation } from '../utils';
 import LargeStatusTag from './StatusTag/LargeStatusTag';
@@ -11,7 +12,7 @@ import { UlkoinenTunniste } from './UlkoinenTunniste';
 
 type EntityFormHeaderProps = {
   entityType: ENTITY;
-  entity?: EntityBase;
+  entity?: EntityModelBase;
 };
 
 export default function EntityFormHeader({

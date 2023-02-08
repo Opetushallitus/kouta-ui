@@ -1,4 +1,5 @@
 import { ENTITY } from '#/src/constants';
+import { ToteutusModel } from '#/src/types/domainTypes';
 import { getEntityByOid, useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
 const getToteutusByOid = async ({ oid, apiUrls, httpClient }) =>
@@ -10,6 +11,6 @@ const getToteutusByOid = async ({ oid, apiUrls, httpClient }) =>
   });
 
 export const useToteutusByOid = (oid?: string | null, options = {}) =>
-  useEntityByOid(ENTITY.TOTEUTUS, { oid }, options);
+  useEntityByOid<ToteutusModel>(ENTITY.TOTEUTUS, { oid }, options);
 
 export default getToteutusByOid;

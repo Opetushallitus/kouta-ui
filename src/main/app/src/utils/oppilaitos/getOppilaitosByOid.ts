@@ -1,4 +1,5 @@
 import { ENTITY } from '#/src/constants';
+import { OppilaitosModel } from '#/src/types/domainTypes';
 
 import { getEntityByOid, useEntityByOid } from '../api/getEntityByOid';
 
@@ -17,6 +18,10 @@ export const getOppilaitosByOid = async ({
   });
 
 export const useOppilaitosByOid = (oid?: string | null, options = {}) =>
-  useEntityByOid(ENTITY.OPPILAITOS, { oid, silent: true }, options);
+  useEntityByOid<OppilaitosModel>(
+    ENTITY.OPPILAITOS,
+    { oid, silent: true },
+    options
+  );
 
 export default getOppilaitosByOid;

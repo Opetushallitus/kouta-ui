@@ -10,7 +10,7 @@ import { useFormMode, useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
-import { KoulutusModel } from '#/src/types/koulutusTypes';
+import { KoulutusModel } from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';

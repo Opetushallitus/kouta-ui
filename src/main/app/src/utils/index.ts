@@ -19,6 +19,7 @@ import {
   NDASH,
   ORGANISAATIOTYYPPI,
 } from '#/src/constants';
+import { EntityModelBase } from '#/src/types/domainTypes';
 import { memoize, memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
@@ -310,7 +311,7 @@ export const isIn = (coll: Array<unknown>) => (val: unknown) =>
   coll?.includes(val);
 
 export const getEntityNimiTranslation = (
-  entity: EntityBase | undefined,
+  entity: EntityModelBase | undefined,
   lng: string
 ) => {
   const { _enrichedData, nimi } = entity ?? {};

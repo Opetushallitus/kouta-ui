@@ -1,4 +1,5 @@
 import { ENTITY } from '#/src/constants';
+import { SoraKuvausModel } from '#/src/types/domainTypes';
 import { getEntityByOid, useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
 export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) =>
@@ -10,6 +11,6 @@ export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) =>
   });
 
 export const useSoraKuvausById = (id: string | null, options = {}) =>
-  useEntityByOid(ENTITY.SORA_KUVAUS, { oid: id }, options);
+  useEntityByOid<SoraKuvausModel>(ENTITY.SORA_KUVAUS, { oid: id }, options);
 
 export default getSoraKuvausById;

@@ -19,8 +19,7 @@ import {
   DEFAULT_JULKAISUTILA,
 } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
-import { KoulutusModel } from '#/src/types/koulutusTypes';
-import { ToteutusModel } from '#/src/types/toteutusTypes';
+import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 

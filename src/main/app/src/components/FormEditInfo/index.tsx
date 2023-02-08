@@ -7,6 +7,7 @@ import Anchor from '#/src/components/Anchor';
 import { Icon, Box } from '#/src/components/virkailija';
 import { useMuokkaajaName } from '#/src/hooks/useMuokkaajaName';
 import { getThemeProp } from '#/src/theme';
+import { EntityModelBase } from '#/src/types/domainTypes';
 import { formatDateValue } from '#/src/utils';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`
@@ -29,13 +30,18 @@ const Container = styled.div`
   display: flex;
 `;
 
-const FormEditInfo = ({ entity, date, historyUrl, ...props }) => {
+type FormEditProps = {
+  entity: EntityModelBase;
+  historyUrl?: string;
+};
+
+const FormEditInfo = ({ entity, historyUrl }: FormEditProps) => {
   const { t } = useTranslation();
 
   const muokkaajaName = useMuokkaajaName(entity);
 
   return (
-    <Container {...props}>
+    <Container>
       <IconContainer>
         <InfoIcon />
       </IconContainer>

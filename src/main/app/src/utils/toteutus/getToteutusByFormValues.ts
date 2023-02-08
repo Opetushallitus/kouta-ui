@@ -185,12 +185,20 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         otsikko: osaamisalaLinkkiOtsikot[osaamisala] || {},
       })),
       yhteyshenkilot: (values?.yhteyshenkilot || []).map(
-        ({ nimi, titteli, sahkoposti, puhelinnumero, verkkosivu }) => ({
+        ({
+          nimi,
+          titteli,
+          sahkoposti,
+          puhelinnumero,
+          verkkosivu,
+          verkkosivuTeksti,
+        }) => ({
           nimi: pickTranslations(nimi || {}),
           titteli: pickTranslations(titteli || {}),
           sahkoposti: pickTranslations(sahkoposti || {}),
           puhelinnumero: pickTranslations(puhelinnumero || {}),
           wwwSivu: pickTranslations(verkkosivu || {}),
+          wwwSivuTeksti: pickTranslations(verkkosivuTeksti || {}),
         })
       ),
       ammattinimikkeet: _fp

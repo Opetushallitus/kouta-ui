@@ -60,11 +60,19 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
         })
       ),
       yhteyshenkilot: (values?.yhteyshenkilot || []).map(
-        ({ nimi, titteli, puhelinnumero, sahkoposti, verkkosivu }) => ({
+        ({
+          nimi,
+          titteli,
+          puhelinnumero,
+          sahkoposti,
+          verkkosivu,
+          verkkosivuTeksti,
+        }) => ({
           nimi: pickTranslations(nimi),
           titteli: pickTranslations(titteli),
           puhelinnumero: pickTranslations(puhelinnumero),
           wwwSivu: pickTranslations(verkkosivu),
+          wwwSivuTeksti: pickTranslations(verkkosivuTeksti),
           sahkoposti: pickTranslations(sahkoposti),
         })
       ),

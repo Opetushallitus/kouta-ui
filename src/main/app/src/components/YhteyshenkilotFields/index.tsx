@@ -53,6 +53,13 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
                 component={FormFieldUrlInput}
               />
             </Box>
+            <Box>
+              <Field
+                name={`${field}.verkkosivuTeksti.${language}`}
+                label={t('yleiset.verkkosivu-teksti')}
+                component={FormFieldUrlInput}
+              />
+            </Box>
           </>
         )}
       </FieldArrayList>

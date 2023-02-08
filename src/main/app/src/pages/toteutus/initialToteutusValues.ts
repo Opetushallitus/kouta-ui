@@ -17,6 +17,8 @@ export const initialValues = ({ koulutus }) => {
     koulutus?.metadata?.opintojenLaajuusNumeroMin;
   const opintojenLaajuusNumeroMax =
     koulutus?.metadata?.opintojenLaajuusNumeroMax;
+  const opintojenLaajuusyksikkoKoodiUri =
+    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
 
   const opintojenLaajuusNumero =
     koulutus?.metadata?.opintojenLaajuusNumeroMin ===
@@ -55,6 +57,7 @@ export const initialValues = ({ koulutus }) => {
                 : MaaraTyyppi.VAIHTELUVALI,
             opintojenLaajuusNumeroMin: opintojenLaajuusNumeroMin,
             opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
+            opintojenLaajuusyksikko: { value: opintojenLaajuusyksikkoKoodiUri },
           }
         : {}),
     },

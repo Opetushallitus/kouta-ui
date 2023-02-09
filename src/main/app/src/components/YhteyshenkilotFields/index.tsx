@@ -57,7 +57,7 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
               <Field
                 name={`${field}.verkkosivuTeksti.${language}`}
                 label={t('yleiset.verkkosivu-teksti')}
-                component={FormFieldUrlInput}
+                component={FormFieldInput}
               />
             </Box>
           </>

@@ -168,9 +168,9 @@ const fillKkOpintokokonaisuusTiedotSection = () => {
 
     getByTestId('laajuusnumero').pipe(paste('10'));
 
-    getSelectByLabel('yleiset.laajuusyksikko').pipe(
-      pFillSelect('opintopistettä')
-    );
+    cy.findByLabelText(/laajuusyksikko/)
+      .should('be.disabled')
+      .should('have.value', 'opintopistettä');
 
     getInputByLabel('yleiset.tunniste').pipe(paste('ABC-123'));
 

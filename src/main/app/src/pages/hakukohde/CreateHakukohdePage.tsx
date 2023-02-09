@@ -34,13 +34,21 @@ import {
 
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
-  return merge(getFormValuesByHakukohde(_.omit(hakukohde, ['organisaatioOid']), FormMode.CREATE), {
-    tila: DEFAULT_JULKAISUTILA,
-    perustiedot: {
-      nimi: isNimiKoodi ? null : nimi,
-      hakukohdeKoodiUri: isNimiKoodi ? toSelectValue(hakukohdeKoodiUri) : null,
-    },
-  });
+  return merge(
+    getFormValuesByHakukohde(
+      _.omit(hakukohde, ['organisaatioOid']),
+      FormMode.CREATE
+    ),
+    {
+      tila: DEFAULT_JULKAISUTILA,
+      perustiedot: {
+        nimi: isNimiKoodi ? null : nimi,
+        hakukohdeKoodiUri: isNimiKoodi
+          ? toSelectValue(hakukohdeKoodiUri)
+          : null,
+      },
+    }
+  );
 };
 
 export const CreateHakukohdePage = () => {

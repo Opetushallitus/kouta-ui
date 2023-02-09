@@ -14,6 +14,7 @@ export const initialValues = ({
   isAvoinKorkeakoulutus,
   tunniste,
   opinnonTyyppiKoodiUri,
+  koulutusOpintojenLaajuusNumero,
 }) => ({
   tila: DEFAULT_JULKAISUTILA,
   esikatselu: true,
@@ -23,6 +24,10 @@ export const initialValues = ({
     isAvoinKorkeakoulutus,
     tunniste,
     opinnonTyyppi: { value: opinnonTyyppiKoodiUri },
+    opintojenLaajuusNumero:
+      koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS
+        ? koulutusOpintojenLaajuusNumero
+        : undefined,
   },
   pohja: {
     tapa: POHJAVALINTA.UUSI,

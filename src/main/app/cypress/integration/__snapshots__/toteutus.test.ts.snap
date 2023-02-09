@@ -3486,7 +3486,6 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": true,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -3499,6 +3498,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": true,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -3578,9 +3578,9 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
     },
     "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
     "opintojenLaajuusNumero": 10,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
-    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
     "taiteenalaKoodiUrit": [],

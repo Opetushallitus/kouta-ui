@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { UseMutationResult } from 'react-query';
 import styled from 'styled-components';
 
@@ -76,8 +76,8 @@ type CopyResultItem = {
 };
 
 const isCopyResultSuccessful = mutationResult =>
-  _fp.isArray(mutationResult?.data) &&
-  _fp.every(result => result.status === 'success', mutationResult?.data);
+  _.isArray(mutationResult?.data) &&
+  _.every(mutationResult?.data, { status: 'success' });
 
 export const CopyResultModal = ({
   entityType,
@@ -87,11 +87,7 @@ export const CopyResultModal = ({
 }: {
   entityType: ENTITY;
   headerText: string;
-  mutationResult: UseMutationResult<
-    Array<CopyResultItem>,
-    unknown,
-    Array<string>
-  >;
+  mutationResult: UseMutationResult<Array<CopyResultItem>, unknown, any>;
   getLinkUrl: any;
 }) => {
   const { removeSelection } = useEntitySelection(entityType);

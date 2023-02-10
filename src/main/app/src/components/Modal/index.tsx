@@ -19,7 +19,7 @@ const Modal = ({
 }) => {
   const wrapBody = Boolean(footer || header); // For legacy modal
 
-  return (
+  return open ? (
     <UiModal open={open} onClose={onClose} {...props}>
       {header && <ModalHeader onClose={onClose}>{header}</ModalHeader>}
       {wrapBody ? (
@@ -31,7 +31,7 @@ const Modal = ({
       )}
       {footer && <ModalFooter>{footer}</ModalFooter>}
     </UiModal>
-  );
+  ) : null;
 };
 
 export default Modal;

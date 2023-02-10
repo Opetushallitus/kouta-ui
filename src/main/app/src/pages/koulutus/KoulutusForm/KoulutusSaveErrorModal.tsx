@@ -25,7 +25,7 @@ export const KoulutusSaveErrorModal = () => {
 
   const organisaatioOid = useSelectedOrganisaatioOid();
 
-  return isOpen ? (
+  return (
     <Modal
       minHeight="90vh"
       maxWidth="1200px"
@@ -59,5 +59,5 @@ export const KoulutusSaveErrorModal = () => {
         ))}
       </Box>
     </Modal>
-  ) : null;
+  );
 };

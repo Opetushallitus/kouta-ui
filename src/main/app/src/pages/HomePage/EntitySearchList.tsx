@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -68,13 +68,10 @@ type EntitySearchListProps = {
 export const EntityListTable = ({ entities, ...rest }) => {
   const rows = useMemo(
     () =>
-      _fp.map(
-        entityData => ({
-          ...entityData,
-          key: entityData?.oid ?? entityData?.id,
-        }),
-        entities
-      ),
+      _.map(entities, entityData => ({
+        ...entityData,
+        key: entityData?.oid ?? entityData?.id,
+      })),
     [entities]
   );
   return <ListTable rows={rows} {...rest} />;

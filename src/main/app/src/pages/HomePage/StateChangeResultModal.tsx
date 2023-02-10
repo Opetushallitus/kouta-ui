@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { UseMutationResult, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
@@ -107,8 +107,8 @@ type StateChangeResultItem = {
 };
 
 const isStateChangeResultSuccessful = mutationResult =>
-  _fp.isArray(mutationResult?.data) &&
-  _fp.every(result => result.status === 'success', mutationResult?.data);
+  _.isArray(mutationResult?.data) &&
+  _.every(mutationResult?.data, { status: 'success' });
 
 export const StateChangeResultModal = ({
   entityType,

@@ -1,5 +1,5 @@
 import { assign } from '@xstate/immer';
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { createMachine } from 'xstate';
 
 type EntityListItem = {
@@ -20,16 +20,17 @@ interface DeselectItemsEvent {
   items: Array<EntityListItem>;
 }
 
-interface ResetSelection {
+interface ResetSelectionEvent {
   type: 'RESET_SELECTION';
   items?: Array<EntityListItem>;
 }
 
 export const EntitySelectionMachine = createMachine(
   {
+    id: 'EntitySelectionMachine',
     schema: {
       context: {} as SelectionContext,
-      events: {} as SelectItemsEvent | DeselectItemsEvent | ResetSelection,
+      events: {} as SelectItemsEvent | DeselectItemsEvent | ResetSelectionEvent,
     },
     context: {
       selection: {},
@@ -49,21 +50,23 @@ export const EntitySelectionMachine = createMachine(
   {
     actions: {
       selectItems: assign<SelectionContext, SelectItemsEvent>((ctx, e) => {
-        _fp.forEach(item => {
+        _.forEach(e.items, item => {
           ctx.selection[item.oid] = item;
-        }, e.items);
+        });
       }),
-      deselectItems: assign<SelectionContext, DeselectItemsEvent>((ctx, e) =>
-        _fp.forEach(item => {
+      deselectItems: assign<SelectionContext, DeselectItemsEvent>((ctx, e) => {
+        _.forEach(e.items, item => {
           delete ctx.selection[item.oid];
-        }, e.items)
-      ),
-      resetSelection: assign<SelectionContext, DeselectItemsEvent>((ctx, e) => {
-        ctx.selection = {};
-        _fp.forEach(item => {
-          ctx.selection[item.oid] = item;
-        }, e?.items);
+        });
       }),
+      resetSelection: assign<SelectionContext, ResetSelectionEvent>(
+        (ctx, e) => {
+          ctx.selection = {};
+          _.forEach(e?.items, item => {
+            ctx.selection[item.oid] = item;
+          });
+        }
+      ),
     } as any,
   }
 );

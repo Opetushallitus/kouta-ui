@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { UseMutationResult } from 'react-query';
 import { usePrevious } from 'react-use';
@@ -10,6 +10,14 @@ import ListTable from '#/src/components/ListTable';
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
+
+const ResultList = ({ data, columns }) => {
+  const rows = useMemo(
+    () => _.map(data, result => ({ ...result, key: result.oid })),
+    [data]
+  );
+  return <ListTable rows={rows} columns={columns} />;
+};
 
 export const ResultModal = ({
   onClose,
@@ -21,7 +29,7 @@ export const ResultModal = ({
 }: {
   onClose: any;
   headerText: string;
-  mutationResult: UseMutationResult<Array<any>, unknown, Array<string>>;
+  mutationResult: UseMutationResult<Array<any>, unknown, unknown>;
   entityType: ENTITY;
   getLinkUrl: any;
   useTableColumns: any;
@@ -32,20 +40,12 @@ export const ResultModal = ({
 
   const usePreviousNonNil = value => {
     const prev = usePrevious(value);
-    return _fp.isEmpty(value) ? prev : value;
+    return _.isEmpty(value) ? prev : value;
   };
 
   const data = usePreviousNonNil(mutationResult.data);
 
-  const ResultList = ({ data, entityType, getLinkUrl }) => {
-    const { t } = useTranslation();
-    const columns = useTableColumns(t, entityType, getLinkUrl);
-    const rows = useMemo(
-      () => _fp.map(result => ({ ...result, key: result.oid }), data),
-      [data]
-    );
-    return <ListTable rows={rows} columns={columns} />;
-  };
+  const columns = useTableColumns(t, entityType, getLinkUrl);
 
   return (
     <Modal
@@ -67,11 +67,7 @@ export const ResultModal = ({
           {t('etusivu.hakukohde.tilanmuutosEpaonnistui')}
         </ErrorAlert>
       ) : (
-        <ResultList
-          data={data}
-          entityType={entityType}
-          getLinkUrl={getLinkUrl}
-        />
+        <ResultList data={data} columns={columns} />
       )}
     </Modal>
   );

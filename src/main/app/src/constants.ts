@@ -17,6 +17,10 @@ export function getJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
   throw new Error(`Unknown julkaisutila given: ${tila}`);
 }
 
+export function safeGetJulkaisutilaTranslationKey(tila?: JULKAISUTILA): string {
+  return tila ? getJulkaisutilaTranslationKey(tila) : '';
+}
+
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
 
 export enum NAKYVYYS {

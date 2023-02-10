@@ -4,12 +4,17 @@ import { useActor, useSelector } from '@xstate/react';
 import { interpret } from 'xstate';
 
 import { ENTITY } from '#/src/constants';
+import { isDev } from '#/src/utils';
 
 import { EntitySelectionMachine } from './entitySelectionMachine';
 
 export const SERVICE_BY_ENTITY = {
-  [ENTITY.TOTEUTUS]: interpret(EntitySelectionMachine).start(),
-  [ENTITY.HAKUKOHDE]: interpret(EntitySelectionMachine).start(),
+  [ENTITY.TOTEUTUS]: interpret(EntitySelectionMachine, {
+    devTools: isDev,
+  }).start(),
+  [ENTITY.HAKUKOHDE]: interpret(EntitySelectionMachine, {
+    devTools: isDev,
+  }).start(),
 };
 
 export const useEntitySelectionApi = actor => {

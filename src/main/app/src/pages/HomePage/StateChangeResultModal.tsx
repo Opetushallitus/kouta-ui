@@ -9,10 +9,10 @@ import SmallStatusTag from '#/src/components/StatusTag/SmallStatusTag';
 import { Icon } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
 import { ResultModal } from '#/src/pages/HomePage/ResultModal';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
+import { useStateChangeConfirmationModal } from './StateChangeConfirmationModal';
 import { useEntitySelection } from './useEntitySelection';
 
 const NimiLink = ({ item, entityType, getLinkUrl }) => {
@@ -29,12 +29,12 @@ const NimiLink = ({ item, entityType, getLinkUrl }) => {
 const Tila = ({ item, entityType }) => {
   const { selection } = useEntitySelection(entityType);
   const vanhaTila = selection?.[item.oid]?.tila;
-  const { tila } = useHakukohdeTila();
+  const { tila } = useStateChangeConfirmationModal();
   const status = item.status;
 
   switch (status) {
     case 'success':
-      return <SmallStatusTag status={tila?.value} />;
+      return tila ? <SmallStatusTag status={tila} /> : null;
     case 'error':
       return <SmallStatusTag status={vanhaTila} />;
     default:
@@ -118,28 +118,20 @@ export const StateChangeResultModal = ({
 }: {
   entityType: ENTITY;
   headerText: string;
-  mutationResult: UseMutationResult<
-    Array<StateChangeResultItem>,
-    unknown,
-    Array<string>
-  >;
+  mutationResult: UseMutationResult<Array<StateChangeResultItem>, unknown, any>;
   getLinkUrl: any;
 }) => {
   const { removeSelection } = useEntitySelection(entityType);
 
   const queryClient = useQueryClient();
 
-  const { setHakukohdeTila } = useHakukohdeTila();
-
   const onClose = useCallback(() => {
     if (isStateChangeResultSuccessful(mutationResult)) {
       removeSelection();
-      setHakukohdeTila(null);
     }
     mutationResult.reset();
-
     queryClient.invalidateQueries('search.homepage.hakukohteet');
-  }, [mutationResult, removeSelection, queryClient, setHakukohdeTila]);
+  }, [mutationResult, removeSelection, queryClient]);
 
   return (
     <ResultModal

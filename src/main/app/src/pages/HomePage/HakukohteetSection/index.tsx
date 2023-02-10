@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { createGlobalState } from 'react-use';
 
 import Button from '#/src/components/Button';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
@@ -21,7 +20,6 @@ import { StateChangeResultModal } from '#/src/pages/HomePage/StateChangeResultMo
 import {
   SERVICE_BY_ENTITY,
   useEntitySelection,
-  useEntitySelectionApi,
 } from '#/src/pages/HomePage/useEntitySelection';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
@@ -33,38 +31,24 @@ import LiitoksetModal from './LiitoksetModal';
 
 const { HAKUKOHDE } = ENTITY;
 
-const useTilaState = createGlobalState(null);
-
-export const useHakukohdeTila = () => {
-  const [hakukohdeTila, setHakukohdeTila] = useTilaState();
-  return {
-    tila: hakukohdeTila,
-    setHakukohdeTila: tila => setHakukohdeTila(tila),
-  };
-};
-
 const HakukohdeActionBar = () => {
-  const { selection, removeSelection } = useEntitySelection(HAKUKOHDE);
-
-  const { openModal } = useStateChangeConfirmationModal();
-  const { setHakukohdeTila } = useHakukohdeTila();
+  const { selection } = useEntitySelection(HAKUKOHDE);
+  const { openModal, tila } = useStateChangeConfirmationModal();
 
   const changeTila = useCallback(
     tila => {
-      if (tila !== null && !_fp.isEmpty(selection)) {
-        setHakukohdeTila(tila);
-        return openModal();
+      if (tila !== null && !_.isEmpty(selection)) {
+        openModal({ tila, entities: selection });
       }
     },
-    [selection, openModal, setHakukohdeTila]
+    [selection, openModal]
   );
+
   return (
     <EntityListActionBar
       entityType={HAKUKOHDE}
-      selection={selection}
-      removeSelection={removeSelection}
-      copyEntities={null}
       changeTila={changeTila}
+      tila={tila}
     />
   );
 };
@@ -91,8 +75,6 @@ export const createGetHakukohdeLinkUrl = organisaatioOid => oid =>
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[HAKUKOHDE]);
-
   const columns = useMemo(
     () =>
       createHakukohdeListColumns(
@@ -107,23 +89,23 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     [t, organisaatioOid]
   );
 
-  const changeHakukohteetTilaMutation = useChangeHakukohteetTilaMutation();
+  const tilaMutationResult = useChangeHakukohteetTilaMutation();
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
-  return changeHakukohteetTilaMutation.isLoading ? (
+  return tilaMutationResult.isLoading ? (
     <OverlaySpin text={t('etusivu.hakukohde.tilaaVaihdetaan')} />
   ) : (
-    <StateChangeConfirmationWrapper entities={selection}>
+    <StateChangeConfirmationWrapper>
       <StateChangeConfirmationModal
-        onStateChangeSelection={changeHakukohteetTilaMutation.mutate}
+        startBatchMutation={tilaMutationResult.mutate}
         headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}
       />
       <StateChangeResultModal
         entityType={HAKUKOHDE}
         headerText={t('etusivu.hakukohde.tilamuutosTuloksetOtsikko')}
-        mutationResult={changeHakukohteetTilaMutation}
+        mutationResult={tilaMutationResult}
         getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
       />
       <NavigationAnchor id="hakukohteet" />

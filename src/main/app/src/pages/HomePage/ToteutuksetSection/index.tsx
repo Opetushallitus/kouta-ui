@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -20,11 +20,7 @@ import { EntityListActionBar } from '../EntityListActionBar';
 import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
-import {
-  SERVICE_BY_ENTITY,
-  useEntitySelection,
-  useEntitySelectionApi,
-} from '../useEntitySelection';
+import { SERVICE_BY_ENTITY, useEntitySelection } from '../useEntitySelection';
 import { useCopyToteutuksetMutation } from './copyToteutukset';
 import { createToteutusListColumns } from './createToteutusListColumns';
 import { KoulutusModal } from './KoulutusModal';
@@ -48,18 +44,15 @@ const Actions = ({ organisaatioOid }) => {
 };
 
 const ToteutusActionBar = () => {
-  const { selection, removeSelection } = useEntitySelection(TOTEUTUS);
-
+  const { selection } = useEntitySelection(TOTEUTUS);
   const { openModal } = useCopyConfirmationModal();
 
+  const copyEntities = useCallback(() => {
+    openModal({ entities: selection, tila: undefined });
+  }, [openModal, selection]);
+
   return (
-    <EntityListActionBar
-      entityType={TOTEUTUS}
-      selection={selection}
-      removeSelection={removeSelection}
-      copyEntities={openModal}
-      changeTila={undefined}
-    />
+    <EntityListActionBar entityType={TOTEUTUS} copyEntities={copyEntities} />
   );
 };
 
@@ -68,8 +61,6 @@ export const createGetToteutusLinkUrl = organisaatioOid => oid =>
 
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
-
-  const { selection } = useEntitySelectionApi(SERVICE_BY_ENTITY[TOTEUTUS]);
 
   const columns = useMemo(
     () =>
@@ -97,10 +88,9 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   return copyMutation.isLoading ? (
     <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />
   ) : (
-    <CopyConfirmationWrapper entities={selection}>
+    <CopyConfirmationWrapper>
       <CopyConfirmationModal
         onCopySelection={copyMutation.mutate}
-        entities={selection}
         headerText={t('etusivu.toteutus.vahvistaKopiointiOtsikko')}
         createColumns={createColumnsForConfirmationModal}
       />

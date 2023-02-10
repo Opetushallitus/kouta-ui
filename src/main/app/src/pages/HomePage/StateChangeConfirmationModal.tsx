@@ -1,16 +1,21 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
-import { useActor, useInterpret, useSelector } from '@xstate/react';
-import _fp from 'lodash/fp';
+import { useInterpret, useSelector } from '@xstate/react';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
+import {
+  safeGetJulkaisutilaTranslationKey,
+  JULKAISUTILA,
+} from '#/src/constants';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import { ModalMachine } from '#/src/machines/modalMachine';
-import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
+import { BatchOpsModalMachine } from '#/src/machines/modalMachine';
 
+import { useBatchOpsModal } from './CopyConfirmationModal';
 import { EntityListTable } from './EntitySearchList';
+import { useEntitySelectionApi } from './useEntitySelection';
 
 export const StateChangeConfirmationModalContext = React.createContext(
   {} as any
@@ -21,48 +26,11 @@ export const useStateChangeConfirmationModal = () => {
     StateChangeConfirmationModalContext
   );
 
-  const [state, send] = useActor(modalService);
-
-  const { setHakukohdeTila } = useHakukohdeTila();
-
-  return useMemo(
-    () => ({
-      isOpen: state.value === 'open',
-      openModal: () => send('OPEN'),
-      closeModal: () => {
-        send('CLOSE');
-        setHakukohdeTila(null);
-      },
-    }),
-    [state, send, setHakukohdeTila]
-  );
+  return useBatchOpsModal(modalService);
 };
 
-export const useFilteredModalSelection = () => {
-  const { selectionService } = useContextOrThrow(
-    StateChangeConfirmationModalContext
-  );
-
-  const selection = useSelector(
-    selectionService,
-    state => state.context.selection
-  );
-
-  const { tila } = useHakukohdeTila();
-
-  const tilaFilteredSelection = Object.values(selection).filter(
-    hakukohde => hakukohde?.tila !== tila?.value
-  );
-
-  return tilaFilteredSelection;
-};
-
-export const StateChangeConfirmationWrapper = ({ entities, children }) => {
-  const modalService = useInterpret(ModalMachine);
-
-  useEffect(() => {
-    modalService.send({ type: 'SET_ENTITIES', entities });
-  }, [entities, modalService]);
+export const StateChangeConfirmationWrapper = ({ children }) => {
+  const modalService = useInterpret(BatchOpsModalMachine);
 
   const selectionService = useSelector(
     modalService,
@@ -71,7 +39,7 @@ export const StateChangeConfirmationWrapper = ({ entities, children }) => {
 
   const modalContext = useMemo(
     () => ({
-      modalService: modalService,
+      modalService,
       selectionService,
     }),
     [modalService, selectionService]
@@ -86,16 +54,20 @@ export const StateChangeConfirmationWrapper = ({ entities, children }) => {
 
 export const StateChangeConfirmationModal = ({
   headerText,
-  onStateChangeSelection,
+  startBatchMutation,
   createColumns,
 }: {
   headerText: string;
-  onStateChangeSelection: any;
+  startBatchMutation: (x: {
+    hakukohteet: Array<string>;
+    tila: JULKAISUTILA;
+  }) => void;
   createColumns: (selectionActor: any) => any;
 }) => {
   const { t } = useTranslation();
 
-  const { isOpen, closeModal } = useStateChangeConfirmationModal();
+  const { tila, isOpen, closeModal, entities } =
+    useStateChangeConfirmationModal();
 
   const { selectionService } = useContextOrThrow(
     StateChangeConfirmationModalContext
@@ -106,16 +78,12 @@ export const StateChangeConfirmationModal = ({
     [createColumns, selectionService]
   );
 
-  const selection = useFilteredModalSelection();
-
-  const { tila } = useHakukohdeTila();
+  const { selection } = useEntitySelectionApi(selectionService);
 
   const onConfirm = useCallback(() => {
-    onStateChangeSelection(selection);
+    startBatchMutation({ hakukohteet: selection, tila });
     closeModal();
-  }, [closeModal, onStateChangeSelection, selection]);
-
-  const tilaLabel = tila?.label || '';
+  }, [closeModal, startBatchMutation, selection, tila]);
 
   return (
     <Modal
@@ -131,15 +99,15 @@ export const StateChangeConfirmationModal = ({
               {t('yleiset.sulje')}
             </Button>
           </Box>
-          <Button disabled={_fp.isEmpty(selection)} onClick={onConfirm}>
+          <Button disabled={_.isEmpty(selection)} onClick={onConfirm}>
             {t('etusivu.hakukohde.vahvistaTilanmuutos', {
-              tila: tilaLabel,
+              tila: t(safeGetJulkaisutilaTranslationKey(tila)),
             })}
           </Button>
         </Box>
       }
     >
-      <EntityListTable entities={selection} columns={columns} />
+      <EntityListTable entities={entities} columns={columns} />
     </Modal>
   );
 };

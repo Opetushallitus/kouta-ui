@@ -4,7 +4,10 @@ import _ from 'lodash';
 
 import { Checkbox } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY } from '#/src/constants';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import {
+  useCurrentUserHasRole,
+  useGetCurrentUserHasRole,
+} from '#/src/hooks/useCurrentUserHasRole';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 import { useEntitySelectionApi } from './useEntitySelection';
@@ -17,17 +20,17 @@ export const createHeadingCheckbox =
 
     const isOphVirkailija = useIsOphVirkailija();
 
+    const getCurrentUserHasUpdateRole = useGetCurrentUserHasRole(
+      entityType,
+      CRUD_ROLES.UPDATE
+    );
+
     const pageItems =
       entityType === ENTITY.HAKUKOHDE
         ? _.filter(
             rows,
             ({ organisaatio }) =>
-              isOphVirkailija ||
-              useCurrentUserHasRole(
-                ENTITY.HAKUKOHDE,
-                CRUD_ROLES.UPDATE,
-                organisaatio?.oid
-              )
+              isOphVirkailija || getCurrentUserHasUpdateRole(organisaatio?.oid)
           )
         : rows;
 
@@ -63,7 +66,7 @@ export const createRowCheckbox = (selectionActor, entityType) => item => {
   const hasRightsToUpdate =
     isOphVirkailija ||
     useCurrentUserHasRole(
-      ENTITY.HAKUKOHDE,
+      entityType,
       CRUD_ROLES.UPDATE,
       item?.organisaatio?.oid
     );

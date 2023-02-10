@@ -3,13 +3,15 @@ import React, { useMemo } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { match } from 'ts-pattern';
 
 import IconButton from '#/src/components/IconButton';
 import Select from '#/src/components/Select';
 import { Box } from '#/src/components/virkailija';
-import { JULKAISUTILA } from '#/src/constants';
-import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection';
+import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { getThemeProp, spacing } from '#/src/theme';
+
+import { useEntitySelection } from './useEntitySelection';
 
 const ButtonBox = styled(Box)`
   display: flex;
@@ -62,19 +64,34 @@ const useTilaOptions = t =>
     [t]
   );
 
+type EntityListActionBarProps = {
+  entityType: ENTITY;
+  copyEntities?: () => void;
+  changeTila?: (tila?: JULKAISUTILA) => void;
+  tila?: JULKAISUTILA;
+};
+
+const getJulkaisutilaFromString = (t?: string) =>
+  match(t)
+    .with('tallennettu', () => JULKAISUTILA.TALLENNETTU)
+    .with('arkistoitu', () => JULKAISUTILA.ARKISTOITU)
+    .with('julkaistu', () => JULKAISUTILA.JULKAISTU)
+    .with('poistettu', () => JULKAISUTILA.POISTETTU)
+    .otherwise(() => undefined);
+
 export const EntityListActionBar = ({
   entityType,
-  selection,
-  removeSelection,
   copyEntities,
   changeTila,
-}) => {
+  tila,
+}: EntityListActionBarProps) => {
   const { t } = useTranslation();
+
+  const { selection, removeSelection } = useEntitySelection(entityType);
+
   const isDisabled = _.size(selection) === 0;
 
   const tilaOptions = useTilaOptions(t);
-
-  const { tila } = useHakukohdeTila();
 
   return (
     <ButtonBox display="flex">
@@ -88,8 +105,12 @@ export const EntityListActionBar = ({
             <Select
               options={tilaOptions}
               placeholder={t('yleiset.vaihdaTila')}
-              onChange={changeTila}
-              value={tila}
+              onChange={ti => {
+                changeTila(getJulkaisutilaFromString(ti?.value));
+              }}
+              value={tila ? { value: tila } : null}
+              disabled={isDisabled}
+              isClearable={false}
             />
           </Box>
         </>

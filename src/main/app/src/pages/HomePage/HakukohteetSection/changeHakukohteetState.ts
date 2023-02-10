@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 
+import _ from 'lodash';
 import { useMutation } from 'react-query';
 
+import { JULKAISUTILA } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useHakukohdeTila } from '#/src/pages/HomePage/HakukohteetSection/index';
-import { map } from '#/src/utils/lodashFpUncapped';
 
 type HakukohdeTilaChangeResponseItem = {
   oid: string;
@@ -14,18 +14,22 @@ type HakukohdeTilaChangeResponseItem = {
 
 type HakukohteetTilaChangeResponseData = Array<HakukohdeTilaChangeResponseItem>;
 
+type ChangeHakukohteidenTilaProps = {
+  hakukohteet: Array<string>;
+  tila: JULKAISUTILA;
+};
+
 const useChangeHakukohteidenTila = () => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
-  const { tila } = useHakukohdeTila();
 
   return useCallback(
-    async (hakukohteet: Array<string>) => {
+    async ({ hakukohteet, tila }: ChangeHakukohteidenTilaProps) => {
       const lastModified = new Date().toUTCString();
 
       const result = await httpClient.post(
-        apiUrls.url('kouta-backend.hakukohteet-tilamuutos', tila?.value),
-        map('oid', hakukohteet),
+        apiUrls.url('kouta-backend.hakukohteet-tilamuutos', tila),
+        _.map(hakukohteet, 'oid'),
         {
           headers: {
             'X-If-Unmodified-Since': lastModified,
@@ -34,13 +38,15 @@ const useChangeHakukohteidenTila = () => {
       );
       return result.data as HakukohteetTilaChangeResponseData;
     },
-    [httpClient, apiUrls, tila]
+    [httpClient, apiUrls]
   );
 };
 
 export const useChangeHakukohteetTilaMutation = () => {
   const changeHakukohteidenTila = useChangeHakukohteidenTila();
-  return useMutation<HakukohteetTilaChangeResponseData, unknown, Array<string>>(
-    changeHakukohteidenTila
-  );
+  return useMutation<
+    HakukohteetTilaChangeResponseData,
+    unknown,
+    ChangeHakukohteidenTilaProps
+  >('changeHakukohteidenTila', changeHakukohteidenTila);
 };

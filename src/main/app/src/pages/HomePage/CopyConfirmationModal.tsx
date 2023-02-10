@@ -1,45 +1,45 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useActor, useInterpret, useSelector } from '@xstate/react';
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import { ModalMachine } from '#/src/machines/modalMachine';
+import { BatchOpsModalMachine } from '#/src/machines/modalMachine';
+import { isDev } from '#/src/utils';
 
 import { EntityListTable } from './EntitySearchList';
+import { useEntitySelectionApi } from './useEntitySelection';
 
 export const CopyConfirmationModalContext = React.createContext({} as any);
 
-export const useCopyConfirmationModal = () => {
-  const { modalService } = useContextOrThrow(CopyConfirmationModalContext);
-
+export const useBatchOpsModal = modalService => {
   const [state, send] = useActor(modalService);
+
+  const tila = useSelector(modalService, s => s.context?.tila);
+  const entities = useSelector(modalService, s => s.context?.entities);
 
   return useMemo(
     () => ({
+      tila,
+      entities,
       isOpen: state.value === 'open',
-      openModal: () => send('OPEN'),
+      openModal: ({ tila, entities }) => send({ type: 'OPEN', tila, entities }),
       closeModal: () => send('CLOSE'),
     }),
-    [state, send]
+    [state, send, tila, entities]
   );
 };
 
-export const useModalSelection = () => {
-  const { selectionService } = useContextOrThrow(CopyConfirmationModalContext);
-
-  return useSelector(selectionService, state => state.context.selection);
+export const useCopyConfirmationModal = () => {
+  const { modalService } = useContextOrThrow(CopyConfirmationModalContext);
+  return useBatchOpsModal(modalService);
 };
 
-export const CopyConfirmationWrapper = ({ entities, children }) => {
-  const modalService = useInterpret(ModalMachine);
-
-  useEffect(() => {
-    modalService.send({ type: 'SET_ENTITIES', entities });
-  }, [entities, modalService]);
+export const CopyConfirmationWrapper = ({ children }) => {
+  const modalService = useInterpret(BatchOpsModalMachine, { devTools: isDev });
 
   const selectionService = useSelector(
     modalService,
@@ -63,18 +63,16 @@ export const CopyConfirmationWrapper = ({ entities, children }) => {
 
 export const CopyConfirmationModal = ({
   headerText,
-  entities = [],
   onCopySelection,
   createColumns,
 }: {
   headerText: string;
-  entities: Array<any>;
   onCopySelection: any;
   createColumns: (selectionActor: any) => any;
 }) => {
   const { t } = useTranslation();
 
-  const { isOpen, closeModal } = useCopyConfirmationModal();
+  const { isOpen, closeModal, entities } = useCopyConfirmationModal();
 
   const { selectionService } = useContextOrThrow(CopyConfirmationModalContext);
 
@@ -83,10 +81,10 @@ export const CopyConfirmationModal = ({
     [createColumns, selectionService]
   );
 
-  const selection = useModalSelection();
+  const { selection } = useEntitySelectionApi(selectionService);
 
   const onConfirm = useCallback(() => {
-    onCopySelection(selection);
+    onCopySelection({ entities: selection });
     closeModal();
   }, [closeModal, onCopySelection, selection]);
 
@@ -104,7 +102,7 @@ export const CopyConfirmationModal = ({
               {t('yleiset.sulje')}
             </Button>
           </Box>
-          <Button disabled={_fp.isEmpty(selection)} onClick={onConfirm}>
+          <Button disabled={_.isEmpty(selection)} onClick={onConfirm}>
             {t('etusivu.aloitaKopiointi')}
           </Button>
         </Box>

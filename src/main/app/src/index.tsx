@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { inspect } from '@xstate/inspect';
 import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
 import ReactDOM from 'react-dom';
@@ -10,6 +11,12 @@ import App from './pages/App';
 import { createStore } from './state';
 import defaultTheme from './theme';
 import { configure as configureUrls } from './urls';
+
+if (process.env.REACT_APP_XSTATE_INSPECTOR) {
+  inspect({
+    iframe: false, // open in new window
+  });
+}
 
 const history = createBrowserHistory({ basename: 'kouta' });
 

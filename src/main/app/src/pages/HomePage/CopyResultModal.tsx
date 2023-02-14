@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import _ from 'lodash';
-import { UseMutationResult } from 'react-query';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -11,6 +11,7 @@ import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { ResultModal } from '#/src/pages/HomePage/ResultModal';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
+import { useCopyBatchOpsApi } from './CopyConfirmationModal';
 import { useEntitySelection } from './useEntitySelection';
 
 const Nimi = ({ item, entityType }) => {
@@ -53,6 +54,7 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     },
   },
   {
+    key: 'tulos',
     render: item => {
       const status = item.status;
       switch (status) {
@@ -67,46 +69,39 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
   },
 ];
 
-type CopyResultItem = {
-  oid: string;
-  created: {
-    toteutusOid?: string;
-    hakukohdeOid?: string;
-  };
-};
-
 const isCopyResultSuccessful = mutationResult =>
-  _.isArray(mutationResult?.data) &&
-  _.every(mutationResult?.data, { status: 'success' });
+  _.isArray(mutationResult) && _.every(mutationResult, { status: 'success' });
 
 export const CopyResultModal = ({
   entityType,
   headerText,
-  mutationResult,
   getLinkUrl,
 }: {
   entityType: ENTITY;
   headerText: string;
-  mutationResult: UseMutationResult<Array<CopyResultItem>, unknown, any>;
   getLinkUrl: any;
 }) => {
   const { removeSelection } = useEntitySelection(entityType);
 
+  const { close, result, service } = useCopyBatchOpsApi();
+
   const onClose = useCallback(() => {
-    if (isCopyResultSuccessful(mutationResult)) {
+    if (isCopyResultSuccessful(result)) {
       removeSelection();
     }
-    mutationResult.reset();
-  }, [mutationResult, removeSelection]);
+    close();
+  }, [result, removeSelection, close]);
+
+  const { t } = useTranslation();
+
+  const columns = useTableColumns(t, entityType, getLinkUrl);
 
   return (
     <ResultModal
       onClose={onClose}
       headerText={headerText}
-      mutationResult={mutationResult}
-      entityType={entityType}
-      getLinkUrl={getLinkUrl}
-      useTableColumns={useTableColumns}
+      batchOpsService={service}
+      columns={columns}
     />
   );
 };

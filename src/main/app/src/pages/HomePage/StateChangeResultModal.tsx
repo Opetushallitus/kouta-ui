@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 
 import _ from 'lodash';
-import { UseMutationResult, useQueryClient } from 'react-query';
+import { useTranslation } from 'react-i18next';
+import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -12,7 +13,7 @@ import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { ResultModal } from '#/src/pages/HomePage/ResultModal';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
-import { useStateChangeConfirmationModal } from './StateChangeConfirmationModal';
+import { useStateChangeBatchOpsApi } from './StateChangeConfirmationModal';
 import { useEntitySelection } from './useEntitySelection';
 
 const NimiLink = ({ item, entityType, getLinkUrl }) => {
@@ -29,7 +30,7 @@ const NimiLink = ({ item, entityType, getLinkUrl }) => {
 const Tila = ({ item, entityType }) => {
   const { selection } = useEntitySelection(entityType);
   const vanhaTila = selection?.[item.oid]?.tila;
-  const { tila } = useStateChangeConfirmationModal();
+  const { tila } = useStateChangeBatchOpsApi();
   const status = item.status;
 
   switch (status) {
@@ -102,45 +103,42 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
   },
 ];
 
-type StateChangeResultItem = {
-  oid: string;
-};
-
 const isStateChangeResultSuccessful = mutationResult =>
-  _.isArray(mutationResult?.data) &&
-  _.every(mutationResult?.data, { status: 'success' });
+  _.isArray(mutationResult) && _.every(mutationResult, { status: 'success' });
 
 export const StateChangeResultModal = ({
   entityType,
   headerText,
-  mutationResult,
   getLinkUrl,
 }: {
   entityType: ENTITY;
   headerText: string;
-  mutationResult: UseMutationResult<Array<StateChangeResultItem>, unknown, any>;
   getLinkUrl: any;
 }) => {
   const { removeSelection } = useEntitySelection(entityType);
 
+  const { service, close, result } = useStateChangeBatchOpsApi();
+
   const queryClient = useQueryClient();
 
   const onClose = useCallback(() => {
-    if (isStateChangeResultSuccessful(mutationResult)) {
+    if (isStateChangeResultSuccessful(result)) {
       removeSelection();
     }
-    mutationResult.reset();
+    close();
     queryClient.invalidateQueries('search.homepage.hakukohteet');
-  }, [mutationResult, removeSelection, queryClient]);
+  }, [close, removeSelection, queryClient, result]);
+
+  const { t } = useTranslation();
+
+  const columns = useTableColumns(t, entityType, getLinkUrl);
 
   return (
     <ResultModal
+      batchOpsService={service}
       onClose={onClose}
       headerText={headerText}
-      mutationResult={mutationResult}
-      entityType={entityType}
-      getLinkUrl={getLinkUrl}
-      useTableColumns={useTableColumns}
+      columns={columns}
     />
   );
 };

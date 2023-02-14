@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TFunction } from 'i18next';
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 
 import {
   makeCountColumn,
@@ -22,7 +22,7 @@ export const createToteutusListColumns =
   (
     t: TFunction,
     organisaatioOid: string,
-    filter: (item: { key: string }) => boolean = _fp.T
+    filter: (item: { key: string }) => boolean = _.stubTrue
   ) =>
   selectionActor => {
     const HeadingCheckbox = createHeadingCheckbox(

@@ -5,100 +5,114 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '#/src/components/Modal';
+import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { Box, Button } from '#/src/components/virkailija';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import { BatchOpsModalMachine } from '#/src/machines/modalMachine';
+import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
 import { isDev } from '#/src/utils';
 
 import { EntityListTable } from './EntitySearchList';
 import { useEntitySelectionApi } from './useEntitySelection';
 
-export const CopyConfirmationModalContext = React.createContext({} as any);
+export const BatchOpsCopyContext = React.createContext({} as any);
 
-export const useBatchOpsModal = modalService => {
-  const [state, send] = useActor(modalService);
+export const useBatchOpsApi = batchOpsService => {
+  const [state, send] = useActor(batchOpsService);
 
-  const tila = useSelector(modalService, s => s.context?.tila);
-  const entities = useSelector(modalService, s => s.context?.entities);
+  const tila = useSelector(batchOpsService, s => s.context?.tila);
+  const entities = useSelector(batchOpsService, s => s.context?.entities);
+  const result = useSelector(batchOpsService, s => s.context?.result);
+  const error = useSelector(batchOpsService, s => s.context?.error);
+
+  const selectionRef = useSelector(
+    batchOpsService,
+    s => s.context?.selectionRef
+  );
 
   return useMemo(
     () => ({
+      service: batchOpsService,
+      selectionRef,
       tila,
       entities,
-      isOpen: state.value === 'open',
-      openModal: ({ tila, entities }) => send({ type: 'OPEN', tila, entities }),
-      closeModal: () => send('CLOSE'),
+      state: state.value,
+      start: ({ tila, entities }: any) =>
+        send({ type: 'START', tila, entities }),
+      cancel: () => send({ type: 'CANCEL' }),
+      execute: ({ entities, tila }) =>
+        send({ type: 'EXECUTE', entities, tila }),
+      close: () => send({ type: 'CLOSE' }),
+      result,
+      error,
+      isSuccess: state.matches('result.success'),
+      isError: state.matches('result.error'),
     }),
-    [state, send, tila, entities]
+    [state, send, tila, entities, batchOpsService, result, error, selectionRef]
   );
 };
 
-export const useCopyConfirmationModal = () => {
-  const { modalService } = useContextOrThrow(CopyConfirmationModalContext);
-  return useBatchOpsModal(modalService);
+export const useCopyBatchOpsApi = () => {
+  const batchOpsService = useContextOrThrow(BatchOpsCopyContext);
+  return useBatchOpsApi(batchOpsService);
 };
 
-export const CopyConfirmationWrapper = ({ children }) => {
-  const modalService = useInterpret(BatchOpsModalMachine, { devTools: isDev });
+export const CopyConfirmationWrapper = ({ children, mutation }) => {
+  const batchOpsService = useInterpret(BatchOpsMachine, {
+    context: {
+      mutation,
+    },
+    devTools: isDev,
+  });
 
-  const selectionService = useSelector(
-    modalService,
-    state => state.context.selectionRef
-  );
+  const [state] = useActor(batchOpsService);
 
-  const modalContext = useMemo(
-    () => ({
-      modalService,
-      selectionService,
-    }),
-    [modalService, selectionService]
-  );
+  const { t } = useTranslation();
 
   return (
-    <CopyConfirmationModalContext.Provider value={modalContext}>
-      {children}
-    </CopyConfirmationModalContext.Provider>
+    <BatchOpsCopyContext.Provider value={batchOpsService}>
+      {state.value === 'executing' ? (
+        <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />
+      ) : (
+        children
+      )}
+    </BatchOpsCopyContext.Provider>
   );
 };
 
 export const CopyConfirmationModal = ({
   headerText,
-  onCopySelection,
   createColumns,
 }: {
   headerText: string;
-  onCopySelection: any;
   createColumns: (selectionActor: any) => any;
 }) => {
   const { t } = useTranslation();
 
-  const { isOpen, closeModal, entities } = useCopyConfirmationModal();
-
-  const { selectionService } = useContextOrThrow(CopyConfirmationModalContext);
+  const { state, cancel, execute, entities, selectionRef } =
+    useCopyBatchOpsApi();
 
   const columns = useMemo(
-    () => createColumns(selectionService),
-    [createColumns, selectionService]
+    () => createColumns(selectionRef),
+    [createColumns, selectionRef]
   );
 
-  const { selection } = useEntitySelectionApi(selectionService);
+  const { selection } = useEntitySelectionApi(selectionRef);
 
   const onConfirm = useCallback(() => {
-    onCopySelection({ entities: selection });
-    closeModal();
-  }, [closeModal, onCopySelection, selection]);
+    execute({ entities: selection });
+  }, [execute, selection]);
 
   return (
     <Modal
       minHeight="200px"
       maxWidth="1200px"
-      open={isOpen}
-      onClose={closeModal}
+      open={state === 'confirming'}
+      onClose={cancel}
       header={headerText}
       footer={
         <Box display="flex" justifyContent="flex-end">
           <Box mr={2}>
-            <Button variant="outlined" onClick={closeModal}>
+            <Button variant="outlined" onClick={cancel}>
               {t('yleiset.sulje')}
             </Button>
           </Box>

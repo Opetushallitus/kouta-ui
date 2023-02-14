@@ -2,14 +2,13 @@ import React, { useMemo } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { UseMutationResult } from 'react-query';
-import { usePrevious } from 'react-use';
 
 import ErrorAlert from '#/src/components/ErrorAlert';
 import ListTable from '#/src/components/ListTable';
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
-import { ENTITY } from '#/src/constants';
+
+import { useBatchOpsApi } from './CopyConfirmationModal';
 
 const ResultList = ({ data, columns }) => {
   const rows = useMemo(
@@ -22,36 +21,23 @@ const ResultList = ({ data, columns }) => {
 export const ResultModal = ({
   onClose,
   headerText,
-  mutationResult,
-  entityType,
-  getLinkUrl,
-  useTableColumns,
+  batchOpsService,
+  columns,
 }: {
   onClose: any;
   headerText: string;
-  mutationResult: UseMutationResult<Array<any>, unknown, unknown>;
-  entityType: ENTITY;
-  getLinkUrl: any;
-  useTableColumns: any;
+  batchOpsService: any;
+  columns: any;
 }) => {
   const { t } = useTranslation();
 
-  const isOpen = ['success', 'error'].includes(mutationResult.status);
-
-  const usePreviousNonNil = value => {
-    const prev = usePrevious(value);
-    return _.isEmpty(value) ? prev : value;
-  };
-
-  const data = usePreviousNonNil(mutationResult.data);
-
-  const columns = useTableColumns(t, entityType, getLinkUrl);
+  const { result, isSuccess, isError } = useBatchOpsApi(batchOpsService);
 
   return (
     <Modal
       minHeight="90vh"
       maxWidth="1200px"
-      open={isOpen}
+      open={isSuccess}
       onClose={onClose}
       header={headerText}
       footer={
@@ -62,12 +48,12 @@ export const ResultModal = ({
         </Box>
       }
     >
-      {mutationResult.isError ? (
+      {isError ? (
         <ErrorAlert center>
           {t('etusivu.hakukohde.tilanmuutosEpaonnistui')}
         </ErrorAlert>
       ) : (
-        <ResultList data={data} columns={columns} />
+        <ResultList data={result} columns={columns} />
       )}
     </Modal>
   );

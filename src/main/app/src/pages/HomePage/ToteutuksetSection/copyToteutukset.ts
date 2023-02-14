@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
+import _ from 'lodash';
 import { useMutation } from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { map } from '#/src/utils/lodashFpUncapped';
 
 type ToteutusCopyResponseItem = {
   oid: string;
@@ -20,10 +20,10 @@ const useCopyToteutukset = () => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
   return useCallback(
-    async (toteutukset: Array<string>) => {
+    async ({ entities }) => {
       const result = await httpClient.put(
         apiUrls.url('kouta-backend.toteutus-copy'),
-        map('oid', toteutukset)
+        _.map(entities, 'oid')
       );
       return result.data as ToteutusCopyResponseData;
     },

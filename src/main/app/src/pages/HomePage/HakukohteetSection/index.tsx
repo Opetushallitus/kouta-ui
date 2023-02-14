@@ -1,10 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
-import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { hakukohdeService } from '#/src/machines/filterMachines';
@@ -14,7 +12,7 @@ import { createHakukohdeListColumns } from '#/src/pages/HomePage/HakukohteetSect
 import {
   StateChangeConfirmationModal,
   StateChangeConfirmationWrapper,
-  useStateChangeConfirmationModal,
+  useStateChangeBatchOpsApi,
 } from '#/src/pages/HomePage/StateChangeConfirmationModal';
 import { StateChangeResultModal } from '#/src/pages/HomePage/StateChangeResultModal';
 import {
@@ -33,15 +31,13 @@ const { HAKUKOHDE } = ENTITY;
 
 const HakukohdeActionBar = () => {
   const { selection } = useEntitySelection(HAKUKOHDE);
-  const { openModal, tila } = useStateChangeConfirmationModal();
+  const { start, tila } = useStateChangeBatchOpsApi();
 
   const changeTila = useCallback(
     tila => {
-      if (tila !== null && !_.isEmpty(selection)) {
-        openModal({ tila, entities: selection });
-      }
+      start({ tila, entities: selection });
     },
-    [selection, openModal]
+    [selection, start]
   );
 
   return (
@@ -93,19 +89,15 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
-  return tilaMutationResult.isLoading ? (
-    <OverlaySpin text={t('etusivu.hakukohde.tilaaVaihdetaan')} />
-  ) : (
-    <StateChangeConfirmationWrapper>
+  return (
+    <StateChangeConfirmationWrapper mutation={tilaMutationResult}>
       <StateChangeConfirmationModal
-        startBatchMutation={tilaMutationResult.mutate}
         headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}
       />
       <StateChangeResultModal
         entityType={HAKUKOHDE}
         headerText={t('etusivu.hakukohde.tilamuutosTuloksetOtsikko')}
-        mutationResult={tilaMutationResult}
         getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
       />
       <NavigationAnchor id="hakukohteet" />

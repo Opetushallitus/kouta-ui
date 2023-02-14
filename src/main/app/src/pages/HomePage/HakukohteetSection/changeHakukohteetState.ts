@@ -15,7 +15,7 @@ type HakukohdeTilaChangeResponseItem = {
 type HakukohteetTilaChangeResponseData = Array<HakukohdeTilaChangeResponseItem>;
 
 type ChangeHakukohteidenTilaProps = {
-  hakukohteet: Array<string>;
+  entities: Array<string>; // tämä on väärin tyypitetty!
   tila: JULKAISUTILA;
 };
 
@@ -24,12 +24,12 @@ const useChangeHakukohteidenTila = () => {
   const httpClient = useHttpClient();
 
   return useCallback(
-    async ({ hakukohteet, tila }: ChangeHakukohteidenTilaProps) => {
+    async ({ entities, tila }: ChangeHakukohteidenTilaProps) => {
       const lastModified = new Date().toUTCString();
 
       const result = await httpClient.post(
         apiUrls.url('kouta-backend.hakukohteet-tilamuutos', tila),
-        _.map(hakukohteet, 'oid'),
+        _.map(entities, 'oid'),
         {
           headers: {
             'X-If-Unmodified-Since': lastModified,

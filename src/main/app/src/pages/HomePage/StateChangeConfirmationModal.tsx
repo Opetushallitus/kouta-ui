@@ -1,101 +1,84 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useInterpret, useSelector } from '@xstate/react';
+import { useActor, useInterpret } from '@xstate/react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '#/src/components/Modal';
+import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { Box, Button } from '#/src/components/virkailija';
-import {
-  safeGetJulkaisutilaTranslationKey,
-  JULKAISUTILA,
-} from '#/src/constants';
+import { safeGetJulkaisutilaTranslationKey } from '#/src/constants';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import { BatchOpsModalMachine } from '#/src/machines/modalMachine';
+import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
+import { isDev } from '#/src/utils';
 
-import { useBatchOpsModal } from './CopyConfirmationModal';
+import { useBatchOpsApi } from './CopyConfirmationModal';
 import { EntityListTable } from './EntitySearchList';
 import { useEntitySelectionApi } from './useEntitySelection';
 
-export const StateChangeConfirmationModalContext = React.createContext(
-  {} as any
-);
+export const BatchOpsStateChangeContext = React.createContext({} as any);
 
-export const useStateChangeConfirmationModal = () => {
-  const { modalService } = useContextOrThrow(
-    StateChangeConfirmationModalContext
-  );
-
-  return useBatchOpsModal(modalService);
+export const useStateChangeBatchOpsApi = () => {
+  const batchOpsService = useContextOrThrow(BatchOpsStateChangeContext);
+  return useBatchOpsApi(batchOpsService);
 };
 
-export const StateChangeConfirmationWrapper = ({ children }) => {
-  const modalService = useInterpret(BatchOpsModalMachine);
+export const StateChangeConfirmationWrapper = ({ children, mutation }) => {
+  const batchOpsService = useInterpret(BatchOpsMachine, {
+    context: {
+      mutation,
+    },
+    devTools: isDev,
+  });
 
-  const selectionService = useSelector(
-    modalService,
-    state => state.context.selectionRef
-  );
-
-  const modalContext = useMemo(
-    () => ({
-      modalService,
-      selectionService,
-    }),
-    [modalService, selectionService]
-  );
+  const [state] = useActor(batchOpsService);
+  const { t } = useTranslation();
 
   return (
-    <StateChangeConfirmationModalContext.Provider value={modalContext}>
-      {children}
-    </StateChangeConfirmationModalContext.Provider>
+    <BatchOpsStateChangeContext.Provider value={batchOpsService}>
+      {state.value === 'executing' ? (
+        <OverlaySpin text={t('etusivu.hakukohde.tilaaVaihdetaan')} />
+      ) : (
+        children
+      )}
+    </BatchOpsStateChangeContext.Provider>
   );
 };
 
 export const StateChangeConfirmationModal = ({
   headerText,
-  startBatchMutation,
   createColumns,
 }: {
   headerText: string;
-  startBatchMutation: (x: {
-    hakukohteet: Array<string>;
-    tila: JULKAISUTILA;
-  }) => void;
   createColumns: (selectionActor: any) => any;
 }) => {
   const { t } = useTranslation();
 
-  const { tila, isOpen, closeModal, entities } =
-    useStateChangeConfirmationModal();
-
-  const { selectionService } = useContextOrThrow(
-    StateChangeConfirmationModalContext
-  );
+  const { state, cancel, tila, entities, execute, selectionRef } =
+    useStateChangeBatchOpsApi();
 
   const columns = useMemo(
-    () => createColumns(selectionService),
-    [createColumns, selectionService]
+    () => createColumns(selectionRef),
+    [createColumns, selectionRef]
   );
 
-  const { selection } = useEntitySelectionApi(selectionService);
+  const { selection } = useEntitySelectionApi(selectionRef);
 
   const onConfirm = useCallback(() => {
-    startBatchMutation({ hakukohteet: selection, tila });
-    closeModal();
-  }, [closeModal, startBatchMutation, selection, tila]);
+    execute({ entities: selection, tila });
+  }, [execute, selection, tila]);
 
   return (
     <Modal
       minHeight="200px"
       maxWidth="1200px"
-      open={isOpen}
-      onClose={closeModal}
+      open={state === 'confirming'}
+      onClose={cancel}
       header={headerText}
       footer={
         <Box display="flex" justifyContent="flex-end">
           <Box mr={2}>
-            <Button variant="outlined" onClick={closeModal}>
+            <Button variant="outlined" onClick={cancel}>
               {t('yleiset.sulje')}
             </Button>
           </Box>

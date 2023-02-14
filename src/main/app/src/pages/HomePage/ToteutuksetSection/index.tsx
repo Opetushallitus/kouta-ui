@@ -1,9 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
-import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { toteutusService } from '#/src/machines/filterMachines';
@@ -13,7 +12,7 @@ import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 import {
   CopyConfirmationModal,
   CopyConfirmationWrapper,
-  useCopyConfirmationModal,
+  useCopyBatchOpsApi,
 } from '../CopyConfirmationModal';
 import { CopyResultModal } from '../CopyResultModal';
 import { EntityListActionBar } from '../EntityListActionBar';
@@ -45,14 +44,16 @@ const Actions = ({ organisaatioOid }) => {
 
 const ToteutusActionBar = () => {
   const { selection } = useEntitySelection(TOTEUTUS);
-  const { openModal } = useCopyConfirmationModal();
 
-  const copyEntities = useCallback(() => {
-    openModal({ entities: selection, tila: undefined });
-  }, [openModal, selection]);
+  const { start } = useCopyBatchOpsApi();
 
   return (
-    <EntityListActionBar entityType={TOTEUTUS} copyEntities={copyEntities} />
+    <EntityListActionBar
+      entityType={TOTEUTUS}
+      copyEntities={() => {
+        start({ entities: selection });
+      }}
+    />
   );
 };
 
@@ -62,13 +63,11 @@ export const createGetToteutusLinkUrl = organisaatioOid => oid =>
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
+  const selectionRef = SERVICE_BY_ENTITY[TOTEUTUS];
+
   const columns = useMemo(
-    () =>
-      createToteutusListColumns(
-        t,
-        organisaatioOid
-      )(SERVICE_BY_ENTITY[TOTEUTUS]),
-    [t, organisaatioOid]
+    () => createToteutusListColumns(t, organisaatioOid)(selectionRef),
+    [t, organisaatioOid, selectionRef]
   );
 
   const createColumnsForConfirmationModal = useMemo(
@@ -85,19 +84,15 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const filterState = useFilterState(TOTEUTUS, toteutusService);
 
-  return copyMutation.isLoading ? (
-    <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />
-  ) : (
-    <CopyConfirmationWrapper>
+  return (
+    <CopyConfirmationWrapper mutation={copyMutation}>
       <CopyConfirmationModal
-        onCopySelection={copyMutation.mutate}
         headerText={t('etusivu.toteutus.vahvistaKopiointiOtsikko')}
         createColumns={createColumnsForConfirmationModal}
       />
       <CopyResultModal
         entityType={TOTEUTUS}
         headerText={t('etusivu.kopioinninTuloksetOtsikko')}
-        mutationResult={copyMutation}
         getLinkUrl={createGetToteutusLinkUrl(organisaatioOid)}
       />
       <NavigationAnchor id="toteutukset" />

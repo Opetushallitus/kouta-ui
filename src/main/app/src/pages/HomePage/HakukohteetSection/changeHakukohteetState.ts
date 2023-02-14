@@ -15,7 +15,7 @@ type HakukohdeTilaChangeResponseItem = {
 type HakukohteetTilaChangeResponseData = Array<HakukohdeTilaChangeResponseItem>;
 
 type ChangeHakukohteidenTilaProps = {
-  entities: Array<string>; // tämä on väärin tyypitetty!
+  entities: Array<{ oid: string }>;
   tila: JULKAISUTILA;
 };
 

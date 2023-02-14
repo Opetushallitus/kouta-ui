@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useActor, useInterpret } from '@xstate/react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { ActorRefFrom, InterpreterFrom } from 'xstate';
 
 import Modal from '#/src/components/Modal';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
@@ -14,19 +15,24 @@ import { isDev } from '#/src/utils';
 
 import { useBatchOpsApi } from './CopyConfirmationModal';
 import { EntityListTable } from './EntitySearchList';
+import { entitySelectionMachine } from './entitySelectionMachine';
 import { useEntitySelectionApi } from './useEntitySelection';
 
-export const BatchOpsStateChangeContext = React.createContext({} as any);
+export const BatchOpsStateChangeContext = React.createContext<
+  InterpreterFrom<typeof BatchOpsMachine>
+>({} as any);
 
 export const useStateChangeBatchOpsApi = () => {
   const batchOpsService = useContextOrThrow(BatchOpsStateChangeContext);
-  return useBatchOpsApi(batchOpsService);
+  return useBatchOpsApi(
+    batchOpsService as InterpreterFrom<typeof BatchOpsMachine>
+  );
 };
 
 export const StateChangeConfirmationWrapper = ({ children, mutation }) => {
   const batchOpsService = useInterpret(BatchOpsMachine, {
-    context: {
-      mutation,
+    services: {
+      runMutation: (ctx, e) => mutation.mutateAsync(e),
     },
     devTools: isDev,
   });
@@ -50,7 +56,9 @@ export const StateChangeConfirmationModal = ({
   createColumns,
 }: {
   headerText: string;
-  createColumns: (selectionActor: any) => any;
+  createColumns: (
+    selectionActor?: ActorRefFrom<typeof entitySelectionMachine>
+  ) => any;
 }) => {
   const { t } = useTranslation();
 

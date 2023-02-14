@@ -3,20 +3,30 @@ import React, { useCallback, useMemo } from 'react';
 import { useActor, useInterpret, useSelector } from '@xstate/react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { ActorRefFrom, InterpreterFrom } from 'xstate';
 
 import Modal from '#/src/components/Modal';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { Box, Button } from '#/src/components/virkailija';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
+import {
+  BatchOpsMachine,
+  ExecuteEvent,
+  StartEvent,
+} from '#/src/machines/batchOpsMachine';
 import { isDev } from '#/src/utils';
 
 import { EntityListTable } from './EntitySearchList';
+import { entitySelectionMachine } from './entitySelectionMachine';
 import { useEntitySelectionApi } from './useEntitySelection';
 
-export const BatchOpsCopyContext = React.createContext({} as any);
+export const BatchOpsCopyContext = React.createContext(
+  {} as InterpreterFrom<typeof BatchOpsMachine>
+);
 
-export const useBatchOpsApi = batchOpsService => {
+export const useBatchOpsApi = (
+  batchOpsService: InterpreterFrom<typeof BatchOpsMachine>
+) => {
   const [state, send] = useActor(batchOpsService);
 
   const tila = useSelector(batchOpsService, s => s.context?.tila);
@@ -36,10 +46,10 @@ export const useBatchOpsApi = batchOpsService => {
       tila,
       entities,
       state: state.value,
-      start: ({ tila, entities }: any) =>
+      start: ({ tila, entities }: Omit<StartEvent, 'type'>) =>
         send({ type: 'START', tila, entities }),
       cancel: () => send({ type: 'CANCEL' }),
-      execute: ({ entities, tila }) =>
+      execute: ({ entities, tila }: Omit<ExecuteEvent, 'type'>) =>
         send({ type: 'EXECUTE', entities, tila }),
       close: () => send({ type: 'CLOSE' }),
       result,
@@ -53,13 +63,15 @@ export const useBatchOpsApi = batchOpsService => {
 
 export const useCopyBatchOpsApi = () => {
   const batchOpsService = useContextOrThrow(BatchOpsCopyContext);
-  return useBatchOpsApi(batchOpsService);
+  return useBatchOpsApi(
+    batchOpsService as InterpreterFrom<typeof BatchOpsMachine>
+  );
 };
 
 export const CopyConfirmationWrapper = ({ children, mutation }) => {
   const batchOpsService = useInterpret(BatchOpsMachine, {
-    context: {
-      mutation,
+    services: {
+      runMutation: (ctx, e) => mutation.mutateAsync(e),
     },
     devTools: isDev,
   });
@@ -84,7 +96,9 @@ export const CopyConfirmationModal = ({
   createColumns,
 }: {
   headerText: string;
-  createColumns: (selectionActor: any) => any;
+  createColumns: (
+    selectionActor?: ActorRefFrom<typeof entitySelectionMachine>
+  ) => any;
 }) => {
   const { t } = useTranslation();
 

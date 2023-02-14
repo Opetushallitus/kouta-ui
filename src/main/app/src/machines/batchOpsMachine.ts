@@ -1,17 +1,21 @@
 import _ from 'lodash';
-import { actions, createMachine, spawn } from 'xstate';
+import { actions, ActorRefFrom, createMachine, spawn } from 'xstate';
 
 import { JULKAISUTILA } from '#/src/constants';
-import { EntitySelectionMachine } from '#/src/pages/HomePage/entitySelectionMachine';
+import { entitySelectionMachine } from '#/src/pages/HomePage/entitySelectionMachine';
 
 const { pure, assign, send } = actions;
 
-interface StartEvent {
+export interface StartEvent {
   type: 'START';
+  tila?: JULKAISUTILA;
+  entities: EntitySelection;
 }
 
-interface ExecuteEvent {
+export interface ExecuteEvent {
   type: 'EXECUTE';
+  tila?: JULKAISUTILA;
+  entities: EntitySelection;
 }
 
 interface CloseEvent {
@@ -21,31 +25,44 @@ interface CancelEvent {
   type: 'CANCEL';
 }
 
-type EntitySelection = Record<string, Record<string, any>>;
+type EntityItem = { oid: string; tila?: JULKAISUTILA };
+
+type EntitySelection = Record<string, EntityItem>;
+
+type BatchOperationResponseItem = {
+  oid: string;
+  status: 'success' | 'error';
+};
+
+type BatchOperationResponseData = Array<BatchOperationResponseItem>;
 
 interface BatchOpsMachineContext {
-  result?: any;
-  error?: string;
+  result?: BatchOperationResponseData;
+  error?: unknown;
   tila?: JULKAISUTILA;
-  entities?: EntitySelection;
-  selectionRef: any;
-  mutation?: any;
+  entities: EntitySelection;
+  selectionRef?: ActorRefFrom<typeof entitySelectionMachine>;
 }
 
 export const BatchOpsMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QCECGAXAxgCwPIAdYBZVHASwDswA6Ss9M1AGzIC9KoBiAbQAYBdRKHwB7WPTIiKQkAA9EAZgAsAVmoAmFQBoQAT0QA2dQE4AvqZ1oseQiXJVaEJmE4BlACoBBAEru+gpBBRcQYpGXkEE2NqAHYARgAOGO09QwSE6hVzSwwcAmJSbEoaTCkAMzIAJwBbDk4AUQANeoBhAFV3ev8ZYIkwwIj1GKVqJRMDJJT9BBjjA0yjLIsQKzzbQuLqUooKmrqWzwA5FvqAGW7A3tDpAcQhkbG5yZ1phJVo3kXsldybAvsaGBZGBMABXBgULgQKQ0SgANxEAGsaJVQRQiOCMJIKBdhGI+jdQBEFAk4pljApki9EG8Pl9lqs-nYig4gSDwXUwJVKiJKtR8EwMGVedVqKj0ZjrrigvjruFFKTyZSpog5iM4ppvoz8szNpU4KCmOhOC1TrhXF0BD1ZdiZNNxpkdBEVCp1OZlhQRBA4DJtesAdaQrbbggALRKBLUyK8DLGONx0lxJS8FTxN0M346jYOOgMZhsDiBgnyhC8KNKBTpnLWLMAxzOItykNl1IIAxxBSZLWZ-0skrlKq1SGN4NExAt6azJbVtb-PvUNlgiFQEf9MelqPGGLzac-Gu9vUGo2rwlyRARqMO3d+ueH2CG9DUe+YTBweCXG1rs8IOZRklKbt91vBx9XvI0F25XkTxLX9WxURIu3dIA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QCECGAXAxgCwPIAdYBZVHASwDswA6Ss9M1AGzIC9KoBiAbQAYBdRKHwB7WPTIiKQkAA9EAdgAc1AMwA2BQEYlCgKwAaEAE9Ee1QE4161QCYlW23oC+zo2ix5CJclVoQmME4AZQAVAEEAJVC+QSQQUXEGKRl5BFU1JU0dfSNTBAUAFgy9CwV1PXUnV3cMHAJiUmxKGkwpADMyACcAWw5OAFEADQGAYQBVUIHYmUSJFPi0vULbai11Xi1KpzzEC1UtagVeA+q3EA967yaW6jaKTt7+0fCAOVGBgBkZ+Lnk6UWiFsRWoKws6l0hhMiCUpWovCqLnOly8jV8NDAsjAmAArgwKFwIFIaJQAG4iADWNC6OIoRDxGEkFB+wjE8wBoCWlmoej0vGUjih+UK+nhiJqFzqqJ8zT8mOxeP6YC6XREXWo+CYGHaap61BpdIZ-xZCTZ-1SiHUhUO2khu3SdiOSgsCLOtU8DRlty6cBxTHQnFGn1wwWmAlmZqZFvS61BSiU9kF9t5hy24olFBEEDgMhRnpuVAjSSjgIQAFoLHojvyTknoQgtKLCoVzIKJXnrujaBQJMw2Bwi+zo2WRdXjqchYhCrwq+pNODIe2pfmu2QAmBB+bSxZDrYtLx9rl6xt1Dzx23kcvO7LWh1un0CZuS5zEKpCmttpOEFkrDP+Q43UlD1r1ueVcXxKAnwWF8ED0Wx32WWwFyPfIFA0agylsCp03dK40RvfVfX9KCOTkIEVh5Odp0Re0sNWCwWwnJdgPw70iPQahYBxTBMDgeBfkjaCyIQJDeEoq1XS-YoqyUOxa0AjtWL8H0uP9ahlVVLoSOjUTxOonZ61UPlQUYi9XCAA */
   createMachine(
     {
+      tsTypes: {} as import('./batchOpsMachine.typegen').Typegen0,
       id: 'BatchOpsMachine',
       schema: {
         events: {} as StartEvent | ExecuteEvent | CancelEvent | CloseEvent,
         context: {} as BatchOpsMachineContext,
+        services: {} as {
+          runMutation: {
+            data: BatchOperationResponseData;
+          };
+        },
       },
       context: {
         tila: undefined, // Tila, joka halutaan asettaa kaikille entiteeteille (massa-tilamuutos)
         entities: {}, // Kaikki valittavissa olevat entiteetit
         selectionRef: undefined,
-        mutation: undefined,
         result: undefined,
         error: undefined,
       },
@@ -82,21 +99,11 @@ export const BatchOpsMachine =
             src: 'runMutation',
             onDone: {
               target: 'result.success',
-              actions: assign({
-                result: (ctx, e) => {
-                  return e.data;
-                },
-              }),
+              actions: 'setResult',
             },
             onError: {
-              actions: [
-                assign({
-                  error: (ctx, e) => {
-                    return e.data;
-                  },
-                }),
-              ],
               target: 'result.error',
+              actions: 'setError',
             },
           },
         },
@@ -108,7 +115,6 @@ export const BatchOpsMachine =
           on: {
             CLOSE: {
               target: 'idle',
-              actions: ['resetMutation'],
             },
           },
         },
@@ -116,24 +122,36 @@ export const BatchOpsMachine =
     },
     {
       actions: {
-        setContext: assign<BatchOpsMachineContext, any>({
-          tila: (ctx, e) => e?.tila ?? ctx.tila,
-          entities: (ctx, e) =>
-            e?.entities
-              ? _.reject(e?.entities, { tila: e?.tila })
-              : ctx.entities,
+        setResult: assign({
+          result: (ctx, e) => {
+            return e.data;
+          },
         }),
-        resetMutation: ctx => {
-          ctx.mutation.reset();
-        },
-        resetContext: assign({
-          entities: () => ({}),
+        setError: assign({
+          error: (ctx, e) => {
+            return e.data;
+          },
+        }),
+        setContext: assign((ctx, e) => ({
+          tila: e?.tila ?? ctx.tila,
+          entities: e?.entities
+            ? _.flow(
+                t => _.toPairs<EntityItem>(t),
+                entities => _.reject(entities, ([, v]) => v?.tila === ctx.tila),
+                _.fromPairs
+              )(e?.entities)
+            : ctx.entities,
+        })),
+        resetContext: assign(ctx => ({
+          entities: {},
           tila: undefined,
-        }),
+          result: undefined,
+          error: undefined,
+        })),
         initSelectionMachine: assign({
-          selectionRef: () => spawn(EntitySelectionMachine),
+          selectionRef: ctx => spawn(entitySelectionMachine),
         }),
-        selectAll: pure<BatchOpsMachineContext, any>(ctx => {
+        selectAll: pure(ctx => {
           return send(
             {
               type: 'RESET_SELECTION',
@@ -142,15 +160,10 @@ export const BatchOpsMachine =
             { to: ctx.selectionRef }
           );
         }),
-      } as any, // https://github.com/statelyai/xstate/issues/1198
+      },
       guards: {
         eventHasEntities: (ctx, e) => {
           return _.size(_.reject(e?.entities, { tila: e?.tila })) > 0;
-        },
-      },
-      services: {
-        runMutation: (ctx, e) => {
-          return ctx.mutation.mutateAsync(e);
         },
       },
     }

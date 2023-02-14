@@ -6,13 +6,13 @@ import { interpret } from 'xstate';
 import { ENTITY } from '#/src/constants';
 import { isDev } from '#/src/utils';
 
-import { EntitySelectionMachine } from './entitySelectionMachine';
+import { entitySelectionMachine } from './entitySelectionMachine';
 
 export const SERVICE_BY_ENTITY = {
-  [ENTITY.TOTEUTUS]: interpret(EntitySelectionMachine, {
+  [ENTITY.TOTEUTUS]: interpret(entitySelectionMachine, {
     devTools: isDev,
   }).start(),
-  [ENTITY.HAKUKOHDE]: interpret(EntitySelectionMachine, {
+  [ENTITY.HAKUKOHDE]: interpret(entitySelectionMachine, {
     devTools: isDev,
   }).start(),
 };

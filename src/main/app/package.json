@@ -21,7 +21,9 @@
     "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test serve:test https://localhost:3000/kouta 'npm run cypress:run'",
     "test:ci": "CI=true npm run test && npm run test:integration",
     "update-mocks": "node ./node_modules/kto-ui-common/scripts/update-mocks.js",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "xstate:typegen": "xstate typegen \"src/**/*.ts?(x)\"",
+    "postinstall": "npm run xstate:typegen"
   },
   "dependencies": {
     "@opetushallitus/virkailija-ui-components": "^0.4.7",
@@ -98,6 +100,7 @@
     "@types/styled-system": "^5.1.15",
     "@types/testing-library__cypress": "^5.0.9",
     "@types/testing-library__jest-dom": "^5.14.3",
+    "@xstate/cli": "^0.4.2",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.12.0",
     "cross-env": "^7.0.3",

@@ -2,11 +2,13 @@ import React, { useMemo } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { InterpreterFrom } from 'xstate';
 
 import ErrorAlert from '#/src/components/ErrorAlert';
 import ListTable from '#/src/components/ListTable';
 import Modal from '#/src/components/Modal';
 import { Box, Button } from '#/src/components/virkailija';
+import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
 
 import { useBatchOpsApi } from './CopyConfirmationModal';
 
@@ -26,8 +28,15 @@ export const ResultModal = ({
 }: {
   onClose: any;
   headerText: string;
-  batchOpsService: any;
-  columns: any;
+  batchOpsService: InterpreterFrom<typeof BatchOpsMachine>;
+  columns: Array<{
+    key: string;
+    title?: string;
+    sortable?: boolean;
+    Component?: React.Component;
+    render?: (x: any) => any;
+    style?: React.CSSProperties;
+  }>;
 }) => {
   const { t } = useTranslation();
 

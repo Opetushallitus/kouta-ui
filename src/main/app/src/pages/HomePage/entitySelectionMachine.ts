@@ -25,9 +25,10 @@ interface ResetSelectionEvent {
   items?: Array<EntityListItem>;
 }
 
-export const EntitySelectionMachine = createMachine(
+export const entitySelectionMachine = createMachine(
   {
     id: 'EntitySelectionMachine',
+    tsTypes: {} as import('./entitySelectionMachine.typegen').Typegen0,
     schema: {
       context: {} as SelectionContext,
       events: {} as SelectItemsEvent | DeselectItemsEvent | ResetSelectionEvent,
@@ -67,6 +68,6 @@ export const EntitySelectionMachine = createMachine(
           });
         }
       ),
-    } as any,
+    },
   }
 );

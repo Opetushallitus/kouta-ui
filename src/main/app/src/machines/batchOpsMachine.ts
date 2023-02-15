@@ -27,7 +27,7 @@ interface CancelEvent {
 
 type EntityItem = { oid: string; tila?: JULKAISUTILA };
 
-type EntitySelection = Record<string, EntityItem>;
+export type EntitySelection = Record<string, EntityItem>;
 
 type BatchOperationResponseItem = {
   oid: string;
@@ -38,14 +38,13 @@ type BatchOperationResponseData = Array<BatchOperationResponseItem>;
 
 interface BatchOpsMachineContext {
   result?: BatchOperationResponseData;
-  error?: unknown;
   tila?: JULKAISUTILA;
   entities: EntitySelection;
   selectionRef?: ActorRefFrom<typeof entitySelectionMachine>;
 }
 
 export const BatchOpsMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QCECGAXAxgCwPIAdYBZVHASwDswA6Ss9M1AGzIC9KoBiAbQAYBdRKHwB7WPTIiKQkAA9EAdgAc1AMwA2BQEYlCgKwAaEAE9Ee1QE4161QCYlW23oC+zo2ix5CJclVoQmME4AZQAVAEEAJVC+QSQQUXEGKRl5BFU1JU0dfSNTBAUAFgy9CwV1PXUnV3cMHAJiUmxKGkwpADMyACcAWw5OAFEADQGAYQBVUIHYmUSJFPi0vULbai11Xi1KpzzEC1UtagVeA+q3EA967yaW6jaKTt7+0fCAOVGBgBkZ+Lnk6UWiFsRWoKws6l0hhMiCUpWovCqLnOly8jV8NDAsjAmAArgwKFwIFIaJQAG4iADWNC6OIoRDxGEkFB+wjE8wBoCWlmoej0vGUjih+UK+nhiJqFzqqJ8zT8mOxeP6YC6XREXWo+CYGHaap61BpdIZ-xZCTZ-1SiHUhUO2khu3SdiOSgsCLOtU8DRlty6cBxTHQnFGn1wwWmAlmZqZFvS61BSiU9kF9t5hy24olFBEEDgMhRnpuVAjSSjgIQAFoLHojvyTknoQgtKLCoVzIKJXnrujaBQJMw2Bwi+zo2WRdXjqchYhCrwq+pNODIe2pfmu2QAmBB+bSxZDrYtLx9rl6xt1Dzx23kcvO7LWh1un0CZuS5zEKpCmttpOEFkrDP+Q43UlD1r1ueVcXxKAnwWF8ED0Wx32WWwFyPfIFA0agylsCp03dK40RvfVfX9KCOTkIEVh5Odp0Re0sNWCwWwnJdgPw70iPQahYBxTBMDgeBfkjaCyIQJDeEoq1XS-YoqyUOxa0AjtWL8H0uP9ahlVVLoSOjUTxOonZ61UPlQUYi9XCAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QCECGAXAxgCwPIAdYBZVHASwDswA6Ss9M1AGzIC9KoBiAbQAYBdRKHwB7WPTIiKQkAA9EAdgAc1AMwA2BQEYlCgKwAaEAE9Ee1QE4161QCYlW23oC+zo2ix5CJclVoUJZk4AZQAVAEEAJVC+QSQQUXEGKRl5BFU1JU0dfSNTBAUAFgy9CwV1PXUnV3cMHAJiUmxKGkwpADMyACcAWw5OAFEADQGAYQBVUIHYmUSJFPi0vULbai11Xi1KpzzEC1UtagVeA+q3EA967yaW6jaKTt7+0fCAOVGBgBkZ+Lnk6UWiFsRWoKws6l0hhMiCUpWovCqLnOly8jV8NDAsjAmAArgwKFwIFIaJQAG4iADWNC6OIoRDxGEkFB+wjE8wBoCWlmoej0vGUjih+UK+nhiJqFzqqJ8zT8mOxeP6YC6XREXWo+CYGHaap61BpdIZ-xZCTZ-1SiHUhUO2khu3SdiOSgsCLOtU8DRlty6cBxTHQnFGn1wwWmAlmZqZFvS61BSiU9kF9t5hy24olFBEEDgMhRnpuVAjSSjgIQAFoLHojvyTknoQgtKLCoVzIKJXnruj-IEWOwCUX2dGyyLq8dTkLEIVeFX1JpwZD21L8126AxmAPzaXK9Rwbx9rl6xsMgpVMV9IuPZ3Za0Ot0+v3fpGFpzEKe1tsJwgslZp-yHG7JUvNFr2oeVcXxKANxLF8ED0WxCh5MEIQPfIT3UHcFFsCp03dK5gO9X1-Sg585CBFYeVnKdEXtLDVgsFtxwvPCvT8H1YD9dBqHYzBMDgeBH2LEi0lsF0KKtV1P2KKslDsWsAI7fDWMIzjlVVLpiI5UiEBE3gxKonZ61UPlQQYttXGcIA */
   createMachine(
     {
       predictableActionArguments: true,
@@ -65,15 +64,14 @@ export const BatchOpsMachine =
         entities: {}, // Kaikki valittavissa olevat entiteetit
         selectionRef: undefined,
         result: undefined,
-        error: undefined,
       },
       initial: 'initializing',
       states: {
         initializing: {
           entry: 'initSelectionMachine',
-          always: 'idle',
+          always: 'initial',
         },
-        idle: {
+        initial: {
           entry: 'resetContext',
           on: {
             START: {
@@ -86,12 +84,8 @@ export const BatchOpsMachine =
         confirming: {
           entry: 'selectAll',
           on: {
-            EXECUTE: {
-              target: 'executing',
-            },
-            CANCEL: {
-              target: 'idle',
-            },
+            EXECUTE: 'executing',
+            CANCEL: 'initial',
           },
         },
         executing: {
@@ -102,10 +96,7 @@ export const BatchOpsMachine =
               target: 'result.success',
               actions: 'setResult',
             },
-            onError: {
-              target: 'result.error',
-              actions: 'setError',
-            },
+            onError: 'result.error',
           },
         },
         result: {
@@ -114,9 +105,7 @@ export const BatchOpsMachine =
             error: {},
           },
           on: {
-            CLOSE: {
-              target: 'idle',
-            },
+            CLOSE: 'initial',
           },
         },
       },
@@ -124,14 +113,7 @@ export const BatchOpsMachine =
     {
       actions: {
         setResult: assign({
-          result: (ctx, e) => {
-            return e.data;
-          },
-        }),
-        setError: assign({
-          error: (ctx, e) => {
-            return e.data;
-          },
+          result: (ctx, e) => e.data,
         }),
         setContext: assign((ctx, e) => ({
           tila: e?.tila ?? ctx.tila,
@@ -147,7 +129,6 @@ export const BatchOpsMachine =
           entities: {},
           tila: undefined,
           result: undefined,
-          error: undefined,
         })),
         initSelectionMachine: assign({
           selectionRef: ctx => spawn(entitySelectionMachine),

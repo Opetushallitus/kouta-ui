@@ -137,7 +137,7 @@ export const BatchOpsMachine =
           entities: e?.entities
             ? _.flow(
                 t => _.toPairs<EntityItem>(t),
-                entities => _.reject(entities, ([, v]) => v?.tila === ctx.tila),
+                entities => _.reject(entities, ([, v]) => v?.tila === e?.tila),
                 _.fromPairs
               )(e?.entities)
             : ctx.entities,

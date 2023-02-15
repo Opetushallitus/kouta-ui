@@ -48,6 +48,7 @@ export const BatchOpsMachine =
   /** @xstate-layout N4IgpgJg5mDOIC5QCECGAXAxgCwPIAdYBZVHASwDswA6Ss9M1AGzIC9KoBiAbQAYBdRKHwB7WPTIiKQkAA9EAdgAc1AMwA2BQEYlCgKwAaEAE9Ee1QE4161QCYlW23oC+zo2ix5CJclVoQmME4AZQAVAEEAJVC+QSQQUXEGKRl5BFU1JU0dfSNTBAUAFgy9CwV1PXUnV3cMHAJiUmxKGkwpADMyACcAWw5OAFEADQGAYQBVUIHYmUSJFPi0vULbai11Xi1KpzzEC1UtagVeA+q3EA967yaW6jaKTt7+0fCAOVGBgBkZ+Lnk6UWiFsRWoKws6l0hhMiCUpWovCqLnOly8jV8NDAsjAmAArgwKFwIFIaJQAG4iADWNC6OIoRDxGEkFB+wjE8wBoCWlmoej0vGUjih+UK+nhiJqFzqqJ8zT8mOxeP6YC6XREXWo+CYGHaap61BpdIZ-xZCTZ-1SiHUhUO2khu3SdiOSgsCLOtU8DRlty6cBxTHQnFGn1wwWmAlmZqZFvS61BSiU9kF9t5hy24olFBEEDgMhRnpuVAjSSjgIQAFoLHojvyTknoQgtKLCoVzIKJXnrujaBQJMw2Bwi+zo2WRdXjqchYhCrwq+pNODIe2pfmu2QAmBB+bSxZDrYtLx9rl6xt1Dzx23kcvO7LWh1un0CZuS5zEKpCmttpOEFkrDP+Q43UlD1r1ueVcXxKAnwWF8ED0Wx32WWwFyPfIFA0agylsCp03dK40RvfVfX9KCOTkIEVh5Odp0Re0sNWCwWwnJdgPw70iPQahYBxTBMDgeBfkjaCyIQJDeEoq1XS-YoqyUOxa0AjtWL8H0uP9ahlVVLoSOjUTxOonZ61UPlQUYi9XCAA */
   createMachine(
     {
+      predictableActionArguments: true,
       tsTypes: {} as import('./batchOpsMachine.typegen').Typegen0,
       id: 'BatchOpsMachine',
       schema: {

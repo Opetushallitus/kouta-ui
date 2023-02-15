@@ -27,6 +27,7 @@ interface ResetSelectionEvent {
 
 export const entitySelectionMachine = createMachine(
   {
+    predictableActionArguments: true,
     id: 'EntitySelectionMachine',
     tsTypes: {} as import('./entitySelectionMachine.typegen').Typegen0,
     schema: {

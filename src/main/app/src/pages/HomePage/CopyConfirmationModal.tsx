@@ -18,6 +18,7 @@ import { isDev } from '#/src/utils';
 
 import { EntityListTable } from './EntitySearchList';
 import { entitySelectionMachine } from './entitySelectionMachine';
+import { CopyToteutuksetMutationFunctionAsync } from './ToteutuksetSection/copyToteutukset';
 import { useEntitySelectionApi } from './useEntitySelection';
 
 export const BatchOpsCopyContext = React.createContext(
@@ -32,7 +33,6 @@ export const useBatchOpsApi = (
   const tila = useSelector(batchOpsService, s => s.context?.tila);
   const entities = useSelector(batchOpsService, s => s.context?.entities);
   const result = useSelector(batchOpsService, s => s.context?.result);
-  const error = useSelector(batchOpsService, s => s.context?.error);
 
   const selectionRef = useSelector(
     batchOpsService,
@@ -53,11 +53,10 @@ export const useBatchOpsApi = (
         send({ type: 'EXECUTE', entities, tila }),
       close: () => send({ type: 'CLOSE' }),
       result,
-      error,
       isSuccess: state.matches('result.success'),
       isError: state.matches('result.error'),
     }),
-    [state, send, tila, entities, batchOpsService, result, error, selectionRef]
+    [state, send, tila, entities, batchOpsService, result, selectionRef]
   );
 };
 
@@ -68,10 +67,16 @@ export const useCopyBatchOpsApi = () => {
   );
 };
 
-export const CopyConfirmationWrapper = ({ children, mutation }) => {
+export const CopyConfirmationWrapper = ({
+  children,
+  mutateAsync,
+}: {
+  children: React.ReactNode;
+  mutateAsync: CopyToteutuksetMutationFunctionAsync;
+}) => {
   const batchOpsService = useInterpret(BatchOpsMachine, {
     services: {
-      runMutation: (ctx, e) => mutation.mutateAsync(e),
+      runMutation: (ctx, e) => mutateAsync(e),
     },
     devTools: isDev,
   });

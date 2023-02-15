@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 
 import _ from 'lodash';
-import { useMutation } from 'react-query';
+import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { JULKAISUTILA } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { EntitySelection } from '#/src/machines/batchOpsMachine';
 
 type HakukohdeTilaChangeResponseItem = {
   oid: string;
@@ -15,9 +16,15 @@ type HakukohdeTilaChangeResponseItem = {
 type HakukohteetTilaChangeResponseData = Array<HakukohdeTilaChangeResponseItem>;
 
 type ChangeHakukohteidenTilaProps = {
-  entities: Array<{ oid: string }>;
-  tila: JULKAISUTILA;
+  entities: EntitySelection;
+  tila?: JULKAISUTILA;
 };
+
+export type CopyHakukohteetMutationFunctionAsync = UseMutateAsyncFunction<
+  HakukohteetTilaChangeResponseData,
+  unknown,
+  ChangeHakukohteidenTilaProps
+>;
 
 const useChangeHakukohteidenTila = () => {
   const apiUrls = useUrls();

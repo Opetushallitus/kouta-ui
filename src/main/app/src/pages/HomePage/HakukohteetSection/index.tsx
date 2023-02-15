@@ -90,7 +90,9 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
   return (
-    <StateChangeConfirmationWrapper mutation={tilaMutationResult}>
+    <StateChangeConfirmationWrapper
+      mutateAsync={tilaMutationResult.mutateAsync}
+    >
       <StateChangeConfirmationModal
         headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}

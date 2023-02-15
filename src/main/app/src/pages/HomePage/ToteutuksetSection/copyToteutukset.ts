@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 
 import _ from 'lodash';
-import { useMutation } from 'react-query';
+import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { EntitySelection } from '#/src/machines/batchOpsMachine';
 
 type ToteutusCopyResponseItem = {
   oid: string;
@@ -17,8 +18,14 @@ type ToteutusCopyResponseItem = {
 type ToteutusCopyResponseData = Array<ToteutusCopyResponseItem>;
 
 type CopyToteutuksetProps = {
-  entities: Array<{ oid: string }>;
+  entities: EntitySelection;
 };
+
+export type CopyToteutuksetMutationFunctionAsync = UseMutateAsyncFunction<
+  ToteutusCopyResponseData,
+  unknown,
+  CopyToteutuksetProps
+>;
 
 const useCopyToteutukset = () => {
   const apiUrls = useUrls();

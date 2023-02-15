@@ -16,6 +16,7 @@ import { isDev } from '#/src/utils';
 import { useBatchOpsApi } from './CopyConfirmationModal';
 import { EntityListTable } from './EntitySearchList';
 import { entitySelectionMachine } from './entitySelectionMachine';
+import { CopyHakukohteetMutationFunctionAsync } from './HakukohteetSection/changeHakukohteetState';
 import { useEntitySelectionApi } from './useEntitySelection';
 
 export const BatchOpsStateChangeContext = React.createContext<
@@ -29,10 +30,16 @@ export const useStateChangeBatchOpsApi = () => {
   );
 };
 
-export const StateChangeConfirmationWrapper = ({ children, mutation }) => {
+export const StateChangeConfirmationWrapper = ({
+  children,
+  mutateAsync,
+}: {
+  children: React.ReactNode;
+  mutateAsync: CopyHakukohteetMutationFunctionAsync;
+}) => {
   const batchOpsService = useInterpret(BatchOpsMachine, {
     services: {
-      runMutation: (ctx, e) => mutation.mutateAsync(e),
+      runMutation: (ctx, e) => mutateAsync(e),
     },
     devTools: isDev,
   });

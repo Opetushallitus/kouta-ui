@@ -85,7 +85,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const filterState = useFilterState(TOTEUTUS, toteutusService);
 
   return (
-    <CopyConfirmationWrapper mutation={copyMutation}>
+    <CopyConfirmationWrapper mutateAsync={copyMutation.mutateAsync}>
       <CopyConfirmationModal
         headerText={t('etusivu.toteutus.vahvistaKopiointiOtsikko')}
         createColumns={createColumnsForConfirmationModal}

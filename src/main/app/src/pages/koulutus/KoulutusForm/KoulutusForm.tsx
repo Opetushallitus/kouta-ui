@@ -299,6 +299,7 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.ERIKOISLAAKARI,
               KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
               KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+              KOULUTUSTYYPPI.MUU,
               ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
             ].includes(koulutustyyppi) && (
               <FormCollapse

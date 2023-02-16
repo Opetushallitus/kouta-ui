@@ -338,6 +338,7 @@ Object {
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
+        "wwwSivuTeksti": Object {},
       },
     ],
     "yleislinja": true,

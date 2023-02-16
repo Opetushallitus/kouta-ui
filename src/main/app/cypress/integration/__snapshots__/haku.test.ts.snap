@@ -117,7 +117,8 @@ exports[`editHaku > should be able to edit haku #0`] =
         },
         "wwwSivu": {
           "fi": "http://verkkosivu"
-        }
+        },
+        "wwwSivuTeksti": {}
       }
     ]
   },
@@ -184,7 +185,8 @@ exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
         },
         "wwwSivu": {
           "fi": "http://verkkosivu"
-        }
+        },
+        "wwwSivuTeksti": {}
       }
     ]
   },
@@ -383,7 +385,8 @@ exports[`editHaku > should be able to delete haku #0`] =
         },
         "wwwSivu": {
           "fi": "http://verkkosivu"
-        }
+        },
+        "wwwSivuTeksti": {}
       }
     ]
   },

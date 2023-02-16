@@ -62,12 +62,20 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
       hakulomakeLinkki,
     }),
     yhteyshenkilot: yhteyshenkilot.map(
-      ({ nimi, titteli, puhelinnumero, sahkoposti, wwwSivu }) => ({
+      ({
+        nimi,
+        titteli,
+        puhelinnumero,
+        sahkoposti,
+        wwwSivu,
+        wwwSivuTeksti,
+      }) => ({
         nimi: nimi || {},
         titteli: titteli || {},
         puhelinnumero: puhelinnumero || {},
         sahkoposti: sahkoposti || {},
         verkkosivu: wwwSivu || {},
+        verkkosivuTeksti: wwwSivuTeksti || {},
       })
     ),
   };

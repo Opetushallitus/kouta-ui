@@ -18,6 +18,7 @@ type Yhteystieto = {
   puhelinnumero: TranslatedField<string>;
   sahkoposti: TranslatedField<string>;
   verkkosivu: TranslatedField<string>;
+  verkkosivuTeksti: TranslatedField<string>;
 };
 
 type SelectOption<T = string | undefined> = { label?: string; value: T };

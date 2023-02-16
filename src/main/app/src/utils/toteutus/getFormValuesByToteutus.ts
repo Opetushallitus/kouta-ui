@@ -240,11 +240,19 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       avainsanat: kieliArvoListToMultiSelectValue(asiasanat),
     },
     yhteyshenkilot: _fp.map(
-      ({ nimi, titteli, sahkoposti, wwwSivu, puhelinnumero }) => ({
+      ({
+        nimi,
+        titteli,
+        sahkoposti,
+        wwwSivu,
+        wwwSivuTeksti,
+        puhelinnumero,
+      }) => ({
         nimi: nimi || {},
         titteli: titteli || {},
         sahkoposti: sahkoposti || {},
         verkkosivu: wwwSivu || {},
+        verkkosivuTeksti: wwwSivuTeksti || {},
         puhelinnumero: puhelinnumero || {},
       })
     )(yhteyshenkilot),

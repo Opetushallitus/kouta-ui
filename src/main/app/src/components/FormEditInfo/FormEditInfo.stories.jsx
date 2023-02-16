@@ -10,8 +10,10 @@ storiesOf('FormEditInfo', module)
   .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => (
     <FormEditInfo
-      editorOid={null}
-      date="2011-10-10T10:30"
+      entity={{
+        muokkaaja: 'Matti Meikäläinen',
+        modified: '2011-10-10T10:30',
+      }}
       historyUrl="https://google.fi"
     />
   ));

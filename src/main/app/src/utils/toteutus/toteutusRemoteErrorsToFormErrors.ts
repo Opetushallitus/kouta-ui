@@ -107,6 +107,40 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
     };
   }
 
+  if (path === 'metadata.opintojenLaajuusNumeroMax') {
+    const errorKey =
+      errorType === 'invalidToteutusOpintojenLaajuusMin'
+        ? 'invalidToteutusOpintojenLaajuusNumeroIntegrity'
+        : errorType;
+    return [
+      {
+        field: 'tiedot.opintojenLaajuusGroup',
+        errorKey: `validointivirheet.${errorKey}`, // Virheteksti group-tasolla
+      },
+      {
+        field: 'tiedot.opintojenLaajuusNumeroMax',
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
+      },
+    ];
+  }
+
+  if (path === 'metadata.opintojenLaajuusNumeroMin') {
+    const errorKey =
+      errorType === 'invalidToteutusOpintojenLaajuusMin'
+        ? 'invalidToteutusOpintojenLaajuusNumeroIntegrity'
+        : errorType;
+    return [
+      {
+        field: 'tiedot.opintojenLaajuusGroup',
+        errorKey: `validointivirheet.${errorKey}`, // Virheteksti group-tasolla
+      },
+      {
+        field: 'tiedot.opintojenLaajuusNumeroMin',
+        errorKey: null, // Kenttä punaiseksi (ei virhetekstiä)
+      },
+    ];
+  }
+
   if (
     /metadata.liitetytOpintojaksot.julkaisutila/.test(path) &&
     errorType === 'invalidTilaForLiitettyOpintojaksoOnJulkaisu'

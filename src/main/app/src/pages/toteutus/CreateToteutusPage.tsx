@@ -19,7 +19,7 @@ import {
   DEFAULT_JULKAISUTILA,
 } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
-import { ToteutusModel } from '#/src/types/toteutusTypes';
+import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 
@@ -27,14 +27,7 @@ import { initialValues } from './initialToteutusValues';
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
 
-const {
-  AMMATILLINEN_KOULUTUS,
-  TUTKINNON_OSA,
-  OSAAMISALA,
-  VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-  VAPAA_SIVISTYSTYO_MUU,
-  MUU_AMMATILLINEN_KOULUTUS,
-} = KOULUTUSTYYPPI;
+const { AMMATILLINEN_KOULUTUS } = KOULUTUSTYYPPI;
 
 const getCopyValues = toteutusOid => ({
   pohja: {
@@ -45,22 +38,10 @@ const getCopyValues = toteutusOid => ({
 
 const getInitialValues = ({
   toteutus,
-  koulutustyyppi,
-  koulutusNimi,
-  koulutusKielet,
-  isAvoinKorkeakoulutus,
-  tunniste,
-  opinnonTyyppiKoodiUri,
-  koulutusOpintojenLaajuusNumero,
+  koulutus,
 }: {
-  toteutus: ToteutusModel;
-  koulutustyyppi: KOULUTUSTYYPPI;
-  koulutusNimi?: string;
-  koulutusKielet?: Array<LanguageCode>;
-  isAvoinKorkeakoulutus?: boolean;
-  tunniste?: string;
-  opinnonTyyppiKoodiUri?: string;
-  koulutusOpintojenLaajuusNumero?: number;
+  toteutus?: ToteutusModel;
+  koulutus: KoulutusModel;
 }) => {
   return toteutus
     ? {
@@ -68,15 +49,7 @@ const getInitialValues = ({
         ...getFormValuesByToteutus(_.omit(toteutus, ['organisaatioOid'])),
         tila: DEFAULT_JULKAISUTILA,
       }
-    : initialValues({
-        koulutustyyppi,
-        koulutusNimi,
-        koulutusKielet,
-        isAvoinKorkeakoulutus,
-        tunniste,
-        opinnonTyyppiKoodiUri,
-        koulutusOpintojenLaajuusNumero,
-      });
+    : initialValues({ koulutus });
 };
 
 export const CreateToteutusPage = () => {
@@ -88,56 +61,16 @@ export const CreateToteutusPage = () => {
 
   const koulutustyyppi = koulutus?.koulutustyyppi ?? AMMATILLINEN_KOULUTUS;
 
-  const koulutusNimi = koulutus?.nimi;
-  const koulutusKielet = koulutus?.kielivalinta;
-  const isAvoinKorkeakoulutus = koulutus?.metadata?.isAvoinKorkeakoulutus;
-  const tunniste = koulutus?.metadata?.tunniste;
-  const opinnonTyyppiKoodiUri = koulutus?.metadata?.opinnonTyyppiKoodiUri;
-  const koulutusOpintojenLaajuusNumero =
-    koulutus?.metadata?.opintojenLaajuusNumeroMin ===
-    koulutus?.metadata?.opintojenLaajuusNumeroMax
-      ? koulutus?.metadata?.opintojenLaajuusNumeroMin
-      : '';
-
   const { data: toteutus } = usePohjaEntity(ENTITY.TOTEUTUS);
 
-  const initialValues = useMemo(() => {
-    return [
-      AMMATILLINEN_KOULUTUS,
-      TUTKINNON_OSA,
-      OSAAMISALA,
-      VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-      VAPAA_SIVISTYSTYO_MUU,
-      MUU_AMMATILLINEN_KOULUTUS,
-    ].includes(koulutustyyppi)
-      ? getInitialValues({
-          koulutustyyppi,
-          toteutus,
-          koulutusNimi,
-          koulutusKielet,
-          isAvoinKorkeakoulutus,
-          tunniste,
-          opinnonTyyppiKoodiUri,
-        })
-      : getInitialValues({
-          koulutustyyppi,
-          toteutus,
-          koulutusKielet,
-          isAvoinKorkeakoulutus,
-          tunniste,
-          opinnonTyyppiKoodiUri,
-          koulutusOpintojenLaajuusNumero,
-        });
-  }, [
-    toteutus,
-    koulutustyyppi,
-    koulutusNimi,
-    koulutusKielet,
-    isAvoinKorkeakoulutus,
-    tunniste,
-    opinnonTyyppiKoodiUri,
-    koulutusOpintojenLaajuusNumero,
-  ]);
+  const initialValues = useMemo(
+    () =>
+      getInitialValues({
+        toteutus,
+        koulutus,
+      }),
+    [toteutus, koulutus]
+  );
 
   return (
     <FormPage

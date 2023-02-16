@@ -10,8 +10,6 @@ import {
 
 import { AjankohtaFields } from './formTypes';
 
-export type ToteutusModel = any;
-
 type Kuvaus = TranslatedField<any>;
 
 export enum MaksullisuusTyyppi {

@@ -15,7 +15,7 @@ import { Box } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { HakuModel } from '#/src/types/hakuTypes';
+import { HakuModel } from '#/src/types/domainTypes';
 
 import { useAtaruLomakeUrl, useLomakeOptions } from './utils';
 

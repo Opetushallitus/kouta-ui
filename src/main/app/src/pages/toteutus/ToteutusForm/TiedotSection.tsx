@@ -16,7 +16,7 @@ import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
-import VaativaErityinenTukiField from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
+import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
@@ -371,6 +371,20 @@ export const ErikoistumiskoulutusTiedotSection = DIATiedotSection;
 export const LukioTiedotSection = ({ name }: ToteutusTiedotSectionProps) => {
   return (
     <VerticalBox gap={2}>
+      <CommonTiedotFields name={name} />
+    </VerticalBox>
+  );
+};
+
+export const MuuTiedotSection = ({
+  name,
+  language,
+  disabled,
+}: ToteutusTiedotSectionProps) => {
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} />
+      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
       <CommonTiedotFields name={name} />
     </VerticalBox>
   );

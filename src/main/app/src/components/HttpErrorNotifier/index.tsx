@@ -1,22 +1,20 @@
 import { useEffect } from 'react';
 
-import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { match } from 'ts-pattern';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useToaster } from '#/src/hooks/useToaster';
-import { otherwise } from '#/src/utils';
 
 const getToastOptions = (error, t) => {
   const { response } = error;
   const status = response?.status;
   const data = response?.data;
 
-  const label = _fp.cond([
-    [_fp.equals(403), () => t('ilmoitukset.kayttooikeusVirhe')],
-    [_fp.equals(400), () => t('ilmoitukset.virheellinenPalvelinpyynto')],
-    [otherwise, () => t('ilmoitukset.tuntematonVirhe.viesti')],
-  ])(status);
+  const label = match(status)
+    .with(403, () => t('ilmoitukset.kayttooikeusVirhe'))
+    .with(400, () => t('ilmoitukset.virheellinenPalvelinpyynto'))
+    .otherwise(() => t('ilmoitukset.tuntematonVirhe.viesti'));
 
   return {
     status: 'danger',

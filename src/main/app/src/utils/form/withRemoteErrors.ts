@@ -31,9 +31,9 @@ const setErrors = (
   if (_.isNil(existingError)) {
     val = [errorKey];
   } else if (_.isArray(existingError)) {
-    val = [...existingError, errorKey];
+    val = _.uniq([...existingError, errorKey]);
   } else {
-    val = [existingError, errorKey];
+    val = _.uniq([existingError, errorKey]);
   }
 
   _.set(errors, fieldName, val);

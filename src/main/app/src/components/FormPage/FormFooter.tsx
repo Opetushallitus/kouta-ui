@@ -10,6 +10,7 @@ import { Box } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { EntityModelBase } from '#/src/types/domainTypes';
 import { getEntityNimiTranslation } from '#/src/utils';
 
 import DeleteConfirmationDialog from '../DeleteConfirmationDialog';
@@ -17,7 +18,7 @@ import FormEditInfo from '../FormEditInfo';
 
 type FormFooterProps = {
   entityType: ENTITY;
-  entity: EntityBase;
+  entity?: EntityModelBase;
   save: () => void;
   canUpdate?: boolean;
   submitProps?: object;
@@ -30,7 +31,7 @@ const aboutToDeleteEntity = (nextState: JULKAISUTILA | undefined) => {
   return nextState && nextState === JULKAISUTILA.POISTETTU;
 };
 
-const FormFooter = ({
+export const FormFooter = ({
   entityType,
   entity = {
     tila: undefined,
@@ -98,5 +99,3 @@ const FormFooter = ({
     </>
   );
 };
-
-export default FormFooter;

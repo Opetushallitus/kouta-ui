@@ -5,13 +5,13 @@ import prettyBytes from 'pretty-bytes';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
+import { match } from 'ts-pattern';
 
 import Button from '#/src/components/Button';
 import { Box, Typography, Icon, Spin } from '#/src/components/virkailija';
 import { useMachine } from '#/src/hooks/useMachine';
 import { disabledStyle } from '#/src/system';
 import { getThemeProp, spacing } from '#/src/theme';
-import { ifAny, otherwise } from '#/src/utils';
 
 import {
   createImageUploadMachine,
@@ -182,36 +182,24 @@ const ImageConstraints = ({
 
 const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
   <>
-    {_.cond([
-      [
-        ifAny([CS.empty, CS.error]),
-        () => (
-          <PlaceholderContent t={t} openDialog={open} error={machineError} />
-        ),
-      ],
-      [
-        ifAny(CS.uploading),
-        () => <Loader message={t('yleiset.latausKaynnissa')} />,
-      ],
-      [
-        ifAny(CS.draggingEnabled),
-        () => (
-          <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
-        ),
-      ],
-      [
-        ifAny([CS.fileUploaded, CS.draggingDisabled]),
-        () => <ValueContent file={file} onRemove={onRemove} t={t} />,
-      ],
-      [
-        otherwise,
-        () => {
-          console.error(
-            `ImageInput: Unknown control state ${JSON.stringify(state.value)}`
-          );
-        },
-      ],
-    ])(state.matches)}
+    {match(state.value)
+      .with(CS.empty, CS.error, () => (
+        <PlaceholderContent t={t} openDialog={open} error={machineError} />
+      ))
+      .with(CS.uploading, () => (
+        <Loader message={t('yleiset.latausKaynnissa')} />
+      ))
+      .with(CS.draggingEnabled, () => (
+        <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
+      ))
+      .with(CS.fileUploaded, CS.draggingDisabled, () => (
+        <ValueContent file={file} onRemove={onRemove} t={t} />
+      ))
+      .otherwise(() =>
+        console.error(
+          `ImageInput: Unknown control state ${JSON.stringify(state.value)}`
+        )
+      )}
   </>
 );
 

@@ -3,6 +3,7 @@ import { TFunction } from 'i18next';
 import _ from 'lodash';
 import _fp from 'lodash/fp';
 import stripTags from 'striptags';
+import { match } from 'ts-pattern';
 
 import {
   isEditorState,
@@ -18,6 +19,7 @@ import {
   NDASH,
   ORGANISAATIOTYYPPI,
 } from '#/src/constants';
+import { EntityModelBase } from '#/src/types/domainTypes';
 import { memoize, memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
@@ -149,17 +151,6 @@ export const getFileExtension = (file: File) => {
   return parts.length > 1 ? _.toLower(_.last(parts) as string) : '';
 };
 
-/**
- * Check that given predicate returns truthy for a value or any value in an array
- * Can be used with lodash.cond() to improve readability
- * @param {*} value A single value or an array of values to check
- * @param {*} predicate A function returning truthy for a single matching value
- */
-export const ifAny = value => predicate =>
-  _.isArray(value) ? value.some(predicate) : predicate(value);
-
-export const otherwise = () => true;
-
 export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
 
 export const parseKeyVal = memoize(
@@ -178,27 +169,26 @@ const allFuncs =
     _.every(fns, fn => fn(value));
 
 export const formValueExists = value =>
-  _.cond([
-    [_.isNil, _.stubFalse],
-    [
+  match(value)
+    .when(_.isNil, _.stubFalse)
+    .when(
       allFuncs(
         v => _.isArray(v) || _.isString(v),
         v => v.length === 0
       ),
-      _.stubFalse,
-    ],
-    [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
-    [
+      _.stubFalse
+    )
+    .when(allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse)
+    .when(
       allFuncs(
         _.isPlainObject,
         v => _.has(v, 'value'),
         v => v.value === '' || _.isNil(v.value)
       ),
-      _.stubFalse,
-    ],
-    [allFuncs(isEditorState, isEmptyEditorState), _.stubFalse],
-    [otherwise, _.stubTrue],
-  ])(value);
+      _.stubFalse
+    )
+    .when(allFuncs(isEditorState, isEmptyEditorState), _.stubFalse)
+    .otherwise(_.stubTrue);
 
 export const isDeepEmptyFormValues = value =>
   !formValueExists(value) ||
@@ -321,7 +311,7 @@ export const isIn = (coll: Array<unknown>) => (val: unknown) =>
   coll?.includes(val);
 
 export const getEntityNimiTranslation = (
-  entity: EntityBase | undefined,
+  entity: EntityModelBase | undefined,
   lng: string
 ) => {
   const { _enrichedData, nimi } = entity ?? {};

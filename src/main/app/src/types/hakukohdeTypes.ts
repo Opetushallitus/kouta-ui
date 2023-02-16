@@ -7,8 +7,6 @@ import {
 
 import { AjankohtaFields } from './formTypes';
 
-export type HakukohdeModel = any;
-
 type ToimitustapaFields = {
   tapa: string;
   paikka: {

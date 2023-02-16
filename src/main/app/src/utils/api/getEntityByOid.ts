@@ -34,12 +34,12 @@ export const getEntityByOid = async ({
   return _.isObject(data) ? { lastModified, ...data } : data;
 };
 
-export const useEntityByOid = (
+export const useEntityByOid = <E>(
   entityType: ENTITY,
   props?: { oid?: string | null; silent?: boolean },
   options: KoutaApiQueryConfig = {}
 ) =>
-  useApiQuery(
+  useApiQuery<E>(
     entityType,
     getEntityByOid,
     { entityType, ...props },

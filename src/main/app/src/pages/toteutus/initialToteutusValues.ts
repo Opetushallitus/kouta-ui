@@ -45,10 +45,12 @@ export const initialValues = ({ koulutus }) => {
       isAvoinKorkeakoulutus,
       tunniste,
       opinnonTyyppi: { value: opinnonTyyppiKoodiUri },
-      opintojenLaajuusNumero:
-        koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS
-          ? opintojenLaajuusNumero
-          : undefined,
+      opintojenLaajuusNumero: [
+        KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+        KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+      ].includes(koulutustyyppi)
+        ? opintojenLaajuusNumero
+        : undefined,
       ...(koulutustyyppi === KOULUTUSTYYPPI.MUU
         ? {
             laajuusNumeroTyyppi:

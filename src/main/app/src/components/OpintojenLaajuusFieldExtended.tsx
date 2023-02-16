@@ -15,14 +15,14 @@ type Props = {
   name: string;
   disabled?: boolean;
   required?: boolean;
-  defaultLaajuusYksikko?: string;
+  fixedLaajuusYksikko?: string;
 };
 
 export const OpintojenLaajuusFieldExtended = ({
   name,
   disabled = false,
   required = false,
-  defaultLaajuusYksikko,
+  fixedLaajuusYksikko,
 }: Props) => {
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
@@ -46,10 +46,10 @@ export const OpintojenLaajuusFieldExtended = ({
         />
       </Box>
 
-      {defaultLaajuusYksikko ? (
+      {fixedLaajuusYksikko ? (
         <Box px={1} flexGrow={1}>
           <FormControl label={t('yleiset.laajuusyksikko')} disabled={true}>
-            <Input value={defaultLaajuusYksikko} />
+            <Input value={fixedLaajuusYksikko} />
           </FormControl>
         </Box>
       ) : (
@@ -62,7 +62,7 @@ export const OpintojenLaajuusFieldExtended = ({
             disabled={disabled}
             required={required}
             isClearable
-            defaultValue={{ value: defaultLaajuusYksikko }}
+            defaultValue={{ value: fixedLaajuusYksikko }}
           />
         </Box>
       )}

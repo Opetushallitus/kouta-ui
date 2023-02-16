@@ -264,7 +264,7 @@ export const KkOpintojaksoTiedotSection = ({
     <OpintojenLaajuusFieldExtended
       name={name}
       disabled={disabled}
-      defaultLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
+      fixedLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
     />
     <CommonTiedotFields name={name} />
     <TunnisteField name={name} />
@@ -284,7 +284,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
     <OpintojenLaajuusFieldExtended
       name={name}
       disabled={disabled}
-      defaultLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
+      fixedLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
     />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />

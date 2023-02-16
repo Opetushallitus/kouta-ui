@@ -111,7 +111,7 @@ export const TuvaTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        defaultLaajuusYksikko="viikkoa"
+        fixedLaajuusYksikko="viikkoa"
       />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
@@ -134,7 +134,7 @@ export const TelmaTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        defaultLaajuusYksikko="osaamispistettä"
+        fixedLaajuusYksikko="osaamispistettä"
       />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
@@ -213,7 +213,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        defaultLaajuusYksikko="opintopistettä"
+        fixedLaajuusYksikko="opintopistettä"
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
@@ -380,7 +380,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           <OpintojenLaajuusFieldExtended
             disabled={disabled}
             name={name}
-            defaultLaajuusYksikko="opintopistettä"
+            fixedLaajuusYksikko="opintopistettä"
           />
           <TutkintonimikeField disabled={disabled} name={name} />
           <KoulutusalatField disabled={disabled} name={name} />
@@ -401,7 +401,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           <OpintojenLaajuusFieldExtended
             disabled={disabled}
             name={name}
-            defaultLaajuusYksikko="opintopistettä"
+            fixedLaajuusYksikko="opintopistettä"
           />
           <ReadOnlyKoulutusalaSection
             koodiUri={KoulutusalaKoodi.YLEISSIVISTAVA}

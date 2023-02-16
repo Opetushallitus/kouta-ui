@@ -6,6 +6,7 @@ import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
+import { mapValues } from '#/src/utils/lodashFpUncapped';
 
 import { isApurahaVisible } from './toteutusVisibilities';
 
@@ -231,6 +232,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         values?.tiedot?.ilmoittautumislinkki
       ),
       aloituspaikat: maybeParseNumber(values?.tiedot?.aloituspaikat),
+      aloituspaikkakuvaus: mapValues(
+        serializeEditorState,
+        values?.tiedot?.aloituspaikkakuvaus
+      ),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
           nimi: pickTranslations(nimi),

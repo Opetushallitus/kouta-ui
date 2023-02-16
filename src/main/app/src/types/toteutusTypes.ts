@@ -73,6 +73,7 @@ export type ToteutusFormValues = {
     laajuusNumeroTyyppi?: MaaraTyyppi;
     ilmoittautumislinkki: TranslatedField<string>;
     aloituspaikat: string;
+    aloituspaikkakuvaus: TranslatedField<EditorState>;
     hasJotpaRahoitus: boolean;
     isTyovoimakoulutus: boolean;
     isTaydennyskoulutus: boolean;

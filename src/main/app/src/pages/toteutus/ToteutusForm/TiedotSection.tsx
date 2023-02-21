@@ -313,6 +313,23 @@ export const OpettajaTiedotSection = ({
 export const TutkinnonOsaTiedotSection = ({
   koulutus,
   language,
+  disabled,
+  name,
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <LaajuusJaAloituspaikat
+      name={name}
+      koulutus={koulutus}
+      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
+    />
+    <CommonTiedotFields name={name} />
+  </VerticalBox>
+);
+
+export const OsaamisalaTiedotSection = ({
+  koulutus,
+  language,
   name,
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
@@ -325,8 +342,6 @@ export const TutkinnonOsaTiedotSection = ({
     <CommonTiedotFields name={name} />
   </VerticalBox>
 );
-
-export const OsaamisalaTiedotSection = TutkinnonOsaTiedotSection;
 
 export const TutkintoonJohtavaTiedotSection = ({
   language,

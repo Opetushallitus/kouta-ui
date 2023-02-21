@@ -56,7 +56,7 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<
   return (
     <Box mb={2} {...getTestIdProps('koulutuksenNimi')}>
       <Field
-        disabled={disabled || selectedTutkinnonosaNimi}
+        disabled={disabled}
         name={`${name}.nimi.${language}`}
         component={FormFieldInput}
         label={t('koulutuslomake.lisaaKoulutuksenNimi')}

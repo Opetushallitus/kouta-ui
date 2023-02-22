@@ -1,14 +1,11 @@
-import _fp from 'lodash/fp';
+export const flatFilterHierarkia = (hierarkia, filterFn) =>
+  hierarkia
+    .flatMap(org =>
+      [org].concat(flatFilterHierarkia(org.children || [], filterFn))
+    )
+    .filter(filterFn);
 
-export const flatFilterHierarkia = (hierarkia, filterFn) => {
-  return hierarkia.flatMap(org => [
-    ...(filterFn(org)
-      ? [org]
-      : flatFilterHierarkia(org.children || [], filterFn)),
-  ]);
-};
-
-export const flattenHierarkia = _fp.flatMap(org => [
-  org,
-  ...flattenHierarkia(org?.children ?? []),
-]);
+export const flattenHierarkia = org =>
+  org?.children
+    ? [org].concat(org?.children.flatMap(child => flattenHierarkia(child)))
+    : [org];

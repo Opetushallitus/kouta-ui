@@ -4,6 +4,9 @@ import _ from 'lodash';
 import { Field } from 'redux-form';
 
 import { Box } from '#/src/components/virkailija';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { useOrgCreateHierarkia } from '#/src/pages/HomePage/OrganisaatioDrawer/useReadableOrganisaatioHierarkia';
 import { getTestIdProps } from '#/src/utils';
@@ -14,17 +17,24 @@ import { FormFieldSelect } from './formFields';
 
 export const OrganisaatioSectionCreate = ({ organisaatioOid }) => {
   const language = useUserLanguage();
+  const isOphVirkailija = useIsOphVirkailija();
 
   const { hierarkia, isLoading } = useOrgCreateHierarkia(organisaatioOid);
 
+  const { organisaatio: oph, isLoading: ophIsLoading } = useOrganisaatio(
+    OPETUSHALLITUS_ORGANISAATIO_OID
+  );
+
   const options = useMemo(() => {
     const orgs = flattenHierarkia(hierarkia);
+
+    if (isOphVirkailija && !ophIsLoading) orgs.unshift(oph);
 
     return _.map(orgs, ({ oid, nimi }) => ({
       value: oid,
       label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
     }));
-  }, [hierarkia, language]);
+  }, [hierarkia, language, isOphVirkailija, ophIsLoading, oph]);
 
   return (
     <Box>

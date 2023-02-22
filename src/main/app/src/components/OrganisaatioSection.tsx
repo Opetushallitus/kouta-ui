@@ -8,6 +8,7 @@ import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useLoadOptions from '#/src/hooks/useLoadOptions';
+import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
@@ -28,13 +29,18 @@ export const OrganisaatioSection = () => {
     }
   );
 
+  const { organisaatio: oph, isLoading: ophIsLoading } = useOrganisaatio(
+    OPETUSHALLITUS_ORGANISAATIO_OID
+  );
+
   const options = useMemo(() => {
     const orgs = flattenHierarkia(hierarkia);
+    if (isOphVirkailija && !ophIsLoading) orgs.unshift(oph);
     return _.map(orgs, ({ oid, nimi }) => ({
       value: oid,
       label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
     }));
-  }, [hierarkia, language]);
+  }, [hierarkia, language, isOphVirkailija, ophIsLoading, oph]);
 
   const loadOptions = useLoadOptions(options);
 

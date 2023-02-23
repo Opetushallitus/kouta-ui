@@ -440,6 +440,7 @@
       "tilamuutos": "Tila",
       "tilamuuttunut": "Muuttunut",
       "tilanmuutosEpaonnistui": "Hakukohteiden tilanvaihto epäonnistui!",
+      "tilanmuutosOhje": "Hakukohteiden tilojen muutokset eivät päivity heti etusivun listalle. Odota hetki ja lataa sen jälkeen sivu uudestaan.",
       "tilaVirhe": "Virhe",
       "tilaVirheSyy": "Virheen syy",
       "tilaaVaihdetaan": "Vaihdetaan hakukohteiden tilaa..."

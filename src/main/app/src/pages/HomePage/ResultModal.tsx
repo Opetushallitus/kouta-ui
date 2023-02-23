@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 import { InterpreterFrom } from 'xstate';
 
 import ErrorAlert from '#/src/components/ErrorAlert';
@@ -11,6 +12,10 @@ import { Box, Button } from '#/src/components/virkailija';
 import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
 
 import { useBatchOpsApi } from './CopyConfirmationModal';
+
+const InfoText = styled(Box)`
+  padding-bottom: 15px;
+`;
 
 const ResultList = ({ data, columns }) => {
   const rows = useMemo(
@@ -50,11 +55,14 @@ export const ResultModal = ({
       onClose={onClose}
       header={headerText}
       footer={
-        <Box display="flex" justifyContent="flex-end">
-          <Button variant="outlined" onClick={onClose}>
-            {t('yleiset.sulje')}
-          </Button>
-        </Box>
+        <>
+          <InfoText>{t('etusivu.hakukohde.tilanmuutosOhje')}</InfoText>
+          <Box display="flex" justifyContent="flex-end">
+            <Button variant="outlined" onClick={onClose}>
+              {t('yleiset.sulje')}
+            </Button>
+          </Box>
+        </>
       }
     >
       {isError ? (

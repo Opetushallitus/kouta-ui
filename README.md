@@ -30,6 +30,15 @@ https://localhost:3000
 
 **Huom! HTTPS-protokolla käytössä.** Webpack-dev-serverin proxy on konfiguroitu oletuksena ohjaamaan kaikki muut polut paitsi `/`, `/kouta` ja `/kouta/*` osoitteeseen `https://virkailija.hahtuvaopintopolku.fi`. Käytetään oletuksena self-signed-sertifikaatteja, eikä CORS-rajoituksia ei tarvitse kiertää selaimessa. Kehitysympäristön virkailija-osoitetta, johon proxytaan voi vaihtaa asettamalla ympäristömuuttujan `DEV_VIRKAILIJA_URL` eri arvoon (esim. `.env.local`-tiedostossa).
 
+## Suositellut kehitystyökalut ja pluginit
+
+Kehittämisessä suositeltava editori on "Visual Studio Code", mutta sen käyttäminen ei ole pakollista. Hyödyllisiä VSCode-plugineja ovat mm:
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) näyttää ESLint-virheet editorissa. Erillistä prettier-pluginia ei tarvita, koska ne mäpätään eslint-varoituksiksi.
+- [XState VSCode](https://marketplace.visualstudio.com/items?itemName=statelyai.stately-vscode) tarjoaa monenlaisia työkaluja xstate-tilakoneiden kanssa työskentelyyn.
+- [Total Typescript](https://marketplace.visualstudio.com/items?itemName=mattpocock.ts-error-translator) tekee TypeScript-virheistä helpommin ymmärrettäviä ja näyttää opettavaisia selityksiä erilaisille TypeScript-rakenteille.
+- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components) auttaa erityisesti styled-components-kirjaston CSS-template-stringien kanssa.
+
 ## Koodin tyyli ja tarkistus
 
 Käytössä on ESlint ja Prettier koodin tyylin yhdenmukaistamiseksi ja staattiseen tarkistamiseen. Prettier ajetaan eslint-sääntönä, joten prettierin ajaminen JS/TS-tiedostoille erikseen ei ole tarpeen. Lisäksi eslint ajetaan Huskyn ja Lint-staged:n avulla Git precommit-hookissa, jolloin korjataan ne virheet/varoitukset, jotka pystytään. Jos ei kaikkea pystytty korjaamaan, commit epäonnistuu ja käyttäjän täytyy korjata jäljellä olevat ongelmat käsin.

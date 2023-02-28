@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useActor, useInterpret, useSelector } from '@xstate/react';
+import { useActor, useInterpret } from '@xstate/react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { ActorRefFrom, InterpreterFrom } from 'xstate';
@@ -8,71 +8,34 @@ import { ActorRefFrom, InterpreterFrom } from 'xstate';
 import Modal from '#/src/components/Modal';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { Box, Button } from '#/src/components/virkailija';
+import { safeGetJulkaisutilaTranslationKey } from '#/src/constants';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
-import {
-  BatchOpsMachine,
-  ExecuteEvent,
-  StartEvent,
-} from '#/src/machines/batchOpsMachine';
+import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
 import { isDev } from '#/src/utils';
 
+import { useBatchOpsApi } from './CopyConfirmationModal';
 import { EntityListTable } from './EntitySearchList';
 import { entitySelectionMachine } from './entitySelectionMachine';
-import { CopyToteutuksetMutationFunctionAsync } from './ToteutuksetSection/copyToteutukset';
+import { CopyHakukohteetMutationFunctionAsync } from './HakukohteetSection/changeHakukohteetState';
 import { useEntitySelectionApi } from './useEntitySelection';
 
-export const BatchOpsCopyContext = React.createContext(
-  {} as InterpreterFrom<typeof BatchOpsMachine>
-);
+export const BatchOpsStateChangeContext = React.createContext<
+  InterpreterFrom<typeof BatchOpsMachine>
+>({} as any);
 
-export const useBatchOpsApi = (
-  batchOpsService: InterpreterFrom<typeof BatchOpsMachine>
-) => {
-  const [state, send] = useActor(batchOpsService);
-
-  const tila = useSelector(batchOpsService, s => s.context?.tila);
-  const entities = useSelector(batchOpsService, s => s.context?.entities);
-  const result = useSelector(batchOpsService, s => s.context?.result);
-
-  const selectionRef = useSelector(
-    batchOpsService,
-    s => s.context?.selectionRef
-  );
-
-  return useMemo(
-    () => ({
-      service: batchOpsService,
-      selectionRef,
-      tila,
-      entities,
-      state: state.value,
-      start: ({ tila, entities }: Omit<StartEvent, 'type'>) =>
-        send({ type: 'START', tila, entities }),
-      cancel: () => send({ type: 'CANCEL' }),
-      execute: ({ entities, tila }: Omit<ExecuteEvent, 'type'>) =>
-        send({ type: 'EXECUTE', entities, tila }),
-      close: () => send({ type: 'CLOSE' }),
-      result,
-      isSuccess: state.matches('result.success'),
-      isError: state.matches('result.error'),
-    }),
-    [state, send, tila, entities, batchOpsService, result, selectionRef]
-  );
-};
-
-export const useCopyBatchOpsApi = () => {
-  const batchOpsService = useContextOrThrow(BatchOpsCopyContext);
+export const useStateChangeBatchOpsApi = () => {
+  const batchOpsService = useContextOrThrow(BatchOpsStateChangeContext);
   return useBatchOpsApi(
     batchOpsService as InterpreterFrom<typeof BatchOpsMachine>
   );
 };
 
-export const CopyConfirmationWrapper = ({
+export const StateChangeConfirmationWrapper = ({
   children,
   mutateAsync,
 }: {
   children: React.ReactNode;
-  mutateAsync: CopyToteutuksetMutationFunctionAsync;
+  mutateAsync: CopyHakukohteetMutationFunctionAsync;
 }) => {
   const batchOpsService = useInterpret(BatchOpsMachine, {
     services: {
@@ -82,21 +45,20 @@ export const CopyConfirmationWrapper = ({
   });
 
   const [state] = useActor(batchOpsService);
-
   const { t } = useTranslation();
 
   return (
-    <BatchOpsCopyContext.Provider value={batchOpsService}>
+    <BatchOpsStateChangeContext.Provider value={batchOpsService}>
       {state.value === 'executing' ? (
-        <OverlaySpin text={t('etusivu.toteutus.kopioidaan')} />
+        <OverlaySpin text={t('etusivu.hakukohde.tilaaVaihdetaan')} />
       ) : (
         children
       )}
-    </BatchOpsCopyContext.Provider>
+    </BatchOpsStateChangeContext.Provider>
   );
 };
 
-export const CopyConfirmationModal = ({
+export const StateChangeConfirmationModal = ({
   headerText,
   createColumns,
 }: {
@@ -107,8 +69,8 @@ export const CopyConfirmationModal = ({
 }) => {
   const { t } = useTranslation();
 
-  const { state, cancel, execute, entities, selectionRef } =
-    useCopyBatchOpsApi();
+  const { state, cancel, tila, entities, execute, selectionRef } =
+    useStateChangeBatchOpsApi();
 
   const columns = useMemo(
     () => createColumns(selectionRef),
@@ -118,8 +80,8 @@ export const CopyConfirmationModal = ({
   const { selection } = useEntitySelectionApi(selectionRef);
 
   const onConfirm = useCallback(() => {
-    execute({ entities: selection });
-  }, [execute, selection]);
+    execute({ entities: selection, tila });
+  }, [execute, selection, tila]);
 
   return (
     <Modal
@@ -136,7 +98,9 @@ export const CopyConfirmationModal = ({
             </Button>
           </Box>
           <Button disabled={_.isEmpty(selection)} onClick={onConfirm}>
-            {t('etusivu.aloitaKopiointi')}
+            {t('etusivu.hakukohde.vahvistaTilanmuutos', {
+              tila: t(safeGetJulkaisutilaTranslationKey(tila)),
+            })}
           </Button>
         </Box>
       }

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 
 import { getCookie } from '#/src/utils';
 
@@ -105,7 +105,7 @@ const createHttpClient = ({ apiUrls, callerId }) => {
     },
   });
 
-  return _fp.flow(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
+  return _.flow(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
 };
 
 export default createHttpClient;

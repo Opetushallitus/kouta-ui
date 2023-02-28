@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -15,17 +15,17 @@ export const KoulutusSaveErrorModal = () => {
 
   const { remoteErrors = [], setRemoteErrors } = useFormSaveRemoteErrors();
   const errorsWithToteutukset = useMemo(
-    () => remoteErrors?.filter?.(e => !_fp.isEmpty(e?.meta?.toteutukset)),
+    () => remoteErrors?.filter?.(e => !_.isEmpty(e?.meta?.toteutukset)),
     [remoteErrors]
   );
 
-  const isOpen = !_fp.isEmpty(errorsWithToteutukset);
+  const isOpen = !_.isEmpty(errorsWithToteutukset);
 
   const closeModal = () => setRemoteErrors(null);
 
   const organisaatioOid = useSelectedOrganisaatioOid();
 
-  return isOpen ? (
+  return (
     <Modal
       minHeight="90vh"
       maxWidth="1200px"
@@ -41,7 +41,7 @@ export const KoulutusSaveErrorModal = () => {
       }
     >
       <Box flexDirection="column">
-        {errorsWithToteutukset.map(error => (
+        {_.map(errorsWithToteutukset, error => (
           <div key={error.errorType}>
             <Typography>
               {t(`validointivirheet.${error.errorType}`)}:
@@ -59,5 +59,5 @@ export const KoulutusSaveErrorModal = () => {
         ))}
       </Box>
     </Modal>
-  ) : null;
+  );
 };

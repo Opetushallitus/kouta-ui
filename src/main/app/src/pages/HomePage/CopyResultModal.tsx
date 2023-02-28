@@ -1,20 +1,17 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { UseMutationResult } from 'react-query';
-import { usePrevious } from 'react-use';
 import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
-import ErrorAlert from '#/src/components/ErrorAlert';
-import ListTable from '#/src/components/ListTable';
-import Modal from '#/src/components/Modal';
-import { Box, Button, Icon } from '#/src/components/virkailija';
+import { Icon } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { ResultModal } from '#/src/pages/HomePage/ResultModal';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
+import { useCopyBatchOpsApi } from './CopyConfirmationModal';
 import { useEntitySelection } from './useEntitySelection';
 
 const Nimi = ({ item, entityType }) => {
@@ -57,6 +54,7 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     },
   },
   {
+    key: 'tulos',
     render: item => {
       const status = item.status;
       switch (status) {
@@ -71,88 +69,39 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
   },
 ];
 
-export const CopyResultList = ({ data, entityType, getLinkUrl }) => {
-  const { t } = useTranslation();
-  const columns = useTableColumns(t, entityType, getLinkUrl);
-  const rows = useMemo(
-    () => _fp.map(result => ({ ...result, key: result.oid }), data),
-    [data]
-  );
-
-  return <ListTable rows={rows} columns={columns} />;
-};
-
-type CopyResultItem = {
-  oid: string;
-  created: {
-    toteutusOid?: string;
-    hakukohdeOid?: string;
-  };
-};
-
-const usePreviousNonNil = value => {
-  const prev = usePrevious(value);
-  return _fp.isEmpty(value) ? prev : value;
-};
-
 const isCopyResultSuccessful = mutationResult =>
-  _fp.isArray(mutationResult?.data) &&
-  _fp.every(result => result.status === 'success', mutationResult?.data);
+  _.isArray(mutationResult) && _.every(mutationResult, { status: 'success' });
 
 export const CopyResultModal = ({
   entityType,
   headerText,
-  mutationResult,
   getLinkUrl,
 }: {
   entityType: ENTITY;
   headerText: string;
-  mutationResult: UseMutationResult<
-    Array<CopyResultItem>,
-    unknown,
-    Array<string>
-  >;
   getLinkUrl: any;
 }) => {
-  const { t } = useTranslation();
-
-  const isOpen = ['success', 'error'].includes(mutationResult.status);
-
   const { removeSelection } = useEntitySelection(entityType);
 
+  const { close, result, service } = useCopyBatchOpsApi();
+
   const onClose = useCallback(() => {
-    if (isCopyResultSuccessful(mutationResult)) {
+    if (isCopyResultSuccessful(result)) {
       removeSelection();
     }
-    mutationResult.reset();
-  }, [mutationResult, removeSelection]);
+    close();
+  }, [result, removeSelection, close]);
 
-  const data = usePreviousNonNil(mutationResult.data);
+  const { t } = useTranslation();
+
+  const columns = useTableColumns(t, entityType, getLinkUrl);
 
   return (
-    <Modal
-      minHeight="90vh"
-      maxWidth="1200px"
-      open={isOpen}
+    <ResultModal
       onClose={onClose}
-      header={headerText}
-      footer={
-        <Box display="flex" justifyContent="flex-end">
-          <Button variant="outlined" onClick={onClose}>
-            {t('yleiset.sulje')}
-          </Button>
-        </Box>
-      }
-    >
-      {mutationResult.isError ? (
-        <ErrorAlert center>{t('etusivu.kopiointiEpaonnistui')}</ErrorAlert>
-      ) : (
-        <CopyResultList
-          data={data}
-          entityType={entityType}
-          getLinkUrl={getLinkUrl}
-        />
-      )}
-    </Modal>
+      headerText={headerText}
+      batchOpsService={service}
+      columns={columns}
+    />
   );
 };

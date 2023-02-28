@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 
-import { useMutation } from 'react-query';
+import _ from 'lodash';
+import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { map } from '#/src/utils/lodashFpUncapped';
+import { EntitySelection } from '#/src/machines/batchOpsMachine';
 
 type ToteutusCopyResponseItem = {
   oid: string;
@@ -16,14 +17,24 @@ type ToteutusCopyResponseItem = {
 
 type ToteutusCopyResponseData = Array<ToteutusCopyResponseItem>;
 
+type CopyToteutuksetProps = {
+  entities: EntitySelection;
+};
+
+export type CopyToteutuksetMutationFunctionAsync = UseMutateAsyncFunction<
+  ToteutusCopyResponseData,
+  unknown,
+  CopyToteutuksetProps
+>;
+
 const useCopyToteutukset = () => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
   return useCallback(
-    async (toteutukset: Array<string>) => {
+    async ({ entities }: CopyToteutuksetProps) => {
       const result = await httpClient.put(
         apiUrls.url('kouta-backend.toteutus-copy'),
-        map('oid', toteutukset)
+        _.map(entities, 'oid')
       );
       return result.data as ToteutusCopyResponseData;
     },
@@ -33,7 +44,7 @@ const useCopyToteutukset = () => {
 
 export const useCopyToteutuksetMutation = () => {
   const copyToteutukset = useCopyToteutukset();
-  return useMutation<ToteutusCopyResponseData, unknown, Array<string>>(
+  return useMutation<ToteutusCopyResponseData, unknown, CopyToteutuksetProps>(
     copyToteutukset
   );
 };

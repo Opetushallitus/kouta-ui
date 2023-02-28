@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { TFunction } from 'i18next';
-import _ from 'lodash';
 
 import {
-  makeCountColumn,
+  makeHakuColumn,
   makeKoulutustyyppiColumn,
   makeModifiedColumn,
   makeMuokkaajaColumn,
@@ -12,24 +11,18 @@ import {
   makeTilaColumn,
 } from '#/src/components/ListTable';
 import { ENTITY } from '#/src/constants';
-
 import {
   createHeadingCheckbox,
   createRowCheckbox,
-} from '../EntityListCheckboxes';
+} from '#/src/pages/HomePage/EntityListCheckboxes';
 
-export const createToteutusListColumns =
-  (
-    t: TFunction,
-    organisaatioOid: string,
-    filter: (item: { key: string }) => boolean = _.stubTrue
-  ) =>
-  selectionActor => {
+export const createHakukohdeListColumns =
+  (t: TFunction, organisaatioOid: string) => selectionActor => {
     const HeadingCheckbox = createHeadingCheckbox(
       selectionActor,
-      ENTITY.TOTEUTUS
+      ENTITY.HAKUKOHDE
     );
-    const RowCheckbox = createRowCheckbox(selectionActor, ENTITY.TOTEUTUS);
+    const RowCheckbox = createRowCheckbox(selectionActor, ENTITY.HAKUKOHDE);
     return [
       {
         title: ({ rows }) => <HeadingCheckbox rows={rows} />,
@@ -42,16 +35,15 @@ export const createToteutusListColumns =
       },
       makeNimiColumn(t, {
         getLinkUrl: ({ oid }) =>
-          `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
+          `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+      }),
+      makeHakuColumn(t, {
+        getLinkUrl: ({ hakuOid }) =>
+          `/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus/`,
       }),
       makeKoulutustyyppiColumn(t),
       makeTilaColumn(t),
       makeModifiedColumn(t),
       makeMuokkaajaColumn(t),
-      makeCountColumn({
-        title: t('etusivu.kiinnitetytHakukohteet'),
-        key: 'hakukohteet',
-        propName: 'hakukohdeCount',
-      }),
-    ].filter(filter);
+    ];
   };

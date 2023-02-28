@@ -203,7 +203,8 @@
     "aliorganisaatio": "Organisaatio",
     "isAvoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta",
     "tunniste": "Hakijalle näkyvä tunniste",
-    "opinnonTyyppi": "Valitse opinnon tyyppi"
+    "opinnonTyyppi": "Valitse opinnon tyyppi",
+    "vaihdaTila": "Vaihda tila"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -428,6 +429,21 @@
       "valitut_other": "{{count}} toteutusta valittu",
       "vahvistaKopiointiOtsikko": "Valitse toteutukset",
       "kopioidaan": "Kopioidaan toteutuksia..."
+    },
+    "hakukohde": {
+      "valitut_zero": "Ei hakukohteita valittu",
+      "valitut": "1 hakukohde valittu",
+      "valitut_other": "{{count}} hakukohdetta valittu",
+      "vahvistaTilanmuutosOtsikko": "Valitse hakukohteet",
+      "vahvistaTilanmuutos": "Vaihda hakukohteet tilaan {{tila}}",
+      "tilamuutosTuloksetOtsikko": "Hakukohteiden tilamuutoksen tulokset",
+      "tilamuutos": "Tila",
+      "tilamuuttunut": "Muuttunut",
+      "tilanmuutosEpaonnistui": "Hakukohteiden tilanvaihto epäonnistui!",
+      "tilanmuutosOhje": "Hakukohteiden tilojen muutokset eivät päivity heti etusivun listalle. Odota hetki ja lataa sen jälkeen sivu uudestaan.",
+      "tilaVirhe": "Virhe",
+      "tilaVirheSyy": "Virheen syy",
+      "tilaaVaihdetaan": "Vaihdetaan hakukohteiden tilaa..."
     }
   },
   "koulutuslomake": {

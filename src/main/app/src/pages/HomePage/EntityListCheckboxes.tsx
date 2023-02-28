@@ -1,23 +1,43 @@
 import React, { useCallback, useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 
 import { Checkbox } from '#/src/components/virkailija';
+import { CRUD_ROLES, ENTITY } from '#/src/constants';
+import {
+  useCurrentUserHasRole,
+  useGetCurrentUserHasRole,
+} from '#/src/hooks/useCurrentUserHasRole';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 import { useEntitySelectionApi } from './useEntitySelection';
 
 export const createHeadingCheckbox =
-  selectionActor =>
+  (selectionActor, entityType) =>
   ({ rows }) => {
     const { selection, selectItems, deselectItems } =
       useEntitySelectionApi(selectionActor);
 
-    const pageItems = rows;
+    const isOphVirkailija = useIsOphVirkailija();
+
+    const getCurrentUserHasUpdateRole = useGetCurrentUserHasRole(
+      entityType,
+      CRUD_ROLES.UPDATE
+    );
+
+    const pageItems =
+      entityType === ENTITY.HAKUKOHDE
+        ? _.filter(
+            rows,
+            ({ organisaatio }) =>
+              isOphVirkailija || getCurrentUserHasUpdateRole(organisaatio?.oid)
+          )
+        : rows;
 
     const allPageItemsSelected = useMemo(
       () =>
-        !_fp.isEmpty(pageItems) &&
-        _fp.every(({ oid: pageOid }) => Boolean(selection[pageOid]), pageItems),
+        !_.isEmpty(pageItems) &&
+        _.every(pageItems, ({ oid: pageOid }) => Boolean(selection[pageOid])),
       [selection, pageItems]
     );
 
@@ -37,9 +57,19 @@ export const createHeadingCheckbox =
     );
   };
 
-export const createRowCheckbox = selectionActor => item => {
+export const createRowCheckbox = (selectionActor, entityType) => item => {
   const { selection, selectItems, deselectItems } =
     useEntitySelectionApi(selectionActor);
+
+  const isOphVirkailija = useIsOphVirkailija();
+
+  const hasRightsToUpdate =
+    isOphVirkailija ||
+    useCurrentUserHasRole(
+      entityType,
+      CRUD_ROLES.UPDATE,
+      item?.organisaatio?.oid
+    );
 
   const onSelectionChange = useCallback(
     e => {
@@ -56,6 +86,7 @@ export const createRowCheckbox = selectionActor => item => {
     <Checkbox
       checked={Boolean(selection[item.oid])}
       onChange={onSelectionChange}
+      disabled={entityType === ENTITY.HAKUKOHDE ? !hasRightsToUpdate : false}
     />
   );
 };

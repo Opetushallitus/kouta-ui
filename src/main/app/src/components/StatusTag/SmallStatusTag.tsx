@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Box, Typography } from '#/src/components/virkailija';
-import { getJulkaisutilaTranslationKey } from '#/src/constants';
+import { safeGetJulkaisutilaTranslationKey } from '#/src/constants';
 import { spacing } from '#/src/theme';
 
 import { getColor, StatusTagProps } from './utils';
@@ -22,7 +22,7 @@ const getLabel = ({ children, tila, t }) => {
     return children;
   }
 
-  return t(getJulkaisutilaTranslationKey(tila));
+  return t(safeGetJulkaisutilaTranslationKey(tila));
 };
 
 export const SmallStatusTag = ({ children, status, color }: StatusTagProps) => {

@@ -1,19 +1,24 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
-import {
-  makeHakuColumn,
-  makeKoulutustyyppiColumn,
-  makeModifiedColumn,
-  makeMuokkaajaColumn,
-  makeNimiColumn,
-  makeTilaColumn,
-} from '#/src/components/ListTable';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { hakukohdeService } from '#/src/machines/filterMachines';
+import { EntityListActionBar } from '#/src/pages/HomePage/EntityListActionBar';
+import { useChangeHakukohteetTilaMutation } from '#/src/pages/HomePage/HakukohteetSection/changeHakukohteetState';
+import { createHakukohdeListColumns } from '#/src/pages/HomePage/HakukohteetSection/createHakukohdeListColumns';
+import {
+  StateChangeConfirmationModal,
+  StateChangeConfirmationWrapper,
+  useStateChangeBatchOpsApi,
+} from '#/src/pages/HomePage/StateChangeConfirmationModal';
+import { StateChangeResultModal } from '#/src/pages/HomePage/StateChangeResultModal';
+import {
+  SERVICE_BY_ENTITY,
+  useEntitySelection,
+} from '#/src/pages/HomePage/useEntitySelection';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
@@ -24,24 +29,25 @@ import LiitoksetModal from './LiitoksetModal';
 
 const { HAKUKOHDE } = ENTITY;
 
-const useTableColumns = (t, organisaatioOid) =>
-  useMemo(
-    () => [
-      makeNimiColumn(t, {
-        getLinkUrl: ({ oid }) =>
-          `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
-      }),
-      makeHakuColumn(t, {
-        getLinkUrl: ({ hakuOid }) =>
-          `/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus/`,
-      }),
-      makeKoulutustyyppiColumn(t),
-      makeTilaColumn(t),
-      makeModifiedColumn(t),
-      makeMuokkaajaColumn(t),
-    ],
-    [t, organisaatioOid]
+const HakukohdeActionBar = () => {
+  const { selection } = useEntitySelection(HAKUKOHDE);
+  const { start, tila } = useStateChangeBatchOpsApi();
+
+  const changeTila = useCallback(
+    tila => {
+      start({ tila, entities: selection });
+    },
+    [selection, start]
   );
+
+  return (
+    <EntityListActionBar
+      entityType={HAKUKOHDE}
+      changeTila={changeTila}
+      tila={tila}
+    />
+  );
+};
 
 const Actions = ({ organisaatioOid }) => {
   const { isOpen, close, open } = useModal();
@@ -59,14 +65,43 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
+export const createGetHakukohdeLinkUrl = organisaatioOid => oid =>
+  `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`;
+
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
+  const columns = useMemo(
+    () =>
+      createHakukohdeListColumns(
+        t,
+        organisaatioOid
+      )(SERVICE_BY_ENTITY[HAKUKOHDE]),
+    [t, organisaatioOid]
+  );
+
+  const createColumnsForConfirmationModal = useMemo(
+    () => createHakukohdeListColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
+
+  const tilaMutationResult = useChangeHakukohteetTilaMutation();
+
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 
-  const columns = useTableColumns(t, organisaatioOid);
   return (
-    <>
+    <StateChangeConfirmationWrapper
+      mutateAsync={tilaMutationResult.mutateAsync}
+    >
+      <StateChangeConfirmationModal
+        headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
+        createColumns={createColumnsForConfirmationModal}
+      />
+      <StateChangeResultModal
+        entityType={HAKUKOHDE}
+        headerText={t('etusivu.hakukohde.tilamuutosTuloksetOtsikko')}
+        getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
+      />
       <NavigationAnchor id="hakukohteet" />
       <ListCollapse
         icon={ICONS[HAKUKOHDE]}
@@ -77,6 +112,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
         defaultOpen
       >
         <EntitySearchList
+          ActionBar={HakukohdeActionBar}
           searchEntities={searchHakukohteet}
           organisaatioOid={organisaatioOid}
           entityType={HAKUKOHDE}
@@ -86,7 +122,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
           searchPage="homepage.hakukohteet"
         />
       </ListCollapse>
-    </>
+    </StateChangeConfirmationWrapper>
   );
 };
 

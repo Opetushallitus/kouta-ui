@@ -8,7 +8,7 @@ const getHaut =
       {
         params: {
           organisaatioOid,
-          ...(yhteishaut && { yhteishaut }),
+          yhteishaut: yhteishaut || false,
           myosArkistoidut: true,
         },
       }

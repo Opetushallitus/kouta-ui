@@ -59,6 +59,7 @@ import {
   ErikoistumiskoulutusTiedotSection,
   TaiteenperusopetusTiedotSection,
   MuuTiedotSection,
+  OsaamisalaTiedotSection,
 } from './TiedotSection';
 import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
@@ -195,11 +196,8 @@ const ToteutusForm = ({
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
               () => VapaaSivistystyoMuuTiedotSection
             )
-            .with(
-              KOULUTUSTYYPPI.TUTKINNON_OSA,
-              KOULUTUSTYYPPI.OSAAMISALA,
-              () => TutkinnonOsaTiedotSection
-            )
+            .with(KOULUTUSTYYPPI.TUTKINNON_OSA, () => TutkinnonOsaTiedotSection)
+            .with(KOULUTUSTYYPPI.OSAAMISALA, () => OsaamisalaTiedotSection)
             .with(
               KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
               KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,

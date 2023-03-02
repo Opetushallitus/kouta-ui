@@ -52,7 +52,8 @@ const isAllowedTilaTransition = (
   currTila,
   checkedTila,
   isPaakayttaja,
-  tilaTransferAllowedWithoutPaakayttaja
+  tilaTransferAllowedWithoutPaakayttaja,
+  arkistoituToPoistettuAllowed
 ) => {
   /* tila (currTila) on undefined kun ollaan luomassa entiteettiä */
   switch (currTila) {
@@ -73,7 +74,10 @@ const isAllowedTilaTransition = (
           )
         : [JULKAISUTILA.ARKISTOITU].includes(checkedTila);
     case JULKAISUTILA.ARKISTOITU:
-      return checkedTila === JULKAISUTILA.JULKAISTU;
+      return (
+        checkedTila === JULKAISUTILA.JULKAISTU ||
+        (arkistoituToPoistettuAllowed && checkedTila === JULKAISUTILA.POISTETTU)
+      );
     default:
       return false;
   }
@@ -85,6 +89,7 @@ export const JulkaisutilaField = ({
   name,
   label: labelProp,
   showLabel = true,
+  arkistoituToPoistettuAllowed = false,
 }) => {
   const savedTila = entity?.tila;
 
@@ -115,7 +120,8 @@ export const JulkaisutilaField = ({
             savedTila,
             tila,
             isPaakayttaja,
-            tilaTransferAllowedWithoutPaakayttaja
+            tilaTransferAllowedWithoutPaakayttaja,
+            arkistoituToPoistettuAllowed
           ) && (
             <Radio key={tila} value={tila}>
               <Label tila={tila} t={t} />

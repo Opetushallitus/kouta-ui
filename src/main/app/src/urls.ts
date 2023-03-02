@@ -31,6 +31,8 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.toteutus-opintojaksot': `${koutaBackendDevUrl}/toteutus/opintojaksot/list`,
   'kouta-backend.toteutus-copy': `${koutaBackendDevUrl}/toteutus/copy`,
   'kouta-backend.toteutukset-tilamuutos': `${koutaBackendDevUrl}/toteutus/tila/$1`,
+  'kouta-backend.hakemuspalvelu': `${koutaBackendDevUrl}/hakemuspalvelu`,
+  'kouta-backend.hakemuspalvelu-hakukohde-info': `${koutaBackendDevUrl}/hakemuspalvelu/hakukohde/$1`,
   'kouta-backend.haku': `${koutaBackendDevUrl}/haku`,
   'kouta-backend.haku-by-oid': `${koutaBackendDevUrl}/haku/$1`,
   'kouta-backend.haku-list': `${koutaBackendDevUrl}/haku/list`,

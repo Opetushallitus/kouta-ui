@@ -9,9 +9,19 @@ import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
+import {
+  ENTITY,
+  FormMode,
+  JULKAISUTILA,
+  KOULUTUSTYYPPI,
+} from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
-import { useFieldValue } from '#/src/hooks/form';
+import {
+  useFieldValue,
+  useInitalFieldValue,
+  useSetFieldValue,
+} from '#/src/hooks/form';
+import useHakukohdeInfo from '#/src/hooks/useHakukohdeInfo';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
@@ -26,6 +36,36 @@ import { PerustiedotSection } from './PerustiedotSection';
 import { PohjakoulutusSection } from './PohjakoulutusSection';
 
 const PERUSTIEDOT_NAME = 'perustiedot';
+
+const onkoHakuaikaMenossa = hakuaika => {
+  if (!hakuaika?.alkaa) return false;
+
+  const alkaa = hakuaika?.alkaa && new Date(hakuaika?.alkaa);
+  const paattyy = hakuaika?.paattyy && new Date(hakuaika?.paattyy);
+  const now = new Date();
+
+  return (alkaa <= now && !paattyy) || (alkaa <= now && now <= paattyy);
+};
+
+const isHakukohteenHakuaikaMenossa = (hakuajat, eriHakuaika) => {
+  return eriHakuaika && hakuajat?.some(ha => onkoHakuaikaMenossa(ha));
+};
+
+const isArkistoituToPoistettuAllowed = (
+  hakukohde,
+  haku,
+  hakukohteenHakuaikaMenossa,
+  eriHakuaika,
+  hakukohdeInfo,
+  isLoading
+) => {
+  const haunHakuaikaMenossa =
+    haku?.hakuajat?.some(ha => onkoHakuaikaMenossa(ha)) && eriHakuaika;
+
+  const hakuaikaMenossa = hakukohteenHakuaikaMenossa || haunHakuaikaMenossa;
+
+  return !isLoading && !hakuaikaMenossa && hakukohdeInfo?.hakemustenMaara === 0;
+};
 
 export const HakukohdeForm = ({
   steps = true,
@@ -45,6 +85,31 @@ export const HakukohdeForm = ({
   const isEBkoulutus = isEB(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
   const hakutapa = haku?.hakutapaKoodiUri;
+
+  const hakuajatField = useFieldValue('hakuajat');
+  const hakukohteenHakujat = hakuajatField?.hakuajat;
+  const eriHakuaika = hakuajatField?.eriHakuaika;
+  const hakukohteenHakuaikaMenossa = isHakukohteenHakuaikaMenossa(
+    hakukohteenHakujat,
+    eriHakuaika
+  );
+  const { data: hakukohdeInfo, isLoading } = useHakukohdeInfo(hakukohde?.oid);
+  const arkistoituToPoistettuAllowed = isArkistoituToPoistettuAllowed(
+    hakukohde,
+    haku,
+    hakukohteenHakuaikaMenossa,
+    eriHakuaika,
+    hakukohdeInfo,
+    isLoading
+  );
+
+  const initiaTila = useInitalFieldValue('tila');
+  const currentTila = useFieldValue('tila');
+  useSetFieldValue(
+    'tila',
+    initiaTila,
+    hakukohteenHakuaikaMenossa && currentTila === JULKAISUTILA.POISTETTU
+  );
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
@@ -158,6 +223,7 @@ export const HakukohdeForm = ({
         header={t('hakukohdelomake.hakukohteenTila')}
         Component={JulkaisutilaField}
         entity={hakukohde}
+        arkistoituToPoistettuAllowed={arkistoituToPoistettuAllowed}
       />
     </FormCollapseGroup>
   );

@@ -15,8 +15,8 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import getOrganisaatioByOid from '#/src/utils/organisaatio/getOrganisaatioByOid';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
 import { FormFieldAsyncSelect } from './formFields';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
 
 export const OrganisaatioSection = () => {
   const language = useUserLanguage();
@@ -35,7 +35,8 @@ export const OrganisaatioSection = () => {
 
   const options = useMemo(() => {
     const orgs = flattenHierarkia(hierarkia);
-    if (isOphVirkailija && !ophIsLoading) orgs.unshift(oph);
+    if (isOphVirkailija && !ophIsLoading && oph) orgs.unshift(oph);
+
     return _.map(orgs, ({ oid, nimi }) => ({
       value: oid,
       label: `${getFirstLanguageValue(nimi, language)} (${oid})`,

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
-import Alert from '#/src/components/Alert';
+import { Alert } from '#/src/components/Alert';
 import Button from '#/src/components/Button';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';

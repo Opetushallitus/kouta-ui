@@ -1,27 +1,53 @@
 import produce from 'immer';
 import _ from 'lodash';
 
-export const getNumberOfColumns = rows => {
+export type Language = 'fi' | 'sv' | 'en';
+
+export type TableColumn = {
+  index?: number;
+  text: Partial<Record<Language, string>>;
+};
+
+export type TableRows = Array<{
+  index?: number;
+  isHeader?: boolean;
+  columns: Array<TableColumn>;
+}>;
+
+export type TableInputValue = {
+  rows: TableRows;
+};
+
+export const getNumberOfColumns = (rows: TableRows) => {
   return _.isArray(rows)
-    ? Math.max(...rows.map(row => (_.get(row, 'columns') || []).length))
+    ? Math.max(...rows.map(row => (row?.columns || []).length))
     : 0;
 };
 
-export const getMaxColumnLength = rows => {
+export const getMaxColumnLength = (rows: Array<Array<string>>) => {
   return _.isArray(rows) ? Math.max(...rows.map(row => (row || []).length)) : 0;
 };
 
-export const getEmptyColumn = language => ({ text: { [language]: '' } });
+export const getEmptyColumn = (language: Language) =>
+  ({ text: { [language]: '' } } as TableColumn);
 
-export const getEmptyRow = (numColumns, language) => {
+export const getEmptyRow = (numColumns: number, language: Language) => {
   return {
     columns: [...new Array(numColumns)].map(() => getEmptyColumn(language)),
   };
 };
 
-export const setTable = ({ value, language, table }) => {
+export const setTable = ({
+  value,
+  language,
+  table,
+}: {
+  value: TableInputValue;
+  language: Language;
+  table: Array<Array<string>>;
+}) => {
   const addExtraRowsIfNeeded = (draft, language) => {
-    const rows = _.get(draft, 'rows') || [];
+    const rows = draft?.rows || [];
     const numberOfColumns = getNumberOfColumns(rows);
     const extraRows = table.length - rows.length;
     if (extraRows > 0) {
@@ -33,7 +59,7 @@ export const setTable = ({ value, language, table }) => {
   };
   const addExtraColumnsIfNeeded = (draft, language) => {
     const numberOfTableColumns = getMaxColumnLength(table);
-    const rows = _.get(draft, 'rows') || [];
+    const rows = draft?.rows || [];
     const numberOfRowColumns = getNumberOfColumns(rows);
     const extraColumns = numberOfTableColumns - numberOfRowColumns;
     if (extraColumns > 0) {
@@ -65,9 +91,17 @@ export const setTable = ({ value, language, table }) => {
   });
 };
 
-export const addColumnToIndex = ({ value, columnIndex, language }) => {
+export const addColumnToIndex = ({
+  value,
+  columnIndex,
+  language,
+}: {
+  value: TableInputValue;
+  columnIndex: number;
+  language: Language;
+}) => {
   return produce(value, draft => {
-    const rows = _.get(draft, 'rows') || [];
+    const rows = draft?.rows || [];
 
     rows.forEach(row => {
       const columns = _.get(row, 'columns') || [];
@@ -88,9 +122,15 @@ export const addColumnToIndex = ({ value, columnIndex, language }) => {
   });
 };
 
-export const removeColumn = ({ value, columnIndex }) => {
+export const removeColumn = ({
+  value,
+  columnIndex,
+}: {
+  value: TableInputValue;
+  columnIndex: number;
+}) => {
   return produce(value, draft => {
-    const rows = _.get(draft, 'rows') || [];
+    const rows = draft?.rows || [];
 
     rows.forEach(row => {
       const columns = _.get(row, 'columns') || [];
@@ -102,9 +142,17 @@ export const removeColumn = ({ value, columnIndex }) => {
   });
 };
 
-export const addRowToIndex = ({ value, rowIndex, language }) => {
+export const addRowToIndex = ({
+  value,
+  rowIndex,
+  language,
+}: {
+  value: TableInputValue;
+  rowIndex: number;
+  language: Language;
+}) => {
   return produce(value, draft => {
-    const rows = _.get(draft, 'rows') || [];
+    const rows = draft?.rows || [];
 
     const rowsBefore = rowIndex < 0 ? [] : rows.slice(0, rowIndex + 1);
 
@@ -119,9 +167,15 @@ export const addRowToIndex = ({ value, rowIndex, language }) => {
   });
 };
 
-export const removeRow = ({ value, rowIndex }) => {
+export const removeRow = ({
+  value,
+  rowIndex,
+}: {
+  value: TableInputValue;
+  rowIndex: number;
+}) => {
   return produce(value, draft => {
-    const rows = _.get(draft, 'rows') || [];
+    const rows = draft?.rows || [];
 
     rows.splice(rowIndex, 1);
 
@@ -129,7 +183,15 @@ export const removeRow = ({ value, rowIndex }) => {
   });
 };
 
-export const setRowHeaderStatus = ({ value, rowIndex, status }) => {
+export const setRowHeaderStatus = ({
+  value,
+  rowIndex,
+  status,
+}: {
+  value: TableInputValue;
+  rowIndex: number;
+  status: boolean;
+}) => {
   return produce(value, draft => {
     _.set(draft, ['rows', rowIndex, 'isHeader'], status);
   });
@@ -142,6 +204,13 @@ export const setColumnFieldValue = ({
   field,
   fieldValue,
   language,
+}: {
+  value: TableInputValue;
+  rowIndex: number;
+  columnIndex: number;
+  field: string;
+  fieldValue: string;
+  language?: Language;
 }) => {
   let path = ['rows', rowIndex, 'columns', columnIndex, field];
 

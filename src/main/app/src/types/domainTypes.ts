@@ -16,6 +16,17 @@ export type OppilaitosModel = components['schemas']['Oppilaitos'];
 
 export type OppilaitoksenOsaModel = components['schemas']['OppilaitoksenOsa'];
 
+export type Valintakokeet = Array<components['schemas']['Valintakoe']>;
+
+export type ValintakoetilaisuusModel =
+  components['schemas']['Valintakoetilaisuus'];
+
+export type SisaltoModel = components['schemas']['Valintatapa']['sisalto'];
+
+export type SisaltoTaulukkoModel = components['schemas']['SisaltoTaulukko'];
+
+export type Kielivalinta = Array<components['schemas']['Kieli']>;
+
 export type EntityModelBase = {
   nimi?: components['schemas']['Nimi'];
   tila?: components['schemas']['Julkaisutila'];

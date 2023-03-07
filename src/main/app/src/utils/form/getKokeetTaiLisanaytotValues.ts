@@ -2,13 +2,19 @@ import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { FormMode } from '#/src/constants';
+import {
+  ValintakoetilaisuusModel,
+  Valintakokeet,
+} from '#/src/types/domainTypes';
+import { ValintakokeetValues } from '#/src/types/formTypes';
+import { toSelectValue } from '#/src/utils';
 
 export const getTilaisuusValues = ({
   osoite,
   aika,
   lisatietoja,
   jarjestamispaikka,
-}) => ({
+}: ValintakoetilaisuusModel) => ({
   osoite: osoite?.osoite || {},
   postinumero: osoite?.postinumeroKoodiUri
     ? { value: osoite.postinumeroKoodiUri }
@@ -20,10 +26,10 @@ export const getTilaisuusValues = ({
 });
 
 export const getKokeetTaiLisanaytotValues = (
-  valintakokeet = [],
-  yleisKuvaus,
-  formMode?
-) => {
+  valintakokeet: Valintakokeet = [],
+  yleisKuvaus?: TranslatedField,
+  formMode?: FormMode
+): ValintakokeetValues => {
   return {
     yleisKuvaus: _.mapValues(yleisKuvaus, kuvaus => parseEditorState(kuvaus)),
     kokeetTaiLisanaytot: valintakokeet.map(
@@ -42,7 +48,7 @@ export const getKokeetTaiLisanaytotValues = (
         } = {},
       }) => ({
         id: formMode === FormMode.CREATE ? undefined : id,
-        tyyppi: { value: tyyppiKoodiUri },
+        tyyppi: toSelectValue(tyyppiKoodiUri),
         nimi,
         liittyyEnnakkovalmistautumista,
         ohjeetEnnakkovalmistautumiseen: _.mapValues(
@@ -57,7 +63,7 @@ export const getKokeetTaiLisanaytotValues = (
         tietoaHakijalle: _.mapValues(tietoja, parseEditorState),
         vahimmaispistemaara:
           _.toString(vahimmaispisteet)?.replace('.', ',') || '',
-        tilaisuudet: tilaisuudet.map(getTilaisuusValues),
+        tilaisuudet: tilaisuudet?.map(getTilaisuusValues),
       })
     ),
   };

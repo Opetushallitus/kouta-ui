@@ -28,7 +28,9 @@ const KOULUTUSTYYPPI_KOODIURIT_MAPPING = {
   [KOULUTUSTYYPPI.ERIKOISLAAKARI]: ERIKOISLAAKARI_KOULUTUSKOODIURIT,
 };
 
-export const useKoulutuksetByKoulutustyyppi = koulutustyyppi => {
+export const useKoulutuksetByKoulutustyyppi = (
+  koulutustyyppi: KOULUTUSTYYPPI
+) => {
   const ylaKoodiUrit = KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP[koulutustyyppi];
 
   const queryProps = useMemo(

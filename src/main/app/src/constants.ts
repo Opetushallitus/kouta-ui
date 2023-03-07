@@ -169,6 +169,7 @@ const AMM_KOULUTUS_KOODIURIT = [
   'koulutustyyppi_13',
   'koulutustyyppi_18',
   'koulutustyyppi_19',
+  'koulutustyyppi_24',
   'koulutustyyppi_26',
 ];
 
@@ -416,6 +417,13 @@ export const ERIKOISLAAKARI_KOULUTUSKOODIURIT = [
   'koulutus_775101', // Erikoislääkäri
   'koulutus_775201', // Erikoishammaslääkäri
   'koulutus_775301', // Erikoiseläinlääkäri
+];
+
+export const PELASTUSALAN_AMMATILLISET_KOULUTUSKOODIURIT = [
+  'koulutus_381501', // Pelastajan tutkinto: palomies
+  'koulutus_381502', // Alipäällystötutkinto (palontorjunta-ala): paloesimies,
+  'koulutus_381503', // Hätäkeskuspäivystäjän tutkinto
+  'koulutus_381521', // Rikosseuraamusalan tutkinto; vankeinhoidon perustutkinto; vartija; ylivartija
 ];
 
 export enum KoulutusalaKoodi {

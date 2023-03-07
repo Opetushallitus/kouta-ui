@@ -23,7 +23,6 @@ import {
   setRowHeaderStatus,
   setColumnFieldValue,
   TableInputValue,
-  Language,
 } from './utils';
 
 const ColumnInput = styled.textarea.attrs({ rows: 2 })`
@@ -213,7 +212,7 @@ const EditRow = ({
 
 type TableInputProps = {
   value?: TableInputValue;
-  language: Language;
+  language: LanguageCode;
   onChange: (v: TableInputValue) => void;
   overflowDropdowns?: boolean;
 };

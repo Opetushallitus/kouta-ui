@@ -1,24 +1,22 @@
 import produce from 'immer';
 import _ from 'lodash';
 
-export type Language = 'fi' | 'sv' | 'en';
-
 export type TableColumn = {
   index?: number;
-  text: Partial<Record<Language, string>>;
+  text: Partial<Record<LanguageCode, string>>;
 };
 
-export type TableRows = Array<{
+export type TableInputRows = Array<{
   index?: number;
   isHeader?: boolean;
   columns: Array<TableColumn>;
 }>;
 
 export type TableInputValue = {
-  rows: TableRows;
+  rows: TableInputRows;
 };
 
-export const getNumberOfColumns = (rows: TableRows) => {
+export const getNumberOfColumns = (rows: TableInputRows) => {
   return _.isArray(rows)
     ? Math.max(...rows.map(row => (row?.columns || []).length))
     : 0;
@@ -28,10 +26,10 @@ export const getMaxColumnLength = (rows: Array<Array<string>>) => {
   return _.isArray(rows) ? Math.max(...rows.map(row => (row || []).length)) : 0;
 };
 
-export const getEmptyColumn = (language: Language) =>
+export const getEmptyColumn = (language: LanguageCode) =>
   ({ text: { [language]: '' } } as TableColumn);
 
-export const getEmptyRow = (numColumns: number, language: Language) => {
+export const getEmptyRow = (numColumns: number, language: LanguageCode) => {
   return {
     columns: [...new Array(numColumns)].map(() => getEmptyColumn(language)),
   };
@@ -43,7 +41,7 @@ export const setTable = ({
   table,
 }: {
   value: TableInputValue;
-  language: Language;
+  language: LanguageCode;
   table: Array<Array<string>>;
 }) => {
   const addExtraRowsIfNeeded = (draft, language) => {
@@ -98,7 +96,7 @@ export const addColumnToIndex = ({
 }: {
   value: TableInputValue;
   columnIndex: number;
-  language: Language;
+  language: LanguageCode;
 }) => {
   return produce(value, draft => {
     const rows = draft?.rows || [];
@@ -149,7 +147,7 @@ export const addRowToIndex = ({
 }: {
   value: TableInputValue;
   rowIndex: number;
-  language: Language;
+  language: LanguageCode;
 }) => {
   return produce(value, draft => {
     const rows = draft?.rows || [];
@@ -210,7 +208,7 @@ export const setColumnFieldValue = ({
   columnIndex: number;
   field: string;
   fieldValue: string;
-  language?: Language;
+  language?: LanguageCode;
 }) => {
   let path = ['rows', rowIndex, 'columns', columnIndex, field];
 

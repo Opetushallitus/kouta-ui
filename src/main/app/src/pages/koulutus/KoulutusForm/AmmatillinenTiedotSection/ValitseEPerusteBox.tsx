@@ -21,6 +21,7 @@ import { getTestIdProps, getReadableDateTime } from '#/src/utils';
 import {
   getEPerusteStatusCss,
   getEPerusteStatus,
+  EPerusteStatus,
 } from '#/src/utils/ePeruste/ePerusteStatus';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
@@ -29,10 +30,18 @@ import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 const getListNimiLanguageValues = (list = [], language) =>
   list.map(({ nimi }) => getLanguageValue(nimi, language)).filter(Boolean);
 
-const TilaBadge = ({ status = '', className }) => {
+const TilaBadge = ({
+  status,
+  className,
+}: {
+  status?: EPerusteStatus;
+  className?: string;
+}) => {
   const { t } = useTranslation();
   return (
-    <div className={className}>{t(`yleiset.ePerusteStatus.${status}`)}</div>
+    <div className={className}>
+      {t(`yleiset.ePerusteStatus.${status ?? ''}`)}
+    </div>
   );
 };
 

@@ -297,8 +297,8 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -323,7 +323,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
   },
-  "muokkaaja": "1.2.246.562.24.26603962037",
+  "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Kaivosalan perustutkinto"
   },
@@ -781,8 +781,8 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -807,7 +807,7 @@ exports[`editKoulutus > should be able to delete koulutus #0`] =
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
   },
-  "muokkaaja": "1.2.246.562.24.26603962037",
+  "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Kaivosalan perustutkinto"
   },

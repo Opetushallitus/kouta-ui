@@ -2,16 +2,22 @@ import React from 'react';
 
 import { Box } from '#/src/components/virkailija';
 
-import { KoulutuksenEPerusteTiedot } from './KoulutuksenEPerusteTiedot';
+import { WithKoulutusSelect } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';
+import { EPerusteTiedot } from './AmmatillinenTiedotSection/EPerusteTiedot';
 
-export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
+export const OsaamisalaSection = ({ disabled, language, name }) => {
   return (
     <Box mb={-2}>
-      <KoulutuksenEPerusteTiedot
-        language={language}
-        name={name}
-        disabled={disabled}
-      />
+      <WithKoulutusSelect name={name}>
+        {({ koulutus }) => (
+          <EPerusteTiedot
+            language={language}
+            name={name}
+            disabled={disabled}
+            selectedKoulutus={koulutus}
+          />
+        )}
+      </WithKoulutusSelect>
     </Box>
   );
 };

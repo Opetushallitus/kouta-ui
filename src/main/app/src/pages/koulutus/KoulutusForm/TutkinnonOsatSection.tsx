@@ -8,7 +8,8 @@ import FieldArrayList from '#/src/components/FieldArrayList';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-import { KoulutuksenEPerusteTiedot } from './KoulutuksenEPerusteTiedot';
+import { WithKoulutusSelect } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';
+import { EPerusteTiedot } from './AmmatillinenTiedotSection/EPerusteTiedot';
 import { useNimiFromKoulutusKoodi } from './useNimiFromKoulutusKoodi';
 
 const TutkinnonOsatField = ({ disabled, language, name }) => {
@@ -19,11 +20,16 @@ const TutkinnonOsatField = ({ disabled, language, name }) => {
 
   return (
     <Box mt={2}>
-      <KoulutuksenEPerusteTiedot
-        disabled={disabled}
-        language={language}
-        name={name}
-      />
+      <WithKoulutusSelect name={name}>
+        {({ koulutus }) => (
+          <EPerusteTiedot
+            disabled={disabled}
+            language={language}
+            name={name}
+            selectedKoulutus={koulutus}
+          />
+        )}
+      </WithKoulutusSelect>
     </Box>
   );
 };

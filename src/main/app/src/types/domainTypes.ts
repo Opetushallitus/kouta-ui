@@ -27,6 +27,8 @@ export type SisaltoTaulukkoModel = components['schemas']['SisaltoTaulukko'];
 
 export type Kielivalinta = Array<components['schemas']['Kieli']>;
 
+export type Organisaatio = components['schemas']['Organisaatio'];
+
 export type EntityModelBase = {
   nimi?: components['schemas']['Nimi'];
   tila?: components['schemas']['Julkaisutila'];

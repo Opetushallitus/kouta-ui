@@ -1,6 +1,6 @@
 exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
 {
-  "ePerusteId": 6777660,
+  "ePerusteId": 7823345,
   "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": true,
@@ -13,8 +13,8 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   ],
   "koulutustyyppi": "amm",
   "metadata": {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm",
     "kuvaus": {},
@@ -53,7 +53,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
 
 exports[`createKoulutus > should be able to create ammatillinen osaamisala koulutus #0`] =
 {
-  "ePerusteId": 6777660,
+  "ePerusteId": 7823345,
   "esikatselu": true,
   "externalId": null,
   "johtaaTutkintoon": false,
@@ -66,8 +66,8 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   ],
   "koulutustyyppi": "amm-osaamisala",
   "metadata": {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-osaamisala",
     "kuvaus": {},
@@ -117,8 +117,8 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-tutkinnon-osa",
   "metadata": {
-    "isAvoinKorkeakoulutus": false,
     "erikoistumiskoulutusKoodiUri": null,
+    "isAvoinKorkeakoulutus": false,
     "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-tutkinnon-osa",
     "kuvaus": {},
@@ -141,13 +141,13 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
     "tunniste": null,
     "tutkinnonOsat": [
       {
-        "ePerusteId": 6777660,
+        "ePerusteId": 7823345,
         "koulutusKoodiUri": "koulutus_351107#12",
         "tutkinnonosaId": 6777674,
-        "tutkinnonosaViite": 6778201
+        "tutkinnonosaViite": 7843530
       },
       {
-        "ePerusteId": 6777660,
+        "ePerusteId": 7823345,
         "koulutusKoodiUri": "koulutus_351107#12",
         "tutkinnonosaId": 6778360,
         "tutkinnonosaViite": 6778207

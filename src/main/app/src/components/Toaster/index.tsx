@@ -46,8 +46,14 @@ const ToastContainer = styled.div`
       background-color: ${getThemeProp('palette.primary.main')};
       color: white;
     `}
+    
+  ${({ status }) =>
+    status === 'warning' &&
+    css`
+      background-color: ${getThemeProp('colors.yellow.main')};
+      color: red;
+    `}
 `;
-
 const ToastWrapper = styled.div`
   display: flex;
   justify-content: flex-end;

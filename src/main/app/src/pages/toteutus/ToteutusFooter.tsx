@@ -63,7 +63,7 @@ export const ToteutusFooter = ({
         unregisteredFields,
         initialValues
       );
-      const { oid } = await dataSendFn({
+      const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
         toteutus:
@@ -101,6 +101,7 @@ export const ToteutusFooter = ({
           valuesForSaving.tila
         );
       }
+      return { warnings: warnings };
     },
     [
       dataSendFn,

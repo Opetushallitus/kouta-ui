@@ -21,7 +21,8 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   const user = useAuthorizedUser();
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
-  const { openSavingSuccessToast, openSavingErrorToast } = useToaster();
+  const { openSavingSuccessToast, openSavingErrorToast, openWarningToast } =
+    useToaster();
   const { setRemoteErrors } = useFormSaveRemoteErrors();
   const form = useForm(formName);
 
@@ -39,14 +40,20 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   );
 
   const stopSubmit = useCallback(
-    ({ errors, response }) => {
+    ({ errors, warnings, response }) => {
       batch(() => {
         dispatch(stopSubmitAction(formName, errors));
         if (errors) {
           openSavingErrorToast(response?.data);
           setRemoteErrors(response?.data);
         } else {
-          openSavingSuccessToast();
+          if (warnings) {
+            warnings.forEach(w => {
+              openWarningToast(w);
+            });
+          } else {
+            openSavingSuccessToast();
+          }
         }
       });
     },
@@ -55,6 +62,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
       dispatch,
       openSavingSuccessToast,
       openSavingErrorToast,
+      openWarningToast,
       setRemoteErrors,
     ]
   );
@@ -75,8 +83,8 @@ export const useSaveForm = ({ formName, validate, submit }) => {
           values: enhancedValues,
           httpClient,
           apiUrls,
-        }).then(() => {
-          stopSubmit({ errors: null });
+        }).then(r => {
+          stopSubmit({ errors: null, warnings: r.warnings });
           // NOTE: initialize values with the saved ones to update the dirty state
           // This shouldn't be needed, because page data is refetched after save
           // (in Edit*Page components) and initial values are recalculated when data changes.

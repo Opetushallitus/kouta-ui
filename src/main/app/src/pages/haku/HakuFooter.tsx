@@ -49,7 +49,7 @@ export const HakuFooter = ({
         initialValues
       );
 
-      const { oid } = await dataSendFn({
+      const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
         haku:
@@ -69,6 +69,7 @@ export const HakuFooter = ({
       } else {
         afterUpdate(queryClient, history, ENTITY.HAKU, valuesForSaving.tila);
       }
+      return { warnings: warnings };
     },
     [
       organisaatioOid,

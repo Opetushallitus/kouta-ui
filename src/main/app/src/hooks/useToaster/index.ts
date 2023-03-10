@@ -139,6 +139,13 @@ export const useToaster = () => {
         label: t('ilmoitukset.tuntematonVirhe.viesti'),
         status: 'danger',
       }),
+    openWarningToast: warning =>
+      openToast({
+        label: t(warning),
+        status: 'warning',
+        duration: 10000,
+        warning,
+      }),
   };
 };
 

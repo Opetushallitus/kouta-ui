@@ -39,7 +39,7 @@ export const ValintaperusteFooter = ({
           ? createValintaperuste
           : updateValintaperuste;
 
-      const { id } = await dataSendFn({
+      const { id, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
         valintaperuste:
@@ -61,6 +61,7 @@ export const ValintaperusteFooter = ({
       } else {
         afterUpdate(queryClient, history, ENTITY.VALINTAPERUSTE, values.tila);
       }
+      return { warnings: warnings };
     },
     [formMode, organisaatioOid, valintaperuste, history, queryClient]
   );

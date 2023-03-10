@@ -49,7 +49,7 @@ export const KoulutusFooter = ({
         unregisteredFields,
         initialValues
       );
-      const { oid } = await dataSendFn({
+      const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
         koulutus:
@@ -79,6 +79,7 @@ export const KoulutusFooter = ({
           valuesForSaving.tila
         );
       }
+      return { warnings: warnings };
     },
     [
       dataSendFn,

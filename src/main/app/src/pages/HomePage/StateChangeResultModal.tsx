@@ -57,7 +57,12 @@ const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
   color: ${({ theme }) => theme.colors.red.main};
 `;
 
-const useTableColumns = (t, entityType, getLinkUrl) => [
+const useTableColumns = (
+  t,
+  entityType,
+  getLinkUrl,
+  entityTranslationKeyPath
+) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
@@ -66,12 +71,12 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     ),
   },
   {
-    title: t('etusivu.hakukohde.tilamuutos'),
+    title: t(`${entityTranslationKeyPath}.tilamuutos`),
     key: 'tilamuutos',
     render: item => <Tila item={item} entityType={entityType} />,
   },
   {
-    title: t('etusivu.hakukohde.tilamuuttunut'),
+    title: t(`${entityTranslationKeyPath}.tilamuuttunut`),
     key: 'tilamuuttunut',
     render: item => {
       const status = item.status;
@@ -86,7 +91,7 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     },
   },
   {
-    title: t('etusivu.hakukohde.tilaVirhe'),
+    title: t(`${entityTranslationKeyPath}.tilaVirhe`),
     key: 'tilaVirhe',
     render: item => {
       const status = item.status;
@@ -94,7 +99,7 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
     },
   },
   {
-    title: t('etusivu.hakukohde.tilaVirheSyy'),
+    title: t(`${entityTranslationKeyPath}.tilaVirheSyy`),
     key: 'tilaVirheSyy',
     render: item => {
       const status = item.status;
@@ -108,12 +113,12 @@ const isStateChangeResultSuccessful = mutationResult =>
 
 export const StateChangeResultModal = ({
   entityType,
-  headerText,
   getLinkUrl,
+  entityTranslationKeyPath,
 }: {
   entityType: ENTITY;
-  headerText: string;
   getLinkUrl: any;
+  entityTranslationKeyPath: string;
 }) => {
   const { removeSelection } = useEntitySelection(entityType);
 
@@ -131,13 +136,18 @@ export const StateChangeResultModal = ({
 
   const { t } = useTranslation();
 
-  const columns = useTableColumns(t, entityType, getLinkUrl);
+  const columns = useTableColumns(
+    t,
+    entityType,
+    getLinkUrl,
+    entityTranslationKeyPath
+  );
 
   return (
     <ResultModal
       batchOpsService={service}
       onClose={onClose}
-      headerText={headerText}
+      headerText={t(`${entityTranslationKeyPath}.tilamuutosTuloksetOtsikko`)}
       columns={columns}
     />
   );

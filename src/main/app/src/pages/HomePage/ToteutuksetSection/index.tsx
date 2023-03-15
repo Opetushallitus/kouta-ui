@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -6,12 +6,6 @@ import Button from '#/src/components/Button';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { toteutusService } from '#/src/machines/filterMachines';
-import {
-  StateChangeConfirmationModal,
-  StateChangeConfirmationWrapper,
-  useStateChangeBatchOpsApi,
-} from '#/src/pages/HomePage/StateChangeConfirmationModal';
-import { StateChangeResultModal } from '#/src/pages/HomePage/StateChangeResultModal';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
@@ -26,7 +20,6 @@ import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
 import { SERVICE_BY_ENTITY, useEntitySelection } from '../useEntitySelection';
-import { useChangeToteutuksetTilaMutation } from './changeToteutuksetState';
 import { useCopyToteutuksetMutation } from './copyToteutukset';
 import { createToteutusListColumns } from './createToteutusListColumns';
 import { KoulutusModal } from './KoulutusModal';
@@ -52,24 +45,14 @@ const Actions = ({ organisaatioOid }) => {
 const ToteutusActionBar = () => {
   const { selection } = useEntitySelection(TOTEUTUS);
 
-  const copyApi = useCopyBatchOpsApi();
-  const { start, tila } = useStateChangeBatchOpsApi();
-
-  const changeTila = useCallback(
-    tila => {
-      start({ tila, entities: selection });
-    },
-    [selection, start]
-  );
+  const { start } = useCopyBatchOpsApi();
 
   return (
     <EntityListActionBar
       entityType={TOTEUTUS}
       copyEntities={() => {
-        copyApi.start({ entities: selection });
+        start({ entities: selection });
       }}
-      changeTila={changeTila}
-      tila={tila}
     />
   );
 };
@@ -98,7 +81,6 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   );
 
   const copyMutation = useCopyToteutuksetMutation();
-  const tilaMutationResult = useChangeToteutuksetTilaMutation();
 
   const filterState = useFilterState(TOTEUTUS, toteutusService);
 
@@ -113,40 +95,26 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         headerText={t('etusivu.kopioinninTuloksetOtsikko')}
         getLinkUrl={createGetToteutusLinkUrl(organisaatioOid)}
       />
-      <StateChangeConfirmationWrapper
-        mutateAsync={tilaMutationResult.mutateAsync}
-        entityTranslationKeyPath={'etusivu.toteutus'}
+      <NavigationAnchor id="toteutukset" />
+      <ListCollapse
+        icon={ICONS[TOTEUTUS]}
+        header={t('yleiset.toteutukset')}
+        actions={
+          canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
+        }
+        defaultOpen
       >
-        <StateChangeConfirmationModal
-          createColumns={createColumnsForConfirmationModal}
-          entityTranslationKeyPath={'etusivu.toteutus'}
-        />
-        <StateChangeResultModal
+        <EntitySearchList
+          ActionBar={ToteutusActionBar}
+          searchEntities={searchToteutukset}
+          organisaatioOid={organisaatioOid}
           entityType={TOTEUTUS}
-          getLinkUrl={createGetToteutusLinkUrl(organisaatioOid)}
-          entityTranslationKeyPath={'etusivu.toteutus'}
+          columns={columns}
+          nimiPlaceholder={t('etusivu.haeToteutuksia')}
+          filterState={filterState}
+          searchPage="homepage.toteutukset"
         />
-        <NavigationAnchor id="toteutukset" />
-        <ListCollapse
-          icon={ICONS[TOTEUTUS]}
-          header={t('yleiset.toteutukset')}
-          actions={
-            canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
-          }
-          defaultOpen
-        >
-          <EntitySearchList
-            ActionBar={ToteutusActionBar}
-            searchEntities={searchToteutukset}
-            organisaatioOid={organisaatioOid}
-            entityType={TOTEUTUS}
-            columns={columns}
-            nimiPlaceholder={t('etusivu.haeToteutuksia')}
-            filterState={filterState}
-            searchPage="homepage.toteutukset"
-          />
-        </ListCollapse>
-      </StateChangeConfirmationWrapper>
+      </ListCollapse>
     </CopyConfirmationWrapper>
   );
 };

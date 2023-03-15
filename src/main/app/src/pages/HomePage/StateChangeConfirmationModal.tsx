@@ -33,11 +33,9 @@ export const useStateChangeBatchOpsApi = () => {
 export const StateChangeConfirmationWrapper = ({
   children,
   mutateAsync,
-  entityTranslationKeyPath,
 }: {
   children: React.ReactNode;
   mutateAsync: CopyHakukohteetMutationFunctionAsync;
-  entityTranslationKeyPath: string;
 }) => {
   const batchOpsService = useInterpret(BatchOpsMachine, {
     services: {
@@ -52,7 +50,7 @@ export const StateChangeConfirmationWrapper = ({
   return (
     <BatchOpsStateChangeContext.Provider value={batchOpsService}>
       {state.value === 'executing' ? (
-        <OverlaySpin text={t(`${entityTranslationKeyPath}.tilaaVaihdetaan`)} />
+        <OverlaySpin text={t('etusivu.hakukohde.tilaaVaihdetaan')} />
       ) : (
         children
       )}
@@ -61,13 +59,13 @@ export const StateChangeConfirmationWrapper = ({
 };
 
 export const StateChangeConfirmationModal = ({
+  headerText,
   createColumns,
-  entityTranslationKeyPath,
 }: {
+  headerText: string;
   createColumns: (
     selectionActor?: ActorRefFrom<typeof entitySelectionMachine>
   ) => any;
-  entityTranslationKeyPath: string;
 }) => {
   const { t } = useTranslation();
 
@@ -91,7 +89,7 @@ export const StateChangeConfirmationModal = ({
       maxWidth="1200px"
       open={state === 'confirming'}
       onClose={cancel}
-      header={t(`${entityTranslationKeyPath}.vahvistaTilanmuutosOtsikko`)}
+      header={headerText}
       footer={
         <Box display="flex" justifyContent="flex-end">
           <Box mr={2}>
@@ -100,7 +98,7 @@ export const StateChangeConfirmationModal = ({
             </Button>
           </Box>
           <Button disabled={_.isEmpty(selection)} onClick={onConfirm}>
-            {t(`${entityTranslationKeyPath}.vahvistaTilanmuutos`, {
+            {t('etusivu.hakukohde.vahvistaTilanmuutos', {
               tila: t(safeGetJulkaisutilaTranslationKey(tila)),
             })}
           </Button>

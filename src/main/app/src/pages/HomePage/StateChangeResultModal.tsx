@@ -57,12 +57,7 @@ const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
   color: ${({ theme }) => theme.colors.red.main};
 `;
 
-const useTableColumns = (
-  t,
-  entityType,
-  getLinkUrl,
-  entityTranslationKeyPath
-) => [
+const useTableColumns = (t, entityType, getLinkUrl) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
@@ -71,12 +66,12 @@ const useTableColumns = (
     ),
   },
   {
-    title: t(`${entityTranslationKeyPath}.tilamuutos`),
+    title: t('etusivu.hakukohde.tilamuutos'),
     key: 'tilamuutos',
     render: item => <Tila item={item} entityType={entityType} />,
   },
   {
-    title: t(`${entityTranslationKeyPath}.tilamuuttunut`),
+    title: t('etusivu.hakukohde.tilamuuttunut'),
     key: 'tilamuuttunut',
     render: item => {
       const status = item.status;
@@ -91,7 +86,7 @@ const useTableColumns = (
     },
   },
   {
-    title: t(`${entityTranslationKeyPath}.tilaVirhe`),
+    title: t('etusivu.hakukohde.tilaVirhe'),
     key: 'tilaVirhe',
     render: item => {
       const status = item.status;
@@ -99,7 +94,7 @@ const useTableColumns = (
     },
   },
   {
-    title: t(`${entityTranslationKeyPath}.tilaVirheSyy`),
+    title: t('etusivu.hakukohde.tilaVirheSyy'),
     key: 'tilaVirheSyy',
     render: item => {
       const status = item.status;
@@ -113,12 +108,12 @@ const isStateChangeResultSuccessful = mutationResult =>
 
 export const StateChangeResultModal = ({
   entityType,
+  headerText,
   getLinkUrl,
-  entityTranslationKeyPath,
 }: {
   entityType: ENTITY;
+  headerText: string;
   getLinkUrl: any;
-  entityTranslationKeyPath: string;
 }) => {
   const { removeSelection } = useEntitySelection(entityType);
 
@@ -136,18 +131,13 @@ export const StateChangeResultModal = ({
 
   const { t } = useTranslation();
 
-  const columns = useTableColumns(
-    t,
-    entityType,
-    getLinkUrl,
-    entityTranslationKeyPath
-  );
+  const columns = useTableColumns(t, entityType, getLinkUrl);
 
   return (
     <ResultModal
       batchOpsService={service}
       onClose={onClose}
-      headerText={t(`${entityTranslationKeyPath}.tilamuutosTuloksetOtsikko`)}
+      headerText={headerText}
       columns={columns}
     />
   );

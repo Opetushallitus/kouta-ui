@@ -62,12 +62,14 @@ const ToteutusActionBar = () => {
     [selection, start]
   );
 
+  const copy = useCallback(() => {
+    copyApi.start({ entities: selection });
+  }, [selection, copyApi]);
+
   return (
     <EntityListActionBar
       entityType={TOTEUTUS}
-      copyEntities={() => {
-        copyApi.start({ entities: selection });
-      }}
+      copyEntities={copy}
       changeTila={changeTila}
       tila={tila}
     />

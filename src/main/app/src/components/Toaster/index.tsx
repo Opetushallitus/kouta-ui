@@ -50,8 +50,8 @@ const ToastContainer = styled.div`
   ${({ status }) =>
     status === 'warning' &&
     css`
-      background-color: ${getThemeProp('colors.yellow.main')};
-      color: red;
+      background-color: ${getThemeProp('colors.mediumYellow.main')};
+      color: black;
     `}
 `;
 const ToastWrapper = styled.div`

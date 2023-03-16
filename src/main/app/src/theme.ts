@@ -47,6 +47,10 @@ export const createTheme = () => {
         main: '#ffd024',
         contrastText: '#ffffff',
       },
+      mediumYellow: {
+        main: '#fbdb04',
+        contrastText: '#ffffff',
+      },
       red: {
         main: '#db2828',
         contrastText: '#ffffff',

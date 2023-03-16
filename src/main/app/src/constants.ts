@@ -171,6 +171,7 @@ const AMM_KOULUTUS_KOODIURIT = [
   'koulutustyyppi_19',
   'koulutustyyppi_24',
   'koulutustyyppi_26',
+  'koulutustyyppi_42',
 ];
 
 export const KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP = {

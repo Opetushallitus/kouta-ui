@@ -47,7 +47,11 @@ const SyntheticEPerusteTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <OpintojenLaajuusFieldExtended name={name} disabled={disabled} required />
-      <TutkintonimikeField name={name} disabled={disabled} />
+      <TutkintonimikeField
+        name={name}
+        disabled={disabled}
+        koodisto="tutkintonimikkeet"
+      />
       <KoulutusalatField name={name} disabled={disabled} />
       <KoulutusNimiField name={name} disabled={disabled} />
     </VerticalBox>

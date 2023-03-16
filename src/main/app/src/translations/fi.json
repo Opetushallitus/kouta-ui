@@ -239,7 +239,7 @@
     "lisaa": "Lisää"
   },
   "varoitukset": {
-    "indeksointiAikakatkaisu": "Tallennus onnistui, mutta indeksointi ei vielä valmistunut. Etusivun listaukset eivät ole välttämättä vielä päivittyneet - odotathan hetkisen!",
+    "indeksointiAikakatkaisu": "Tallennus onnistui, mutta indeksointi ei ole vielä valmistunut. Etusivun listaukset eivät ole välttämättä vielä päivittyneet - odotathan hetkisen!",
     "indeksointiEpaonnistui": "Tallennus onnistui, mutta indeksoinnissa oli ongelmia. Etusivun listaukset eivät ole välttämättä vielä päivittyneet - odotathan hetkisen!"
   },
   "ilmoitukset": {

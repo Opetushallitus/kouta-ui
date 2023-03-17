@@ -29,7 +29,7 @@ import { getTestIdProps } from '#/src/utils';
 import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
-import { useIsPelastusalanKoulutus } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';
+import { useIsAmmTutkintoWithoutEperuste } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
@@ -104,7 +104,7 @@ export const KoulutusForm = ({
     [isNewKoulutus, organisaatio, hierarkia]
   );
 
-  const isPelastusalanKoulutus = useIsPelastusalanKoulutus();
+  const isAmmTutkintoWithoutEperuste = useIsAmmTutkintoWithoutEperuste();
 
   return (
     <>
@@ -213,7 +213,7 @@ export const KoulutusForm = ({
                   header={t('koulutuslomake.koulutuksenKuvaus')}
                   Component={match(koulutustyyppi)
                     .with(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS, () =>
-                      isPelastusalanKoulutus
+                      isAmmTutkintoWithoutEperuste
                         ? KuvausFieldsSection
                         : EPerusteKuvausSection
                     )

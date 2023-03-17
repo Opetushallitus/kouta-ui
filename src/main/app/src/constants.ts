@@ -420,7 +420,7 @@ export const ERIKOISLAAKARI_KOULUTUSKOODIURIT = [
   'koulutus_775301', // Erikoiseläinlääkäri
 ];
 
-export const PELASTUSALAN_AMMATILLISET_KOULUTUSKOODIURIT = [
+export const AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE = [
   'koulutus_381501', // Pelastajan tutkinto: palomies
   'koulutus_381502', // Alipäällystötutkinto (palontorjunta-ala): paloesimies,
   'koulutus_381503', // Hätäkeskuspäivystäjän tutkinto

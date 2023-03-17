@@ -8,7 +8,7 @@ import { FormFieldInput } from '#/src/components/formFields';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
-import { PELASTUSALAN_AMMATILLISET_KOULUTUSKOODIURIT } from '#/src/constants';
+import { AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
@@ -35,7 +35,7 @@ const KoulutusNimiField = ({ name, disabled }) => {
   );
 };
 
-// Pelastusalan koulutuksille halutaan itse syötettävät ePeruste-tyyppiset tiedot, koska
+// Tietyille koulutus-koodiureille käyttäjä syöttää ePeruste-tyyppiset tiedot, koska
 // niillä ei ole vielä ePerusteita
 const SyntheticEPerusteTiedotSection = ({
   name,
@@ -90,11 +90,11 @@ export const WithKoulutusSelect = ({
   );
 };
 
-export const useIsPelastusalanKoulutus = () => {
+export const useIsAmmTutkintoWithoutEperuste = () => {
   const koulutus = useFieldValue('information.koulutus')?.value;
 
   return _.includes(
-    PELASTUSALAN_AMMATILLISET_KOULUTUSKOODIURIT,
+    AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE,
     koodiUriWithoutVersion(koulutus)
   );
 };
@@ -105,12 +105,12 @@ export const AmmatillinenTiedotSection = ({
   language,
   koulutusLabel,
 }: AmmatillinenTiedotProps) => {
-  const isPelastusalanKoulutus = useIsPelastusalanKoulutus();
+  const isAmmTutkintoWithoutEperuste = useIsAmmTutkintoWithoutEperuste();
 
   return (
     <WithKoulutusSelect name={name} koulutusLabel={koulutusLabel}>
       {({ koulutus }) =>
-        isPelastusalanKoulutus ? (
+        isAmmTutkintoWithoutEperuste ? (
           <SyntheticEPerusteTiedotSection disabled={disabled} name={name} />
         ) : (
           <EPerusteTiedot

@@ -137,10 +137,25 @@ export const editHakukohdeForm = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify([
-          'APP_KOUTA',
-          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
-        ]),
+        // roles: JSON.stringify([
+        //   'APP_KOUTA',
+        //   `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
+        // ]),
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'OPHPAAKAYTTAJA',
+              },
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'HAKUKOHDE_UPDATE',
+              },
+            ],
+          },
+        ],
       },
     });
     cy.reload();

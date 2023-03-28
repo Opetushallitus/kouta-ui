@@ -167,16 +167,24 @@ export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
     { method: 'GET', url: '/kayttooikeus-service/henkilo/current/omattiedot' },
     {
       body: {
-        uid: 'johndoe',
-        oid: '1.2.246.562.24.62301161440',
-        firstName: 'John',
-        lastName: 'Doe',
-        lang: 'fi',
-        roles: JSON.stringify([
-          'APP_KOUTA',
-          'APP_KOUTA_OPHPAAKAYTTAJA',
-          'APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001',
-        ]),
+        oidHenkilo: '1.2.246.562.24.62301161440',
+        username: 'johndoe',
+        kayttajaTyyppi: 'VIRKAILIJA',
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'OPHPAAKAYTTAJA',
+              },
+            ],
+          },
+        ],
+        isAdmin: true,
+        isMiniAdmin: true,
+        anomusilmoitus: [],
+        mfaProvider: null,
         ...user,
       },
     }

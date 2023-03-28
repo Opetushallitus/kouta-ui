@@ -450,9 +450,19 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify([
-          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
-        ]),
+        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
+
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'HAKUKOHDE_UPDATE',
+              },
+            ],
+          },
+        ],
       },
     });
 
@@ -480,9 +490,19 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify([
-          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
-        ]),
+        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
+
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'HAKUKOHDE_UPDATE',
+              },
+            ],
+          },
+        ],
       },
     });
     cy.reload();
@@ -506,9 +526,19 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify([
-          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
-        ]),
+        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
+
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'HAKUKOHDE_UPDATE',
+              },
+            ],
+          },
+        ],
       },
     });
     cy.reload();
@@ -533,9 +563,19 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify([
-          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
-        ]),
+        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
+
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'HAKUKOHDE_UPDATE',
+              },
+            ],
+          },
+        ],
       },
     });
     cy.reload();

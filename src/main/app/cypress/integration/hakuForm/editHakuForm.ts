@@ -84,7 +84,18 @@ export const editHakuForm = () => {
   it('should not be possible for oppilaitos user to add hakukohde for haku with expired liittämistakaraja', () => {
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify(['APP_KOUTA']),
+        //roles: JSON.stringify(['APP_KOUTA']),
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'OPHPAAKAYTTAJA',
+              },
+            ],
+          },
+        ],
       },
     });
 
@@ -109,7 +120,18 @@ export const editHakuForm = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify(['APP_KOUTA']),
+        //roles: JSON.stringify(['APP_KOUTA']),
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'OPHPAAKAYTTAJA',
+              },
+            ],
+          },
+        ],
       },
     });
 
@@ -134,7 +156,18 @@ export const editHakuForm = () => {
 
     stubKayttoOikeusMeRoute({
       user: {
-        roles: JSON.stringify(['APP_KOUTA']),
+        //roles: JSON.stringify(['APP_KOUTA']),
+        organisaatiot: [
+          {
+            organisaatioOid: '1.2.246.562.10.00000000001',
+            kayttooikeudet: [
+              {
+                palvelu: 'KOUTA',
+                oikeus: 'OPHPAAKAYTTAJA',
+              },
+            ],
+          },
+        ],
       },
     });
 

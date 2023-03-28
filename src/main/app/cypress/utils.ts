@@ -162,7 +162,12 @@ export const fillYhteyshenkilotFields = () => {
   );
 };
 
-export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
+export const stubKayttoOikeusOmatTiedotRoute = (
+  organisaatiot: Array<{
+    organisaatioOid: string;
+    kayttooikeudet: Array<{ palvelu: 'KOUTA'; oikeus: string }>;
+  }>
+) => {
   cy.intercept(
     { method: 'GET', url: '/kayttooikeus-service/henkilo/current/omattiedot' },
     {
@@ -170,7 +175,7 @@ export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
         oidHenkilo: '1.2.246.562.24.62301161440',
         username: 'johndoe',
         kayttajaTyyppi: 'VIRKAILIJA',
-        organisaatiot: [
+        organisaatiot: organisaatiot ?? [
           {
             organisaatioOid: '1.2.246.562.10.00000000001',
             kayttooikeudet: [
@@ -185,7 +190,6 @@ export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
         isMiniAdmin: true,
         anomusilmoitus: [],
         mfaProvider: null,
-        ...user,
       },
     }
   );
@@ -357,7 +361,7 @@ const stubEntityLists = () => {
 export const stubCommonRoutes = () => {
   stubEntityLists();
   stubLokalisaatioRoute();
-  stubKayttoOikeusMeRoute();
+  stubKayttoOikeusOmatTiedotRoute();
   stubAsiointikieliRoute();
   stubKoutaBackendLoginRoute();
   stubKoutaBackendSessionRoute();

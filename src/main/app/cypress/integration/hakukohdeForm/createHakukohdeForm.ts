@@ -21,7 +21,7 @@ import {
   pFillAsyncSelect,
   withinSection,
   getInputByLabel,
-  stubKayttoOikeusMeRoute,
+  stubKayttoOikeusOmatTiedotRoute,
   jatka,
   fillPohjaSectionCopyingValuesFrom,
   tilaShouldBe,
@@ -448,23 +448,17 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
       hakukohteenLiittaminenHasExpired: true,
     });
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
-
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'HAKUKOHDE_UPDATE',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKUKOHDE_UPDATE',
           },
         ],
       },
-    });
+    ]);
 
     // cy.reload-kutsu lisätty kaikkialle, missä prepareTestin jälkeen yritetään stubata käyttöoikeudet
     // uudestaan, sillä uudelleenstubbaus ei aina ehdi valmistua ennen kuin prepareTestistä on kutsuttu
@@ -488,23 +482,17 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
       hakukohteenMuokkaaminenHasExpired: true,
     });
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
-
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'HAKUKOHDE_UPDATE',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKUKOHDE_UPDATE',
           },
         ],
       },
-    });
+    ]);
     cy.reload();
 
     fillKieliversiotSection({ jatka: true });
@@ -524,23 +512,17 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
       hakuWithoutTakarajat: true,
     });
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
-
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'HAKUKOHDE_UPDATE',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKUKOHDE_UPDATE',
           },
         ],
       },
-    });
+    ]);
     cy.reload();
 
     fillKieliversiotSection({ jatka: true });
@@ -561,23 +543,18 @@ export const createHakukohdeFormAsOppilaitosUser = () => {
       hakuWithoutMuokkaamisenTakaraja: true,
     });
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        //roles: JSON.stringify([          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,]),
-
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'HAKUKOHDE_UPDATE',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKUKOHDE_UPDATE',
           },
         ],
       },
-    });
+    ]);
+
     cy.reload();
 
     fillKieliversiotSection({ jatka: true });

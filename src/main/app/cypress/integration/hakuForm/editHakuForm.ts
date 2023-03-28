@@ -10,7 +10,7 @@ import {
   fillTilaSection,
   tallenna,
   wrapMutationTest,
-  stubKayttoOikeusMeRoute,
+  stubKayttoOikeusOmatTiedotRoute,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -82,22 +82,17 @@ export const editHakuForm = () => {
   });
 
   it('should not be possible for oppilaitos user to add hakukohde for haku with expired liittämistakaraja', () => {
-    stubKayttoOikeusMeRoute({
-      user: {
-        //roles: JSON.stringify(['APP_KOUTA']),
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'OPHPAAKAYTTAJA',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKU_CRUD',
           },
         ],
       },
-    });
+    ]);
 
     cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
     cy.findByText('yleiset.liitaHakukohde', { selector: 'button' }).should(
@@ -118,22 +113,17 @@ export const editHakuForm = () => {
     const oneDayBeforeDeadline = sub(new Date(takaraja), { days: 1 });
     cy.clock(oneDayBeforeDeadline, ['Date']);
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        //roles: JSON.stringify(['APP_KOUTA']),
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'OPHPAAKAYTTAJA',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKU_CRUD',
           },
         ],
       },
-    });
+    ]);
 
     cy.intercept(
       { method: 'GET', url: `**/haku/${hakuOid}` },
@@ -154,22 +144,17 @@ export const editHakuForm = () => {
     const hakuMockData = haku();
     hakuMockData.hakukohteenLiittamisenTakaraja = null;
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        //roles: JSON.stringify(['APP_KOUTA']),
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'OPHPAAKAYTTAJA',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKU_CRUD',
           },
         ],
       },
-    });
+    ]);
 
     cy.intercept(
       { method: 'GET', url: `**/haku/${hakuOid}` },

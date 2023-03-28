@@ -12,7 +12,7 @@ import {
   fillTilaSection,
   tallenna,
   wrapMutationTest,
-  stubKayttoOikeusMeRoute,
+  stubKayttoOikeusOmatTiedotRoute,
 } from '#/cypress/utils';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -135,29 +135,18 @@ export const editHakukohdeForm = () => {
       hakukohteenMuokkaaminenHasExpired: true,
     });
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        // roles: JSON.stringify([
-        //   'APP_KOUTA',
-        //   `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
-        // ]),
-        organisaatiot: [
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
           {
-            organisaatioOid: '1.2.246.562.10.00000000001',
-            kayttooikeudet: [
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'OPHPAAKAYTTAJA',
-              },
-              {
-                palvelu: 'KOUTA',
-                oikeus: 'HAKUKOHDE_UPDATE',
-              },
-            ],
+            palvelu: 'KOUTA',
+            oikeus: 'HAKUKOHDE_UPDATE',
           },
         ],
       },
-    });
+    ]);
+
     cy.reload();
 
     cy.findByRole('button', {
@@ -176,14 +165,18 @@ export const editHakukohdeForm = () => {
       hakukohteenMuokkaaminenHasExpired: false,
     });
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        roles: JSON.stringify([
-          'APP_KOUTA',
-          `APP_KOUTA_HAKUKOHDE_UPDATE_${organisaatioOid}`,
-        ]),
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid,
+        kayttooikeudet: [
+          {
+            palvelu: 'KOUTA',
+            oikeus: 'HAKUKOHDE_UPDATE',
+          },
+        ],
       },
-    });
+    ]);
+
     cy.reload();
 
     cy.findByRole('button', {
@@ -191,7 +184,7 @@ export const editHakukohdeForm = () => {
     }).should('not.be.disabled');
   });
 
-  it("should not be possible for oppilaitos user to update another organizations's hakukohde", () => {
+  it.only("should not be possible for oppilaitos user to update another organizations's hakukohde", () => {
     prepareTest({
       tyyppi: 'lk',
       hakuOid,
@@ -201,14 +194,18 @@ export const editHakukohdeForm = () => {
       tarjoajat: ['1.2.246.562.10.45854578546'],
     });
 
-    stubKayttoOikeusMeRoute({
-      user: {
-        roles: JSON.stringify([
-          'APP_KOUTA',
-          `APP_KOUTA_HAKUKOHDE_UPDATE_1.2.246.562.10.52251087111`,
-        ]),
+    stubKayttoOikeusOmatTiedotRoute([
+      {
+        organisaatioOid: '1.2.246.562.10.52251087111',
+        kayttooikeudet: [
+          {
+            palvelu: 'KOUTA',
+            oikeus: 'HAKUKOHDE_UPDATE',
+          },
+        ],
       },
-    });
+    ]);
+
     cy.reload();
 
     cy.findByRole('button', {

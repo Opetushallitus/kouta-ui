@@ -28,7 +28,7 @@ export const OrganisaatioSectionCreate = ({ organisaatioOid }) => {
   const options = useMemo(() => {
     const orgs = flattenHierarkia(hierarkia);
 
-    if (isOphVirkailija && !ophIsLoading) orgs.unshift(oph);
+    if (isOphVirkailija && !ophIsLoading && oph) orgs.unshift(oph);
 
     return _.map(orgs, ({ oid, nimi }) => ({
       value: oid,

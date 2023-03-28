@@ -164,7 +164,7 @@ export const fillYhteyshenkilotFields = () => {
 
 export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
   cy.intercept(
-    { method: 'GET', url: '/kayttooikeus-service/cas/me' },
+    { method: 'GET', url: '/kayttooikeus-service/henkilo/current/omattiedot' },
     {
       body: {
         uid: 'johndoe',

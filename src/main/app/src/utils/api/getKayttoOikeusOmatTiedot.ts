@@ -4,17 +4,19 @@ import { retryOnRedirect } from '#/src/utils';
 // 'kayttooikeus-service.me' is redirected (302) to /cas/login which can be detected checking
 // if the response URL has changed.
 
-export const getMe = async ({ httpClient, apiUrls }) => {
+const getKayttoOikeusOmatTiedot = async ({ httpClient, apiUrls }) => {
   return retryOnRedirect({
     httpClient,
     targetUrl: apiUrls.url('kayttooikeus-service.omattiedot'),
   });
 };
 
-export const useGetMe = () => {
-  return useApiQuery(
+export const useKayttoOikeusOmatTiedot = () => {
+  return useApiQuery<{
+    oidHenkilo: string;
+  }>(
     'getMe',
-    getMe,
+    getKayttoOikeusOmatTiedot,
     {},
     {
       staleTime: Infinity,

@@ -14,7 +14,7 @@ import AuthorizedUserContext from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
-import { useGetMe } from '#/src/utils/api/getMe';
+import { useKayttoOikeusOmatTiedot } from '#/src/utils/api/getKayttoOikeusOmatTiedot';
 
 import AuthorizationErrorModal from './AuthorizationErrorModal';
 
@@ -29,17 +29,17 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
   const [isFocused, setFocused] = useState(true);
   const [errorCode, setErrorCode] = useState<string | number | null>(null);
 
-  const { data, error: getMeError } = useGetMe();
+  const { data, error: omatTiedotError } = useKayttoOikeusOmatTiedot();
   const isLoaded = Boolean(data?.oidHenkilo);
   const isIdle = useIdle(IDLE_TIMEOUT);
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
     // NOTE: Not sure what could be the case when data does exists but oid does not, but this has probably happened few times
-    if (!errorCode && (getMeError || (data && !data.oidHenkilo))) {
+    if (!errorCode && (omatTiedotError || (data && !data.oidHenkilo))) {
       setErrorCode(ERROR_KAYTTOOIKEUS_SERVICE);
     }
-  }, [data, errorCode, getMeError]);
+  }, [data, errorCode, omatTiedotError]);
 
   useEvent('focus', () => setFocused(true), window);
   useEvent('blur', () => setFocused(false), window);

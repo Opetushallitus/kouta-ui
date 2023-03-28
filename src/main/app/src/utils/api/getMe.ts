@@ -7,7 +7,7 @@ import { retryOnRedirect } from '#/src/utils';
 export const getMe = async ({ httpClient, apiUrls }) => {
   return retryOnRedirect({
     httpClient,
-    targetUrl: apiUrls.url('kayttooikeus-service.me'),
+    targetUrl: apiUrls.url('kayttooikeus-service.omattiedot'),
   });
 };
 

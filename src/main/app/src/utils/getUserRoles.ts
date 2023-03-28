@@ -2,13 +2,12 @@ import _ from 'lodash';
 
 import tryParseJson from './tryParseJson';
 
-const getUserRoles = user => {
-  if (!_.isObject(user) || !user.roles) {
+const getUserRoles = userdata => {
+  console.log('getUserRoles user = ', userdata);
+  if (!_.isObject(userdata)) {
     return [];
   }
-
-  const roles = tryParseJson(user.roles, []);
-
+  const roles = tryParseJson(userdata, []);
   return _.isArray(roles) ? roles : [];
 };
 

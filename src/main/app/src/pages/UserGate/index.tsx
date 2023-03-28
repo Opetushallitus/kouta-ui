@@ -30,13 +30,13 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
   const [errorCode, setErrorCode] = useState<string | number | null>(null);
 
   const { data, error: getMeError } = useGetMe();
-  const isLoaded = Boolean(data?.oid);
+  const isLoaded = Boolean(data?.oidHenkilo);
   const isIdle = useIdle(IDLE_TIMEOUT);
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
     // NOTE: Not sure what could be the case when data does exists but oid does not, but this has probably happened few times
-    if (!errorCode && (getMeError || (data && !data.oid))) {
+    if (!errorCode && (getMeError || (data && !data.oidHenkilo))) {
       setErrorCode(ERROR_KAYTTOOIKEUS_SERVICE);
     }
   }, [data, errorCode, getMeError]);

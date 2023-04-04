@@ -1,13 +1,19 @@
 import _ from 'lodash';
 
-import tryParseJson from './tryParseJson';
-
 const getUserRoles = userdata => {
   console.log('getUserRoles user = ', userdata);
   if (!_.isObject(userdata)) {
     return [];
   }
-  const roles = tryParseJson(userdata, []);
+  const roleSet: Set<string> = new Set();
+  userdata.organisaatiot.forEach(({ organisaatioOid, kayttooikeudet }) => {
+    kayttooikeudet.forEach(({ palvelu, oikeus }) => {
+      roleSet.add(`APP_${palvelu}`);
+      roleSet.add(`APP_${palvelu}_${oikeus}`);
+      roleSet.add(`APP_${palvelu}_${oikeus}_${organisaatioOid}`);
+    });
+  });
+  const roles = Array.from(roleSet);
   return _.isArray(roles) ? roles : [];
 };
 

@@ -2,21 +2,16 @@ const tryParseJson = (userdata, defaultValue = null) => {
   try {
     let userroles: Array<string> = [];
 
-    userdata.organisaatiot.forEach(organisaatio => {
-      organisaatio.kayttooikeudet.forEach(kayttooikeus => {
-        let newuserrole = 'APP_' + kayttooikeus.palvelu;
-        if (userroles.indexOf(newuserrole) === -1) {
-          userroles.push(newuserrole);
-        }
-        newuserrole += '_' + kayttooikeus.oikeus;
-        if (userroles.indexOf(newuserrole) === -1) {
-          userroles.push(newuserrole);
-        }
-        newuserrole += '_' + organisaatio.organisaatioOid;
-        if (userroles.indexOf(newuserrole) === -1) {
-          userroles.push(newuserrole);
-        }
+    const roles: Set<string> = new Set();
+    userdata.organisaatiot.forEach(({ organisaatioOid, kayttooikeudet }) => {
+      kayttooikeudet.forEach(({ palvelu, oikeus }) => {
+        roles.add(`APP_${palvelu}`);
+        roles.add(`APP_${palvelu}_${oikeus}`);
+        roles.add(`APP_${palvelu}_${oikeus}_${organisaatioOid}`);
       });
+    });
+
+    return Array.from(roles);
     });
 
     return userroles;

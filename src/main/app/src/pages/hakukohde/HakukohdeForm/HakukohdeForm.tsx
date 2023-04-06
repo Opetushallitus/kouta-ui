@@ -21,7 +21,7 @@ import {
   useInitalFieldValue,
   useSetFieldValue,
 } from '#/src/hooks/form';
-import useHakukohdeInfo from '#/src/hooks/useHakukohdeInfo';
+import { useHakukohdeAllowsPoistettuTila } from '#/src/hooks/useHakukohdeInfo';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
@@ -51,20 +51,8 @@ const isHakukohteenHakuaikaMenossa = (hakuajat, eriHakuaika) => {
   return eriHakuaika && hakuajat?.some(ha => onkoHakuaikaMenossa(ha));
 };
 
-const isArkistoituToPoistettuAllowed = (
-  hakukohde,
-  haku,
-  hakukohteenHakuaikaMenossa,
-  eriHakuaika,
-  hakukohdeInfo,
-  isLoading
-) => {
-  const haunHakuaikaMenossa =
-    haku?.hakuajat?.some(ha => onkoHakuaikaMenossa(ha)) && eriHakuaika;
-
-  const hakuaikaMenossa = hakukohteenHakuaikaMenossa || haunHakuaikaMenossa;
-
-  return !isLoading && !hakuaikaMenossa && hakukohdeInfo?.hakemustenMaara === 0;
+const isArkistoituToPoistettuAllowed = (allowed, isLoading) => {
+  return !isLoading && allowed;
 };
 
 export const HakukohdeForm = ({
@@ -93,13 +81,11 @@ export const HakukohdeForm = ({
     hakukohteenHakujat,
     eriHakuaika
   );
-  const { data: hakukohdeInfo, isLoading } = useHakukohdeInfo(hakukohde?.oid);
+  const { data: allowed, isLoading } = useHakukohdeAllowsPoistettuTila(
+    hakukohde?.oid
+  );
   const arkistoituToPoistettuAllowed = isArkistoituToPoistettuAllowed(
-    hakukohde,
-    haku,
-    hakukohteenHakuaikaMenossa,
-    eriHakuaika,
-    hakukohdeInfo,
+    allowed,
     isLoading
   );
 

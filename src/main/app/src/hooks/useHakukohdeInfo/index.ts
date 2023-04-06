@@ -1,12 +1,12 @@
-import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS, JULKAISUTILA } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import getHakemuspalveluHakukohdeInfo from '#/src/utils/hakemuspalvelu/getHakemuspalveluHakukohdeInfo';
+import getHakukohdeTilaMuutosAllowed from '#/src/utils/hakukohde/getHakukohdeTilaMuutosAllowed';
 
-export const useHakukohdeInfo = (hakukohdeOid, options = {}) => {
+export const useHakukohdeAllowsPoistettuTila = (hakukohdeOid, options = {}) => {
   const result = useApiQuery(
-    'getHakemuspalveluHakukohdeInfo',
-    getHakemuspalveluHakukohdeInfo,
-    { hakukohdeOid: hakukohdeOid },
+    'getHakukohdeTilaMuutosAllowed',
+    getHakukohdeTilaMuutosAllowed,
+    { oid: hakukohdeOid, status: JULKAISUTILA.POISTETTU },
     {
       ...LONG_CACHE_QUERY_OPTIONS,
       enabled: hakukohdeOid !== undefined,
@@ -18,4 +18,4 @@ export const useHakukohdeInfo = (hakukohdeOid, options = {}) => {
   return result;
 };
 
-export default useHakukohdeInfo;
+export default useHakukohdeAllowsPoistettuTila;

@@ -34,9 +34,6 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.toteutus-copy", this.require("kouta-backend.toteutus-copy"));
         this.frontProperties.setProperty("kouta-backend.toteutukset-tilamuutos", this.require("kouta-backend.toteutukset-tilamuutos"));
 
-        this.frontProperties.setProperty("kouta-backend.hakemuspalvelu", this.require("kouta-backend.hakemuspalvelu"));
-        this.frontProperties.setProperty("kouta-backend.hakemuspalvelu-hakukohde-info", this.require("kouta-backend.hakemuspalvelu-hakukohde-info"));
-
         this.frontProperties.setProperty("kouta-backend.haku", this.require("kouta-backend.haku"));
         this.frontProperties.setProperty("kouta-backend.haku-by-oid", this.require("kouta-backend.haku-by-oid"));
         this.frontProperties.setProperty("kouta-backend.haku-list", this.require("kouta-backend.haku-list"));
@@ -45,6 +42,7 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("kouta-backend.hakukohde", this.require("kouta-backend.hakukohde"));
         this.frontProperties.setProperty("kouta-backend.hakukohde-by-oid", this.require("kouta-backend.hakukohde-by-oid"));
+        this.frontProperties.setProperty("kouta-backend.hakukohde-tilamuutos-allowed", this.require("kouta-backend.hakukohde-tilamuutos-allowed"));
 
         this.frontProperties.setProperty("konfo-ui.valintaperuste", this.require("konfo-ui.valintaperuste"));
         this.frontProperties.setProperty("kouta-backend.valintaperuste", this.require("kouta-backend.valintaperuste"));

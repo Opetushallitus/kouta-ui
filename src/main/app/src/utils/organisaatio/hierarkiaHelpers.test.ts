@@ -1,4 +1,8 @@
-import { flatFilterHierarkia, flattenHierarkia } from './hierarkiaHelpers';
+import {
+  flatFilterHierarkia,
+  flattenHierarkia,
+  filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch,
+} from './hierarkiaHelpers';
 
 const childWithChildren = {
   oid: '4',
@@ -28,4 +32,26 @@ test('flattens organization hierarchy with filter', () => {
   const filterFn = obj => Number.parseInt(obj.oid) % 2 === 0;
   const expected = [{ oid: '2' }, childWithChildren, { oid: '6' }];
   expect(flatFilterHierarkia(hierarchy, filterFn)).toEqual(expected);
+});
+
+describe('filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch', () => {
+  test('does nothing when parent passes the filter', () => {
+    const filterFn = obj => '4' === obj.oid;
+    expect(
+      filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch(
+        [childWithChildren],
+        filterFn
+      )
+    ).toEqual([childWithChildren]);
+  });
+
+  test('utilizes chilren when parent does not pass the filter', () => {
+    const filterFn = obj => '4' !== obj.oid;
+    expect(
+      filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch(
+        [childWithChildren],
+        filterFn
+      )
+    ).toEqual(childWithChildren.children);
+  });
 });

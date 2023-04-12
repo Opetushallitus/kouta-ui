@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
@@ -17,6 +17,7 @@ import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
+import { Organisaatio } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -26,7 +27,13 @@ const InfoLabel = props => (
 
 const InfoValue = props => <Box flexGrow={1} {...props} />;
 
-const TiedotSection = ({ language, name, t }) => {
+type TiedotSectionProps = {
+  language: LanguageCode;
+  name: string;
+  t: TFunction;
+};
+
+const TiedotSection = ({ language, name, t }: TiedotSectionProps) => {
   const isOphVirkailija = useIsOphVirkailija();
   return (
     <>
@@ -34,7 +41,7 @@ const TiedotSection = ({ language, name, t }) => {
         {t('oppilaitoslomake.perustiedotInfo')}
       </Typography>
 
-      <Grid css={{ marginBottom: '12px' }}>
+      <Grid style={{ marginBottom: '12px' }}>
         <Cell width={4} {...getTestIdProps('opiskelijoita')}>
           <Field
             component={FormFieldInput}
@@ -92,7 +99,7 @@ const TiedotSection = ({ language, name, t }) => {
           />
         </Cell>
       </Grid>
-      <Grid css={{ marginBottom: '12px' }}>
+      <Grid style={{ marginBottom: '12px' }}>
         <Cell width={6}>
           <Field
             component={FormFieldUrlInput}
@@ -130,11 +137,19 @@ const TiedotSection = ({ language, name, t }) => {
   );
 };
 
-const OrganisaatioSection = ({ language, organisaatio, t }) => {
-  const opetuskieletUris = _.get(organisaatio, 'kieletUris') || [];
-  const paikkakuntaUri = _.get(organisaatio, 'kotipaikkaUri');
-  const oppilaitostyyppiUri = _.get(organisaatio, 'oppilaitosTyyppiUri');
-  const nimi = getFirstLanguageValue(_.get(organisaatio, 'nimi'), language);
+const OrganisaatioSection = ({
+  language,
+  organisaatio,
+  t,
+}: {
+  language: LanguageCode;
+  organisaatio?: Organisaatio;
+  t: TFunction;
+}) => {
+  const opetuskieletUris = organisaatio?.kieletUris || [];
+  const paikkakuntaUri = organisaatio?.kotipaikkaUri;
+  const oppilaitostyyppiUri = organisaatio?.oppilaitosTyyppiUri;
+  const nimi = getFirstLanguageValue(organisaatio?.nimi, language);
 
   const { nimet: opetuskielet } = useKoodiNimet(opetuskieletUris);
   const { nimi: paikkakunta } = useKoodiNimi(paikkakuntaUri);

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -17,7 +16,6 @@ import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box, FormControl } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   KOULUTUS_PERUSOPETUS_KOODIURI,
   KoulutusalaKoodi,
@@ -31,7 +29,7 @@ import useKoodi from '#/src/hooks/useKoodi';
 import { getKoulutustyyppiTranslationKey, getTestIdProps } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
-import { KoulutuksenEPerusteTiedot } from '../KoulutuksenEPerusteTiedot';
+import { AmmatillinenTiedotSection } from '../AmmatillinenTiedotSection/AmmatillinenTiedotSection';
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
 import { ErikoistumiskoulutusField } from './ErikoistumiskoulutusField';
@@ -45,7 +43,7 @@ const useNimiFromKoulutustyyppi = ({ name, koulutustyyppi }) => {
   const { change } = useBoundFormActions();
   const currNimi = useFieldValue(`${name}.nimi`);
   useEffect(() => {
-    if (_fp.isUndefined(currNimi)) {
+    if (_.isUndefined(currNimi)) {
       change(`${name}.nimi`, {
         fi: t(`${koulutustyyppiKey}`, { lng: 'fi' }),
         sv: t(`${koulutustyyppiKey}`, { lng: 'sv' }),
@@ -68,7 +66,7 @@ const useNimiFromFixedKoulutusKoodi = ({ nimiFieldName, koodiUri }) => {
   const koulutusKoodi = useKoodi(koodiUri)?.koodi;
 
   useEffect(() => {
-    if (_fp.isUndefined(currNimi) && koulutusKoodi) {
+    if (_.isUndefined(currNimi) && koulutusKoodi) {
       change(nimiFieldName, {
         fi: byLng({ koodiObject: koulutusKoodi, lng: 'fi' }),
         sv: byLng({ koodiObject: koulutusKoodi, lng: 'sv' }),
@@ -352,12 +350,11 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
       ? `${name}.korkeakoulutukset`
       : `${name}.koulutus`,
   });
+
   return (
     <VerticalBox gap={2}>
-      {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
-        koulutustyyppi
-      ) && (
-        <KoulutuksenEPerusteTiedot
+      {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS && (
+        <AmmatillinenTiedotSection
           disabled={disabled}
           language={language}
           name={name}
@@ -376,7 +373,6 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
               required
             />
           </Box>
-
           <OpintojenLaajuusFieldExtended
             disabled={disabled}
             name={name}

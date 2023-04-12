@@ -1,7 +1,11 @@
 import produce from 'immer';
 import _ from 'lodash';
+import { match, P } from 'ts-pattern';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
+import { TableInputValue } from '#/src/components/TableInput/utils';
+import { KieliversiotValues, SisaltoValues } from '#/src/types/formTypes';
+import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';
 import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
@@ -12,7 +16,13 @@ const getArrayValue = (values, key) => {
   return isDeepEmptyFormValues(valueCandidate) ? [] : valueCandidate;
 };
 
-const serializeTable = ({ table, kielivalinta }) => {
+const serializeTable = ({
+  table,
+  kielivalinta,
+}: {
+  table?: TableInputValue;
+  kielivalinta: Array<LanguageCode>;
+}) => {
   if (!table?.rows) {
     return { rows: [] };
   }
@@ -36,33 +46,33 @@ const serializeTable = ({ table, kielivalinta }) => {
   });
 };
 
-const serializeSisalto = (sisalto, kielivalinta = []) => {
+const serializeSisalto = (
+  sisalto?: SisaltoValues,
+  kielivalinta: KieliversiotValues = []
+) => {
   if (!_.isArray(sisalto)) {
     return [];
   }
 
-  return sisalto.map(({ tyyppi, data }) => {
-    let serializedData = {};
-
-    if (tyyppi === 'teksti') {
-      serializedData = _.pick(
-        _.isObject(data) ? _.mapValues(data, serializeEditorState) : {},
-        kielivalinta
-      );
-    }
-
-    if (tyyppi === 'taulukko') {
-      serializedData = serializeTable({ table: data, kielivalinta });
-    }
-
+  return sisalto.map(sisaltoItem => {
     return {
-      tyyppi,
-      data: serializedData,
+      tyyppi: sisaltoItem.tyyppi,
+      data: match(sisaltoItem)
+        .with({ tyyppi: 'teksti', data: P.select() }, data =>
+          _.pick(
+            _.isObject(data) ? _.mapValues(data, serializeEditorState) : {},
+            kielivalinta
+          )
+        )
+        .with({ tyyppi: 'taulukko', data: P.select() }, data =>
+          serializeTable({ table: data, kielivalinta })
+        )
+        .otherwise(() => undefined),
     };
   });
 };
 
-export const getValintaperusteByFormValues = values => {
+export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
   const { tila, muokkaaja, perustiedot, esikatselu = false } = values;
 
   const koulutustyyppi = perustiedot?.tyyppi ?? null;
@@ -87,7 +97,10 @@ export const getValintaperusteByFormValues = values => {
   );
   const sisalto = serializeSisalto(values?.kuvaus?.sisalto, kielivalinta);
 
-  const valintatavat = KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi)
+  const valintatavat = _.includes(
+    KOULUTUSTYYPIT_WITH_VALINTATAPA,
+    koulutustyyppi
+  )
     ? getArrayValue(values, 'valintatavat').map(
         ({
           nimi: valintatapaNimi,

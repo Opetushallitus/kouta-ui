@@ -16,7 +16,17 @@ const TutkintonimikeFieldComponent = createFormFieldComponent(
   selectMapProps
 );
 
-export const TutkintonimikeField = ({ disabled, name }) => {
+type TutkintonimikeFieldProps = {
+  name: string;
+  disabled?: boolean;
+  koodisto?: string;
+};
+
+export const TutkintonimikeField = ({
+  disabled,
+  name,
+  koodisto,
+}: TutkintonimikeFieldProps) => {
   const { t } = useTranslation();
 
   return (
@@ -26,6 +36,7 @@ export const TutkintonimikeField = ({ disabled, name }) => {
         name={`${name}.tutkintonimike`}
         component={TutkintonimikeFieldComponent}
         label={t('koulutuslomake.valitseTutkintonimike')}
+        koodisto={koodisto}
       />
     </div>
   );

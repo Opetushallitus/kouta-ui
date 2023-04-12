@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Transition } from 'react-spring/renderprops';
 import styled, { css } from 'styled-components';
 
-import AbstractCollapse from '#/src/components/AbstractCollapse';
+import { AbstractCollapse } from '#/src/components/AbstractCollapse';
 import { Box, Icon, Typography } from '#/src/components/virkailija';
 import useToaster from '#/src/hooks/useToaster';
 import { getThemeProp } from '#/src/theme';

@@ -1,27 +1,17 @@
 import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { toSelectValue } from '#/src/utils';
+import { FormMode, JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
+import { ValintaperusteModel } from '#/src/types/domainTypes';
+import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';
+import { toEnumValue, toSelectValue } from '#/src/utils';
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
 
-const parseSisalto = sisalto => {
-  if (!_.isArray(sisalto)) {
-    return [];
-  }
-
-  return sisalto.map(({ tyyppi, data }) => {
-    if (tyyppi === 'teksti') {
-      return {
-        tyyppi,
-        data: _.isObject(data) ? _.mapValues(data, parseEditorState) : {},
-      };
-    }
-
-    return { tyyppi, data };
-  });
-};
-
-export const getFormValuesByValintaperuste = (valintaperuste, formMode) => {
+export const getFormValuesByValintaperuste = (
+  valintaperuste: ValintaperusteModel,
+  formMode?: FormMode
+): ValintaperusteValues => {
   const {
     hakutapaKoodiUri = null,
     kielivalinta = [],
@@ -49,9 +39,9 @@ export const getFormValuesByValintaperuste = (valintaperuste, formMode) => {
   return {
     organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
-    tila,
+    tila: toEnumValue(JULKAISUTILA, tila),
     perustiedot: {
-      tyyppi: koulutustyyppi,
+      tyyppi: toEnumValue(KOULUTUSTYYPPI, koulutustyyppi),
       kieliversiot: kielivalinta,
       hakutapa: hakutapaKoodiUri,
       kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
@@ -60,7 +50,7 @@ export const getFormValuesByValintaperuste = (valintaperuste, formMode) => {
     kuvaus: {
       nimi,
       kuvaus: _.mapValues(kuvaus || {}, parseEditorState),
-      sisalto: parseSisalto(sisalto),
+      sisalto: parseSisaltoField(sisalto),
     },
     hakukelpoisuus: _.mapValues(hakukelpoisuus || {}, parseEditorState),
     lisatiedot: _.mapValues(lisatiedot || {}, parseEditorState),
@@ -74,7 +64,7 @@ export const getFormValuesByValintaperuste = (valintaperuste, formMode) => {
         vahimmaispisteet,
       }) => ({
         nimi: valintatapaNimi || {},
-        sisalto: parseSisalto(valintatapaSisalto),
+        sisalto: parseSisaltoField(valintatapaSisalto),
         tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
         kynnysehto: _.mapValues(kynnysehto || {}, parseEditorState),
         enimmaispistemaara:

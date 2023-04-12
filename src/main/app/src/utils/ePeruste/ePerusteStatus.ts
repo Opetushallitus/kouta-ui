@@ -6,6 +6,9 @@ import {
   EPERUSTE_STATUS_TULEVA,
   EPERUSTE_STATUS_VOIMASSA,
 } from '#/src/constants';
+import { Theme } from '#/src/theme';
+
+export type EPerusteStatus = 'voimassa' | 'tuleva';
 
 export const getEPerusteStatus = ePeruste => {
   if (ePeruste) {
@@ -16,24 +19,30 @@ export const getEPerusteStatus = ePeruste => {
       voimassaoloAlkaa < now &&
       (_.isNil(voimassaoloLoppuu) || voimassaoloLoppuu > now)
     ) {
-      return EPERUSTE_STATUS_VOIMASSA;
+      return 'voimassa' as EPerusteStatus;
     } else if (voimassaoloAlkaa > now) {
-      return EPERUSTE_STATUS_TULEVA;
+      return 'tuleva' as EPerusteStatus;
     }
   }
 };
 
-const getStatusColors = ({ status, theme }) => {
+const getStatusColors = ({
+  status,
+  theme,
+}: {
+  status: EPerusteStatus;
+  theme: Theme;
+}) => {
   switch (status) {
     case EPERUSTE_STATUS_TULEVA:
       return {
-        backgroundColor: setLightness(0.9, theme.palette.success.main),
-        color: theme.palette.success.main,
+        backgroundColor: setLightness(0.9, theme.colors.success.main),
+        color: theme.colors.success.main,
       };
     case EPERUSTE_STATUS_VOIMASSA:
       return {
-        backgroundColor: setLightness(0.9, theme.palette.primary.main),
-        color: theme.palette.primary.main,
+        backgroundColor: setLightness(0.9, theme.colors.primary.main),
+        color: theme.colors.primary.main,
       };
     default:
       return {

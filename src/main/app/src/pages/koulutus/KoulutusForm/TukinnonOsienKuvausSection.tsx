@@ -15,7 +15,7 @@ import { useEPerusteTutkinnonOsat } from '#/src/utils/koulutus/getTutkinnonosaVi
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
-import { StyledInfoBox } from './KoulutuksenEPerusteTiedot/InfoBox';
+import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 
 const BodyHeading = styled(Typography).attrs({ variant: 'h6' })`
   color: ${getThemeProp('colors.text.primary')};

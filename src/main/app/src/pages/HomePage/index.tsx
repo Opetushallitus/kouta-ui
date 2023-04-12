@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Alert from '#/src/components/Alert';
+import { Alert } from '#/src/components/Alert';
 import Title from '#/src/components/Title';
 import {
   KOULUTUS_ROLE,
@@ -69,7 +69,7 @@ const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
 
   if (!firstOrganisaatioOid) {
     return (
-      <Alert variant="danger" title={t('etusivu.eiOikeuksiaVirheilmoitus')}>
+      <Alert status="danger" title={t('etusivu.eiOikeuksiaVirheilmoitus')}>
         {t('etusivu.eiOikeuksiaVirheilmoitusKuvaus')}
       </Alert>
     );

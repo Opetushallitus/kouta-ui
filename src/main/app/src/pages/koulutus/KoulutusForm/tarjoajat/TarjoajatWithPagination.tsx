@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import Pagination from '#/src/components/Pagination';
-import Switch from '#/src/components/Switch';
+import { Switch } from '#/src/components/Switch';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 

@@ -5,34 +5,44 @@ import styled, { css } from 'styled-components';
 
 import { Typography, Icon, Box } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
+import type { Theme } from '#/src/theme';
 
-const getIconByStatus = status => {
-  if (status === 'info') {
-    return 'info';
-  } else if (status === 'danger') {
-    return 'error';
-  } else if (status === 'success') {
-    return 'check_circle';
+type Status = 'info' | 'danger' | 'success';
+
+const getIconByStatus = (status: Status) => {
+  switch (status) {
+    case 'info':
+      return 'info';
+    case 'danger':
+      return 'error';
+    case 'success':
+      return 'check_circle';
+    default:
+      return undefined;
   }
-
-  return undefined;
 };
 
-const getStatusColor = ({ status, theme }) => {
+const getStatusColor = ({
+  status,
+  theme,
+}: {
+  status: Status;
+  theme: Theme;
+}) => {
   if (status === 'danger') {
-    return theme.palette.danger.main;
+    return theme.colors.danger.main;
   } else if (status === 'success') {
-    return theme.palette.success.main;
+    return theme.colors.success.main;
   }
 
-  return theme.palette.primary.main;
+  return theme.colors.primary.main;
 };
 
 const StatusIcon = styled(Icon)`
   font-size: 1.8rem;
   color: ${getStatusColor};
 `;
-const getStatusCss = ({ status, theme }) => {
+const getStatusCss = ({ status, theme }: { status: Status; theme: Theme }) => {
   const color = getStatusColor({ theme, status });
 
   return css`
@@ -41,7 +51,7 @@ const getStatusCss = ({ status, theme }) => {
   `;
 };
 
-const AlertBase = styled.div`
+const AlertBase = styled.div<{ hasTitle: boolean; status: Status }>`
   padding: ${spacing(2)};
   display: flex;
   border-radius: ${getThemeProp('shape.borderRadius')};
@@ -52,18 +62,24 @@ const AlertBase = styled.div`
   ${getStatusCss}
 `;
 
-const Alert = ({
+type AlertProps = {
+  status?: Status;
+  title?: string;
+  children?: React.ReactNode;
+  showIcon?: boolean;
+};
+
+export const Alert = ({
   status = 'info',
-  title = null,
+  title,
   children = null,
   showIcon = true,
-  ...props
-}) => {
+}: AlertProps) => {
   const icon = getIconByStatus(status);
   const hasTitle = Boolean(title);
 
   return (
-    <AlertBase status={status} hasTitle={hasTitle} {...props}>
+    <AlertBase status={status} hasTitle={hasTitle}>
       {icon && showIcon ? (
         <StatusIcon status={status} type={icon} mr={2} />
       ) : null}
@@ -82,5 +98,3 @@ const Alert = ({
     </AlertBase>
   );
 };
-
-export default Alert;

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
-import DateInput from '#/src/components/DateInput';
+import { DateInput } from '#/src/components/DateInput';
 import { DateTimeInput } from '#/src/components/DateTimeInput';
 import { Editor } from '#/src/components/Editor';
 import { ImageInput } from '#/src/components/ImageInput';

@@ -55,12 +55,14 @@ const validateApuraha = eb => {
   const onkoApuraha = values?.jarjestamistiedot?.onkoApuraha;
   const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
   const apurahaYksikko = values?.jarjestamistiedot?.apurahaYksikko?.value;
+  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
 
   return validateIf(
     onkoApuraha &&
       isApurahaVisible(
         values?.koulutustyyppi,
-        values?.jarjestamistiedot.opetuskieli
+        values?.jarjestamistiedot.opetuskieli,
+        maksullisuustyyppi
       ),
     _fp.flow(
       validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {

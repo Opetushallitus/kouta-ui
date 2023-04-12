@@ -119,10 +119,17 @@ export const ApurahaMaaraFields = createFormFieldComponent(
 export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
   const { t } = useTranslation();
   const onkoApuraha = useFieldValue<boolean>(`${name}.onkoApuraha`);
+  const maksullisuustyyppi = useFieldValue<string>(
+    `${name}.maksullisuustyyppi`
+  );
 
   const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
-  const isVisible = isApurahaVisible(koulutustyyppi, opetuskieliArr);
+  const isVisible = isApurahaVisible(
+    koulutustyyppi,
+    opetuskieliArr,
+    maksullisuustyyppi
+  );
 
   if (!isVisible) {
     return null;

@@ -350,6 +350,13 @@ export interface paths {
      */
     get: operations['Listaa koulutukset'];
   };
+  '/hakukohde/tila/{tila}': {
+    /**
+     * Muuttaa usean hakukohteen tilat
+     * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen hakukohteiden yksilöivät oidit.
+     */
+    post: operations['Muuttaa hakukohteiden tilat'];
+  };
   '/koulutus/listOppilaitostyypitByKoulutustyypit': {
     /**
      * Listaa oppilaitostyypit koulutustyypeittäin
@@ -752,8 +759,10 @@ export interface components {
       sahkoposti?: components['schemas']['Teksti'];
       /** @description Yhteyshenkilön puhelinnumero eri kielillä. Kielet on määritetty kielivalinnassa. */
       puhelinnumero?: components['schemas']['Teksti'];
-      /** @description Yhteyshenkilön www-sivu eri kielillä. Kielet on määritetty kielivalinnassa. */
+      /** @description Yhteyshenkilön www-sivun linkki eri kielillä. Kielet on määritetty kielivalinnassa. */
       wwwSivu?: components['schemas']['Teksti'];
+      /** @description Yhteyshenkilön www-sivun linkin kanssa näytettävä teksti eri kielillä. Kielet on määritetty kielivalinnassa. */
+      wwwSivuTeksti?: components['schemas']['Teksti'];
     };
     /** @enum {string} */
     Hakulomaketyyppi: 'ataru' | 'ei sähköistä' | 'muu';
@@ -802,10 +811,11 @@ export interface components {
       /** @description Tietoa valintakokeesta */
       tietoja?: components['schemas']['Teksti'];
       /**
+       * Format: double
        * @description Valintakokeen vähimmäispisteet
        * @example 10
        */
-      vahimmaispisteet?: Record<string, never>;
+      vahimmaispisteet?: number;
       /** @description Liittyykö valintakokeeseen ennakkovalmistautumista */
       liittyyEnnakkovalmistautumista?: boolean;
       /** @description Ohjeet valintakokeen ennakkojärjestelyihin */
@@ -819,7 +829,7 @@ export interface components {
       /** @description Valintakokeen järjestämispaikan osoite */
       osoite?: components['schemas']['Osoite'];
       /** @description Valintakokeen järjestämisaika */
-      aika?: Array<components['schemas']['Ajanjakso']>;
+      aika?: components['schemas']['Ajanjakso'];
       /** @description Valintakokeen järjestämispaikka eri kielillä. Kielet on määritetty kielivalinnassa. */
       jarjestamispaikka?: components['schemas']['Teksti'];
       /** @description Lisätietoja valintakokeesta eri kielillä. Kielet on määritetty kielivalinnassa. */
@@ -964,6 +974,13 @@ export interface components {
       pisteet?: Record<string, never>;
       vuosi?: string;
     };
+    TilaChangeResult: {
+      oid?: string;
+      status?: string;
+      errorPaths?: Array<string>;
+      errorMessages?: Array<string>;
+      errorTypes?: Array<string>;
+    };
     Asiasana: {
       /**
        * @description Asiasanan kieli
@@ -1104,7 +1121,7 @@ export interface components {
       ePerusteId?: number;
       /**
        * Format: date-time
-       * @description Koulutuksen viimeisin muokkausaika. Järjestelmän generoima
+       * @description Koulutuksen viimeisin muokkausaika. Järjestelmän generoima.
        * @example "2019-08-23T09:55:17.000Z"
        */
       modified?: string;
@@ -1776,10 +1793,11 @@ export interface components {
       /** @description Koulutuksen toteutuksen maksullisuutta tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
       maksullisuusKuvaus?: components['schemas']['Kuvaus'];
       /**
+       * Format: double
        * @description Koulutuksen toteutuksen maksun määrä euroissa?
        * @example 220.5
        */
-      maksunMaara?: Record<string, never>;
+      maksunMaara?: number;
       /** @description Koulutuksen alkamiskausi */
       koulutuksenAlkamiskausi?: components['schemas']['KoulutuksenAlkamiskausi'];
       /** @description Koulutuksen toteutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
@@ -1806,12 +1824,12 @@ export interface components {
        * @description Apurahan minimi euromäärä tai minimi prosenttiosuus lukuvuosimaksusta
        * @example 100
        */
-      min?: Record<string, never>;
+      min?: number;
       /**
        * @description Apurahan maksimi euromäärä tai maksimi prosenttiosuus lukuvuosimaksusta
        * @example 200
        */
-      max?: Record<string, never>;
+      max?: number;
       /**
        * @description Apurahan yksikkö
        * @example euro
@@ -2421,6 +2439,8 @@ export interface components {
        * ]
        */
       pohjakoulutusvaatimusKoodiUrit?: Array<string>;
+      /** @description Pohjakoulutusvaatimukset tarkenneteksti eri kielillä */
+      pohjakoulutusvaatimusTarkenne?: components['schemas']['Kuvaus'];
       /** @description Hakukohteen muiden pohjakoulutusvaatimusten kuvaus eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
       muuPohjakoulutusvaatimus?: components['schemas']['Kuvaus'];
       /** @description Onko hakukohteen toisen asteen koulutuksessa mahdollista suorittaa kaksoistutkinto? */
@@ -2498,6 +2518,8 @@ export interface components {
       kaytetaanHaunAlkamiskautta?: boolean;
       /** @description Hakukohteen aloituspaikkojen tiedot */
       aloituspaikat?: components['schemas']['Aloituspaikat'];
+      /** @description lukiototeutuksen hakukohteen linja */
+      hakukohteenLinja?: components['schemas']['HakukohteenLinja'];
       /** @description Uuden opiskelijan ohjeita sisältävän verkkosivun URL */
       uudenOpiskelijanUrl?: components['schemas']['Linkki'];
       /** @description Hakukohde on urheilijoille tarkoitettua ammatillista koulutusta */
@@ -2728,54 +2750,61 @@ export interface components {
       /** @description Valintatavan kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
       kuvaus?: components['schemas']['Kuvaus'];
       /** @description Valintatavan sisältö. Voi sisältää sekä teksti- että taulukkoelementtejä. */
-      sisalto?: Array<
-        | components['schemas']['SisaltoTeksti']
-        | components['schemas']['SisaltoTaulukko']
-      >;
+      sisalto?: Array<components['schemas']['SisaltoItem']>;
       /** @description Käytetäänkö muuntotaulukkoa? */
       kaytaMuuntotaulukkoa?: boolean;
       /** @description Kynnysehdon kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
       kynnysehto?: components['schemas']['Kuvaus'];
       /**
+       * Format: double
        * @description Valintatavan enimmäispisteet
        * @example 20
        */
-      enimmaispisteet?: Record<string, never>;
+      enimmaispisteet?: number;
       /**
+       * Format: double
        * @description Valintatavan vähimmäispisteet
        * @example 10
        */
-      vahimmaispisteet?: Record<string, never>;
+      vahimmaispisteet?: number;
     };
-    /** @description Tekstimuotoinen valintatavan sisällön kuvaus */
+    /** @description Valintatavan Opintopolussa näytettävä kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
     SisaltoTeksti: {
-      /** @description Valintatavan Opintopolussa näytettävä kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-      teksti?: components['schemas']['Teksti'];
+      /** @enum {string} */
+      tyyppi?: 'teksti';
+      data?: components['schemas']['Teksti'];
     };
     /** @description Taulukkomuotoinen valintatavan sisällön kuvaus */
     SisaltoTaulukko: {
-      /**
-       * @description Taulukon yksilöivä tunnus
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /** @description Taulukon Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-      nimi?: components['schemas']['Nimi'];
-      /** @description Taukon rivit */
-      rows?: Array<{
-        /** @description Rivin järjestysnumero */
-        index?: number;
-        /** @description Onko rivi otsikkorivi */
-        isHeader?: boolean;
-        /** @description Rivin sarakkeet */
-        columns?: Array<{
-          /** @description Sarakkeen järjestysnumero */
+      /** @enum {string} */
+      tyyppi?: 'taulukko';
+      data?: {
+        /**
+         * @description Taulukon yksilöivä tunnus
+         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+         */
+        id?: string;
+        /** @description Taulukon Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+        nimi?: components['schemas']['Nimi'];
+        /** @description Taulukon rivit */
+        rows?: Array<{
+          /** @description Rivin järjestysnumero */
           index?: number;
-          /** @description Sarakkeen Opintopolussa näytettävä teksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-          text?: components['schemas']['Teksti'];
+          /** @description Onko rivi otsikkorivi */
+          isHeader?: boolean;
+          /** @description Rivin sarakkeet */
+          columns?: Array<{
+            /** @description Sarakkeen järjestysnumero */
+            index?: number;
+            /** @description Sarakkeen Opintopolussa näytettävä teksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+            text?: components['schemas']['Teksti'];
+          }>;
         }>;
-      }>;
+      };
     };
+    SisaltoItem:
+      | components['schemas']['SisaltoTeksti']
+      | components['schemas']['SisaltoTaulukko'];
     ValintaperusteMetadata: {
       /** @description Valintaperustekuvauksen metatiedon (koulutus)tyyppi */
       tyyppi?: components['schemas']['Koulutustyyppi'];
@@ -2790,10 +2819,7 @@ export interface components {
       /** @description Valintaperustekuvauksen lisatiedot eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
       lisatiedot?: components['schemas']['Kuvaus'];
       /** @description Valintaperusteen kuvauksen sisältö. Voi sisältää sekä teksti- että taulukkoelementtejä. */
-      sisalto?: Array<
-        | components['schemas']['SisaltoTeksti']
-        | components['schemas']['SisaltoTaulukko']
-      >;
+      sisalto?: Array<components['schemas']['SisaltoItem']>;
     };
     Valintaperuste: {
       /**
@@ -3659,7 +3685,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) toteutukset */
-      query?: {
+      query: {
         vainOlemassaolevat?: boolean;
       };
       /**
@@ -3686,7 +3712,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
-      query?: {
+      query: {
         vainOlemassaolevat?: boolean;
       };
       /**
@@ -3863,7 +3889,7 @@ export interface operations {
      * Palauttaa tarjoajan ja hakukohdekoodin tai lukiolinjakoodin yhdistelmään liittyvät pistetiedot
      * @description Listaa pistetiedot. Tarjoaja JA joko hakukohdekoodi TAI lukiolinjakoodi annettava.
      */
-    parameters?: {
+    parameters: {
       /**
        * @description Tarjoajaorganisaation oid
        * @example 1.2.246.562.10.00101010101
@@ -3873,7 +3899,7 @@ export interface operations {
        * @example hakukohteet_000
        */
       /** @description lukiolinjakoodi */
-      query?: {
+      query: {
         tarjoaja?: Record<string, never>;
         hakukohdekoodi?: Record<string, never>;
         lukiolinjakoodi?: Record<string, never>;
@@ -4003,9 +4029,9 @@ export interface operations {
      * Tallenna ammattinimikkeitä
      * @description Tallenna ammattinimikkeitä
      */
-    parameters?: {
+    parameters: {
       /** @description Tallennettavan ammattinimikkeen kieli */
-      query?: {
+      query: {
         kieli?: 'fi' | 'sv' | 'en';
       };
     };
@@ -4045,12 +4071,12 @@ export interface operations {
      * Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
      * @description Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
      */
-    parameters?: {
+    parameters: {
       /**
        * @description Yksittäisen haun oid tai "defaults" viiden edellisen toisen asteen yhteishaun synkronoimiseksi (2022)
        * @example 1.2.246.562.29.54537554997
        */
-      query?: {
+      query: {
         hakuOid?: Record<string, never>;
       };
     };
@@ -4066,7 +4092,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko myös mahdollisesti poistettu SORA-kuvaus */
-      query?: {
+      query: {
         myosPoistetut?: boolean;
       };
       /**
@@ -4165,7 +4191,7 @@ export interface operations {
     parameters: {
       /** @description Haettavan ammattinimikkeen kieli */
       /** @description Palautettavien ammattinimikkeiden maksimimäärä */
-      query?: {
+      query: {
         kieli?: 'fi' | 'sv' | 'en';
         limit?: number;
       };
@@ -4363,7 +4389,7 @@ export interface operations {
      * Hae organisaatiohierarkian organisaatiopalvelusta
      * @description Hakee organisaatiohierarkian organisaatiopalvelusta
      */
-    parameters?: {
+    parameters: {
       /**
        * @description Hakumerkkijono
        * @example Tampereen yliopisto
@@ -4395,7 +4421,7 @@ export interface operations {
        * @description Jätetäänkö yläorganisaatiot pois hakutuloksista
        * @example false
        */
-      query?: {
+      query: {
         searchStr?: string;
         oid?: string;
         oidRestrictionList?: Array<string>;
@@ -4487,7 +4513,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
-      query?: {
+      query: {
         vainOlemassaolevat?: boolean;
       };
       /**
@@ -4706,7 +4732,7 @@ export interface operations {
     parameters: {
       /** @description Palautetaanko vain julkaistut, Opintopolussa näytettävät toteutukset */
       /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) toteutukset */
-      query?: {
+      query: {
         vainJulkaistut?: boolean;
         vainOlemassaolevat?: boolean;
       };
@@ -4757,7 +4783,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) haut */
-      query?: {
+      query: {
         vainOlemassaolevat?: boolean;
       };
       /**
@@ -4870,7 +4896,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko myös mahdollisesti poistettu toteutus */
-      query?: {
+      query: {
         myosPoistetut?: boolean;
       };
       /**
@@ -4897,7 +4923,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) koulutukset */
-      query?: {
+      query: {
         vainOlemassaolevat?: boolean;
       };
       /**
@@ -4943,6 +4969,35 @@ export interface operations {
       200: {
         content: {
           'application/json': Array<components['schemas']['KoulutusListItem']>;
+        };
+      };
+    };
+  };
+  'Muuttaa hakukohteiden tilat': {
+    /**
+     * Muuttaa usean hakukohteen tilat
+     * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen hakukohteiden yksilöivät oidit.
+     */
+    parameters: {
+      /**
+       * @description Hakukohteen julkaisutila, joka päivitetään hakukohteille
+       * @example tallennettu
+       */
+      path: {
+        tila: string;
+      };
+    };
+    /** @description Lista muutettavien hakukohteiden oideja */
+    requestBody: {
+      content: {
+        'application/json': Array<string>;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: {
+          'application/json': Array<components['schemas']['TilaChangeResult']>;
         };
       };
     };
@@ -5092,7 +5147,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
-      query?: {
+      query: {
         vainOlemassaolevat?: boolean;
       };
       /**
@@ -5279,7 +5334,7 @@ export interface operations {
     parameters: {
       /** @description Haettavan asiasanan kieli */
       /** @description Palautettavien asiasanojen maksimimäärä */
-      query?: {
+      query: {
         kieli?: 'fi' | 'sv' | 'en';
         limit?: number;
       };
@@ -5417,7 +5472,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko myös mahdollisesti poistettu haku */
-      query?: {
+      query: {
         myosPoistetut?: boolean;
       };
       /**
@@ -5467,7 +5522,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko myös mahdollisesti poistettu hakukohde */
-      query?: {
+      query: {
         myosPoistetut?: boolean;
       };
       /**
@@ -5773,9 +5828,9 @@ export interface operations {
      * Tallenna asiasanoja
      * @description Tallenna asiasanoja
      */
-    parameters?: {
+    parameters: {
       /** @description Tallennettavan asiasanan kieli */
-      query?: {
+      query: {
         kieli?: 'fi' | 'sv' | 'en';
       };
     };
@@ -5797,7 +5852,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko myös mahdollisesti poistettu koulutus */
-      query?: {
+      query: {
         myosPoistetut?: boolean;
       };
       /**
@@ -5824,7 +5879,7 @@ export interface operations {
      */
     parameters: {
       /** @description Palautetaanko myös mahdollisesti poistettu valintaperuste */
-      query?: {
+      query: {
         myosPoistetut?: boolean;
       };
       /**

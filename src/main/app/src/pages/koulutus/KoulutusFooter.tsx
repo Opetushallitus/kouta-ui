@@ -60,10 +60,6 @@ export const KoulutusFooter = ({
             : {
                 ...koulutus,
                 ...getKoulutusByFormValues(valuesForSaving),
-                // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
-                // but backend requires it when creating new ones.
-                // TODO: Remove this when backend works without muokkaaja
-                muokkaaja: koulutus?.muokkaaja,
               },
       });
 

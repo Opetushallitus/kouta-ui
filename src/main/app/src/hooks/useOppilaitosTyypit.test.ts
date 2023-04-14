@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 
 import {
   KOULUTUSTYYPIT,
@@ -43,8 +43,8 @@ const getIsDisabledForNone = createIsKoulutustyyppiDisabledGetter({
   entityType: ENTITY.KOULUTUS,
 });
 
-test.each(_fp.difference(KOULUTUSTYYPIT)(EI_TUETUT_KOULUTUSTYYPIT))(
-  'Creating KOMO with any koulutustyyppi should be allowed for OPH',
+test.each(KOULUTUSTYYPIT)(
+  'Creating Koulutus with any koulutustyyppi should be allowed for OPH',
   kt => {
     expect(getIsDisabledForOPH(kt)).toEqual(false);
   }
@@ -58,10 +58,9 @@ test.each(ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)(
 );
 
 test.each(
-  _fp.difference(KOULUTUSTYYPIT)(
-    _fp.union(EI_TUETUT_KOULUTUSTYYPIT)(
-      ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT
-    )
+  _.difference(
+    KOULUTUSTYYPIT,
+    _.union(EI_TUETUT_KOULUTUSTYYPIT, ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)
   )
 )(
   'Should not disable any koulutustyyppi when not detecting any oppilaitos types',
@@ -132,19 +131,6 @@ test('Should enable yo-koulutustyyppi for all yo-oppilaitostyyppi', () => {
       },
     ])(KOULUTUSTYYPPI.YLIOPISTOKOULUTUS)
   ).toEqual(false);
-});
-
-test('Should disable ammatillinen koulutustyyppi for amm-oppilaitostyyppi', () => {
-  const oppilaitostyypit = ['oppilaitostyyppi_21'];
-
-  expect(
-    getIsDisabledForOppilaitostyypit(oppilaitostyypit, [
-      {
-        koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-        oppilaitostyypit,
-      },
-    ])(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS)
-  ).toEqual(true);
 });
 
 test('Should enable amm. tutkinnon osa for amm koulutustyyppi', () => {

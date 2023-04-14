@@ -380,3 +380,12 @@ export const getKoulutustyyppiTranslation = (
 
 export const notToimipisteOrg = org =>
   !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE, org);
+
+export const toEnumValue = <T extends object>(
+  obj: T,
+  value?: string | null
+) => {
+  const values = Object.values(obj);
+  const index = values.indexOf(value);
+  return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
+};

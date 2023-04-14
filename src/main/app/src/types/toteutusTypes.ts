@@ -8,7 +8,7 @@ import {
   ApurahaYksikko,
 } from '#/src/constants';
 
-import { AjankohtaFields } from './formTypes';
+import { AjankohtaFields, SisaltoValues } from './formTypes';
 
 type Kuvaus = TranslatedField<any>;
 
@@ -24,10 +24,7 @@ type Toteutusjakso = {
   laajuus: TranslatedField<string>;
   ilmoittautumislinkki: TranslatedField<string>;
   kuvaus: Kuvaus;
-  sisalto: Array<{
-    tyyppi: string;
-    data: any;
-  }>;
+  sisalto: SisaltoValues;
 };
 
 export type LukiolinjatOsio = {

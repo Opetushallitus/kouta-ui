@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { RefObject, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
@@ -65,7 +65,10 @@ const AddContentDropdown = ({ onAdd }) => {
   return (
     <Dropdown overlay={overlay}>
       {({ onToggle, ref }) => (
-        <div ref={ref} style={{ display: 'inline-block' }}>
+        <div
+          ref={ref as RefObject<HTMLDivElement>}
+          style={{ display: 'inline-block' }}
+        >
           <IconButton
             iconType="add"
             color="primary"
@@ -169,10 +172,16 @@ const renderFields = props => {
   );
 };
 
-export const SisaltoFields = ({ language = 'fi', ...props }) => {
+export const SisaltoFields = ({ name, language = 'fi', ...props }) => {
   const { t } = useTranslation();
 
   return (
-    <FieldArray {...props} component={renderFields} language={language} t={t} />
+    <FieldArray
+      name={name}
+      {...props}
+      component={renderFields}
+      language={language}
+      t={t}
+    />
   );
 };

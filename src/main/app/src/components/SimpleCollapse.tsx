@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import { AbstractCollapse } from '#/src/components/AbstractCollapse';
 import { Icon } from '#/src/components/virkailija';
 
-import AbstractCollapse from './AbstractCollapse';
 import Heading from './Heading';
 
 const SimpleCollapseHeader = styled.div`

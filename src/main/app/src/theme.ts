@@ -79,4 +79,6 @@ export const createTheme = () => {
 
 export const defaultTheme = createTheme();
 
+export type Theme = typeof defaultTheme;
+
 export default defaultTheme;

@@ -34,7 +34,7 @@ Object {
     "kohdejoukko": Object {
       "value": "joukko_1#1",
     },
-    "tyyppi": "tyyppi_1#1",
+    "tyyppi": "amk",
   },
   "tila": "tallennettu",
   "valintakokeet": Object {

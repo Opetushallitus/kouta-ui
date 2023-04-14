@@ -6,7 +6,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
     hakutapaKoodiUri: 'tapa_1#1',
     kielivalinta: ['fi', 'sv'],
     kohdejoukkoKoodiUri: 'joukko_1#1',
-    koulutustyyppi: 'tyyppi_1#1',
+    koulutustyyppi: 'amk',
     julkinen: true,
     metadata: {
       kuvaus: {
@@ -129,10 +129,6 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
             osoite: {
               osoite: { fi: 'fi osoite', sv: 'sv osoite' },
               postinumeroKoodiUri: 'posti_1#1',
-              postitoimipaikka: {
-                fi: 'fi postitoimipaikka',
-                sv: 'sv postitoimipaikka',
-              },
             },
             aika: {
               alkaa: '2019-04-16T08:44',

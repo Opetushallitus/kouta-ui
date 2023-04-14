@@ -1,1 +1,0 @@
-export { KoulutuksenEPerusteTiedot } from './KouluksenEPerusteTiedot';

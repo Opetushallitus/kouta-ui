@@ -9,6 +9,7 @@ import {
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { Organisaatio } from '#/src/types/domainTypes';
 import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
 import getUserRoles from '#/src/utils/getUserRoles';
 import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
@@ -20,7 +21,7 @@ export const useOrganisaatio = (oid, options = {}) => {
 };
 
 export const useOrganisaatiot = (oids, options = {}) => {
-  const { data: organisaatiot, ...rest } = useApiQuery(
+  const { data: organisaatiot, ...rest } = useApiQuery<Array<Organisaatio>>(
     'getOrganisaatiot',
     getOrganisaatiotByOids,
     { oids: _.castArray(oids) },

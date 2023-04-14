@@ -28,13 +28,3 @@ type SelectOptions = Array<SelectOption<string>>;
 type PohjaValinta = { tapa: string; valinta: string };
 
 type ValueOf<T> = T[keyof T];
-
-type Organisaatio = {
-  oid: string;
-  parentOidPath: string;
-  nimi: TranslatedField;
-  organisaatiotyypit: Array<string>;
-  tyypit: Array<string>;
-  children: Array<Organisaatio>;
-  oppilaitostyyppi?: string;
-};

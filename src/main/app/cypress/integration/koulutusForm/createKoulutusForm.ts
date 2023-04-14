@@ -144,7 +144,7 @@ export const createKoulutusForm = () => {
           const url = new URL($link.attr('href'));
           expect(url.pathname).to.equal('/');
           expect(url.hash).to.equal(
-            '#/fi/esitys/6777660/reformi/sisalto/6858226'
+            '#/fi/esitys/7823345/reformi/sisalto/6858226'
           );
         });
       });
@@ -188,7 +188,7 @@ export const createKoulutusForm = () => {
           const url = new URL($link.attr('href'));
           expect(url.pathname).to.equal('/');
           expect(url.hash).to.equal(
-            '#/fi/esitys/6777660/reformi/tutkinnonosat/6778201'
+            '#/fi/esitys/7823345/reformi/tutkinnonosat/7843530'
           );
         });
       });
@@ -209,7 +209,7 @@ export const createKoulutusForm = () => {
           const url = new URL($link.attr('href'));
           expect(url.pathname).to.equal('/');
           expect(url.hash).to.equal(
-            '#/fi/esitys/6777660/reformi/tutkinnonosat/6778207'
+            '#/fi/esitys/7823345/reformi/tutkinnonosat/6778207'
           );
         });
       });

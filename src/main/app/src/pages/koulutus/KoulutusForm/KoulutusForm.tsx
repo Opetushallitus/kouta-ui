@@ -16,13 +16,7 @@ import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { Box } from '#/src/components/virkailija';
-import {
-  ENTITY,
-  FormMode,
-  KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
-  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-} from '#/src/constants';
+import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import {
@@ -35,6 +29,7 @@ import { getTestIdProps } from '#/src/utils';
 import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
+import { useIsAmmTutkintoWithoutEperuste } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
@@ -82,7 +77,7 @@ export const KoulutusForm = ({
 }: KoulutusFormProps) => {
   const { t } = useTranslation();
 
-  const koulutustyyppi = useFieldValue('koulutustyyppi');
+  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
   const kieliversiotValue = useFieldValue('kieliversiot');
   const koulutuskoodi = useFieldValue('information.koulutus');
   const languageTabs = kieliversiotValue || [];
@@ -108,6 +103,8 @@ export const KoulutusForm = ({
       isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia),
     [isNewKoulutus, organisaatio, hierarkia]
   );
+
+  const isAmmTutkintoWithoutEperuste = useIsAmmTutkintoWithoutEperuste();
 
   return (
     <>
@@ -160,157 +157,147 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.TUTKINNON_OSA,
               KOULUTUSTYYPPI.OSAAMISALA,
             ].includes(koulutustyyppi) && (
-              <FormCollapse
-                section="information"
-                header={t('koulutuslomake.koulutuksenTiedot')}
-                Component={match(koulutustyyppi)
-                  .with(KOULUTUSTYYPPI.TUVA, () => TuvaTiedotSection)
-                  .with(KOULUTUSTYYPPI.TELMA, () => TelmaTiedotSection)
-                  .with(
-                    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-                    () => AikuistenPerusopetusTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
-                    () => TaiteenPerusopetusTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-                    () => VapaaSivistystyoOpistovuosiTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-                    () => AmmMuuTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-                    () => VapaaSivistystyoMuuTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
-                    () => KkOpintojaksoTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
-                    () => KkOpintokokonaisuusTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.ERIKOISLAAKARI,
-                    () => ErikoislaakariTiedotSection
-                  )
-                  .with(
-                    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-                    () => ErikoistumisKoulutusTiedotSection
-                  )
-                  .with(KOULUTUSTYYPPI.MUU, () => MuuTiedotSection)
-                  .otherwise(() => TiedotSection)}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-              />
+              <>
+                <FormCollapse
+                  section="information"
+                  header={t('koulutuslomake.koulutuksenTiedot')}
+                  Component={match(koulutustyyppi)
+                    .with(KOULUTUSTYYPPI.TUVA, () => TuvaTiedotSection)
+                    .with(KOULUTUSTYYPPI.TELMA, () => TelmaTiedotSection)
+                    .with(
+                      KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+                      () => AikuistenPerusopetusTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
+                      () => TaiteenPerusopetusTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+                      () => VapaaSivistystyoOpistovuosiTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+                      () => AmmMuuTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+                      () => VapaaSivistystyoMuuTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+                      () => KkOpintojaksoTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+                      () => KkOpintokokonaisuusTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.ERIKOISLAAKARI,
+                      () => ErikoislaakariTiedotSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+                      () => ErikoistumisKoulutusTiedotSection
+                    )
+                    .with(KOULUTUSTYYPPI.MUU, () => MuuTiedotSection)
+                    .otherwise(() => TiedotSection)}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
+                />
+                {/* TODO: Mille kaikille koulutustyypeille kuvaus-kenttä pitäisi näyttää? 
+                Monien koulutustyyppien metadatassa on kuvaus-kenttä, mutta siihen ei voi syöttää mitään. */}
+                <FormCollapse
+                  section="description"
+                  header={t('koulutuslomake.koulutuksenKuvaus')}
+                  Component={match(koulutustyyppi)
+                    .with(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS, () =>
+                      isAmmTutkintoWithoutEperuste
+                        ? KuvausFieldsSection
+                        : EPerusteKuvausSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.LUKIOKOULUTUS,
+                      KOULUTUSTYYPPI.TUVA,
+                      KOULUTUSTYYPPI.TELMA,
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+                      KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
+                      KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
+                      KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+                      KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+                      KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
+                      KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+                      KOULUTUSTYYPPI.ERIKOISLAAKARI,
+                      KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+                      KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+                      KOULUTUSTYYPPI.MUU,
+                      KOULUTUSTYYPPI.AMKKOULUTUS,
+                      KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
+                      () => KuvausFieldsSection
+                    )
+                    .otherwise(() => null)}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
+                  koulutuskoodi={koulutuskoodi}
+                />
+              </>
             )}
 
             {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
-              <FormCollapse
-                section="osaamisala"
-                header={t('koulutuslomake.valitseOsaamisala')}
-                Component={OsaamisalaSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-              />
+              <>
+                <FormCollapse
+                  section="osaamisala"
+                  header={t('koulutuslomake.valitseOsaamisala')}
+                  Component={OsaamisalaSection}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
+                />
+                <FormCollapse
+                  section="osaamisalanKuvaus"
+                  header={t('koulutuslomake.osaamisalanKuvaus')}
+                  Component={OsaamisalanKuvausSection}
+                  name={'osaamisala.osaamisala'}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
+                />
+              </>
             )}
 
             {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
-              <FormCollapse
-                section="tutkinnonosat"
-                header={t('koulutuslomake.tutkinnonOsat')}
-                Component={TutkinnonOsatSection}
-                name={'tutkinnonosat.osat'}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-              />
-            )}
-
-            {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
-              <FormCollapse
-                section="osaamisalanKuvaus"
-                header={t('koulutuslomake.osaamisalanKuvaus')}
-                Component={OsaamisalanKuvausSection}
-                name={'osaamisala.osaamisala'}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-              />
-            )}
-
-            {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
-              <FormCollapse
-                section="tutkinnonosat"
-                header={t('koulutuslomake.koulutuksenNimi')}
-                Component={TutkinnonOsaKoulutusNimiSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-                {...getTestIdProps('nimiSection')}
-              />
-            )}
-
-            {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
-              <FormCollapse
-                section="tutkinnonosat"
-                header={t('koulutuslomake.tutkinnonOsienKuvaus')}
-                Component={TutkinnonOsienKuvausSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-                {...getTestIdProps('tutkinnonOsienKuvausSection')}
-              />
-            )}
-
-            {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
-              koulutustyyppi
-            ) && (
-              <FormCollapse
-                section="description"
-                header={t('koulutuslomake.koulutuksenKuvaus')}
-                Component={EPerusteKuvausSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-                koulutuskoodi={koulutuskoodi}
-              />
-            )}
-            {/* TODO: Mille kaikille koulutustyypeille kuvaus-kenttä pitäisi näyttää? 
-              Monien koulutustyyppien metadatassa on kuvaus-kenttä, mutta siihen ei voi syöttää mitään. */}
-            {[
-              KOULUTUSTYYPPI.LUKIOKOULUTUS,
-              KOULUTUSTYYPPI.TUVA,
-              KOULUTUSTYYPPI.TELMA,
-              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-              KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS,
-              KOULUTUSTYYPPI.OPETTAJIEN_PEDAGOGISET_OPINNOT,
-              KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-              KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-              KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
-              KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
-              KOULUTUSTYYPPI.ERIKOISLAAKARI,
-              KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
-              KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-              KOULUTUSTYYPPI.MUU,
-              ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-            ].includes(koulutustyyppi) && (
-              <FormCollapse
-                section="description"
-                header={t('koulutuslomake.koulutuksenKuvaus')}
-                Component={KuvausFieldsSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-                koulutuskoodi={koulutuskoodi}
-              />
+              <>
+                <FormCollapse
+                  section="tutkinnonosat"
+                  header={t('koulutuslomake.tutkinnonOsat')}
+                  Component={TutkinnonOsatSection}
+                  name={'tutkinnonosat.osat'}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
+                />
+                <FormCollapse
+                  section="tutkinnonosat"
+                  header={t('koulutuslomake.koulutuksenNimi')}
+                  Component={TutkinnonOsaKoulutusNimiSection}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
+                  {...getTestIdProps('nimiSection')}
+                />
+                <FormCollapse
+                  section="tutkinnonosat"
+                  header={t('koulutuslomake.tutkinnonOsienKuvaus')}
+                  Component={TutkinnonOsienKuvausSection}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
+                  {...getTestIdProps('tutkinnonOsienKuvausSection')}
+                />
+              </>
             )}
 
             {![

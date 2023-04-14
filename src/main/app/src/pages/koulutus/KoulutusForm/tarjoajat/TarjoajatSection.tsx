@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import Alert from '#/src/components/Alert';
+import { Alert } from '#/src/components/Alert';
 import {
   createFormFieldComponent,
   FormFieldCheckbox,

@@ -2,14 +2,16 @@ import _ from 'lodash';
 
 import { formValueExists } from '#/src/utils';
 
-export const getLanguageValue = (value, language = 'fi') =>
-  _.isObject(value) ? value[language] || null : null;
+export const getLanguageValue = (
+  value?: TranslatedField,
+  language: LanguageCode = 'fi'
+) => (_.isObject(value) ? value[language] || null : null);
 
 export const getFirstLanguageValue = (
-  value,
-  priorityArg?: Array<string> | string
+  value?: TranslatedField,
+  priorityArg?: Array<LanguageCode> | LanguageCode
 ) => {
-  const defaultPriority = ['fi', 'en', 'sv'];
+  const defaultPriority: Array<LanguageCode> = ['fi', 'en', 'sv'];
 
   let priority = defaultPriority;
 

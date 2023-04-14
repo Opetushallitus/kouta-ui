@@ -5,7 +5,7 @@ import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
-import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
+import { serializeSisaltoField } from '#/src/utils/form/serializeSisaltoField';
 
 import { isApurahaVisible } from './toteutusVisibilities';
 

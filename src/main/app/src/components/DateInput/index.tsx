@@ -10,7 +10,7 @@ const generateId = () =>
   `DateTimeInput__${Math.round(Math.random() * 10000).toString()}`;
 
 const useId = () => {
-  const ref = useRef();
+  const ref = useRef<string>();
 
   if (!ref.current) {
     ref.current = generateId();
@@ -96,5 +96,3 @@ export const DateInput = ({
     </Box>
   );
 };
-
-export default DateInput;

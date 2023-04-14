@@ -1,8 +1,4 @@
-import React from 'react';
-
-import Switch from './index';
-
-const Template = args => <Switch {...args} />;
+import { Switch } from './index';
 
 export default {
   title: 'Switch',
@@ -14,4 +10,4 @@ export default {
   },
 };
 
-export const Basic = Template.bind({});
+export const Basic = Switch.bind({});

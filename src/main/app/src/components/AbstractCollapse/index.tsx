@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import { hideVisually } from 'polished';
 import styled from 'styled-components';
@@ -7,50 +7,46 @@ const Hidden = styled.div`
   ${hideVisually()};
 `;
 
-class AbstractCollapse extends Component {
-  static defaultProps = {
-    defaultOpen: false,
-    children: () => null,
-    content: null,
-    unmount: false,
-  };
+type ChildrenProps = { open: boolean; onToggle: () => void };
 
-  constructor(props) {
-    super(props);
+type AbstractCollapseProps = {
+  defaultOpen?: boolean;
+  children?: (props: ChildrenProps) => React.ReactNode;
+  content?: React.ReactNode;
+  unmount?: boolean;
+};
 
-    this.state = {
-      open: props.defaultOpen,
-    };
-  }
-
-  onToggle = () => {
-    this.setState(({ open }) => ({ open: !open }));
-  };
-
-  renderContent() {
-    const { unmount, content } = this.props;
-    const { open } = this.state;
-
-    if (open) {
-      return content;
-    } else if (unmount) {
+const Content = ({
+  open,
+  unmount,
+  content,
+}: {
+  open: boolean;
+  unmount: boolean;
+  content: React.ReactNode;
+}) => {
+  switch (true) {
+    case open:
+      return <>{content}</>;
+    case unmount:
       return null;
-    } else {
+    default:
       return <Hidden>{content}</Hidden>;
-    }
   }
+};
 
-  render() {
-    const { children } = this.props;
-    const { open } = this.state;
+export const AbstractCollapse = ({
+  defaultOpen = false,
+  children = () => null,
+  content = null,
+  unmount = false,
+}: AbstractCollapseProps) => {
+  const [open, setOpen] = useState<boolean>(() => defaultOpen);
 
-    return (
-      <>
-        {children({ open, onToggle: this.onToggle })}
-        {this.renderContent()}
-      </>
-    );
-  }
-}
-
-export default AbstractCollapse;
+  return (
+    <>
+      {children({ open, onToggle: () => setOpen(isOpen => !isOpen) })}
+      <Content open={open} unmount={unmount} content={content} />
+    </>
+  );
+};

@@ -23,7 +23,7 @@ const HiddenSwitch = styled.input.attrs({ type: 'checkbox' })`
   width: 1px;
 `;
 
-const StyledSwitch = styled.div`
+const StyledSwitch = styled.div<{ error: boolean; checked: boolean }>`
   display: inline-block;
   position: relative;
   width: 2.5em;
@@ -53,7 +53,7 @@ const StyledSwitch = styled.div`
     `}
 `;
 
-const Label = styled.label`
+const Label = styled.label<{ error: boolean; disabled: boolean }>`
   font-family: ${getThemeProp('typography.fontFamily')};
   font-size: 1rem;
   display: flex;
@@ -72,7 +72,7 @@ const Label = styled.label`
   ${disabledStyle}
 `;
 
-const LabelWrapper = styled.div`
+const LabelWrapper = styled.div<{ disabled: boolean }>`
   flex: 1;
   margin-left: 9px;
 
@@ -121,7 +121,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
     },
     ref
   ) => (
-    <Label disabled={disabled}>
+    <Label disabled={disabled} error={error}>
       <SwitchWrapper>
         <SwitchContainer className={className}>
           <HiddenSwitch
@@ -132,16 +132,14 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           />
           <StyledSwitch checked={checked} error={error}>
             <Spring to={{ left: checked ? '1.4em' : '0.125em' }}>
-              {({ left }) => (
-                <SwitchBall error={error} checked={checked} style={{ left }} />
-              )}
+              {({ left }) => <SwitchBall style={{ left }} />}
             </Spring>
           </StyledSwitch>
         </SwitchContainer>
       </SwitchWrapper>
-      {children ? <LabelWrapper>{children}</LabelWrapper> : null}
+      {children ? (
+        <LabelWrapper disabled={disabled}>{children}</LabelWrapper>
+      ) : null}
     </Label>
   )
 );
-
-export default Switch;

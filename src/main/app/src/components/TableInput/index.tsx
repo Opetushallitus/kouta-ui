@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { ClipboardEventHandler, Component, RefObject } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -22,6 +22,7 @@ import {
   removeRow,
   setRowHeaderStatus,
   setColumnFieldValue,
+  TableInputValue,
 } from './utils';
 
 const ColumnInput = styled.textarea.attrs({ rows: 2 })`
@@ -55,7 +56,10 @@ const Column = styled(Box)`
   width: 17rem;
 `;
 
-const Row = styled(Box).attrs({ display: 'inline-flex' })`
+const Row = styled(Box).attrs({ display: 'inline-flex' })<{
+  isLast?: boolean;
+  isHeader?: boolean;
+}>`
   background-color: white;
   border-top: 1px solid ${getThemeProp('palette.border')};
   border-left: 1px solid ${getThemeProp('palette.border')};
@@ -91,7 +95,7 @@ const Container = styled.div`
   }
 `;
 
-const EditRowBase = styled(Box)`
+const EditRowBase = styled(Box)<{ isHeader?: boolean }>`
   background-color: ${getThemeProp('palette.mainBackground')};
   width: 2rem;
   text-align: center;
@@ -147,7 +151,11 @@ const EditColumn = ({
   return (
     <Dropdown overlay={overlay} overflow={overflow}>
       {({ ref, onToggle }) => (
-        <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
+        <div
+          style={{ display: 'flex' }}
+          ref={ref as RefObject<HTMLDivElement>}
+          onClick={onToggle}
+        >
           <EditColumnBase {...props} />
         </div>
       )}
@@ -190,7 +198,11 @@ const EditRow = ({
   return (
     <Dropdown overlay={overlay} overflow={overflow}>
       {({ ref, onToggle }) => (
-        <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
+        <div
+          style={{ display: 'flex' }}
+          ref={ref as RefObject<HTMLDivElement>}
+          onClick={onToggle}
+        >
           <EditRowBase isHeader={isHeader} {...props} />
         </div>
       )}
@@ -198,7 +210,13 @@ const EditRow = ({
   );
 };
 
-class TableInput extends Component {
+type TableInputProps = {
+  value?: TableInputValue;
+  language: LanguageCode;
+  onChange: (v: TableInputValue) => void;
+  overflowDropdowns?: boolean;
+};
+class TableInput extends Component<TableInputProps> {
   static defaultProps = {
     onChange: () => {},
     language: 'fi',
@@ -214,7 +232,7 @@ class TableInput extends Component {
   }
 
   makeOnRemoveColumn =
-    ({ columnIndex }) =>
+    ({ columnIndex }: { columnIndex: number }) =>
     () => {
       const nextValue = removeColumn({ columnIndex, value: this.getValue() });
 
@@ -222,7 +240,7 @@ class TableInput extends Component {
     };
 
   makeOnAddColumnLeft =
-    ({ columnIndex }) =>
+    ({ columnIndex }: { columnIndex: number }) =>
     () => {
       const nextValue = addColumnToIndex({
         value: this.getValue(),
@@ -234,7 +252,7 @@ class TableInput extends Component {
     };
 
   makeOnAddColumnRight =
-    ({ columnIndex }) =>
+    ({ columnIndex }: { columnIndex: number }) =>
     () => {
       const nextValue = addColumnToIndex({
         value: this.getValue(),
@@ -246,7 +264,7 @@ class TableInput extends Component {
     };
 
   makeOnAddRowBelow =
-    ({ rowIndex }) =>
+    ({ rowIndex }: { rowIndex: number }) =>
     () => {
       const nextValue = addRowToIndex({
         value: this.getValue(),
@@ -258,23 +276,22 @@ class TableInput extends Component {
     };
 
   makeOnAddRowAbove =
-    ({ rowIndex }) =>
+    ({ rowIndex }: { rowIndex: number }) =>
     () => {
       const nextValue = addRowToIndex({
         value: this.getValue(),
         rowIndex: rowIndex - 1,
+        language: this.props.language,
       });
 
       this.props.onChange(nextValue);
     };
 
   makeOnToggleRowHeaderStatus =
-    ({ rowIndex }) =>
+    ({ rowIndex }: { rowIndex: number }) =>
     () => {
       const value = this.getValue();
-      const currentStatus = Boolean(
-        _.get(value, ['rows', rowIndex, 'isHeader'])
-      );
+      const currentStatus = Boolean(value?.rows?.[rowIndex]?.isHeader);
 
       this.props.onChange(
         setRowHeaderStatus({
@@ -286,14 +303,17 @@ class TableInput extends Component {
     };
 
   makeOnRemoveRow =
-    ({ rowIndex }) =>
+    ({ rowIndex }: { rowIndex: number }) =>
     () => {
       const nextValue = removeRow({ value: this.getValue(), rowIndex });
 
       this.props.onChange(nextValue);
     };
 
-  makeOnColumnTextFieldChange =
+  makeOnColumnTextFieldChange: (props: {
+    rowIndex: number;
+    columnIndex: number;
+  }) => React.ChangeEventHandler<HTMLTextAreaElement> =
     ({ rowIndex, columnIndex }) =>
     e => {
       const { onChange, language } = this.props;
@@ -319,9 +339,9 @@ class TableInput extends Component {
     return _.get(column, path) || '';
   };
 
-  handlePasteEvent = event => {
-    const paste = (event.clipboardData || window.clipboardData).getData('Text');
-    const rows = paste.replace(/[\r\n]+/gm, '\r').split(/\r/);
+  handlePasteEvent: ClipboardEventHandler<HTMLTextAreaElement> = event => {
+    const paste = event.clipboardData?.getData('Text');
+    const rows = paste?.replace(/[\r\n]+/gm, '\r').split(/\r/) ?? [];
     const table = rows.map(cell => cell.split(/\t/));
     const { language } = this.props;
 

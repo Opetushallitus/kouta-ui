@@ -103,7 +103,7 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("virkailija-raamit.raamitJs", this.require("virkailija-raamit.raamitJs"));
 
-        this.frontProperties.setProperty("kayttooikeus-service.me", this.require("kayttooikeus-service.me"));
+        this.frontProperties.setProperty("kayttooikeus-service.omattiedot", this.require("kayttooikeus-service.omattiedot"));
         this.frontProperties.setProperty("kayttooikeus-service.kayttajan-organisaatiot", this.require("kayttooikeus-service.kayttajan-organisaatiot"));
 
         this.frontProperties.setProperty("cas.login", this.require("cas.login"));

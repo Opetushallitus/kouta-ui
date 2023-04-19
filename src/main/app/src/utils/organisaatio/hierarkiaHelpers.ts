@@ -1,14 +1,23 @@
-import _fp from 'lodash/fp';
+export const flattenHierarkia = (orgs: Array<Organisaatio>) =>
+  orgs.flatMap((org: Organisaatio) => [
+    org,
+    ...flattenHierarkia(org?.children ?? []),
+  ]);
 
-export const flatFilterHierarkia = (hierarkia, filterFn) => {
-  return hierarkia.flatMap(org => [
+export const flatFilterHierarkia = (
+  hierarkia: Array<Organisaatio>,
+  filterFn: (org: Organisaatio) => boolean
+) => flattenHierarkia(hierarkia).filter(filterFn);
+
+export const filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch = (
+  hierarkia,
+  filterFn
+) =>
+  hierarkia.flatMap(org => [
     ...(filterFn(org)
       ? [org]
-      : flatFilterHierarkia(org.children || [], filterFn)),
+      : filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch(
+          org.children || [],
+          filterFn
+        )),
   ]);
-};
-
-export const flattenHierarkia = _fp.flatMap(org => [
-  org,
-  ...flattenHierarkia(org?.children ?? []),
-]);

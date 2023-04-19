@@ -11,7 +11,10 @@ import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import getUserRoles from '#/src/utils/getUserRoles';
 import isOid from '#/src/utils/isOid';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
-import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import {
+  filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch,
+  flatFilterHierarkia,
+} from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 import { createCanReadSomethingRoleBuilder } from '../utils';
 
@@ -147,7 +150,7 @@ export const useReadableOrganisaatioHierarkia = ({
 
   const hierarkia = useMemo(() => {
     return _.isArray(data)
-      ? flatFilterHierarkia(
+      ? filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch(
           data,
           org => organisaatioHasCorrectType(org) && hasRequiredRoles(org)
         )

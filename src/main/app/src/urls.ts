@@ -80,7 +80,6 @@ export const development = ({ isCypress }) => ({
   'eperusteet-service.lukiodiplomit': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/6828810/lops2019/oppiaineet/6835372`,
   'eperusteet-service.lukiodiplomi-tiedot': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/6828810/lops2019/oppiaineet/6835372/moduulit/$1`,
   'lokalisaatio-service.localisation': `${virkailijaDevUrl}/lokalisointi/cxf/rest/v1/localisation?category=$1`,
-  'kayttooikeus-service.me': `${virkailijaDevUrl}/kayttooikeus-service/cas/me`,
   'kayttooikeus-service.omattiedot': `${virkailijaDevUrl}/kayttooikeus-service/henkilo/current/omattiedot`,
   'kayttooikeus-service.kayttajan-organisaatiot': `${virkailijaDevUrl}/kayttooikeus-service/organisaatiohenkilo/organisaatioOid`,
   'cas.login': `${virkailijaDevUrl}/cas/login`,

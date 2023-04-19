@@ -1,7 +1,7 @@
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 export const isApurahaVisible = (
   koulutustyyppi: KOULUTUSTYYPPI,
@@ -10,11 +10,12 @@ export const isApurahaVisible = (
 ) => {
   const isLukuvuosimaksu =
     maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU;
-  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
+  const isTutkintoonJohtavaKorkeakoulu =
+    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
   const isEnglishChosen = opetuskielet.some(kieli => {
     const { koodisto, koodiArvo } = parseKoodiUri(kieli);
     return koodisto === 'oppilaitoksenopetuskieli' && koodiArvo === '4';
   });
 
-  return isKorkeakoulu && isLukuvuosimaksu && isEnglishChosen;
+  return isTutkintoonJohtavaKorkeakoulu && isLukuvuosimaksu && isEnglishChosen;
 };

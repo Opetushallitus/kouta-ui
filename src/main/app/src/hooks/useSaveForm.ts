@@ -60,7 +60,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   );
 
   return useCallback(async () => {
-    const muokkaaja = user?.oid;
+    const muokkaaja = user?.oidHenkilo;
     const currentValues = form?.values ?? {};
     const enhancedValues = { muokkaaja, ...currentValues };
 

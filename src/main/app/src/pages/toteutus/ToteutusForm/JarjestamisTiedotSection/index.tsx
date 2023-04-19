@@ -18,7 +18,7 @@ import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
-import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { ApurahaFields } from './ApurahaFields';
 import { DiplomiFields } from './DiplomiFields';
@@ -139,7 +139,8 @@ export const JarjestamisTiedotSection = ({
     koodisto: 'koulutuksenlisatiedot',
   });
 
-  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
+  const isTutkintoonJohtavaKorkeakoulu =
+    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
     `${name}.ajankohta.ajankohtaKaytossa`
@@ -231,7 +232,7 @@ export const JarjestamisTiedotSection = ({
         <Box display="flex" {...getTestIdProps('maksullisuus')}>
           <Box flexGrow={0} flexBasis="30%">
             <MaksullisuusFields
-              isKorkeakoulu={isKorkeakoulu}
+              isTutkintoonJohtavaKorkeakoulu={isTutkintoonJohtavaKorkeakoulu}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />

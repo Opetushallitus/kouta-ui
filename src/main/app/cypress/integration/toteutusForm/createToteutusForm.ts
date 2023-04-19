@@ -623,7 +623,9 @@ export const createToteutusForm = () => {
       fillKieliversiotSection();
       fillTiedotSection('amm-ope-erityisope-ja-opo');
       fillKuvausSection();
-      fillJarjestamistiedotWithApuraha();
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
       fillNayttamistiedotSection();
       fillJarjestajatSection();
       fillYhteystiedotSection();
@@ -643,8 +645,9 @@ export const createToteutusForm = () => {
       fillKieliversiotSection();
       fillTiedotSection('kk-opintojakso');
       fillKuvausSection();
-
-      fillJarjestamistiedotWithApuraha();
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillHakeutumisTaiIlmoittautumistapaSection();
@@ -666,7 +669,9 @@ export const createToteutusForm = () => {
       fillKkOpintokokonaisuusTiedotSection();
       fillKuvausSection();
       fillLiitetytOpintojaksotSection();
-      fillJarjestamistiedotWithApuraha();
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillHakeutumisTaiIlmoittautumistapaSection();

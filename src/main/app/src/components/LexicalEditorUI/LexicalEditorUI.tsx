@@ -13,12 +13,17 @@ import { HeadingNode } from '@lexical/rich-text';
 
 import { Container, EditorScroller, Editor } from './Components';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
-import HtmlSerializationPlugin from './plugins/HtmlSerializationPlugin';
+import {
+  HtmlSerializationPlugin,
+  LexicalEditorHtml,
+} from './plugins/HtmlSerializationPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import EditorTheme from './themes/EditorTheme';
 
+export type { LexicalEditorHtml } from './plugins/HtmlSerializationPlugin';
+
 interface LexicalEditorUIProps {
-  value?: string;
+  value?: LexicalEditorHtml;
   onChange?: any;
   inputProps?: any;
   onFocus?: any;
@@ -67,7 +72,7 @@ export const LexicalEditorUI = ({
         }}
         initialConfig={config}
       >
-        <HtmlSerializationPlugin initialHtml={value} onHtmlChanged={onChange} />
+        <HtmlSerializationPlugin initial={value} onContentChanged={onChange} />
         <ToolbarPlugin />
         <RichTextPlugin
           contentEditable={

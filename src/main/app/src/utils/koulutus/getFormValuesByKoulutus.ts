@@ -1,6 +1,6 @@
 import _fp from 'lodash/fp';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
 import { isNumeric, toSelectValue } from '#/src/utils';

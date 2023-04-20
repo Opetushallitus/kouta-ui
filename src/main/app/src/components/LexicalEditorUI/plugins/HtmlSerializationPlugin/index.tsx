@@ -1,26 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { $generateHtmlFromNodes, $generateNodesFromDOM } from '@lexical/html';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { $getRoot, $isElementNode, $isDecoratorNode } from 'lexical';
 
+export type LexicalEditorHtml = {
+  htmlStr: string;
+};
+
 interface Props {
-  initialHtml?: string;
-  onHtmlChanged: (html: string) => void;
+  initial?: LexicalEditorHtml;
+  onContentChanged: (html: LexicalEditorHtml) => void;
 }
 
-const HtmlSerializationPlugin = ({ initialHtml, onHtmlChanged }: Props) => {
+export const HtmlSerializationPlugin = ({
+  initial,
+  onContentChanged,
+}: Props) => {
   const [editor] = useLexicalComposerContext();
-  const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
-    if (!initialHtml || !isFirstRender) return;
-    setIsFirstRender(false);
+    if (!initial) return;
 
     editor.update(() => {
       const parser = new DOMParser();
-      const dom = parser.parseFromString(initialHtml, 'text/html');
+      const dom = parser.parseFromString(initial.htmlStr, 'text/html');
       const nodes = $generateNodesFromDOM(editor, dom);
 
       // Using $insertNodes seems to directly fail with any whitespace in DOM...
@@ -49,7 +54,11 @@ const HtmlSerializationPlugin = ({ initialHtml, onHtmlChanged }: Props) => {
     <OnChangePlugin
       onChange={editorState => {
         editorState.read(() => {
-          onHtmlChanged(tidyHtmlOutput($generateHtmlFromNodes(editor)));
+          const html: LexicalEditorHtml = {
+            htmlStr: tidyHtmlOutput($generateHtmlFromNodes(editor)),
+          };
+
+          onContentChanged(html);
         });
       }}
     />

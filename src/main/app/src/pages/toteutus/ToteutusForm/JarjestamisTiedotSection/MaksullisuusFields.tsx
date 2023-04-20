@@ -39,7 +39,7 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
 
 export const MaksullisuusFields = ({
   name,
-  isTutkintoonJohtavaKorkeakoulu,
+  isLukuvuosimaksuVisible,
   label,
 }) => {
   const { t } = useTranslation();
@@ -48,7 +48,7 @@ export const MaksullisuusFields = ({
     return [
       { value: MaksullisuusTyyppi.MAKSULLINEN, label: t('yleiset.kylla') },
       { value: MaksullisuusTyyppi.MAKSUTON, label: t('yleiset.ei') },
-      ...(isTutkintoonJohtavaKorkeakoulu
+      ...(isLukuvuosimaksuVisible
         ? [
             {
               value: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
@@ -57,7 +57,7 @@ export const MaksullisuusFields = ({
           ]
         : []),
     ];
-  }, [t, isTutkintoonJohtavaKorkeakoulu]);
+  }, [t, isLukuvuosimaksuVisible]);
 
   const tyyppiName = `${name}.maksullisuustyyppi`;
 

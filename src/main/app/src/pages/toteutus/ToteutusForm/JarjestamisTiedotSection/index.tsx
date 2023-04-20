@@ -18,6 +18,7 @@ import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
+import { isEnglishChosen } from '#/src/utils/isEnglishChosen';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { ApurahaFields } from './ApurahaFields';
@@ -128,6 +129,16 @@ const SuunniteltuKestoFields = ({ name }) => {
   );
 };
 
+const isLukuvuosimaksuVisible = (
+  koulutustyyppi: KOULUTUSTYYPPI,
+  opetuskielet?: Array<string>
+) => {
+  return (
+    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
+    isEnglishChosen(opetuskielet)
+  );
+};
+
 export const JarjestamisTiedotSection = ({
   language,
   koulutustyyppi,
@@ -139,8 +150,7 @@ export const JarjestamisTiedotSection = ({
     koodisto: 'koulutuksenlisatiedot',
   });
 
-  const isTutkintoonJohtavaKorkeakoulu =
-    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
+  const opetuskielet = useFieldValue<Array>(`${name}.opetuskieli`);
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
     `${name}.ajankohta.ajankohtaKaytossa`
@@ -232,7 +242,10 @@ export const JarjestamisTiedotSection = ({
         <Box display="flex" {...getTestIdProps('maksullisuus')}>
           <Box flexGrow={0} flexBasis="30%">
             <MaksullisuusFields
-              isTutkintoonJohtavaKorkeakoulu={isTutkintoonJohtavaKorkeakoulu}
+              isLukuvuosimaksuVisible={isLukuvuosimaksuVisible(
+                koulutustyyppi,
+                opetuskielet
+              )}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />

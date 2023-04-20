@@ -123,13 +123,7 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
     `${name}.maksullisuustyyppi`
   );
 
-  const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
-
-  const isVisible = isApurahaVisible(
-    koulutustyyppi,
-    opetuskieliArr,
-    maksullisuustyyppi
-  );
+  const isVisible = isApurahaVisible(maksullisuustyyppi);
 
   if (!isVisible) {
     return null;

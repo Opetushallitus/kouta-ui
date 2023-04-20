@@ -110,11 +110,11 @@ const fillCommonJarjestamistiedot = ({
 
 const fillJarjestamistiedotWithApuraha = () => {
   withinSection('jarjestamistiedot', () => {
+    cy.findByTestId('lukuvuosimaksu').should('not.exist');
+    fillOpetuskieli('englanti'); // "englanti" is needed for lukuvuosimaksu selection to show up
     fillCommonJarjestamistiedot({
       maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
     });
-    cy.findByTestId('apuraha').should('not.exist');
-    fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
     cy.findByTestId('apuraha').should('exist');
     fillApuraha();
   });

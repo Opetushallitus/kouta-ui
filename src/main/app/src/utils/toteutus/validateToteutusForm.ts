@@ -58,12 +58,7 @@ const validateApuraha = eb => {
   const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
 
   return validateIf(
-    onkoApuraha &&
-      isApurahaVisible(
-        values?.koulutustyyppi,
-        values?.jarjestamistiedot.opetuskieli,
-        maksullisuustyyppi
-      ),
+    onkoApuraha && isApurahaVisible(maksullisuustyyppi),
     _fp.flow(
       validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
         message: ['validointivirheet.eiNegatiivinenKokonaisluku'],

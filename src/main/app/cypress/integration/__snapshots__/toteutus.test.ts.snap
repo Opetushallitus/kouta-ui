@@ -302,12 +302,12 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -363,8 +363,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#2",
-        "oppilaitoksenopetuskieli_4#2"
+        "oppilaitoksenopetuskieli_4#2",
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -380,8 +380,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],

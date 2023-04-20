@@ -4,6 +4,7 @@ import {
   pickTranslations,
   pickAndSerializeTranslations,
 } from '../pickTranslations';
+import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 
 const getSoraKuvausByFormValues = values => {
   const { tila, muokkaaja, koulutusala, koulutukset } = values;

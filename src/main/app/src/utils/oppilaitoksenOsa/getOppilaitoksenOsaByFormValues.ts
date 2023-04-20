@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { isNumeric } from '#/src/utils';
 
 import {

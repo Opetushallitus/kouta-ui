@@ -1,5 +1,6 @@
 import _fp from 'lodash/fp';
 
+import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import {
   KOULUTUSTYYPPI,
   MaaraTyyppi,

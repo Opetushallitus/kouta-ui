@@ -1,4 +1,4 @@
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { getOppilaitoksenOsaByFormValues } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 
 test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given form values', () => {

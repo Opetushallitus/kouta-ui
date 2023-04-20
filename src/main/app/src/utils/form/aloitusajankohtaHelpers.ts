@@ -1,6 +1,9 @@
 import _fp from 'lodash/fp';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import {
+  parseEditorState,
+  serializeEditorState,
+} from '#/src/components/LexicalEditorUI/utils';
 import { AjankohtaFields } from '#/src/types/formTypes';
 import { maybeParseNumber, toSelectValue } from '#/src/utils';
 

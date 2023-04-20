@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
+import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 
 import { getFormValuesByHaku } from './getFormValuesByHaku';

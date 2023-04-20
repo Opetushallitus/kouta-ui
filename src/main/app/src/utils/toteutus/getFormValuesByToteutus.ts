@@ -1,6 +1,6 @@
 import _fp from 'lodash/fp';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { MaaraTyyppi, ApurahaYksikko } from '#/src/constants';
 import {
   ToteutusFormValues,

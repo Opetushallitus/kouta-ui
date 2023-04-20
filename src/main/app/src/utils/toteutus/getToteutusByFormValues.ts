@@ -1,5 +1,6 @@
 import _fp from 'lodash/fp';
 
+import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { isPartialDate, maybeParseNumber } from '#/src/utils';

@@ -1,3 +1,4 @@
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import {
   BASE_HAKUKOHDE_FORMDATA,
   hakukohdeFormValuesWithExtraTranslations,

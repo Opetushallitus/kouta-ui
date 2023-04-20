@@ -3,11 +3,11 @@ import _ from 'lodash';
 import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
 import { DateInput } from '#/src/components/DateInput';
 import { DateTimeInput } from '#/src/components/DateTimeInput';
-import { Editor } from '#/src/components/Editor';
 import { ImageInput } from '#/src/components/ImageInput';
 import { KoulutusalaSelect } from '#/src/components/KoulutusalaSelect';
 import { KoulutustyyppiSelect } from '#/src/components/KoulutustyyppiSelect';
 import { LanguageSelect } from '#/src/components/LanguageSelect';
+import { LexicalEditorUI } from '#/src/components/LexicalEditorUI';
 import { FloatInput, IntegerInput } from '#/src/components/NumberInput';
 import { PostinumeroSelect } from '#/src/components/PostinumeroSelect';
 import { Select, AsyncSelect } from '#/src/components/Select';
@@ -105,7 +105,7 @@ export const FormFieldDateTimeInput = createComponent(
 
 export const FormFieldDateInput = createComponent(DateInput, simpleMapProps);
 
-export const FormFieldEditor = createComponent(Editor, simpleMapProps);
+export const FormFieldEditor = createComponent(LexicalEditorUI, simpleMapProps);
 
 export const FormFieldYearSelect = createComponent(
   YearSelect,

@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react';
 
 import Button from '#/src/components/Button';
 
-import Editor from './index';
+import { Editor } from './index';
 import { parseEditorState, serializeEditorState } from './utils';
 
 const convertToHTMLAction = action('convertToHTML');

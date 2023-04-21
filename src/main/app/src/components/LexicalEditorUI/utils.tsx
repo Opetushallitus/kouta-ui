@@ -13,7 +13,6 @@ import {
   EditorState,
   $createParagraphNode,
 } from 'lexical';
-import _ from 'lodash';
 
 function wrapElementWith(element: HTMLElement, tag: string): HTMLElement {
   const el = document.createElement(tag);
@@ -26,26 +25,24 @@ class CustomTextNode extends TextNode {
     return new CustomTextNode(node.__text);
   }
 
-  exportDOM(editor: LexicalEditor): DOMExportOutput {
+  exportDOM(_editor: LexicalEditor): DOMExportOutput {
     let element = document.createElement('span');
     element.textContent = this.__text;
 
     // This is the only way to properly add support for most clients,
     // even if it's semantically incorrect to have to resort to using
     // <b>, <u>, <s>, <i> elements.
-    if (element !== null) {
-      if (this.hasFormat('bold')) {
-        element = wrapElementWith(element, 'strong');
-      }
-      if (this.hasFormat('italic')) {
-        element = wrapElementWith(element, 'em');
-      }
-      if (this.hasFormat('strikethrough')) {
-        element = wrapElementWith(element, 's');
-      }
-      if (this.hasFormat('underline')) {
-        element = wrapElementWith(element, 'u');
-      }
+    if (this.hasFormat('bold')) {
+      element = wrapElementWith(element, 'strong');
+    }
+    if (this.hasFormat('italic')) {
+      element = wrapElementWith(element, 'em');
+    }
+    if (this.hasFormat('strikethrough')) {
+      element = wrapElementWith(element, 's');
+    }
+    if (this.hasFormat('underline')) {
+      element = wrapElementWith(element, 'u');
     }
 
     return {
@@ -54,27 +51,25 @@ class CustomTextNode extends TextNode {
   }
 }
 
-const NODES = [
-  HeadingNode,
-  ListNode,
-  ListItemNode,
-  AutoLinkNode,
-  LinkNode,
-  CustomTextNode,
-  {
-    replace: TextNode,
-    with: (node: TextNode) => {
-      return new CustomTextNode(node.__text);
-    },
-  },
-];
-
 const editorConfig: CreateEditorArgs = {
   namespace: 'ImportExportEditor',
   onError: error => {
     console.error(error);
   },
-  nodes: NODES,
+  nodes: [
+    HeadingNode,
+    ListNode,
+    ListItemNode,
+    AutoLinkNode,
+    LinkNode,
+    CustomTextNode,
+    {
+      replace: TextNode,
+      with: (node: TextNode) => {
+        return new CustomTextNode(node.__text);
+      },
+    },
+  ],
 };
 
 export const parseEditorState = (value: string): EditorState => {
@@ -114,12 +109,16 @@ export const serializeEditorState = (value: EditorState): string => {
   return unwrapSpans(html);
 };
 
-export const isEditorState = (value: unknown): value is EditorState => {
-  return _.isFunction(value?.isEmpty);
-  //return value && typeof value === 'object' && value.hasOwnProperty('htmlStr');
+export const createEmptyEditorState = () => {
+  const editor = createEditor(editorConfig);
+  return editor.getEditorState();
 };
 
-export const isEmptyEditorState = (state: EditorState) => {
-  if (!isEditorState) return false;
-  return state.isEmpty();
+export const isEditorState = (value: unknown): value is EditorState => {
+  const es = createEmptyEditorState();
+  // Ei voida käyttää suoraan EditorState:a instanceof-tarkistuksessa, koska lexicalista exportataan vain tyyppi
+  return value instanceof es.constructor;
 };
+
+export const isEmptyEditorState = (state: unknown) =>
+  isEditorState(state) && state.isEmpty();

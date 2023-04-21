@@ -33,7 +33,6 @@ test('serializeEditorState headings with paragraphs', () => {
   const es = parseEditorState(
     '<h1>heading1</h1><p>paragraph1</p><h2>heading2</h2><p>paragraph2</p>'
   );
-  console.log(JSON.stringify(es, null, 2));
   expect(serializeEditorState(es)).toEqual(
     '<h1>heading1</h1><p>paragraph1</p><h2>heading2</h2><p>paragraph2</p>'
   );
@@ -41,6 +40,5 @@ test('serializeEditorState headings with paragraphs', () => {
 
 test('serializeEditorState span', () => {
   const es = parseEditorState('<strong>qwe</strong><span>asd</span>');
-  console.log(JSON.stringify(es, null, 2));
   expect(serializeEditorState(es)).toEqual('<p><strong>qwe</strong>asd</p>');
 });

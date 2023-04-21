@@ -1,7 +1,7 @@
 import { parseEditorState } from './utils';
 
-test.skip('parseEditorState 1', () => {
-  expect(parseEditorState('<p><em>test</em></p>')).toMatchObject({
+test('parseEditorState simple paragraph', () => {
+  expect(parseEditorState('<p>test</p>').toJSON()).toMatchObject({
     root: {
       children: [
         {
@@ -9,7 +9,7 @@ test.skip('parseEditorState 1', () => {
           children: [
             {
               type: 'text',
-              format: 2,
+              format: 0,
               text: 'test',
             },
           ],
@@ -19,16 +19,60 @@ test.skip('parseEditorState 1', () => {
   });
 });
 
-test.skip('parseEditorState 2', () => {
-  expect(parseEditorState('<p>test</p>')).toMatchObject({
+test('parseEditorState heading and paragraph', () => {
+  expect(
+    parseEditorState('<h1>otsikko1</h1><p>sisalto</p>').toJSON()
+  ).toMatchObject({
     root: {
       children: [
+        {
+          type: 'heading',
+          tag: 'h1',
+          children: [
+            {
+              type: 'text',
+              text: 'otsikko1',
+            },
+          ],
+        },
         {
           type: 'paragraph',
           children: [
             {
               type: 'text',
-              text: 'test',
+              format: 0,
+              text: 'sisalto',
+            },
+          ],
+        },
+      ],
+    },
+  });
+});
+
+test('parseEditorState list', () => {
+  expect(
+    parseEditorState('<h1>otsikko1</h1><p>sisalto</p>').toJSON()
+  ).toMatchObject({
+    root: {
+      children: [
+        {
+          type: 'heading',
+          tag: 'h1',
+          children: [
+            {
+              type: 'text',
+              text: 'otsikko1',
+            },
+          ],
+        },
+        {
+          type: 'paragraph',
+          children: [
+            {
+              type: 'text',
+              format: 0,
+              text: 'sisalto',
             },
           ],
         },

@@ -12,6 +12,7 @@ import {
   $insertNodes,
   EditorState,
   $createParagraphNode,
+  SerializedTextNode,
 } from 'lexical';
 
 function wrapElementWith(element: HTMLElement, tag: string): HTMLElement {
@@ -21,8 +22,21 @@ function wrapElementWith(element: HTMLElement, tag: string): HTMLElement {
 }
 
 class CustomTextNode extends TextNode {
+  static getType() {
+    return TextNode.getType();
+  }
+
   static clone(node: CustomTextNode): CustomTextNode {
     return new CustomTextNode(node.__text);
+  }
+
+  static importJSON(serializedNode: SerializedTextNode): CustomTextNode {
+    const serialized = TextNode.importJSON(serializedNode);
+    return new CustomTextNode(serialized.__text);
+  }
+
+  exportJSON(): SerializedTextNode {
+    return super.exportJSON();
   }
 
   exportDOM(_editor: LexicalEditor): DOMExportOutput {

@@ -10,20 +10,16 @@ import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { HeadingNode } from '@lexical/rich-text';
+import { EditorState } from 'lexical';
 
 import { Container, EditorScroller, Editor } from './Components';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
-import {
-  HtmlSerializationPlugin,
-  LexicalEditorHtml,
-} from './plugins/HtmlSerializationPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import EditorTheme from './themes/EditorTheme';
-
-export type { LexicalEditorHtml } from './plugins/HtmlSerializationPlugin';
+import { isEditorState } from './utils';
 
 interface LexicalEditorUIProps {
-  value?: LexicalEditorHtml;
+  value?: EditorState;
   onChange?: any;
   inputProps?: any;
   onFocus?: any;
@@ -46,6 +42,7 @@ export const LexicalEditorUI = ({
       console.error(error);
     },
     nodes: [HeadingNode, ListNode, ListItemNode, AutoLinkNode, LinkNode],
+    editorState: isEditorState(value) ? value : null,
   };
 
   const [hasFocus, setHasFocus] = useState(false);
@@ -72,7 +69,6 @@ export const LexicalEditorUI = ({
         }}
         initialConfig={config}
       >
-        <HtmlSerializationPlugin initial={value} onContentChanged={onChange} />
         <ToolbarPlugin />
         <RichTextPlugin
           contentEditable={

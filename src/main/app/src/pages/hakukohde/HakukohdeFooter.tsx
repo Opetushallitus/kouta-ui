@@ -63,7 +63,7 @@ export const HakukohdeFooter = ({
         initialValues
       );
 
-      const { oid } = await dataSendFn({
+      const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
         hakukohde:
@@ -91,6 +91,7 @@ export const HakukohdeFooter = ({
           valuesForSaving.tila
         );
       }
+      return { warnings: warnings };
     },
     [
       organisaatioOid,

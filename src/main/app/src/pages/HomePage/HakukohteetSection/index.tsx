@@ -92,15 +92,16 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   return (
     <StateChangeConfirmationWrapper
       mutateAsync={tilaMutationResult.mutateAsync}
+      entityTranslationKeyPath={'etusivu.hakukohde'}
     >
       <StateChangeConfirmationModal
-        headerText={t('etusivu.hakukohde.vahvistaTilanmuutosOtsikko')}
         createColumns={createColumnsForConfirmationModal}
+        entityTranslationKeyPath={'etusivu.hakukohde'}
       />
       <StateChangeResultModal
         entityType={HAKUKOHDE}
-        headerText={t('etusivu.hakukohde.tilamuutosTuloksetOtsikko')}
         getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
+        entityTranslationKeyPath={'etusivu.hakukohde'}
       />
       <NavigationAnchor id="hakukohteet" />
       <ListCollapse

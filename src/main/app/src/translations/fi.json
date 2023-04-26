@@ -428,7 +428,17 @@
       "valitut": "1 toteutus valittu",
       "valitut_other": "{{count}} toteutusta valittu",
       "vahvistaKopiointiOtsikko": "Valitse toteutukset",
-      "kopioidaan": "Kopioidaan toteutuksia..."
+      "kopioidaan": "Kopioidaan toteutuksia...",
+      "vahvistaTilanmuutosOtsikko": "Valitse toteutukset",
+      "vahvistaTilanmuutos": "Vaihda toteutukset tilaan {{tila}}",
+      "tilamuutosTuloksetOtsikko": "Toteutusten tilamuutoksen tulokset",
+      "tilamuutos": "Tila",
+      "tilamuuttunut": "Muuttunut",
+      "tilanmuutosEpaonnistui": "Toteutusten tilanvaihto epäonnistui!",
+      "tilanmuutosOhje": "Toteutusten tilojen muutokset eivät päivity heti etusivun listalle. Odota hetki ja lataa sen jälkeen sivu uudestaan.",
+      "tilaVirhe": "Virhe",
+      "tilaVirheSyy": "Virheen syy",
+      "tilaaVaihdetaan": "Vaihdetaan toteutusten tilaa..."
     },
     "hakukohde": {
       "valitut_zero": "Ei hakukohteita valittu",

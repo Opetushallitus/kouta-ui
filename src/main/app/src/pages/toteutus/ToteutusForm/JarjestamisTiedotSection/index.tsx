@@ -14,11 +14,13 @@ import {
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import { KOULUTUSTYYPPI, TOHTORITUTKINTOTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useKoulutuksetByTutkintotyyppi } from '#/src/hooks/useKoulutuksetByTutkintotyyppi';
 import { getTestIdProps } from '#/src/utils';
 import { isEnglishChosen } from '#/src/utils/isEnglishChosen';
+import { isTohtorikoulutus } from '#/src/utils/koulutus/isTohtorikoulutus';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { ApurahaFields } from './ApurahaFields';
@@ -131,10 +133,13 @@ const SuunniteltuKestoFields = ({ name }) => {
 
 const isLukuvuosimaksuVisible = (
   koulutustyyppi: KOULUTUSTYYPPI,
-  opetuskielet?: Array<string>
+  opetuskielet?: Array<string>,
+  tohtorikoulutukset?: Array<string>,
+  koulutusKoodiurit?: Array<string>
 ) => {
   return (
     isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
+    !isTohtorikoulutus(koulutusKoodiurit, tohtorikoulutukset) &&
     isEnglishChosen(opetuskielet)
   );
 };
@@ -143,6 +148,7 @@ export const JarjestamisTiedotSection = ({
   language,
   koulutustyyppi,
   name,
+  koulutusKoodiurit,
 }) => {
   const { t } = useTranslation();
 
@@ -154,6 +160,10 @@ export const JarjestamisTiedotSection = ({
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
     `${name}.ajankohta.ajankohtaKaytossa`
+  );
+
+  const { data: tohtorikoulutukset } = useKoulutuksetByTutkintotyyppi(
+    TOHTORITUTKINTOTYYPPI
   );
 
   return (
@@ -244,7 +254,9 @@ export const JarjestamisTiedotSection = ({
             <MaksullisuusFields
               isLukuvuosimaksuVisible={isLukuvuosimaksuVisible(
                 koulutustyyppi,
-                opetuskielet
+                opetuskielet,
+                tohtorikoulutukset,
+                koulutusKoodiurit
               )}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}

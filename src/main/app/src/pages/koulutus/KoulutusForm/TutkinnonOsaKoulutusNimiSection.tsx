@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
@@ -25,11 +25,16 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<
 > = ({ language, languages, name, disabled }) => {
   const { t } = useTranslation();
 
+  const [selectedTutkinnonosa, setSelectedTutkinnonosa] = useState(null);
+
   const tutkinnonosat = useSelectedTutkinnonOsat();
 
   const oneSelectedTutkinnonOsa = oneAndOnlyOne(tutkinnonosat);
 
-  const { data: ePerusteTutkinnonOsat } = useEPerusteTutkinnonOsat({
+  const {
+    data: ePerusteTutkinnonOsat,
+    isLoading: ePerusteTutkinnonOsatIsLoading,
+  } = useEPerusteTutkinnonOsat({
     ePerusteId: oneSelectedTutkinnonOsa?.ePerusteId,
   });
 
@@ -40,18 +45,35 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<
   const { change } = useBoundFormActions();
   const isDirty = useIsDirty();
 
+  const changeNimi =
+    isDirty &&
+    oneSelectedTutkinnonOsa?.tutkinnonosaViite &&
+    oneSelectedTutkinnonOsa?.tutkinnonosaViite !== selectedTutkinnonosa;
+
   useEffect(() => {
-    if (isDirty && selectedTutkinnonosaNimi) {
-      _fp.each(lang => {
-        change(
-          `${name}.nimi.${lang}`,
-          selectedTutkinnonosaNimi
-            ? getLanguageValue(selectedTutkinnonosaNimi, lang)
-            : null
-        );
-      }, languages);
+    if (!ePerusteTutkinnonOsatIsLoading) {
+      if (changeNimi) {
+        _fp.each(lang => {
+          change(
+            `${name}.nimi.${lang}`,
+            selectedTutkinnonosaNimi
+              ? getLanguageValue(selectedTutkinnonosaNimi, lang)
+              : null
+          );
+        }, languages);
+      }
+      setSelectedTutkinnonosa(oneSelectedTutkinnonOsa?.tutkinnonosaViite);
     }
-  }, [change, name, isDirty, language, selectedTutkinnonosaNimi, languages]);
+  }, [
+    change,
+    name,
+    language,
+    selectedTutkinnonosaNimi,
+    languages,
+    changeNimi,
+    oneSelectedTutkinnonOsa,
+    ePerusteTutkinnonOsatIsLoading,
+  ]);
 
   return (
     <Box mb={2} {...getTestIdProps('koulutuksenNimi')}>
@@ -60,6 +82,7 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<
         name={`${name}.nimi.${language}`}
         component={FormFieldInput}
         label={t('koulutuslomake.lisaaKoulutuksenNimi')}
+        helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
     </Box>

@@ -134,7 +134,7 @@ const SuunniteltuKestoFields = ({ name }) => {
 const isLukuvuosimaksuVisible = (
   koulutustyyppi: KOULUTUSTYYPPI,
   opetuskielet?: Array<string>,
-  tohtorikoulutukset?: Array<string>,
+  tohtorikoulutukset?: Array<Koodi>,
   koulutusKoodiurit?: Array<string>
 ) => {
   return (
@@ -156,7 +156,7 @@ export const JarjestamisTiedotSection = ({
     koodisto: 'koulutuksenlisatiedot',
   });
 
-  const opetuskielet = useFieldValue<Array>(`${name}.opetuskieli`);
+  const opetuskielet = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
     `${name}.ajankohta.ajankohtaKaytossa`

@@ -110,11 +110,11 @@ const fillCommonJarjestamistiedot = ({
 
 const fillJarjestamistiedotWithApuraha = () => {
   withinSection('jarjestamistiedot', () => {
+    cy.findByTestId('lukuvuosimaksu').should('not.exist');
+    fillOpetuskieli('englanti'); // "englanti" is needed for lukuvuosimaksu selection to show up
     fillCommonJarjestamistiedot({
       maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
     });
-    cy.findByTestId('apuraha').should('not.exist');
-    fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
     cy.findByTestId('apuraha').should('exist');
     fillApuraha();
   });
@@ -623,7 +623,9 @@ export const createToteutusForm = () => {
       fillKieliversiotSection();
       fillTiedotSection('amm-ope-erityisope-ja-opo');
       fillKuvausSection();
-      fillJarjestamistiedotWithApuraha();
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
       fillNayttamistiedotSection();
       fillJarjestajatSection();
       fillYhteystiedotSection();
@@ -643,8 +645,9 @@ export const createToteutusForm = () => {
       fillKieliversiotSection();
       fillTiedotSection('kk-opintojakso');
       fillKuvausSection();
-
-      fillJarjestamistiedotWithApuraha();
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillHakeutumisTaiIlmoittautumistapaSection();
@@ -666,7 +669,9 @@ export const createToteutusForm = () => {
       fillKkOpintokokonaisuusTiedotSection();
       fillKuvausSection();
       fillLiitetytOpintojaksotSection();
-      fillJarjestamistiedotWithApuraha();
+      withinSection('jarjestamistiedot', () => {
+        fillCommonJarjestamistiedot();
+      });
       fillNayttamistiedotSection({ ammattinimikkeet: false });
       fillJarjestajatSection();
       fillHakeutumisTaiIlmoittautumistapaSection();

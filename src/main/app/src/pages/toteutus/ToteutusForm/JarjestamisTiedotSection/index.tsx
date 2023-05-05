@@ -14,11 +14,14 @@ import {
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import { KOULUTUSTYYPPI, TOHTORITUTKINTOTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useKoulutuksetByTutkintotyyppi } from '#/src/hooks/useKoulutuksetByTutkintotyyppi';
 import { getTestIdProps } from '#/src/utils';
-import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
+import { isEnglishChosen } from '#/src/utils/isEnglishChosen';
+import { isTohtorikoulutus } from '#/src/utils/koulutus/isTohtorikoulutus';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { ApurahaFields } from './ApurahaFields';
 import { DiplomiFields } from './DiplomiFields';
@@ -128,10 +131,24 @@ const SuunniteltuKestoFields = ({ name }) => {
   );
 };
 
+const isLukuvuosimaksuVisible = (
+  koulutustyyppi: KOULUTUSTYYPPI,
+  opetuskielet?: Array<string>,
+  tohtorikoulutukset?: Array<Koodi>,
+  koulutusKoodiurit?: Array<string>
+) => {
+  return (
+    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
+    !isTohtorikoulutus(koulutusKoodiurit, tohtorikoulutukset) &&
+    isEnglishChosen(opetuskielet)
+  );
+};
+
 export const JarjestamisTiedotSection = ({
   language,
   koulutustyyppi,
   name,
+  koulutusKoodiurit,
 }) => {
   const { t } = useTranslation();
 
@@ -139,10 +156,14 @@ export const JarjestamisTiedotSection = ({
     koodisto: 'koulutuksenlisatiedot',
   });
 
-  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
+  const opetuskielet = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
     `${name}.ajankohta.ajankohtaKaytossa`
+  );
+
+  const { data: tohtorikoulutukset } = useKoulutuksetByTutkintotyyppi(
+    TOHTORITUTKINTOTYYPPI
   );
 
   return (
@@ -231,7 +252,12 @@ export const JarjestamisTiedotSection = ({
         <Box display="flex" {...getTestIdProps('maksullisuus')}>
           <Box flexGrow={0} flexBasis="30%">
             <MaksullisuusFields
-              isKorkeakoulu={isKorkeakoulu}
+              isLukuvuosimaksuVisible={isLukuvuosimaksuVisible(
+                koulutustyyppi,
+                opetuskielet,
+                tohtorikoulutukset,
+                koulutusKoodiurit
+              )}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />

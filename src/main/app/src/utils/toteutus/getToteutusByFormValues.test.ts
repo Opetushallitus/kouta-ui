@@ -46,7 +46,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       kieliversiot: ['fi', 'sv'],
       tarjoajat: ['org1', 'org2'],
       jarjestamistiedot: {
-        maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
+        maksullisuustyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
         maksunMaara: 50.5,
         maksullisuusKuvaus: {
           fi: parseEditorState('Fi maksullisuuskuvaus'),

@@ -55,49 +55,55 @@ const validateApuraha = eb => {
   const onkoApuraha = values?.jarjestamistiedot?.onkoApuraha;
   const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
   const apurahaYksikko = values?.jarjestamistiedot?.apurahaYksikko?.value;
+  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
 
-  return validateIf(
-    onkoApuraha &&
-      isApurahaVisible(
-        values?.koulutustyyppi,
-        values?.jarjestamistiedot.opetuskieli
-      ),
-    _fp.flow(
-      validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
-        message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
-      }),
-      validate(
-        'jarjestamistiedot.apurahaGroup',
-        () =>
-          apurahaYksikko === ApurahaYksikko.PROSENTTI
-            ? apurahaMin <= 100
-            : true,
-        {
-          message: 'validointivirheet.yliSataProsenttia',
-        }
-      ),
-      validateIf(
-        apurahaMaaraTyyppi === MaaraTyyppi.VAIHTELUVALI,
-        _fp.flow(
-          validate('jarjestamistiedot.apurahaGroup', () => apurahaMax >= 0, {
-            message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
-          }),
-          validate(
-            'jarjestamistiedot.apurahaGroup',
-            () => apurahaMin <= apurahaMax,
-            {
-              message: 'validointivirheet.apurahaMinMax',
-            }
-          ),
-          validate(
-            'jarjestamistiedot.apurahaGroup',
-            () =>
-              apurahaYksikko === ApurahaYksikko.PROSENTTI
-                ? apurahaMax <= 100
-                : true,
-            {
-              message: 'validointivirheet.yliSataProsenttia',
-            }
+  return _fp.flow(
+    validate(
+      'jarjestamistiedot.onkoApuraha',
+      () => onkoApuraha && isApurahaVisible(maksullisuustyyppi),
+      {
+        message: ['validointivirheet.vaaraMaksullisuustyyppiApurahalle'],
+      }
+    ),
+    validateIf(
+      onkoApuraha && isApurahaVisible(maksullisuustyyppi),
+      _fp.flow(
+        validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
+          message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
+        }),
+        validate(
+          'jarjestamistiedot.apurahaGroup',
+          () =>
+            apurahaYksikko === ApurahaYksikko.PROSENTTI
+              ? apurahaMin <= 100
+              : true,
+          {
+            message: 'validointivirheet.yliSataProsenttia',
+          }
+        ),
+        validateIf(
+          apurahaMaaraTyyppi === MaaraTyyppi.VAIHTELUVALI,
+          _fp.flow(
+            validate('jarjestamistiedot.apurahaGroup', () => apurahaMax >= 0, {
+              message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
+            }),
+            validate(
+              'jarjestamistiedot.apurahaGroup',
+              () => apurahaMin <= apurahaMax,
+              {
+                message: 'validointivirheet.apurahaMinMax',
+              }
+            ),
+            validate(
+              'jarjestamistiedot.apurahaGroup',
+              () =>
+                apurahaYksikko === ApurahaYksikko.PROSENTTI
+                  ? apurahaMax <= 100
+                  : true,
+              {
+                message: 'validointivirheet.yliSataProsenttia',
+              }
+            )
           )
         )
       )

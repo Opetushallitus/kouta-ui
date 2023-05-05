@@ -58,9 +58,11 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const kielivalikoima = values?.jarjestamistiedot?.kielivalikoima;
 
   const ajankohta = values?.jarjestamistiedot?.ajankohta;
-  const onkoApuraha = values?.jarjestamistiedot?.onkoApuraha;
+  const apurahaVisible = isApurahaVisible(maksullisuustyyppi);
+  const onkoApuraha = apurahaVisible
+    ? values?.jarjestamistiedot?.onkoApuraha
+    : false;
   const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
-  const apurahaVisible = isApurahaVisible(koulutustyyppi, opetuskielet);
 
   const apurahaMin = values?.jarjestamistiedot?.apurahaMin;
   const apurahaMax = values?.jarjestamistiedot?.apurahaMax;

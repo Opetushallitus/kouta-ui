@@ -172,4 +172,14 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
       errorKey: `validointivirheet.${errorType}`,
     };
   }
+
+  if (
+    path === 'metadata.opetus.maksullisuustyyppi' &&
+    errorType === 'invalidOpetuskieliWithLukuvuosimaksu'
+  ) {
+    return {
+      field: 'jarjestamistiedot.maksullisuustyyppi',
+      errorKey: `validointivirheet.${errorType}`,
+    };
+  }
 };

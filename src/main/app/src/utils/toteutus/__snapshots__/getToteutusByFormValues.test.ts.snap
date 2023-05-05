@@ -155,7 +155,7 @@ Object {
         "fi": "<p>Fi maksullisuuskuvaus</p>",
         "sv": "<p>Sv maksullisuuskuvaus</p>",
       },
-      "maksullisuustyyppi": "maksullinen",
+      "maksullisuustyyppi": "lukuvuosimaksu",
       "maksunMaara": 50.5,
       "onkoApuraha": true,
       "opetusaikaKoodiUrit": Array [

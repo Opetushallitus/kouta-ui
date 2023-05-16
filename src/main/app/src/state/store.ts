@@ -1,7 +1,8 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as formReducer } from 'redux-form';
 import { persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
 
 import { isDev } from '#/src/utils';
 
@@ -12,7 +13,9 @@ export const store = () => {
     form: formReducer,
   });
 
-  const enhancer = isDev ? composeWithDevTools(compose()) : compose();
+  const enhancer = isDev
+    ? composeWithDevTools(compose(applyMiddleware(thunk)))
+    : compose(applyMiddleware(thunk));
 
   const store = createStore(rootReducer, enhancer);
 

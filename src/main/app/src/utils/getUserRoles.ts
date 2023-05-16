@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 const getUserRoles = userdata => {
-  console.log('getUserRoles user = ', userdata);
   if (!_.isObject(userdata)) {
     return [];
   }

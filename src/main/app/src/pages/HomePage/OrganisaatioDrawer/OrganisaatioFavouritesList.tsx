@@ -21,7 +21,11 @@ export const OrganisaatioFavouritesList = ({
         {t('etusivu.suosikit')}
       </Typography>
       {items.map((org, index) => (
-        <Box marginBottom={index < items.length - 1 ? 1 : 0} key={org?.oid}>
+        <Box
+          marginBottom={index < items.length - 1 ? 1 : 0}
+          key={org?.oid}
+          id="organization-favourites"
+        >
           <OrganisaatioItem
             {...org}
             selected={org?.oid === selected}

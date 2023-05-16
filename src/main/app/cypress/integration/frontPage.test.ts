@@ -72,6 +72,19 @@ describe('frontPage', () => {
     );
   });
 
+  it('adds organization to favourites', () => {
+    cy.get('#organization-favourites').should('not.exist');
+    cy.get('.favourite-icon__organization').first().click();
+    cy.get('#organization-favourites').should('exist');
+  });
+
+  it('removes organization from favourites', () => {
+    cy.get('#organization-favourites').within(() => {
+      cy.get('.favourite-icon__organization').first().click();
+    });
+    cy.get('#organization-favourites').should('not.exist');
+  });
+
   it('should display navigation links', () => {
     cy.findAllByTestId('navigaatio')
       .should('contain', 'yleiset.koulutukset')

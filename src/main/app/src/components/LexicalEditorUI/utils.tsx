@@ -23,7 +23,7 @@ function wrapElementWith(element: HTMLElement, tag: string): HTMLElement {
 
 class CustomTextNode extends TextNode {
   static getType() {
-    return TextNode.getType();
+    return 'CustomTextNode';
   }
 
   static clone(node: CustomTextNode): CustomTextNode {

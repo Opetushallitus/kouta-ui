@@ -8,7 +8,7 @@ test('parseEditorState simple paragraph', () => {
           type: 'paragraph',
           children: [
             {
-              type: 'text',
+              type: 'CustomTextNode',
               format: 0,
               text: 'test',
             },
@@ -30,7 +30,7 @@ test('parseEditorState heading and paragraph', () => {
           tag: 'h1',
           children: [
             {
-              type: 'text',
+              type: 'CustomTextNode',
               text: 'otsikko1',
             },
           ],
@@ -39,7 +39,7 @@ test('parseEditorState heading and paragraph', () => {
           type: 'paragraph',
           children: [
             {
-              type: 'text',
+              type: 'CustomTextNode',
               format: 0,
               text: 'sisalto',
             },
@@ -61,7 +61,7 @@ test('parseEditorState list', () => {
           tag: 'h1',
           children: [
             {
-              type: 'text',
+              type: 'CustomTextNode',
               text: 'otsikko1',
             },
           ],
@@ -70,7 +70,7 @@ test('parseEditorState list', () => {
           type: 'paragraph',
           children: [
             {
-              type: 'text',
+              type: 'CustomTextNode',
               format: 0,
               text: 'sisalto',
             },

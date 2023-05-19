@@ -36,7 +36,9 @@ class CustomTextNode extends TextNode {
   }
 
   exportJSON(): SerializedTextNode {
-    return super.exportJSON();
+    const node = super.exportJSON();
+    node.type = 'CustomTextNode';
+    return node;
   }
 
   exportDOM(_editor: LexicalEditor): DOMExportOutput {

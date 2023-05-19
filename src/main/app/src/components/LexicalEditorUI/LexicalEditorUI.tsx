@@ -42,7 +42,7 @@ export const LexicalEditorUI = ({
       console.error(error);
     },
     nodes: [HeadingNode, ListNode, ListItemNode, AutoLinkNode, LinkNode],
-    editorState: isEditorState(value) ? value : null,
+    editorState: isEditorState(value) && !value.isEmpty() ? value : null,
   };
 
   const [hasFocus, setHasFocus] = useState(false);

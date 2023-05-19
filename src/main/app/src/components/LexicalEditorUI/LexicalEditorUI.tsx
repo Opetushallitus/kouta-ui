@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { AutoLinkNode, LinkNode } from '@lexical/link';
-import { ListItemNode, ListNode } from '@lexical/list';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
@@ -9,14 +7,13 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { HeadingNode } from '@lexical/rich-text';
 import { EditorState } from 'lexical';
 
 import { Container, EditorScroller, Editor } from './Components';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import EditorTheme from './themes/EditorTheme';
-import { isEditorState } from './utils';
+import { LEXICAL_NODES, isEditorState } from './utils';
 
 interface LexicalEditorUIProps {
   value?: EditorState;
@@ -41,7 +38,7 @@ export const LexicalEditorUI = ({
     onError: error => {
       console.error(error);
     },
-    nodes: [HeadingNode, ListNode, ListItemNode, AutoLinkNode, LinkNode],
+    nodes: LEXICAL_NODES,
     editorState: isEditorState(value) && !value.isEmpty() ? value : null,
   };
 

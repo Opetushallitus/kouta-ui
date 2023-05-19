@@ -43,7 +43,7 @@ class CustomTextNode extends TextNode {
 
   exportDOM(_editor: LexicalEditor): DOMExportOutput {
     let element = document.createElement('span');
-    element.textContent = this.__text;
+    element.textContent = this.getTextContent();
 
     // This is the only way to properly add support for most clients,
     // even if it's semantically incorrect to have to resort to using
@@ -67,25 +67,27 @@ class CustomTextNode extends TextNode {
   }
 }
 
+export const LEXICAL_NODES = [
+  HeadingNode,
+  ListNode,
+  ListItemNode,
+  AutoLinkNode,
+  LinkNode,
+  CustomTextNode,
+  {
+    replace: TextNode,
+    with: (node: TextNode) => {
+      return new CustomTextNode(node.__text);
+    },
+  },
+];
+
 const editorConfig: CreateEditorArgs = {
   namespace: 'ImportExportEditor',
   onError: error => {
     console.error(error);
   },
-  nodes: [
-    HeadingNode,
-    ListNode,
-    ListItemNode,
-    AutoLinkNode,
-    LinkNode,
-    CustomTextNode,
-    {
-      replace: TextNode,
-      with: (node: TextNode) => {
-        return new CustomTextNode(node.__text);
-      },
-    },
-  ],
+  nodes: LEXICAL_NODES,
 };
 
 export const parseEditorState = (value: string): EditorState => {

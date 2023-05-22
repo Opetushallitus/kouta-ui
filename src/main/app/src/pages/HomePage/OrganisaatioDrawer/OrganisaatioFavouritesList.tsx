@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Box, Typography } from '#/src/components/virkailija';
+import { getTestIdProps } from '#/src/utils';
 
 import OrganisaatioItem from './OrganisaatioItem';
 
@@ -24,7 +25,7 @@ export const OrganisaatioFavouritesList = ({
         <Box
           marginBottom={index < items.length - 1 ? 1 : 0}
           key={org?.oid}
-          id="organization-favourites"
+          {...getTestIdProps('organization-favourites')}
         >
           <OrganisaatioItem
             {...org}

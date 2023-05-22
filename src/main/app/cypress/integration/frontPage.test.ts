@@ -73,16 +73,20 @@ describe('frontPage', () => {
   });
 
   it('adds organization to favourites', () => {
-    cy.get('#organization-favourites').should('not.exist');
-    cy.get('.favourite-icon__organization').first().click();
-    cy.get('#organization-favourites').should('exist');
+    getByTestId('organisaatioDrawer').within(() => {
+      cy.findByTestId('organization-favourites').should('not.exist');
+      cy.findAllByTitle('etusivu.lisaaSuosikkeihin').first().click();
+      cy.findByTestId('organization-favourites').should('exist');
+    });
   });
 
   it('removes organization from favourites', () => {
-    cy.get('#organization-favourites').within(() => {
-      cy.get('.favourite-icon__organization').first().click();
+    getByTestId('organisaatioDrawer').within(() => {
+      cy.findByTestId('organization-favourites').within(() => {
+        cy.findAllByRole('button').first().click();
+      });
+      cy.findByTestId('organization-favourites').should('not.exist');
     });
-    cy.get('#organization-favourites').should('not.exist');
   });
 
   it('should display navigation links', () => {

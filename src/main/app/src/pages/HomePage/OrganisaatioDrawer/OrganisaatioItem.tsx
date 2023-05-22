@@ -100,7 +100,6 @@ export const OrganisaatioItem = ({
 
       <Box display="flex" alignItems="center">
         <FavouriteIcon
-          class="favourite-icon__organization"
           active={favourite}
           disabled={disabled}
           title={t('etusivu.lisaaSuosikkeihin')}

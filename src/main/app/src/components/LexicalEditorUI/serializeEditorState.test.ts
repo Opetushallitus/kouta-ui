@@ -42,3 +42,12 @@ test('serializeEditorState span', () => {
   const es = parseEditorState('<strong>qwe</strong><span>asd</span>');
   expect(serializeEditorState(es)).toEqual('<p><strong>qwe</strong>asd</p>');
 });
+
+test('serializeEditorState whitespace in HTML', () => {
+  const es = parseEditorState(
+    '<h1>heading1</h1> <p>paragraph1</p> <h2>heading2</h2> <p>paragraph2</p>'
+  );
+  expect(serializeEditorState(es)).toEqual(
+    '<h1>heading1</h1><p>paragraph1</p><h2>heading2</h2><p>paragraph2</p>'
+  );
+});

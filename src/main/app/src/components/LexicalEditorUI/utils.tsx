@@ -117,15 +117,16 @@ export const parseEditorState = (value: string): EditorState => {
   return editor.getEditorState();
 };
 
-// TODO: Tarvii varmistua ettei rikota HTML:ää tässä!
-const unwrapSpans = html => html.replace(new RegExp('</?span.*?>', 'gm'), '');
-
 const postprocessHtml = (html: string): string => {
-  const unwrapped = unwrapSpans(html);
-
   const parser = new DOMParser();
-  const doc = parser.parseFromString(unwrapped, 'text/html');
+  const doc = parser.parseFromString(html, 'text/html');
 
+  // unwrap unnecessary spans
+  doc
+    .querySelectorAll('span')
+    .forEach(elem => elem.replaceWith(...elem.childNodes));
+
+  // extra direction tags in paragraphs
   for (const element of doc.querySelectorAll('[dir]')) {
     element.removeAttribute('dir');
   }

@@ -120,6 +120,19 @@ export const parseEditorState = (value: string): EditorState => {
 // TODO: Tarvii varmistua ettei rikota HTML:ää tässä!
 const unwrapSpans = html => html.replace(new RegExp('</?span.*?>', 'gm'), '');
 
+const postprocessHtml = (html: string): string => {
+  const unwrapped = unwrapSpans(html);
+
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(unwrapped, 'text/html');
+
+  for (const element of doc.querySelectorAll('[dir]')) {
+    element.removeAttribute('dir');
+  }
+
+  return doc.body.innerHTML;
+};
+
 export const serializeEditorState = (value: EditorState): string => {
   const editor = createEditor(editorConfig);
   editor.setEditorState(value);
@@ -134,7 +147,7 @@ export const serializeEditorState = (value: EditorState): string => {
     { discrete: true }
   );
 
-  return unwrapSpans(html);
+  return postprocessHtml(html);
 };
 
 export const createEmptyEditorState = () => {

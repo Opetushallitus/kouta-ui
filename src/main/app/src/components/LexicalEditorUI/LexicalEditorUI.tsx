@@ -6,6 +6,7 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { EditorState } from 'lexical';
 
@@ -28,8 +29,8 @@ interface LexicalEditorUIProps {
 export const LexicalEditorUI = ({
   value,
   onChange,
-  onFocus,
-  onBlur,
+  onFocus = () => {},
+  onBlur = () => {},
   disabled,
 }: LexicalEditorUIProps) => {
   const config = {
@@ -64,6 +65,7 @@ export const LexicalEditorUI = ({
           setHasFocus(false);
           onBlur();
         }}
+        onChange={onChange}
         initialConfig={config}
       >
         <ToolbarPlugin />
@@ -86,6 +88,7 @@ export const LexicalEditorUI = ({
           )}
         </>
         <HistoryPlugin />
+        <OnChangePlugin onChange={onChange} />
       </LexicalComposer>
     </Container>
   );

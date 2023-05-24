@@ -30,7 +30,7 @@ test('serializeEditorState paragraph with <a>', () => {
     '<p><a href="http://example.com" target="_blank">example</a></p><p></p>'
   );
   expect(serializeEditorState(es)).toEqual(
-    '<p><a href="http://example.com" target="_blank">example</a></p><p><br></p>'
+    '<p><a href="http://example.com" target="_blank" rel="noopener noreferrer">example</a></p><p><br></p>'
   );
 });
 

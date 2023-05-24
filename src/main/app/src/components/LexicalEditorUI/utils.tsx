@@ -131,6 +131,12 @@ const postprocessHtml = (html: string): string => {
     element.removeAttribute('dir');
   }
 
+  // to match old editor output
+  for (const element of doc.querySelectorAll('a')) {
+    element.setAttribute('rel', 'noopener noreferrer');
+    element.setAttribute('target', '_blank');
+  }
+
   return doc.body.innerHTML;
 };
 

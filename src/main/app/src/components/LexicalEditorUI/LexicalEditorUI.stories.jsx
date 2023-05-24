@@ -11,7 +11,7 @@ import { serializeEditorState, parseEditorState } from './utils';
 const convertToHTMLAction = action('convertToHTML');
 
 const initialValue = parseEditorState(
-  '<h1>Hei!</h1> <p> </p> <p>Klikkaa seuraavaa <b>linkkiä</b>: <a href="https://www.oph.fi/">Opetushallitus</a></p>'
+  'Klikkaa tätä linkkiä: <a href="https://www.oph.fi/">Opetushallitus</a>'
 );
 
 const StoryLexicalEditor = () => {

@@ -6,8 +6,8 @@ const theme: EditorThemeClasses = {
   blockCursor: 'EditorTheme__blockCursor',
   characterLimit: 'EditorTheme__characterLimit',
   heading: {
-    h1: 'EditorTheme__h1',
-    h2: 'EditorTheme__h2',
+    h3: 'EditorTheme__h3',
+    h4: 'EditorTheme__h4',
   },
   indent: 'EditorTheme__indent',
   link: 'EditorTheme__link',
@@ -26,8 +26,6 @@ const theme: EditorThemeClasses = {
     ul: 'EditorTheme__ul',
   },
   ltr: 'EditorTheme__ltr',
-  mark: 'EditorTheme__mark',
-  markOverlap: 'EditorTheme__markOverlap',
   paragraph: 'EditorTheme__paragraph',
   rtl: 'EditorTheme__rtl',
   text: {

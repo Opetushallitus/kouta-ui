@@ -32,6 +32,7 @@ import {
 } from 'lexical';
 import { createPortal } from 'react-dom';
 
+import { StyledIcon } from '../../ui/Components';
 import { getSelectedNode } from '../../utils/getSelectedNode';
 import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
 import { sanitizeUrl } from '../../utils/url';
@@ -223,14 +224,18 @@ function FloatingLinkEditor({
               onClick={() => {
                 setEditMode(false);
               }}
-            />
+            >
+              <StyledIcon type="cancel" />
+            </LinkEditorButtonCancel>
 
             <LinkEditorButtonConfirm
               role="button"
               tabIndex={0}
               onMouseDown={event => event.preventDefault()}
               onClick={handleLinkSubmission}
-            />
+            >
+              <StyledIcon type="check_circle" />
+            </LinkEditorButtonConfirm>
           </div>
         </>
       ) : (
@@ -246,7 +251,9 @@ function FloatingLinkEditor({
               setEditedLinkUrl(linkUrl);
               setEditMode(true);
             }}
-          />
+          >
+            <StyledIcon type="edit" />
+          </LinkEditorButtonEdit>
         </LinkView>
       )}
     </LinkEditor>

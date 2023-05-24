@@ -1,5 +1,10 @@
 import { parseEditorState, serializeEditorState } from './utils';
 
+test('serializeEditorState headings', () => {
+  const es = parseEditorState('<h3>test</h3><h4>title</h4>');
+  expect(serializeEditorState(es)).toEqual('<h3>test</h3><h4>title</h4>');
+});
+
 test('serializeEditorState simple paragraph', () => {
   const es = parseEditorState('<p>test</p>');
   expect(serializeEditorState(es)).toEqual('<p>test</p>');
@@ -31,10 +36,10 @@ test('serializeEditorState paragraph with <a>', () => {
 
 test('serializeEditorState headings with paragraphs', () => {
   const es = parseEditorState(
-    '<h1>heading1</h1><p>paragraph1</p><h2>heading2</h2><p>paragraph2</p>'
+    '<h3>heading1</h3><p>paragraph1</p><h4>heading2</h4><p>paragraph2</p>'
   );
   expect(serializeEditorState(es)).toEqual(
-    '<h1>heading1</h1><p>paragraph1</p><h2>heading2</h2><p>paragraph2</p>'
+    '<h3>heading1</h3><p>paragraph1</p><h4>heading2</h4><p>paragraph2</p>'
   );
 });
 

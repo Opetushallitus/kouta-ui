@@ -39,14 +39,23 @@ import {
 } from 'lexical';
 
 import { IS_APPLE } from '../../shared/environment';
+import { StyledIcon } from '../../ui/Components';
 import { getSelectedNode } from '../../utils/getSelectedNode';
 import { sanitizeUrl } from '../../utils/url';
 import { StyledDropDown, StyledDropDownItem, Toolbar } from './Components';
 
+const blockTypeToIconName = {
+  bullet: 'format_list_bulleted',
+  h3: 'title',
+  h4: 'title',
+  number: 'format_list_numbered',
+  paragraph: 'segment',
+};
+
 const blockTypeToBlockName = {
   bullet: 'Lista',
-  h1: 'Otsikko 1',
-  h2: 'Otsikko 2',
+  h3: 'Otsikko 1',
+  h4: 'Otsikko 2',
   number: 'Numeroitu lista',
   paragraph: 'Normaali teksti',
 };
@@ -111,7 +120,7 @@ function BlockFormatDropDown({
     <StyledDropDown
       disabled={disabled}
       buttonClassName="toolbar-item block-controls"
-      buttonIconClassName={'icon block-type ' + blockType}
+      buttonIconClassName={blockTypeToIconName[blockType]}
       buttonLabel={blockTypeToBlockName[blockType]}
       buttonAriaLabel="Formatting options for text style"
     >
@@ -119,36 +128,36 @@ function BlockFormatDropDown({
         className={'item ' + dropDownActiveClass(blockType === 'paragraph')}
         onClick={formatParagraph}
       >
-        <i className="icon paragraph" />
+        <StyledIcon type="segment" />
         <span className="text">{blockTypeToBlockName.paragraph}</span>
       </StyledDropDownItem>
       <StyledDropDownItem
-        className={'item ' + dropDownActiveClass(blockType === 'h1')}
-        onClick={() => formatHeading('h1')}
+        className={'item ' + dropDownActiveClass(blockType === 'h3')}
+        onClick={() => formatHeading('h3')}
       >
-        <i className="icon h1" />
-        <span className="text">{blockTypeToBlockName.h1}</span>
+        <StyledIcon type="title" />
+        <span className="text">{blockTypeToBlockName.h3}</span>
       </StyledDropDownItem>
       <StyledDropDownItem
-        className={'item ' + dropDownActiveClass(blockType === 'h2')}
-        onClick={() => formatHeading('h2')}
+        className={'item ' + dropDownActiveClass(blockType === 'h4')}
+        onClick={() => formatHeading('h4')}
       >
-        <i className="icon h2" />
-        <span className="text">{blockTypeToBlockName.h2}</span>
+        <StyledIcon type="title" />
+        <span className="text">{blockTypeToBlockName.h4}</span>
       </StyledDropDownItem>
 
       <StyledDropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'bullet')}
         onClick={formatBulletList}
       >
-        <i className="icon bullet-list" />
+        <StyledIcon type="format_list_bulleted" />
         <span className="text">{blockTypeToBlockName.bullet}</span>
       </StyledDropDownItem>
       <StyledDropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'number')}
         onClick={formatNumberedList}
       >
-        <i className="icon numbered-list" />
+        <StyledIcon type="format_list_numbered" />
         <span className="text">{blockTypeToBlockName.number}</span>
       </StyledDropDownItem>
     </StyledDropDown>
@@ -284,7 +293,7 @@ export default function ToolbarPlugin(): JSX.Element {
         className="toolbar-item spaced"
         aria-label="Undo"
       >
-        <i className="format undo" />
+        <StyledIcon type="undo" />
       </button>
       <button
         disabled={!canRedo || !isEditable}
@@ -296,7 +305,7 @@ export default function ToolbarPlugin(): JSX.Element {
         className="toolbar-item"
         aria-label="Redo"
       >
-        <i className="format redo" />
+        <StyledIcon type="redo" />
       </button>
       <Divider />
       {blockType in blockTypeToBlockName && activeEditor === editor && (
@@ -321,7 +330,7 @@ export default function ToolbarPlugin(): JSX.Element {
           IS_APPLE ? '⌘B' : 'Ctrl+B'
         }`}
       >
-        <i className="format bold" />
+        <StyledIcon type="format_bold" />
       </button>
       <button
         disabled={!isEditable}
@@ -331,7 +340,7 @@ export default function ToolbarPlugin(): JSX.Element {
         title="Insert link"
         type="button"
       >
-        <i className="format link" />
+        <StyledIcon type="link" />
       </button>
     </Toolbar>
   );

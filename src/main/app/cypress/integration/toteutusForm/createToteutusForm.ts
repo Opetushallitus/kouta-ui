@@ -462,18 +462,6 @@ const fillHakeutumisTaiIlmoittautumistapaSection = () => {
       .click()
       .pipe(paste('http://example.com'));
 
-    /*cy.findByRole('textbox', {
-      name: /^toteutuslomake.hakeutuminen.lisatiedot/,
-    })
-      .click()
-      .pipe(paste('lisätiedot'));
-
-    cy.findByRole('textbox', {
-      name: /^toteutuslomake.lisatiedotValintaperusteista/,
-    })
-      .click()
-      .pipe(paste('lisätiedot valintaperusteista'));*/
-
     getFieldWrapperByName('hakeutumisTaiIlmoittautumistapa.lisatiedot').within(
       () => {
         typeToEditor('lisätiedot');

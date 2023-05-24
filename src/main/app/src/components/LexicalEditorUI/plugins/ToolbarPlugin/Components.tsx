@@ -1,21 +1,10 @@
 import styled from 'styled-components';
 
-import iconRedo from '../../images/icons/arrow-clockwise.svg';
-import iconUndo from '../../images/icons/arrow-counterclockwise.svg';
-import iconChevronDown from '../../images/icons/chevron-down.svg';
-import iconClose from '../../images/icons/close.svg';
-import iconLink from '../../images/icons/link.svg';
-import iconOl from '../../images/icons/list-ol.svg';
-import iconUl from '../../images/icons/list-ul.svg';
-import iconParagraph from '../../images/icons/text-paragraph.svg';
-import iconBold from '../../images/icons/type-bold.svg';
-import iconH1 from '../../images/icons/type-h1.svg';
-import iconH2 from '../../images/icons/type-h2.svg';
 import DropDown, { DropDownItem } from '../../ui/DropDown';
 
 export const Toolbar = styled.div`
   display: flex;
-  margin-bottom: 1px;
+  margin-bottom: 16px;
   background: #fff;
   padding: 4px;
   border-top-left-radius: 10px;
@@ -26,6 +15,7 @@ export const Toolbar = styled.div`
   position: sticky;
   top: 0;
   z-index: 2;
+  border-bottom: 1px solid #ced4da;
 
   button.toolbar-item {
     border: 0;
@@ -48,29 +38,14 @@ export const Toolbar = styled.div`
     margin-right: 2px;
   }
 
-  button.toolbar-item i.format {
-    background-size: contain;
-    display: inline-block;
-    height: 18px;
-    width: 18px;
-    vertical-align: -0.25em;
-    display: flex;
-    opacity: 0.6;
-  }
-
   button.toolbar-item:disabled .icon,
   button.toolbar-item:disabled .text,
-  button.toolbar-item:disabled i.format,
-  button.toolbar-item:disabled .chevron-down {
+  button.toolbar-item:disabled i.format {
     opacity: 0.2;
   }
 
   button.toolbar-item.active {
     background-color: rgba(223, 232, 250, 0.3);
-  }
-
-  button.toolbar-item.active i {
-    opacity: 1;
   }
 
   .toolbar-item:hover:not([disabled]) {
@@ -80,10 +55,6 @@ export const Toolbar = styled.div`
   .toolbar-item.font-family .text {
     display: block;
     max-width: 40px;
-  }
-
-  .code-language {
-    width: 150px;
   }
 
   .toolbar-item .text {
@@ -99,89 +70,10 @@ export const Toolbar = styled.div`
     padding-right: 10px;
   }
 
-  .toolbar-item .icon {
-    display: flex;
-    width: 20px;
-    height: 20px;
-    user-select: none;
-    margin-right: 8px;
-    line-height: 16px;
-    background-size: contain;
-  }
-
-  i.chevron-down {
-    margin-top: 3px;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    user-select: none;
-  }
-
-  i.chevron-down.inside {
-    width: 16px;
-    height: 16px;
-    display: flex;
-    margin-left: -25px;
-    margin-top: 11px;
-    margin-right: 10px;
-    pointer-events: none;
-  }
-
   .divider {
     width: 1px;
     background-color: #eee;
     margin: 0 4px;
-  }
-
-  i.bold {
-    background-image: url(${iconBold});
-  }
-
-  i.link {
-    background-image: url(${iconLink});
-  }
-
-  i.close {
-    background-image: url(${iconClose});
-  }
-
-  i.undo {
-    background-image: url(${iconUndo});
-  }
-
-  i.redo {
-    background-image: url(${iconRedo});
-  }
-
-  i.chevron-down {
-    background-color: transparent;
-    background-size: contain;
-    display: inline-block;
-    height: 8px;
-    width: 8px;
-    background-image: url(${iconChevronDown});
-  }
-
-  .icon.paragraph {
-    background-image: url(${iconParagraph});
-  }
-
-  .icon.h1 {
-    background-image: url(${iconH1});
-  }
-
-  .icon.h2 {
-    background-image: url(${iconH2});
-  }
-
-  .icon.bullet-list,
-  .icon.bullet {
-    background-image: url(${iconUl});
-  }
-
-  .icon.numbered-list,
-  .icon.number {
-    background-image: url(${iconOl});
   }
 `;
 
@@ -234,18 +126,6 @@ export const StyledDropDownItem = styled(DropDownItem)`
     min-width: 150px;
   }
 
-  .icon {
-    display: flex;
-    width: 20px;
-    height: 20px;
-    user-select: none;
-    margin-right: 12px;
-    line-height: 16px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
   #block-controls {
     display: block;
     position: absolute;
@@ -279,34 +159,6 @@ export const StyledDropDownItem = styled(DropDownItem)`
   #block-controls button:focus-visible {
     border-color: blue;
   }
-
-  #block-controls span.block-type {
-    background-size: contain;
-    display: block;
-    width: 18px;
-    height: 18px;
-    margin: 2px;
-  }
-
-  #block-controls span.block-type.paragraph {
-    background-image: url(${iconParagraph});
-  }
-
-  #block-controls span.block-type.h1 {
-    background-image: url(${iconH1});
-  }
-
-  #block-controls span.block-type.h2 {
-    background-image: url(${iconH2});
-  }
-
-  #block-controls span.block-type.ul {
-    background-image: url(${iconUl});
-  }
-
-  #block-controls span.block-type.ol {
-    background-image: url(${iconOl});
-  }
 `;
 
 export const StyledDropDown = styled(DropDown)`
@@ -320,12 +172,6 @@ export const StyledDropDown = styled(DropDown)`
   @media screen and (max-width: 1100px) {
     .dropdown-button-text {
       display: none !important;
-    }
-    .font-size .dropdown-button-text {
-      display: flex !important;
-    }
-    .code-language .dropdown-button-text {
-      display: flex !important;
     }
   }
 `;

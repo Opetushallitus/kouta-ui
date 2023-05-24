@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-import closeIcon from '../../images/icons/close.svg';
-import editIcon from '../../images/icons/pencil-fill.svg';
-import confirmIcon from '../../images/icons/success-alt.svg';
-
 export const LinkEditor = styled.div`
   display: flex;
   position: absolute;
@@ -28,11 +24,7 @@ export const LinkEditor = styled.div`
 `;
 
 export const LinkEditorButton = styled.div`
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
   width: 35px;
-  vertical-align: -0.25em;
   position: absolute;
   right: 0;
   top: 0;
@@ -41,17 +33,17 @@ export const LinkEditorButton = styled.div`
 `;
 
 export const LinkEditorButtonEdit = styled(LinkEditorButton)`
-  background-image: url(${editIcon});
+  margin-top: 6px;
 `;
 
 export const LinkEditorButtonCancel = styled(LinkEditorButton)`
-  background-image: url(${closeIcon});
-  margin-right: 28px;
+  margin-top: 18px;
+  margin-right: 22px;
 `;
 
 export const LinkEditorButtonConfirm = styled(LinkEditorButton)`
-  background-image: url(${confirmIcon});
-  margin-right: 2px;
+  margin-top: 18px;
+  margin-right: -2px;
 `;
 
 export const LinkInput = styled.input`
@@ -67,7 +59,7 @@ export const LinkInput = styled.input`
   border: 0;
   outline: 0;
   position: relative;
-  font-family: inherit;
+  font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
 
   a {
     color: rgb(33, 111, 219);
@@ -94,7 +86,7 @@ export const LinkView = styled.div`
   border: 0;
   outline: 0;
   position: relative;
-  font-family: inherit;
+  font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
 
   a {
     display: block;

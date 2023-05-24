@@ -17,68 +17,8 @@ import {
 import * as React from 'react';
 
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
 
-import iconChevronDown from '../images/icons/chevron-down.svg';
-import iconOl from '../images/icons/list-ol.svg';
-import iconUl from '../images/icons/list-ul.svg';
-import iconParagraph from '../images/icons/text-paragraph.svg';
-import iconH1 from '../images/icons/type-h1.svg';
-import iconH2 from '../images/icons/type-h2.svg';
-
-const DropDownContainer = styled.div`
-  z-index: 10;
-  display: block;
-  position: fixed;
-  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  min-height: 40px;
-  background-color: #fff;
-
-  .icon.paragraph {
-    background-image: url(${iconParagraph});
-  }
-
-  .icon.h1 {
-    background-image: url(${iconH1});
-  }
-
-  .icon.h2 {
-    background-image: url(${iconH2});
-  }
-
-  .icon.bullet-list,
-  .icon.bullet {
-    background-image: url(${iconUl});
-  }
-
-  .icon.numbered-list,
-  .icon.number {
-    background-image: url(${iconOl});
-  }
-
-  i.chevron-down {
-    background-color: transparent;
-    background-size: contain;
-    display: inline-block;
-    height: 8px;
-    width: 8px;
-    background-image: url(${iconChevronDown});
-  }
-
-  button.item i {
-    opacity: 0.6;
-  }
-
-  button.item.dropdown-item-active {
-    background-color: rgba(223, 232, 250, 0.3);
-  }
-
-  button.item.dropdown-item-active i {
-    opacity: 1;
-  }
-`;
+import { StyledIcon, DropDownContainer } from './Components';
 
 type DropDownContextType = {
   registerItem: (ref: React.RefObject<HTMLButtonElement>) => void;
@@ -274,11 +214,11 @@ export default function DropDown({
         onClick={() => setShowDropDown(!showDropDown)}
         ref={buttonRef}
       >
-        {buttonIconClassName && <span className={buttonIconClassName} />}
+        {buttonIconClassName && <StyledIcon type={buttonIconClassName} />}
         {buttonLabel && (
           <span className="text dropdown-button-text">{buttonLabel}</span>
         )}
-        <i className="chevron-down" />
+        <StyledIcon type="expand_more" />
       </button>
 
       {showDropDown &&

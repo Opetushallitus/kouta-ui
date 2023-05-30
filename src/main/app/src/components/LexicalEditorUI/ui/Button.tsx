@@ -6,6 +6,9 @@
  *
  */
 
+/* Otherwise identical to Meta reference editor Button component,
+   but with styles wrapped wity styled-components. */
+
 import { ReactNode } from 'react';
 
 import styled from 'styled-components';

@@ -7,6 +7,12 @@
  *
  */
 
+/* Based on Meta reference link editor plugin. Command logic stays the same. Major changes:
+ * - Use styled components instead of raw CSS
+ * - Use MUI icons
+ * - Adjust styles for unified look and feel
+ */
+
 import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 

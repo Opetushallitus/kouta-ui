@@ -1,1 +1,1 @@
-export { default, LexicalEditorUI } from './LexicalEditorUI';
+export { LexicalEditorUI } from './LexicalEditorUI';

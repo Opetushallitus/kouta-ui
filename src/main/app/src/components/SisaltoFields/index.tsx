@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
 import IconButton from '#/src/components/IconButton';
-import LexicalEditorUI from '#/src/components/LexicalEditorUI';
+import { LexicalEditorUI } from '#/src/components/LexicalEditorUI';
 import RemoveButton from '#/src/components/RemoveButton';
 import {
   SortableContainer,

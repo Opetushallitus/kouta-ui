@@ -93,5 +93,3 @@ export const LexicalEditorUI = ({
     </Container>
   );
 };
-
-export default LexicalEditorUI;

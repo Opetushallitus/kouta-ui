@@ -1,4 +1,18 @@
 /* eslint-disable no-negated-condition */
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+/* Based on Meta reference toolbar plugin. Command logic stays the same. Major changes:
+ * - Heavily stripped functionality: removed rich text styling options we don't support
+ * - Use styled components instead of raw CSS
+ * - Use MUI icons
+ * - Adjust styles for unified look and feel
+ */
 
 import { useCallback, useEffect, useState } from 'react';
 

@@ -6,6 +6,9 @@
  *
  */
 
+/* Functionally identical to Meta reference editor DropDown component,
+   but using styled-components and minor style changes + cleanup. */
+
 import {
   ReactNode,
   useCallback,

@@ -60,12 +60,14 @@ const Wrapper = styled.div`
   ${({ readOnly }) =>
     readOnly &&
     css`
-      & .CollapseContent {
-        .ButtonWrapper {
-          opacity: 0.7;
-          cursor: not-allowed;
-          & * {
-            pointer-events: none;
+      & .disableForReadOnly {
+        .CollapseContent {
+          .ButtonWrapper {
+            opacity: 0.7;
+            cursor: not-allowed;
+            & * {
+              pointer-events: none;
+            }
           }
         }
       }

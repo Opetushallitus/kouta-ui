@@ -145,6 +145,7 @@ const HakuForm = ({
           isErillishaku={isErillishaku}
           isOphVirkailija={isOphVirkailija}
           languages={languages}
+          className="disableForReadOnly"
         />
 
         <FormCollapse
@@ -161,6 +162,7 @@ const HakuForm = ({
           header={t('hakulomake.haunYhteystiedot')}
           languages={languages}
           Component={YhteyshenkilotSection}
+          className="disableForReadOnly"
         />
 
         <FormCollapse

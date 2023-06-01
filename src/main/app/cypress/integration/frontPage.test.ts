@@ -72,6 +72,23 @@ describe('frontPage', () => {
     );
   });
 
+  it('adds organization to favourites', () => {
+    getByTestId('organisaatioDrawer').within(() => {
+      cy.findByTestId('organization-favourites').should('not.exist');
+      cy.findAllByTitle('etusivu.lisaaSuosikkeihin').first().click();
+      cy.findByTestId('organization-favourites').should('exist');
+    });
+  });
+
+  it('removes organization from favourites', () => {
+    getByTestId('organisaatioDrawer').within(() => {
+      cy.findByTestId('organization-favourites').within(() => {
+        cy.findAllByRole('button').first().click();
+      });
+      cy.findByTestId('organization-favourites').should('not.exist');
+    });
+  });
+
   it('should display navigation links', () => {
     cy.findAllByTestId('navigaatio')
       .should('contain', 'yleiset.koulutukset')

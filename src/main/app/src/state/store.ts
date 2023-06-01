@@ -1,4 +1,5 @@
-import { createStore, compose } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as formReducer } from 'redux-form';
 import { persistStore } from 'redux-persist';
@@ -14,7 +15,7 @@ export const store = () => {
 
   const enhancer = isDev ? composeWithDevTools(compose()) : compose();
 
-  const store = createStore(rootReducer, enhancer);
+  const store = configureStore({ reducer: rootReducer, enhancers: [enhancer] });
 
   const persistor = persistStore(store);
 

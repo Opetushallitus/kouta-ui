@@ -4,7 +4,7 @@ export const getSisaltyyYlakoodit = async ({
   koodiUri,
 }) => {
   const { data } = await httpClient.get(
-    apiUrls.url('koodisto-service.sisaltyy-ylakoodit', '') + koodiUri
+    apiUrls.url('kouta-backend.koodisto-koulutukset-by-ylakoodi', '') + koodiUri
   );
 
   return data;

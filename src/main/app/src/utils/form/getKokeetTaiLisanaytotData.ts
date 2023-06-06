@@ -21,8 +21,11 @@ export const getTilaisuusData =
       alkaa: alkaa,
       paattyy: paattyy,
     },
-    lisatietoja: _.mapValues(lisatietoja || {}, serializeEditorState),
-    jarjestamispaikka,
+    lisatietoja: _.mapValues(
+      _.pick(lisatietoja || {}, kielivalinta),
+      serializeEditorState
+    ),
+    jarjestamispaikka: _.pick(jarjestamispaikka || {}, kielivalinta),
   });
 
 export const getKokeetTaiLisanaytotData = ({
@@ -49,20 +52,23 @@ export const getKokeetTaiLisanaytotData = ({
     }) => ({
       id,
       tyyppiKoodiUri: _.get(tyyppi, 'value'),
-      nimi: nimi,
+      nimi: _.pick(nimi || {}, kielivalinta),
       metadata: {
-        tietoja: _.mapValues(tietoaHakijalle, serializeEditorState),
+        tietoja: _.mapValues(
+          _.pick(tietoaHakijalle || {}, kielivalinta),
+          serializeEditorState
+        ),
         vahimmaispisteet: isNumeric(vahimmaispistemaara)
           ? parseFloatComma(vahimmaispistemaara)
           : null,
         liittyyEnnakkovalmistautumista,
         ohjeetEnnakkovalmistautumiseen: _.mapValues(
-          ohjeetEnnakkovalmistautumiseen,
+          _.pick(ohjeetEnnakkovalmistautumiseen || {}, kielivalinta),
           serializeEditorState
         ),
         erityisjarjestelytMahdollisia,
         ohjeetErityisjarjestelyihin: _.mapValues(
-          ohjeetErityisjarjestelyihin,
+          _.pick(ohjeetErityisjarjestelyihin || {}, kielivalinta),
           serializeEditorState
         ),
       },

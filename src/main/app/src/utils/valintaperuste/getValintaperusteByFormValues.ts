@@ -129,7 +129,7 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
     : [];
 
   const valintakokeidenYleiskuvaus = _.mapValues(
-    values?.valintakokeet?.yleisKuvaus,
+    _.pick(values?.valintakokeet?.yleisKuvaus || {}, kielivalinta),
     serializeEditorState
   );
 

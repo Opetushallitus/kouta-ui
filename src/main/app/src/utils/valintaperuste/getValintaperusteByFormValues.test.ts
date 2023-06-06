@@ -76,52 +76,118 @@ const BASE_VALINTAPERUSTE_FORM_DATA = {
   tila: 'julkaistu',
 };
 
+const valintatavat = [
+  {
+    nimi: {
+      fi: 'Fi nimi',
+      sv: 'Sv nimi',
+    },
+    kynnysehto: {
+      fi: parseEditorState('<p>Fi kynnysehto</p>'),
+      sv: parseEditorState('<p>Sv kynnysehto</p>'),
+    },
+    tapa: { value: 'tapa_1#1' },
+    enimmaispistemaara: '20,2',
+    vahimmaispistemaara: '10,1',
+    sisalto: [
+      {
+        tyyppi: 'teksti',
+        data: {
+          fi: parseEditorState('<h2>Fi sisalto</h2>'),
+          sv: parseEditorState('<h2>Sv sisalto</h2>'),
+        },
+      },
+      {
+        tyyppi: 'taulukko',
+        data: {
+          rows: [
+            {
+              columns: [
+                { text: { fi: 'Fi column1', sv: 'Sv column1' } },
+                { text: { fi: 'Fi column2', sv: 'Sv column2' } },
+              ],
+            },
+            {
+              columns: [
+                { text: { fi: 'Fi column3', sv: 'Sv column3' } },
+                { text: { fi: 'Fi column4', sv: 'Sv column4' } },
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  },
+];
+
+const valintakokeetExtraTranslations = {
+  yleisKuvaus: {
+    fi: parseEditorState('<p>Yleiskuvaus - fi</p>'),
+    sv: parseEditorState('<p>Yleiskuvaus - sv</p>'),
+    en: parseEditorState('<p>Yleiskuvaus - en</p>'),
+  },
+  kokeetTaiLisanaytot: [
+    {
+      nimi: { fi: 'nimi - fi', sv: 'nimi - sv', en: 'nimi - en' },
+      tyyppi: {
+        value: 'tyyppi_1#1',
+      },
+      tietoaHakijalle: {
+        fi: parseEditorState('<p>Tietoa hakijalle - fi</p>'),
+        sv: parseEditorState('<p>Tietoa hakijalle - sv</p>'),
+        en: parseEditorState('<p>Tietoa hakijalle - en</p>'),
+      },
+      vahimmaispistemaara: '30,4',
+      liittyyEnnakkovalmistautumista: true,
+      ohjeetEnnakkovalmistautumiseen: {
+        fi: parseEditorState('<p>Ohjeet ennakkovalmistautumiseen - fi</p>'),
+        sv: parseEditorState('<p>ohjeet ennakkovalmistautumiseen - sv</p>'),
+        en: parseEditorState('<p>ohjeet ennakkovalmistautumiseen - en</p>'),
+      },
+      erityisjarjestelytMahdollisia: true,
+      ohjeetErityisjarjestelyihin: {
+        fi: parseEditorState('<p>Ohjeet erityisjärjestelyihin - fi</p>'),
+        sv: parseEditorState('<p>Ohjeet erityisjärjestelyihin - sv</p>'),
+        en: parseEditorState('<p>Ohjeet erityisjärjestelyihin - en</p>'),
+      },
+      tilaisuudet: [
+        {
+          osoite: { fi: 'fi osoite', sv: 'sv osoite', en: 'en osoite' },
+          postinumero: { value: 'posti_1#1' },
+          alkaa: '2019-04-16T08:44',
+          paattyy: '2019-04-18T08:44',
+          lisatietoja: {
+            fi: parseEditorState('<p>fi lisatietoja</p>'),
+            sv: parseEditorState('<p>sv lisatietoja</p>'),
+            en: parseEditorState('<p>en lisatietoja</p>'),
+          },
+          jarjestamispaikka: {
+            fi: 'jarjestamispaikka - fi',
+            sv: 'jarjestamispaikka - sv',
+            en: 'jarjestamispaikka - en',
+          },
+        },
+      ],
+    },
+  ],
+};
+
 test('Should convert valintaperuste form with valintatapa', () => {
   const data = {
     ...BASE_VALINTAPERUSTE_FORM_DATA,
-    valintatavat: [
-      {
-        nimi: {
-          fi: 'Fi nimi',
-          sv: 'Sv nimi',
-        },
-        kynnysehto: {
-          fi: parseEditorState('<p>Fi kynnysehto</p>'),
-          sv: parseEditorState('<p>Sv kynnysehto</p>'),
-        },
-        tapa: { value: 'tapa_1#1' },
-        enimmaispistemaara: '20,2',
-        vahimmaispistemaara: '10,1',
-        sisalto: [
-          {
-            tyyppi: 'teksti',
-            data: {
-              fi: parseEditorState('<h2>Fi sisalto</h2>'),
-              sv: parseEditorState('<h2>Sv sisalto</h2>'),
-            },
-          },
-          {
-            tyyppi: 'taulukko',
-            data: {
-              rows: [
-                {
-                  columns: [
-                    { text: { fi: 'Fi column1', sv: 'Sv column1' } },
-                    { text: { fi: 'Fi column2', sv: 'Sv column2' } },
-                  ],
-                },
-                {
-                  columns: [
-                    { text: { fi: 'Fi column3', sv: 'Sv column3' } },
-                    { text: { fi: 'Fi column4', sv: 'Sv column4' } },
-                  ],
-                },
-              ],
-            },
-          },
-        ],
-      },
-    ],
+    valintatavat,
+  };
+
+  const valintaperuste = getValintaperusteByFormValues(data);
+
+  expect(valintaperuste).toMatchSnapshot();
+});
+
+test('Should not convert translations for non-selected language', () => {
+  const data = {
+    ...BASE_VALINTAPERUSTE_FORM_DATA,
+    valintatavat,
+    valintakokeet: valintakokeetExtraTranslations,
   };
 
   const valintaperuste = getValintaperusteByFormValues(data);

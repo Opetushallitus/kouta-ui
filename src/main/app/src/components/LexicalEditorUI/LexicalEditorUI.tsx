@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
@@ -26,6 +27,33 @@ interface LexicalEditorUIProps {
   hideHeaderSelect?: boolean;
 }
 
+const generateId = () =>
+  `LexicalEditor__${Math.round(Math.random() * 10000).toString()}`;
+
+const useId = () => {
+  const ref = useRef();
+
+  if (!ref.current) {
+    ref.current = generateId();
+  }
+
+  return ref.current;
+};
+
+/* We need this, so that when editor is updated in the fly,
+   eg. when changing language, the state updates accordingly. */
+const UpdatePlugin = ({ value }) => {
+  const [editor] = useLexicalComposerContext();
+
+  useEffect(() => {
+    if (isEditorState(value) && !value.isEmpty()) {
+      editor.setEditorState(value);
+    }
+  }, [value, editor]);
+
+  return null;
+};
+
 export const LexicalEditorUI = ({
   value,
   onChange,
@@ -33,8 +61,9 @@ export const LexicalEditorUI = ({
   onBlur = () => {},
   disabled,
 }: LexicalEditorUIProps) => {
+  const editorId = useId();
   const config = {
-    namespace: 'LexicalEditor',
+    namespace: editorId,
     theme: EditorTheme,
     onError: error => {
       console.error(error);
@@ -89,6 +118,7 @@ export const LexicalEditorUI = ({
         </>
         <HistoryPlugin />
         <OnChangePlugin onChange={onChange} />
+        <UpdatePlugin value={value} />
       </LexicalComposer>
     </Container>
   );

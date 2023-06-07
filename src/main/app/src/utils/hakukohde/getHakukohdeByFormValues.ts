@@ -80,6 +80,8 @@ const getLiiteToimitusosoite = (toimitustapa, kielivalinta) => {
 };
 
 const getHakukohteenLinja = values => {
+  const kielivalinta = getKielivalinta(values);
+  const pickTranslations = _fp.pick(kielivalinta);
   if (!values?.hakukohteenLinja) {
     return null;
   }
@@ -91,7 +93,9 @@ const getHakukohteenLinja = values => {
     alinHyvaksyttyKeskiarvo:
       (alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo)) ||
       null,
-    lisatietoa: mapValues(serializeEditorState, lisatietoa),
+    lisatietoa: pickTranslations(
+      mapValues(serializeEditorState, lisatietoa || {})
+    ),
     painotetutArvosanat: getPainotetutArvosanatData(painotetutArvosanat),
   };
 };
@@ -252,14 +256,18 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     hakulomakeKuvaus,
     metadata: {
       jarjestaaUrheilijanAmmKoulutusta,
-      valintakokeidenYleiskuvaus: mapValues(
-        kuvaus => serializeEditorState(kuvaus),
-        values?.valintakokeet?.yleisKuvaus
+      valintakokeidenYleiskuvaus: pickTranslations(
+        mapValues(
+          serializeEditorState,
+          values?.valintakokeet?.yleisKuvaus || {}
+        )
       ),
       valintaperusteenValintakokeidenLisatilaisuudet,
-      kynnysehto: mapValues(
-        kuvaus => serializeEditorState(kuvaus),
-        values?.valintaperusteenKuvaus?.kynnysehto
+      kynnysehto: pickTranslations(
+        mapValues(
+          serializeEditorState,
+          values?.valintaperusteenKuvaus?.kynnysehto || {}
+        )
       ),
       aloituspaikat: getAloituspaikat(values),
       kaytetaanHaunAlkamiskautta: !kaytetaanHakukohteenAlkamiskautta,

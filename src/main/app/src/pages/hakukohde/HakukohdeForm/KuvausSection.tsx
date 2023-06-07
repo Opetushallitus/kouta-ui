@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { Alert } from '#/src/components/Alert';
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
@@ -73,7 +73,7 @@ export const KuvausSection = ({
       />
       <Buttons>
         {valintaperusteOid && (
-          <Button
+          <FormButton
             variant="outlined"
             color="primary"
             as="a"
@@ -81,9 +81,9 @@ export const KuvausSection = ({
             target="_blank"
           >
             {t('hakukohdelomake.avaaValintaperuste')}
-          </Button>
+          </FormButton>
         )}
-        <Button
+        <FormButton
           variant="outlined"
           color="primary"
           as="a"
@@ -96,7 +96,7 @@ export const KuvausSection = ({
               })}
         >
           {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
-        </Button>
+        </FormButton>
       </Buttons>
       <Field
         name={`${name}.kynnysehto.${language}`}

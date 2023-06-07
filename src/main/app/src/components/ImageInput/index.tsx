@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { match } from 'ts-pattern';
 
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 import { Box, Typography, Icon, Spin } from '#/src/components/virkailija';
 import { useMachine } from '#/src/hooks/useMachine';
 import { disabledStyle } from '#/src/system';
@@ -109,9 +109,14 @@ const FlexWrapper = ({ children }) => (
 const ValueContent = ({ file, t, onRemove }) => (
   <FlexWrapper>
     <FileUploadedMessage>{file ? file.name : ''}</FileUploadedMessage>
-    <Button color="danger" variant="contained" type="button" onClick={onRemove}>
+    <FormButton
+      color="danger"
+      variant="contained"
+      type="button"
+      onClick={onRemove}
+    >
       {t('yleiset.poista')}
-    </Button>
+    </FormButton>
   </FlexWrapper>
 );
 
@@ -127,14 +132,14 @@ const PlaceholderContent = ({ error, openDialog, t }) => (
     {error && <ErrorMessage>{error}</ErrorMessage>}
     <Typography>{t('yleiset.raahaaLiitettavaTiedosto')}</Typography>
     <Typography>{t('yleiset.tai')}</Typography>
-    <Button
+    <FormButton
       color="primary"
       variant="outlined"
       type="button"
       onClick={openDialog}
     >
       {t('yleiset.selaaTiedostoja')}
-    </Button>
+    </FormButton>
   </FlexWrapper>
 );
 

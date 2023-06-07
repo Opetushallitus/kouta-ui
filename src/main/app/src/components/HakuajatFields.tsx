@@ -2,8 +2,8 @@ import React from 'react';
 
 import _ from 'lodash';
 
-import Button from '#/src/components/Button';
 import DateTimeRange from '#/src/components/DateTimeRange';
+import FormButton from '#/src/components/FormButton';
 import { Box, FormControl } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
@@ -23,7 +23,7 @@ export const HakuajatFields = ({ fields, t, meta: { error } }) => (
       ))}
     </FormControl>
     <Box marginTop={2}>
-      <Button
+      <FormButton
         type="button"
         variant="outlined"
         onClick={() => {
@@ -32,7 +32,7 @@ export const HakuajatFields = ({ fields, t, meta: { error } }) => (
         {...getTestIdProps('lisaaButton')}
       >
         {t('yleiset.lisaaHakuaika')}
-      </Button>
+      </FormButton>
     </Box>
   </>
 );

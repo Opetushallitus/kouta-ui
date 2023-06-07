@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
-import Button from '#/src/components/Button';
 import { ErrorPlaceholder } from '#/src/components/ErrorPlaceholder';
 import FieldArrayList from '#/src/components/FieldArrayList';
+import FormButton from '#/src/components/FormButton';
 import {
   FormFieldEditor,
   FormFieldInput,
@@ -89,7 +89,7 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
       justifyContent="center"
       marginTop={fields.length > 0 ? 4 : 0}
     >
-      <Button
+      <FormButton
         type="button"
         variant="outlined"
         onClick={() => {
@@ -98,7 +98,7 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
         {...getTestIdProps('lisaaButton')}
       >
         {t('valintaperustelomake.lisaaValintatapa')}
-      </Button>
+      </FormButton>
     </Box>
   </>
 );

@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Button from '#/src/components/Button';
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
+import FormButton from '#/src/components/FormButton';
 import { Box } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
@@ -75,9 +75,9 @@ export const FormFooter = ({
       />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" justifyContent="flex-start" alignItems="center">
-          <Button as={Link} to="/" color="primary" variant="outlined">
+          <FormButton as={Link} to="/" color="primary" variant="outlined">
             {t('yleiset.etusivulle')}
-          </Button>
+          </FormButton>
           {!hideEsikatselu && (
             <EsikatseluControls esikatseluUrl={esikatseluUrl} />
           )}
@@ -85,7 +85,7 @@ export const FormFooter = ({
             {entity?.modified && <FormEditInfo entity={entity} />}
           </Box>
         </Box>
-        <Button
+        <FormButton
           onClick={() => {
             aboutToDeleteEntity(tila) ? toggleConfirmationDialog(true) : save();
           }}
@@ -94,7 +94,7 @@ export const FormFooter = ({
           {...submitProps}
         >
           {t('yleiset.tallenna')}
-        </Button>
+        </FormButton>
       </Box>
     </>
   );

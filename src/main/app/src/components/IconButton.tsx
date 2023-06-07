@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 import { Icon } from '#/src/components/virkailija';
 
 const SizedIcon = styled(Icon)`
@@ -12,10 +12,10 @@ const SizedIcon = styled(Icon)`
 `;
 
 export const IconButton = ({ iconType, children, ...props }) => (
-  <Button {...props}>
+  <FormButton {...props}>
     <SizedIcon type={iconType} />
     {children}
-  </Button>
+  </FormButton>
 );
 
 export default IconButton;

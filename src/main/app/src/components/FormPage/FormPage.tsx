@@ -2,7 +2,7 @@ import React from 'react';
 
 import { QueryObserverResult } from 'react-query';
 import NavigationPrompt from 'react-router-navigation-prompt';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import Container from '#/src/components/Container';
 import FullSpin from '#/src/components/FullSpin';
@@ -31,13 +31,12 @@ const FooterContainer = styled.div`
   background-color: white;
   border-top: 2px solid ${getThemeProp('palette.primary.main')};
   padding: ${({ theme }) => theme.spacing.unit * 2}px 0px;
-  bottom: 0px;
+  bottom: 0;
   position: sticky;
-  left: 0px;
+  left: 0;
   width: 100%;
   z-index: 99;
   height: 36px;
-  bottom: 0;
 `;
 
 const FormContent = styled.div`
@@ -57,21 +56,6 @@ const Wrapper = styled.div`
   padding: 0;
   margin: 0;
   height: 100%;
-  ${({ readOnly }) =>
-    readOnly &&
-    css`
-      & .disableForReadOnly {
-        .CollapseContent {
-          .ButtonWrapper {
-            opacity: 0.7;
-            cursor: not-allowed;
-            & * {
-              pointer-events: none;
-            }
-          }
-        }
-      }
-    `}
 `;
 
 type FormPageProps = {
@@ -101,7 +85,6 @@ const FormPageContent = ({
   steps = null,
   children = null,
   footer = null,
-  readOnly = false,
 }: any) => {
   const isSubmitting = useIsSubmitting();
   const isDirty = useIsDirty();
@@ -119,7 +102,7 @@ const FormPageContent = ({
       >
         {props => <UnsavedChangesDialog {...props} />}
       </NavigationPrompt>
-      <Wrapper readOnly={readOnly}>
+      <Wrapper>
         <HeaderContainer>
           <Container>{header}</Container>
         </HeaderContainer>

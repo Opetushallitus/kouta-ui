@@ -3,7 +3,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 import { Typography } from '#/src/components/virkailija';
 
 import Collapse from './index';
@@ -12,8 +12,8 @@ const header = '1 Koulutustyyppi';
 
 const footer = (
   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-    <Button variant="outlined">Tyhjennä tiedot</Button>
-    <Button>Jatka</Button>
+    <FormButton variant="outlined">Tyhjennä tiedot</FormButton>
+    <FormButton>Jatka</FormButton>
   </div>
 );
 

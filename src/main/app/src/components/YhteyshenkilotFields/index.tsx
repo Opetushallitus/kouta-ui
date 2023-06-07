@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
-import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
+import FormButton from '#/src/components/FormButton';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 
@@ -68,14 +68,14 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
         justifyContent="center"
         marginTop={fields.length > 0 ? 4 : 0}
       >
-        <Button
+        <FormButton
           variant="outlined"
           color="primary"
           type="button"
           onClick={onAddField}
         >
           {t('yleiset.lisaaYhteyshenkilo')}
-        </Button>
+        </FormButton>
       </Box>
     </>
   );

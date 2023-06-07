@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 import TableInput from './index';
@@ -43,20 +43,20 @@ class StatefulTableInput extends Component {
           onChange={this.onValueChange}
           language={this.state.language}
         />
-        <Button
+        <FormButton
           onClick={() => {
             this.onLanguageChange('fi');
           }}
         >
           Suomeksi
-        </Button>
-        <Button
+        </FormButton>
+        <FormButton
           onClick={() => {
             this.onLanguageChange('sv');
           }}
         >
           På svenska
-        </Button>
+        </FormButton>
       </>
     );
   }

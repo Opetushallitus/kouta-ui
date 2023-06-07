@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 import { Typography } from '#/src/components/virkailija';
 
 import CollapseContent from './index';
@@ -12,9 +12,9 @@ const Story = ({ component: Component = CollapseContent }) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(currentOpen => !currentOpen)}>
+      <FormButton onClick={() => setOpen(currentOpen => !currentOpen)}>
         {open ? 'Close' : 'Open'}
-      </Button>
+      </FormButton>
       <Component open={open}>
         <Typography>Lorem ipsum dolor sit amet</Typography>
       </Component>

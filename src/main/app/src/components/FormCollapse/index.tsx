@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import Button from '#/src/components/Button';
 import Collapse from '#/src/components/Collapse';
+import FormButton from '#/src/components/FormButton';
 import { Box, Typography } from '#/src/components/virkailija';
 import { LanguageTabContext } from '#/src/contexts/LanguageTabContext';
 import { getTestIdProps } from '#/src/utils';
@@ -33,9 +33,9 @@ const Actions = ({ actions, onContinue, t }) => {
     actions
   ) : _.isFunction(onContinue) ? (
     <Box display="flex" justifyContent="center">
-      <Button type="button" onClick={onContinue}>
+      <FormButton type="button" onClick={onContinue}>
         {t('yleiset.jatka')}
-      </Button>
+      </FormButton>
     </Box>
   ) : null;
 };

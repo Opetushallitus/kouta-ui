@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 import styled from 'styled-components';
 
-import Button from '#/src/components/Button';
 import Editor from '#/src/components/Editor';
+import FormButton from '#/src/components/FormButton';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import {
@@ -24,7 +24,7 @@ import {
 import { getTestIdProps } from '#/src/utils';
 
 const MoveButton = SortableHandle(props => (
-  <Button as="div" style={{ cursor: 'grab', width: '100%' }} {...props} />
+  <FormButton as="div" style={{ cursor: 'grab', width: '100%' }} {...props} />
 ));
 
 const InputContainer = styled(Box)`

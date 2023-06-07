@@ -3,7 +3,7 @@ import React from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
@@ -185,14 +185,14 @@ const HakuForm = ({
                 height="100%"
                 flexBasis="100%"
               >
-                <Button
+                <FormButton
                   onClick={open}
                   disabled={!canAddHakukohde}
                   type="button"
                   title={infoText}
                 >
                   {t('yleiset.liitaHakukohde')}
-                </Button>
+                </FormButton>
               </Box>
             }
             Component={HakukohteetSection}

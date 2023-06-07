@@ -4,9 +4,9 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray, Fields } from 'redux-form';
 
-import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FieldGroup } from '#/src/components/FieldGroup';
+import FormButton from '#/src/components/FormButton';
 import {
   FormFieldDateTimeInput,
   FormFieldInput,
@@ -273,7 +273,7 @@ const LiitteetListField = ({
         justifyContent="center"
         marginTop={fields.length > 0 ? 4 : 0}
       >
-        <Button
+        <FormButton
           type="button"
           variant="outlined"
           onClick={() => {
@@ -282,7 +282,7 @@ const LiitteetListField = ({
           {...getTestIdProps('lisaaButton')}
         >
           {t('hakukohdelomake.lisaaLiite')}
-        </Button>
+        </FormButton>
       </Box>
     </>
   );

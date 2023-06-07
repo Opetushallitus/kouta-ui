@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import Modal from '#/src/components/Modal';
 import { Box, Typography } from '#/src/components/virkailija';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';

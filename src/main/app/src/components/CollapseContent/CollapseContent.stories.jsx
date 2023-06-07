@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { Typography } from '#/src/components/virkailija';
 
 import CollapseContent from './index';

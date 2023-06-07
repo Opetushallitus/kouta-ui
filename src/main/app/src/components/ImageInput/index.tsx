@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { match } from 'ts-pattern';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { Box, Typography, Icon, Spin } from '#/src/components/virkailija';
 import { useMachine } from '#/src/hooks/useMachine';
 import { disabledStyle } from '#/src/system';

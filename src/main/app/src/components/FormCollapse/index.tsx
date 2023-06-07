@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import Collapse from '#/src/components/Collapse';
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { Box, Typography } from '#/src/components/virkailija';
 import { LanguageTabContext } from '#/src/contexts/LanguageTabContext';
 import { getTestIdProps } from '#/src/utils';

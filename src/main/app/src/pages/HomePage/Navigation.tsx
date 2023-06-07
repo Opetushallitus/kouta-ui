@@ -13,10 +13,10 @@ import { useTranslation } from 'react-i18next';
 import { useEvent } from 'react-use';
 import styled, { css } from 'styled-components';
 
-import Button from '#/src/components/Button';
 import Container from '#/src/components/Container';
 import {
   Box,
+  Button,
   Typography,
   Icon,
   Dropdown,

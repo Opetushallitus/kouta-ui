@@ -164,6 +164,7 @@ export const KoulutustyyppiSelect = ({
             onClick={() => {
               setJohtaaTutkintoon(true);
             }}
+            disabled={disabled}
           >
             {t('koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit')}
           </SegmentTab>

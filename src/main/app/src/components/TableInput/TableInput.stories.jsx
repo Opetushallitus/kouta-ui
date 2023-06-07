@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 import TableInput from './index';

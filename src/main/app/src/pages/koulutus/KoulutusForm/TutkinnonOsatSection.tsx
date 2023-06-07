@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { FieldArray } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 

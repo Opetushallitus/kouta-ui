@@ -6,7 +6,7 @@ import { Grid, Cell } from 'styled-css-grid';
 
 import { ErrorPlaceholder } from '#/src/components/ErrorPlaceholder';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import {
   FormFieldEditor,
   FormFieldInput,

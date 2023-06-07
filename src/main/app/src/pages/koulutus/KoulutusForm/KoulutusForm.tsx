@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';

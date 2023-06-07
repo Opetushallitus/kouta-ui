@@ -6,7 +6,7 @@ import { Field, FieldArray, Fields } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FieldGroup } from '#/src/components/FieldGroup';
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import {
   FormFieldDateTimeInput,
   FormFieldInput,

@@ -17,7 +17,7 @@ import { setLightness } from 'polished';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import Select from '#/src/components/Select';
 import {
   Box,

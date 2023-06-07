@@ -1,8 +1,7 @@
 import React from 'react';
 
+import { Button } from '#/src/components/virkailija';
 import { useFormIsDisabled } from '#/src/contexts/FormContext';
-
-import Button from '../Button';
 
 export const FormButton = props => {
   const disabled = useFormIsDisabled();

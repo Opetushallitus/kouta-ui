@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
-import FormButton from '#/src/components/FormButton';
-import { Box } from '#/src/components/virkailija';
+import { FormButton } from '#/src/components/FormButton';
+import { Box, Button } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
@@ -75,9 +75,9 @@ export const FormFooter = ({
       />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" justifyContent="flex-start" alignItems="center">
-          <FormButton as={Link} to="/" color="primary" variant="outlined">
+          <Button as={Link} to="/" color="primary" variant="outlined">
             {t('yleiset.etusivulle')}
-          </FormButton>
+          </Button>
           {!hideEsikatselu && (
             <EsikatseluControls esikatseluUrl={esikatseluUrl} />
           )}

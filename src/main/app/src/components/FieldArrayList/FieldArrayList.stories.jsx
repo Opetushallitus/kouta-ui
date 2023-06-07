@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { FormFieldInput } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 

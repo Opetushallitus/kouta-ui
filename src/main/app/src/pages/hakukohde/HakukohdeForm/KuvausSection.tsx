@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { Alert } from '#/src/components/Alert';
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';

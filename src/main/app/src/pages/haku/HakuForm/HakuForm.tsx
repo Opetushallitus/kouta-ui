@@ -3,7 +3,7 @@ import React from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';

@@ -3,7 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 
 import DateTimeRange from '#/src/components/DateTimeRange';
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { Box, FormControl } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 
 import Editor from './index';
 import { parseEditorState, serializeEditorState } from './utils';

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import FormButton from '#/src/components/FormButton';
+import { FormButton } from '#/src/components/FormButton';
 import { useUrls } from '#/src/contexts/UrlContext';
 
 export const YhteystiedotMuokkausButton = ({ organisaatioOid }) => {

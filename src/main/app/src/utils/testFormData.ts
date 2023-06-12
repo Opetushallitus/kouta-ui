@@ -391,6 +391,35 @@ export const BASE_VALINTAPERUSTE_FORM_DATA = {
   tila: 'julkaistu',
 };
 
+export const sisalto = [
+  {
+    tyyppi: 'teksti',
+    data: {
+      fi: parseEditorState('<h2>Fi sisalto</h2>'),
+      sv: parseEditorState('<h2>Sv sisalto</h2>'),
+    },
+  },
+  {
+    tyyppi: 'taulukko',
+    data: {
+      rows: [
+        {
+          columns: [
+            { text: { fi: 'Fi column1', sv: 'Sv column1' } },
+            { text: { fi: 'Fi column2', sv: 'Sv column2' } },
+          ],
+        },
+        {
+          columns: [
+            { text: { fi: 'Fi column3', sv: 'Sv column3' } },
+            { text: { fi: 'Fi column4', sv: 'Sv column4' } },
+          ],
+        },
+      ],
+    },
+  },
+];
+
 export const valintatapa = {
   nimi: {
     fi: 'Fi nimi',
@@ -403,34 +432,7 @@ export const valintatapa = {
   tapa: { value: 'tapa_1#1' },
   enimmaispistemaara: '20,2',
   vahimmaispistemaara: '10,1',
-  sisalto: [
-    {
-      tyyppi: 'teksti',
-      data: {
-        fi: parseEditorState('<h2>Fi sisalto</h2>'),
-        sv: parseEditorState('<h2>Sv sisalto</h2>'),
-      },
-    },
-    {
-      tyyppi: 'taulukko',
-      data: {
-        rows: [
-          {
-            columns: [
-              { text: { fi: 'Fi column1', sv: 'Sv column1' } },
-              { text: { fi: 'Fi column2', sv: 'Sv column2' } },
-            ],
-          },
-          {
-            columns: [
-              { text: { fi: 'Fi column3', sv: 'Sv column3' } },
-              { text: { fi: 'Fi column4', sv: 'Sv column4' } },
-            ],
-          },
-        ],
-      },
-    },
-  ],
+  sisalto: sisalto,
 };
 
 export const valintatapaWithExtraTranslations = {

@@ -271,7 +271,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
       aloituspaikat: getAloituspaikat(values),
       kaytetaanHaunAlkamiskautta: !kaytetaanHakukohteenAlkamiskautta,
       koulutuksenAlkamiskausi: kaytetaanHakukohteenAlkamiskautta
-        ? getAlkamiskausiData(ajankohta, pickTranslations)
+        ? getAlkamiskausiData(ajankohta, kielivalinta)
         : null,
       hakukohteenLinja: getHakukohteenLinja(values),
       uudenOpiskelijanUrl: values?.uudenOpiskelijanUrl,

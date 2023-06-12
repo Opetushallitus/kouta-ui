@@ -6,12 +6,12 @@ import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 
+import { pickTranslations } from '../pickTranslations';
+
 const getKielivalinta = values => values?.kieliversiot || [];
 
 export const getHakuByFormValues = (values: HakuFormValues) => {
   const kielivalinta = getKielivalinta(values);
-
-  const pickTranslations = _fp.pick(kielivalinta);
 
   const {
     hakulomaketyyppi,
@@ -40,7 +40,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
     ),
     hakukohteenLiittamisenTakaraja:
       values?.aikataulut?.lisaamisenTakaraja || null,
-    nimi: pickTranslations(values?.nimi),
+    nimi: pickTranslations(values?.nimi, kielivalinta),
     kohdejoukkoKoodiUri,
     kohdejoukonTarkenneKoodiUri: isKorkeakoulutusKohdejoukkoKoodiUri(
       kohdejoukkoKoodiUri
@@ -51,7 +51,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
     metadata: {
       koulutuksenAlkamiskausi: getAlkamiskausiData(
         values?.aikataulut,
-        pickTranslations
+        kielivalinta
       ),
       tulevaisuudenAikataulu: (values?.aikataulut?.aikataulu || []).map(
         ({ alkaa, paattyy }) => ({
@@ -68,12 +68,12 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
           verkkosivu,
           verkkosivuTeksti,
         }) => ({
-          nimi: pickTranslations(nimi),
-          titteli: pickTranslations(titteli),
-          puhelinnumero: pickTranslations(puhelinnumero),
-          wwwSivu: pickTranslations(verkkosivu),
-          wwwSivuTeksti: pickTranslations(verkkosivuTeksti),
-          sahkoposti: pickTranslations(sahkoposti),
+          nimi: pickTranslations(nimi, kielivalinta),
+          titteli: pickTranslations(titteli, kielivalinta),
+          puhelinnumero: pickTranslations(puhelinnumero, kielivalinta),
+          wwwSivu: pickTranslations(verkkosivu, kielivalinta),
+          wwwSivuTeksti: pickTranslations(verkkosivuTeksti, kielivalinta),
+          sahkoposti: pickTranslations(sahkoposti, kielivalinta),
         })
       ),
     },

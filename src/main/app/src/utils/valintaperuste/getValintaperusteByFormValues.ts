@@ -10,7 +10,7 @@ import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
 import {
-  pickTranslation,
+  pickTranslations,
   pickTranslationsForEditorField,
 } from '../pickTranslations';
 import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from './constants';
@@ -85,10 +85,10 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
   const hakutapaKoodiUri = perustiedot?.hakutapa;
   const kielivalinta = perustiedot?.kieliversiot ?? [];
   const kohdejoukkoKoodiUri = perustiedot?.kohdejoukko?.value ?? null;
-  const nimi = pickTranslation(values?.kuvaus?.nimi, kielivalinta);
+  const nimi = pickTranslations(values?.kuvaus?.nimi, kielivalinta);
 
-  const kuvaus = _.pick(
-    _.mapValues(values?.kuvaus?.kuvaus ?? {}, serializeEditorState),
+  const kuvaus = pickTranslationsForEditorField(
+    values?.kuvaus?.kuvaus,
     kielivalinta
   );
   const hakukelpoisuus = pickTranslationsForEditorField(
@@ -114,7 +114,7 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
           enimmaispistemaara,
           vahimmaispistemaara,
         }) => ({
-          nimi: pickTranslation(valintatapaNimi, kielivalinta),
+          nimi: pickTranslations(valintatapaNimi, kielivalinta),
           sisalto: serializeSisalto(valintatapaSisalto, kielivalinta),
           valintatapaKoodiUri: tapa?.value,
           kaytaMuuntotaulukkoa: false,

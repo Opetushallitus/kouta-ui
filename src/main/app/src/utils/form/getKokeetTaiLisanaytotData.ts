@@ -1,7 +1,11 @@
 import _ from 'lodash';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric, parseFloatComma } from '#/src/utils';
+
+import {
+  pickTranslations,
+  pickTranslationsForEditorField,
+} from '../pickTranslations';
 
 export const getTilaisuusData =
   kielivalinta =>
@@ -14,18 +18,15 @@ export const getTilaisuusData =
     jarjestamispaikka,
   }) => ({
     osoite: {
-      osoite: _.pick(osoite || {}, kielivalinta),
+      osoite: pickTranslations(osoite, kielivalinta),
       postinumeroKoodiUri: _.get(postinumero, 'value'),
     },
     aika: {
       alkaa: alkaa,
       paattyy: paattyy,
     },
-    lisatietoja: _.mapValues(
-      _.pick(lisatietoja || {}, kielivalinta),
-      serializeEditorState
-    ),
-    jarjestamispaikka: _.pick(jarjestamispaikka || {}, kielivalinta),
+    lisatietoja: pickTranslationsForEditorField(lisatietoja, kielivalinta),
+    jarjestamispaikka: pickTranslations(jarjestamispaikka, kielivalinta),
   });
 
 export const getKokeetTaiLisanaytotData = ({
@@ -52,24 +53,21 @@ export const getKokeetTaiLisanaytotData = ({
     }) => ({
       id,
       tyyppiKoodiUri: _.get(tyyppi, 'value'),
-      nimi: _.pick(nimi || {}, kielivalinta),
+      nimi: pickTranslations(nimi, kielivalinta),
       metadata: {
-        tietoja: _.mapValues(
-          _.pick(tietoaHakijalle || {}, kielivalinta),
-          serializeEditorState
-        ),
+        tietoja: pickTranslationsForEditorField(tietoaHakijalle, kielivalinta),
         vahimmaispisteet: isNumeric(vahimmaispistemaara)
           ? parseFloatComma(vahimmaispistemaara)
           : null,
         liittyyEnnakkovalmistautumista,
-        ohjeetEnnakkovalmistautumiseen: _.mapValues(
-          _.pick(ohjeetEnnakkovalmistautumiseen || {}, kielivalinta),
-          serializeEditorState
+        ohjeetEnnakkovalmistautumiseen: pickTranslationsForEditorField(
+          ohjeetEnnakkovalmistautumiseen,
+          kielivalinta
         ),
         erityisjarjestelytMahdollisia,
-        ohjeetErityisjarjestelyihin: _.mapValues(
-          _.pick(ohjeetErityisjarjestelyihin || {}, kielivalinta),
-          serializeEditorState
+        ohjeetErityisjarjestelyihin: pickTranslationsForEditorField(
+          ohjeetErityisjarjestelyihin,
+          kielivalinta
         ),
       },
       tilaisuudet: tilaisuudet.map(getTilaisuusData(kielivalinta)),

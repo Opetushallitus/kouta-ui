@@ -9,6 +9,10 @@ import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';
 import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
+import {
+  pickTranslation,
+  pickTranslationsForEditorField,
+} from '../pickTranslations';
 import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from './constants';
 
 const getArrayValue = (values, key) => {
@@ -81,19 +85,19 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
   const hakutapaKoodiUri = perustiedot?.hakutapa;
   const kielivalinta = perustiedot?.kieliversiot ?? [];
   const kohdejoukkoKoodiUri = perustiedot?.kohdejoukko?.value ?? null;
-  const nimi = _.pick(values?.kuvaus?.nimi, kielivalinta);
+  const nimi = pickTranslation(values?.kuvaus?.nimi, kielivalinta);
 
   const kuvaus = _.pick(
     _.mapValues(values?.kuvaus?.kuvaus ?? {}, serializeEditorState),
     kielivalinta
   );
-  const hakukelpoisuus = _.mapValues(
-    _.pick(values?.hakukelpoisuus || {}, kielivalinta),
-    serializeEditorState
+  const hakukelpoisuus = pickTranslationsForEditorField(
+    values?.hakukelpoisuus,
+    kielivalinta
   );
-  const lisatiedot = _.mapValues(
-    _.pick(values?.lisatiedot || {}, kielivalinta),
-    serializeEditorState
+  const lisatiedot = pickTranslationsForEditorField(
+    values?.lisatiedot,
+    kielivalinta
   );
   const sisalto = serializeSisalto(values?.kuvaus?.sisalto, kielivalinta);
 
@@ -110,14 +114,11 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
           enimmaispistemaara,
           vahimmaispistemaara,
         }) => ({
-          nimi: _.pick(valintatapaNimi || {}, kielivalinta),
+          nimi: pickTranslation(valintatapaNimi, kielivalinta),
           sisalto: serializeSisalto(valintatapaSisalto, kielivalinta),
           valintatapaKoodiUri: tapa?.value,
           kaytaMuuntotaulukkoa: false,
-          kynnysehto: _.mapValues(
-            _.pick(kynnysehto || {}, kielivalinta),
-            serializeEditorState
-          ),
+          kynnysehto: pickTranslationsForEditorField(kynnysehto, kielivalinta),
           enimmaispisteet: isNumeric(enimmaispistemaara)
             ? parseFloatComma(enimmaispistemaara)
             : null,
@@ -128,9 +129,9 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
       )
     : [];
 
-  const valintakokeidenYleiskuvaus = _.mapValues(
-    _.pick(values?.valintakokeet?.yleisKuvaus || {}, kielivalinta),
-    serializeEditorState
+  const valintakokeidenYleiskuvaus = pickTranslationsForEditorField(
+    values?.valintakokeet?.yleisKuvaus,
+    kielivalinta
   );
 
   const valintakokeet = getKokeetTaiLisanaytotData({

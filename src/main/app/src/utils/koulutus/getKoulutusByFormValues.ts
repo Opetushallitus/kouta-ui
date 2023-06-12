@@ -1,6 +1,5 @@
 import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
   MaaraTyyppi,
@@ -13,6 +12,11 @@ import {
 } from '#/src/types/koulutusTypes';
 import { maybeParseNumber, parseFloatComma, valueToArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
+
+import {
+  pickTranslations,
+  pickTranslationsForEditorField,
+} from '../pickTranslations';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -36,7 +40,6 @@ function getKoulutuksetKoodiUri(
 const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const { muokkaaja, tila, esikatselu = false } = values;
   const kielivalinta = values?.kieliversiot ?? [];
-  const pickTranslations = _fp.pick(kielivalinta);
 
   const pohjanTarjoajat = values?.pohja?.tarjoajat;
   const kaytaPohjanJarjestajaa =
@@ -71,8 +74,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA
-        ? pickTranslations(values?.tutkinnonosat?.nimi ?? {})
-        : pickTranslations(values?.information?.nimi ?? {}),
+        ? pickTranslations(values?.tutkinnonosat?.nimi, kielivalinta)
+        : pickTranslations(values?.information?.nimi, kielivalinta),
     julkinen: Boolean(values?.julkinen),
     esikatselu,
     ePerusteId: maybeParseNumber(
@@ -112,15 +115,15 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       koulutustyyppi,
       lisatiedot: osiot.map(({ value }) => ({
         otsikkoKoodiUri: value,
-        teksti: _fp.flow(
-          pickTranslations,
-          _fp.mapValues(serializeEditorState)
-        )(values?.lisatiedot?.osioKuvaukset?.[value] ?? {}),
+        teksti: pickTranslationsForEditorField(
+          values?.lisatiedot?.osioKuvaukset?.[value],
+          kielivalinta
+        ),
       })),
-      kuvaus: _fp.flow(
-        pickTranslations,
-        _fp.mapValues(serializeEditorState)
-      )(values?.description?.kuvaus ?? {}),
+      kuvaus: pickTranslationsForEditorField(
+        values?.description?.kuvaus,
+        kielivalinta
+      ),
       opintojenLaajuusKoodiUri:
         values?.information?.opintojenLaajuus?.value || null,
       opintojenLaajuusyksikkoKoodiUri:
@@ -142,7 +145,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         ({ value }) => value
       ),
       linkkiEPerusteisiin: pickTranslations(
-        values?.description?.linkkiEPerusteisiin ?? {}
+        values?.description?.linkkiEPerusteisiin,
+        kielivalinta
       ),
       isAvoinKorkeakoulutus:
         values?.information?.isAvoinKorkeakoulutus || false,

@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric } from '#/src/utils';
+
+import * as pickTranslations from '../pickTranslations';
 
 const parseNumeric = value => (isNumeric(value) ? parseInt(value) : null);
 
@@ -17,14 +17,12 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     esikatselu = false,
   } = values;
 
-  const pickTranslations = _fp.pick(kieliversiot || []);
-
   const tietoaOpiskelusta = (tietoa?.osiot || []).map(
     ({ value: otsikkoKoodiUri }) => ({
       otsikkoKoodiUri,
-      teksti: _.mapValues(
-        pickTranslations(_.get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}),
-        serializeEditorState
+      teksti: pickTranslations.pickTranslationsForEditorField(
+        _.get(tietoa, ['tiedot', otsikkoKoodiUri]) || {},
+        kieliversiot
       ),
     })
   );
@@ -39,29 +37,41 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     metadata: {
       hakijapalveluidenYhteystiedot: hy
         ? {
-            nimi: pickTranslations(hy.nimi || {}),
+            nimi: pickTranslations.pickTranslations(hy.nimi, kieliversiot),
             postiosoite:
               !_.isEmpty(hy.postiosoite) || hy.postinumero
                 ? {
-                    osoite: pickTranslations(hy.postiosoite || {}),
+                    osoite: pickTranslations.pickTranslations(
+                      hy.postiosoite,
+                      kieliversiot
+                    ),
                     postinumeroKoodiUri: hy.postinumero?.value || null,
                   }
                 : null,
             kayntiosoite:
               !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
                 ? {
-                    osoite: pickTranslations(hy.kayntiosoite || {}),
+                    osoite: pickTranslations.pickTranslations(
+                      hy.kayntiosoite,
+                      kieliversiot
+                    ),
                     postinumeroKoodiUri:
                       hy.kayntiosoitePostinumero?.value || null,
                   }
                 : null,
-            sahkoposti: pickTranslations(hy.sahkoposti || {}),
-            puhelinnumero: pickTranslations(hy.puhelinnumero || {}),
+            sahkoposti: pickTranslations.pickTranslations(
+              hy.sahkoposti,
+              kieliversiot
+            ),
+            puhelinnumero: pickTranslations.pickTranslations(
+              hy.puhelinnumero,
+              kieliversiot
+            ),
           }
         : null,
-      esittely: _.mapValues(
-        pickTranslations(esittely || {}),
-        serializeEditorState
+      esittely: pickTranslations.pickTranslationsForEditorField(
+        esittely,
+        kieliversiot
       ),
       jarjestaaUrheilijanAmmKoulutusta:
         perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
@@ -76,8 +86,14 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
         ? null
         : {
-            url: pickTranslations(perustiedot.wwwSivuUrl || {}),
-            nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
+            url: pickTranslations.pickTranslations(
+              perustiedot.wwwSivuUrl,
+              kieliversiot
+            ),
+            nimi: pickTranslations.pickTranslations(
+              perustiedot.wwwSivuNimi,
+              kieliversiot
+            ),
           },
     },
   };

@@ -64,7 +64,6 @@ Object {
     "aloituspaikat": Object {
       "ensikertalaisille": 29,
       "kuvaus": Object {
-        "en": "<p>aloituspaikan kuvaus en</p>",
         "fi": "<p>aloituspaikan kuvaus fi</p>",
         "sv": "<p>aloituspaikan kuvaus sv</p>",
       },

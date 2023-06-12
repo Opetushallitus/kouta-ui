@@ -1,6 +1,5 @@
 import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { maybeParseNumber, parseFloatComma } from '#/src/utils';
@@ -10,7 +9,12 @@ import {
   getKokeetTaiLisanaytotData,
   getTilaisuusData,
 } from '#/src/utils/form/getKokeetTaiLisanaytotData';
-import { reduce, mapValues } from '#/src/utils/lodashFpUncapped';
+import { reduce } from '#/src/utils/lodashFpUncapped';
+
+import {
+  pickTranslations,
+  pickTranslationsForEditorField,
+} from '../pickTranslations';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 
@@ -28,9 +32,9 @@ function getAloituspaikat(values: HakukohdeFormValues) {
     ensikertalaisille: maybeParseNumber(
       values?.aloituspaikat?.ensikertalaismaara
     ),
-    kuvaus: mapValues(
-      serializeEditorState,
-      values?.aloituspaikat?.aloituspaikkakuvaus
+    kuvaus: pickTranslationsForEditorField(
+      values?.aloituspaikat?.aloituspaikkakuvaus,
+      getKielivalinta(values)
     ),
   };
 }
@@ -80,8 +84,6 @@ const getLiiteToimitusosoite = (toimitustapa, kielivalinta) => {
 };
 
 const getHakukohteenLinja = values => {
-  const kielivalinta = getKielivalinta(values);
-  const pickTranslations = _fp.pick(kielivalinta);
   if (!values?.hakukohteenLinja) {
     return null;
   }
@@ -93,8 +95,9 @@ const getHakukohteenLinja = values => {
     alinHyvaksyttyKeskiarvo:
       (alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo)) ||
       null,
-    lisatietoa: pickTranslations(
-      mapValues(serializeEditorState, lisatietoa || {})
+    lisatietoa: pickTranslationsForEditorField(
+      lisatietoa,
+      getKielivalinta(values)
     ),
     painotetutArvosanat: getPainotetutArvosanatData(painotetutArvosanat),
   };
@@ -109,7 +112,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     jarjestaaUrheilijanAmmKoulutusta,
   } = values;
   const kielivalinta = getKielivalinta(values);
-  const pickTranslations = _fp.pick(kielivalinta);
 
   const kaytetaanHaunHakulomaketta = !values?.hakulomake?.eriHakulomake;
   const {
@@ -169,7 +171,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
       return {
         toimitustapa: tapa,
         tyyppiKoodiUri: tyyppi?.value || null,
-        nimi: pickTranslations(nimi),
+        nimi: pickTranslations(nimi, kielivalinta),
         toimitusaika: liitteetOnkoSamaToimitusaika
           ? null
           : toimitusaika || null,
@@ -177,12 +179,12 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
             ? getLiiteToimitusosoite(toimitustapa, kielivalinta)
             : null,
-        kuvaus: mapValues(serializeEditorState, pickTranslations(kuvaus || {})),
+        kuvaus: pickTranslationsForEditorField(kuvaus, kielivalinta),
       };
     }
   );
 
-  const nimi = pickTranslations(values?.perustiedot?.nimi);
+  const nimi = pickTranslations(values?.perustiedot?.nimi, kielivalinta);
 
   const hakukohdeKoodiUri =
     values?.perustiedot?.hakukohdeKoodiUri?.value ?? null;
@@ -200,8 +202,9 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     values?.pohjakoulutus?.pohjakoulutusvaatimus || []
   ).map(({ value }) => value);
 
-  const pohjakoulutusvaatimusTarkenne = pickTranslations(
-    mapValues(serializeEditorState, values?.pohjakoulutus?.tarkenne || {})
+  const pohjakoulutusvaatimusTarkenne = pickTranslationsForEditorField(
+    values?.pohjakoulutus?.tarkenne,
+    kielivalinta
   );
 
   const kaytetaanHakukohteenAlkamiskautta =
@@ -256,18 +259,14 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     hakulomakeKuvaus,
     metadata: {
       jarjestaaUrheilijanAmmKoulutusta,
-      valintakokeidenYleiskuvaus: pickTranslations(
-        mapValues(
-          serializeEditorState,
-          values?.valintakokeet?.yleisKuvaus || {}
-        )
+      valintakokeidenYleiskuvaus: pickTranslationsForEditorField(
+        values?.valintakokeet?.yleisKuvaus,
+        kielivalinta
       ),
       valintaperusteenValintakokeidenLisatilaisuudet,
-      kynnysehto: pickTranslations(
-        mapValues(
-          serializeEditorState,
-          values?.valintaperusteenKuvaus?.kynnysehto || {}
-        )
+      kynnysehto: pickTranslationsForEditorField(
+        values?.valintaperusteenKuvaus?.kynnysehto,
+        kielivalinta
       ),
       aloituspaikat: getAloituspaikat(values),
       kaytetaanHaunAlkamiskautta: !kaytetaanHakukohteenAlkamiskautta,

@@ -1,6 +1,9 @@
 import _fp from 'lodash/fp';
 
-import * as pickTranslations from '../pickTranslations';
+import {
+  pickTranslations,
+  pickAndSerializeTranslations,
+} from '../pickTranslations';
 
 const getSoraKuvausByFormValues = values => {
   const { tila, muokkaaja, koulutusala, koulutukset } = values;
@@ -12,13 +15,13 @@ const getSoraKuvausByFormValues = values => {
     externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
     tila,
     muokkaaja,
-    nimi: pickTranslations.pickTranslations(values?.tiedot?.nimi, kielivalinta),
+    nimi: pickTranslations(values?.tiedot?.nimi, kielivalinta),
     koulutustyyppi: values?.koulutustyyppi || null,
     kielivalinta,
     metadata: {
       koulutusalaKoodiUri: koulutusala?.value,
       koulutusKoodiUrit: koulutukset?.map(_fp.prop('value')),
-      kuvaus: pickTranslations.pickTranslationsForEditorField(
+      kuvaus: pickAndSerializeTranslations(
         values?.tiedot?.kuvaus,
         kielivalinta
       ),

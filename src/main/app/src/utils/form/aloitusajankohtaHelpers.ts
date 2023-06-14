@@ -4,11 +4,9 @@ import { parseEditorState } from '#/src/components/Editor/utils';
 import { AjankohtaFields } from '#/src/types/formTypes';
 import { maybeParseNumber, toSelectValue } from '#/src/utils';
 
-import { pickTranslationsForEditorField } from '../pickTranslations';
-
 export const getAlkamiskausiData = (
   ajankohta: AjankohtaFields,
-  kielivalinta: Array<LanguageCode>
+  kieleistyksetSerialized
 ) =>
   ajankohta?.ajankohtaTyyppi
     ? {
@@ -17,9 +15,8 @@ export const getAlkamiskausiData = (
         koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
         koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
         koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
-        henkilokohtaisenSuunnitelmanLisatiedot: pickTranslationsForEditorField(
-          ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot,
-          kielivalinta
+        henkilokohtaisenSuunnitelmanLisatiedot: kieleistyksetSerialized(
+          ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot
         ),
       }
     : null;

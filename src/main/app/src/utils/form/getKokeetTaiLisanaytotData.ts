@@ -2,13 +2,8 @@ import _ from 'lodash';
 
 import { isNumeric, parseFloatComma } from '#/src/utils';
 
-import {
-  pickTranslations,
-  pickTranslationsForEditorField,
-} from '../pickTranslations';
-
 export const getTilaisuusData =
-  kielivalinta =>
+  (kieleistykset, kieleistyksetSerialized) =>
   ({
     osoite,
     postinumero,
@@ -18,20 +13,21 @@ export const getTilaisuusData =
     jarjestamispaikka,
   }) => ({
     osoite: {
-      osoite: pickTranslations(osoite, kielivalinta),
+      osoite: kieleistykset(osoite),
       postinumeroKoodiUri: _.get(postinumero, 'value'),
     },
     aika: {
       alkaa: alkaa,
       paattyy: paattyy,
     },
-    lisatietoja: pickTranslationsForEditorField(lisatietoja, kielivalinta),
-    jarjestamispaikka: pickTranslations(jarjestamispaikka, kielivalinta),
+    lisatietoja: kieleistyksetSerialized(lisatietoja),
+    jarjestamispaikka: kieleistykset(jarjestamispaikka),
   });
 
 export const getKokeetTaiLisanaytotData = ({
   valintakoeValues = {},
-  kielivalinta,
+  kieleistykset,
+  kieleistyksetSerialized,
 }) => {
   const kokeetTaiLisanaytot = _.get(valintakoeValues, 'kokeetTaiLisanaytot');
   if (_.isEmpty(kokeetTaiLisanaytot)) {
@@ -53,24 +49,24 @@ export const getKokeetTaiLisanaytotData = ({
     }) => ({
       id,
       tyyppiKoodiUri: _.get(tyyppi, 'value'),
-      nimi: pickTranslations(nimi, kielivalinta),
+      nimi: kieleistykset(nimi),
       metadata: {
-        tietoja: pickTranslationsForEditorField(tietoaHakijalle, kielivalinta),
+        tietoja: kieleistyksetSerialized(tietoaHakijalle),
         vahimmaispisteet: isNumeric(vahimmaispistemaara)
           ? parseFloatComma(vahimmaispistemaara)
           : null,
         liittyyEnnakkovalmistautumista,
-        ohjeetEnnakkovalmistautumiseen: pickTranslationsForEditorField(
-          ohjeetEnnakkovalmistautumiseen,
-          kielivalinta
+        ohjeetEnnakkovalmistautumiseen: kieleistyksetSerialized(
+          ohjeetEnnakkovalmistautumiseen
         ),
         erityisjarjestelytMahdollisia,
-        ohjeetErityisjarjestelyihin: pickTranslationsForEditorField(
-          ohjeetErityisjarjestelyihin,
-          kielivalinta
+        ohjeetErityisjarjestelyihin: kieleistyksetSerialized(
+          ohjeetErityisjarjestelyihin
         ),
       },
-      tilaisuudet: tilaisuudet.map(getTilaisuusData(kielivalinta)),
+      tilaisuudet: tilaisuudet.map(
+        getTilaisuusData(kieleistykset, kieleistyksetSerialized)
+      ),
     })
   );
 };

@@ -6,13 +6,17 @@ import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 
-import { pickTranslations } from '../pickTranslations';
-
-const getKielivalinta = values => values?.kieliversiot || [];
+import {
+  getKieleistyksetFromValues,
+  getKielivalinta,
+  getSerializedKieleistykset,
+} from '../pickTranslations';
 
 export const getHakuByFormValues = (values: HakuFormValues) => {
   const kielivalinta = getKielivalinta(values);
 
+  const kieleistykset = getKieleistyksetFromValues(values);
+  const kieleistyksetSerialized = getSerializedKieleistykset(values);
   const {
     hakulomaketyyppi,
     hakulomakeAtaruId,
@@ -20,7 +24,8 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
     hakulomakeKuvaus,
   } = getHakulomakeFieldsData({
     hakulomakeValues: values?.hakulomake,
-    kielivalinta,
+    kieleistykset,
+    kieleistyksetSerialized,
   });
 
   const kohdejoukkoKoodiUri = values?.kohdejoukko?.kohdejoukko || null;
@@ -40,7 +45,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
     ),
     hakukohteenLiittamisenTakaraja:
       values?.aikataulut?.lisaamisenTakaraja || null,
-    nimi: pickTranslations(values?.nimi, kielivalinta),
+    nimi: kieleistykset(values?.nimi),
     kohdejoukkoKoodiUri,
     kohdejoukonTarkenneKoodiUri: isKorkeakoulutusKohdejoukkoKoodiUri(
       kohdejoukkoKoodiUri
@@ -51,7 +56,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
     metadata: {
       koulutuksenAlkamiskausi: getAlkamiskausiData(
         values?.aikataulut,
-        kielivalinta
+        kieleistyksetSerialized
       ),
       tulevaisuudenAikataulu: (values?.aikataulut?.aikataulu || []).map(
         ({ alkaa, paattyy }) => ({
@@ -68,12 +73,12 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
           verkkosivu,
           verkkosivuTeksti,
         }) => ({
-          nimi: pickTranslations(nimi, kielivalinta),
-          titteli: pickTranslations(titteli, kielivalinta),
-          puhelinnumero: pickTranslations(puhelinnumero, kielivalinta),
-          wwwSivu: pickTranslations(verkkosivu, kielivalinta),
-          wwwSivuTeksti: pickTranslations(verkkosivuTeksti, kielivalinta),
-          sahkoposti: pickTranslations(sahkoposti, kielivalinta),
+          nimi: kieleistykset(nimi),
+          titteli: kieleistykset(titteli),
+          puhelinnumero: kieleistykset(puhelinnumero),
+          wwwSivu: kieleistykset(verkkosivu),
+          wwwSivuTeksti: kieleistykset(verkkosivuTeksti),
+          sahkoposti: kieleistykset(sahkoposti),
         })
       ),
     },

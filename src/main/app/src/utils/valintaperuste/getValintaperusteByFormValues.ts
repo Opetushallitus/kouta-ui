@@ -10,8 +10,8 @@ import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
 import {
-  pickTranslations,
-  pickTranslationsForEditorField,
+  getKieleistyksetFromValues,
+  getSerializedKieleistykset,
 } from '../pickTranslations';
 import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from './constants';
 
@@ -83,22 +83,15 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
   const julkinen = Boolean(values?.julkinen);
 
   const hakutapaKoodiUri = perustiedot?.hakutapa;
+  const kieleistykset = getKieleistyksetFromValues(perustiedot);
+  const kieleistyksetSerialized = getSerializedKieleistykset(perustiedot);
   const kielivalinta = perustiedot?.kieliversiot ?? [];
   const kohdejoukkoKoodiUri = perustiedot?.kohdejoukko?.value ?? null;
-  const nimi = pickTranslations(values?.kuvaus?.nimi, kielivalinta);
+  const nimi = kieleistykset(values?.kuvaus?.nimi);
 
-  const kuvaus = pickTranslationsForEditorField(
-    values?.kuvaus?.kuvaus,
-    kielivalinta
-  );
-  const hakukelpoisuus = pickTranslationsForEditorField(
-    values?.hakukelpoisuus,
-    kielivalinta
-  );
-  const lisatiedot = pickTranslationsForEditorField(
-    values?.lisatiedot,
-    kielivalinta
-  );
+  const kuvaus = kieleistyksetSerialized(values?.kuvaus?.kuvaus);
+  const hakukelpoisuus = kieleistyksetSerialized(values?.hakukelpoisuus);
+  const lisatiedot = kieleistyksetSerialized(values?.lisatiedot);
   const sisalto = serializeSisalto(values?.kuvaus?.sisalto, kielivalinta);
 
   const valintatavat = _.includes(
@@ -114,11 +107,11 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
           enimmaispistemaara,
           vahimmaispistemaara,
         }) => ({
-          nimi: pickTranslations(valintatapaNimi, kielivalinta),
+          nimi: kieleistykset(valintatapaNimi),
           sisalto: serializeSisalto(valintatapaSisalto, kielivalinta),
           valintatapaKoodiUri: tapa?.value,
           kaytaMuuntotaulukkoa: false,
-          kynnysehto: pickTranslationsForEditorField(kynnysehto, kielivalinta),
+          kynnysehto: kieleistyksetSerialized(kynnysehto),
           enimmaispisteet: isNumeric(enimmaispistemaara)
             ? parseFloatComma(enimmaispistemaara)
             : null,
@@ -129,14 +122,14 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
       )
     : [];
 
-  const valintakokeidenYleiskuvaus = pickTranslationsForEditorField(
-    values?.valintakokeet?.yleisKuvaus,
-    kielivalinta
+  const valintakokeidenYleiskuvaus = kieleistyksetSerialized(
+    values?.valintakokeet?.yleisKuvaus
   );
 
   const valintakokeet = getKokeetTaiLisanaytotData({
     valintakoeValues: values?.valintakokeet,
-    kielivalinta,
+    kieleistykset,
+    kieleistyksetSerialized,
   });
 
   return {

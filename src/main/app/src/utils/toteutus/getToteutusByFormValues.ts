@@ -7,32 +7,27 @@ import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { serializeSisaltoField } from '#/src/utils/form/serializeSisaltoField';
 
 import {
-  pickTranslations,
-  pickTranslationsForEditorField,
+  getSerializedKieleistykset,
+  getKieleistyksetFromValues,
+  getKielivalinta,
 } from '../pickTranslations';
 import { isApurahaVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
-const getLukiolinjatByValues = (linjaValues, kielivalinta) =>
+const getLukiolinjatByValues = (linjaValues, kieleistyksetSerialized) =>
   (linjaValues?.kaytossa &&
     linjaValues?.valinnat?.map(({ value }) => ({
       koodiUri: value,
-      kuvaus: pickTranslationsForEditorField(
-        linjaValues.kuvaukset[value],
-        kielivalinta
-      ),
+      kuvaus: kieleistyksetSerialized(linjaValues.kuvaukset[value]),
     }))) ||
   [];
 
-const getDiplomitByValues = (diplomiValues, kielivalinta) =>
+const getDiplomitByValues = (diplomiValues, kieleistykset) =>
   diplomiValues?.valinnat?.map(({ value }, index) => ({
     koodiUri: value,
-    linkki: pickTranslations(diplomiValues?.linkit[index]?.url, kielivalinta),
-    linkinAltTeksti: pickTranslations(
-      diplomiValues?.linkit[index]?.alt,
-      kielivalinta
-    ),
+    linkki: kieleistykset(diplomiValues?.linkit[index]?.url),
+    linkinAltTeksti: kieleistykset(diplomiValues?.linkit[index]?.alt),
   })) || [];
 
 const getToteutusByFormValues = (values: ToteutusFormValues) => {
@@ -45,7 +40,9 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
     hakeutumisTaiIlmoittautumistapa: HTIT,
   } = values;
   const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
-  const kielivalinta = values?.kieliversiot || [];
+  const kieleistykset = getKieleistyksetFromValues(values);
+  const kieleistyksetSerialized = getSerializedKieleistykset(values);
+  const kielivalinta = getKielivalinta(values);
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 
@@ -75,10 +72,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   return {
     organisaatioOid: values?.organisaatioOid?.value,
     externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
-    nimi:
-      koulutustyyppi === 'lk'
-        ? {}
-        : pickTranslations(values?.tiedot?.nimi, kielivalinta),
+    nimi: koulutustyyppi === 'lk' ? {} : kieleistykset(values?.tiedot?.nimi),
     tarjoajat: values?.tarjoajat || [],
     kielivalinta,
     tila,
@@ -91,10 +85,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(
           ({ value }) => ({
             otsikkoKoodiUri: value,
-            teksti: pickTranslationsForEditorField(
-              osioKuvaukset[value],
-              kielivalinta
-            ),
+            teksti: kieleistyksetSerialized(osioKuvaukset[value]),
           })
         ),
         opetuskieliKoodiUrit: opetuskielet || [],
@@ -102,29 +93,24 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         maksunMaara: maybeParseNumber(maksunMaara),
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
-        opetuskieletKuvaus: pickTranslationsForEditorField(
-          values?.jarjestamistiedot?.opetuskieliKuvaus,
-          kielivalinta
+        opetuskieletKuvaus: kieleistyksetSerialized(
+          values?.jarjestamistiedot?.opetuskieliKuvaus
         ),
-        opetustapaKuvaus: pickTranslationsForEditorField(
-          values?.jarjestamistiedot?.opetustapaKuvaus,
-          kielivalinta
+        opetustapaKuvaus: kieleistyksetSerialized(
+          values?.jarjestamistiedot?.opetustapaKuvaus
         ),
-        opetusaikaKuvaus: pickTranslationsForEditorField(
-          values?.jarjestamistiedot?.opetusaikaKuvaus,
-          kielivalinta
+        opetusaikaKuvaus: kieleistyksetSerialized(
+          values?.jarjestamistiedot?.opetusaikaKuvaus
         ),
-        maksullisuusKuvaus: pickTranslationsForEditorField(
-          values?.jarjestamistiedot?.maksullisuusKuvaus,
-          kielivalinta
+        maksullisuusKuvaus: kieleistyksetSerialized(
+          values?.jarjestamistiedot?.maksullisuusKuvaus
         ),
         onkoApuraha,
         apuraha:
           apurahaVisible && onkoApuraha
             ? {
-                kuvaus: pickTranslationsForEditorField(
-                  values?.jarjestamistiedot?.apurahaKuvaus,
-                  kielivalinta
+                kuvaus: kieleistyksetSerialized(
+                  values?.jarjestamistiedot?.apurahaKuvaus
                 ),
                 ...(onkoApuraha
                   ? {
@@ -145,15 +131,17 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         suunniteltuKestoKuukaudet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.kuukautta
         ),
-        suunniteltuKestoKuvaus: pickTranslationsForEditorField(
-          jarjestamistiedot?.suunniteltuKestoKuvaus,
-          kielivalinta
+        suunniteltuKestoKuvaus: kieleistyksetSerialized(
+          jarjestamistiedot?.suunniteltuKestoKuvaus
         ),
-        koulutuksenAlkamiskausi: getAlkamiskausiData(ajankohta, kielivalinta),
+        koulutuksenAlkamiskausi: getAlkamiskausiData(
+          ajankohta,
+          kieleistyksetSerialized
+        ),
       },
       diplomit: getDiplomitByValues(
         values?.jarjestamistiedot?.diplomit,
-        kielivalinta
+        kieleistykset
       ),
       ammatillinenPerustutkintoErityisopetuksena:
         values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
@@ -165,7 +153,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       yleislinja: values?.lukiolinjat?.yleislinja,
       painotukset: getLukiolinjatByValues(
         values?.lukiolinjat?.painotukset,
-        kielivalinta
+        kieleistyksetSerialized
       ),
       kielivalikoima: {
         A1Kielet: (kielivalikoima?.A1Kielet || []).map(_fp.prop('value')),
@@ -178,7 +166,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       },
       erityisetKoulutustehtavat: getLukiolinjatByValues(
         values?.lukiolinjat?.erityisetKoulutustehtavat,
-        kielivalinta
+        kieleistyksetSerialized
       ),
       osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({
         koodiUri: osaamisala,
@@ -194,21 +182,16 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           verkkosivu,
           verkkosivuTeksti,
         }) => ({
-          nimi: pickTranslations(nimi, kielivalinta),
-          titteli: pickTranslations(titteli, kielivalinta),
-          sahkoposti: pickTranslations(sahkoposti, kielivalinta),
-          puhelinnumero: pickTranslations(puhelinnumero, kielivalinta),
-          wwwSivu: pickTranslations(verkkosivu, kielivalinta),
-          wwwSivuTeksti: pickTranslations(verkkosivuTeksti, kielivalinta),
+          nimi: kieleistykset(nimi),
+          titteli: kieleistykset(titteli),
+          sahkoposti: kieleistykset(sahkoposti),
+          puhelinnumero: kieleistykset(puhelinnumero),
+          wwwSivu: kieleistykset(verkkosivu),
+          wwwSivuTeksti: kieleistykset(verkkosivuTeksti),
         })
       ),
       ammattinimikkeet: _fp
-        .toPairs(
-          pickTranslations(
-            values?.nayttamistiedot?.ammattinimikkeet,
-            kielivalinta
-          )
-        )
+        .toPairs(kieleistykset(values?.nayttamistiedot?.ammattinimikkeet))
         .flatMap(([language, nimikkeet]) => {
           return (nimikkeet || []).map(({ value }) => ({
             kieli: language,
@@ -216,16 +199,14 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           }));
         }),
       asiasanat: _fp
-        .toPairs(
-          pickTranslations(values?.nayttamistiedot?.avainsanat, kielivalinta)
-        )
+        .toPairs(kieleistykset(values?.nayttamistiedot?.avainsanat))
         .flatMap(([language, sanat]) => {
           return (sanat || []).map(({ value }) => ({
             kieli: language,
             arvo: value,
           }));
         }),
-      kuvaus: pickTranslationsForEditorField(values?.kuvaus, kielivalinta),
+      kuvaus: kieleistyksetSerialized(values?.kuvaus),
       tyyppi: koulutustyyppi,
       opintojenLaajuusyksikkoKoodiUri:
         values?.tiedot?.opintojenLaajuusyksikko?.value || null,
@@ -238,40 +219,29 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       opintojenLaajuusNumeroMax: isLaajuusRange
         ? maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMax)
         : maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMin),
-      ilmoittautumislinkki: pickTranslations(
-        values?.tiedot?.ilmoittautumislinkki,
-        kielivalinta
-      ),
+      ilmoittautumislinkki: kieleistykset(values?.tiedot?.ilmoittautumislinkki),
       aloituspaikat: maybeParseNumber(values?.tiedot?.aloituspaikat),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
-          nimi: pickTranslations(nimi, kielivalinta),
+          nimi: kieleistykset(nimi),
           koodi: koodi || null,
-          laajuus: pickTranslations(laajuus, kielivalinta),
-          ilmoittautumislinkki: pickTranslations(
-            ilmoittautumislinkki,
-            kielivalinta
-          ),
-          kuvaus: pickTranslationsForEditorField(kuvaus, kielivalinta),
+          laajuus: kieleistykset(laajuus),
+          ilmoittautumislinkki: kieleistykset(ilmoittautumislinkki),
+          kuvaus: kieleistyksetSerialized(kuvaus),
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
         })
       ),
       hakutermi: HTIT?.hakuTapa,
       hakulomaketyyppi,
       hakulomakeLinkki:
-        hakulomaketyyppi === MUU
-          ? pickTranslations(HTIT?.linkki, kielivalinta)
-          : {},
+        hakulomaketyyppi === MUU ? kieleistykset(HTIT?.linkki) : {},
       lisatietoaHakeutumisesta:
         hakulomaketyyppi === MUU || hakulomaketyyppi === EI_SAHKOISTA_HAKUA
-          ? pickTranslationsForEditorField(HTIT?.lisatiedot, kielivalinta)
+          ? kieleistyksetSerialized(HTIT?.lisatiedot)
           : {},
       lisatietoaValintaperusteista:
         hakulomaketyyppi === MUU
-          ? pickTranslationsForEditorField(
-              HTIT?.lisatiedotValintaperusteista,
-              kielivalinta
-            )
+          ? kieleistyksetSerialized(HTIT?.lisatiedotValintaperusteista)
           : {},
       hakuaika:
         hakulomaketyyppi === MUU &&

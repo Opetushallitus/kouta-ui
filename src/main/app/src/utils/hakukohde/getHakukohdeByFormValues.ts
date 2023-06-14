@@ -12,11 +12,11 @@ import {
 import { reduce } from '#/src/utils/lodashFpUncapped';
 
 import {
-  pickTranslations,
-  pickTranslationsForEditorField,
+  getKielivalinta,
+  getKieleistyksetFromValues,
+  getSerializedKieleistykset,
+  pickAndSerializeTranslations,
 } from '../pickTranslations';
-
-const getKielivalinta = values => values?.kieliversiot || [];
 
 const getLiitteillaYhteinenToimitusaika = values =>
   Boolean(values?.liitteet?.yhteinenToimitusaika);
@@ -32,7 +32,7 @@ function getAloituspaikat(values: HakukohdeFormValues) {
     ensikertalaisille: maybeParseNumber(
       values?.aloituspaikat?.ensikertalaismaara
     ),
-    kuvaus: pickTranslationsForEditorField(
+    kuvaus: pickAndSerializeTranslations(
       values?.aloituspaikat?.aloituspaikkakuvaus,
       getKielivalinta(values)
     ),
@@ -95,7 +95,7 @@ const getHakukohteenLinja = values => {
     alinHyvaksyttyKeskiarvo:
       (alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo)) ||
       null,
-    lisatietoa: pickTranslationsForEditorField(
+    lisatietoa: pickAndSerializeTranslations(
       lisatietoa,
       getKielivalinta(values)
     ),
@@ -113,6 +113,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   } = values;
   const kielivalinta = getKielivalinta(values);
 
+  const kieleistykset = getKieleistyksetFromValues(values);
+  const kieleistyksetSerialized = getSerializedKieleistykset(values);
   const kaytetaanHaunHakulomaketta = !values?.hakulomake?.eriHakulomake;
   const {
     hakulomakeAtaruId,
@@ -128,7 +130,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
       }
     : getHakulomakeFieldsData({
         hakulomakeValues: values?.hakulomake,
-        kielivalinta,
+        kieleistykset,
+        kieleistyksetSerialized,
       });
 
   const kaytetaanHaunAikataulua = getKaytetaanHaunAikataulua(values);
@@ -171,7 +174,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
       return {
         toimitustapa: tapa,
         tyyppiKoodiUri: tyyppi?.value || null,
-        nimi: pickTranslations(nimi, kielivalinta),
+        nimi: kieleistykset(nimi),
         toimitusaika: liitteetOnkoSamaToimitusaika
           ? null
           : toimitusaika || null,
@@ -179,12 +182,12 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
             ? getLiiteToimitusosoite(toimitustapa, kielivalinta)
             : null,
-        kuvaus: pickTranslationsForEditorField(kuvaus, kielivalinta),
+        kuvaus: kieleistyksetSerialized(kuvaus),
       };
     }
   );
 
-  const nimi = pickTranslations(values?.perustiedot?.nimi, kielivalinta);
+  const nimi = kieleistykset(values?.perustiedot?.nimi);
 
   const hakukohdeKoodiUri =
     values?.perustiedot?.hakukohdeKoodiUri?.value ?? null;
@@ -195,16 +198,16 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   const valintakokeet = getKokeetTaiLisanaytotData({
     valintakoeValues: values?.valintakokeet,
-    kielivalinta,
+    kieleistykset,
+    kieleistyksetSerialized,
   });
 
   const pohjakoulutusvaatimusKoodiUrit = (
     values?.pohjakoulutus?.pohjakoulutusvaatimus || []
   ).map(({ value }) => value);
 
-  const pohjakoulutusvaatimusTarkenne = pickTranslationsForEditorField(
-    values?.pohjakoulutus?.tarkenne,
-    kielivalinta
+  const pohjakoulutusvaatimusTarkenne = kieleistyksetSerialized(
+    values?.pohjakoulutus?.tarkenne
   );
 
   const kaytetaanHakukohteenAlkamiskautta =
@@ -214,7 +217,15 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const valintaperusteenValintakokeidenLisatilaisuudet = reduce(
     (a, v, k) =>
       v?.length > 0
-        ? [...a, { id: k, tilaisuudet: v.map(getTilaisuusData(kielivalinta)) }]
+        ? [
+            ...a,
+            {
+              id: k,
+              tilaisuudet: v.map(
+                getTilaisuusData(kieleistykset, kieleistyksetSerialized)
+              ),
+            },
+          ]
         : a,
     [],
     values?.valintakokeet?.valintaperusteenValintakokeidenLisatilaisuudet || {}
@@ -259,19 +270,17 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     hakulomakeKuvaus,
     metadata: {
       jarjestaaUrheilijanAmmKoulutusta,
-      valintakokeidenYleiskuvaus: pickTranslationsForEditorField(
-        values?.valintakokeet?.yleisKuvaus,
-        kielivalinta
+      valintakokeidenYleiskuvaus: kieleistyksetSerialized(
+        values?.valintakokeet?.yleisKuvaus
       ),
       valintaperusteenValintakokeidenLisatilaisuudet,
-      kynnysehto: pickTranslationsForEditorField(
-        values?.valintaperusteenKuvaus?.kynnysehto,
-        kielivalinta
+      kynnysehto: kieleistyksetSerialized(
+        values?.valintaperusteenKuvaus?.kynnysehto
       ),
       aloituspaikat: getAloituspaikat(values),
       kaytetaanHaunAlkamiskautta: !kaytetaanHakukohteenAlkamiskautta,
       koulutuksenAlkamiskausi: kaytetaanHakukohteenAlkamiskautta
-        ? getAlkamiskausiData(ajankohta, kielivalinta)
+        ? getAlkamiskausiData(ajankohta, kieleistyksetSerialized)
         : null,
       hakukohteenLinja: getHakukohteenLinja(values),
       uudenOpiskelijanUrl: values?.uudenOpiskelijanUrl,

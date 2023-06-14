@@ -11,6 +11,8 @@ import {
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 
+import { sisalto } from '../testFormData';
+
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues(
     {
@@ -46,7 +48,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       kieliversiot: ['fi', 'sv'],
       tarjoajat: ['org1', 'org2'],
       jarjestamistiedot: {
-        maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
+        maksullisuustyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
         maksunMaara: 50.5,
         maksullisuusKuvaus: {
           fi: parseEditorState('Fi maksullisuuskuvaus'),
@@ -238,34 +240,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
             fi: 'Fi linkki',
             sv: 'Sv linkki',
           },
-          sisalto: [
-            {
-              tyyppi: 'teksti',
-              data: {
-                fi: parseEditorState('<h2>Fi sisalto</h2>'),
-                sv: parseEditorState('<h2>Sv sisalto</h2>'),
-              },
-            },
-            {
-              tyyppi: 'taulukko',
-              data: {
-                rows: [
-                  {
-                    columns: [
-                      { text: { fi: 'Fi column1', sv: 'Sv column1' } },
-                      { text: { fi: 'Fi column2', sv: 'Sv column2' } },
-                    ],
-                  },
-                  {
-                    columns: [
-                      { text: { fi: 'Fi column3', sv: 'Sv column3' } },
-                      { text: { fi: 'Fi column4', sv: 'Sv column4' } },
-                    ],
-                  },
-                ],
-              },
-            },
-          ],
+          sisalto: sisalto,
         },
       ],
       hakeutumisTaiIlmoittautumistapa: {

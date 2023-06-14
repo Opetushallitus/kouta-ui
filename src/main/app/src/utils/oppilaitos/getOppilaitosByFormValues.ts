@@ -1,8 +1,11 @@
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric } from '#/src/utils';
+
+import {
+  getKieleistyksetForKieliversiot,
+  getSerializedKieleistyksetFromKieliversiot,
+} from '../pickTranslations';
 
 const parseNumeric = value => (isNumeric(value) ? parseInt(value) : null);
 
@@ -17,14 +20,14 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     esikatselu = false,
   } = values;
 
-  const pickTranslations = _fp.pick(kieliversiot || []);
-
+  const kieleistykset = getKieleistyksetForKieliversiot(kieliversiot);
+  const kieleistyksetSerialized =
+    getSerializedKieleistyksetFromKieliversiot(kieliversiot);
   const tietoaOpiskelusta = (tietoa?.osiot || []).map(
     ({ value: otsikkoKoodiUri }) => ({
       otsikkoKoodiUri,
-      teksti: _.mapValues(
-        pickTranslations(_.get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}),
-        serializeEditorState
+      teksti: kieleistyksetSerialized(
+        _.get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}
       ),
     })
   );
@@ -39,30 +42,27 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     metadata: {
       hakijapalveluidenYhteystiedot: hy
         ? {
-            nimi: pickTranslations(hy.nimi || {}),
+            nimi: kieleistykset(hy.nimi),
             postiosoite:
               !_.isEmpty(hy.postiosoite) || hy.postinumero
                 ? {
-                    osoite: pickTranslations(hy.postiosoite || {}),
+                    osoite: kieleistykset(hy.postiosoite),
                     postinumeroKoodiUri: hy.postinumero?.value || null,
                   }
                 : null,
             kayntiosoite:
               !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
                 ? {
-                    osoite: pickTranslations(hy.kayntiosoite || {}),
+                    osoite: kieleistykset(hy.kayntiosoite),
                     postinumeroKoodiUri:
                       hy.kayntiosoitePostinumero?.value || null,
                   }
                 : null,
-            sahkoposti: pickTranslations(hy.sahkoposti || {}),
-            puhelinnumero: pickTranslations(hy.puhelinnumero || {}),
+            sahkoposti: kieleistykset(hy.sahkoposti),
+            puhelinnumero: kieleistykset(hy.puhelinnumero),
           }
         : null,
-      esittely: _.mapValues(
-        pickTranslations(esittely || {}),
-        serializeEditorState
-      ),
+      esittely: kieleistyksetSerialized(esittely),
       jarjestaaUrheilijanAmmKoulutusta:
         perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
       tietoaOpiskelusta,
@@ -76,8 +76,8 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
         ? null
         : {
-            url: pickTranslations(perustiedot.wwwSivuUrl || {}),
-            nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
+            url: kieleistykset(perustiedot.wwwSivuUrl),
+            nimi: kieleistykset(perustiedot.wwwSivuNimi),
           },
     },
   };

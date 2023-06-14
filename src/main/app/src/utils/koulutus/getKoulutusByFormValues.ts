@@ -1,6 +1,5 @@
 import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
   MaaraTyyppi,
@@ -13,6 +12,11 @@ import {
 } from '#/src/types/koulutusTypes';
 import { maybeParseNumber, parseFloatComma, valueToArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
+
+import {
+  getKieleistyksetFromValues,
+  getSerializedKieleistykset,
+} from '../pickTranslations';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -36,8 +40,8 @@ function getKoulutuksetKoodiUri(
 const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const { muokkaaja, tila, esikatselu = false } = values;
   const kielivalinta = values?.kieliversiot ?? [];
-  const pickTranslations = _fp.pick(kielivalinta);
-
+  const kieleistykset = getKieleistyksetFromValues(values);
+  const kieleistyksetSerialized = getSerializedKieleistykset(values);
   const pohjanTarjoajat = values?.pohja?.tarjoajat;
   const kaytaPohjanJarjestajaa =
     values?.tarjoajat?.kaytaPohjanJarjestajaa ?? false;
@@ -71,8 +75,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA
-        ? pickTranslations(values?.tutkinnonosat?.nimi ?? {})
-        : pickTranslations(values?.information?.nimi ?? {}),
+        ? kieleistykset(values?.tutkinnonosat?.nimi)
+        : kieleistykset(values?.information?.nimi),
     julkinen: Boolean(values?.julkinen),
     esikatselu,
     ePerusteId: maybeParseNumber(
@@ -112,15 +116,11 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       koulutustyyppi,
       lisatiedot: osiot.map(({ value }) => ({
         otsikkoKoodiUri: value,
-        teksti: _fp.flow(
-          pickTranslations,
-          _fp.mapValues(serializeEditorState)
-        )(values?.lisatiedot?.osioKuvaukset?.[value] ?? {}),
+        teksti: kieleistyksetSerialized(
+          values?.lisatiedot?.osioKuvaukset?.[value]
+        ),
       })),
-      kuvaus: _fp.flow(
-        pickTranslations,
-        _fp.mapValues(serializeEditorState)
-      )(values?.description?.kuvaus ?? {}),
+      kuvaus: kieleistyksetSerialized(values?.description?.kuvaus),
       opintojenLaajuusKoodiUri:
         values?.information?.opintojenLaajuus?.value || null,
       opintojenLaajuusyksikkoKoodiUri:
@@ -141,8 +141,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       koulutusalaKoodiUrit: (values?.information?.koulutusalat ?? []).map(
         ({ value }) => value
       ),
-      linkkiEPerusteisiin: pickTranslations(
-        values?.description?.linkkiEPerusteisiin ?? {}
+      linkkiEPerusteisiin: kieleistykset(
+        values?.description?.linkkiEPerusteisiin
       ),
       isAvoinKorkeakoulutus:
         values?.information?.isAvoinKorkeakoulutus || false,

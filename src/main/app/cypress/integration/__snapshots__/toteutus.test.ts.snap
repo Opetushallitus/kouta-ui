@@ -15,7 +15,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -28,6 +27,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -69,6 +69,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -95,8 +96,8 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -159,12 +160,12 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -202,6 +203,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -228,8 +230,8 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -302,12 +304,12 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -363,8 +365,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#2",
-        "oppilaitoksenopetuskieli_4#2"
+        "oppilaitoksenopetuskieli_4#2",
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -380,8 +382,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -439,7 +441,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -474,6 +475,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": true,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [
         "kieli_en#1"
@@ -525,6 +527,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -551,8 +554,8 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [
@@ -632,13 +635,13 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -678,7 +681,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -705,8 +708,8 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -786,13 +789,13 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -832,7 +835,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -859,8 +862,8 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -930,13 +933,13 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -990,7 +993,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1017,8 +1020,8 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -1087,7 +1090,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -1096,6 +1098,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "hakutermi": "hakeutuminen",
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -1135,7 +1138,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1162,8 +1165,8 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -1233,12 +1236,12 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -1276,6 +1279,7 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1302,8 +1306,8 @@ exports[`createToteutus > should be able to create TUVA toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -1371,13 +1375,13 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -1417,7 +1421,7 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1444,8 +1448,8 @@ exports[`editToteutus > should be able to edit tuva toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -1505,12 +1509,12 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -1548,6 +1552,7 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1574,8 +1579,8 @@ exports[`createToteutus > should be able to create TELMA toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -1643,13 +1648,13 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -1689,7 +1694,7 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1716,8 +1721,8 @@ exports[`editToteutus > should be able to edit telma toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -1777,7 +1782,6 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -1790,6 +1794,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -1831,6 +1836,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1857,8 +1863,8 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö - Muu" to
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -1916,12 +1922,12 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -1959,6 +1965,7 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1985,8 +1992,8 @@ exports[`createToteutus > should be able to create "Vapaa Sivistystyö  - Opisto
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -2054,13 +2061,13 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -2100,7 +2107,7 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -2127,8 +2134,8 @@ exports[`editToteutus > should be able to delete toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [
       {
@@ -2341,12 +2348,12 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -2362,14 +2369,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "apuraha": {
-        "kuvaus": {
-          "fi": "<p>apuraha kuvaus</p>"
-        },
-        "max": 20,
-        "min": 20,
-        "yksikko": "euro"
-      },
+      "apuraha": null,
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -2389,9 +2389,9 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
-      "maksullisuustyyppi": "lukuvuosimaksu",
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -2402,8 +2402,7 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#2",
-        "oppilaitoksenopetuskieli_4#2"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -2419,8 +2418,8 @@ exports[`createToteutus > should be able to create amm. ope-, erityisope- ja opo
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -2478,7 +2477,6 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -2491,6 +2489,7 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -2532,6 +2531,7 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -2558,8 +2558,8 @@ exports[`createToteutus > should be able to create muu ammatillinen toteutus #0`
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -2617,7 +2617,6 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -2630,6 +2629,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -2671,6 +2671,7 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -2697,8 +2698,8 @@ exports[`createToteutus > should be able to create "Aikuisten perusopetus" -tote
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -2766,7 +2767,6 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2775,6 +2775,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
     "hakutermi": "hakeutuminen",
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -2814,7 +2815,7 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -2841,8 +2842,8 @@ exports[`editToteutus > should be able to edit muu ammatillinen toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -2912,7 +2913,6 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": null,
@@ -2921,6 +2921,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
     "hakutermi": "hakeutuminen",
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
@@ -2960,7 +2961,7 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -2987,8 +2988,8 @@ exports[`editToteutus > should be able to edit "Aikuisten perusopetus" -toteutus
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -3048,7 +3049,6 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [],
     "erityisetKoulutustehtavat": [],
     "hakuaika": {
@@ -3061,6 +3061,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [],
       "A2Kielet": [],
@@ -3080,14 +3081,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
       "fi": "<p>lisätiedot valintaperusteista</p>"
     },
     "opetus": {
-      "apuraha": {
-        "kuvaus": {
-          "fi": "<p>apuraha kuvaus</p>"
-        },
-        "max": 20,
-        "min": 20,
-        "yksikko": "euro"
-      },
+      "apuraha": null,
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -3107,9 +3101,9 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
-      "maksullisuustyyppi": "lukuvuosimaksu",
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -3120,8 +3114,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#2",
-        "oppilaitoksenopetuskieli_4#2"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -3137,8 +3130,8 @@ exports[`createToteutus > should be able to create korkeakoulutus opintojakso to
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -3196,7 +3189,6 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -3218,6 +3210,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     "hakulomakeLinkki": {},
     "hasJotpaRahoitus": true,
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [
         "kieli_en#1"
@@ -3269,6 +3262,7 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -3295,8 +3289,8 @@ exports[`createToteutus > should be able to create "DIA" -toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -3353,7 +3347,6 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "isAvoinKorkeakoulutus": false,
     "diplomit": [
       {
         "koodiUri": "moduulikoodistolops2021_kald3#1",
@@ -3374,6 +3367,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "isAvoinKorkeakoulutus": false,
     "kielivalikoima": {
       "A1Kielet": [
         "kieli_en#1"
@@ -3425,6 +3419,7 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -3451,8 +3446,8 @@ exports[`createToteutus > should be able to create "EB" -toteutus #0`] =
     },
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
-    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
+    "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalat": [],
     "painotukset": [],
@@ -3544,14 +3539,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
       "fi": "<p>lisätiedot valintaperusteista</p>"
     },
     "opetus": {
-      "apuraha": {
-        "kuvaus": {
-          "fi": "<p>apuraha kuvaus</p>"
-        },
-        "max": 20,
-        "min": 20,
-        "yksikko": "euro"
-      },
+      "apuraha": null,
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
@@ -3571,9 +3559,9 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
-      "maksullisuustyyppi": "lukuvuosimaksu",
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
-      "onkoApuraha": true,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -3584,8 +3572,7 @@ exports[`createToteutus > should be able to create korkeakoulutus opintokokonais
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_1#2",
-        "oppilaitoksenopetuskieli_4#2"
+        "oppilaitoksenopetuskieli_1#2"
       ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
@@ -3714,6 +3701,7 @@ exports[`createToteutus > should be able to create "Taiteen perusopetus" -toteut
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
+      "onkoApuraha": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],

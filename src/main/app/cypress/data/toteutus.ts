@@ -1,6 +1,6 @@
 import { merge } from 'lodash/fp';
 
-import { Alkamiskausityyppi, ApurahaYksikko } from '#/src/constants';
+import { Alkamiskausityyppi } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const getBaseFields = ({ tyyppi }) => ({
@@ -41,15 +41,6 @@ const getBaseFields = ({ tyyppi }) => ({
         alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
         koulutuksenAlkamispaivamaara: '2021-04-16T00:00',
         koulutuksenPaattymispaivamaara: '2021-12-12T00:00',
-      },
-      onkoApuraha: true,
-      apuraha: {
-        kuvaus: {
-          fi: 'Stipendin kuvaus',
-        },
-        min: 100,
-        max: 200,
-        yksikko: ApurahaYksikko.EURO,
       },
       lisatiedot: [
         {

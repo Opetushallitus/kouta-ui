@@ -292,6 +292,7 @@ const ToteutusForm = ({
           languages={languages}
           Component={JarjestamisTiedotSection}
           koulutustyyppi={koulutustyyppi}
+          koulutusKoodiurit={koulutus?.koulutuksetKoodiUri}
         />
         <FormCollapse
           section="teemakuva"

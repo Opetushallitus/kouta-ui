@@ -14,4 +14,3 @@ export const Basic = () => (
     <HakeutumisTaiIlmoittautumistapaSection language="fi" />
   </ReduxForm>
 );
-

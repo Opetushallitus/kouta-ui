@@ -32,7 +32,7 @@ import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
-import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
+import { HakeutumisTaiIlmoittautumistapaSection } from './HakeutumisTaiIlmoittautumistapaSection/HakeutumisTaiIlmoittautumistapaSection';
 import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
 import { JarjestamispaikatSection } from './JarjestamispaikatSection';
@@ -67,7 +67,7 @@ import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 
-const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
+export const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
   KOULUTUSTYYPPI.TUTKINNON_OSA,
   KOULUTUSTYYPPI.OSAAMISALA,
   KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
@@ -315,17 +315,14 @@ const ToteutusForm = ({
           organisaatioOid={organisaatioOid}
           tarjoajat={toteutus?.tarjoajat}
         />
-        {KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
-          koulutustyyppi
-        ) && (
-          <FormCollapse
-            section="hakeutumisTaiIlmoittautumistapa"
-            header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
-            Component={HakeutumisTaiIlmoittautumistapaSection}
-            languages={languages}
-            {...getTestIdProps('hakeutumisTaiIlmoittautumistapaSection')}
-          />
-        )}
+        <FormCollapse
+          section="hakeutumisTaiIlmoittautumistapa"
+          header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
+          Component={HakeutumisTaiIlmoittautumistapaSection}
+          languages={languages}
+          koulutustyyppi={koulutustyyppi}
+          {...getTestIdProps('hakeutumisTaiIlmoittautumistapaSection')}
+        />
         {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
           koulutustyyppi
         ) &&

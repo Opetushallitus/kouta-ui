@@ -326,6 +326,11 @@ export enum Hakeutumistapa {
   ILMOITTAUTUMINEN = 'ilmoittautuminen',
 }
 
+export enum HakukohteetToteutuksella {
+  HAKUKOHTEET_KAYTOSSA = 'hakukohteet_kaytossa',
+  EI_HAKUKOHTEITA = 'ei_hakukohteita',
+}
+
 // react-query options for koodisto, eperuste etc. requests that change rarely
 export const LONG_CACHE_QUERY_OPTIONS = {
   staleTime: 30 * 60 * 1000,

@@ -16,7 +16,7 @@ import {
 } from './HakeutumisTaiIlmoittautumistapaSection';
 import MuuHakulomakeBox from './MuuhakulomakeBox';
 
-const { MUU, ATARU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
+const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
 const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
   ({ hakuTapa, section, onChange, value, language }) => {
@@ -38,13 +38,6 @@ const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
             language={language}
           />
         )}
-        <StyledGrayRadio
-          checked={value === ATARU}
-          value={ATARU}
-          onChange={onChange}
-        >
-          {t('toteutuslomake.hakemuspalvelu')}
-        </StyledGrayRadio>
         <StyledGrayRadio
           checked={value === EI_SAHKOISTA_HAKUA}
           value={EI_SAHKOISTA_HAKUA}

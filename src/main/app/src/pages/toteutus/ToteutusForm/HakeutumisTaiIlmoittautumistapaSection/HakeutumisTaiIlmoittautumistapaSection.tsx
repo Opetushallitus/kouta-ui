@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import { Alert } from '#/src/components/Alert';
 import {
   createFormFieldComponent,
+  FormFieldEditor,
+  FormFieldInput,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
 import SegmentTab from '#/src/components/SegmentTab';
@@ -83,7 +85,7 @@ export const HakukohdeKaytossaFields = createFormFieldComponent(({ name }) => {
   return (
     <Box
       marginTop={1}
-      {...getTestIdProps('toteutuslomake.hakukohdeKaytossa')}
+      {...getTestIdProps(`${name}.hakukohteetKaytossa`)}
       width="200px"
     >
       <Box mt={1}>
@@ -143,22 +145,39 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
             <Field
               label={t('toteutuslomake.hakukohteetKaytossa')}
               component={HakukohdeKaytossaFields}
-              name={`${name}.hakukohteetKaytossa`}
+              name={name}
               required
             />
           </Box>
-          {hakukohteetKaytossaValinta ===
-          HakukohteetToteutuksella.EI_HAKUKOHTEITA ? (
-            <ValitseHakutapa
-              hakuTapa={hakuTapa}
-              language={language}
-              name={name}
-            />
-          ) : (
+          {hakukohteetKaytossaValinta &&
+          hakukohteetKaytossaValinta ===
+            HakukohteetToteutuksella.EI_HAKUKOHTEITA ? (
             <>
-              <div>{hakukohteetKaytossaValinta}</div>
-              <HakukohteetKaytossaInfoBox />
+              <ValitseHakutapa
+                hakuTapa={hakuTapa}
+                language={language}
+                name={name}
+              />
+              <Box display="flex">
+                <Box mr={2} {...getTestIdProps('aloituspaikat')}>
+                  <Field
+                    name={`${name}.aloituspaikat`}
+                    component={FormFieldInput}
+                    label={t('toteutuslomake.aloituspaikat')}
+                    type="number"
+                  />
+                </Box>
+                <Box {...getTestIdProps('aloituspaikkakuvaus')}>
+                  <Field
+                    name={`${name}.aloituspaikkakuvaus.${language}`}
+                    component={FormFieldEditor}
+                    label={t('toteutuslomake.aloituspaikkojenKuvaus')}
+                  />
+                </Box>
+              </Box>
             </>
+          ) : (
+            <HakukohteetKaytossaInfoBox />
           )}
         </>
       )}

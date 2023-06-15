@@ -329,8 +329,8 @@ export enum Hakeutumistapa {
 }
 
 export enum HakukohteetToteutuksella {
-  HAKUKOHTEET_KAYTOSSA = 'hakukohteet_kaytossa',
-  EI_HAKUKOHTEITA = 'ei_hakukohteita',
+  HAKUKOHTEET_KAYTOSSA = 'hakukohteet kaytossa',
+  EI_HAKUKOHTEITA = 'ei hakukohteita',
 }
 
 // react-query options for koodisto, eperuste etc. requests that change rarely

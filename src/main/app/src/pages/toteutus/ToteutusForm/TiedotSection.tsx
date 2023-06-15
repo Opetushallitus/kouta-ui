@@ -42,9 +42,8 @@ const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   );
 };
 
-const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
+const OpintojenLaajuus = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
   const selectedLanguage = useLanguageTab();
-  const { t } = useTranslation();
 
   return (
     <Box display="flex">
@@ -54,14 +53,6 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
           koodiUri={laajuusyksikkoKoodiUri}
           label={t('toteutuslomake.laajuus')}
           prefix={koulutus?.metadata?.opintojenLaajuusNumero}
-        />
-      </Box>
-      <Box ml={2} {...getTestIdProps('aloituspaikat')}>
-        <Field
-          name={`${name}.aloituspaikat`}
-          component={FormFieldInput}
-          label={t('toteutuslomake.aloituspaikat')}
-          type="number"
         />
       </Box>
     </Box>
@@ -115,7 +106,7 @@ export const TuvaTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
-      <LaajuusJaAloituspaikat
+      <OpintojenLaajuus
         name={name}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.VIIKKO}
@@ -141,7 +132,7 @@ export const TelmaTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
-      <LaajuusJaAloituspaikat
+      <OpintojenLaajuus
         name={name}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
@@ -161,7 +152,7 @@ export const AikuistenperusopetusTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} />
-      <LaajuusJaAloituspaikat
+      <OpintojenLaajuus
         name={name}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={
@@ -285,7 +276,7 @@ export const OpettajaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <LaajuusJaAloituspaikat
+    <OpintojenLaajuus
       name={name}
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
@@ -302,7 +293,7 @@ export const TutkinnonOsaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <LaajuusJaAloituspaikat
+    <OpintojenLaajuus
       name={name}
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
@@ -318,7 +309,7 @@ export const OsaamisalaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={true} />
-    <LaajuusJaAloituspaikat
+    <OpintojenLaajuus
       name={name}
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}

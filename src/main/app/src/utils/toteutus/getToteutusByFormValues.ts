@@ -221,6 +221,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         : maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMin),
       ilmoittautumislinkki: kieleistykset(values?.tiedot?.ilmoittautumislinkki),
       aloituspaikat: maybeParseNumber(values?.tiedot?.aloituspaikat),
+      aloituspaikkakuvaus: _fp.flow(
+        pickTranslations,
+        _fp.mapValues(serializeEditorState)
+      )(values?.tiedot?.aloituspaikkakuvaus || {}),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
           nimi: kieleistykset(nimi),

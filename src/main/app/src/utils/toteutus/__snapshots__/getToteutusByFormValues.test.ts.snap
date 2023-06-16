@@ -10,6 +10,10 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
   ],
   "metadata": {
     "aloituspaikat": 56,
+    "aloituspaikkakuvaus": Object {
+      "fi": "<p>aloituspaikan kuvaus fi</p>",
+      "sv": "<p>aloituspaikan kuvaus sv</p>",
+    },
     "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": [
       {

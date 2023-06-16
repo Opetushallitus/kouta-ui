@@ -90,6 +90,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     opintojenLaajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
+    aloituspaikkakuvaus,
     kielivalikoima = {},
     toteutusjaksot,
     ammatillinenPerustutkintoErityisopetuksena,
@@ -156,6 +157,10 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       aloituspaikat: _fp.isNumber(aloituspaikat)
         ? aloituspaikat.toString()
         : '',
+      aloituspaikkakuvaus: _fp.mapValues(
+        parseEditorState,
+        aloituspaikkakuvaus || {}
+      ),
       isAvoinKorkeakoulutus: Boolean(isAvoinKorkeakoulutus),
       tunniste,
       opinnonTyyppi: {
@@ -288,6 +293,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     teemakuva,
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
+      hakukohteetKaytossa: metadata.hakukohteetKaytossa,
       hakuTapa: metadata?.hakutermi,
       linkki: metadata?.hakulomakeLinkki,
       lisatiedot: _fp.mapValues(

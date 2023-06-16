@@ -7,6 +7,7 @@ import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   KOULUTUSTYYPPI,
+  HakukohteetToteutuksella,
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
@@ -29,6 +30,10 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: 'Sv linkki',
         },
         aloituspaikat: '56',
+        aloituspaikkakuvaus: {
+          fi: parseEditorState('aloituspaikan kuvaus fi'),
+          sv: parseEditorState('aloituspaikan kuvaus sv'),
+        },
         opintojenLaajuusNumero: '252',
         laajuusNumeroTyyppi: 'single',
         opintojenLaajuusNumeroMin: 300,
@@ -245,6 +250,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       ],
       hakeutumisTaiIlmoittautumistapa: {
         hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU,
+        hakukohteetKaytossa: HakukohteetToteutuksella.EI_HAKUKOHTEITA,
         hakuTapa: Hakeutumistapa.ILMOITTAUTUMINEN,
         lisatiedot: {
           fi: parseEditorState('<p>Fi lisatiedot</p>'),

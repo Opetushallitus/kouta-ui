@@ -123,6 +123,8 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
     `${name}.maksullisuustyyppi`
   );
 
+  // onkoApuraha-check tehdään, koska tietokannassa on jo maksullisia toteutuksia, joille
+  // on virheellisesti asetettu apuraha
   const isVisible = isApurahaVisible(maksullisuustyyppi) || onkoApuraha;
 
   if (!isVisible) {

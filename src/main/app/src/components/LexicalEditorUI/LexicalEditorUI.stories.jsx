@@ -5,8 +5,8 @@ import { storiesOf } from '@storybook/react';
 
 import Button from '#/src/components/Button';
 
-import Editor from './index';
-import { parseEditorState, serializeEditorState } from './utils';
+import { LexicalEditorUI } from './index';
+import { serializeEditorState, parseEditorState } from './utils';
 
 const convertToHTMLAction = action('convertToHTML');
 
@@ -14,7 +14,7 @@ const initialValue = parseEditorState(
   'Klikkaa tätä linkkiä: <a href="https://www.oph.fi/">Opetushallitus</a>'
 );
 
-const StoryEditor = () => {
+const StoryLexicalEditor = () => {
   const [value, setValue] = useState(initialValue);
 
   return (
@@ -22,9 +22,9 @@ const StoryEditor = () => {
       <Button onClick={() => convertToHTMLAction(serializeEditorState(value))}>
         To HTML
       </Button>
-      <Editor value={value} onChange={setValue} />
+      <LexicalEditorUI value={value} onChange={setValue} />
     </>
   );
 };
 
-storiesOf('Editor', module).add('Basic', () => <StoryEditor />);
+storiesOf('LexicalEditorUI', module).add('Basic', () => <StoryLexicalEditor />);

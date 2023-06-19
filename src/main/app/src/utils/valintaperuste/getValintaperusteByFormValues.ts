@@ -2,7 +2,7 @@ import produce from 'immer';
 import _ from 'lodash';
 import { match, P } from 'ts-pattern';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
+import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { TableInputValue } from '#/src/components/TableInput/utils';
 import { KieliversiotValues, SisaltoValues } from '#/src/types/formTypes';
 import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';

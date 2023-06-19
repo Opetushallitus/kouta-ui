@@ -3,7 +3,7 @@ import _fp from 'lodash/fp';
 import {
   parseEditorState,
   serializeEditorState,
-} from '#/src/components/Editor/utils';
+} from '#/src/components/LexicalEditorUI/utils';
 import { AjankohtaFields } from '#/src/types/formTypes';
 import { maybeParseNumber, toSelectValue } from '#/src/utils';
 

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
@@ -55,6 +55,7 @@ const baseValues: HakuFormValues = {
   hakulomake: {
     tyyppi: HAKULOMAKETYYPPI.ATARU,
     lomake: { value: '12345' },
+    kuvaus: { fi: parseEditorState('<p>kuvaus</p> ') },
   },
   yhteyshenkilot: [
     {

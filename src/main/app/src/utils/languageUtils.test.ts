@@ -1,5 +1,5 @@
 import { formValueExists } from '.';
-import { createEmptyEditorState } from '../components/Editor/utils';
+import { createEmptyEditorState } from '../components/LexicalEditorUI/utils';
 import { getInvalidTranslations } from './languageUtils';
 
 describe('getInvalidTranslations', () => {

@@ -5,8 +5,8 @@ import { Field, FieldArray } from 'redux-form';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
-import Editor from '#/src/components/Editor';
 import IconButton from '#/src/components/IconButton';
+import { LexicalEditorUI } from '#/src/components/LexicalEditorUI';
 import RemoveButton from '#/src/components/RemoveButton';
 import {
   SortableContainer,
@@ -88,7 +88,7 @@ const renderTableInputField = ({ input, language, ...props }) => (
   <TableInput {...input} language={language} {...props} />
 );
 
-const renderEditorField = ({ input }) => <Editor {...input} />;
+const renderEditorField = ({ input }) => <LexicalEditorUI {...input} />;
 
 const ContentField = ({ tyyppi, name, language }) => {
   if (tyyppi === 'taulukko') {

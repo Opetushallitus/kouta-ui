@@ -8,7 +8,7 @@ import { match } from 'ts-pattern';
 import {
   isEditorState,
   isEmptyEditorState,
-} from '#/src/components/Editor/utils';
+} from '#/src/components/LexicalEditorUI/utils';
 import {
   ALLOWED_HTML_TAGS,
   EI_TUETUT_KOULUTUSTYYPIT,

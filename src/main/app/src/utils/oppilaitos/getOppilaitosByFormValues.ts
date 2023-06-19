@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
+import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { isNumeric } from '#/src/utils';
 
 const parseNumeric = value => (isNumeric(value) ? parseInt(value) : null);

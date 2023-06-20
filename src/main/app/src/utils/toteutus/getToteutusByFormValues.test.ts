@@ -29,11 +29,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           fi: 'Fi linkki',
           sv: 'Sv linkki',
         },
-        aloituspaikat: '56',
-        aloituspaikkakuvaus: {
-          fi: parseEditorState('aloituspaikan kuvaus fi'),
-          sv: parseEditorState('aloituspaikan kuvaus sv'),
-        },
         opintojenLaajuusNumero: '252',
         laajuusNumeroTyyppi: 'single',
         opintojenLaajuusNumeroMin: 300,
@@ -255,6 +250,11 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         lisatiedot: {
           fi: parseEditorState('<p>Fi lisatiedot</p>'),
           sv: parseEditorState('<p>Sv sisalto</p>'),
+        },
+        aloituspaikat: '56',
+        aloituspaikkakuvaus: {
+          fi: parseEditorState('aloituspaikan kuvaus fi'),
+          sv: parseEditorState('aloituspaikan kuvaus sv'),
         },
       },
     },

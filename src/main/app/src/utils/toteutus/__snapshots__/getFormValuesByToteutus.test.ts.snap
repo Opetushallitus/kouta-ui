@@ -5,6 +5,11 @@ Object {
   "esikatselu": false,
   "externalId": "ext1",
   "hakeutumisTaiIlmoittautumistapa": Object {
+    "aloituspaikat": "251",
+    "aloituspaikkakuvaus": Object {
+      "fi": "<p>Aloituspaikan kuvaus - fi</p>",
+      "sv": "<p>Aloituspaikan kuvaus - sv</p>",
+    },
     "hakeutumisTaiIlmoittautumistapa": undefined,
     "hakuTapa": undefined,
     "hakuaikaAlkaa": undefined,
@@ -256,11 +261,6 @@ Object {
   ],
   "teemakuva": undefined,
   "tiedot": Object {
-    "aloituspaikat": "251",
-    "aloituspaikkakuvaus": Object {
-      "fi": "<p>Aloituspaikan kuvaus - fi</p>",
-      "sv": "<p>Aloituspaikan kuvaus - sv</p>",
-    },
     "ammatillinenPerustutkintoErityisopetuksena": true,
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": Object {

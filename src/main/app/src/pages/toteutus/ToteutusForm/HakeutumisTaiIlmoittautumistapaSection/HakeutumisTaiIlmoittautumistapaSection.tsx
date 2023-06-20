@@ -35,36 +35,6 @@ export const StyledBlueBox = styled(Box)`
   margin-bottom: 20px;
 `;
 
-const ValitseHakutapa = ({ hakuTapa, language, name }) => {
-  const { t } = useTranslation();
-
-  return (
-    <>
-      <Box mb="30px">
-        <Field
-          label={t('toteutuslomake.valitseHakutapa')}
-          component={HakutapaFormField}
-          name={`${name}.hakuTapa`}
-          required
-        />
-      </Box>
-      <Box>
-        {hakuTapa && (
-          <Field
-            label={hakuTapa && t(`toteutuslomake.${hakuTapa}.valitseTapa`)}
-            component={HakeutumisTaiIlmoittautusmistapaFields}
-            name={`${name}.hakeutumisTaiIlmoittautumistapa`}
-            section={name}
-            hakuTapa={hakuTapa}
-            language={language}
-            required
-          />
-        )}
-      </Box>
-    </>
-  );
-};
-
 const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
   const { t } = useTranslation();
   return (
@@ -84,26 +54,24 @@ export const HakukohdeKaytossaFields = createFormFieldComponent(({ name }) => {
 
   return (
     <Box
-      marginTop={1}
+      mb={2}
       {...getTestIdProps(`${name}.hakukohteetKaytossa`)}
       width="200px"
     >
-      <Box mt={1}>
-        <Field
-          name={`${name}.hakukohteetKaytossa`}
-          component={FormFieldRadioGroup}
-          options={[
-            {
-              label: t('yleiset.kylla'),
-              value: HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA,
-            },
-            {
-              label: t('yleiset.ei'),
-              value: HakukohteetToteutuksella.EI_HAKUKOHTEITA,
-            },
-          ]}
-        />
-      </Box>
+      <Field
+        name={`${name}.hakukohteetKaytossa`}
+        component={FormFieldRadioGroup}
+        options={[
+          {
+            label: t('yleiset.kylla'),
+            value: HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA,
+          },
+          {
+            label: t('yleiset.ei'),
+            value: HakukohteetToteutuksella.EI_HAKUKOHTEITA,
+          },
+        ]}
+      />
     </Box>
   );
 });
@@ -116,69 +84,84 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
   const { t } = useTranslation();
   const hakuTapa = useFieldValue(`${name}.hakuTapa`);
 
-  const hakukohteetKaytossaKoulutustyypille =
-    !KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
+  const hakukohteidenKaytonVoiValita =
+    KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
       koulutustyyppi
     );
 
-  const hakukohteetKaytossaValinta = useFieldValue<HakukohteetToteutuksella>(
+  const hakukohteetAinaKaytossaKoulutustyypille = !hakukohteidenKaytonVoiValita;
+
+  const hakukohteetKaytossaValinta = useFieldValue(
     `${name}.hakukohteetKaytossa`
   );
 
-  const HakukohteetKaytossaInfoBox = () => {
-    return (
-      <Box>
-        <Alert status="info">
-          {t('toteutuslomake.hakukohteetKaytossaInfo')}
-        </Alert>
-      </Box>
-    );
-  };
+  const showAloituspaikatJaHakeutumisTapaFields =
+    hakukohteetKaytossaValinta === HakukohteetToteutuksella.EI_HAKUKOHTEITA;
+
+  const showHakukohteetKaytossaInfobox =
+    hakukohteetAinaKaytossaKoulutustyypille ||
+    hakukohteetKaytossaValinta ===
+      HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA;
 
   return (
     <Box flexDirection="column">
-      {hakukohteetKaytossaKoulutustyypille ? (
-        <HakukohteetKaytossaInfoBox />
-      ) : (
+      {hakukohteidenKaytonVoiValita && (
+        <Box>
+          <Field
+            label={t('toteutuslomake.hakukohteetKaytossa')}
+            component={HakukohdeKaytossaFields}
+            name={name}
+            required
+          />
+        </Box>
+      )}
+      {showHakukohteetKaytossaInfobox && (
+        <Box mb={2}>
+          <Alert status="info">
+            {t('toteutuslomake.hakukohteetKaytossaInfo')}
+          </Alert>
+        </Box>
+      )}
+      <Box mb="30px">
+        <Field
+          label={t('toteutuslomake.valitseHakutapa')}
+          component={HakutapaFormField}
+          name={`${name}.hakuTapa`}
+          required
+        />
+      </Box>
+      {showAloituspaikatJaHakeutumisTapaFields && (
         <>
-          <Box mb="30px">
-            <Field
-              label={t('toteutuslomake.hakukohteetKaytossa')}
-              component={HakukohdeKaytossaFields}
-              name={name}
-              required
-            />
-          </Box>
-          {hakukohteetKaytossaValinta &&
-          hakukohteetKaytossaValinta ===
-            HakukohteetToteutuksella.EI_HAKUKOHTEITA ? (
-            <>
-              <ValitseHakutapa
+          <Box>
+            {hakuTapa && (
+              <Field
+                label={hakuTapa && t(`toteutuslomake.${hakuTapa}.valitseTapa`)}
+                component={HakeutumisTaiIlmoittautusmistapaFields}
+                name={`${name}.hakeutumisTaiIlmoittautumistapa`}
+                section={name}
                 hakuTapa={hakuTapa}
                 language={language}
-                name={name}
+                required
               />
-              <Box display="flex">
-                <Box mr={2} {...getTestIdProps('aloituspaikat')}>
-                  <Field
-                    name={`${name}.aloituspaikat`}
-                    component={FormFieldInput}
-                    label={t('toteutuslomake.aloituspaikat')}
-                    type="number"
-                  />
-                </Box>
-                <Box {...getTestIdProps('aloituspaikkakuvaus')}>
-                  <Field
-                    name={`${name}.aloituspaikkakuvaus.${language}`}
-                    component={FormFieldEditor}
-                    label={t('toteutuslomake.aloituspaikkojenKuvaus')}
-                  />
-                </Box>
-              </Box>
-            </>
-          ) : (
-            <HakukohteetKaytossaInfoBox />
-          )}
+            )}
+          </Box>
+          <Box display="flex">
+            <Box mr={2} {...getTestIdProps('aloituspaikat')}>
+              <Field
+                name={`${name}.aloituspaikat`}
+                component={FormFieldInput}
+                label={t('toteutuslomake.aloituspaikat')}
+                type="number"
+              />
+            </Box>
+            <Box {...getTestIdProps('aloituspaikkakuvaus')}>
+              <Field
+                name={`${name}.aloituspaikkakuvaus.${language}`}
+                component={FormFieldEditor}
+                label={t('toteutuslomake.aloituspaikkojenKuvaus')}
+              />
+            </Box>
+          </Box>
         </>
       )}
     </Box>

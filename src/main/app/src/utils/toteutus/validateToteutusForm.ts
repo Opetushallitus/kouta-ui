@@ -190,14 +190,16 @@ export const validateToteutusForm = (
       validateTranslations('tiedot.nimi'),
       validateOptionalTranslatedField('kuvaus'),
       validateInteger(
-        'tiedot.aloituspaikat',
+        'hakeutumisTaiIlmoittautumistapa.aloituspaikat',
         {
           min: 1,
           optional: true,
         },
         'validointivirheet.positiivinenKokonaisluku'
       ),
-      validateOptionalTranslatedField('tiedot.aloituspaikkakuvaus'),
+      validateOptionalTranslatedField(
+        'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
+      ),
       validateExistence('lukiolinjat.lukiolinja'),
       validateOptionalTranslatedField('jarjestamistiedot.opetuskieliKuvaus'),
       validateOptionalTranslatedField(

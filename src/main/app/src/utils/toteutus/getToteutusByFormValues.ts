@@ -220,11 +220,12 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         ? maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMax)
         : maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMin),
       ilmoittautumislinkki: kieleistykset(values?.tiedot?.ilmoittautumislinkki),
-      aloituspaikat: maybeParseNumber(values?.tiedot?.aloituspaikat),
-      aloituspaikkakuvaus: _fp.flow(
-        pickTranslations,
-        _fp.mapValues(serializeEditorState)
-      )(values?.tiedot?.aloituspaikkakuvaus || {}),
+      aloituspaikat: maybeParseNumber(
+        values?.hakeutumisTaiIlmoittautumistapa?.aloituspaikat
+      ),
+      aloituspaikkakuvaus: kieleistyksetSerialized(
+        values?.hakeutumisTaiIlmoittautumistapa?.aloituspaikkakuvaus
+      ),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
           nimi: kieleistykset(nimi),

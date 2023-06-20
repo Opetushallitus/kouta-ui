@@ -1975,6 +1975,8 @@ export interface components {
        * @example 100
        */
       aloituspaikat?: number;
+      /** @description Tarkempi kuvaus aloituspaikoista */
+      kuvaus?: components['schemas']['Kuvaus'];
     };
     AmmatillinenTutkinnonOsaToteutusMetadata: components['schemas']['TutkintoonJohtamatonToteutusMetadata'] & {
       /**

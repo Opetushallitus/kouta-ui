@@ -154,13 +154,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
       opintojenLaajuusyksikko: toSelectValue(opintojenLaajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},
-      aloituspaikat: _fp.isNumber(aloituspaikat)
-        ? aloituspaikat.toString()
-        : '',
-      aloituspaikkakuvaus: _fp.mapValues(
-        parseEditorState,
-        aloituspaikkakuvaus || {}
-      ),
       isAvoinKorkeakoulutus: Boolean(isAvoinKorkeakoulutus),
       tunniste,
       opinnonTyyppi: {
@@ -306,6 +299,13 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       ),
       hakuaikaAlkaa: metadata?.hakuaika?.alkaa,
       hakuaikaPaattyy: metadata?.hakuaika?.paattyy,
+      aloituspaikat: _fp.isNumber(aloituspaikat)
+        ? aloituspaikat.toString()
+        : '',
+      aloituspaikkakuvaus: _fp.mapValues(
+        parseEditorState,
+        aloituspaikkakuvaus || {}
+      ),
     },
     soraKuvaus: toSelectValue(sorakuvausId),
     opintojaksojenLiittaminen: {

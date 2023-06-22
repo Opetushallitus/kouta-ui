@@ -1,8 +1,11 @@
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric } from '#/src/utils';
+
+import {
+  pickAndSerializeTranslations,
+  getKieleistyksetForKieliversiot,
+} from '../pickTranslations';
 
 export const getOppilaitoksenOsaByFormValues = ({
   tila,
@@ -18,11 +21,10 @@ export const getOppilaitoksenOsaByFormValues = ({
     esikatselu = false,
     hakijapalveluidenYhteystiedot: hy,
   } = values;
-  const pickTranslations = _fp.pick(kieliversiot || []);
-  const hpy = Object.values(pickTranslations(hy?.nimi)).some(
+  const kieleistykset = getKieleistyksetForKieliversiot(kieliversiot);
+  const hpy = Object.values(kieleistykset(hy?.nimi)).some(
     n => String(n).trim().length > 0
   );
-
   return {
     oppilaitosOid,
     tila,
@@ -31,42 +33,39 @@ export const getOppilaitoksenOsaByFormValues = ({
     teemakuva,
     esikatselu,
     metadata: {
-      esittely: _.mapValues(
-        pickTranslations(esittely || {}),
-        serializeEditorState
-      ),
+      esittely: pickAndSerializeTranslations(esittely, kieliversiot),
       opiskelijoita: isNumeric(perustiedot?.opiskelijoita)
         ? parseInt(perustiedot.opiskelijoita)
         : null,
-      kampus: pickTranslations(perustiedot?.kampus || {}),
+      kampus: kieleistykset(perustiedot?.kampus),
       wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
         ? null
         : {
-            url: pickTranslations(perustiedot.wwwSivuUrl || {}),
-            nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
+            url: kieleistykset(perustiedot.wwwSivuUrl),
+            nimi: kieleistykset(perustiedot.wwwSivuNimi),
           },
       jarjestaaUrheilijanAmmKoulutusta:
         perustiedot?.jarjestaaUrheilijanAmmKoulutusta,
       hakijapalveluidenYhteystiedot: hpy
         ? {
-            nimi: pickTranslations(hy.nimi || {}),
+            nimi: kieleistykset(hy.nimi),
             postiosoite:
               !_.isEmpty(hy.postiosoite) || hy.postinumero
                 ? {
-                    osoite: pickTranslations(hy.postiosoite || {}),
+                    osoite: kieleistykset(hy.postiosoite),
                     postinumeroKoodiUri: hy.postinumero?.value || null,
                   }
                 : null,
             kayntiosoite:
               !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
                 ? {
-                    osoite: pickTranslations(hy.kayntiosoite || {}),
+                    osoite: kieleistykset(hy.kayntiosoite),
                     postinumeroKoodiUri:
                       hy.kayntiosoitePostinumero?.value || null,
                   }
                 : null,
-            sahkoposti: pickTranslations(hy.sahkoposti || {}),
-            puhelinnumero: pickTranslations(hy.puhelinnumero || {}),
+            sahkoposti: kieleistykset(hy.sahkoposti),
+            puhelinnumero: kieleistykset(hy.puhelinnumero),
           }
         : null,
     },

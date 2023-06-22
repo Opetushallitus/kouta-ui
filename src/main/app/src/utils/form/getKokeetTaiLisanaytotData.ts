@@ -1,10 +1,9 @@
 import _ from 'lodash';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric, parseFloatComma } from '#/src/utils';
 
 export const getTilaisuusData =
-  kielivalinta =>
+  (kieleistykset, kieleistyksetSerialized) =>
   ({
     osoite,
     postinumero,
@@ -14,20 +13,21 @@ export const getTilaisuusData =
     jarjestamispaikka,
   }) => ({
     osoite: {
-      osoite: _.pick(osoite || {}, kielivalinta),
+      osoite: kieleistykset(osoite),
       postinumeroKoodiUri: _.get(postinumero, 'value'),
     },
     aika: {
       alkaa: alkaa,
       paattyy: paattyy,
     },
-    lisatietoja: _.mapValues(lisatietoja || {}, serializeEditorState),
-    jarjestamispaikka,
+    lisatietoja: kieleistyksetSerialized(lisatietoja),
+    jarjestamispaikka: kieleistykset(jarjestamispaikka),
   });
 
 export const getKokeetTaiLisanaytotData = ({
   valintakoeValues = {},
-  kielivalinta,
+  kieleistykset,
+  kieleistyksetSerialized,
 }) => {
   const kokeetTaiLisanaytot = _.get(valintakoeValues, 'kokeetTaiLisanaytot');
   if (_.isEmpty(kokeetTaiLisanaytot)) {
@@ -49,24 +49,24 @@ export const getKokeetTaiLisanaytotData = ({
     }) => ({
       id,
       tyyppiKoodiUri: _.get(tyyppi, 'value'),
-      nimi: nimi,
+      nimi: kieleistykset(nimi),
       metadata: {
-        tietoja: _.mapValues(tietoaHakijalle, serializeEditorState),
+        tietoja: kieleistyksetSerialized(tietoaHakijalle),
         vahimmaispisteet: isNumeric(vahimmaispistemaara)
           ? parseFloatComma(vahimmaispistemaara)
           : null,
         liittyyEnnakkovalmistautumista,
-        ohjeetEnnakkovalmistautumiseen: _.mapValues(
-          ohjeetEnnakkovalmistautumiseen,
-          serializeEditorState
+        ohjeetEnnakkovalmistautumiseen: kieleistyksetSerialized(
+          ohjeetEnnakkovalmistautumiseen
         ),
         erityisjarjestelytMahdollisia,
-        ohjeetErityisjarjestelyihin: _.mapValues(
-          ohjeetErityisjarjestelyihin,
-          serializeEditorState
+        ohjeetErityisjarjestelyihin: kieleistyksetSerialized(
+          ohjeetErityisjarjestelyihin
         ),
       },
-      tilaisuudet: tilaisuudet.map(getTilaisuusData(kielivalinta)),
+      tilaisuudet: tilaisuudet.map(
+        getTilaisuusData(kieleistykset, kieleistyksetSerialized)
+      ),
     })
   );
 };

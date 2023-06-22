@@ -254,3 +254,165 @@ Object {
   ],
 }
 `;
+
+exports[`Should not convert translations for non-selected language 1`] = `
+Object {
+  "esikatselu": false,
+  "externalId": null,
+  "hakutapaKoodiUri": "tapa_1#1",
+  "julkinen": true,
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukkoKoodiUri": "joukko_1#1",
+  "koulutustyyppi": "amk",
+  "metadata": Object {
+    "hakukelpoisuus": Object {
+      "fi": "<h1>Fi hakukelpoisuus</h1>",
+      "sv": "<h1>Sv hakukelpoisuus</h1>",
+    },
+    "kuvaus": Object {
+      "fi": "<h1>Fi kuvaus</h1>",
+      "sv": "<h1>Sv kuvaus</h1>",
+    },
+    "lisatiedot": Object {
+      "fi": "<h1>Fi lisatiedot</h1>",
+      "sv": "<h1>Sv lisatiedot</h1>",
+    },
+    "sisalto": Array [],
+    "tyyppi": "amk",
+    "valintakokeidenYleiskuvaus": Object {
+      "fi": "<p>Yleiskuvaus - fi</p>",
+      "sv": "<p>Yleiskuvaus - sv</p>",
+    },
+    "valintatavat": Array [
+      Object {
+        "enimmaispisteet": 20.2,
+        "kaytaMuuntotaulukkoa": false,
+        "kynnysehto": Object {
+          "fi": "<p>Fi kynnysehto</p>",
+          "sv": "<p>Sv kynnysehto</p>",
+        },
+        "nimi": Object {
+          "fi": "Fi nimi",
+          "sv": "Sv nimi",
+        },
+        "sisalto": Array [
+          Object {
+            "data": Object {
+              "fi": "<h2>Fi sisalto</h2>",
+              "sv": "<h2>Sv sisalto</h2>",
+            },
+            "tyyppi": "teksti",
+          },
+          Object {
+            "data": Object {
+              "rows": Array [
+                Object {
+                  "columns": Array [
+                    Object {
+                      "index": 0,
+                      "text": Object {
+                        "fi": "Fi column1",
+                        "sv": "Sv column1",
+                      },
+                    },
+                    Object {
+                      "index": 1,
+                      "text": Object {
+                        "fi": "Fi column2",
+                        "sv": "Sv column2",
+                      },
+                    },
+                  ],
+                  "index": 0,
+                },
+                Object {
+                  "columns": Array [
+                    Object {
+                      "index": 0,
+                      "text": Object {
+                        "fi": "Fi column3",
+                        "sv": "Sv column3",
+                      },
+                    },
+                    Object {
+                      "index": 1,
+                      "text": Object {
+                        "fi": "Fi column4",
+                        "sv": "Sv column4",
+                      },
+                    },
+                  ],
+                  "index": 1,
+                },
+              ],
+            },
+            "tyyppi": "taulukko",
+          },
+        ],
+        "vahimmaispisteet": 10.1,
+        "valintatapaKoodiUri": "tapa_1#1",
+      },
+    ],
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+  "organisaatioOid": undefined,
+  "tila": "julkaistu",
+  "valintakokeet": Array [
+    Object {
+      "id": undefined,
+      "metadata": Object {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": Object {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+          "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+        },
+        "ohjeetErityisjarjestelyihin": Object {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+          "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+        },
+        "tietoja": Object {
+          "fi": "<p>Tietoa hakijalle - fi</p>",
+          "sv": "<p>Tietoa hakijalle - sv</p>",
+        },
+        "vahimmaispisteet": 30.4,
+      },
+      "nimi": Object {
+        "fi": "nimi - fi",
+        "sv": "nimi - sv",
+      },
+      "tilaisuudet": Array [
+        Object {
+          "aika": Object {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44",
+          },
+          "jarjestamispaikka": Object {
+            "fi": "jarjestamispaikka - fi",
+            "sv": "jarjestamispaikka - sv",
+          },
+          "lisatietoja": Object {
+            "fi": "<p>fi lisatietoja</p>",
+            "sv": "<p>sv lisatietoja</p>",
+          },
+          "osoite": Object {
+            "osoite": Object {
+              "fi": "fi osoite",
+              "sv": "sv osoite",
+            },
+            "postinumeroKoodiUri": "posti_1#1",
+          },
+        },
+      ],
+      "tyyppiKoodiUri": "tyyppi_1#1",
+    },
+  ],
+}
+`;

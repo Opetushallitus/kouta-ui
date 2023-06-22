@@ -15,6 +15,7 @@ import {
 import { Box } from '#/src/components/virkailija';
 import { MaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 import { isApurahaVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
@@ -116,16 +117,25 @@ export const ApurahaMaaraFields = createFormFieldComponent(
   }
 );
 
-export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
+export const ApurahaFields = ({
+  koulutustyyppi,
+  language,
+  name,
+  toteutuksenMetadata,
+}) => {
   const { t } = useTranslation();
-  const onkoApuraha = useFieldValue<boolean>(`${name}.onkoApuraha`);
+  const onkoApurahaSelected = useFieldValue<boolean>(`${name}.onkoApuraha`);
+
   const maksullisuustyyppi = useFieldValue<string>(
     `${name}.maksullisuustyyppi`
   );
+  const onkoApurahaInDb = toteutuksenMetadata?.opetus?.onkoApuraha;
 
-  // onkoApuraha-check tehdään, koska tietokannassa on jo maksullisia toteutuksia, joille
+  // onkoApurahaInDb-check tehdään, koska tietokannassa on jo maksullisia toteutuksia, joille
   // on virheellisesti asetettu apuraha
-  const isVisible = isApurahaVisible(maksullisuustyyppi) || onkoApuraha;
+  const isVisible =
+    isApurahaVisible(maksullisuustyyppi) ||
+    (onkoApurahaInDb && maksullisuustyyppi !== MaksullisuusTyyppi.MAKSUTON);
 
   if (!isVisible) {
     return null;
@@ -138,7 +148,7 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
           <Field name={`${name}.onkoApuraha`} component={FormFieldSwitch}>
             {t('toteutuslomake.apurahaKaytossa')}
           </Field>
-          {onkoApuraha && (
+          {onkoApurahaSelected && (
             <Field
               component={ApurahaMaaraFields}
               name={`${name}.apurahaGroup`}
@@ -146,7 +156,7 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
             />
           )}
         </Box>
-        {onkoApuraha && (
+        {onkoApurahaSelected && (
           <Box flexGrow={1} paddingLeft={4}>
             <Field
               name={`${name}.apurahaKuvaus.${language}`}

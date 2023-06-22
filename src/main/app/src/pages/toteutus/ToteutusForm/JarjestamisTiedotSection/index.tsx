@@ -149,6 +149,7 @@ export const JarjestamisTiedotSection = ({
   koulutustyyppi,
   name,
   koulutusKoodiurit,
+  toteutuksenMetadata,
 }) => {
   const { t } = useTranslation();
 
@@ -282,6 +283,7 @@ export const JarjestamisTiedotSection = ({
         language={language}
         name={name}
         koulutustyyppi={koulutustyyppi}
+        toteutuksenMetadata={toteutuksenMetadata}
       />
 
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>

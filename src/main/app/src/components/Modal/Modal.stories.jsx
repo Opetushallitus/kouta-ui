@@ -3,14 +3,14 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import Button from '#/src/components/Button';
+import { FormButton } from '#/src/components/FormButton';
 import { Typography } from '#/src/components/virkailija';
 
 import Modal from './index';
 
 const header = 'Lorem ipsum';
 
-const footer = <Button>Sulje</Button>;
+const footer = <FormButton>Sulje</FormButton>;
 
 const content = <Typography>Lorem ipsum dolor sit amet</Typography>;
 

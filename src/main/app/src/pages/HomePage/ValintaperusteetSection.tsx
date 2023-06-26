@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Button from '#/src/components/Button';
 import {
   makeJulkinenColumn,
   makeKoulutustyyppiColumn,
@@ -12,6 +11,7 @@ import {
   makeNimiColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
+import { Button } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
 import { valintaperusteService } from '#/src/machines/filterMachines';
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';

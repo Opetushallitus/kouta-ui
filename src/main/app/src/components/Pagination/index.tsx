@@ -3,9 +3,8 @@ import React, { useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-import Button from '#/src/components/Button';
 import Select from '#/src/components/Select';
-import { Box, Icon, Typography } from '#/src/components/virkailija';
+import { Box, Button, Icon, Typography } from '#/src/components/virkailija';
 import { spacing } from '#/src/theme';
 
 const ButtonIcon = styled(Icon)`

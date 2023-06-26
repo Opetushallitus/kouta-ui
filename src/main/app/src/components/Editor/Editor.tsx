@@ -17,7 +17,7 @@ import { setLightness } from 'polished';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-import Button from '#/src/components/Button';
+import { FormButton } from '#/src/components/FormButton';
 import Select from '#/src/components/Select';
 import {
   Box,
@@ -229,9 +229,9 @@ const LinkDropdown = ({ value, onChange, onSubmit }) => {
           />
         </Box>
         <Box flexGrow={0}>
-          <Button type="button" onClick={onSubmit}>
+          <FormButton type="button" onClick={onSubmit}>
             {t('editor.lisaa')}
-          </Button>
+          </FormButton>
         </Box>
       </Box>
     </LinkDropdownContainer>

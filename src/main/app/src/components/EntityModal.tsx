@@ -3,10 +3,9 @@ import React, { useState, useCallback } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
-import { Box, FormLabel } from '#/src/components/virkailija';
+import { Box, Button, FormLabel } from '#/src/components/virkailija';
 import { SelectValue } from '#/src/types/formTypes';
 
 type EntityModalProps = {

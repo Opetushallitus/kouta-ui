@@ -3,7 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
-import Button from '#/src/components/Button';
+import { FormButton } from '#/src/components/FormButton';
 import { FormFieldInput } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 
@@ -34,9 +34,13 @@ const StoryFieldArrayList = ({ fields }) => (
       justifyContent="center"
       marginTop={fields.length > 0 ? 4 : 0}
     >
-      <Button type="button" variant="outlined" onClick={() => fields.push({})}>
+      <FormButton
+        type="button"
+        variant="outlined"
+        onClick={() => fields.push({})}
+      >
         Lisää henkilö
-      </Button>
+      </FormButton>
     </Box>
   </>
 );

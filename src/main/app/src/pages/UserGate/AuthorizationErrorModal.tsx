@@ -3,10 +3,10 @@ import React from 'react';
 import { StatusCodes } from 'http-status-codes';
 import styled from 'styled-components';
 
-import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import {
   Box,
+  Button,
   ModalBody,
   ModalFooter,
   ModalHeader,

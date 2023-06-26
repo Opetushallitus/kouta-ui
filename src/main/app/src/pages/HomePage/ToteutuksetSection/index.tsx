@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import Button from '#/src/components/Button';
+import { Button } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
 import useModal from '#/src/hooks/useModal';
 import { toteutusService } from '#/src/machines/filterMachines';

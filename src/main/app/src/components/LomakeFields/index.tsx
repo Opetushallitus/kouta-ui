@@ -4,14 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
-import Button from '#/src/components/Button';
 import {
   FormFieldSelect,
   FormFieldRadioGroup,
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import { Box } from '#/src/components/virkailija';
+import { Box, Button } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';

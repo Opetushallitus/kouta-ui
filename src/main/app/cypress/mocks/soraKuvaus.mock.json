@@ -3369,7 +3369,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
+    "url": "https://localhost:3000/kouta-backend/koodisto/koulutukset/kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
     "response": {
       "body": [
         {

@@ -36,6 +36,7 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
         name={`${name}.osioKuvaukset.${value}.${language}`}
         component={FormFieldEditor}
         label={label}
+        required
       />
     </Box>
   ));

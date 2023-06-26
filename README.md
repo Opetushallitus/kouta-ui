@@ -82,6 +82,8 @@ Käynnistä kouta-ui lokaalisti komennolla:
 
 Kirjaudu selaimella linkistä http://localhost:8099/kouta-backend/auth/login
 
+Mene selaimella osoitteeseen https://localhost:3000/virkailijan-tyopoyta/ ja kirjaudu.
+
 Tämän jälkeen mene selaimella osoitteeseen https://localhost:3000/kouta
 
 ## Buildaus ja käynnistys (Spring Boot -sovellus)

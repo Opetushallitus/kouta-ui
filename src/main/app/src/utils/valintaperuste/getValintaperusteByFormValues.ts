@@ -9,6 +9,10 @@ import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';
 import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
+import {
+  getKieleistyksetFromValues,
+  getSerializedKieleistykset,
+} from '../pickTranslations';
 import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from './constants';
 
 const getArrayValue = (values, key) => {
@@ -79,22 +83,15 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
   const julkinen = Boolean(values?.julkinen);
 
   const hakutapaKoodiUri = perustiedot?.hakutapa;
+  const kieleistykset = getKieleistyksetFromValues(perustiedot);
+  const kieleistyksetSerialized = getSerializedKieleistykset(perustiedot);
   const kielivalinta = perustiedot?.kieliversiot ?? [];
   const kohdejoukkoKoodiUri = perustiedot?.kohdejoukko?.value ?? null;
-  const nimi = _.pick(values?.kuvaus?.nimi, kielivalinta);
+  const nimi = kieleistykset(values?.kuvaus?.nimi);
 
-  const kuvaus = _.pick(
-    _.mapValues(values?.kuvaus?.kuvaus ?? {}, serializeEditorState),
-    kielivalinta
-  );
-  const hakukelpoisuus = _.mapValues(
-    _.pick(values?.hakukelpoisuus || {}, kielivalinta),
-    serializeEditorState
-  );
-  const lisatiedot = _.mapValues(
-    _.pick(values?.lisatiedot || {}, kielivalinta),
-    serializeEditorState
-  );
+  const kuvaus = kieleistyksetSerialized(values?.kuvaus?.kuvaus);
+  const hakukelpoisuus = kieleistyksetSerialized(values?.hakukelpoisuus);
+  const lisatiedot = kieleistyksetSerialized(values?.lisatiedot);
   const sisalto = serializeSisalto(values?.kuvaus?.sisalto, kielivalinta);
 
   const valintatavat = _.includes(
@@ -110,14 +107,11 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
           enimmaispistemaara,
           vahimmaispistemaara,
         }) => ({
-          nimi: _.pick(valintatapaNimi || {}, kielivalinta),
+          nimi: kieleistykset(valintatapaNimi),
           sisalto: serializeSisalto(valintatapaSisalto, kielivalinta),
           valintatapaKoodiUri: tapa?.value,
           kaytaMuuntotaulukkoa: false,
-          kynnysehto: _.mapValues(
-            _.pick(kynnysehto || {}, kielivalinta),
-            serializeEditorState
-          ),
+          kynnysehto: kieleistyksetSerialized(kynnysehto),
           enimmaispisteet: isNumeric(enimmaispistemaara)
             ? parseFloatComma(enimmaispistemaara)
             : null,
@@ -128,14 +122,14 @@ export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
       )
     : [];
 
-  const valintakokeidenYleiskuvaus = _.mapValues(
-    values?.valintakokeet?.yleisKuvaus,
-    serializeEditorState
+  const valintakokeidenYleiskuvaus = kieleistyksetSerialized(
+    values?.valintakokeet?.yleisKuvaus
   );
 
   const valintakokeet = getKokeetTaiLisanaytotData({
     valintakoeValues: values?.valintakokeet,
-    kielivalinta,
+    kieleistykset,
+    kieleistyksetSerialized,
   });
 
   return {

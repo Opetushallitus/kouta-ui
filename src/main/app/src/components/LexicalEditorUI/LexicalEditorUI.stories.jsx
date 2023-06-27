@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import Button from '#/src/components/Button';
+import FormButton from '#/src/components/FormButton';
 
 import { LexicalEditorUI } from './index';
 import { serializeEditorState, parseEditorState } from './utils';
@@ -19,9 +19,11 @@ const StoryLexicalEditor = () => {
 
   return (
     <>
-      <Button onClick={() => convertToHTMLAction(serializeEditorState(value))}>
+      <FormButton
+        onClick={() => convertToHTMLAction(serializeEditorState(value))}
+      >
         To HTML
-      </Button>
+      </FormButton>
       <LexicalEditorUI value={value} onChange={setValue} />
     </>
   );

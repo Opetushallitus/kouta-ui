@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { isNumeric, parseFloatComma } from '#/src/utils';
 
 export const getTilaisuusData =

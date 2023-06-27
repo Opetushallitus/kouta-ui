@@ -1,6 +1,5 @@
 import _fp from 'lodash/fp';
 
-import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { maybeParseNumber, parseFloatComma } from '#/src/utils';

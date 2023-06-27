@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { serializeEditorState } from '../components/Editor/utils';
+import { serializeEditorState } from '../components/LexicalEditorUI/utils';
 
 export const getKielivalinta = (values): Array<LanguageCode> =>
   values?.kieliversiot || [];

@@ -58,12 +58,15 @@ const validateApuraha = eb => {
   const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
 
   return _fp.flow(
-    validate(
-      'jarjestamistiedot.onkoApuraha',
-      () => onkoApuraha && isApurahaVisible(maksullisuustyyppi),
-      {
-        message: ['validointivirheet.vaaraMaksullisuustyyppiApurahalle'],
-      }
+    validateIf(
+      onkoApuraha,
+      validate(
+        'jarjestamistiedot.onkoApuraha',
+        () => isApurahaVisible(maksullisuustyyppi),
+        {
+          message: ['validointivirheet.vaaraMaksullisuustyyppiApurahalle'],
+        }
+      )
     ),
     validateIf(
       onkoApuraha && isApurahaVisible(maksullisuustyyppi),

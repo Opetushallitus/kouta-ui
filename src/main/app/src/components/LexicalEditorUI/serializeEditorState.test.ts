@@ -10,9 +10,14 @@ test('serializeEditorState simple paragraph', () => {
   expect(serializeEditorState(es)).toEqual('<p>test</p>');
 });
 
-test('serializeEditorState paragraph with line break', () => {
+test('serializeEditorState paragraph with content and line break', () => {
   const es = parseEditorState('<p>test<br></p>');
   expect(serializeEditorState(es)).toEqual('<p>test<br></p>');
+});
+
+test('serializeEditorState paragraphs with empty paragraph in between', () => {
+  const es = parseEditorState('<p>test</p><p></p><p>test</p>');
+  expect(serializeEditorState(es)).toEqual('<p>test</p><p></p><p>test</p>');
 });
 
 test('serializeEditorState paragraph with em', () => {
@@ -30,7 +35,7 @@ test('serializeEditorState paragraph with <a>', () => {
     '<p><a href="http://example.com" target="_blank">example</a></p><p></p>'
   );
   expect(serializeEditorState(es)).toEqual(
-    '<p><a href="http://example.com" target="_blank" rel="noopener noreferrer">example</a></p><p><br></p>'
+    '<p><a href="http://example.com" target="_blank" rel="noopener noreferrer">example</a></p><p></p>'
   );
 });
 

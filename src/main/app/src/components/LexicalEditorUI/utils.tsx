@@ -126,6 +126,14 @@ const postprocessHtml = (html: string): string => {
     .querySelectorAll('span')
     .forEach(elem => elem.replaceWith(...elem.childNodes));
 
+  // lexical produces extra line breaks inside empty paragraphs -
+  // they can't be added purposefully so strip them off altogether
+  for (const element of doc.querySelectorAll('p > br:only-child')) {
+    if (element.parentNode?.textContent === '') {
+      element.remove();
+    }
+  }
+
   // extra direction tags in paragraphs
   for (const element of doc.querySelectorAll('[dir]')) {
     element.removeAttribute('dir');

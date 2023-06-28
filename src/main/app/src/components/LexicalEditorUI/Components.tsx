@@ -10,6 +10,11 @@ export const Container = styled.div`
   transition: border-color 0.25s, box-shadow 0.25s;
   margin-bottom: ${spacing(2)};
 
+  div[contenteditable] {
+    min-width: 100%;
+    min-height: 100%;
+  }
+
   &:hover {
     border-color: ${getThemeProp('colors.primary.main')};
   }

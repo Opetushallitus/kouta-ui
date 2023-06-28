@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import Button from '#/src/components/Button';
+import { FormButton } from '#/src/components/FormButton';
 import { FormFieldSoraKuvausSelect } from '#/src/components/formFields';
 import { Box, Divider } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
@@ -28,7 +28,7 @@ const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
       />
       {soraKuvausId ? (
         <Box mt={2}>
-          <Button
+          <FormButton
             variant="outlined"
             color="primary"
             as="a"
@@ -36,14 +36,14 @@ const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
             target="_blank"
           >
             {t('valintaperustelomake.avaaSoraKuvaus')}
-          </Button>
+          </FormButton>
         </Box>
       ) : null}
       {isOphVirkailija && (
         <>
           <Divider marginTop={4} marginBottom={4} />
           <Box display="flex" justifyContent="center">
-            <Button
+            <FormButton
               variant="outlined"
               color="primary"
               as="a"
@@ -51,7 +51,7 @@ const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
               target="_blank"
             >
               {t('yleiset.luoUusiSoraKuvaus')}
-            </Button>
+            </FormButton>
           </Box>
         </>
       )}

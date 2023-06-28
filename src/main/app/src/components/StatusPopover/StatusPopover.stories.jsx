@@ -3,7 +3,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 
-import Button from '#/src/components/Button';
+import { FormButton } from '#/src/components/FormButton';
 import { Typography } from '#/src/components/virkailija';
 
 import StatusPopover from './index';
@@ -23,7 +23,7 @@ storiesOf('StatusPopover', module)
         onClose={action('close')}
         visible
       >
-        {({ ref }) => <Button ref={ref}>Button</Button>}
+        {({ ref }) => <FormButton ref={ref}>Button</FormButton>}
       </StatusPopover>
     </div>
   ))
@@ -35,7 +35,7 @@ storiesOf('StatusPopover', module)
         status="danger"
         visible
       >
-        {({ ref }) => <Button ref={ref}>Button</Button>}
+        {({ ref }) => <FormButton ref={ref}>Button</FormButton>}
       </StatusPopover>
     </div>
   ));

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
-import Button from '#/src/components/Button';
+import { FormButton } from '#/src/components/FormButton';
 import Modal from '#/src/components/Modal';
 import { Box, Typography } from '#/src/components/virkailija';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
@@ -34,9 +34,9 @@ export const KoulutusSaveErrorModal = () => {
       header={t('koulutuslomake.epayhteensopiviaToteutuksia')}
       footer={
         <Box display="flex" justifyContent="flex-end">
-          <Button variant="outlined" onClick={closeModal}>
+          <FormButton variant="outlined" onClick={closeModal}>
             {t('yleiset.sulje')}
-          </Button>
+          </FormButton>
         </Box>
       }
     >

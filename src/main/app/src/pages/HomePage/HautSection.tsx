@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Button from '#/src/components/Button';
 import {
   makeCountColumn,
   makeModifiedColumn,
@@ -13,6 +12,7 @@ import {
   makeHakutapaColumn,
   makeKoulutuksenAlkamiskausiColumn,
 } from '#/src/components/ListTable';
+import { Button } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { hakuService } from '#/src/machines/filterMachines';

@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FieldArray } from 'redux-form';
 
-import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
+import { FormButton } from '#/src/components/FormButton';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
@@ -56,7 +56,7 @@ const TutkinnonOsatFields = ({ disabled, language, fields }) => {
         justifyContent="center"
         mt={fields.length > 0 ? 4 : 0}
       >
-        <Button
+        <FormButton
           variant="outlined"
           color="primary"
           type="button"
@@ -64,7 +64,7 @@ const TutkinnonOsatFields = ({ disabled, language, fields }) => {
           {...getTestIdProps('lisaaKoulutusButton')}
         >
           {t('koulutuslomake.lisaaKoulutus')}
-        </Button>
+        </FormButton>
       </Box>
     </>
   );

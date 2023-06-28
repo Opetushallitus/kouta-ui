@@ -4,9 +4,9 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Button from '#/src/components/Button';
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
-import { Box } from '#/src/components/virkailija';
+import { FormButton } from '#/src/components/FormButton';
+import { Box, Button } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
@@ -85,7 +85,7 @@ export const FormFooter = ({
             {entity?.modified && <FormEditInfo entity={entity} />}
           </Box>
         </Box>
-        <Button
+        <FormButton
           onClick={() => {
             aboutToDeleteEntity(tila) ? toggleConfirmationDialog(true) : save();
           }}
@@ -94,7 +94,7 @@ export const FormFooter = ({
           {...submitProps}
         >
           {t('yleiset.tallenna')}
-        </Button>
+        </FormButton>
       </Box>
     </>
   );

@@ -1,9 +1,12 @@
 import _ from 'lodash';
 
-import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 
-export const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
+export const getHakulomakeFieldsData = ({
+  hakulomakeValues,
+  kieleistykset,
+  kieleistyksetSerialized,
+}) => {
   const hakulomaketyyppi = _.get(hakulomakeValues, 'tyyppi') || null;
 
   const hakulomakeAtaruId =
@@ -13,15 +16,12 @@ export const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
 
   const hakulomakeLinkki =
     hakulomaketyyppi === HAKULOMAKETYYPPI.MUU
-      ? _.pick(_.get(hakulomakeValues, 'linkki') || {}, kielivalinta)
+      ? kieleistykset(_.get(hakulomakeValues, 'linkki'))
       : {};
 
   const hakulomakeKuvaus =
     hakulomaketyyppi === HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA
-      ? _.mapValues(
-          _.pick(_.get(hakulomakeValues, 'kuvaus') || {}, kielivalinta),
-          serializeEditorState
-        )
+      ? kieleistyksetSerialized(_.get(hakulomakeValues, 'kuvaus'))
       : {};
 
   return {

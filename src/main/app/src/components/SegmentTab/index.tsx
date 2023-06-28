@@ -28,6 +28,10 @@ const SegmentTab = styled.button`
     border-color: ${({ theme }) => theme.colors.primary.main};
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   ${({ active }) =>
     active &&
     css`

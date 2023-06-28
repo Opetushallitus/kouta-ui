@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { useUnmount, usePrevious } from 'react-use';
 import styled from 'styled-components';
 
-import Button from '#/src/components/Button';
 import Heading from '#/src/components/Heading';
 import {
   Drawer,
@@ -14,6 +13,7 @@ import {
   Input,
   InputIcon,
   Box,
+  Button,
   Spin,
 } from '#/src/components/virkailija';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';

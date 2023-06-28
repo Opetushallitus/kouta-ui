@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
-import Button from '#/src/components/Button';
 import { FormFieldCheckbox } from '#/src/components/formFields';
 import { Tooltip } from '#/src/components/Tooltip';
+import { Button } from '#/src/components/virkailija';
 import { JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsDirty } from '#/src/hooks/form';
 

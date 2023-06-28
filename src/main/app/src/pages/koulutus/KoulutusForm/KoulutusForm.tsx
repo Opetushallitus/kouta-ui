@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
-import Button from '#/src/components/Button';
+import { FormButton } from '#/src/components/FormButton';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
@@ -376,14 +376,14 @@ export const KoulutusForm = ({
                 id="koulutukseen-liitetetyt-toteutukset"
                 actions={
                   <Box display="flex" justifyContent="center">
-                    <Button
+                    <FormButton
                       disabled={onlyTarjoajaRights}
                       color="primary"
                       onClick={onAttachToteutus}
                       type="button"
                     >
                       {t('koulutuslomake.liitaToteutus')}
-                    </Button>
+                    </FormButton>
                   </Box>
                 }
                 Component={ToteutuksetSection}

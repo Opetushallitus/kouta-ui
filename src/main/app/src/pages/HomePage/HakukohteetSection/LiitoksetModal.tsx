@@ -3,11 +3,11 @@ import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
 import {
   Box,
+  Button,
   FormLabel,
   ModalBody,
   ModalFooter,

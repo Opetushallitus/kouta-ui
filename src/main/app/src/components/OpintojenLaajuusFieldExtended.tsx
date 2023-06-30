@@ -6,8 +6,10 @@ import { Field } from 'redux-form';
 
 import { OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
+import useKoodi from '#/src/hooks/useKoodi';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 import { FormFieldFloatInput, FormFieldSelect } from './formFields';
 import { Box, FormControl } from './virkailija';
@@ -32,12 +34,11 @@ export const OpintojenLaajuusFieldExtended = ({
     language: selectedLanguage,
   });
 
-  const laajuusYksikko = useMemo(
-    () =>
-      options.find(({ value }) =>
-        value.match(RegExp(`${fixedLaajuusYksikko}#[0-9]`))
-      ),
-    [options, fixedLaajuusYksikko]
+  const { koodi } = useKoodi(fixedLaajuusYksikko);
+
+  const laajuusYksikkoTranslated = useMemo(
+    () => getKoodiNimiTranslation(koodi, selectedLanguage),
+    [selectedLanguage, koodi]
   );
 
   return (
@@ -58,7 +59,7 @@ export const OpintojenLaajuusFieldExtended = ({
       {fixedLaajuusYksikko ? (
         <Box px={1} flexGrow={1}>
           <FormControl label={t('yleiset.laajuusyksikko')} disabled={true}>
-            <Input value={laajuusYksikko?.label} />
+            <Input value={laajuusYksikkoTranslated} />
           </FormControl>
         </Box>
       ) : (

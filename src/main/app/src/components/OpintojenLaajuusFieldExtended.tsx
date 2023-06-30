@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import Input from '@opetushallitus/virkailija-ui-components/Input';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import { OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 import { FormFieldFloatInput, FormFieldSelect } from './formFields';
@@ -15,7 +16,7 @@ type Props = {
   name: string;
   disabled?: boolean;
   required?: boolean;
-  fixedLaajuusYksikko?: string;
+  fixedLaajuusYksikko?: OpintojenLaajuusyksikko;
 };
 
 export const OpintojenLaajuusFieldExtended = ({
@@ -26,10 +27,18 @@ export const OpintojenLaajuusFieldExtended = ({
 }: Props) => {
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
-  let { options } = useKoodistoOptions({
+  const { options } = useKoodistoOptions({
     koodisto: 'opintojenlaajuusyksikko',
     language: selectedLanguage,
   });
+
+  const laajuusYksikko = useMemo(
+    () =>
+      options.find(({ value }) =>
+        value.match(RegExp(`${fixedLaajuusYksikko}#[0-9]`))
+      ),
+    [options, fixedLaajuusYksikko]
+  );
 
   return (
     <Box display="flex" mx={-1}>
@@ -49,7 +58,7 @@ export const OpintojenLaajuusFieldExtended = ({
       {fixedLaajuusYksikko ? (
         <Box px={1} flexGrow={1}>
           <FormControl label={t('yleiset.laajuusyksikko')} disabled={true}>
-            <Input value={fixedLaajuusYksikko} />
+            <Input value={laajuusYksikko?.label} />
           </FormControl>
         </Box>
       ) : (
@@ -62,7 +71,6 @@ export const OpintojenLaajuusFieldExtended = ({
             disabled={disabled}
             required={required}
             isClearable
-            defaultValue={{ value: fixedLaajuusYksikko }}
           />
         </Box>
       )}

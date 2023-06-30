@@ -15,11 +15,9 @@ import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
-import useKoodi from '#/src/hooks/useKoodi';
 import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
@@ -241,16 +239,6 @@ export const VapaaSivistystyoMuuTiedotSection = ({
 
 export const AmmMuuTiedotSection = VapaaSivistystyoMuuTiedotSection;
 
-const useLaajuusYksikkoTextValue = (koulutus, language) => {
-  const laajuusyksikkoKoodiUri =
-    koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri;
-  const { koodi: forcedLaajuusKoodi } = useKoodi(laajuusyksikkoKoodiUri);
-
-  return laajuusyksikkoKoodiUri
-    ? getKoodiNimiTranslation(forcedLaajuusKoodi, language) || ''
-    : '';
-};
-
 export const KkOpintojaksoTiedotSection = ({
   language,
   disabled,
@@ -262,7 +250,7 @@ export const KkOpintojaksoTiedotSection = ({
     <OpintojenLaajuusFieldExtended
       name={name}
       disabled={disabled}
-      fixedLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
+      fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
     <CommonTiedotFields name={name} />
     <TunnisteField name={name} />
@@ -282,7 +270,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
     <OpintojenLaajuusFieldExtended
       name={name}
       disabled={disabled}
-      fixedLaajuusYksikko={useLaajuusYksikkoTextValue(koulutus, language)}
+      fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />

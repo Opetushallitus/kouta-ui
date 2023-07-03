@@ -84,7 +84,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
           httpClient,
           apiUrls,
         }).then(r => {
-          stopSubmit({ errors: null, warnings: r.warnings });
+          stopSubmit({ errors: null, warnings: r?.warnings });
           // NOTE: initialize values with the saved ones to update the dirty state
           // This shouldn't be needed, because page data is refetched after save
           // (in Edit*Page components) and initial values are recalculated when data changes.

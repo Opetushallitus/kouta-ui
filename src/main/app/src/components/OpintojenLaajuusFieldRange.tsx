@@ -1,20 +1,19 @@
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
 import { MaaraTyyppi, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
 
 import { useLanguageTab } from '../contexts/LanguageTabContext';
-import useKoodi from '../hooks/useKoodi';
-import getKoodiNimiTranslation from '../utils/getKoodiNimiTranslation';
 import {
   createFormFieldComponent,
   FormFieldAsyncKoodistoSelect,
   FormFieldFloatInput,
   FormFieldRadioGroup,
 } from './formFields';
-import { Box, FormControl, Input } from './virkailija';
+import { Box } from './virkailija';
 
 const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
   ({ disabled, section, forcedLaajuusYksikko }) => {
@@ -27,12 +26,6 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
     const { data: koodistoData } = useKoodisto({
       koodisto: 'opintojenlaajuusyksikko',
     });
-
-    const { koodi: forcedLaajuusKoodi } = useKoodi(forcedLaajuusYksikko);
-
-    const laajuusYksikkoTextValue = forcedLaajuusYksikko
-      ? getKoodiNimiTranslation(forcedLaajuusKoodi, selectedLanguage) || ''
-      : '';
 
     return (
       <FormControl label={t('koulutuslomake.valitseOpintojenLaajuus')}>
@@ -86,9 +79,11 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
           )}
           {forcedLaajuusYksikko ? (
             <Box flexGrow={2} ml={1} data-testid="forcedLaajuusyksikko">
-              <FormControl disabled={true}>
-                <Input value={laajuusYksikkoTextValue} />
-              </FormControl>
+              <FixedValueKoodiInput
+                koodiUri={forcedLaajuusYksikko}
+                label="yleiset.laajuusyksikko"
+                selectedLanguage={selectedLanguage}
+              />
             </Box>
           ) : (
             <Box flexGrow={2} ml={1} data-testid="laajuusyksikko">

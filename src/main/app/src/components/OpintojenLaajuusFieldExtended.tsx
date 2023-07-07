@@ -1,18 +1,16 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import Input from '@opetushallitus/virkailija-ui-components/Input';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
 import { OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import useKoodi from '#/src/hooks/useKoodi';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 import { FormFieldFloatInput, FormFieldSelect } from './formFields';
-import { Box, FormControl } from './virkailija';
+import { Box } from './virkailija';
 
 type Props = {
   name: string;
@@ -34,13 +32,6 @@ export const OpintojenLaajuusFieldExtended = ({
     language: selectedLanguage,
   });
 
-  const { koodi } = useKoodi(fixedLaajuusYksikko);
-
-  const laajuusYksikkoTranslated = useMemo(
-    () => getKoodiNimiTranslation(koodi, selectedLanguage),
-    [selectedLanguage, koodi]
-  );
-
   return (
     <Box display="flex" mx={-1}>
       <Box px={1} flexGrow={1}>
@@ -55,12 +46,13 @@ export const OpintojenLaajuusFieldExtended = ({
           {...getTestIdProps('laajuusnumero')}
         />
       </Box>
-
       {fixedLaajuusYksikko ? (
         <Box px={1} flexGrow={1}>
-          <FormControl label={t('yleiset.laajuusyksikko')} disabled={true}>
-            <Input value={laajuusYksikkoTranslated} />
-          </FormControl>
+          <FixedValueKoodiInput
+            koodiUri={fixedLaajuusYksikko}
+            selectedLanguage={selectedLanguage}
+            label="yleiset.laajuusyksikko"
+          />
         </Box>
       ) : (
         <Box px={1} flexGrow={1} {...getTestIdProps('laajuusyksikko')}>

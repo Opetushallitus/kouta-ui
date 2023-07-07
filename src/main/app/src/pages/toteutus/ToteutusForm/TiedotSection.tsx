@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
+import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
 import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
@@ -19,7 +20,6 @@ import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/Tie
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
-import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
 
 type NimiSectionProps = {
@@ -49,11 +49,10 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
   return (
     <Box display="flex">
       <Box maxWidth="300px">
-        <OpintojenLaajuusReadOnlyField
+        <FixedValueKoodiInput
           selectedLanguage={selectedLanguage}
-          laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
-          laajuusyksikkoKoodiUri={laajuusyksikkoKoodiUri}
-          laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
+          koodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+          label="toteutuslomake.laajuus"
         />
       </Box>
       <Box ml={2} {...getTestIdProps('aloituspaikat')}>
@@ -201,13 +200,10 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
-      <OpintojenLaajuusReadOnlyField
+      <FixedValueKoodiInput
         selectedLanguage={language}
-        laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
-        laajuusyksikkoKoodiUri={
-          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
-        }
-        laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
+        koodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+        label="toteutuslomake.laajuus"
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>
@@ -224,13 +220,10 @@ export const VapaaSivistystyoMuuTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
-      <OpintojenLaajuusReadOnlyField
+      <FixedValueKoodiInput
         selectedLanguage={language}
-        laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
-        laajuusyksikkoKoodiUri={
-          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
-        }
-        laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
+        koodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+        label="toteutuslomake.laajuus"
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>

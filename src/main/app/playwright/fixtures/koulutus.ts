@@ -1,8 +1,6 @@
-import { merge } from 'lodash';
+import { merge } from 'lodash/fp';
 
-import { TestiKoulutustyyppi } from '../test-types';
-
-const getBaseFields = (tyyppi: TestiKoulutustyyppi = 'amm') => {
+const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
   return {
     oid: '1.2.246.562.13.00000000000000000072',
     koulutustyyppi: tyyppi,

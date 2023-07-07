@@ -13,22 +13,25 @@ type Props = {
   koodiUri: string;
   label: string;
   selectedLanguage: LanguageCode;
+  prefix?: string;
 };
 
 export const FixedValueKoodiInput = ({
   koodiUri,
   label,
   selectedLanguage,
+  prefix,
 }: Props) => {
   const { t } = useTranslation();
   const { koodi } = useKoodi(koodiUri);
 
+  const value = prefix
+    ? `${prefix} ${getKoodiNimiTranslation(koodi, selectedLanguage)}`
+    : getKoodiNimiTranslation(koodi, selectedLanguage);
+
   return (
     <FormControl label={t(label)} disabled={true}>
-      <Input
-        value={getKoodiNimiTranslation(koodi, selectedLanguage)}
-        {...getTestIdProps('fixed-value')}
-      />
+      <Input value={value} {...getTestIdProps('fixed-value')} />
     </FormControl>
   );
 };

@@ -51,8 +51,9 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
       <Box maxWidth="300px">
         <FixedValueKoodiInput
           selectedLanguage={selectedLanguage}
-          koodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+          koodiUri={laajuusyksikkoKoodiUri}
           label="toteutuslomake.laajuus"
+          prefix={koulutus?.metadata?.opintojenLaajuusNumero}
         />
       </Box>
       <Box ml={2} {...getTestIdProps('aloituspaikat')}>
@@ -202,8 +203,9 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
       <NimiSection name={name} language={language} disabled={true} />
       <FixedValueKoodiInput
         selectedLanguage={language}
-        koodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+        koodiUri={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
         label="toteutuslomake.laajuus"
+        prefix={koulutus?.metadata?.opintojenLaajuusNumero}
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>
@@ -222,8 +224,9 @@ export const VapaaSivistystyoMuuTiedotSection = ({
       <NimiSection name={name} language={language} disabled={false} />
       <FixedValueKoodiInput
         selectedLanguage={language}
-        koodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+        koodiUri={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
         label="toteutuslomake.laajuus"
+        prefix={koulutus?.metadata?.opintojenLaajuusNumero}
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>

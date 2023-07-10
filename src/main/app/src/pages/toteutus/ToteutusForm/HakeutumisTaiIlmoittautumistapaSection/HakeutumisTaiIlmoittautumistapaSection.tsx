@@ -122,17 +122,17 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
           </Alert>
         </Box>
       )}
-      <Box mb="30px">
-        <Field
-          label={t('toteutuslomake.valitseHakutapa')}
-          component={HakutapaFormField}
-          name={`${name}.hakuTapa`}
-          required
-        />
-      </Box>
       {showAloituspaikatJaHakeutumisTapaFields && (
         <>
-          <Box>
+          <Box mb="30px">
+            <Field
+              label={t('toteutuslomake.valitseHakutapa')}
+              component={HakutapaFormField}
+              name={`${name}.hakuTapa`}
+              required
+            />
+          </Box>
+          <Box mb={2}>
             {hakuTapa && (
               <Field
                 label={hakuTapa && t(`toteutuslomake.${hakuTapa}.valitseTapa`)}
@@ -145,22 +145,20 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
               />
             )}
           </Box>
-          <Box display="flex">
-            <Box mr={2} {...getTestIdProps('aloituspaikat')}>
-              <Field
-                name={`${name}.aloituspaikat`}
-                component={FormFieldInput}
-                label={t('toteutuslomake.aloituspaikat')}
-                type="number"
-              />
-            </Box>
-            <Box {...getTestIdProps('aloituspaikkakuvaus')}>
-              <Field
-                name={`${name}.aloituspaikkakuvaus.${language}`}
-                component={FormFieldEditor}
-                label={t('toteutuslomake.aloituspaikkojenKuvaus')}
-              />
-            </Box>
+          <Box mb={2} {...getTestIdProps('aloituspaikat')}>
+            <Field
+              name={`${name}.aloituspaikat`}
+              component={FormFieldInput}
+              label={t('toteutuslomake.aloituspaikat')}
+              type="number"
+            />
+          </Box>
+          <Box {...getTestIdProps('aloituspaikkakuvaus')}>
+            <Field
+              name={`${name}.aloituspaikkakuvaus.${language}`}
+              component={FormFieldEditor}
+              label={t('toteutuslomake.aloituspaikkojenKuvaus')}
+            />
           </Box>
         </>
       )}

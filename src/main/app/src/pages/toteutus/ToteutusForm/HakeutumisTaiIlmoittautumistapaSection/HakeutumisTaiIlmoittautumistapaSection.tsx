@@ -6,10 +6,11 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { Alert } from '#/src/components/Alert';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   createFormFieldComponent,
   FormFieldEditor,
-  FormFieldInput,
+  FormFieldIntegerInput,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
 import SegmentTab from '#/src/components/SegmentTab';
@@ -145,21 +146,34 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
               />
             )}
           </Box>
-          <Box mb={2} {...getTestIdProps('aloituspaikat')}>
-            <Field
-              name={`${name}.aloituspaikat`}
-              component={FormFieldInput}
-              label={t('toteutuslomake.aloituspaikat')}
-              type="number"
-            />
-          </Box>
-          <Box {...getTestIdProps('aloituspaikkakuvaus')}>
-            <Field
-              name={`${name}.aloituspaikkakuvaus.${language}`}
-              component={FormFieldEditor}
-              label={t('toteutuslomake.aloituspaikkojenKuvaus')}
-            />
-          </Box>
+          <FieldGroup title={t('toteutuslomake.aloituspaikkatiedot')}>
+            <Box display="flex">
+              <Box
+                flexGrow={0}
+                flexBasis="30%"
+                {...getTestIdProps('aloituspaikat')}
+              >
+                <Field
+                  name={`${name}.aloituspaikat`}
+                  component={FormFieldIntegerInput}
+                  min={0}
+                  label={t('toteutuslomake.aloituspaikat')}
+                  type="number"
+                />
+              </Box>
+              <Box
+                flexGrow={1}
+                paddingLeft={4}
+                {...getTestIdProps('aloituspaikkakuvaus')}
+              >
+                <Field
+                  name={`${name}.aloituspaikkakuvaus.${language}`}
+                  component={FormFieldEditor}
+                  label={t('toteutuslomake.aloituspaikkojenKuvaus')}
+                />
+              </Box>
+            </Box>
+          </FieldGroup>
         </>
       )}
     </Box>

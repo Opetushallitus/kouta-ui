@@ -21,6 +21,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
+  HakukohteetToteutuksella,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -65,7 +66,7 @@ import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
-const { ATARU, MUU } = HAKULOMAKETYYPPI;
+const { MUU } = HAKULOMAKETYYPPI;
 
 export const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
   KOULUTUSTYYPPI.TUTKINNON_OSA,
@@ -106,11 +107,16 @@ const ToteutusForm = ({
     'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
   );
 
-  const kaytetaanHakemuspalvelua =
+  const hakukohteetKaytossaValittu = useFieldValue(
+    'hakeutumisTaiIlmoittautumistapa.hakukohteetKaytossa'
+  );
+
+  const hakukohteetKaytossa =
     KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
       koulutustyyppi
     )
-      ? hakeutumisTaiIlmoittautumistapa === ATARU
+      ? hakukohteetKaytossaValittu ===
+        HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA
       : true;
 
   const isEBkoulutus = isEB(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
@@ -348,7 +354,7 @@ const ToteutusForm = ({
           entity={toteutus}
           {...getTestIdProps('tilaSection')}
         />
-        {_.isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua && (
+        {_.isFunction(onAttachHakukohde) && hakukohteetKaytossa && (
           <FormCollapse
             header={
               t('toteutuslomake.toteutukseenLiitetytHakukohteet') +

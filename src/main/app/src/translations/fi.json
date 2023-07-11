@@ -581,7 +581,6 @@
     "toteutusjaksonLaajuus": "Laajuus",
     "toteutusjaksonKuvaus": "Jakson kuvaus",
     "koulutukseenLiittyvatTutkinnonOsat": "Koulutukseen liittyvät tutkinnon osat",
-    "hakukohteenLittaminen": "Hakukohteen liittäminen toteutukseen",
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta",
     "toteutuksenTeemakuva": "Toteutuksen teemakuva",
     "eiOsaamisaloja": "Valittuun koulutukseen <0>{{koulutusLinkText}}</0> liitetyllä ePerusteella <1>{{ePerusteLinkText}}</1> ei ole osaamisaloja.",
@@ -593,6 +592,7 @@
     "kuukautta": "Kuukautta",
     "hakeutumisTaiIlmoittautumistapa": "Hakeutumis- tai ilmoittautumistapa",
     "hakukohteetKaytossa": "Valitse käytetäänkö toteutuksella hakukohteita",
+    "hakukohteetKaytossaInfo": "Toteutuksella on käytössä hakukohteet, ja hakeutumis- sekä aloituspaikkatiedot tallennetaan hakukohteille",
     "valitseHakutapa": "Valitse oppijalle näkyvä hakutapa",
     "hakuTapa": {
       "hakeutuminen": "Hakeutuminen",
@@ -611,6 +611,7 @@
     "muuHakulomake": "Muu hakulomake",
     "hakemuspalvelu": "Hakemuspalvelu",
     "eiSahkoistaHakua": "Ei sähköistä hakua",
+    "aloituspaikkatiedot": "Tiedot aloituspaikoista",
     "aloituspaikat": "Aloituspaikat",
     "aloituspaikkojenKuvaus": "Aloituspaikkojen tarkempi kuvaus",
     "hakuaikaAlkaa": "Hakuaika alkaa",

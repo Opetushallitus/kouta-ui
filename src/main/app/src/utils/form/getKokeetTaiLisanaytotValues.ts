@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { FormMode } from '#/src/constants';
 import {
   ValintakoetilaisuusModel,

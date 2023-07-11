@@ -30,6 +30,7 @@ import {
   fillPohjaSectionCopyingValuesFrom,
   tilaShouldBe,
   fillOrgSection,
+  getFieldWrapperByName,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -461,17 +462,17 @@ const fillHakeutumisTaiIlmoittautumistapaSection = () => {
       .click()
       .pipe(paste('http://example.com'));
 
-    cy.findByRole('textbox', {
-      name: /^toteutuslomake.hakeutuminen.lisatiedot/,
-    })
-      .click()
-      .pipe(paste('lisätiedot'));
+    getFieldWrapperByName('hakeutumisTaiIlmoittautumistapa.lisatiedot').within(
+      () => {
+        typeToEditor('lisätiedot');
+      }
+    );
 
-    cy.findByRole('textbox', {
-      name: /^toteutuslomake.lisatiedotValintaperusteista/,
-    })
-      .click()
-      .pipe(paste('lisätiedot valintaperusteista'));
+    getFieldWrapperByName(
+      'hakeutumisTaiIlmoittautumistapa.lisatiedotValintaperusteista'
+    ).within(() => {
+      typeToEditor('lisätiedot valintaperusteista');
+    });
 
     cy.findByTestId('alkaa').within(() => {
       fillDateTimeInput({

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {
   isEditorState,
   serializeEditorState,
-} from '#/src/components/Editor/utils';
+} from '#/src/components/LexicalEditorUI/utils';
 
 // Serialize Draft editor
 expect.addSnapshotSerializer({

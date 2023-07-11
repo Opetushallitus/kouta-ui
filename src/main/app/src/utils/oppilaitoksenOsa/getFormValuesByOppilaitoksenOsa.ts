@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 
 export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   const {

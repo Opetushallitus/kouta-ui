@@ -1,0 +1,74 @@
+.EditorTheme__ltr {
+  font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: left;
+  color: #666;
+}
+.EditorTheme__rtl {
+  font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: right;
+  color: #666;
+}
+.EditorTheme__paragraph {
+  font-size: 16px;
+  margin: 0;
+  position: relative;
+}
+.EditorTheme__indent {
+  --lexical-indent-base-value: 40px;
+}
+.EditorTheme__textBold {
+  font-weight: bold;
+}
+.EditorTheme__link {
+  color: rgb(33, 111, 219);
+  text-decoration: none;
+}
+.EditorTheme__link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.EditorTheme__ol1 {
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+}
+.EditorTheme__ol2 {
+  padding: 0;
+  margin: 0;
+  list-style-type: upper-alpha;
+  list-style-position: inside;
+}
+.EditorTheme__ol3 {
+  padding: 0;
+  margin: 0;
+  list-style-type: lower-alpha;
+  list-style-position: inside;
+}
+.EditorTheme__ol4 {
+  padding: 0;
+  margin: 0;
+  list-style-type: upper-roman;
+  list-style-position: inside;
+}
+.EditorTheme__ol5 {
+  padding: 0;
+  margin: 0;
+  list-style-type: lower-roman;
+  list-style-position: inside;
+}
+.EditorTheme__ul {
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+}
+.EditorTheme__listItem {
+  margin: 0 32px;
+}
+.EditorTheme__nestedListItem {
+  list-style-type: none;
+}
+.EditorTheme__nestedListItem:before,
+.EditorTheme__nestedListItem:after {
+  display: none;
+}

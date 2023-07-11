@@ -1,4 +1,4 @@
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFormValues';
 
 test('getSoraKuvausByFormValues returns correct sora-kuvaus given form values', () => {

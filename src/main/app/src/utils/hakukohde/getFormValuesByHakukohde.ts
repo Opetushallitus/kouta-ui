@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import _fp from 'lodash/fp';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { isNumeric, toSelectValue } from '#/src/utils';

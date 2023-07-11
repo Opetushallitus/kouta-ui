@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { FormMode, JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 import { ValintaperusteModel } from '#/src/types/domainTypes';
 import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';

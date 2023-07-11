@@ -1,4 +1,4 @@
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 

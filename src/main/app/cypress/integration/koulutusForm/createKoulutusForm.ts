@@ -255,7 +255,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();
@@ -304,7 +304,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();
@@ -348,7 +348,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();
@@ -395,7 +395,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();
@@ -422,7 +422,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();
@@ -453,7 +453,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
           paste('http://linkki.fi')
         );
@@ -490,7 +490,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
           paste('http://linkki.fi')
@@ -529,7 +529,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
           paste('http://linkki.fi')
@@ -563,7 +563,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
           paste('http://linkki.fi')
@@ -602,7 +602,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillJarjestajaSection();
@@ -634,7 +634,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillJarjestajaSection();
@@ -667,7 +667,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
 
         getInputByLabel('koulutuslomake.linkkiEPerusteisiin').pipe(
           paste('http://linkki.fi')
@@ -710,7 +710,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();
@@ -748,7 +748,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();
@@ -791,7 +791,7 @@ export const createKoulutusForm = () => {
       });
 
       withinSection('description', () => {
-        getInputByLabel('yleiset.kuvaus').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       fillLisatiedotSection();

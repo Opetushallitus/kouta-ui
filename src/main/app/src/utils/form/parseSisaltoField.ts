@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { match, P } from 'ts-pattern';
 
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { SisaltoModel } from '#/src/types/domainTypes';
 import {
   SisaltoTaulukkoValue,

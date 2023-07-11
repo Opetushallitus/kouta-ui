@@ -1,4 +1,4 @@
-import { parseEditorState } from '../components/Editor/utils';
+import { parseEditorState } from '../components/LexicalEditorUI/utils';
 import {
   Alkamiskausityyppi,
   HAKULOMAKETYYPPI,

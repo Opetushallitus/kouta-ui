@@ -49,13 +49,11 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
+    container: 
+      image: mcr.microsoft.com/playwright:v1.35.0-jammy
+      options: --ipc=host
     steps:
       - uses: actions/checkout@v3
-
-      - uses: szenius/set-timezone@v1.1
-        with:
-          timezoneLinux: "Europe/Helsinki"
 
       - uses: actions/setup-node@v3
         with:

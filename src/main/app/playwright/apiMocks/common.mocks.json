@@ -1,0 +1,204 @@
+[
+  {
+    "method": "GET",
+    "url": "https://localhost:3000/koodisto-service/rest/json/kausi/koodi?onlyValidKoodis=true",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "kausi_s",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/kausi_s",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "kausi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "S",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "1995-08-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Höst",
+              "kuvaus": "Höst",
+              "lyhytNimi": "H",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Autumn",
+              "kuvaus": "Autumn",
+              "lyhytNimi": "A",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Syksy",
+              "kuvaus": "Voi olla joko koulutuksen alkamiskausi tai hakukausi",
+              "lyhytNimi": "S",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "kausi_k",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/kausi_k",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "kausi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "K",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "1992-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Spring",
+              "kuvaus": "Spring",
+              "lyhytNimi": "S",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Vår",
+              "kuvaus": "Vår",
+              "lyhytNimi": "V",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Kevät",
+              "kuvaus": "Voi olla joko koulutuksen alkamiskausi tai hakukausi",
+              "lyhytNimi": "K",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/koodisto-service/rest/codeelement/latest/posti_00350",
+    "response": {
+      "body": {
+        "koodiUri": "posti_00350",
+        "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/posti_00350",
+        "version": 0,
+        "versio": 2,
+        "koodisto": {
+          "koodistoUri": "posti",
+          "organisaatioOid": "1.2.246.562.10.00000000001",
+          "koodistoVersios": [2]
+        },
+        "koodiArvo": "00350",
+        "paivitysPvm": "2018-11-19",
+        "paivittajaOid": null,
+        "voimassaAlkuPvm": "1990-01-01",
+        "voimassaLoppuPvm": null,
+        "tila": "LUONNOS",
+        "metadata": [
+          {
+            "nimi": "HELSINKI",
+            "kuvaus": "HELSINKI",
+            "lyhytNimi": "HELSINKI",
+            "kayttoohje": null,
+            "kasite": null,
+            "sisaltaaMerkityksen": null,
+            "eiSisallaMerkitysta": null,
+            "huomioitavaKoodi": null,
+            "sisaltaaKoodiston": null,
+            "kieli": "FI"
+          },
+          {
+            "nimi": "HELSINGFORS",
+            "kuvaus": "HELSINGFORS",
+            "lyhytNimi": "HELSINGFORS",
+            "kayttoohje": null,
+            "kasite": null,
+            "sisaltaaMerkityksen": null,
+            "eiSisallaMerkitysta": null,
+            "huomioitavaKoodi": null,
+            "sisaltaaKoodiston": null,
+            "kieli": "SV"
+          }
+        ],
+        "withinCodeElements": [
+          {
+            "codeElementUri": "koulutustoimija_06500110",
+            "codeElementVersion": 1,
+            "codeElementValue": "0650011-0",
+            "relationMetadata": [
+              {
+                "nimi": "Helsingin ranskalais-suomalaisen koulun johtokunta",
+                "kieli": "FI",
+                "kuvaus": "Helsingin ranskalais-suomalaisen koulun johtokunta"
+              }
+            ],
+            "parentMetadata": [
+              {
+                "nimi": "koulutustoimija",
+                "kieli": "FI",
+                "kuvaus": "Koulutustoimija = opetuksen järjestäjä, ylläpitäjä ja koulutuksen järjestäjä. Jokaisella oppilaitoksella on oltava koulutustoimija jotta oppilaitoksen voi lisätä järjestelmään. Koulutustoimija on se taho joka saa valtion rahoituksen toiminsan ylläpitämiseen sekä koulutustehtäväpäätöksen. Koulutustoimijan tiedot haetaan Organisaatiopalveluun YTJ-rekisteristä. Tietoihin lisättän OPHn tarvitsemat muut tiedot.  Tieto kopioituu tähän koodistoon. Tilastokeskus käyttää koulutuksen järjestäjän tunnuksela YTJ-rekisterisä saatavia Y-tunnuksia.\nTätä koodistoa ylläpidetään Opetushallituksen Tietohallintoyksikössä (Heidi Bergström)"
+              },
+              {
+                "nimi": "koulutustoimija",
+                "kieli": "EN",
+                "kuvaus": "koulutustoimija"
+              },
+              {
+                "nimi": "koulutustoimija",
+                "kieli": "SV",
+                "kuvaus": "koulutustoimija"
+              }
+            ],
+            "passive": false
+          }
+        ],
+        "includesCodeElements": [],
+        "levelsWithCodeElements": []
+      },
+      "status": 200
+    }
+  }
+]

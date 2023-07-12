@@ -1,0 +1,22 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "tila": "julkaistu",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Nimi"
+  },
+  "koulutustyyppi": "amm",
+  "kielivalinta": [
+    "fi"
+  ],
+  "metadata": {
+    "koulutusalaKoodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
+    "koulutusKoodiUrit": [
+      "koulutus_652501#12"
+    ],
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    }
+  }
+}

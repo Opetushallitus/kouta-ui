@@ -1,0 +1,57 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "johtaaTutkintoon": true,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "julkaistu",
+  "kielivalinta": [
+    "fi"
+  ],
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_671112#12"
+  ],
+  "koulutustyyppi": "amk",
+  "nimi": {
+    "fi": "Tiedot nimi"
+  },
+  "julkinen": false,
+  "esikatselu": true,
+  "ePerusteId": null,
+  "sorakuvausId": "1",
+  "metadata": {
+    "tyyppi": "amk",
+    "tutkinnonOsat": [],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "amk",
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": 300,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "tutkintonimikeKoodiUrit": [
+      "tutkintonimikekk_533#2"
+    ],
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_091#1"
+    ],
+    "linkkiEPerusteisiin": {},
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "erikoistumiskoulutusKoodiUri": null
+  }
+}

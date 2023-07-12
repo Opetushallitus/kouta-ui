@@ -1,0 +1,59 @@
+{
+  "oid": "1.2.3.4.5.6",
+  "koulutustyyppi": "aikuisten-perusopetus",
+  "koulutuksetKoodiUri": [
+    "koulutus_0#1"
+  ],
+  "tila": "tallennettu",
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "nimi": {
+    "fi": "Aikuisten perusopetus",
+    "sv": "Grundexamen inom lantbruksbranschen"
+  },
+  "metadata": {
+    "tyyppi": "aikuisten-perusopetus",
+    "tutkinnonOsat": [],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "aikuisten-perusopetus",
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "kuvaus": {
+      "fi": "<p>kuvausteksti</p>"
+    },
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "opintojenLaajuusNumero": 13,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "tutkintonimikeKoodiUrit": [],
+    "koulutusalaKoodiUrit": [],
+    "linkkiEPerusteisiin": {
+      "fi": "http://testilinkki.fi"
+    },
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "erikoistumiskoulutusKoodiUri": null
+  },
+  "julkinen": true,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "kielivalinta": [
+    "fi",
+    "sv"
+  ],
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "esikatselu": false,
+  "ePerusteId": null,
+  "sorakuvausId": null
+}

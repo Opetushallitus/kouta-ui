@@ -1,0 +1,228 @@
+[
+  {
+    "method": "GET",
+    "url": "https://localhost:3000/koodisto-service/rest/json/organisaationkuvaustiedot/koodi?onlyValidKoodis=true",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "organisaationkuvaustiedot_01",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/organisaationkuvaustiedot_01",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "organisaationkuvaustiedot",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "01",
+          "paivitysPvm": "2019-12-12",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2019-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Esteettömyys ja saavutettavuus",
+              "kuvaus": null,
+              "lyhytNimi": "Esteettömyys ja saavutettavuus",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "organisaationkuvaustiedot_06",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/organisaationkuvaustiedot_06",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "organisaationkuvaustiedot",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "06",
+          "paivitysPvm": "2019-12-12",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2019-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Tietoa elämisen kustannuksista",
+              "kuvaus": null,
+              "lyhytNimi": "Tietoa elämisen kustannuksista",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "organisaationkuvaustiedot_07",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/organisaationkuvaustiedot_07",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "organisaationkuvaustiedot",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "07",
+          "paivitysPvm": "2019-12-12",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2019-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Vapaa-ajanpalvelut",
+              "kuvaus": null,
+              "lyhytNimi": "Vapaa-ajanpalvelut",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "organisaationkuvaustiedot_02",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/organisaationkuvaustiedot_02",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "organisaationkuvaustiedot",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "02",
+          "paivitysPvm": "2019-12-12",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2019-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Opintojen rahoitus",
+              "kuvaus": null,
+              "lyhytNimi": "Opintojen rahoitus",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "organisaationkuvaustiedot_03",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/organisaationkuvaustiedot_03",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "organisaationkuvaustiedot",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "03",
+          "paivitysPvm": "2019-12-12",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2019-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Opiskelijaruokailu",
+              "kuvaus": null,
+              "lyhytNimi": "Opiskelijaruokailu",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "organisaationkuvaustiedot_04",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/organisaationkuvaustiedot_04",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "organisaationkuvaustiedot",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "04",
+          "paivitysPvm": "2019-12-12",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2019-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Terveydenhuoltopalvelut",
+              "kuvaus": null,
+              "lyhytNimi": "Terveydenhuoltopalvelut",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "organisaationkuvaustiedot_05",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/organisaationkuvaustiedot_05",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "organisaationkuvaustiedot",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [1]
+          },
+          "koodiArvo": "05",
+          "paivitysPvm": "2019-12-12",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2019-12-12",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Tietoa asumisesta",
+              "kuvaus": null,
+              "lyhytNimi": "Tietoa asumisesta",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
+  }
+]

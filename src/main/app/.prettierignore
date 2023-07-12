@@ -1,5 +1,4 @@
 tsconfig.json
 package-lock.json
 *.typegen.ts
-**/snapshots/**
-**/mocks/**.json
+**/playwright/**/*.json

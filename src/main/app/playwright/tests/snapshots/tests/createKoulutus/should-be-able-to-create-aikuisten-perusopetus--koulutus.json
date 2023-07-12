@@ -1,0 +1,46 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "julkaistu",
+  "kielivalinta": [
+    "fi"
+  ],
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "aikuisten-perusopetus",
+  "nimi": {
+    "fi": "koulutustyypit.aikuistenPerusopetus"
+  },
+  "julkinen": true,
+  "esikatselu": true,
+  "ePerusteId": null,
+  "sorakuvausId": null,
+  "metadata": {
+    "tyyppi": "aikuisten-perusopetus",
+    "tutkinnonOsat": [],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "aikuisten-perusopetus",
+    "lisatiedot": [],
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "opintojenLaajuusNumero": 13,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "tutkintonimikeKoodiUrit": [],
+    "koulutusalaKoodiUrit": [],
+    "linkkiEPerusteisiin": {
+      "fi": "http://linkki.fi"
+    },
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "erikoistumiskoulutusKoodiUri": null
+  }
+}

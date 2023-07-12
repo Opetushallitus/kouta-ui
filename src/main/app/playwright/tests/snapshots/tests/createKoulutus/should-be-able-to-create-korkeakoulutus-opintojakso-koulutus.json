@@ -1,0 +1,51 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "julkaistu",
+  "kielivalinta": [
+    "fi"
+  ],
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "kk-opintojakso",
+  "nimi": {
+    "fi": "Opintojakso nimi"
+  },
+  "julkinen": false,
+  "esikatselu": true,
+  "ePerusteId": null,
+  "sorakuvausId": null,
+  "metadata": {
+    "tyyppi": "kk-opintojakso",
+    "tutkinnonOsat": [],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "kk-opintojakso",
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": 30,
+    "opintojenLaajuusNumeroMax": 30,
+    "tutkintonimikeKoodiUrit": [],
+    "koulutusalaKoodiUrit": [],
+    "linkkiEPerusteisiin": {},
+    "isAvoinKorkeakoulutus": true,
+    "tunniste": "ABC-123",
+    "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
+    "erikoistumiskoulutusKoodiUri": null
+  }
+}

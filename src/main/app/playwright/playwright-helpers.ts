@@ -157,7 +157,7 @@ const assertOnFrontPage = (page: Page) =>
   expect(page).toHaveURL(/\/kouta?\/\?.+$/);
 
 export const assertNoUnsavedChangesDialog = async (page: Page) => {
-  page.getByRole('link', { name: 'Home' }).click();
+  await page.getByRole('link', { name: 'Home' }).click();
   await expect(
     page.getByRole('heading', {
       name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',

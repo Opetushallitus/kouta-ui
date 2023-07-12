@@ -1,5 +1,6 @@
-import getOsaamisalaLaajuus from '#/src/utils/koulutus/getOsaamisalaLaajuus';
-import { setDefaultMuodostumisSaanto } from '#/src/utils/koulutus/getOsaamisalaLaajuus';
+import getOsaamisalaLaajuus, {
+  setDefaultMuodostumisSaanto,
+} from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 
 test('sets default muodostumisSaanto for osaamisala that is missing it', () => {
   const osaamisala = {

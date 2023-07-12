@@ -2,17 +2,16 @@
   "extends": [
     "react-app",
     "prettier",
-    "plugin:lodash/recommended",
-    "plugin:playwright/recommended"
+    "plugin:lodash/recommended"
   ],
   "plugins": [
     "prettier",
     "lodash"
   ],
   "rules": {
-    "playwright/expect-expect": "off",
-    "playwright/no-force-option": "off",
-    "@typescript-eslint/no-duplicate-imports": ["warn"],
+    "@typescript-eslint/no-duplicate-imports": [
+      "warn"
+    ],
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -67,8 +66,31 @@
     "lodash/prefer-noop": "off",
     "lodash/prefer-includes": "off",
     "lodash/path-style": "off",
-    "no-negated-condition": ["warn"],
-    "no-implicit-coercion": ["warn"],
-    "no-var": ["warn"]
-  }
+    "no-negated-condition": [
+      "warn"
+    ],
+    "no-implicit-coercion": [
+      "warn"
+    ],
+    "no-var": [
+      "warn"
+    ]
+  },
+  "overrides": [
+     {
+      "files": "./playwright/*.ts",
+      "extends": "plugin:playwright/recommended",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "project": "tsconfig.json"
+      },
+      "rules": {
+        "playwright/expect-expect": "off",
+        "playwright/no-force-option": "off",
+        "@typescript-eslint/no-floating-promises": [
+          "error"
+        ]
+      }
+    }
+  ]
 }

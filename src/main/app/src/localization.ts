@@ -7,7 +7,7 @@ import { LANGUAGES } from '#/src/constants';
 import getTranslations from '#/src/translations';
 import { getLocalization } from '#/src/utils/api/getLocalization';
 
-const { REACT_APP_LANG } = process.env;
+import { isPlaywright } from './utils';
 
 const formatMap = {
   toLower: _.toLower,
@@ -39,7 +39,7 @@ const createLocalization = ({
 }: CreateLocalizationProps) => {
   let instance = i18n.createInstance();
 
-  if (!REACT_APP_LANG && loadLocalization) {
+  if (!isPlaywright && loadLocalization) {
     instance = instance.use(HttpBackend);
   }
 
@@ -48,9 +48,9 @@ const createLocalization = ({
     debug,
     defaultNS,
     preload: LANGUAGES,
-    lng: REACT_APP_LANG ?? language,
+    lng: isPlaywright ? 'cimode' : language,
     ns,
-    ...(!REACT_APP_LANG &&
+    ...(!isPlaywright &&
       loadLocalization && {
         backend: {
           loadPath: '{{ns}}:{{lng}}',

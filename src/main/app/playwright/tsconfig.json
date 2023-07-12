@@ -1,0 +1,14 @@
+{
+    "extends": "../tsconfig.paths.json",
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "moduleResolution": "node",
+    },
+    "include": [
+      "./**/*.ts",
+      "./**/*.js",
+      "../src/constants.ts",
+      "../src/types/*"
+    ]
+  }

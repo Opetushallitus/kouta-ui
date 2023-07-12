@@ -2,12 +2,12 @@ import { test, expect } from '@playwright/test';
 import { sub } from 'date-fns';
 import { merge } from 'lodash';
 
+import haku from '#/playwright/mocks/haku';
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import { stubHakuRoutes } from '#/playwright/mocks/stubHakuRoutes';
+import { stubKayttoOikeusOmatTiedot } from '#/playwright/mocks/stubKayttoOikeusOmatTiedot';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
-import haku from './mocks/haku';
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import { stubHakuRoutes } from './mocks/stubHakuRoutes';
-import { stubKayttoOikeusOmatTiedot } from './mocks/stubKayttoOikeusOmatTiedot';
 import {
   assertNoUnsavedChangesDialog,
   assertURLEndsWith,

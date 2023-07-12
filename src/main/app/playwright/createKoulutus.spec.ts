@@ -1,8 +1,8 @@
 import { Page, test, expect } from '@playwright/test';
 
+import { stubKoulutusRoutes } from '#/playwright/mocks/stubKoulutusRoutes';
 import { ENTITY } from '#/src/constants';
 
-import { stubKoulutusRoutes } from './mocks/stubKoulutusRoutes';
 import {
   fillAsyncSelect,
   fillKieliversiotSection,
@@ -50,7 +50,7 @@ const fillJarjestajaSection = (page: Page) =>
 
 const fillNakyvyysSection = (page: Page) =>
   withinSection(page, 'julkinen', async section => {
-    section.getByText('yleiset.onJulkinen').click();
+    await section.getByText('yleiset.onJulkinen').click();
   });
 
 test.describe('Create koulutus', () => {

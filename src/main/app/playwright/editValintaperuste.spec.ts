@@ -1,11 +1,12 @@
 import { Page, test, expect } from '@playwright/test';
 import { merge } from 'lodash';
 
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import valintaperuste from '#/playwright/mocks/valintaperuste';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { KoulutustyyppiModel } from '#/src/types/domainTypes';
 
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import valintaperuste from './mocks/valintaperuste';
+import { stubValintaperusteRoutes } from './mocks/stubValintaperusteRoutes';
 import {
   fillKieliversiotSection,
   fillTilaSection,
@@ -15,7 +16,6 @@ import {
   assertNoUnsavedChangesDialog,
   assertURLEndsWith,
 } from './playwright-helpers';
-import { stubValintaperusteRoutes } from './stubValintaperusteRoutes';
 
 const valintaperusteId = '111-222-333-444-555';
 

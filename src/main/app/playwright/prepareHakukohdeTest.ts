@@ -1,13 +1,16 @@
 import { merge } from 'lodash';
 
+import koulutus from '#/playwright/mocks/koulutus';
+import {
+  fixtureJSON,
+  mocksFromFile,
+} from '#/playwright/mocks/playwright-mock-utils';
+import { stubOrganisaatioRoutes } from '#/playwright/mocks/stubOrganisaatioRoutes';
+import toteutus from '#/playwright/mocks/toteutus';
+import valintaperuste from '#/playwright/mocks/valintaperuste';
 import { HAKUTAPA_YHTEISHAKU_KOODI_URI } from '#/src/constants';
 
-import koulutus from './mocks/koulutus';
-import { fixtureJSON, mocksFromFile } from './mocks/playwright-mock-utils';
-import { stubOrganisaatioRoutes } from './mocks/stubOrganisaatioRoutes';
-import toteutus from './mocks/toteutus';
-import valintaperuste from './mocks/valintaperuste';
-import { stubHakukohdeRoutes } from './stubHakukohdeRoutes';
+import { stubHakukohdeRoutes } from './mocks/stubHakukohdeRoutes';
 
 export const toteutusOid = '2.1.1.1.1.1';
 export const koulutusOid = '3.1.1.1.1';

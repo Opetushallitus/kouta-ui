@@ -2,6 +2,7 @@ import { Page, test, expect, Locator } from '@playwright/test';
 
 import { ENTITY } from '#/src/constants';
 
+import { stubValintaperusteRoutes } from './mocks/stubValintaperusteRoutes';
 import {
   fillAsyncSelect,
   fillKieliversiotSection,
@@ -18,7 +19,6 @@ import {
   copyPohja,
   assertTilaIs,
 } from './playwright-helpers';
-import { stubValintaperusteRoutes } from './stubValintaperusteRoutes';
 
 const valintaperusteId = '111-222-333-444-555';
 

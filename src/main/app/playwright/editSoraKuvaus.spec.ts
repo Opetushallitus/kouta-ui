@@ -1,10 +1,11 @@
 import { test } from '@playwright/test';
 import { merge } from 'lodash';
 
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import createSoraKuvaus from '#/playwright/mocks/soraKuvaus';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import createSoraKuvaus from './mocks/soraKuvaus';
+import { stubSoraKuvausRoutes } from './mocks/stubSoraKuvausRoutes';
 import {
   fillKieliversiotSection,
   fillTilaSection,
@@ -14,7 +15,6 @@ import {
   assertNoUnsavedChangesDialog,
   assertURLEndsWith,
 } from './playwright-helpers';
-import { stubSoraKuvausRoutes } from './stubSoraKuvausRoutes';
 
 const soraKuvaus = createSoraKuvaus();
 

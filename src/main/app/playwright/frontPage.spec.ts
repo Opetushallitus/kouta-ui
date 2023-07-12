@@ -1,11 +1,10 @@
 import { expect, test } from '@playwright/test';
 import { merge } from 'lodash';
 
+import organisaatio from '#/playwright/mocks/organisaatio';
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import { stubCommonRoutes } from '#/playwright/mocks/stubCommonRoutes';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-
-import organisaatio from './mocks/organisaatio';
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import { stubCommonRoutes } from './mocks/stubCommonRoutes';
 
 export const oid = OPETUSHALLITUS_ORGANISAATIO_OID;
 

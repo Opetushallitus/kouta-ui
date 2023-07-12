@@ -1,11 +1,12 @@
 import { Page, test, expect } from '@playwright/test';
 import { merge } from 'lodash';
 
+import hakukohde from '#/playwright/mocks/hakukohde';
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import { stubKayttoOikeusOmatTiedot } from '#/playwright/mocks/stubKayttoOikeusOmatTiedot';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
-import hakukohde from './mocks/hakukohde';
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import { stubKayttoOikeusOmatTiedot } from './mocks/stubKayttoOikeusOmatTiedot';
+import { selectedToimipisteNimi } from './mocks/stubHakukohdeRoutes';
 import {
   fillKieliversiotSection,
   fillTilaSection,
@@ -20,7 +21,6 @@ import {
   valintaperusteId,
   toteutusOid,
 } from './prepareHakukohdeTest';
-import { selectedToimipisteNimi } from './stubHakukohdeRoutes';
 
 const fillJarjestyspaikkaSection = (page: Page) =>
   withinSection(page, 'jarjestyspaikkaOid', async section => {

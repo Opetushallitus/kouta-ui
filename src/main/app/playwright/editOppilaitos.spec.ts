@@ -1,10 +1,10 @@
 import { test } from '@playwright/test';
 
+import oppilaitos from '#/playwright/mocks/oppilaitos';
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import { stubOppilaitosRoutes } from '#/playwright/mocks/stubOppilaitosRoutes';
 import { ENTITY } from '#/src/constants';
 
-import oppilaitos from './mocks/oppilaitos';
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import { stubOppilaitosRoutes } from './mocks/stubOppilaitosRoutes';
 import {
   fillKieliversiotSection,
   tallenna,

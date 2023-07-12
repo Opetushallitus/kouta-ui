@@ -1,8 +1,8 @@
 import { Page, test, expect } from '@playwright/test';
 
+import { stubOppilaitosRoutes } from '#/playwright/mocks/stubOppilaitosRoutes';
 import { ENTITY } from '#/src/constants';
 
-import { stubOppilaitosRoutes } from './mocks/stubOppilaitosRoutes';
 import {
   fillAsyncSelect,
   fillKieliversiotSection,

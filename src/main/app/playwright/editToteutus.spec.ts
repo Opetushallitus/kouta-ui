@@ -1,11 +1,14 @@
 import { Page, test, expect } from '@playwright/test';
 import { merge } from 'lodash';
 
+import koulutus from '#/playwright/mocks/koulutus';
+import {
+  fixtureJSON,
+  mocksFromFile,
+} from '#/playwright/mocks/playwright-mock-utils';
+import { stubToteutusRoutes } from '#/playwright/mocks/stubToteutusRoutes';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
-import koulutus from './mocks/koulutus';
-import { fixtureJSON, mocksFromFile } from './mocks/playwright-mock-utils';
-import { stubToteutusRoutes } from './mocks/stubToteutusRoutes';
 import {
   fillKieliversiotSection,
   fillTilaSection,

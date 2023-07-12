@@ -1,8 +1,8 @@
 import { Page, test } from '@playwright/test';
 
+import { stubHakuRoutes } from '#/playwright/mocks/stubHakuRoutes';
 import { ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
 
-import { stubHakuRoutes } from './mocks/stubHakuRoutes';
 import {
   fillAsyncSelect,
   fillDateTime,

@@ -2,13 +2,14 @@ import { Page } from '@playwright/test';
 import { sub } from 'date-fns';
 import { merge } from 'lodash';
 
-import haku from './mocks/haku';
-import organisaatioHierarkia from './mocks/organisaatioHierarkia';
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import { stubCommonRoutes } from './mocks/stubCommonRoutes';
-import { stubHakemuspalveluLomakkeetRoute } from './mocks/stubHakemuspalveluLomakkeetRoute';
-import { stubONRHenkiloRoute } from './mocks/stubONRHenkiloRoute';
-import { setFakeTime } from './playwright-helpers';
+import haku from '#/playwright/mocks/haku';
+import organisaatioHierarkia from '#/playwright/mocks/organisaatioHierarkia';
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import { stubCommonRoutes } from '#/playwright/mocks/stubCommonRoutes';
+import { stubHakemuspalveluLomakkeetRoute } from '#/playwright/mocks/stubHakemuspalveluLomakkeetRoute';
+import { stubONRHenkiloRoute } from '#/playwright/mocks/stubONRHenkiloRoute';
+
+import { setFakeTime } from '../playwright-helpers';
 
 export const selectedToimipisteNimi =
   'Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka';

@@ -1,11 +1,14 @@
 import { Page } from '@playwright/test';
 import { merge } from 'lodash';
 
-import { koutaSearchItem } from './mocks/koutaSearchItem';
-import { fixtureJSON, mocksFromFile } from './mocks/playwright-mock-utils';
-import { stubCommonRoutes } from './mocks/stubCommonRoutes';
-import { stubONRHenkiloRoute } from './mocks/stubONRHenkiloRoute';
-import { stubOrganisaatioRoutes } from './mocks/stubOrganisaatioRoutes';
+import { koutaSearchItem } from '#/playwright/mocks/koutaSearchItem';
+import {
+  fixtureJSON,
+  mocksFromFile,
+} from '#/playwright/mocks/playwright-mock-utils';
+import { stubCommonRoutes } from '#/playwright/mocks/stubCommonRoutes';
+import { stubONRHenkiloRoute } from '#/playwright/mocks/stubONRHenkiloRoute';
+import { stubOrganisaatioRoutes } from '#/playwright/mocks/stubOrganisaatioRoutes';
 
 const valintaperusteItem = merge(koutaSearchItem({ idProp: 'id' }), {
   nimi: { fi: 'Valintaperusteen nimi' },

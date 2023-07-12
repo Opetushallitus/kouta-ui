@@ -1,18 +1,25 @@
 import { Locator, Page, test, expect } from '@playwright/test';
 import { merge } from 'lodash';
 
+import koulutus from '#/playwright/mocks/koulutus';
+import {
+  fixtureJSON,
+  mocksFromFile,
+} from '#/playwright/mocks/playwright-mock-utils';
+import { stubKayttoOikeusOmatTiedot } from '#/playwright/mocks/stubKayttoOikeusOmatTiedot';
+import { stubOrganisaatioRoutes } from '#/playwright/mocks/stubOrganisaatioRoutes';
+import toteutus from '#/playwright/mocks/toteutus';
+import valintaperuste from '#/playwright/mocks/valintaperuste';
 import {
   Alkamiskausityyppi,
   ENTITY,
   HAKUTAPA_YHTEISHAKU_KOODI_URI,
 } from '#/src/constants';
 
-import koulutus from './mocks/koulutus';
-import { fixtureJSON, mocksFromFile } from './mocks/playwright-mock-utils';
-import { stubKayttoOikeusOmatTiedot } from './mocks/stubKayttoOikeusOmatTiedot';
-import { stubOrganisaatioRoutes } from './mocks/stubOrganisaatioRoutes';
-import toteutus from './mocks/toteutus';
-import valintaperuste from './mocks/valintaperuste';
+import {
+  selectedToimipisteNimi,
+  stubHakukohdeRoutes,
+} from './mocks/stubHakukohdeRoutes';
 import {
   fillAsyncSelect,
   fillDateTime,
@@ -30,10 +37,6 @@ import {
   assertBaseTilaNotCopied,
   fillValintakokeetSection,
 } from './playwright-helpers';
-import {
-  selectedToimipisteNimi,
-  stubHakukohdeRoutes,
-} from './stubHakukohdeRoutes';
 
 const prepareTest = async (
   page,

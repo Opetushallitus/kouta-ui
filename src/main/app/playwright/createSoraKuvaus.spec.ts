@@ -1,8 +1,9 @@
 import { Page, test, expect } from '@playwright/test';
 
+import createSoraKuvaus from '#/playwright/mocks/soraKuvaus';
 import { ENTITY } from '#/src/constants';
 
-import createSoraKuvaus from './mocks/soraKuvaus';
+import { stubSoraKuvausRoutes } from './mocks/stubSoraKuvausRoutes';
 import {
   fillAsyncSelect,
   fillKieliversiotSection,
@@ -15,7 +16,6 @@ import {
   typeToEditor,
   assertBaseTilaNotCopied,
 } from './playwright-helpers';
-import { stubSoraKuvausRoutes } from './stubSoraKuvausRoutes';
 
 const soraKuvaus = createSoraKuvaus();
 

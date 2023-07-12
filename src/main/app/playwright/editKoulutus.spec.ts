@@ -1,11 +1,11 @@
 import { test, Page } from '@playwright/test';
 import { merge } from 'lodash';
 
+import koulutus from '#/playwright/mocks/koulutus';
+import { fixtureJSON } from '#/playwright/mocks/playwright-mock-utils';
+import { stubKoulutusRoutes } from '#/playwright/mocks/stubKoulutusRoutes';
 import { ENTITY } from '#/src/constants';
 
-import koulutus from './mocks/koulutus';
-import { fixtureJSON } from './mocks/playwright-mock-utils';
-import { stubKoulutusRoutes } from './mocks/stubKoulutusRoutes';
 import {
   assertNoUnsavedChangesDialog,
   confirmDelete,

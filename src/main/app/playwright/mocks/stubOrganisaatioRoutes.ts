@@ -20,6 +20,13 @@ export const stubOrganisaatioRoutes = async (
   );
 
   await page.route(
+    `**/kouta-backend/organisaatio/hierarkia?aktiiviset=true&lakkautetut=false&skipParents=false&suunnitellut=true`,
+    fixtureJSON(
+      organisaatioHierarkia({ rootOid: OPETUSHALLITUS_ORGANISAATIO_OID })
+    )
+  );
+
+  await page.route(
     `**/kouta-backend/organisaatio/hierarkia*oid=${organisaatioOid}*`,
     fixtureJSON(organisaatioHierarkia({ rootOid: organisaatioOid }))
   );

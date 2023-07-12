@@ -4,7 +4,6 @@ import { Field } from 'redux-form';
 import { MaaraTyyppi, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
-import { getTestIdProps } from '#/src/utils';
 
 import { useLanguageTab } from '../contexts/LanguageTabContext';
 import useKoodi from '../hooks/useKoodi';
@@ -36,8 +35,7 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
       : '';
 
     return (
-      <Box {...getTestIdProps('laajuusNumero')}>
-        <legend>{t('koulutuslomake.valitseOpintojenLaajuus')}</legend>
+      <FormControl label={t('koulutuslomake.valitseOpintojenLaajuus')}>
         <Box mt={1}>
           <Field
             name={`${section}.laajuusNumeroTyyppi`}
@@ -105,7 +103,7 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
             </Box>
           )}
         </Box>
-      </Box>
+      </FormControl>
     );
   }
 );

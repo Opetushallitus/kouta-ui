@@ -2,7 +2,11 @@ import { Page } from '@playwright/test';
 import { merge } from 'lodash';
 
 import { koutaSearchItem } from './koutaSearchItem';
-import { fixtureJSON, mocksFromFile } from './playwright-mock-utils';
+import {
+  fixtureFromFile,
+  fixtureJSON,
+  mocksFromFile,
+} from './playwright-mock-utils';
 import { stubKayttoOikeusOmatTiedot } from './stubKayttoOikeusOmatTiedot';
 
 export const stubCommonRoutes = async (page: Page) => {
@@ -83,6 +87,11 @@ export const stubCommonRoutes = async (page: Page) => {
   );
   await page.route('**/kouta-backend/auth/session', fixtureJSON({}));
   await page.route('**/kouta-backend/auth/login', fixtureJSON({}));
+
+  await page.route(
+    '**/koodisto-service/rest/json/hakutapa/koodi*',
+    fixtureFromFile('hakutapa-koodisto.json')
+  );
 
   await stubKayttoOikeusOmatTiedot(page);
   await mocksFromFile(page, 'common.mocks.json');

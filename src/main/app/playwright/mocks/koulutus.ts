@@ -1,6 +1,8 @@
 import { merge } from 'lodash/fp';
 
-const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
+import { TestiKoulutustyyppi } from '../test-types';
+
+const getBaseFields = (tyyppi: TestiKoulutustyyppi = 'amm') => {
   return {
     oid: '1.2.246.562.13.00000000000000000072',
     koulutustyyppi: tyyppi,
@@ -32,11 +34,10 @@ const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
   };
 };
 
-const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
-  return merge(getBaseFields(), {
+const getAmmatillinenFields = (tyyppi: TestiKoulutustyyppi) => {
+  return merge(getBaseFields(tyyppi), {
     oid: '1.2.246.562.13.00000000000000000599',
     johtaaTutkintoon: false,
-    koulutustyyppi: tyyppi,
     koulutuksetKoodiUri: ['koulutus_351107#12'],
     tila: 'tallennettu',
     tarjoajat: [],
@@ -46,7 +47,6 @@ const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
       sv: 'Grundexamen inom gruvbranschen',
     },
     metadata: {
-      tyyppi: tyyppi,
       kuvaus: {},
       lisatiedot: [],
     },
@@ -60,14 +60,12 @@ const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
   });
 };
 
-const getKorkeakouluFields = ({ tyyppi }) => {
-  return merge(getBaseFields(), {
+const getKorkeakouluFields = (tyyppi: TestiKoulutustyyppi) => {
+  return merge(getBaseFields(tyyppi), {
     johtaaTutkintoon: true,
-    koulutustyyppi: tyyppi,
     koulutuksetKoodiUri: ['koulutus_671112#12'],
     nimi: { fi: 'Fysioterapeutti (AMK)', sv: 'Fysioterapeut (YH)' },
     metadata: {
-      tyyppi,
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
       tutkintonimikeKoodiUrit: ['tutkintonimikekk_1#1', 'tutkintonimikekk_2#1'],
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
@@ -78,14 +76,12 @@ const getKorkeakouluFields = ({ tyyppi }) => {
   });
 };
 
-const getAmmOpeErityisopeJaOpoFields = ({ tyyppi }) => {
-  return merge(getBaseFields(), {
+const getAmmOpeErityisopeJaOpoFields = () => {
+  return merge(getBaseFields('amm-ope-erityisope-ja-opo'), {
     johtaaTutkintoon: false,
-    koulutustyyppi: tyyppi,
     koulutuksetKoodiUri: ['koulutus_000001#12'],
     nimi: { fi: 'Ammatillinen opettajankoulutus', sv: 'Yrkeslärarutbildning' },
     metadata: {
-      tyyppi,
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
       tutkintonimikeKoodiUrit: [],
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_60#1',
@@ -96,8 +92,8 @@ const getAmmOpeErityisopeJaOpoFields = ({ tyyppi }) => {
   });
 };
 
-const getLukioFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getLukioFields = () => {
+  return merge(getBaseFields('lk'), {
     koulutuksetKoodiUri: ['koulutus_309902#7'],
     nimi: { fi: 'Lukion oppimäärä' },
     metadata: {
@@ -107,14 +103,14 @@ const getLukioFields = ({ tyyppi }) => {
 };
 
 const getDIAFields = () => {
-  return merge(getBaseFields({ tyyppi: 'lk' }), {
+  return merge(getBaseFields('lk'), {
     koulutuksetKoodiUri: ['koulutus_301103#7'],
     nimi: { fi: 'Deutsche Internationale Abitur; Reifeprüfung' },
   });
 };
 
-const getTuvaFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getTuvaFields = () => {
+  return merge(getBaseFields('tuva'), {
     nimi: { fi: 'Tutkintokoulutukseen valmentava koulutus (TUVA)' },
     metadata: {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_38',
@@ -123,8 +119,8 @@ const getTuvaFields = ({ tyyppi }) => {
   });
 };
 
-const getTelmaFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getTelmaFields = () => {
+  return merge(getBaseFields('telma'), {
     nimi: { fi: 'Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)' },
     metadata: {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_60',
@@ -133,8 +129,8 @@ const getTelmaFields = ({ tyyppi }) => {
   });
 };
 
-const getVapaaSivistystyoFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getVapaaSivistystyoFields = tyyppi => {
+  return merge(getBaseFields(tyyppi), {
     nimi: { fi: 'Vapaa Sivistystyö Opistovuosi' },
     metadata: {
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53',
@@ -143,8 +139,8 @@ const getVapaaSivistystyoFields = ({ tyyppi }) => {
   });
 };
 
-const getMuuAmmatillinenFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getMuuAmmatillinenFields = () => {
+  return merge(getBaseFields('amm-muu'), {
     nimi: {
       fi: 'Muut ammatilliset koulutukset',
       sv: 'Muut ammatilliset koulutukset',
@@ -157,8 +153,8 @@ const getMuuAmmatillinenFields = ({ tyyppi }) => {
   });
 };
 
-const getAikuistenPerusopetusFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getAikuistenPerusopetusFields = () => {
+  return merge(getBaseFields('aikuisten-perusopetus'), {
     nimi: { fi: 'Aikuisten perusopetus' },
     metadata: {
       opintojenLaajuusNumero: 13,
@@ -168,8 +164,8 @@ const getAikuistenPerusopetusFields = ({ tyyppi }) => {
   });
 };
 
-const getKorkeakoulutusOpintojaksoFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getKorkeakoulutusOpintojaksoFields = () => {
+  return merge(getBaseFields('kk-opintojakso'), {
     nimi: { fi: 'KK-opintojakso' },
     metadata: {
       opintojenLaajuusNumero: 13,
@@ -180,14 +176,14 @@ const getKorkeakoulutusOpintojaksoFields = ({ tyyppi }) => {
 };
 
 const getEBFields = () => {
-  return merge(getBaseFields({ tyyppi: 'lk' }), {
+  return merge(getBaseFields('lk'), {
     koulutuksetKoodiUri: ['koulutus_301104#7'],
     nimi: { fi: 'EB-tutkinto (European Baccalaureate)' },
   });
 };
 
-const getKorkeakoulutusOpintokokonaisuusFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getKorkeakoulutusOpintokokonaisuusFields = () => {
+  return merge(getBaseFields('kk-opintokokonaisuus'), {
     nimi: { fi: 'KK-opintokokonaisuus' },
     metadata: {
       opintojenLaajuusNumero: '10 - 20',
@@ -197,8 +193,8 @@ const getKorkeakoulutusOpintokokonaisuusFields = ({ tyyppi }) => {
   });
 };
 
-const getTaiteenPerusopetusFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+const getTaiteenPerusopetusFields = () => {
+  return merge(getBaseFields('taiteen-perusopetus'), {
     nimi: { fi: 'Taiteen perusopetus' },
     metadata: {
       kuvaus: { fi: 'kuvausteksti' },
@@ -206,36 +202,36 @@ const getTaiteenPerusopetusFields = ({ tyyppi }) => {
   });
 };
 
-export default ({ tyyppi = 'amm' } = {}) => {
+export default (tyyppi: TestiKoulutustyyppi = 'amm') => {
   if (tyyppi === 'amm-ope-erityisope-ja-opo') {
-    return getAmmOpeErityisopeJaOpoFields({ tyyppi });
+    return getAmmOpeErityisopeJaOpoFields();
   } else if (tyyppi === 'amm-muu') {
-    return getMuuAmmatillinenFields({ tyyppi });
+    return getMuuAmmatillinenFields();
   } else if (tyyppi.startsWith('amm')) {
-    return getAmmatillinenFields({ tyyppi });
+    return getAmmatillinenFields(tyyppi);
   } else if (['yo', 'amk'].includes(tyyppi)) {
-    return getKorkeakouluFields({ tyyppi });
+    return getKorkeakouluFields(tyyppi);
   } else if (tyyppi === 'lk') {
-    return getLukioFields({ tyyppi });
+    return getLukioFields();
   } else if (tyyppi === 'tuva') {
-    return getTuvaFields({ tyyppi });
+    return getTuvaFields();
   } else if (tyyppi === 'telma') {
-    return getTelmaFields({ tyyppi });
+    return getTelmaFields();
   } else if (tyyppi.startsWith('vapaa-sivistystyo')) {
-    return getVapaaSivistystyoFields({ tyyppi });
+    return getVapaaSivistystyoFields(tyyppi);
   } else if (tyyppi === 'aikuisten-perusopetus') {
-    return getAikuistenPerusopetusFields({ tyyppi });
+    return getAikuistenPerusopetusFields();
   } else if (tyyppi === 'kk-opintojakso') {
-    return getKorkeakoulutusOpintojaksoFields({ tyyppi });
+    return getKorkeakoulutusOpintojaksoFields();
   } else if (tyyppi === 'eb') {
     return getEBFields();
   } else if (tyyppi === 'dia') {
     return getDIAFields();
   } else if (tyyppi === 'kk-opintokokonaisuus') {
-    return getKorkeakoulutusOpintokokonaisuusFields({ tyyppi });
+    return getKorkeakoulutusOpintokokonaisuusFields();
   } else if (tyyppi === 'taiteen-perusopetus') {
-    return getTaiteenPerusopetusFields({ tyyppi });
+    return getTaiteenPerusopetusFields();
   }
 
-  return getBaseFields();
+  return getBaseFields(tyyppi);
 };

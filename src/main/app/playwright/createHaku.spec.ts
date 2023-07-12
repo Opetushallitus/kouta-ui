@@ -1,6 +1,6 @@
-import { Locator, Page, test, expect } from '@playwright/test';
+import { Page, test } from '@playwright/test';
 
-import { Alkamiskausityyppi, ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
+import { ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
 
 import { stubHakuRoutes } from './mocks/stubHakuRoutes';
 import {
@@ -9,15 +9,14 @@ import {
   fillKieliversiotSection,
   fillOrgSection,
   fillTilaSection,
-  getFieldWrapperByName,
-  getRadio,
-  getSection,
   getWrapperByLabel,
-  jatka,
   tallenna,
   typeToEditor,
   wrapMutationTest,
   withinSection,
+  fillAjankohtaFields,
+  fillYhteystiedotSection,
+  assertBaseTilaNotCopied,
 } from './playwright-helpers';
 
 const fillNimiSection = (page: Page) =>
@@ -39,37 +38,6 @@ const fillHakutapaSection = (page: Page) =>
   withinSection(page, 'hakutapa', async section => {
     await section.getByText('Yhteishaku').click();
   });
-
-const fillAjankohtaFields = async (
-  section: Locator,
-  alkamiskausityyppi: Alkamiskausityyppi = Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI
-) => {
-  const ak = section.getByTestId('AloitusajankohtaFields');
-  switch (alkamiskausityyppi) {
-    case Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI:
-      await ak.getByText('yleiset.alkamiskausiJaVuosi').click();
-      await ak.getByText('Kevät').click();
-      await fillAsyncSelect(ak, '2035');
-      return;
-    case Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA:
-      await ak.getByText('yleiset.tarkkaAlkamisajankohta').click();
-      await fillDateTime(ak.getByTestId('alkaa'), {
-        date: '1.11.2030',
-        time: '00:00',
-      });
-      await fillDateTime(ak.getByTestId('paattyy'), {
-        date: '30.11.2030',
-        time: '00:00',
-      });
-      return;
-    case Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA:
-      ak.getByText(
-        'yleiset.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'
-      ).click();
-      const lisatietoa = ak.getByLabel('yleiset.lisatietoa');
-      await lisatietoa.type('Henkilökohtaisen suunnitelman lisätiedot');
-  }
-};
 
 const fillAikatauluSection = (page: Page) =>
   withinSection(page, 'aikataulut', async section => {
@@ -136,29 +104,6 @@ const fillHakulomakeSection = (
     }
   });
 
-const fillYhteystiedotSection = (page: Page) =>
-  withinSection(page, 'yhteyshenkilot', async section => {
-    await section
-      .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
-      .click();
-    await section.getByRole('textbox', { name: 'yleiset.nimi' }).fill('nimi');
-    await section
-      .getByRole('textbox', { name: 'yleiset.titteli' })
-      .fill('titteli');
-    await section
-      .getByRole('textbox', { name: 'yleiset.sahkoposti' })
-      .fill('sähköposti');
-    await section
-      .getByRole('textbox', { name: 'yleiset.puhelinnumero' })
-      .fill('puhelin');
-    await section
-      .getByRole('textbox', { name: 'yleiset.verkkosivu', exact: true })
-      .fill('verkkosivu');
-    await section
-      .getByRole('textbox', { name: 'yleiset.verkkosivun-teksti', exact: true })
-      .fill('verkkosivun teksti');
-  });
-
 const organisaatioOid = '1.1.1.1.1.1';
 
 test.describe('Create haku', () => {
@@ -209,16 +154,9 @@ test.describe('Create haku', () => {
       await tallenna(page);
     }));
 
-  test('Using an existing object as baseline it should not copy publishing state', async ({
+  test('Should not copy publishing state when using existing entity as base', async ({
     page,
   }) => {
-    await withinSection(page, 'pohja', async section => {
-      await section.getByText('hakulomake.kopioiPohjaksi').click();
-      const pohjaWrapper = getFieldWrapperByName(section, 'pohja.valinta');
-      await fillAsyncSelect(pohjaWrapper, 'Korkeakoulujen yhteishaku');
-      await jatka(section);
-    });
-    const tilaSection = getSection(page, 'tila');
-    await expect(getRadio(tilaSection, 'tallennettu')).toBeChecked();
+    await assertBaseTilaNotCopied(page, 'Korkeakoulujen yhteishaku');
   });
 });

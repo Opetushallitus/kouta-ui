@@ -15,6 +15,7 @@ import {
   typeToEditor,
   wrapMutationTest,
 } from './playwright-helpers';
+import { TestiKoulutustyyppi } from './test-types';
 
 const mutationTest = wrapMutationTest(ENTITY.KOULUTUS);
 
@@ -29,12 +30,12 @@ const testKoulutusFields = {
 
 const prepareTest = async (
   page: Page,
-  tyyppi: string,
+  tyyppi: TestiKoulutustyyppi,
   opts: { loadPage?: boolean } = {}
 ) => {
   await page.route(
     `**/kouta-backend/koulutus/${koulutusOid}`,
-    fixtureJSON(merge(koulutus({ tyyppi }), testKoulutusFields))
+    fixtureJSON(merge(koulutus(tyyppi), testKoulutusFields))
   );
   if (opts?.loadPage) {
     await page.goto(

@@ -9,7 +9,7 @@ import {
 } from '@playwright/test';
 import { deburr, last, split, toLower } from 'lodash';
 
-import { ENTITY } from '#/src/constants';
+import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
 export const getCookie = async (context: BrowserContext, name: string) => {
   const cookies = await context.cookies();
@@ -22,7 +22,7 @@ export const assertURLEndsWith = (page: Page, urlEnd: string) =>
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
 export const wrapMutationTest =
-  (entity: ENTITY) =>
+  (entity: ENTITY, params?: { oid?: string; id?: string }) =>
   async (args: { page: Page; testInfo: TestInfo }, run: () => Promise<any>) => {
     const { page, testInfo } = args;
 
@@ -43,9 +43,16 @@ export const wrapMutationTest =
 
     await page.route(`**/kouta-backend/${entityLower}`, async route => {
       const method = route.request().method();
-      const data = route.request().postData();
+      const data = route.request().postDataJSON();
+      if (params?.oid) {
+        data.oid = params.oid;
+      } else if (params?.id) {
+        data.id = params.id;
+      }
       if (['POST', 'PUT'].includes(method)) {
-        await route.fulfill({ body: data });
+        await route.fulfill({
+          json: data,
+        });
       }
     });
     await run();
@@ -110,16 +117,23 @@ export const tallenna = async (page: Page) => {
   await page.getByRole('button', { name: 'yleiset.tallenna' }).click();
 };
 
-export const getRadio = (loc: Locator, value) =>
+export const getRadio = (loc: Locator, value: string) =>
   loc.locator(`input[type="radio"][value="${value}"]`);
+
+export const fillRadioValue = async (loc: Locator, value: string) => {
+  const radio = getRadio(loc, value);
+  const isChecked = await radio.isChecked();
+  if (!isChecked) {
+    await parent(radio).click();
+  }
+};
+
+export const getLabel = (loc: Locator, match: string | RegExp) =>
+  loc.locator('label', { hasText: match });
 
 export const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
   withinSection(page, 'tila', async section => {
-    const tilaRadio = getRadio(section, tila);
-    const isChecked = await tilaRadio.isChecked();
-    if (!isChecked) {
-      await parent(tilaRadio).click();
-    }
+    await fillRadioValue(section, tila);
   });
 
 const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
@@ -159,11 +173,15 @@ export const confirmDelete = async (page: Page) => {
   await assertOnFrontPage(page);
 };
 
-export const fillAsyncSelect = async (loc: Locator, input: string) => {
+export const fillAsyncSelect = async (
+  loc: Locator,
+  input: string,
+  optionMatch: string = input
+) => {
   const textbox = loc.getByRole('textbox');
   await textbox.scrollIntoViewIfNeeded();
   await loc.getByRole('textbox').fill(input);
-  const options = loc.getByRole('option', { name: input });
+  const options = loc.getByRole('option', { name: optionMatch });
   await expect(options).not.toHaveCount(0);
   await options.first().click();
 };
@@ -191,9 +209,7 @@ export const fillDateTime = async (
 
 export const fillTreeSelect = async (loc: Locator, value: Array<string>) => {
   for (const val of value) {
-    await loc
-      .locator(`input[type="checkbox"][name="${val}"]`)
-      .click({ force: true });
+    await parent(loc.locator(`input[type="checkbox"][name="${val}"]`)).click();
   }
 };
 
@@ -221,8 +237,7 @@ export const fillKoulutustyyppiSelect = async (
   }
 
   for (const option of koulutustyyppiPath) {
-    const radio = getRadio(loc, option);
-    await parent(radio).click();
+    await fillRadioValue(loc, option);
   }
 };
 
@@ -236,6 +251,73 @@ export const fillKoulutustyyppiSection = async (
 
 export const getSelectByLabel = (loc: Locator, label: string | RegExp) =>
   loc.locator(`label:text("${label}") + .Select__`);
+
+export const fillAjankohtaFields = async (
+  section: Locator,
+  alkamiskausityyppi: Alkamiskausityyppi = Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI
+) => {
+  const ak = section.getByTestId('AloitusajankohtaFields');
+  switch (alkamiskausityyppi) {
+    case Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI:
+      await ak.getByText('yleiset.alkamiskausiJaVuosi').click();
+      await ak.getByText('Kevät').click();
+      await fillAsyncSelect(ak, '2035');
+      return;
+    case Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA:
+      await ak.getByText('yleiset.tarkkaAlkamisajankohta').click();
+      await fillDateTime(ak.getByTestId('alkaa'), {
+        date: '1.11.2030',
+        time: '00:00',
+      });
+      await fillDateTime(ak.getByTestId('paattyy'), {
+        date: '30.11.2030',
+        time: '00:00',
+      });
+      return;
+    case Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA:
+      ak.getByText(
+        'yleiset.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'
+      ).click();
+      const lisatietoa = ak.getByLabel('yleiset.lisatietoa');
+      await lisatietoa.type('Henkilökohtaisen suunnitelman lisätiedot');
+  }
+};
+
+export const fillYhteystiedotSection = (page: Page) =>
+  withinSection(page, 'yhteyshenkilot', async section => {
+    await section
+      .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
+      .click();
+    await section.getByRole('textbox', { name: 'yleiset.nimi' }).fill('nimi');
+    await section
+      .getByRole('textbox', { name: 'yleiset.titteli' })
+      .fill('titteli');
+    await section
+      .getByRole('textbox', { name: 'yleiset.sahkoposti' })
+      .fill('sähköposti');
+    await section
+      .getByRole('textbox', { name: 'yleiset.puhelinnumero' })
+      .fill('puhelin');
+    await section
+      .getByRole('textbox', { name: 'yleiset.verkkosivu', exact: true })
+      .fill('verkkosivu');
+    await section
+      .getByRole('textbox', { name: 'yleiset.verkkosivun-teksti', exact: true })
+      .fill('verkkosivun teksti');
+  });
+
+export const assertBaseTilaNotCopied = async (
+  page: Page,
+  baseEntityName: string
+) => {
+  await withinSection(page, 'pohja', async section => {
+    await getLabel(section, '.kopioiPohjaksi').click();
+    const pohjaWrapper = getFieldWrapperByName(section, 'pohja.valinta');
+    await fillAsyncSelect(pohjaWrapper, baseEntityName);
+    await jatka(section);
+  });
+  await expect(getRadio(getSection(page, 'tila'), 'tallennettu')).toBeChecked();
+};
 
 // For debugging
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

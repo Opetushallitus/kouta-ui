@@ -189,7 +189,7 @@ const OsaamisalatContainer = ({
         </Typography>
       )}
       <Container>
-        <SelectionContainer {...getTestIdProps('osaamisalaSelection')}>
+        <SelectionContainer>
           <Field
             name={`${name}.osaamisalat`}
             component={OsaamisalatCheckboxGroup}

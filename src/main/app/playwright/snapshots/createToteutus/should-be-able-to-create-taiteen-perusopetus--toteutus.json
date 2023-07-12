@@ -1,0 +1,137 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "nimi": {
+    "fi": "toteutuksen nimi"
+  },
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "kielivalinta": [
+    "fi"
+  ],
+  "tila": "julkaistu",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "sorakuvausId": null,
+  "esikatselu": true,
+  "metadata": {
+    "opetus": {
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+          "teksti": {}
+        }
+      ],
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_1#2"
+      ],
+      "maksullisuustyyppi": "maksuton",
+      "maksunMaara": null,
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_1#1"
+      ],
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_1#1"
+      ],
+      "opetuskieletKuvaus": {
+        "fi": "<p>opetuskieli kuvaus</p>"
+      },
+      "opetustapaKuvaus": {},
+      "opetusaikaKuvaus": {
+        "fi": "<p>opetustapa kuvaus</p>"
+      },
+      "maksullisuusKuvaus": {},
+      "onkoApuraha": false,
+      "apuraha": null,
+      "suunniteltuKestoVuodet": 2,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "<p>suuniteltu kesto kuvaus</p>"
+      },
+      "koulutuksenAlkamiskausi": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenPaattymispaivamaara": null,
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamisvuosi": 2035,
+        "henkilokohtaisenSuunnitelmanLisatiedot": {}
+      }
+    },
+    "diplomit": [],
+    "painotukset": [],
+    "kielivalikoima": {
+      "A1Kielet": [],
+      "A2Kielet": [],
+      "aidinkielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "muutKielet": []
+    },
+    "erityisetKoulutustehtavat": [],
+    "osaamisalat": [],
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "sahkoposti": {
+          "fi": "sähköposti"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "wwwSivu": {
+          "fi": "http://verkkosivu"
+        },
+        "wwwSivuTeksti": {
+          "fi": "verkkosivun teksti"
+        }
+      }
+    ],
+    "ammattinimikkeet": [],
+    "asiasanat": [
+      {
+        "kieli": "fi",
+        "arvo": "avainsana"
+      }
+    ],
+    "kuvaus": {
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
+    "tyyppi": "taiteen-perusopetus",
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": 10,
+    "opintojenLaajuusNumeroMax": 20,
+    "ilmoittautumislinkki": {},
+    "aloituspaikat": null,
+    "toteutusjaksot": [],
+    "hakutermi": "hakeutuminen",
+    "hakulomaketyyppi": "muu",
+    "hakulomakeLinkki": {
+      "fi": "http://example.com"
+    },
+    "lisatietoaHakeutumisesta": {
+      "fi": "<p>lisätiedot</p>"
+    },
+    "lisatietoaValintaperusteista": {
+      "fi": "<p>lisätiedot valintaperusteista</p>"
+    },
+    "hakuaika": {
+      "alkaa": "2050-04-01T00:00",
+      "paattyy": "2050-09-01T00:00"
+    },
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "taiteenalaKoodiUrit": [
+      "taiteenperusopetustaiteenala_sirkustaide#1",
+      "taiteenperusopetustaiteenala_sanataide#1"
+    ]
+  },
+  "koulutusOid": "1.2.1.1.1.1"
+}

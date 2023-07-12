@@ -29,7 +29,7 @@ export const mocksFromFile = async (
   );
 };
 
-const FIXTURES_PATH = path.resolve(__dirname, '../cypress/fixtures');
+const FIXTURES_PATH = path.resolve(__dirname, '../fixtures');
 
 export const fixtureFromFile = (fileName: string) => (route: Route) =>
   route.fulfill({ path: path.resolve(FIXTURES_PATH, fileName) });

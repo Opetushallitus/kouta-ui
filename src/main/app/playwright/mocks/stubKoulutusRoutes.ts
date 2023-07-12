@@ -13,11 +13,11 @@ export const stubKoulutusRoutes = async (page, organisaatioOid) => {
 
   await stubOrganisaatioRoutes(page, organisaatioOid);
 
-  page.route('**/koulutus/*/toteutukset/list**', fixtureJSON([]));
+  await page.route('**/koulutus/*/toteutukset/list**', fixtureJSON([]));
 
-  page.route('**/valintaperuste/list**', fixtureJSON([]));
+  await page.route('**/valintaperuste/list**', fixtureJSON([]));
 
-  page.route(
+  await page.route(
     '**/sorakuvaus/list**',
     fixtureJSON(
       [...new Array(10)].map((v, i) =>
@@ -30,7 +30,7 @@ export const stubKoulutusRoutes = async (page, organisaatioOid) => {
     )
   );
 
-  page.route(
+  await page.route(
     '**/sorakuvaus/1',
     fixtureJSON(
       merge(soraKuvaus(), {
@@ -48,12 +48,12 @@ export const stubKoulutusRoutes = async (page, organisaatioOid) => {
     koulutustyyppi: 'amk',
   });
 
-  page.route('**/koulutus/1.1.1.1.1.1', fixtureJSON(koulutusItem));
+  await page.route('**/koulutus/1.1.1.1.1.1', fixtureJSON(koulutusItem));
 
-  page.route('**/koulutus/list**', fixtureJSON([koulutusItem]));
+  await page.route('**/koulutus/list**', fixtureJSON([koulutusItem]));
 
   // tämä on jo mockattu stubCommonRoutes:ssa eri tavalla. Tarvitaanko tätä?
-  page.route('**/search/koulutus/**', fixtureJSON([]));
+  await page.route('**/search/koulutus/**', fixtureJSON([]));
 
-  stubONRHenkiloRoute(page);
+  await stubONRHenkiloRoute(page);
 };

@@ -4,9 +4,16 @@ import { Alkamiskausityyppi, ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
 
 import { stubHakuRoutes } from './mocks/stubHakuRoutes';
 import {
+  fillAsyncSelect,
+  fillDateTime,
+  fillKieliversiotSection,
+  fillOrgSection,
+  fillTilaSection,
   getFieldWrapperByName,
+  getRadio,
   getSection,
-  parent,
+  getWrapperByLabel,
+  tallenna,
   typeToEditor,
   withinSection,
   wrapMutationTest,
@@ -27,46 +34,6 @@ const fillKohdejoukkoSection = withinSection('kohdejoukko', async section => {
 
 const fillHakutapaSection = withinSection('hakutapa', async section => {
   await section.getByText('Yhteishaku').click();
-});
-
-const getWrapperByLabel = (l: Locator, nameMatch: string | RegExp) => {
-  return parent(l.getByText(nameMatch));
-};
-
-const fillAsyncSelect = async (loc: Locator, input: string) => {
-  await loc.getByRole('textbox').fill(input);
-  const options = loc.getByRole('option', { name: input });
-  await options.first().click();
-};
-
-const fillOrgSection = (page: Page, orgOid: string) =>
-  withinSection('organisaatio', async section => {
-    const orgSelect = section.getByTestId('organisaatioSelect');
-    await fillAsyncSelect(orgSelect, orgOid);
-  })(page);
-
-const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
-  const languages = ['en', 'fi', 'sv'];
-  for (const lang of languages) {
-    const langInput = selector.locator(`input[name="${lang}"]`);
-    if (selectedLanguages.includes(lang)) {
-      await langInput.setChecked(true, { force: true });
-    } else {
-      await langInput.setChecked(false, { force: true });
-    }
-  }
-};
-
-const fillDateTime = async (
-  locator: Locator,
-  { date, time }: { date: string; time: string }
-) => {
-  await locator.getByTestId('DateTimeInput__Date').locator('input').fill(date);
-  await locator.getByTestId('DateTimeInput__Time').locator('input').fill(time);
-};
-
-const fillKieliversiotSection = withinSection('kieliversiot', async section => {
-  await selectLanguages(section, ['fi']);
 });
 
 const fillAjankohtaFields = async (
@@ -142,10 +109,6 @@ const fillAikatauluSection = (page: Page) =>
 
 const mutationTest = wrapMutationTest(ENTITY.HAKU);
 
-const tallenna = async (page: Page) => {
-  await page.getByRole('button', { name: 'yleiset.tallenna' }).click();
-};
-
 const fillHakulomakeSection = (
   page: Page,
   type: HAKULOMAKETYYPPI = HAKULOMAKETYYPPI.ATARU
@@ -190,19 +153,6 @@ const fillYhteystiedotSection = (page: Page) =>
     await section
       .getByRole('textbox', { name: 'yleiset.verkkosivun-teksti', exact: true })
       .fill('verkkosivun teksti');
-  })(page);
-
-const getRadio = (loc: Locator, value: string) =>
-  loc.locator(`input[type="radio"][value="${value}"]`);
-
-const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
-  withinSection('tila', async section => {
-    const tilaRadio = getRadio(section, tila);
-
-    const isChecked = await tilaRadio.isChecked();
-    if (!isChecked) {
-      await parent(tilaRadio).click();
-    }
   })(page);
 
 const organisaatioOid = '1.1.1.1.1.1';

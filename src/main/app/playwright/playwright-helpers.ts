@@ -141,8 +141,10 @@ const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
   for (const lang of languages) {
     const langInput = selector.locator(`input[name="${lang}"]`);
     if (selectedLanguages.includes(lang)) {
+      // eslint-disable-next-line playwright/no-force-option
       await langInput.setChecked(true, { force: true });
     } else {
+      // eslint-disable-next-line playwright/no-force-option
       await langInput.setChecked(false, { force: true });
     }
   }

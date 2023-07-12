@@ -2,12 +2,17 @@ import { StatusCodes } from 'http-status-codes';
 import i18n from 'i18next';
 import HttpBackend from 'i18next-http-backend';
 import _ from 'lodash';
+import { initReactI18next } from 'react-i18next';
 
 import { LANGUAGES } from '#/src/constants';
 import getTranslations from '#/src/translations';
 import { getLocalization } from '#/src/utils/api/getLocalization';
 
 import { isPlaywright } from './utils';
+
+const { REACT_APP_CIMODE } = process.env;
+
+const isCimode = REACT_APP_CIMODE || isPlaywright;
 
 const formatMap = {
   toLower: _.toLower,
@@ -37,45 +42,40 @@ const createLocalization = ({
   defaultNS = 'kouta',
   ns = ['kouta'],
 }: CreateLocalizationProps) => {
-  let instance = i18n.createInstance();
+  i18n
+    .use(HttpBackend)
+    .use(initReactI18next)
+    .init({
+      fallbackLng,
+      debug,
+      defaultNS,
+      preload: LANGUAGES,
+      lng: isCimode ? 'cimode' : language,
+      ns,
+      ...(!isCimode &&
+        loadLocalization && {
+          backend: {
+            loadPath: '{{ns}}:{{lng}}',
+            request: (options, url, payload, callback) => {
+              const [namespace, language] = url.split(':');
 
-  if (!isPlaywright && loadLocalization) {
-    instance = instance.use(HttpBackend);
-  }
-
-  instance.init({
-    fallbackLng,
-    debug,
-    defaultNS,
-    preload: LANGUAGES,
-    lng: isPlaywright ? 'cimode' : language,
-    ns,
-    ...(!isPlaywright &&
-      loadLocalization && {
-        backend: {
-          loadPath: '{{ns}}:{{lng}}',
-          request: (options, url, payload, callback) => {
-            const [namespace, language] = url.split(':');
-
-            loadLocalization({ namespace, language })
-              .then(data => {
-                callback(null, { status: StatusCodes.OK, data });
-              })
-              .catch(() => callback({ status: StatusCodes.NOT_FOUND }));
+              loadLocalization({ namespace, language })
+                .then(data => {
+                  callback(null, { status: StatusCodes.OK, data });
+                })
+                .catch(() => callback({ status: StatusCodes.NOT_FOUND }));
+            },
+            parse: data => data,
           },
-          parse: data => data,
+        }),
+      interpolation: {
+        format(value, format = 'default', lng) {
+          return _.isFunction(formatMap[format])
+            ? formatMap[format](value)
+            : value;
         },
-      }),
-    interpolation: {
-      format(value, format = 'default', lng) {
-        return _.isFunction(formatMap[format])
-          ? formatMap[format](value)
-          : value;
       },
-    },
-  });
-
-  return instance;
+    });
 };
 
 const isDev = process.env.NODE_ENV === 'development';

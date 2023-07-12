@@ -15,6 +15,8 @@
     "cypress/globals": true
   },
   "rules": {
+    "playwright/expect-expect": "off",
+    "playwright/no-force-option": "off",
     "@typescript-eslint/no-duplicate-imports": ["warn"],
     "@typescript-eslint/ban-types": [
       "error",

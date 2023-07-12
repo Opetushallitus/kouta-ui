@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Spring, config } from 'react-spring/renderprops';
 
-import { isCypress } from '#/src/utils';
+import { isPlaywright } from '#/src/utils';
 
 const collapseConfig = {
   ...config.gentle,
@@ -14,7 +14,7 @@ export const CollapseContent = ({ open = false, children }) => {
   return (
     <Spring
       config={collapseConfig}
-      immediate={isCypress}
+      immediate={isPlaywright}
       to={open ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
     >
       {({ opacity, height }) => (

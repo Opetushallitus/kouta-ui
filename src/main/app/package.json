@@ -9,6 +9,7 @@
     "start:integration": "cross-env DISABLE_LOCAL_PROXY=true NODE_ENV=test npm run start",
     "start:integration:debug": "cross-env REACT_APP_CIMODE=1 NODE_ENV=test npm run start",
     "build": "craco build",
+    "build:test": "cross-env REACT_APP_CIMODE=1 craco build",
     "serve:test": "node test-server.js",
     "test": "craco test",
     "eject": "craco eject",

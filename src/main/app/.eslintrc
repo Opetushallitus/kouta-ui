@@ -3,7 +3,8 @@
     "react-app",
     "prettier",
     "plugin:cypress/recommended",
-    "plugin:lodash/canonical"
+    "plugin:lodash/recommended",
+    "plugin:playwright/recommended"
   ],
   "plugins": [
     "prettier",
@@ -62,6 +63,7 @@
         }
       }
     ],
+    "lodash/import-scope": "off",
     "lodash/prefer-lodash-method": "off",
     "lodash/prefer-lodash-chain": "off",
     "lodash/prefer-constant": "off",

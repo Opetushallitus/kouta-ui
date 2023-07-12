@@ -4,18 +4,9 @@ import { merge } from 'lodash';
 import { koutaSearchItem } from './koutaSearchItem';
 import { fixtureJSON, mocksFromFile } from './playwright-mock-utils';
 import { stubCommonRoutes } from './stubCommonRoutes';
+import { stubHakemuspalveluLomakkeetRoute } from './stubHakemuspalveluLomakkeetRoute';
 import { stubONRHenkiloRoute } from './stubONRHenkiloRoute';
 import { stubOrganisaatioRoutes } from './stubOrganisaatioRoutes';
-
-const stubHakemuspalveluLomakkeetRoute = async (
-  page: Page,
-  { lomakkeet = [{ name: { fi: 'Lomake 1' }, key: 'lomake_1' }] } = {}
-) => {
-  await page.route(
-    '**/lomake-editori/api/forms',
-    fixtureJSON({ forms: lomakkeet })
-  );
-};
 
 export const stubHakuRoutes = async (page: Page, organisaatioOid: string) => {
   await stubCommonRoutes(page);

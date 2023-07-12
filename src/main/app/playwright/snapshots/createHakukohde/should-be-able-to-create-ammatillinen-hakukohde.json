@@ -1,0 +1,146 @@
+{
+  "organisaatioOid": "1.2.246.562.10.52251087186",
+  "externalId": null,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "julkaistu",
+  "esikatselu": true,
+  "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
+  "kaytetaanHaunAikataulua": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "hakuajat": [
+    {
+      "alkaa": "2019-04-02T10:45",
+      "paattyy": "2019-11-25T23:59"
+    }
+  ],
+  "liitteetOnkoSamaToimitusaika": false,
+  "liitteetOnkoSamaToimitusosoite": false,
+  "liitteidenToimitustapa": null,
+  "liitteet": [
+    {
+      "toimitustapa": "osoite",
+      "tyyppiKoodiUri": "liitetyypitamm_4#1",
+      "nimi": {
+        "fi": "Nimi"
+      },
+      "toimitusaika": "2019-11-25T23:59",
+      "toimitusosoite": {
+        "osoite": {
+          "osoite": {
+            "fi": "Osoite"
+          },
+          "postinumeroKoodiUri": "posti_00350#2"
+        },
+        "sahkoposti": "sahkoposti@email.com",
+        "verkkosivu": "http://example.com"
+      },
+      "kuvaus": {
+        "fi": "<p>Kuvaus</p>"
+      }
+    }
+  ],
+  "liitteidenToimitusosoite": null,
+  "liitteidenToimitusaika": null,
+  "nimi": {},
+  "hakukohdeKoodiUri": "hakukohteetperusopetuksenjalkeinenyhteishaku_101#1",
+  "toinenAsteOnkoKaksoistutkinto": true,
+  "valintakokeet": [
+    {
+      "tyyppiKoodiUri": "valintakokeentyyppi_9#1",
+      "nimi": {
+        "fi": "nimi"
+      },
+      "metadata": {
+        "tietoja": {
+          "fi": "<p>Tietoa hakijalle</p>"
+        },
+        "vahimmaispisteet": 10.03,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>ohjeet ennakkovalmistautumiseen</p>"
+        },
+        "erityisjarjestelytMahdollisia": true,
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>ohjeet erityisjärjestelyihin</p>"
+        }
+      },
+      "tilaisuudet": [
+        {
+          "osoite": {
+            "osoite": {
+              "fi": "osoite"
+            },
+            "postinumeroKoodiUri": "posti_00350#2"
+          },
+          "aika": {
+            "alkaa": "2019-04-02T10:45",
+            "paattyy": "2019-04-02T19:00"
+          },
+          "lisatietoja": {
+            "fi": "<p>lisatietoja</p>"
+          },
+          "jarjestamispaikka": {
+            "fi": "paikka"
+          }
+        }
+      ]
+    }
+  ],
+  "pohjakoulutusvaatimusKoodiUrit": [
+    "pohjakoulutusvaatimuskouta_pk#1"
+  ],
+  "pohjakoulutusvaatimusTarkenne": {
+    "fi": "<p>Tarkenne</p>"
+  },
+  "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928",
+  "kaytetaanHaunHakulomaketta": false,
+  "hakulomaketyyppi": "ataru",
+  "hakulomakeAtaruId": "lomake_1",
+  "hakulomakeLinkki": {},
+  "hakulomakeKuvaus": {},
+  "metadata": {
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus</p>"
+    },
+    "valintaperusteenValintakokeidenLisatilaisuudet": [
+      {
+        "id": "testi-id-123",
+        "tilaisuudet": [
+          {
+            "osoite": {
+              "osoite": {
+                "fi": "osoite"
+              },
+              "postinumeroKoodiUri": "posti_00350#2"
+            },
+            "aika": {
+              "alkaa": "2019-04-02T10:45",
+              "paattyy": "2019-04-02T19:00"
+            },
+            "lisatietoja": {
+              "fi": "<p>lisatietoja</p>"
+            },
+            "jarjestamispaikka": {
+              "fi": "paikka"
+            }
+          }
+        ]
+      }
+    ],
+    "kynnysehto": {
+      "fi": "<p>Kynnysehto</p>"
+    },
+    "aloituspaikat": {
+      "lukumaara": 10,
+      "ensikertalaisille": null,
+      "kuvaus": {}
+    },
+    "kaytetaanHaunAlkamiskautta": true,
+    "koulutuksenAlkamiskausi": null,
+    "hakukohteenLinja": null
+  },
+  "hakuOid": "4.1.1.1.1.1",
+  "toteutusOid": "2.1.1.1.1.1"
+}

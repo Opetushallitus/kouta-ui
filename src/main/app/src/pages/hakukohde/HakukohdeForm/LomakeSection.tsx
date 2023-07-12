@@ -10,7 +10,6 @@ import { LomakeFields } from '#/src/components/LomakeFields';
 import { Box, Typography } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const hakulomakeTyyppiToLabel = {
@@ -80,20 +79,18 @@ const LomakeSection = ({ language, haku }) => {
       <Box marginBottom={2}>
         <HakulomakeInfo haku={haku} t={t} />
       </Box>
-      <div {...getTestIdProps('eriHakulomake')}>
-        <Field
-          name="hakulomake.eriHakulomake"
-          component={FormFieldSwitch}
-          disabled={!canSelectHakulomake}
-          helperText={
-            canSelectHakulomake
-              ? null
-              : t('hakukohdelomake.hakuunEiLiitettyMuuLomake')
-          }
-        >
-          {t('hakukohdelomake.eriHakulomake')}
-        </Field>
-      </div>
+      <Field
+        name="hakulomake.eriHakulomake"
+        component={FormFieldSwitch}
+        disabled={!canSelectHakulomake}
+        helperText={
+          canSelectHakulomake
+            ? null
+            : t('hakukohdelomake.hakuunEiLiitettyMuuLomake')
+        }
+      >
+        {t('hakukohdelomake.eriHakulomake')}
+      </Field>
       {canSelectHakulomake ? (
         <Field
           component={ConditionalLomakeFields}

@@ -22,16 +22,17 @@ export const assertURLEndsWith = (page: Page, urlEnd: string) =>
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
 export const wrapMutationTest =
-  (entity: ENTITY, params?: { oid?: string; id?: string }) =>
+  (entityName: ENTITY, params?: { oid?: string; id?: string }) =>
   async (args: { page: Page; testInfo: TestInfo }, run: () => Promise<any>) => {
     const { page, testInfo } = args;
+    const entityLower = toLower(entityName);
 
+    // Tallennetaan snapshot tiedostoon ./snapshots/<testitiedosto>/<testin-nimi>.json
     testInfo.snapshotPath = (name: string) =>
       `${path.dirname(testInfo.file)}/snapshots/${
         split(testInfo.titlePath[0], '.')?.[0]
       }/${deburr(toLower(name))}`;
 
-    const entityLower = toLower(entity);
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();
       const url = req.url();
@@ -57,8 +58,7 @@ export const wrapMutationTest =
     });
     await run();
     const request = await requestPromise;
-
-    const reqData = JSON.stringify(JSON.parse(request.postData()), null, 2);
+    const reqData = JSON.stringify(request.postDataJSON(), null, 2);
     await expect(reqData).toMatchSnapshot(`${testInfo.title}.json`);
   };
 
@@ -178,10 +178,17 @@ export const fillAsyncSelect = async (
   input: string,
   optionMatch: string = input
 ) => {
-  const textbox = loc.getByRole('textbox');
+  const isLocSelect = await loc.evaluate(el =>
+    el.classList.contains('Select__')
+  );
+  let selectLoc = loc;
+  if (!isLocSelect) {
+    selectLoc = loc.locator('.Select__');
+  }
+  const textbox = selectLoc.getByRole('textbox');
   await textbox.scrollIntoViewIfNeeded();
-  await loc.getByRole('textbox').fill(input);
-  const options = loc.getByRole('option', { name: optionMatch });
+  await selectLoc.getByRole('textbox').fill(input);
+  const options = selectLoc.getByRole('option', { name: optionMatch });
   await expect(options).not.toHaveCount(0);
   await options.first().click();
 };
@@ -275,11 +282,10 @@ export const fillAjankohtaFields = async (
       });
       return;
     case Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA:
-      ak.getByText(
-        'yleiset.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'
-      ).click();
-      const lisatietoa = ak.getByLabel('yleiset.lisatietoa');
-      await lisatietoa.type('Henkilökohtaisen suunnitelman lisätiedot');
+      await ak
+        .getByText('yleiset.aloitusHenkilokohtaisenSuunnitelmanMukaisesti')
+        .click();
+      await typeToEditor(ak, 'Henkilökohtaisen suunnitelman lisätiedot');
   }
 };
 

@@ -28,6 +28,7 @@ import {
   fillRadioValue,
   getLabel,
   assertBaseTilaNotCopied,
+  fillValintakokeetSection,
 } from './playwright-helpers';
 import {
   selectedToimipisteNimi,
@@ -217,27 +218,6 @@ const fillAloituspaikatSection = (page: Page, { isKorkeakoulu = false }) =>
     }
   });
 
-const fillTilaisuus = async (section: Locator) => {
-  await section.getByTestId('lisaaTilaisuusButton').click();
-  await section.getByTestId('osoite').locator('input').fill('osoite');
-  await fillAsyncSelect(section.getByTestId('postinumero'), '00350');
-  await fillDateTime(section.getByTestId('alkaa'), {
-    date: '02.04.2019',
-    time: '10:45',
-  });
-
-  await fillDateTime(section.getByTestId('paattyy'), {
-    date: '02.04.2019',
-    time: '19:00',
-  });
-
-  await section
-    .getByTestId('jarjestamispaikka')
-    .locator('input')
-    .fill('paikka');
-  await typeToEditor(section.getByTestId('lisatietoja'), 'lisatietoja');
-};
-
 const fillValintaperusteenKuvausSection = (page: Page) =>
   withinSection(page, 'valintaperusteenKuvaus', async section => {
     await fillAsyncSelect(
@@ -245,61 +225,6 @@ const fillValintaperusteenKuvausSection = (page: Page) =>
       'Valintaperusteen nimi'
     );
     await typeToEditor(section, 'Kynnysehto');
-  });
-
-const fillValintakokeetSection = (page: Page, { withValintaperusteenKokeet }) =>
-  withinSection(page, 'valintakokeet', async section => {
-    await typeToEditor(
-      section.getByTestId('yleisKuvaus'),
-      'Valintakokeiden kuvaus'
-    );
-    if (withValintaperusteenKokeet) {
-      await fillTilaisuus(section.getByTestId('valintaperusteenValintakokeet'));
-    }
-
-    const kokeetTaiLisanaytot = section.getByTestId('kokeetTaiLisanaytot');
-    await kokeetTaiLisanaytot
-      .getByTestId('lisaaKoeTaiLisanayttoButton')
-      .click();
-    await fillAsyncSelect(
-      kokeetTaiLisanaytot.getByTestId('kokeenTaiLisanaytonTyyppi'),
-      'Valintakoe'
-    );
-    await kokeetTaiLisanaytot
-      .getByTestId('hakijalleNakyvaNimi')
-      .locator('input')
-      .fill('nimi');
-
-    await typeToEditor(
-      kokeetTaiLisanaytot.getByTestId('tietoaHakijalle'),
-      'Tietoa hakijalle'
-    );
-
-    await kokeetTaiLisanaytot
-      .getByTestId('vahimmaispistemaara')
-      .locator('input')
-      .fill('10,03');
-
-    await getLabel(
-      kokeetTaiLisanaytot,
-      'koeTaiLisanaytto.liittyyEnnakkovalmistautumista'
-    ).click();
-
-    await typeToEditor(
-      kokeetTaiLisanaytot.getByTestId('ohjeetEnnakkovalmistautumiseen'),
-      'ohjeet ennakkovalmistautumiseen'
-    );
-
-    await getLabel(
-      kokeetTaiLisanaytot,
-      'koeTaiLisanaytto.erityisjarjestelytMahdollisia'
-    ).click();
-
-    await typeToEditor(
-      kokeetTaiLisanaytot.getByTestId('ohjeetErityisjarjestelyihin'),
-      'ohjeet erityisjärjestelyihin'
-    );
-    await fillTilaisuus(kokeetTaiLisanaytot);
   });
 
 const pressLisaa = (section: Locator) =>

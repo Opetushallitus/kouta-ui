@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "tyyppi": "amk",
+    "valintatavat": [
+      {
+        "nimi": {
+          "fi": "Valintatavan nimi"
+        },
+        "sisalto": [
+          {
+            "tyyppi": "teksti",
+            "data": {
+              "fi": "<p>Tekstia</p>"
+            }
+          },
+          {
+            "tyyppi": "taulukko",
+            "data": {
+              "nimi": {},
+              "rows": [
+                {
+                  "index": 0,
+                  "isHeader": false,
+                  "columns": [
+                    {
+                      "index": 0,
+                      "text": {
+                        "fi": "Solu"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        "valintatapaKoodiUri": "valintatapajono_tv#1",
+        "kaytaMuuntotaulukkoa": false,
+        "kynnysehto": {
+          "fi": "<p>Kynnysehto</p>"
+        },
+        "enimmaispisteet": 100.02,
+        "vahimmaispisteet": 10.01
+      }
+    ],
+    "kuvaus": {
+      "fi": "<p>Loppukuvaus</p>"
+    },
+    "sisalto": [
+      {
+        "tyyppi": "teksti",
+        "data": {
+          "fi": "<p>Tekstia</p>"
+        }
+      },
+      {
+        "tyyppi": "taulukko",
+        "data": {
+          "nimi": {},
+          "rows": [
+            {
+              "index": 0,
+              "isHeader": false,
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "Solu"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+    },
+    "hakukelpoisuus": {},
+    "lisatiedot": {}
+  },
+  "koulutustyyppi": "amk",
+  "id": "649adb37-cd4d-4846-91a9-84b58b90f928",
+  "tila": "tallennettu",
+  "hakutapaKoodiUri": "hakutapa_01#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
+  "nimi": {
+    "fi": "Valintaperusteen nimi"
+  },
+  "julkinen": false,
+  "sorakuvausId": "1",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "kielivalinta": [
+    "fi"
+  ],
+  "valintakokeet": [
+    {
+      "id": "testi-id-123",
+      "tyyppiKoodiUri": "valintakokeentyyppi_1#1",
+      "nimi": {
+        "fi": "Kokeen nimi - fi"
+      },
+      "metadata": {
+        "tietoja": {
+          "fi": "<p>Tietoa kokeesta - fi</p>"
+        },
+        "vahimmaispisteet": 10.03,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+        },
+        "erityisjarjestelytMahdollisia": true,
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+        }
+      },
+      "tilaisuudet": [
+        {
+          "osoite": {
+            "osoite": {
+              "fi": "fi osoite"
+            },
+            "postinumeroKoodiUri": "posti_00350#2"
+          },
+          "aika": {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44"
+          },
+          "lisatietoja": {
+            "fi": "<p>fi lisatietoja</p>"
+          },
+          "jarjestamispaikka": {
+            "fi": "Jarjestamispaikka - fi"
+          }
+        }
+      ]
+    }
+  ],
+  "externalId": null,
+  "esikatselu": false
+}

@@ -1,0 +1,62 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "julkaistu",
+  "kielivalinta": [
+    "fi"
+  ],
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "amm-tutkinnon-osa",
+  "nimi": {
+    "fi": "Louhintaporaus"
+  },
+  "julkinen": true,
+  "esikatselu": true,
+  "ePerusteId": null,
+  "sorakuvausId": "1",
+  "metadata": {
+    "tyyppi": "amm-tutkinnon-osa",
+    "tutkinnonOsat": [
+      {
+        "ePerusteId": 7823345,
+        "koulutusKoodiUri": "koulutus_351107#12",
+        "tutkinnonosaId": 6777674,
+        "tutkinnonosaViite": 7843530
+      },
+      {
+        "ePerusteId": 7823345,
+        "koulutusKoodiUri": "koulutus_351107#12",
+        "tutkinnonosaId": 6778360,
+        "tutkinnonosaViite": 6778207
+      }
+    ],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "amm-tutkinnon-osa",
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
+        }
+      }
+    ],
+    "kuvaus": {},
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "tutkintonimikeKoodiUrit": [],
+    "koulutusalaKoodiUrit": [],
+    "linkkiEPerusteisiin": {},
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "erikoistumiskoulutusKoodiUri": null
+  }
+}

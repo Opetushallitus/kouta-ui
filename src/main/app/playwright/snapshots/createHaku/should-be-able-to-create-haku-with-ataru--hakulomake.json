@@ -3,7 +3,9 @@
   "externalId": null,
   "muokkaaja": "1.2.246.562.24.62301161440",
   "tila": "julkaistu",
-  "kielivalinta": ["fi"],
+  "kielivalinta": [
+    "fi"
+  ],
   "hakutapaKoodiUri": "hakutapa_01#1",
   "hakuajat": [
     {

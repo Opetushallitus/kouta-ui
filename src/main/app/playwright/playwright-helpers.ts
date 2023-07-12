@@ -7,7 +7,7 @@ import {
   TestInfo,
   expect,
 } from '@playwright/test';
-import { deburr, split, toLower } from 'lodash';
+import { deburr, last, split, toLower } from 'lodash';
 
 import { ENTITY } from '#/src/constants';
 
@@ -53,26 +53,22 @@ export const getSelectOption = (page: Page) => (value: string) =>
 export const getSection = (page: Page, name: string) =>
   page.getByTestId(`${name}Section`);
 
-export const withinSection =
-  (name: string, fn?: (section: Locator) => Promise<any>) =>
-  async (
-    page: Page,
-    { jatka: shouldContinue }: { jatka: boolean } = { jatka: false }
-  ) => {
-    const section = getSection(page, name);
-    const sectionHeading = section.locator('> :first-child');
+export const withinSection = async (
+  page: Page,
+  name: string,
+  fn: (section: Locator) => Promise<any>
+) => {
+  const section = getSection(page, name);
+  const sectionHeading = section.locator('> :first-child');
 
-    const isSectionClosed = await sectionHeading.evaluate(
-      el => el.getAttribute('open') === null
-    );
-    if (isSectionClosed) {
-      await sectionHeading.click();
-    }
-    await fn?.(section);
-    if (shouldContinue) {
-      await jatka(section);
-    }
-  };
+  const isSectionClosed = await sectionHeading.evaluate(
+    el => el.getAttribute('open') === null
+  );
+  if (isSectionClosed) {
+    await sectionHeading.click();
+  }
+  await fn(section);
+};
 
 export const jatka = async (locator: Locator) => {
   await locator.getByRole('button', { name: 'yleiset.jatka' }).click();
@@ -110,13 +106,13 @@ export const getRadio = (loc: Locator, value) =>
   loc.locator(`input[type="radio"][value="${value}"]`);
 
 export const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
-  withinSection('tila', async section => {
+  withinSection(page, 'tila', async section => {
     const tilaRadio = getRadio(section, tila);
     const isChecked = await tilaRadio.isChecked();
     if (!isChecked) {
       await parent(tilaRadio).click();
     }
-  })(page);
+  });
 
 const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
   const languages = ['en', 'fi', 'sv'];
@@ -130,12 +126,10 @@ const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
   }
 };
 
-export const fillKieliversiotSection = withinSection(
-  'kieliversiot',
-  async section => {
+export const fillKieliversiotSection = (page: Page) =>
+  withinSection(page, 'kieliversiot', async section => {
     await selectLanguages(section, ['fi']);
-  }
-);
+  });
 
 export const assertNoUnsavedChangesDialog = async (page: Page) => {
   page.getByRole('link', { name: 'Home' }).click();
@@ -154,19 +148,25 @@ export const confirmDelete = async (page: Page) => {
 };
 
 export const fillAsyncSelect = async (loc: Locator, input: string) => {
+  const textbox = loc.getByRole('textbox');
+  await textbox.scrollIntoViewIfNeeded();
   await loc.getByRole('textbox').fill(input);
   const options = loc.getByRole('option', { name: input });
+  await expect(options).not.toHaveCount(0);
   await options.first().click();
 };
 
 export const fillOrgSection = (page: Page, orgOid: string) =>
-  withinSection('organisaatio', async section => {
-    const orgSelect = section.getByTestId('organisaatioSelect');
-    await fillAsyncSelect(orgSelect, orgOid);
-  })(page);
+  withinSection(page, 'organisaatio', async section => {
+    await fillAsyncSelect(section.getByTestId('organisaatioSelect'), orgOid);
+  });
 
-export const getWrapperByLabel = (l: Locator, nameMatch: string | RegExp) => {
-  return parent(l.getByText(nameMatch));
+export const getWrapperByLabel = (
+  l: Locator,
+  nameMatch: string | RegExp,
+  opts?: { exact?: boolean }
+) => {
+  return parent(l.getByText(nameMatch, opts));
 };
 
 export const fillDateTime = async (
@@ -177,8 +177,56 @@ export const fillDateTime = async (
   await locator.getByTestId('DateTimeInput__Time').locator('input').fill(time);
 };
 
+export const fillTreeSelect = async (loc: Locator, value: Array<string>) => {
+  for (const val of value) {
+    await loc
+      .locator(`input[type="checkbox"][name="${val}"]`)
+      .click({ force: true });
+  }
+};
+
+const isTutkintoonJohtava = (koulutustyyppi: string) =>
+  ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
+
+export const fillKoulutustyyppiSelect = async (
+  loc: Locator,
+  koulutustyyppiPath: Array<string>
+) => {
+  const johtaaTutkintoon = isTutkintoonJohtava(last(koulutustyyppiPath));
+
+  if (johtaaTutkintoon) {
+    await loc
+      .getByRole('button', {
+        name: 'koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit',
+      })
+      .click();
+  } else {
+    await loc
+      .getByRole('button', {
+        name: 'koulutustyyppivalikko.muutKoulutustyypit',
+      })
+      .click();
+  }
+
+  for (const option of koulutustyyppiPath) {
+    const radio = getRadio(loc, option);
+    await parent(radio).click();
+  }
+};
+
+export const fillKoulutustyyppiSection = async (
+  page: Page,
+  koulutustyyppiPath: Array<string>
+) =>
+  withinSection(page, 'koulutustyyppi', async section => {
+    await fillKoulutustyyppiSelect(section, koulutustyyppiPath);
+  });
+
+export const getSelectByLabel = (loc: Locator, label: string | RegExp) =>
+  loc.locator(`label:text("${label}") + .Select__`);
+
 // For debugging
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const outerHTML = (l: Locator) => l.evaluate(el => el.outerHTML);
+export const outerHTML = (l: Locator) => l.evaluate(el => el.outerHTML);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const innerHTML = (l: Locator) => l.evaluate(el => el.innerHTML);
+export const innerHTML = (l: Locator) => l.evaluate(el => el.innerHTML);

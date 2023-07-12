@@ -13,28 +13,32 @@ import {
   getRadio,
   getSection,
   getWrapperByLabel,
+  jatka,
   tallenna,
   typeToEditor,
-  withinSection,
   wrapMutationTest,
+  withinSection,
 } from './playwright-helpers';
 
-const fillNimiSection = withinSection('nimi', async section => {
-  await section.getByLabel('yleiset.nimi').fill('haun nimi');
-});
+const fillNimiSection = (page: Page) =>
+  withinSection(page, 'nimi', async section => {
+    await section.getByLabel('yleiset.nimi').fill('haun nimi');
+  });
 
-const fillKohdejoukkoSection = withinSection('kohdejoukko', async section => {
-  const kohdejoukko = section.getByTestId('kohdejoukko');
-  await kohdejoukko.getByText('Korkeakoulutus').click();
-  await fillAsyncSelect(
-    section.getByTestId('tarkenne'),
-    'Ammatillinen opettajankoulutus'
-  );
-});
+const fillKohdejoukkoSection = (page: Page) =>
+  withinSection(page, 'kohdejoukko', async section => {
+    const kohdejoukko = section.getByTestId('kohdejoukko');
+    await kohdejoukko.getByText('Korkeakoulutus').click();
+    await fillAsyncSelect(
+      section.getByTestId('tarkenne'),
+      'Ammatillinen opettajankoulutus'
+    );
+  });
 
-const fillHakutapaSection = withinSection('hakutapa', async section => {
-  await section.getByText('Yhteishaku').click();
-});
+const fillHakutapaSection = (page: Page) =>
+  withinSection(page, 'hakutapa', async section => {
+    await section.getByText('Yhteishaku').click();
+  });
 
 const fillAjankohtaFields = async (
   section: Locator,
@@ -68,7 +72,7 @@ const fillAjankohtaFields = async (
 };
 
 const fillAikatauluSection = (page: Page) =>
-  withinSection('aikataulut', async section => {
+  withinSection(page, 'aikataulut', async section => {
     const hakuajat = section.getByTestId('hakuajat');
     await hakuajat.getByTestId('lisaaButton').click();
     await fillDateTime(hakuajat.getByTestId('alkaa'), {
@@ -105,7 +109,7 @@ const fillAikatauluSection = (page: Page) =>
       date: '05.12.2019',
       time: '06:45',
     });
-  })(page);
+  });
 
 const mutationTest = wrapMutationTest(ENTITY.HAKU);
 
@@ -113,7 +117,7 @@ const fillHakulomakeSection = (
   page: Page,
   type: HAKULOMAKETYYPPI = HAKULOMAKETYYPPI.ATARU
 ) =>
-  withinSection('hakulomake', async section => {
+  withinSection(page, 'hakulomake', async section => {
     if (type === HAKULOMAKETYYPPI.ATARU) {
       await section.getByText('hakulomakeValinnat.ataru').click();
       await fillAsyncSelect(
@@ -130,10 +134,10 @@ const fillHakulomakeSection = (
         'hakulomake kuvaus'
       );
     }
-  })(page);
+  });
 
 const fillYhteystiedotSection = (page: Page) =>
-  withinSection('yhteyshenkilot', async section => {
+  withinSection(page, 'yhteyshenkilot', async section => {
     await section
       .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
       .click();
@@ -153,7 +157,7 @@ const fillYhteystiedotSection = (page: Page) =>
     await section
       .getByRole('textbox', { name: 'yleiset.verkkosivun-teksti', exact: true })
       .fill('verkkosivun teksti');
-  })(page);
+  });
 
 const organisaatioOid = '1.1.1.1.1.1';
 
@@ -208,11 +212,12 @@ test.describe('Create haku', () => {
   test('Using an existing object as baseline it should not copy publishing state', async ({
     page,
   }) => {
-    await withinSection('pohja', async section => {
+    await withinSection(page, 'pohja', async section => {
       await section.getByText('hakulomake.kopioiPohjaksi').click();
       const pohjaWrapper = getFieldWrapperByName(section, 'pohja.valinta');
       await fillAsyncSelect(pohjaWrapper, 'Korkeakoulujen yhteishaku');
-    })(page, { jatka: true });
+      await jatka(section);
+    });
     const tilaSection = getSection(page, 'tila');
     await expect(getRadio(tilaSection, 'tallennettu')).toBeChecked();
   });

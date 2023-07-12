@@ -1,9 +1,16 @@
-import { Locator, Page, test } from '@playwright/test';
+import { Locator, Page, test, expect } from '@playwright/test';
 
 import { Alkamiskausityyppi, ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
 
 import { stubHakuRoutes } from './mocks/stubHakuRoutes';
-import { parent, withinSection, wrapMutationTest } from './playwright-helpers';
+import {
+  getFieldWrapperByName,
+  getSection,
+  parent,
+  typeToEditor,
+  withinSection,
+  wrapMutationTest,
+} from './playwright-helpers';
 
 const fillNimiSection = withinSection('nimi', async section => {
   await section.getByLabel('yleiset.nimi').fill('haun nimi');
@@ -22,7 +29,7 @@ const fillHakutapaSection = withinSection('hakutapa', async section => {
   await section.getByText('Yhteishaku').click();
 });
 
-const getSelectByLabel = (l: Locator, nameMatch: string | RegExp) => {
+const getWrapperByLabel = (l: Locator, nameMatch: string | RegExp) => {
   return parent(l.getByText(nameMatch));
 };
 
@@ -37,8 +44,6 @@ const fillOrgSection = (page: Page, orgOid: string) =>
     const orgSelect = section.getByTestId('organisaatioSelect');
     await fillAsyncSelect(orgSelect, orgOid);
   })(page);
-
-const skipSection = (page: Page, name: string) => withinSection(name)(page);
 
 const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
   const languages = ['en', 'fi', 'sv'];
@@ -149,15 +154,18 @@ const fillHakulomakeSection = (
     if (type === HAKULOMAKETYYPPI.ATARU) {
       await section.getByText('hakulomakeValinnat.ataru').click();
       await fillAsyncSelect(
-        getSelectByLabel(section, /^yleiset\.valitseHakulomake/),
+        getWrapperByLabel(section, /^yleiset\.valitseHakulomake/),
         'Lomake 1'
       );
     } else if (type === HAKULOMAKETYYPPI.MUU) {
-      await section.getByLabel('hakulomakeValinnat.muu').click();
+      await section.getByText('hakulomakeValinnat.muu').click();
       await section.getByLabel('yleiset.linkki').fill('http://example.com');
     } else {
-      await section.getByLabel('hakulomakeValinnat.eiSahkoistaHakua').click();
-      await section.getByLabel('yleiset.kuvaus').type('hakulomake kuvaus');
+      await section.getByText('hakulomakeValinnat.eiSahkoistaHakua').click();
+      await typeToEditor(
+        getWrapperByLabel(section, 'yleiset.kuvaus'),
+        'hakulomake kuvaus'
+      );
     }
   })(page);
 
@@ -184,7 +192,7 @@ const fillYhteystiedotSection = (page: Page) =>
       .fill('verkkosivun teksti');
   })(page);
 
-const getRadio = (loc: Locator, value) =>
+const getRadio = (loc: Locator, value: string) =>
   loc.locator(`input[type="radio"][value="${value}"]`);
 
 const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
@@ -205,12 +213,11 @@ test.describe('Create haku', () => {
     await page.goto(`/kouta/organisaatio/${organisaatioOid}/haku`);
   });
 
-  test('Should be able to create haku with ataru hakulomake', ({
+  test('Should be able to create haku with "ataru"-hakulomake', ({
     page,
   }, testInfo) =>
     mutationTest({ page, testInfo }, async () => {
       await fillOrgSection(page, organisaatioOid);
-      await skipSection(page, 'pohja');
       await fillKieliversiotSection(page);
       await fillNimiSection(page);
       await fillKohdejoukkoSection(page);
@@ -221,4 +228,42 @@ test.describe('Create haku', () => {
       await fillTilaSection(page);
       await tallenna(page);
     }));
+
+  test('Should be able to create haku with "muu"-hakulomake', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillNimiSection(page);
+      await fillKohdejoukkoSection(page);
+      await fillHakutapaSection(page);
+      await fillHakulomakeSection(page, HAKULOMAKETYYPPI.MUU);
+      await tallenna(page);
+    }));
+
+  test('Should be able to create haku with "ei sähköistä"-hakulomake', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillNimiSection(page);
+      await fillKohdejoukkoSection(page);
+      await fillHakutapaSection(page);
+      await fillHakulomakeSection(page, HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA);
+      await tallenna(page);
+    }));
+
+  test('Using an existing object as baseline it should not copy publishing state', async ({
+    page,
+  }) => {
+    await withinSection('pohja', async section => {
+      await section.getByText('hakulomake.kopioiPohjaksi').click();
+      const pohjaWrapper = getFieldWrapperByName(section, 'pohja.valinta');
+      await fillAsyncSelect(pohjaWrapper, 'Korkeakoulujen yhteishaku');
+    })(page, { jatka: true });
+    const tilaSection = getSection(page, 'tila');
+    await expect(getRadio(tilaSection, 'tallennettu')).toBeChecked();
+  });
 });

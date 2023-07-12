@@ -50,20 +50,27 @@ export const wrapMutationTest =
 export const getSelectOption = (page: Page) => (value: string) =>
   page.getByRole('option', { name: value });
 
+export const getSection = (page: Page, name: string) =>
+  page.getByTestId(`${name}Section`);
+
 export const withinSection =
   (name: string, fn?: (section: Locator) => Promise<any>) =>
   async (
     page: Page,
     { jatka: shouldContinue }: { jatka: boolean } = { jatka: false }
   ) => {
-    const section = page.getByTestId(`${name}Section`);
-    const isSectionClosed = (await section.locator('[open]').count()) === 0;
+    const section = getSection(page, name);
+    const sectionHeading = section.locator('> :first-child');
+
+    const isSectionClosed = await sectionHeading.evaluate(
+      el => el.getAttribute('open') === null
+    );
     if (isSectionClosed) {
-      await section.getByRole('heading').first().click();
+      await sectionHeading.click();
     }
     await fn?.(section);
     if (shouldContinue) {
-      jatka(section);
+      await jatka(section);
     }
   };
 
@@ -76,8 +83,10 @@ export const getFieldWrapperByName = (loc: Locator, name: string) =>
 
 export const parent = (loc: Locator) => loc.locator('xpath=..');
 
-// For debugging
+export const typeToEditor = (loc: Locator, text: string) =>
+  loc.locator('.Editor__').locator('[contenteditable="true"]').fill(text);
 
+// For debugging
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const outerHTML = (l: Locator) => l.evaluate(el => el.outerHTML);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

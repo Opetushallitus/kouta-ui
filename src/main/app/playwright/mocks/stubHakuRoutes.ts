@@ -85,10 +85,7 @@ export const stubHakuRoutes = async (page: Page, organisaatioOid: string) => {
     })
   );
 
-  await page.route(
-    '**/kouta-backend/haku/list?organisaatioOid=1.1.1.1.1.1*',
-    fixtureJSON([])
-  );
+  await page.route('**/kouta-backend/haku/list*', fixtureJSON([hakuItem]));
 
   await stubHakemuspalveluLomakkeetRoute(page);
   await stubONRHenkiloRoute(page);

@@ -1,0 +1,86 @@
+{
+  "oid": "1.3.1.1.1.1",
+  "koulutustyyppi": "tuva",
+  "koulutuksetKoodiUri": [
+    "koulutus_0#1"
+  ],
+  "tila": "tallennettu",
+  "tarjoajat": [
+    "5.1.1.1.1.1",
+    "3.1.1.1.1.1"
+  ],
+  "nimi": {
+    "fi": "Tutkintokoulutukseen valmentava koulutus (TUVA)"
+  },
+  "metadata": {
+    "opetus": {
+      "lisatiedot": [],
+      "opetuskieliKoodiUrit": [],
+      "maksullisuustyyppi": "maksuton",
+      "maksunMaara": null,
+      "opetustapaKoodiUrit": [],
+      "opetusaikaKoodiUrit": [],
+      "opetuskieletKuvaus": {},
+      "opetustapaKuvaus": {},
+      "opetusaikaKuvaus": {},
+      "maksullisuusKuvaus": {},
+      "onkoApuraha": false,
+      "apuraha": null,
+      "suunniteltuKestoVuodet": null,
+      "suunniteltuKestoKuukaudet": null,
+      "suunniteltuKestoKuvaus": {},
+      "koulutuksenAlkamiskausi": null
+    },
+    "diplomit": [],
+    "ammatillinenPerustutkintoErityisopetuksena": false,
+    "jarjestetaanErityisopetuksena": false,
+    "hasJotpaRahoitus": false,
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
+    "painotukset": [],
+    "kielivalikoima": {
+      "A1Kielet": [],
+      "A2Kielet": [],
+      "aidinkielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "muutKielet": []
+    },
+    "erityisetKoulutustehtavat": [],
+    "osaamisalat": [],
+    "yhteyshenkilot": [],
+    "ammattinimikkeet": [],
+    "asiasanat": [],
+    "kuvaus": {
+      "fi": "<p>kuvausteksti</p>"
+    },
+    "tyyppi": "tuva",
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "ilmoittautumislinkki": {},
+    "aloituspaikat": null,
+    "toteutusjaksot": [],
+    "hakulomakeLinkki": {},
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
+    "hakuaika": null,
+    "liitetytOpintojaksot": [],
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "taiteenalaKoodiUrit": []
+  },
+  "julkinen": true,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "externalId": null,
+  "sorakuvausId": null,
+  "esikatselu": false
+}

@@ -47,7 +47,7 @@ export const stubOrganisaatioRoutes = async (
     }
   );
 
-  page.route(
+  await page.route(
     '**/kouta-backend/organisaatio/oppilaitokset-for-avoin-korkeakoulutus',
     fixtureJSON(oppilaitoksetFlat({ rootOid: organisaatioOid }))
   );

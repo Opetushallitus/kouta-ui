@@ -28,7 +28,7 @@ test.describe('Edit haku', () => {
   test.beforeEach(async ({ page }) => {
     await stubHakuRoutes(page, organisaatioOid);
 
-    page.route(
+    await page.route(
       `**/kouta-backend/haku/${hakuOid}`,
       fixtureJSON(
         merge(haku(), {
@@ -63,7 +63,7 @@ test.describe('Edit haku', () => {
   });
 
   test('Should redirect from url without organization', async ({ page }) => {
-    page.goto(`/kouta/haku/${hakuOid}/muokkaus`);
+    await page.goto(`/kouta/haku/${hakuOid}/muokkaus`);
     await assertURLEndsWith(
       page,
       `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/haku/${hakuOid}/muokkaus`

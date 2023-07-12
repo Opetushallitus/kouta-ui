@@ -2,7 +2,7 @@ import path from 'path';
 
 import { Page, Route } from '@playwright/test';
 
-const MOCKS_PATH = path.resolve(process.cwd(), 'cypress/mocks');
+const MOCKS_PATH = path.resolve(__dirname);
 
 export const mocksFromFile = async (
   ctx: { route: Page['route'] },

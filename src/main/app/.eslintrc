@@ -2,18 +2,13 @@
   "extends": [
     "react-app",
     "prettier",
-    "plugin:cypress/recommended",
     "plugin:lodash/recommended",
     "plugin:playwright/recommended"
   ],
   "plugins": [
     "prettier",
-    "cypress",
     "lodash"
   ],
-  "env": {
-    "cypress/globals": true
-  },
   "rules": {
     "playwright/expect-expect": "off",
     "playwright/no-force-option": "off",

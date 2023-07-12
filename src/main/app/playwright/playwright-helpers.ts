@@ -40,6 +40,14 @@ export const wrapMutationTest =
         ['POST', 'PUT'].includes(method)
       );
     });
+
+    await page.route(`**/kouta-backend/${entityLower}`, async route => {
+      const method = route.request().method();
+      const data = route.request().postData();
+      if (['POST', 'PUT'].includes(method)) {
+        await route.fulfill({ body: data });
+      }
+    });
     await run();
     const request = await requestPromise;
 
@@ -131,6 +139,9 @@ export const fillKieliversiotSection = (page: Page) =>
     await selectLanguages(section, ['fi']);
   });
 
+const assertOnFrontPage = (page: Page) =>
+  expect(page).toHaveURL(/\/kouta?\/\?.+$/);
+
 export const assertNoUnsavedChangesDialog = async (page: Page) => {
   page.getByRole('link', { name: 'Home' }).click();
   await expect(
@@ -138,13 +149,14 @@ export const assertNoUnsavedChangesDialog = async (page: Page) => {
       name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
     })
   ).toBeHidden();
-  await expect(page).toHaveURL(/\/kouta?\/\?.+$/);
+  await assertOnFrontPage(page);
 };
 
 export const confirmDelete = async (page: Page) => {
   await page
     .getByRole('button', { name: 'ilmoitukset.luonnoksenPoisto.jatka' })
     .click();
+  await assertOnFrontPage(page);
 };
 
 export const fillAsyncSelect = async (loc: Locator, input: string) => {

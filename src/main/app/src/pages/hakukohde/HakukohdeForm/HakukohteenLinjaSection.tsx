@@ -161,7 +161,7 @@ export const HakukohteenLinjaSection = ({
             t('hakukohdelomake.hakukohteenLinja')
           }
         >
-          <Box {...getTestIdProps('alinHyvaksytty')} mb={2}>
+          <Box mb={2}>
             <Field
               component={FormFieldInput}
               name={`${name}.alinHyvaksyttyKeskiarvo`}

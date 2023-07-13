@@ -28,3 +28,13 @@ type SelectOptions = Array<SelectOption<string>>;
 type PohjaValinta = { tapa: string; valinta: string };
 
 type ValueOf<T> = T[keyof T];
+
+type Serializable =
+  | Partial<{
+      [x: string]: Serializable;
+    }>
+  | number
+  | string
+  | null
+  | boolean
+  | Array<Serializable>;

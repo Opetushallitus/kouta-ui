@@ -1,5 +1,4 @@
-cypress/**/__snapshots__/*
-cypress/fixtures/*
-cypress/mocks/*
 tsconfig.json
 package-lock.json
+*.typegen.ts
+**/playwright/**/*.json

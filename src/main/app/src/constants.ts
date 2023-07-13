@@ -28,6 +28,7 @@ export enum NAKYVYYS {
   EI_JULKINEN = 'ei_julkinen',
 }
 
+// TODO: Pitäisi ennemmin käyttää kouta-backendin swaggerista tulevaa KoulutustyyppiModel-tyyppiä
 export enum KOULUTUSTYYPPI {
   AMMATILLINEN_KOULUTUS = 'amm',
   LUKIOKOULUTUS = 'lk',

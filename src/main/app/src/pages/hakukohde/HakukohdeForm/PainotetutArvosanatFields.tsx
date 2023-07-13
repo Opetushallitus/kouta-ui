@@ -41,7 +41,7 @@ const PainotetutArvosanatFields = ({ fields }) => {
                 required
               />
             </Box>
-            <Box marginRight={2} {...getTestIdProps('painokerroin')}>
+            <Box marginRight={2}>
               <Field
                 component={FormFieldInput}
                 name={`${hakukohteenLinja}.painokerroin`}
@@ -57,7 +57,6 @@ const PainotetutArvosanatFields = ({ fields }) => {
                 onClick={() => {
                   fields.remove(index);
                 }}
-                {...getTestIdProps('poistaButton')}
               >
                 {t('yleiset.poistaRivi')}
               </RemoveButton>

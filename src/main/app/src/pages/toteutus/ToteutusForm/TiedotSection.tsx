@@ -34,15 +34,13 @@ const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   const { t } = useTranslation();
 
   return (
-    <div {...getTestIdProps('toteutuksenNimi')}>
-      <Field
-        name={`${name}.nimi.${language}`}
-        component={FormFieldInput}
-        label={t('toteutuslomake.toteutuksenNimi')}
-        disabled={disabled}
-        required
-      />
-    </div>
+    <Field
+      name={`${name}.nimi.${language}`}
+      component={FormFieldInput}
+      label={t('toteutuslomake.toteutuksenNimi')}
+      disabled={disabled}
+      required
+    />
   );
 };
 

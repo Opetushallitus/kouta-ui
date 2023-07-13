@@ -1,2 +1,2 @@
-cypress/**/__snapshots__/*
 service-worker.js
+*.typegen.ts

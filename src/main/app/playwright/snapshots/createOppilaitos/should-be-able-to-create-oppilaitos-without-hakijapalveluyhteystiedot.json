@@ -1,0 +1,39 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "oid": "1.1.1.1.1.1",
+  "tila": "julkaistu",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "kielivalinta": [
+    "fi"
+  ],
+  "esikatselu": false,
+  "metadata": {
+    "hakijapalveluidenYhteystiedot": null,
+    "esittely": {
+      "fi": "<p>Esittely</p>"
+    },
+    "tietoaOpiskelusta": [
+      {
+        "otsikkoKoodiUri": "organisaationkuvaustiedot_02#1",
+        "teksti": {
+          "fi": "<p>Tietoa</p>"
+        }
+      }
+    ],
+    "opiskelijoita": 1,
+    "korkeakouluja": 2,
+    "tiedekuntia": 3,
+    "kampuksia": 4,
+    "yksikoita": 5,
+    "toimipisteita": 6,
+    "akatemioita": 7,
+    "wwwSivu": {
+      "url": {
+        "fi": "http://www.verkkosivu.fi"
+      },
+      "nimi": {
+        "fi": "Verkkosivu fi"
+      }
+    }
+  }
+}

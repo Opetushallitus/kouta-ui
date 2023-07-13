@@ -1,0 +1,57 @@
+{
+  "oid": "1.2.3.4.5.6",
+  "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+  "koulutuksetKoodiUri": [
+    "koulutus_000001#12"
+  ],
+  "tila": "tallennettu",
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "nimi": {
+    "fi": "Ammatillinen opettajankoulutus"
+  },
+  "metadata": {
+    "tyyppi": "amm-ope-erityisope-ja-opo",
+    "tutkinnonOsat": [],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+        }
+      }
+    ],
+    "kuvaus": {
+      "fi": "<p>Fi kuvaus</p>"
+    },
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "tutkintonimikeKoodiUrit": [],
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso1_01#1"
+    ],
+    "linkkiEPerusteisiin": {},
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "erikoistumiskoulutusKoodiUri": null
+  },
+  "julkinen": true,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "kielivalinta": [
+    "fi"
+  ],
+  "johtaaTutkintoon": false,
+  "externalId": null,
+  "esikatselu": false,
+  "ePerusteId": null,
+  "sorakuvausId": null
+}

@@ -7,7 +7,6 @@ import { FormFieldSelect } from '#/src/components/formFields';
 import Heading from '#/src/components/Heading';
 import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { getTestIdProps } from '#/src/utils';
 
 const KielivalikoimaBox = props => (
   <Box flexGrow={1} width={0.33} p={1} {...props} />
@@ -21,7 +20,7 @@ const KielivalikoimaFields = ({ name }) => {
     <>
       <Heading hasDivider>{t('toteutuslomake.kielivalikoima')}</Heading>
       <Box display="flex" flexWrap="wrap" m={-1}>
-        <KielivalikoimaBox width={0.5} {...getTestIdProps('A1Kielet')}>
+        <KielivalikoimaBox width={0.5}>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.A1Kielet`}
@@ -30,7 +29,7 @@ const KielivalikoimaFields = ({ name }) => {
             isMulti
           />
         </KielivalikoimaBox>
-        <KielivalikoimaBox width={0.5} {...getTestIdProps('A2Kielet')}>
+        <KielivalikoimaBox width={0.5}>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.A2Kielet`}
@@ -40,7 +39,7 @@ const KielivalikoimaFields = ({ name }) => {
           />
         </KielivalikoimaBox>
 
-        <KielivalikoimaBox {...getTestIdProps('B1Kielet')}>
+        <KielivalikoimaBox>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.B1Kielet`}
@@ -50,7 +49,7 @@ const KielivalikoimaFields = ({ name }) => {
           />
         </KielivalikoimaBox>
 
-        <KielivalikoimaBox {...getTestIdProps('B2Kielet')}>
+        <KielivalikoimaBox>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.B2Kielet`}
@@ -60,7 +59,7 @@ const KielivalikoimaFields = ({ name }) => {
           />
         </KielivalikoimaBox>
 
-        <KielivalikoimaBox {...getTestIdProps('B3Kielet')}>
+        <KielivalikoimaBox>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.B3Kielet`}
@@ -70,7 +69,7 @@ const KielivalikoimaFields = ({ name }) => {
           />
         </KielivalikoimaBox>
 
-        <KielivalikoimaBox width={0.5} {...getTestIdProps('aidinkielet')}>
+        <KielivalikoimaBox width={0.5}>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.aidinkielet`}
@@ -80,7 +79,7 @@ const KielivalikoimaFields = ({ name }) => {
           />
         </KielivalikoimaBox>
 
-        <KielivalikoimaBox width={0.5} {...getTestIdProps('muutKielet')}>
+        <KielivalikoimaBox width={0.5}>
           <Field
             component={FormFieldSelect}
             name={`${name}.kielivalikoima.muutKielet`}

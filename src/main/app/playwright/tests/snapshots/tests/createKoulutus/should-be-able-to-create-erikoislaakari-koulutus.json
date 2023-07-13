@@ -1,0 +1,46 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "julkaistu",
+  "kielivalinta": [
+    "fi"
+  ],
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "koulutuksetKoodiUri": [
+    "koulutus_775101#12"
+  ],
+  "koulutustyyppi": "erikoislaakari",
+  "nimi": {
+    "fi": "erikoislääkäri-koulutus nimi"
+  },
+  "julkinen": false,
+  "esikatselu": true,
+  "ePerusteId": null,
+  "sorakuvausId": null,
+  "metadata": {
+    "tyyppi": "erikoislaakari",
+    "tutkinnonOsat": [],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "erikoislaakari",
+    "lisatiedot": [],
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "tutkintonimikeKoodiUrit": [],
+    "koulutusalaKoodiUrit": [],
+    "linkkiEPerusteisiin": {},
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "erikoistumiskoulutusKoodiUri": null
+  }
+}

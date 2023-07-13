@@ -26,14 +26,14 @@ import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
 import { organisaatioMatchesTyyppi } from './organisaatio/organisaatioMatchesTyyppi';
 
-const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
+const { NODE_ENV } = process.env;
 
-export const isDev = NODE_ENV === 'development';
+export const isDev = process.env.NODE_ENV === 'development';
 
 export const isNodeEnv = env =>
   (_.isArray(env) ? env : [env]).includes(NODE_ENV);
 
-export const isCypress = Boolean(REACT_APP_CYPRESS);
+export const isPlaywright = Boolean(localStorage.getItem('isPlaywright'));
 
 export const isValidDate = value => _.isDate(value) && !_.isNaN(value);
 

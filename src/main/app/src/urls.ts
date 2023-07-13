@@ -1,4 +1,4 @@
-import { isNodeEnv, isCypress } from './utils';
+import { isNodeEnv, isPlaywright } from './utils';
 
 const {
   REACT_APP_DEV_SERVER_URL,
@@ -12,7 +12,7 @@ const koutaBackendDevUrl = `${
 const virkailijaDevUrl = REACT_APP_DEV_SERVER_URL;
 const ePerusteetDevUrl = `https://eperusteet.hahtuvaopintopolku.fi`;
 
-export const development = ({ isCypress }) => ({
+export const development = ({ isPlaywright }) => ({
   'konfo-ui.koulutus': `${REACT_APP_KONFO_URL}/koulutus/$1`,
   'konfo-ui.toteutus': `${REACT_APP_KONFO_URL}/toteutus/$1`,
   'konfo-ui.oppilaitos': `${REACT_APP_KONFO_URL}/oppilaitos/$1`,
@@ -85,7 +85,7 @@ export const development = ({ isCypress }) => ({
   'kayttooikeus-service.omattiedot': `${virkailijaDevUrl}/kayttooikeus-service/henkilo/current/omattiedot`,
   'kayttooikeus-service.kayttajan-organisaatiot': `${virkailijaDevUrl}/kayttooikeus-service/organisaatiohenkilo/organisaatioOid`,
   'cas.login': `${virkailijaDevUrl}/cas/login`,
-  ...(!isCypress && {
+  ...(!isPlaywright && {
     'virkailija-raamit.raamitJs': `${virkailijaDevUrl}/virkailija-raamit/apply-raamit.js`,
   }),
   'lomake-editori.lomakkeet': `${virkailijaDevUrl}/lomake-editori/api/forms`,
@@ -101,8 +101,8 @@ export const development = ({ isCypress }) => ({
 });
 
 export const configure = async (urls, httpClient) => {
-  if (isNodeEnv(['development', 'test']) || isCypress) {
-    urls.addProperties(development({ isCypress }));
+  if (isNodeEnv(['development', 'test']) || isPlaywright) {
+    urls.addProperties(development({ isPlaywright }));
   } else {
     const { data } = await httpClient.get('/kouta/rest/config/frontProperties');
     urls.addProperties(data);

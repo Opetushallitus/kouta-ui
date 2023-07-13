@@ -5,13 +5,12 @@ import { Field } from 'redux-form';
 
 import { FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
-import { getTestIdProps } from '#/src/utils';
 
 export const ToteutuksenKuvausSection = ({ language }) => {
   const { t } = useTranslation();
 
   return (
-    <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
+    <Box mb={2}>
       <Field
         name={`kuvaus.${language}`}
         component={FormFieldEditor}

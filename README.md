@@ -1,8 +1,6 @@
 # Kouta-UI
 
-Uuden koulutustarjonnan virkailijan käyttöliittymä.
-
-Kouta-UI on luotu create-react-app:lla, ja se on kääritty Spring Boot 2.0 -sovellukseen, jonka ainoa tehtävä on jakaa käyttöliittymä.
+Koulutustarjonnan virkailijan käyttöliittymä. React-kirjastolla kehitetty SPA (single page app), jonka varsinainen koodi sijaitsee hakemistossa `src/main/app`. Juurihakemiston Spring Boot -kääre tarjoilee SPA:n ympäristökohtaisten asetusten kanssa, kun sovellus asennetaan pilveen.
 
 [![Kouta-ui](https://github.com/Opetushallitus/kouta-ui/actions/workflows/build.yml/badge.svg)](https://github.com/Opetushallitus/kouta-ui/actions/workflows/build.yml)
 
@@ -39,9 +37,11 @@ Kehittämisessä suositeltava editori on "Visual Studio Code", mutta sen käytt�
 - [Total Typescript](https://marketplace.visualstudio.com/items?itemName=mattpocock.ts-error-translator) tekee TypeScript-virheistä helpommin ymmärrettäviä ja näyttää opettavaisia selityksiä erilaisille TypeScript-rakenteille.
 - [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components) auttaa erityisesti styled-components-kirjaston CSS-template-stringien kanssa.
 
-## Koodin tyyli ja tarkistus
+## Koodin tyyli ja tarkistus (ESLint & Prettier)
 
 Käytössä on ESlint ja Prettier koodin tyylin yhdenmukaistamiseksi ja staattiseen tarkistamiseen. Prettier ajetaan eslint-sääntönä, joten prettierin ajaminen JS/TS-tiedostoille erikseen ei ole tarpeen. Lisäksi eslint ajetaan Huskyn ja Lint-staged:n avulla Git precommit-hookissa, jolloin korjataan ne virheet/varoitukset, jotka pystytään. Jos ei kaikkea pystytty korjaamaan, commit epäonnistuu ja käyttäjän täytyy korjata jäljellä olevat ongelmat käsin.
+
+ESLintin voi ajaa käsin komennolla `npm run lint`, tai automaattisen fiksauksen kanssa `npm run lint:fix`.
 
 ## Ajaminen lokaalisti kouta-backendin kanssa
 
@@ -109,30 +109,34 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 `open -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/moi`
 
-## Testit
+## Yksikkötestit
 
-Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
+Yksikkötestit on toteutettu Jest-kirjastolla. Ne löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, ja ne voi ajaa komennolla `npm run test`. 
 
-Yksikkötestit voi ajaa komennolla `npm run test`. Integraatiotestejä varten täytyy käynnistää ensin kouta-ui integraatio-moodissa komennolla `npm run start:integration` ja sen jälkeen ajaa integraatiotestit komennolla `npm run cypress:run`.
+## Integraatiotestit
 
-CI-ympäristössä integraatiotestit ajetaan hieman eri tavalla. Ensin luodaan sovelluksesta testi-bundle komennolla `npm run build:test` ja sen jälkeen komennolla `npm run test:ci` servataan testi-bundle ja ajetaan sekä yksikkö- että integraatiotestit. Tämä tapa on kaikki testit ajettaessa hieman nopeampi kuin edellisessä kappaleessa kuvattu. On myös mahdollista servata testi-bundle komennolla `npm run serve:test` ja sitten ajaa pelkät cypress-testit komennolla `npm run cypress:run`.
+Koko sovellusta vasten ajettavat testit on toteutettu [Playwright](https://playwright.dev)-kirjastolla. 
+Ensimmäisellä kerralla, ja aina kun Playwright-riippuvuus päivittyy, täytyy sen käyttämät selaimet riippuvuuksineen asentaa käsin komennolla:
 
-### Integraatiotestien ajaminen interaktiivisesti (Cypress)
+    npx playwright install
 
-Cypress-testejä voi ajaa myös interaktiivisesti käynnistämällä ensin kouta-ui:n integraatio-moodissa:
+Playwright-testit olettavat kälin löytyvän ajossa portista `3000` (ks. otsikko "Käyttöliittymän kehittäminen" yllä).
+Jos haluat ajaa **kaikki** testit kannattaa tehdä kuten Github Actionsissa, eli buildata ja servata sovellus:
 
-    cd src/main/app
-    npm run start:integration
+    npm run build:test
+    npm run serve:test
 
-ja sitten samassa kansiossa, mutta toisessa shellissä: 
+ja ajaa sitten kaikki testit toisessa terminaalissa komennolla
 
-    npm run cypress:open
-    
-Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm run start:integration`tai `npm run start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
+    npx playwright test
 
-### API-kutsujen mockaaminen
+Playwright-testejä voi ajaa myös dev-serveriä vasten, mutta se on paljon hitaampaa kuin servattua tuotanto-buildia vasten. Aikakatkaisuja voi tulla, vaikka rajoja on kasvatettu. Playwright-testit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm run start:integration`tai `npm run start:integration:debug` komentoa dev-serverin käynnistämiseen. NPM-skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle, jolloin sovellusta voi testailla selaimella muutenkin. Tällöin täytyy kuitenkin olla tarkkana, että muistaa lisätä fixtuurit tarvittaville API-kyselyille.
 
-KTO-projektissa on toteutettu omat työkalut API-kutsujen mockauksen helpottamiseen. Työkalut ja niiden dokumentaatio löytyvät [kto-ui-common](https://github.com/Opetushallitus/kto-ui-common)-reposta. `Update-mocks.js`-skriptille on tehty käytön helpottamiseksi npm skripti `update-mocks`, jota siis kutsutaan komennolla `npm run update-mocks`. Muista käynnistää lokaali kehitysproxy (`npm run start`) ennen mockien päivitystä, jotta mockeille tulee oikeaa dataa localhostin kautta.
+Kun sovellus on ajossa, kätevintä yksittäisten Playwright-testien ajaminen ja debuggaminen on käyttämällä "Visual Studio Code"-editorissa virallista Playwright-pluginia: https://playwright.dev/docs/getting-started-vscode
+
+Yksittäisiä testejä voi myös ajaa [Playwrightin UI-moodissa](https://playwright.dev/docs/test-ui-mode), jonka saa käynnistettyä komennolla:
+
+    npx playwright test --ui
 
 ## Storybook
 

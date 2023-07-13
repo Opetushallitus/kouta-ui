@@ -112,7 +112,6 @@ const SuunniteltuKestoFields = ({ name }) => {
             component={FormFieldIntegerInput}
             min={0}
             type="number"
-            {...getTestIdProps('suunniteltuKestoVuotta')}
           />
         </Box>
         <Box ml={2}>
@@ -123,7 +122,6 @@ const SuunniteltuKestoFields = ({ name }) => {
             min={0}
             max={11}
             type="number"
-            {...getTestIdProps('suunniteltuKestoKuukautta')}
           />
         </Box>
       </Box>
@@ -170,7 +168,7 @@ export const JarjestamisTiedotSection = ({
   return (
     <>
       <FieldGroup title={t('yleiset.opetuskieli')}>
-        <Box display="flex" {...getTestIdProps('opetuskieli')}>
+        <Box display="flex">
           <Box flexGrow={0} flexBasis="30%">
             <Field
               name={`${name}.opetuskieli`}
@@ -190,7 +188,7 @@ export const JarjestamisTiedotSection = ({
         </Box>
       </FieldGroup>
       <FieldGroup title={t('toteutuslomake.suunniteltuKesto')}>
-        <Box display="flex" {...getTestIdProps('suunniteltuKesto')}>
+        <Box display="flex">
           <Box flexGrow={0} flexBasis="30%">
             <SuunniteltuKestoFields name={name} />
           </Box>
@@ -200,14 +198,13 @@ export const JarjestamisTiedotSection = ({
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
               hideHeaderSelect
-              {...getTestIdProps('suunniteltuKestoKuvaus')}
             />
           </Box>
         </Box>
       </FieldGroup>
 
       <FieldGroup title={t('toteutuslomake.opetusaika')}>
-        <Box display="flex" {...getTestIdProps('opetusaika')}>
+        <Box display="flex">
           <Box flexGrow={0} flexBasis="30%">
             <Field
               name={`${name}.opetusaika`}
@@ -229,7 +226,7 @@ export const JarjestamisTiedotSection = ({
       </FieldGroup>
 
       <FieldGroup title={t('toteutuslomake.paaasiallinenOpetustapa')}>
-        <Box display="flex" {...getTestIdProps('opetustapa')}>
+        <Box display="flex">
           <Box flexGrow={0} flexBasis="30%">
             <Field
               name={`${name}.opetustapa`}
@@ -250,7 +247,7 @@ export const JarjestamisTiedotSection = ({
       </FieldGroup>
 
       <FieldGroup title={t('toteutuslomake.opetuksenMaksullisuus')}>
-        <Box display="flex" {...getTestIdProps('maksullisuus')}>
+        <Box display="flex">
           <Box flexGrow={0} flexBasis="30%">
             <MaksullisuusFields
               isLukuvuosimaksuVisible={isLukuvuosimaksuVisible(
@@ -263,11 +260,7 @@ export const JarjestamisTiedotSection = ({
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />
           </Box>
-          <Box
-            flexGrow={1}
-            paddingLeft={4}
-            {...getTestIdProps('maksullisuusKuvaus')}
-          >
+          <Box flexGrow={1} paddingLeft={4}>
             <Field
               name={`${name}.maksullisuusKuvaus.${language}`}
               component={FormFieldEditor}
@@ -317,14 +310,12 @@ export const JarjestamisTiedotSection = ({
       )}
 
       <FieldGroup title={t('yleiset.valitseLisattavaOsio')}>
-        <div {...getTestIdProps('osiotSelect')}>
-          <Field
-            name={`${name}.osiot`}
-            component={FormFieldSelect}
-            options={osiotOptions}
-            isMulti
-          />
-        </div>
+        <Field
+          name={`${name}.osiot`}
+          component={FormFieldSelect}
+          options={osiotOptions}
+          isMulti
+        />
       </FieldGroup>
 
       <OsiotFields

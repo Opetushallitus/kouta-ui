@@ -1,6 +1,6 @@
-import { isCypress } from '#/src/utils';
+import { isPlaywright } from '#/src/utils';
 
-const SCROLL_OPTIONS = isCypress ? {} : { behavior: 'smooth' };
+const SCROLL_OPTIONS = isPlaywright ? {} : { behavior: 'smooth' };
 
 const scrollElementIntoView = (element, delay = 0) => {
   setTimeout(() => {

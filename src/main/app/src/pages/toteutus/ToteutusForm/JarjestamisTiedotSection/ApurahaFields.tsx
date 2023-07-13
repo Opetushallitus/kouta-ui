@@ -16,7 +16,6 @@ import { Box } from '#/src/components/virkailija';
 import { MaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
-import { getTestIdProps } from '#/src/utils';
 import { isApurahaVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
 const APURAHA_YKSIKKO_OPTIONS = [
@@ -53,7 +52,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
       `${section}.apurahaMaaraTyyppi`
     );
     return (
-      <Box marginTop={1} {...getTestIdProps('apurahaMaara')} width="200px">
+      <Box marginTop={1} width="200px">
         <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
         <Box mt={1}>
           <Field
@@ -143,7 +142,7 @@ export const ApurahaFields = ({
 
   return (
     <FieldGroup title={t('toteutuslomake.apuraha')}>
-      <Box display="flex" {...getTestIdProps('apuraha')}>
+      <Box display="flex">
         <Box flexGrow={0} flexBasis="30%">
           <Field name={`${name}.onkoApuraha`} component={FormFieldSwitch}>
             {t('toteutuslomake.apurahaKaytossa')}

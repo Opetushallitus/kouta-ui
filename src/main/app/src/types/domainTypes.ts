@@ -38,3 +38,5 @@ export type EntityModelBase = {
   muokkaaja?: string;
   modified?: string;
 };
+
+export type KoulutustyyppiModel = components['schemas']['Koulutustyyppi'];

@@ -1,0 +1,31 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "tallennettu",
+  "kielivalinta": [
+    "fi"
+  ],
+  "hakutapaKoodiUri": "hakutapa_01#1",
+  "hakuajat": [],
+  "hakukohteenLiittamisenTakaraja": null,
+  "nimi": {
+    "fi": "haun nimi"
+  },
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
+  "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_2#1",
+  "hakulomaketyyppi": "ei sähköistä",
+  "metadata": {
+    "koulutuksenAlkamiskausi": null,
+    "tulevaisuudenAikataulu": [],
+    "yhteyshenkilot": []
+  },
+  "hakukohteenMuokkaamisenTakaraja": null,
+  "ajastettuJulkaisu": null,
+  "ajastettuHaunJaHakukohteidenArkistointi": null,
+  "hakulomakeAtaruId": null,
+  "hakulomakeLinkki": {},
+  "hakulomakeKuvaus": {
+    "fi": "<p>hakulomake kuvaus</p>"
+  }
+}

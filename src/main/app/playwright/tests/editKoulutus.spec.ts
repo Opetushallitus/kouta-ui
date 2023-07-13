@@ -4,6 +4,7 @@ import { merge } from 'lodash';
 import koulutus from '#/playwright/fixtures/koulutus';
 import {
   assertNoUnsavedChangesDialog,
+  assertURLEndsWith,
   confirmDelete,
   fillKieliversiotSection,
   fillTilaSection,
@@ -14,7 +15,7 @@ import {
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubKoulutusRoutes } from '#/playwright/stubKoulutusRoutes';
 import { TestiKoulutustyyppi } from '#/playwright/test-types';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const mutationTest = wrapMutationTest(ENTITY.KOULUTUS);
 
@@ -180,5 +181,14 @@ test.describe('Edit koulutus', () => {
   }) => {
     await prepareTest(page, 'amm', { loadPage: true });
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should redirect from url without organization', async ({ page }) => {
+    await prepareTest(page, 'amm', { loadPage: true });
+    await page.goto(`/kouta/koulutus/${koulutusOid}/muokkaus`);
+    await assertURLEndsWith(
+      page,
+      `/kouta/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/koulutus/${koulutusOid}/muokkaus`
+    );
   });
 });

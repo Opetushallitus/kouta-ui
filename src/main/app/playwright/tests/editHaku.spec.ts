@@ -15,8 +15,9 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubHakuRoutes } from '#/playwright/stubHakuRoutes';
-import { stubKayttoOikeusOmatTiedot } from '#/playwright/stubKayttoOikeusOmatTiedot';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+
+import { stubOrgPaakayttajaRights } from '../stubOrgPaakayttajaRights';
 
 const mutationTest = wrapMutationTest(ENTITY.HAKU);
 
@@ -69,20 +70,10 @@ test.describe('Edit haku', () => {
     );
   });
 
-  test('should not be possible for oppilaitos user to add hakukohde for haku with expired liittämistakaraja', async ({
+  test('Should not be possible for oppilaitos user to add hakukohde for haku with expired liittämistakaraja', async ({
     page,
   }) => {
-    await stubKayttoOikeusOmatTiedot(page, [
-      {
-        organisaatioOid,
-        kayttooikeudet: [
-          {
-            palvelu: 'KOUTA',
-            oikeus: 'HAKU_CRUD',
-          },
-        ],
-      },
-    ]);
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
 
     await page.goto(
       `/kouta/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`
@@ -92,7 +83,7 @@ test.describe('Edit haku', () => {
     ).toBeDisabled();
   });
 
-  test('should be possible for OPH virkailija to add hakukohde for haku with expired liittämistakaraja', async ({
+  test('Should be possible for OPH virkailija to add hakukohde for haku with expired liittämistakaraja', async ({
     page,
   }) => {
     await expect(
@@ -100,25 +91,39 @@ test.describe('Edit haku', () => {
     ).toBeEnabled();
   });
 
-  test('should be possible for oppilaitos user to add hakukohde for haku without expired liittämistakaraja', async ({
+  test('Should be possible for oppilaitos user to add hakukohde for haku without expired liittämistakaraja', async ({
     page,
   }) => {
     const hakuMockData = haku();
     const takaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
     const oneDayBeforeDeadline = sub(new Date(takaraja), { days: 1 });
     await setFakeTime(page, oneDayBeforeDeadline);
-    await stubKayttoOikeusOmatTiedot(page, [
-      {
-        organisaatioOid,
-        kayttooikeudet: [
-          {
-            palvelu: 'KOUTA',
-            oikeus: 'HAKU_CRUD',
-          },
-        ],
-      },
-    ]);
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
 
+    await page.route(
+      `**/kouta-backend/haku/${hakuOid}`,
+      fixtureJSON(
+        merge(hakuMockData, {
+          oid: hakuOid,
+          organisaatioOid: organisaatioOid,
+        })
+      )
+    );
+
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`
+    );
+    await expect(
+      page.getByRole('button', { name: 'yleiset.liitaHakukohde' })
+    ).toBeEnabled();
+  });
+
+  test('Should be possible for oppilaitos user to add hakukohde for haku if liittämistakaraja has not been set', async ({
+    page,
+  }) => {
+    const hakuMockData = haku();
+    hakuMockData.hakukohteenLiittamisenTakaraja = null;
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
     await page.route(
       `**/kouta-backend/haku/${hakuOid}`,
       fixtureJSON(

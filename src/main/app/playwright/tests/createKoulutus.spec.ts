@@ -14,6 +14,7 @@ import {
   getWrapperByLabel,
   getSelectByLabel,
   getSection,
+  assertBaseTilaNotCopied,
 } from '#/playwright/playwright-helpers';
 import { stubKoulutusRoutes } from '#/playwright/stubKoulutusRoutes';
 import { ENTITY } from '#/src/constants';
@@ -618,4 +619,51 @@ test.describe('Create koulutus', () => {
       await fillTilaSection(page);
       await tallenna(page);
     }));
+
+  test('should be able to create Erikoistumiskoulutus', ({ page }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await fillKoulutustyyppiSection(page, [
+        'korkeakoulutus',
+        'erikoistumiskoulutus',
+      ]);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await withinSection(page, 'information', async section => {
+        await fillAsyncSelect(
+          getSelectByLabel(
+            section,
+            'koulutuslomake.valitseErikoistumiskoulutus'
+          ),
+          'Big Data Analytics'
+        );
+        await section.getByText('toteutuslomake.vaihteluvali').click();
+        await section.getByTestId('laajuusMin').locator('input').fill('5');
+        await section.getByTestId('laajuusMax').locator('input').fill('10');
+        await expect(
+          section.getByTestId('forcedLaajuusyksikko').locator('input')
+        ).toHaveValue('opintopistettä');
+        await fillAsyncSelect(
+          getSelectByLabel(section, 'koulutuslomake.valitseKoulutusalat'),
+          'Tietojenkäsittely ja tietoliikenne (ICT)'
+        );
+
+        await expect(
+          section.getByLabel('koulutuslomake.muokkaaKoulutuksenNimea')
+        ).toHaveValue('Big Data Analytics');
+      });
+      await withinSection(page, 'description', async section => {
+        await typeToEditor(section, 'Kuvaus');
+      });
+      await fillLisatiedotSection(page);
+      await fillSoraKuvausSection(page);
+      await fillJarjestajaSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
+  test('Should not copy publishing state when using existing koulutus as base', async ({
+    page,
+  }) => {
+    await assertBaseTilaNotCopied(page, 'Koulutuksen nimi');
+  });
 });

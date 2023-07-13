@@ -26,8 +26,8 @@ import {
   selectedToimipisteNimi,
   stubHakukohdeRoutes,
 } from '#/playwright/stubHakukohdeRoutes';
-import { stubKayttoOikeusOmatTiedot } from '#/playwright/stubKayttoOikeusOmatTiedot';
 import { stubOrganisaatioRoutes } from '#/playwright/stubOrganisaatioRoutes';
+import { stubOrgPaakayttajaRights } from '#/playwright/stubOrgPaakayttajaRights';
 import {
   Alkamiskausityyppi,
   ENTITY,
@@ -490,19 +490,6 @@ test.describe('Create hakukohde', () => {
   });
 });
 
-const stubOppilaitosRights = (page: Page) =>
-  stubKayttoOikeusOmatTiedot(page, [
-    {
-      organisaatioOid,
-      kayttooikeudet: [
-        {
-          palvelu: 'KOUTA',
-          oikeus: 'HAKUKOHDE_UPDATE',
-        },
-      ],
-    },
-  ]);
-
 test.describe('Create hakukohde as oppilaitos user', () => {
   test('should not be possible to save hakukohde if haun liittämistakaraja has expired', async ({
     page,
@@ -514,7 +501,7 @@ test.describe('Create hakukohde as oppilaitos user', () => {
       tarjoajat,
       hakukohteenLiittaminenHasExpired: true,
     });
-    await stubOppilaitosRights(page);
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
     await loadHakukohdePage(page);
     await fillKieliversiotSection(page);
     const tallennaBtn = page.getByRole('button', {
@@ -526,6 +513,30 @@ test.describe('Create hakukohde as oppilaitos user', () => {
       'hakukohdelomake.muokkaamisenTakarajaYlittynyt'
     );
   });
+
+  test('should not be possible to save hakukohde if haun muokkaamistakaraja has expired', async ({
+    page,
+  }) => {
+    await prepareTest(page, {
+      tyyppi: 'lk',
+      hakuOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenMuokkaaminenHasExpired: true,
+    });
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
+    await loadHakukohdePage(page);
+    await fillKieliversiotSection(page);
+    const tallennaBtn = page.getByRole('button', {
+      name: 'yleiset.tallenna',
+    });
+    await expect(tallennaBtn).toBeDisabled();
+    await expect(tallennaBtn).toHaveAttribute(
+      'title',
+      'hakukohdelomake.muokkaamisenTakarajaYlittynyt'
+    );
+  });
+
   test("should be possible to save hakukohde if haun lisäämis- ja muokkaamistakarajat haven't been set", async ({
     page,
   }) => {
@@ -536,7 +547,7 @@ test.describe('Create hakukohde as oppilaitos user', () => {
       tarjoajat,
       hakuWithoutTakarajat: true,
     });
-    await stubOppilaitosRights(page);
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
     await loadHakukohdePage(page);
     await fillKieliversiotSection(page);
     const tallennaBtn = page.getByRole('button', {
@@ -556,7 +567,7 @@ test.describe('Create hakukohde as oppilaitos user', () => {
       hakukohteenLiittaminenHasExpired: true,
       hakuWithoutMuokkaamisenTakaraja: true,
     });
-    await stubOppilaitosRights(page);
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
     await loadHakukohdePage(page);
     await fillKieliversiotSection(page);
     const tallennaBtn = page.getByRole('button', {

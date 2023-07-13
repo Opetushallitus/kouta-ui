@@ -2,7 +2,10 @@ import { useMemo } from 'react';
 
 import _ from 'lodash';
 
-import useKoodisto from '#/src/hooks/useKoodisto';
+import {
+  useKoodisto,
+  useValintakokeentyyppiKoodisto,
+} from '#/src/hooks/useKoodisto';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
@@ -78,6 +81,36 @@ export const useKoodistoOptions = ({
   sortFn,
 }: UseKoodistoOptionsProps) => {
   const { data, ...rest } = useKoodisto({ koodisto, versio });
+
+  const options = useKoodistoDataOptions({
+    koodistoData: data,
+    language,
+    sortFn,
+  });
+
+  return { ...rest, options };
+};
+
+type UseValintakokeentyyppiKoodistoOptionsProps = {
+  koulutuskoodit: Array<string>;
+  hakutapa: string;
+  haunkohdejoukko: string;
+  language?: LanguageCode;
+  sortFn?: (unknown) => SelectOptions;
+};
+
+export const useValintakokeentyyppiKoodistoOptions = ({
+  koulutuskoodit,
+  hakutapa,
+  haunkohdejoukko,
+  language,
+  sortFn,
+}: UseValintakokeentyyppiKoodistoOptionsProps) => {
+  const { data, ...rest } = useValintakokeentyyppiKoodisto({
+    koulutuskoodit,
+    haunkohdejoukko,
+    hakutapa,
+  });
 
   const options = useKoodistoDataOptions({
     koodistoData: data,

@@ -1,6 +1,8 @@
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import getKoodisto from '#/src/utils/koodi/getKoodisto';
+import getKoodisto, {
+  getValintakokeentyyppiKoodisto,
+} from '#/src/utils/koodi/getKoodisto';
 
 type UseKoodistoProps = {
   koodisto: string;
@@ -27,6 +29,38 @@ export const useKoodisto = ({
   );
 };
 
+type UseValintakokeentyyppiKoodistoProps = {
+  koulutuskoodit: Array<string>;
+  hakutapa: string;
+  haunkohdejoukko: string;
+};
+
+export const useValintakokeentyyppiKoodisto = ({
+  koulutuskoodit,
+  hakutapa,
+  haunkohdejoukko,
+}: UseValintakokeentyyppiKoodistoProps) => {
+  return useApiQuery(
+    GET_VALINTAKOKEENTYYPPI_KOODISTO_QUERY_KEY,
+    getValintakokeentyyppiKoodisto,
+    {
+      koulutuskoodit,
+      hakutapakoodi: hakutapa,
+      haunkohdejoukkokoodi: haunkohdejoukko,
+    },
+    {
+      enabled:
+        koulutuskoodit.length > 0 &&
+        Boolean(hakutapa) &&
+        Boolean(haunkohdejoukko),
+      ...LONG_CACHE_QUERY_OPTIONS,
+    }
+  );
+};
+
 export const GET_KOODISTO_QUERY_KEY = 'getKoodisto';
+
+export const GET_VALINTAKOKEENTYYPPI_KOODISTO_QUERY_KEY =
+  'getValintakokeentyyppiKoodisto';
 
 export default useKoodisto;

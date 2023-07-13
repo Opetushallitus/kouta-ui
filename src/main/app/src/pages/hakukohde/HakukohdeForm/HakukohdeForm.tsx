@@ -185,6 +185,8 @@ export const HakukohdeForm = ({
         section="valintakokeet"
         header={t('yleiset.kokeetTaiLisanaytot')}
         languages={languages}
+        haku={haku}
+        koulutuskoodit={toteutus?.koulutuksetKoodiUri}
         Component={HakukohteenValintakokeetSection}
       />
 

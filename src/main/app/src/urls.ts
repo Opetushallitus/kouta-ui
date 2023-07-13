@@ -25,6 +25,7 @@ export const development = ({ isPlaywright }) => ({
   'kouta-backend.oppilaitostyypit-by-koulutustyypit': `${koutaBackendDevUrl}/koulutus/listOppilaitostyypitByKoulutustyypit`,
   'kouta-backend.koulutus-toteutukset': `${koutaBackendDevUrl}/koulutus/$1/toteutukset/list`,
   'kouta-backend.koodisto-koulutukset-by-ylakoodi': `${koutaBackendDevUrl}/koodisto/koulutukset/$1`,
+  'kouta-backend.koodisto-valintakokeentyypit': `${koutaBackendDevUrl}/koodisto/valintakokeentyypit?hakutapakoodi=$1&haunkohdejoukkokoodi=$2`,
   'kouta-backend.toteutus': `${koutaBackendDevUrl}/toteutus`,
   'kouta-backend.toteutus-by-oid': `${koutaBackendDevUrl}/toteutus/$1`,
   'kouta-backend.toteutus-list': `${koutaBackendDevUrl}/toteutus/list`,

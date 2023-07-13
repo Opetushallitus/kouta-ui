@@ -109,13 +109,9 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 `open -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/moi`
 
-## Testit
+## Yksikkötestit
 
-Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
-
-Yksikkötestit voi ajaa komennolla `npm run test`. Integraatiotestejä varten täytyy käynnistää ensin kouta-ui integraatio-moodissa komennolla `npm run start:integration` ja sen jälkeen ajaa integraatiotestit komennolla `npm run cypress:run`.
-
-CI-ympäristössä integraatiotestit ajetaan hieman eri tavalla. Ensin luodaan sovelluksesta testi-bundle komennolla `npm run build:test` ja sen jälkeen komennolla `npm run test:ci` servataan testi-bundle ja ajetaan sekä yksikkö- että integraatiotestit. Tämä tapa on kaikki testit ajettaessa hieman nopeampi kuin edellisessä kappaleessa kuvattu. On myös mahdollista servata testi-bundle komennolla `npm run serve:test` ja sitten ajaa pelkät cypress-testit komennolla `npm run cypress:run`.
+Yksikkötestit on toteutettu Jest-kirjastolla. Ne löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, ja ne voi ajaa komennolla `npm run test`. 
 
 ## Integraatiotestit
 
@@ -125,7 +121,7 @@ Ensimmäisellä kerralla, ja aina kun Playwright-riippuvuus päivittyy, täytyy 
     npx playwright install
 
 Playwright-testit olettavat kälin löytyvän ajossa portista `3000` (ks. otsikko "Käyttöliittymän kehittäminen" yllä).
-Jos haluat ajaa **kaikki** testit kannattaa tehdä kuten CI:ssä, eli buildata ja sitten servata sovellus:
+Jos haluat ajaa **kaikki** testit kannattaa tehdä kuten Github Actionsissa, eli buildata ja servata sovellus:
 
     npm run build:test
     npm run serve:test

@@ -14,7 +14,7 @@ Object {
     "hakuTapa": undefined,
     "hakuaikaAlkaa": undefined,
     "hakuaikaPaattyy": undefined,
-    "hakukohteetKaytossa": undefined,
+    "isHakukohteetKaytossa": undefined,
     "linkki": undefined,
     "lisatiedot": Object {},
     "lisatiedotValintaperusteista": Object {},

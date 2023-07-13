@@ -2004,7 +2004,7 @@ export interface components {
       ammatillinenPerustutkintoErityisopetuksena?: boolean;
     };
     TutkintoonJohtamatonToteutusMetadata: components['schemas']['ToteutusMetadata'] & {
-      /** @description Onko toteutuksella käytössä hakukohteet? */
+      /** @description Tieto siitä onko toteutuksella käytössä hakukohteet */
       isHakukohteetKaytossa?: boolean;
       hakutermi?: components['schemas']['Hakutermi'];
       /**

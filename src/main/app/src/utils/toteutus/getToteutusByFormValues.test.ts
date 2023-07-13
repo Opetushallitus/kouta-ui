@@ -7,7 +7,6 @@ import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   KOULUTUSTYYPPI,
-  HakukohteetToteutuksella,
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
@@ -245,7 +244,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       ],
       hakeutumisTaiIlmoittautumistapa: {
         hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU,
-        hakukohteetKaytossa: HakukohteetToteutuksella.EI_HAKUKOHTEITA,
+        isHakukohteetKaytossa: false,
         hakuTapa: Hakeutumistapa.ILMOITTAUTUMINEN,
         lisatiedot: {
           fi: parseEditorState('<p>Fi lisatiedot</p>'),

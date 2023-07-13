@@ -6,7 +6,6 @@ import {
   Hakeutumistapa,
   MaaraTyyppi,
   ApurahaYksikko,
-  HakukohteetToteutuksella,
 } from '#/src/constants';
 
 import { AjankohtaFields, SisaltoValues } from './formTypes';
@@ -127,7 +126,7 @@ export type ToteutusFormValues = {
   toteutusjaksot: Array<Toteutusjakso>;
   teemakuva?: string;
   hakeutumisTaiIlmoittautumistapa: {
-    hakukohteetKaytossa: HakukohteetToteutuksella;
+    isHakukohteetKaytossa: boolean;
     hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
     hakuTapa?: Hakeutumistapa;
     linkki?: TranslatedField;

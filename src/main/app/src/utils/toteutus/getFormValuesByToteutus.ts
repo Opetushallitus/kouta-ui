@@ -286,7 +286,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     teemakuva,
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
-      hakukohteetKaytossa: metadata.hakukohteetKaytossa,
+      isHakukohteetKaytossa: metadata.isHakukohteetKaytossa,
       hakuTapa: metadata?.hakutermi,
       linkki: metadata?.hakulomakeLinkki,
       lisatiedot: _fp.mapValues(

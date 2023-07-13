@@ -144,12 +144,19 @@ const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
       const isChecked = await langInput.isChecked();
       if (selectedLanguages.includes(lang)) {
         if (!isChecked) {
-          // eslint-disable-next-line playwright/no-force-option
-          await langInput.setChecked(true, { force: true });
+          await langInput.setChecked(true, {
+            // eslint-disable-next-line playwright/no-force-option
+            force: true,
+            // Joissakin järjestelmissä nämä napsautukset ei osu checkboxiin ilman sijainnin kertomista
+            position: { x: 5, y: 5 },
+          });
         }
       } else if (isChecked) {
-        // eslint-disable-next-line playwright/no-force-option
-        await langInput.setChecked(false, { force: true });
+        await langInput.setChecked(false, {
+          // eslint-disable-next-line playwright/no-force-option
+          force: true,
+          position: { x: 5, y: 5 },
+        });
       }
     })
   );

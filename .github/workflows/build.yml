@@ -44,7 +44,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container: 
-      image: mcr.microsoft.com/playwright:v1.35.0-jammy
+      image: mcr.microsoft.com/playwright:v1.36.0-jammy
       options: --ipc=host
     steps:
       - uses: actions/checkout@v3

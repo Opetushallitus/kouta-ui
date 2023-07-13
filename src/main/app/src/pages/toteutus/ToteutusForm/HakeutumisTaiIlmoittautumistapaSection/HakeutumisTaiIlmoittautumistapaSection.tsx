@@ -20,8 +20,11 @@ import { Hakeutumistapa, HakukohteetToteutuksella } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
+import {
+  hakukohteetAinaKaytossaKoulutustyypille,
+  hakukohteidenKaytonVoiValita,
+} from '#/src/utils/toteutus/hakukohteetKaytossaUtil';
 
-import { KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA } from '../ToteutusForm';
 import HakeutumisTaiIlmoittautusmistapaFields from './HakeutumisTaiIlmoittautumistapaFields';
 
 export const StyledGrayRadio = styled(Radio)`
@@ -50,17 +53,16 @@ const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
   );
 });
 
-export const HakukohdeKaytossaFields = createFormFieldComponent(({ name }) => {
+const HakukohdeKaytossaFields = createFormFieldComponent(({ name }) => {
   const { t } = useTranslation();
-
   return (
     <Box
       mb={2}
-      {...getTestIdProps(`${name}.hakukohteetKaytossa`)}
+      {...getTestIdProps(`${name}.isHakukohteetKaytossa`)}
       width="200px"
     >
       <Field
-        name={`${name}.hakukohteetKaytossa`}
+        name={`${name}.isHakukohteetKaytossa`}
         component={FormFieldRadioGroup}
         options={[
           {
@@ -85,37 +87,32 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
   const { t } = useTranslation();
   const hakuTapa = useFieldValue(`${name}.hakuTapa`);
 
-  const hakukohteidenKaytonVoiValita =
-    KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
-      koulutustyyppi
-    );
-
-  const hakukohteetAinaKaytossaKoulutustyypille = !hakukohteidenKaytonVoiValita;
-
   const hakukohteetKaytossaValinta = useFieldValue(
-    `${name}.hakukohteetKaytossa`
+    `${name}.isHakukohteetKaytossa`
   );
 
   const showAloituspaikatJaHakeutumisTapaFields =
     hakukohteetKaytossaValinta === HakukohteetToteutuksella.EI_HAKUKOHTEITA;
 
   const showHakukohteetKaytossaInfobox =
-    hakukohteetAinaKaytossaKoulutustyypille ||
+    hakukohteetAinaKaytossaKoulutustyypille(koulutustyyppi) ||
     hakukohteetKaytossaValinta ===
       HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA;
 
   return (
     <Box flexDirection="column">
-      {hakukohteidenKaytonVoiValita && (
+      {hakukohteidenKaytonVoiValita(koulutustyyppi) && (
         <Box>
           <Field
-            label={t('toteutuslomake.hakukohteetKaytossa')}
+            label={t('toteutuslomake.isHakukohteetKaytossa')}
             component={HakukohdeKaytossaFields}
             name={name}
             required
           />
         </Box>
       )}
+      {console.log(hakukohteetKaytossaValinta)}
+      {console.log(typeof hakukohteetKaytossaValinta)}
       {showHakukohteetKaytossaInfobox && (
         <Box mb={2}>
           <Alert status="info">

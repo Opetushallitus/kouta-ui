@@ -21,6 +21,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
+  Koulutustyyppi,
   HakukohteetToteutuksella,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
@@ -32,6 +33,7 @@ import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet'
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
+import { hakukohteidenKaytonVoiValita } from '#/src/utils/toteutus/hakukohteetKaytossaUtil';
 
 import { HakeutumisTaiIlmoittautumistapaSection } from './HakeutumisTaiIlmoittautumistapaSection/HakeutumisTaiIlmoittautumistapaSection';
 import HakukohteetModal from './HakukohteetModal';
@@ -68,18 +70,19 @@ import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { MUU } = HAKULOMAKETYYPPI;
 
-export const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = [
-  KOULUTUSTYYPPI.TUTKINNON_OSA,
-  KOULUTUSTYYPPI.OSAAMISALA,
-  KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-  KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-  KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-  KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
-  KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
-  KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
-  KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-  KOULUTUSTYYPPI.MUU,
-];
+export const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA: Array<Koulutustyyppi> =
+  [
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+    KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+    KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
+    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+    KOULUTUSTYYPPI.MUU,
+  ];
 
 type ToteutusFormProps = {
   koulutus: KoulutusModel;
@@ -108,16 +111,13 @@ const ToteutusForm = ({
   );
 
   const hakukohteetKaytossaValittu = useFieldValue(
-    'hakeutumisTaiIlmoittautumistapa.hakukohteetKaytossa'
+    'hakeutumisTaiIlmoittautumistapa.isHakukohteetKaytossa'
   );
 
-  const hakukohteetKaytossa =
-    KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA.includes(
-      koulutustyyppi
-    )
-      ? hakukohteetKaytossaValittu ===
-        HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA
-      : true;
+  const hakukohteetKaytossa = hakukohteidenKaytonVoiValita(koulutustyyppi)
+    ? hakukohteetKaytossaValittu ===
+      HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA
+    : true;
 
   const isEBkoulutus = isEB(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
   const isDIAkoulutus = isDIA(koulutus?.koulutuksetKoodiUri, koulutustyyppi);
@@ -321,14 +321,16 @@ const ToteutusForm = ({
           organisaatioOid={organisaatioOid}
           tarjoajat={toteutus?.tarjoajat}
         />
-        <FormCollapse
-          section="hakeutumisTaiIlmoittautumistapa"
-          header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
-          Component={HakeutumisTaiIlmoittautumistapaSection}
-          languages={languages}
-          koulutustyyppi={koulutustyyppi}
-          {...getTestIdProps('hakeutumisTaiIlmoittautumistapaSection')}
-        />
+        {hakukohteidenKaytonVoiValita(koulutustyyppi) && (
+          <FormCollapse
+            section="hakeutumisTaiIlmoittautumistapa"
+            header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
+            Component={HakeutumisTaiIlmoittautumistapaSection}
+            languages={languages}
+            koulutustyyppi={koulutustyyppi}
+            {...getTestIdProps('hakeutumisTaiIlmoittautumistapaSection')}
+          />
+        )}
         {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
           koulutustyyppi
         ) &&

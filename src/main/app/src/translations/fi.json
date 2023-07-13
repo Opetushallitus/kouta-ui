@@ -591,7 +591,8 @@
     "vuotta": "Vuotta",
     "kuukautta": "Kuukautta",
     "hakeutumisTaiIlmoittautumistapa": "Hakeutumis- tai ilmoittautumistapa",
-    "hakukohteetKaytossa": "Valitse käytetäänkö toteutuksella hakukohteita",
+    "isHakukohteetKaytossa": "Valitse käytetäänkö toteutuksella hakukohteita",
+    "hakukohteetKaytossaValittu": "Hakukohteet ovat käytössä toteutuksella",
     "hakukohteetKaytossaInfo": "Toteutuksella on käytössä hakukohteet, ja hakeutumis- sekä aloituspaikkatiedot tallennetaan hakukohteille",
     "valitseHakutapa": "Valitse oppijalle näkyvä hakutapa",
     "hakuTapa": {

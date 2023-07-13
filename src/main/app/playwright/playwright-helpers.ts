@@ -138,16 +138,21 @@ export const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
 
 const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
   const languages = ['en', 'fi', 'sv'];
-  for (const lang of languages) {
-    const langInput = selector.locator(`input[name="${lang}"]`);
-    if (selectedLanguages.includes(lang)) {
-      // eslint-disable-next-line playwright/no-force-option
-      await langInput.setChecked(true, { force: true });
-    } else {
-      // eslint-disable-next-line playwright/no-force-option
-      await langInput.setChecked(false, { force: true });
-    }
-  }
+  await Promise.all(
+    languages.map(async lang => {
+      const langInput = selector.locator(`input[name="${lang}"]`);
+      const isChecked = await langInput.isChecked();
+      if (selectedLanguages.includes(lang)) {
+        if (!isChecked) {
+          // eslint-disable-next-line playwright/no-force-option
+          await langInput.setChecked(true, { force: true });
+        }
+      } else if (isChecked) {
+        // eslint-disable-next-line playwright/no-force-option
+        await langInput.setChecked(false, { force: true });
+      }
+    })
+  );
 };
 
 export const fillKieliversiotSection = (page: Page) =>

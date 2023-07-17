@@ -33,12 +33,14 @@ type UseValintakokeentyyppiKoodistoProps = {
   koulutuskoodit: Array<string>;
   hakutapa: string;
   haunkohdejoukko: string;
+  osaamisalat: Array<string>;
 };
 
 export const useValintakokeentyyppiKoodisto = ({
   koulutuskoodit,
   hakutapa,
   haunkohdejoukko,
+  osaamisalat,
 }: UseValintakokeentyyppiKoodistoProps) => {
   return useApiQuery(
     GET_VALINTAKOKEENTYYPPI_KOODISTO_QUERY_KEY,
@@ -47,6 +49,7 @@ export const useValintakokeentyyppiKoodisto = ({
       koulutuskoodit,
       hakutapakoodi: hakutapa,
       haunkohdejoukkokoodi: haunkohdejoukko,
+      osaamisalat,
     },
     {
       enabled:

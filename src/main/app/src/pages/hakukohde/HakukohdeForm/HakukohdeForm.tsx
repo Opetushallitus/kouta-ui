@@ -187,6 +187,7 @@ export const HakukohdeForm = ({
         languages={languages}
         haku={haku}
         koulutuskoodit={toteutus?.koulutuksetKoodiUri}
+        osaamisalat={toteutus?.metadata?.osaamisalat?.map(oa => oa.koodiUri)}
         Component={HakukohteenValintakokeetSection}
       />
 

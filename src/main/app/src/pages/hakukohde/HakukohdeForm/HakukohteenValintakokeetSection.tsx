@@ -23,6 +23,7 @@ export const HakukohteenValintakokeetSection = ({
   language,
   haku,
   koulutuskoodit,
+  osaamisalat,
 }) => {
   const { t } = useTranslation();
   const valintaperusteOid = useFieldValue(
@@ -90,6 +91,7 @@ export const HakukohteenValintakokeetSection = ({
         t={t}
         haku={haku}
         koulutuskoodit={koulutuskoodit}
+        osaamisalat={osaamisalat}
       />
     </>
   );

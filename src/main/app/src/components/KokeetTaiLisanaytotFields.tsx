@@ -28,12 +28,14 @@ export const KoeTaiLisanayttoFields = ({
   removeSelf,
   haku,
   koulutuskoodit = [],
+  osaamisalat = [],
 }) => {
   const { t } = useTranslation();
   const { options } = useValintakokeentyyppiKoodistoOptions({
     koulutuskoodit,
     hakutapa: haku.hakutapaKoodiUri,
     haunkohdejoukko: haku.kohdejoukkoKoodiUri,
+    osaamisalat,
   });
 
   const liittyyEnnakkovalmistautumista = useFieldValue(
@@ -149,6 +151,7 @@ export const KokeetTaiLisanaytotFields = ({
   readonlyAmount = 0,
   haku,
   koulutuskoodit = [],
+  osaamisalat = [],
 }) => {
   return (
     <div {...getTestIdProps('kokeetTaiLisanaytot')}>
@@ -167,6 +170,7 @@ export const KokeetTaiLisanaytotFields = ({
             removeSelf={() => fields.remove(index)}
             haku={haku}
             koulutuskoodit={koulutuskoodit}
+            osaamisalat={osaamisalat}
           />
         )}
       </FieldArrayList>

@@ -95,6 +95,7 @@ type UseValintakokeentyyppiKoodistoOptionsProps = {
   koulutuskoodit: Array<string>;
   hakutapa: string;
   haunkohdejoukko: string;
+  osaamisalat: Array<string>;
   language?: LanguageCode;
   sortFn?: (unknown) => SelectOptions;
 };
@@ -103,6 +104,7 @@ export const useValintakokeentyyppiKoodistoOptions = ({
   koulutuskoodit,
   hakutapa,
   haunkohdejoukko,
+  osaamisalat,
   language,
   sortFn,
 }: UseValintakokeentyyppiKoodistoOptionsProps) => {
@@ -110,6 +112,7 @@ export const useValintakokeentyyppiKoodistoOptions = ({
     koulutuskoodit,
     haunkohdejoukko,
     hakutapa,
+    osaamisalat,
   });
 
   const options = useKoodistoDataOptions({

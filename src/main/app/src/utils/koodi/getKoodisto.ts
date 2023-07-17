@@ -32,6 +32,7 @@ type GetValintakokeentyyppiKoodistoProps = {
   koulutuskoodit: Array<string>;
   hakutapakoodi: string;
   haunkohdejoukkokoodi: string;
+  osaamisalat: Array<string>;
   apiUrls: any;
 };
 
@@ -41,19 +42,27 @@ export const getValintakokeentyyppiKoodisto = async ({
   koulutuskoodit,
   hakutapakoodi,
   haunkohdejoukkokoodi,
+  osaamisalat,
 }: GetValintakokeentyyppiKoodistoProps) => {
   const koulutuskoodiQueryParams = koulutuskoodit
     .map(kk => `koulutuskoodi=${encodeURIComponent(kk)}`)
+    .join('&');
+  const osaamisalatkoodiQueryParams = osaamisalat
+    .map(kk => `osaamisalakoodi=${encodeURIComponent(kk)}`)
     .join('&');
   const koulutuskoodiQuery =
     koulutuskoodit && koulutuskoodit.length > 0
       ? `&${koulutuskoodiQueryParams}`
       : '';
+  const osaamisalakoodiQuery =
+    osaamisalat && osaamisalat.length > 0
+      ? `&${osaamisalatkoodiQueryParams}`
+      : '';
   const endpoint = `${apiUrls.url(
     'kouta-backend.koodisto-valintakokeentyypit',
     hakutapakoodi,
     haunkohdejoukkokoodi
-  )}${koulutuskoodiQuery}`;
+  )}${koulutuskoodiQuery}${osaamisalakoodiQuery}`;
   const { data } = await httpClient.get(endpoint);
   return data;
 };

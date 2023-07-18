@@ -60,8 +60,8 @@ export const getValintakokeentyyppiKoodisto = async ({
       : '';
   const endpoint = `${apiUrls.url(
     'kouta-backend.koodisto-valintakokeentyypit',
-    hakutapakoodi,
-    haunkohdejoukkokoodi
+    hakutapakoodi || '',
+    haunkohdejoukkokoodi || ''
   )}${koulutuskoodiQuery}${osaamisalakoodiQuery}`;
   const { data } = await httpClient.get(endpoint);
   return data;

@@ -89,7 +89,8 @@ export const HakukohteenValintakokeetSection = ({
         component={KokeetTaiLisanaytotFields}
         language={language}
         t={t}
-        haku={haku}
+        hakutapa={haku?.hakutapa}
+        haunkohdejoukko={haku?.haunkohdejoukko}
         koulutuskoodit={koulutuskoodit}
         osaamisalat={osaamisalat}
       />

@@ -31,8 +31,8 @@ export const useKoodisto = ({
 
 type UseValintakokeentyyppiKoodistoProps = {
   koulutuskoodit: Array<string>;
-  hakutapa: string;
-  haunkohdejoukko: string;
+  hakutapa?: string;
+  haunkohdejoukko?: string;
   osaamisalat: Array<string>;
 };
 
@@ -42,20 +42,19 @@ export const useValintakokeentyyppiKoodisto = ({
   haunkohdejoukko,
   osaamisalat,
 }: UseValintakokeentyyppiKoodistoProps) => {
+  const params = {
+    koulutuskoodit,
+    hakutapakoodi: hakutapa,
+    haunkohdejoukkokoodi: haunkohdejoukko,
+    osaamisalat,
+  };
+
   return useApiQuery(
     GET_VALINTAKOKEENTYYPPI_KOODISTO_QUERY_KEY,
     getValintakokeentyyppiKoodisto,
+    params,
     {
-      koulutuskoodit,
-      hakutapakoodi: hakutapa,
-      haunkohdejoukkokoodi: haunkohdejoukko,
-      osaamisalat,
-    },
-    {
-      enabled:
-        koulutuskoodit.length > 0 &&
-        Boolean(hakutapa) &&
-        Boolean(haunkohdejoukko),
+      enabled: true,
       ...LONG_CACHE_QUERY_OPTIONS,
     }
   );

@@ -26,15 +26,16 @@ export const KoeTaiLisanayttoFields = ({
   field,
   language,
   removeSelf,
-  haku,
+  hakutapa,
+  haunkohdejoukko,
   koulutuskoodit = [],
   osaamisalat = [],
 }) => {
   const { t } = useTranslation();
   const { options } = useValintakokeentyyppiKoodistoOptions({
     koulutuskoodit,
-    hakutapa: haku.hakutapaKoodiUri,
-    haunkohdejoukko: haku.kohdejoukkoKoodiUri,
+    hakutapa,
+    haunkohdejoukko,
     osaamisalat,
   });
 
@@ -149,7 +150,8 @@ export const KokeetTaiLisanaytotFields = ({
   t,
   meta,
   readonlyAmount = 0,
-  haku,
+  hakutapa = null,
+  haunkohdejoukko = null,
   koulutuskoodit = [],
   osaamisalat = [],
 }) => {
@@ -168,7 +170,8 @@ export const KokeetTaiLisanaytotFields = ({
             meta={meta}
             index={index + 1 + readonlyAmount}
             removeSelf={() => fields.remove(index)}
-            haku={haku}
+            hakutapa={hakutapa}
+            haunkohdejoukko={haunkohdejoukko}
             koulutuskoodit={koulutuskoodit}
             osaamisalat={osaamisalat}
           />

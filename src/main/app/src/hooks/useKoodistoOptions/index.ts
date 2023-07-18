@@ -93,8 +93,8 @@ export const useKoodistoOptions = ({
 
 type UseValintakokeentyyppiKoodistoOptionsProps = {
   koulutuskoodit: Array<string>;
-  hakutapa: string;
-  haunkohdejoukko: string;
+  hakutapa?: string;
+  haunkohdejoukko?: string;
   osaamisalat: Array<string>;
   language?: LanguageCode;
   sortFn?: (unknown) => SelectOptions;

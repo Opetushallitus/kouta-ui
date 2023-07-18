@@ -10,7 +10,12 @@ import { getTestIdProps } from '#/src/utils';
 
 import { KokeetTaiLisanaytotFields } from './KokeetTaiLisanaytotFields';
 
-export const KokeetTaiLisanaytotSection = ({ name, language }) => {
+export const KokeetTaiLisanaytotSection = ({
+  name,
+  language,
+  hakutapa,
+  haunkohdejoukko,
+}) => {
   const { t } = useTranslation();
   return (
     <>
@@ -25,6 +30,8 @@ export const KokeetTaiLisanaytotSection = ({ name, language }) => {
       <FieldArray
         name={`${name}.kokeetTaiLisanaytot`}
         component={KokeetTaiLisanaytotFields}
+        hakutapa={hakutapa}
+        haunkohdejoukko={haunkohdejoukko}
         language={language}
         t={t}
       />

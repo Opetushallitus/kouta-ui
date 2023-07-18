@@ -29,7 +29,7 @@ export const wrapMutationTest =
 
     // Tallennetaan snapshot tiedostoon ./snapshots/<testitiedosto>/<testin-nimi>.json
     testInfo.snapshotPath = (name: string) =>
-      `${path.dirname(testInfo.file)}/snapshots/${
+      `${path.resolve(testInfo.file, '../..')}/snapshots/${
         split(testInfo.titlePath[0], '.')?.[0]
       }/${deburr(toLower(name))}`;
 

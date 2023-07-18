@@ -15,7 +15,7 @@ import { defineConfig, devices } from '@playwright/test';
 const MAX_WORKERS = 7;
 
 export default defineConfig({
-  testDir: './playwright',
+  testDir: './playwright/tests',
   timeout: process.env.CI ? 20 * 1000 : 60 * 1000,
   expect: {
     timeout: process.env.CI ? 8 * 1000 : 15 * 1000,

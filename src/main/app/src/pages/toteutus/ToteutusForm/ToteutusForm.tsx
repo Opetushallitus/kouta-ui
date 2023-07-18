@@ -134,6 +134,10 @@ const ToteutusForm = ({
     hakukohdeAmount = ' (' + data.totalCount + ')';
   }
 
+  const hasHakukohdeAttached: boolean = data?.totalCount
+    ? Number(data?.totalCount) > 0
+    : false;
+
   return (
     <>
       <HakukohteetModal
@@ -334,6 +338,7 @@ const ToteutusForm = ({
         {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
           koulutustyyppi
         ) &&
+          hasHakukohdeAttached &&
           hakeutumisTaiIlmoittautumistapa === MUU && (
             <FormCollapse
               section="soraKuvaus"

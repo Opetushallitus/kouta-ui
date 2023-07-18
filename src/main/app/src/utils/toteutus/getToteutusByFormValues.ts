@@ -230,7 +230,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
         })
       ),
-      isHakukohteetKaytossa: HTIT.isHakukohteetKaytossa,
+      isHakukohteetKaytossa: HTIT?.isHakukohteetKaytossa,
       hakutermi: HTIT?.hakuTapa,
       hakulomaketyyppi,
       hakulomakeLinkki:

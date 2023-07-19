@@ -143,9 +143,6 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
       );
       await expect(laajuus).toBeDisabled();
       await expect(laajuus).toHaveValue('38 viikkoa');
-      await section
-        .getByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
-        .fill('25');
     } else if (tyyppi === 'kk-opintokokonaisuus') {
       await nimi.fill('toteutuksen nimi');
 
@@ -177,9 +174,6 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
       );
       await expect(laajuus).toBeDisabled();
       await expect(laajuus).toHaveValue('60 osaamispistettä');
-      await section
-        .getByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
-        .fill('25');
     } else if (tyyppi === 'amm-muu') {
       await expect(nimi).toBeEnabled();
       await expect(nimi).toHaveValue('Muut ammatilliset koulutukset');
@@ -190,9 +184,6 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
       await expect(nimi).toHaveValue('Aikuisten perusopetus');
       await expect(laajuus).toBeDisabled();
       await expect(laajuus).toHaveValue('13 opintopistettä');
-      await section
-        .getByRole('textbox', { name: 'toteutuslomake.aloituspaikat' })
-        .fill('25');
     } else if (tyyppi === 'dia') {
       await expect(nimi).toBeEnabled();
       await expect(nimi).toHaveValue(
@@ -249,11 +240,7 @@ const fillNayttamistiedotSection = (
 
 const fillHakeutumisTaiIlmoittautumisTapaSection = (page: Page) =>
   withinSection(page, 'hakeutumisTaiIlmoittautumistapa', async section => {
-    await section
-      .getByRole('button', {
-        name: 'toteutuslomake.hakuTapa.hakeutuminen',
-      })
-      .click();
+    await section.getByText('yleiset.ei').click(); // TODO tee fiksummin
 
     await section
       .getByRole('button', {
@@ -294,6 +281,20 @@ const fillHakeutumisTaiIlmoittautumisTapaSection = (page: Page) =>
       date: '01.09.2050',
       time: '00:00',
     });
+
+    await section
+      .getByRole('textbox', {
+        name: 'toteutuslomake.aloituspaikat',
+      })
+      .fill('25');
+
+    await typeToEditor(
+      getFieldWrapperByName(
+        section,
+        'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
+      ),
+      'lisätietoja aloituspaikoista'
+    );
   });
 
 const fillKielivalikoima = async (section: Locator) => {

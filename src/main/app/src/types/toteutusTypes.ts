@@ -126,7 +126,7 @@ export type ToteutusFormValues = {
   toteutusjaksot: Array<Toteutusjakso>;
   teemakuva?: string;
   hakeutumisTaiIlmoittautumistapa: {
-    isHakukohteetKaytossa: boolean;
+    isHakukohteetKaytossa: string;
     hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
     hakuTapa?: Hakeutumistapa;
     linkki?: TranslatedField;

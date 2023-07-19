@@ -85,7 +85,7 @@ Object {
       "sv": "Sv linkki",
     },
     "isAvoinKorkeakoulutus": false,
-    "isHakukohteetKaytossa": false,
+    "isHakukohteetKaytossa": undefined,
     "isTaydennyskoulutus": undefined,
     "isTyovoimakoulutus": undefined,
     "jarjestetaanErityisopetuksena": false,

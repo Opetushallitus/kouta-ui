@@ -11,6 +11,7 @@ import {
   getKieleistyksetFromValues,
   getKielivalinta,
 } from '../pickTranslations';
+import { isHakukohteetKaytossa } from './hakukohteetKaytossaUtil';
 import { isApurahaVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
@@ -230,7 +231,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
         })
       ),
-      isHakukohteetKaytossa: HTIT?.isHakukohteetKaytossa,
+      isHakukohteetKaytossa: isHakukohteetKaytossa(HTIT?.isHakukohteetKaytossa),
       hakutermi: HTIT?.hakuTapa,
       hakulomaketyyppi,
       hakulomakeLinkki:

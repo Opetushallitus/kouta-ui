@@ -86,16 +86,9 @@ test.describe('Edit toteutus', () => {
         page,
         'hakeutumisTaiIlmoittautumistapa',
         async section => {
-          await section
-            .getByRole('button', {
-              name: 'toteutuslomake.hakuTapa.hakeutuminen',
-            })
-            .click();
-          await section.getByText('toteutuslomake.hakemuspalvelu').click();
+          await section.getByText('yleiset.kylla').click(); // TODO tee fiksummin
           await expect(hakukohteetSection).toBeVisible();
-          await section.getByText('toteutuslomake.muuHakulomake').click();
-          await expect(hakukohteetSection).toBeHidden();
-          await section.getByText('toteutuslomake.eiSahkoistaHakua').click();
+          await section.getByText('yleiset.ei').click(); // TODO tee fiksummin
           await expect(hakukohteetSection).toBeHidden();
         }
       );
@@ -164,12 +157,7 @@ test.describe('Edit toteutus', () => {
         page,
         'hakeutumisTaiIlmoittautumistapa',
         async section => {
-          await section
-            .getByRole('button', {
-              name: 'toteutuslomake.hakuTapa.hakeutuminen',
-            })
-            .click();
-          await section.getByText('toteutuslomake.hakemuspalvelu').click();
+          await section.getByText('yleiset.kylla').click(); // TODO tee fiksummin
           await expect(hakukohteetSection).toBeVisible();
         }
       );
@@ -193,12 +181,7 @@ test.describe('Edit toteutus', () => {
         page,
         'hakeutumisTaiIlmoittautumistapa',
         async section => {
-          await section
-            .getByRole('button', {
-              name: 'toteutuslomake.hakuTapa.hakeutuminen',
-            })
-            .click();
-          await section.getByText('toteutuslomake.hakemuspalvelu').click();
+          await section.getByText('yleiset.kylla').click(); // TODO tee fiksummin
           await expect(hakukohteetSection).toBeVisible();
         }
       );

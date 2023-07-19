@@ -38,3 +38,6 @@ src/main/app/*.png
 
 cert.pem
 key.pem
+/test-results/
+/playwright-report/
+/playwright/.cache/

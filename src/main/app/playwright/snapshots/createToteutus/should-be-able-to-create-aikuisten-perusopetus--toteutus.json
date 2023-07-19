@@ -108,8 +108,8 @@
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "ilmoittautumislinkki": {},
-    "aloituspaikat": 25,
     "toteutusjaksot": [],
+    "isHakukohteetKaytossa": false,
     "hakutermi": "hakeutuminen",
     "hakulomaketyyppi": "muu",
     "hakulomakeLinkki": {
@@ -124,6 +124,10 @@
     "hakuaika": {
       "alkaa": "2050-04-01T00:00",
       "paattyy": "2050-09-01T00:00"
+    },
+    "aloituspaikat": 25,
+    "aloituspaikkakuvaus": {
+      "fi": "<p>lisätietoja aloituspaikoista</p>"
     },
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,

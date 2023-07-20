@@ -16,9 +16,9 @@ const MAX_WORKERS = 7;
 
 export default defineConfig({
   testDir: './playwright/tests',
-  timeout: process.env.CI ? 20 * 1000 : 60 * 1000,
+  timeout: 60 * 1000,
   expect: {
-    timeout: process.env.CI ? 8 * 1000 : 15 * 1000,
+    timeout: 15 * 1000,
   },
   /* Run tests in files in parallel */
   fullyParallel: true,

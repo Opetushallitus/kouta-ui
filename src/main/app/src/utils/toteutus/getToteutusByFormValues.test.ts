@@ -11,8 +11,8 @@ import {
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 
+import { parseStringToBoolean } from '..';
 import { sisalto } from '../testFormData';
-import { isHakukohteetKaytossa } from './hakukohteetKaytossaUtil';
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues(
@@ -276,10 +276,10 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
 });
 
 test('isHakukohteetKaytossa is undefined when value not given or invalid', () => {
-  expect(isHakukohteetKaytossa(null)).toBe(undefined);
-  expect(isHakukohteetKaytossa('')).toBe(undefined);
-  expect(isHakukohteetKaytossa('foo')).toBe(undefined);
-  expect(isHakukohteetKaytossa(undefined)).toBe(undefined);
-  expect(isHakukohteetKaytossa('true')).toBe(true);
-  expect(isHakukohteetKaytossa('false')).toBe(false);
+  expect(parseStringToBoolean(null)).toBe(undefined);
+  expect(parseStringToBoolean('')).toBe(undefined);
+  expect(parseStringToBoolean('foo')).toBe(undefined);
+  expect(parseStringToBoolean(undefined)).toBe(undefined);
+  expect(parseStringToBoolean('true')).toBe(true);
+  expect(parseStringToBoolean('false')).toBe(false);
 });

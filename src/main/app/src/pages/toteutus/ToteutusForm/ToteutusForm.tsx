@@ -33,7 +33,7 @@ import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet'
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
-import { hakukohteidenKaytonVoiValita } from '#/src/utils/toteutus/hakukohteetKaytossaUtil';
+import { isHakeutumisTaiIlmoittautumisosioVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
 import { HakeutumisTaiIlmoittautumistapaSection } from './HakeutumisTaiIlmoittautumistapaSection/HakeutumisTaiIlmoittautumistapaSection';
 import HakukohteetModal from './HakukohteetModal';
@@ -114,7 +114,9 @@ const ToteutusForm = ({
     'hakeutumisTaiIlmoittautumistapa.isHakukohteetKaytossa'
   );
 
-  const hakukohteetKaytossa = hakukohteidenKaytonVoiValita(koulutustyyppi)
+  const hakukohteetKaytossa = isHakeutumisTaiIlmoittautumisosioVisible(
+    koulutustyyppi
+  )
     ? hakukohteetKaytossaValittu ===
       HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA
     : true;
@@ -325,20 +327,20 @@ const ToteutusForm = ({
           organisaatioOid={organisaatioOid}
           tarjoajat={toteutus?.tarjoajat}
         />
-        {hakukohteidenKaytonVoiValita(koulutustyyppi) && (
+        {isHakeutumisTaiIlmoittautumisosioVisible(koulutustyyppi) && (
           <FormCollapse
             section="hakeutumisTaiIlmoittautumistapa"
             header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
             Component={HakeutumisTaiIlmoittautumistapaSection}
             languages={languages}
             koulutustyyppi={koulutustyyppi}
+            hasHakukohdeAttached={hasHakukohdeAttached}
             {...getTestIdProps('hakeutumisTaiIlmoittautumistapaSection')}
           />
         )}
         {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
           koulutustyyppi
         ) &&
-          hasHakukohdeAttached &&
           hakeutumisTaiIlmoittautumistapa === MUU && (
             <FormCollapse
               section="soraKuvaus"

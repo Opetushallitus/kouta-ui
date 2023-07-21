@@ -2,7 +2,11 @@ import _fp from 'lodash/fp';
 
 import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
-import { isPartialDate, maybeParseNumber } from '#/src/utils';
+import {
+  isPartialDate,
+  maybeParseNumber,
+  parseStringToBoolean,
+} from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { serializeSisaltoField } from '#/src/utils/form/serializeSisaltoField';
 
@@ -11,7 +15,6 @@ import {
   getKieleistyksetFromValues,
   getKielivalinta,
 } from '../pickTranslations';
-import { isHakukohteetKaytossa } from './hakukohteetKaytossaUtil';
 import { isApurahaVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
@@ -231,7 +234,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
         })
       ),
-      isHakukohteetKaytossa: isHakukohteetKaytossa(HTIT?.isHakukohteetKaytossa),
+      isHakukohteetKaytossa: parseStringToBoolean(HTIT?.isHakukohteetKaytossa),
       hakutermi: HTIT?.hakuTapa,
       hakulomaketyyppi,
       hakulomakeLinkki:

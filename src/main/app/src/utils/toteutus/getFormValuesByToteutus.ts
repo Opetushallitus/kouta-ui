@@ -8,7 +8,11 @@ import {
   LukiolinjatOsio,
   LukioDiplomiValues,
 } from '#/src/types/toteutusTypes';
-import { toSelectValue, toSelectValueList } from '#/src/utils';
+import {
+  parseBooleanToString,
+  toSelectValue,
+  toSelectValueList,
+} from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
 
@@ -286,7 +290,9 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     teemakuva,
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
-      isHakukohteetKaytossa: metadata.isHakukohteetKaytossa,
+      isHakukohteetKaytossa: parseBooleanToString(
+        metadata?.isHakukohteetKaytossa
+      ),
       hakuTapa: metadata?.hakutermi,
       linkki: metadata?.hakulomakeLinkki,
       lisatiedot: _fp.mapValues(

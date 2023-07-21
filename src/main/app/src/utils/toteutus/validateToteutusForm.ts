@@ -25,8 +25,10 @@ import {
   validatePohja,
 } from '#/src/utils/form/formConfigUtils';
 
-import { hakukohteidenKaytonVoiValita } from './hakukohteetKaytossaUtil';
-import { isApurahaVisible } from './toteutusVisibilities';
+import {
+  isApurahaVisible,
+  isHakeutumisTaiIlmoittautumisosioVisible,
+} from './toteutusVisibilities';
 
 const validateDateTimeRange =
   (alkaaFieldName, paattyyFieldName) => (eb, values) => {
@@ -127,7 +129,7 @@ const validateHakeutumisTaiIlmoittautumisTapa = eb => {
       )(eb, values),
     validateIf(
       values?.tila === JULKAISUTILA.JULKAISTU &&
-        hakukohteidenKaytonVoiValita(values.koulutustyyppi) &&
+        isHakeutumisTaiIlmoittautumisosioVisible(values.koulutustyyppi) &&
         values?.hakeutumisTaiIlmoittautumistapa?.isHakukohteetKaytossa ===
           false,
       _fp.flow(

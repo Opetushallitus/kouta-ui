@@ -20,10 +20,7 @@ import { Hakeutumistapa, HakukohteetToteutuksella } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
-import {
-  hakukohteetAinaKaytossaKoulutustyypille,
-  hakukohteidenKaytonVoiValita,
-} from '#/src/utils/toteutus/hakukohteetKaytossaUtil';
+import { isAloituspaikatVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
 import HakeutumisTaiIlmoittautusmistapaFields from './HakeutumisTaiIlmoittautumistapaFields';
 
@@ -53,36 +50,40 @@ const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
   );
 });
 
-const HakukohdeKaytossaFields = createFormFieldComponent(({ name }) => {
-  const { t } = useTranslation();
-  return (
-    <Box
-      mb={2}
-      {...getTestIdProps(`${name}.isHakukohteetKaytossa`)}
-      width="200px"
-    >
-      <Field
-        name={`${name}.isHakukohteetKaytossa`}
-        component={FormFieldRadioGroup}
-        options={[
-          {
-            label: t('yleiset.kylla'),
-            value: HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA,
-          },
-          {
-            label: t('yleiset.ei'),
-            value: HakukohteetToteutuksella.EI_HAKUKOHTEITA,
-          },
-        ]}
-      />
-    </Box>
-  );
-});
+const HakukohdeKaytossaFields = createFormFieldComponent(
+  ({ name, disabled }) => {
+    const { t } = useTranslation();
+    return (
+      <Box
+        mb={2}
+        {...getTestIdProps(`${name}.isHakukohteetKaytossa`)}
+        width="200px"
+      >
+        <Field
+          name={`${name}.isHakukohteetKaytossa`}
+          component={FormFieldRadioGroup}
+          options={[
+            {
+              label: t('yleiset.kylla'),
+              value: HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA,
+            },
+            {
+              label: t('yleiset.ei'),
+              value: HakukohteetToteutuksella.EI_HAKUKOHTEITA,
+            },
+          ]}
+          disabled={disabled}
+        />
+      </Box>
+    );
+  }
+);
 
 export const HakeutumisTaiIlmoittautumistapaSection = ({
   name = 'hakeutumisTaiIlmoittautumistapa',
   language,
   koulutustyyppi,
+  hasHakukohdeAttached,
 }) => {
   const { t } = useTranslation();
   const hakuTapa = useFieldValue(`${name}.hakuTapa`);
@@ -91,28 +92,24 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
     `${name}.isHakukohteetKaytossa`
   );
 
-  const showAloituspaikatJaHakeutumisTapaFields =
+  const showHakeutumisTapaFieldsJaAloituspaikat =
     hakukohteetKaytossaValinta === HakukohteetToteutuksella.EI_HAKUKOHTEITA;
 
   const showHakukohteetKaytossaInfobox =
-    hakukohteetAinaKaytossaKoulutustyypille(koulutustyyppi) ||
     hakukohteetKaytossaValinta ===
-      HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA;
+    HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA;
 
   return (
     <Box flexDirection="column">
-      {hakukohteidenKaytonVoiValita(koulutustyyppi) && (
-        <Box>
-          <Field
-            label={t('toteutuslomake.isHakukohteetKaytossa')}
-            component={HakukohdeKaytossaFields}
-            name={name}
-            required
-          />
-        </Box>
-      )}
-      {console.log(hakukohteetKaytossaValinta)}
-      {console.log(typeof hakukohteetKaytossaValinta)}
+      <Box>
+        <Field
+          label={t('toteutuslomake.isHakukohteetKaytossa')}
+          component={HakukohdeKaytossaFields}
+          name={name}
+          disabled={hasHakukohdeAttached}
+          required
+        />
+      </Box>
       {showHakukohteetKaytossaInfobox && (
         <Box mb={2}>
           <Alert status="info">
@@ -120,7 +117,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
           </Alert>
         </Box>
       )}
-      {showAloituspaikatJaHakeutumisTapaFields && (
+      {showHakeutumisTapaFieldsJaAloituspaikat && (
         <>
           <Box mb="30px">
             <Field
@@ -143,34 +140,36 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
               />
             )}
           </Box>
-          <FieldGroup title={t('toteutuslomake.aloituspaikkatiedot')}>
-            <Box display="flex">
-              <Box
-                flexGrow={0}
-                flexBasis="30%"
-                {...getTestIdProps('aloituspaikat')}
-              >
-                <Field
-                  name={`${name}.aloituspaikat`}
-                  component={FormFieldIntegerInput}
-                  min={0}
-                  label={t('toteutuslomake.aloituspaikat')}
-                  type="number"
-                />
+          {isAloituspaikatVisible(koulutustyyppi) && (
+            <FieldGroup title={t('toteutuslomake.aloituspaikkatiedot')}>
+              <Box display="flex">
+                <Box
+                  flexGrow={0}
+                  flexBasis="30%"
+                  {...getTestIdProps('aloituspaikat')}
+                >
+                  <Field
+                    name={`${name}.aloituspaikat`}
+                    component={FormFieldIntegerInput}
+                    min={0}
+                    label={t('toteutuslomake.aloituspaikat')}
+                    type="number"
+                  />
+                </Box>
+                <Box
+                  flexGrow={1}
+                  paddingLeft={4}
+                  {...getTestIdProps('aloituspaikkakuvaus')}
+                >
+                  <Field
+                    name={`${name}.aloituspaikkakuvaus.${language}`}
+                    component={FormFieldEditor}
+                    label={t('toteutuslomake.aloituspaikkojenKuvaus')}
+                  />
+                </Box>
               </Box>
-              <Box
-                flexGrow={1}
-                paddingLeft={4}
-                {...getTestIdProps('aloituspaikkakuvaus')}
-              >
-                <Field
-                  name={`${name}.aloituspaikkakuvaus.${language}`}
-                  component={FormFieldEditor}
-                  label={t('toteutuslomake.aloituspaikkojenKuvaus')}
-                />
-              </Box>
-            </Box>
-          </FieldGroup>
+            </FieldGroup>
+          )}
         </>
       )}
     </Box>

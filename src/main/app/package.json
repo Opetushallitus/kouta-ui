@@ -73,7 +73,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
-    "@craco/craco": "^6.4.3",
+    "@craco/craco": "^7.1.0",
     "@playwright/test": "^1.36.0",
     "@popperjs/core": "^2.11.5",
     "@storybook/addon-actions": "^6.5.4",
@@ -116,7 +116,7 @@
     "jest-styled-components": "^7.0.8",
     "lint-staged": "^13.0.3",
     "prettier": "^2.5.1",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "react-test-renderer": "^16.14.0",
     "source-map-explorer": "^2.5.2",
     "start-server-and-test": "^1.14.0",

@@ -106,7 +106,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
           label={t('toteutuslomake.isHakukohteetKaytossa')}
           component={HakukohdeKaytossaFields}
           name={name}
-          disabled={hasHakukohdeAttached}
+          //disabled={hasHakukohdeAttached}
           required
         />
       </Box>

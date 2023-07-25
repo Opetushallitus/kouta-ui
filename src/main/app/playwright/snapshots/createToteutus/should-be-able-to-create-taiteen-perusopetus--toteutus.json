@@ -125,10 +125,8 @@
       "alkaa": "2050-04-01T00:00",
       "paattyy": "2050-09-01T00:00"
     },
-    "aloituspaikat": 25,
-    "aloituspaikkakuvaus": {
-      "fi": "<p>lisätietoja aloituspaikoista</p>"
-    },
+    "aloituspaikat": null,
+    "aloituspaikkakuvaus": {},
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,

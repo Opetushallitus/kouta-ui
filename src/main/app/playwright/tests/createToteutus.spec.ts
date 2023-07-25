@@ -238,10 +238,7 @@ const fillNayttamistiedotSection = (
     );
   });
 
-const fillHakeutumisTaiIlmoittautumisTapaSection = (
-  page: Page,
-  { aloituspaikat }: { aloituspaikat: boolean }
-) =>
+const fillHakeutumisTaiIlmoittautumisTapaSection = (page: Page) =>
   withinSection(page, 'hakeutumisTaiIlmoittautumistapa', async section => {
     await section.getByText('yleiset.ei').click(); // TODO tee fiksummin
 
@@ -285,21 +282,19 @@ const fillHakeutumisTaiIlmoittautumisTapaSection = (
       time: '00:00',
     });
 
-    if (aloituspaikat) {
-      await section
-        .getByRole('textbox', {
-          name: 'toteutuslomake.aloituspaikat',
-        })
-        .fill('25');
+    await section
+      .getByRole('textbox', {
+        name: 'toteutuslomake.aloituspaikat',
+      })
+      .fill('25');
 
-      await typeToEditor(
-        getFieldWrapperByName(
-          section,
-          'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
-        ),
-        'lisätietoja aloituspaikoista'
-      );
-    }
+    await typeToEditor(
+      getFieldWrapperByName(
+        section,
+        'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
+      ),
+      'lisätietoja aloituspaikoista'
+    );
   });
 
 const fillKielivalikoima = async (section: Locator) => {
@@ -426,9 +421,7 @@ test.describe('Create toteutus', () => {
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
       await expect(getSection(page, 'soraKuvaus')).toBeHidden();
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, {
-        aloituspaikat: true,
-      });
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -519,9 +512,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, {
-        aloituspaikat: true,
-      });
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -541,9 +532,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, {
-        aloituspaikat: true,
-      });
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -617,9 +606,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, {
-        aloituspaikat: true,
-      });
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -654,9 +641,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, {
-        aloituspaikat: true,
-      });
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -675,9 +660,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, {
-        aloituspaikat: true,
-      });
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -738,9 +721,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, {
-        aloituspaikat: false,
-      });
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);

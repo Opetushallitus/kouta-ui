@@ -20,7 +20,6 @@ import { Hakeutumistapa, HakukohteetToteutuksella } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
-import { isAloituspaikatVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
 import HakeutumisTaiIlmoittautusmistapaFields from './HakeutumisTaiIlmoittautumistapaFields';
 
@@ -140,36 +139,34 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
               />
             )}
           </Box>
-          {isAloituspaikatVisible(koulutustyyppi) && (
-            <FieldGroup title={t('toteutuslomake.aloituspaikkatiedot')}>
-              <Box display="flex">
-                <Box
-                  flexGrow={0}
-                  flexBasis="30%"
-                  {...getTestIdProps('aloituspaikat')}
-                >
-                  <Field
-                    name={`${name}.aloituspaikat`}
-                    component={FormFieldIntegerInput}
-                    min={0}
-                    label={t('toteutuslomake.aloituspaikat')}
-                    type="number"
-                  />
-                </Box>
-                <Box
-                  flexGrow={1}
-                  paddingLeft={4}
-                  {...getTestIdProps('aloituspaikkakuvaus')}
-                >
-                  <Field
-                    name={`${name}.aloituspaikkakuvaus.${language}`}
-                    component={FormFieldEditor}
-                    label={t('toteutuslomake.aloituspaikkojenKuvaus')}
-                  />
-                </Box>
+          <FieldGroup title={t('toteutuslomake.aloituspaikkatiedot')}>
+            <Box display="flex">
+              <Box
+                flexGrow={0}
+                flexBasis="30%"
+                {...getTestIdProps('aloituspaikat')}
+              >
+                <Field
+                  name={`${name}.aloituspaikat`}
+                  component={FormFieldIntegerInput}
+                  min={0}
+                  label={t('toteutuslomake.aloituspaikat')}
+                  type="number"
+                />
               </Box>
-            </FieldGroup>
-          )}
+              <Box
+                flexGrow={1}
+                paddingLeft={4}
+                {...getTestIdProps('aloituspaikkakuvaus')}
+              >
+                <Field
+                  name={`${name}.aloituspaikkakuvaus.${language}`}
+                  component={FormFieldEditor}
+                  label={t('toteutuslomake.aloituspaikkojenKuvaus')}
+                />
+              </Box>
+            </Box>
+          </FieldGroup>
         </>
       )}
     </Box>

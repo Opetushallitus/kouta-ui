@@ -136,9 +136,9 @@ const ToteutusForm = ({
     hakukohdeAmount = ' (' + data.totalCount + ')';
   }
 
-  const hasHakukohdeAttached: boolean = data?.totalCount
-    ? Number(data?.totalCount) > 0
-    : false;
+  // jos toteutusta ei vielä tallennettu, totalcount on koko organisaation hakukohdemäärä ilman toteutusrajausta
+  const hasHakukohdeAttached: boolean =
+    toteutus?.oid && data?.totalCount ? Number(data?.totalCount) > 0 : false;
 
   return (
     <>

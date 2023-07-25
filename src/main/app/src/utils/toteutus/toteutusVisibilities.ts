@@ -19,5 +19,5 @@ const KOULUTUSTYYPIT_WITHOUT_ALOITUSPAIKAT: Array<Koulutustyyppi> = [
 ];
 
 export const isAloituspaikatVisible = (koulutustyyppi: Koulutustyyppi) => {
-  return KOULUTUSTYYPIT_WITHOUT_ALOITUSPAIKAT.includes(koulutustyyppi);
+  return !KOULUTUSTYYPIT_WITHOUT_ALOITUSPAIKAT.includes(koulutustyyppi);
 };

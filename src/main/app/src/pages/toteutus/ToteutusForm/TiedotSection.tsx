@@ -16,7 +16,6 @@ import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
-import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 import { OpintojenLaajuusReadOnlyField } from './OpintojenLaajuusReadOnlyField';

@@ -10,8 +10,8 @@ import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 type Props = {
   koodiUri: string;
-  label: string;
   selectedLanguage: LanguageCode;
+  label?: string;
   prefix?: string;
 };
 
@@ -29,7 +29,7 @@ export const FixedValueKoodiInput = ({
     : getKoodiNimiTranslation(koodi, selectedLanguage);
 
   return (
-    <FormControl label={t(label)} disabled={true}>
+    <FormControl label={label ? t(label) : undefined} disabled={true}>
       <Input
         value={value ?? ''}
         {...getTestIdProps('fixed-value-koodi-input')}

@@ -81,7 +81,6 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
             <Box flexGrow={2} ml={1} data-testid="forcedLaajuusyksikko">
               <FixedValueKoodiInput
                 koodiUri={forcedLaajuusYksikko}
-                label="yleiset.laajuusyksikko"
                 selectedLanguage={selectedLanguage}
               />
             </Box>

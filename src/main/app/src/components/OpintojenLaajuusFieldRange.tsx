@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
+import { Box, FormControl } from '#/src/components/virkailija';
 import { MaaraTyyppi, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
@@ -13,7 +14,6 @@ import {
   FormFieldFloatInput,
   FormFieldRadioGroup,
 } from './formFields';
-import { Box } from './virkailija';
 
 const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
   ({ disabled, section, forcedLaajuusYksikko }) => {

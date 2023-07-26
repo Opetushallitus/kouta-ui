@@ -165,11 +165,11 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
     } else if (tyyppi === 'vapaa-sivistystyo-opistovuosi') {
       await expect(nimi).toBeDisabled();
       await expect(laajuus).toBeDisabled();
-      await expect(laajuus).toHaveValue('vähintään 53 op');
+      await expect(laajuus).toHaveValue('53 opintopistettä');
     } else if (tyyppi === 'vapaa-sivistystyo-muu') {
       await expect(nimi).toBeEnabled();
       await expect(laajuus).toBeDisabled();
-      await expect(laajuus).toHaveValue('vähintään 53 op');
+      await expect(laajuus).toHaveValue('53 opintopistettä');
     } else if (tyyppi === 'telma') {
       await expect(nimi).toBeDisabled();
       await expect(nimi).toHaveValue(

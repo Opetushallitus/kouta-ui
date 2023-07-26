@@ -1,6 +1,9 @@
 import { merge } from 'lodash/fp';
 
-const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
+import { TestiKoulutustyyppi } from '#/playwright/test-types';
+import { OpintojenLaajuusyksikko } from '#/src/constants';
+
+const getBaseFields = (tyyppi: TestiKoulutustyyppi = 'amm') => {
   return {
     oid: '1.2.246.562.13.00000000000000000072',
     koulutustyyppi: tyyppi,
@@ -111,7 +114,8 @@ const getTuvaFields = () => {
   return merge(getBaseFields('tuva'), {
     nimi: { fi: 'Tutkintokoulutukseen valmentava koulutus (TUVA)' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_38',
+      opintojenLaajuusyksikkoKoodiUri: OpintojenLaajuusyksikko.VIIKKO,
+      opintojenLaajuusNumero: 38,
       kuvaus: { fi: 'kuvausteksti' },
     },
   });
@@ -121,7 +125,8 @@ const getTelmaFields = () => {
   return merge(getBaseFields('telma'), {
     nimi: { fi: 'Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_60',
+      opintojenLaajuusyksikkoKoodiUri: OpintojenLaajuusyksikko.OSAAMISPISTE,
+      opintojenLaajuusNumero: 60,
       kuvaus: { fi: 'kuvausteksti' },
     },
   });
@@ -131,7 +136,8 @@ const getVapaaSivistystyoFields = tyyppi => {
   return merge(getBaseFields(tyyppi), {
     nimi: { fi: 'Vapaa Sivistystyö Opistovuosi' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53',
+      opintojenLaajuusyksikkoKoodiUri: OpintojenLaajuusyksikko.OPINTOPISTE,
+      opintojenLaajuusNumero: 53,
       kuvaus: { fi: 'kuvausteksti' },
     },
   });

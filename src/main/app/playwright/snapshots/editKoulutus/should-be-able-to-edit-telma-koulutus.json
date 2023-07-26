@@ -28,9 +28,9 @@
     "kuvaus": {
       "fi": "<p>Kuvausta on muokattu</p>"
     },
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60",
-    "opintojenLaajuusyksikkoKoodiUri": null,
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6",
+    "opintojenLaajuusNumero": 60,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "tutkintonimikeKoodiUrit": [],

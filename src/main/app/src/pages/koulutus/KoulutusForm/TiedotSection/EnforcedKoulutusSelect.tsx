@@ -1,7 +1,7 @@
-import FormControl from '@opetushallitus/virkailija-ui-components/FormControl';
 import { useTranslation } from 'react-i18next';
 
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
+import { FormControl } from '#/src/components/virkailija';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import { formatKoodiLabelWithArvo } from '#/src/utils';
 

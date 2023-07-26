@@ -3,11 +3,10 @@ import React from 'react';
 import Input from '@opetushallitus/virkailija-ui-components/Input';
 import { useTranslation } from 'react-i18next';
 
+import { FormControl } from '#/src/components/virkailija';
 import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
-
-import { FormControl } from './virkailija';
 
 type Props = {
   koodiUri: string;
@@ -31,7 +30,7 @@ export const FixedValueKoodiInput = ({
 
   return (
     <FormControl label={t(label)} disabled={true}>
-      <Input value={value} {...getTestIdProps('fixed-value')} />
+      <Input value={value} {...getTestIdProps('fixed-value-koodi-input')} />
     </FormControl>
   );
 };

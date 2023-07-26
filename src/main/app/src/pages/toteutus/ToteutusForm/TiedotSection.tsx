@@ -118,7 +118,7 @@ export const TuvaTiedotSection = ({
       <LaajuusJaAloituspaikat
         name={name}
         koulutus={koulutus}
-        laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
+        laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.VIIKKO}
       />
       <Field
         name={`${name}.jarjestetaanErityisopetuksena`}

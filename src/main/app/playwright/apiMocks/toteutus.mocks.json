@@ -12564,6 +12564,58 @@
               "kieli": "SV"
             }
           ]
+        },
+        {
+          "koodiUri":"opintojenlaajuusyksikko_8",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuusyksikko_8",
+          "version":1,
+          "versio":1,
+          "koodisto":{
+            "koodistoUri":"opintojenlaajuusyksikko",
+            "organisaatioOid":"1.2.246.562.10.00000000001",
+            "koodistoVersios":[1]
+          },
+          "koodiArvo":"8",
+          "paivitysPvm":"2022-04-22",
+          "paivittajaOid":null,
+          "voimassaAlkuPvm":"2021-07-06",
+          "voimassaLoppuPvm":null,
+          "tila":"LUONNOS",
+          "metadata":[
+            {
+              "nimi":"veckor",
+              "kuvaus":"",
+              "lyhytNimi":"v",
+              "kayttoohje":"",
+              "kasite":"",
+              "sisaltaaMerkityksen":"",
+              "eiSisallaMerkitysta":"",
+              "huomioitavaKoodi":"",
+              "sisaltaaKoodiston":"",
+              "kieli":"SV"},
+            {
+              "nimi":"viikkoa",
+              "kuvaus":"Tuva laajuusyksikkö",
+              "lyhytNimi":"vk",
+              "kayttoohje":"",
+              "kasite":"",
+              "sisaltaaMerkityksen":"",
+              "eiSisallaMerkitysta":"",
+              "huomioitavaKoodi":"",
+              "sisaltaaKoodiston":"",
+              "kieli":"FI"},
+            {
+              "nimi":"weeks",
+              "kuvaus":"",
+              "lyhytNimi":"w",
+              "kayttoohje":"",
+              "kasite":"",
+              "sisaltaaMerkityksen":"",
+              "eiSisallaMerkitysta":"",
+              "huomioitavaKoodi":"",
+              "sisaltaaKoodiston":"",
+              "kieli":"EN"}
+          ]
         }
       ],
       "status": 200

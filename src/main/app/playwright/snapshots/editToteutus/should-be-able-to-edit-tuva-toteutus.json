@@ -56,8 +56,8 @@
       "fi": "<p>kuvausteksti</p>"
     },
     "tyyppi": "tuva",
-    "opintojenLaajuusyksikkoKoodiUri": null,
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_8",
+    "opintojenLaajuusNumero": 38,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "ilmoittautumislinkki": {},

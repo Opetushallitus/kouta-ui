@@ -24,9 +24,6 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
         { value: 'koulutus_371101#1' },
         { value: 'koulutus_201000#1' },
       ],
-      opintojenLaajuus: {
-        value: 'laajuus_1#1',
-      },
       tutkintonimike: [{ value: 'nimike_1#1' }, { value: 'nimike_2#1' }],
       koulutusalat: [
         { value: 'koulutusala_1#1' },
@@ -87,9 +84,6 @@ test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillin
         value: 'koulutuskoodi_1#1',
       },
       korkeakoulutukset: [],
-      opintojenLaajuus: {
-        value: 'laajuus_1#1',
-      },
       tutkintonimike: [{ value: 'nimike_1#1' }, { value: 'nimike_2#1' }],
       koulutusalat: [
         { value: 'koulutusala_1#1' },

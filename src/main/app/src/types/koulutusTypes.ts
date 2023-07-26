@@ -1,4 +1,5 @@
-import { EditorState } from '#/src/components/Editor/Editor';
+import { EditorState } from 'lexical';
+
 import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 
 export type TutkinnonOsa = {
@@ -12,7 +13,6 @@ export type InformationSectionValues = {
   eperuste?: SelectOption;
   koulutus: SelectOption;
   korkeakoulutukset: SelectOptions;
-  opintojenLaajuus?: SelectOption;
   opintojenLaajuusyksikko?: SelectOption;
   opintojenLaajuusNumero?: string;
   opintojenLaajuusNumeroMin?: string;

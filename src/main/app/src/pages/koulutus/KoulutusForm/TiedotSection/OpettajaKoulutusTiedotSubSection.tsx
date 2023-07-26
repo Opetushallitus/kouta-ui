@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
 import KoulutusField from '#/src/components/KoulutusField';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box, FormControl, Input } from '#/src/components/virkailija';
@@ -12,8 +13,6 @@ import {
   YO_OPETTAJA_KOULUTUS_KOODIURI,
 } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import useKoodi from '#/src/hooks/useKoodi';
-import { getOpintojenLaajuusTranslation } from '#/src/utils/getOpintojenLaajuusTranslation';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
@@ -28,15 +27,6 @@ export const OpettajaKoulutusTiedotSubSection = ({
 }) => {
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
-
-  // !!!!Jatkossa opintojenlaajuus -koodistoa ei enää tule käyttää laajuuden määrittämiseen!!!!!
-  // Sen sijaan tulee käyttää opintojenlaajuusyksikko -koodistoa yksikön määrittämiseen + erillistä numeroarvoa varsinaisen laajuuden määritykseen
-  const { koodi: laajuusKoodi } = useKoodi('opintojenlaajuus_60');
-  const { koodi: laajuusyksikko } = useKoodi(
-    OpintojenLaajuusyksikko.OPINTOPISTE
-  );
-  const laajuusKoodiMetadata = laajuusKoodi?.metadata;
-  const laajuusyksikkoMetadata = laajuusyksikko?.metadata;
 
   useNimiFromKoulutusKoodi({
     nimiFieldName: `${name}.nimi`,
@@ -64,20 +54,12 @@ export const OpettajaKoulutusTiedotSubSection = ({
         />
       )}
       <Box maxWidth="300px" mb={2}>
-        <FormControl
+        <FixedValueKoodiInput
+          koodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
+          selectedLanguage={selectedLanguage}
+          prefix={'60'}
           label={t('koulutuslomake.valitseOpintojenLaajuus')}
-          disabled={true}
-        >
-          <Input
-            value={
-              getOpintojenLaajuusTranslation(
-                laajuusKoodiMetadata,
-                laajuusyksikkoMetadata,
-                selectedLanguage
-              ) || ''
-            }
-          />
-        </FormControl>
+        />
       </Box>
       <Box maxWidth="300px" mb={2}>
         <FormControl

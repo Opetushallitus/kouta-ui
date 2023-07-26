@@ -28,9 +28,8 @@
     "kuvaus": {
       "fi": "<p>Fi kuvaus</p>"
     },
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_60#1",
     "opintojenLaajuusyksikkoKoodiUri": null,
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumero": 60,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "tutkintonimikeKoodiUrit": [],

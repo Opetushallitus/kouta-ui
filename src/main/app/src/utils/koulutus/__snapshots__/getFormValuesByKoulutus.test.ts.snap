@@ -39,9 +39,6 @@ Object {
     "opinnonTyyppi": Object {
       "value": undefined,
     },
-    "opintojenLaajuus": Object {
-      "value": "laajuus_1#1",
-    },
     "opintojenLaajuusNumero": "",
     "opintojenLaajuusNumeroMax": undefined,
     "opintojenLaajuusNumeroMin": undefined,
@@ -137,9 +134,6 @@ Object {
     "opinnonTyyppi": Object {
       "value": undefined,
     },
-    "opintojenLaajuus": Object {
-      "value": "",
-    },
     "opintojenLaajuusNumero": "",
     "opintojenLaajuusNumeroMax": 10,
     "opintojenLaajuusNumeroMin": 5,
@@ -216,9 +210,6 @@ Object {
     },
     "opinnonTyyppi": Object {
       "value": undefined,
-    },
-    "opintojenLaajuus": Object {
-      "value": "laajuus_1#1",
     },
     "opintojenLaajuusNumero": "",
     "opintojenLaajuusNumeroMax": undefined,

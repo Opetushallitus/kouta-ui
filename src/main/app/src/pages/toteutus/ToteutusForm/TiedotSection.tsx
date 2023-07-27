@@ -52,7 +52,7 @@ const LaajuusJaAloituspaikat = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
         <FixedValueKoodiInput
           selectedLanguage={selectedLanguage}
           koodiUri={laajuusyksikkoKoodiUri}
-          label="toteutuslomake.laajuus"
+          label={t('toteutuslomake.laajuus')}
           prefix={koulutus?.metadata?.opintojenLaajuusNumero}
         />
       </Box>
@@ -197,6 +197,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
   name,
 }: ToteutusTiedotSectionProps) => {
   useNimiFromKoulutus({ koulutus, name });
+  const { t } = useTranslation();
 
   return (
     <VerticalBox gap={2}>
@@ -204,7 +205,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
       <FixedValueKoodiInput
         selectedLanguage={language}
         koodiUri={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
-        label="toteutuslomake.laajuus"
+        label={t('toteutuslomake.laajuus')}
         prefix={koulutus?.metadata?.opintojenLaajuusNumero}
       />
       <CommonTiedotFields name={name} />
@@ -218,6 +219,7 @@ export const VapaaSivistystyoMuuTiedotSection = ({
   name,
 }: ToteutusTiedotSectionProps) => {
   useNimiFromKoulutus({ koulutus, name });
+  const { t } = useTranslation();
 
   return (
     <VerticalBox gap={2}>
@@ -225,7 +227,7 @@ export const VapaaSivistystyoMuuTiedotSection = ({
       <FixedValueKoodiInput
         selectedLanguage={language}
         koodiUri={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
-        label="toteutuslomake.laajuus"
+        label={t('toteutuslomake.laajuus')}
         prefix={koulutus?.metadata?.opintojenLaajuusNumero}
       />
       <CommonTiedotFields name={name} />

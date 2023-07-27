@@ -51,7 +51,7 @@ export const OpintojenLaajuusFieldExtended = ({
           <FixedValueKoodiInput
             koodiUri={fixedLaajuusYksikko}
             selectedLanguage={selectedLanguage}
-            label="yleiset.laajuusyksikko"
+            label={t('yleiset.laajuusyksikko')}
           />
         </Box>
       ) : (

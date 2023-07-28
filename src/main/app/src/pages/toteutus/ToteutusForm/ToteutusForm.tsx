@@ -22,7 +22,6 @@ import {
   FormMode,
   ENTITY,
   Koulutustyyppi,
-  HakukohteetToteutuksella,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -117,8 +116,7 @@ const ToteutusForm = ({
   const hakukohteetKaytossa = isHakeutumisTaiIlmoittautumisosioVisible(
     koulutustyyppi
   )
-    ? hakukohteetKaytossaValittu ===
-      HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA
+    ? hakukohteetKaytossaValittu === true
     : true;
 
   const isEBkoulutus = isEB(koulutus?.koulutuksetKoodiUri, koulutustyyppi);

@@ -72,6 +72,9 @@ test.describe('Edit toteutus', () => {
     mutationTest({ page, testInfo }, async () => {
       const tyyppi = 'amm';
       await prepareTest(page, tyyppi);
+      await expect(
+        getSection(page, 'hakeutumisTaiIlmoittautumistapa')
+      ).toBeHidden();
       await expect(getSection(page, 'hakukohteet')).toBeVisible();
       await tallenna(page);
     }));
@@ -81,6 +84,13 @@ test.describe('Edit toteutus', () => {
       const tyyppi = 'amm-tutkinnon-osa';
       const hakukohteetSection = getSection(page, 'hakukohteet');
       await prepareTest(page, tyyppi);
+      await page.route(
+        '**/kouta-backend/search/hakukohteet?*',
+        fixtureJSON({
+          totalCount: 0,
+          result: [],
+        })
+      );
       await fillKieliversiotSection(page);
       await withinSection(
         page,
@@ -100,6 +110,10 @@ test.describe('Edit toteutus', () => {
       const tyyppi = 'yo';
       await prepareTest(page, tyyppi);
       await fillKieliversiotSection(page);
+      await expect(
+        getSection(page, 'hakeutumisTaiIlmoittautumistapa')
+      ).toBeHidden();
+      await expect(getSection(page, 'hakukohteet')).toBeVisible();
       await tallenna(page);
     }));
 
@@ -108,6 +122,9 @@ test.describe('Edit toteutus', () => {
       const tyyppi = 'lk';
       await prepareTest(page, tyyppi);
       await fillKieliversiotSection(page);
+      await expect(
+        getSection(page, 'hakeutumisTaiIlmoittautumistapa')
+      ).toBeHidden();
       await expect(getSection(page, 'hakukohteet')).toBeVisible();
       await tallenna(page);
     }));
@@ -122,6 +139,9 @@ test.describe('Edit toteutus', () => {
         await expect(laajuus).toBeDisabled();
         await expect(laajuus).toHaveValue('38 viikkoa');
       });
+      await expect(
+        getSection(page, 'hakeutumisTaiIlmoittautumistapa')
+      ).toBeHidden();
       await expect(getSection(page, 'hakukohteet')).toBeVisible();
       await tallenna(page);
     }));
@@ -136,6 +156,9 @@ test.describe('Edit toteutus', () => {
         await expect(laajuus).toBeDisabled();
         await expect(laajuus).toHaveValue('60 osaamispistettä');
       });
+      await expect(
+        getSection(page, 'hakeutumisTaiIlmoittautumistapa')
+      ).toBeHidden();
       await expect(getSection(page, 'hakukohteet')).toBeVisible();
       await tallenna(page);
     }));
@@ -146,6 +169,13 @@ test.describe('Edit toteutus', () => {
     mutationTest({ page, testInfo }, async () => {
       const tyyppi = 'amm-muu';
       await prepareTest(page, tyyppi);
+      await page.route(
+        '**/kouta-backend/search/hakukohteet?*',
+        fixtureJSON({
+          totalCount: 0,
+          result: [],
+        })
+      );
       await fillKieliversiotSection(page);
       await withinSection(page, 'tiedot', async section => {
         const laajuus = section.getByLabel('toteutuslomake.laajuus');
@@ -170,6 +200,13 @@ test.describe('Edit toteutus', () => {
     mutationTest({ page, testInfo }, async () => {
       const tyyppi = 'aikuisten-perusopetus';
       await prepareTest(page, tyyppi);
+      await page.route(
+        '**/kouta-backend/search/hakukohteet?*',
+        fixtureJSON({
+          totalCount: 0,
+          result: [],
+        })
+      );
       await fillKieliversiotSection(page);
       await withinSection(page, 'tiedot', async section => {
         const laajuus = section.getByLabel('toteutuslomake.laajuus');

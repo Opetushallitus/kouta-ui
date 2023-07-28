@@ -3,6 +3,8 @@ import {
   getValuesForSaving,
   isDeepEmptyFormValues,
   formatDateValue,
+  parseBooleanToString,
+  parseStringToBoolean,
 } from '#/src/utils';
 
 const OBJECT_IN_ARRAY = [
@@ -171,4 +173,21 @@ test.each([
   ['2020-01-01', '01.01.2020 00:00'],
 ])('formatDateValue', (dateString, result) => {
   expect(formatDateValue(dateString)).toEqual(result);
+});
+
+test('parseBooleanToString parses null and undefined values to undefined', () => {
+  expect(parseBooleanToString(null)).toBe(undefined);
+  expect(parseBooleanToString(undefined)).toBe(undefined);
+  expect(parseBooleanToString('')).toBe(undefined);
+  expect(parseBooleanToString(true)).toBe('true');
+  expect(parseBooleanToString(false)).toBe('false');
+});
+
+test('parseStringToBoolen is undefined when value not given or invalid', () => {
+  expect(parseStringToBoolean(null)).toBe(undefined);
+  expect(parseStringToBoolean(undefined)).toBe(undefined);
+  expect(parseStringToBoolean('')).toBe(undefined);
+  expect(parseStringToBoolean('foo')).toBe(undefined);
+  expect(parseStringToBoolean('true')).toBe(true);
+  expect(parseStringToBoolean('false')).toBe(false);
 });

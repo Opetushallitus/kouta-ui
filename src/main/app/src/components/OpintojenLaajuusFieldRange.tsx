@@ -16,7 +16,7 @@ import {
 } from './formFields';
 
 const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
-  ({ disabled, section, forcedLaajuusYksikko }) => {
+  ({ disabled, section, fixedLaajuusYksikko }) => {
     const { t } = useTranslation();
     const selectedLanguage = useLanguageTab();
     const laajuusNumeroTyyppi = useFieldValue<MaaraTyyppi>(
@@ -77,10 +77,10 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
               </Box>
             </>
           )}
-          {forcedLaajuusYksikko ? (
-            <Box flexGrow={2} ml={1} data-testid="forcedLaajuusyksikko">
+          {fixedLaajuusYksikko ? (
+            <Box flexGrow={2} ml={1} data-testid="fixedLaajuusyksikko">
               <FixedValueKoodiInput
-                koodiUri={forcedLaajuusYksikko}
+                koodiUri={fixedLaajuusYksikko}
                 selectedLanguage={selectedLanguage}
               />
             </Box>
@@ -106,19 +106,19 @@ type Props = {
   name: string;
   disabled?: boolean;
   required?: boolean;
-  forcedLaajuusYksikko?: string;
+  fixedLaajuusYksikko?: string;
 };
 
 export const OpintojenLaajuusFieldRange = ({
   name,
   disabled,
-  forcedLaajuusYksikko,
+  fixedLaajuusYksikko,
 }: Props) => (
   <Field
     component={OpintojenLaajuusRangeGroupInput}
     name={`${name}.opintojenLaajuusGroup`}
     disabled={disabled}
     section={name}
-    forcedLaajuusYksikko={forcedLaajuusYksikko}
+    fixedLaajuusYksikko={fixedLaajuusYksikko}
   />
 );

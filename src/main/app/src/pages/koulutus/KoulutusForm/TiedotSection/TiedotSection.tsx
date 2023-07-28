@@ -274,7 +274,7 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
       <OpintojenLaajuusFieldRange
         name={name}
         disabled={disabled}
-        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
@@ -447,7 +447,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
       <OpintojenLaajuusFieldRange
         name={name}
         disabled={disabled}
-        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
@@ -487,7 +487,7 @@ export const ErikoistumisKoulutusTiedotSection = ({
       <OpintojenLaajuusFieldRange
         name={name}
         disabled={disabled}
-        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field

@@ -1,6 +1,8 @@
+import { AxiosInstance } from 'axios';
+
 type GetKoodistoProps = {
   koodistoUri: string;
-  httpClient: any;
+  httpClient: AxiosInstance;
   apiUrls: any;
   versio?: number;
 };
@@ -12,7 +14,7 @@ const getKoodisto = async ({
   versio,
 }: GetKoodistoProps) => {
   const koodistoVersio = versio;
-  const { data } = await httpClient.get(
+  const { data } = await httpClient.get<Array<Koodi>>(
     apiUrls.url('koodisto-service.koodi', koodistoUri),
     {
       params: {

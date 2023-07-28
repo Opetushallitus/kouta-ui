@@ -225,7 +225,7 @@ test.describe('Create koulutus', () => {
         await section.getByText('toteutuslomake.yksiArvo').click();
         await section.getByTestId('laajuusMin').locator('input').fill('30');
         await expect(
-          section.getByTestId('forcedLaajuusyksikko').locator('input')
+          section.getByTestId('fixedLaajuusyksikko').locator('input')
         ).toHaveValue('opintopistettä');
         await section
           .getByLabel('koulutuslomake.koulutuksenNimi')
@@ -261,7 +261,7 @@ test.describe('Create koulutus', () => {
         await section.getByTestId('laajuusMin').locator('input').fill('5');
         await section.getByTestId('laajuusMax').locator('input').fill('10');
         await expect(
-          section.getByTestId('forcedLaajuusyksikko').locator('input')
+          section.getByTestId('fixedLaajuusyksikko').locator('input')
         ).toHaveValue('opintopistettä');
         await section
           .getByLabel('koulutuslomake.koulutuksenNimi')
@@ -640,7 +640,7 @@ test.describe('Create koulutus', () => {
         await section.getByTestId('laajuusMin').locator('input').fill('5');
         await section.getByTestId('laajuusMax').locator('input').fill('10');
         await expect(
-          section.getByTestId('forcedLaajuusyksikko').locator('input')
+          section.getByTestId('fixedLaajuusyksikko').locator('input')
         ).toHaveValue('opintopistettä');
         await fillAsyncSelect(
           getSelectByLabel(section, 'koulutuslomake.valitseKoulutusalat'),

@@ -80,7 +80,7 @@ export const useKoodistoOptions = ({
   const { data, ...rest } = useKoodisto({ koodisto, versio });
 
   const options = useKoodistoDataOptions({
-    koodistoData: data as Array<Koodi>,
+    koodistoData: data ?? [],
     language,
     sortFn,
   });

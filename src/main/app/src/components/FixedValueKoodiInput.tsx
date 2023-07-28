@@ -27,7 +27,7 @@ export const FixedValueKoodiInput = ({
     : getKoodiNimiTranslation(koodi, selectedLanguage);
 
   return (
-    <FormControl label={label ? label : undefined} disabled={true}>
+    <FormControl label={label} disabled={true}>
       <Input
         value={value ?? ''}
         {...getTestIdProps('fixed-value-koodi-input')}

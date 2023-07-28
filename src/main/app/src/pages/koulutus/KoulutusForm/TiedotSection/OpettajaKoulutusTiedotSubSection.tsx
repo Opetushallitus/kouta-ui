@@ -57,7 +57,7 @@ export const OpettajaKoulutusTiedotSubSection = ({
         <FixedValueKoodiInput
           koodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
           selectedLanguage={selectedLanguage}
-          prefix={'60'}
+          prefix="60"
           label={t('koulutuslomake.valitseOpintojenLaajuus')}
         />
       </Box>

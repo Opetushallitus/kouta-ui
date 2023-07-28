@@ -30,7 +30,6 @@ export const FixedValueKoodiInput = ({
     <FormControl label={label} disabled={true}>
       <Input
         value={value ?? ''}
-        {...getTestIdProps('fixed-value-koodi-input')}
       />
     </FormControl>
   );

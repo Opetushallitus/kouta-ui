@@ -594,6 +594,7 @@
     "isHakukohteetKaytossa": "Valitse käytetäänkö toteutuksella hakukohteita",
     "hakukohteetKaytossaValittu": "Hakukohteet ovat käytössä toteutuksella",
     "hakukohteetKaytossaInfo": "Toteutuksella on käytössä hakukohteet, ja hakeutumis- sekä aloituspaikkatiedot tallennetaan hakukohteille",
+    "hakukohteetKaytossaJaLiitettynaInfo": "Toteutukseen on liitetty hakukohteita, ja hakukohteet käytössä -valinnan muuttaminen on sen vuoksi estetty. Hakeutumis- sekä aloituspaikkatiedot tallennetaan hakukohteille",
     "valitseHakutapa": "Valitse oppijalle näkyvä hakutapa",
     "hakuTapa": {
       "hakeutuminen": "Hakeutuminen",

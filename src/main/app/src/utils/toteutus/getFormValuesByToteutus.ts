@@ -1,18 +1,14 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
-import { MaaraTyyppi, ApurahaYksikko } from '#/src/constants';
+import { MaaraTyyppi, ApurahaYksikko, HAKULOMAKETYYPPI } from '#/src/constants';
 import {
   ToteutusFormValues,
   MaksullisuusTyyppi,
   LukiolinjatOsio,
   LukioDiplomiValues,
 } from '#/src/types/toteutusTypes';
-import {
-  parseBooleanToString,
-  toSelectValue,
-  toSelectValueList,
-} from '#/src/utils';
+import { toSelectValue, toSelectValueList } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
 
@@ -64,6 +60,15 @@ const diplomitToFormValues = diplomit => {
   });
 
   return result;
+};
+
+// fallback aiemmin tallennetuille toteutuksille joilta puuttuu isHakukohteetKaytossa-tieto
+export const hakukohteetKaytossaToFormValues = metadata => {
+  return (
+    metadata?.isHakukohteetKaytossa ??
+    (metadata?.hakulomaketyyppi &&
+      metadata?.hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU)
+  );
 };
 
 const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
@@ -290,9 +295,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     teemakuva,
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
-      isHakukohteetKaytossa: parseBooleanToString(
-        metadata?.isHakukohteetKaytossa
-      ),
+      isHakukohteetKaytossa: hakukohteetKaytossaToFormValues(metadata),
       hakuTapa: metadata?.hakutermi,
       linkki: metadata?.hakulomakeLinkki,
       lisatiedot: _fp.mapValues(

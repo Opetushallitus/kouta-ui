@@ -11,17 +11,17 @@ import {
   createFormFieldComponent,
   FormFieldEditor,
   FormFieldIntegerInput,
-  FormFieldRadioGroup,
 } from '#/src/components/formFields';
 import SegmentTab from '#/src/components/SegmentTab';
 import SegmentTabs from '#/src/components/SegmentTabs';
 import { Box, Radio } from '#/src/components/virkailija';
-import { Hakeutumistapa, HakukohteetToteutuksella } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
+import { Hakeutumistapa } from '#/src/constants';
+import { useFieldValue, useSetFieldValue } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 
 import HakeutumisTaiIlmoittautusmistapaFields from './HakeutumisTaiIlmoittautumistapaFields';
+import { HakukohteetKaytossaChoice } from './HakukohteetKaytossaChoice';
 
 export const StyledGrayRadio = styled(Radio)`
   background-color: ${getThemeProp('colors.grayLighten6', transparentize(0.5))};
@@ -49,35 +49,6 @@ const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
   );
 });
 
-const HakukohdeKaytossaFields = createFormFieldComponent(
-  ({ name, disabled }) => {
-    const { t } = useTranslation();
-    return (
-      <Box
-        mb={2}
-        {...getTestIdProps(`${name}.isHakukohteetKaytossa`)}
-        width="200px"
-      >
-        <Field
-          name={`${name}.isHakukohteetKaytossa`}
-          component={FormFieldRadioGroup}
-          options={[
-            {
-              label: t('yleiset.kylla'),
-              value: HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA,
-            },
-            {
-              label: t('yleiset.ei'),
-              value: HakukohteetToteutuksella.EI_HAKUKOHTEITA,
-            },
-          ]}
-          disabled={disabled}
-        />
-      </Box>
-    );
-  }
-);
-
 export const HakeutumisTaiIlmoittautumistapaSection = ({
   name = 'hakeutumisTaiIlmoittautumistapa',
   language,
@@ -91,28 +62,33 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
     `${name}.isHakukohteetKaytossa`
   );
 
-  const showHakeutumisTapaFieldsJaAloituspaikat =
-    hakukohteetKaytossaValinta === HakukohteetToteutuksella.EI_HAKUKOHTEITA;
+  // aiemmin tallennettujen fallback:
+  // jos toteutuksella on kiinnitettynä hakukohteita, asetetaan isHakukohteetKaytossa-valinta arvoon kyllä
+  useSetFieldValue(
+    `${name}.isHakukohteetKaytossa`,
+    true,
+    hakukohteetKaytossaValinta !== true && hasHakukohdeAttached
+  );
 
-  const showHakukohteetKaytossaInfobox =
-    hakukohteetKaytossaValinta ===
-    HakukohteetToteutuksella.HAKUKOHTEET_KAYTOSSA;
+  const showHakeutumisTapaFieldsJaAloituspaikat =
+    hakukohteetKaytossaValinta === false;
+
+  const showHakukohteetKaytossaInfobox = hakukohteetKaytossaValinta === true;
 
   return (
     <Box flexDirection="column">
-      <Box>
-        <Field
-          label={t('toteutuslomake.isHakukohteetKaytossa')}
-          component={HakukohdeKaytossaFields}
-          name={name}
-          //disabled={hasHakukohdeAttached}
-          required
+      <Box mb={2} {...getTestIdProps(`${name}.isHakukohteetKaytossa`)}>
+        <HakukohteetKaytossaChoice
+          name={`${name}.isHakukohteetKaytossa`}
+          disabled={hasHakukohdeAttached}
         />
       </Box>
       {showHakukohteetKaytossaInfobox && (
         <Box mb={2}>
           <Alert status="info">
-            {t('toteutuslomake.hakukohteetKaytossaInfo')}
+            {hasHakukohdeAttached
+              ? t('toteutuslomake.hakukohteetKaytossaJaLiitettynaInfo')
+              : t('toteutuslomake.hakukohteetKaytossaInfo')}
           </Alert>
         </Box>
       )}

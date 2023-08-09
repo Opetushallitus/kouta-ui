@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Globals } from '@react-spring/web';
 import { inspect } from '@xstate/inspect';
 import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
@@ -11,6 +12,11 @@ import App from './pages/App';
 import { createStore } from './state';
 import defaultTheme from './theme';
 import { configure as configureUrls } from './urls';
+import { isPlaywright } from './utils';
+
+Globals.assign({
+  skipAnimation: isPlaywright,
+});
 
 if (import.meta.env.VITE_XSTATE_INSPECTOR) {
   inspect({

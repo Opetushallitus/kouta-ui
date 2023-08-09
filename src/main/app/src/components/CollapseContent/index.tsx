@@ -3,8 +3,6 @@ import { useRef } from 'react';
 import { config, useSpring, animated } from '@react-spring/web';
 import { useMeasure } from 'react-use';
 
-import { isPlaywright } from '#/src/utils';
-
 const collapseConfig = {
   ...config.gentle,
   precision: 0.02,
@@ -19,7 +17,7 @@ export const CollapseContent = ({ open = false, children }) => {
     config: collapseConfig,
     maxHeight: open ? `${height}px` : '0px',
     opacity: open ? 1 : 0,
-    immediate: !initializedRef.current || isPlaywright,
+    immediate: !initializedRef.current,
   });
 
   // Ei animoida ensimmäisellä kerralla

@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { AnyActorRef, interpret } from 'xstate';
 import { waitFor } from 'xstate/lib/waitFor';
 
@@ -10,16 +11,15 @@ const expectEventualState = async (actor: AnyActorRef, stateMatch: string) => {
   return expectedState;
 };
 
-const runMutationMock = jest.fn();
-
-const mockBatchOpsMachine = BatchOpsMachine.withConfig({
-  services: {
-    runMutation: runMutationMock,
-  },
-});
+const mockBatchOpsMachine = (runMutationMock = vi.fn()) =>
+  BatchOpsMachine.withConfig({
+    services: {
+      runMutation: runMutationMock,
+    },
+  });
 
 test('Should switch to "confirming"-state on START-event with tila and one matching entity', () => {
-  const batchOpsActor = interpret(mockBatchOpsMachine).start();
+  const batchOpsActor = interpret(mockBatchOpsMachine()).start();
 
   batchOpsActor.send({
     type: 'START',
@@ -31,7 +31,7 @@ test('Should switch to "confirming"-state on START-event with tila and one match
 });
 
 test('Should select all entities after entering "confirming"-state', () => {
-  const batchOpsActor = interpret(mockBatchOpsMachine).start();
+  const batchOpsActor = interpret(mockBatchOpsMachine()).start();
 
   let selectionRef = batchOpsActor.getSnapshot().context.selectionRef;
 
@@ -53,7 +53,7 @@ test('Should select all entities after entering "confirming"-state', () => {
 });
 
 test('Should not switch to "confirming-state" on START when all selected entities have requested "tila"', () => {
-  const batchOpsActor = interpret(mockBatchOpsMachine).start();
+  const batchOpsActor = interpret(mockBatchOpsMachine()).start();
 
   batchOpsActor.send({
     type: 'START',
@@ -67,7 +67,7 @@ test('Should not switch to "confirming-state" on START when all selected entitie
 });
 
 test('Should return back to initial state and reset context on CANCEL', async () => {
-  const batchOpsActor = interpret(mockBatchOpsMachine).start();
+  const batchOpsActor = interpret(mockBatchOpsMachine()).start();
 
   batchOpsActor.send({
     type: 'START',
@@ -103,7 +103,8 @@ test('Should return back to initial state and reset context on CANCEL', async ()
 });
 
 test('Should call runMutation-service, set context.result and return to initial-state on CLOSE', async () => {
-  const batchOpsActor = interpret(mockBatchOpsMachine).start();
+  const runMutationMock = vi.fn();
+  const batchOpsActor = interpret(mockBatchOpsMachine(runMutationMock)).start();
 
   runMutationMock.mockResolvedValueOnce([{ oid: '12345', status: 'success' }]);
 
@@ -142,7 +143,8 @@ test('Should call runMutation-service, set context.result and return to initial-
 });
 
 test('Should enter result.error when runMutation rejects and return to initial on CLOSE', async () => {
-  const batchOpsActor = interpret(mockBatchOpsMachine).start();
+  const runMutationMock = vi.fn();
+  const batchOpsActor = interpret(mockBatchOpsMachine(runMutationMock)).start();
 
   runMutationMock.mockRejectedValueOnce({});
 

@@ -4,12 +4,12 @@ import _ from 'lodash';
 import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 
-import CollapseContent from '#/src/components/CollapseContent';
+import { CollapseContent } from '#/src/components/CollapseContent';
 import Heading from '#/src/components/Heading';
 import { Box, Icon } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
 
-const SectionInnerCollapseHeader = styled.div`
+const SectionInnerCollapseHeader = styled.div<{ isOpen: boolean }>`
   display: flex;
   transition-property:
     color,

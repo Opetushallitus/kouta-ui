@@ -1,51 +1,51 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getHakukohdeByFormValues does not return translations for non-selected language 1`] = `
-Object {
+{
   "esikatselu": false,
   "externalId": "ext1",
-  "hakuajat": Array [
-    Object {
+  "hakuajat": [
+    {
       "alkaa": "2019-04-17T05:52",
       "paattyy": "2019-04-22T05:52",
     },
-    Object {
+    {
       "alkaa": "2019-05-17T05:52",
       "paattyy": "2019-05-18T05:52",
     },
   ],
   "hakukohdeKoodiUri": null,
   "hakulomakeAtaruId": "12345",
-  "hakulomakeKuvaus": Object {},
-  "hakulomakeLinkki": Object {},
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "2.2.2.2.2",
   "kaytetaanHaunAikataulua": false,
   "kaytetaanHaunHakulomaketta": false,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
-  "liitteet": Array [
-    Object {
-      "kuvaus": Object {
+  "liitteet": [
+    {
+      "kuvaus": {
         "fi": "<p>Fi kuvaus</p>",
         "sv": "<p>Sv kuvaus</p>",
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
       "toimitusaika": "2019-08-17T05:52",
-      "toimitusosoite": Object {
-        "osoite": Object {
-          "osoite": Object {
+      "toimitusosoite": {
+        "osoite": {
+          "osoite": {
             "fi": "Fi osoite",
             "sv": "Sv osoite",
           },
           "postinumeroKoodiUri": "posti_1#1",
         },
-        "sahkoposti": Object {
+        "sahkoposti": {
           "fi": "Fi sahkoposti",
           "sv": "Sv sahkoposti",
         },
@@ -60,25 +60,25 @@ Object {
   "liitteidenToimitusaika": null,
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
-  "metadata": Object {
-    "aloituspaikat": Object {
+  "metadata": {
+    "aloituspaikat": {
       "ensikertalaisille": 29,
-      "kuvaus": Object {
+      "kuvaus": {
         "fi": "<p>aloituspaikan kuvaus fi</p>",
         "sv": "<p>aloituspaikan kuvaus sv</p>",
       },
       "lukumaara": 45,
     },
-    "hakukohteenLinja": Object {
+    "hakukohteenLinja": {
       "alinHyvaksyttyKeskiarvo": 6.5,
       "linja": "lukiopainotukset_0104#1",
-      "lisatietoa": Object {
+      "lisatietoa": {
         "fi": "<p>Fi lisatietoa</p>",
         "sv": "<p>Sv lisatietoa</p>",
       },
-      "painotetutArvosanat": Array [
-        Object {
-          "koodiUrit": Object {
+      "painotetutArvosanat": [
+        {
+          "koodiUrit": {
             "oppiaine": "painotettavatoppiaineetlukiossa_a1en#1",
           },
           "painokerroin": 1.2,
@@ -87,45 +87,45 @@ Object {
     },
     "jarjestaaUrheilijanAmmKoulutusta": false,
     "kaytetaanHaunAlkamiskautta": false,
-    "koulutuksenAlkamiskausi": Object {
+    "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
-    "kynnysehto": Object {
+    "kynnysehto": {
       "fi": "<p>Hakukohteen kynnysehto - fi</p>",
       "sv": "<p>Hakukohteen kynnysehto - sv</p>",
     },
-    "uudenOpiskelijanUrl": Object {
+    "uudenOpiskelijanUrl": {
       "fi": "https://opiskelu.fi",
       "sv": "https://opiskelu.se",
     },
-    "valintakokeidenYleiskuvaus": Object {
+    "valintakokeidenYleiskuvaus": {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
-    "valintaperusteenValintakokeidenLisatilaisuudet": Array [
-      Object {
+    "valintaperusteenValintakokeidenLisatilaisuudet": [
+      {
         "id": "123-123",
-        "tilaisuudet": Array [
-          Object {
-            "aika": Object {
+        "tilaisuudet": [
+          {
+            "aika": {
               "alkaa": "2019-04-16T08:44",
               "paattyy": "2019-04-18T08:44",
             },
-            "jarjestamispaikka": Object {
+            "jarjestamispaikka": {
               "fi": "jarjestamispaikka - fi",
               "sv": "jarjestamispaikka - sv",
             },
-            "lisatietoja": Object {
+            "lisatietoja": {
               "fi": "<p>fi lisatietoja</p>",
               "sv": "<p>sv lisatietoja</p>",
             },
-            "osoite": Object {
-              "osoite": Object {
+            "osoite": {
+              "osoite": {
                 "fi": "fi osoite",
                 "sv": "sv osoite",
               },
@@ -137,61 +137,61 @@ Object {
     ],
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
-  "pohjakoulutusvaatimusKoodiUrit": Array [
+  "pohjakoulutusvaatimusKoodiUrit": [
     "vaatimus_1#1",
     "vaatimus_2#1",
   ],
-  "pohjakoulutusvaatimusTarkenne": Object {
+  "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p><strong>Tarkenne fi</strong></p>",
     "sv": "<p><strong>Tarkenne sv</strong></p>",
   },
   "tila": "tallennettu",
   "toinenAsteOnkoKaksoistutkinto": true,
-  "valintakokeet": Array [
-    Object {
+  "valintakokeet": [
+    {
       "id": undefined,
-      "metadata": Object {
+      "metadata": {
         "erityisjarjestelytMahdollisia": true,
         "liittyyEnnakkovalmistautumista": true,
-        "ohjeetEnnakkovalmistautumiseen": Object {
+        "ohjeetEnnakkovalmistautumiseen": {
           "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
           "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
-        "ohjeetErityisjarjestelyihin": Object {
+        "ohjeetErityisjarjestelyihin": {
           "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
           "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
-        "tietoja": Object {
+        "tietoja": {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
         "vahimmaispisteet": 30.4,
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "nimi - fi",
         "sv": "nimi - sv",
       },
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
+      "tilaisuudet": [
+        {
+          "aika": {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44",
           },
-          "jarjestamispaikka": Object {
+          "jarjestamispaikka": {
             "fi": "jarjestamispaikka - fi",
             "sv": "jarjestamispaikka - sv",
           },
-          "lisatietoja": Object {
+          "lisatietoja": {
             "fi": "<p>fi lisatietoja</p>",
             "sv": "<p>sv lisatietoja</p>",
           },
-          "osoite": Object {
-            "osoite": Object {
+          "osoite": {
+            "osoite": {
               "fi": "fi osoite",
               "sv": "sv osoite",
             },
@@ -207,51 +207,51 @@ Object {
 `;
 
 exports[`getHakukohdeByFormValues returns correct hakukohde given form values 1`] = `
-Object {
+{
   "esikatselu": false,
   "externalId": "ext1",
-  "hakuajat": Array [
-    Object {
+  "hakuajat": [
+    {
       "alkaa": "2019-04-17T05:52",
       "paattyy": "2019-04-22T05:52",
     },
-    Object {
+    {
       "alkaa": "2019-05-17T05:52",
       "paattyy": "2019-05-18T05:52",
     },
   ],
   "hakukohdeKoodiUri": null,
   "hakulomakeAtaruId": "12345",
-  "hakulomakeKuvaus": Object {},
-  "hakulomakeLinkki": Object {},
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "2.2.2.2.2",
   "kaytetaanHaunAikataulua": false,
   "kaytetaanHaunHakulomaketta": false,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
-  "liitteet": Array [
-    Object {
-      "kuvaus": Object {
+  "liitteet": [
+    {
+      "kuvaus": {
         "fi": "<p>Fi kuvaus</p>",
         "sv": "<p>Sv kuvaus</p>",
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
       "toimitusaika": "2019-08-17T05:52",
-      "toimitusosoite": Object {
-        "osoite": Object {
-          "osoite": Object {
+      "toimitusosoite": {
+        "osoite": {
+          "osoite": {
             "fi": "Fi osoite",
             "sv": "Sv osoite",
           },
           "postinumeroKoodiUri": "posti_1#1",
         },
-        "sahkoposti": Object {
+        "sahkoposti": {
           "fi": "Fi sahkoposti",
           "sv": "Sv sahkoposti",
         },
@@ -266,25 +266,25 @@ Object {
   "liitteidenToimitusaika": null,
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
-  "metadata": Object {
-    "aloituspaikat": Object {
+  "metadata": {
+    "aloituspaikat": {
       "ensikertalaisille": 29,
-      "kuvaus": Object {
+      "kuvaus": {
         "fi": "<p>aloituspaikan kuvaus fi</p>",
         "sv": "<p>aloituspaikan kuvaus sv</p>",
       },
       "lukumaara": 45,
     },
-    "hakukohteenLinja": Object {
+    "hakukohteenLinja": {
       "alinHyvaksyttyKeskiarvo": 6.5,
       "linja": "lukiopainotukset_0104#1",
-      "lisatietoa": Object {
+      "lisatietoa": {
         "fi": "<p>Fi lisatietoa</p>",
         "sv": "<p>Sv lisatietoa</p>",
       },
-      "painotetutArvosanat": Array [
-        Object {
-          "koodiUrit": Object {
+      "painotetutArvosanat": [
+        {
+          "koodiUrit": {
             "oppiaine": "painotettavatoppiaineetlukiossa_a1en#1",
           },
           "painokerroin": 1.2,
@@ -293,45 +293,45 @@ Object {
     },
     "jarjestaaUrheilijanAmmKoulutusta": false,
     "kaytetaanHaunAlkamiskautta": false,
-    "koulutuksenAlkamiskausi": Object {
+    "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
-    "kynnysehto": Object {
+    "kynnysehto": {
       "fi": "<p>Hakukohteen kynnysehto - fi</p>",
       "sv": "<p>Hakukohteen kynnysehto - sv</p>",
     },
-    "uudenOpiskelijanUrl": Object {
+    "uudenOpiskelijanUrl": {
       "fi": "https://opiskelu.fi",
       "sv": "https://opiskelu.se",
     },
-    "valintakokeidenYleiskuvaus": Object {
+    "valintakokeidenYleiskuvaus": {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
-    "valintaperusteenValintakokeidenLisatilaisuudet": Array [
-      Object {
+    "valintaperusteenValintakokeidenLisatilaisuudet": [
+      {
         "id": "123-123",
-        "tilaisuudet": Array [
-          Object {
-            "aika": Object {
+        "tilaisuudet": [
+          {
+            "aika": {
               "alkaa": "2019-04-16T08:44",
               "paattyy": "2019-04-18T08:44",
             },
-            "jarjestamispaikka": Object {
+            "jarjestamispaikka": {
               "fi": "jarjestamispaikka - fi",
               "sv": "jarjestamispaikka - sv",
             },
-            "lisatietoja": Object {
+            "lisatietoja": {
               "fi": "<p>fi lisatietoja</p>",
               "sv": "<p>sv lisatietoja</p>",
             },
-            "osoite": Object {
-              "osoite": Object {
+            "osoite": {
+              "osoite": {
                 "fi": "fi osoite",
                 "sv": "sv osoite",
               },
@@ -343,61 +343,61 @@ Object {
     ],
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
-  "pohjakoulutusvaatimusKoodiUrit": Array [
+  "pohjakoulutusvaatimusKoodiUrit": [
     "vaatimus_1#1",
     "vaatimus_2#1",
   ],
-  "pohjakoulutusvaatimusTarkenne": Object {
+  "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p><strong>Tarkenne fi</strong></p>",
     "sv": "<p><strong>Tarkenne sv</strong></p>",
   },
   "tila": "tallennettu",
   "toinenAsteOnkoKaksoistutkinto": true,
-  "valintakokeet": Array [
-    Object {
+  "valintakokeet": [
+    {
       "id": undefined,
-      "metadata": Object {
+      "metadata": {
         "erityisjarjestelytMahdollisia": true,
         "liittyyEnnakkovalmistautumista": true,
-        "ohjeetEnnakkovalmistautumiseen": Object {
+        "ohjeetEnnakkovalmistautumiseen": {
           "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
           "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
-        "ohjeetErityisjarjestelyihin": Object {
+        "ohjeetErityisjarjestelyihin": {
           "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
           "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
-        "tietoja": Object {
+        "tietoja": {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
         "vahimmaispisteet": 30.4,
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "nimi - fi",
         "sv": "nimi - sv",
       },
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
+      "tilaisuudet": [
+        {
+          "aika": {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44",
           },
-          "jarjestamispaikka": Object {
+          "jarjestamispaikka": {
             "fi": "jarjestamispaikka - fi",
             "sv": "jarjestamispaikka - sv",
           },
-          "lisatietoja": Object {
+          "lisatietoja": {
             "fi": "<p>fi lisatietoja</p>",
             "sv": "<p>sv lisatietoja</p>",
           },
-          "osoite": Object {
-            "osoite": Object {
+          "osoite": {
+            "osoite": {
               "fi": "fi osoite",
               "sv": "sv osoite",
             },

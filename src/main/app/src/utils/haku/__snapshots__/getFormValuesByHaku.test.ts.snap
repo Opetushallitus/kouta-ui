@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getFormValuesByHaku returns correct form values given different hakulomake variations 1`] = `
-Object {
-  "aikataulut": Object {
-    "aikataulu": Array [
-      Object {
+{
+  "aikataulut": {
+    "aikataulu": [
+      {
         "alkaa": "2019-02-20T12:28",
         "paattyy": "2019-08-01T12:45",
       },
@@ -13,82 +13,82 @@ Object {
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
-    "hakuaika": Array [
-      Object {
+    "hakuaika": [
+      {
         "alkaa": "2019-03-29T12:28",
         "paattyy": "2019-09-29T12:30",
       },
     ],
-    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+    "henkilokohtaisenSuunnitelmanLisatiedot": {},
     "kausi": "alkamiskausi_1#1",
     "lisaamisenTakaraja": "2019-03-29T12:28",
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
-    "vuosi": Object {
+    "vuosi": {
       "value": "2020",
     },
   },
   "externalId": "ext1",
-  "hakulomake": Object {
-    "kuvaus": Object {},
-    "linkki": Object {
+  "hakulomake": {
+    "kuvaus": {},
+    "linkki": {
       "fi": "https://google.fi",
     },
-    "lomake": Object {},
+    "lomake": {},
     "tyyppi": "muu",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
-  "kohdejoukko": Object {
+  "kohdejoukko": {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": Object {
+    "tarkenne": {
       "value": "tarkenne_1#1",
     },
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "tallennettu",
-  "yhteyshenkilot": Array [
-    Object {
-      "nimi": Object {
+  "yhteyshenkilot": [
+    {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "puhelinnumero": Object {
+      "puhelinnumero": {
         "fi": "Fi puhelinnumero",
         "sv": "Sv puhelinnumero",
       },
-      "sahkoposti": Object {
+      "sahkoposti": {
         "fi": "Fi sähköposti",
         "sv": "Sv sähköposti",
       },
-      "titteli": Object {
+      "titteli": {
         "fi": "Fi titteli",
         "sv": "Sv titteli",
       },
-      "verkkosivu": Object {
+      "verkkosivu": {
         "fi": "Fi verkkosivu",
         "sv": "Sv verkkosivu",
       },
-      "verkkosivuTeksti": Object {},
+      "verkkosivuTeksti": {},
     },
   ],
 }
 `;
 
 exports[`getFormValuesByHaku returns correct form values given different hakulomake variations 2`] = `
-Object {
-  "aikataulut": Object {
-    "aikataulu": Array [
-      Object {
+{
+  "aikataulut": {
+    "aikataulu": [
+      {
         "alkaa": "2019-02-20T12:28",
         "paattyy": "2019-08-01T12:45",
       },
@@ -97,82 +97,82 @@ Object {
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
-    "hakuaika": Array [
-      Object {
+    "hakuaika": [
+      {
         "alkaa": "2019-03-29T12:28",
         "paattyy": "2019-09-29T12:30",
       },
     ],
-    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+    "henkilokohtaisenSuunnitelmanLisatiedot": {},
     "kausi": "alkamiskausi_1#1",
     "lisaamisenTakaraja": "2019-03-29T12:28",
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
-    "vuosi": Object {
+    "vuosi": {
       "value": "2020",
     },
   },
   "externalId": "ext1",
-  "hakulomake": Object {
-    "kuvaus": Object {
+  "hakulomake": {
+    "kuvaus": {
       "fi": "<p>kuvaus</p>",
     },
-    "linkki": Object {},
-    "lomake": Object {},
+    "linkki": {},
+    "lomake": {},
     "tyyppi": "ei sähköistä",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
-  "kohdejoukko": Object {
+  "kohdejoukko": {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": Object {
+    "tarkenne": {
       "value": "tarkenne_1#1",
     },
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "tallennettu",
-  "yhteyshenkilot": Array [
-    Object {
-      "nimi": Object {
+  "yhteyshenkilot": [
+    {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "puhelinnumero": Object {
+      "puhelinnumero": {
         "fi": "Fi puhelinnumero",
         "sv": "Sv puhelinnumero",
       },
-      "sahkoposti": Object {
+      "sahkoposti": {
         "fi": "Fi sähköposti",
         "sv": "Sv sähköposti",
       },
-      "titteli": Object {
+      "titteli": {
         "fi": "Fi titteli",
         "sv": "Sv titteli",
       },
-      "verkkosivu": Object {
+      "verkkosivu": {
         "fi": "Fi verkkosivu",
         "sv": "Sv verkkosivu",
       },
-      "verkkosivuTeksti": Object {},
+      "verkkosivuTeksti": {},
     },
   ],
 }
 `;
 
 exports[`getFormValuesByHaku returns correct form values given haku 1`] = `
-Object {
-  "aikataulut": Object {
-    "aikataulu": Array [
-      Object {
+{
+  "aikataulut": {
+    "aikataulu": [
+      {
         "alkaa": "2019-02-20T12:28",
         "paattyy": "2019-08-01T12:45",
       },
@@ -181,82 +181,82 @@ Object {
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
-    "hakuaika": Array [
-      Object {
+    "hakuaika": [
+      {
         "alkaa": "2019-03-29T12:28",
         "paattyy": "2019-09-29T12:30",
       },
     ],
-    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+    "henkilokohtaisenSuunnitelmanLisatiedot": {},
     "kausi": "alkamiskausi_1#1",
     "lisaamisenTakaraja": "2019-03-29T12:28",
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
-    "vuosi": Object {
+    "vuosi": {
       "value": "2020",
     },
   },
   "externalId": "ext1",
-  "hakulomake": Object {
-    "kuvaus": Object {},
-    "linkki": Object {},
-    "lomake": Object {
+  "hakulomake": {
+    "kuvaus": {},
+    "linkki": {},
+    "lomake": {
       "value": "12345",
     },
     "tyyppi": "ataru",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
-  "kohdejoukko": Object {
+  "kohdejoukko": {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": Object {
+    "tarkenne": {
       "value": "tarkenne_1#1",
     },
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "tallennettu",
-  "yhteyshenkilot": Array [
-    Object {
-      "nimi": Object {
+  "yhteyshenkilot": [
+    {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "puhelinnumero": Object {
+      "puhelinnumero": {
         "fi": "Fi puhelinnumero",
         "sv": "Sv puhelinnumero",
       },
-      "sahkoposti": Object {
+      "sahkoposti": {
         "fi": "Fi sähköposti",
         "sv": "Sv sähköposti",
       },
-      "titteli": Object {
+      "titteli": {
         "fi": "Fi titteli",
         "sv": "Sv titteli",
       },
-      "verkkosivu": Object {
+      "verkkosivu": {
         "fi": "Fi verkkosivu",
         "sv": "Sv verkkosivu",
       },
-      "verkkosivuTeksti": Object {},
+      "verkkosivuTeksti": {},
     },
   ],
 }
 `;
 
 exports[`getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti 1`] = `
-Object {
-  "aikataulut": Object {
-    "aikataulu": Array [
-      Object {
+{
+  "aikataulut": {
+    "aikataulu": [
+      {
         "alkaa": "2019-02-20T12:28",
         "paattyy": "2019-08-01T12:45",
       },
@@ -265,13 +265,13 @@ Object {
     "ajankohtaTyyppi": "henkilokohtainen suunnitelma",
     "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
-    "hakuaika": Array [
-      Object {
+    "hakuaika": [
+      {
         "alkaa": "2019-03-29T12:28",
         "paattyy": "2019-09-29T12:30",
       },
     ],
-    "henkilokohtaisenSuunnitelmanLisatiedot": Object {
+    "henkilokohtaisenSuunnitelmanLisatiedot": {
       "en": "<p>hlokoht en </p>",
       "fi": "<p>hlokoht fi </p>",
       "sv": "<p>hlokoht sv </p>",
@@ -284,65 +284,65 @@ Object {
     "vuosi": undefined,
   },
   "externalId": "ext1",
-  "hakulomake": Object {
-    "kuvaus": Object {},
-    "linkki": Object {},
-    "lomake": Object {
+  "hakulomake": {
+    "kuvaus": {},
+    "linkki": {},
+    "lomake": {
       "value": "12345",
     },
     "tyyppi": "ataru",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
-  "kohdejoukko": Object {
+  "kohdejoukko": {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": Object {
+    "tarkenne": {
       "value": "tarkenne_1#1",
     },
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "tallennettu",
-  "yhteyshenkilot": Array [
-    Object {
-      "nimi": Object {
+  "yhteyshenkilot": [
+    {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "puhelinnumero": Object {
+      "puhelinnumero": {
         "fi": "Fi puhelinnumero",
         "sv": "Sv puhelinnumero",
       },
-      "sahkoposti": Object {
+      "sahkoposti": {
         "fi": "Fi sähköposti",
         "sv": "Sv sähköposti",
       },
-      "titteli": Object {
+      "titteli": {
         "fi": "Fi titteli",
         "sv": "Sv titteli",
       },
-      "verkkosivu": Object {
+      "verkkosivu": {
         "fi": "Fi verkkosivu",
         "sv": "Sv verkkosivu",
       },
-      "verkkosivuTeksti": Object {},
+      "verkkosivuTeksti": {},
     },
   ],
 }
 `;
 
 exports[`getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
-Object {
-  "aikataulut": Object {
-    "aikataulu": Array [
-      Object {
+{
+  "aikataulut": {
+    "aikataulu": [
+      {
         "alkaa": "2019-02-20T12:28",
         "paattyy": "2019-08-01T12:45",
       },
@@ -351,72 +351,72 @@ Object {
     "ajankohtaTyyppi": "tarkka alkamisajankohta",
     "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
     "ajastettuJulkaisu": "2020-01-20T05:00",
-    "hakuaika": Array [
-      Object {
+    "hakuaika": [
+      {
         "alkaa": "2019-03-29T12:28",
         "paattyy": "2019-09-29T12:30",
       },
     ],
-    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+    "henkilokohtaisenSuunnitelmanLisatiedot": {},
     "kausi": "alkamiskausi_1#1",
     "lisaamisenTakaraja": "2019-03-29T12:28",
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": "2030-12-20T12:28",
     "tarkkaPaattyy": "2030-12-21T12:28",
-    "vuosi": Object {
+    "vuosi": {
       "value": "2030",
     },
   },
   "externalId": "ext1",
-  "hakulomake": Object {
-    "kuvaus": Object {},
-    "linkki": Object {},
-    "lomake": Object {
+  "hakulomake": {
+    "kuvaus": {},
+    "linkki": {},
+    "lomake": {
       "value": "12345",
     },
     "tyyppi": "ataru",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
-  "kohdejoukko": Object {
+  "kohdejoukko": {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": Object {
+    "tarkenne": {
       "value": "tarkenne_1#1",
     },
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "tallennettu",
-  "yhteyshenkilot": Array [
-    Object {
-      "nimi": Object {
+  "yhteyshenkilot": [
+    {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "puhelinnumero": Object {
+      "puhelinnumero": {
         "fi": "Fi puhelinnumero",
         "sv": "Sv puhelinnumero",
       },
-      "sahkoposti": Object {
+      "sahkoposti": {
         "fi": "Fi sähköposti",
         "sv": "Sv sähköposti",
       },
-      "titteli": Object {
+      "titteli": {
         "fi": "Fi titteli",
         "sv": "Sv titteli",
       },
-      "verkkosivu": Object {
+      "verkkosivu": {
         "fi": "Fi verkkosivu",
         "sv": "Sv verkkosivu",
       },
-      "verkkosivuTeksti": Object {},
+      "verkkosivuTeksti": {},
     },
   ],
 }

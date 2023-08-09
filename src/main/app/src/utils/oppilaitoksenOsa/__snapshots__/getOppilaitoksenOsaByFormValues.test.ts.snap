@@ -1,30 +1,30 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given form values 1`] = `
-Object {
+{
   "esikatselu": false,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
-  "metadata": Object {
-    "esittely": Object {
+  "metadata": {
+    "esittely": {
       "fi": "<p><em>Fi esittely</em></p>",
       "sv": "<p><em>Sv esittely</em></p>",
     },
     "hakijapalveluidenYhteystiedot": null,
     "jarjestaaUrheilijanAmmKoulutusta": false,
-    "kampus": Object {
+    "kampus": {
       "fi": "Fi kampus",
       "sv": "Sv kampus",
     },
     "opiskelijoita": 100,
-    "wwwSivu": Object {
-      "nimi": Object {
+    "wwwSivu": {
+      "nimi": {
         "fi": "Verkkosivu fi",
         "sv": "Verkkosivu sv",
       },
-      "url": Object {
+      "url": {
         "fi": "www.verkkosivu.fi",
         "sv": "www.verkkosivu.sv",
       },

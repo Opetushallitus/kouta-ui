@@ -1,25 +1,25 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getFormValuesBySoraKuvaus returns correct form values given sora-kuvaus 1`] = `
-Object {
+{
   "externalId": "ext1",
-  "kieliversiot": Array [],
-  "koulutukset": Array [
-    Object {
+  "kieliversiot": [],
+  "koulutukset": [
+    {
       "value": "koulutus_754101#7",
     },
   ],
-  "koulutusala": Object {
+  "koulutusala": {
     "value": "kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
   },
   "koulutustyyppi": "amm",
   "organisaatioOid": undefined,
-  "tiedot": Object {
-    "kuvaus": Object {
+  "tiedot": {
+    "kuvaus": {
       "fi": "<p><strong>Kuvaus fi</strong></p>",
       "sv": "<p><em>Kuvaus sv</em></p>",
     },
-    "nimi": Object {
+    "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },

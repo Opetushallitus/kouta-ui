@@ -1,7 +1,11 @@
 import { isDev, isPlaywright } from './utils';
 
-const { VITE_DEV_SERVER_URL, VITE_KOUTA_BACKEND_URL, VITE_KONFO_URL } =
-  import.meta.env;
+const {
+  VITE_DEV_SERVER_URL,
+  VITE_KOUTA_BACKEND_URL,
+  VITE_KONFO_URL,
+  STORYBOOK,
+} = import.meta.env;
 
 const koutaBackendDevUrl = `${
   VITE_KOUTA_BACKEND_URL || VITE_DEV_SERVER_URL
@@ -99,7 +103,7 @@ const development = {
 };
 
 export const configure = async (urls, httpClient) => {
-  if (isDev || isPlaywright) {
+  if (isDev || isPlaywright || STORYBOOK) {
     urls.addProperties(development);
   } else {
     const { data } = await httpClient.get('/kouta/rest/config/frontProperties');

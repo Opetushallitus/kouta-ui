@@ -73,7 +73,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: src/main/app/package-lock.json
 
-      - name: Run tests
+      - name: Build and publish storybook
         run: |
           git clone https://github.com/Opetushallitus/ci-tools.git
           source ci-tools/common/setup-tools.sh

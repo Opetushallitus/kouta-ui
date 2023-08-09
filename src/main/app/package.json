@@ -13,14 +13,14 @@
     "preview:watch": "npm run build:test -- --watch & npm run serve:test",
     "serve:test": "node test-server.js",
     "test": "vitest",
-    "storybook": "NODE_ENV=development sb dev -p 9009",
-    "build-storybook": "NODE_ENV=development sb build -c .storybook -o build/storybook --quiet",
+    "storybook": "cross-env NODE_ENV=development sb dev -p 9009",
+    "build-storybook": "cross-env STORYBOOK=1 sb build -c .storybook -o build/storybook --quiet",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
     "tsc": "tsc",
     "test:integration": "npm run build:test && START_SERVER_AND_TEST_INSECURE=1 start-server-and-test serve:test https://localhost:3000/kouta 'npx playwright test'",
     "test:ci": "CI=true npm run test && npm run test:integration",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "analyze": "vite-bundle-visualizer",
     "xstate:typegen": "xstate typegen \"src/**/*.ts?(x)\"",
     "postinstall": "npm run xstate:typegen"
   },
@@ -29,6 +29,7 @@
     "@lexical/list": "^0.10.0",
     "@lexical/react": "^0.10.0",
     "@opetushallitus/virkailija-ui-components": "^0.4.7",
+    "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.8.0",
     "@xstate/immer": "^0.3.3",
     "@xstate/inspect": "^0.8.0",
@@ -60,7 +61,6 @@
     "react-select": "^4.3.1",
     "react-simple-timefield": "^3.2.5",
     "react-sortable-hoc": "^1.11.0",
-    "react-spring": "^8.0.27",
     "react-use": "^17.3.2",
     "redux": "^4.1.2",
     "redux-form": "^8.3.10",
@@ -87,7 +87,6 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.179",
     "@types/node": "^16.18.38",
     "@types/react": "^16.14.5",
@@ -116,6 +115,7 @@
     "https-pem": "^3.0.0",
     "husky": "^8.0.3",
     "jest-styled-components": "^7.0.8",
+    "jsdom": "^22.1.0",
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.1",
     "start-server-and-test": "^1.14.0",
@@ -139,15 +139,6 @@
     ],
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix"
-    ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^#(.*)$": "<rootDir>$1",
-      "\\.(css|less)$": "<rootDir>/src/dummy.js"
-    },
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!(react-spring)/)"
     ]
   }
 }

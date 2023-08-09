@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 
 import useToaster from '#/src/hooks/useToaster';
 
-import Toaster from './index';
+import { Toaster } from './index';
 
 const toastsArray = [
   {

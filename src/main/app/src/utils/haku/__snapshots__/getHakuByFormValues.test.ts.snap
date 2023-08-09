@@ -1,16 +1,16 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getHakuByFormValues returns correct haku given different hakulomake variations 1`] = `
-Object {
+{
   "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
-  "hakuajat": Array [
-    Object {
+  "hakuajat": [
+    {
       "alkaa": "2019-04-16T08:44",
       "paattyy": "2019-04-18T08:44",
     },
-    Object {
+    {
       "alkaa": "2019-06-16T08:44",
       "paattyy": "2019-06-18T08:44",
     },
@@ -18,65 +18,65 @@ Object {
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomakeAtaruId": null,
-  "hakulomakeKuvaus": Object {},
-  "hakulomakeLinkki": Object {
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {
     "fi": "https://google.fi",
   },
   "hakulomaketyyppi": "muu",
   "hakutapaKoodiUri": "hakutapa_1#1",
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
-  "metadata": Object {
-    "koulutuksenAlkamiskausi": Object {
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
-    "tulevaisuudenAikataulu": Array [
-      Object {
+    "tulevaisuudenAikataulu": [
+      {
         "alkaa": "2019-08-16T08:44",
         "paattyy": "2019-08-18T08:44",
       },
-      Object {
+      {
         "alkaa": "2019-09-16T08:44",
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteyshenkilot": Array [
-      Object {
-        "nimi": Object {
+    "yhteyshenkilot": [
+      {
+        "nimi": {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
-        "puhelinnumero": Object {
+        "puhelinnumero": {
           "fi": "Fi puhelinnumero",
           "sv": "Sv puhelinnumero",
         },
-        "sahkoposti": Object {
+        "sahkoposti": {
           "fi": "Fi sähköposti",
           "sv": "Sv sähköposti",
         },
-        "titteli": Object {
+        "titteli": {
           "fi": "Fi titteli",
           "sv": "Sv titteli",
         },
-        "wwwSivu": Object {
+        "wwwSivu": {
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": Object {},
+        "wwwSivuTeksti": {},
       },
     ],
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Nimi",
     "sv": "Namn",
   },
@@ -86,16 +86,16 @@ Object {
 `;
 
 exports[`getHakuByFormValues returns correct haku given different hakulomake variations 2`] = `
-Object {
+{
   "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
-  "hakuajat": Array [
-    Object {
+  "hakuajat": [
+    {
       "alkaa": "2019-04-16T08:44",
       "paattyy": "2019-04-18T08:44",
     },
-    Object {
+    {
       "alkaa": "2019-06-16T08:44",
       "paattyy": "2019-06-18T08:44",
     },
@@ -103,65 +103,65 @@ Object {
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomakeAtaruId": null,
-  "hakulomakeKuvaus": Object {
+  "hakulomakeKuvaus": {
     "fi": "<p>kuvaus</p>",
   },
-  "hakulomakeLinkki": Object {},
+  "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ei sähköistä",
   "hakutapaKoodiUri": "hakutapa_1#1",
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
-  "metadata": Object {
-    "koulutuksenAlkamiskausi": Object {
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
-    "tulevaisuudenAikataulu": Array [
-      Object {
+    "tulevaisuudenAikataulu": [
+      {
         "alkaa": "2019-08-16T08:44",
         "paattyy": "2019-08-18T08:44",
       },
-      Object {
+      {
         "alkaa": "2019-09-16T08:44",
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteyshenkilot": Array [
-      Object {
-        "nimi": Object {
+    "yhteyshenkilot": [
+      {
+        "nimi": {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
-        "puhelinnumero": Object {
+        "puhelinnumero": {
           "fi": "Fi puhelinnumero",
           "sv": "Sv puhelinnumero",
         },
-        "sahkoposti": Object {
+        "sahkoposti": {
           "fi": "Fi sähköposti",
           "sv": "Sv sähköposti",
         },
-        "titteli": Object {
+        "titteli": {
           "fi": "Fi titteli",
           "sv": "Sv titteli",
         },
-        "wwwSivu": Object {
+        "wwwSivu": {
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": Object {},
+        "wwwSivuTeksti": {},
       },
     ],
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Nimi",
     "sv": "Namn",
   },
@@ -171,16 +171,16 @@ Object {
 `;
 
 exports[`getHakuByFormValues returns correct haku given form values 1`] = `
-Object {
+{
   "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
-  "hakuajat": Array [
-    Object {
+  "hakuajat": [
+    {
       "alkaa": "2019-04-16T08:44",
       "paattyy": "2019-04-18T08:44",
     },
-    Object {
+    {
       "alkaa": "2019-06-16T08:44",
       "paattyy": "2019-06-18T08:44",
     },
@@ -188,63 +188,63 @@ Object {
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomakeAtaruId": "12345",
-  "hakulomakeKuvaus": Object {},
-  "hakulomakeLinkki": Object {},
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
   "hakutapaKoodiUri": "hakutapa_1#1",
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
-  "metadata": Object {
-    "koulutuksenAlkamiskausi": Object {
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
-    "tulevaisuudenAikataulu": Array [
-      Object {
+    "tulevaisuudenAikataulu": [
+      {
         "alkaa": "2019-08-16T08:44",
         "paattyy": "2019-08-18T08:44",
       },
-      Object {
+      {
         "alkaa": "2019-09-16T08:44",
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteyshenkilot": Array [
-      Object {
-        "nimi": Object {
+    "yhteyshenkilot": [
+      {
+        "nimi": {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
-        "puhelinnumero": Object {
+        "puhelinnumero": {
           "fi": "Fi puhelinnumero",
           "sv": "Sv puhelinnumero",
         },
-        "sahkoposti": Object {
+        "sahkoposti": {
           "fi": "Fi sähköposti",
           "sv": "Sv sähköposti",
         },
-        "titteli": Object {
+        "titteli": {
           "fi": "Fi titteli",
           "sv": "Sv titteli",
         },
-        "wwwSivu": Object {
+        "wwwSivu": {
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": Object {},
+        "wwwSivuTeksti": {},
       },
     ],
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Nimi",
     "sv": "Namn",
   },
@@ -254,16 +254,16 @@ Object {
 `;
 
 exports[`getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti 1`] = `
-Object {
+{
   "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
-  "hakuajat": Array [
-    Object {
+  "hakuajat": [
+    {
       "alkaa": "2019-04-16T08:44",
       "paattyy": "2019-04-18T08:44",
     },
-    Object {
+    {
       "alkaa": "2019-06-16T08:44",
       "paattyy": "2019-06-18T08:44",
     },
@@ -271,20 +271,20 @@ Object {
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomakeAtaruId": "12345",
-  "hakulomakeKuvaus": Object {},
-  "hakulomakeLinkki": Object {},
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
   "hakutapaKoodiUri": "hakutapa_1#1",
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
-  "metadata": Object {
-    "koulutuksenAlkamiskausi": Object {
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {
+      "henkilokohtaisenSuunnitelmanLisatiedot": {
         "fi": "<p>hlokoht fi </p>",
         "sv": "<p>hlokoht sv </p>",
       },
@@ -293,44 +293,44 @@ Object {
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
-    "tulevaisuudenAikataulu": Array [
-      Object {
+    "tulevaisuudenAikataulu": [
+      {
         "alkaa": "2019-08-16T08:44",
         "paattyy": "2019-08-18T08:44",
       },
-      Object {
+      {
         "alkaa": "2019-09-16T08:44",
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteyshenkilot": Array [
-      Object {
-        "nimi": Object {
+    "yhteyshenkilot": [
+      {
+        "nimi": {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
-        "puhelinnumero": Object {
+        "puhelinnumero": {
           "fi": "Fi puhelinnumero",
           "sv": "Sv puhelinnumero",
         },
-        "sahkoposti": Object {
+        "sahkoposti": {
           "fi": "Fi sähköposti",
           "sv": "Sv sähköposti",
         },
-        "titteli": Object {
+        "titteli": {
           "fi": "Fi titteli",
           "sv": "Sv titteli",
         },
-        "wwwSivu": Object {
+        "wwwSivu": {
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": Object {},
+        "wwwSivuTeksti": {},
       },
     ],
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Nimi",
     "sv": "Namn",
   },
@@ -340,16 +340,16 @@ Object {
 `;
 
 exports[`getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
-Object {
+{
   "ajastettuHaunJaHakukohteidenArkistointi": "2019-11-16T09:44",
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "externalId": "ext1",
-  "hakuajat": Array [
-    Object {
+  "hakuajat": [
+    {
       "alkaa": "2019-04-16T08:44",
       "paattyy": "2019-04-18T08:44",
     },
-    Object {
+    {
       "alkaa": "2019-06-16T08:44",
       "paattyy": "2019-06-18T08:44",
     },
@@ -357,63 +357,63 @@ Object {
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomakeAtaruId": "12345",
-  "hakulomakeKuvaus": Object {},
-  "hakulomakeLinkki": Object {},
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
   "hakutapaKoodiUri": "hakutapa_1#1",
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
-  "metadata": Object {
-    "koulutuksenAlkamiskausi": Object {
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
       "koulutuksenAlkamispaivamaara": "2019-09-16T08:44",
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": "2019-09-16T08:44",
     },
-    "tulevaisuudenAikataulu": Array [
-      Object {
+    "tulevaisuudenAikataulu": [
+      {
         "alkaa": "2019-08-16T08:44",
         "paattyy": "2019-08-18T08:44",
       },
-      Object {
+      {
         "alkaa": "2019-09-16T08:44",
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteyshenkilot": Array [
-      Object {
-        "nimi": Object {
+    "yhteyshenkilot": [
+      {
+        "nimi": {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
-        "puhelinnumero": Object {
+        "puhelinnumero": {
           "fi": "Fi puhelinnumero",
           "sv": "Sv puhelinnumero",
         },
-        "sahkoposti": Object {
+        "sahkoposti": {
           "fi": "Fi sähköposti",
           "sv": "Sv sähköposti",
         },
-        "titteli": Object {
+        "titteli": {
           "fi": "Fi titteli",
           "sv": "Sv titteli",
         },
-        "wwwSivu": Object {
+        "wwwSivu": {
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": Object {},
+        "wwwSivuTeksti": {},
       },
     ],
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Nimi",
     "sv": "Namn",
   },

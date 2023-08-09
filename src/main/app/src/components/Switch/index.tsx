@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Spring } from 'react-spring/renderprops';
+import { useSpring, animated } from '@react-spring/web';
 import styled, { css } from 'styled-components';
 
 import { disabledStyle } from '#/src/system';
@@ -87,7 +87,7 @@ const SwitchWrapper = styled.div`
   line-height: 0;
 `;
 
-const SwitchBall = styled.div`
+const SwitchBall = styled(animated.div)`
   border-radius: 50%;
   background-color: white;
   width: 1em;
@@ -123,26 +123,30 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       ...props
     },
     ref
-  ) => (
-    <Label disabled={disabled} error={error}>
-      <SwitchWrapper>
-        <SwitchContainer className={className}>
-          <HiddenSwitch
-            checked={checked}
-            disabled={disabled}
-            ref={ref}
-            {...props}
-          />
-          <StyledSwitch checked={checked} error={error}>
-            <Spring to={{ left: checked ? '1.4em' : '0.125em' }}>
-              {({ left }) => <SwitchBall style={{ left }} />}
-            </Spring>
-          </StyledSwitch>
-        </SwitchContainer>
-      </SwitchWrapper>
-      {children ? (
-        <LabelWrapper disabled={disabled}>{children}</LabelWrapper>
-      ) : null}
-    </Label>
-  )
+  ) => {
+    const ballStyle = useSpring({
+      to: { left: checked ? '1.4em' : '0.125em' },
+    });
+
+    return (
+      <Label disabled={disabled} error={error}>
+        <SwitchWrapper>
+          <SwitchContainer className={className}>
+            <HiddenSwitch
+              checked={checked}
+              disabled={disabled}
+              ref={ref}
+              {...props}
+            />
+            <StyledSwitch checked={checked} error={error}>
+              <SwitchBall style={ballStyle} />
+            </StyledSwitch>
+          </SwitchContainer>
+        </SwitchWrapper>
+        {children ? (
+          <LabelWrapper disabled={disabled}>{children}</LabelWrapper>
+        ) : null}
+      </Label>
+    );
+  }
 );

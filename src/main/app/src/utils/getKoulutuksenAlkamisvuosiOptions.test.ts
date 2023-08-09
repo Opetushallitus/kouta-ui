@@ -1,7 +1,9 @@
+import { vi } from 'vitest';
+
 import { getKoulutuksenAlkamisvuosiOptions } from './getKoulutuksenAlkamisvuosiOptions';
 
 test('getKoulutuksenAlkamisvuosiOptions', () => {
-  jest.useFakeTimers('modern').setSystemTime(new Date('2020-01-01'));
+  vi.useFakeTimers().setSystemTime(new Date('2020-01-01'));
 
   expect(getKoulutuksenAlkamisvuosiOptions()).toEqual([
     {
@@ -25,5 +27,5 @@ test('getKoulutuksenAlkamisvuosiOptions', () => {
       value: '2022',
     },
   ]);
-  jest.useRealTimers();
+  vi.useRealTimers();
 });

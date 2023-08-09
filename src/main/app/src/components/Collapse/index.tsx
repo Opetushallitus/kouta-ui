@@ -4,11 +4,11 @@ import _ from 'lodash';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 
-import CollapseContent from '#/src/components/CollapseContent';
+import { CollapseContent } from '#/src/components/CollapseContent';
 import { Box, DropdownIcon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
-const Container = styled.div`
+const Container = styled.div<{ active: boolean }>`
   border: 1px solid ${getThemeProp('palette.divider')};
   background-color: white;
 
@@ -31,7 +31,7 @@ const HeaderToggle = styled.div`
   cursor: pointer;
 `;
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<{ open: boolean }>`
   display: flex;
 
   ${({ open }) =>
@@ -41,7 +41,7 @@ const HeaderContainer = styled.div`
     `}
 `;
 
-const HeaderContent = styled.div`
+const HeaderContent = styled.div<{ toggleOnHeaderClick: boolean }>`
   display: flex;
   align-items: center;
   flex: 1;

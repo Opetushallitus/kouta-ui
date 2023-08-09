@@ -332,7 +332,7 @@ export const ListTable = ({
                                     : { row: key, column: columnKey }
                                 );
                               }
-                            : null
+                            : undefined
                         }
                       >
                         {_.isFunction(Component) ? (

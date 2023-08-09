@@ -10,14 +10,14 @@ const Story = () => {
 
   const loadOptions = useLoadOptions(options);
 
-  const [value, setValue] = useState([
-    { value: 'posti_00940#2' },
-    { value: 'posti_99870#2' },
+  const [value, setValue] = useState<Array<SelectOption<string>>>([
+    { label: 'posti_00940', value: 'posti_00940#2' },
+    { label: 'posti_99870', value: 'posti_99870#2' },
   ]);
 
   return (
     <AsyncKoodistoSelect
-      onChange={setValue}
+      onChange={v => setValue(old => (Array.isArray(v) ? [...old, v] : old))}
       value={value}
       loadOptions={loadOptions}
       isMulti

@@ -4,7 +4,10 @@ import useKoodi from '#/src/hooks/useKoodi';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
-export const useKoodiNimi = (koodiUri, { language: languageOpt } = {}) => {
+export const useKoodiNimi = (
+  koodiUri,
+  { language: languageOpt }: { language?: string } = {}
+) => {
   const { koodi, ...rest } = useKoodi(koodiUri);
   const language = useUserLanguage();
   const koodiLanguage = languageOpt || language;

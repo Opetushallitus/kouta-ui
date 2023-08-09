@@ -108,10 +108,10 @@ const getValue = (
   return value;
 };
 
-type SelectProps = Props & {
+export type SelectProps = {
   id?: string;
   error?: boolean;
-};
+} & Props<SelectOption<string>, boolean>;
 
 export const Select = ({
   id,

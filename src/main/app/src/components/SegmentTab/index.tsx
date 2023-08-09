@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 
-const SegmentTab = styled.button`
+const SegmentTab = styled.button<{
+  active?: boolean;
+  isInTabs?: boolean;
+  isFirst?: boolean;
+  isLast?: boolean;
+}>`
   background-color: transparent;
   border-color: rgba(0, 0, 0, 0.2);
   border-width: 1px 1px 1px 1px;

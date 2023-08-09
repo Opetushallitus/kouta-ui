@@ -301,8 +301,10 @@ const postinumeroUriRegExp = /\d{5}/;
 export const getPostinumeroByPostinumeroUri = uri =>
   uri?.match?.(postinumeroUriRegExp)?.[0];
 
-export const formatKoodiLabelWithArvo = (koodi, language) =>
-  `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`;
+export const formatKoodiLabelWithArvo = (
+  koodi: Koodi,
+  language: LanguageCode
+) => `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`;
 
 export const isIn = (coll: Array<unknown>) => (val: unknown) =>
   coll?.includes(val);

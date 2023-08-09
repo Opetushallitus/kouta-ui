@@ -8,6 +8,15 @@ import {
   ModalHeader,
 } from '#/src/components/virkailija';
 
+type KoutaModalProps = {
+  footer?: JSX.Element | string;
+  header?: JSX.Element | string;
+  children: React.ReactNode;
+  onClose?: () => void;
+  minHeight?: string | number;
+  open?: boolean;
+} & React.ComponentProps<typeof UiModal>;
+
 const Modal = ({
   footer,
   header,
@@ -16,7 +25,7 @@ const Modal = ({
   minHeight,
   open = false,
   ...props
-}) => {
+}: KoutaModalProps) => {
   const wrapBody = Boolean(footer || header); // For legacy modal
 
   return open ? (

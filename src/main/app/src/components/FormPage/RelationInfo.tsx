@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
 import { Box, Typography } from '#/src/components/virkailija';
+import { EntityModelBase } from '#/src/types/domainTypes';
 import { getEntityNimiTranslation } from '#/src/utils';
 
 export const RelationInfoContainer = ({ children }) => {
@@ -20,7 +21,15 @@ export const RelationInfoContainer = ({ children }) => {
   );
 };
 
-export function RelationInfo({ title = '', entity, linkUrl = undefined }) {
+export function RelationInfo({
+  title = '',
+  entity,
+  linkUrl,
+}: {
+  title?: string;
+  entity: EntityModelBase;
+  linkUrl?: string;
+}) {
   const { i18n } = useTranslation();
   const name = getEntityNimiTranslation(entity, i18n.language) || '';
   return (

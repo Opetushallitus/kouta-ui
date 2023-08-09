@@ -7,7 +7,7 @@ import {
   TestInfo,
   expect,
 } from '@playwright/test';
-import { deburr, last, split, toLower } from 'lodash';
+import { deburr, includes, last, split, toLower } from 'lodash';
 
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -137,7 +137,10 @@ export const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
     await fillRadioValue(section, tila);
   });
 
-const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
+const selectLanguages = async (
+  selector: Locator,
+  selectedLanguages: Array<string> = []
+) => {
   const languages = ['en', 'fi', 'sv'];
   await Promise.all(
     languages.map(async lang => {
@@ -235,8 +238,8 @@ export const fillTreeSelect = async (loc: Locator, value: Array<string>) => {
   }
 };
 
-const isTutkintoonJohtava = (koulutustyyppi: string) =>
-  ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
+const isTutkintoonJohtava = (koulutustyyppi?: string) =>
+  includes(['amk', 'yo', 'amm', 'lk'], koulutustyyppi);
 
 export const fillKoulutustyyppiSelect = async (
   loc: Locator,

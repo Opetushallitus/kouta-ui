@@ -4,14 +4,14 @@ import { formValueExists } from '#/src/utils';
 
 export const getLanguageValue = (
   value?: TranslatedField,
-  language: LanguageCode = 'fi'
+  language: string = 'fi'
 ) => (_.isObject(value) ? value[language] || null : null);
 
 export const getFirstLanguageValue = (
   value?: TranslatedField,
-  priorityArg?: Array<LanguageCode> | LanguageCode
+  priorityArg?: Array<string> | string
 ) => {
-  const defaultPriority: Array<LanguageCode> = ['fi', 'en', 'sv'];
+  const defaultPriority: Array<string> = ['fi', 'en', 'sv'];
 
   let priority = defaultPriority;
 

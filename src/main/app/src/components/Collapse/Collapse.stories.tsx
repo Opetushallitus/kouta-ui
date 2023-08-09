@@ -33,14 +33,6 @@ export const Basic = () => (
   </Collapse>
 );
 
-export const WithUncontrolled = () => (
-  <Collapse header={header} footer={footer} defaultOpen={true}>
-    {children}
-  </Collapse>
-);
-
-WithUncontrolled.storyName = 'With uncontrolled';
-
 export const WithActive = () => (
   <Collapse
     header={header}

@@ -13,7 +13,7 @@ type EntityModalProps = {
   labelText?: string;
   submitText: string;
   options?: Array<any>;
-  onSubmit?: ({ oid: string }) => void;
+  onSubmit?: ({ oid }: { oid?: string }) => void;
   onClose?: () => void;
   open: boolean;
 };

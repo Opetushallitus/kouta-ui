@@ -28,7 +28,7 @@ export const DateTimeRange: React.FC<DateTimeRangeProps> = ({
           label={t('yleiset.alkaa')}
           component={FormFieldDateTimeInput}
           helperText={t('yleiset.paivamaaraJaKellonaika')}
-          required
+          required={true}
           {...startProps}
         />
       </Box>
@@ -37,6 +37,7 @@ export const DateTimeRange: React.FC<DateTimeRangeProps> = ({
           label={t('yleiset.paattyy')}
           component={FormFieldDateTimeInput}
           helperText={t('yleiset.paivamaaraJaKellonaika')}
+          required={false}
           {...endProps}
         />
       </Box>

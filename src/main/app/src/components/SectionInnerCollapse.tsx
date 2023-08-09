@@ -11,7 +11,9 @@ import { getThemeProp } from '#/src/theme';
 
 const SectionInnerCollapseHeader = styled.div`
   display: flex;
-  transition-property: color, background-color border-radius;
+  transition-property:
+    color,
+    background-color border-radius;
   transition-duration: 0.4s;
   color: black;
   background-color: ${getThemeProp('colors.grayLighten6')};

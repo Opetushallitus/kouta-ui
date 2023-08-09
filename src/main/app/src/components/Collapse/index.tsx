@@ -16,7 +16,8 @@ const Container = styled.div`
     active &&
     css`
       border-color: ${getThemeProp('palette.primary.main')};
-      box-shadow: 0 0 0 1px ${getThemeProp('palette.primary.main')},
+      box-shadow:
+        0 0 0 1px ${getThemeProp('palette.primary.main')},
         0 0 7px 1px
           ${({ theme }) => setLightness(0.8, theme.palette.primary.main)};
     `}

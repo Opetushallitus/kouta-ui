@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import _ from 'lodash';
+
 import { sanitizeHTML } from '#/src/utils';
 import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';

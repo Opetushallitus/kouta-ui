@@ -2,9 +2,9 @@ import React from 'react';
 
 import { storiesOf } from '@storybook/react';
 
-import { ENTITY, FormMode } from '../constants';
 import ReduxForm from './ReduxForm';
 import SoraKuvausSection from './SoraKuvausSection';
+import { ENTITY, FormMode } from '../constants';
 
 storiesOf('SoraKuvausSection', module).add('Basic', () => (
   <ReduxForm

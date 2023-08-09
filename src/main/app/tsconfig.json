@@ -17,6 +17,7 @@
       "esnext"
     ],
     "skipLibCheck": true,
+    "allowUmdGlobalAccess": false,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",

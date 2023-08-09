@@ -1,23 +1,20 @@
-import { isNodeEnv, isPlaywright } from './utils';
+import { isDev, isPlaywright } from './utils';
 
-const {
-  REACT_APP_DEV_SERVER_URL,
-  REACT_APP_KOUTA_BACKEND_URL,
-  REACT_APP_KONFO_URL,
-} = process.env;
+const { VITE_DEV_SERVER_URL, VITE_KOUTA_BACKEND_URL, VITE_KONFO_URL } =
+  import.meta.env;
 
 const koutaBackendDevUrl = `${
-  REACT_APP_KOUTA_BACKEND_URL || REACT_APP_DEV_SERVER_URL
+  VITE_KOUTA_BACKEND_URL || VITE_DEV_SERVER_URL
 }/kouta-backend`;
-const virkailijaDevUrl = REACT_APP_DEV_SERVER_URL;
+const virkailijaDevUrl = VITE_DEV_SERVER_URL;
 const ePerusteetDevUrl = `https://eperusteet.hahtuvaopintopolku.fi`;
 
-export const development = ({ isPlaywright }) => ({
-  'konfo-ui.koulutus': `${REACT_APP_KONFO_URL}/koulutus/$1`,
-  'konfo-ui.toteutus': `${REACT_APP_KONFO_URL}/toteutus/$1`,
-  'konfo-ui.oppilaitos': `${REACT_APP_KONFO_URL}/oppilaitos/$1`,
-  'konfo-ui.oppilaitoksenOsa': `${REACT_APP_KONFO_URL}/oppilaitososa/$1`,
-  'konfo-ui.valintaperuste': `${REACT_APP_KONFO_URL}/valintaperuste/$1`,
+const development = {
+  'konfo-ui.koulutus': `${VITE_KONFO_URL}/koulutus/$1`,
+  'konfo-ui.toteutus': `${VITE_KONFO_URL}/toteutus/$1`,
+  'konfo-ui.oppilaitos': `${VITE_KONFO_URL}/oppilaitos/$1`,
+  'konfo-ui.oppilaitoksenOsa': `${VITE_KONFO_URL}/oppilaitososa/$1`,
+  'konfo-ui.valintaperuste': `${VITE_KONFO_URL}/valintaperuste/$1`,
   'kouta-backend.base-url': koutaBackendDevUrl,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
@@ -99,11 +96,11 @@ export const development = ({ isPlaywright }) => ({
   'eperusteet.sisalto': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/sisalto/$3`,
   'hakukohderyhmapalvelu.haun-asetukset': `${virkailijaDevUrl}/hakukohderyhmapalvelu/haun-asetukset?hakuOid=$1`,
   'organisaatiopalvelu.organisaation-muokkaus-ui': `${virkailijaDevUrl}/organisaatio-service/lomake/$1`,
-});
+};
 
 export const configure = async (urls, httpClient) => {
-  if (isNodeEnv(['development', 'test']) || isPlaywright) {
-    urls.addProperties(development({ isPlaywright }));
+  if (isDev || isPlaywright) {
+    urls.addProperties(development);
   } else {
     const { data } = await httpClient.get('/kouta/rest/config/frontProperties');
     urls.addProperties(data);

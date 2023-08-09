@@ -8,7 +8,7 @@ import { useFieldValue } from '#/src/hooks/form';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
-export const OsaamisalanKuvausSection = ({ disabled, language, name }) => {
+export const OsaamisalanKuvausSection = ({ language }) => {
   const { t } = useTranslation();
   const selectedEPeruste = useFieldValue('osaamisala.eperuste')?.value;
   const selectedOsaamisala = useFieldValue('osaamisala.osaamisala')?.value;

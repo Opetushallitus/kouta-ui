@@ -102,7 +102,7 @@ const InfoLabel = props => (
 
 const InfoValue = props => <Box flexGrow={1} {...props} />;
 
-const Yhteystieto = ({ label, value, id, ...props }) => (
+const Yhteystieto = ({ label, value, id }) => (
   <Box display="flex" mb={2}>
     <InfoLabel id={id}>
       <Typography color="text.dark">{label}:</Typography>

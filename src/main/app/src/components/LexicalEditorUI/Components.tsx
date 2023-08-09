@@ -7,7 +7,9 @@ export const Container = styled.div`
   border-radius: ${getThemeProp('shape.borderRadius')};
   background-color: white;
   box-shadow: 0 0 0 0 transparent;
-  transition: border-color 0.25s, box-shadow 0.25s;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s;
   margin-bottom: ${spacing(2)};
 
   div[contenteditable] {

@@ -8,8 +8,8 @@ import {
   KOULUTUSTYYPPI,
 } from '#/src/constants';
 
-import { initialValues } from '../initialToteutusValues';
 import ToteutusForm from './index';
+import { initialValues } from '../initialToteutusValues';
 
 export default {
   title: 'ToteutusForm',

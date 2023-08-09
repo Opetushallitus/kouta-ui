@@ -1,8 +1,40 @@
 module.exports = {
-  extends: ['react-app', 'prettier', 'plugin:lodash/recommended'],
-  plugins: ['prettier', 'lodash'],
+  parser: '@typescript-eslint/parser',
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'plugin:lodash/recommended',
+    'plugin:react-hooks/recommended',
+  ],
+  plugins: ['@typescript-eslint', 'prettier', 'lodash', 'import'],
+  env: {
+    browser: true,
+    node: true,
+  },
   rules: {
-    '@typescript-eslint/no-duplicate-imports': ['warn'],
+    'no-empty': 'off',
+    'react/prop-types': 'off',
+    'react/display-name': 'off',
+    'react/jsx-uses-react': ['warn'],
+    'import/no-duplicates': ['warn'],
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+      },
+    ],
     '@typescript-eslint/ban-types': [
       'error',
       {

@@ -12,7 +12,7 @@ import { createStore } from './state';
 import defaultTheme from './theme';
 import { configure as configureUrls } from './urls';
 
-if (process.env.REACT_APP_XSTATE_INSPECTOR) {
+if (import.meta.env.VITE_XSTATE_INSPECTOR) {
   inspect({
     iframe: false, // open in new window
   });
@@ -23,9 +23,9 @@ const history = createBrowserHistory({ basename: 'kouta' });
 (async () => {
   let apiUrls = ophUrls;
 
-  let httpClient = createHttpClient({
+  const httpClient = createHttpClient({
     apiUrls,
-    callerId: process.env.REACT_APP_CALLER_ID,
+    callerId: import.meta.env.VITE_CALLER_ID,
   });
 
   apiUrls = await configureUrls(apiUrls, httpClient);

@@ -26,7 +26,6 @@ type PohjaFormCollapseProps = {
 export default function PohjaFormCollapse({
   onContinue,
   entityType,
-  scrollOnActive = false,
   ...props
 }: PohjaFormCollapseProps) {
   const { t } = useTranslation();

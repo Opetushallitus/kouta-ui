@@ -45,7 +45,7 @@ const HaunAsetuksetButton = ({ haku }) => {
   );
 };
 
-const LomakeSelect = ({ input, haku, getShowUrl, hakutapa, ...props }) => {
+const LomakeSelect = ({ input, haku, hakutapa, ...props }) => {
   const { value } = input;
   const url = useAtaruLomakeUrl(value);
 

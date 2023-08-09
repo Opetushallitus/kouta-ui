@@ -11,7 +11,7 @@ import FieldArrayList from './index';
 
 const StoryForm = reduxForm({
   form: 'storyForm',
-})(({ children }) => <form children={children} />);
+})(({ children }) => <form>{children}</form>);
 
 const StoryFieldArrayList = ({ fields }) => (
   <>

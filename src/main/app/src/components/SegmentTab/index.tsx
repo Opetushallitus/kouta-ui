@@ -14,7 +14,10 @@ const SegmentTab = styled.button`
   cursor: pointer;
   outline: none;
   position: relative;
-  transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s,
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    background-color 0.25s,
     color 0.25s;
   box-shadow: 0px 0px 0px 0px transparent;
 

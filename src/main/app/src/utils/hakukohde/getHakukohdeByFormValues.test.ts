@@ -1,8 +1,8 @@
+import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 import {
   BASE_HAKUKOHDE_FORMDATA,
   hakukohdeFormValuesWithExtraTranslations,
 } from '../testFormData';
-import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 
 test('getHakukohdeByFormValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByFormValues(BASE_HAKUKOHDE_FORMDATA);

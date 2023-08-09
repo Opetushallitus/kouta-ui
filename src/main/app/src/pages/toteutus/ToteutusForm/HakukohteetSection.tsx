@@ -43,7 +43,7 @@ export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
 
   const hakukohdeService = useInterpret(hakukohdeMachine);
 
-  let filterParams = { toteutusOid: toteutus?.oid };
+  const filterParams = { toteutusOid: toteutus?.oid };
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 

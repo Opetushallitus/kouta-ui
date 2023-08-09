@@ -12,7 +12,7 @@ const getUserOrganisaatiotWithRoles = (user, roles) => {
 
   const organisaatioOids = [];
 
-  for (let role of userRoles) {
+  for (const role of userRoles) {
     const isMatch = Boolean(roles.find(r => role.startsWith(r)));
 
     if (!isMatch) {

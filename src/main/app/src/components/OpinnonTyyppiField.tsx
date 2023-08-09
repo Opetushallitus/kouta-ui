@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import { useLanguageTab } from '../contexts/LanguageTabContext';
-import useKoodistoOptions from '../hooks/useKoodistoOptions';
 import { FormFieldSelect } from './formFields';
 import { Box } from './virkailija';
+import { useLanguageTab } from '../contexts/LanguageTabContext';
+import useKoodistoOptions from '../hooks/useKoodistoOptions';
 
 export const OpinnonTyyppiField = ({ name }) => {
   const { t } = useTranslation();

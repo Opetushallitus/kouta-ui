@@ -13,12 +13,7 @@ import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 import { getTestIdProps } from '#/src/utils';
 import { useOpintojaksot } from '#/src/utils/toteutus/getOpintojaksot';
 
-export const OpintojaksotFields = ({
-  fields,
-  name,
-  organisaatioOid,
-  language,
-}) => {
+export const OpintojaksotFields = ({ fields, organisaatioOid }) => {
   const { t } = useTranslation();
 
   const { data: opintojaksot } = useOpintojaksot({

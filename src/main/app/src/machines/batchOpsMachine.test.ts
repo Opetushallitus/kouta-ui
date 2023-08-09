@@ -1,8 +1,8 @@
 import { AnyActorRef, interpret } from 'xstate';
 import { waitFor } from 'xstate/lib/waitFor';
 
-import { JULKAISUTILA } from '../constants';
 import { BatchOpsMachine } from './batchOpsMachine';
+import { JULKAISUTILA } from '../constants';
 
 const expectEventualState = async (actor: AnyActorRef, stateMatch: string) => {
   const expectedState = await waitFor(actor, s => s.matches(stateMatch));

@@ -116,12 +116,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
   }
 );
 
-export const ApurahaFields = ({
-  koulutustyyppi,
-  language,
-  name,
-  toteutuksenMetadata,
-}) => {
+export const ApurahaFields = ({ language, name, toteutuksenMetadata }) => {
   const { t } = useTranslation();
   const onkoApurahaSelected = useFieldValue<boolean>(`${name}.onkoApuraha`);
 

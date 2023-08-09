@@ -1,6 +1,6 @@
 import { formValueExists } from '.';
-import { createEmptyEditorState } from '../components/LexicalEditorUI/utils';
 import { getInvalidTranslations } from './languageUtils';
+import { createEmptyEditorState } from '../components/LexicalEditorUI/utils';
 
 describe('getInvalidTranslations', () => {
   test.each([[{ fi: createEmptyEditorState() }, ['fi', 'sv'], []]])(

@@ -2,6 +2,7 @@ export const makeBackendEntityMutator =
   (method: 'put' | 'post', dataProp: string, urlKey: string) => async props => {
     // "modified" on backendin generoima ja "lastModified" tulee "x-last-modified"-headerissa (muokkaus)
     // Ei lähetetä näitä kenttiä datan mukana tallennettaessa
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { modified, lastModified, ...entityData } = props[dataProp];
     const { data } = await props.httpClient[method](
       props.apiUrls.url(urlKey),

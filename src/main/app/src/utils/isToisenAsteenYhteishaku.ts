@@ -1,5 +1,5 @@
-import { TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT } from '../constants';
 import isYhteishakuHakutapa from './isYhteishakuHakutapa';
+import { TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT } from '../constants';
 
 export const isToisenAsteenYhteishaku = (hakutapaKoodiUri, koulutustyyppi) =>
   isYhteishakuHakutapa(hakutapaKoodiUri) &&

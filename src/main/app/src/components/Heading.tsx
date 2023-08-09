@@ -24,7 +24,6 @@ export const Heading = ({
   hasDivider = false,
   mt = 0,
   mb = 2,
-  ...props
 }: HeadingProps) => (
   <Box width="100%" mb={mb} mt={mt}>
     <StyledTypography id={id} variant={variant}>

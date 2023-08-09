@@ -29,13 +29,13 @@ import useKoodi from '#/src/hooks/useKoodi';
 import { getKoulutustyyppiTranslationKey, getTestIdProps } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
-import { AmmatillinenTiedotSection } from '../AmmatillinenTiedotSection/AmmatillinenTiedotSection';
-import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
 import { ErikoistumiskoulutusField } from './ErikoistumiskoulutusField';
 import KoulutusalatField from './KoulutusalatField';
 import { OpettajaKoulutusTiedotSubSection } from './OpettajaKoulutusTiedotSubSection';
 import TutkintonimikeField from './TutkintonimikeField';
+import { AmmatillinenTiedotSection } from '../AmmatillinenTiedotSection/AmmatillinenTiedotSection';
+import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 
 const useNimiFromKoulutustyyppi = ({ name, koulutustyyppi }) => {
   const { t } = useTranslation();

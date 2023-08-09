@@ -29,15 +29,15 @@ import {
 import { spacing, getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 
+import OrganisaatioTreeList from './OrganisaatioTreeList';
+import { PikavalinnatCollapse } from './PikavalinnatCollapse';
+import { SelectedOrganisaatioBox } from './SelectedOrganisaatioBox';
+import { useReadableOrganisaatioHierarkia } from './useReadableOrganisaatioHierarkia';
 import {
   createCanReadSomethingRoleBuilder,
   getEditLinkURL,
   isEditable,
 } from '../utils';
-import OrganisaatioTreeList from './OrganisaatioTreeList';
-import { PikavalinnatCollapse } from './PikavalinnatCollapse';
-import { SelectedOrganisaatioBox } from './SelectedOrganisaatioBox';
-import { useReadableOrganisaatioHierarkia } from './useReadableOrganisaatioHierarkia';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};

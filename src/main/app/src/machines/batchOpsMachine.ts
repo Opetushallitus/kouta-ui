@@ -49,6 +49,7 @@ export const BatchOpsMachine =
     {
       predictableActionArguments: true,
       tsTypes: {} as import('./batchOpsMachine.typegen').Typegen0,
+
       id: 'BatchOpsMachine',
       schema: {
         events: {} as StartEvent | ExecuteEvent | CancelEvent | CloseEvent,
@@ -125,13 +126,13 @@ export const BatchOpsMachine =
               )(e?.entities)
             : ctx.entities,
         })),
-        resetContext: assign(ctx => ({
+        resetContext: assign(() => ({
           entities: {},
           tila: undefined,
           result: undefined,
         })),
         initSelectionMachine: assign({
-          selectionRef: ctx => spawn(entitySelectionMachine),
+          selectionRef: () => spawn(entitySelectionMachine),
         }),
         selectAll: pure(ctx => {
           return send(

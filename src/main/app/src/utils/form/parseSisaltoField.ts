@@ -24,14 +24,14 @@ export const parseSisaltoField = (sisalto?: SisaltoModel): SisaltoValues => {
             data: _.isObject(data)
               ? _.mapValues(data, parseEditorState)
               : undefined,
-          } as SisaltoTekstiValue)
+          }) as SisaltoTekstiValue
       )
       .otherwise(
         ({ data }) =>
           ({
             tyyppi: 'taulukko',
             data,
-          } as SisaltoTaulukkoValue)
+          }) as SisaltoTaulukkoValue
       );
   });
 };

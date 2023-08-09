@@ -15,7 +15,7 @@ export const TaiteenalatField = ({
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
 
-  let { options } = useKoodistoOptions({
+  const { options } = useKoodistoOptions({
     koodisto: 'taiteenperusopetustaiteenala',
     language: selectedLanguage,
   });

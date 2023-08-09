@@ -8,11 +8,11 @@ import { LANGUAGES } from '#/src/constants';
 import getTranslations from '#/src/translations';
 import { getLocalization } from '#/src/utils/api/getLocalization';
 
-import { isPlaywright } from './utils';
+import { isDev, isPlaywright } from './utils';
 
-const { REACT_APP_CIMODE } = process.env;
+const { VITE_CIMODE } = import.meta.env;
 
-const isCimode = REACT_APP_CIMODE || isPlaywright;
+const isCimode = VITE_CIMODE || isPlaywright;
 
 const formatMap = {
   toLower: _.toLower,
@@ -69,7 +69,7 @@ const createLocalization = ({
           },
         }),
       interpolation: {
-        format(value, format = 'default', lng) {
+        format(value, format = 'default') {
           return _.isFunction(formatMap[format])
             ? formatMap[format](value)
             : value;
@@ -77,8 +77,6 @@ const createLocalization = ({
       },
     });
 };
-
-const isDev = process.env.NODE_ENV === 'development';
 
 export const createDefaultLocalization = ({ httpClient, apiUrls }) => {
   return createLocalization({

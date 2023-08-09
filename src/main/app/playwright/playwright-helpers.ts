@@ -29,9 +29,10 @@ export const wrapMutationTest =
 
     // Tallennetaan snapshot tiedostoon ./snapshots/<testitiedosto>/<testin-nimi>.json
     testInfo.snapshotPath = (name: string) =>
-      `${path.resolve(testInfo.file, '../..')}/snapshots/${
-        split(testInfo.titlePath[0], '.')?.[0]
-      }/${deburr(toLower(name))}`;
+      `${path.resolve(testInfo.file, '../..')}/snapshots/${split(
+        testInfo.titlePath[0],
+        '.'
+      )?.[0]}/${deburr(toLower(name))}`;
 
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();
@@ -334,8 +335,11 @@ export const copyPohja = (page: Page, baseEntityName: string) =>
     await jatka(section);
   });
 
-export const assertTilaIs = async (page: Page, value: string) => {
-  await expect(getRadio(getSection(page, 'tila'), 'tallennettu')).toBeChecked();
+export const assertTilaIs = async (
+  page: Page,
+  value: string = 'tallennettu'
+) => {
+  await expect(getRadio(getSection(page, 'tila'), value)).toBeChecked();
 };
 
 export const assertBaseTilaNotCopied = async (

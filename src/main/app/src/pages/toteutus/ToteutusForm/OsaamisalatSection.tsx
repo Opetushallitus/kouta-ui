@@ -177,11 +177,15 @@ const OsaamisalatContainer = ({
             values={{ koulutusLinkText, ePerusteLinkText }}
             components={[
               <RouterAnchor
+                key={koulutus.oid}
                 to={`/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/muokkaus`}
               >
                 {koulutusLinkText}
               </RouterAnchor>,
-              <Anchor href={urls.url('eperusteet.kooste', language, id)}>
+              <Anchor
+                key={id}
+                href={urls.url('eperusteet.kooste', language, id)}
+              >
                 {ePerusteLinkText}
               </Anchor>,
             ]}

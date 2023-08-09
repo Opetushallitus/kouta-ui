@@ -49,8 +49,8 @@ export const stubHakukohdeRoutes = async (
     (!hakukohteenLiittaminenHasExpired && !hakukohteenMuokkaaminenHasExpired) ||
     hakuWithoutMuokkaamisenTakaraja
   ) {
-    let liittamisenTakaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
-    let muokkaamisenTakaraja = hakuMockData.hakukohteenMuokkaamisenTakaraja;
+    const liittamisenTakaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
+    const muokkaamisenTakaraja = hakuMockData.hakukohteenMuokkaamisenTakaraja;
     let takaraja = liittamisenTakaraja;
 
     if (muokkaamisenTakaraja && muokkaamisenTakaraja < liittamisenTakaraja) {

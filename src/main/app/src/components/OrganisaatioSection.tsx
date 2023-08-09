@@ -15,8 +15,8 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import getOrganisaatioByOid from '#/src/utils/organisaatio/getOrganisaatioByOid';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
 import { FormFieldAsyncSelect } from './formFields';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
 
 export const OrganisaatioSection = () => {
   const language = useUserLanguage();
@@ -55,9 +55,10 @@ export const OrganisaatioSection = () => {
         httpClient,
         apiUrls,
       });
-      return `${getFirstLanguageValue(organisaatio?.nimi, language)} (${
-        organisaatio?.oid
-      })`;
+      return `${getFirstLanguageValue(
+        organisaatio?.nimi,
+        language
+      )} (${organisaatio?.oid})`;
     },
     [apiUrls, httpClient, language]
   );

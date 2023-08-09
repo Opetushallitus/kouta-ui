@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import {

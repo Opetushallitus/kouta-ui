@@ -26,7 +26,7 @@ import { YearSelect } from '#/src/components/YearSelect';
 
 import { createComponent } from './utils';
 
-export const simpleMapProps = ({ meta, input, ...props }) => ({
+export const simpleMapProps = ({ input, ...props }) => ({
   ...input,
   ...props,
 });
@@ -45,7 +45,7 @@ export const FormFieldUrlInput = createComponent(UrlInput, simpleMapProps);
 
 export const FormFieldRadio = createComponent(
   Radio,
-  ({ meta, input: { value, ...input }, ...props }) => ({
+  ({ input: { value, ...input }, ...props }) => ({
     ...input,
     checked: Boolean(value),
     ...props,
@@ -56,7 +56,7 @@ export const FormFieldRadioGroup = createComponent(RadioGroup, simpleMapProps);
 
 export const FormFieldCheckbox = createComponent(
   Checkbox,
-  ({ meta, input: { value, ...input }, ...props }) => ({
+  ({ input: { value, ...input }, ...props }) => ({
     ...input,
     checked: Boolean(value),
     ...props,
@@ -65,7 +65,7 @@ export const FormFieldCheckbox = createComponent(
 
 export const FormFieldSwitch = createComponent(
   Switch,
-  ({ meta, input: { value, checked, ...input }, ...props }) => ({
+  ({ input: { value, ...input }, ...props }) => ({
     ...input,
     checked: Boolean(value),
     ...props,
@@ -78,7 +78,7 @@ export const FormFieldCheckboxGroup = createComponent(
 );
 
 export const FormFieldHardcoded = value =>
-  createComponent(Select, ({ disabled, meta, input, id, ...props }) => ({
+  createComponent(Select, ({ input, id, ...props }) => ({
     ...input,
     value: { value: value },
     onBlur: _.noop,
@@ -88,7 +88,7 @@ export const FormFieldHardcoded = value =>
 
 export const FormFieldSelect = createComponent(
   Select,
-  ({ disabled, meta, input, id, ...props }) => ({
+  ({ input, id, ...props }) => ({
     ...input,
     onBlur: _.noop,
     ...props,
@@ -109,7 +109,7 @@ export const FormFieldEditor = createComponent(LexicalEditorUI, simpleMapProps);
 
 export const FormFieldYearSelect = createComponent(
   YearSelect,
-  ({ meta, input, id, ...props }) => ({
+  ({ input, id, ...props }) => ({
     ...input,
     onBlur: _.noop,
     ...props,
@@ -138,7 +138,7 @@ export const FormFieldKoulutusalaSelect = createComponent(
 
 export const FormFieldSoraKuvausSelect = createComponent(
   SoraKuvausSelect,
-  ({ meta, input, id, ...props }) => ({
+  ({ input, id, ...props }) => ({
     ...input,
     onBlur: _.noop,
     ...props,

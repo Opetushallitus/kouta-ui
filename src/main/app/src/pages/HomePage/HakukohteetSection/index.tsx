@@ -22,10 +22,10 @@ import {
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 
+import LiitoksetModal from './LiitoksetModal';
 import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
-import LiitoksetModal from './LiitoksetModal';
 
 const { HAKUKOHDE } = ENTITY;
 

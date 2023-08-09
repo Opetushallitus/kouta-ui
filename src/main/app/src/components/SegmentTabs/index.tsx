@@ -7,7 +7,7 @@ const SegmentTabsBase = styled.div`
     fullWidth ? { display: 'flex', width: '100%' } : { display: 'inline-flex' }}
 `;
 
-const SegmentTabs = ({ fullWidth = false, value, children, ...props }) => {
+const SegmentTabs = ({ value, children, ...props }) => {
   const validChildren = React.Children.toArray(children).filter(c =>
     React.isValidElement(c)
   );

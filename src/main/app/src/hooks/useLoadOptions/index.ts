@@ -4,7 +4,7 @@ import debounce from 'debounce-promise';
 import _ from 'lodash';
 
 const getMatchingOptions = (options: SelectOptions, input, maxMatches) => {
-  let matches: SelectOptions = [];
+  const matches: SelectOptions = [];
 
   if (!_.isString(input)) {
     return matches;

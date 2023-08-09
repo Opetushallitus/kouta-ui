@@ -7,13 +7,13 @@ import { MaaraTyyppi, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
 
-import { useLanguageTab } from '../contexts/LanguageTabContext';
 import {
   createFormFieldComponent,
   FormFieldAsyncKoodistoSelect,
   FormFieldFloatInput,
   FormFieldRadioGroup,
 } from './formFields';
+import { useLanguageTab } from '../contexts/LanguageTabContext';
 
 const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
   ({ disabled, section, fixedLaajuusYksikko }) => {

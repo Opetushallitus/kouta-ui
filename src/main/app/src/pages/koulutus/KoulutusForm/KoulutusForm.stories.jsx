@@ -5,8 +5,8 @@ import { storiesOf } from '@storybook/react';
 import ReduxForm from '#/src/components/ReduxForm';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
-import { initialKoulutusValues } from '../initialKoulutusValues';
 import { KoulutusForm } from './KoulutusForm';
+import { initialKoulutusValues } from '../initialKoulutusValues';
 
 storiesOf('KoulutusForm', module).add('Basic', () => {
   return (

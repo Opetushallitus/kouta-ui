@@ -43,15 +43,15 @@ storiesOf('ImageInput', module)
   .addDecorator(makeLocalizationDecorator())
   .add('With external value', () => <Story />)
   .add('With disabled', () => (
-    <ImageInput onChange={v => action('change')} disabled />
+    <ImageInput onChange={() => action('change')} disabled />
   ))
   .add('With external error', () => (
     <ImageInput
-      onChange={v => action('change')}
+      onChange={() => action('change')}
       upload={upload}
       error="Attribuuttina annettu virhe"
     />
   ))
   .add('With failing upload', () => (
-    <ImageInput onChange={v => action('change')} upload={errorUpload} />
+    <ImageInput onChange={() => action('change')} upload={errorUpload} />
   ));

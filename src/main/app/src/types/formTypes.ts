@@ -1,5 +1,5 @@
-import { EditorState } from 'draft-js';
 import { TFunction } from 'i18next';
+import { EditorState } from 'lexical';
 import { ValueType } from 'react-select';
 
 import { TableInputRows } from '#/src/components/TableInput/utils';

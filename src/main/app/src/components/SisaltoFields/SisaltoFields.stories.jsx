@@ -7,7 +7,7 @@ import { SisaltoFields } from '.';
 
 const StoryForm = reduxForm({
   form: 'storyForm',
-})(({ children }) => <form children={children} />);
+})(({ children }) => <form>{children}</form>);
 
 storiesOf('SisaltoFields', module).add('Basic', () => (
   <StoryForm>

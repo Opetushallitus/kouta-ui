@@ -388,7 +388,7 @@ export const fillValintakokeetSection = (
       .click();
     await fillAsyncSelect(
       kokeetTaiLisanaytot.getByTestId('kokeenTaiLisanaytonTyyppi'),
-      'Valintakoe'
+      'Kielikoe'
     );
     await kokeetTaiLisanaytot
       .getByTestId('hakijalleNakyvaNimi')

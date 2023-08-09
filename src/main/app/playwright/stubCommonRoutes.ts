@@ -94,6 +94,11 @@ export const stubCommonRoutes = async (page: Page) => {
     fixtureFromFile('hakutapa-koodisto.json')
   );
 
+  await page.route(
+    '**/kouta-backend/koodisto/valintakokeentyypit?*',
+    fixtureFromFile('valintakokeentyyppi-koodisto.json')
+  );
+
   await stubKayttoOikeusOmatTiedot(page);
   await mocksFromFile(page, 'common.mocks.json');
 };

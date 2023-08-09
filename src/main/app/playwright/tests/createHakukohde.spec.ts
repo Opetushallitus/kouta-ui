@@ -21,7 +21,11 @@ import {
   assertBaseTilaNotCopied,
   fillValintakokeetSection,
 } from '#/playwright/playwright-helpers';
-import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
+import {
+  fixtureJSON,
+  fixtureFromFile,
+  mocksFromFile,
+} from '#/playwright/playwright-mock-utils';
 import {
   selectedToimipisteNimi,
   stubHakukohdeRoutes,
@@ -114,6 +118,11 @@ const prepareTest = async (
         tila: 'julkaistu',
       })
     )
+  );
+
+  await page.route(
+    '**/kouta-backend/koodisto/valintakokeentyypit*',
+    fixtureFromFile('valintakokeentyyppi-koodisto.json')
   );
 };
 

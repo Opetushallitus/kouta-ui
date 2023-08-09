@@ -16,7 +16,7 @@ import RemoveButton from '#/src/components/RemoveButton';
 import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';
 import { Box, Divider } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useValintakokeentyyppiKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 import { TilaisuudetFields } from './TilaisuudetFields';
@@ -26,9 +26,18 @@ export const KoeTaiLisanayttoFields = ({
   field,
   language,
   removeSelf,
+  hakutapa,
+  haunkohdejoukko,
+  koulutuskoodit = [],
+  osaamisalat = [],
 }) => {
   const { t } = useTranslation();
-  const { options } = useKoodistoOptions({ koodisto: 'valintakokeentyyppi' });
+  const { options } = useValintakokeentyyppiKoodistoOptions({
+    koulutuskoodit,
+    hakutapa,
+    haunkohdejoukko,
+    osaamisalat,
+  });
 
   const liittyyEnnakkovalmistautumista = useFieldValue(
     `${field}.liittyyEnnakkovalmistautumista`
@@ -141,6 +150,10 @@ export const KokeetTaiLisanaytotFields = ({
   t,
   meta,
   readonlyAmount = 0,
+  hakutapa = null,
+  haunkohdejoukko = null,
+  koulutuskoodit = [],
+  osaamisalat = [],
 }) => {
   return (
     <div {...getTestIdProps('kokeetTaiLisanaytot')}>
@@ -157,6 +170,10 @@ export const KokeetTaiLisanaytotFields = ({
             meta={meta}
             index={index + 1 + readonlyAmount}
             removeSelf={() => fields.remove(index)}
+            hakutapa={hakutapa}
+            haunkohdejoukko={haunkohdejoukko}
+            koulutuskoodit={koulutuskoodit}
+            osaamisalat={osaamisalat}
           />
         )}
       </FieldArrayList>

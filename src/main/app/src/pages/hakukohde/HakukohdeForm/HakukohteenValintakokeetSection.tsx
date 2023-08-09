@@ -18,7 +18,13 @@ import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperu
 
 import { ReadonlyKoeJaTilaisuudet } from './ReadonlyKoeJaTilaisuudet';
 
-export const HakukohteenValintakokeetSection = ({ name, language }) => {
+export const HakukohteenValintakokeetSection = ({
+  name,
+  language,
+  haku,
+  koulutuskoodit,
+  osaamisalat,
+}) => {
   const { t } = useTranslation();
   const valintaperusteOid = useFieldValue(
     'valintaperusteenKuvaus.valintaperuste'
@@ -83,6 +89,10 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
         component={KokeetTaiLisanaytotFields}
         language={language}
         t={t}
+        hakutapa={haku?.hakutapa}
+        haunkohdejoukko={haku?.haunkohdejoukko}
+        koulutuskoodit={koulutuskoodit}
+        osaamisalat={osaamisalat}
       />
     </>
   );

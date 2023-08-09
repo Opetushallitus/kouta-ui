@@ -108,6 +108,8 @@ export const ValintaperusteForm = ({
             header={t('yleiset.kokeetTaiLisanaytot')}
             languages={languages}
             Component={KokeetTaiLisanaytotSection}
+            hakutapa={valintaperuste?.hakutapaKoodiUri}
+            haunkohdejoukko={valintaperuste?.kohdejoukkoKoodiUri}
           />
 
           <FormCollapse

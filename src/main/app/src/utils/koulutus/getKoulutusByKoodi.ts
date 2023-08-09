@@ -61,10 +61,6 @@ export const getKoulutusByKoodi = async ({
     ({ koodiUri }) => koodiUri && /^okmohjauksenala_/.test(koodiUri)
   );
 
-  const opintojenlaajuusKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^opintojenlaajuus_/.test(koodiUri)
-  );
-
   const opintojenlaajuusYksikkoKoodi = alakooditData.find(
     ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri)
   );
@@ -78,11 +74,6 @@ export const getKoulutusByKoodi = async ({
       ? _.keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
           kieli ? kieli.toLowerCase() : '_'
         )
-      : null;
-
-  const opintojenlaajuus =
-    opintojenlaajuusKoodi && _.isArray(opintojenlaajuusKoodi.metadata)
-      ? _.get(opintojenlaajuusKoodi.metadata, '[0].nimi') || null
       : null;
 
   const opintojenlaajuusYksikko =
@@ -120,7 +111,6 @@ export const getKoulutusByKoodi = async ({
     osaamisalat,
     tutkintonimikeKoodit,
     koulutusala: _.mapValues(koulutusala, ({ nimi }) => nimi || null),
-    opintojenlaajuus,
     opintojenlaajuusYksikko: _.mapValues(
       opintojenlaajuusYksikko,
       ({ nimi }) => nimi || null

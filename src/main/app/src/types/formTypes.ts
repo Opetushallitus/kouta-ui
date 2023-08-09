@@ -19,7 +19,7 @@ export type AjankohtaFields = {
 
 export type FormError = {
   field: string;
-  errorKey: string | ((t: TFunction) => string);
+  errorKey: string | ((t: TFunction) => string) | null;
 };
 
 type KoutaErrorResponse = { errorType: string; msg: string; path: string };

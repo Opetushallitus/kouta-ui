@@ -1,21 +1,22 @@
 import React from 'react';
 
-import Input from '@opetushallitus/virkailija-ui-components/Input';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
+import { OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 import { FormFieldFloatInput, FormFieldSelect } from './formFields';
-import { Box, FormControl } from './virkailija';
+import { Box } from './virkailija';
 
 type Props = {
   name: string;
   disabled?: boolean;
   required?: boolean;
-  fixedLaajuusYksikko?: string;
+  fixedLaajuusYksikko?: OpintojenLaajuusyksikko;
 };
 
 export const OpintojenLaajuusFieldExtended = ({
@@ -26,7 +27,7 @@ export const OpintojenLaajuusFieldExtended = ({
 }: Props) => {
   const { t } = useTranslation();
   const selectedLanguage = useLanguageTab();
-  let { options } = useKoodistoOptions({
+  const { options } = useKoodistoOptions({
     koodisto: 'opintojenlaajuusyksikko',
     language: selectedLanguage,
   });
@@ -45,12 +46,13 @@ export const OpintojenLaajuusFieldExtended = ({
           {...getTestIdProps('laajuusnumero')}
         />
       </Box>
-
       {fixedLaajuusYksikko ? (
         <Box px={1} flexGrow={1}>
-          <FormControl label={t('yleiset.laajuusyksikko')} disabled={true}>
-            <Input value={fixedLaajuusYksikko} />
-          </FormControl>
+          <FixedValueKoodiInput
+            koodiUri={fixedLaajuusYksikko}
+            selectedLanguage={selectedLanguage}
+            label={t('yleiset.laajuusyksikko')}
+          />
         </Box>
       ) : (
         <Box px={1} flexGrow={1} {...getTestIdProps('laajuusyksikko')}>
@@ -62,7 +64,6 @@ export const OpintojenLaajuusFieldExtended = ({
             disabled={disabled}
             required={required}
             isClearable
-            defaultValue={{ value: fixedLaajuusYksikko }}
           />
         </Box>
       )}

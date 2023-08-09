@@ -447,6 +447,7 @@ export type Koulutustyyppi = ValueOf<KOULUTUSTYYPPI>;
 export enum OpintojenLaajuusyksikko {
   OPINTOPISTE = 'opintojenlaajuusyksikko_2',
   OSAAMISPISTE = 'opintojenlaajuusyksikko_6',
+  VIIKKO = 'opintojenlaajuusyksikko_8',
 }
 
 export const PAINOTETUT_OPPIAINEET_LUKIO_KAIKKI_OPTIONS = [

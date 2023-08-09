@@ -71,16 +71,6 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   }
 
   if (
-    path === 'metadata.opintojenLaajuusKoodiUri' &&
-    errorType === 'missingMsg'
-  ) {
-    return {
-      field: `information.opintojenLaajuus`,
-      errorKey: 'validointivirheet.pakollinen',
-    };
-  }
-
-  if (
     path === 'metadata.opintojenLaajuusNumeroMin' ||
     path === 'metadata.opintojenLaajuusNumeroMax'
   ) {

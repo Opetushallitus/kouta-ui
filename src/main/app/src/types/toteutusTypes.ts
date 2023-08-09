@@ -1,4 +1,5 @@
-import { EditorState } from '#/src/components/Editor/Editor';
+import { EditorState } from 'lexical';
+
 import {
   JULKAISUTILA,
   KOULUTUSTYYPPI,

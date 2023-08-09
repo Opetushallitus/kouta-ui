@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 
-import { TestiKoulutustyyppi } from '../test-types';
+import { TestiKoulutustyyppi } from '#/playwright/test-types';
+import { OpintojenLaajuusyksikko } from '#/src/constants';
 
 const getBaseFields = (tyyppi: TestiKoulutustyyppi = 'amm') => {
   return {
@@ -68,7 +69,6 @@ const getKorkeakouluFields = (tyyppi: TestiKoulutustyyppi) => {
     metadata: {
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
       tutkintonimikeKoodiUrit: ['tutkintonimikekk_1#1', 'tutkintonimikekk_2#1'],
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
       koulutusalaKoodiUrit: [
         'kansallinenkoulutusluokitus2016koulutusalataso2_052#1',
       ],
@@ -84,7 +84,8 @@ const getAmmOpeErityisopeJaOpoFields = () => {
     metadata: {
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
       tutkintonimikeKoodiUrit: [],
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_60#1',
+      opintojenLaajuusYksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
+      opintojenLaajuusNumero: 60,
       koulutusalaKoodiUrit: [
         'kansallinenkoulutusluokitus2016koulutusalataso1_01#1',
       ],
@@ -97,7 +98,8 @@ const getLukioFields = () => {
     koulutuksetKoodiUri: ['koulutus_309902#7'],
     nimi: { fi: 'Lukion oppimäärä' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_150',
+      opintojenLaajuusYksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
+      opintojenLaajuusNumero: 150,
     },
   });
 };
@@ -113,7 +115,8 @@ const getTuvaFields = () => {
   return merge(getBaseFields('tuva'), {
     nimi: { fi: 'Tutkintokoulutukseen valmentava koulutus (TUVA)' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_38',
+      opintojenLaajuusyksikkoKoodiUri: OpintojenLaajuusyksikko.VIIKKO,
+      opintojenLaajuusNumero: 38,
       kuvaus: { fi: 'kuvausteksti' },
     },
   });
@@ -123,7 +126,8 @@ const getTelmaFields = () => {
   return merge(getBaseFields('telma'), {
     nimi: { fi: 'Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_60',
+      opintojenLaajuusyksikkoKoodiUri: OpintojenLaajuusyksikko.OSAAMISPISTE,
+      opintojenLaajuusNumero: 60,
       kuvaus: { fi: 'kuvausteksti' },
     },
   });
@@ -133,7 +137,8 @@ const getVapaaSivistystyoFields = tyyppi => {
   return merge(getBaseFields(tyyppi), {
     nimi: { fi: 'Vapaa Sivistystyö Opistovuosi' },
     metadata: {
-      opintojenLaajuusKoodiUri: 'opintojenlaajuus_v53',
+      opintojenLaajuusyksikkoKoodiUri: OpintojenLaajuusyksikko.OPINTOPISTE,
+      opintojenLaajuusNumero: 53,
       kuvaus: { fi: 'kuvausteksti' },
     },
   });

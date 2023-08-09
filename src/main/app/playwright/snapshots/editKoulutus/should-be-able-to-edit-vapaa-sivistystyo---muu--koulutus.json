@@ -29,9 +29,8 @@
     "kuvaus": {
       "fi": "<p>kuvausteksti</p>"
     },
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53",
-    "opintojenLaajuusyksikkoKoodiUri": null,
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2",
+    "opintojenLaajuusNumero": 53,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "tutkintonimikeKoodiUrit": [],

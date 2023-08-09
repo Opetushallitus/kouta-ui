@@ -54,7 +54,6 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     lisatiedot = [],
     kuvaus = {},
     tutkinnonOsat = [],
-    opintojenLaajuusKoodiUri = '',
     opintojenLaajuusyksikkoKoodiUri = '',
     opintojenLaajuusNumero,
     opintojenLaajuusNumeroMin,
@@ -84,9 +83,6 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         value: koulutusKoodiUri,
       },
       korkeakoulutukset: korkeakoulutusKoodiUrit.map(value => ({ value })),
-      opintojenLaajuus: {
-        value: opintojenLaajuusKoodiUri,
-      },
       opintojenLaajuusyksikko: {
         value: opintojenLaajuusyksikkoKoodiUri,
       },

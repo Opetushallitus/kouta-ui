@@ -26,9 +26,8 @@
       }
     ],
     "kuvaus": {},
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_150",
     "opintojenLaajuusyksikkoKoodiUri": null,
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumero": 150,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "tutkintonimikeKoodiUrit": [],

@@ -56,8 +56,8 @@
       "fi": "<p>kuvausteksti</p>"
     },
     "tyyppi": "telma",
-    "opintojenLaajuusyksikkoKoodiUri": null,
-    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6",
+    "opintojenLaajuusNumero": 60,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "ilmoittautumislinkki": {},

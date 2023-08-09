@@ -15,13 +15,13 @@ import { TunnisteField } from '#/src/components/TunnisteField';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box, FormControl } from '#/src/components/virkailija';
 import {
-  KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   KOULUTUS_PERUSOPETUS_KOODIURI,
   KoulutusalaKoodi,
+  KOULUTUSTYYPPI,
   OPETTAJA_KOULUTUSTYYPIT,
   OpintojenLaajuusyksikko,
   TAITEEN_PERUSOPETUS_KOULUTUS_KOODIURI,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -109,7 +109,7 @@ export const TuvaTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        fixedLaajuusYksikko="viikkoa"
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.VIIKKO}
       />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
@@ -132,7 +132,7 @@ export const TelmaTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        fixedLaajuusYksikko="osaamispistettä"
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OSAAMISPISTE}
       />
       <NimiFieldFromKoulutustyyppi
         koulutustyyppi={koulutustyyppi}
@@ -211,7 +211,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         disabled={disabled}
         name={name}
         required
-        fixedLaajuusYksikko="opintopistettä"
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
@@ -274,7 +274,7 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
       <OpintojenLaajuusFieldRange
         name={name}
         disabled={disabled}
-        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
@@ -376,7 +376,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           <OpintojenLaajuusFieldExtended
             disabled={disabled}
             name={name}
-            fixedLaajuusYksikko="opintopistettä"
+            fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
           />
           <TutkintonimikeField disabled={disabled} name={name} />
           <KoulutusalatField disabled={disabled} name={name} />
@@ -397,7 +397,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           <OpintojenLaajuusFieldExtended
             disabled={disabled}
             name={name}
-            fixedLaajuusYksikko="opintopistettä"
+            fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
           />
           <ReadOnlyKoulutusalaSection
             koodiUri={KoulutusalaKoodi.YLEISSIVISTAVA}
@@ -447,7 +447,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
       <OpintojenLaajuusFieldRange
         name={name}
         disabled={disabled}
-        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field
@@ -487,7 +487,7 @@ export const ErikoistumisKoulutusTiedotSection = ({
       <OpintojenLaajuusFieldRange
         name={name}
         disabled={disabled}
-        forcedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
+        fixedLaajuusYksikko={OpintojenLaajuusyksikko.OPINTOPISTE}
       />
       <KoulutusalatField disabled={disabled} name={name} />
       <Field

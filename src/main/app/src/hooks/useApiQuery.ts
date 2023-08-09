@@ -12,7 +12,7 @@ export type KoutaApiQueryConfig = QueryObserverOptions<ApiResult, ApiError>;
 
 export const useApiQuery = <E>(
   key: string,
-  apiFn: (any) => any,
+  apiFn: (any) => Promise<E>,
   props: Record<string, any> = {},
   options: KoutaApiQueryConfig = {}
 ) => {

@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { produce } from 'immer';
 import _ from 'lodash';
 
 export type TableColumn = {

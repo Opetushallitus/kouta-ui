@@ -1,7 +1,6 @@
 import { useMemo, useCallback, useEffect } from 'react';
 
 import _ from 'lodash';
-import { useDispatch, useSelector } from 'react-redux';
 import { change, isDirty, isSubmitting, getFormSubmitErrors } from 'redux-form';
 import formActions from 'redux-form/lib/actions';
 
@@ -9,6 +8,7 @@ import { useFormName } from '#/src/contexts/FormContext';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
+import { useDispatch, useSelector } from './reduxHooks';
 import { useActions } from './useActions';
 
 export const useForm = (formNameProp?: string) => {

@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 
 import _ from 'lodash';
-import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import { useDispatch } from './reduxHooks';
 
 export function useActions(actions) {
   const dispatch = useDispatch();

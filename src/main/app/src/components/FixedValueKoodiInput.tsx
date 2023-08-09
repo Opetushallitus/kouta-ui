@@ -4,7 +4,6 @@ import Input from '@opetushallitus/virkailija-ui-components/Input';
 
 import { FormControl } from '#/src/components/virkailija';
 import useKoodi from '#/src/hooks/useKoodi';
-import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 type Props = {
@@ -28,9 +27,7 @@ export const FixedValueKoodiInput = ({
 
   return (
     <FormControl label={label} disabled={true}>
-      <Input
-        value={value ?? ''}
-      />
+      <Input value={value ?? ''} />
     </FormControl>
   );
 };

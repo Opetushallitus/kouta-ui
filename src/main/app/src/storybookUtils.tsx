@@ -16,7 +16,7 @@ import defaultTheme from '#/src/theme';
 import AuthorizedUserContext from './contexts/AuthorizedUserContext';
 import HttpContext from './contexts/HttpClientContext';
 import createLocalization from './localization';
-import { createStore } from './state';
+import { store } from './state/store';
 import { translations } from './translations';
 import { configure as configureUrls } from './urls';
 
@@ -59,7 +59,6 @@ export const makeApiDecorator =
   );
 
 export const makeStoreDecorator = ({ logging = false } = {}) => {
-  const { store } = createStore();
   const storeAction = action('change');
 
   if (logging) {

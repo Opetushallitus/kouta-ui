@@ -1,7 +1,6 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { useUnmount, usePrevious } from 'react-use';
 import styled from 'styled-components';
 
@@ -17,6 +16,7 @@ import {
   Spin,
 } from '#/src/components/virkailija';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { useSelector } from '#/src/hooks/reduxHooks';
 import { useActions } from '#/src/hooks/useActions';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useDebounceState } from '#/src/hooks/useDebounceState';

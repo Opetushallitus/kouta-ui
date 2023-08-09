@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import createHttpClient from './httpClient';
 import { createDefaultLocalization } from './localization';
 import App from './pages/App';
-import { createStore } from './state';
+import { store, persistor } from './state/store';
 import defaultTheme from './theme';
 import { configure as configureUrls } from './urls';
 import { isPlaywright } from './utils';
@@ -40,8 +40,6 @@ const history = createBrowserHistory({ basename: 'kouta' });
     httpClient,
     apiUrls,
   });
-
-  const { store, persistor } = createStore();
 
   ReactDOM.render(
     <App

@@ -7,6 +7,7 @@ import { I18nextProvider } from 'react-i18next';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { useAsync } from 'react-use';
 import { ThemeProvider } from 'styled-components';
 
 import UrlContext from '#/src/contexts/UrlContext';
@@ -16,7 +17,7 @@ import AuthorizedUserContext from './contexts/AuthorizedUserContext';
 import HttpContext from './contexts/HttpClientContext';
 import createLocalization from './localization';
 import { createStore } from './state';
-import getTranslations from './translations';
+import { translations } from './translations';
 import { configure as configureUrls } from './urls';
 
 const queryClient = new QueryClient();
@@ -24,17 +25,12 @@ const queryClient = new QueryClient();
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls, defaultHttpClient);
 
-const getLocalizationInstance = () => {
-  const localizationInstance = createLocalization({
+const getLocalizationInstance = async () => {
+  const localizationInstance = await createLocalization({
     debug: true,
   });
 
-  localizationInstance.addResourceBundle(
-    'fi',
-    'kouta',
-    getTranslations().fi.kouta,
-    true
-  );
+  localizationInstance.addResourceBundle('fi', 'kouta', translations.fi, true);
 
   return localizationInstance;
 };
@@ -56,9 +52,11 @@ const ApiDecorator = ({ httpClient, children }) => {
 
 export const makeApiDecorator =
   ({ httpClient = defaultHttpClient } = {}) =>
-  storyFn => {
-    return <ApiDecorator httpClient={httpClient}>{storyFn()}</ApiDecorator>;
-  };
+  Story => (
+    <ApiDecorator httpClient={httpClient}>
+      <Story />
+    </ApiDecorator>
+  );
 
 export const makeStoreDecorator = ({ logging = false } = {}) => {
   const { store } = createStore();
@@ -69,33 +67,49 @@ export const makeStoreDecorator = ({ logging = false } = {}) => {
       storeAction(store.getState());
     });
   }
-  return storyFn => <Provider store={store}>{storyFn()}</Provider>;
-};
-
-export const makeLocalizationDecorator = () => storyFn => {
-  const instance = getLocalizationInstance();
-
-  return (
-    <Suspense fallback={null}>
-      <I18nextProvider i18n={instance}>{storyFn()}</I18nextProvider>
-    </Suspense>
+  return Story => (
+    <Provider store={store}>
+      <Story />
+    </Provider>
   );
 };
 
-export const themeDecorator = storyFn => (
-  <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
+export const makeLocalizationDecorator = () => Story => {
+  const { value: instance } = useAsync(getLocalizationInstance, []);
+
+  return instance ? (
+    <Suspense fallback={null}>
+      <I18nextProvider i18n={instance}>
+        <Story />
+      </I18nextProvider>
+    </Suspense>
+  ) : null;
+};
+
+export const themeDecorator = Story => (
+  <ThemeProvider theme={defaultTheme}>
+    <Story />
+  </ThemeProvider>
 );
 
-export const queryClientDecorator = storyFn => (
-  <QueryClientProvider client={queryClient}>{storyFn()}</QueryClientProvider>
+export const queryClientDecorator = Story => (
+  <QueryClientProvider client={queryClient}>
+    <Story />
+  </QueryClientProvider>
 );
 
-export const authorizedUserDecorator = storyFn => (
-  <AuthorizedUserContext.Provider value={{}}>
-    {storyFn()}
+export const authorizedUserDecorator = Story => (
+  <AuthorizedUserContext.Provider
+    value={{
+      organisaatiot: [],
+    }}
+  >
+    <Story />
   </AuthorizedUserContext.Provider>
 );
 
-export const routerDecorator = storyFn => (
-  <MemoryRouter initialEntries={['/']}>{storyFn()}</MemoryRouter>
+export const routerDecorator = Story => (
+  <MemoryRouter initialEntries={['/']}>
+    <Story />
+  </MemoryRouter>
 );

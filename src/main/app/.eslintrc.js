@@ -23,14 +23,14 @@ module.exports = {
     'no-empty': 'off',
     'react/prop-types': 'off',
     'react/display-name': 'off',
-    'react/jsx-uses-react': ['warn'],
-    'import/no-duplicates': ['warn'],
+    'react/jsx-uses-react': ['error'],
+    'import/no-duplicates': ['error'],
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-unused-vars': [
-      'warn',
+      'error',
       {
         argsIgnorePattern: '^_',
       },
@@ -45,7 +45,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/array-type': [
-      'warn',
+      'error',
       {
         default: 'generic',
       },
@@ -53,7 +53,7 @@ module.exports = {
     'prettier/prettier': 'warn',
     'import/no-anonymous-default-export': 'off',
     'import/order': [
-      'warn',
+      'error',
       {
         groups: ['builtin', 'external', 'internal'],
         pathGroups: [
@@ -83,9 +83,9 @@ module.exports = {
     'lodash/prefer-noop': 'off',
     'lodash/prefer-includes': 'off',
     'lodash/path-style': 'off',
-    'no-negated-condition': ['warn'],
-    'no-implicit-coercion': ['warn'],
-    'no-var': ['warn'],
+    'no-negated-condition': ['error'],
+    'no-implicit-coercion': ['error'],
+    'no-var': ['error'],
   },
   overrides: [
     {

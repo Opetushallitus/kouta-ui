@@ -30,7 +30,7 @@ const history = createBrowserHistory({ basename: 'kouta' });
 
   apiUrls = await configureUrls(apiUrls, httpClient);
 
-  const localizationInstance = createDefaultLocalization({
+  const localizationInstance = await createDefaultLocalization({
     httpClient,
     apiUrls,
   });

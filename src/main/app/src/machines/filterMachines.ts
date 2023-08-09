@@ -1,6 +1,7 @@
 import { assign, createMachine, interpret } from 'xstate';
 
 const initialMachine = createMachine({
+  predictableActionArguments: true,
   on: {
     SET_VALUES: {
       actions: [

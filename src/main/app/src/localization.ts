@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { initReactI18next } from 'react-i18next';
 
 import { LANGUAGES } from '#/src/constants';
-import getTranslations from '#/src/translations';
+import { translations } from '#/src/translations';
 import { getLocalization } from '#/src/utils/api/getLocalization';
 
 import { isDev, isPlaywright } from './utils';
@@ -34,7 +34,7 @@ type CreateLocalizationProps = {
   ns?: Array<string>;
 };
 
-const createLocalization = ({
+const createLocalization = async ({
   loadLocalization,
   fallbackLng = 'fi',
   language = 'fi',
@@ -42,7 +42,7 @@ const createLocalization = ({
   defaultNS = 'kouta',
   ns = ['kouta'],
 }: CreateLocalizationProps) => {
-  i18n
+  await i18n
     .use(HttpBackend)
     .use(initReactI18next)
     .init({
@@ -76,24 +76,21 @@ const createLocalization = ({
         },
       },
     });
+  return i18n;
 };
 
 export const createDefaultLocalization = ({ httpClient, apiUrls }) => {
   return createLocalization({
     debug: isDev,
     loadLocalization: async ({ namespace, language }) => {
-      const localization = await getLocalization({
-        category: namespace,
-        locale: language,
-        httpClient,
-        apiUrls,
-      });
-
-      const translations = getTranslations();
-
-      return _.get(translations, [language, namespace])
-        ? _.merge({}, translations[language][namespace], localization || {})
-        : localization;
+      return isDev
+        ? translations?.[language]
+        : await getLocalization({
+            category: namespace,
+            locale: language,
+            httpClient,
+            apiUrls,
+          });
     },
   });
 };

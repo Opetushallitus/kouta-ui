@@ -13,7 +13,7 @@
     "preview:watch": "npm run build:test -- --watch & npm run serve:test",
     "serve:test": "node test-server.js",
     "test": "vitest",
-    "storybook": "cross-env NODE_ENV=development sb dev -p 9009",
+    "storybook": "cross-env STORYBOOK=1 sb dev -p 9009",
     "build-storybook": "cross-env STORYBOOK=1 sb build -c .storybook -o build/storybook --quiet",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",

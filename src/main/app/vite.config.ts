@@ -31,7 +31,12 @@ export default defineConfig(({ mode }) => {
   const env = Object.assign({}, process.env, loadEnv(mode, process.cwd(), ''));
 
   const isDev = mode === 'development';
-  const { DISABLE_LOCAL_PROXY, KOUTA_BACKEND_URL, DEV_VIRKAILIJA_URL } = env;
+  const {
+    DISABLE_LOCAL_PROXY,
+    KOUTA_BACKEND_URL,
+    DEV_VIRKAILIJA_URL,
+    STORYBOOK,
+  } = env;
 
   return {
     base: '/kouta',
@@ -50,7 +55,7 @@ export default defineConfig(({ mode }) => {
       svgr(),
       //optimizeLodashImports(), // Tämän voi ottaa käyttöön sitten kun lodash-importit on muutettu käyttämään nimettyjä importteja
       // Tuotanto-buildissa karsitaan devaus-plugineja hidastamasta
-      ...(isDev
+      ...(isDev && !STORYBOOK
         ? [
             pluginRewriteAll(),
             checker({

@@ -4,8 +4,8 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import SegmentTab from '#/src/components/SegmentTab';
-import SegmentTabs from '#/src/components/SegmentTabs';
+import { SegmentTab } from '#/src/components/SegmentTab';
+import { SegmentTabs } from '#/src/components/SegmentTabs';
 import { Box, Radio, RadioGroup } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPIT,

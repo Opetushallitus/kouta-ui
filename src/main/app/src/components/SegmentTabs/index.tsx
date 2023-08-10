@@ -2,28 +2,31 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const SegmentTabsBase = styled.div`
+import { SegmentTab } from '../SegmentTab';
+
+const SegmentTabsBase = styled.div<{ fullWidth?: boolean }>`
   ${({ fullWidth }) =>
     fullWidth ? { display: 'flex', width: '100%' } : { display: 'inline-flex' }}
 `;
 
-const SegmentTabs = ({ value, children, ...props }) => {
-  const validChildren = React.Children.toArray(children).filter(c =>
-    React.isValidElement(c)
-  );
-
-  return (
-    <SegmentTabsBase {...props}>
-      {React.Children.map(validChildren, (c, index) => {
-        return React.cloneElement(c, {
-          active: value !== undefined && c.props.value === value,
-          isFirst: index === 0,
-          isLast: index === validChildren.length - 1,
-          isInTabs: true,
-        });
-      })}
-    </SegmentTabsBase>
-  );
-};
-
-export default SegmentTabs;
+export const SegmentTabs = ({
+  value,
+  children,
+  ...props
+}: {
+  value: string;
+  children:
+    | Array<React.ReactElement<React.ComponentProps<typeof SegmentTab>>>
+    | React.ReactElement<React.ComponentProps<typeof SegmentTab>>;
+}) => (
+  <SegmentTabsBase {...props}>
+    {React.Children.map(children, (c, index) =>
+      React.cloneElement(c, {
+        active: value !== undefined && c.props.value === value,
+        isFirst: index === 0,
+        isLast: index === React.Children.count(children) - 1,
+        isInTabs: true,
+      })
+    )}
+  </SegmentTabsBase>
+);

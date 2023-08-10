@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { action } from '@storybook/addon-actions';
+import { SegmentTab } from '#/src/components/SegmentTab';
 
-import SegmentTab from '#/src/components/SegmentTab';
-
-import SegmentTabs from './index';
+import { SegmentTabs } from './index';
 
 export default {
   title: 'SegmentTabs',
 };
 
-export const Basic = () => (
-  <SegmentTabs value="b" onChange={action('change')}>
-    <SegmentTab value="a">Tab A</SegmentTab>
-    <SegmentTab value="b">Tab B</SegmentTab>
-    <SegmentTab value="c">Tab C</SegmentTab>
-  </SegmentTabs>
-);
+export const Basic = () => {
+  const [val, setVal] = useState<'a' | 'b' | 'c'>('a');
+  return (
+    <SegmentTabs value={val}>
+      <SegmentTab value="a" onClick={() => setVal('a')}>
+        Tab A
+      </SegmentTab>
+      <SegmentTab value="b" onClick={() => setVal('b')}>
+        Tab B
+      </SegmentTab>
+      <SegmentTab value="c" onClick={() => setVal('c')}>
+        Tab C
+      </SegmentTab>
+    </SegmentTabs>
+  );
+};

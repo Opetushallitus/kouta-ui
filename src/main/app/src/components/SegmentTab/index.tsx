@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-const SegmentTab = styled.button<{
+export const SegmentTab = styled.button<{
   active?: boolean;
   isInTabs?: boolean;
   isFirst?: boolean;
@@ -69,5 +69,3 @@ const SegmentTab = styled.button<{
       border-bottom-right-radius: ${({ theme }) => theme.radii[1]}px;
     `}
 `;
-
-export default SegmentTab;

@@ -1,7 +1,9 @@
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { Switch } from './index';
 
-export default {
-  title: 'Switch',
+const meta: Meta<typeof Switch> = {
+  component: Switch,
   argTypes: {
     onChange: { action: 'changed' },
     checked: { control: 'boolean' },
@@ -10,4 +12,10 @@ export default {
   },
 };
 
-export const Basic = () => <Switch />;
+export default meta;
+
+type Story = StoryObj<typeof Switch>;
+
+export const Basic: Story = {
+  render: props => <Switch {...props} />,
+};

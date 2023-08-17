@@ -7,7 +7,7 @@ const getOrganisaatioHierarkia = async ({
   oids,
   aktiiviset = true,
   suunnitellut = true,
-  lakkautetut = false,
+  lakkautetut = true,
   skipParents = false,
   apiUrls,
   httpClient,

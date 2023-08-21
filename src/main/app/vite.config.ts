@@ -78,11 +78,11 @@ export default defineConfig(({ mode }) => {
       proxy: DISABLE_LOCAL_PROXY
         ? undefined
         : {
-            '/kouta-backend/*': devProxyOptions(
+            '^/kouta-backend/.*': devProxyOptions(
               KOUTA_BACKEND_URL ?? DEV_VIRKAILIJA_URL
             ),
             //Ohjataan DEV_VIRKAILIJA_URL:ään kaikki muu paitsi "/", "/kouta" ja "/kouta/*"
-            '^(?!(/$)|(/kouta$)|(/kouta/\\w*))':
+            '^(?!(/$)|(/kouta$)|(/kouta/.*))':
               devProxyOptions(DEV_VIRKAILIJA_URL),
           },
     },

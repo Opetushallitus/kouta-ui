@@ -24,6 +24,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     toimipisteita,
     akatemioita,
     wwwSivu,
+    some,
     jarjestaaUrheilijanAmmKoulutusta,
   } = metadata;
 
@@ -73,6 +74,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       logo,
       wwwSivuUrl: wwwSivu?.url || {},
       wwwSivuNimi: wwwSivu?.nimi || {},
+      some: some || {},
       jarjestaaUrheilijanAmmKoulutusta,
     },
     teemakuva,

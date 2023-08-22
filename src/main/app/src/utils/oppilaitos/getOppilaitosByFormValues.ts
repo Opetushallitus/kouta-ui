@@ -73,6 +73,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       yksikoita: parseNumeric(perustiedot?.yksikoita),
       toimipisteita: parseNumeric(perustiedot?.toimipisteita),
       akatemioita: parseNumeric(perustiedot?.akatemioita),
+      some: perustiedot.some,
       wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
         ? null
         : {

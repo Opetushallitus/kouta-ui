@@ -1,79 +1,79 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getFormValuesByKoulutus returns correct form values for ammatillinen koulutus 1`] = `
-Object {
-  "description": Object {
-    "kuvaus": Object {
+{
+  "description": {
+    "kuvaus": {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
     },
-    "linkkiEPerusteisiin": Object {},
+    "linkkiEPerusteisiin": {},
   },
   "esikatselu": false,
   "externalId": undefined,
-  "information": Object {
-    "eperuste": Object {
+  "information": {
+    "eperuste": {
       "value": undefined,
     },
-    "erikoistumiskoulutus": Object {
+    "erikoistumiskoulutus": {
       "value": "",
     },
     "isAvoinKorkeakoulutus": false,
-    "korkeakoulutukset": Array [],
-    "koulutus": Object {
+    "korkeakoulutukset": [],
+    "koulutus": {
       "value": "koulutus_371101#1",
     },
-    "koulutusalat": Array [
-      Object {
+    "koulutusalat": [
+      {
         "value": "koulutusala_1#1",
       },
-      Object {
+      {
         "value": "koulutusala_2#1",
       },
     ],
     "laajuusNumeroTyyppi": "single",
-    "nimi": Object {
+    "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "opinnonTyyppi": Object {
+    "opinnonTyyppi": {
       "value": undefined,
     },
     "opintojenLaajuusNumero": "",
     "opintojenLaajuusNumeroMax": undefined,
     "opintojenLaajuusNumeroMin": undefined,
-    "opintojenLaajuusyksikko": Object {
+    "opintojenLaajuusyksikko": {
       "value": "",
     },
     "tunniste": undefined,
-    "tutkintonimike": Array [
-      Object {
+    "tutkintonimike": [
+      {
         "value": "nimike_1#1",
       },
-      Object {
+      {
         "value": "nimike_2#1",
       },
     ],
   },
   "julkinen": true,
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
   "koulutustyyppi": "amm",
-  "lisatiedot": Object {
-    "osioKuvaukset": Object {
-      "osio_1#1": Object {},
-      "osio_2#1": Object {
+  "lisatiedot": {
+    "osioKuvaukset": {
+      "osio_1#1": {},
+      "osio_2#1": {
         "fi": "<p>Fi kuvaus</p>",
         "sv": "<p>Sv kuvaus</p>",
       },
     },
-    "osiot": Array [
-      Object {
+    "osiot": [
+      {
         "value": "osio_1#1",
       },
-      Object {
+      {
         "value": "osio_2#1",
       },
     ],
@@ -81,193 +81,193 @@ Object {
   "organisaatioOid": undefined,
   "osaamisala": null,
   "soraKuvaus": null,
-  "tarjoajat": Object {
-    "tarjoajat": Array [
+  "tarjoajat": {
+    "tarjoajat": [
       "123.456.789",
     ],
   },
   "teemakuva": undefined,
   "tila": "tallennettu",
-  "tutkinnonosat": Object {
-    "nimi": Object {
+  "tutkinnonosat": {
+    "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "osat": Array [],
+    "osat": [],
   },
 }
 `;
 
 exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskoulutus 1`] = `
-Object {
-  "description": Object {
-    "kuvaus": Object {
+{
+  "description": {
+    "kuvaus": {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
     },
-    "linkkiEPerusteisiin": Object {},
+    "linkkiEPerusteisiin": {},
   },
   "esikatselu": false,
   "externalId": undefined,
-  "information": Object {
-    "eperuste": Object {
+  "information": {
+    "eperuste": {
       "value": undefined,
     },
-    "erikoistumiskoulutus": Object {
+    "erikoistumiskoulutus": {
       "value": "erikoistumiskoulutukset_001#2",
     },
     "isAvoinKorkeakoulutus": false,
-    "korkeakoulutukset": Array [],
-    "koulutus": Object {
+    "korkeakoulutukset": [],
+    "koulutus": {
       "value": undefined,
     },
-    "koulutusalat": Array [
-      Object {
+    "koulutusalat": [
+      {
         "value": "koulutusala_1#1",
       },
-      Object {
+      {
         "value": "koulutusala_2#1",
       },
     ],
     "laajuusNumeroTyyppi": "range",
-    "nimi": Object {},
-    "opinnonTyyppi": Object {
+    "nimi": {},
+    "opinnonTyyppi": {
       "value": undefined,
     },
     "opintojenLaajuusNumero": "",
     "opintojenLaajuusNumeroMax": 10,
     "opintojenLaajuusNumeroMin": 5,
-    "opintojenLaajuusyksikko": Object {
+    "opintojenLaajuusyksikko": {
       "value": "",
     },
     "tunniste": undefined,
-    "tutkintonimike": Array [],
+    "tutkintonimike": [],
   },
   "julkinen": false,
-  "kieliversiot": Array [],
+  "kieliversiot": [],
   "koulutustyyppi": "erikoistumiskoulutus",
-  "lisatiedot": Object {
-    "osioKuvaukset": Object {},
-    "osiot": Array [],
+  "lisatiedot": {
+    "osioKuvaukset": {},
+    "osiot": [],
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
   "soraKuvaus": null,
-  "tarjoajat": Object {
-    "tarjoajat": Array [],
+  "tarjoajat": {
+    "tarjoajat": [],
   },
   "teemakuva": undefined,
   "tila": undefined,
-  "tutkinnonosat": Object {
-    "nimi": Object {},
-    "osat": Array [],
+  "tutkinnonosat": {
+    "nimi": {},
+    "osat": [],
   },
 }
 `;
 
 exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] = `
-Object {
-  "description": Object {
-    "kuvaus": Object {
+{
+  "description": {
+    "kuvaus": {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
     },
-    "linkkiEPerusteisiin": Object {},
+    "linkkiEPerusteisiin": {},
   },
   "esikatselu": false,
   "externalId": "ext1",
-  "information": Object {
-    "eperuste": Object {
+  "information": {
+    "eperuste": {
       "value": undefined,
     },
-    "erikoistumiskoulutus": Object {
+    "erikoistumiskoulutus": {
       "value": "",
     },
     "isAvoinKorkeakoulutus": false,
-    "korkeakoulutukset": Array [
-      Object {
+    "korkeakoulutukset": [
+      {
         "value": "koulutus_371101#1",
       },
-      Object {
+      {
         "value": "koulutus_201000#1",
       },
     ],
-    "koulutus": Object {
+    "koulutus": {
       "value": undefined,
     },
-    "koulutusalat": Array [
-      Object {
+    "koulutusalat": [
+      {
         "value": "koulutusala_1#1",
       },
-      Object {
+      {
         "value": "koulutusala_2#1",
       },
     ],
     "laajuusNumeroTyyppi": "single",
-    "nimi": Object {
+    "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "opinnonTyyppi": Object {
+    "opinnonTyyppi": {
       "value": undefined,
     },
     "opintojenLaajuusNumero": "",
     "opintojenLaajuusNumeroMax": undefined,
     "opintojenLaajuusNumeroMin": undefined,
-    "opintojenLaajuusyksikko": Object {
+    "opintojenLaajuusyksikko": {
       "value": "",
     },
     "tunniste": undefined,
-    "tutkintonimike": Array [
-      Object {
+    "tutkintonimike": [
+      {
         "value": "nimike_1#1",
       },
-      Object {
+      {
         "value": "nimike_2#1",
       },
     ],
   },
   "julkinen": true,
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
   "koulutustyyppi": "yo",
-  "lisatiedot": Object {
-    "osioKuvaukset": Object {
-      "osio_1#1": Object {},
-      "osio_2#1": Object {
+  "lisatiedot": {
+    "osioKuvaukset": {
+      "osio_1#1": {},
+      "osio_2#1": {
         "fi": "<p>Fi kuvaus</p>",
         "sv": "<p>Sv kuvaus</p>",
       },
     },
-    "osiot": Array [
-      Object {
+    "osiot": [
+      {
         "value": "osio_1#1",
       },
-      Object {
+      {
         "value": "osio_2#1",
       },
     ],
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
-  "soraKuvaus": Object {
+  "soraKuvaus": {
     "value": "1234",
   },
-  "tarjoajat": Object {
-    "tarjoajat": Array [
+  "tarjoajat": {
+    "tarjoajat": [
       "123.456.789",
     ],
   },
   "teemakuva": undefined,
   "tila": "tallennettu",
-  "tutkinnonosat": Object {
-    "nimi": Object {
+  "tutkinnonosat": {
+    "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "osat": Array [],
+    "osat": [],
   },
 }
 `;

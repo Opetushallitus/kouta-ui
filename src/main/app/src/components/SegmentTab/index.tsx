@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 
-const SegmentTab = styled.button`
+export const SegmentTab = styled.button<{
+  active?: boolean;
+  isInTabs?: boolean;
+  isFirst?: boolean;
+  isLast?: boolean;
+}>`
   background-color: transparent;
   border-color: rgba(0, 0, 0, 0.2);
   border-width: 1px 1px 1px 1px;
@@ -14,7 +19,10 @@ const SegmentTab = styled.button`
   cursor: pointer;
   outline: none;
   position: relative;
-  transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s,
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    background-color 0.25s,
     color 0.25s;
   box-shadow: 0px 0px 0px 0px transparent;
 
@@ -61,5 +69,3 @@ const SegmentTab = styled.button`
       border-bottom-right-radius: ${({ theme }) => theme.radii[1]}px;
     `}
 `;
-
-export default SegmentTab;

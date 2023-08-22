@@ -1,8 +1,40 @@
 module.exports = {
-  extends: ['react-app', 'prettier', 'plugin:lodash/recommended'],
-  plugins: ['prettier', 'lodash'],
+  parser: '@typescript-eslint/parser',
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'plugin:lodash/recommended',
+    'plugin:react-hooks/recommended',
+  ],
+  plugins: ['@typescript-eslint', 'prettier', 'lodash', 'import'],
+  env: {
+    browser: true,
+    node: true,
+  },
   rules: {
-    '@typescript-eslint/no-duplicate-imports': ['warn'],
+    'no-empty': 'off',
+    'react/prop-types': 'off',
+    'react/display-name': 'off',
+    'react/jsx-uses-react': ['error'],
+    'import/no-duplicates': ['error'],
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+      },
+    ],
     '@typescript-eslint/ban-types': [
       'error',
       {
@@ -13,7 +45,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/array-type': [
-      'warn',
+      'error',
       {
         default: 'generic',
       },
@@ -21,7 +53,7 @@ module.exports = {
     'prettier/prettier': 'warn',
     'import/no-anonymous-default-export': 'off',
     'import/order': [
-      'warn',
+      'error',
       {
         groups: ['builtin', 'external', 'internal'],
         pathGroups: [
@@ -51,9 +83,9 @@ module.exports = {
     'lodash/prefer-noop': 'off',
     'lodash/prefer-includes': 'off',
     'lodash/path-style': 'off',
-    'no-negated-condition': ['warn'],
-    'no-implicit-coercion': ['warn'],
-    'no-var': ['warn'],
+    'no-negated-condition': ['error'],
+    'no-implicit-coercion': ['error'],
+    'no-var': ['error'],
   },
   overrides: [
     {

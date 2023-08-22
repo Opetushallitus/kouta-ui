@@ -7,7 +7,7 @@ import {
   TestInfo,
   expect,
 } from '@playwright/test';
-import { deburr, last, split, toLower } from 'lodash';
+import { deburr, includes, last, split, toLower } from 'lodash';
 
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -29,9 +29,10 @@ export const wrapMutationTest =
 
     // Tallennetaan snapshot tiedostoon ./snapshots/<testitiedosto>/<testin-nimi>.json
     testInfo.snapshotPath = (name: string) =>
-      `${path.resolve(testInfo.file, '../..')}/snapshots/${
-        split(testInfo.titlePath[0], '.')?.[0]
-      }/${deburr(toLower(name))}`;
+      `${path.resolve(testInfo.file, '../..')}/snapshots/${split(
+        testInfo.titlePath[0],
+        '.'
+      )?.[0]}/${deburr(toLower(name))}`;
 
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();
@@ -136,7 +137,10 @@ export const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
     await fillRadioValue(section, tila);
   });
 
-const selectLanguages = async (selector: Locator, selectedLanguages = []) => {
+const selectLanguages = async (
+  selector: Locator,
+  selectedLanguages: Array<string> = []
+) => {
   const languages = ['en', 'fi', 'sv'];
   await Promise.all(
     languages.map(async lang => {
@@ -234,8 +238,8 @@ export const fillTreeSelect = async (loc: Locator, value: Array<string>) => {
   }
 };
 
-const isTutkintoonJohtava = (koulutustyyppi: string) =>
-  ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
+const isTutkintoonJohtava = (koulutustyyppi?: string) =>
+  includes(['amk', 'yo', 'amm', 'lk'], koulutustyyppi);
 
 export const fillKoulutustyyppiSelect = async (
   loc: Locator,
@@ -334,8 +338,11 @@ export const copyPohja = (page: Page, baseEntityName: string) =>
     await jatka(section);
   });
 
-export const assertTilaIs = async (page: Page, value: string) => {
-  await expect(getRadio(getSection(page, 'tila'), 'tallennettu')).toBeChecked();
+export const assertTilaIs = async (
+  page: Page,
+  value: string = 'tallennettu'
+) => {
+  await expect(getRadio(getSection(page, 'tila'), value)).toBeChecked();
 };
 
 export const assertBaseTilaNotCopied = async (

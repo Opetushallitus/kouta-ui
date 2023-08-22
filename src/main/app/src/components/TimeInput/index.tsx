@@ -10,7 +10,6 @@ export const TimeInput = ({
   error = false,
   disabled = false,
   id,
-  inputProps = {},
   onChange,
   ...props
 }) => {

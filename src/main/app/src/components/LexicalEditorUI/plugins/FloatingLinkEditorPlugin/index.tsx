@@ -38,10 +38,6 @@ import {
 } from 'lexical';
 import { createPortal } from 'react-dom';
 
-import { StyledIcon } from '../../ui/Components';
-import { getSelectedNode } from '../../utils/getSelectedNode';
-import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
-import { sanitizeUrl } from '../../utils/url';
 import {
   LinkEditor,
   LinkEditorButtonConfirm,
@@ -50,6 +46,10 @@ import {
   LinkView,
   LinkInput,
 } from './Components';
+import { StyledIcon } from '../../ui/Components';
+import { getSelectedNode } from '../../utils/getSelectedNode';
+import { setFloatingElemPositionForLinkEditor } from '../../utils/setFloatingElemPositionForLinkEditor';
+import { sanitizeUrl } from '../../utils/url';
 
 function FloatingLinkEditor({
   editor,

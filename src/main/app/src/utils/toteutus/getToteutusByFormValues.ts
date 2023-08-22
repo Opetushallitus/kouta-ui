@@ -6,12 +6,12 @@ import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { serializeSisaltoField } from '#/src/utils/form/serializeSisaltoField';
 
+import { isApurahaVisible } from './toteutusVisibilities';
 import {
   getSerializedKieleistykset,
   getKieleistyksetFromValues,
   getKielivalinta,
 } from '../pickTranslations';
-import { isApurahaVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 

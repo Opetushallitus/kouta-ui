@@ -36,6 +36,7 @@ const createToastActor =
 export const toastService = interpret(
   createMachine(
     {
+      predictableActionArguments: true,
       id: 'toastMachine',
       initial: 'empty',
       context: {

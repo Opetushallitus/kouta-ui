@@ -1,7 +1,7 @@
 import { getYear } from 'date-fns';
 import _ from 'lodash';
 
-let YEAR_PADDING = 2;
+const YEAR_PADDING = 2;
 
 export const getKoulutuksenAlkamisvuosiOptions = () => {
   const thisYear = getYear(new Date());

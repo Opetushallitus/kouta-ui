@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import produce from 'immer';
 
 import { ADD_FAVOURITE, REMOVE_FAVOURITE } from './actions';
 
@@ -9,19 +8,9 @@ const initialState = {
 
 export default createReducer(initialState, {
   [ADD_FAVOURITE]: (state, { payload: oid }) => {
-    return {
-      ...state,
-      byOid: produce(state.byOid, draft => {
-        draft[oid] = true;
-      }),
-    };
+    state.byOid[oid] = true;
   },
   [REMOVE_FAVOURITE]: (state, { payload: oid }) => {
-    return {
-      ...state,
-      byOid: produce(state.byOid, draft => {
-        delete draft[oid];
-      }),
-    };
+    delete state.byOid[oid];
   },
 });

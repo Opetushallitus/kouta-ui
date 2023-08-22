@@ -1,12 +1,14 @@
 import 'jest-styled-components';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
+import { expect } from 'vitest';
+
 import {
   isEditorState,
   serializeEditorState,
 } from '#/src/components/LexicalEditorUI/utils';
 
-// Serialize Draft editor
+// Serialize Lexical editor
 expect.addSnapshotSerializer({
   test: isEditorState,
-  print: (value, serialize) => serialize(serializeEditorState(value)),
+  print: (value: any, serialize) => serialize(serializeEditorState(value)),
 });

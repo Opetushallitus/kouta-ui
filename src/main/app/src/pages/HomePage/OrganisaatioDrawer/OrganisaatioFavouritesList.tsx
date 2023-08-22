@@ -12,7 +12,6 @@ export const OrganisaatioFavouritesList = ({
   onToggleFavourite,
   onSelect,
   selected,
-  language = 'fi',
 }) => {
   const { t } = useTranslation();
 

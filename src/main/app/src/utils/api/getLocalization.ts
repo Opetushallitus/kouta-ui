@@ -13,7 +13,7 @@ export const getLocalization = async ({
     }
   );
 
-  let resource = {};
+  const resource = {};
 
   // eslint-disable-next-line
   for (const translation of data) {

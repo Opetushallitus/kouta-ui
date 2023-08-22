@@ -15,6 +15,10 @@ import { StateChangeResultModal } from '#/src/pages/HomePage/StateChangeResultMo
 import { useFilterState } from '#/src/pages/HomePage/useFilterState';
 import { searchToteutukset } from '#/src/utils/toteutus/searchToteutukset';
 
+import { useChangeToteutuksetTilaMutation } from './changeToteutuksetState';
+import { useCopyToteutuksetMutation } from './copyToteutukset';
+import { createToteutusListColumns } from './createToteutusListColumns';
+import { KoulutusModal } from './KoulutusModal';
 import {
   CopyConfirmationModal,
   CopyConfirmationWrapper,
@@ -26,10 +30,6 @@ import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
 import { SERVICE_BY_ENTITY, useEntitySelection } from '../useEntitySelection';
-import { useChangeToteutuksetTilaMutation } from './changeToteutuksetState';
-import { useCopyToteutuksetMutation } from './copyToteutukset';
-import { createToteutusListColumns } from './createToteutusListColumns';
-import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
 

@@ -1,6 +1,6 @@
 export default ({
   oid = '1.2.246.562.10.594252633210',
-} = {}): SerializableObject => ({
+} = {}): Serializable => ({
   oid,
   nimi: { fi: 'Organisaatio' },
   metadata: {

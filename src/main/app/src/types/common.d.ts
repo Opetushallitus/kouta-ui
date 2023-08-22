@@ -10,6 +10,7 @@ type Koodi = {
   koodiUri: string;
   versio: number;
   metadata: any;
+  koodiArvo: string;
 };
 
 type Yhteystieto = {
@@ -38,3 +39,9 @@ type Serializable =
   | null
   | boolean
   | Array<Serializable>;
+
+type NullableUndef<T> = undefined extends T ? T | null : T;
+
+type WithNullableUndefs<F extends Record<string, Serializable>> = {
+  [P in keyof F]: NullableUndef<WithNullableUndefs<F[P]>>;
+};

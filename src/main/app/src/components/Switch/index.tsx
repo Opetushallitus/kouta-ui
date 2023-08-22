@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Spring } from 'react-spring/renderprops';
+import { useSpring, animated } from '@react-spring/web';
 import styled, { css } from 'styled-components';
 
 import { disabledStyle } from '#/src/system';
@@ -32,7 +32,10 @@ const StyledSwitch = styled.div<{ error: boolean; checked: boolean }>`
   border-style: solid;
   border: 0.0625em solid ${getThemeProp('colors.inputBorder')};
   background-color: rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.25s, border-color 0.25s, background-color 0.25s;
+  transition:
+    box-shadow 0.25s,
+    border-color 0.25s,
+    background-color 0.25s;
 
   ${HiddenSwitch}:focus + & {
     box-shadow: 0 0 0 0.1875em
@@ -84,7 +87,7 @@ const SwitchWrapper = styled.div`
   line-height: 0;
 `;
 
-const SwitchBall = styled.div`
+const SwitchBall = styled(animated.div)`
   border-radius: 50%;
   background-color: white;
   width: 1em;
@@ -120,26 +123,30 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       ...props
     },
     ref
-  ) => (
-    <Label disabled={disabled} error={error}>
-      <SwitchWrapper>
-        <SwitchContainer className={className}>
-          <HiddenSwitch
-            checked={checked}
-            disabled={disabled}
-            ref={ref}
-            {...props}
-          />
-          <StyledSwitch checked={checked} error={error}>
-            <Spring to={{ left: checked ? '1.4em' : '0.125em' }}>
-              {({ left }) => <SwitchBall style={{ left }} />}
-            </Spring>
-          </StyledSwitch>
-        </SwitchContainer>
-      </SwitchWrapper>
-      {children ? (
-        <LabelWrapper disabled={disabled}>{children}</LabelWrapper>
-      ) : null}
-    </Label>
-  )
+  ) => {
+    const ballStyle = useSpring({
+      to: { left: checked ? '1.4em' : '0.125em' },
+    });
+
+    return (
+      <Label disabled={disabled} error={error}>
+        <SwitchWrapper>
+          <SwitchContainer className={className}>
+            <HiddenSwitch
+              checked={checked}
+              disabled={disabled}
+              ref={ref}
+              {...props}
+            />
+            <StyledSwitch checked={checked} error={error}>
+              <SwitchBall style={ballStyle} />
+            </StyledSwitch>
+          </SwitchContainer>
+        </SwitchWrapper>
+        {children ? (
+          <LabelWrapper disabled={disabled}>{children}</LabelWrapper>
+        ) : null}
+      </Label>
+    );
+  }
 );

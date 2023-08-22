@@ -3,7 +3,7 @@ import React from 'react';
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import RouterScrollToTop from '#/src/components/RouterScrollToTop';
-import Toaster from '#/src/components/Toaster';
+import { Toaster } from '#/src/components/Toaster';
 import { ENTITY } from '#/src/constants';
 
 import { CreateHakuPage } from './haku/CreateHakuPage';

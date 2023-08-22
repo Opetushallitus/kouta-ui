@@ -1,4 +1,4 @@
-import { EditorState } from 'draft-js';
+import { EditorState } from 'lexical';
 
 import { JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 

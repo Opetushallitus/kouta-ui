@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import _ from 'lodash';
 
-import { AsyncSelect } from '#/src/components/Select';
+import { AsyncSelect, SelectProps } from '#/src/components/Select';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
@@ -12,6 +12,15 @@ import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import getKoodi from '#/src/utils/koodi/getKoodi';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
+type AsyncKoodistoSelectProps = {
+  formatKoodiLabel: (k: Koodi, lng?: LanguageCode) => string;
+  loadLabel: (value: string) => Promise<string>;
+  koodistoData: Array<Koodi>;
+  loadOptions: (value: string) => Promise<SelectOptions>;
+  showAllOptions?: boolean;
+  selectedLanguage?: LanguageCode;
+} & SelectProps;
+
 export const AsyncKoodistoSelect = ({
   formatKoodiLabel,
   loadLabel: loadLabelProp,
@@ -20,7 +29,7 @@ export const AsyncKoodistoSelect = ({
   showAllOptions = false,
   selectedLanguage,
   ...props
-}) => {
+}: AsyncKoodistoSelectProps) => {
   const userLanguage = useUserLanguage();
 
   const usedLanguage = selectedLanguage ? selectedLanguage : userLanguage;

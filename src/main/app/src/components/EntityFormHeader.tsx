@@ -6,9 +6,9 @@ import FormHeader from '#/src/components/FormHeader';
 import { ENTITY } from '#/src/constants';
 import { EntityModelBase } from '#/src/types/domainTypes';
 
-import { getEntityNimiTranslation } from '../utils';
 import LargeStatusTag from './StatusTag/LargeStatusTag';
 import { UlkoinenTunniste } from './UlkoinenTunniste';
+import { getEntityNimiTranslation } from '../utils';
 
 type EntityFormHeaderProps = {
   entityType: ENTITY;

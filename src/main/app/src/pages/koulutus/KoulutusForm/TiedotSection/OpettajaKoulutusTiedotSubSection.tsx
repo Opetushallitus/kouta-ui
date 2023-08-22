@@ -15,9 +15,9 @@ import {
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
-import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
 import { ReadOnlyKoulutusalaSection } from './TiedotSection';
+import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 
 export const OpettajaKoulutusTiedotSubSection = ({
   disabled,

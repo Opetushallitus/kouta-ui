@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { useTransition, animated } from '@react-spring/web';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Transition } from 'react-spring/renderprops';
 import styled, { css } from 'styled-components';
 
 import { AbstractCollapse } from '#/src/components/AbstractCollapse';
@@ -15,7 +15,9 @@ const ToasterContainer = styled.div`
   flex-direction: column;
 `;
 
-const ToastContainer = styled.div`
+type ToastStatus = 'success' | 'danger' | 'info' | 'warning';
+
+const ToastContainer = styled.div<{ status: ToastStatus }>`
   display: inline-flex;
   align-items: flex-start;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
@@ -54,18 +56,13 @@ const ToastContainer = styled.div`
       color: black;
     `}
 `;
-const ToastWrapper = styled.div`
+const ToastWrapper = styled(animated.div)`
   display: flex;
   justify-content: flex-end;
-
-  ${({ last }) =>
-    !last &&
-    css`
-      margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-    `};
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const hoverHighlightStyle = css`
+const hoverHighlightStyle = `
   color: inherit;
   opacity: 0.7;
   font-size: 1.25rem;
@@ -77,7 +74,9 @@ const hoverHighlightStyle = css`
   }
 `;
 
-const CloseIcon = styled(Icon).attrs({ type: 'close' })(hoverHighlightStyle);
+const CloseIcon = styled(Icon).attrs({ type: 'close' })`
+  ${hoverHighlightStyle}
+`;
 
 const ErrorContainer = styled.div`
   display: flex;
@@ -102,12 +101,17 @@ const iconByStatus = {
   info: 'info',
 };
 
+type ToastProps = React.PropsWithChildren<{
+  onClose: () => void;
+}> &
+  React.ComponentProps<typeof ToastContainer>;
+
 export const Toast = ({
   status = 'info',
   children = null,
   onClose,
   ...props
-}) => (
+}: ToastProps) => (
   <ToastContainer status={status} {...props}>
     <Icon type={iconByStatus[status] || ''} mr={2} />
     <Typography color="inherit">{children}</Typography>
@@ -125,58 +129,60 @@ const FormattedError = styled.pre`
   word-break: keep-all;
 `;
 
-export const Toaster = ({ ...props }) => {
+export const Toaster = props => {
   const { toasts, closeToast, toastMouseEnter, toastMouseLeave } = useToaster();
+
+  const toastTransitions = useTransition(
+    toasts as Array<{
+      key: string;
+      status: ToastStatus;
+      label: string;
+      error?: string;
+    }>,
+    {
+      from: {
+        opacity: 0,
+        transform: 'scale(0.5)',
+      },
+      enter: {
+        opacity: 1,
+        transform: 'scale(1)',
+      },
+      leave: {
+        opacity: 0,
+        transform: 'scale(0.5)',
+      },
+    }
+  );
 
   return (
     <ToasterContainer {...props}>
-      <Transition
-        items={toasts}
-        keys={item => item.key}
-        enter={{
-          opacity: 1,
-          transform: 'scale(1)',
-        }}
-        leave={{
-          opacity: 0,
-          transform: 'scale(0.5)',
-        }}
-        from={{
-          opacity: 0,
-          transform: 'scale(0.5)',
-        }}
-      >
-        {(item, state, index) => props =>
-          (
-            <ToastWrapper last={index === toasts.length - 1}>
-              <Toast
-                key={item.key}
-                status={item.status}
-                style={props}
-                onClose={() => closeToast(item.key)}
-                onMouseEnter={() => toastMouseEnter(item.key)}
-                onMouseLeave={() => toastMouseLeave(item.key)}
+      {toastTransitions((style, item, _state) => (
+        <ToastWrapper style={style}>
+          <Toast
+            key={item.key}
+            status={item.status}
+            onClose={() => closeToast(item.key)}
+            onMouseEnter={() => toastMouseEnter(item.key)}
+            onMouseLeave={() => toastMouseLeave(item.key)}
+          >
+            <Box mb={1}>{item.label}</Box>
+            {item.error && (
+              <AbstractCollapse
+                content={
+                  <FormattedError>
+                    {JSON.stringify(item.error, null, 2)}
+                  </FormattedError>
+                }
               >
-                <Box mb={1}>{item.label}</Box>
-                {item.error && (
-                  <AbstractCollapse
-                    content={
-                      <FormattedError>
-                        {JSON.stringify(item.error, null, 2)}
-                      </FormattedError>
-                    }
-                  >
-                    {({ open, onToggle }) => (
-                      <ErrorToggle open={open} onToggle={onToggle} />
-                    )}
-                  </AbstractCollapse>
+                {({ open, onToggle }) => (
+                  <ErrorToggle open={open} onToggle={onToggle} />
                 )}
-              </Toast>
-            </ToastWrapper>
-          )}
-      </Transition>
+              </AbstractCollapse>
+            )}
+          </Toast>
+        </ToastWrapper>
+      ))}
     </ToasterContainer>
   );
 };
-
-export default Toaster;

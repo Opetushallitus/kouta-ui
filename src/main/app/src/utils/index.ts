@@ -26,12 +26,9 @@ import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
 import { organisaatioMatchesTyyppi } from './organisaatio/organisaatioMatchesTyyppi';
 
-const { NODE_ENV } = process.env;
+export const isDev = import.meta.env.MODE === 'development';
 
-export const isDev = process.env.NODE_ENV === 'development';
-
-export const isNodeEnv = env =>
-  (_.isArray(env) ? env : [env]).includes(NODE_ENV);
+export const isProd = import.meta.env.MODE === 'production';
 
 export const isPlaywright = Boolean(localStorage.getItem('isPlaywright'));
 
@@ -304,8 +301,10 @@ const postinumeroUriRegExp = /\d{5}/;
 export const getPostinumeroByPostinumeroUri = uri =>
   uri?.match?.(postinumeroUriRegExp)?.[0];
 
-export const formatKoodiLabelWithArvo = (koodi, language) =>
-  `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`;
+export const formatKoodiLabelWithArvo = (
+  koodi: Koodi,
+  language: LanguageCode
+) => `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`;
 
 export const isIn = (coll: Array<unknown>) => (val: unknown) =>
   coll?.includes(val);

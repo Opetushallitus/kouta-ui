@@ -19,7 +19,7 @@ export const PostinumeroSelect = ({ ...props }) => {
   const language = useUserLanguage();
 
   const loadOptions = useCallback(
-    async inputValue => {
+    async (inputValue: string) => {
       if (_.size(inputValue) === VALID_POSTINUMERO_LENGTH) {
         const koodi = await getKoodi({
           httpClient,

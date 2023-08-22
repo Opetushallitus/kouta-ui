@@ -9,12 +9,7 @@ import { getTestIdProps } from '#/src/utils';
 
 import { OpintojaksotFields } from './OpintojaksotFields';
 
-export const OpintojaksojenLiittamisSection = ({
-  language,
-  name,
-  disabled,
-  organisaatioOid,
-}) => {
+export const OpintojaksojenLiittamisSection = ({ name, organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (

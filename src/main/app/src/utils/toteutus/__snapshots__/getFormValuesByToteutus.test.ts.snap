@@ -1,264 +1,264 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] = `
-Object {
+{
   "esikatselu": false,
   "externalId": "ext1",
-  "hakeutumisTaiIlmoittautumistapa": Object {
+  "hakeutumisTaiIlmoittautumistapa": {
     "hakeutumisTaiIlmoittautumistapa": undefined,
     "hakuTapa": undefined,
     "hakuaikaAlkaa": undefined,
     "hakuaikaPaattyy": undefined,
     "linkki": undefined,
-    "lisatiedot": Object {},
-    "lisatiedotValintaperusteista": Object {},
+    "lisatiedot": {},
+    "lisatiedotValintaperusteista": {},
   },
-  "jarjestamistiedot": Object {
-    "ajankohta": Object {
+  "jarjestamistiedot": {
+    "ajankohta": {
       "ajankohtaKaytossa": true,
       "ajankohtaTyyppi": "tarkka alkamisajankohta",
-      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "kausi": "kausi_k#1",
       "tarkkaAlkaa": "2021-04-16T00:00",
       "tarkkaPaattyy": "2021-12-12T00:00",
-      "vuosi": Object {
+      "vuosi": {
         "value": 2020,
       },
     },
-    "apurahaKuvaus": Object {
+    "apurahaKuvaus": {
       "fi": "<p>Fi apurahakuvaus</p>",
       "sv": "<p>Sv apurahakuvaus</p>",
     },
     "apurahaMaaraTyyppi": "range",
     "apurahaMax": 200,
     "apurahaMin": 100,
-    "apurahaYksikko": Object {
+    "apurahaYksikko": {
       "value": "euro",
     },
-    "diplomit": Object {
-      "linkit": Array [
-        Object {
-          "alt": Object {
+    "diplomit": {
+      "linkit": [
+        {
+          "alt": {
             "fi": "Suomeksi",
             "sv": "På svenska",
           },
-          "url": Object {
+          "url": {
             "fi": "http://linkki.fi",
             "sv": "http://link.se",
           },
         },
       ],
-      "valinnat": Array [
-        Object {
+      "valinnat": [
+        {
           "value": "moduulikoodistolops2021_kald3#1",
         },
       ],
     },
-    "kielivalikoima": Object {
-      "A1Kielet": Array [
-        Object {
+    "kielivalikoima": {
+      "A1Kielet": [
+        {
           "value": "kieli_1#1",
         },
       ],
-      "A2Kielet": Array [
-        Object {
+      "A2Kielet": [
+        {
           "value": "kieli_2#1",
         },
       ],
-      "B1Kielet": Array [
-        Object {
+      "B1Kielet": [
+        {
           "value": "kieli_3#1",
         },
       ],
-      "B2Kielet": Array [
-        Object {
+      "B2Kielet": [
+        {
           "value": "kieli_4#1",
         },
       ],
-      "B3Kielet": Array [
-        Object {
+      "B3Kielet": [
+        {
           "value": "kieli_5#1",
         },
       ],
-      "aidinkielet": Array [
-        Object {
+      "aidinkielet": [
+        {
           "value": "kieli_6#1",
         },
       ],
-      "muutKielet": Array [
-        Object {
+      "muutKielet": [
+        {
           "value": "kieli_7#1",
         },
       ],
     },
-    "maksullisuusKuvaus": Object {
+    "maksullisuusKuvaus": {
       "fi": "<p>Fi maksullisuuskuvaus</p>",
       "sv": "<p>Sv maksullisuuskuvaus</p>",
     },
     "maksullisuustyyppi": "maksullinen",
     "maksunMaara": 500,
     "onkoApuraha": true,
-    "opetusaika": Array [
+    "opetusaika": [
       "opetusaika_1#1",
     ],
-    "opetusaikaKuvaus": Object {
+    "opetusaikaKuvaus": {
       "fi": "<p>Fi aikakuvaus</p>",
       "sv": "<p>Sv aikakuvaus</p>",
     },
-    "opetuskieli": Array [
+    "opetuskieli": [
       "opetuskieli_1#1",
       "opetuskieli_2#1",
     ],
-    "opetuskieliKuvaus": Object {
+    "opetuskieliKuvaus": {
       "fi": "<p>Fi kielikuvaus</p>",
       "sv": "<p>Sv kielikuvaus</p>",
     },
-    "opetustapa": Array [
+    "opetustapa": [
       "opetustapa_1#1",
       "opetustapa_2#1",
     ],
-    "opetustapaKuvaus": Object {
+    "opetustapaKuvaus": {
       "fi": "<p>Fi tapakuvaus</p>",
       "sv": "<p>Sv tapakuvaus</p>",
     },
-    "osioKuvaukset": Object {
-      "osio_1#1": Object {
+    "osioKuvaukset": {
+      "osio_1#1": {
         "fi": "<p>Fi kuvaus1</p>",
         "sv": "<p>Sv kuvaus1</p>",
       },
-      "osio_2#1": Object {
+      "osio_2#1": {
         "fi": "<p>Fi kuvaus2</p>",
         "sv": "<p>Sv kuvaus2</p>",
       },
     },
-    "osiot": Array [
-      Object {
+    "osiot": [
+      {
         "value": "osio_1#1",
       },
-      Object {
+      {
         "value": "osio_2#1",
       },
     ],
-    "suunniteltuKesto": Object {
+    "suunniteltuKesto": {
       "kuukautta": 6,
       "vuotta": 2,
     },
-    "suunniteltuKestoKuvaus": Object {
+    "suunniteltuKestoKuvaus": {
       "fi": "<p>Fi suunniteltuKestoKuvaus</p>",
       "sv": "<p>Sv suunniteltuKestoKuvaus</p>",
     },
   },
-  "kieliversiot": Array [
+  "kieliversiot": [
     "fi",
     "sv",
   ],
   "koulutustyyppi": undefined,
-  "kuvaus": Object {
+  "kuvaus": {
     "fi": "<p>Fi toteutuksenkuvaus</p>",
     "sv": "<p>Sv toteutuksenkuvaus</p>",
   },
-  "lukiolinjat": Object {
-    "erityisetKoulutustehtavat": Object {
+  "lukiolinjat": {
+    "erityisetKoulutustehtavat": {
       "kaytossa": true,
-      "kuvaukset": Object {
-        "erityinenkoulutustehtava_1#1": Object {
+      "kuvaukset": {
+        "erityinenkoulutustehtava_1#1": {
           "fi": "<p>erityinen koulutustehtävä 1 fi</p>",
           "sv": "<p>erityinen koulutustehtävä 1 sv</p>",
         },
       },
-      "valinnat": Array [
-        Object {
+      "valinnat": [
+        {
           "value": "erityinenkoulutustehtava_1#1",
         },
       ],
     },
-    "painotukset": Object {
+    "painotukset": {
       "kaytossa": true,
-      "kuvaukset": Object {
-        "painotus_1#1": Object {
+      "kuvaukset": {
+        "painotus_1#1": {
           "fi": "<p>painotus 1 fi</p>",
           "sv": "<p>painotus 1 sv</p>",
         },
       },
-      "valinnat": Array [
-        Object {
+      "valinnat": [
+        {
           "value": "painotus_1#1",
         },
       ],
     },
     "yleislinja": true,
   },
-  "nayttamistiedot": Object {
-    "ammattinimikkeet": Object {
-      "fi": Array [
-        Object {
+  "nayttamistiedot": {
+    "ammattinimikkeet": {
+      "fi": [
+        {
           "label": "nimike1",
           "value": "nimike1",
         },
       ],
-      "sv": Array [
-        Object {
+      "sv": [
+        {
           "label": "nimike2",
           "value": "nimike2",
         },
       ],
     },
-    "avainsanat": Object {
-      "fi": Array [
-        Object {
+    "avainsanat": {
+      "fi": [
+        {
           "label": "avainsana1",
           "value": "avainsana1",
         },
       ],
-      "sv": Array [
-        Object {
+      "sv": [
+        {
           "label": "avainsana2",
           "value": "avainsana2",
         },
       ],
     },
   },
-  "opintojaksojenLiittaminen": Object {
-    "opintojaksot": Array [],
+  "opintojaksojenLiittaminen": {
+    "opintojaksot": [],
   },
   "organisaatioOid": undefined,
-  "osaamisalat": Object {
-    "osaamisalaLinkit": Object {
-      "osaamisala1": Object {
+  "osaamisalat": {
+    "osaamisalaLinkit": {
+      "osaamisala1": {
         "fi": "Fi linkki1",
         "sv": "Sv linkki1",
       },
-      "osaamisala2": Object {
+      "osaamisala2": {
         "fi": "Fi linkki2",
         "sv": "Sv linkki2",
       },
     },
-    "osaamisalaLinkkiOtsikot": Object {
-      "osaamisala1": Object {
+    "osaamisalaLinkkiOtsikot": {
+      "osaamisala1": {
         "fi": "Fi otsikko1",
         "sv": "Sv otsikko1",
       },
-      "osaamisala2": Object {
+      "osaamisala2": {
         "fi": "Fi otsikko2",
         "sv": "Sv otsikko2",
       },
     },
-    "osaamisalat": Array [
+    "osaamisalat": [
       "osaamisala1",
       "osaamisala2",
     ],
   },
   "soraKuvaus": undefined,
-  "tarjoajat": Array [
+  "tarjoajat": [
     "org1",
     "org2",
   ],
   "teemakuva": undefined,
-  "tiedot": Object {
+  "tiedot": {
     "aloituspaikat": "251",
     "ammatillinenPerustutkintoErityisopetuksena": true,
     "hasJotpaRahoitus": false,
-    "ilmoittautumislinkki": Object {
+    "ilmoittautumislinkki": {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
@@ -267,72 +267,72 @@ Object {
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "laajuusNumeroTyyppi": "range",
-    "nimi": Object {
+    "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "opinnonTyyppi": Object {
+    "opinnonTyyppi": {
       "value": undefined,
     },
     "opintojenLaajuusNumero": "25",
     "opintojenLaajuusNumeroMax": 35,
     "opintojenLaajuusNumeroMin": 30,
-    "opintojenLaajuusyksikko": Object {
+    "opintojenLaajuusyksikko": {
       "value": "laajuus_1#1",
     },
-    "taiteenalat": Array [
-      Object {
+    "taiteenalat": [
+      {
         "value": "taiteenperusopetustaiteenala_sirkustaide",
       },
-      Object {
+      {
         "value": "taiteenperusopetustaiteenala_sanataide",
       },
     ],
     "tunniste": undefined,
   },
   "tila": "tallennettu",
-  "toteutusjaksot": Array [
-    Object {
-      "ilmoittautumislinkki": Object {
+  "toteutusjaksot": [
+    {
+      "ilmoittautumislinkki": {
         "fi": "Fi linkki",
         "sv": "Sv linkki",
       },
       "koodi": "koodi 123",
-      "kuvaus": Object {
+      "kuvaus": {
         "fi": "<p>Fi kuvaus</p>",
         "sv": "<p>Sv kuvaus</p>",
       },
-      "laajuus": Object {
+      "laajuus": {
         "fi": "Fi laajuus",
         "sv": "Sv laajuus",
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "sisalto": Array [
-        Object {
-          "data": Object {
+      "sisalto": [
+        {
+          "data": {
             "fi": "<h2>Fi sisalto</h2>",
             "sv": "<h2>Sv sisalto</h2>",
           },
           "tyyppi": "teksti",
         },
-        Object {
-          "data": Object {
-            "rows": Array [
-              Object {
-                "columns": Array [
-                  Object {
+        {
+          "data": {
+            "rows": [
+              {
+                "columns": [
+                  {
                     "index": 0,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column1",
                       "sv": "Sv column1",
                     },
                   },
-                  Object {
+                  {
                     "index": 1,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column2",
                       "sv": "Sv column2",
                     },
@@ -340,18 +340,18 @@ Object {
                 ],
                 "index": 0,
               },
-              Object {
-                "columns": Array [
-                  Object {
+              {
+                "columns": [
+                  {
                     "index": 0,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column3",
                       "sv": "Sv column3",
                     },
                   },
-                  Object {
+                  {
                     "index": 1,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column4",
                       "sv": "Sv column4",
                     },
@@ -366,29 +366,29 @@ Object {
       ],
     },
   ],
-  "yhteyshenkilot": Array [
-    Object {
-      "nimi": Object {
+  "yhteyshenkilot": [
+    {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "puhelinnumero": Object {
+      "puhelinnumero": {
         "fi": "Fi puhelinnumero",
         "sv": "Sv puhelinnumero",
       },
-      "sahkoposti": Object {
+      "sahkoposti": {
         "fi": "Fi sähköposti",
         "sv": "Sv sähköposti",
       },
-      "titteli": Object {
+      "titteli": {
         "fi": "Fi titteli",
         "sv": "Sv titteli",
       },
-      "verkkosivu": Object {
+      "verkkosivu": {
         "fi": "Fi verkkosivu",
         "sv": "Sv verkkosivu",
       },
-      "verkkosivuTeksti": Object {},
+      "verkkosivuTeksti": {},
     },
   ],
 }

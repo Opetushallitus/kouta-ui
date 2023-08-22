@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
 import _ from 'lodash';
-import { useDispatch, batch } from 'react-redux';
+import { batch } from 'react-redux';
 import {
   startSubmit as startSubmitAction,
   stopSubmit as stopSubmitAction,
@@ -15,6 +15,8 @@ import { useForm, useSubmitErrors } from '#/src/hooks/form';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
 import useToaster from '#/src/hooks/useToaster';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
+
+import { useDispatch } from './reduxHooks';
 
 export const useSaveForm = ({ formName, validate, submit }) => {
   const dispatch = useDispatch();

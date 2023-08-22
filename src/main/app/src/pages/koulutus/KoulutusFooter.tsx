@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
 import { useQueryClient } from 'react-query';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
@@ -9,6 +8,7 @@ import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode, useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
+import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel } from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';

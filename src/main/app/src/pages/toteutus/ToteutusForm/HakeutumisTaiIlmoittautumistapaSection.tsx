@@ -11,8 +11,8 @@ import {
   FormFieldUrlInput,
   createFormFieldComponent,
 } from '#/src/components/formFields';
-import SegmentTab from '#/src/components/SegmentTab';
-import SegmentTabs from '#/src/components/SegmentTabs';
+import { SegmentTab } from '#/src/components/SegmentTab';
+import { SegmentTabs } from '#/src/components/SegmentTabs';
 import { Box, Radio } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI, Hakeutumistapa } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';

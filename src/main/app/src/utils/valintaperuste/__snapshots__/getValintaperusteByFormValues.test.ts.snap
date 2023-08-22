@@ -1,71 +1,71 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Should convert valintaperuste form with valintatapa 1`] = `
-Object {
+{
   "esikatselu": false,
   "externalId": null,
   "hakutapaKoodiUri": "tapa_1#1",
   "julkinen": true,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "joukko_1#1",
   "koulutustyyppi": "amk",
-  "metadata": Object {
-    "hakukelpoisuus": Object {
+  "metadata": {
+    "hakukelpoisuus": {
       "fi": "<h1>Fi hakukelpoisuus</h1>",
       "sv": "<h1>Sv hakukelpoisuus</h1>",
     },
-    "kuvaus": Object {
+    "kuvaus": {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
-    "lisatiedot": Object {
+    "lisatiedot": {
       "fi": "<h1>Fi lisatiedot</h1>",
       "sv": "<h1>Sv lisatiedot</h1>",
     },
-    "sisalto": Array [],
+    "sisalto": [],
     "tyyppi": "amk",
-    "valintakokeidenYleiskuvaus": Object {
+    "valintakokeidenYleiskuvaus": {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
-    "valintatavat": Array [
-      Object {
+    "valintatavat": [
+      {
         "enimmaispisteet": 20.2,
         "kaytaMuuntotaulukkoa": false,
-        "kynnysehto": Object {
+        "kynnysehto": {
           "fi": "<p>Fi kynnysehto</p>",
           "sv": "<p>Sv kynnysehto</p>",
         },
-        "nimi": Object {
+        "nimi": {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
-        "sisalto": Array [
-          Object {
-            "data": Object {
+        "sisalto": [
+          {
+            "data": {
               "fi": "<h2>Fi sisalto</h2>",
               "sv": "<h2>Sv sisalto</h2>",
             },
             "tyyppi": "teksti",
           },
-          Object {
-            "data": Object {
-              "rows": Array [
-                Object {
-                  "columns": Array [
-                    Object {
+          {
+            "data": {
+              "rows": [
+                {
+                  "columns": [
+                    {
                       "index": 0,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column1",
                         "sv": "Sv column1",
                       },
                     },
-                    Object {
+                    {
                       "index": 1,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column2",
                         "sv": "Sv column2",
                       },
@@ -73,18 +73,18 @@ Object {
                   ],
                   "index": 0,
                 },
-                Object {
-                  "columns": Array [
-                    Object {
+                {
+                  "columns": [
+                    {
                       "index": 0,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column3",
                         "sv": "Sv column3",
                       },
                     },
-                    Object {
+                    {
                       "index": 1,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column4",
                         "sv": "Sv column4",
                       },
@@ -103,52 +103,52 @@ Object {
     ],
   },
   "muokkaaja": undefined,
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "julkaistu",
-  "valintakokeet": Array [
-    Object {
+  "valintakokeet": [
+    {
       "id": undefined,
-      "metadata": Object {
+      "metadata": {
         "erityisjarjestelytMahdollisia": true,
         "liittyyEnnakkovalmistautumista": true,
-        "ohjeetEnnakkovalmistautumiseen": Object {
+        "ohjeetEnnakkovalmistautumiseen": {
           "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
           "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
-        "ohjeetErityisjarjestelyihin": Object {
+        "ohjeetErityisjarjestelyihin": {
           "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
           "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
-        "tietoja": Object {
+        "tietoja": {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
         "vahimmaispisteet": 30.4,
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "nimi - fi",
         "sv": "nimi - sv",
       },
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
+      "tilaisuudet": [
+        {
+          "aika": {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44",
           },
-          "jarjestamispaikka": Object {
+          "jarjestamispaikka": {
             "fi": "jarjestamispaikka - fi",
             "sv": "jarjestamispaikka - sv",
           },
-          "lisatietoja": Object {
+          "lisatietoja": {
             "fi": "<p>fi lisatietoja</p>",
             "sv": "<p>sv lisatietoja</p>",
           },
-          "osoite": Object {
-            "osoite": Object {
+          "osoite": {
+            "osoite": {
               "fi": "fi osoite",
               "sv": "sv osoite",
             },
@@ -163,85 +163,85 @@ Object {
 `;
 
 exports[`Should convert valintaperuste form without valintatapa 1`] = `
-Object {
+{
   "esikatselu": false,
   "externalId": null,
   "hakutapaKoodiUri": "tapa_1#1",
   "julkinen": true,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "joukko_1#1",
   "koulutustyyppi": "amk",
-  "metadata": Object {
-    "hakukelpoisuus": Object {
+  "metadata": {
+    "hakukelpoisuus": {
       "fi": "<h1>Fi hakukelpoisuus</h1>",
       "sv": "<h1>Sv hakukelpoisuus</h1>",
     },
-    "kuvaus": Object {
+    "kuvaus": {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
-    "lisatiedot": Object {
+    "lisatiedot": {
       "fi": "<h1>Fi lisatiedot</h1>",
       "sv": "<h1>Sv lisatiedot</h1>",
     },
-    "sisalto": Array [],
+    "sisalto": [],
     "tyyppi": "amk",
-    "valintakokeidenYleiskuvaus": Object {
+    "valintakokeidenYleiskuvaus": {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
-    "valintatavat": Array [],
+    "valintatavat": [],
   },
   "muokkaaja": undefined,
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "julkaistu",
-  "valintakokeet": Array [
-    Object {
+  "valintakokeet": [
+    {
       "id": undefined,
-      "metadata": Object {
+      "metadata": {
         "erityisjarjestelytMahdollisia": true,
         "liittyyEnnakkovalmistautumista": true,
-        "ohjeetEnnakkovalmistautumiseen": Object {
+        "ohjeetEnnakkovalmistautumiseen": {
           "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
           "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
-        "ohjeetErityisjarjestelyihin": Object {
+        "ohjeetErityisjarjestelyihin": {
           "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
           "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
-        "tietoja": Object {
+        "tietoja": {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
         "vahimmaispisteet": 30.4,
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "nimi - fi",
         "sv": "nimi - sv",
       },
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
+      "tilaisuudet": [
+        {
+          "aika": {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44",
           },
-          "jarjestamispaikka": Object {
+          "jarjestamispaikka": {
             "fi": "jarjestamispaikka - fi",
             "sv": "jarjestamispaikka - sv",
           },
-          "lisatietoja": Object {
+          "lisatietoja": {
             "fi": "<p>fi lisatietoja</p>",
             "sv": "<p>sv lisatietoja</p>",
           },
-          "osoite": Object {
-            "osoite": Object {
+          "osoite": {
+            "osoite": {
               "fi": "fi osoite",
               "sv": "sv osoite",
             },
@@ -256,71 +256,71 @@ Object {
 `;
 
 exports[`Should not convert translations for non-selected language 1`] = `
-Object {
+{
   "esikatselu": false,
   "externalId": null,
   "hakutapaKoodiUri": "tapa_1#1",
   "julkinen": true,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "kohdejoukkoKoodiUri": "joukko_1#1",
   "koulutustyyppi": "amk",
-  "metadata": Object {
-    "hakukelpoisuus": Object {
+  "metadata": {
+    "hakukelpoisuus": {
       "fi": "<h1>Fi hakukelpoisuus</h1>",
       "sv": "<h1>Sv hakukelpoisuus</h1>",
     },
-    "kuvaus": Object {
+    "kuvaus": {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
-    "lisatiedot": Object {
+    "lisatiedot": {
       "fi": "<h1>Fi lisatiedot</h1>",
       "sv": "<h1>Sv lisatiedot</h1>",
     },
-    "sisalto": Array [],
+    "sisalto": [],
     "tyyppi": "amk",
-    "valintakokeidenYleiskuvaus": Object {
+    "valintakokeidenYleiskuvaus": {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
-    "valintatavat": Array [
-      Object {
+    "valintatavat": [
+      {
         "enimmaispisteet": 20.2,
         "kaytaMuuntotaulukkoa": false,
-        "kynnysehto": Object {
+        "kynnysehto": {
           "fi": "<p>Fi kynnysehto</p>",
           "sv": "<p>Sv kynnysehto</p>",
         },
-        "nimi": Object {
+        "nimi": {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
-        "sisalto": Array [
-          Object {
-            "data": Object {
+        "sisalto": [
+          {
+            "data": {
               "fi": "<h2>Fi sisalto</h2>",
               "sv": "<h2>Sv sisalto</h2>",
             },
             "tyyppi": "teksti",
           },
-          Object {
-            "data": Object {
-              "rows": Array [
-                Object {
-                  "columns": Array [
-                    Object {
+          {
+            "data": {
+              "rows": [
+                {
+                  "columns": [
+                    {
                       "index": 0,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column1",
                         "sv": "Sv column1",
                       },
                     },
-                    Object {
+                    {
                       "index": 1,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column2",
                         "sv": "Sv column2",
                       },
@@ -328,18 +328,18 @@ Object {
                   ],
                   "index": 0,
                 },
-                Object {
-                  "columns": Array [
-                    Object {
+                {
+                  "columns": [
+                    {
                       "index": 0,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column3",
                         "sv": "Sv column3",
                       },
                     },
-                    Object {
+                    {
                       "index": 1,
-                      "text": Object {
+                      "text": {
                         "fi": "Fi column4",
                         "sv": "Sv column4",
                       },
@@ -358,52 +358,52 @@ Object {
     ],
   },
   "muokkaaja": undefined,
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "tila": "julkaistu",
-  "valintakokeet": Array [
-    Object {
+  "valintakokeet": [
+    {
       "id": undefined,
-      "metadata": Object {
+      "metadata": {
         "erityisjarjestelytMahdollisia": true,
         "liittyyEnnakkovalmistautumista": true,
-        "ohjeetEnnakkovalmistautumiseen": Object {
+        "ohjeetEnnakkovalmistautumiseen": {
           "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
           "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
-        "ohjeetErityisjarjestelyihin": Object {
+        "ohjeetErityisjarjestelyihin": {
           "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
           "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
-        "tietoja": Object {
+        "tietoja": {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
         "vahimmaispisteet": 30.4,
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "nimi - fi",
         "sv": "nimi - sv",
       },
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
+      "tilaisuudet": [
+        {
+          "aika": {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44",
           },
-          "jarjestamispaikka": Object {
+          "jarjestamispaikka": {
             "fi": "jarjestamispaikka - fi",
             "sv": "jarjestamispaikka - sv",
           },
-          "lisatietoja": Object {
+          "lisatietoja": {
             "fi": "<p>fi lisatietoja</p>",
             "sv": "<p>sv lisatietoja</p>",
           },
-          "osoite": Object {
-            "osoite": Object {
+          "osoite": {
+            "osoite": {
               "fi": "fi osoite",
               "sv": "sv osoite",
             },

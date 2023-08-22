@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { produce } from 'immer';
 import _ from 'lodash';
 
 export type TableColumn = {
@@ -27,7 +27,7 @@ export const getMaxColumnLength = (rows: Array<Array<string>>) => {
 };
 
 export const getEmptyColumn = (language: LanguageCode) =>
-  ({ text: { [language]: '' } } as TableColumn);
+  ({ text: { [language]: '' } }) as TableColumn;
 
 export const getEmptyRow = (numColumns: number, language: LanguageCode) => {
   return {
@@ -61,7 +61,7 @@ export const setTable = ({
     const numberOfRowColumns = getNumberOfColumns(rows);
     const extraColumns = numberOfTableColumns - numberOfRowColumns;
     if (extraColumns > 0) {
-      draft.rows.forEach((row, rowIndex) => {
+      draft.rows.forEach(row => {
         const columns = _.get(row, 'columns') || [];
 
         row.columns = [

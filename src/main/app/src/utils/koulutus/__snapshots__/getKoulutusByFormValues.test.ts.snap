@@ -1,26 +1,26 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved 1`] = `
-Object {
+{
   "ePerusteId": null,
   "esikatselu": false,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
-  "kielivalinta": Array [],
-  "koulutuksetKoodiUri": Array [],
+  "kielivalinta": [],
+  "koulutuksetKoodiUri": [],
   "koulutustyyppi": "erikoistumiskoulutus",
-  "metadata": Object {
+  "metadata": {
     "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
     "isAvoinKorkeakoulutus": false,
-    "koulutusalaKoodiUrit": Array [
+    "koulutusalaKoodiUrit": [
       "koulutusala_1#1",
       "koulutusala_2#1",
     ],
     "koulutustyyppi": "erikoistumiskoulutus",
-    "kuvaus": Object {},
-    "linkkiEPerusteisiin": Object {},
-    "lisatiedot": Array [],
+    "kuvaus": {},
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": 10,
@@ -28,40 +28,40 @@ Object {
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
     "tunniste": null,
-    "tutkinnonOsat": Array [],
-    "tutkintonimikeKoodiUrit": Array [],
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
     "tyyppi": "erikoistumiskoulutus",
   },
   "muokkaaja": undefined,
-  "nimi": Object {},
+  "nimi": {},
   "organisaatioOid": undefined,
   "sorakuvausId": null,
-  "tarjoajat": Array [],
+  "tarjoajat": [],
   "teemakuva": undefined,
   "tila": undefined,
 }
 `;
 
 exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
-Object {
+{
   "ePerusteId": null,
   "esikatselu": false,
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
-  "kielivalinta": Array [],
-  "koulutuksetKoodiUri": Array [
+  "kielivalinta": [],
+  "koulutuksetKoodiUri": [
     "koulutus_371101#1",
   ],
   "koulutustyyppi": "amm-osaamisala",
-  "metadata": Object {
+  "metadata": {
     "erikoistumiskoulutusKoodiUri": null,
     "isAvoinKorkeakoulutus": false,
-    "koulutusalaKoodiUrit": Array [],
+    "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "amm-osaamisala",
-    "kuvaus": Object {},
-    "linkkiEPerusteisiin": Object {},
-    "lisatiedot": Array [],
+    "kuvaus": {},
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -69,43 +69,43 @@ Object {
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tunniste": null,
-    "tutkinnonOsat": Array [],
-    "tutkintonimikeKoodiUrit": Array [],
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm-osaamisala",
   },
   "muokkaaja": undefined,
-  "nimi": Object {},
+  "nimi": {},
   "organisaatioOid": undefined,
   "sorakuvausId": null,
-  "tarjoajat": Array [],
+  "tarjoajat": [],
   "teemakuva": undefined,
   "tila": undefined,
 }
 `;
 
 exports[`getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus 1`] = `
-Object {
+{
   "ePerusteId": 1,
   "esikatselu": false,
   "externalId": "ext1",
   "johtaaTutkintoon": true,
   "julkinen": false,
-  "kielivalinta": Array [],
-  "koulutuksetKoodiUri": Array [
+  "kielivalinta": [],
+  "koulutuksetKoodiUri": [
     "koulutuskoodi_1#1",
   ],
   "koulutustyyppi": "amm",
-  "metadata": Object {
+  "metadata": {
     "erikoistumiskoulutusKoodiUri": null,
     "isAvoinKorkeakoulutus": false,
-    "koulutusalaKoodiUrit": Array [
+    "koulutusalaKoodiUrit": [
       "koulutusala_1#1",
       "koulutusala_2#1",
     ],
     "koulutustyyppi": "amm",
-    "kuvaus": Object {},
-    "linkkiEPerusteisiin": Object {},
-    "lisatiedot": Array [],
+    "kuvaus": {},
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -113,60 +113,60 @@ Object {
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tunniste": null,
-    "tutkinnonOsat": Array [],
-    "tutkintonimikeKoodiUrit": Array [
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [
       "nimike_1#1",
       "nimike_2#1",
     ],
     "tyyppi": "amm",
   },
   "muokkaaja": undefined,
-  "nimi": Object {},
+  "nimi": {},
   "organisaatioOid": undefined,
   "sorakuvausId": null,
-  "tarjoajat": Array [],
+  "tarjoajat": [],
   "teemakuva": undefined,
   "tila": undefined,
 }
 `;
 
 exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] = `
-Object {
+{
   "ePerusteId": null,
   "esikatselu": false,
   "externalId": "ext1",
   "johtaaTutkintoon": true,
   "julkinen": true,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
-  "koulutuksetKoodiUri": Array [
+  "koulutuksetKoodiUri": [
     "koulutus_371101#1",
     "koulutus_201000#1",
   ],
   "koulutustyyppi": "yo",
-  "metadata": Object {
+  "metadata": {
     "erikoistumiskoulutusKoodiUri": null,
     "isAvoinKorkeakoulutus": false,
-    "koulutusalaKoodiUrit": Array [
+    "koulutusalaKoodiUrit": [
       "koulutusala_1#1",
       "koulutusala_2#1",
     ],
     "koulutustyyppi": "yo",
-    "kuvaus": Object {
+    "kuvaus": {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
     },
-    "linkkiEPerusteisiin": Object {},
-    "lisatiedot": Array [
-      Object {
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [
+      {
         "otsikkoKoodiUri": "osio_1#1",
-        "teksti": Object {},
+        "teksti": {},
       },
-      Object {
+      {
         "otsikkoKoodiUri": "osio_2#1",
-        "teksti": Object {
+        "teksti": {
           "fi": "<p>Fi kuvaus</p>",
           "sv": "<p>Sv kuvaus</p>",
         },
@@ -179,21 +179,21 @@ Object {
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tunniste": null,
-    "tutkinnonOsat": Array [],
-    "tutkintonimikeKoodiUrit": Array [
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [
       "nimike_1#1",
       "nimike_2#1",
     ],
     "tyyppi": "yo",
   },
   "muokkaaja": "1.1.1.1",
-  "nimi": Object {
+  "nimi": {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
   "organisaatioOid": undefined,
   "sorakuvausId": "1234",
-  "tarjoajat": Array [
+  "tarjoajat": [
     "123.456.789",
   ],
   "teemakuva": undefined,
@@ -202,23 +202,23 @@ Object {
 `;
 
 exports[`it should return empty array if no koulutusKoodiUri given 1`] = `
-Object {
+{
   "ePerusteId": null,
   "esikatselu": false,
   "externalId": null,
   "johtaaTutkintoon": true,
   "julkinen": false,
-  "kielivalinta": Array [],
-  "koulutuksetKoodiUri": Array [],
+  "kielivalinta": [],
+  "koulutuksetKoodiUri": [],
   "koulutustyyppi": "yo",
-  "metadata": Object {
+  "metadata": {
     "erikoistumiskoulutusKoodiUri": null,
     "isAvoinKorkeakoulutus": false,
-    "koulutusalaKoodiUrit": Array [],
+    "koulutusalaKoodiUrit": [],
     "koulutustyyppi": "yo",
-    "kuvaus": Object {},
-    "linkkiEPerusteisiin": Object {},
-    "lisatiedot": Array [],
+    "kuvaus": {},
+    "linkkiEPerusteisiin": {},
+    "lisatiedot": [],
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMax": null,
@@ -226,15 +226,15 @@ Object {
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "tunniste": null,
-    "tutkinnonOsat": Array [],
-    "tutkintonimikeKoodiUrit": Array [],
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
     "tyyppi": "yo",
   },
   "muokkaaja": undefined,
-  "nimi": Object {},
+  "nimi": {},
   "organisaatioOid": undefined,
   "sorakuvausId": null,
-  "tarjoajat": Array [],
+  "tarjoajat": [],
   "teemakuva": undefined,
   "tila": undefined,
 }

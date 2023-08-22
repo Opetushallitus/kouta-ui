@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -17,6 +16,7 @@ import {
   HAKUKOHDE_ROLE,
 } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
+import { useSelector } from '#/src/hooks/reduxHooks';
 import { selectOrganisaatio } from '#/src/state/organisaatioSelection';
 import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
 import getUserRoles from '#/src/utils/getUserRoles';

@@ -1,130 +1,130 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getFormValuesByValintaperuste returns correct form values given valintaperuste 1`] = `
-Object {
+{
   "esikatselu": false,
   "externalId": undefined,
-  "hakukelpoisuus": Object {
+  "hakukelpoisuus": {
     "fi": "<h1>Fi hakukelpoisuus</h1>",
     "sv": "<h1>Sv hakukelpoisuus</h1>",
   },
   "julkinen": true,
-  "kuvaus": Object {
-    "kuvaus": Object {
+  "kuvaus": {
+    "kuvaus": {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
-    "nimi": Object {
+    "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
-    "sisalto": Array [],
+    "sisalto": [],
   },
-  "lisatiedot": Object {
+  "lisatiedot": {
     "fi": "<h1>Fi lisatiedot</h1>",
     "sv": "<h1>Sv lisatiedot</h1>",
   },
   "organisaatioOid": undefined,
-  "perustiedot": Object {
+  "perustiedot": {
     "hakutapa": "tapa_1#1",
-    "kieliversiot": Array [
+    "kieliversiot": [
       "fi",
       "sv",
     ],
-    "kohdejoukko": Object {
+    "kohdejoukko": {
       "value": "joukko_1#1",
     },
     "tyyppi": "amk",
   },
   "tila": "tallennettu",
-  "valintakokeet": Object {
-    "kokeetTaiLisanaytot": Array [
-      Object {
+  "valintakokeet": {
+    "kokeetTaiLisanaytot": [
+      {
         "erityisjarjestelytMahdollisia": true,
         "id": undefined,
         "liittyyEnnakkovalmistautumista": true,
-        "nimi": Object {
+        "nimi": {
           "fi": "valintakokeen nimi - fi",
           "sv": "valintakokeen nimi - sv",
         },
-        "ohjeetEnnakkovalmistautumiseen": Object {
+        "ohjeetEnnakkovalmistautumiseen": {
           "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
           "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
-        "ohjeetErityisjarjestelyihin": Object {
+        "ohjeetErityisjarjestelyihin": {
           "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
           "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
-        "tietoaHakijalle": Object {
+        "tietoaHakijalle": {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
-        "tilaisuudet": Array [
-          Object {
+        "tilaisuudet": [
+          {
             "alkaa": "2019-04-16T08:44",
-            "jarjestamispaikka": Object {
+            "jarjestamispaikka": {
               "fi": "jarjestamispaikka - fi",
               "sv": "jarjestamispaikka - sv",
             },
-            "lisatietoja": Object {
+            "lisatietoja": {
               "fi": "<p>fi lisatietoja</p>",
               "sv": "<p>sv lisatietoja</p>",
             },
-            "osoite": Object {
+            "osoite": {
               "fi": "fi osoite",
               "sv": "sv osoite",
             },
             "paattyy": "2019-04-18T08:44",
-            "postinumero": Object {
+            "postinumero": {
               "value": "posti_1#1",
             },
           },
         ],
-        "tyyppi": Object {
+        "tyyppi": {
           "value": "tyyppi_1#1",
         },
         "vahimmaispistemaara": "30,3",
       },
     ],
-    "yleisKuvaus": Object {
+    "yleisKuvaus": {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
   },
-  "valintatavat": Array [
-    Object {
+  "valintatavat": [
+    {
       "enimmaispistemaara": "20,2",
-      "kynnysehto": Object {
+      "kynnysehto": {
         "fi": "<p>Fi kynnysehto</p>",
         "sv": "<p>Sv kynnysehto</p>",
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
       },
-      "sisalto": Array [
-        Object {
-          "data": Object {
+      "sisalto": [
+        {
+          "data": {
             "fi": "<h2>Fi sisalto</h2>",
             "sv": "<h2>Sv sisalto</h2>",
           },
           "tyyppi": "teksti",
         },
-        Object {
-          "data": Object {
-            "rows": Array [
-              Object {
-                "columns": Array [
-                  Object {
+        {
+          "data": {
+            "rows": [
+              {
+                "columns": [
+                  {
                     "index": 0,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column1",
                       "sv": "Sv column1",
                     },
                   },
-                  Object {
+                  {
                     "index": 1,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column2",
                       "sv": "Sv column2",
                     },
@@ -132,18 +132,18 @@ Object {
                 ],
                 "index": 0,
               },
-              Object {
-                "columns": Array [
-                  Object {
+              {
+                "columns": [
+                  {
                     "index": 0,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column3",
                       "sv": "Sv column3",
                     },
                   },
-                  Object {
+                  {
                     "index": 1,
-                    "text": Object {
+                    "text": {
                       "fi": "Fi column4",
                       "sv": "Sv column4",
                     },
@@ -156,7 +156,7 @@ Object {
           "tyyppi": "taulukko",
         },
       ],
-      "tapa": Object {
+      "tapa": {
         "value": "tapa_1#1",
       },
       "vahimmaispistemaara": "10,1",

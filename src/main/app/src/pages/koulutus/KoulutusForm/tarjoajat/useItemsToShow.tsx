@@ -18,7 +18,7 @@ export const useItemsToShow = ({
   naytaVainValitut,
 }: Props) => {
   return useMemo(() => {
-    let selectedKoulutustoimijaOids: Array<string> = [];
+    const selectedKoulutustoimijaOids: Array<string> = [];
 
     return (
       organisaatiot

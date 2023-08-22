@@ -76,7 +76,9 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.25s, background-color 0.25s;
+  transition:
+    border-color 0.25s,
+    background-color 0.25s;
   min-height: 9rem;
   background-repeat: no-repeat;
   background-size: cover;
@@ -90,10 +92,9 @@ const Container = styled.div`
     css`
       border-color: ${getThemeProp('palette.danger.main')};
     `};
-  ${({ url }) =>
-    css`
-      background-image: ${url ? `url(${url})` : 'none'};
-    `};
+  ${({ url }) => css`
+    background-image: ${url ? `url(${url})` : 'none'};
+  `};
 `;
 
 const FlexWrapper = ({ children }) => (

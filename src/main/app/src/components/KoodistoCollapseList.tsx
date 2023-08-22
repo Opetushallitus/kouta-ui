@@ -4,12 +4,12 @@ import { Field } from 'redux-form';
 
 import { Box } from '#/src/components/virkailija';
 
+import { FormFieldAsyncKoodistoSelect } from './formFields';
+import { SectionInnerCollapse } from './SectionInnerCollapse';
 import { useFieldValue } from '../hooks/form';
 import { useUserLanguage } from '../hooks/useUserLanguage';
 import getKoodiNimiTranslation from '../utils/getKoodiNimiTranslation';
 import { koodiUriWithoutVersion } from '../utils/koodi/koodiUriWithoutVersion';
-import { FormFieldAsyncKoodistoSelect } from './formFields';
-import { SectionInnerCollapse } from './SectionInnerCollapse';
 
 type CollapseContentProps = {
   koodiUri: string;

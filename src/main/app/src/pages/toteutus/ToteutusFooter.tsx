@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 
 import _ from 'lodash';
 import { useQueryClient } from 'react-query';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
@@ -10,6 +9,7 @@ import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
+import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';

@@ -1,4 +1,4 @@
-import produce from 'immer';
+import { produce } from 'immer';
 import _ from 'lodash';
 import { match, P } from 'ts-pattern';
 
@@ -9,11 +9,11 @@ import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';
 import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
+import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from './constants';
 import {
   getKieleistyksetFromValues,
   getSerializedKieleistykset,
 } from '../pickTranslations';
-import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from './constants';
 
 const getArrayValue = (values, key) => {
   const valueCandidate = _.get(values, key);

@@ -14,10 +14,10 @@ import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 
-import KoulutusalatField from '../TiedotSection/KoulutusalatField';
-import TutkintonimikeField from '../TiedotSection/TutkintonimikeField';
 import { EPerusteTiedot } from './EPerusteTiedot';
 import { ValitseKoulutusBox } from './ValitseKoulutusBox';
+import KoulutusalatField from '../TiedotSection/KoulutusalatField';
+import TutkintonimikeField from '../TiedotSection/TutkintonimikeField';
 
 const KoulutusNimiField = ({ name, disabled }) => {
   const language = useLanguageTab();

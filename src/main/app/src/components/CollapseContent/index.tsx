@@ -1,8 +1,7 @@
-import React from 'react';
+import { useRef } from 'react';
 
-import { Spring, config } from 'react-spring/renderprops';
-
-import { isPlaywright } from '#/src/utils';
+import { config, useSpring, animated } from '@react-spring/web';
+import { useMeasure } from 'react-use';
 
 const collapseConfig = {
   ...config.gentle,
@@ -11,25 +10,29 @@ const collapseConfig = {
 };
 
 export const CollapseContent = ({ open = false, children }) => {
+  const initializedRef = useRef<boolean>(false);
+  const [measureRef, { height }] = useMeasure<HTMLDivElement>();
+
+  const style = useSpring({
+    config: collapseConfig,
+    maxHeight: open ? `${height}px` : '0px',
+    opacity: open ? 1 : 0,
+    immediate: !initializedRef.current,
+  });
+
+  // Ei animoida ensimmäisellä kerralla
+  if (!initializedRef.current && open ? height > 0 : true) {
+    initializedRef.current = true;
+  }
+
   return (
-    <Spring
-      config={collapseConfig}
-      immediate={isPlaywright}
-      to={open ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+    <animated.div
+      style={{
+        ...style,
+        overflow: style.opacity.get() === 1 ? 'visible' : 'hidden',
+      }}
     >
-      {({ opacity, height }) => (
-        <div
-          style={{
-            opacity,
-            height,
-            overflow: opacity === 1 ? 'visible' : 'hidden',
-          }}
-        >
-          {children}
-        </div>
-      )}
-    </Spring>
+      <div ref={measureRef}>{children}</div>
+    </animated.div>
   );
 };
-
-export default CollapseContent;

@@ -1,43 +1,43 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`getOppilaitosByFormValues returns correct oppilaitos given form values 1`] = `
-Object {
+{
   "esikatselu": false,
-  "kielivalinta": Array [
+  "kielivalinta": [
     "fi",
     "sv",
   ],
   "logo": undefined,
-  "metadata": Object {
+  "metadata": {
     "akatemioita": 1,
-    "esittely": Object {
+    "esittely": {
       "fi": "<p><em>Fi esittely</em></p>",
       "sv": "<p><em>Sv esittely</em></p>",
     },
-    "hakijapalveluidenYhteystiedot": Object {
-      "kayntiosoite": Object {
-        "osoite": Object {
+    "hakijapalveluidenYhteystiedot": {
+      "kayntiosoite": {
+        "osoite": {
           "fi": "Fi osoite",
           "sv": "Sv osoite",
         },
         "postinumeroKoodiUri": "postinumero_1#1",
       },
-      "nimi": Object {
+      "nimi": {
         "fi": "Hakijapalveluiden nimi",
         "sv": "Hakijapalveluiden nimi sv",
       },
-      "postiosoite": Object {
-        "osoite": Object {
+      "postiosoite": {
+        "osoite": {
           "fi": "Fi osoite",
           "sv": "Sv osoite",
         },
         "postinumeroKoodiUri": "postinumero_1#1",
       },
-      "puhelinnumero": Object {
+      "puhelinnumero": {
         "fi": "1234",
         "sv": "5678",
       },
-      "sahkoposti": Object {
+      "sahkoposti": {
         "fi": "fi@sahkoposti.fi",
         "sv": "sv@sahkoposti.sv",
       },
@@ -47,22 +47,22 @@ Object {
     "korkeakouluja": 5,
     "opiskelijoita": 100,
     "tiedekuntia": 4,
-    "tietoaOpiskelusta": Array [
-      Object {
+    "tietoaOpiskelusta": [
+      {
         "otsikkoKoodiUri": "osio_1#1",
-        "teksti": Object {
+        "teksti": {
           "fi": "<p>Fi tiedot</p>",
           "sv": "<p>Sv tiedot</p>",
         },
       },
     ],
     "toimipisteita": 9,
-    "wwwSivu": Object {
-      "nimi": Object {
+    "wwwSivu": {
+      "nimi": {
         "fi": "Verkkosivu fi",
         "sv": "Verkkosivu sv",
       },
-      "url": Object {
+      "url": {
         "fi": "www.verkkosivu.fi",
         "sv": "www.verkkosivu.sv",
       },

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`renders correctly 1`] = `
 .c5 {
@@ -108,24 +108,26 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   <div
-    style="opacity: 1; height: 0px; overflow: visible;"
+    style="max-height: 0px; opacity: 1; overflow: visible;"
   >
-    <div
-      class="CollapseContent"
-    >
+    <div>
       <div
-        class="c7"
+        class="CollapseContent"
       >
-        <div>
-          Collapse children
+        <div
+          class="c7"
+        >
+          <div>
+            Collapse children
+          </div>
         </div>
-      </div>
-      <div
-        class="c8"
-      >
-        <button>
-          Footer button
-        </button>
+        <div
+          class="c8"
+        >
+          <button>
+            Footer button
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -227,24 +229,26 @@ exports[`renders correctly 2`] = `
     </div>
   </div>
   <div
-    style="opacity: 1; height: 0px; overflow: visible;"
+    style="max-height: 0px; opacity: 1; overflow: visible;"
   >
-    <div
-      class="CollapseContent"
-    >
+    <div>
       <div
-        class="c6"
+        class="CollapseContent"
       >
-        <div>
-          Collapse children
+        <div
+          class="c6"
+        >
+          <div>
+            Collapse children
+          </div>
         </div>
-      </div>
-      <div
-        class="c7"
-      >
-        <button>
-          Footer button
-        </button>
+        <div
+          class="c7"
+        >
+          <button>
+            Footer button
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -357,23 +361,25 @@ exports[`renders correctly when closed 1`] = `
     </div>
   </div>
   <div
-    style="opacity: 0; height: 0px; overflow: hidden;"
+    style="max-height: 0px; opacity: 0; overflow: hidden;"
   >
-    <div
-      class="CollapseContent"
-    >
+    <div>
       <div
-        class="c7"
+        class="CollapseContent"
       >
-        <div>
-          Hello world!
+        <div
+          class="c7"
+        >
+          <div>
+            Hello world!
+          </div>
         </div>
-      </div>
-      <div
-        class="c8"
-      >
-        <div>
-          footer
+        <div
+          class="c8"
+        >
+          <div>
+            footer
+          </div>
         </div>
       </div>
     </div>

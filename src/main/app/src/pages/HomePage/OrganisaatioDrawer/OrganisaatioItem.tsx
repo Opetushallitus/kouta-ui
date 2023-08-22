@@ -67,7 +67,7 @@ export const OrganisaatioItem = ({
   nimi,
   open = false,
   collapse = false,
-  onToggleOpen: onToggleOpenProp = oid => {},
+  onToggleOpen: onToggleOpenProp = () => {},
   children = [],
   language = 'fi',
   disabled = false,

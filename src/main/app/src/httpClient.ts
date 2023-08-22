@@ -96,7 +96,7 @@ const withCSRF = client => {
 };
 
 const createHttpClient = ({ apiUrls, callerId }) => {
-  let client = axios.create({
+  const client = axios.create({
     withCredentials: true,
     headers: {
       ...(callerId && {

@@ -91,8 +91,8 @@ export const Filters = ({
   const entityState = state?.context?.values;
 
   const parseChildOrgs = (hierarkia, lang) => {
-    let flatHierarkia = flattenHierarkia(hierarkia);
-    let result = [];
+    const flatHierarkia = flattenHierarkia(hierarkia);
+    const result = [];
     flatHierarkia.forEach(org => {
       if (org?.nimi) {
         const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi;

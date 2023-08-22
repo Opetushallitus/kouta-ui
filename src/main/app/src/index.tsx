@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Globals } from '@react-spring/web';
 import { inspect } from '@xstate/inspect';
 import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
@@ -8,11 +9,16 @@ import ReactDOM from 'react-dom';
 import createHttpClient from './httpClient';
 import { createDefaultLocalization } from './localization';
 import App from './pages/App';
-import { createStore } from './state';
+import { store, persistor } from './state/store';
 import defaultTheme from './theme';
 import { configure as configureUrls } from './urls';
+import { isPlaywright } from './utils';
 
-if (process.env.REACT_APP_XSTATE_INSPECTOR) {
+Globals.assign({
+  skipAnimation: isPlaywright,
+});
+
+if (import.meta.env.VITE_XSTATE_INSPECTOR) {
   inspect({
     iframe: false, // open in new window
   });
@@ -23,19 +29,17 @@ const history = createBrowserHistory({ basename: 'kouta' });
 (async () => {
   let apiUrls = ophUrls;
 
-  let httpClient = createHttpClient({
+  const httpClient = createHttpClient({
     apiUrls,
-    callerId: process.env.REACT_APP_CALLER_ID,
+    callerId: import.meta.env.VITE_CALLER_ID,
   });
 
   apiUrls = await configureUrls(apiUrls, httpClient);
 
-  const localizationInstance = createDefaultLocalization({
+  const localizationInstance = await createDefaultLocalization({
     httpClient,
     apiUrls,
   });
-
-  const { store, persistor } = createStore();
 
   ReactDOM.render(
     <App

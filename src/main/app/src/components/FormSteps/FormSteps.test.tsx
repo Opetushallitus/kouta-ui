@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { mountWithTheme } from '#/src/testUtils';
 
 import FormSteps from './index';

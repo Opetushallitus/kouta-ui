@@ -78,7 +78,7 @@ export const TableHead = ({ children, ...props }) => {
       : null
   );
 
-  return <TableHeadBase children={childrenProp} {...props} />;
+  return <TableHeadBase {...props}>{childrenProp}</TableHeadBase>;
 };
 
 const TableRowBase = styled.tr`
@@ -116,11 +116,9 @@ export const TableRow = ({ children, isTableHead = false, ...props }) => {
   );
 
   return (
-    <TableRowBase
-      isTableHead={isTableHead}
-      children={childrenProp}
-      {...props}
-    />
+    <TableRowBase isTableHead={isTableHead} {...props}>
+      {childrenProp}
+    </TableRowBase>
   );
 };
 
@@ -146,7 +144,6 @@ const getSortIconType = (sortDirection: any) => {
 };
 
 export const TableCell = ({
-  key,
   sortDirection,
   onSort,
   children,

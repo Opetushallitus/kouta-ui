@@ -1,13 +1,19 @@
 import React, { useMemo } from 'react';
 
 import _ from 'lodash';
-import { useTranslation } from 'react-i18next';
+import { TFunction, useTranslation } from 'react-i18next';
 
 import { Tab, Tabs } from '#/src/components/virkailija';
 
 const sortOrder = ['fi', 'sv', 'en', 'muu'];
 
-const getLanguageOptions = ({ languages = [], t }) => {
+const getLanguageOptions = ({
+  languages = [],
+  t,
+}: {
+  languages: Array<LanguageCode>;
+  t: TFunction;
+}) => {
   const labelByValue = {
     fi: t('yleiset.suomeksi'),
     sv: t('yleiset.ruotsiksi'),
@@ -30,7 +36,11 @@ const onTabClick = e => e.stopPropagation();
 const LanguageTabs = ({
   languages = [],
   language = 'fi',
-  onChange = () => {},
+  onChange = _.noop,
+}: {
+  languages?: Array<LanguageCode>;
+  language?: LanguageCode;
+  onChange: () => void;
 }) => {
   const { t } = useTranslation();
 

@@ -4,11 +4,11 @@ import _ from 'lodash';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 
-import CollapseContent from '#/src/components/CollapseContent';
+import { CollapseContent } from '#/src/components/CollapseContent';
 import { Box, DropdownIcon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
-const Container = styled.div`
+const Container = styled.div<{ active: boolean }>`
   border: 1px solid ${getThemeProp('palette.divider')};
   background-color: white;
 
@@ -16,7 +16,8 @@ const Container = styled.div`
     active &&
     css`
       border-color: ${getThemeProp('palette.primary.main')};
-      box-shadow: 0 0 0 1px ${getThemeProp('palette.primary.main')},
+      box-shadow:
+        0 0 0 1px ${getThemeProp('palette.primary.main')},
         0 0 7px 1px
           ${({ theme }) => setLightness(0.8, theme.palette.primary.main)};
     `}
@@ -30,7 +31,7 @@ const HeaderToggle = styled.div`
   cursor: pointer;
 `;
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<{ open: boolean }>`
   display: flex;
 
   ${({ open }) =>
@@ -40,7 +41,7 @@ const HeaderContainer = styled.div`
     `}
 `;
 
-const HeaderContent = styled.div`
+const HeaderContent = styled.div<{ toggleOnHeaderClick: boolean }>`
   display: flex;
   align-items: center;
   flex: 1;

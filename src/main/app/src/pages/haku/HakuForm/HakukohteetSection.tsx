@@ -36,7 +36,7 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
 
   const columns = useTableColumns(t, organisaatioOid);
 
-  let filterParams = { hakuOid: haku?.oid };
+  const filterParams = { hakuOid: haku?.oid };
 
   const hakukohdeService = useInterpret(hakukohdeMachine);
 

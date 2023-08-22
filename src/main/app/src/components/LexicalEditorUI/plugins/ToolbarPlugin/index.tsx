@@ -52,11 +52,11 @@ import {
   UNDO_COMMAND,
 } from 'lexical';
 
+import { StyledDropDown, StyledDropDownItem, Toolbar } from './Components';
 import { IS_APPLE } from '../../shared/environment';
 import { StyledIcon } from '../../ui/Components';
 import { getSelectedNode } from '../../utils/getSelectedNode';
 import { sanitizeUrl } from '../../utils/url';
-import { StyledDropDown, StyledDropDownItem, Toolbar } from './Components';
 
 const blockTypeToIconName = {
   bullet: 'format_list_bulleted',

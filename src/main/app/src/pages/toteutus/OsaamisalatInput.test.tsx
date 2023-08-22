@@ -1,10 +1,10 @@
-import React from 'react';
+import { vi } from 'vitest';
 
 import { renderWithTheme, screen, fireEvent, within } from '#/src/testUtils';
 
 import { OsaamisalatInput } from './OsaamisalatInput';
 
-jest.mock('react-i18next', () => ({
+vi.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
   useTranslation: () => ({
     t: str => str,
@@ -55,7 +55,7 @@ test('onChange works right', () => {
     },
   ];
 
-  const onChange = jest.fn();
+  const onChange = vi.fn();
 
   renderWithTheme(
     <OsaamisalatInput

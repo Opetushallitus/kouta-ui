@@ -103,7 +103,6 @@ export const FormCollapse = ({
   key,
   id,
   defaultLanguage = 'fi',
-  showLanguageTabs = false,
   languages = [],
   active = false,
   section,

@@ -90,7 +90,7 @@ export const stubCommonRoutes = async (page: Page) => {
   await page.route('**/kouta-backend/auth/login', fixtureJSON({}));
 
   await page.route(
-    '**/koodisto-service/rest/json/hakutapa/koodi*',
+    '**/kouta-backend/koodisto/hakutapa/koodit*',
     fixtureFromFile('hakutapa-koodisto.json')
   );
 

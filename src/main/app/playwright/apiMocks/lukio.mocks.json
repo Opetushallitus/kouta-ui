@@ -1,6 +1,6 @@
 [
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/lukiolinjaterityinenkoulutustehtava/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/lukiolinjaerityinenkoulutustehtava/koodit",
     "response": {
       "body": [
         {
@@ -923,7 +923,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/lukiopainotukset/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/lukiopainotukset/koodit",
     "response": {
       "body": [
         {
@@ -2146,7 +2146,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/moduulikoodistolops2021/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/moduulikoodistolops2021/koodit",
     "response": {
       "body": [
         {

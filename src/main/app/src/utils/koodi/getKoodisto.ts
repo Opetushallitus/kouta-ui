@@ -16,7 +16,7 @@ const getKoodisto = async ({
   const { data } = await httpClient.get<Array<Koodi>>(
     apiUrls.url('kouta-backend.koodisto.koodit', koodistoUri),
     {
-      params: { versio },
+      params: versio ? { versio } : {},
     }
   );
 

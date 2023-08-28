@@ -1,6 +1,6 @@
 [
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/haunkohdejoukko/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/haunkohdejoukko/koodit",
     "response": {
       "body": [
         {
@@ -519,7 +519,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/valintatapajono/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/valintatapajono/koodit",
     "response": {
       "body": [
         {
@@ -713,7 +713,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/valintakokeentyyppi/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/valintakokeentyyppi/koodit",
     "response": {
       "body": [
         {

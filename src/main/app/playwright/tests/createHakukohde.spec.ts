@@ -121,7 +121,7 @@ const prepareTest = async (
   );
 
   await page.route(
-    '**/kouta-backend/koodisto/valintakokeentyypit*',
+    '**/kouta-backend/koodisto/valintakokeentyypit/koodit*',
     fixtureFromFile('valintakokeentyyppi-koodisto.json')
   );
 };

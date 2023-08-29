@@ -46,6 +46,7 @@ exports[`getOppilaitosByFormValues returns correct oppilaitos given form values 
     "kampuksia": 3,
     "korkeakouluja": 5,
     "opiskelijoita": 100,
+    "some": undefined,
     "tiedekuntia": 4,
     "tietoaOpiskelusta": [
       {

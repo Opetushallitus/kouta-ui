@@ -2,10 +2,12 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+import { Grid, Cell } from 'styled-css-grid';
 
 import { FormFieldUrlInput } from '#/src/components/formFields';
-import { Box, Typography } from '#/src/components/virkailija';
 import useKoodisto from '#/src/hooks/useKoodisto';
+
+import Heading from '../Heading';
 
 type SomeFieldsProps = {
   name: string;
@@ -17,20 +19,19 @@ export const SomeFields = ({ name }: SomeFieldsProps) => {
 
   return (
     <>
-      <Typography as="div" mb={2}>
-        {t('oppilaitoslomake.some')}
-      </Typography>
+      <Heading mt={4}>{t('oppilaitoslomake.some')}</Heading>
 
-      <Box m={-1} display="flex">
+      <Grid style={{ marginBottom: '2rem' }}>
         {somekanavat?.map(somekanava => (
-          <Field
-            component={FormFieldUrlInput}
-            name={`${name}.some.${somekanava.koodiUri}`}
-            label={somekanava.metadata[0].nimi}
-            key={`key-some-${somekanava.metadata[0].nimi}`}
-          />
+          <Cell width={4} key={`key-some-${somekanava.metadata[0].nimi}`}>
+            <Field
+              component={FormFieldUrlInput}
+              name={`${name}.some.${somekanava.koodiUri}`}
+              label={somekanava.metadata[0].nimi}
+            />
+          </Cell>
         ))}
-      </Box>
+      </Grid>
     </>
   );
 };

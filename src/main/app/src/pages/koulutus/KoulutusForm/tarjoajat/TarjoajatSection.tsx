@@ -14,6 +14,7 @@ import {
   KOULUTUS_ROLE,
   OPH_PAAKAYTTAJA_ROLE,
   KOULUTUSTYYPPI,
+  ENTITY,
 } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
@@ -29,12 +30,14 @@ const TarjoajatFormField = createFormFieldComponent(
   simpleMapProps
 );
 
-const TarjoajatSelector = ({ organisaatioOid, koulutus }) => {
+const TarjoajatSelector = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   const isAvoinKorkeakoulutus = useFieldValue(
     'information.isAvoinKorkeakoulutus'
   );
+  const isJulkinen = useFieldValue('julkinen', ENTITY.KOULUTUS);
+  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
 
   const { tarjoajat, isLoading } = useSelectableKoulutusTarjoajat({
     organisaatioOid,
@@ -44,14 +47,13 @@ const TarjoajatSelector = ({ organisaatioOid, koulutus }) => {
 
   const getIsDisabled = useCallback(
     organisaatio => {
-      const kt = koulutus?.koulutustyyppi ?? 'unknown';
       const requiredRole =
-        kt === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+        koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
           ? OPH_PAAKAYTTAJA_ROLE
           : KOULUTUS_ROLE;
       return !roleBuilder.hasUpdate(requiredRole, organisaatio).result();
     },
-    [roleBuilder, koulutus]
+    [roleBuilder, koulutustyyppi]
   );
 
   return isLoading ? (
@@ -66,6 +68,13 @@ const TarjoajatSelector = ({ organisaatioOid, koulutus }) => {
         isAvoinKorkeakoulutus={isAvoinKorkeakoulutus}
         label={t('koulutuslomake.valitseJarjestajat')}
         organisaatioOid={organisaatioOid}
+        required={
+          [
+            KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+            KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+            KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+          ].includes(koulutustyyppi) && !isJulkinen
+        }
       />
     </div>
   );
@@ -116,10 +125,7 @@ export const TarjoajatSection = ({
             </Box>
           )}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
-            <TarjoajatSelector
-              koulutus={koulutus}
-              organisaatioOid={organisaatioOid}
-            />
+            <TarjoajatSelector organisaatioOid={organisaatioOid} />
           )}
         </>
       )}

@@ -37,7 +37,7 @@ const TarjoajatSelector = ({ organisaatioOid }) => {
     'information.isAvoinKorkeakoulutus'
   );
   const isJulkinen = useFieldValue('julkinen', ENTITY.KOULUTUS);
-  const koulutusTyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
+  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
 
   const { tarjoajat, isLoading } = useSelectableKoulutusTarjoajat({
     organisaatioOid,
@@ -48,12 +48,12 @@ const TarjoajatSelector = ({ organisaatioOid }) => {
   const getIsDisabled = useCallback(
     organisaatio => {
       const requiredRole =
-        koulutusTyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+        koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
           ? OPH_PAAKAYTTAJA_ROLE
           : KOULUTUS_ROLE;
       return !roleBuilder.hasUpdate(requiredRole, organisaatio).result();
     },
-    [roleBuilder, koulutusTyyppi]
+    [roleBuilder, koulutustyyppi]
   );
 
   return isLoading ? (
@@ -73,7 +73,7 @@ const TarjoajatSelector = ({ organisaatioOid }) => {
             KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
             KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
             KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-          ].includes(koulutusTyyppi) && !isJulkinen
+          ].includes(koulutustyyppi) && !isJulkinen
         }
       />
     </div>

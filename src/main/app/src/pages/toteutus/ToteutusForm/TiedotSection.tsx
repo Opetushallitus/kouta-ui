@@ -12,16 +12,14 @@ import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuus
 import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
 import { TunnisteField } from '#/src/components/TunnisteField';
 import { VerticalBox } from '#/src/components/VerticalBox';
+import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, OpintojenLaajuusyksikko } from '#/src/constants';
+import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
-import { getTestIdProps } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
-import { Box } from '#/src/components/virkailija';
-import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 
 type NimiSectionProps = {
   name: string;
@@ -43,7 +41,7 @@ const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   );
 };
 
-const OpintojenLaajuus = ({ name, koulutus, laajuusyksikkoKoodiUri }) => {
+const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
   const selectedLanguage = useLanguageTab();
   const { t } = useTranslation();
 
@@ -109,7 +107,6 @@ export const TuvaTiedotSection = ({
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
       <OpintojenLaajuus
-        name={name}
         koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.VIIKKO}
       />
@@ -134,11 +131,9 @@ export const TelmaTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
-      <OpintojenLaajuusReadOnlyField
-        selectedLanguage={language}
-        laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+      <OpintojenLaajuus
+        koulutus={koulutus}
         laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
-        laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>
@@ -155,13 +150,11 @@ export const AikuistenperusopetusTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} />
-      <OpintojenLaajuusReadOnlyField
-        selectedLanguage={language}
-        laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+      <OpintojenLaajuus
+        koulutus={koulutus}
         laajuusyksikkoKoodiUri={
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
-        laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>
@@ -192,16 +185,15 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
   name,
 }: ToteutusTiedotSectionProps) => {
   useNimiFromKoulutus({ koulutus, name });
-  const { t } = useTranslation();
 
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={true} />
-      <FixedValueKoodiInput
-        selectedLanguage={language}
-        koodiUri={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
-        label={t('toteutuslomake.laajuus')}
-        prefix={koulutus?.metadata?.opintojenLaajuusNumero}
+      <OpintojenLaajuus
+        laajuusyksikkoKoodiUri={
+          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
+        }
+        koulutus={koulutus}
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>
@@ -214,16 +206,15 @@ export const VapaaSivistystyoMuuTiedotSection = ({
   name,
 }: ToteutusTiedotSectionProps) => {
   useNimiFromKoulutus({ koulutus, name });
-  const { t } = useTranslation();
 
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
-      <FixedValueKoodiInput
-        selectedLanguage={language}
-        koodiUri={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
-        label={t('toteutuslomake.laajuus')}
-        prefix={koulutus?.metadata?.opintojenLaajuusNumero}
+      <OpintojenLaajuus
+        koulutus={koulutus}
+        laajuusyksikkoKoodiUri={
+          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
+        }
       />
       <CommonTiedotFields name={name} />
     </VerticalBox>
@@ -280,11 +271,9 @@ export const OpettajaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <OpintojenLaajuusReadOnlyField
-      selectedLanguage={language}
-      laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+    <OpintojenLaajuus
+      koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OPINTOPISTE}
-      laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
     <CommonTiedotFields name={name} />
   </VerticalBox>
@@ -298,11 +287,9 @@ export const TutkinnonOsaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <OpintojenLaajuusReadOnlyField
-      selectedLanguage={language}
-      laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+    <OpintojenLaajuus
+      koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
-      laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
     <CommonTiedotFields name={name} />
   </VerticalBox>
@@ -315,11 +302,9 @@ export const OsaamisalaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={true} />
-    <OpintojenLaajuusReadOnlyField
-      selectedLanguage={language}
-      laajuusKoodiUri={koulutus?.metadata?.opintojenLaajuusKoodiUri}
+    <OpintojenLaajuus
+      koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
-      laajuusNumero={koulutus?.metadata?.opintojenLaajuusNumero}
     />
     <CommonTiedotFields name={name} />
   </VerticalBox>

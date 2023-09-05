@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 
 import { HakeutumisTaiIlmoittautumistapaSection } from './HakeutumisTaiIlmoittautumistapaSection';
 
@@ -13,7 +13,7 @@ export const Basic = () => (
   <ReduxForm form={ENTITY.TOTEUTUS} initialValues={{}} mode={FormMode.CREATE}>
     <HakeutumisTaiIlmoittautumistapaSection
       language="fi"
-      koulutustyyppi={KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS}
+      hasHakukohdeAttached={false}
     />
   </ReduxForm>
 );

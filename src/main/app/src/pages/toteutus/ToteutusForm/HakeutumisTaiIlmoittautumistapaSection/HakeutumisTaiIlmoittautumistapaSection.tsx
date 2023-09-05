@@ -12,8 +12,8 @@ import {
   FormFieldEditor,
   FormFieldIntegerInput,
 } from '#/src/components/formFields';
-import SegmentTab from '#/src/components/SegmentTab';
-import SegmentTabs from '#/src/components/SegmentTabs';
+import { SegmentTab } from '#/src/components/SegmentTab';
+import { SegmentTabs } from '#/src/components/SegmentTabs';
 import { Box, Radio } from '#/src/components/virkailija';
 import { Hakeutumistapa } from '#/src/constants';
 import { useFieldValue, useSetFieldValue } from '#/src/hooks/form';
@@ -52,7 +52,6 @@ const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
 export const HakeutumisTaiIlmoittautumistapaSection = ({
   name = 'hakeutumisTaiIlmoittautumistapa',
   language,
-  koulutustyyppi,
   hasHakukohdeAttached,
 }) => {
   const { t } = useTranslation();

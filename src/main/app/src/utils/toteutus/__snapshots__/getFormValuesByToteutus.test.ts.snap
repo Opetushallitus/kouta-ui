@@ -4,16 +4,12 @@ exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] 
 {
   "esikatselu": false,
   "externalId": "ext1",
-<<<<<<< HEAD
   "hakeutumisTaiIlmoittautumistapa": {
-=======
-  "hakeutumisTaiIlmoittautumistapa": Object {
     "aloituspaikat": "251",
-    "aloituspaikkakuvaus": Object {
+    "aloituspaikkakuvaus": {
       "fi": "<p>Aloituspaikan kuvaus - fi</p>",
       "sv": "<p>Aloituspaikan kuvaus - sv</p>",
     },
->>>>>>> 27b414a1 (OY-3972 käliviilauksia ja tietomallissa aloituspaikat uuteen kontekstiin)
     "hakeutumisTaiIlmoittautumistapa": undefined,
     "hakuTapa": undefined,
     "hakuaikaAlkaa": undefined,
@@ -264,16 +260,7 @@ exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] 
     "org2",
   ],
   "teemakuva": undefined,
-<<<<<<< HEAD
   "tiedot": {
-    "aloituspaikat": "251",
-    "aloituspaikkakuvaus": Object {
-      "fi": "<p>Aloituspaikan kuvaus - fi</p>",
-      "sv": "<p>Aloituspaikan kuvaus - sv</p>",
-    },
-=======
-  "tiedot": Object {
->>>>>>> 27b414a1 (OY-3972 käliviilauksia ja tietomallissa aloituspaikat uuteen kontekstiin)
     "ammatillinenPerustutkintoErityisopetuksena": true,
     "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {

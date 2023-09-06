@@ -349,7 +349,8 @@
     "invalidJarjestajaForAvoinKorkeakoulutus": "Toteutukselle ei voi lisätä järjestäjäksi organisaatioita, joita ei ole lisätty koulutuksella järjestäjäksi.",
     "cannotRemoveTarjoajaFromAvoinKorkeakoulutus": "Koulutuksen tarjoajaa ei voi enää poistaa, koska koulutukseen on liitetty toteutuksia, joissa tarjoaja on lisätty järjestäjäksi",
     "vaaraMaksullisuustyyppiApurahalle": "Apurahan voi asettaa vain lukuvuosimaksulliselle toteutukselle.",
-    "invalidOpetuskieliWithLukuvuosimaksu": "Lukuvuosimaksun voi valita maksullisuustyypiksi vain englanninkielisille toteutuksille."
+    "invalidOpetuskieliWithLukuvuosimaksu": "Lukuvuosimaksun voi valita maksullisuustyypiksi vain englanninkielisille toteutuksille.",
+    "missingTarjoajatForNonJulkinenKoulutus": "Tämän tyyppiselle koulutukselle täytyy valita vähintään yksi järjestäjä, ellei koulutus ole julkinen"
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

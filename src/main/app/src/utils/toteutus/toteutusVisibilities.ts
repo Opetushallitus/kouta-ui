@@ -1,5 +1,7 @@
-import { Koulutustyyppi } from '#/src/constants';
-import { KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA } from '#/src/pages/toteutus/ToteutusForm/ToteutusForm';
+import {
+  KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA,
+  Koulutustyyppi,
+} from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 export const isApurahaVisible = (maksullisuustyyppi: string) => {

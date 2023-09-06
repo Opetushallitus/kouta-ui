@@ -96,9 +96,9 @@ test.describe('Edit toteutus', () => {
         page,
         'hakeutumisTaiIlmoittautumistapa',
         async section => {
-          await section.getByText('yleiset.kylla').click(); // TODO tee fiksummin
+          await section.getByText('yleiset.kylla').click();
           await expect(hakukohteetSection).toBeVisible();
-          await section.getByText('yleiset.ei').click(); // TODO tee fiksummin
+          await section.getByText('yleiset.ei').click();
           await expect(hakukohteetSection).toBeHidden();
         }
       );
@@ -187,7 +187,7 @@ test.describe('Edit toteutus', () => {
         page,
         'hakeutumisTaiIlmoittautumistapa',
         async section => {
-          await section.getByText('yleiset.kylla').click(); // TODO tee fiksummin
+          await section.getByText('yleiset.kylla').click();
           await expect(hakukohteetSection).toBeVisible();
         }
       );
@@ -218,7 +218,7 @@ test.describe('Edit toteutus', () => {
         page,
         'hakeutumisTaiIlmoittautumistapa',
         async section => {
-          await section.getByText('yleiset.kylla').click(); // TODO tee fiksummin
+          await section.getByText('yleiset.kylla').click();
           await expect(hakukohteetSection).toBeVisible();
         }
       );

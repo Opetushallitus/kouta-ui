@@ -21,7 +21,6 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
-  Koulutustyyppi,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -68,20 +67,6 @@ import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { MUU } = HAKULOMAKETYYPPI;
-
-export const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA: Array<Koulutustyyppi> =
-  [
-    KOULUTUSTYYPPI.TUTKINNON_OSA,
-    KOULUTUSTYYPPI.OSAAMISALA,
-    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
-    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-    KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
-    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
-    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
-    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-    KOULUTUSTYYPPI.MUU,
-  ];
 
 type ToteutusFormProps = {
   koulutus: KoulutusModel;

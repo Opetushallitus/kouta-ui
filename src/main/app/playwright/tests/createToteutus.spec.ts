@@ -46,6 +46,7 @@ const fillJarjestamistiedotSection = (
       maara: string;
       kuvaus: string;
     };
+    lukiotiedot?: boolean;
   }
 ) =>
   withinSection(page, 'jarjestamistiedot', async section => {
@@ -121,6 +122,10 @@ const fillJarjestamistiedotSection = (
       }),
       'Opintojen rakenne'
     );
+    if (values?.lukiotiedot) {
+      await fillKielivalikoima(section);
+      await fillLukioDiplomi(section);
+    }
   });
 
 const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
@@ -240,7 +245,7 @@ const fillNayttamistiedotSection = (
 
 const fillHakeutumisTaiIlmoittautumisTapaSection = (page: Page) =>
   withinSection(page, 'hakeutumisTaiIlmoittautumistapa', async section => {
-    await section.getByText('yleiset.ei').click(); // TODO tee fiksummin
+    await section.getByText('yleiset.ei').click();
 
     await section
       .getByRole('button', {
@@ -546,12 +551,7 @@ test.describe('Create toteutus', () => {
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
       await fillKuvausSection(page);
-      await fillJarjestamistiedotSection(page);
-      await withinSection(page, 'jarjestamistiedot', async section => {
-        // TODO: Ehkä nämä voisi laittaa fillJarjestamistiedotSection:n sisään?
-        await fillKielivalikoima(section);
-        await fillLukioDiplomi(section);
-      });
+      await fillJarjestamistiedotSection(page, { lukiotiedot: true });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
       await fillYhteystiedotSection(page);
@@ -674,12 +674,7 @@ test.describe('Create toteutus', () => {
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
       await fillKuvausSection(page);
-      await fillJarjestamistiedotSection(page);
-      await withinSection(page, 'jarjestamistiedot', async section => {
-        // TODO: Ehkä nämä voisi laittaa fillJarjestamistiedotSection:n sisään?
-        await fillKielivalikoima(section);
-        await fillLukioDiplomi(section);
-      });
+      await fillJarjestamistiedotSection(page, { lukiotiedot: true });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
       await fillYhteystiedotSection(page);
@@ -695,12 +690,7 @@ test.describe('Create toteutus', () => {
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
       await fillKuvausSection(page);
-      await fillJarjestamistiedotSection(page);
-      await withinSection(page, 'jarjestamistiedot', async section => {
-        // TODO: Ehkä nämä voisi laittaa fillJarjestamistiedotSection:n sisään?
-        await fillKielivalikoima(section);
-        await fillLukioDiplomi(section);
-      });
+      await fillJarjestamistiedotSection(page, { lukiotiedot: true });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
       await fillYhteystiedotSection(page);

@@ -14,7 +14,7 @@ import {
 } from '#/src/components/formFields';
 import { SegmentTab } from '#/src/components/SegmentTab';
 import { SegmentTabs } from '#/src/components/SegmentTabs';
-import { Box, Radio } from '#/src/components/virkailija';
+import { Box } from '#/src/components/virkailija';
 import { Hakeutumistapa } from '#/src/constants';
 import { useFieldValue, useSetFieldValue } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
@@ -22,12 +22,6 @@ import { getTestIdProps } from '#/src/utils';
 
 import HakeutumisTaiIlmoittautusmistapaFields from './HakeutumisTaiIlmoittautumistapaFields';
 import { HakukohteetKaytossaChoice } from './HakukohteetKaytossaChoice';
-
-export const StyledGrayRadio = styled(Radio)`
-  background-color: ${getThemeProp('colors.grayLighten6', transparentize(0.5))};
-  padding: 19px 10px;
-  margin-bottom: 10px;
-`;
 
 export const StyledBlueBox = styled(Box)`
   background-color: ${getThemeProp('colors.blueLighten4', transparentize(0.7))};

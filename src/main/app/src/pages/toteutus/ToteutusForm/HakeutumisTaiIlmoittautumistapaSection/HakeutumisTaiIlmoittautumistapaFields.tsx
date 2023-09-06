@@ -1,22 +1,28 @@
 import React from 'react';
 
+import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+import styled from 'styled-components';
 
 import {
   FormFieldEditor,
   createFormFieldComponent,
 } from '#/src/components/formFields';
-import { Box } from '#/src/components/virkailija';
+import { Box, Radio } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
+import { getThemeProp } from '#/src/theme';
 
-import {
-  StyledBlueBox,
-  StyledGrayRadio,
-} from './HakeutumisTaiIlmoittautumistapaSection';
+import { StyledBlueBox } from './HakeutumisTaiIlmoittautumistapaSection';
 import MuuHakulomakeBox from './MuuhakulomakeBox';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
+
+const StyledGrayRadio = styled(Radio)`
+  background-color: ${getThemeProp('colors.grayLighten6', transparentize(0.5))};
+  padding: 19px 10px;
+  margin-bottom: 10px;
+`;
 
 const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
   ({ hakuTapa, section, onChange, value, language }) => {

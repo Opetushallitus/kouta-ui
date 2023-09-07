@@ -227,14 +227,14 @@ export const toSelectValueList = _fp.map((value: string) => ({
 /** Parse a boolean to a string value for selection component.
  * For other than boolean values returns undefined.
  */
-export const parseBooleanToString = value => {
+export const parseBooleanToString = (value): string | undefined => {
   return _.isBoolean(value) ? String(value) : undefined;
 };
 
 /** Parse a string representation of boolean from selection component to boolean.
  * If value is not set, returns undefined.
  */
-export const parseStringToBoolean = value => {
+export const parseStringToBoolean = (value): boolean | undefined => {
   return value === 'true' || value === 'false' ? JSON.parse(value) : undefined;
 };
 

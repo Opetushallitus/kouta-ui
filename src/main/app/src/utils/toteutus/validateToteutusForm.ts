@@ -129,7 +129,7 @@ const validateHakeutumisTaiIlmoittautumisTapa = eb => {
       )(eb, values),
     validateIf(
       values?.tila === JULKAISUTILA.JULKAISTU &&
-        isHakeutumisTaiIlmoittautumisosioVisible(values.koulutustyyppi) &&
+        isHakeutumisTaiIlmoittautumisosioVisible(values?.koulutustyyppi) &&
         values?.hakeutumisTaiIlmoittautumistapa?.isHakukohteetKaytossa ===
           false,
       _fp.flow(

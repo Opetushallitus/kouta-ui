@@ -27,6 +27,9 @@
     "yksikoita": 5,
     "toimipisteita": 6,
     "akatemioita": 7,
+    "some": {
+      "sosiaalinenmedia_7": "https://www.youtube.com/user/AaltoUniversity"
+    },
     "wwwSivu": {
       "url": {
         "fi": "http://www.verkkosivu.fi"

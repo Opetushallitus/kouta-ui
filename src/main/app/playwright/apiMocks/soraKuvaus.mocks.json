@@ -300,7 +300,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/kansallinenkoulutusluokitus2016koulutusalataso2/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/kansallinenkoulutusluokitus2016koulutusalataso2/koodit",
     "response": {
       "body": [
         {

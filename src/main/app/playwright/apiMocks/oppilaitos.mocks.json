@@ -1,7 +1,7 @@
 [
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/organisaationkuvaustiedot/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/organisaationkuvaustiedot/koodit",
     "response": {
       "body": [
         {
@@ -222,6 +222,14 @@
           ]
         }
       ],
+      "status": 200
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://localhost:3000/kouta-backend/koodisto/sosiaalinenmedia/koodit",
+    "response": {
+      "body": [{"koodiUri":"sosiaalinenmedia_8","koodiArvo":"8","versio":1,"koodisto":{"koodistoUri":"sosiaalinenmedia"},"metadata":[{"nimi":"Snapchat","kieli":"FI"},{"nimi":"Snapchat","kieli":"EN"},{"nimi":"Snapchat","kieli":"SV"}],"ylaRelaatiot":[]},{"koodiUri":"sosiaalinenmedia_3","koodiArvo":"3","versio":2,"koodisto":{"koodistoUri":"sosiaalinenmedia"},"metadata":[{"nimi":"Linkedin","kieli":"SV"},{"nimi":"Linkedin","kieli":"FI"}],"ylaRelaatiot":[]},{"koodiUri":"sosiaalinenmedia_5","koodiArvo":"5","versio":2,"koodisto":{"koodistoUri":"sosiaalinenmedia"},"metadata":[{"nimi":"Muu","kieli":"FI"},{"nimi":"Muu","kieli":"SV"}],"ylaRelaatiot":[]},{"koodiUri":"sosiaalinenmedia_7","koodiArvo":"7","versio":2,"koodisto":{"koodistoUri":"sosiaalinenmedia"},"metadata":[{"nimi":"Youtube","kieli":"EN"},{"nimi":"Youtube","kieli":"FI"},{"nimi":"Youtube","kieli":"SV"}],"ylaRelaatiot":[]},{"koodiUri":"sosiaalinenmedia_6","koodiArvo":"6","versio":2,"koodisto":{"koodistoUri":"sosiaalinenmedia"},"metadata":[{"nimi":"Instagram","kieli":"FI"},{"nimi":"Instagram","kieli":"EN"},{"nimi":"Instagram","kieli":"SV"}],"ylaRelaatiot":[]},{"koodiUri":"sosiaalinenmedia_1","koodiArvo":"1","versio":2,"koodisto":{"koodistoUri":"sosiaalinenmedia"},"metadata":[{"nimi":"Facebook","kieli":"SV"},{"nimi":"Facebook","kieli":"FI"}],"ylaRelaatiot":[]},{"koodiUri":"sosiaalinenmedia_4","koodiArvo":"4","versio":2,"koodisto":{"koodistoUri":"sosiaalinenmedia"},"metadata":[{"nimi":"Twitter","kieli":"FI"},{"nimi":"Twitter","kieli":"SV"}],"ylaRelaatiot":[]}],
       "status": 200
     }
   }

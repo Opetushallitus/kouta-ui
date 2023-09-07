@@ -31,6 +31,9 @@ const fillPerustiedotSection = async (page: Page) =>
     await section
       .getByLabel('oppilaitoslomake.wwwSivuNimi')
       .fill('Verkkosivu fi');
+    await section
+      .getByLabel('Youtube')
+      .fill('https://www.youtube.com/user/AaltoUniversity');
   });
 
 const fillEsittelySection = async (page: Page) =>

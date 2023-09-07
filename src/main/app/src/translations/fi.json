@@ -797,7 +797,8 @@
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitosta.",
     "eiOppilaitoksenOsia": "Oppilaitoksella ei ole osia",
     "yhteystietojen-muokkaus": "Muokkaa yhteystietoja",
-    "jarjestaaUrheilijanAmmKoulutusta": "Oppilaitos järjestää urheilijan ammatillista koulutusta"
+    "jarjestaaUrheilijanAmmKoulutusta": "Oppilaitos järjestää urheilijan ammatillista koulutusta",
+    "some": "Sosiaalisen median yhteystiedot"
   },
   "oppilaitoksenOsaLomake": {
     "oppilaitoksenOsanPerustiedot": "Oppilaitoksen osan perustiedot",

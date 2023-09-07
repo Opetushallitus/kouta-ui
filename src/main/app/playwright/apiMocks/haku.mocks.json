@@ -1,7 +1,7 @@
 [
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/haunkohdejoukko/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/haunkohdejoukko/koodit",
     "response": {
       "body": [
         {
@@ -521,7 +521,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/haunkohdejoukontarkenne/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/haunkohdejoukontarkenne/koodit",
     "response": {
       "body": [
         {

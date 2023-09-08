@@ -75,3 +75,72 @@ exports[`getOppilaitosByFormValues returns correct oppilaitos given form values 
   "tila": "tallennettu",
 }
 `;
+
+exports[`getOppilaitosByFormValues returns only some keys with values on them 1`] = `
+{
+  "esikatselu": false,
+  "kielivalinta": [
+    "fi",
+    "sv",
+  ],
+  "logo": undefined,
+  "metadata": {
+    "akatemioita": null,
+    "esittely": {
+      "fi": "<p><em>Fi esittely</em></p>",
+      "sv": "<p><em>Sv esittely</em></p>",
+    },
+    "hakijapalveluidenYhteystiedot": {
+      "kayntiosoite": {
+        "osoite": {
+          "fi": "Fi osoite",
+          "sv": "Sv osoite",
+        },
+        "postinumeroKoodiUri": "postinumero_1#1",
+      },
+      "nimi": {
+        "fi": "Hakijapalveluiden nimi",
+        "sv": "Hakijapalveluiden nimi sv",
+      },
+      "postiosoite": {
+        "osoite": {
+          "fi": "Fi osoite",
+          "sv": "Sv osoite",
+        },
+        "postinumeroKoodiUri": "postinumero_1#1",
+      },
+      "puhelinnumero": {
+        "fi": "1234",
+        "sv": "5678",
+      },
+      "sahkoposti": {
+        "fi": "fi@sahkoposti.fi",
+        "sv": "sv@sahkoposti.sv",
+      },
+    },
+    "jarjestaaUrheilijanAmmKoulutusta": undefined,
+    "kampuksia": null,
+    "korkeakouluja": null,
+    "opiskelijoita": null,
+    "some": {
+      "sosiaalinenmedia_2": "https://youtube.com/RuhtinasNukettaja",
+    },
+    "tiedekuntia": null,
+    "tietoaOpiskelusta": [
+      {
+        "otsikkoKoodiUri": "osio_1#1",
+        "teksti": {
+          "fi": "<p>Fi tiedot</p>",
+          "sv": "<p>Sv tiedot</p>",
+        },
+      },
+    ],
+    "toimipisteita": null,
+    "wwwSivu": null,
+    "yksikoita": null,
+  },
+  "muokkaaja": "1.1.1.1",
+  "teemakuva": undefined,
+  "tila": "tallennettu",
+}
+`;

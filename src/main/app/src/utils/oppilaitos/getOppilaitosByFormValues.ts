@@ -32,6 +32,20 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     })
   );
 
+  interface Some {
+    [key: string]: string;
+  }
+
+  const removeEmptySomeKeys = (some: Some): Partial<Some> => {
+    let someWithEmptyValsRemoved: Partial<Some> = some;
+    Object.keys(some).forEach((key: string) => {
+      if (some[key].trim().length < 1) {
+        someWithEmptyValsRemoved = _.omit(someWithEmptyValsRemoved, [key]);
+      }
+    });
+    return someWithEmptyValsRemoved;
+  };
+
   return {
     tila,
     muokkaaja,
@@ -73,7 +87,9 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       yksikoita: parseNumeric(perustiedot?.yksikoita),
       toimipisteita: parseNumeric(perustiedot?.toimipisteita),
       akatemioita: parseNumeric(perustiedot?.akatemioita),
-      some: perustiedot.some,
+      some: perustiedot?.some
+        ? removeEmptySomeKeys(perustiedot.some)
+        : undefined,
       wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
         ? null
         : {

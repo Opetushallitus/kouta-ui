@@ -249,16 +249,22 @@ export const getValuesForSaving = (
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
   _.forEach(unregisteredFields, ({ name }) => {
     const fieldName = getFieldNameWithoutLanguage(name);
-    _.set(saveableValues, fieldName, null);
+    _.set(saveableValues, fieldName!, null);
   });
 
+  // In case of fields from multiple hierarchy levels, we want to process the lowest level one first so we don't accidentally
+  // override anything. Sorting the list of registered fields gives eg. yhteyshenkilo before yhteyshenkilo[0].nimi.
+  const sortedFields = Object.values(registeredFields)
+    .map(f => f.name)
+    .sort();
+
   // Ensure that the fields that are registered (visible) will be saved
-  _.forEach(registeredFields, ({ name }) => {
+  sortedFields.forEach(name => {
     const fieldName = getFieldNameWithoutLanguage(name);
-    const fieldValue = _.get(values, fieldName);
+    const fieldValue = _.get(values, fieldName!);
 
     const valueForSave = isEmptyTranslatedField(fieldValue) ? {} : fieldValue;
-    _.set(saveableValues, fieldName, valueForSave);
+    _.set(saveableValues, fieldName!, valueForSave);
   });
 
   // Some exceptions (fields that should be saved even though they are not visible)

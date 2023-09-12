@@ -15,7 +15,7 @@ export const stubToteutusRoutes = async (page, organisaatioOid) => {
 
   await stubOrganisaatioRoutes(page, organisaatioOid);
   await page.route(
-    '**/koodisto-service/rest/json/osaamisala/koodi*',
+    '**/kouta-backend/koodisto/osaamisala/koodit*',
     fixtureFromFile('osaamisala-koodisto.json')
   );
 

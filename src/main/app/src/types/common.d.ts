@@ -6,11 +6,16 @@ type FormDateRange = { alkaa: FormDate; paattyy: FormDate };
 
 type TranslatedField<T = string> = Partial<Record<LanguageCode, T>>;
 
+type KoodiMetadata = {
+  nimi: string;
+  kieli: LanguageCode;
+};
+
 type Koodi = {
   koodiUri: string;
   versio: number;
-  metadata: any;
   koodiArvo: string;
+  metadata: Array<KoodiMetadata>;
 };
 
 type Yhteystieto = {

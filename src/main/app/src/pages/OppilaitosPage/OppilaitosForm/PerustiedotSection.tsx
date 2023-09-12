@@ -12,6 +12,7 @@ import {
 } from '#/src/components/formFields';
 import Heading from '#/src/components/Heading';
 import LogoSection from '#/src/components/LogoSection';
+import { SomeFields } from '#/src/components/SomeFields';
 import { Box, Typography } from '#/src/components/virkailija';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
@@ -114,6 +115,11 @@ const TiedotSection = ({ language, name, t }: TiedotSectionProps) => {
             name={`${name}.wwwSivuNimi.${language}`}
             label={t('oppilaitoslomake.wwwSivuNimi')}
           />
+        </Cell>
+      </Grid>
+      <Grid>
+        <Cell width={12} {...getTestIdProps('somefields')}>
+          <SomeFields name={name} />
         </Cell>
       </Grid>
       <Grid>

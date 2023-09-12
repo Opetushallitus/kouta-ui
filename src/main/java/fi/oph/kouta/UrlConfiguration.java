@@ -24,6 +24,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.koulutus-list", this.require("kouta-backend.koulutus-list"));
         this.frontProperties.setProperty("kouta-backend.koulutus-toteutukset", this.require("kouta-backend.koulutus-toteutukset"));
         this.frontProperties.setProperty("kouta-backend.oppilaitostyypit-by-koulutustyypit", this.require("kouta-backend.oppilaitostyypit-by-koulutustyypit"));
+        this.frontProperties.setProperty("kouta-backend.koodisto.koodit", this.require("kouta-backend.koodisto.koodit"));
         this.frontProperties.setProperty("kouta-backend.koodisto-koulutukset-by-ylakoodi", this.require("kouta-backend.koodisto-koulutukset-by-ylakoodi"));
         this.frontProperties.setProperty("kouta-backend.koodisto-valintakokeentyypit", this.require("kouta-backend.koodisto-valintakokeentyypit"));
 
@@ -84,7 +85,6 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("koodisto-service.base-url", this.require("koodisto-service.base-url"));
         this.frontProperties.setProperty("koodisto-service.sisaltyy-alakoodit", this.require("koodisto-service.sisaltyy-alakoodit"));
-        this.frontProperties.setProperty("koodisto-service.koodi", this.require("koodisto-service.koodi"));
         this.frontProperties.setProperty("koodisto-service.codeelement", this.require("koodisto-service.codeelement"));
 
         this.frontProperties.setProperty("eperusteet.kooste", this.require("eperusteet.kooste"));

@@ -302,7 +302,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/kieli/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/kieli/koodit",
     "response": {
       "body": [
         {
@@ -10926,7 +10926,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/koulutuksenlisatiedot/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/koulutuksenlisatiedot/koodit",
     "response": {
       "body": [
         {
@@ -11578,7 +11578,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/opetusaikakk/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/opetusaikakk/koodit",
     "response": {
       "body": [
         {
@@ -11862,7 +11862,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/opetuspaikkakk/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/opetuspaikkakk/koodit",
     "response": {
       "body": [
         {
@@ -12623,7 +12623,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/oppilaitoksenopetuskieli/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/oppilaitoksenopetuskieli/koodit",
     "response": {
       "body": [
         {
@@ -13156,7 +13156,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/opinnontyyppi/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/opinnontyyppi/koodit",
     "response": {
       "body": [
         {
@@ -13715,7 +13715,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/taiteenperusopetustaiteenala/koodi?onlyValidKoodis=true",
+    "url": "https://localhost:3000/kouta-backend/koodisto/taiteenperusopetustaiteenala/koodit",
     "response": {
       "body": [
         {

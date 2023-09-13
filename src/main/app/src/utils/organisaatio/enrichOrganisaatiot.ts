@@ -4,12 +4,13 @@ export const enrichOrganisaatiot = (orgs, oppilaitokset) => {
   const osat = oppilaitokset?.flatMap(oppilaitos => oppilaitos.osat);
 
   return orgs.map(org => {
-    const osa = _.find(osat, ['oid', org.oid]);
+    const oppilaitosOrOsa =
+      _.find(osat, ['oid', org.oid]) || _.find(oppilaitokset, ['oid', org.oid]);
 
     return {
       ...org,
       jarjestaaUrheilijanAmmKoulutusta:
-        osa?.metadata?.jarjestaaUrheilijanAmmKoulutusta,
+        oppilaitosOrOsa?.metadata?.jarjestaaUrheilijanAmmKoulutusta,
     };
   });
 };

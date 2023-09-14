@@ -52,7 +52,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
       `${section}.apurahaMaaraTyyppi`
     );
     return (
-      <Box marginTop={1} width="200px">
+      <Box marginTop={1} width="240px">
         <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
         <Box mt={1}>
           <Field
@@ -77,7 +77,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
           alignItems="center"
           justifyContent="space-between"
         >
-          <Box flexBasis="60px" flexGrow={1} data-testid="apurahaMin">
+          <Box flexBasis="80px" flexGrow={1} data-testid="apurahaMin">
             <Field
               name={`${section}.apurahaMin`}
               placeholder={
@@ -93,7 +93,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
           {apurahaMaaraTyyppi === MaaraTyyppi.VAIHTELUVALI && (
             <>
               <Box style={{ textAlign: 'center', width: '20px' }}>{NDASH}</Box>
-              <Box flexBasis="60px" flexGrow={1}>
+              <Box flexBasis="80px" flexGrow={1}>
                 <Field
                   name={`${section}.apurahaMax`}
                   placeholder={t('toteutuslomake.max')}

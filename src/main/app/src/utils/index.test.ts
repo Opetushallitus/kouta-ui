@@ -143,6 +143,16 @@ test.each([
       },
     },
   ],
+  [
+    { nimet: [{ nimi: { fi: '' } }] },
+    {
+      'nimet[0].nimi.fi': { name: 'nimet[0].nimi.fi' },
+      nimet: { name: 'nimet' },
+    },
+    {},
+    {},
+    { nimet: [{ nimi: {} }] },
+  ],
 ])(
   'getValuesForSaving',
   (values, registeredFields, unregisteredFields, initialValues, result) => {

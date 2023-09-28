@@ -79,7 +79,7 @@ const development = {
   'eperusteet-service.peruste-tutkinnonosat': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/tutkinnonosat`,
   'eperusteet-service.peruste-rakenne': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/rakenne`,
   'eperusteet-service.peruste-sisalto': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/sisalto`,
-  'eperusteet-service.perusteet-koulutuskoodilla': `${virkailijaDevUrl}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1&tutkinnonosat=true`,
+  'eperusteet-service.perusteet-koulutuskoodilla': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/internal?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1&tutkinnonosat=true`,
   'eperusteet-service.osaamisalakuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset`,
   'eperusteet-service.lukiodiplomit': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/6828810/lops2019/oppiaineet/6835372`,
   'eperusteet-service.lukiodiplomi-tiedot': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/6828810/lops2019/oppiaineet/6835372/moduulit/$1`,

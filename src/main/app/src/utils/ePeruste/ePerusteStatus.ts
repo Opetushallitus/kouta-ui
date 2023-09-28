@@ -3,20 +3,20 @@ import { setLightness } from 'polished';
 import { css } from 'styled-components';
 
 import {
-  EPERUSTE_STATUS_LAADINTA,
+  EPERUSTE_STATUS_LAADINNASSA,
   EPERUSTE_STATUS_TULEVA,
   EPERUSTE_STATUS_VOIMASSA,
 } from '#/src/constants';
 import { Theme } from '#/src/theme';
 
-export type EPerusteStatus = 'voimassa' | 'tuleva' | 'laadinta';
+export type EPerusteStatus = 'voimassa' | 'tuleva' | 'laadinnassa';
 
 export const getEPerusteStatus = ePeruste => {
   if (ePeruste) {
     const { voimassaoloAlkaa, voimassaoloLoppuu, tila } = ePeruste;
     const now = Date.now();
     if (tila === 'luonnos') {
-      return 'laadinta' as EPerusteStatus;
+      return 'laadinnassa' as EPerusteStatus;
     } else if (
       voimassaoloAlkaa &&
       voimassaoloAlkaa < now &&
@@ -47,7 +47,7 @@ const getStatusColors = ({
         backgroundColor: setLightness(0.9, theme.colors.primary.main),
         color: theme.colors.primary.main,
       };
-    case EPERUSTE_STATUS_LAADINTA:
+    case EPERUSTE_STATUS_LAADINNASSA:
       return {
         backgroundColor: setLightness(0.9, theme.colors.danger.main),
         color: theme.colors.primary.main,

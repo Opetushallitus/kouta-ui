@@ -17,7 +17,7 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { getTestIdProps, getReadableDateTime } from '#/src/utils';
+import { getTestIdProps, getReadableDate } from '#/src/utils';
 import {
   getEPerusteStatusCss,
   getEPerusteStatus,
@@ -155,7 +155,7 @@ export const ValitseEPerusteBox = ({
                 },
                 {
                   title: t('yleiset.voimaantulo'),
-                  description: getReadableDateTime(ePeruste?.voimassaoloAlkaa),
+                  description: getReadableDate(ePeruste?.voimassaoloAlkaa),
                 },
                 {
                   title: t('yleiset.tila'),

@@ -258,6 +258,8 @@ export const LOGO_NO_DIMENSION_CHECK_FOR_FORMATS = ['.svg'];
 export const EPERUSTE_STATUS_TULEVA = 'tuleva';
 export const EPERUSTE_STATUS_VOIMASSA = 'voimassa';
 
+export const EPERUSTE_STATUS_LAADINTA = 'laadinta';
+
 export const ALLOWED_HTML_TAGS = [
   'b',
   'blockquote',

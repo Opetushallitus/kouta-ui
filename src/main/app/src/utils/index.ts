@@ -84,6 +84,10 @@ export const getReadableDateTime = dateData => {
   return formatDateValue(dateData, "d.M.yyyy' 'HH:mm") ?? '-';
 };
 
+export const getReadableDate = dateData => {
+  return formatDateValue(dateData, 'd.M.yyyy') ?? '-';
+};
+
 export const getKoutaDateString = (dateData: Date) => {
   if (isValidDate(dateData)) {
     return formatDate(dateData, "yyyy-MM-dd'T'HH:mm");
@@ -92,13 +96,16 @@ export const getKoutaDateString = (dateData: Date) => {
 };
 
 export const formatDateValue = (
-  date?: Date | string,
+  date?: Date | string | number,
   format: string = "dd.MM.yyyy' 'HH:mm"
 ) => {
   try {
     let parsed = date;
     if (_.isString(date)) {
       parsed = parseISO(date);
+    }
+    if (_.isNumber(date)) {
+      parsed = new Date(date);
     }
     if (isValidDate(parsed)) {
       return formatDate(parsed as Date, format);

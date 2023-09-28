@@ -173,7 +173,8 @@
     "opintopistetta": "opintopistettä",
     "ePerusteStatus": {
       "voimassa": "Voimassa",
-      "tuleva": "Tuleva"
+      "tuleva": "Tuleva",
+      "laadinta": "Laadinta"
     },
     "riippuvuusEiJulkaistu": "Liitetty {{entity, unCapitalize}} ei ole \"Julkaistu\"-tilassa.",
     "onJulkinen": "{{entity}} on julkinen",

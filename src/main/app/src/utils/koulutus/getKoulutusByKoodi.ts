@@ -43,7 +43,16 @@ export const getKoulutusByKoodi = async ({
     httpClient
       .get(apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi))
       .then(({ data: { data: ePerusteet } }) =>
-        Promise.all(ePerusteet.map(fetchRakenneAndTutkinnonOsat))
+        Promise.all(
+          ePerusteet
+            .filter(
+              ePeruste =>
+                ePeruste?.tila === 'valmis' ||
+                (ePeruste?.tila === 'luonnos' &&
+                  ePeruste?.perusteprojekti?.esikatseltavissa === true)
+            )
+            .map(fetchRakenneAndTutkinnonOsat)
+        )
       ),
     httpClient.get(
       apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodi, versio || '')

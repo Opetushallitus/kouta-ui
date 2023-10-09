@@ -7,7 +7,6 @@ import { FormFieldSelect, FormFieldInput } from '#/src/components/formFields';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
-import { PAINOTETUT_OPPIAINEET_LUKIO_KAIKKI_OPTIONS } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
@@ -33,10 +32,7 @@ const PainotetutArvosanatFields = ({ fields }) => {
               <Field
                 component={FormFieldSelect}
                 name={`${hakukohteenLinja}.painotettuOppiaine`}
-                options={[
-                  ...PAINOTETUT_OPPIAINEET_LUKIO_KAIKKI_OPTIONS,
-                  ...painotetutOppiaineetOptions,
-                ]}
+                options={painotetutOppiaineetOptions}
                 label={t('hakukohdelomake.oppiaine')}
                 required
               />

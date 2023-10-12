@@ -3448,7 +3448,7 @@ export interface components {
       organisaatiot?: Array<components['schemas']['Organisaatio']>;
     };
     OrganisaatioYhteystiedot: {
-      email?: {
+      sahkoposti?: {
         /** @description Organisaation suomenkielinen sähköpostiosoite */
         fi?: string;
         /** @description Organisaation ruotsinkielinen sähköpostiosoite */
@@ -3486,8 +3486,14 @@ export interface components {
         /** @description Organisaation englanninkielinen osoite */
         en?: string;
       };
-      /** @description Postinumeron koodiUri */
-      postinumeroUri?: string;
+      postinumeroUri?: {
+        /** @description Organisaation suomenkielinen postinumeron koodiUri */
+        fi?: string;
+        /** @description Organisaation ruotsinkielinen postinumeron koodiUri */
+        sv?: string;
+        /** @description Organisaation englanninkielinen postinumeron koodiUri */
+        en?: string;
+      };
     };
     IndexedOrganisaatio: {
       /**

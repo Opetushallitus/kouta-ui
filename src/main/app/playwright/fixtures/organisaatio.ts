@@ -15,49 +15,34 @@ export default ({
     muokkausPvm: 1376464481941,
     data: {},
   },
-  yhteystiedot: [
-    {
-      osoiteTyyppi: 'posti',
-      kieli: 'kieli_fi#1',
-      postinumeroUri: 'posti_40101',
-      yhteystietoOid: '1.2.246.562.5.96263614271',
-      id: '6752708',
-      postitoimipaikka: 'JYVÄSKYLÄ',
-      osoite: 'Horonpohjantie 279',
-    },
-    {
-      kieli: 'kieli_fi#1',
-      www: 'https://www.sivusto.fi',
-      yhteystietoOid: '1.2.246.562.5.32073585773',
-      id: '6752705',
-    },
-    {
-      osoiteTyyppi: 'kaynti',
-      kieli: 'kieli_fi#1',
-      postinumeroUri: 'posti_40720',
-      yhteystietoOid: '1.2.246.562.5.97143062806',
-      id: '6752706',
-      postitoimipaikka: 'JYVÄSKYLÄ',
-      osoite: 'Verhonkulmala 220',
-    },
-    {
-      kieli: 'kieli_fi#1',
-      yhteystietoOid: '1.2.246.562.5.95170942981',
-      id: '6752707',
-      email: 'hakija-31832505@oph.fi',
-    },
-    {
-      kieli: 'kieli_fi#1',
-      numero: '050 28144921',
-      tyyppi: 'puhelin',
-      yhteystietoOid: '1.2.246.562.5.19786669531',
-      id: '6752704',
-    },
-  ],
-  kayntiosoite: {},
-  ryhmatyypit: [],
-  kayttoryhmat: [],
   parentOidPath: `|1.2.246.562.10.00000000001|`,
   parentOid: '1.2.246.562.10.00000000001',
   status: 'AKTIIVINEN',
+  yhteystiedot: {
+    postiosoite: {
+      osoite: {
+        fi: 'Horonpohjantie 279',
+      },
+      postinumeroKoodiUri: {
+        fi: 'posti_40101',
+      },
+    },
+    kayntiosoite: {
+      osoite: {
+        fi: "'Verhonkulmala 220",
+      },
+      postinumeroKoodiUri: {
+        fi: 'posti_40720',
+      },
+    },
+    puhelinnumero: {
+      fi: '050 28144921',
+    },
+    sahkoposti: {
+      fi: 'hakija-31832505@oph.fi',
+    },
+    wwwOsoite: {
+      fi: 'https://www.sivusto.fi',
+    },
+  },
 });

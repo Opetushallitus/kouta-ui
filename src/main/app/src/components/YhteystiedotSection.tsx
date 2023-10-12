@@ -120,7 +120,7 @@ export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
 
   const nimi = getFirstLanguageValue(organisaatio?.nimi, language);
 
-  const yhteystiedot = organisaatio?.yhteystiedot;
+  const yhteystiedot = [organisaatio?.yhteystiedot];
   let contactInfo;
   if (yhteystiedot) {
     contactInfo = getKielistettyOrganisaatioContactInfo(yhteystiedot);

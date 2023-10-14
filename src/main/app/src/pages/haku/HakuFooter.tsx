@@ -48,20 +48,15 @@ export const HakuFooter = ({
         unregisteredFields,
         initialValues
       );
+      console.log('valuesForSaving', valuesForSaving);
 
       const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
-        haku:
-          formMode === FormMode.CREATE
-            ? {
-                ...haku,
-                ...getHakuByFormValues(valuesForSaving),
-              }
-            : {
-                ...haku,
-                ...getHakuByFormValues(valuesForSaving),
-              },
+        haku: {
+          ...haku,
+          ...getHakuByFormValues(valuesForSaving),
+        },
       });
 
       if (formMode === FormMode.CREATE) {

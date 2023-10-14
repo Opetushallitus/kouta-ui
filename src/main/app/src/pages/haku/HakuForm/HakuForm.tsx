@@ -24,6 +24,7 @@ import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet'
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
+import { TarjoajatSection } from './hakukohteenLiittajaOrganisaatiot/TarjoajatSection';
 import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
 import { HakutapaSection } from './HakutapaSection';
@@ -170,6 +171,15 @@ const HakuForm = ({
           header={t('hakulomake.haunTila')}
           Component={JulkaisutilaField}
           entity={hakuProp}
+        />
+
+        <FormCollapse
+          section="liittajaorganisatiot"
+          header={t('hakulomake.hakukohteenliittajaorganisatiot')}
+          Component={TarjoajatSection}
+          organisaatioOid={organisaatioOid}
+          haku={hakuProp}
+          disableTarjoajaHierarkia={false}
         />
 
         {_fp.isFunction(onAttachHakukohde) ? (

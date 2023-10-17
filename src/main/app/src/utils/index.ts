@@ -211,7 +211,10 @@ export const maybeParseNumber = value => {
   if (_.isNil(value) || value === '') {
     return null;
   }
-  const numberValue = Number(value);
+  const numberValue =
+    _.isString(value) && value.includes(',')
+      ? Number(value.replace(',', '.'))
+      : Number(value);
   return _.isNaN(numberValue) ? value : numberValue;
 };
 

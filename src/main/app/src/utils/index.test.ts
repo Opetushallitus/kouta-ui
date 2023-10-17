@@ -3,6 +3,7 @@ import {
   getValuesForSaving,
   isDeepEmptyFormValues,
   formatDateValue,
+  maybeParseNumber,
 } from '#/src/utils';
 
 const OBJECT_IN_ARRAY = [
@@ -58,6 +59,14 @@ test('Should return false for not empty object', () => {
 
 test('Should return false for zero', () => {
   expect(isDeepEmptyFormValues(0)).toEqual(false);
+});
+
+test('parses decimal with comma', () => {
+  expect(maybeParseNumber('5,8')).toEqual(5.8);
+});
+
+test('does not convert text to number', () => {
+  expect(maybeParseNumber('a')).toEqual('a');
 });
 
 test.each([

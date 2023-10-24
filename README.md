@@ -26,7 +26,7 @@ Hetken kuluttua käyttöliittymä on käytettävissä osoitteessa (selainta ei a
 
 https://localhost:3000
 
-**Huom! HTTPS-protokolla käytössä.** Webpack-dev-serverin proxy on konfiguroitu oletuksena ohjaamaan kaikki muut polut paitsi `/`, `/kouta` ja `/kouta/*` osoitteeseen `https://virkailija.hahtuvaopintopolku.fi`. Käytetään oletuksena self-signed-sertifikaatteja, eikä CORS-rajoituksia ei tarvitse kiertää selaimessa. Kehitysympäristön virkailija-osoitetta, johon proxytaan voi vaihtaa asettamalla ympäristömuuttujan `DEV_VIRKAILIJA_URL` eri arvoon (esim. `.env.local`-tiedostossa).
+**Huom! HTTPS-protokolla käytössä.** Webpack-dev-serverin proxy on konfiguroitu oletuksena ohjaamaan kaikki muut polut paitsi `/`, `/kouta` ja `/kouta/*` osoitteeseen `https://virkailija.hahtuvaopintopolku.fi`. Käytetään oletuksena self-signed-sertifikaatteja, eikä CORS-rajoituksia ei tarvitse kiertää selaimessa. Kehitysympäristön virkailija-osoitetta, johon proxytaan voi vaihtaa asettamalla ympäristömuuttujan `DEV_VIRKAILIJA_URL` eri arvoon `.env.development.local`-tiedostossa.
 
 ## Suositellut kehitystyökalut ja pluginit
 
@@ -45,22 +45,22 @@ ESLintin voi ajaa käsin komennolla `npm run lint`, tai automaattisen fiksauksen
 
 ## Ajaminen lokaalisti kouta-backendin kanssa
 
-Korvaa kouta-backendissä `dev-vars.yml`-tiedostoon: 
+Korvaa kouta-backendissä `dev-vars.yml`-tiedostoon:
 
     cas_url: https://localhost:3000/cas
     kouta_backend_cas_service: https://localhost:3000/kouta-backend/auth/login
-    
+
 ja käynnistä kouta-backend (EmbeddedJettyLauncher).
 
-Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.local`-tiedostossa): 
+Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.development.local`-tiedostossa):
 
 `KOUTA_BACKEND_URL=http://localhost:8099`
 
-Käynnistä kouta-ui lokaalisti komennolla: 
+Käynnistä kouta-ui lokaalisti komennolla:
 
 `npm run start`
 
-Käynnistä Opintopolun VPN, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan. 
+Käynnistä Opintopolun VPN, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan.
 
 Kirjaudu selaimella linkistä http://localhost:8099/kouta-backend/auth/login
 

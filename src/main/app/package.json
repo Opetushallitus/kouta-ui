@@ -123,6 +123,7 @@
     "vite": "^4.4.9",
     "vite-bundle-visualizer": "^0.10.0",
     "vite-plugin-checker": "^0.6.1",
+    "vite-plugin-mkcert": "^1.16.0",
     "vite-plugin-rewrite-all": "^1.0.1",
     "vite-plugin-svgr": "^3.2.0",
     "vitest": "^0.34.1"

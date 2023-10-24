@@ -45,6 +45,12 @@ ESLintin voi ajaa käsin komennolla `npm run lint`, tai automaattisen fiksauksen
 
 ## Ajaminen lokaalisti kouta-backendin kanssa
 
+Jotta [kouta-backend](https://github.com/Opetushallitus/kouta-backend/) voisi kutsua kouta-ui:n lokaalin proxyn osoitteita, täytyy lokaalin proxyn sertifikaattien olla luotettuja kouta-backendin mielestä. Tähän voi käyttää esim. [mkcert](https://mkcert.org/)-työkalua, joka luo lokaalisti luotetun CA:n (Certificate Authority). 
+
+Asenna mkcert täältä löytyvien ohjeiden mukaan: https://github.com/FiloSottile/mkcert#installation
+
+Kouta-UI:ssa on käytössä `vite-plugin-mkcert`, joka osaa luoda sertifikaatti-tiedostot tarvittaessa ja lisätä ne CA:han. Varmista, että JAVA_HOME-ympäristömuuttuja osoittaa kouta-backendin käyttämän Javan kotihakemistoon ennen kuin käynnistät kouta-ui:n lokaalisti, jotta edellä mainittu plugin osaa lisätä sertifikaatit myös oikean Javan CA:han.
+
 Korvaa kouta-backendissä `dev-vars.yml`-tiedostoon: 
 
     cas_url: https://localhost:3000/cas
@@ -62,29 +68,11 @@ Käynnistä kouta-ui lokaalisti komennolla:
 
 Käynnistä Opintopolun VPN, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan. 
 
-Kirjaudu selaimella linkistä http://localhost:8099/kouta-backend/auth/login
+Tämän jälkeen mene selaimella osoitteeseen https://localhost:3000/kouta. Kouta-UI:n pitäisi ohjata login-sivulle, jossa voit kirjautua sisään.
 
-Tämän jälkeen mene selaimella osoitteeseen https://localhost:3000/kouta
+Jos kouta-backend edelleen valittaa, että sertifikaatit eivät ole luotettuja, varmista että ne on lisätty oikean Javan CA:han. Jos ei ole, aseta JAVA_HOME-ympäristömuuttuja osoittamaan oikeaan polkuun ja aja komento:
 
-## Ajaminen lokaalisti kouta-backendin kanssa testiympäristöä vasten
-
-Käynnistä Opintopolun VPN
-
-Käynnistä kouta-backend sen README:ssa olevan osion (3.4.1 Ajo testiympäristöä vasten) ohjeen mukaan.
-
-Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.local`-tiedostossa): 
-
-`KOUTA_BACKEND_URL=http://localhost:8099`
-
-Käynnistä kouta-ui lokaalisti komennolla: 
-
-`npm run start`
-
-Kirjaudu selaimella linkistä http://localhost:8099/kouta-backend/auth/login
-
-Mene selaimella osoitteeseen https://localhost:3000/virkailijan-tyopoyta/ ja kirjaudu.
-
-Tämän jälkeen mene selaimella osoitteeseen https://localhost:3000/kouta
+`mkcert -install`
 
 ## Buildaus ja käynnistys (Spring Boot -sovellus)
 

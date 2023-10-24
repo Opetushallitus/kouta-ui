@@ -99,7 +99,6 @@
     "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
-    "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-react": "^4.0.4",
     "@xstate/cli": "^0.5.2",
     "browserslist-to-esbuild": "^1.2.0",

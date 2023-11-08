@@ -2,3 +2,4 @@ tsconfig.json
 package-lock.json
 *.typegen.ts
 **/playwright/**/*.json
+src/types/kouta-backend.api.ts

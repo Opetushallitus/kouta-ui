@@ -144,4 +144,10 @@ Yksittäisiä testejä voi myös ajaa [Playwrightin UI-moodissa](https://playwri
 
 ## Lokalisaatio
 
-Lokalisointiin käytetään [react-i18next](https://github.com/i18next/react-i18next) kirjastoa, joka puolestaa käyttää [i18next](https://www.i18next.com/) kirjastoa. React-komponenttien sisällä käytössä on [useTranslation](https://react.i18next.com/latest/usetranslation-hook)-hook. Käännökset haetaan lokalisaatio-service:ltä `kouta`-kategoriasta. Suomenkieliset käännökset on määritelty [translations/fi.js](https://github.com/Opetushallitus/kouta-ui/blob/master/src/main/app/src/translations/fi.js)-tiedostossa. Käännöksissä käytetään ensisijaisesti lokalisaatio-service:n tarjoamia käännöksiä. Uusien käännöksien lisäämisen kannattaa aloittaa lisäämällä suomenkielinen käännös `translations/fi.js`-tiedostoon.
+Lokalisointiin käytetään [react-i18next](https://github.com/i18next/react-i18next) kirjastoa, joka puolestaa käyttää [i18next](https://www.i18next.com/) kirjastoa. React-komponenttien sisällä käytössä on [useTranslation](https://react.i18next.com/latest/usetranslation-hook)-hook. Käännökset haetaan lokalisaatio-service:ltä `kouta`-kategoriasta. Suomenkieliset käännökset on määritelty [translations/fi.js](https://github.com/Opetushallitus/kouta-ui/blob/master/src/main/app/src/translations/fi.js)-tiedostossa. Käännöksissä käytetään ensisijaisesti lokalisaatio-service:n tarjoamia käännöksiä. Uusien käännöksien lisäämisen kannattaa aloittaa lisäämällä suomenkielinen käännös `translations/fi.json`-tiedostoon.
+
+## Backend-apin tyypitys
+
+types/kouta-backend.api.ts on autogeneroitu kouta-backendin swaggerista openapi-typescript-kirjastolla. Jos teet muutoksia backendin tyypityksiin, päivitä tiedosto halutusta backend-ympäristöstä (ml. lokaali):
+
+`npx openapi-typescript https://virkailija.hahtuvaopintopolku.fi/kouta-backend/swagger/swagger.yaml -o ./src/types/kouta-backend.api.ts`

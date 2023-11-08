@@ -68,7 +68,6 @@ export type ToteutusFormValues = {
     opintojenLaajuusNumeroMax?: string;
     laajuusNumeroTyyppi?: MaaraTyyppi;
     ilmoittautumislinkki: TranslatedField<string>;
-    aloituspaikat: string;
     hasJotpaRahoitus: boolean;
     isTyovoimakoulutus: boolean;
     isTaydennyskoulutus: boolean;
@@ -128,6 +127,7 @@ export type ToteutusFormValues = {
   toteutusjaksot: Array<Toteutusjakso>;
   teemakuva?: string;
   hakeutumisTaiIlmoittautumistapa: {
+    isHakukohteetKaytossa?: boolean;
     hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
     hakuTapa?: Hakeutumistapa;
     linkki?: TranslatedField;
@@ -135,6 +135,8 @@ export type ToteutusFormValues = {
     lisatiedotValintaperusteista?: TranslatedField<EditorState>;
     hakuaikaAlkaa?: string;
     hakuaikaPaattyy?: string;
+    aloituspaikat: string;
+    aloituspaikkakuvaus: TranslatedField<EditorState>;
   };
   soraKuvaus?: SelectOption;
   esikatselu?: boolean;

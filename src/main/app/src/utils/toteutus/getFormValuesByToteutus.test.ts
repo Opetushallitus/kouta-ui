@@ -4,7 +4,9 @@ import {
   JULKAISUTILA,
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
-import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
+import getFormValuesByToteutus, {
+  hakukohteetKaytossaToFormValues,
+} from '#/src/utils/toteutus/getFormValuesByToteutus';
 
 test('getFormValuesByToteutus returns correct form values given toteutus', () => {
   const values = getFormValuesByToteutus({
@@ -195,6 +197,10 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv linkki',
       },
       aloituspaikat: 251,
+      aloituspaikkakuvaus: {
+        fi: '<p>Aloituspaikan kuvaus - fi</p>',
+        sv: '<p>Aloituspaikan kuvaus - sv</p>',
+      },
       suunniteltuKesto: {
         fi: 'Fi kesto',
         sv: 'Sv kesto',
@@ -291,4 +297,46 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
   });
 
   expect(values).toMatchSnapshot();
+});
+
+test('hakukohteetKaytossaToFormValues mapping checks hakulomaketyyppi if isHakukohteetKaytossa is missing', () => {
+  expect(hakukohteetKaytossaToFormValues({})).toBe(undefined);
+  expect(hakukohteetKaytossaToFormValues({ isHakukohteetKaytossa: true })).toBe(
+    true
+  );
+  expect(
+    hakukohteetKaytossaToFormValues({ isHakukohteetKaytossa: false })
+  ).toBe(false);
+  expect(
+    hakukohteetKaytossaToFormValues({ isHakukohteetKaytossa: undefined })
+  ).toBe(undefined);
+  expect(
+    hakukohteetKaytossaToFormValues({
+      isHakukohteetKaytossa: undefined,
+      hakulomaketyyppi: 'ataru',
+    })
+  ).toBe(true);
+  expect(
+    hakukohteetKaytossaToFormValues({
+      hakulomaketyyppi: 'ataru',
+    })
+  ).toBe(true);
+  expect(
+    hakukohteetKaytossaToFormValues({
+      isHakukohteetKaytossa: undefined,
+      hakulomaketyyppi: 'muu',
+    })
+  ).toBe(false);
+  expect(
+    hakukohteetKaytossaToFormValues({
+      isHakukohteetKaytossa: undefined,
+      hakulomaketyyppi: 'ei sähköistä',
+    })
+  ).toBe(false);
+  expect(
+    hakukohteetKaytossaToFormValues({
+      isHakukohteetKaytossa: undefined,
+      hakulomaketyyppi: undefined,
+    })
+  ).toBe(undefined);
 });

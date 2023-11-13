@@ -470,11 +470,3 @@ export enum OpintojenLaajuusyksikko {
   OSAAMISPISTE = 'opintojenlaajuusyksikko_6',
   VIIKKO = 'opintojenlaajuusyksikko_8',
 }
-
-export const PAINOTETUT_OPPIAINEET_LUKIO_KAIKKI_OPTIONS = [
-  { value: 'painotettavatoppiaineetlukiossa_a1', label: 'A1 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_a2', label: 'A2 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_b1', label: 'B1 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_b2', label: 'B2 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_b3', label: 'B3 (Kaikki)' },
-];

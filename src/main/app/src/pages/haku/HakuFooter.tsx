@@ -48,7 +48,6 @@ export const HakuFooter = ({
         unregisteredFields,
         initialValues
       );
-      console.log('valuesForSaving', valuesForSaving);
 
       const { oid, warnings } = await dataSendFn({
         httpClient,

@@ -155,5 +155,6 @@
   "esikatselu": false,
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "liitteidenToimitusaika": null,
-  "hakukohdeKoodiUri": null
+  "hakukohdeKoodiUri": null,
+  "hakukohteenLiittajaOrganisaatiot": []
 }

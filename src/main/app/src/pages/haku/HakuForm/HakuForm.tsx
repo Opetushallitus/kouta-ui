@@ -24,7 +24,7 @@ import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet'
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
-import { TarjoajatSection } from './hakukohteenLiittajaOrganisaatiot/TarjoajatSection';
+import { LiittajaOrganisaatiotSection } from './hakukohteenLiittajaOrganisaatiot/LiittajaOrganisaatiotSection';
 import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
 import { HakutapaSection } from './HakutapaSection';
@@ -176,7 +176,7 @@ const HakuForm = ({
         <FormCollapse
           section="liittajaorganisatiot"
           header={t('hakulomake.hakukohteenliittajaorganisatiot')}
-          Component={TarjoajatSection}
+          Component={LiittajaOrganisaatiotSection}
           organisaatioOid={organisaatioOid}
           haku={hakuProp}
           disableTarjoajaHierarkia={false}

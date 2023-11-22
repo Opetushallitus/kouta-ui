@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -21,27 +21,23 @@ import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuild
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { getTestIdProps } from '#/src/utils';
 
-import { TarjoajatLinkList } from './TarjoajatLinkList';
-import { TarjoajatWithPagination } from './TarjoajatWithPagination';
-import { useSelectableKoulutusTarjoajat } from './useSelectableKoulutusTarjoajat';
+import { HakukohteenLiittajatWithPagination } from './HakukohteenLiittajatWithPagination';
+import { LiittajaOrganisaatiotLinkList } from './LiittajaOrgaisaatiotLinkList';
+import { useSelectableLiittajaOrganisaatiot } from './useSelectableHakukohteenLiittajaOrganisaatiot';
 
 const TarjoajatFormField = createFormFieldComponent(
-  TarjoajatWithPagination,
+  HakukohteenLiittajatWithPagination,
   simpleMapProps
 );
 
-const TarjoajatSelector = ({ organisaatioOid }) => {
+const LiittajaOrganisaatiotSelector = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
-  const isAvoinKorkeakoulutus = useFieldValue(
-    'information.isAvoinKorkeakoulutus'
-  );
   const isJulkinen = useFieldValue('julkinen', ENTITY.KOULUTUS);
   const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
 
-  const { tarjoajat, isLoading } = useSelectableKoulutusTarjoajat({
-    organisaatioOid,
-  });
+  const { liittajaOrganisaatiot, isLoading } =
+    useSelectableLiittajaOrganisaatiot();
 
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -61,11 +57,10 @@ const TarjoajatSelector = ({ organisaatioOid }) => {
   ) : (
     <div {...getTestIdProps('tarjoajatSelection')}>
       <Field
-        name="tarjoajat.tarjoajat"
-        tarjoajat={tarjoajat}
+        name="hakukohteenLiittajaOrganisaatiot"
+        liittajaOrganisaatiot={liittajaOrganisaatiot}
         getIsDisabled={getIsDisabled}
         component={TarjoajatFormField}
-        isAvoinKorkeakoulutus={isAvoinKorkeakoulutus}
         label={t('hakulomake.valitseLiittajaOrganisaatiot')}
         organisaatioOid={organisaatioOid}
         required={
@@ -80,14 +75,14 @@ const TarjoajatSelector = ({ organisaatioOid }) => {
   );
 };
 
-export const TarjoajatSection = ({
+export const LiittajaOrganisaatiotSection = ({
   organisaatioOid,
-  koulutus,
+  haku,
   disableTarjoajaHierarkia,
 }) => {
   const { t } = useTranslation();
 
-  const koulutusTarjoajaOids = koulutus?.tarjoajat ?? [];
+  const koulutusTarjoajaOids = haku?.hakukohteenLiittajaOrganisaatiot ?? [];
   const isOphVirkailija = useIsOphVirkailija();
 
   const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
@@ -109,7 +104,7 @@ export const TarjoajatSection = ({
         ))}
       {isOphVirkailija && (
         <Box mb={2}>
-          <TarjoajatLinkList koulutus={koulutus} />
+          <LiittajaOrganisaatiotLinkList haku={haku} />
         </Box>
       )}
       {!disableTarjoajaHierarkia && (
@@ -125,10 +120,7 @@ export const TarjoajatSection = ({
             </Box>
           )}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
-            <TarjoajatSelector
-              // koulutus={koulutus}
-              organisaatioOid={organisaatioOid}
-            />
+            <LiittajaOrganisaatiotSelector organisaatioOid={organisaatioOid} />
           )}
         </>
       )}

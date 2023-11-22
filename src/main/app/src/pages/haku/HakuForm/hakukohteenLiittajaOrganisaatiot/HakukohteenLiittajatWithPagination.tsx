@@ -1,6 +1,6 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
-import _ from 'lodash';
+import { difference, isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
@@ -10,44 +10,40 @@ import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 
 import { useItemsToShow } from './useItemsToShow';
-import { useResetAvoinTarjoajat } from './useResetAvoinTarjoajat';
 
 export const PAGE_SIZE = 15;
 export const countPageNumber = orgs => Math.ceil(orgs.length / PAGE_SIZE);
 
 type Props = {
   organisaatioOid: string;
-  tarjoajat: Array<Organisaatio>;
+  liittajaOrganisaatiot: Array<any>;
   value: Array<string>;
   onChange: (val: Array<string>) => void;
   language: LanguageCode;
-  isAvoinKorkeakoulutus: boolean;
 };
 
-export const TarjoajatWithPagination = ({
-  organisaatioOid,
-  tarjoajat,
+export const HakukohteenLiittajatWithPagination = ({
+  liittajaOrganisaatiot,
   value,
   onChange,
   language,
-  isAvoinKorkeakoulutus,
 }: Props) => {
   const { t } = useTranslation();
   const [currentPage, setPage] = useState(0);
   const [usedNimi, setNimi] = useState('');
   const [naytaVainValitut, setNaytaVainValitut] = useState(false);
-  const filteredTarjoajat = useItemsToShow({
-    organisaatiot: tarjoajat,
+  const filteredLiittajaOrganisaatiot = useItemsToShow({
+    organisaatiot: liittajaOrganisaatiot,
     value,
     naytaVainValitut,
   });
-  let itemsToShow = filteredTarjoajat;
+  let itemsToShow = filteredLiittajaOrganisaatiot;
   let pageCount = countPageNumber(itemsToShow);
   const currentPageFirstItemIndex = currentPage * PAGE_SIZE;
 
-  if (!_.isEmpty(usedNimi)) {
+  if (!isEmpty(usedNimi)) {
     itemsToShow = searchOrgsFromHierarkiaWithName(
-      filteredTarjoajat,
+      filteredLiittajaOrganisaatiot,
       usedNimi,
       language
     );
@@ -56,14 +52,7 @@ export const TarjoajatWithPagination = ({
 
   useEffect(() => {
     setPage(0);
-  }, [usedNimi, isAvoinKorkeakoulutus, naytaVainValitut]);
-
-  useResetAvoinTarjoajat({
-    isAvoinKorkeakoulutus,
-    organisaatioOid,
-    value,
-    onChange,
-  });
+  }, [usedNimi, naytaVainValitut]);
 
   const itemsOnPage = [
     itemsToShow.slice(
@@ -76,7 +65,7 @@ export const TarjoajatWithPagination = ({
 
   const onOrgsChange = useCallback(
     selectedPageOids => {
-      onChange([..._.difference(value, pageOids), ...selectedPageOids]);
+      onChange([...difference(value, pageOids), ...selectedPageOids]);
     },
     [value, pageOids, onChange]
   );
@@ -108,7 +97,7 @@ export const TarjoajatWithPagination = ({
           hierarkia={itemsOnPage}
           onChange={onOrgsChange}
           value={value}
-          disableAutoSelect={true}
+          disableAutoSelect={false}
         />
       </Box>
       <Pagination

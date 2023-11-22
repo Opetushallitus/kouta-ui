@@ -30,6 +30,7 @@ exports[`getFormValuesByHaku returns correct form values given different hakulom
     },
   },
   "externalId": "ext1",
+  "hakukohteenLiittajaOrganisaatiot": [],
   "hakulomake": {
     "kuvaus": {},
     "linkki": {
@@ -114,6 +115,7 @@ exports[`getFormValuesByHaku returns correct form values given different hakulom
     },
   },
   "externalId": "ext1",
+  "hakukohteenLiittajaOrganisaatiot": [],
   "hakulomake": {
     "kuvaus": {
       "fi": "<p>kuvaus</p>",
@@ -198,6 +200,7 @@ exports[`getFormValuesByHaku returns correct form values given haku 1`] = `
     },
   },
   "externalId": "ext1",
+  "hakukohteenLiittajaOrganisaatiot": [],
   "hakulomake": {
     "kuvaus": {},
     "linkki": {},
@@ -284,6 +287,7 @@ exports[`getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen su
     "vuosi": undefined,
   },
   "externalId": "ext1",
+  "hakukohteenLiittajaOrganisaatiot": [],
   "hakulomake": {
     "kuvaus": {},
     "linkki": {},
@@ -368,6 +372,7 @@ exports[`getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
     },
   },
   "externalId": "ext1",
+  "hakukohteenLiittajaOrganisaatiot": [],
   "hakulomake": {
     "kuvaus": {},
     "linkki": {},

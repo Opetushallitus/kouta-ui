@@ -59,6 +59,7 @@ const OppilaitoksenOsaForm = ({
         section="yhteystiedot"
         Component={YhteystiedotSection}
         organisaatioOid={organisaatioOid}
+        oppilaitos={oppilaitoksenOsa}
       />
 
       <FormCollapse

@@ -10,10 +10,12 @@ import {
 } from '#/src/components/formFields';
 import { Box, Divider, Typography } from '#/src/components/virkailija';
 import { YhteystiedotMuokkausButton } from '#/src/components/YhteystiedotMuokkausButton';
-import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
+import useKoodi from '#/src/hooks/useKoodi';
 import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { getKielistettyOrganisaatioContactInfo } from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
+import {
+  getFirstLanguageValue,
+  getKielistettyOsoite,
+} from '#/src/utils/languageUtils';
 
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
@@ -113,36 +115,44 @@ const Yhteystieto = ({ label, value, id }) => (
   </Box>
 );
 
-export const YhteystiedotSection = ({ language = 'fi', organisaatioOid }) => {
+export const YhteystiedotSection = ({
+  language = 'fi',
+  organisaatioOid,
+  oppilaitos,
+}) => {
   const { t } = useTranslation();
 
-  const { organisaatio } = useOrganisaatio(organisaatioOid);
+  const yhteystiedot = oppilaitos?._enrichedData?.organisaationYhteystiedot;
 
-  const nimi = getFirstLanguageValue(organisaatio?.nimi, language);
+  const nimi = getFirstLanguageValue(yhteystiedot?.nimi, language);
 
-  const yhteystiedot = organisaatio?.yhteystiedot;
-  let contactInfo;
-  if (yhteystiedot) {
-    contactInfo = getKielistettyOrganisaatioContactInfo(yhteystiedot);
-  }
+  const { koodi: kayntiosoitePostinumeroKoodi } = useKoodi(
+    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri
+  );
 
-  const kayntiosoiteInSelectedLang = getFirstLanguageValue(
-    contactInfo?.kaynti,
+  const kayntiosoiteInSelectedLang = getKielistettyOsoite(
+    yhteystiedot?.kayntiosoite,
+    kayntiosoitePostinumeroKoodi,
     language
   );
 
-  const postiosoiteInSelectedLang = getFirstLanguageValue(
-    contactInfo?.posti,
+  const { koodi: postiosoitePostinumeroKoodi } = useKoodi(
+    yhteystiedot?.postiosoite?.postinumeroKoodiUri
+  );
+
+  const postiosoiteInSelectedLang = getKielistettyOsoite(
+    yhteystiedot?.postiosoite,
+    postiosoitePostinumeroKoodi,
     language
   );
 
   const sahkopostiInSelectedLang = getFirstLanguageValue(
-    contactInfo?.sahkoposti,
+    yhteystiedot?.sahkoposti,
     language
   );
 
   const puhelinnumeroInSelectedLang = getFirstLanguageValue(
-    contactInfo?.puhelinnumero,
+    yhteystiedot?.puhelinnumero,
     language
   );
 

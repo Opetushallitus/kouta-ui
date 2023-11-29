@@ -220,7 +220,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         ? maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMax)
         : maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMin),
       ilmoittautumislinkki: kieleistykset(values?.tiedot?.ilmoittautumislinkki),
-      aloituspaikat: maybeParseNumber(values?.tiedot?.aloituspaikat),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
           nimi: kieleistykset(nimi),
@@ -231,6 +230,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
         })
       ),
+      isHakukohteetKaytossa: HTIT?.isHakukohteetKaytossa,
       hakutermi: HTIT?.hakuTapa,
       hakulomaketyyppi,
       hakulomakeLinkki:
@@ -255,6 +255,12 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
                 : HTIT?.hakuaikaPaattyy,
             }
           : null,
+      aloituspaikat: maybeParseNumber(
+        values?.hakeutumisTaiIlmoittautumistapa?.aloituspaikat
+      ),
+      aloituspaikkakuvaus: kieleistyksetSerialized(
+        values?.hakeutumisTaiIlmoittautumistapa?.aloituspaikkakuvaus
+      ),
       liitetytOpintojaksot: values?.opintojaksojenLiittaminen?.opintojaksot
         ?.map(opintojakso => opintojakso?.opintojakso?.value)
         .filter(Boolean),

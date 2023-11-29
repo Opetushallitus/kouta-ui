@@ -1,7 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
-import { MaaraTyyppi, ApurahaYksikko } from '#/src/constants';
+import { MaaraTyyppi, ApurahaYksikko, HAKULOMAKETYYPPI } from '#/src/constants';
 import {
   ToteutusFormValues,
   MaksullisuusTyyppi,
@@ -62,6 +62,15 @@ const diplomitToFormValues = diplomit => {
   return result;
 };
 
+// fallback aiemmin tallennetuille toteutuksille joilta puuttuu isHakukohteetKaytossa-tieto
+export const hakukohteetKaytossaToFormValues = metadata => {
+  return (
+    metadata?.isHakukohteetKaytossa ??
+    (metadata?.hakulomaketyyppi &&
+      metadata?.hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU)
+  );
+};
+
 const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
     koulutustyyppi,
@@ -90,6 +99,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     opintojenLaajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
+    aloituspaikkakuvaus,
     kielivalikoima = {},
     toteutusjaksot,
     ammatillinenPerustutkintoErityisopetuksena,
@@ -153,9 +163,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
       opintojenLaajuusyksikko: toSelectValue(opintojenLaajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},
-      aloituspaikat: _fp.isNumber(aloituspaikat)
-        ? aloituspaikat.toString()
-        : '',
       isAvoinKorkeakoulutus: Boolean(isAvoinKorkeakoulutus),
       tunniste,
       opinnonTyyppi: {
@@ -288,6 +295,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     teemakuva,
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
+      isHakukohteetKaytossa: hakukohteetKaytossaToFormValues(metadata),
       hakuTapa: metadata?.hakutermi,
       linkki: metadata?.hakulomakeLinkki,
       lisatiedot: _fp.mapValues(
@@ -300,6 +308,13 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       ),
       hakuaikaAlkaa: metadata?.hakuaika?.alkaa,
       hakuaikaPaattyy: metadata?.hakuaika?.paattyy,
+      aloituspaikat: _fp.isNumber(aloituspaikat)
+        ? aloituspaikat.toString()
+        : '',
+      aloituspaikkakuvaus: _fp.mapValues(
+        parseEditorState,
+        aloituspaikkakuvaus || {}
+      ),
     },
     soraKuvaus: toSelectValue(sorakuvausId),
     opintojaksojenLiittaminen: {

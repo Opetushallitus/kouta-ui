@@ -25,7 +25,10 @@ import {
   validatePohja,
 } from '#/src/utils/form/formConfigUtils';
 
-import { isApurahaVisible } from './toteutusVisibilities';
+import {
+  isApurahaVisible,
+  isHakeutumisTaiIlmoittautumisosioVisible,
+} from './toteutusVisibilities';
 
 const validateDateTimeRange =
   (alkaaFieldName, paattyyFieldName) => (eb, values) => {
@@ -125,7 +128,10 @@ const validateHakeutumisTaiIlmoittautumisTapa = eb => {
         'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
       )(eb, values),
     validateIf(
-      values?.tila === JULKAISUTILA.JULKAISTU,
+      values?.tila === JULKAISUTILA.JULKAISTU &&
+        isHakeutumisTaiIlmoittautumisosioVisible(values?.koulutustyyppi) &&
+        values?.hakeutumisTaiIlmoittautumistapa?.isHakukohteetKaytossa ===
+          false,
       _fp.flow(
         validateExistence('hakeutumisTaiIlmoittautumistapa.hakuTapa'),
         validateExistence(
@@ -190,12 +196,15 @@ export const validateToteutusForm = (
       validateTranslations('tiedot.nimi'),
       validateOptionalTranslatedField('kuvaus'),
       validateInteger(
-        'tiedot.aloituspaikat',
+        'hakeutumisTaiIlmoittautumistapa.aloituspaikat',
         {
           min: 1,
           optional: true,
         },
         'validointivirheet.positiivinenKokonaisluku'
+      ),
+      validateOptionalTranslatedField(
+        'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
       ),
       validateExistence('lukiolinjat.lukiolinja'),
       validateOptionalTranslatedField('jarjestamistiedot.opetuskieliKuvaus'),

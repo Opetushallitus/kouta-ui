@@ -198,6 +198,20 @@ export const KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP = {
   ],
 };
 
+export const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA: Array<Koulutustyyppi> =
+  [
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+    KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
+    KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
+    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+    KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+    KOULUTUSTYYPPI.MUU,
+  ];
+
 export enum HAKULOMAKETYYPPI {
   ATARU = 'ataru',
   HAKUAPP = 'haku-app',
@@ -328,6 +342,11 @@ export enum Hakeutumistapa {
   ILMOITTAUTUMINEN = 'ilmoittautuminen',
 }
 
+export enum HakukohteetToteutuksella {
+  HAKUKOHTEET_KAYTOSSA = 'true',
+  EI_HAKUKOHTEITA = 'false',
+}
+
 // react-query options for koodisto, eperuste etc. requests that change rarely
 export const LONG_CACHE_QUERY_OPTIONS = {
   staleTime: 30 * 60 * 1000,
@@ -451,11 +470,3 @@ export enum OpintojenLaajuusyksikko {
   OSAAMISPISTE = 'opintojenlaajuusyksikko_6',
   VIIKKO = 'opintojenlaajuusyksikko_8',
 }
-
-export const PAINOTETUT_OPPIAINEET_LUKIO_KAIKKI_OPTIONS = [
-  { value: 'painotettavatoppiaineetlukiossa_a1', label: 'A1 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_a2', label: 'A2 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_b1', label: 'B1 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_b2', label: 'B2 (Kaikki)' },
-  { value: 'painotettavatoppiaineetlukiossa_b3', label: 'B3 (Kaikki)' },
-];

@@ -79,7 +79,7 @@ export const OppilaitosPage = () => {
     [formMode, oppilaitos, contactInfo]
   );
 
-  const stepsEnabled = !oppilaitos;
+  const stepsEnabled = !oppilaitos?.lastModified;
 
   return isFetching ? (
     <FullSpin />

@@ -14,29 +14,6 @@ export default () => {
       kampuksia: 3,
       korkeakouluja: 5,
       opiskelijoita: 100,
-      yhteystiedot: [
-        {
-          nimi: {
-            fi: 'Yhteystiedon nimi',
-            sv: 'Yhteystiedon nimi sv',
-          },
-          postiosoite: {
-            osoite: {
-              fi: 'Fi osoite',
-              sv: 'Sv osoite',
-            },
-            postinumeroKoodiUri: 'posti_00350#2',
-          },
-          puhelinnumero: {
-            fi: '1234',
-            sv: '5678',
-          },
-          sahkoposti: {
-            fi: 'fi@sahkoposti.fi',
-            sv: 'sv@sahkoposti.sv',
-          },
-        },
-      ],
       wwwSivu: {
         url: {
           fi: 'http://www.verkkosivu.fi',
@@ -59,6 +36,30 @@ export default () => {
       ],
       toimipisteita: 9,
       yksikoita: 2,
+    },
+    _enrichedData: {
+      muokkaajanNimi: 'Anonymisoitu Virkailija',
+      organisaationYhteystiedot: {
+        nimi: {
+          fi: 'Organisaation nimi',
+          sv: 'Organisaation nimi sv',
+        },
+        postiosoite: {
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'posti_00350#2',
+        },
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
+      },
     },
   };
 };

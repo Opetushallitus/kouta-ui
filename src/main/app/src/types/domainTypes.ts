@@ -12,9 +12,12 @@ export type ValintaperusteModel = components['schemas']['Valintaperuste'];
 
 export type SoraKuvausModel = components['schemas']['Sorakuvaus'];
 
-export type OppilaitosModel = components['schemas']['Oppilaitos'];
+export type OppilaitosModel = components['schemas']['Oppilaitos'] & {
+  lastModified: string | null;
+};
 
-export type OppilaitoksenOsaModel = components['schemas']['OppilaitoksenOsa'];
+export type OppilaitoksenOsaModel =
+  components['schemas']['OppilaitoksenOsa'] & { lastModified: string | null };
 
 export type Valintakokeet = Array<components['schemas']['Valintakoe']>;
 

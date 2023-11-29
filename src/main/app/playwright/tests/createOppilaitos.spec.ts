@@ -1,5 +1,6 @@
 import { Page, test, expect } from '@playwright/test';
 
+import oppilaitos from '#/playwright/fixtures/oppilaitosWithOnlyYhteystiedot';
 import {
   fillAsyncSelect,
   fillKieliversiotSection,
@@ -9,6 +10,7 @@ import {
   withinSection,
   typeToEditor,
 } from '#/playwright/playwright-helpers';
+import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubOppilaitosRoutes } from '#/playwright/stubOppilaitosRoutes';
 import { ENTITY } from '#/src/constants';
 
@@ -87,6 +89,13 @@ const checkYhteystiedotSection = (page: Page) =>
 test.describe('Create oppilaitos', () => {
   test.beforeEach(async ({ page }) => {
     await stubOppilaitosRoutes(page, organisaatioOid);
+    await page.route(
+      `**/oppilaitos/${organisaatioOid}`,
+      fixtureJSON({
+        ...oppilaitos(),
+        oid: organisaatioOid,
+      })
+    );
     await page.goto(`/kouta/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 

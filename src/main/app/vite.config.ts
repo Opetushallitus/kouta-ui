@@ -3,11 +3,11 @@ import path from 'path';
 import url from 'url';
 
 //import { optimizeLodashImports } from '@optimize-lodash/rollup-plugin';
-import basicSsl from '@vitejs/plugin-basic-ssl';
 import react from '@vitejs/plugin-react';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
 import { defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
+import mkcert from 'vite-plugin-mkcert';
 import pluginRewriteAll from 'vite-plugin-rewrite-all';
 import svgr from 'vite-plugin-svgr';
 
@@ -25,7 +25,7 @@ const devProxyOptions = (targetUrl: string) => ({
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dns.setDefaultResultOrder('verbatim');
+dns.setDefaultResultOrder('ipv4first');
 
 export default defineConfig(({ mode }) => {
   const env = Object.assign({}, process.env, loadEnv(mode, process.cwd(), ''));
@@ -67,7 +67,7 @@ export default defineConfig(({ mode }) => {
                 initialIsOpen: false,
               },
             }),
-            basicSsl(),
+            mkcert(),
           ]
         : []),
     ],

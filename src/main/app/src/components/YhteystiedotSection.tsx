@@ -122,7 +122,7 @@ export const YhteystiedotSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const yhteystiedot = oppilaitos?._enrichedData?.organisaationYhteystiedot;
+  const yhteystiedot = oppilaitos?._enrichedData?.organisaatio?.yhteystiedot;
 
   const nimi = getFirstLanguageValue(yhteystiedot?.nimi, language);
 

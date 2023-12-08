@@ -9,7 +9,7 @@ import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { EditorState } from 'lexical';
+import { $getRoot, EditorState } from 'lexical';
 
 import { Container, EditorScroller, Editor } from './Components';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
@@ -48,6 +48,10 @@ const UpdatePlugin = ({ value }) => {
   useEffect(() => {
     if (isEditorState(value) && !value.isEmpty()) {
       editor.setEditorState(value);
+    } else {
+      editor.update(() => {
+        $getRoot().clear();
+      });
     }
   }, [value, editor]);
 

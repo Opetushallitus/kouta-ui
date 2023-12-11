@@ -40,7 +40,7 @@ const OppilaitosForm = ({
         languages={languageTabs}
         header={t('oppilaitoslomake.oppilaitoksenPerustiedot')}
         Component={PerustiedotSection}
-        organisaatioOid={organisaatioOid}
+        oppilaitos={oppilaitos}
       />
 
       <FormCollapse

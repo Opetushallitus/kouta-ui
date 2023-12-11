@@ -37,7 +37,7 @@ const OppilaitoksenOsaForm = ({
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanPerustiedot')}
         section="perustiedot"
         Component={PerustiedotSection}
-        organisaatioOid={organisaatioOid}
+        oppilaitoksenOsa={oppilaitoksenOsa}
       />
 
       <FormCollapse

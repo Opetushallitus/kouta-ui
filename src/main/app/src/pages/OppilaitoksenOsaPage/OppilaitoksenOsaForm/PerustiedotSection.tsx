@@ -14,7 +14,6 @@ import { Box, Typography } from '#/src/components/virkailija';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
-import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -124,8 +123,8 @@ const OrganisaatioSection = ({ organisaatio, t, language }) => {
   );
 };
 
-export const PerustiedotSection = ({ name, organisaatioOid, language }) => {
-  const { organisaatio } = useOrganisaatio(organisaatioOid);
+export const PerustiedotSection = ({ name, language, oppilaitoksenOsa }) => {
+  const organisaatio = oppilaitoksenOsa?._enrichedData?.organisaatio;
   const { t } = useTranslation();
 
   return (

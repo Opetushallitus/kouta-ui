@@ -77,8 +77,8 @@ export const getInvalidTranslations = (
 };
 
 export const getKielistettyOsoite = (
-  osoite: Osoite,
-  koodi: Koodi,
+  osoite?: Osoite,
+  koodi?: Koodi,
   language: string = 'fi'
 ) => {
   const postinumeroMetadata = arrayToTranslationObject(koodi?.metadata);

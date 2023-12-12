@@ -15,7 +15,7 @@ export const OppilaitosFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
   const queryClient = useQueryClient();
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      const fn = oppilaitos ? updateOppilaitos : createOppilaitos;
+      const fn = oppilaitos?.lastModified ? updateOppilaitos : createOppilaitos;
 
       await fn({
         httpClient,

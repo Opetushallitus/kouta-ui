@@ -20,7 +20,7 @@ export const OppilaitoksenOsaFooter = ({
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      const fn = oppilaitoksenOsa
+      const fn = oppilaitoksenOsa?.lastModified
         ? updateOppilaitoksenOsa
         : createOppilaitoksenOsa;
 

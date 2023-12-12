@@ -15,11 +15,9 @@ import {
   FormMode,
 } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
-import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
+import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import { getFormValuesByOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
 import { useOppilaitoksenOsaByOid } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
-import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
 import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
@@ -39,7 +37,6 @@ const useOppilaitosOid = oppilaitoksenOsaOrganisaatio => {
 
 export const OppilaitoksenOsaPage = () => {
   const { organisaatioOid } = useParams();
-  const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const [formMode, setFormMode] = useState<FormMode>(FormMode.EDIT);
 
@@ -52,22 +49,20 @@ export const OppilaitoksenOsaPage = () => {
           setFormMode(FormMode.CREATE);
         }
       },
-      onSuccess: () => {
-        setFormMode(FormMode.EDIT);
+      onSuccess: oppilaitoksenOsa => {
+        oppilaitoksenOsa?.lastModified
+          ? setFormMode(FormMode.EDIT)
+          : setFormMode(FormMode.CREATE);
       },
     }
   );
+
+  const organisaatio = oppilaitoksenOsa?._enrichedData?.organisaatio;
 
   // TODO: Setting oppilaitosOid should be done in backend. https://jira.oph.ware.fi/jira/browse/KTO-819
   const oppilaitosOid = useOppilaitosOid(organisaatio);
 
   const { t } = useTranslation();
-
-  const stepsEnabled = !oppilaitoksenOsa;
-  const contactInfo = useMemo(
-    () => getOrganisaatioContactInfo(organisaatio),
-    [organisaatio]
-  );
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.OPPILAITOS,
@@ -81,28 +76,16 @@ export const OppilaitoksenOsaPage = () => {
     organisaatioOid
   );
 
-  const readOnly = oppilaitoksenOsa ? !canUpdate : !canCreate;
+  const stepsEnabled = !oppilaitoksenOsa?.lastModified;
+  const readOnly = oppilaitoksenOsa?.lastModified ? !canUpdate : !canCreate;
 
   const initialValues = useMemo(
     () => ({
       ...(formMode === FormMode.CREATE
         ? {
             ...formInitialValues,
-            yhteystiedot: [
-              {
-                postiosoite: contactInfo.osoite || {},
-                postinumero: contactInfo.postinumeroKoodiUri
-                  ? {
-                      value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
-                        ? contactInfo.postinumeroKoodiUri
-                        : `${contactInfo.postinumeroKoodiUri}#2`,
-                    }
-                  : undefined,
-                puhelinnumero: contactInfo.puhelinnumero || '',
-              },
-            ],
             perustiedot: {
-              wwwSivuUrl: contactInfo.verkkosivu || '',
+              wwwSivuUrl: organisaatio?.yhteystiedot?.www || '',
               jarjestaaUrheilijanAmmKoulutusta: false,
             },
           }
@@ -111,7 +94,7 @@ export const OppilaitoksenOsaPage = () => {
         : {}),
       oppilaitosOid,
     }),
-    [formMode, oppilaitoksenOsa, oppilaitosOid, contactInfo]
+    [formMode, oppilaitoksenOsa, oppilaitosOid, organisaatio]
   );
 
   return isFetching ? (
@@ -138,13 +121,11 @@ export const OppilaitoksenOsaPage = () => {
         />
       }
     >
-      {organisaatio ? (
-        <OppilaitoksenOsaForm
-          organisaatioOid={organisaatioOid}
-          oppilaitoksenOsa={oppilaitoksenOsa}
-          steps={stepsEnabled}
-        />
-      ) : null}
+      <OppilaitoksenOsaForm
+        organisaatioOid={organisaatioOid}
+        oppilaitoksenOsa={oppilaitoksenOsa}
+        steps={stepsEnabled}
+      />
     </FormPage>
   );
 };

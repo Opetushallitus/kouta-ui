@@ -8,32 +8,15 @@ import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
-import {
-  ENTITY,
-  CRUD_ROLES,
-  ORGANISAATIOTYYPPI,
-  FormMode,
-} from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import { getFormValuesByOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
 import { useOppilaitoksenOsaByOid } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
-import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
-import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 import { OppilaitoksenOsaFooter } from './OppilaitoksenOsaFooter';
 import OppilaitoksenOsaForm, {
   initialValues as formInitialValues,
 } from './OppilaitoksenOsaForm';
-
-const useOppilaitosOid = oppilaitoksenOsaOrganisaatio => {
-  const parentOids = getOrganisaatioParentOidPath(oppilaitoksenOsaOrganisaatio);
-  const { organisaatiot } = useOrganisaatiot(parentOids);
-  const oppilaitos = organisaatiot?.find?.(
-    organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)
-  );
-  return oppilaitos?.oid;
-};
 
 export const OppilaitoksenOsaPage = () => {
   const { organisaatioOid } = useParams();
@@ -58,9 +41,6 @@ export const OppilaitoksenOsaPage = () => {
   );
 
   const organisaatio = oppilaitoksenOsa?._enrichedData?.organisaatio;
-
-  // TODO: Setting oppilaitosOid should be done in backend. https://jira.oph.ware.fi/jira/browse/KTO-819
-  const oppilaitosOid = useOppilaitosOid(organisaatio);
 
   const { t } = useTranslation();
 
@@ -92,9 +72,8 @@ export const OppilaitoksenOsaPage = () => {
         : oppilaitoksenOsa
         ? getFormValuesByOppilaitoksenOsa(oppilaitoksenOsa)
         : {}),
-      oppilaitosOid,
     }),
-    [formMode, oppilaitoksenOsa, oppilaitosOid, organisaatio]
+    [formMode, oppilaitoksenOsa, organisaatio]
   );
 
   return isFetching ? (

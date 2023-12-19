@@ -16,7 +16,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     hakijapalveluidenYhteystiedot: hy,
     tietoa,
     kieliversiot,
-    teemakuva,
+    teemakuvaOrEsittelyvideo,
     esikatselu = false,
   } = values;
 
@@ -51,7 +51,10 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     muokkaaja,
     kielivalinta: kieliversiot,
     logo: perustiedot?.logo,
-    teemakuva,
+    teemakuva:
+      teemakuvaOrEsittelyvideo?.mediaType === 'teemakuva'
+        ? teemakuvaOrEsittelyvideo?.teemakuvaUrl
+        : undefined,
     esikatselu,
     metadata: {
       hakijapalveluidenYhteystiedot: hy
@@ -96,6 +99,22 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
             url: kieleistykset(perustiedot.wwwSivuUrl),
             nimi: kieleistykset(perustiedot.wwwSivuNimi),
           },
+      esittelyvideo:
+        teemakuvaOrEsittelyvideo?.mediaType === 'esittelyvideo'
+          ? {
+              url: teemakuvaOrEsittelyvideo?.esittelyvideoUrl,
+              nimi: teemakuvaOrEsittelyvideo?.esittelyvideoUrl
+                ? Object.keys(
+                    teemakuvaOrEsittelyvideo?.esittelyvideoUrl
+                  ).reduce((obj, lang) => {
+                    return {
+                      ...obj,
+                      [lang]: 'esittelyvideo',
+                    };
+                  }, {})
+                : undefined,
+            }
+          : undefined,
     },
   };
 };

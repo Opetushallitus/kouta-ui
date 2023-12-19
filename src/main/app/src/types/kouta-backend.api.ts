@@ -3202,6 +3202,8 @@ export interface components {
     OppilaitosMetadata: {
       /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
       wwwSivu?: components['schemas']['NimettyLinkki'];
+      /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+      esittelyvideo?: components['schemas']['NimettyLinkki'];
       /** @description Opintopolussa käytettävät oppilaitoksen sosiaalisen median kanavat. */
       some?: Map<string, string>;
       /** @description Oppilaitokseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */

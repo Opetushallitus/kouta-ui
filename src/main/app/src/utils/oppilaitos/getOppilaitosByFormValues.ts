@@ -46,6 +46,22 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     return someWithEmptyValsRemoved;
   };
 
+  const composeEsittelyvideoNimiObject = (
+    videoUrls: object
+  ): object | undefined => {
+    const languages = Object.keys(videoUrls).filter(lang =>
+      Boolean(videoUrls[lang])
+    );
+    return languages.length > 0
+      ? languages.reduce((obj, lang) => {
+          return {
+            ...obj,
+            [lang]: 'esittelyvideo',
+          };
+        }, {})
+      : undefined;
+  };
+
   return {
     tila,
     muokkaaja,
@@ -106,17 +122,10 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
           Boolean
         ).length > 0
           ? {
-              url: teemakuvaOrEsittelyvideo?.esittelyvideoUrl,
-              nimi: teemakuvaOrEsittelyvideo?.esittelyvideoUrl
-                ? Object.keys(
-                    teemakuvaOrEsittelyvideo?.esittelyvideoUrl
-                  ).reduce((obj, lang) => {
-                    return {
-                      ...obj,
-                      [lang]: 'esittelyvideo',
-                    };
-                  }, {})
-                : undefined,
+              url: kieleistykset(teemakuvaOrEsittelyvideo?.esittelyvideoUrl),
+              nimi: composeEsittelyvideoNimiObject(
+                teemakuvaOrEsittelyvideo?.esittelyvideoUrl || {}
+              ),
             }
           : undefined,
     },

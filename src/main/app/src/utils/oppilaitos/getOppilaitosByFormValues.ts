@@ -52,7 +52,8 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     kielivalinta: kieliversiot,
     logo: perustiedot?.logo,
     teemakuva:
-      teemakuvaOrEsittelyvideo?.mediaType === 'teemakuva'
+      teemakuvaOrEsittelyvideo?.mediaType === 'teemakuva' &&
+      teemakuvaOrEsittelyvideo?.teemakuvaUrl
         ? teemakuvaOrEsittelyvideo?.teemakuvaUrl
         : undefined,
     esikatselu,
@@ -100,7 +101,10 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
             nimi: kieleistykset(perustiedot.wwwSivuNimi),
           },
       esittelyvideo:
-        teemakuvaOrEsittelyvideo?.mediaType === 'esittelyvideo'
+        teemakuvaOrEsittelyvideo?.mediaType === 'esittelyvideo' &&
+        Object.values(teemakuvaOrEsittelyvideo?.esittelyvideoUrl || {}).filter(
+          Boolean
+        ).length > 0
           ? {
               url: teemakuvaOrEsittelyvideo?.esittelyvideoUrl,
               nimi: teemakuvaOrEsittelyvideo?.esittelyvideoUrl

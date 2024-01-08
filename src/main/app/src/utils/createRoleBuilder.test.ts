@@ -1,6 +1,8 @@
 import createRoleBuilder from './createRoleBuilder';
 
-const makeOrganisaatio = path => ({ parentOidPath: path.join('/') });
+const makeOrganisaatio = (parentOids: Array<string>) => ({
+  parentOids: parentOids,
+});
 
 test('hasRead works correctly', () => {
   const rb1 = createRoleBuilder({

@@ -11,7 +11,7 @@ export default ({
         oid: '1.2.1.1.1.1',
         organisaatiotyypit: ['organisaatiotyyppi_02'],
         parentOid: rootOid,
-        parentOidPath: `1.2.1.1.1.1/${rootOid}/${OPETUSHALLITUS_ORGANISAATIO_OID}`,
+        parentOids: ['1.2.1.1.1.1', rootOid, OPETUSHALLITUS_ORGANISAATIO_OID],
         children: [],
       },
       {
@@ -19,7 +19,7 @@ export default ({
         oid: '1.3.1.1.1.1',
         organisaatiotyypit: ['organisaatiotyyppi_02'],
         parentOid: rootOid,
-        parentOidPath: `${rootOid}/1.3.1.1.1.1/${OPETUSHALLITUS_ORGANISAATIO_OID}`,
+        parentOids: ['1.3.1.1.1.1', rootOid, OPETUSHALLITUS_ORGANISAATIO_OID],
         children: [],
       },
     ],

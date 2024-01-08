@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { OPH_PAAKAYTTAJA_ROLE } from '#/src/constants';
-import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
 
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
 import isOid from './isOid';
@@ -18,22 +17,6 @@ const getRoleName = role => {
   const parts = role.split('_');
 
   return parts.filter(v => !isOid(v)).join('_');
-};
-
-const resolveOidPath = value => {
-  if (_.isString(value)) {
-    return [value];
-  }
-
-  if (_.isArray(value)) {
-    return value;
-  }
-
-  if (_.isObject(value)) {
-    return getOrganisaatioParentOidPath(value);
-  }
-
-  return [];
 };
 
 const createRoleLookup = roles => {
@@ -57,6 +40,26 @@ const createRoleLookup = roles => {
   }
 
   return lookup;
+};
+
+const getParentAndSelfOids = (
+  organisaatioOrOids: Organisaatio | Array<string> | string
+) => {
+  if (_.isString(organisaatioOrOids)) {
+    return [organisaatioOrOids];
+  }
+
+  if (_.isArray(organisaatioOrOids)) {
+    return organisaatioOrOids;
+  }
+
+  const parentOids = organisaatioOrOids?.parentOids;
+  const organisaatioOid = organisaatioOrOids?.oid;
+  const parentsAndSelf = _.isEmpty(parentOids)
+    ? [organisaatioOid]
+    : [...parentOids, organisaatioOid];
+
+  return parentsAndSelf.filter(Boolean);
 };
 
 class RoleBuilder {
@@ -83,7 +86,7 @@ class RoleBuilder {
 
   hasRead(role, organisaatio) {
     return this.clone(
-      resolveOidPath(organisaatio).some(oid => {
+      getParentAndSelfOids(organisaatio).some(oid => {
         return (
           this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
           READ_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
@@ -114,7 +117,7 @@ class RoleBuilder {
 
   hasUpdate(role, organisaatio) {
     return this.clone(
-      resolveOidPath(organisaatio).some(oid => {
+      getParentAndSelfOids(organisaatio).some(oid => {
         return (
           this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
           UPDATE_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
@@ -145,7 +148,7 @@ class RoleBuilder {
 
   hasCreate(role, organisaatio) {
     return this.clone(
-      resolveOidPath(organisaatio).some(oid => {
+      getParentAndSelfOids(organisaatio).some(oid => {
         return (
           this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
           CREATE_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))

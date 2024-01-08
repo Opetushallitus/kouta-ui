@@ -57,7 +57,7 @@ export default ({
   kayntiosoite: {},
   ryhmatyypit: [],
   kayttoryhmat: [],
-  parentOidPath: `|1.2.246.562.10.00000000001|`,
+  parentOids: ['1.2.246.562.10.00000000001'],
   parentOid: '1.2.246.562.10.00000000001',
   status: 'AKTIIVINEN',
 });

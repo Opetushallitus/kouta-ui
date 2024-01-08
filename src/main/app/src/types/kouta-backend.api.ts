@@ -344,13 +344,6 @@ export interface paths {
      */
     get: operations["searchHakukohteet"];
   };
-  "/migration/hakukohde/{hakukohdeOid}": {
-    /**
-     * Migroi tarjonnan hakukohde Koutaan
-     * @description Migroi tarjonnan hakukohde Koutaan
-     */
-    post: operations["Migroi tarjonnan hakukohde Koutaan"];
-  };
   "/toteutus/{oid}": {
     /**
      * Hae koulutuksen toteutus
@@ -655,20 +648,6 @@ export interface paths {
      * @description Muokkaa olemassa olevaa oppilaitoksen osan kuvailutietoa. Rajapinnalle annetaan oppilaitoksen osan kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
      */
     post: operations["editOppilaitoksenOsa"];
-  };
-  "/migration/haku/{hakuOid}": {
-    /**
-     * Migroi tarjonnan haku Koutaan
-     * @description Migroi tarjonnan haku Koutaan
-     */
-    post: operations["Migroi tarjonnan haku Koutaan"];
-  };
-  "/migration/{oid}": {
-    /**
-     * Hae migraatiossa mäpätty oid
-     * @description Hae migraatiossa mäpätty oid
-     */
-    get: operations["Hae migraatiossa mäpätty oid"];
   };
   "/indexer/haku/{oid}/toteutukset/list": {
     /**
@@ -3339,6 +3318,8 @@ export interface components {
       sahkoposti?: components["schemas"]["Teksti"];
       /** @description Opintopolussa näytettävä puhelinnumero eri kielillä. Kielet on määritetty kielivalinnassa. */
       puhelinnumero?: components["schemas"]["Teksti"];
+      /** @description Opintopolussa näytettävä verkkosivu eri kielillä. Kielet on määritetty kielivalinnassa. */
+      www?: components["schemas"]["Teksti"];
     };
     TietoaOpiskelusta: {
       /**
@@ -3358,6 +3339,7 @@ export interface components {
       oid?: string;
       /** @example 1.2.246.562.10.66634895871/1.2.246.562.10.594252633210/1.2.246.562.10.00000000001 */
       parentOidPath?: string;
+      parentOids?: string[];
       /** @example oppilaitostyyppi_21 */
       oppilaitostyyppi?: string;
       nimi?: components["schemas"]["Nimi"];
@@ -3383,6 +3365,9 @@ export interface components {
       oid?: string;
       /** @example 1.2.246.562.10.66634895871/1.2.246.562.10.594252633210/1.2.246.562.10.00000000001 */
       parentOidPath?: string;
+      parentOids?: unknown;
+      /** @example oppilaitostyyppi_21 */
+      oppilaitostyyppi?: string;
       nimi?: components["schemas"]["Nimi"];
       yhteystiedot?: components["schemas"]["Yhteystieto"];
       /**
@@ -5221,24 +5206,6 @@ export interface operations {
     };
   };
   /**
-   * Migroi tarjonnan hakukohde Koutaan
-   * @description Migroi tarjonnan hakukohde Koutaan
-   */
-  "Migroi tarjonnan hakukohde Koutaan": {
-    parameters: {
-      path: {
-        /** @description Oid */
-        hakukohdeOid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
    * Hae koulutuksen toteutus
    * @description Hakee koulutuksen toteutuksen tiedot
    */
@@ -6066,42 +6033,6 @@ export interface operations {
     requestBody: {
       content: {
         "application/json": components["schemas"]["OppilaitoksenOsa"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Migroi tarjonnan haku Koutaan
-   * @description Migroi tarjonnan haku Koutaan
-   */
-  "Migroi tarjonnan haku Koutaan": {
-    parameters: {
-      path: {
-        /** @description Oid */
-        hakuOid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae migraatiossa mäpätty oid
-   * @description Hae migraatiossa mäpätty oid
-   */
-  "Hae migraatiossa mäpätty oid": {
-    parameters: {
-      path: {
-        /** @description Oid */
-        oid: string;
       };
     };
     responses: {

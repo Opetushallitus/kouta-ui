@@ -4,7 +4,7 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
   const hierarkia = [
     {
       oid: '1.2.246.562.10.501459103410',
-      parentOidPath: '1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+      parentOids: ['1.2.246.562.10.501459103410', '1.2.246.562.10.00000000001'],
       nimi: {
         fi: 'Joku kaupunki',
         sv: 'Joku kaupunki',
@@ -14,8 +14,10 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
-          parentOidPath:
-            '1.2.246.562.10.58311582298/1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+          parentOids: [
+            '1.2.246.562.10.501459103410',
+            '1.2.246.562.10.00000000001',
+          ],
           oppilaitostyyppi: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -44,7 +46,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
   const hierarkia = [
     {
       oid: '1.2.246.562.10.353744225710',
-      parentOidPath: '1.2.246.562.10.353744225710/1.2.246.562.10.00000000001',
+      parentOids: ['1.2.246.562.10.353744225710', '1.2.246.562.10.00000000001'],
       nimi: {
         fi: 'Kansanvalistusseura sr',
         sv: 'Kansanvalistusseura sr',
@@ -54,8 +56,11 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
       children: [
         {
           oid: '1.2.246.562.10.92541507692',
-          parentOidPath:
-            '1.2.246.562.10.92541507692/1.2.246.562.10.353744225710/1.2.246.562.10.00000000001',
+          parentOids: [
+            '1.2.246.562.10.92541507692',
+            '1.2.246.562.10.353744225710',
+            '1.2.246.562.10.00000000001',
+          ],
           oppilaitostyyppi: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Etelä-Helsingin kansalaisopisto',
@@ -73,7 +78,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
     },
     {
       oid: '1.2.246.562.10.501459103410',
-      parentOidPath: '1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+      parentOids: ['1.2.246.562.10.501459103410', '1.2.246.562.10.00000000001'],
       nimi: {
         fi: 'Joku kaupunki',
         sv: 'Joku kaupunki',
@@ -83,8 +88,11 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
-          parentOidPath:
-            '1.2.246.562.10.58311582298/1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+          parentOids: [
+            '1.2.246.562.10.58311582298',
+            '1.2.246.562.10.501459103410',
+            '1.2.246.562.10.00000000001',
+          ],
           oppilaitostyyppi: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -109,7 +117,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
   const result = [
     {
       oid: '1.2.246.562.10.501459103410',
-      parentOidPath: '1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+      parentOids: ['1.2.246.562.10.501459103410', '1.2.246.562.10.00000000001'],
       nimi: {
         fi: 'Joku kaupunki',
         sv: 'Joku kaupunki',
@@ -119,8 +127,11 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
-          parentOidPath:
-            '1.2.246.562.10.58311582298/1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+          parentOids: [
+            '1.2.246.562.10.58311582298',
+            '1.2.246.562.10.501459103410',
+            '1.2.246.562.10.00000000001',
+          ],
           oppilaitostyyppi: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -148,7 +159,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
   const hierarkia = [
     {
       oid: '1.2.246.562.10.501459103410',
-      parentOidPath: '1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+      parentOids: ['1.2.246.562.10.501459103410', '1.2.246.562.10.00000000001'],
       nimi: {
         fi: 'Joku kaupunki',
         sv: 'Joku kaupunki',
@@ -158,8 +169,11 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
-          parentOidPath:
-            '1.2.246.562.10.58311582298/1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+          parentOids: [
+            '1.2.246.562.10.58311582298',
+            '1.2.246.562.10.501459103410',
+            '1.2.246.562.10.00000000001',
+          ],
           oppilaitostyyppi: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -190,7 +204,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
   const hierarkia = [
     {
       oid: '1.2.246.562.10.353744225710',
-      parentOidPath: '1.2.246.562.10.353744225710/1.2.246.562.10.00000000001',
+      parentOids: ['1.2.246.562.10.353744225710', '1.2.246.562.10.00000000001'],
       nimi: {
         fi: 'Kansanvalistusseura sr',
         sv: 'Kansanvalistusseura sr',
@@ -200,8 +214,12 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
       children: [
         {
           oid: '1.2.246.562.10.92541507692',
-          parentOidPath:
-            '1.2.246.562.10.92541507692/1.2.246.562.10.353744225710/1.2.246.562.10.00000000001',
+          parentOids: [
+            '1.2.246.562.10.92541507692',
+            '1.2.246.562.10.353744225710',
+            '1.2.246.562.10.00000000001',
+          ],
+
           oppilaitostyyppi: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Etelä-Helsingin kansalaisopisto',
@@ -219,7 +237,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
     },
     {
       oid: '1.2.246.562.10.501459103410',
-      parentOidPath: '1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+      parentOids: ['1.2.246.562.10.501459103410', '1.2.246.562.10.00000000001'],
       nimi: {
         fi: 'Joku kaupunki',
         sv: 'Joku kaupunki',
@@ -229,8 +247,11 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
-          parentOidPath:
-            '1.2.246.562.10.58311582298/1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+          parentOids: [
+            '1.2.246.562.10.58311582298',
+            '1.2.246.562.10.501459103410',
+            '1.2.246.562.10.00000000001',
+          ],
           oppilaitostyyppi: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -241,8 +262,11 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
           children: [
             {
               oid: '1.2.246.562.10.583115822981',
-              parentOidPath:
-                '1.2.246.562.10.583115822981/1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+              parentOids: [
+                '1.2.246.562.10.58311582298',
+                '1.2.246.562.10.501459103410',
+                '1.2.246.562.10.00000000001',
+              ],
               oppilaitostyyppi: 'oppilaitostyyppi_64#1',
               nimi: {
                 fi: 'Lapsenlapsiopisto',
@@ -256,8 +280,12 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             },
             {
               oid: '1.2.246.562.10.58311582299',
-              parentOidPath:
-                '1.2.246.562.10.58311582299/1.2.246.562.10.501459103410/1.2.246.562.10.00000000001',
+              parentOids: [
+                '1.2.246.562.10.58311582299',
+                '1.2.246.562.10.501459103410',
+                '1.2.246.562.10.00000000001',
+              ],
+
               oppilaitostyyppi: 'oppilaitostyyppi_64#1',
               nimi: {
                 fi: 'Lapsiopisto',

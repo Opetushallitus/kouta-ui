@@ -44,7 +44,7 @@ const oppilaitostyyppiToKoulutustyyppi = o =>
     [ot => LUKIO_OPPILAITOSTYYPIT.includes(ot), _ => 'Lk'],
   ])(o?.oppilaitostyyppi);
 
-const isParent = parentOid => org => org.parentOidPath.includes(parentOid);
+const isParent = parentOid => org => org?.parentOids?.includes(parentOid);
 
 const isChild = childOid => org =>
   org.oid === childOid || _.head(org.children?.filter(isChild(childOid)));

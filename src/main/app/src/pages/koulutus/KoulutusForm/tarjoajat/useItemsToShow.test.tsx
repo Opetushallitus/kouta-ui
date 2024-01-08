@@ -1,19 +1,20 @@
 import { renderHook } from '@testing-library/react-hooks';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
+import { Organisaatio } from '#/src/types/domainTypes';
 
 import { useItemsToShow } from './useItemsToShow';
 
 const createOrg = ({
   oid = '1.2.3.4',
   nimi = {},
-  parentOidPath = '',
+  parentOids = [],
   organisaatiotyypit = [],
   children = [],
 }: Partial<Organisaatio>): Organisaatio => ({
   oid,
   nimi,
-  parentOidPath,
+  parentOids,
   organisaatiotyypit,
   tyypit: [],
   children,
@@ -37,7 +38,7 @@ test('useItemsToShow vain vain valitut organisaatiot, kun naytaVainValitut=true'
 test('useItemsToShow palauttaa vain oppilaitokset, paitsi valituille koulutustoimijoille, eikä sen lapsi-oppilaitoksia', () => {
   const org1_2 = createOrg({
     oid: '2.2.2.2',
-    parentOidPath: '2.2.2.2/1.1.1.1',
+    parentOids: ['2.2.2.2', '1.1.1.1'],
     organisaatiotyypit: [ORGANISAATIOTYYPPI.OPPILAITOS],
   });
 
@@ -49,7 +50,7 @@ test('useItemsToShow palauttaa vain oppilaitokset, paitsi valituille koulutustoi
 
   const org2_1 = createOrg({
     oid: '2.2.2.3',
-    parentOidPath: '2.2.2.3/1.1.1.2',
+    parentOids: ['2.2.2.3', '1.1.1.2'],
     organisaatiotyypit: [ORGANISAATIOTYYPPI.OPPILAITOS],
   });
 

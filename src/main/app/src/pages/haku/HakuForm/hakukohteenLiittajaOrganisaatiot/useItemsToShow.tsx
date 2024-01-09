@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import { Organisaatio } from '#/src/types/domainTypes';
@@ -20,39 +20,36 @@ export const useItemsToShow = ({
   return useMemo(() => {
     const selectedKoulutustoimijaOids: Array<string> = [];
 
-    return (
-      organisaatiot
-        .filter(org => {
-          const isSelected = value.includes(org.oid);
+    return organisaatiot
+      .filter(org => {
+        const orgOid = org.oid || '';
+        const isSelected = value.includes(orgOid);
 
-          if (
-            isSelected &&
-            organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA)(org)
-          ) {
-            selectedKoulutustoimijaOids.push(org.oid);
-          }
+        if (
+          isSelected &&
+          organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA)(org)
+        ) {
+          selectedKoulutustoimijaOids.push(orgOid);
+        }
 
-          return naytaVainValitut
-            ? isSelected
-            : isSelected ||
-                organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)(org);
-        })
-        // Olemassaolevissa tarjoajissa on tallennettuna myös koulutustoimijoita.
-        // Näytetään koulutustoimija silloin kun se on valittu, jotta valinnan voi poistaa.
-        .filter(org => {
-          if (_.isEmpty(selectedKoulutustoimijaOids)) {
-            return true;
-          } else {
-            return (
-              organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA)(
-                org
-              ) ||
-              !selectedKoulutustoimijaOids.some(ktOid =>
-                org.parentOidPath.includes(ktOid)
-              )
-            );
-          }
-        })
-    );
+        return naytaVainValitut
+          ? isSelected
+          : isSelected ||
+              organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)(org);
+      })
+      .filter(org => {
+        if (isEmpty(selectedKoulutustoimijaOids)) {
+          return true;
+        } else {
+          return (
+            organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA)(
+              org
+            ) ||
+            !selectedKoulutustoimijaOids.some(ktOid =>
+              (org?.parentOidPath || '').includes(ktOid)
+            )
+          );
+        }
+      });
   }, [organisaatiot, value, naytaVainValitut]);
 };

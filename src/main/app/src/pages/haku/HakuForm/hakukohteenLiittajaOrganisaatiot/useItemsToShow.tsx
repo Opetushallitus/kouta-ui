@@ -22,7 +22,7 @@ export const useItemsToShow = ({
 
     return organisaatiot
       .filter(org => {
-        const orgOid = org.oid || '';
+        const orgOid = org.oid ?? '';
         const isSelected = value.includes(orgOid);
 
         if (
@@ -46,7 +46,7 @@ export const useItemsToShow = ({
               org
             ) ||
             !selectedKoulutustoimijaOids.some(ktOid =>
-              (org?.parentOidPath || '').includes(ktOid)
+              (org?.parentOidPath ?? '').includes(ktOid)
             )
           );
         }

@@ -15,7 +15,6 @@ export const PAGE_SIZE = 15;
 export const countPageNumber = orgs => Math.ceil(orgs.length / PAGE_SIZE);
 
 type Props = {
-  organisaatioOid: string;
   liittajaOrganisaatiot: Array<any>;
   value: Array<string>;
   onChange: (val: Array<string>) => void;
@@ -29,8 +28,8 @@ export const HakukohteenLiittajatWithPagination = ({
   language,
 }: Props) => {
   const { t } = useTranslation();
-  const [currentPage, setPage] = useState(0);
-  const [usedNimi, setNimi] = useState('');
+  const [currentPage, setCurrentPage] = useState(0);
+  const [usedNimi, setUsedNimi] = useState('');
   const [naytaVainValitut, setNaytaVainValitut] = useState(false);
   const filteredLiittajaOrganisaatiot = useItemsToShow({
     organisaatiot: liittajaOrganisaatiot,
@@ -51,7 +50,7 @@ export const HakukohteenLiittajatWithPagination = ({
   }
 
   useEffect(() => {
-    setPage(0);
+    setCurrentPage(0);
   }, [usedNimi, naytaVainValitut]);
 
   const itemsOnPage = [
@@ -78,7 +77,7 @@ export const HakukohteenLiittajatWithPagination = ({
             placeholder={t('koulutuslomake.haeJarjestajanNimella')}
             value={usedNimi}
             onChange={e => {
-              setNimi(e.target.value);
+              setUsedNimi(e.target.value);
             }}
             suffix={<InputIcon type="search" />}
           />
@@ -102,7 +101,7 @@ export const HakukohteenLiittajatWithPagination = ({
       </Box>
       <Pagination
         value={currentPage}
-        onChange={setPage}
+        onChange={setCurrentPage}
         pageCount={pageCount}
       />
     </>

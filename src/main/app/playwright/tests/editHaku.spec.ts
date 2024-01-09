@@ -141,4 +141,15 @@ test.describe('Edit haku', () => {
       page.getByRole('button', { name: 'yleiset.liitaHakukohde' })
     ).toBeEnabled();
   });
+
+  test('Hakukohteen liittääjäorganisaatiot osio should be visible', async ({
+    page,
+  }) => {
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`
+    );
+    await expect(
+      page.getByText('hakulomake.hakukohteenliittajaorganisatiot')
+    ).toBeVisible();
+  });
 });

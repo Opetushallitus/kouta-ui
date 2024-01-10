@@ -1,6 +1,10 @@
 import _ from 'lodash';
 
-export const searchOrgsFromHierarkiaWithName = (hierarkia, name, language) => {
+export const searchOrgsFromHierarkiaWithName = (
+  hierarkia,
+  name,
+  language = 'fi'
+) => {
   return hierarkia.reduce((result, org) => {
     const filteredOrg = {
       ...org,

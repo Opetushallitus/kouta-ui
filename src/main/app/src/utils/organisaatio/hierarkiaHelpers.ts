@@ -1,3 +1,5 @@
+import { Organisaatio } from '#/src/types/domainTypes';
+
 export const flattenHierarkia = (orgs: Array<Organisaatio>) =>
   orgs.flatMap((org: Organisaatio) => [
     org,

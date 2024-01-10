@@ -673,7 +673,9 @@
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu haku",
     "haullaErillinenAloitusajankohta": "Haulla on erillinen aloitusajankohta",
     "liittamisenTakarajaYlittynyt": "Hakukohteen lisäämisen takaraja on umpeutunut.",
-    "valitseLiittajaOrganisaatiot": "Valitse ne organisaatiot, jotka voivat liittää hakukohteen"
+    "valitseLiittajaOrganisaatiot": "Valitse ne organisaatiot, jotka voivat liittää hakukohteen",
+    "haeOrganisaationNimella": "Hae organisaation nimellä",
+    "naytaVainValitut": "Näytä vain valitut"
   },
   "hakukohdelomake": {
     "toteutukseenLiitettyAlkamisajankohta": "Toteutukseen liitetty alkamisajankohta",

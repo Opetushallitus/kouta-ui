@@ -21,7 +21,7 @@ const LiittajatFormField = createFormFieldComponent(
   simpleMapProps
 );
 
-const LiittajaOrganisaatiotSelector = ({ organisaatioOid }) => {
+const LiittajaOrganisaatiotSelector = () => {
   const { t } = useTranslation();
 
   const { liittajaOrganisaatiot, isLoading } =
@@ -46,13 +46,12 @@ const LiittajaOrganisaatiotSelector = ({ organisaatioOid }) => {
         getIsDisabled={getIsDisabled}
         component={LiittajatFormField}
         label={t('hakulomake.valitseLiittajaOrganisaatiot')}
-        organisaatioOid={organisaatioOid}
       />
     </div>
   );
 };
 
-export const LiittajaOrganisaatiotSection = ({ organisaatioOid, haku }) => {
+export const LiittajaOrganisaatiotSection = ({ haku }) => {
   const isOphVirkailija = useIsOphVirkailija();
 
   return (
@@ -62,7 +61,7 @@ export const LiittajaOrganisaatiotSection = ({ organisaatioOid, haku }) => {
           <LiittajaOrganisaatiotLinkList haku={haku} />
         </Box>
       )}
-      <LiittajaOrganisaatiotSelector organisaatioOid={organisaatioOid} />
+      <LiittajaOrganisaatiotSelector />
     </>
   );
 };

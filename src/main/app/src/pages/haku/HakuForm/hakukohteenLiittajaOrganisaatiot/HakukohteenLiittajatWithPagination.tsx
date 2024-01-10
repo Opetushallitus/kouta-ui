@@ -74,7 +74,7 @@ export const HakukohteenLiittajatWithPagination = ({
       <Box display="flex" alignItems="flex-start" flexDirection="column">
         <Box width={1} mb={2}>
           <Input
-            placeholder={t('koulutuslomake.haeJarjestajanNimella')}
+            placeholder={t('hakulomake.haeOrganisaationNimella')}
             value={usedNimi}
             onChange={e => {
               setUsedNimi(e.target.value);
@@ -87,7 +87,7 @@ export const HakukohteenLiittajatWithPagination = ({
             checked={naytaVainValitut}
             onChange={e => setNaytaVainValitut(e.target.checked)}
           >
-            {t('koulutuslomake.naytaVainValitut')}
+            {t('hakulomake.naytaVainValitut')}
           </Switch>
         </Box>
       </Box>

@@ -7,15 +7,15 @@ import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierar
 import Pagination from '#/src/components/Pagination';
 import { Switch } from '#/src/components/Switch';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
+import { useItemsToShow } from '#/src/hooks/useItemsToShow';
+import { Organisaatio } from '#/src/types/domainTypes';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
-
-import { useItemsToShow } from './useItemsToShow';
 
 export const PAGE_SIZE = 15;
 export const countPageNumber = orgs => Math.ceil(orgs.length / PAGE_SIZE);
 
 type Props = {
-  liittajaOrganisaatiot: Array<any>;
+  liittajaOrganisaatiot: Array<Organisaatio>;
   value: Array<string>;
   onChange: (val: Array<string>) => void;
   language: LanguageCode;

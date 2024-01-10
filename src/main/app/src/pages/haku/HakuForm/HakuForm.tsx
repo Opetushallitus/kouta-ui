@@ -174,12 +174,11 @@ const HakuForm = ({
         />
 
         <FormCollapse
-          section="liittajaorganisatiot"
-          header={t('hakulomake.hakukohteenliittajaorganisatiot')}
+          section="liittajaorganisaatiot"
+          header={t('hakulomake.hakukohteenliittajaorganisaatiot')}
           Component={LiittajaOrganisaatiotSection}
           organisaatioOid={organisaatioOid}
           haku={hakuProp}
-          disableTarjoajaHierarkia={false}
         />
 
         {_fp.isFunction(onAttachHakukohde) ? (
@@ -200,7 +199,7 @@ const HakuForm = ({
                   disabled={!canAddHakukohde}
                   type="button"
                   title={infoText}
-                  isHakokohteenLiittaja={hakuProp?.hakukohteenLiittajaOrganisaatiot.includes(
+                  isHakukohteenLiittaja={hakuProp?.hakukohteenLiittajaOrganisaatiot.includes(
                     organisaatioOid
                   )}
                 >

@@ -149,7 +149,7 @@ test.describe('Edit haku', () => {
       `/kouta/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`
     );
     await expect(
-      page.getByText('hakulomake.hakukohteenliittajaorganisatiot')
+      page.getByText('hakulomake.hakukohteenliittajaorganisaatiot')
     ).toBeVisible();
   });
 });

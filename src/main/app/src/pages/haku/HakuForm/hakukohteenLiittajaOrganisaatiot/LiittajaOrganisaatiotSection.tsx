@@ -3,15 +3,12 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-// import { Alert } from '#/src/components/Alert';
 import {
   createFormFieldComponent,
-  // FormFieldCheckbox,
   simpleMapProps,
 } from '#/src/components/formFields';
 import { Box, Spin } from '#/src/components/virkailija';
 import { HAKU_ROLE } from '#/src/constants';
-// import { useFieldValue } from '#/src/hooks/form';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
@@ -56,15 +53,7 @@ const LiittajaOrganisaatiotSelector = ({ organisaatioOid }) => {
 };
 
 export const LiittajaOrganisaatiotSection = ({ organisaatioOid, haku }) => {
-  // const { t } = useTranslation();
-
-  // const koulutusTarjoajaOids = haku?.hakukohteenLiittajaOrganisaatiot ?? [];
   const isOphVirkailija = useIsOphVirkailija();
-
-  // const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
-  // const kaytaPohjanJarjestajaa = useFieldValue(
-  //   'tarjoajat.kaytaPohjanJarjestajaa'
-  // );
 
   return (
     <>

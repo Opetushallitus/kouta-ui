@@ -47,7 +47,7 @@ jobs:
       run:
         working-directory: ./src/main/app
     steps:
-      - uses: actions/checkout@v3 
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version-file: 'src/main/app/.nvmrc'
@@ -70,6 +70,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - name: Run tests
         run: |
+          npm run lint
           npm run test:ci
 
   publish-storybook:

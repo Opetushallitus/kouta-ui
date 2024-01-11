@@ -153,7 +153,7 @@ const OrganisaatioSection = ({
 }) => {
   const opetuskieletUris = organisaatio?.kieletUris || [];
   const paikkakuntaUri = organisaatio?.kotipaikkaUri;
-  const oppilaitostyyppiUri = organisaatio?.oppilaitostyyppi;
+  const oppilaitostyyppiUri = organisaatio?.oppilaitostyyppiUri;
   const nimi = getFirstLanguageValue(organisaatio?.nimi, language);
 
   const { nimet: opetuskielet } = useKoodiNimet(opetuskieletUris);

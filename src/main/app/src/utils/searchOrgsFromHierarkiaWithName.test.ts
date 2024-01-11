@@ -18,7 +18,7 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
-          oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+          oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
             sv: 'Eriniminen kansalaisopisto',
@@ -61,7 +61,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
             '1.2.246.562.10.353744225710',
             '1.2.246.562.10.00000000001',
           ],
-          oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+          oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Etelä-Helsingin kansalaisopisto',
             sv: 'Etelä-Helsingin kansalaisopisto',
@@ -93,7 +93,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
-          oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+          oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
             sv: 'Eriniminen kansalaisopisto',
@@ -132,7 +132,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
-          oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+          oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
             sv: 'Eriniminen kansalaisopisto',
@@ -174,7 +174,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
-          oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+          oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
             sv: 'Eriniminen kansalaisopisto',
@@ -220,7 +220,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             '1.2.246.562.10.00000000001',
           ],
 
-          oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+          oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Etelä-Helsingin kansalaisopisto',
             sv: 'Etelä-Helsingin kansalaisopisto',
@@ -252,7 +252,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
-          oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+          oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
             sv: 'Eriniminen kansalaisopisto',
@@ -267,7 +267,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 '1.2.246.562.10.501459103410',
                 '1.2.246.562.10.00000000001',
               ],
-              oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+              oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
               nimi: {
                 fi: 'Lapsenlapsiopisto',
                 sv: 'Lapsenlapsiopisto',
@@ -286,7 +286,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 '1.2.246.562.10.00000000001',
               ],
 
-              oppilaitostyyppi: 'oppilaitostyyppi_64#1',
+              oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
               nimi: {
                 fi: 'Lapsiopisto',
                 sv: 'Lapsiopisto',

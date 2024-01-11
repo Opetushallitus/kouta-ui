@@ -87,6 +87,13 @@ export interface paths {
      */
     post: operations["Tallenna logo"];
   };
+  "/raportointi/koulutukset": {
+    /**
+     * Tallentaa koulutukset siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportKoulutukset"];
+  };
   "/indexer/pistehistoria": {
     /**
      * Palauttaa tarjoajan ja hakukohdekoodin tai lukiolinjakoodin yhdistelmään liittyvät pistetiedot
@@ -3275,7 +3282,7 @@ export interface components {
     OppilaitosEnrichedData: {
       /** @description Oppilaitoksen osan kuvailutietoja viimeksi muokanneen virkailijan henkilön nimi */
       muokkaajanNimi?: components["schemas"]["Nimi"];
-      organisaatio?: components["schemas"]["KoutaOrganisaatio"];
+      organisaatio?: components["schemas"]["Organisaatio"];
     };
     OppilaitoksenOsaListItem: {
       /**
@@ -3337,11 +3344,9 @@ export interface components {
     Organisaatio: {
       /** @example 1.2.246.562.10.66634895871 */
       oid?: string;
-      /** @example 1.2.246.562.10.66634895871/1.2.246.562.10.594252633210/1.2.246.562.10.00000000001 */
-      parentOidPath?: string;
       parentOids?: string[];
       /** @example oppilaitostyyppi_21 */
-      oppilaitostyyppi?: string;
+      oppilaitostyyppiUri?: string;
       nimi?: components["schemas"]["Nimi"];
       /**
        * @example [
@@ -3353,32 +3358,12 @@ export interface components {
       children?: components["schemas"]["Organisaatio"][];
       /** @example AKTIIVINEN */
       status?: string;
-      organisaatiotyypit?: unknown;
-      tyypit?: unknown;
-      kieletUris?: unknown;
+      organisaatiotyypit?: string[];
+      tyypit?: string[];
+      kieletUris?: string[];
     };
     OrganisaatioHierarkia: {
       organisaatiot?: components["schemas"]["Organisaatio"][];
-    };
-    KoutaOrganisaatio: {
-      /** @example 1.2.246.562.10.66634895871 */
-      oid?: string;
-      /** @example 1.2.246.562.10.66634895871/1.2.246.562.10.594252633210/1.2.246.562.10.00000000001 */
-      parentOidPath?: string;
-      parentOids?: unknown;
-      /** @example oppilaitostyyppi_21 */
-      oppilaitostyyppi?: string;
-      nimi?: components["schemas"]["Nimi"];
-      yhteystiedot?: components["schemas"]["Yhteystieto"];
-      /**
-       * @example [
-       *   "kunta_091",
-       *   "kunta_398"
-       * ]
-       */
-      kotipaikkaUri?: string;
-      organisaatiotyypit?: unknown;
-      kieletUris?: unknown;
     };
     IndexedOrganisaatio: {
       /**
@@ -4014,6 +3999,29 @@ export interface operations {
         "image/jpeg": string;
         "image/png": string;
         "image/svg+xml": string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa koulutukset siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportKoulutukset: {
+    parameters: {
+      query?: {
+        /** @example Thu, 1 Jan 1970 00:00:00 GMT */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example Thu, 1 Jan 1970 00:00:00 GMT
+         */
+        endTime?: string;
       };
     };
     responses: {

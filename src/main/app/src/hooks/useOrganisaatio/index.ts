@@ -42,7 +42,7 @@ const oppilaitostyyppiToKoulutustyyppi = o =>
     [ot => AMMATILLISET_OPPILAITOSTYYPIT.includes(ot), _ => 'Amm'],
     [ot => KORKEAKOULU_OPPILAITOSTYYPIT.includes(ot), _ => 'Yo'],
     [ot => LUKIO_OPPILAITOSTYYPIT.includes(ot), _ => 'Lk'],
-  ])(o?.oppilaitostyyppi);
+  ])(o?.oppilaitostyyppiUri);
 
 const isParent = parentOid => org => org?.parentOids?.includes(parentOid);
 

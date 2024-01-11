@@ -6,10 +6,15 @@ import {
   EPERUSTE_STATUS_LAADINNASSA,
   EPERUSTE_STATUS_TULEVA,
   EPERUSTE_STATUS_VOIMASSA,
+  EPERUSTE_STATUS_PAATTYNYT,
 } from '#/src/constants';
 import { Theme } from '#/src/theme';
 
-export type EPerusteStatus = 'voimassa' | 'tuleva' | 'laadinnassa';
+export type EPerusteStatus =
+  | 'voimassa'
+  | 'tuleva'
+  | 'laadinnassa'
+  | 'paattynyt';
 
 export const getEPerusteStatus = ePeruste => {
   if (ePeruste) {
@@ -25,6 +30,8 @@ export const getEPerusteStatus = ePeruste => {
       return 'voimassa' as EPerusteStatus;
     } else if (voimassaoloAlkaa > now) {
       return 'tuleva' as EPerusteStatus;
+    } else if (voimassaoloLoppuu < now) {
+      return 'paattynyt' as EPerusteStatus;
     }
   }
 };
@@ -48,6 +55,11 @@ const getStatusColors = ({
         color: theme.colors.primary.main,
       };
     case EPERUSTE_STATUS_LAADINNASSA:
+      return {
+        backgroundColor: setLightness(0.9, theme.colors.danger.main),
+        color: theme.colors.primary.main,
+      };
+    case EPERUSTE_STATUS_PAATTYNYT:
       return {
         backgroundColor: setLightness(0.9, theme.colors.danger.main),
         color: theme.colors.primary.main,

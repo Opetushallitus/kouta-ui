@@ -23,6 +23,7 @@ import {
   getEPerusteStatus,
   EPerusteStatus,
 } from '#/src/utils/ePeruste/ePerusteStatus';
+import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
@@ -90,7 +91,7 @@ export const ValitseEPerusteBox = ({
   const { t } = useTranslation();
   const apiUrls = useUrls();
   const ePerusteId = useFieldValue(fieldName)?.value;
-  const ePeruste = ePerusteet?.find(({ id }) => id === ePerusteId);
+  const { data: ePeruste = {} } = useEPerusteById(ePerusteId);
 
   const { opintojenlaajuus, nimikkeet, osaamisalat } = useMemo(
     () => ({
@@ -133,7 +134,7 @@ export const ValitseEPerusteBox = ({
           disabled={disabled}
         />
       </Box>
-      {ePeruste && (
+      {ePerusteId && (
         <Grid columns="minmax(300px, 40%) auto">
           <Cell key="eperusteen-tiedot-1">
             <InfoBoxGrid

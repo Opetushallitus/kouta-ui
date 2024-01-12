@@ -12,7 +12,6 @@ import {
   getKieleistyksetFromValues,
   getKielivalinta,
 } from '../pickTranslations';
-import { isHakukohteetKaytossa } from './hakukohteetKaytossaUtil';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 

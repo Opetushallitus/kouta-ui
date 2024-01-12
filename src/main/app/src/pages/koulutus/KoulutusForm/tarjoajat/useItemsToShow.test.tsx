@@ -9,14 +9,13 @@ const createOrg = ({
   oid = '1.2.3.4',
   nimi = {},
   parentOids = [],
-  organisaatiotyypit = [],
+  organisaatiotyyppiUris = [],
   children = [],
 }: Partial<Organisaatio>): Organisaatio => ({
   oid,
   nimi,
   parentOids,
-  organisaatiotyypit,
-  tyypit: [],
+  organisaatiotyyppiUris,
   children,
 });
 
@@ -39,24 +38,24 @@ test('useItemsToShow palauttaa vain oppilaitokset, paitsi valituille koulutustoi
   const org1_2 = createOrg({
     oid: '2.2.2.2',
     parentOids: ['2.2.2.2', '1.1.1.1'],
-    organisaatiotyypit: [ORGANISAATIOTYYPPI.OPPILAITOS],
+    organisaatiotyyppiUris: [ORGANISAATIOTYYPPI.OPPILAITOS],
   });
 
   const org1 = createOrg({
     oid: '1.1.1.1',
-    organisaatiotyypit: [ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA],
+    organisaatiotyyppiUris: [ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA],
     children: [org1_2],
   });
 
   const org2_1 = createOrg({
     oid: '2.2.2.3',
     parentOids: ['2.2.2.3', '1.1.1.2'],
-    organisaatiotyypit: [ORGANISAATIOTYYPPI.OPPILAITOS],
+    organisaatiotyyppiUris: [ORGANISAATIOTYYPPI.OPPILAITOS],
   });
 
   const org2 = createOrg({
     oid: '1.1.1.2',
-    organisaatiotyypit: [ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA],
+    organisaatiotyyppiUris: [ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA],
     children: [org2_1],
   });
 

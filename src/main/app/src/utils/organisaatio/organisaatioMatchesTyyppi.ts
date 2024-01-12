@@ -1,16 +1,12 @@
 import _fp from 'lodash/fp';
 
+import { Organisaatio } from '#/src/types/domainTypes';
 import { valueToArray } from '#/src/utils';
 
-export const getOrganisaatioTyypit = organisaatio =>
-  _fp.isEmpty(organisaatio?.organisaatiotyypit)
-    ? _fp.isEmpty(organisaatio?.tyypit)
-      ? []
-      : organisaatio?.tyypit
-    : organisaatio?.organisaatiotyypit;
-
-export const organisaatioMatchesTyyppi = _fp.curry((tyyppi, organisaatio) => {
-  const tyypit = valueToArray(tyyppi);
-  const orgTyypit = getOrganisaatioTyypit(organisaatio);
-  return orgTyypit.some(t => tyypit.includes(t));
-});
+export const organisaatioMatchesTyyppi = _fp.curry(
+  (tyyppi: string, organisaatio: Organisaatio) => {
+    const tyypit = valueToArray(tyyppi);
+    const orgTyypit = organisaatio?.organisaatiotyyppiUris || [];
+    return orgTyypit.some(t => tyypit.includes(t));
+  }
+);

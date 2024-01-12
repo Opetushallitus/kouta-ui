@@ -3343,11 +3343,11 @@ export interface components {
     };
     Organisaatio: {
       /** @example 1.2.246.562.10.66634895871 */
-      oid?: string;
-      parentOids?: string[];
-      /** @example oppilaitostyyppi_21 */
-      oppilaitostyyppiUri?: string;
-      nimi?: components["schemas"]["Nimi"];
+      oid: string;
+      parentOids: string[];
+      nimi: components["schemas"]["Nimi"];
+      kieletUris: string[];
+      yhteystiedot?: components["schemas"]["Yhteystieto"];
       /**
        * @example [
        *   "kunta_091",
@@ -3355,12 +3355,28 @@ export interface components {
        * ]
        */
       kotipaikkaUri?: string;
+      /**
+       * @example {
+       *   "oid": "1.2.246.562.10.66634895777",
+       *   "parentOids": [
+       *     "1.2.246.562.10.66634895871",
+       *     "1.2.246.562.10.594252633210",
+       *     "1.2.246.562.10.00000000001"
+       *   ],
+       *   "nimi": {
+       *     "fi": "Lapsiorganisaation nimi fi",
+       *     "sv": "Lapsiorganisaation nimi sv",
+       *     "en": "Lapsiorganisaation nimi en"
+       *   },
+       *   "kieletUris": [
+       *     "oppilaitoksenopetuskieli_1#1"
+       *   ]
+       * }
+       */
       children?: components["schemas"]["Organisaatio"][];
-      /** @example AKTIIVINEN */
-      status?: string;
-      organisaatiotyypit?: string[];
-      tyypit?: string[];
-      kieletUris?: string[];
+      /** @example oppilaitostyyppi_21 */
+      oppilaitostyyppiUri?: string;
+      organisaatiotyyppiUris?: string[];
     };
     OrganisaatioHierarkia: {
       organisaatiot?: components["schemas"]["Organisaatio"][];

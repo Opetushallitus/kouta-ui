@@ -1,3 +1,5 @@
+import { Organisaatio } from '#/src/types/domainTypes';
+
 import { searchOrgsFromHierarkiaWithName } from './searchOrgsFromHierarkiaWithName';
 
 test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches the given name', () => {
@@ -10,6 +12,7 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
         sv: 'Joku kaupunki',
         en: 'Joku kaupunki',
       },
+      kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_208',
       children: [
         {
@@ -18,6 +21,7 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
+          kieletUris: [],
           oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -26,18 +30,16 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
           },
           kotipaikkaUri: 'kunta_208',
           children: [],
-          organisaatiotyypit: ['organisaatiotyyppi_02'],
-          tyypit: [],
+          organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ],
-      organisaatiotyypit: [
+      ] as Array<Organisaatio>,
+      organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
         'organisaatiotyyppi_09',
       ],
-      tyypit: [],
     },
-  ];
+  ] as Array<Organisaatio>;
 
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'Joku')).toEqual(hierarkia);
 });
@@ -52,6 +54,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
         sv: 'Kansanvalistusseura sr',
         en: 'Kansanvalistusseura sr',
       },
+      kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_091',
       children: [
         {
@@ -61,6 +64,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
             '1.2.246.562.10.353744225710',
             '1.2.246.562.10.00000000001',
           ],
+          kieletUris: ['oppilaitoksenopetuskieli_1#2'],
           oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Etelä-Helsingin kansalaisopisto',
@@ -69,12 +73,10 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           },
           kotipaikkaUri: 'kunta_091',
           children: [],
-          organisaatiotyypit: ['organisaatiotyyppi_02'],
-          tyypit: [],
+          organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ],
-      organisaatiotyypit: ['organisaatiotyyppi_01'],
-      tyypit: [],
+      ] as Array<Organisaatio>,
+      organisaatiotyyppiUris: ['organisaatiotyyppi_01'],
     },
     {
       oid: '1.2.246.562.10.501459103410',
@@ -84,6 +86,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
         sv: 'Joku kaupunki',
         en: 'Joku kaupunki',
       },
+      kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_208',
       children: [
         {
@@ -93,6 +96,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
+          kieletUris: ['oppilaitoksenopetuskieli_1#2'],
           oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -101,18 +105,16 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           },
           kotipaikkaUri: 'kunta_208',
           children: [],
-          organisaatiotyypit: ['organisaatiotyyppi_02'],
-          tyypit: [],
+          organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
       ],
-      organisaatiotyypit: [
+      organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
         'organisaatiotyyppi_09',
       ],
-      tyypit: [],
     },
-  ];
+  ] as Array<Organisaatio>;
 
   const result = [
     {
@@ -123,6 +125,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
         sv: 'Joku kaupunki',
         en: 'Joku kaupunki',
       },
+      kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_208',
       children: [
         {
@@ -132,6 +135,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
+          kieletUris: ['oppilaitoksenopetuskieli_1#2'],
           oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -140,18 +144,16 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           },
           kotipaikkaUri: 'kunta_208',
           children: [],
-          organisaatiotyypit: ['organisaatiotyyppi_02'],
-          tyypit: [],
+          organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ],
-      organisaatiotyypit: [
+      ] as Array<Organisaatio>,
+      organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
         'organisaatiotyyppi_09',
       ],
-      tyypit: [],
     },
-  ];
+  ] as Array<Organisaatio>;
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'Joku')).toEqual(result);
 });
 
@@ -165,6 +167,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
         sv: 'Joku kaupunki',
         en: 'Joku kaupunki',
       },
+      kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_208',
       children: [
         {
@@ -174,6 +177,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
+          kieletUris: ['oppilaitoksenopetuskieli_1#2'],
           oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -182,18 +186,16 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
           },
           kotipaikkaUri: 'kunta_208',
           children: [],
-          organisaatiotyypit: ['organisaatiotyyppi_02'],
-          tyypit: [],
+          organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ],
-      organisaatiotyypit: [
+      ] as Array<Organisaatio>,
+      organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
         'organisaatiotyyppi_09',
       ],
-      tyypit: [],
     },
-  ];
+  ] as Array<Organisaatio>;
 
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'Eriniminen')).toEqual(
     hierarkia
@@ -210,6 +212,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
         sv: 'Kansanvalistusseura sr',
         en: 'Kansanvalistusseura sr',
       },
+      kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_091',
       children: [
         {
@@ -219,7 +222,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             '1.2.246.562.10.353744225710',
             '1.2.246.562.10.00000000001',
           ],
-
+          kieletUris: ['oppilaitoksenopetuskieli_1#2'],
           oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Etelä-Helsingin kansalaisopisto',
@@ -227,13 +230,11 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             en: 'Etelä-Helsingin kansalaisopisto',
           },
           kotipaikkaUri: 'kunta_091',
-          children: [],
-          organisaatiotyypit: ['organisaatiotyyppi_02'],
-          tyypit: [],
+          children: [] as Array<Organisaatio>,
+          organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ],
-      organisaatiotyypit: ['organisaatiotyyppi_01'],
-      tyypit: [],
+      ] as Array<Organisaatio>,
+      organisaatiotyyppiUris: ['organisaatiotyyppi_01'],
     },
     {
       oid: '1.2.246.562.10.501459103410',
@@ -244,6 +245,12 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
         en: 'Joku kaupunki',
       },
       kotipaikkaUri: 'kunta_208',
+      kieletUris: ['oppilaitoksenopetuskieli_1#2'],
+      organisaatiotyyppiUris: [
+        'organisaatiotyyppi_01',
+        'organisaatiotyyppi_07',
+        'organisaatiotyyppi_09',
+      ],
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
@@ -252,6 +259,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             '1.2.246.562.10.501459103410',
             '1.2.246.562.10.00000000001',
           ],
+          kieletUris: ['oppilaitoksenopetuskieli_1#2'],
           oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
           nimi: {
             fi: 'Eriniminen kansalaisopisto',
@@ -267,6 +275,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 '1.2.246.562.10.501459103410',
                 '1.2.246.562.10.00000000001',
               ],
+              kieletUris: ['oppilaitoksenopetuskieli_1#2'],
               oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
               nimi: {
                 fi: 'Lapsenlapsiopisto',
@@ -274,9 +283,8 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 en: 'Lapsenlapsiopisto',
               },
               kotipaikkaUri: 'kunta_208',
-              children: [],
-              organisaatiotyypit: ['organisaatiotyyppi_02'],
-              tyypit: [],
+              children: [] as Array<Organisaatio>,
+              organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
             },
             {
               oid: '1.2.246.562.10.58311582299',
@@ -285,7 +293,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 '1.2.246.562.10.501459103410',
                 '1.2.246.562.10.00000000001',
               ],
-
+              kieletUris: ['oppilaitoksenopetuskieli_1#2'],
               oppilaitostyyppiUri: 'oppilaitostyyppi_64#1',
               nimi: {
                 fi: 'Lapsiopisto',
@@ -293,22 +301,14 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 en: 'Lapsiopisto',
               },
               kotipaikkaUri: 'kunta_208',
-              children: [],
-              organisaatiotyypit: ['organisaatiotyyppi_02'],
-              tyypit: [],
+              children: [] as Array<Organisaatio>,
+              organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
             },
-          ],
-          organisaatiotyypit: ['organisaatiotyyppi_02'],
-          tyypit: [],
+          ] as Array<Organisaatio>,
+          organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ],
-      organisaatiotyypit: [
-        'organisaatiotyyppi_01',
-        'organisaatiotyyppi_07',
-        'organisaatiotyyppi_09',
-      ],
-      tyypit: [],
-    },
+      ] as Array<Organisaatio>,
+    } as Organisaatio,
   ];
 
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'laps')).toEqual([

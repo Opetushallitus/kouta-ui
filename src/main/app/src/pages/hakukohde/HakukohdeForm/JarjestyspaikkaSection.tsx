@@ -27,10 +27,7 @@ import { useOppilaitoksetByOids } from '#/src/utils/hakukohde/getOppilaitoksetBy
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { enrichOrganisaatiot } from '#/src/utils/organisaatio/enrichOrganisaatiot';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
-import {
-  organisaatioMatchesTyyppi,
-  getOrganisaatioTyypit,
-} from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const useOrganisaatiotyyppiMap = () => {
   const { data: organisaatiotyypit } = useKoodisto({
@@ -52,7 +49,7 @@ const useOrganisaatiotyyppiMap = () => {
 
 const getOrganisaatioLabel = (org, language, organisaatiotyyppiMap, t) => {
   const nimi = getFirstLanguageValue(org?.nimi, language);
-  const organisaatiotyyppi = getOrganisaatioTyypit(org)?.[0];
+  const organisaatiotyyppi = org?.organisaatiotyyppiUris[0];
   const tyyppi = organisaatiotyyppiMap[organisaatiotyyppi];
   const jarjestaaUrheilijanAmmKoulutusta = org.jarjestaaUrheilijanAmmKoulutusta
     ? `, ${t('yleiset.urheilijanAmmKoulutus')}`

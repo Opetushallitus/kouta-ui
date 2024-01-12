@@ -8,10 +8,10 @@ import {
   ORGANISAATIOTYYPPI,
 } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { Organisaatio } from '#/src/types/domainTypes';
 import { oneAndOnlyOne } from '#/src/utils';
 import filterTree from '#/src/utils/filterTree';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
-import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 type UseOrganisaatioHierarkiaOptions =
   | {
@@ -21,8 +21,8 @@ type UseOrganisaatioHierarkiaOptions =
     }
   | undefined;
 
-export const defaultFilter = org => {
-  const organisaatiotyypit = getOrganisaatioTyypit(org);
+export const defaultFilter = (org: Organisaatio) => {
+  const organisaatiotyypit = org?.organisaatiotyyppiUris;
 
   const onlyOrganisaatiotyyppi = oneAndOnlyOne(organisaatiotyypit);
 

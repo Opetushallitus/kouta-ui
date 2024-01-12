@@ -13,7 +13,6 @@ import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { getThemeProp } from '#/src/theme';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const StyledBlueBox = styled(Box)`
   background-color: ${getThemeProp('colors.blueLighten4', transparentize(0.7))};
@@ -27,7 +26,7 @@ export const SelectedOrganisaatioBox = ({ organisaatioOid }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const nimi = getFirstLanguageValue(organisaatio?.nimi);
 
-  const tyypit = getOrganisaatioTyypit(organisaatio);
+  const tyypit = organisaatio?.organisaatiotyyppiUris;
 
   const orgEntityType = match(tyypit)
     .when(

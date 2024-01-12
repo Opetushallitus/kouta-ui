@@ -14,8 +14,8 @@ import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithR
 import getUserRoles from '#/src/utils/getUserRoles';
 import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
 
-export const useOrganisaatio = oid => {
-  const { organisaatiot, ...rest } = useOrganisaatiot(oid);
+export const useOrganisaatio = (oid, options = {}) => {
+  const { organisaatiot, ...rest } = useOrganisaatiot(oid, options);
 
   return { organisaatio: organisaatiot?.[0], ...rest };
 };

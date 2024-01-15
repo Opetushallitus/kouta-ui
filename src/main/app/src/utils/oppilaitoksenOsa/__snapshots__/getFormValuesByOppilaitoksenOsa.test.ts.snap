@@ -29,7 +29,11 @@ exports[`getFormValuesByOppilaitoksenOsa returns correct form values given oppil
       "sv": "www.verkkosivu.sv",
     },
   },
-  "teemakuva": undefined,
+  "teemakuvaOrEsittelyvideo": {
+    "esittelyvideoUrl": {},
+    "mediaType": "teemakuva",
+    "teemakuvaUrl": undefined,
+  },
   "tila": "tallennettu",
 }
 `;

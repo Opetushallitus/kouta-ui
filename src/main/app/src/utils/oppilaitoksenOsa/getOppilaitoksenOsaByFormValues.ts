@@ -17,7 +17,7 @@ export const getOppilaitoksenOsaByFormValues = ({
     perustiedot,
     esittely,
     kieliversiot,
-    teemakuva,
+    teemakuvaOrEsittelyvideo,
     esikatselu = false,
     hakijapalveluidenYhteystiedot: hy,
   } = values;
@@ -25,12 +25,31 @@ export const getOppilaitoksenOsaByFormValues = ({
   const hpy = Object.values(kieleistykset(hy?.nimi)).some(
     n => String(n).trim().length > 0
   );
+  const composeEsittelyvideoNimiObject = (
+    videoUrls: object
+  ): object | undefined => {
+    const languages = Object.keys(videoUrls).filter(lang =>
+      Boolean(videoUrls[lang])
+    );
+    return languages.length > 0
+      ? languages.reduce((obj, lang) => {
+          return {
+            ...obj,
+            [lang]: 'esittelyvideo',
+          };
+        }, {})
+      : undefined;
+  };
   return {
     oppilaitosOid,
     tila,
     muokkaaja,
     kielivalinta: kieliversiot,
-    teemakuva,
+    teemakuva:
+      teemakuvaOrEsittelyvideo?.mediaType === 'teemakuva' &&
+      teemakuvaOrEsittelyvideo?.teemakuvaUrl
+        ? teemakuvaOrEsittelyvideo?.teemakuvaUrl
+        : undefined,
     esikatselu,
     metadata: {
       esittely: pickAndSerializeTranslations(esittely, kieliversiot),
@@ -68,6 +87,18 @@ export const getOppilaitoksenOsaByFormValues = ({
             puhelinnumero: kieleistykset(hy.puhelinnumero),
           }
         : null,
+      esittelyvideo:
+        teemakuvaOrEsittelyvideo?.mediaType === 'esittelyvideo' &&
+        Object.values(teemakuvaOrEsittelyvideo?.esittelyvideoUrl || {}).filter(
+          Boolean
+        ).length > 0
+          ? {
+              url: kieleistykset(teemakuvaOrEsittelyvideo?.esittelyvideoUrl),
+              nimi: composeEsittelyvideoNimiObject(
+                teemakuvaOrEsittelyvideo?.esittelyvideoUrl || {}
+              ),
+            }
+          : undefined,
     },
   };
 };

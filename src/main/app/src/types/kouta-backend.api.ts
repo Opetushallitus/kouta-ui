@@ -3235,6 +3235,8 @@ export interface components {
     OppilaitoksenOsaMetadata: {
       /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
       wwwSivu?: components['schemas']['NimettyLinkki'];
+      /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+      esittelyvideo?: components['schemas']['NimettyLinkki'];
       /** @description Oppilaitoksen Opintopolussa näytettävät hakijapalveluiden yhteystiedot */
       hakijapalveluidenYhteystiedot?: components['schemas']['Yhteystieto'];
       /** @description Oppilaitoksen osan Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */

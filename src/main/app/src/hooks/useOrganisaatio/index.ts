@@ -26,10 +26,10 @@ export const useOrganisaatiot = (oids, options = {}) => {
     getOrganisaatiotByOids,
     { oids: _.castArray(oids) },
     {
-      ...LONG_CACHE_QUERY_OPTIONS,
-      enabled: !_.isEmpty(oids),
-      retry: 0,
       ...options,
+      ...LONG_CACHE_QUERY_OPTIONS,
+      enabled: !_.isEmpty(oids) && options.enabled,
+      retry: 0,
     }
   );
 

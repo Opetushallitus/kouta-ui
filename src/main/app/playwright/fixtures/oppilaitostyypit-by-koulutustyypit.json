@@ -1,0 +1,233 @@
+{
+  "koulutustyypitToOppilaitostyypit": [
+    {
+      "koulutustyyppi": "lk",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_64#1",
+        "oppilaitostyyppi_15#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_19#1",
+        "oppilaitostyyppi_65#1",
+        "oppilaitostyyppi_66#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "kk-opintojakso",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_45#1",
+        "oppilaitostyyppi_42#1",
+        "oppilaitostyyppi_41#1",
+        "oppilaitostyyppi_43#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_46#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "tuva",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_24#1",
+        "oppilaitostyyppi_15#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_11#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_19#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_21#1",
+        "oppilaitostyyppi_12#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "erikoistumiskoulutus",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_42#1",
+        "oppilaitostyyppi_41#1",
+        "oppilaitostyyppi_43#1",
+        "oppilaitostyyppi_46#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "amm",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_61#1",
+        "oppilaitostyyppi_93#1",
+        "oppilaitostyyppi_64#1",
+        "oppilaitostyyppi_24#1",
+        "oppilaitostyyppi_23#1",
+        "oppilaitostyyppi_99#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_65#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_28#1",
+        "oppilaitostyyppi_66#1",
+        "oppilaitostyyppi_29#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "amm-tutkinnon-osa",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_61#1",
+        "oppilaitostyyppi_93#1",
+        "oppilaitostyyppi_24#1",
+        "oppilaitostyyppi_23#1",
+        "oppilaitostyyppi_99#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_65#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_66#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "amk",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_41#1",
+        "oppilaitostyyppi_28#1",
+        "oppilaitostyyppi_46#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "vapaa-sivistystyo-muu",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_64#1",
+        "oppilaitostyyppi_99#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_65#1",
+        "oppilaitostyyppi_66#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "vapaa-sivistystyo-opistovuosi",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_64#1",
+        "oppilaitostyyppi_99#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_65#1",
+        "oppilaitostyyppi_66#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "amm-ope-erityisope-ja-opo",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_41#1",
+        "oppilaitostyyppi_46#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "amm-muu",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_61#1",
+        "oppilaitostyyppi_93#1",
+        "oppilaitostyyppi_24#1",
+        "oppilaitostyyppi_23#1",
+        "oppilaitostyyppi_99#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_65#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_28#1",
+        "oppilaitostyyppi_66#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "amm-osaamisala",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_61#1",
+        "oppilaitostyyppi_93#1",
+        "oppilaitostyyppi_24#1",
+        "oppilaitostyyppi_23#1",
+        "oppilaitostyyppi_99#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_65#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_66#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "taiteen-perusopetus",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_61#1",
+        "oppilaitostyyppi_64#1",
+        "oppilaitostyyppi_15#1",
+        "oppilaitostyyppi_99#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_11#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_19#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_21#1",
+        "oppilaitostyyppi_01#1",
+        "oppilaitostyyppi_12#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "muu",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_xx#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "kk-opintokokonaisuus",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_45#1",
+        "oppilaitostyyppi_42#1",
+        "oppilaitostyyppi_41#1",
+        "oppilaitostyyppi_43#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_46#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "erikoislaakari",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_42#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "telma",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_21#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "aikuisten-perusopetus",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_64#1",
+        "oppilaitostyyppi_15#1",
+        "oppilaitostyyppi_63#1",
+        "oppilaitostyyppi_11#1",
+        "oppilaitostyyppi_62#1",
+        "oppilaitostyyppi_19#1",
+        "oppilaitostyyppi_22#1",
+        "oppilaitostyyppi_21#1",
+        "oppilaitostyyppi_12#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "ope-pedag-opinnot",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_42#1"
+      ]
+    },
+    {
+      "koulutustyyppi": "yo",
+      "oppilaitostyypit": [
+        "oppilaitostyyppi_45#1",
+        "oppilaitostyyppi_42#1",
+        "oppilaitostyyppi_43#1"
+      ]
+    }
+  ]
+}

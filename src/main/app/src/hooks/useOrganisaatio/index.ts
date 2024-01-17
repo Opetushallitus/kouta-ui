@@ -1,17 +1,13 @@
 import _ from 'lodash';
 
-import {
-  AMMATILLISET_OPPILAITOSTYYPIT,
-  KORKEAKOULU_OPPILAITOSTYYPIT,
-  LUKIO_OPPILAITOSTYYPIT,
-  LONG_CACHE_QUERY_OPTIONS,
-} from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { Organisaatio } from '#/src/types/domainTypes';
 import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
 import getUserRoles from '#/src/utils/getUserRoles';
+import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
 import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
 
 export const useOrganisaatio = (oid, options = {}) => {
@@ -36,69 +32,117 @@ export const useOrganisaatiot = (oids, options = {}) => {
   return { ...rest, organisaatiot };
 };
 
-// TODO: Tässä pitäisi käyttää koulutustyyppi->oppilaitostyyppi mäppäystä kouta-backendistä (useOppilaitostyypitByKoulutustyyppi)
-const oppilaitostyyppiToKoulutustyyppi = o =>
-  _.cond([
-    [ot => AMMATILLISET_OPPILAITOSTYYPIT.includes(ot), _ => 'Amm'],
-    [ot => KORKEAKOULU_OPPILAITOSTYYPIT.includes(ot), _ => 'Yo'],
-    [ot => LUKIO_OPPILAITOSTYYPIT.includes(ot), _ => 'Lk'],
-  ])(o?.oppilaitostyyppiUri);
+const organisaationKoulutustyypit = (o, oppilaitostyypitByKoulutustyypit) => {
+  const oppilaitostyyppi = o?.oppilaitostyyppiUri?.replace(/#\d/i, '');
+
+  return _.filter(oppilaitostyypitByKoulutustyypit, obj =>
+    obj.oppilaitostyypit.includes(oppilaitostyyppi)
+  );
+};
 
 const isParent = parentOid => org => org?.parentOids?.includes(parentOid);
 
 const isChild = childOid => org =>
   org.oid === childOid || _.head(org.children?.filter(isChild(childOid)));
 
-const isSameKoulutustyyppi = koulutustyyppi => org =>
-  oppilaitostyyppiToKoulutustyyppi(org) === koulutustyyppi ||
-  _.head(org.children?.filter(isSameKoulutustyyppi(koulutustyyppi)));
+const hasSameOppilaitostyyppiAsOneOfOrgsKoulutustyyppis =
+  oppilaitoksenKoulutustyypit => org => {
+    const oppilaitostyypit = oppilaitoksenKoulutustyypit.flatMap(
+      obj => obj.oppilaitostyypit
+    );
+
+    return (
+      _.some(
+        oppilaitostyypit,
+        oppilaitostyyppi => oppilaitostyyppi === org.oppilaitostyyppiUri
+      ) ||
+      _.head(
+        org.children?.filter(
+          hasSameOppilaitostyyppiAsOneOfOrgsKoulutustyyppis(
+            oppilaitoksenKoulutustyypit
+          )
+        )
+      )
+    );
+  };
 
 export const isSameKoulutustyyppiWithOrganisaatio = (
   organisaatio,
-  hierarkia
+  hierarkia,
+  oppilaitostyypitByKoulutustyypit
 ) => {
-  const koulutustyyppi = oppilaitostyyppiToKoulutustyyppi(organisaatio);
+  const oppilaitoksenKoulutustyypit = organisaationKoulutustyypit(
+    organisaatio,
+    oppilaitostyypitByKoulutustyypit
+  );
 
   return (
-    koulutustyyppi &&
-    _.head(hierarkia?.filter(isSameKoulutustyyppi(koulutustyyppi)))
+    !_.isEmpty(oppilaitoksenKoulutustyypit) &&
+    _.head(
+      hierarkia?.filter(
+        hasSameOppilaitostyyppiAsOneOfOrgsKoulutustyyppis(
+          oppilaitoksenKoulutustyypit
+        )
+      )
+    )
   );
 };
 
-export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
+export const usePreferredOrganisaatio = (
+  creatorOrganisaatioOid,
+  creatorOrganisaatioIsLoading
+) => {
   const user = useAuthorizedUser();
   const roles = getUserRoles(user);
   const orgOids = _.uniq(getUserOrganisaatiotWithRoles(user, roles));
   const { organisaatiot } = useOrganisaatiot(orgOids);
-  const { hierarkia } = useOrganisaatioHierarkia(creatorOrganisaatioOid, {
-    skipParents: false,
-  });
-  const firstSameKoulutustyyppiOrganisation =
-    organisaatiot &&
-    hierarkia &&
-    _.head(
-      organisaatiot
-        .filter(org => isSameKoulutustyyppiWithOrganisaatio(org, hierarkia))
-        .map(_ => _.oid)
-    );
-  const firstChildOrganisation =
-    organisaatiot &&
-    hierarkia &&
-    _.head(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
-  const firstParentOrganisation =
-    organisaatiot &&
-    hierarkia &&
-    _.head(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
+  const { hierarkia, isLoading: hierarkiaIsLoading } = useOrganisaatioHierarkia(
+    creatorOrganisaatioOid,
+    {
+      skipParents: false,
+    }
+  );
 
-  const preferredOrganisaatio =
-    organisaatiot &&
-    hierarkia &&
-    (firstSameKoulutustyyppiOrganisation ||
-      firstChildOrganisation ||
-      firstParentOrganisation ||
-      creatorOrganisaatioOid);
+  const { oppilaitostyypitByKoulutustyypit, isLoading: loadingMappings } =
+    useOppilaitostyypitByKoulutustyypit();
 
-  return { preferredOrganisaatio };
+  if (loadingMappings || creatorOrganisaatioIsLoading || hierarkiaIsLoading) {
+    return {};
+  } else {
+    const firstSameKoulutustyyppiOrganisation =
+      organisaatiot &&
+      hierarkia &&
+      _.head(
+        organisaatiot
+          .filter(org =>
+            isSameKoulutustyyppiWithOrganisaatio(
+              org,
+              hierarkia,
+              oppilaitostyypitByKoulutustyypit
+            )
+          )
+          .map(_ => _.oid)
+      );
+
+    const firstChildOrganisation =
+      organisaatiot &&
+      hierarkia &&
+      _.head(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
+    const firstParentOrganisation =
+      organisaatiot &&
+      hierarkia &&
+      _.head(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
+
+    const preferredOrganisaatio =
+      organisaatiot &&
+      hierarkia &&
+      (firstSameKoulutustyyppiOrganisation ||
+        firstChildOrganisation ||
+        firstParentOrganisation ||
+        creatorOrganisaatioOid);
+
+    return { preferredOrganisaatio };
+  }
 };
 
 export default useOrganisaatio;

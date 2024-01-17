@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { without } from 'lodash';
 
 export const LANGUAGES = ['fi', 'sv', 'en'];
 
@@ -94,7 +94,7 @@ export const TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
 ];
 
-export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
+export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = without(
   KOULUTUSTYYPIT,
   ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT
 );
@@ -385,27 +385,6 @@ export const ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.TUVA,
   KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
   KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
-];
-
-export const AMMATILLISET_OPPILAITOSTYYPIT = [
-  'oppilaitostyyppi_21', // Ammatilliset oppilaitokset
-  'oppilaitostyyppi_22', // Ammatilliset erityisoppilaitokset
-  'oppilaitostyyppi_23', // Ammatilliset erikoisoppilaitokset
-  'oppilaitostyyppi_24', // Ammatilliset aikuiskoulutuskeskukset
-  'oppilaitostyyppi_28', // Palo-, poliisi- ja vartiointialojen oppilaitokset
-  'oppilaitostyyppi_29', // Sotilasalan ammatilliset oppilaitokset
-];
-
-export const KORKEAKOULU_OPPILAITOSTYYPIT = [
-  'oppilaitostyyppi_41', // Ammattikorkeakoulut
-  'oppilaitostyyppi_42', // Yliopistot
-  'oppilaitostyyppi_43', // Sotilaskorkeakoulut
-  'oppilaitostyyppi_45', // Lastentarhanopettajaopistot
-];
-
-export const LUKIO_OPPILAITOSTYYPIT = [
-  'oppilaitostyyppi_15#1', // Lukiot
-  'oppilaitostyyppi_19#1', // Perus- ja lukioasteen koulut
 ];
 
 export enum MaaraTyyppi {

@@ -99,6 +99,11 @@ export const stubCommonRoutes = async (page: Page) => {
     fixtureFromFile('valintakokeentyyppi-koodisto.json')
   );
 
+  await page.route(
+    '**/kouta-backend/koulutus/listOppilaitostyypitByKoulutustyypit*',
+    fixtureFromFile('oppilaitostyypit-by-koulutustyypit.json')
+  );
+
   await stubKayttoOikeusOmatTiedot(page);
   await mocksFromFile(page, 'common.mocks.json');
 };

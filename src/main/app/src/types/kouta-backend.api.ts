@@ -87,13 +87,6 @@ export interface paths {
      */
     post: operations["Tallenna logo"];
   };
-  "/raportointi/koulutukset": {
-    /**
-     * Tallentaa koulutukset siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["reportKoulutukset"];
-  };
   "/indexer/pistehistoria": {
     /**
      * Palauttaa tarjoajan ja hakukohdekoodin tai lukiolinjakoodin yhdistelmään liittyvät pistetiedot
@@ -3369,7 +3362,7 @@ export interface components {
        *     "en": "Lapsiorganisaation nimi en"
        *   },
        *   "kieletUris": [
-       *     "oppilaitoksenopetuskieli_1#1"
+       *     "oppilaitoksenopetuskieli_1"
        *   ]
        * }
        */
@@ -4015,29 +4008,6 @@ export interface operations {
         "image/jpeg": string;
         "image/png": string;
         "image/svg+xml": string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallentaa koulutukset siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  reportKoulutukset: {
-    parameters: {
-      query?: {
-        /** @example Thu, 1 Jan 1970 00:00:00 GMT */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example Thu, 1 Jan 1970 00:00:00 GMT
-         */
-        endTime?: string;
       };
     };
     responses: {

@@ -123,8 +123,9 @@ export const YhteystiedotSection = ({
   const { t } = useTranslation();
 
   const yhteystiedot = oppilaitos?._enrichedData?.organisaatio?.yhteystiedot;
+  const organisaationNimet = oppilaitos?._enrichedData?.organisaatio?.nimi;
 
-  const nimi = getFirstLanguageValue(yhteystiedot?.nimi, language);
+  const nimi = getFirstLanguageValue(organisaationNimet, language);
 
   const { koodi: kayntiosoitePostinumeroKoodi } = useKoodi(
     yhteystiedot?.kayntiosoite?.postinumeroKoodiUri

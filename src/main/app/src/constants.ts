@@ -274,6 +274,8 @@ export const EPERUSTE_STATUS_VOIMASSA = 'voimassa';
 
 export const EPERUSTE_STATUS_LAADINNASSA = 'laadinnassa';
 
+export const EPERUSTE_STATUS_PAATTYNYT = 'paattynyt';
+
 export const ALLOWED_HTML_TAGS = [
   'b',
   'blockquote',

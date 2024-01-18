@@ -174,7 +174,8 @@
     "ePerusteStatus": {
       "voimassa": "Voimassa",
       "tuleva": "Tuleva",
-      "laadinnassa": "Laadinnassa"
+      "laadinnassa": "Laadinnassa",
+      "paattynyt": "Päättynyt"
     },
     "riippuvuusEiJulkaistu": "Liitetty {{entity, unCapitalize}} ei ole \"Julkaistu\"-tilassa.",
     "onJulkinen": "{{entity}} on julkinen",

@@ -6,7 +6,7 @@ import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
-import TeemakuvaSection from '#/src/components/TeemakuvaSection';
+import { TeemakuvaOrEsittelyvideoSection } from '#/src/components/TeemakuvaOrEsittelyvideoSection';
 import {
   YhteystietoSection,
   YhteystiedotSection,
@@ -51,9 +51,10 @@ const OppilaitosForm = ({
       />
 
       <FormCollapse
-        section="teemakuva"
+        languages={languageTabs}
+        section="teemakuvaOrEsittelyvideo"
         header={t('oppilaitoslomake.oppilaitoksenTeemakuva')}
-        Component={TeemakuvaSection}
+        Component={TeemakuvaOrEsittelyvideoSection}
       />
 
       <FormCollapse

@@ -21,6 +21,7 @@ import useKoodisto from '#/src/hooks/useKoodisto';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import JarjestaaUrheilijanAmmatillistaKoulutustaField from '#/src/pages/hakukohde/HakukohdeForm/JarjestaaUrheilijanAmmatillistaKoulutustaField';
+import { Organisaatio } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { useOppilaitoksetByOids } from '#/src/utils/hakukohde/getOppilaitoksetByOids';
@@ -74,7 +75,7 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
     [hierarkia]
   );
 
-  const hierarkiaOids = flattenedHierarkia.map(org => org.oid);
+  const hierarkiaOids = flattenedHierarkia.map((org: Organisaatio) => org.oid);
 
   const { organisaatio: selectedOrganisaatio, isLoading: isSelectedLoading } =
     useOrganisaatio(

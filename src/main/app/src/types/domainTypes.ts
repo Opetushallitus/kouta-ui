@@ -30,7 +30,9 @@ export type SisaltoTaulukkoModel = components['schemas']['SisaltoTaulukko'];
 
 export type Kielivalinta = Array<components['schemas']['Kieli']>;
 
-export type Organisaatio = components['schemas']['Organisaatio'];
+export type Organisaatio = components['schemas']['Organisaatio'] & {
+  jarjestaaUrheilijanAmmKoulutusta: boolean | null;
+};
 
 export type Osoite = components['schemas']['Osoite'];
 

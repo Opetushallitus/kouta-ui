@@ -206,8 +206,15 @@ const OrganisaatioSection = ({
   );
 };
 
-export const PerustiedotSection = ({ language, name, oppilaitos }) => {
-  const organisaatio = oppilaitos?._enrichedData?.organisaatio;
+export const PerustiedotSection = ({
+  language,
+  name,
+  organisaatio,
+}: {
+  language: LanguageCode;
+  name: string;
+  organisaatio?: Organisaatio;
+}) => {
   const { t } = useTranslation();
 
   return (

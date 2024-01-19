@@ -27,11 +27,6 @@ type Yhteystieto = {
   verkkosivuTeksti: TranslatedField<string>;
 };
 
-type Osoite = {
-  osoite: TranslatedField<string>;
-  postinumeroKoodiUri: string;
-};
-
 type SelectOption<T = string | undefined> = { label?: string; value: T };
 
 type SelectOptions = Array<SelectOption<string>>;

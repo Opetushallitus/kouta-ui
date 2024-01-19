@@ -17,6 +17,8 @@ import {
   getKielistettyOsoite,
 } from '#/src/utils/languageUtils';
 
+import { Organisaatio } from '../types/domainTypes';
+
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
 
@@ -118,12 +120,16 @@ const Yhteystieto = ({ label, value, id }) => (
 export const YhteystiedotSection = ({
   language = 'fi',
   organisaatioOid,
-  oppilaitos,
+  organisaatio,
+}: {
+  language: LanguageCode;
+  organisaatioOid: string;
+  organisaatio: Organisaatio;
 }) => {
   const { t } = useTranslation();
 
-  const yhteystiedot = oppilaitos?._enrichedData?.organisaatio?.yhteystiedot;
-  const organisaationNimet = oppilaitos?._enrichedData?.organisaatio?.nimi;
+  const yhteystiedot = organisaatio?.yhteystiedot;
+  const organisaationNimet = organisaatio?.nimi;
 
   const nimi = getFirstLanguageValue(organisaationNimet, language);
 

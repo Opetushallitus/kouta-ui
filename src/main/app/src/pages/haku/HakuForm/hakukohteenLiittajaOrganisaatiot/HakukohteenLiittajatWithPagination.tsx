@@ -7,6 +7,7 @@ import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierar
 import Pagination from '#/src/components/Pagination';
 import { Switch } from '#/src/components/Switch';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
+import { useFormIsDisabled } from '#/src/contexts/FormContext';
 import { useItemsToShow } from '#/src/hooks/useItemsToShow';
 import { Organisaatio } from '#/src/types/domainTypes';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
@@ -28,9 +29,10 @@ export const HakukohteenLiittajatWithPagination = ({
   language,
 }: Props) => {
   const { t } = useTranslation();
+  const readOnly = useFormIsDisabled();
   const [currentPage, setCurrentPage] = useState(0);
   const [usedNimi, setUsedNimi] = useState('');
-  const [naytaVainValitut, setNaytaVainValitut] = useState(false);
+  const [naytaVainValitut, setNaytaVainValitut] = useState(readOnly);
   const filteredLiittajaOrganisaatiot = useItemsToShow({
     organisaatiot: liittajaOrganisaatiot,
     value,
@@ -74,6 +76,7 @@ export const HakukohteenLiittajatWithPagination = ({
       <Box display="flex" alignItems="flex-start" flexDirection="column">
         <Box width={1} mb={2}>
           <Input
+            disabled={readOnly}
             placeholder={t('hakulomake.haeOrganisaationNimella')}
             value={usedNimi}
             onChange={e => {
@@ -84,7 +87,8 @@ export const HakukohteenLiittajatWithPagination = ({
         </Box>
         <Box mb={2}>
           <Switch
-            checked={naytaVainValitut}
+            disabled={readOnly}
+            checked={readOnly ? true : naytaVainValitut}
             onChange={e => setNaytaVainValitut(e.target.checked)}
           >
             {t('hakulomake.naytaVainValitut')}
@@ -97,6 +101,7 @@ export const HakukohteenLiittajatWithPagination = ({
           onChange={onOrgsChange}
           value={value}
           disableAutoSelect={false}
+          getIsDisabled={() => readOnly}
         />
       </Box>
       <Pagination

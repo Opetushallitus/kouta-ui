@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { OPH_PAAKAYTTAJA_ROLE } from '#/src/constants';
+import { Organisaatio } from '#/src/types/domainTypes';
 
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
 import isOid from './isOid';

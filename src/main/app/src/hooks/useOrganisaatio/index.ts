@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { castArray, isEmpty, head, filter, some, uniq } from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
@@ -20,11 +20,11 @@ export const useOrganisaatiot = (oids, options = {}) => {
   const { data: organisaatiot, ...rest } = useApiQuery<Array<Organisaatio>>(
     'getOrganisaatiot',
     getOrganisaatiotByOids,
-    { oids: _.castArray(oids) },
+    { oids: castArray(oids) },
     {
       ...options,
       ...LONG_CACHE_QUERY_OPTIONS,
-      enabled: !_.isEmpty(oids) && options.enabled,
+      enabled: !isEmpty(oids) && options.enabled,
       retry: 0,
     }
   );
@@ -35,7 +35,7 @@ export const useOrganisaatiot = (oids, options = {}) => {
 const organisaationKoulutustyypit = (o, oppilaitostyypitByKoulutustyypit) => {
   const oppilaitostyyppi = o?.oppilaitostyyppiUri?.replace(/#\d/i, '');
 
-  return _.filter(oppilaitostyypitByKoulutustyypit, obj =>
+  return filter(oppilaitostyypitByKoulutustyypit, obj =>
     obj.oppilaitostyypit.includes(oppilaitostyyppi)
   );
 };
@@ -43,7 +43,7 @@ const organisaationKoulutustyypit = (o, oppilaitostyypitByKoulutustyypit) => {
 const isParent = parentOid => org => org?.parentOids?.includes(parentOid);
 
 const isChild = childOid => org =>
-  org.oid === childOid || _.head(org.children?.filter(isChild(childOid)));
+  org.oid === childOid || head(org.children?.filter(isChild(childOid)));
 
 const hasSameOppilaitostyyppiAsOneOfOrgsKoulutustyyppis =
   oppilaitoksenKoulutustyypit => org => {
@@ -52,11 +52,11 @@ const hasSameOppilaitostyyppiAsOneOfOrgsKoulutustyyppis =
     );
 
     return (
-      _.some(
+      some(
         oppilaitostyypit,
         oppilaitostyyppi => oppilaitostyyppi === org.oppilaitostyyppiUri
       ) ||
-      _.head(
+      head(
         org.children?.filter(
           hasSameOppilaitostyyppiAsOneOfOrgsKoulutustyyppis(
             oppilaitoksenKoulutustyypit
@@ -77,8 +77,8 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
   );
 
   return (
-    !_.isEmpty(oppilaitoksenKoulutustyypit) &&
-    _.head(
+    isEmpty(oppilaitoksenKoulutustyypit) &&
+    head(
       hierarkia?.filter(
         hasSameOppilaitostyyppiAsOneOfOrgsKoulutustyyppis(
           oppilaitoksenKoulutustyypit
@@ -94,7 +94,7 @@ export const usePreferredOrganisaatio = (
 ) => {
   const user = useAuthorizedUser();
   const roles = getUserRoles(user);
-  const orgOids = _.uniq(getUserOrganisaatiotWithRoles(user, roles));
+  const orgOids = uniq(getUserOrganisaatiotWithRoles(user, roles));
   const { organisaatiot } = useOrganisaatiot(orgOids);
   const { hierarkia, isLoading: hierarkiaIsLoading } = useOrganisaatioHierarkia(
     creatorOrganisaatioOid,
@@ -112,7 +112,7 @@ export const usePreferredOrganisaatio = (
     const firstSameKoulutustyyppiOrganisation =
       organisaatiot &&
       hierarkia &&
-      _.head(
+      head(
         organisaatiot
           .filter(org =>
             isSameKoulutustyyppiWithOrganisaatio(
@@ -127,11 +127,11 @@ export const usePreferredOrganisaatio = (
     const firstChildOrganisation =
       organisaatiot &&
       hierarkia &&
-      _.head(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
+      head(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
     const firstParentOrganisation =
       organisaatiot &&
       hierarkia &&
-      _.head(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
+      head(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
 
     const preferredOrganisaatio =
       organisaatiot &&

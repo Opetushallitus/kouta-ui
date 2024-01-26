@@ -3224,11 +3224,11 @@ export interface components {
     };
     OppilaitosMetadata: {
       /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivu?: components['schemas']['NimettyLinkki'];
+      wwwSivu?: components["schemas"]["NimettyLinkki"];
       /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      esittelyvideo?: components['schemas']['NimettyLinkki'];
-      /** @description Opintopolussa käytettävät oppilaitoksen sosiaalisen median kanavat. */
-      some?: Map<string, string>;
+      esittelyvideo?: components["schemas"]["NimettyLinkki"];
+      /** @description Opintopolussa näytettävien sosiaalisen median kanavien osoitteita. Koodiurit toimivat avaimena. */
+      some?: Record<string, never>;
       /** @description Oppilaitokseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
       tietoaOpiskelusta?: components["schemas"]["TietoaOpiskelusta"][];
       /** @description Oppilaitoksen Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
@@ -3257,9 +3257,9 @@ export interface components {
     };
     OppilaitoksenOsaMetadata: {
       /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivu?: components['schemas']['NimettyLinkki'];
+      wwwSivu?: components["schemas"]["NimettyLinkki"];
       /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      esittelyvideo?: components['schemas']['NimettyLinkki'];
+      esittelyvideo?: components["schemas"]["NimettyLinkki"];
       /** @description Oppilaitoksen Opintopolussa näytettävät hakijapalveluiden yhteystiedot */
       hakijapalveluidenYhteystiedot?: components["schemas"]["Yhteystieto"];
       /** @description Oppilaitoksen osan Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
@@ -4228,7 +4228,7 @@ export interface operations {
       query?: {
         /**
          * @description Yksittäisen haun oid tai "defaults" viiden edellisen toisen asteen yhteishaun synkronoimiseksi (2023)
-         * @example 1.2.246.562.29.54537554997
+         * @example 1.2.246.562.29.00000000000000021303
          */
         hakuOid?: Record<string, never>;
       };
@@ -4236,7 +4236,21 @@ export interface operations {
     responses: {
       /** @description Ok */
       200: {
-        content: never;
+        content: {
+          "text/plain": string;
+        };
+      };
+      /** @description Pakollinen parametri puuttuu */
+      400: {
+        content: {
+          "text/plain": string;
+        };
+      };
+      /** @description Palvelinvirhe */
+      500: {
+        content: {
+          "text/plain": string;
+        };
       };
     };
   };

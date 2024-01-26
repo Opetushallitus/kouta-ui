@@ -59,7 +59,11 @@ exports[`getFormValuesByOppilaitos returns correct form values given oppilaitos 
     },
     "yksikoita": 2,
   },
-  "teemakuva": undefined,
+  "teemakuvaOrEsittelyvideo": {
+    "esittelyvideoUrl": {},
+    "mediaType": "teemakuva",
+    "teemakuvaUrl": undefined,
+  },
   "tietoa": {
     "osiot": [
       {

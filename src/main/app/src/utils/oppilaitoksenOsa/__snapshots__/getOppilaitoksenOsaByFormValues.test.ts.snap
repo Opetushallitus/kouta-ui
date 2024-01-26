@@ -12,6 +12,7 @@ exports[`getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given
       "fi": "<p><em>Fi esittely</em></p>",
       "sv": "<p><em>Sv esittely</em></p>",
     },
+    "esittelyvideo": undefined,
     "hakijapalveluidenYhteystiedot": null,
     "jarjestaaUrheilijanAmmKoulutusta": false,
     "kampus": {

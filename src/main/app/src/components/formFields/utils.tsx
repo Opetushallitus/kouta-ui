@@ -4,7 +4,11 @@ import _ from 'lodash';
 
 import { simpleMapProps } from '#/src/components/formFields';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
-import { FormControl, FormLabel } from '#/src/components/virkailija';
+import {
+  FormControl,
+  FormLabel,
+  Typography,
+} from '#/src/components/virkailija';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import { useFormIsDisabled } from '#/src/contexts/FormContext';
 import { getFieldNameWithoutLanguage } from '#/src/utils';
@@ -14,6 +18,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
     const {
       disabled,
       label = '',
+      info = '',
       helperText,
       meta,
       required,
@@ -48,6 +53,16 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
             label ? (
               <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
                 {`${label}${required ? ' *' : ''}`}
+                {info ? (
+                  <Typography
+                    variant="secondary"
+                    as="div"
+                    marginBottom={1}
+                    marginTop={1}
+                  >
+                    {info}
+                  </Typography>
+                ) : undefined}
               </FormLabel>
             ) : undefined
           }

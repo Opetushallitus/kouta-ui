@@ -3224,9 +3224,11 @@ export interface components {
     };
     OppilaitosMetadata: {
       /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivu?: components["schemas"]["NimettyLinkki"];
-      /** @description Opintopolussa näytettävien sosiaalisen median kanavien osoitteita. Koodiurit toimivat avaimena. */
-      some?: Record<string, never>;
+      wwwSivu?: components['schemas']['NimettyLinkki'];
+      /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+      esittelyvideo?: components['schemas']['NimettyLinkki'];
+      /** @description Opintopolussa käytettävät oppilaitoksen sosiaalisen median kanavat. */
+      some?: Map<string, string>;
       /** @description Oppilaitokseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
       tietoaOpiskelusta?: components["schemas"]["TietoaOpiskelusta"][];
       /** @description Oppilaitoksen Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
@@ -3255,7 +3257,9 @@ export interface components {
     };
     OppilaitoksenOsaMetadata: {
       /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivu?: components["schemas"]["NimettyLinkki"];
+      wwwSivu?: components['schemas']['NimettyLinkki'];
+      /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+      esittelyvideo?: components['schemas']['NimettyLinkki'];
       /** @description Oppilaitoksen Opintopolussa näytettävät hakijapalveluiden yhteystiedot */
       hakijapalveluidenYhteystiedot?: components["schemas"]["Yhteystieto"];
       /** @description Oppilaitoksen osan Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */

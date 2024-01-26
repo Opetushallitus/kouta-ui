@@ -26,6 +26,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     wwwSivu,
     some,
     jarjestaaUrheilijanAmmKoulutusta,
+    esittelyvideo,
   } = metadata;
 
   return {
@@ -77,6 +78,13 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       some: some || {},
       jarjestaaUrheilijanAmmKoulutusta,
     },
-    teemakuva,
+    teemakuvaOrEsittelyvideo: {
+      mediaType:
+        _.isString(teemakuva) || _.isEmpty(esittelyvideo?.url)
+          ? 'teemakuva'
+          : 'esittelyvideo',
+      teemakuvaUrl: teemakuva,
+      esittelyvideoUrl: esittelyvideo?.url || {},
+    },
   };
 };

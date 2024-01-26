@@ -14,6 +14,14 @@ exports[`getOppilaitosByFormValues returns correct oppilaitos given form values 
       "fi": "<p><em>Fi esittely</em></p>",
       "sv": "<p><em>Sv esittely</em></p>",
     },
+    "esittelyvideo": {
+      "nimi": {
+        "fi": "esittelyvideo",
+      },
+      "url": {
+        "fi": "https://foo.bar",
+      },
+    },
     "hakijapalveluidenYhteystiedot": {
       "kayntiosoite": {
         "osoite": {
@@ -89,6 +97,14 @@ exports[`getOppilaitosByFormValues returns only some keys with values on them 1`
     "esittely": {
       "fi": "<p><em>Fi esittely</em></p>",
       "sv": "<p><em>Sv esittely</em></p>",
+    },
+    "esittelyvideo": {
+      "nimi": {
+        "fi": "esittelyvideo",
+      },
+      "url": {
+        "fi": "https://foo.bar",
+      },
     },
     "hakijapalveluidenYhteystiedot": {
       "kayntiosoite": {

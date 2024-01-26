@@ -86,6 +86,13 @@ const oppilaitosFormVals = {
       sv: 'sv@sahkoposti.sv',
     },
   },
+  teemakuvaOrEsittelyvideo: {
+    mediaType: 'esittelyvideo',
+    teemakuvaUrl: undefined,
+    esittelyvideoUrl: {
+      fi: 'https://foo.bar',
+    },
+  },
 };
 
 test('getOppilaitosByFormValues returns correct oppilaitos given form values', () => {

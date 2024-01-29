@@ -85,6 +85,8 @@ export const getKielistettyOsoite = (
   const postinumeroMetadata = arrayToTranslationObject(koodi?.metadata);
   const postitoimipaikka = postinumeroMetadata[language]?.nimi
     ? postinumeroMetadata[language].nimi
+    : postinumeroMetadata['fi']?.nimi
+    ? postinumeroMetadata['fi'].nimi
     : '';
   const kielistettyKatuosoite = getFirstLanguageValue(osoite?.osoite, language);
 

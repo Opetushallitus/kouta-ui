@@ -133,8 +133,12 @@ export const YhteystiedotSection = ({
 
   const nimi = getFirstLanguageValue(organisaationNimet, language);
 
+  const kayntiosoitePostinumeroKoodiUri =
+    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri[language] ||
+    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri['fi'];
+
   const { koodi: kayntiosoitePostinumeroKoodi } = useKoodi(
-    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri
+    kayntiosoitePostinumeroKoodiUri
   );
 
   const kayntiosoiteInSelectedLang = getKielistettyOsoite(
@@ -143,8 +147,11 @@ export const YhteystiedotSection = ({
     language
   );
 
+  const postiosoitePostinumeroKoodiUri =
+    yhteystiedot?.postiosoite?.postinumeroKoodiUri[language] ||
+    yhteystiedot?.postiosoite?.postinumeroKoodiUri['fi'];
   const { koodi: postiosoitePostinumeroKoodi } = useKoodi(
-    yhteystiedot?.postiosoite?.postinumeroKoodiUri
+    postiosoitePostinumeroKoodiUri
   );
 
   const postiosoiteInSelectedLang = getKielistettyOsoite(

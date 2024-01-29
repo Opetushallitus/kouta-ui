@@ -38,15 +38,9 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       ? {
           nimi: hy.nimi || {},
           postiosoite: hy.postiosoite?.osoite || {},
-          postinumero: hy.postiosoite?.postinumeroKoodiUri
-            ? {
-                value: hy.postiosoite.postinumeroKoodiUri,
-              }
-            : null,
+          postinumero: hy.postiosoite?.postinumeroKoodiUri || {},
           kayntiosoite: hy.kayntiosoite?.osoite || {},
-          kayntiosoitePostinumero: hy.kayntiosoite?.postinumeroKoodiUri
-            ? { value: hy.kayntiosoite.postinumeroKoodiUri }
-            : null,
+          kayntiosoitePostinumero: hy.kayntiosoite?.postinumeroKoodiUri || {},
           puhelinnumero: hy.puhelinnumero || {},
           sahkoposti: hy.sahkoposti || {},
         }

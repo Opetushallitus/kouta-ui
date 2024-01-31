@@ -139,6 +139,14 @@ const HakuForm = ({
         />
 
         <FormCollapse
+          section="liittajaorganisaatiot"
+          header={t('hakulomake.hakukohteenliittajaorganisaatiot')}
+          Component={LiittajaOrganisaatiotSection}
+          organisaatioOid={organisaatioOid}
+          haku={hakuProp}
+        />
+
+        <FormCollapse
           section="aikataulut"
           header={t('hakulomake.haunAikataulu')}
           Component={ScheduleSection}
@@ -171,14 +179,6 @@ const HakuForm = ({
           header={t('hakulomake.haunTila')}
           Component={JulkaisutilaField}
           entity={hakuProp}
-        />
-
-        <FormCollapse
-          section="liittajaorganisaatiot"
-          header={t('hakulomake.hakukohteenliittajaorganisaatiot')}
-          Component={LiittajaOrganisaatiotSection}
-          organisaatioOid={organisaatioOid}
-          haku={hakuProp}
         />
 
         {_fp.isFunction(onAttachHakukohde) ? (

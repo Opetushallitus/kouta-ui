@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { SelectValue } from '#/src/types/formTypes';
 import { isNumeric } from '#/src/utils';
 
 import {
@@ -62,6 +63,14 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       : undefined;
   };
 
+  const reduceToKielistettyWithValueStr = (
+    obj: Record<LanguageCode, SelectValue>
+  ) => {
+    return Object.entries(obj || {}).reduce((result, [key, val]) => {
+      return key && val?.value ? { ...result, [key]: val.value } : result;
+    }, {});
+  };
+
   return {
     tila,
     muokkaaja,
@@ -81,15 +90,20 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
               !_.isEmpty(hy.postiosoite) || hy.postinumero
                 ? {
                     osoite: kieleistykset(hy.postiosoite),
-                    postinumeroKoodiUri: hy.postinumero?.value || null,
+                    postinumeroKoodiUri: kieleistykset(
+                      reduceToKielistettyWithValueStr(hy.postinumero)
+                    ),
                   }
                 : null,
             kayntiosoite:
               !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
                 ? {
                     osoite: kieleistykset(hy.kayntiosoite),
-                    postinumeroKoodiUri:
-                      hy.kayntiosoitePostinumero?.value || null,
+                    postinumeroKoodiUri: kieleistykset(
+                      reduceToKielistettyWithValueStr(
+                        hy.kayntiosoitePostinumero
+                      )
+                    ),
                   }
                 : null,
             sahkoposti: kieleistykset(hy.sahkoposti),

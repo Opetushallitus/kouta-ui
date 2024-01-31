@@ -54,13 +54,17 @@
         "osoite": {
           "fi": "Osoite"
         },
-        "postinumeroKoodiUri": "posti_00350#2"
+        "postinumeroKoodiUri": {
+          "fi": "posti_00350#2"
+        }
       },
       "kayntiosoite": {
         "osoite": {
           "fi": "Osoite"
         },
-        "postinumeroKoodiUri": "posti_00350#2"
+        "postinumeroKoodiUri": {
+          "fi": "posti_00350#2"
+        }
       },
       "sahkoposti": {
         "fi": "sahkoposti@sahkoposti.fi"

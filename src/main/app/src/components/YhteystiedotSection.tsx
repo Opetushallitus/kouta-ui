@@ -52,7 +52,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
       <Cell width={6} {...getTestIdProps('postinumero')}>
         <Field
           component={FormFieldPostinumeroSelect}
-          name={`${name}.postinumero`}
+          name={`${name}.postinumero.${language}`}
           label={t('yleiset.postinumero')}
         />
       </Cell>
@@ -72,7 +72,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
       <Cell width={6} {...getTestIdProps('kayntiosoitePostinumero')}>
         <Field
           component={FormFieldPostinumeroSelect}
-          name={`${name}.kayntiosoitePostinumero`}
+          name={`${name}.kayntiosoitePostinumero.${language}`}
           label={t('yleiset.postinumero')}
         />
       </Cell>

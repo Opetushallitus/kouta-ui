@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
+import { SelectValue } from '#/src/types/formTypes';
 
 export const getFormValuesByOppilaitos = oppilaitos => {
   const {
@@ -29,6 +30,12 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     esittelyvideo,
   } = metadata;
 
+  const reduceToKielistettyWithValueField = (obj: SelectValue) => {
+    return Object.entries(obj || {}).reduce((result, [key, val]) => {
+      return { ...result, [key]: { value: val } };
+    }, {});
+  };
+
   return {
     kieliversiot: kielivalinta || [],
     tila,
@@ -38,9 +45,13 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       ? {
           nimi: hy.nimi || {},
           postiosoite: hy.postiosoite?.osoite || {},
-          postinumero: hy.postiosoite?.postinumeroKoodiUri || {},
+          postinumero: reduceToKielistettyWithValueField(
+            hy.postiosoite?.postinumeroKoodiUri
+          ),
           kayntiosoite: hy.kayntiosoite?.osoite || {},
-          kayntiosoitePostinumero: hy.kayntiosoite?.postinumeroKoodiUri || {},
+          kayntiosoitePostinumero: reduceToKielistettyWithValueField(
+            hy.kayntiosoite?.postinumeroKoodiUri
+          ),
           puhelinnumero: hy.puhelinnumero || {},
           sahkoposti: hy.sahkoposti || {},
         }

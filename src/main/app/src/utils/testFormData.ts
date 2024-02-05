@@ -9,7 +9,10 @@ import { HakukohdeFormValues } from '../types/hakukohdeTypes';
 
 const valintaTilaisuus = {
   osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-  postinumero: { value: 'posti_1#1' },
+  postinumero: {
+    fi: { value: 'posti_1#1' },
+    sv: { value: 'posti_1#1' },
+  },
   alkaa: '2019-04-16T08:44',
   paattyy: '2019-04-18T08:44',
   lisatietoja: {

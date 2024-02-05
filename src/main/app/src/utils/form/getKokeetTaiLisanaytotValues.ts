@@ -7,7 +7,7 @@ import {
   Valintakokeet,
 } from '#/src/types/domainTypes';
 import { ValintakokeetValues } from '#/src/types/formTypes';
-import { toSelectValue } from '#/src/utils';
+import { toSelectValue, toKielistettyWithValueField } from '#/src/utils';
 
 export const getTilaisuusValues = ({
   osoite,
@@ -16,9 +16,7 @@ export const getTilaisuusValues = ({
   jarjestamispaikka,
 }: ValintakoetilaisuusModel) => ({
   osoite: osoite?.osoite || {},
-  postinumero: osoite?.postinumeroKoodiUri
-    ? { value: osoite.postinumeroKoodiUri }
-    : undefined,
+  postinumero: toKielistettyWithValueField(osoite?.postinumeroKoodiUri),
   alkaa: aika?.alkaa || '',
   paattyy: aika?.paattyy || '',
   lisatietoja: _.mapValues(lisatietoja || {}, parseEditorState),

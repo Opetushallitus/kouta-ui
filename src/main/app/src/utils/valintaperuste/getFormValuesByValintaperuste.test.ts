@@ -128,7 +128,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
           {
             osoite: {
               osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-              postinumeroKoodiUri: 'posti_1#1',
+              postinumeroKoodiUri: { fi: 'posti_1#1', sv: 'posti_2#1' },
             },
             aika: {
               alkaa: '2019-04-16T08:44',

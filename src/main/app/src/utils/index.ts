@@ -20,6 +20,7 @@ import {
   ORGANISAATIOTYYPPI,
 } from '#/src/constants';
 import { EntityModelBase } from '#/src/types/domainTypes';
+import { SelectValue } from '#/src/types/formTypes';
 import { memoize, memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
@@ -223,6 +224,22 @@ export const toSelectValue = value => (_.isNil(value) ? undefined : { value });
 export const toSelectValueList = _fp.map((value: string) => ({
   value,
 }));
+
+export const toKielistettyWithValueField = (
+  obj: TranslatedField | undefined
+) => {
+  return Object.entries(obj || {}).reduce((result, [lang, val]) => {
+    return { ...result, [lang]: { value: val } };
+  }, {});
+};
+
+export const toKielistettyWithValueStr = (
+  obj: Record<LanguageCode, SelectValue>
+) => {
+  return Object.entries(obj || {}).reduce((result, [key, val]) => {
+    return key && val?.value ? { ...result, [key]: val.value } : result;
+  }, {});
+};
 
 /** Parse a boolean to a string value for selection component.
  * For other than boolean values returns undefined.

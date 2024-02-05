@@ -60,7 +60,7 @@ const hakukohde = () => ({
               osoite: {
                 fi: 'osoite',
               },
-              postinumeroKoodiUri: 'posti_00350#2',
+              postinumeroKoodiUri: { fi: 'posti_00350#2' },
             },
           },
         ],
@@ -101,7 +101,7 @@ const hakukohde = () => ({
         {
           osoite: {
             osoite: { fi: 'fi osoite' },
-            postinumeroKoodiUri: 'posti_00350#2',
+            postinumeroKoodiUri: { fi: 'posti_00350#2' },
           },
           aika: {
             alkaa: '2019-04-16T08:44',

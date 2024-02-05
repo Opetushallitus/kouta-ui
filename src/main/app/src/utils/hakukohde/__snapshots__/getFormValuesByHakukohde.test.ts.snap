@@ -195,7 +195,9 @@ exports[`getFormValuesByHakukohde returns correct form values given hakukohde 1`
             },
             "paattyy": "2019-04-18T08:44",
             "postinumero": {
-              "value": "posti_1#1",
+              "fi": {
+                "value": "posti_1#1",
+              },
             },
           },
         ],
@@ -223,7 +225,9 @@ exports[`getFormValuesByHakukohde returns correct form values given hakukohde 1`
           },
           "paattyy": "2019-04-18T08:44",
           "postinumero": {
-            "value": "posti_1#1",
+            "fi": {
+              "value": "posti_1#1",
+            },
           },
         },
       ],

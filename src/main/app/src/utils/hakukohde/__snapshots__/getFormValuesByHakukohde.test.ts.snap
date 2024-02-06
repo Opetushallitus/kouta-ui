@@ -89,7 +89,9 @@ exports[`getFormValuesByHakukohde returns correct form values given hakukohde 1`
               },
             },
             "postinumero": {
-              "value": "posti_1#1",
+              "fi": {
+                "value": "posti_1#1",
+              },
             },
             "sahkoposti": {
               "fi": "Fi sahkoposti",
@@ -118,7 +120,9 @@ exports[`getFormValuesByHakukohde returns correct form values given hakukohde 1`
           },
         },
         "postinumero": {
-          "value": "posti_1#1",
+          "fi": {
+            "value": "posti_1#1",
+          },
         },
         "sahkoposti": {
           "fi": "Fi sahkoposti",

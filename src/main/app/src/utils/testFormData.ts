@@ -122,7 +122,7 @@ const liite = {
         },
         rivi2: {},
       },
-      postinumero: { value: 'posti_1#1' },
+      postinumero: { fi: { value: 'posti_1#1' }, sv: { value: 'posti_1#1' } },
       sahkoposti: {
         fi: 'Fi sahkoposti',
         sv: 'Sv sahkoposti',
@@ -212,7 +212,7 @@ export const BASE_HAKUKOHDE_FORMDATA: HakukohdeFormValues = {
           },
           rivi2: {},
         },
-        postinumero: { value: 'posti_1#1' },
+        postinumero: { fi: { value: 'posti_1#1' }, en: { value: 'posti_2#1' } },
         sahkoposti: {
           fi: 'Fi sahkoposti',
           sv: 'Sv sahkoposti',
@@ -315,7 +315,11 @@ export const hakukohdeFormValuesWithExtraTranslations: HakukohdeFormValues = {
           },
           rivi2: {},
         },
-        postinumero: { value: 'posti_1#1' },
+        postinumero: {
+          fi: { value: 'posti_1#1' },
+          sv: { value: 'posti_2#1' },
+          en: { value: 'posti_3#1' },
+        },
         sahkoposti: {
           fi: 'Fi sahkoposti',
           sv: 'Sv sahkoposti',

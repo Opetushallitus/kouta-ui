@@ -43,7 +43,10 @@ exports[`getHakukohdeByFormValues does not return translations for non-selected 
             "fi": "Fi osoite",
             "sv": "Sv osoite",
           },
-          "postinumeroKoodiUri": "posti_1#1",
+          "postinumeroKoodiUri": {
+            "fi": "posti_1#1",
+            "sv": "posti_1#1",
+          },
         },
         "sahkoposti": {
           "fi": "Fi sahkoposti",
@@ -255,7 +258,10 @@ exports[`getHakukohdeByFormValues returns correct hakukohde given form values 1`
             "fi": "Fi osoite",
             "sv": "Sv osoite",
           },
-          "postinumeroKoodiUri": "posti_1#1",
+          "postinumeroKoodiUri": {
+            "fi": "posti_1#1",
+            "sv": "posti_1#1",
+          },
         },
         "sahkoposti": {
           "fi": "Fi sahkoposti",

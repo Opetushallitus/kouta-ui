@@ -2,7 +2,11 @@ import _fp from 'lodash/fp';
 
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { maybeParseNumber, parseFloatComma } from '#/src/utils';
+import {
+  maybeParseNumber,
+  parseFloatComma,
+  toKielistettyWithValueStr,
+} from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import {
@@ -55,7 +59,7 @@ function getPainotetutArvosanatData(arvosanat) {
     );
 }
 
-const getLiiteToimitusosoite = (toimitustapa, kielivalinta) => {
+const getLiiteToimitusosoite = (toimitustapa, kielivalinta, kieleistykset) => {
   const unpackOsoite = rivit => {
     if (rivit) {
       const { rivi1, rivi2 } = rivit;
@@ -73,10 +77,13 @@ const getLiiteToimitusosoite = (toimitustapa, kielivalinta) => {
       }
     }
   };
+  console.log(toimitustapa);
   return {
     osoite: {
       osoite: unpackOsoite(toimitustapa?.paikka?.osoite || null),
-      postinumeroKoodiUri: toimitustapa?.paikka?.postinumero?.value || null,
+      postinumeroKoodiUri: kieleistykset(
+        toKielistettyWithValueStr(toimitustapa?.paikka?.postinumero)
+      ),
     },
     sahkoposti: toimitustapa?.paikka?.sahkoposti || null,
     verkkosivu: toimitustapa?.paikka?.verkkosivu || null,
@@ -145,9 +152,11 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   const liitteidenToimitusosoite = getLiiteToimitusosoite(
     values?.liitteet?.toimitustapa,
-    kielivalinta
+    kielivalinta,
+    kieleistykset
   );
 
+  console.log(JSON.stringify(liitteidenToimitusosoite, null, 2));
   const liitteidenToimitustapa = _fp.isEmpty(
     values?.liitteet?.toimitustapa?.tapa
   )
@@ -180,13 +189,14 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
           : toimitusaika || null,
         toimitusosoite:
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
-            ? getLiiteToimitusosoite(toimitustapa, kielivalinta)
+            ? getLiiteToimitusosoite(toimitustapa, kielivalinta, kieleistykset)
             : null,
         kuvaus: kieleistyksetSerialized(kuvaus),
       };
     }
   );
 
+  console.log(JSON.stringify(liitteet, null, 2));
   const nimi = kieleistykset(values?.perustiedot?.nimi);
 
   const hakukohdeKoodiUri =

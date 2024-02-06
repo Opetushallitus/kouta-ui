@@ -30,7 +30,7 @@ const hakukohde = () => ({
       toimitusosoite: {
         osoite: {
           osoite: { fi: 'Osoite' },
-          postinumeroKoodiUri: 'posti_00350#2',
+          postinumeroKoodiUri: { fi: 'posti_00350#2' },
         },
         sahkoposti: 'sahkoposti@email.com',
       },

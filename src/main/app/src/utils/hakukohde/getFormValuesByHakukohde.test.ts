@@ -46,7 +46,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
                 fi: 'Fi osoite',
                 sv: 'Sv osoite',
               },
-              postinumeroKoodiUri: 'posti_1#1',
+              postinumeroKoodiUri: { fi: 'posti_1#1' },
               postitoimipaikka: {
                 fi: 'Fi postitoimipaikka',
                 sv: 'Sv postitoimipaikka',
@@ -68,7 +68,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
             fi: 'Fi osoite',
             sv: 'Sv osoite',
           },
-          postinumeroKoodiUri: 'posti_1#1',
+          postinumeroKoodiUri: { fi: 'posti_1#1' },
           postitoimipaikka: {
             fi: 'Fi postitoimipaikka',
             sv: 'Sv postitoimipaikka',

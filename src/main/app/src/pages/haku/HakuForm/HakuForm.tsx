@@ -3,7 +3,6 @@ import React from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
-import { FormButton } from '#/src/components/FormButton';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
@@ -12,7 +11,7 @@ import { LomakeFields } from '#/src/components/LomakeFields';
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import { Box } from '#/src/components/virkailija';
+import { Box, Button } from '#/src/components/virkailija';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
@@ -185,14 +184,14 @@ const HakuForm = ({
                 height="100%"
                 flexBasis="100%"
               >
-                <FormButton
+                <Button
                   onClick={open}
                   disabled={!canAddHakukohde}
                   type="button"
                   title={infoText}
                 >
                   {t('yleiset.liitaHakukohde')}
-                </FormButton>
+                </Button>
               </Box>
             }
             Component={HakukohteetSection}

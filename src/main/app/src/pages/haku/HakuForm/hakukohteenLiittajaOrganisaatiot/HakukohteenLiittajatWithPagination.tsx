@@ -1,54 +1,50 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
-import _ from 'lodash';
+import { difference, isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import Pagination from '#/src/components/Pagination';
 import { Switch } from '#/src/components/Switch';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
+import { useFormIsDisabled } from '#/src/contexts/FormContext';
 import { useItemsToShow } from '#/src/hooks/useItemsToShow';
 import { Organisaatio } from '#/src/types/domainTypes';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
-
-import { useResetAvoinTarjoajat } from './useResetAvoinTarjoajat';
 
 export const PAGE_SIZE = 15;
 export const countPageNumber = orgs => Math.ceil(orgs.length / PAGE_SIZE);
 
 type Props = {
-  organisaatioOid: string;
-  tarjoajat: Array<Organisaatio>;
+  liittajaOrganisaatiot: Array<Organisaatio>;
   value: Array<string>;
   onChange: (val: Array<string>) => void;
   language: LanguageCode;
-  isAvoinKorkeakoulutus: boolean;
 };
 
-export const TarjoajatWithPagination = ({
-  organisaatioOid,
-  tarjoajat,
+export const HakukohteenLiittajatWithPagination = ({
+  liittajaOrganisaatiot,
   value,
   onChange,
   language,
-  isAvoinKorkeakoulutus,
 }: Props) => {
   const { t } = useTranslation();
-  const [currentPage, setPage] = useState(0);
-  const [usedNimi, setNimi] = useState('');
-  const [naytaVainValitut, setNaytaVainValitut] = useState(false);
-  const filteredTarjoajat = useItemsToShow({
-    organisaatiot: tarjoajat,
+  const readOnly = useFormIsDisabled();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [usedNimi, setUsedNimi] = useState('');
+  const [naytaVainValitut, setNaytaVainValitut] = useState(readOnly);
+  const filteredLiittajaOrganisaatiot = useItemsToShow({
+    organisaatiot: liittajaOrganisaatiot,
     value,
     naytaVainValitut,
   });
-  let itemsToShow = filteredTarjoajat;
+  let itemsToShow = filteredLiittajaOrganisaatiot;
   let pageCount = countPageNumber(itemsToShow);
   const currentPageFirstItemIndex = currentPage * PAGE_SIZE;
 
-  if (!_.isEmpty(usedNimi)) {
+  if (!isEmpty(usedNimi)) {
     itemsToShow = searchOrgsFromHierarkiaWithName(
-      filteredTarjoajat,
+      filteredLiittajaOrganisaatiot,
       usedNimi,
       language
     );
@@ -56,15 +52,8 @@ export const TarjoajatWithPagination = ({
   }
 
   useEffect(() => {
-    setPage(0);
-  }, [usedNimi, isAvoinKorkeakoulutus, naytaVainValitut]);
-
-  useResetAvoinTarjoajat({
-    isAvoinKorkeakoulutus,
-    organisaatioOid,
-    value,
-    onChange,
-  });
+    setCurrentPage(0);
+  }, [usedNimi, naytaVainValitut]);
 
   const itemsOnPage = [
     itemsToShow.slice(
@@ -77,7 +66,7 @@ export const TarjoajatWithPagination = ({
 
   const onOrgsChange = useCallback(
     selectedPageOids => {
-      onChange([..._.difference(value, pageOids), ...selectedPageOids]);
+      onChange([...difference(value, pageOids), ...selectedPageOids]);
     },
     [value, pageOids, onChange]
   );
@@ -87,20 +76,22 @@ export const TarjoajatWithPagination = ({
       <Box display="flex" alignItems="flex-start" flexDirection="column">
         <Box width={1} mb={2}>
           <Input
-            placeholder={t('koulutuslomake.haeJarjestajanNimella')}
+            disabled={readOnly}
+            placeholder={t('hakulomake.haeOrganisaationNimella')}
             value={usedNimi}
             onChange={e => {
-              setNimi(e.target.value);
+              setUsedNimi(e.target.value);
             }}
             suffix={<InputIcon type="search" />}
           />
         </Box>
         <Box mb={2}>
           <Switch
-            checked={naytaVainValitut}
+            disabled={readOnly}
+            checked={readOnly ? true : naytaVainValitut}
             onChange={e => setNaytaVainValitut(e.target.checked)}
           >
-            {t('koulutuslomake.naytaVainValitut')}
+            {t('hakulomake.naytaVainValitut')}
           </Switch>
         </Box>
       </Box>
@@ -109,12 +100,13 @@ export const TarjoajatWithPagination = ({
           hierarkia={itemsOnPage}
           onChange={onOrgsChange}
           value={value}
-          disableAutoSelect={true}
+          disableAutoSelect={false}
+          getIsDisabled={() => readOnly}
         />
       </Box>
       <Pagination
         value={currentPage}
-        onChange={setPage}
+        onChange={setCurrentPage}
         pageCount={pageCount}
       />
     </>

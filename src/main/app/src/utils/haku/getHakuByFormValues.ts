@@ -84,6 +84,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
     },
     hakukohteenMuokkaamisenTakaraja:
       values?.aikataulut?.muokkauksenTakaraja || null,
+    hakukohteenLiittajaOrganisaatiot: values?.hakukohteenLiittajaOrganisaatiot,
     ajastettuJulkaisu: values?.aikataulut?.ajastettuJulkaisu || null,
     ajastettuHaunJaHakukohteidenArkistointi:
       values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi || null,

@@ -658,6 +658,7 @@
     "haunAikataulu": "Haun aikataulu",
     "hakukohteenLisaamisenJaPerumisenTakaraja": "Hakukohteen lisäämisen ja perumisen takaraja",
     "hakukohteenMuokkauksenTakaraja": "Hakukohteen muokkauksen takaraja",
+    "hakukohteenliittajaorganisaatiot": "Hakukohteen liittajaorganisaatiot",
     "ajastettuHaunJulkaisupaivamaara": "Ajastettu haun julkaisupäivämäärä",
     "ajastettuHaunHakukohdeidenArkistointipaivamaara": "Ajastettu haun hakukohteiden arkistointipäivämäärä",
     "haunYhteystiedot": "Haun yhteystiedot",
@@ -671,7 +672,10 @@
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu haku",
     "haullaErillinenAloitusajankohta": "Haulla on erillinen aloitusajankohta",
-    "liittamisenTakarajaYlittynyt": "Hakukohteen lisäämisen takaraja on umpeutunut."
+    "liittamisenTakarajaYlittynyt": "Hakukohteen lisäämisen takaraja on umpeutunut.",
+    "valitseLiittajaOrganisaatiot": "Valitse ne organisaatiot, jotka voivat liittää hakukohteen",
+    "haeOrganisaationNimella": "Hae organisaation nimellä",
+    "naytaVainValitut": "Näytä vain valitut"
   },
   "hakukohdelomake": {
     "toteutukseenLiitettyAlkamisajankohta": "Toteutukseen liitetty alkamisajankohta",

@@ -23,6 +23,7 @@ import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet'
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
+import { LiittajaOrganisaatiotSection } from './hakukohteenLiittajaOrganisaatiot/LiittajaOrganisaatiotSection';
 import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
 import { HakutapaSection } from './HakutapaSection';
@@ -137,6 +138,14 @@ const HakuForm = ({
         />
 
         <FormCollapse
+          section="liittajaorganisaatiot"
+          header={t('hakulomake.hakukohteenliittajaorganisaatiot')}
+          Component={LiittajaOrganisaatiotSection}
+          organisaatioOid={organisaatioOid}
+          haku={hakuProp}
+        />
+
+        <FormCollapse
           section="aikataulut"
           header={t('hakulomake.haunAikataulu')}
           Component={ScheduleSection}
@@ -189,6 +198,9 @@ const HakuForm = ({
                   disabled={!canAddHakukohde}
                   type="button"
                   title={infoText}
+                  isHakukohteenLiittaja={hakuProp?.hakukohteenLiittajaOrganisaatiot.includes(
+                    organisaatioOid
+                  )}
                 >
                   {t('yleiset.liitaHakukohde')}
                 </Button>

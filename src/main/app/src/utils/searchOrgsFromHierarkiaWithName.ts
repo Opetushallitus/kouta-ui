@@ -17,7 +17,7 @@ export const searchOrgsFromHierarkiaWithName = (
       ),
     };
 
-    const regex = new RegExp(`${name}.+`, 'gmi');
+    const regex = new RegExp(`${name}`, 'gmi');
     const orgNimi = filteredOrg.nimi[language]
       ? filteredOrg.nimi[language].match(regex)
       : filteredOrg.nimi.fi?.match(regex);

@@ -16,6 +16,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     hakulomakeLinkki = {},
     hakukohteenLiittamisenTakaraja,
     hakukohteenMuokkaamisenTakaraja,
+    hakukohteenLiittajaOrganisaatiot = [],
     ajastettuJulkaisu,
     ajastettuHaunJaHakukohteidenArkistointi,
     kielivalinta = [],
@@ -78,5 +79,6 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
         verkkosivuTeksti: wwwSivuTeksti || {},
       })
     ),
+    hakukohteenLiittajaOrganisaatiot,
   };
 };

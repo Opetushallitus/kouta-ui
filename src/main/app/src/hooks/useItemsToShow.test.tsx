@@ -64,7 +64,7 @@ test('useItemsToShow palauttaa vain oppilaitokset, paitsi valituille koulutustoi
   const { result } = renderHook(() =>
     useItemsToShow({
       organisaatiot: [org1, org2, org1_2, org2_1],
-      value: [org1.oid],
+      value: [org1.oid ?? ''],
       naytaVainValitut: false,
     })
   );

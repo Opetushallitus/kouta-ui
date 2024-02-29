@@ -7,7 +7,7 @@ const haku = ({ hakutapaKoodiUri }: { hakutapaKoodiUri?: string } = {}) => ({
   hakutapaKoodiUri: hakutapaKoodiUri ?? 'hakutapa_01#1',
   hakukohteenLiittamisenTakaraja: '2019-02-08T07:05',
   hakukohteenMuokkaamisenTakaraja: '2019-03-08T07:05',
-
+  hakukohteenLiittajaOrganisaatiot: [],
   kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
   kohdejoukonTarkenneKoodiUri: 'haunkohdejoukontarkenne_0#1',
   hakulomaketyyppi: 'ataru',

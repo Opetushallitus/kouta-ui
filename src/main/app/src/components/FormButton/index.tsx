@@ -5,7 +5,6 @@ import { useFormIsDisabled } from '#/src/contexts/FormContext';
 
 export const FormButton = props => {
   const disabled = useFormIsDisabled();
-
   return <Button {...props} disabled={props.disabled || disabled} />;
 };
 

@@ -25,7 +25,7 @@ export const EditToteutusPage = () => {
 
   const toteutusQueryResult = useToteutusByOid(oid);
 
-  const { data: toteutus } = toteutusQueryResult;
+  const { data: toteutus = null } = toteutusQueryResult;
 
   const koulutusQueryResult = useKoulutusByOid(toteutus?.koulutusOid, {
     enabled: Boolean(toteutus?.koulutusOid),
@@ -53,10 +53,9 @@ export const EditToteutusPage = () => {
     toteutus?.organisaatioOid
   );
 
-  const initialValues = useMemo(
-    () => (toteutus ? getFormValuesByToteutus(toteutus) : {}),
-    [toteutus]
-  );
+  const initialValues = useMemo(() => {
+    return toteutus && getFormValuesByToteutus(toteutus);
+  }, [toteutus]);
 
   return (
     <FormPage
@@ -64,7 +63,7 @@ export const EditToteutusPage = () => {
       entityType={ENTITY.TOTEUTUS}
       formMode={FormMode.EDIT}
       queryResult={[toteutusQueryResult, koulutusQueryResult]}
-      initialValues={initialValues}
+      initialValues={initialValues ?? {}}
       readOnly={!canUpdate}
       header={
         <EntityFormHeader entityType={ENTITY.TOTEUTUS} entity={toteutus} />

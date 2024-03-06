@@ -94,14 +94,15 @@ const ToteutusForm = ({
     'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
   );
 
-  const hakukohteetKaytossaValittu = useFieldValue<boolean>(
+  const hakukohteetKaytossaValittu = useFieldValue(
     'hakeutumisTaiIlmoittautumistapa.isHakukohteetKaytossa'
   );
-
+  console.log('hakukohteetKaytossaValittu: ', hakukohteetKaytossaValittu);
   const hakukohteetKaytossa = isHakeutumisTaiIlmoittautumisosioVisible(
     koulutustyyppi
   )
-    ? hakukohteetKaytossaValittu
+    ? hakukohteetKaytossaValittu === true ||
+      hakukohteetKaytossaValittu === 'true'
     : true;
 
   const isEBkoulutus = isEB(koulutus?.koulutuksetKoodiUri, koulutustyyppi);

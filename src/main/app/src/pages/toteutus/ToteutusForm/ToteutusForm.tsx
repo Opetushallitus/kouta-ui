@@ -97,7 +97,9 @@ const ToteutusForm = ({
   const hakukohteetKaytossaValittu = useFieldValue(
     'hakeutumisTaiIlmoittautumistapa.isHakukohteetKaytossa'
   );
-  console.log('hakukohteetKaytossaValittu: ', hakukohteetKaytossaValittu);
+  console.log('hakukohteetKaytossaValittu', {
+    hakukohteetKaytossaValittu: hakukohteetKaytossaValittu,
+  });
   const hakukohteetKaytossa = isHakeutumisTaiIlmoittautumisosioVisible(
     koulutustyyppi
   )

@@ -55,18 +55,12 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
     `${name}.isHakukohteetKaytossa`
   );
 
-  console.log('hakukohteetKaytossaValinta', {
-    hakukohteetKaytossaValinta: hakukohteetKaytossaValinta,
-  });
-
   // aiemmin tallennettujen fallback:
   // jos toteutuksella on kiinnitettynä hakukohteita, asetetaan isHakukohteetKaytossa-valinta arvoon kyllä
   useSetFieldValue(
     `${name}.isHakukohteetKaytossa`,
     true,
-    (hakukohteetKaytossaValinta === undefined ||
-      hakukohteetKaytossaValinta === '') &&
-      hasHakukohdeAttached
+    hakukohteetKaytossaValinta === undefined && hasHakukohdeAttached
   );
 
   const showHakeutumisTapaFieldsJaAloituspaikat =

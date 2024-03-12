@@ -27,6 +27,7 @@ import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
+import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { useIsAmmTutkintoWithoutEperuste } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';
@@ -89,19 +90,34 @@ export const KoulutusForm = ({
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);
-  const { hierarkia = [] } = useOrganisaatioHierarkia(
-    koulutusProp?.organisaatioOid
-  );
+  const { hierarkia = [], isLoading: hierarkiaIsLoading } =
+    useOrganisaatioHierarkia(koulutusProp?.organisaatioOid);
+
+  const { oppilaitostyypitByKoulutustyypit, isLoading: loadingMappings } =
+    useOppilaitostyypitByKoulutustyypit();
 
   const onlyTarjoajaRights = useMemo(
     () =>
       !isNewKoulutus &&
       organisaatio &&
+      !hierarkiaIsLoading &&
       hierarkia &&
       !isOphOrganisaatio(organisaatio.oid) &&
       !isInHierarkia(organisaatio)(hierarkia) &&
-      isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia),
-    [isNewKoulutus, organisaatio, hierarkia]
+      !loadingMappings &&
+      isSameKoulutustyyppiWithOrganisaatio(
+        organisaatio,
+        hierarkia,
+        oppilaitostyypitByKoulutustyypit
+      ),
+    [
+      isNewKoulutus,
+      organisaatio,
+      hierarkiaIsLoading,
+      hierarkia,
+      loadingMappings,
+      oppilaitostyypitByKoulutustyypit,
+    ]
   );
 
   const isAmmTutkintoWithoutEperuste = useIsAmmTutkintoWithoutEperuste();

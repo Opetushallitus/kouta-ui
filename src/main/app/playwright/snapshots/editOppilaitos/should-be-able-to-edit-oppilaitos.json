@@ -35,6 +35,37 @@
       }
     }
   },
+  "_enrichedData": {
+    "muokkaajanNimi": "Anonymisoitu Virkailija",
+    "organisaatio": {
+      "oid": "1.2.246.562.13.00000000000000000072",
+      "nimi": {
+        "fi": "Organisaation nimi",
+        "sv": "Organisaation nimi sv"
+      },
+      "yhteystiedot": {
+        "nimi": {
+          "fi": "Organisaation nimi",
+          "sv": "Organisaation nimi sv"
+        },
+        "postiosoite": {
+          "osoite": {
+            "fi": "Fi osoite",
+            "sv": "Sv osoite"
+          },
+          "postinumeroKoodiUri": "posti_00350#2"
+        },
+        "puhelinnumero": {
+          "fi": "1234",
+          "sv": "5678"
+        },
+        "sahkoposti": {
+          "fi": "fi@sahkoposti.fi",
+          "sv": "sv@sahkoposti.sv"
+        }
+      }
+    }
+  },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "esikatselu": false
 }

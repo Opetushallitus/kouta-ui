@@ -1,3 +1,4 @@
+import { Organisaatio } from '#/src/types/domainTypes';
 const OPH_OID = '1.2.246.562.10.00000000001';
 
 export default ({
@@ -12,44 +13,42 @@ export default ({
       {
         oid: rootOid,
         nimi: { fi: `${rootName}_1` },
-        organisaatiotyypit: ['organisaatiotyyppi_01'],
-        parentOid: OPH_OID,
-        parentOidPath: `${rootOid}/${OPH_OID}`,
+        kieletUris: ['oppilaitoksenopetuskieli_1#2'],
+        organisaatiotyyppiUris: ['organisaatiotyyppi_01'],
+        parentOids: [rootOid, OPH_OID],
         children: [
           {
             nimi: { fi: `${rootName}_1_1` },
             oid: '1.2.1.1.1.1',
-            organisaatiotyypit: ['organisaatiotyyppi_02'],
-            parentOid: rootOid,
-            parentOidPath: `1.2.1.1.1.1/${rootOid}/${OPH_OID}`,
+            kieletUris: ['oppilaitoksenopetuskieli_1#2'],
+            organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
+            parentOids: ['1.2.1.1.1.1', rootOid, OPH_OID],
             children: [
               {
                 nimi: { fi: toimipistenimi },
                 oid: jarjestyspaikkaOid,
-                parentOid: '1.2.1.1.1.1',
-                organisaatiotyypit: ['organisaatiotyyppi_03'],
-                parentOidPath: `1.2.2.1.1.1/1.2.1.1.1.1/${rootOid}/${OPH_OID}`,
+                organisaatiotyyppiUris: ['organisaatiotyyppi_03'],
+                parentOids: ['1.2.2.1.1.1', '1.2.1.1.1.1', rootOid, OPH_OID],
               },
-            ],
+            ] as Array<Organisaatio>,
           },
           {
             nimi: { fi: `${rootName}_1_2` },
             oid: '1.3.1.1.1.1',
-            organisaatiotyypit: ['organisaatiotyyppi_02'],
-            parentOid: rootOid,
-            parentOidPath: `${rootOid}/1.3.1.1.1.1/${OPH_OID}`,
+            kieletUris: ['oppilaitoksenopetuskieli_1#2'],
+            organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
+            parentOids: [rootOid, '1.3.1.1.1.1', OPH_OID],
             children: [
               {
                 nimi: { fi: `${rootName}_1_2_1` },
                 oid: '1.3.2.1.1.1',
-                organisaatiotyypit: ['organisaatiotyyppi_03'],
-                parentOid: '1.3.1.1.1.1',
-                parentOidPath: `1.3.2.1.1.1/1.3.1.1.1.1/${rootOid}/${OPH_OID}`,
+                organisaatiotyyppiUris: ['organisaatiotyyppi_03'],
+                parentOids: ['1.3.2.1.1.1', '1.3.1.1.1.1', rootOid, OPH_OID],
               },
-            ],
+            ] as Array<Organisaatio>,
           },
-        ],
+        ] as Array<Organisaatio>,
       },
-    ],
+    ] as Array<Organisaatio>,
   };
 };

@@ -7,20 +7,14 @@ import ListSpin from '#/src/components/ListSpin';
 import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
 import { Typography } from '#/src/components/virkailija';
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
-import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
-
-const getOppilaitoksenOsat = oppilaitos => {
-  return flatFilterHierarkia(
-    oppilaitos?.children ?? [],
-    organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
-  );
-};
 
 const OppilaitoksenOsatSection = ({ organisaatio }) => {
   const { t, i18n } = useTranslation();
 
-  const data = getOppilaitoksenOsat(organisaatio);
+  const data = organisaatio?.children?.filter(
+    organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
+  );
   const columns = [
     makeNimiColumn(t, {
       getLinkUrl: ({ oid }) => `/organisaatio/${oid}/oppilaitoksen-osa`,

@@ -12,7 +12,6 @@ exports[`getFormValuesByOppilaitoksenOsa returns correct form values given oppil
     "fi",
     "sv",
   ],
-  "oppilaitosOid": "888.888.888",
   "perustiedot": {
     "jarjestaaUrheilijanAmmKoulutusta": false,
     "kampus": {

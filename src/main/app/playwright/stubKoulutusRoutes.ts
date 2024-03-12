@@ -14,6 +14,11 @@ export const stubKoulutusRoutes = async (page, organisaatioOid) => {
 
   await stubOrganisaatioRoutes(page, organisaatioOid);
 
+  await page.route(
+    '**/koodisto-service/rest/codeelement/latest/kansallinenkoulutusluokitus2016koulutusalataso1*',
+    fixtureJSON([])
+  );
+
   await page.route('**/koulutus/*/toteutukset/list**', fixtureJSON([]));
 
   await page.route('**/valintaperuste/list**', fixtureJSON([]));

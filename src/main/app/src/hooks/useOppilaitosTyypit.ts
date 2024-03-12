@@ -26,8 +26,8 @@ export const useOppilaitosTyypit = (
     const tyypit: Array<any> = [];
 
     iterateTree(hierarkia, org => {
-      if (org?.oppilaitostyyppi) {
-        tyypit.push(org?.oppilaitostyyppi);
+      if (org?.oppilaitostyyppiUri) {
+        tyypit.push(org?.oppilaitostyyppiUri);
       }
     });
     return tyypit.map(oppilaitostyyppi => oppilaitostyyppi.split('#')[0]);

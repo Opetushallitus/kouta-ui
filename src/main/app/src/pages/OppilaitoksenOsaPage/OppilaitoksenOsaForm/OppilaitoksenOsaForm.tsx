@@ -19,10 +19,11 @@ import { PerustiedotSection } from './PerustiedotSection';
 const OppilaitoksenOsaForm = ({
   steps = false,
   organisaatioOid,
-  oppilaitoksenOsa = undefined,
+  oppilaitoksenOsa,
 }) => {
   const { t } = useTranslation();
   const languageTabs = useFieldValue('kieliversiot');
+  const organisaatio = oppilaitoksenOsa?._enrichedData?.organisaatio;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
@@ -37,7 +38,7 @@ const OppilaitoksenOsaForm = ({
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanPerustiedot')}
         section="perustiedot"
         Component={PerustiedotSection}
-        organisaatioOid={organisaatioOid}
+        organisaatio={organisaatio}
       />
 
       <FormCollapse
@@ -60,6 +61,7 @@ const OppilaitoksenOsaForm = ({
         section="yhteystiedot"
         Component={YhteystiedotSection}
         organisaatioOid={organisaatioOid}
+        organisaatio={organisaatio}
       />
 
       <FormCollapse

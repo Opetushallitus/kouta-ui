@@ -8,7 +8,6 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
     teemakuva,
     tila,
     metadata = {},
-    oppilaitosOid,
     esikatselu = false,
   } = oppilaitoksenOsa;
 
@@ -24,7 +23,6 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
 
   return {
     tila,
-    oppilaitosOid,
     kieliversiot: kielivalinta,
     esittely: _.mapValues(esittely || {}, parseEditorState),
     perustiedot: {

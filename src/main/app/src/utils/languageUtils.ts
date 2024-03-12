@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { Osoite } from '#/src/types/domainTypes';
 import { formValueExists } from '#/src/utils';
 
 export const getLanguageValue = (
@@ -74,4 +75,24 @@ export const getInvalidTranslations = (
   return _.toPairs(translationObj)
     .filter(([, value]) => !validate(value))
     .map(([language]) => language);
+};
+
+export const getKielistettyOsoite = (
+  osoite?: Osoite,
+  koodi?: Koodi,
+  language: string = 'fi'
+) => {
+  const postinumeroMetadata = arrayToTranslationObject(koodi?.metadata);
+  const postitoimipaikka = postinumeroMetadata[language]?.nimi
+    ? postinumeroMetadata[language].nimi
+    : '';
+  const kielistettyKatuosoite = getFirstLanguageValue(osoite?.osoite, language);
+
+  const postinumero = koodi?.koodiArvo;
+  const kielistettyOsoite = kielistettyKatuosoite
+    ? `${kielistettyKatuosoite}${postinumero ? `, ${postinumero}` : ''}${
+        postitoimipaikka ? ` ${postitoimipaikka}` : ''
+      }`
+    : '';
+  return kielistettyOsoite;
 };

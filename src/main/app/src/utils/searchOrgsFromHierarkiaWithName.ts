@@ -1,17 +1,27 @@
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 
-export const searchOrgsFromHierarkiaWithName = (hierarkia, name, language) => {
-  return hierarkia.reduce((result, org) => {
+import { Organisaatio } from '#/src/types/domainTypes';
+
+export const searchOrgsFromHierarkiaWithName = (
+  hierarkia: Array<Organisaatio>,
+  name: string,
+  language = 'fi'
+): Array<Organisaatio> => {
+  return hierarkia.reduce((result: Array<Organisaatio>, org: Organisaatio) => {
     const filteredOrg = {
       ...org,
-      children: searchOrgsFromHierarkiaWithName(org.children, name, language),
+      children: searchOrgsFromHierarkiaWithName(
+        org.children || [],
+        name,
+        language
+      ),
     };
 
     const regex = new RegExp(`${name}`, 'gmi');
     const orgNimi = filteredOrg.nimi[language]
       ? filteredOrg.nimi[language].match(regex)
-      : filteredOrg.nimi.fi.match(regex);
-    if (!_.isEmpty(orgNimi) || filteredOrg.children.length > 0) {
+      : filteredOrg.nimi.fi?.match(regex);
+    if (!isEmpty(orgNimi) || filteredOrg.children.length > 0) {
       return [...result, org];
     } else {
       return result;

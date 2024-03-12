@@ -10,10 +10,8 @@ import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
 import { useOppilaitosByOid } from '#/src/utils/oppilaitos/getOppilaitosByOid';
-import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
 import { OppilaitosFooter } from './OppilaitosFooter';
 import OppilaitosForm, {
@@ -22,13 +20,8 @@ import OppilaitosForm, {
 
 export const OppilaitosPage = () => {
   const { organisaatioOid } = useParams();
-  const { hierarkia } = useOrganisaatioHierarkia(organisaatioOid, {
-    skipParents: true,
-  });
 
   const [formMode, setFormMode] = useState<FormMode>(FormMode.EDIT);
-
-  const organisaatio = hierarkia?.[0];
 
   const { data: oppilaitos, isFetching } = useOppilaitosByOid(organisaatioOid, {
     retry: 0,
@@ -37,17 +30,14 @@ export const OppilaitosPage = () => {
         setFormMode(FormMode.CREATE);
       }
     },
-    onSuccess: () => {
-      setFormMode(FormMode.EDIT);
+    onSuccess: oppilaitos => {
+      oppilaitos?.lastModified
+        ? setFormMode(FormMode.EDIT)
+        : setFormMode(FormMode.CREATE);
     },
   });
 
   const { t } = useTranslation();
-
-  const contactInfo = useMemo(
-    () => getOrganisaatioContactInfo(organisaatio),
-    [organisaatio]
-  );
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.OPPILAITOS,
@@ -61,7 +51,7 @@ export const OppilaitosPage = () => {
     organisaatioOid
   );
 
-  const readOnly = formMode === FormMode.EDIT ? !canUpdate : !canCreate;
+  const organisaatio = oppilaitos?._enrichedData?.organisaatio;
 
   const initialValues = useMemo(
     () => ({
@@ -69,17 +59,18 @@ export const OppilaitosPage = () => {
         ? {
             ...formInitialValues,
             perustiedot: {
-              wwwSivuUrl: contactInfo.verkkosivu || '',
+              wwwSivuUrl: organisaatio?.yhteystiedot?.www || '',
             },
           }
         : oppilaitos
         ? getFormValuesByOppilaitos(oppilaitos)
         : {}),
     }),
-    [formMode, oppilaitos, contactInfo]
+    [formMode, organisaatio, oppilaitos]
   );
 
-  const stepsEnabled = !oppilaitos;
+  const stepsEnabled = !oppilaitos?.lastModified;
+  const readOnly = formMode === FormMode.EDIT ? !canUpdate : !canCreate;
 
   return isFetching ? (
     <FullSpin />

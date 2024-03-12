@@ -45,8 +45,8 @@ export const useItemsToShow = ({
             organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.KOULUTUSTOIMIJA)(
               org
             ) ||
-            !selectedKoulutustoimijaOids.some(ktOid =>
-              (org?.parentOidPath ?? '').includes(ktOid)
+            !selectedKoulutustoimijaOids.some(
+              ktOid => org?.parentOids?.includes(ktOid)
             )
           );
         }

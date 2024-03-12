@@ -25,7 +25,7 @@ export const createRedirectEntityPage =
       params: { oid },
     },
   }) => {
-    const { data: entity = {} } = useEntityByOid(
+    const { data: entity = {}, isLoading } = useEntityByOid(
       entityType,
       { oid },
       {
@@ -36,10 +36,11 @@ export const createRedirectEntityPage =
     );
 
     const { preferredOrganisaatio } = usePreferredOrganisaatio(
-      entity?.organisaatioOid
+      entity?.organisaatioOid,
+      isLoading
     );
 
-    return entity && preferredOrganisaatio ? (
+    return !isLoading && entity && preferredOrganisaatio ? (
       <Redirect
         to={getRedirectUrl({ oid, organisaatioOid: preferredOrganisaatio })}
       />

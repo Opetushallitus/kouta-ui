@@ -13,7 +13,6 @@ export const getOppilaitoksenOsaByFormValues = ({
   ...values
 }) => {
   const {
-    oppilaitosOid,
     perustiedot,
     esittely,
     kieliversiot,
@@ -41,7 +40,6 @@ export const getOppilaitoksenOsaByFormValues = ({
       : undefined;
   };
   return {
-    oppilaitosOid,
     tila,
     muokkaaja,
     kielivalinta: kieliversiot,

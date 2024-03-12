@@ -12,9 +12,12 @@ export type ValintaperusteModel = components['schemas']['Valintaperuste'];
 
 export type SoraKuvausModel = components['schemas']['Sorakuvaus'];
 
-export type OppilaitosModel = components['schemas']['Oppilaitos'];
+export type OppilaitosModel = components['schemas']['Oppilaitos'] & {
+  lastModified: string | null;
+};
 
-export type OppilaitoksenOsaModel = components['schemas']['OppilaitoksenOsa'];
+export type OppilaitoksenOsaModel =
+  components['schemas']['OppilaitoksenOsa'] & { lastModified: string | null };
 
 export type Valintakokeet = Array<components['schemas']['Valintakoe']>;
 
@@ -27,7 +30,11 @@ export type SisaltoTaulukkoModel = components['schemas']['SisaltoTaulukko'];
 
 export type Kielivalinta = Array<components['schemas']['Kieli']>;
 
-export type Organisaatio = components['schemas']['Organisaatio'];
+export type Organisaatio = components['schemas']['Organisaatio'] & {
+  jarjestaaUrheilijanAmmKoulutusta: boolean | null;
+};
+
+export type Osoite = components['schemas']['Osoite'];
 
 export type EntityModelBase = {
   nimi?: components['schemas']['Nimi'];

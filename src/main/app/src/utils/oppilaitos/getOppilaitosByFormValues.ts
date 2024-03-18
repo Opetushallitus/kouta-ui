@@ -78,7 +78,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
         ? {
             nimi: kieleistykset(hy.nimi),
             postiosoite:
-              !_.isEmpty(hy.postiosoite) || hy.postinumero
+              !_.isEmpty(hy.postiosoite) || !_.isEmpty(hy.postinumero)
                 ? {
                     osoite: kieleistykset(hy.postiosoite),
                     postinumeroKoodiUri: kieleistykset(
@@ -87,7 +87,8 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
                   }
                 : null,
             kayntiosoite:
-              !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
+              !_.isEmpty(hy.kayntiosoite) ||
+              !_.isEmpty(hy.kayntiosoitePostinumero)
                 ? {
                     osoite: kieleistykset(hy.kayntiosoite),
                     postinumeroKoodiUri: kieleistykset(

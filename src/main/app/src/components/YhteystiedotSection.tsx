@@ -52,7 +52,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
       <Cell width={6} {...getTestIdProps('postinumero')}>
         <Field
           component={FormFieldPostinumeroSelect}
-          name={`${name}.postinumero`}
+          name={`${name}.postinumero.${language}`}
           label={t('yleiset.postinumero')}
         />
       </Cell>
@@ -72,7 +72,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
       <Cell width={6} {...getTestIdProps('kayntiosoitePostinumero')}>
         <Field
           component={FormFieldPostinumeroSelect}
-          name={`${name}.kayntiosoitePostinumero`}
+          name={`${name}.kayntiosoitePostinumero.${language}`}
           label={t('yleiset.postinumero')}
         />
       </Cell>
@@ -133,8 +133,12 @@ export const YhteystiedotSection = ({
 
   const nimi = getFirstLanguageValue(organisaationNimet, language);
 
+  const kayntiosoitePostinumeroKoodiUri =
+    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri[language] ||
+    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri['fi'];
+
   const { koodi: kayntiosoitePostinumeroKoodi } = useKoodi(
-    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri
+    kayntiosoitePostinumeroKoodiUri
   );
 
   const kayntiosoiteInSelectedLang = getKielistettyOsoite(
@@ -143,8 +147,11 @@ export const YhteystiedotSection = ({
     language
   );
 
+  const postiosoitePostinumeroKoodiUri =
+    yhteystiedot?.postiosoite?.postinumeroKoodiUri[language] ||
+    yhteystiedot?.postiosoite?.postinumeroKoodiUri['fi'];
   const { koodi: postiosoitePostinumeroKoodi } = useKoodi(
-    yhteystiedot?.postiosoite?.postinumeroKoodiUri
+    postiosoitePostinumeroKoodiUri
   );
 
   const postiosoiteInSelectedLang = getKielistettyOsoite(

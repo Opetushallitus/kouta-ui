@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { isFunction } from 'lodash';
 
 import { AsyncSelect, SelectProps } from '#/src/components/Select';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
@@ -46,7 +46,7 @@ export const AsyncKoodistoSelect = ({
 
   const loadLabel = useCallback(
     async value => {
-      if (_.isFunction(loadLabelProp)) {
+      if (isFunction(loadLabelProp)) {
         return loadLabelProp(value);
       } else {
         const { koodi, versio } = parseKoodiUri(value);

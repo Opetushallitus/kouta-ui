@@ -28,7 +28,9 @@ exports[`getOppilaitosByFormValues returns correct oppilaitos given form values 
           "fi": "Fi osoite",
           "sv": "Sv osoite",
         },
-        "postinumeroKoodiUri": "postinumero_1#1",
+        "postinumeroKoodiUri": {
+          "fi": "postinumero_1#1",
+        },
       },
       "nimi": {
         "fi": "Hakijapalveluiden nimi",
@@ -39,7 +41,9 @@ exports[`getOppilaitosByFormValues returns correct oppilaitos given form values 
           "fi": "Fi osoite",
           "sv": "Sv osoite",
         },
-        "postinumeroKoodiUri": "postinumero_1#1",
+        "postinumeroKoodiUri": {
+          "fi": "postinumero_1#1",
+        },
       },
       "puhelinnumero": {
         "fi": "1234",
@@ -112,7 +116,9 @@ exports[`getOppilaitosByFormValues returns only some keys with values on them 1`
           "fi": "Fi osoite",
           "sv": "Sv osoite",
         },
-        "postinumeroKoodiUri": "postinumero_1#1",
+        "postinumeroKoodiUri": {
+          "fi": "postinumero_1#1",
+        },
       },
       "nimi": {
         "fi": "Hakijapalveluiden nimi",
@@ -123,7 +129,9 @@ exports[`getOppilaitosByFormValues returns only some keys with values on them 1`
           "fi": "Fi osoite",
           "sv": "Sv osoite",
         },
-        "postinumeroKoodiUri": "postinumero_1#1",
+        "postinumeroKoodiUri": {
+          "fi": "postinumero_1#1",
+        },
       },
       "puhelinnumero": {
         "fi": "1234",

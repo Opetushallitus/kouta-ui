@@ -31,7 +31,9 @@
           "osoite": {
             "fi": "Osoite"
           },
-          "postinumeroKoodiUri": "posti_00350#2"
+          "postinumeroKoodiUri": {
+            "fi": "posti_00350#2"
+          }
         },
         "sahkoposti": "sahkoposti@email.com",
         "verkkosivu": "http://example.com"
@@ -72,7 +74,9 @@
             "osoite": {
               "fi": "osoite"
             },
-            "postinumeroKoodiUri": "posti_00350#2"
+            "postinumeroKoodiUri": {
+              "fi": "posti_00350#2"
+            }
           },
           "aika": {
             "alkaa": "2019-04-02T10:45",
@@ -113,7 +117,9 @@
               "osoite": {
                 "fi": "osoite"
               },
-              "postinumeroKoodiUri": "posti_00350#2"
+              "postinumeroKoodiUri": {
+                "fi": "posti_00350#2"
+              }
             },
             "aika": {
               "alkaa": "2019-04-02T10:45",

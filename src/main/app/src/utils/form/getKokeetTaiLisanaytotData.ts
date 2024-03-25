@@ -1,6 +1,10 @@
 import _ from 'lodash';
 
-import { isNumeric, parseFloatComma } from '#/src/utils';
+import {
+  isNumeric,
+  parseFloatComma,
+  toKielistettyWithValueStr,
+} from '#/src/utils';
 
 export const getTilaisuusData =
   (kieleistykset, kieleistyksetSerialized) =>
@@ -14,7 +18,9 @@ export const getTilaisuusData =
   }) => ({
     osoite: {
       osoite: kieleistykset(osoite),
-      postinumeroKoodiUri: _.get(postinumero, 'value'),
+      postinumeroKoodiUri: kieleistykset(
+        toKielistettyWithValueStr(postinumero)
+      ),
     },
     aika: {
       alkaa: alkaa,

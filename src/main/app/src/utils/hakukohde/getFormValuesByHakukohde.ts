@@ -4,7 +4,11 @@ import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { isNumeric, toSelectValue } from '#/src/utils';
+import {
+  isNumeric,
+  toSelectValue,
+  toKielistettyWithValueField,
+} from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
 import {
@@ -26,9 +30,9 @@ const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
       { rivi1: {}, rivi2: {} },
       Object.entries(toimitusosoite?.osoite?.osoite || {})
     ),
-    postinumero: toimitusosoite?.osoite?.postinumeroKoodiUri
-      ? { value: toimitusosoite?.osoite?.postinumeroKoodiUri }
-      : undefined,
+    postinumero: toKielistettyWithValueField(
+      toimitusosoite?.osoite?.postinumeroKoodiUri
+    ),
     sahkoposti: toimitusosoite?.sahkoposti || '',
     verkkosivu: toimitusosoite?.verkkosivu || '',
   },

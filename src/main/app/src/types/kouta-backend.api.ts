@@ -844,11 +844,23 @@ export interface components {
     Osoite: {
       /** @description Osoite eri kielillä. Kielet on määritetty kielivalinnassa. */
       osoite?: components["schemas"]["Teksti"];
-      /**
-       * @description Postinumero. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/posti/2)
-       * @example posti_04230#2
-       */
-      postinumeroKoodiUri?: string;
+      postinumeroKoodiUri?: {
+        /**
+         * @description Suomenkielisen osoitteen postinumero, jos kielivalinnassa on 'fi'
+         * @example posti_04230#2
+         */
+        fi?: string;
+        /**
+         * @description Ruotsinkielisen osoitteen postinumero, jos kielivalinnassa on 'sv'
+         * @example posti_04231#2
+         */
+        sv?: string;
+        /**
+         * @description Englanninkielisen osoitteen postinumero, jos kielivalinnassa on 'en'
+         * @example posti_04232#2
+         */
+        en?: string;
+      };
     };
     /** @description Valintakokeen tiedot */
     Valintakoe: {

@@ -105,7 +105,7 @@ const ToimituspaikkaFields = ({ name, language }) => {
 
       <Box marginBottom={2} {...getTestIdProps('postinumero')}>
         <Field
-          name={`${name}.postinumero`}
+          name={`${name}.postinumero.${language}`}
           required
           component={FormFieldPostinumeroSelect}
           label={t('yleiset.postinumero')}

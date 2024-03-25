@@ -77,7 +77,7 @@ const getLiiteToimitusosoite = (toimitustapa, kielivalinta, kieleistykset) => {
       }
     }
   };
-  console.log(toimitustapa);
+
   return {
     osoite: {
       osoite: unpackOsoite(toimitustapa?.paikka?.osoite || null),
@@ -156,7 +156,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     kieleistykset
   );
 
-  console.log(JSON.stringify(liitteidenToimitusosoite, null, 2));
   const liitteidenToimitustapa = _fp.isEmpty(
     values?.liitteet?.toimitustapa?.tapa
   )

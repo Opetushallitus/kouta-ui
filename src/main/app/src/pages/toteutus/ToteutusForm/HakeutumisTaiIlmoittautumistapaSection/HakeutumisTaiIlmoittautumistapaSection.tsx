@@ -60,7 +60,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
   useSetFieldValue(
     `${name}.isHakukohteetKaytossa`,
     true,
-    !hakukohteetKaytossaValinta && hasHakukohdeAttached
+    hakukohteetKaytossaValinta === undefined && hasHakukohdeAttached
   );
 
   const showHakeutumisTapaFieldsJaAloituspaikat =

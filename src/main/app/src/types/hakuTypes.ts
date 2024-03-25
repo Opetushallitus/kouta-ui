@@ -31,4 +31,5 @@ export type HakuFormValues = {
   };
   hakulomake: HakulomakeFormSection;
   yhteyshenkilot: Array<Yhteystieto>;
+  hakukohteenLiittajaOrganisaatiot: Array<string>;
 };

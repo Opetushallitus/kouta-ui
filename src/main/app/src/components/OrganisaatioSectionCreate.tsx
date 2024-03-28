@@ -30,10 +30,13 @@ export const OrganisaatioSectionCreate = ({ organisaatioOid }) => {
 
     if (isOphVirkailija && !ophIsLoading && oph) orgs.unshift(oph);
 
-    return _.map(orgs, ({ oid, nimi }) => ({
-      value: oid,
-      label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
-    }));
+    return _.uniqBy(
+      _.map(orgs, ({ oid, nimi }) => ({
+        value: oid,
+        label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
+      })),
+      'value'
+    );
   }, [hierarkia, language, isOphVirkailija, ophIsLoading, oph]);
 
   return (

@@ -195,7 +195,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     }
   );
 
-  console.log(JSON.stringify(liitteet, null, 2));
   const nimi = kieleistykset(values?.perustiedot?.nimi);
 
   const hakukohdeKoodiUri =

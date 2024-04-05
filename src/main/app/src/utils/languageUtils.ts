@@ -1,4 +1,13 @@
-import _ from 'lodash';
+import {
+  isArray,
+  isEmpty,
+  isObject,
+  isString,
+  pick,
+  pickBy,
+  toPairs,
+  zipObject,
+} from 'lodash';
 import { match } from 'ts-pattern';
 
 import { Osoite } from '#/src/types/domainTypes';
@@ -7,7 +16,7 @@ import { formValueExists } from '#/src/utils';
 export const getLanguageValue = (
   value?: TranslatedField,
   language: string = 'fi'
-) => (_.isObject(value) ? value[language] || null : null);
+) => (isObject(value) ? value[language] || null : null);
 
 export const getFirstLanguageValue = (
   value?: TranslatedField,
@@ -17,11 +26,11 @@ export const getFirstLanguageValue = (
 
   let priority = defaultPriority;
 
-  if (_.isArray(priorityArg)) {
+  if (isArray(priorityArg)) {
     priority = [...priorityArg, ...defaultPriority];
   }
 
-  if (_.isString(priorityArg)) {
+  if (isString(priorityArg)) {
     priority = [priorityArg, ...defaultPriority];
   }
 
@@ -38,10 +47,10 @@ export const getFirstLanguageValue = (
 };
 
 export const arrayToTranslationObject = (arr, languageField = 'kieli') => {
-  return _.isArray(arr)
+  return isArray(arr)
     ? arr.reduce((acc, curr) => {
         acc[
-          _.isString(curr[languageField])
+          isString(curr[languageField])
             ? curr[languageField].toLowerCase()
             : '_'
         ] = curr;
@@ -58,22 +67,22 @@ export const getInvalidTranslations = (
   optional: boolean = false
 ) => {
   if (optional) {
-    const existingValues = _.pickBy(obj, formValueExists);
-    if (_.isEmpty(existingValues)) {
+    const existingValues = pickBy(obj, formValueExists);
+    if (isEmpty(existingValues)) {
       return [];
     }
   }
 
-  if (!_.isObject(obj)) {
+  if (!isObject(obj)) {
     return languages;
   }
 
   const translationObj = {
-    ..._.zipObject(languages),
-    ..._.pick(obj, languages),
+    ...zipObject(languages),
+    ...pick(obj, languages),
   };
 
-  return _.toPairs(translationObj)
+  return toPairs(translationObj)
     .filter(([, value]) => !validate(value))
     .map(([language]) => language);
 };

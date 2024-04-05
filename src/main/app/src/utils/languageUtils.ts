@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { match } from 'ts-pattern';
 
 import { Osoite } from '#/src/types/domainTypes';
 import { formValueExists } from '#/src/utils';
@@ -83,11 +84,17 @@ export const getKielistettyOsoite = (
   language: string = 'fi'
 ) => {
   const postinumeroMetadata = arrayToTranslationObject(koodi?.metadata);
-  const postitoimipaikka = postinumeroMetadata[language]?.nimi
-    ? postinumeroMetadata[language].nimi
-    : postinumeroMetadata['fi']?.nimi
-    ? postinumeroMetadata['fi'].nimi
-    : '';
+  const postitoimipaikka = match(postinumeroMetadata)
+    .when(
+      pnro => !isEmpty(pnro[language]),
+      pnro => pnro[language].nimi
+    )
+    .when(
+      pnro => !isEmpty(pnro['fi']),
+      pnro => pnro['fi'].nimi
+    )
+    .otherwise(() => '');
+
   const kielistettyKatuosoite = getFirstLanguageValue(osoite?.osoite, language);
 
   const postinumero = koodi?.koodiArvo;

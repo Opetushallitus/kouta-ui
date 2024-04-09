@@ -11,7 +11,7 @@ const koutaBackendDevUrl = `${
   VITE_KOUTA_BACKEND_URL || VITE_DEV_SERVER_URL
 }/kouta-backend`;
 const virkailijaDevUrl = VITE_DEV_SERVER_URL;
-const ePerusteetDevUrl = `https://eperusteet.hahtuvaopintopolku.fi`;
+const ePerusteetDevUrl = `https://eperusteet.testiopintopolku.fi`;
 
 const development = {
   'konfo-ui.koulutus': `${VITE_KONFO_URL}/koulutus/$1`,
@@ -83,6 +83,7 @@ const development = {
   'eperusteet-service.osaamisalakuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset`,
   'eperusteet-service.lukiodiplomit': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/6828810/lops2019/oppiaineet/6835372`,
   'eperusteet-service.lukiodiplomi-tiedot': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/6828810/lops2019/oppiaineet/6835372/moduulit/$1`,
+  'eperusteet-service.osaamismerkki': `${virkailijaDevUrl}/eperusteet-service/api/external/osaamismerkki/koodi/$1`,
   'lokalisaatio-service.localisation': `${virkailijaDevUrl}/lokalisointi/cxf/rest/v1/localisation?category=$1`,
   'kayttooikeus-service.omattiedot': `${virkailijaDevUrl}/kayttooikeus-service/henkilo/current/omattiedot`,
   'kayttooikeus-service.kayttajan-organisaatiot': `${virkailijaDevUrl}/kayttooikeus-service/organisaatiohenkilo/organisaatioOid`,
@@ -98,6 +99,7 @@ const development = {
   'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
   'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/tutkinnonosat/$3`,
   'eperusteet.sisalto': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/sisalto/$3`,
+  'eperusteet.osaamismerkit': `${ePerusteetDevUrl}/#/$1/osaamismerkit/osaamismerkki/$2`,
   'hakukohderyhmapalvelu.haun-asetukset': `${virkailijaDevUrl}/hakukohderyhmapalvelu/haun-asetukset?hakuOid=$1`,
   'organisaatiopalvelu.organisaation-muokkaus-ui': `${virkailijaDevUrl}/organisaatio-service/lomake/$1`,
 };

@@ -7,6 +7,7 @@ import { match } from 'ts-pattern';
 import { FormButton } from '#/src/components/FormButton';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import HakutuloslistauksenKuvakeSection from '#/src/components/HakutuloslistauksenKuvakeSection';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
@@ -38,6 +39,7 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
+import { OsaamismerkkiKuvausSection } from './OsaamismerkkiKuvausSection';
 import { TarjoajatSection } from './tarjoajat/TarjoajatSection';
 import {
   TiedotSection,
@@ -53,6 +55,7 @@ import {
   TaiteenPerusopetusTiedotSection,
   AmmMuuTiedotSection,
   VapaaSivistystyoMuuTiedotSection,
+  VapaaSivistystyoOsaamismerkkiTiedotSection,
 } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -193,6 +196,10 @@ export const KoulutusForm = ({
                       () => VapaaSivistystyoOpistovuosiTiedotSection
                     )
                     .with(
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+                      () => VapaaSivistystyoOsaamismerkkiTiedotSection
+                    )
+                    .with(
                       KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
                       () => AmmMuuTiedotSection
                     )
@@ -232,6 +239,10 @@ export const KoulutusForm = ({
                       isAmmTutkintoWithoutEperuste
                         ? KuvausFieldsSection
                         : EPerusteKuvausSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+                      () => OsaamismerkkiKuvausSection
                     )
                     .with(
                       KOULUTUSTYYPPI.LUKIOKOULUTUS,
@@ -321,6 +332,7 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.TELMA,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
               KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
             ].includes(koulutustyyppi) && (
@@ -338,6 +350,7 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.TELMA,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
               KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
               KOULUTUSTYYPPI.ERIKOISLAAKARI,
@@ -356,7 +369,20 @@ export const KoulutusForm = ({
               header={t('koulutuslomake.koulutuksenTeemakuva')}
               Component={TeemakuvaSection}
               disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
             />
+
+            {koulutustyyppi ===
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI && (
+              <FormCollapse
+                section="hakutuloslistauksen-kuvake"
+                header={t(
+                  'koulutuslomake.koulutuksenHakutuloslistauksenKuvake'
+                )}
+                Component={HakutuloslistauksenKuvakeSection}
+                disabled={onlyTarjoajaRights}
+              />
+            )}
 
             {!isNewOphKoulutus && (
               <FormCollapse

@@ -90,6 +90,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("eperusteet.kooste", this.require("eperusteet.kooste"));
         this.frontProperties.setProperty("eperusteet.sisalto", this.require("eperusteet.sisalto"));
         this.frontProperties.setProperty("eperusteet.tutkinnonosat", this.require("eperusteet.tutkinnonosat"));
+        this.frontProperties.setProperty("eperusteet.osaamismerkit", this.require("eperusteet.osaamismerkit"));
 
         this.frontProperties.setProperty("eperusteet-service.base-url", this.require("eperusteet-service.base-url"));
         this.frontProperties.setProperty("eperusteet-service.peruste-by-id", this.require("eperusteet-service.peruste-by-id"));
@@ -101,6 +102,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("eperusteet-service.peruste-sisalto", this.require("eperusteet-service.peruste-sisalto"));
         this.frontProperties.setProperty("eperusteet-service.lukiodiplomit", this.require("eperusteet-service.lukiodiplomit"));
         this.frontProperties.setProperty("eperusteet-service.lukiodiplomi-tiedot", this.require("eperusteet-service.lukiodiplomi-tiedot"));
+        this.frontProperties.setProperty("eperusteet-service.osaamismerkki", this.require("eperusteet-service.osaamismerkki"));
 
         this.frontProperties.setProperty("lokalisaatio-service.localisation", this.require("lokalisaatio-service.localisation"));
 

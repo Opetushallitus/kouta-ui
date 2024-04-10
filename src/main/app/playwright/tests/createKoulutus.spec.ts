@@ -16,6 +16,7 @@ import {
   getSection,
   assertBaseTilaNotCopied,
 } from '#/playwright/playwright-helpers';
+import { fixtureFromFile } from '#/playwright/playwright-mock-utils';
 import { stubKoulutusRoutes } from '#/playwright/stubKoulutusRoutes';
 import { ENTITY } from '#/src/constants';
 
@@ -430,6 +431,54 @@ test.describe('Create koulutus', () => {
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
+      });
+      await fillJarjestajaSection(page);
+      await fillTilaSection(page);
+
+      await expect(getSection(page, 'soraKuvaus')).toBeHidden();
+      await expect(getSection(page, 'lisatiedot')).toBeHidden();
+
+      await tallenna(page);
+    }));
+
+  test('should be able to create "Vapaa Sivistystyö - Osaamismerkki"-koulutus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await fillKoulutustyyppiSection(page, [
+        'vapaa-sivistystyo',
+        'vapaa-sivistystyo-osaamismerkki',
+      ]);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await withinSection(page, 'information', async section => {
+        await fillAsyncSelect(
+          getSelectByLabel(section, 'koulutuslomake.valitseKoulutusalat'),
+          'Yleissivistävä koulutus'
+        );
+        await fillAsyncSelect(
+          getSelectByLabel(section, 'koulutuslomake.valitseOsaamismerkki'),
+          'Lukeminen'
+        );
+        await page.route(
+          '**/eperusteet-service/api/external/osaamismerkki/koodi/osaamismerkit_1007',
+          fixtureFromFile('osaamismerkit_1007.json')
+        );
+        await expect(
+          section.getByRole('link', { name: '9202686', exact: true })
+        ).toHaveAttribute(
+          'href',
+          new RegExp('#/fi/osaamismerkit/osaamismerkki/9202686$')
+        );
+      });
+      await withinSection(page, 'description', async section => {
+        await expect(section).toContainText('Lukeminen (9202686)');
+        await expect(section).toContainText(
+          'osaa hyödyntää lukemista eri tarkoituksiin'
+        );
+        await expect(section).toContainText(
+          'kertoo, kuinka voi kehittää itseään lukemalla erilaisia tekstejä'
+        );
       });
       await fillJarjestajaSection(page);
       await fillTilaSection(page);

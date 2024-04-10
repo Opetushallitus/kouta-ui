@@ -41,7 +41,8 @@
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,
-    "erikoistumiskoulutusKoodiUri": null
+    "erikoistumiskoulutusKoodiUri": null,
+    "osaamismerkki": null
   },
   "julkinen": true,
   "muokkaaja": "1.2.246.562.24.62301161440",

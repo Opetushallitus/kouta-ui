@@ -1,0 +1,738 @@
+[
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_080",
+    "koodiArvo": "080",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Broad programmes and qualifications involving agriculture, forestry,fisheries and vetrinary",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Maa- ja metsätalousalat, yleiset koulutusohjelmat",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Lant- och skogsbruk, allmänna utbildningsprogram",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_020",
+    "koodiArvo": "020",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Humanistiset ja taidealat, yleiset koulutusohjelmat",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "De humanistiska och konstnärliga områdena, allmänna utbildningsprogram",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Broad programmes and qualifications involving arts and humanities",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_091",
+    "koodiArvo": "091",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Terveys",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Health",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Hälsovård",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_041",
+    "koodiArvo": "041",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Handel och administration",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Kauppa ja hallinto",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Business and administration",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_061",
+    "koodiArvo": "061",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Tietojenkäsittely ja tietoliikenne (ICT)",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Information and Communication Technologies (ICT) ",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Databehandling och kommunikation (IKT) ",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_104",
+    "koodiArvo": "104",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Kuljetuspalvelut",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Transporttjänster",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Transport services",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_082",
+    "koodiArvo": "082",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Metsätalous",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Skogsbruk",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Forestry",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_022",
+    "koodiArvo": "022",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "De humanistiska områdena (exkl. språk)",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Humanistiset alat (paitsi kielet)",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Humanities (except languages)",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_100",
+    "koodiArvo": "100",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Palvelualat, yleiset koulutusohjelmat",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Tjänstebranschen, allmänna utbildningsprogram",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Broad programmes and qualifications involving services",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_050",
+    "koodiArvo": "050",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Broad programmes and qualifications involving natural sciences, mathematics and statistics",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Naturvetenskaper, allmänna utbildningsprogram",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Luonnontieteet, yleiset koulutusohjelmat",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_011",
+    "koodiArvo": "011",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "De pedagogiska områdena",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Kasvatusalat",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Education",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_071",
+    "koodiArvo": "071",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Kone-, prosessi-, energia- ja sähkötekniikka",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Engineering and engineering trades",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Maskin-, process-, energi- och elteknik",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_084",
+    "koodiArvo": "084",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Eläinlääketiede",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Veterinärmedicin",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Veterinary",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_031",
+    "koodiArvo": "031",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Social and behavioural sciences",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Yhteiskuntatieteet",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Samhällsvetenskaper",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_103",
+    "koodiArvo": "103",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Turvallisuuspalvelut",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Security services",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Säkerhetstjänster",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_052",
+    "koodiArvo": "052",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Environment",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Miljöområdena",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ympäristöalat",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_021",
+    "koodiArvo": "021",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Taidealat",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Arts",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "De konstnärliga områdena",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_073",
+    "koodiArvo": "073",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Arkitektur och byggnadsteknik",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Architecture and construction",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Arkkitehtuuri ja rakentaminen",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_042",
+    "koodiArvo": "042",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Law",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Oikeustieteet",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Juridik",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_090",
+    "koodiArvo": "090",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Hälsovård och välfärd, allmänna utbildningsprogram",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Broad programmes and qualifications involving health and welfare",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Terveys- ja hyvinvointialat, yleiset koulutusohjelmat",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_999",
+    "koodiArvo": "999",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Övriga eller okända",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Muut tai tuntemattomat koulutusalat",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Unknown",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_054",
+    "koodiArvo": "054",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Mathematics and statistics",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Matematik och statistik",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Matematiikka ja tilastotiede",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_023",
+    "koodiArvo": "023",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Kielet",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Languages",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Språk",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_081",
+    "koodiArvo": "081",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Agriculture",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Lantbruk",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Maatalous",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_051",
+    "koodiArvo": "051",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Biological and related sciences",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Biologia ja biotieteet",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Biologi och biovetenskaper",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_092",
+    "koodiArvo": "092",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Hyvinvointi",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Välfärd",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Welfare",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_072",
+    "koodiArvo": "072",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Manufacturing and processing",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Material- och processteknik",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Materiaali- ja prosessitekniikka",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_001",
+    "koodiArvo": "001",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Yleissivistävä koulutus",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Allmänbildande utbildning",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Basic programmes and qualifications",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_032",
+    "koodiArvo": "032",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Journalism and information",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Journalistik och information",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Viestintä ja informaatiotieteet",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_083",
+    "koodiArvo": "083",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Kalatalous",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Fisheries",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Fiskeri",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_053",
+    "koodiArvo": "053",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Fysikaaliset tieteet,kemia ja geotieteet",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Fysikaliska vetenskaper, kemi och geovetenskaper",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Physical sciences",
+        "kieli": "EN"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_101",
+    "koodiArvo": "101",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2"
+    },
+    "metadata": [
+      {
+        "nimi": "Personal services",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Henkilökohtaiset palvelut",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Personliga tjänster",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  }
+]

@@ -47,6 +47,7 @@
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,
-    "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2"
+    "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
+    "osaamismerkki": null
   }
 }

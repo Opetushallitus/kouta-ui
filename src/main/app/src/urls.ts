@@ -69,6 +69,7 @@ const development = {
   'kouta-backend.search.hakukohteet': `${koutaBackendDevUrl}/search/hakukohteet`,
   'kouta-backend.search.valintaperusteet': `${koutaBackendDevUrl}/search/valintaperusteet`,
   'kouta-backend.upload-teemakuva': `${koutaBackendDevUrl}/upload/teemakuva`,
+  'kouta-backend.upload-icon': `${koutaBackendDevUrl}/upload/icon`,
   'kouta-backend.upload-logo': `${koutaBackendDevUrl}/upload/logo`,
   'koodisto-service.base-url': `${virkailijaDevUrl}/koodisto-service`,
   'koodisto-service.sisaltyy-alakoodit': `${virkailijaDevUrl}/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2`,

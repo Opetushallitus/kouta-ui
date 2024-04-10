@@ -11,3 +11,17 @@ export const uploadTeemakuva = async function ({ image, httpClient, apiUrls }) {
 
   return data.url;
 };
+
+export const uploadIcon = async function ({ image, httpClient, apiUrls }) {
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.upload-icon'),
+    image,
+    {
+      headers: {
+        'Content-Type': image.type,
+      },
+    }
+  );
+
+  return data.url;
+};

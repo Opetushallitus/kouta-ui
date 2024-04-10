@@ -12,7 +12,7 @@ import {
 } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { uploadTeemakuva } from '#/src/utils/api/uploadTeemakuva';
+import { uploadTeemakuva } from '#/src/utils/api/uploadKuva';
 
 import { FormFieldImageInput } from './formFields';
 import { GenericFieldProps } from '../types/formTypes';

@@ -14,7 +14,7 @@ import { useUrls } from '#/src/contexts/UrlContext';
 import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { GenericFieldProps } from '#/src/types/formTypes';
-import { uploadTeemakuva } from '#/src/utils/api/uploadTeemakuva';
+import { uploadIcon } from '#/src/utils/api/uploadKuva';
 
 import { FormFieldImageInput } from './formFields';
 
@@ -27,7 +27,7 @@ export const HakutuloslistauksenKuvakeSection = (props: GenericFieldProps) => {
 
   const upload = useCallback(
     async file => {
-      return uploadTeemakuva({ httpClient, image: file, apiUrls });
+      return uploadIcon({ httpClient, image: file, apiUrls });
     },
     [httpClient, apiUrls]
   );

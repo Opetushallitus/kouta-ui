@@ -381,6 +381,7 @@ export const KoulutusForm = ({
                 )}
                 Component={HakutuloslistauksenKuvakeSection}
                 disabled={onlyTarjoajaRights}
+                koulutustyyppi={koulutustyyppi}
               />
             )}
 

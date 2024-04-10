@@ -9,6 +9,7 @@ interface FieldBaseProps {
   name: string;
   disabled: boolean;
   language: LanguageCode;
+  koulutustyyppi?: Koulutustyyppi;
 }
 
 interface SelectField extends FieldBaseProps {
@@ -19,7 +20,6 @@ export type SelectFieldProps = SelectField;
 
 interface GenericField extends FieldBaseProps {
   languages?: Array<string>;
-  koulutustyyppi?: Koulutustyyppi;
 }
 
 export type GenericFieldProps = GenericField;

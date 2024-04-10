@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { useUnmount } from 'react-use';
 import { Field } from 'redux-form';
 
 import {
@@ -10,13 +11,15 @@ import {
 } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
+import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { GenericFieldProps } from '#/src/types/formTypes';
 import { uploadTeemakuva } from '#/src/utils/api/uploadTeemakuva';
 
 import { FormFieldImageInput } from './formFields';
 
 export const HakutuloslistauksenKuvakeSection = (props: GenericFieldProps) => {
-  const { name, disabled } = props;
+  const { name, disabled, koulutustyyppi: selectedKoulutus } = props;
   const { t } = useTranslation();
 
   const httpClient = useHttpClient();
@@ -28,6 +31,21 @@ export const HakutuloslistauksenKuvakeSection = (props: GenericFieldProps) => {
     },
     [httpClient, apiUrls]
   );
+
+  const { change } = useBoundFormActions();
+  const isDirty = useIsDirty();
+
+  const koulutusHasChanged = useHasChanged(selectedKoulutus);
+
+  useEffect(() => {
+    if (isDirty && koulutusHasChanged) {
+      change(name, null);
+    }
+  }, [change, isDirty, name, koulutusHasChanged]);
+
+  useUnmount(() => {
+    change(name, null);
+  });
 
   return (
     <Field

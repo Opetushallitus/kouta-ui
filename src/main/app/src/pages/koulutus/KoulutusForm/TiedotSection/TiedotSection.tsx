@@ -231,12 +231,14 @@ export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
   disabled,
   language,
   name,
+  koulutustyyppi,
 }) => {
   return (
     <VerticalBox gap={2}>
       <KoulutusalatField disabled={disabled} name={name} />
       <Box width={0.7} mb={2} {...getTestIdProps('osaamismerkkiSelect')}>
         <OsaamismerkkiField
+          koulutustyyppi={koulutustyyppi}
           disabled={disabled}
           name={`${name}.osaamismerkki`}
           language={language}

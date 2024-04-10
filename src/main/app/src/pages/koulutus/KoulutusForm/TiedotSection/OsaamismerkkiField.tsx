@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { TFunction } from 'i18next';
 import { isEmpty, lowerCase } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { useUnmount } from 'react-use';
 import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
 
@@ -11,8 +12,13 @@ import { FormFieldSelect } from '#/src/components/formFields';
 import { Box, Spin } from '#/src/components/virkailija';
 import { OSAAMISMERKKI_JULKAISUTILA } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useFieldValue } from '#/src/hooks/form';
+import {
+  useFieldValue,
+  useBoundFormActions,
+  useIsDirty,
+} from '#/src/hooks/form';
 import { useOsaamismerkki } from '#/src/hooks/useEPeruste/useOsaamismerkki';
+import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import {
   InfoBoxGrid,
@@ -48,8 +54,9 @@ export type Arviointikriteeri = {
 type OsaamismerkkiNimi = {
   _id: string;
   _tunniste: string;
-  fi: string;
-  sv: string;
+  fi?: string;
+  sv?: string;
+  en?: string;
 };
 
 type OsaamismerkkiLiite = {
@@ -175,7 +182,12 @@ const OsaamismerkkitiedotReadOnly = ({
 
 export const OsaamismerkkiField = (props: SelectFieldProps) => {
   const { t } = useTranslation();
-  const { name, isMultiSelect = false, language } = props;
+  const {
+    name,
+    isMultiSelect = false,
+    language,
+    koulutustyyppi: selectedKoulutus,
+  } = props;
 
   const { options, isLoading } = useKoodistoOptions({
     koodisto: 'osaamismerkit',
@@ -183,6 +195,21 @@ export const OsaamismerkkiField = (props: SelectFieldProps) => {
   });
 
   const osaamismerkkiId = useFieldValue(name)?.value;
+
+  const { change } = useBoundFormActions();
+  const isDirty = useIsDirty();
+
+  const koulutusHasChanged = useHasChanged(selectedKoulutus);
+
+  useEffect(() => {
+    if (isDirty && koulutusHasChanged) {
+      change(name, null);
+    }
+  }, [change, isDirty, name, koulutusHasChanged]);
+
+  useUnmount(() => {
+    change(name, null);
+  });
 
   const { data: osaamismerkkiData, isLoading: osaamismerkkiIsLoading } =
     useOsaamismerkki(osaamismerkkiId);

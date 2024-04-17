@@ -24,15 +24,20 @@ export const TeemakuvaSection = (props: GenericFieldProps) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
 
-  const upload = useCallback(
-    async file => {
-      return uploadTeemakuva({ httpClient, image: file, apiUrls });
-    },
-    [httpClient, apiUrls]
-  );
-
   const isOsaamismerkki =
     koulutustyyppi === KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI;
+
+  const upload = useCallback(
+    async file => {
+      return uploadTeemakuva({
+        httpClient,
+        image: file,
+        apiUrls,
+        params: { isSmallTeemakuva: isOsaamismerkki },
+      });
+    },
+    [httpClient, apiUrls, isOsaamismerkki]
+  );
 
   return (
     <Field

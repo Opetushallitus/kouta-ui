@@ -1,4 +1,9 @@
-export const uploadTeemakuva = async function ({ image, httpClient, apiUrls }) {
+export const uploadTeemakuva = async function ({
+  image,
+  httpClient,
+  apiUrls,
+  params,
+}) {
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.upload-teemakuva'),
     image,
@@ -6,6 +11,7 @@ export const uploadTeemakuva = async function ({ image, httpClient, apiUrls }) {
       headers: {
         'Content-Type': image.type,
       },
+      params,
     }
   );
 

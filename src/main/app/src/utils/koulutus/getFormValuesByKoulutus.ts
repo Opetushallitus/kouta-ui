@@ -66,6 +66,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     tunniste,
     opinnonTyyppiKoodiUri,
     erikoistumiskoulutusKoodiUri = '',
+    osaamismerkkiKoodiUri,
   } = metadata;
 
   return {
@@ -105,6 +106,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       erikoistumiskoulutus: {
         value: erikoistumiskoulutusKoodiUri,
       },
+      osaamismerkki: { value: osaamismerkkiKoodiUri },
     },
     koulutustyyppi,
     lisatiedot: {

@@ -25,14 +25,20 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
               fi: 'Fi osoite',
               sv: 'Sv osoite',
             },
-            postinumeroKoodiUri: 'postinumero_1#1',
+            postinumeroKoodiUri: {
+              fi: 'postinumero_1#1',
+              sv: 'postinumero_2#1',
+            },
           },
           kayntiosoite: {
             osoite: {
               fi: 'Fi osoite',
               sv: 'Sv osoite',
             },
-            postinumeroKoodiUri: 'postinumero_1#1',
+            postinumeroKoodiUri: {
+              fi: 'postinumero_1#1',
+              sv: 'postinumero_2#1',
+            },
           },
           puhelinnumero: {
             fi: '1234',
@@ -54,14 +60,20 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
             fi: 'Fi osoite',
             sv: 'Sv osoite',
           },
-          postinumeroKoodiUri: 'postinumero_1#1',
+          postinumeroKoodiUri: {
+            fi: 'postinumero_1#1',
+            sv: 'postinumero_2#1',
+          },
         },
         kayntiosoite: {
           osoite: {
             fi: 'Fi osoite',
             sv: 'Sv osoite',
           },
-          postinumeroKoodiUri: 'postinumero_1#1',
+          postinumeroKoodiUri: {
+            fi: 'postinumero_1#1',
+            sv: 'postinumero_2#1',
+          },
         },
         puhelinnumero: {
           fi: '1234',

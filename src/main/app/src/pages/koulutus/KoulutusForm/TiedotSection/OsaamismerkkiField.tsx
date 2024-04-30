@@ -41,14 +41,10 @@ type OsaamismerkkiKuvausEntity = {
   en?: string;
 };
 
-export type Osaamistavoite = {
+export type OsaamismerkkiKuvaus = {
   id: number;
-  osaamistavoite: Array<OsaamismerkkiKuvausEntity>;
-};
-
-export type Arviointikriteeri = {
-  id: number;
-  arviointikriteeri: Array<OsaamismerkkiKuvausEntity>;
+  osaamistavoite?: OsaamismerkkiKuvausEntity;
+  arviointikriteeri?: OsaamismerkkiKuvausEntity;
 };
 
 type OsaamismerkkiNimi = {
@@ -66,7 +62,7 @@ type OsaamismerkkiLiite = {
   binarydata: string;
 };
 
-type Osaamismerkki = {
+export type Osaamismerkki = {
   id: number;
   nimi: OsaamismerkkiNimi;
   kuvaus: string | null;
@@ -79,8 +75,8 @@ type Osaamismerkki = {
     muokattu: number;
   };
   koodiUri: string;
-  osaamistavoitteet: Array<Osaamistavoite>;
-  arviointikriteerit: Array<Arviointikriteeri>;
+  osaamistavoitteet: Array<OsaamismerkkiKuvaus>;
+  arviointikriteerit: Array<OsaamismerkkiKuvaus>;
   voimassaoloAlkaa: number;
   voimassaoloLoppuu: number | null;
   muokattu: number;

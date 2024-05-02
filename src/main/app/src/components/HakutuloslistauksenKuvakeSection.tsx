@@ -51,7 +51,7 @@ export const HakutuloslistauksenKuvakeSection = (props: GenericFieldProps) => {
     <Field
       disabled={disabled}
       name={name}
-      label={t('yleiset.teemakuva')}
+      label={t('yleiset.hakutuloslistauksenKuvake')}
       component={FormFieldImageInput}
       upload={upload}
       maxSize={TEEMAKUVA_MAX_SIZE}

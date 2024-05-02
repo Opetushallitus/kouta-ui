@@ -323,6 +323,13 @@ export interface paths {
      */
     get: operations["indexerKoulutusToteutukset"];
   };
+  "/upload/icon": {
+    /**
+     * Tallenna kuvake
+     * @description Tallenna kuvake väliaikaiseen sijaintiin. Kuvake siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
+     */
+    post: operations["Tallenna kuvake"];
+  };
   "/indexer/haku/{oid}/koulutukset/list": {
     /**
      * Listaa kaikki hakuun liitetyt koulutukset
@@ -729,7 +736,7 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     /** @enum {string} */
-    Koulutustyyppi: "aikuisten-perusopetus" | "amk" | "amm" | "amm-muu" | "amm-ope-erityisope-ja-opo" | "amm-osaamisala" | "amm-tutkinnon-osa" | "ope-pedag-opinnot" | "erikoislaakari" | "kk-opintojakso" | "kk-opintokokonaisuus" | "erikoistumiskoulutus" | "lk" | "muu" | "taiteen-perusopetus" | "telma" | "tuva" | "vapaa-sivistystyo-muu" | "vapaa-sivistystyo-opistovuosi" | "yo";
+    Koulutustyyppi: "aikuisten-perusopetus" | "amk" | "amm" | "amm-muu" | "amm-ope-erityisope-ja-opo" | "amm-osaamisala" | "amm-tutkinnon-osa" | "ope-pedag-opinnot" | "erikoislaakari" | "kk-opintojakso" | "kk-opintokokonaisuus" | "erikoistumiskoulutus" | "lk" | "muu" | "taiteen-perusopetus" | "telma" | "tuva" | "vapaa-sivistystyo-muu" | "vapaa-sivistystyo-opistovuosi" | "vapaa-sivistystyo-osaamismerkki" | "yo";
     /** @enum {string} */
     Kieli: "fi" | "sv" | "en";
     /** @enum {string} */
@@ -1164,7 +1171,7 @@ export interface components {
        *   ]
        * }
        */
-      metadata?: components["schemas"]["YliopistoKoulutusMetadata"] | components["schemas"]["AmmatillinenKoulutusMetadata"] | components["schemas"]["AmmattikorkeaKoulutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoKoulutusMetadata"] | components["schemas"]["OpePedagOpinnotKoulutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaKoulutusMetadata"] | components["schemas"]["KkOpintojaksoKoulutusMetadata"] | components["schemas"]["KkOpintokokonaisuusKoulutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaKoulutusMetadata"] | components["schemas"]["AmmatillinenMuuKoulutusMetadata"] | components["schemas"]["LukioKoulutusMetadata"] | components["schemas"]["TuvaKoulutusMetadata"] | components["schemas"]["TelmaKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoKoulutusMetadata"] | components["schemas"]["AikuistenPerusopetusKoulutusMetadata"] | components["schemas"]["ErikoislaakariKoulutusMetadata"] | components["schemas"]["ErikoistumiskoulutusMetadata"] | components["schemas"]["TaiteenPerusopetusKoulutusMetadata"] | components["schemas"]["MuuKoulutusMetadata"];
+      metadata?: components["schemas"]["YliopistoKoulutusMetadata"] | components["schemas"]["AmmatillinenKoulutusMetadata"] | components["schemas"]["AmmattikorkeaKoulutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoKoulutusMetadata"] | components["schemas"]["OpePedagOpinnotKoulutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaKoulutusMetadata"] | components["schemas"]["KkOpintojaksoKoulutusMetadata"] | components["schemas"]["KkOpintokokonaisuusKoulutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaKoulutusMetadata"] | components["schemas"]["AmmatillinenMuuKoulutusMetadata"] | components["schemas"]["LukioKoulutusMetadata"] | components["schemas"]["TuvaKoulutusMetadata"] | components["schemas"]["TelmaKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoOsaamismerkkiKoulutusMetadata"] | components["schemas"]["AikuistenPerusopetusKoulutusMetadata"] | components["schemas"]["ErikoislaakariKoulutusMetadata"] | components["schemas"]["ErikoistumiskoulutusMetadata"] | components["schemas"]["TaiteenPerusopetusKoulutusMetadata"] | components["schemas"]["MuuKoulutusMetadata"];
       /**
        * @description Koulutusta viimeksi muokanneen virkailijan henkilö-oid
        * @example 1.2.246.562.10.00101010101
@@ -1492,6 +1499,21 @@ export interface components {
        */
       opintojenLaajuusNumero?: number;
     });
+    VapaaSivistystyoOsaamismerkkiKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+      /**
+       * @description Koulutuksen metatiedon tyyppi
+       * @example vapaa-sivistystyo-osaamismerkki
+       * @enum {string}
+       */
+      tyyppi?: "vapaa-sivistystyo-osaamismerkki";
+      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+      koulutusalaKoodiUrit?: string[];
+      /**
+       * @description Osaamismerkki. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/osaamismerkit/1)
+       * @example osaamismerkit_1009#1
+       */
+      osaamismerkkiKoodiUri?: string;
+    };
     AikuistenPerusopetusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
       /**
        * @description Koulutuksen metatiedon tyyppi
@@ -2148,6 +2170,19 @@ export interface components {
        */
       tyyppi?: "vapaa-sivistystyo-muu";
     };
+    VapaaSivistystyoOsaamismerkkiToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+      /**
+       * @description Toteutuksen metatiedon tyyppi
+       * @example vapaa-sivistystyo-osaamismerkki
+       * @enum {string}
+       */
+      tyyppi?: "vapaa-sivistystyo-osaamismerkki";
+      /**
+       * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
+       * @example false
+       */
+      suoritetaanNayttona?: boolean;
+    };
     TelmaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
       /**
        * @description Toteutuksen metatiedon tyyppi
@@ -2717,6 +2752,14 @@ export interface components {
        * @example 2019-08-23T09:55
        */
       hakukohteenMuokkaamisenTakaraja?: string;
+      /**
+       * @description Hakukohteen liittajaorganisaatioiden oidit
+       * @example [
+       *   "1.2.246.562.10.00101010101",
+       *   "1.2.246.562.10.00101010102"
+       * ]
+       */
+      hakukohteenLiittajaOrganisaatiot?: string[];
       /**
        * Format: date-time
        * @description Ajanhetki, jolloin haku ja siihen liittyvät hakukohteet ja koulutukset julkaistaan automaattisesti Opintopolussa, jos ne eivät vielä ole julkisia
@@ -3721,6 +3764,10 @@ export interface operations {
    */
   getOppilaitos: {
     parameters: {
+      query?: {
+        /** @description Palautetaanko yhteystiedot myös oppilaitoksen osille? */
+        yhteystiedotForOsat?: boolean;
+      };
       path: {
         /**
          * @description Oppilaitoksen organisaatio-oid
@@ -3807,6 +3854,12 @@ export interface operations {
    * @description Tallenna teemakuva väliaikaiseen sijaintiin. Teemakuva siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
    */
   "Tallenna teemakuva": {
+    parameters: {
+      query?: {
+        /** @description Palautetaanko myös mahdollisesti poistettu koulutus */
+        isSmallTeemakuva?: boolean;
+      };
+    };
     requestBody?: {
       content: {
         "image/jpeg": string;
@@ -5112,6 +5165,24 @@ export interface operations {
     };
   };
   /**
+   * Tallenna kuvake
+   * @description Tallenna kuvake väliaikaiseen sijaintiin. Kuvake siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
+   */
+  "Tallenna kuvake": {
+    requestBody?: {
+      content: {
+        "image/jpeg": string;
+        "image/png": string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
    * Listaa kaikki hakuun liitetyt koulutukset
    * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) koulutukset. Tämä rajapinta on indeksointia varten
    */
@@ -5909,6 +5980,10 @@ export interface operations {
    */
   getOppilaitoksenOsa: {
     parameters: {
+      query?: {
+        /** @description Palautetaanko yhteystiedot myös oppilaitoksen osien osille? */
+        yhteystiedotForOsat?: boolean;
+      };
       path: {
         /**
          * @description Oppilaitoksen organisaatio-oid

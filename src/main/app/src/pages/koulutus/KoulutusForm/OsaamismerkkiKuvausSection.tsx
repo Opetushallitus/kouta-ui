@@ -12,19 +12,16 @@ import { sanitizeHTML } from '#/src/utils';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
-import {
-  Osaamistavoite,
-  Arviointikriteeri,
-} from './TiedotSection/OsaamismerkkiField';
+import { OsaamismerkkiKuvaus } from './TiedotSection/OsaamismerkkiField';
 
-const OsaamismerkkiKuvaukset = ({
+export const OsaamismerkkiKuvaukset = ({
   osaamistavoitteet,
   arviointikriteerit,
   language,
   t,
 }: {
-  osaamistavoitteet: Array<Osaamistavoite>;
-  arviointikriteerit: Array<Arviointikriteeri>;
+  osaamistavoitteet: Array<OsaamismerkkiKuvaus>;
+  arviointikriteerit: Array<OsaamismerkkiKuvaus>;
   language: LanguageCode;
   t: TFunction;
 }) => {
@@ -57,7 +54,7 @@ const OsaamismerkkiKuvausSubsection = ({
   language,
   t,
 }: {
-  entities: Array<Osaamistavoite | Arviointikriteeri>;
+  entities: Array<OsaamismerkkiKuvaus>;
   entityKey: string;
   translationKey: string;
   language: LanguageCode;

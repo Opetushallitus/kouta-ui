@@ -144,6 +144,15 @@ const getVapaaSivistystyoFields = tyyppi => {
   });
 };
 
+const getVapaaSivistystyoOsaamismerkkiFields = tyyppi => {
+  return merge(getBaseFields(tyyppi), {
+    nimi: { fi: 'Osaamismerkki: Oma ajankäyttö' },
+    metadata: {
+      kuvaus: { fi: 'kuvausteksti' },
+    },
+  });
+};
+
 const getMuuAmmatillinenFields = () => {
   return merge(getBaseFields('amm-muu'), {
     nimi: {
@@ -222,6 +231,8 @@ export default (tyyppi: TestiKoulutustyyppi = 'amm') => {
     return getTuvaFields();
   } else if (tyyppi === 'telma') {
     return getTelmaFields();
+  } else if (tyyppi === 'vapaa-sivistystyo-osaamismerkki') {
+    return getVapaaSivistystyoOsaamismerkkiFields(tyyppi);
   } else if (tyyppi.startsWith('vapaa-sivistystyo')) {
     return getVapaaSivistystyoFields(tyyppi);
   } else if (tyyppi === 'aikuisten-perusopetus') {

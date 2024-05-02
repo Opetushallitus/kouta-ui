@@ -15,7 +15,7 @@ export const getOsaamismerkkiById = async ({
   }
 };
 
-export const useOsaamismerkkiById = osaamismerkkiId =>
+export const useOsaamismerkkiById = (osaamismerkkiId: string | undefined) =>
   useApiQuery(
     'getOsaamismerkkiById',
     getOsaamismerkkiById,

@@ -223,6 +223,7 @@ export const OsaamismerkkiField = (props: SelectFieldProps) => {
           showAllOptions={true}
           isMulti={isMultiSelect}
           formatKoodiLabel={formatKoodiLabelWithArvo}
+          required
           {...props}
         />
       </Box>

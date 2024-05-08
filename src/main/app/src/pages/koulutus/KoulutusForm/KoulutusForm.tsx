@@ -375,7 +375,7 @@ export const KoulutusForm = ({
             {koulutustyyppi ===
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI && (
               <FormCollapse
-                section="hakutuloslistauksen-kuvake"
+                section="hakutuloslistauksenKuvake"
                 header={t('koulutuslomake.hakutuloslistauksenKuvake')}
                 Component={HakutuloslistauksenKuvakeSection}
                 disabled={onlyTarjoajaRights}

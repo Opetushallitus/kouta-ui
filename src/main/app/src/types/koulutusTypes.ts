@@ -52,6 +52,7 @@ export type KoulutusFormValues = {
   tarjoajat: { tarjoajat: Array<string>; kaytaPohjanJarjestajaa?: boolean };
   julkinen?: boolean;
   teemakuva?: string;
+  hakutuloslistauksenKuvake?: string;
   esikatselu?: boolean;
   osaamisala?: {
     osaamisala: SelectOption;

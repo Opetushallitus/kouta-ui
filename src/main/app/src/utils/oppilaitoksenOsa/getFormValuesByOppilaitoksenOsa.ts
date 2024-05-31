@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
+import { toKielistettyWithValueField } from '#/src/utils';
 
 export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   const {
@@ -36,15 +37,13 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
       ? {
           nimi: hy.nimi || {},
           postiosoite: hy.postiosoite?.osoite || {},
-          postinumero: hy.postiosoite?.postinumeroKoodiUri
-            ? {
-                value: hy.postiosoite.postinumeroKoodiUri,
-              }
-            : null,
+          postinumero: toKielistettyWithValueField(
+            hy.postiosoite?.postinumeroKoodiUri
+          ),
           kayntiosoite: hy.kayntiosoite?.osoite || {},
-          kayntiosoitePostinumero: hy.kayntiosoite?.postinumeroKoodiUri
-            ? { value: hy.kayntiosoite.postinumeroKoodiUri }
-            : null,
+          kayntiosoitePostinumero: toKielistettyWithValueField(
+            hy.kayntiosoite?.postinumeroKoodiUri
+          ),
           puhelinnumero: hy.puhelinnumero || {},
           sahkoposti: hy.sahkoposti || {},
         }

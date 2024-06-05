@@ -73,7 +73,7 @@ export const TilaisuusFields = ({
         <Box mb={2} {...getTestIdProps('postinumero')}>
           <Field
             required
-            name={`${field}.postinumero`}
+            name={`${field}.postinumero.${language}`}
             component={FormFieldPostinumeroSelect}
             label={t('yleiset.postinumero')}
           />

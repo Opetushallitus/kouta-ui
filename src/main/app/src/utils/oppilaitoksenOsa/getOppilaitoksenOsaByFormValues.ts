@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { isNumeric } from '#/src/utils';
+import { isNumeric, toKielistettyWithValueStr } from '#/src/utils';
 
 import {
   pickAndSerializeTranslations,
@@ -70,15 +70,18 @@ export const getOppilaitoksenOsaByFormValues = ({
               !_.isEmpty(hy.postiosoite) || hy.postinumero
                 ? {
                     osoite: kieleistykset(hy.postiosoite),
-                    postinumeroKoodiUri: hy.postinumero?.value || null,
+                    postinumeroKoodiUri: kieleistykset(
+                      toKielistettyWithValueStr(hy.postinumero)
+                    ),
                   }
                 : null,
             kayntiosoite:
               !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
                 ? {
                     osoite: kieleistykset(hy.kayntiosoite),
-                    postinumeroKoodiUri:
-                      hy.kayntiosoitePostinumero?.value || null,
+                    postinumeroKoodiUri: kieleistykset(
+                      toKielistettyWithValueStr(hy.kayntiosoitePostinumero)
+                    ),
                   }
                 : null,
             sahkoposti: kieleistykset(hy.sahkoposti),

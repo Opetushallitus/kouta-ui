@@ -13,14 +13,24 @@ exports[`getFormValuesByOppilaitos returns correct form values given oppilaitos 
       "sv": "Sv osoite",
     },
     "kayntiosoitePostinumero": {
-      "value": "postinumero_1#1",
+      "fi": {
+        "value": "postinumero_1#1",
+      },
+      "sv": {
+        "value": "postinumero_2#1",
+      },
     },
     "nimi": {
       "fi": "Hakijapalveluiden nimi",
       "sv": "Hakijapalveluiden nimi sv",
     },
     "postinumero": {
-      "value": "postinumero_1#1",
+      "fi": {
+        "value": "postinumero_1#1",
+      },
+      "sv": {
+        "value": "postinumero_2#1",
+      },
     },
     "postiosoite": {
       "fi": "Fi osoite",

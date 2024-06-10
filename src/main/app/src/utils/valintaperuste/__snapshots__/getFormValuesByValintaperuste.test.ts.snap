@@ -76,7 +76,12 @@ exports[`getFormValuesByValintaperuste returns correct form values given valinta
             },
             "paattyy": "2019-04-18T08:44",
             "postinumero": {
-              "value": "posti_1#1",
+              "fi": {
+                "value": "posti_1#1",
+              },
+              "sv": {
+                "value": "posti_2#1",
+              },
             },
           },
         ],

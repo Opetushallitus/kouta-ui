@@ -71,12 +71,12 @@ const oppilaitosFormVals = {
       fi: 'Fi osoite',
       sv: 'Sv osoite',
     },
-    postinumero: { value: 'postinumero_1#1' },
+    postinumero: { fi: { value: 'postinumero_1#1' } },
     kayntiosoite: {
       fi: 'Fi osoite',
       sv: 'Sv osoite',
     },
-    kayntiosoitePostinumero: { value: 'postinumero_1#1' },
+    kayntiosoitePostinumero: { fi: { value: 'postinumero_1#1' } },
     puhelinnumero: {
       fi: '1234',
       sv: '5678',

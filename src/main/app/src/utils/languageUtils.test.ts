@@ -26,7 +26,7 @@ describe('getKielistettyOsoite', () => {
       osoite: {
         fi: 'Hankalankuja 228',
       },
-      postinumeroKoodiUri: 'posti_15110',
+      postinumeroKoodiUri: { fi: 'posti_15110' },
     };
     const koodi = {
       koodiUri: 'posti_15110',
@@ -58,7 +58,7 @@ describe('getKielistettyOsoite', () => {
       osoite: {
         fi: 'Hankalankuja 228',
       },
-      postinumeroKoodiUri: 'posti_15110',
+      postinumeroKoodiUri: { fi: 'posti_15110' },
     };
     const koodi = undefined;
     const language = 'fi';
@@ -72,7 +72,7 @@ describe('getKielistettyOsoite', () => {
       osoite: {
         fi: 'Hankalankuja 228',
       },
-      postinumeroKoodiUri: 'posti_15110',
+      postinumeroKoodiUri: { fi: 'posti_15110' },
     };
     const koodi = {
       koodiUri: 'posti_15110',
@@ -105,11 +105,11 @@ describe('getKielistettyOsoite', () => {
         sv: 'Hankalavägen 228',
         en: 'Hankala street 229',
       },
-      postinumeroKoodiUri: 'posti_15110',
+      postinumeroKoodiUri: { sv: 'posti_15110', en: 'posti_15111' },
     };
     const koodi = {
-      koodiUri: 'posti_15110',
-      koodiArvo: '15110',
+      koodiUri: 'posti_15111',
+      koodiArvo: '15111',
       versio: 2,
       koodisto: {
         koodistoUri: 'posti',
@@ -128,7 +128,7 @@ describe('getKielistettyOsoite', () => {
     };
     const language = 'fi';
     expect(getKielistettyOsoite(osoite, koodi, language)).toEqual(
-      'Hankala street 229, 15110 LAHTI'
+      'Hankala street 229, 15111 LAHTI'
     );
   });
 });

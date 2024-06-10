@@ -219,7 +219,7 @@ export const AsyncSelect = ({
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       cacheOptions={true}
-      value={value}
+      value={value ?? ''}
       isLoading={isLoading || isLoadingValue}
       inputId={id}
       {...props}

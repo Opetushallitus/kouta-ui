@@ -47,7 +47,6 @@ ESLintin voi ajaa käsin komennolla `npm run lint`, tai automaattisen fiksauksen
 
 Korvaa kouta-backendissä `dev-vars.yml`-tiedostoon:
 
-    cas_url: https://localhost:3000/cas
     kouta_backend_cas_service: https://localhost:3000/kouta-backend/auth/login
 
 ja käynnistä kouta-backend (EmbeddedJettyLauncher).

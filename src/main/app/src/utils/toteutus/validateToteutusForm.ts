@@ -6,7 +6,6 @@ import {
   ApurahaYksikko,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
-  KOULUTUSTYYPPI,
 } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import createErrorBuilder, {
@@ -151,15 +150,6 @@ const validateHakeutumisTaiIlmoittautumisTapa = eb => {
             ),
             validateExistenceOfDate(
               'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa'
-            ),
-            validateIf(
-              ![
-                KOULUTUSTYYPPI.TUTKINNON_OSA,
-                KOULUTUSTYYPPI.OSAAMISALA,
-              ].includes(values.koulutustyyppi),
-              validateExistenceOfDate(
-                'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
-              )
             )
           )
         ),

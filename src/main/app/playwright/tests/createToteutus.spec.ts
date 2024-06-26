@@ -249,7 +249,8 @@ const fillNayttamistiedotSection = (
 
 const fillHakeutumisTaiIlmoittautumisTapaSection = (
   page: Page,
-  koulutustyyppi?: Koulutustyyppi
+  koulutustyyppi?: Koulutustyyppi,
+  fillEndDate: boolean = true
 ) =>
   withinSection(page, 'hakeutumisTaiIlmoittautumistapa', async section => {
     if (
@@ -297,10 +298,12 @@ const fillHakeutumisTaiIlmoittautumisTapaSection = (
       time: '00:00',
     });
 
-    await fillDateTime(section.getByTestId('paattyy'), {
-      date: '01.09.2050',
-      time: '00:00',
-    });
+    if (fillEndDate) {
+      await fillDateTime(section.getByTestId('paattyy'), {
+        date: '01.09.2050',
+        time: '00:00',
+      });
+    }
 
     await section
       .getByRole('textbox', {
@@ -552,7 +555,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page, false);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -621,7 +624,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page, false);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);

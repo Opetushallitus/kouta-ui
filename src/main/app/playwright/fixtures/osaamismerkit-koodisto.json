@@ -1,0 +1,610 @@
+[
+  {
+    "koodiUri": "osaamismerkit_1022",
+    "koodiArvo": "1022",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digital informationssökning",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Digitaalinen tiedonhaku",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1023",
+    "koodiArvo": "1023",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digitaaliset viestintäkanavat",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Digitala kommunikationskanaler",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1025",
+    "koodiArvo": "1025",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digitaliseringens inverkan",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Digitalisaation vaikutukset",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1013",
+    "koodiArvo": "1013",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Palkka",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Lön",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1017",
+    "koodiArvo": "1017",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Den egna arbetshälsan",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Oma työhyvinvointi",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1018",
+    "koodiArvo": "1018",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Kommunikation",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Vuorovaikutus",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1020",
+    "koodiArvo": "1020",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Att använda respons",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Palautteen hyödyntäminen",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1003",
+    "koodiArvo": "1003",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Eget lärande",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Oma oppiminen",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1006",
+    "koodiArvo": "1006",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Kommunikation",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Viestintä",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1008",
+    "koodiArvo": "1008",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Grundläggande räkneoperationer",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Peruslaskutoimitukset",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1012",
+    "koodiArvo": "1012",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Konsumentens rättigheter",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Kuluttajan oikeudet",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1001",
+    "koodiArvo": "1001",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Den egna vägen till kunnande",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Oma osaamispolku",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1002",
+    "koodiArvo": "1002",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Oma ajankäyttö",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Egen tidsanvändning",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1028",
+    "koodiArvo": "1028",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digiosaamisen kehittäminen",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Utveckling av den digitala kompetensen",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1031",
+    "koodiArvo": "1031",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Kestävä tulevaisuus",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "En hållbar framtid",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1029",
+    "koodiArvo": "1029",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Miljöansvar i hemmet",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Kodin ympäristövastuullisuus",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1030",
+    "koodiArvo": "1030",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Att verka i samhället",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Toimiminen yhteiskunnassa",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1021",
+    "koodiArvo": "1021",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digitala verksamhetsmiljöer",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Digitaaliset toimintaympäristöt",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1000",
+    "koodiArvo": "1000",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Oma osaaminen",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Eget kunnande",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1024",
+    "koodiArvo": "1024",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digitalt innehåll",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Digitaalinen sisältö",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1026",
+    "koodiArvo": "1026",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digitaalinen turvallisuus",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Digital säkerhet",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1027",
+    "koodiArvo": "1027",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Digitala lösningar",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Digitaaliset ratkaisut",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1014",
+    "koodiArvo": "1014",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Offentlig ekonomi",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Julkinen talous",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1015",
+    "koodiArvo": "1015",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Oman toiminnan ohjaus",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Egen aktivitet",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1016",
+    "koodiArvo": "1016",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Oma turvallisuustoiminta",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Trygghet och säkerhet",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1019",
+    "koodiArvo": "1019",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Delta som medlem i grupp",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ryhmässä toiminen",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1007",
+    "koodiArvo": "1007",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Lukeminen",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Läsfärdigheter",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1009",
+    "koodiArvo": "1009",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Arjen rahankäyttö",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Att använda pengar i vardagen",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1010",
+    "koodiArvo": "1010",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Oma talous",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Min ekonomi",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1011",
+    "koodiArvo": "1011",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Måttenheter",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Mittayksiköt",
+        "kieli": "FI"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1004",
+    "koodiArvo": "1004",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Tekstin sisältö",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Textinnehåll",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  },
+  {
+    "koodiUri": "osaamismerkit_1005",
+    "koodiArvo": "1005",
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamismerkit"
+    },
+    "metadata": [
+      {
+        "nimi": "Tekstitaidot",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Textkompetens",
+        "kieli": "SV"
+      }
+    ],
+    "ylaRelaatiot": []
+  }
+]

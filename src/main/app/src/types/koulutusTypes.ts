@@ -25,6 +25,7 @@ export type InformationSectionValues = {
   isAvoinKorkeakoulutus?: boolean;
   tunniste?: string;
   opinnonTyyppi?: SelectOption;
+  osaamismerkki?: SelectOption;
 };
 
 export type KoulutusFormValues = {
@@ -51,6 +52,7 @@ export type KoulutusFormValues = {
   tarjoajat: { tarjoajat: Array<string>; kaytaPohjanJarjestajaa?: boolean };
   julkinen?: boolean;
   teemakuva?: string;
+  hakutuloslistauksenKuvake?: string;
   esikatselu?: boolean;
   osaamisala?: {
     osaamisala: SelectOption;

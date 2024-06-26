@@ -83,6 +83,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       values?.information?.eperuste?.value || osaamisala?.eperuste?.value
     ),
     teemakuva: values?.teemakuva,
+    hakutuloslistauksenKuvake: values?.hakutuloslistauksenKuvake,
     sorakuvausId,
     metadata: {
       tyyppi: koulutustyyppi,
@@ -148,6 +149,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       opinnonTyyppiKoodiUri: values?.information?.opinnonTyyppi?.value || null,
       erikoistumiskoulutusKoodiUri:
         values?.information?.erikoistumiskoulutus?.value || null,
+      osaamismerkkiKoodiUri: values?.information?.osaamismerkki?.value || null,
     },
   };
 };

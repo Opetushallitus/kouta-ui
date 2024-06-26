@@ -39,6 +39,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     esikatselu = false,
     tila,
     teemakuva,
+    hakutuloslistauksenKuvake,
     ePerusteId,
     sorakuvausId,
     externalId,
@@ -66,6 +67,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     tunniste,
     opinnonTyyppiKoodiUri,
     erikoistumiskoulutusKoodiUri = '',
+    osaamismerkkiKoodiUri,
   } = metadata;
 
   return {
@@ -105,6 +107,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       erikoistumiskoulutus: {
         value: erikoistumiskoulutusKoodiUri,
       },
+      osaamismerkki: { value: osaamismerkkiKoodiUri },
     },
     koulutustyyppi,
     lisatiedot: {
@@ -153,6 +156,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     esikatselu,
     julkinen,
     teemakuva,
+    hakutuloslistauksenKuvake,
     osaamisala: osaamisalaKoodiUri
       ? {
           osaamisala: {

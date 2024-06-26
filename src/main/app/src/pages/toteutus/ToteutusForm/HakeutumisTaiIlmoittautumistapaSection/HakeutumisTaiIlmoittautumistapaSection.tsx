@@ -15,7 +15,7 @@ import {
 import { SegmentTab } from '#/src/components/SegmentTab';
 import { SegmentTabs } from '#/src/components/SegmentTabs';
 import { Box } from '#/src/components/virkailija';
-import { Hakeutumistapa } from '#/src/constants';
+import { Hakeutumistapa, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue, useSetFieldValue } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
@@ -47,6 +47,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
   name = 'hakeutumisTaiIlmoittautumistapa',
   language,
   hasHakukohdeAttached,
+  koulutustyyppi,
 }) => {
   const { t } = useTranslation();
   const hakuTapa = useFieldValue(`${name}.hakuTapa`);
@@ -63,6 +64,11 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
     hakukohteetKaytossaValinta === undefined && hasHakukohdeAttached
   );
 
+  const isVstOsaamismerkki =
+    koulutustyyppi === KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI;
+
+  useSetFieldValue(`${name}.isHakukohteetKaytossa`, false, isVstOsaamismerkki);
+
   const showHakeutumisTapaFieldsJaAloituspaikat =
     hakukohteetKaytossaValinta === false; // näytetään vain jos ei-vaihtoehto valittu, ei null/undefined-tapauksessa
 
@@ -73,7 +79,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
       <Box mb={2} {...getTestIdProps(`${name}.isHakukohteetKaytossa`)}>
         <HakukohteetKaytossaChoice
           name={`${name}.isHakukohteetKaytossa`}
-          disabled={hasHakukohdeAttached}
+          disabled={hasHakukohdeAttached || isVstOsaamismerkki}
         />
       </Box>
       {showHakukohteetKaytossaInfobox && (

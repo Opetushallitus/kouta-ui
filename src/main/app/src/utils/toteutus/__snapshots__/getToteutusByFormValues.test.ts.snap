@@ -240,6 +240,7 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
         },
       },
     ],
+    "suoritetaanNayttona": undefined,
     "taiteenalaKoodiUrit": [
       "taiteenperusopetustaiteenala_sirkustaide",
       "taiteenperusopetustaiteenala_sanataide",

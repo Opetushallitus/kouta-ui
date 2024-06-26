@@ -38,6 +38,7 @@
     "hasJotpaRahoitus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
+    "suoritetaanNayttona": false,
     "painotukset": [],
     "kielivalikoima": {
       "A1Kielet": [],

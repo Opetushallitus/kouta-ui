@@ -179,6 +179,19 @@ export const TaiteenperusopetusTiedotSection = ({
   );
 };
 
+const CommonVSTFields = ({ name }: CommonTiedotProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <VerticalBox gap={2}>
+      <CommonTiedotFields name={name} />
+      <Field name={`${name}.suoritetaanNayttona`} component={FormFieldSwitch}>
+        {t('toteutuslomake.suoritetaanNayttona')}
+      </Field>
+    </VerticalBox>
+  );
+};
+
 export const VapaaSivistystyoOpistovuosiTiedotSection = ({
   koulutus,
   language,
@@ -195,7 +208,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         }
         koulutus={koulutus}
       />
-      <CommonTiedotFields name={name} />
+      <CommonVSTFields name={name} />
     </VerticalBox>
   );
 };
@@ -216,7 +229,7 @@ export const VapaaSivistystyoMuuTiedotSection = ({
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
       />
-      <CommonTiedotFields name={name} />
+      <CommonVSTFields name={name} />
     </VerticalBox>
   );
 };
@@ -228,16 +241,12 @@ export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
   language,
   name,
 }: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
   useNimiFromKoulutus({ koulutus, name });
 
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
-      <CommonTiedotFields name={name} />
-      <Field name={`${name}.suoritetaanNayttona`} component={FormFieldSwitch}>
-        {t('toteutuslomake.suoritetaanNayttona')}
-      </Field>
+      <CommonVSTFields name={name} />
     </VerticalBox>
   );
 };

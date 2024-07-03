@@ -80,6 +80,9 @@ export type ToteutusFormValues = {
   opintojaksojenLiittaminen?: {
     opintojaksot: Array<{ opintojakso: SelectOption }>;
   };
+  osaamismerkkienLiittaminen?: {
+    osaamismerkit: Array<{ osaamismerkki: SelectOption }>;
+  };
   kuvaus: TranslatedField<EditorState>;
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;

@@ -654,7 +654,11 @@
     "isTaydennyskoulutus": "Koulutus on täydennyskoulutusta",
     "isTyovoimakoulutus": "Koulutus on työvoimakoulutusta",
     "valitseTaiteenalat": "Valitse taiteenalat",
-    "suoritetaanNayttona": "Suoritetaan näyttönä"
+    "suoritetaanNayttona": "Suoritetaan näyttönä",
+    "siirryOsaamismerkinTietoihin": "Siirry osaamismerkin tietoihin",
+    "osaamismerkki": "Osaamismerkki",
+    "osaamismerkit": "Osaamismerkit",
+    "lisaaOsaamismerkki": "Lisää osaamismerkki"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

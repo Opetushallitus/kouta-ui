@@ -328,6 +328,17 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         };
       }),
     },
+    osaamismerkkienLiittaminen: {
+      osaamismerkit: (metadata?.liitetytOsaamismerkit || []).map(
+        osaamismerkki => {
+          return {
+            osaamismerkki: {
+              value: osaamismerkki,
+            },
+          };
+        }
+      ),
+    },
   };
 };
 

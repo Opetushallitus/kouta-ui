@@ -9,18 +9,17 @@ import { FormFieldSelect } from '#/src/components/formFields';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
-import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 import { getTestIdProps } from '#/src/utils';
-import { useOpintojaksot } from '#/src/utils/toteutus/getOpintojaksot';
 
-export const OpintojaksotFields = ({ fields, organisaatioOid }) => {
+export const EntityFields = ({
+  fields,
+  options,
+  organisaatioOid,
+  fieldName,
+  entityType,
+  entityLinkTranslationKey,
+}) => {
   const { t } = useTranslation();
-
-  const { data: opintojaksot } = useOpintojaksot({
-    organisaatioOid,
-  });
-
-  const options = useEntityOptions(opintojaksot);
 
   return (
     <>
@@ -28,8 +27,8 @@ export const OpintojaksotFields = ({ fields, organisaatioOid }) => {
         {fields.map((field, index) => {
           const fieldData = fields.get(index);
           const oid =
-            !_.isEmpty(fieldData) && !_.isEmpty(fieldData.opintojakso)
-              ? fieldData.opintojakso.value
+            !_.isEmpty(fieldData) && !_.isEmpty(fieldData[fieldName])
+              ? fieldData[fieldName].value
               : undefined;
           return (
             <Box
@@ -37,14 +36,14 @@ export const OpintojaksotFields = ({ fields, organisaatioOid }) => {
               width={0.8}
               key={index}
               marginTop={2}
-              {...getTestIdProps(`opintojakso-${index}`)}
+              {...getTestIdProps(`{fieldName}-${index}`)}
             >
               <Box width={'70%'} flexShrink={1} marginRight={2}>
                 <Field
                   component={FormFieldSelect}
-                  name={`${field}.opintojakso`}
+                  name={`${field}.${fieldName}`}
                   options={options}
-                  label={t('toteutuslomake.opintojakso')}
+                  label={t(`toteutuslomake.${fieldName}`)}
                   required
                 />
               </Box>
@@ -62,9 +61,9 @@ export const OpintojaksotFields = ({ fields, organisaatioOid }) => {
                 {organisaatioOid && oid && (
                   <Box marginLeft={2}>
                     <RouterAnchor
-                      to={`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`}
+                      to={`/organisaatio/${organisaatioOid}/${entityType}/${oid}/muokkaus`}
                     >
-                      {t('toteutuslomake.muokkaaOpintojaksoa')}
+                      {t(entityLinkTranslationKey)}
                     </RouterAnchor>
                   </Box>
                 )}
@@ -83,7 +82,7 @@ export const OpintojaksotFields = ({ fields, organisaatioOid }) => {
           }}
           {...getTestIdProps('lisaaButton')}
         >
-          {t('toteutuslomake.lisaaOpintojakso')}
+          {t(`toteutuslomake.lisaa${_.capitalize(fieldName)}`)}
         </IconButton>
       </Box>
     </>

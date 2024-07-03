@@ -556,7 +556,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, false);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page, tyyppi, false);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -625,7 +625,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, false);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page, tyyppi, false);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);

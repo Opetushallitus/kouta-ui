@@ -24,7 +24,7 @@ export const EntityFields = ({
   return (
     <>
       <FormControl>
-        {fields.map((field, index) => {
+        {fields.map((field: Field, index: number) => {
           const fieldData = fields.get(index);
           const oid =
             !_.isEmpty(fieldData) && !_.isEmpty(fieldData[fieldName])

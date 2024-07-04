@@ -36,7 +36,7 @@ export const EntityFields = ({
               width={0.8}
               key={index}
               marginTop={2}
-              {...getTestIdProps(`{fieldName}-${index}`)}
+              {...getTestIdProps(`${fieldName}-${index}`)}
             >
               <Box width={'70%'} flexShrink={1} marginRight={2}>
                 <Field

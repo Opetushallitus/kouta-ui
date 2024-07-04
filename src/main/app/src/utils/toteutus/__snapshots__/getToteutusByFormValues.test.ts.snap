@@ -117,6 +117,7 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
       "sv": "<p>Sv toteutuksenkuvaus</p>",
     },
     "liitetytOpintojaksot": undefined,
+    "liitetytOsaamismerkit": undefined,
     "lisatietoaHakeutumisesta": {
       "fi": "<p>Fi lisatiedot</p>",
       "sv": "<p>Sv sisalto</p>",

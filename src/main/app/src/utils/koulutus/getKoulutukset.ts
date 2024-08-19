@@ -20,6 +20,7 @@ export const getKoulutukset =
 export const getKoulutuksetByKoulutustyyppi = async ({
   organisaatioOid,
   koulutustyyppi,
+  myosArkistoidut = true,
   httpClient,
   apiUrls,
 }) => {
@@ -29,7 +30,7 @@ export const getKoulutuksetByKoulutustyyppi = async ({
       params: {
         organisaatioOid,
         ...(koulutustyyppi && { koulutustyyppi }),
-        myosArkistoidut: true,
+        myosArkistoidut,
       },
     }
   );

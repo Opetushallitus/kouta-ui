@@ -16,6 +16,7 @@ export const OsaamismerkitFields = ({ fields, organisaatioOid }) => {
   const { data: osaamismerkit } = useKoulutuksetByKoulutustyyppi({
     organisaatioOid,
     koulutustyyppi: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+    myosArkistoidut: false,
   });
 
   const options = useEntityOptions(osaamismerkit);

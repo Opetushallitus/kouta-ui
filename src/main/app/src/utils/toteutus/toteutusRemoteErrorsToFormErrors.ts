@@ -1,6 +1,7 @@
-import _ from 'lodash';
+import { map, findIndex } from 'lodash';
+import { match } from 'ts-pattern';
 
-import { LANGUAGES } from '#/src/constants';
+import { LANGUAGES, KOULUTUSTYYPPI } from '#/src/constants';
 import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
 
 export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
@@ -142,18 +143,48 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   }
 
   if (
-    /metadata.liitetytOpintojaksot.julkaisutila/.test(path) &&
-    errorType === 'invalidTilaForLiitettyOpintojaksoOnJulkaisu'
+    /metadata.liitetytEntiteetit.julkaisutila/.test(path) &&
+    errorType === 'invalidTilaForLiitettyOnJulkaisu'
   ) {
-    const liitetytOpintojaksot =
-      formValues?.opintojaksojenLiittaminen?.opintojaksot || [];
-    const indicesForOpintojaksotWithInvalidTila = _.map(meta.toteutukset, oid =>
-      _.findIndex(liitetytOpintojaksot, ['opintojakso.value', oid])
+    const koulutustyyppi = formValues.koulutustyyppi;
+
+    const [liitetytEntiteetit, propertyName] = match(koulutustyyppi)
+      .with(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS, () => [
+        formValues?.opintojaksojenLiittaminen?.opintojaksot,
+        'opintojakso',
+      ])
+      .with(
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+        () => [
+          formValues?.osaamismerkkienLiittaminen?.osaamismerkit,
+          'osaamismerkki',
+        ]
+      )
+      .otherwise(() => []);
+
+    const indicesForOpintojaksotWithInvalidTila = map(meta.entiteetit, oid =>
+      findIndex(liitetytEntiteetit, [`${propertyName}.value`, oid])
     ).filter(i => i >= 0);
+
+    const fieldValue = index => {
+      return match(koulutustyyppi)
+        .with(
+          KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+          () => `opintojaksojenLiittaminen.opintojaksot[${index}].opintojakso`
+        )
+        .with(
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+          () =>
+            `osaamismerkkienLiittaminen.osaamismerkit[${index}].osaamismerkki`
+        )
+        .otherwise(() => []);
+    };
 
     return indicesForOpintojaksotWithInvalidTila.map(index => {
       return {
-        field: `opintojaksojenLiittaminen.opintojaksot[${index}].opintojakso`,
+        field: fieldValue(index),
         errorKey: `validointivirheet.${errorType}`,
       };
     });

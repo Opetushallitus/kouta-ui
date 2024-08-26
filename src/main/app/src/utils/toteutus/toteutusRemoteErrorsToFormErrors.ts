@@ -148,7 +148,10 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   ) {
     const koulutustyyppi = formValues.koulutustyyppi;
 
-    const [liitetytEntiteetit, koulutustyyppiName] = match(koulutustyyppi)
+    const [liitetytEntiteetit, koulutustyyppiName]: Array<
+      Array<string>,
+      string
+    > = match(koulutustyyppi)
       .with(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS, () => [
         formValues?.opintojaksojenLiittaminen?.opintojaksot,
         'opintojakso',
@@ -163,7 +166,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
       )
       .otherwise(() => []);
 
-    const indicesForOpintojaksotWithInvalidTila = map(meta.entiteetit, oid =>
+    const indicesForOpintojaksotWithInvalidTila = map(meta?.entiteetit, oid =>
       findIndex(liitetytEntiteetit, [`${koulutustyyppiName}.value`, oid])
     ).filter(i => i >= 0);
 

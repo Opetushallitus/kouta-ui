@@ -1,4 +1,4 @@
-import { map, findIndex } from 'lodash';
+import { capitalize, map, findIndex } from 'lodash';
 import { match } from 'ts-pattern';
 
 import { LANGUAGES, KOULUTUSTYYPPI } from '#/src/constants';
@@ -148,7 +148,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   ) {
     const koulutustyyppi = formValues.koulutustyyppi;
 
-    const [liitetytEntiteetit, propertyName] = match(koulutustyyppi)
+    const [liitetytEntiteetit, koulutustyyppiName] = match(koulutustyyppi)
       .with(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS, () => [
         formValues?.opintojaksojenLiittaminen?.opintojaksot,
         'opintojakso',
@@ -164,7 +164,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
       .otherwise(() => []);
 
     const indicesForOpintojaksotWithInvalidTila = map(meta.entiteetit, oid =>
-      findIndex(liitetytEntiteetit, [`${propertyName}.value`, oid])
+      findIndex(liitetytEntiteetit, [`${koulutustyyppiName}.value`, oid])
     ).filter(i => i >= 0);
 
     const fieldValue = index => {
@@ -185,7 +185,9 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
     return indicesForOpintojaksotWithInvalidTila.map(index => {
       return {
         field: fieldValue(index),
-        errorKey: `validointivirheet.${errorType}`,
+        errorKey: `validointivirheet.invalidTilaForLiitetty${capitalize(
+          koulutustyyppiName
+        )}OnJulkaisu`,
       };
     });
   }

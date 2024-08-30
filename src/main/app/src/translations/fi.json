@@ -358,7 +358,8 @@
     "cannotRemoveTarjoajaFromAvoinKorkeakoulutus": "Koulutuksen tarjoajaa ei voi enää poistaa, koska koulutukseen on liitetty toteutuksia, joissa tarjoaja on lisätty järjestäjäksi",
     "vaaraMaksullisuustyyppiApurahalle": "Apurahan voi asettaa vain lukuvuosimaksulliselle toteutukselle.",
     "invalidOpetuskieliWithLukuvuosimaksu": "Lukuvuosimaksun voi valita maksullisuustyypiksi vain englanninkielisille toteutuksille.",
-    "missingTarjoajatForNonJulkinenKoulutus": "Tämän tyyppiselle koulutukselle täytyy valita vähintään yksi järjestäjä, ellei koulutus ole julkinen"
+    "missingTarjoajatForNonJulkinenKoulutus": "Tämän tyyppiselle koulutukselle täytyy valita vähintään yksi järjestäjä, ellei koulutus ole julkinen",
+    "invalidStateChangeForLiitetty": "Entiteetin tilaa ei voi vaihtaa, koska se on liitetty entiteetteihin {{julkaistutToteutukset}}, joiden tila on Julkaistu."
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

@@ -7,6 +7,7 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   errorType,
   msg,
   path,
+  meta,
 }) => {
   if (path === 'koulutustyyppi') {
     if (/sora/i.test(msg)) {
@@ -128,6 +129,19 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
     return {
       field: 'information.osaamismerkki',
       errorKey: `validointivirheet.pakollinen`,
+    };
+  }
+
+  if (
+    path === 'metadata.tila' &&
+    errorType === 'invalidStateChangeForLiitetty'
+  ) {
+    return {
+      field: 'tila',
+      errorKey: (t: TFunction) =>
+        t(`validointivirheet.${errorType}`, {
+          julkaistutToteutukset: meta?.julkaistutToteutukset,
+        }),
     };
   }
 };

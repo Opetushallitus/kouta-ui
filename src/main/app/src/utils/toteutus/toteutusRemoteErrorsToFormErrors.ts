@@ -223,4 +223,17 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
       errorKey: `validointivirheet.${errorType}`,
     };
   }
+
+  if (
+    path === 'metadata.tila' &&
+    errorType === 'invalidStateChangeForLiitetty'
+  ) {
+    return {
+      field: 'tila',
+      errorKey: (t: TFunction) =>
+        t(`validointivirheet.${errorType}`, {
+          julkaistutToteutukset: meta?.julkaistutToteutukset,
+        }),
+    };
+  }
 };

@@ -49,7 +49,7 @@ type KoutaErrorResponse = {
   errorType: string;
   msg: string;
   path: string;
-  meta?: { entiteetit: Array<string> };
+  meta?: { entiteetit?: Array<string> };
 };
 
 type KoutaErrorData = {

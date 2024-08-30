@@ -1,4 +1,5 @@
-import { capitalize, map, findIndex } from 'lodash';
+import { TFunction } from 'i18next';
+import { capitalize, map, findIndex, isEmpty } from 'lodash';
 import { match } from 'ts-pattern';
 
 import { LANGUAGES, KOULUTUSTYYPPI } from '#/src/constants';
@@ -46,7 +47,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   if (path === 'tila') {
     if (errorType === 'notYetJulkaistu') {
       if (/sora/i.test(msg)) {
-        const errorKey = t =>
+        const errorKey = (t: TFunction) =>
           t('yleiset.riippuvuusEiJulkaistu', {
             entity: t('yleiset.soraKuvaus'),
           });
@@ -148,51 +149,55 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   ) {
     const koulutustyyppi = formValues.koulutustyyppi;
 
-    const [liitetytEntiteetit, koulutustyyppiName]: Array<
-      Array<string>,
-      string
-    > = match(koulutustyyppi)
-      .with(KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS, () => [
-        formValues?.opintojaksojenLiittaminen?.opintojaksot,
-        'opintojakso',
-      ])
+    const [liitetytEntiteetit, koulutustyyppiName] = match(koulutustyyppi)
+      .with(
+        KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+        () =>
+          [
+            formValues?.opintojaksojenLiittaminen?.opintojaksot,
+            'opintojakso',
+          ] as const
+      )
       .with(
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
         KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-        () => [
-          formValues?.osaamismerkkienLiittaminen?.osaamismerkit,
-          'osaamismerkki',
-        ]
+        () =>
+          [
+            formValues?.osaamismerkkienLiittaminen?.osaamismerkit,
+            'osaamismerkki',
+          ] as const
       )
       .otherwise(() => []);
 
-    const indicesForOpintojaksotWithInvalidTila = map(meta?.entiteetit, oid =>
-      findIndex(liitetytEntiteetit, [`${koulutustyyppiName}.value`, oid])
-    ).filter(i => i >= 0);
+    if (!isEmpty(liitetytEntiteetit)) {
+      const indicesForOpintojaksotWithInvalidTila = map(meta?.entiteetit, oid =>
+        findIndex(liitetytEntiteetit, [`${koulutustyyppiName}.value`, oid])
+      ).filter(i => i >= 0);
 
-    const fieldValue = index => {
-      return match(koulutustyyppi)
-        .with(
-          KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
-          () => `opintojaksojenLiittaminen.opintojaksot[${index}].opintojakso`
-        )
-        .with(
-          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-          () =>
-            `osaamismerkkienLiittaminen.osaamismerkit[${index}].osaamismerkki`
-        )
-        .otherwise(() => []);
-    };
-
-    return indicesForOpintojaksotWithInvalidTila.map(index => {
-      return {
-        field: fieldValue(index),
-        errorKey: `validointivirheet.invalidTilaForLiitetty${capitalize(
-          koulutustyyppiName
-        )}OnJulkaisu`,
+      const fieldValue = (index: number) => {
+        return match(koulutustyyppi)
+          .with(
+            KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+            () => `opintojaksojenLiittaminen.opintojaksot[${index}].opintojakso`
+          )
+          .with(
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            () =>
+              `osaamismerkkienLiittaminen.osaamismerkit[${index}].osaamismerkki`
+          )
+          .otherwise(() => '');
       };
-    });
+
+      return indicesForOpintojaksotWithInvalidTila.map(index => {
+        return {
+          field: fieldValue(index),
+          errorKey: `validointivirheet.invalidTilaForLiitetty${capitalize(
+            koulutustyyppiName
+          )}OnJulkaisu`,
+        };
+      });
+    }
   }
 
   if (errorType === 'invalidIsAvoinKorkeakoulutusIntegrity') {

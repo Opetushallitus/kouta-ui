@@ -1,3 +1,5 @@
+import { TFunction } from 'i18next';
+
 import { LANGUAGES } from '#/src/constants';
 import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
 
@@ -38,7 +40,7 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   }
   if (path === 'tila') {
     if (errorType === 'notYetJulkaistu' && /sora/i.test(msg)) {
-      const errorKey = t =>
+      const errorKey = (t: TFunction) =>
         t('yleiset.riippuvuusEiJulkaistu', {
           entity: t('yleiset.soraKuvaus'),
         });

@@ -104,6 +104,8 @@ export const HakukohdeForm = ({
           section="organisaatio"
           Component={OrganisaatioSection}
           header={t('yleiset.organisaatio')}
+          updateAllowed={true}
+          organisaatioOid={organisaatioOid}
         />
       )}
       {formMode === FormMode.CREATE && (

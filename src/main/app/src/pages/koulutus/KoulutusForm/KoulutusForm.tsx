@@ -7,7 +7,6 @@ import { match } from 'ts-pattern';
 import { FormButton } from '#/src/components/FormButton';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import HakutuloslistauksenKuvakeSection from '#/src/components/HakutuloslistauksenKuvakeSection';
 import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
@@ -371,17 +370,6 @@ export const KoulutusForm = ({
               disabled={onlyTarjoajaRights}
               koulutustyyppi={koulutustyyppi}
             />
-
-            {koulutustyyppi ===
-              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI && (
-              <FormCollapse
-                section="hakutuloslistauksenKuvake"
-                header={t('koulutuslomake.hakutuloslistauksenKuvake')}
-                Component={HakutuloslistauksenKuvakeSection}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-              />
-            )}
 
             {!isNewOphKoulutus && (
               <FormCollapse

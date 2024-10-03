@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _fp from 'lodash/fp';
+import { identity, isNaN, isNil, isNumber, noop, toString } from 'lodash';
 
 import { Input, InputProps } from '#/src/components/virkailija';
 import { parseFloatComma } from '#/src/utils';
@@ -14,25 +14,25 @@ type NumberInputProps = {
 } & InputProps;
 
 const floatToCommaStr = (value?: number | null) =>
-  _fp.isNil(value) ? '' : _fp.toString(value).replace('.', ',');
+  isNil(value) ? '' : toString(value).replace('.', ',');
 
 const NumberInput = ({
-  onBlur = _fp.noop,
-  min = 0,
+  onBlur = noop,
+  min,
   max,
   fallbackValue = null,
-  parseValue = _fp.identity,
+  parseValue = identity,
   ...props
 }: NumberInputProps) => {
   const usedOnBlur = e => {
     const value: string = e?.target?.value;
     const floatValue = parseValue(value);
-    if (_fp.isNaN(floatValue) || _fp.isNil(floatValue)) {
+    if (isNaN(floatValue) || isNil(floatValue)) {
       e.target.value = fallbackValue;
     } else {
-      if (_fp.isNumber(max) && floatValue > max) {
+      if (isNumber(max) && floatValue > max) {
         e.target.value = max;
-      } else if (_fp.isNumber(min) && floatValue < min) {
+      } else if (isNumber(min) && floatValue < min) {
         e.target.value = min;
       } else {
         e.target.value = floatToCommaStr(floatValue);

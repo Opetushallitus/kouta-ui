@@ -40,6 +40,13 @@ export interface paths {
      */
     post: operations["Tallenna teemakuva"];
   };
+  "/raportointi/hakukohteet": {
+    /**
+     * Tallentaa hakukohteet siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut hakukohteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportHakukohteet"];
+  };
   "/indexer/koulutus/{oid}/toteutukset/list": {
     /**
      * Listaa kaikki koulutuksen toteutukset
@@ -86,6 +93,13 @@ export interface paths {
      * @description Tallenna oppilaitoksen logo väliaikaiseen sijaintiin. Logo siirretään lopulliseen sijaintiinsa, kun se asetetaan oppilaitoksen logoksi.
      */
     post: operations["Tallenna logo"];
+  };
+  "/raportointi/koulutukset": {
+    /**
+     * Tallentaa koulutukset siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportKoulutukset"];
   };
   "/indexer/pistehistoria": {
     /**
@@ -166,6 +180,13 @@ export interface paths {
      * @description Hakee organisaation tiedot organisaatiopalvelusta
      */
     get: operations["getOrganisaatio"];
+  };
+  "/raportointi/pistehistoria": {
+    /**
+     * Tallentaa pistehistorian siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut pistehistoriatiedot ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportPistehistoria"];
   };
   "/external/koulutus": {
     /**
@@ -520,6 +541,20 @@ export interface paths {
      */
     post: operations["indexerListKoulutusOidsByTarjoajat"];
   };
+  "/raportointi/toteutukset": {
+    /**
+     * Tallentaa toteutukset siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut toteutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportToteutukset"];
+  };
+  "/raportointi/asiasanat": {
+    /**
+     * Tallentaa asiasanat siirtotiedostoon
+     * @description Hakee kaikki asiasanat ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportAsiasanat"];
+  };
   "/indexer/toteutukset": {
     /**
      * Hakee toteutukset, joiden oidit annettu requestBodyssä
@@ -540,6 +575,13 @@ export interface paths {
      * @description Tarkista käyttäjän sessio
      */
     get: operations["Tarkista sessio"];
+  };
+  "/raportointi/oppilaitoksetJaOsat": {
+    /**
+     * Tallentaa oppilaitokset ja niiden osat siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut oppilaitokset ja osat, ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportOppilaitoksetJaOsat"];
   };
   "/koulutus/{oid}/toteutukset/list": {
     /**
@@ -583,12 +625,33 @@ export interface paths {
      */
     get: operations["listOppilaitosOsat"];
   };
+  "/raportointi/haut": {
+    /**
+     * Tallentaa haut siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut haut ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportHaut"];
+  };
   "/indexer/list-opintokokonaisuudet": {
     /**
      * Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty
      * @description Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty. Tämä rajapinta on indeksointia varten
      */
     post: operations["indexerListOpintokokonaisuudet"];
+  };
+  "/raportointi/sorakuvaukset": {
+    /**
+     * Tallentaa sorakuvaukset siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut sorakuvaukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportSorakuvaukset"];
+  };
+  "/raportointi/ammattinimikkeet": {
+    /**
+     * Tallentaa ammattinimikkeet siirtotiedostoon
+     * @description Hakee kaikki ammattinimikkeet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportAmmattinimikkeet"];
   };
   "/haku/{oid}": {
     /**
@@ -603,6 +666,13 @@ export interface paths {
      * @description Hakee oppilaitoksen osan kuvailutiedot
      */
     get: operations["getOppilaitoksenOsa"];
+  };
+  "/raportointi/valintaperusteet": {
+    /**
+     * Tallentaa valintaperusteet siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut valintaperusteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportValintaperusteet"];
   };
   "/healthcheck/": {
     /**
@@ -3874,6 +3944,29 @@ export interface operations {
     };
   };
   /**
+   * Tallentaa hakukohteet siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut hakukohteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportHakukohteet: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
    * Listaa kaikki koulutuksen toteutukset
    * @description Listaa kaikki koulutuksen toteutukset. Tämä rajapinta on indeksointia varten
    */
@@ -4077,6 +4170,29 @@ export interface operations {
         "image/jpeg": string;
         "image/png": string;
         "image/svg+xml": string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa koulutukset siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportKoulutukset: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
       };
     };
     responses: {
@@ -4425,6 +4541,29 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["Organisaatio"];
         };
+      };
+    };
+  };
+  /**
+   * Tallentaa pistehistorian siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut pistehistoriatiedot ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportPistehistoria: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
       };
     };
   };
@@ -5654,6 +5793,41 @@ export interface operations {
     };
   };
   /**
+   * Tallentaa toteutukset siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut toteutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportToteutukset: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa asiasanat siirtotiedostoon
+   * @description Hakee kaikki asiasanat ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportAsiasanat: {
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
    * Hakee toteutukset, joiden oidit annettu requestBodyssä
    * @description Hakee toteutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
    */
@@ -5712,6 +5886,29 @@ export interface operations {
       };
       /** @description Unauthorized */
       401: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa oppilaitokset ja niiden osat siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut oppilaitokset ja osat, ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportOppilaitoksetJaOsat: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
         content: never;
       };
     };
@@ -5930,6 +6127,29 @@ export interface operations {
     };
   };
   /**
+   * Tallentaa haut siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut haut ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportHaut: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
    * Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty
    * @description Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty. Tämä rajapinta on indeksointia varten
    */
@@ -5940,6 +6160,41 @@ export interface operations {
         "application/json": string[];
       };
     };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa sorakuvaukset siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut sorakuvaukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportSorakuvaukset: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa ammattinimikkeet siirtotiedostoon
+   * @description Hakee kaikki ammattinimikkeet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportAmmattinimikkeet: {
     responses: {
       /** @description Ok */
       200: {
@@ -5998,6 +6253,29 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["OppilaitoksenOsa"];
         };
+      };
+    };
+  };
+  /**
+   * Tallentaa valintaperusteet siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut valintaperusteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportValintaperusteet: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
       };
     };
   };

@@ -124,7 +124,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
                 <Field
                   name={`${name}.aloituspaikat`}
                   component={FormFieldIntegerInput}
-                  min={0}
+                  fallbackValue={null}
                   label={t('toteutuslomake.aloituspaikat')}
                   type="number"
                 />

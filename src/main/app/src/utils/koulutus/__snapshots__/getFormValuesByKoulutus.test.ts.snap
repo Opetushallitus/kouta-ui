@@ -11,7 +11,6 @@ exports[`getFormValuesByKoulutus returns correct form values for ammatillinen ko
   },
   "esikatselu": false,
   "externalId": undefined,
-  "hakutuloslistauksenKuvake": undefined,
   "information": {
     "eperuste": {
       "value": undefined,
@@ -113,7 +112,6 @@ exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskou
   },
   "esikatselu": false,
   "externalId": undefined,
-  "hakutuloslistauksenKuvake": undefined,
   "information": {
     "eperuste": {
       "value": undefined,
@@ -184,7 +182,6 @@ exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] 
   },
   "esikatselu": false,
   "externalId": "ext1",
-  "hakutuloslistauksenKuvake": undefined,
   "information": {
     "eperuste": {
       "value": undefined,

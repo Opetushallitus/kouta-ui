@@ -210,7 +210,8 @@
     "tunniste": "Hakijalle näkyvä tunniste",
     "opinnonTyyppi": "Valitse opinnon tyyppi",
     "vaihdaTila": "Vaihda tila",
-    "kategoria": "Kategoria"
+    "kategoria": "Kategoria",
+    "voimassaoloLoppuu": "Voimassaolo loppuu"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -850,6 +851,7 @@
   "osaamismerkki": {
     "osaamistavoitteet": "Osaamistavoitteet",
     "arviointikriteerit": "Arviointikriteerit",
-    "logo": "Osaamismerkkilogo"
+    "logo": "Osaamismerkkilogo",
+    "voimassaoloLoppunut": "Osaamismerkin voimassaolo on päättynyt"
   }
 }

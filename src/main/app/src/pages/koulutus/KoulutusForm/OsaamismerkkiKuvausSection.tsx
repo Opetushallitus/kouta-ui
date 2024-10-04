@@ -62,7 +62,9 @@ const OsaamismerkkiKuvausSubsection = ({
 }) => {
   return (
     <Box mb={2}>
-      <Heading>{t(`osaamismerkki.${translationKey}`)}</Heading>
+      <Heading>
+        {t(`osaamismerkki.${translationKey}`, { lng: language })}
+      </Heading>
       <ul>
         {(entities || []).map((entity, index) => (
           <li key={index}>
@@ -80,6 +82,7 @@ export const OsaamismerkkiKuvausSection = ({
   language: LanguageCode;
 }) => {
   const { t } = useTranslation();
+
   const osaamismerkkiId = useFieldValue('information.osaamismerkki')?.value;
 
   const { data: osaamismerkki = {}, isLoading: osaamismerkkiIsLoading } =

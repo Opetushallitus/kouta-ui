@@ -71,13 +71,13 @@ export const createKuvaus = (
   if (!isEmpty(osaamismerkkiData)) {
     const osaamistavoitteet = createKuvausListElement(
       osaamismerkkiData?.osaamistavoitteet,
-      t('osaamismerkki.osaamistavoitteet'),
+      t('osaamismerkki.osaamistavoitteet', { lng: language }),
       'osaamistavoite',
       language
     );
     const arviointikriteerit = createKuvausListElement(
       osaamismerkkiData?.arviointikriteerit,
-      t('osaamismerkki.arviointikriteerit'),
+      t('osaamismerkki.arviointikriteerit', { lng: language }),
       'arviointikriteeri',
       language
     );

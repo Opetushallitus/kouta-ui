@@ -17,6 +17,11 @@ export function getJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
   throw new Error(`Unknown julkaisutila given: ${tila}`);
 }
 
+export enum OSAAMISMERKKI_JULKAISUTILA {
+  JULKAISTU = 'JULKAISTU',
+  LAADINNASSA = 'LAADINNASSA',
+}
+
 export function safeGetJulkaisutilaTranslationKey(tila?: JULKAISUTILA): string {
   return tila ? getJulkaisutilaTranslationKey(tila) : '';
 }
@@ -47,6 +52,7 @@ export enum KOULUTUSTYYPPI {
   OPETTAJIEN_PEDAGOGISET_OPINNOT = 'ope-pedag-opinnot',
   TUVA = 'tuva',
   VAPAA_SIVISTYSTYO_OPISTOVUOSI = 'vapaa-sivistystyo-opistovuosi',
+  VAPAA_SIVISTYSTYO_OSAAMISMERKKI = 'vapaa-sivistystyo-osaamismerkki',
   VAPAA_SIVISTYSTYO_MUU = 'vapaa-sivistystyo-muu',
   AIKUISTEN_PERUSOPETUS = 'aikuisten-perusopetus',
   TAITEEN_PERUSOPETUS = 'taiteen-perusopetus',
@@ -145,6 +151,7 @@ export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
       {
         value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
       },
+      { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI },
       { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU },
     ],
   },
@@ -203,6 +210,7 @@ export const KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA: Array<Koulut
     KOULUTUSTYYPPI.TUTKINNON_OSA,
     KOULUTUSTYYPPI.OSAAMISALA,
     KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+    KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
     KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
     KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
     KOULUTUSTYYPPI.TAITEEN_PERUSOPETUS,
@@ -264,6 +272,14 @@ export const ERROR_REACT_CRASH = 'ERROR_REACT_CRASH';
 export const TEEMAKUVA_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png'];
 export const TEEMAKUVA_MAX_SIZE = 2 * 1000 * 1000;
 export const TEEMAKUVA_MIN_DIMENSIONS = { width: 1260, height: 400 };
+export const TEEMAKUVA_VST_OSAAMISMERKKI_MIN_DIMENSIONS = {
+  width: 630,
+  height: 200,
+};
+export const HAKUKOHDETULOSLISTAUKSEN_KUVAKE_MAX_DIMENSIONS = {
+  width: 500,
+  height: 500,
+};
 
 export const LOGO_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png', '.svg'];
 export const LOGO_MAX_SIZE = 100 * 1000;
@@ -275,6 +291,8 @@ export const EPERUSTE_STATUS_VOIMASSA = 'voimassa';
 export const EPERUSTE_STATUS_LAADINNASSA = 'laadinnassa';
 
 export const EPERUSTE_STATUS_PAATTYNYT = 'paattynyt';
+
+export const OSAAMISMERKKI_STATUS_VOIMASSA = 'voimassa';
 
 export const ALLOWED_HTML_TAGS = [
   'b',

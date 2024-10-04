@@ -40,6 +40,13 @@ export interface paths {
      */
     post: operations["Tallenna teemakuva"];
   };
+  "/raportointi/hakukohteet": {
+    /**
+     * Tallentaa hakukohteet siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut hakukohteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportHakukohteet"];
+  };
   "/indexer/koulutus/{oid}/toteutukset/list": {
     /**
      * Listaa kaikki koulutuksen toteutukset
@@ -86,6 +93,13 @@ export interface paths {
      * @description Tallenna oppilaitoksen logo väliaikaiseen sijaintiin. Logo siirretään lopulliseen sijaintiinsa, kun se asetetaan oppilaitoksen logoksi.
      */
     post: operations["Tallenna logo"];
+  };
+  "/raportointi/koulutukset": {
+    /**
+     * Tallentaa koulutukset siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportKoulutukset"];
   };
   "/indexer/pistehistoria": {
     /**
@@ -166,6 +180,13 @@ export interface paths {
      * @description Hakee organisaation tiedot organisaatiopalvelusta
      */
     get: operations["getOrganisaatio"];
+  };
+  "/raportointi/pistehistoria": {
+    /**
+     * Tallentaa pistehistorian siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut pistehistoriatiedot ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportPistehistoria"];
   };
   "/external/koulutus": {
     /**
@@ -322,6 +343,13 @@ export interface paths {
      * @description Hakee koulutuksen kaikkien toteutusten kaikki tiedot. Tämä rajapinta on ideksointia varten
      */
     get: operations["indexerKoulutusToteutukset"];
+  };
+  "/upload/icon": {
+    /**
+     * Tallenna kuvake
+     * @description Tallenna kuvake väliaikaiseen sijaintiin. Kuvake siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
+     */
+    post: operations["Tallenna kuvake"];
   };
   "/indexer/haku/{oid}/koulutukset/list": {
     /**
@@ -513,6 +541,20 @@ export interface paths {
      */
     post: operations["indexerListKoulutusOidsByTarjoajat"];
   };
+  "/raportointi/toteutukset": {
+    /**
+     * Tallentaa toteutukset siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut toteutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportToteutukset"];
+  };
+  "/raportointi/asiasanat": {
+    /**
+     * Tallentaa asiasanat siirtotiedostoon
+     * @description Hakee kaikki asiasanat ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportAsiasanat"];
+  };
   "/indexer/toteutukset": {
     /**
      * Hakee toteutukset, joiden oidit annettu requestBodyssä
@@ -533,6 +575,13 @@ export interface paths {
      * @description Tarkista käyttäjän sessio
      */
     get: operations["Tarkista sessio"];
+  };
+  "/raportointi/oppilaitoksetJaOsat": {
+    /**
+     * Tallentaa oppilaitokset ja niiden osat siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut oppilaitokset ja osat, ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportOppilaitoksetJaOsat"];
   };
   "/koulutus/{oid}/toteutukset/list": {
     /**
@@ -576,12 +625,33 @@ export interface paths {
      */
     get: operations["listOppilaitosOsat"];
   };
+  "/raportointi/haut": {
+    /**
+     * Tallentaa haut siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut haut ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportHaut"];
+  };
   "/indexer/list-opintokokonaisuudet": {
     /**
      * Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty
      * @description Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty. Tämä rajapinta on indeksointia varten
      */
     post: operations["indexerListOpintokokonaisuudet"];
+  };
+  "/raportointi/sorakuvaukset": {
+    /**
+     * Tallentaa sorakuvaukset siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut sorakuvaukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportSorakuvaukset"];
+  };
+  "/raportointi/ammattinimikkeet": {
+    /**
+     * Tallentaa ammattinimikkeet siirtotiedostoon
+     * @description Hakee kaikki ammattinimikkeet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportAmmattinimikkeet"];
   };
   "/haku/{oid}": {
     /**
@@ -596,6 +666,13 @@ export interface paths {
      * @description Hakee oppilaitoksen osan kuvailutiedot
      */
     get: operations["getOppilaitoksenOsa"];
+  };
+  "/raportointi/valintaperusteet": {
+    /**
+     * Tallentaa valintaperusteet siirtotiedostoon
+     * @description Hakee annetulla aikavälillä luodut/modifioidut valintaperusteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+     */
+    get: operations["reportValintaperusteet"];
   };
   "/healthcheck/": {
     /**
@@ -729,7 +806,7 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     /** @enum {string} */
-    Koulutustyyppi: "aikuisten-perusopetus" | "amk" | "amm" | "amm-muu" | "amm-ope-erityisope-ja-opo" | "amm-osaamisala" | "amm-tutkinnon-osa" | "ope-pedag-opinnot" | "erikoislaakari" | "kk-opintojakso" | "kk-opintokokonaisuus" | "erikoistumiskoulutus" | "lk" | "muu" | "taiteen-perusopetus" | "telma" | "tuva" | "vapaa-sivistystyo-muu" | "vapaa-sivistystyo-opistovuosi" | "yo";
+    Koulutustyyppi: "aikuisten-perusopetus" | "amk" | "amm" | "amm-muu" | "amm-ope-erityisope-ja-opo" | "amm-osaamisala" | "amm-tutkinnon-osa" | "ope-pedag-opinnot" | "erikoislaakari" | "kk-opintojakso" | "kk-opintokokonaisuus" | "erikoistumiskoulutus" | "lk" | "muu" | "taiteen-perusopetus" | "telma" | "tuva" | "vapaa-sivistystyo-muu" | "vapaa-sivistystyo-opistovuosi" | "vapaa-sivistystyo-osaamismerkki" | "yo";
     /** @enum {string} */
     Kieli: "fi" | "sv" | "en";
     /** @enum {string} */
@@ -1164,7 +1241,7 @@ export interface components {
        *   ]
        * }
        */
-      metadata?: components["schemas"]["YliopistoKoulutusMetadata"] | components["schemas"]["AmmatillinenKoulutusMetadata"] | components["schemas"]["AmmattikorkeaKoulutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoKoulutusMetadata"] | components["schemas"]["OpePedagOpinnotKoulutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaKoulutusMetadata"] | components["schemas"]["KkOpintojaksoKoulutusMetadata"] | components["schemas"]["KkOpintokokonaisuusKoulutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaKoulutusMetadata"] | components["schemas"]["AmmatillinenMuuKoulutusMetadata"] | components["schemas"]["LukioKoulutusMetadata"] | components["schemas"]["TuvaKoulutusMetadata"] | components["schemas"]["TelmaKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoKoulutusMetadata"] | components["schemas"]["AikuistenPerusopetusKoulutusMetadata"] | components["schemas"]["ErikoislaakariKoulutusMetadata"] | components["schemas"]["ErikoistumiskoulutusMetadata"] | components["schemas"]["TaiteenPerusopetusKoulutusMetadata"] | components["schemas"]["MuuKoulutusMetadata"];
+      metadata?: components["schemas"]["YliopistoKoulutusMetadata"] | components["schemas"]["AmmatillinenKoulutusMetadata"] | components["schemas"]["AmmattikorkeaKoulutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoKoulutusMetadata"] | components["schemas"]["OpePedagOpinnotKoulutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaKoulutusMetadata"] | components["schemas"]["KkOpintojaksoKoulutusMetadata"] | components["schemas"]["KkOpintokokonaisuusKoulutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaKoulutusMetadata"] | components["schemas"]["AmmatillinenMuuKoulutusMetadata"] | components["schemas"]["LukioKoulutusMetadata"] | components["schemas"]["TuvaKoulutusMetadata"] | components["schemas"]["TelmaKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoOsaamismerkkiKoulutusMetadata"] | components["schemas"]["AikuistenPerusopetusKoulutusMetadata"] | components["schemas"]["ErikoislaakariKoulutusMetadata"] | components["schemas"]["ErikoistumiskoulutusMetadata"] | components["schemas"]["TaiteenPerusopetusKoulutusMetadata"] | components["schemas"]["MuuKoulutusMetadata"];
       /**
        * @description Koulutusta viimeksi muokanneen virkailijan henkilö-oid
        * @example 1.2.246.562.10.00101010101
@@ -1492,6 +1569,21 @@ export interface components {
        */
       opintojenLaajuusNumero?: number;
     });
+    VapaaSivistystyoOsaamismerkkiKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+      /**
+       * @description Koulutuksen metatiedon tyyppi
+       * @example vapaa-sivistystyo-osaamismerkki
+       * @enum {string}
+       */
+      tyyppi?: "vapaa-sivistystyo-osaamismerkki";
+      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+      koulutusalaKoodiUrit?: string[];
+      /**
+       * @description Osaamismerkki. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/osaamismerkit/1)
+       * @example osaamismerkit_1009#1
+       */
+      osaamismerkkiKoodiUri?: string;
+    };
     AikuistenPerusopetusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
       /**
        * @description Koulutuksen metatiedon tyyppi
@@ -2148,6 +2240,19 @@ export interface components {
        */
       tyyppi?: "vapaa-sivistystyo-muu";
     };
+    VapaaSivistystyoOsaamismerkkiToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+      /**
+       * @description Toteutuksen metatiedon tyyppi
+       * @example vapaa-sivistystyo-osaamismerkki
+       * @enum {string}
+       */
+      tyyppi?: "vapaa-sivistystyo-osaamismerkki";
+      /**
+       * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
+       * @example false
+       */
+      suoritetaanNayttona?: boolean;
+    };
     TelmaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
       /**
        * @description Toteutuksen metatiedon tyyppi
@@ -2717,6 +2822,14 @@ export interface components {
        * @example 2019-08-23T09:55
        */
       hakukohteenMuokkaamisenTakaraja?: string;
+      /**
+       * @description Hakukohteen liittajaorganisaatioiden oidit
+       * @example [
+       *   "1.2.246.562.10.00101010101",
+       *   "1.2.246.562.10.00101010102"
+       * ]
+       */
+      hakukohteenLiittajaOrganisaatiot?: string[];
       /**
        * Format: date-time
        * @description Ajanhetki, jolloin haku ja siihen liittyvät hakukohteet ja koulutukset julkaistaan automaattisesti Opintopolussa, jos ne eivät vielä ole julkisia
@@ -3721,6 +3834,10 @@ export interface operations {
    */
   getOppilaitos: {
     parameters: {
+      query?: {
+        /** @description Palautetaanko yhteystiedot myös oppilaitoksen osille? */
+        yhteystiedotForOsat?: boolean;
+      };
       path: {
         /**
          * @description Oppilaitoksen organisaatio-oid
@@ -3807,10 +3924,39 @@ export interface operations {
    * @description Tallenna teemakuva väliaikaiseen sijaintiin. Teemakuva siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
    */
   "Tallenna teemakuva": {
+    parameters: {
+      query?: {
+        /** @description Palautetaanko myös mahdollisesti poistettu koulutus */
+        isSmallTeemakuva?: boolean;
+      };
+    };
     requestBody?: {
       content: {
         "image/jpeg": string;
         "image/png": string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa hakukohteet siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut hakukohteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportHakukohteet: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
       };
     };
     responses: {
@@ -4024,6 +4170,29 @@ export interface operations {
         "image/jpeg": string;
         "image/png": string;
         "image/svg+xml": string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa koulutukset siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportKoulutukset: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
       };
     };
     responses: {
@@ -4372,6 +4541,29 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["Organisaatio"];
         };
+      };
+    };
+  };
+  /**
+   * Tallentaa pistehistorian siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut pistehistoriatiedot ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportPistehistoria: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
       };
     };
   };
@@ -5112,6 +5304,24 @@ export interface operations {
     };
   };
   /**
+   * Tallenna kuvake
+   * @description Tallenna kuvake väliaikaiseen sijaintiin. Kuvake siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
+   */
+  "Tallenna kuvake": {
+    requestBody?: {
+      content: {
+        "image/jpeg": string;
+        "image/png": string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
    * Listaa kaikki hakuun liitetyt koulutukset
    * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) koulutukset. Tämä rajapinta on indeksointia varten
    */
@@ -5583,6 +5793,41 @@ export interface operations {
     };
   };
   /**
+   * Tallentaa toteutukset siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut toteutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportToteutukset: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa asiasanat siirtotiedostoon
+   * @description Hakee kaikki asiasanat ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportAsiasanat: {
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
    * Hakee toteutukset, joiden oidit annettu requestBodyssä
    * @description Hakee toteutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
    */
@@ -5641,6 +5886,29 @@ export interface operations {
       };
       /** @description Unauthorized */
       401: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa oppilaitokset ja niiden osat siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut oppilaitokset ja osat, ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportOppilaitoksetJaOsat: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
         content: never;
       };
     };
@@ -5859,6 +6127,29 @@ export interface operations {
     };
   };
   /**
+   * Tallentaa haut siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut haut ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportHaut: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
    * Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty
    * @description Hakee niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty. Tämä rajapinta on indeksointia varten
    */
@@ -5869,6 +6160,41 @@ export interface operations {
         "application/json": string[];
       };
     };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa sorakuvaukset siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut sorakuvaukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportSorakuvaukset: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
+      };
+    };
+  };
+  /**
+   * Tallentaa ammattinimikkeet siirtotiedostoon
+   * @description Hakee kaikki ammattinimikkeet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportAmmattinimikkeet: {
     responses: {
       /** @description Ok */
       200: {
@@ -5909,6 +6235,10 @@ export interface operations {
    */
   getOppilaitoksenOsa: {
     parameters: {
+      query?: {
+        /** @description Palautetaanko yhteystiedot myös oppilaitoksen osien osille? */
+        yhteystiedotForOsat?: boolean;
+      };
       path: {
         /**
          * @description Oppilaitoksen organisaatio-oid
@@ -5923,6 +6253,29 @@ export interface operations {
         content: {
           "application/json": components["schemas"]["OppilaitoksenOsa"];
         };
+      };
+    };
+  };
+  /**
+   * Tallentaa valintaperusteet siirtotiedostoon
+   * @description Hakee annetulla aikavälillä luodut/modifioidut valintaperusteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+   */
+  reportValintaperusteet: {
+    parameters: {
+      query?: {
+        /** @example 2024-10-03T12:15:23 */
+        startTime?: string;
+        /**
+         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+         * @example 2024-10-03T12:15:23
+         */
+        endTime?: string;
+      };
+    };
+    responses: {
+      /** @description Ok */
+      200: {
+        content: never;
       };
     };
   };

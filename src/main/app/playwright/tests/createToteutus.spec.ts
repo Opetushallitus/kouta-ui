@@ -25,7 +25,7 @@ import {
 import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
 import { stubToteutusRoutes } from '#/playwright/stubToteutusRoutes';
 import { TestiKoulutustyyppi } from '#/playwright/test-types';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, KOULUTUSTYYPPI, Koulutustyyppi } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const mutationTest = wrapMutationTest(ENTITY.TOTEUTUS, { oid: '1.2.3.4.5.6' });
@@ -172,6 +172,10 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
       await expect(nimi).toBeEnabled();
       await expect(laajuus).toBeDisabled();
       await expect(laajuus).toHaveValue('53 opintopistettä');
+    } else if (tyyppi === 'vapaa-sivistystyo-osaamismerkki') {
+      await expect(nimi).toBeEnabled();
+      await expect(laajuus).not.toBeVisible();
+      await getLabel(section, 'toteutuslomake.suoritetaanNayttona').click();
     } else if (tyyppi === 'telma') {
       await expect(nimi).toBeDisabled();
       await expect(nimi).toHaveValue(
@@ -245,10 +249,19 @@ const fillNayttamistiedotSection = (
 
 const fillHakeutumisTaiIlmoittautumisTapaSection = (
   page: Page,
+  koulutustyyppi?: Koulutustyyppi,
   fillEndDate: boolean = true
 ) =>
   withinSection(page, 'hakeutumisTaiIlmoittautumistapa', async section => {
-    await section.getByText('yleiset.ei').click();
+    if (
+      koulutustyyppi &&
+      koulutustyyppi === KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI
+    ) {
+      await expect(section.getByLabel('yleiset.ei')).toBeDisabled();
+      await expect(section.getByLabel('yleiset.kylla')).toBeDisabled();
+    } else {
+      await section.getByText('yleiset.ei').click();
+    }
 
     await section
       .getByRole('button', {
@@ -542,7 +555,7 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, false);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page, tyyppi, false);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);
@@ -611,7 +624,26 @@ test.describe('Create toteutus', () => {
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
-      await fillHakeutumisTaiIlmoittautumisTapaSection(page, false);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page, tyyppi, false);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
+  test('should be able to create "Vapaa Sivistystyö - Osaamismerkki" toteutus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'vapaa-sivistystyo-osaamismerkki';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await fillKuvausSection(page);
+      await fillJarjestamistiedotSection(page);
+      await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+      await fillJarjestajaSection(page);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page, tyyppi);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);
       await tallenna(page);

@@ -42,6 +42,7 @@ import { LukiolinjatSection } from './LukiolinjatSection';
 import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OpintojaksojenLiittamisSection } from './OpintojaksojenLiittamisSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
+import { OsaamismerkkienLiittamisSection } from './OsaamismerkkienLiittamisSection';
 import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
@@ -56,13 +57,17 @@ import {
   EBTiedotSection,
   DIATiedotSection,
   VapaaSivistystyoMuuTiedotSection,
+  VapaaSivistystyoOsaamismerkkiTiedotSection,
   VapaaSivistystyoOpistovuosiTiedotSection,
   ErikoistumiskoulutusTiedotSection,
   TaiteenperusopetusTiedotSection,
   MuuTiedotSection,
   OsaamisalaTiedotSection,
 } from './TiedotSection';
-import { ToteutuksenKuvausSection } from './ToteutuksenKuvausSection';
+import {
+  OsaamismerkkiToteutuksenKuvausSection,
+  ToteutuksenKuvausSection,
+} from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
@@ -191,6 +196,10 @@ const ToteutusForm = ({
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
               () => VapaaSivistystyoMuuTiedotSection
             )
+            .with(
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+              () => VapaaSivistystyoOsaamismerkkiTiedotSection
+            )
             .with(KOULUTUSTYYPPI.TUTKINNON_OSA, () => TutkinnonOsaTiedotSection)
             .with(KOULUTUSTYYPPI.OSAAMISALA, () => OsaamisalaTiedotSection)
             .with(
@@ -235,13 +244,31 @@ const ToteutusForm = ({
           section="kuvaus"
           header={t('toteutuslomake.toteutuksenKuvaus')}
           languages={languages}
-          Component={ToteutuksenKuvausSection}
+          koulutus={koulutus}
+          Component={match(koulutustyyppi)
+            .with(
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+              () => OsaamismerkkiToteutuksenKuvausSection
+            )
+            .otherwise(() => ToteutuksenKuvausSection)}
         />
         {koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS && (
           <FormCollapse
             section="opintojaksojenLiittaminen"
             header={t('toteutuslomake.opintojaksojenLiittaminen')}
             Component={OpintojaksojenLiittamisSection}
+            organisaatioOid={organisaatioOid}
+            entity={toteutus}
+          />
+        )}
+        {[
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+        ].includes(koulutustyyppi) && (
+          <FormCollapse
+            section="osaamismerkkienLiittaminen"
+            header={t('toteutuslomake.osaamismerkkienLiittaminen')}
+            Component={OsaamismerkkienLiittamisSection}
             organisaatioOid={organisaatioOid}
             entity={toteutus}
           />

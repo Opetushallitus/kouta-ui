@@ -1,7 +1,11 @@
 import { merge } from 'lodash';
 
 import { koutaSearchItem } from '#/playwright/fixtures/koutaSearchItem';
-import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
+import {
+  fixtureJSON,
+  mocksFromFile,
+  fixtureFromFile,
+} from '#/playwright/playwright-mock-utils';
 
 import soraKuvaus from './fixtures/soraKuvaus';
 import { stubCommonRoutes } from './stubCommonRoutes';
@@ -60,6 +64,16 @@ export const stubKoulutusRoutes = async (page, organisaatioOid) => {
 
   // tämä on jo mockattu stubCommonRoutes:ssa eri tavalla. Tarvitaanko tätä?
   await page.route('**/search/koulutus/**', fixtureJSON([]));
+
+  await page.route(
+    '**/kouta-backend/koodisto/osaamismerkit/koodit',
+    fixtureFromFile('osaamismerkit-koodisto.json')
+  );
+
+  await page.route(
+    '**/kouta-backend/koodisto/kansallinenkoulutusluokitus2016koulutusalataso2/koodit',
+    fixtureFromFile('koulutusalat-koodisto.json')
+  );
 
   await stubONRHenkiloRoute(page);
 };

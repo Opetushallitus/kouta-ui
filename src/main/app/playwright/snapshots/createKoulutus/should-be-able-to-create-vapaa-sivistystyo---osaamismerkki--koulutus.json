@@ -1,0 +1,42 @@
+{
+  "organisaatioOid": "1.1.1.1.1.1",
+  "externalId": null,
+  "johtaaTutkintoon": false,
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "julkaistu",
+  "kielivalinta": [
+    "fi"
+  ],
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "vapaa-sivistystyo-osaamismerkki",
+  "nimi": {},
+  "julkinen": false,
+  "esikatselu": true,
+  "ePerusteId": null,
+  "sorakuvausId": null,
+  "metadata": {
+    "tyyppi": "vapaa-sivistystyo-osaamismerkki",
+    "tutkinnonOsat": [],
+    "osaamisalaKoodiUri": null,
+    "koulutustyyppi": "vapaa-sivistystyo-osaamismerkki",
+    "lisatiedot": [],
+    "kuvaus": {},
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
+    "opintojenLaajuusNumeroMin": null,
+    "opintojenLaajuusNumeroMax": null,
+    "tutkintonimikeKoodiUrit": [],
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_001#1"
+    ],
+    "linkkiEPerusteisiin": {},
+    "isAvoinKorkeakoulutus": false,
+    "tunniste": null,
+    "opinnonTyyppiKoodiUri": null,
+    "erikoistumiskoulutusKoodiUri": null,
+    "osaamismerkkiKoodiUri": "osaamismerkit_1007#1"
+  }
+}

@@ -72,12 +72,16 @@ export type ToteutusFormValues = {
     isTyovoimakoulutus: boolean;
     isTaydennyskoulutus: boolean;
     isAvoinKorkeakoulutus?: boolean;
+    suoritetaanNayttona?: boolean;
     tunniste?: string;
     opinnonTyyppi?: SelectOption;
     taiteenalat?: SelectOptions;
   };
   opintojaksojenLiittaminen?: {
     opintojaksot: Array<{ opintojakso: SelectOption }>;
+  };
+  osaamismerkkienLiittaminen?: {
+    osaamismerkit: Array<{ osaamismerkki: SelectOption }>;
   };
   kuvaus: TranslatedField<EditorState>;
   kieliversiot: Array<LanguageCode>;

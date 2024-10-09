@@ -73,7 +73,6 @@ export const hakukohteetKaytossaToFormValues = metadata => {
 
 const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
-    koulutustyyppi,
     kielivalinta,
     nimi,
     tarjoajat,
@@ -112,9 +111,11 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     isTaydennyskoulutus,
     isTyovoimakoulutus,
     isAvoinKorkeakoulutus,
+    suoritetaanNayttona,
     tunniste,
     opinnonTyyppiKoodiUri,
     taiteenalaKoodiUrit,
+    tyyppi,
   } = metadata;
 
   const {
@@ -140,7 +141,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   return {
     organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
-    koulutustyyppi,
+    koulutustyyppi: tyyppi,
     tila,
     esikatselu,
     tiedot: {
@@ -152,6 +153,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       hasJotpaRahoitus: Boolean(hasJotpaRahoitus),
       isTaydennyskoulutus: Boolean(isTaydennyskoulutus),
       isTyovoimakoulutus: Boolean(isTyovoimakoulutus),
+      suoritetaanNayttona: Boolean(suoritetaanNayttona),
       opintojenLaajuusNumero: _fp.isNumber(opintojenLaajuusNumero)
         ? opintojenLaajuusNumero.toString()
         : '',
@@ -325,6 +327,17 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
           },
         };
       }),
+    },
+    osaamismerkkienLiittaminen: {
+      osaamismerkit: (metadata?.liitetytOsaamismerkit || []).map(
+        osaamismerkki => {
+          return {
+            osaamismerkki: {
+              value: osaamismerkki,
+            },
+          };
+        }
+      ),
     },
   };
 };

@@ -3,7 +3,30 @@ import { EditorState } from 'lexical';
 import { ValueType } from 'react-select';
 
 import { TableInputRows } from '#/src/components/TableInput/utils';
-import { Alkamiskausityyppi } from '#/src/constants';
+import {
+  Alkamiskausityyppi,
+  KOULUTUSTYYPPI,
+  Koulutustyyppi,
+} from '#/src/constants';
+
+interface FieldBaseProps {
+  name: string;
+  disabled: boolean;
+  language: LanguageCode;
+  koulutustyyppi?: Koulutustyyppi;
+}
+
+interface SelectField extends FieldBaseProps {
+  isMultiSelect?: boolean;
+}
+
+export type SelectFieldProps = SelectField;
+
+interface GenericField extends FieldBaseProps {
+  languages?: Array<string>;
+}
+
+export type GenericFieldProps = GenericField;
 
 export type SelectValue = ValueType<{ label: string; value: string }, false>;
 
@@ -22,10 +45,22 @@ export type FormError = {
   errorKey: string | ((t: TFunction) => string) | null;
 };
 
-type KoutaErrorResponse = { errorType: string; msg: string; path: string };
+type KoutaErrorResponse = {
+  errorType: string;
+  msg: string;
+  path: string;
+  meta?: { entiteetit?: Array<string>; julkaistutToteutukset: Array<string> };
+};
+
+type KoutaErrorData = {
+  koulutustyyppi?: KOULUTUSTYYPPI;
+  opintojaksojenLiittaminen?: { opintojaksot: Array<string> };
+  osaamismerkkienLiittaminen?: { osaamismerkit: Array<string> };
+};
 
 export type RemoteErrorsToFormErrors = (
-  response: KoutaErrorResponse
+  response: KoutaErrorResponse,
+  formValues?: KoutaErrorData
 ) => FormError | Array<FormError> | void;
 
 export type Tilaisuus = {

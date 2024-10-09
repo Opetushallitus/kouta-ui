@@ -150,6 +150,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       hasJotpaRahoitus: values?.tiedot?.hasJotpaRahoitus,
       isTaydennyskoulutus: values?.tiedot?.isTaydennyskoulutus,
       isTyovoimakoulutus: values?.tiedot?.isTyovoimakoulutus,
+      suoritetaanNayttona: values?.tiedot?.suoritetaanNayttona,
       yleislinja: values?.lukiolinjat?.yleislinja,
       painotukset: getLukiolinjatByValues(
         values?.lukiolinjat?.painotukset,
@@ -263,6 +264,9 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       ),
       liitetytOpintojaksot: values?.opintojaksojenLiittaminen?.opintojaksot
         ?.map(opintojakso => opintojakso?.opintojakso?.value)
+        .filter(Boolean),
+      liitetytOsaamismerkit: values?.osaamismerkkienLiittaminen?.osaamismerkit
+        ?.map(osaamismerkki => osaamismerkki?.osaamismerkki?.value)
         .filter(Boolean),
       isAvoinKorkeakoulutus: values?.tiedot?.isAvoinKorkeakoulutus || false,
       tunniste: values?.tiedot?.tunniste || null,

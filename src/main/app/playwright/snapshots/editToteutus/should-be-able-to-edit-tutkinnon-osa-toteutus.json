@@ -37,6 +37,7 @@
     "hasJotpaRahoitus": false,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
+    "suoritetaanNayttona": false,
     "painotukset": [],
     "kielivalikoima": {
       "A1Kielet": [],
@@ -68,6 +69,7 @@
     "aloituspaikat": null,
     "aloituspaikkakuvaus": {},
     "liitetytOpintojaksot": [],
+    "liitetytOsaamismerkit": [],
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,

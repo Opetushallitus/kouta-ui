@@ -1,9 +1,29 @@
 import { TFunction } from 'i18next';
-import { capitalize, map, findIndex, isEmpty } from 'lodash';
+import { capitalize, map, findIndex, isEmpty, isUndefined, uniq } from 'lodash';
 import { match } from 'ts-pattern';
 
 import { LANGUAGES, KOULUTUSTYYPPI } from '#/src/constants';
 import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
+
+export const findAllIndices = (liitetytEntiteetit, virheellinen) => {
+  if (isEmpty(virheellinen) || isEmpty(liitetytEntiteetit)) {
+    return [];
+  } else {
+    return liitetytEntiteetit
+      .map((entiteetti, i) => {
+        if (entiteetti === virheellinen) {
+          return i;
+        }
+      })
+      .filter(e => !isUndefined(e));
+  }
+};
+
+export const findIndices = (liitetytEntiteetit, virheellisetEntiteetit) => {
+  return uniq(virheellisetEntiteetit).flatMap(entiteetti => {
+    return findAllIndices(liitetytEntiteetit, entiteetti);
+  });
+};
 
 export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   { errorType, msg, path, meta },
@@ -198,6 +218,27 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
         };
       });
     }
+  }
+
+  if (
+    /metadata.liitetytEntiteetit.deprecatedOsaamismerkki/.test(path) &&
+    errorType === 'deprecatedOsaamismerkki'
+  ) {
+    const liitetytEntiteetit =
+      formValues?.osaamismerkkienLiittaminen?.osaamismerkit;
+    const liitetytOids = liitetytEntiteetit.map(e => e?.osaamismerkki?.value);
+
+    const indicesWithDeprecated = findIndices(
+      liitetytOids,
+      meta?.osaamismerkit
+    );
+
+    return indicesWithDeprecated.map(index => {
+      return {
+        field: `osaamismerkkienLiittaminen.osaamismerkit[${index}].osaamismerkki`,
+        errorKey: `validointivirheet.deprecatedOsaamismerkki`,
+      };
+    });
   }
 
   if (errorType === 'invalidIsAvoinKorkeakoulutusIntegrity') {

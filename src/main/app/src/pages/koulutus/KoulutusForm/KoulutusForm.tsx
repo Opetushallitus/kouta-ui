@@ -38,6 +38,7 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
+import { OsaamismerkkiKuvausSection } from './OsaamismerkkiKuvausSection';
 import { TarjoajatSection } from './tarjoajat/TarjoajatSection';
 import {
   TiedotSection,
@@ -53,6 +54,7 @@ import {
   TaiteenPerusopetusTiedotSection,
   AmmMuuTiedotSection,
   VapaaSivistystyoMuuTiedotSection,
+  VapaaSivistystyoOsaamismerkkiTiedotSection,
 } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
@@ -193,6 +195,10 @@ export const KoulutusForm = ({
                       () => VapaaSivistystyoOpistovuosiTiedotSection
                     )
                     .with(
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+                      () => VapaaSivistystyoOsaamismerkkiTiedotSection
+                    )
+                    .with(
                       KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
                       () => AmmMuuTiedotSection
                     )
@@ -232,6 +238,10 @@ export const KoulutusForm = ({
                       isAmmTutkintoWithoutEperuste
                         ? KuvausFieldsSection
                         : EPerusteKuvausSection
+                    )
+                    .with(
+                      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+                      () => OsaamismerkkiKuvausSection
                     )
                     .with(
                       KOULUTUSTYYPPI.LUKIOKOULUTUS,
@@ -321,6 +331,7 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.TELMA,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
               KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
             ].includes(koulutustyyppi) && (
@@ -338,6 +349,7 @@ export const KoulutusForm = ({
               KOULUTUSTYYPPI.TELMA,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               KOULUTUSTYYPPI.MUU_AMMATILLINEN_KOULUTUS,
               KOULUTUSTYYPPI.AIKUISTEN_PERUSOPETUS,
               KOULUTUSTYYPPI.ERIKOISLAAKARI,
@@ -356,6 +368,7 @@ export const KoulutusForm = ({
               header={t('koulutuslomake.koulutuksenTeemakuva')}
               Component={TeemakuvaSection}
               disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
             />
 
             {!isNewOphKoulutus && (

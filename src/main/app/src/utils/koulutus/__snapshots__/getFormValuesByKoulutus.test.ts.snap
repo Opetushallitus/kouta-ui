@@ -45,6 +45,9 @@ exports[`getFormValuesByKoulutus returns correct form values for ammatillinen ko
     "opintojenLaajuusyksikko": {
       "value": "",
     },
+    "osaamismerkki": {
+      "value": undefined,
+    },
     "tunniste": undefined,
     "tutkintonimike": [
       {
@@ -140,6 +143,9 @@ exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskou
     "opintojenLaajuusyksikko": {
       "value": "",
     },
+    "osaamismerkki": {
+      "value": undefined,
+    },
     "tunniste": undefined,
     "tutkintonimike": [],
   },
@@ -216,6 +222,9 @@ exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] 
     "opintojenLaajuusNumeroMin": undefined,
     "opintojenLaajuusyksikko": {
       "value": "",
+    },
+    "osaamismerkki": {
+      "value": undefined,
     },
     "tunniste": undefined,
     "tutkintonimike": [

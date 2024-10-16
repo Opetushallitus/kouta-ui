@@ -4,5 +4,13 @@
     "tyotehtavatJoissaVoiToimia": "Arbetsuppgifter för den som avlagt examen",
     "ammattitaitovaatimukset": "Krav på yrkesskicklighet",
     "ammattitaidonOsoittamistavat": "Sätt att påvisa yrkesskickligheten"
+  },
+  "julkaisutilat": {
+    "julkaistu": "Julkaistu på svenska"
+  },
+  "osaamismerkki": {
+    "osaamistavoitteet": "Målen för kunnande",
+    "arviointikriteerit": "Bedömningskriterier",
+    "logo": "Kompetensmärkets logo"
   }
 }

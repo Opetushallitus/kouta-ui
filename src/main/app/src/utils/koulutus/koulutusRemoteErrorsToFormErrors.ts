@@ -121,4 +121,11 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       errorKey: `validointivirheet.${errorType}`,
     };
   }
+
+  if (path === 'metadata.osaamismerkkiKoodiUri' && errorType === 'missingMsg') {
+    return {
+      field: 'information.osaamismerkki',
+      errorKey: `validointivirheet.pakollinen`,
+    };
+  }
 };

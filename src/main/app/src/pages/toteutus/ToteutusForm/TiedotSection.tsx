@@ -223,6 +223,25 @@ export const VapaaSivistystyoMuuTiedotSection = ({
 
 export const AmmMuuTiedotSection = VapaaSivistystyoMuuTiedotSection;
 
+export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
+  koulutus,
+  language,
+  name,
+}: ToteutusTiedotSectionProps) => {
+  const { t } = useTranslation();
+  useNimiFromKoulutus({ koulutus, name });
+
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} disabled={false} />
+      <CommonTiedotFields name={name} />
+      <Field name={`${name}.suoritetaanNayttona`} component={FormFieldSwitch}>
+        {t('toteutuslomake.suoritetaanNayttona')}
+      </Field>
+    </VerticalBox>
+  );
+};
+
 export const KkOpintojaksoTiedotSection = ({
   language,
   disabled,

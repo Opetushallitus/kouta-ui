@@ -33,6 +33,7 @@ import EnforcedKoulutusSelect from './EnforcedKoulutusSelect';
 import { ErikoistumiskoulutusField } from './ErikoistumiskoulutusField';
 import KoulutusalatField from './KoulutusalatField';
 import { OpettajaKoulutusTiedotSubSection } from './OpettajaKoulutusTiedotSubSection';
+import { OsaamismerkkiField } from './OsaamismerkkiField';
 import TutkintonimikeField from './TutkintonimikeField';
 import { AmmatillinenTiedotSection } from '../AmmatillinenTiedotSection/AmmatillinenTiedotSection';
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
@@ -222,6 +223,27 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+    </VerticalBox>
+  );
+};
+
+export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
+  disabled,
+  language,
+  name,
+  koulutustyyppi,
+}) => {
+  return (
+    <VerticalBox gap={2}>
+      <KoulutusalatField disabled={disabled} name={name} />
+      <Box width={0.7} mb={2} {...getTestIdProps('osaamismerkkiSelect')}>
+        <OsaamismerkkiField
+          koulutustyyppi={koulutustyyppi}
+          disabled={disabled}
+          name={`${name}.osaamismerkki`}
+          language={language}
+        />
+      </Box>
     </VerticalBox>
   );
 };

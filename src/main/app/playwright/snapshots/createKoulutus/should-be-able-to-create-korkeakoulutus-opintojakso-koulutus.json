@@ -45,6 +45,7 @@
     "isAvoinKorkeakoulutus": true,
     "tunniste": "ABC-123",
     "opinnonTyyppiKoodiUri": "opinnontyyppi_2#1",
-    "erikoistumiskoulutusKoodiUri": null
+    "erikoistumiskoulutusKoodiUri": null,
+    "osaamismerkkiKoodiUri": null
   }
 }

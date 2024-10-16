@@ -11,36 +11,32 @@
     "1.2.1.1.1.1"
   ],
   "koulutuksetKoodiUri": [],
-  "koulutustyyppi": "vapaa-sivistystyo-muu",
-  "nimi": {
-    "fi": "vapaa sivistystyö nimi"
-  },
+  "koulutustyyppi": "vapaa-sivistystyo-osaamismerkki",
+  "nimi": {},
   "julkinen": false,
   "esikatselu": true,
   "ePerusteId": null,
   "sorakuvausId": null,
   "metadata": {
-    "tyyppi": "vapaa-sivistystyo-muu",
+    "tyyppi": "vapaa-sivistystyo-osaamismerkki",
     "tutkinnonOsat": [],
     "osaamisalaKoodiUri": null,
-    "koulutustyyppi": "vapaa-sivistystyo-muu",
+    "koulutustyyppi": "vapaa-sivistystyo-osaamismerkki",
     "lisatiedot": [],
-    "kuvaus": {
-      "fi": "<p>Kuvaus</p>"
-    },
-    "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
-    "opintojenLaajuusNumero": 53,
+    "kuvaus": {},
+    "opintojenLaajuusyksikkoKoodiUri": null,
+    "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "tutkintonimikeKoodiUrit": [],
-    "koulutusalaKoodiUrit": [],
-    "linkkiEPerusteisiin": {
-      "fi": "http://linkki.fi"
-    },
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_001#1"
+    ],
+    "linkkiEPerusteisiin": {},
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,
     "erikoistumiskoulutusKoodiUri": null,
-    "osaamismerkkiKoodiUri": null
+    "osaamismerkkiKoodiUri": "osaamismerkit_1007#1"
   }
 }

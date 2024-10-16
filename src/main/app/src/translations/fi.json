@@ -209,7 +209,8 @@
     "isAvoinKorkeakoulutus": "Tämä koulutus on avointa korkeakoulutusta",
     "tunniste": "Hakijalle näkyvä tunniste",
     "opinnonTyyppi": "Valitse opinnon tyyppi",
-    "vaihdaTila": "Vaihda tila"
+    "vaihdaTila": "Vaihda tila",
+    "kategoria": "Kategoria"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -312,7 +313,8 @@
     "tallennettu": "Luonnos",
     "julkaistu": "Julkaistu",
     "arkistoitu": "Arkistoitu",
-    "poistettu": "Poistettu"
+    "poistettu": "Poistettu",
+    "laadinnassa": "Laadinnassa"
   },
   "julkaisutilojenSelitteet": {
     "tallennettu": "Luonnoksen tiedot näkyvät vain virkailijalle",
@@ -387,6 +389,7 @@
     "vapaaSivistystyo": "Vapaa sivistystyö",
     "vapaaSivistystyoOpistovuosi": "Opistovuosi oppivelvollisille",
     "vapaaSivistystyoMuu": "Muu",
+    "vapaaSivistystyoOsaamismerkki": "Osaamismerkki",
     "aikuistenPerusopetus": "Aikuisten perusopetus",
     "taiteenPerusopetus": "Taiteen perusopetus",
     "kkOpintojakso": "Opintojakso",
@@ -498,6 +501,7 @@
     "toteutuksenLiittaminenKoulutukseen": "Toteutuksen liittäminen koulutukseen",
     "kuvausEiOleSaatavilla": "Kuvaus ei ole saatavilla",
     "valitseKoulutusalat": "Valitse koulutusalat",
+    "valitseOsaamismerkki": "Valitse osaamismerkki",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana.",
     "lisatiedotInfo": "Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.",
     "valitseOsaamisala": "Valitse osaamisala",
@@ -648,7 +652,8 @@
     "muokkaaOpintojaksoa": "Muokkaa opintojaksoa",
     "isTaydennyskoulutus": "Koulutus on täydennyskoulutusta",
     "isTyovoimakoulutus": "Koulutus on työvoimakoulutusta",
-    "valitseTaiteenalat": "Valitse taiteenalat"
+    "valitseTaiteenalat": "Valitse taiteenalat",
+    "suoritetaanNayttona": "Suoritetaan näyttönä"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",
@@ -835,5 +840,10 @@
     "ammattitaidonOsoittamistavat": "Ammattitaidon osoittamistavat",
     "yleisetTavoitteet": "Yleiset tavoitteet",
     "keskeisetSisallot": "Keskeiset sisällöt"
+  },
+  "osaamismerkki": {
+    "osaamistavoitteet": "Osaamistavoitteet",
+    "arviointikriteerit": "Arviointikriteerit",
+    "logo": "Osaamismerkkilogo"
   }
 }

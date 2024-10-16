@@ -172,6 +172,7 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
       await expect(nimi).toBeEnabled();
       await expect(laajuus).toBeDisabled();
       await expect(laajuus).toHaveValue('53 opintopistettä');
+      await getLabel(section, 'toteutuslomake.suoritetaanNayttona').click();
     } else if (tyyppi === 'vapaa-sivistystyo-osaamismerkki') {
       await expect(nimi).toBeEnabled();
       await expect(laajuus).not.toBeVisible();

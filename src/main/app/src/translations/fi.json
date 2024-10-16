@@ -210,7 +210,8 @@
     "tunniste": "Hakijalle näkyvä tunniste",
     "opinnonTyyppi": "Valitse opinnon tyyppi",
     "vaihdaTila": "Vaihda tila",
-    "kategoria": "Kategoria"
+    "kategoria": "Kategoria",
+    "voimassaoloLoppuu": "Voimassaolo loppuu"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -350,6 +351,7 @@
     "invalidToteutusOpintojenLaajuusyksikkoIntegrity": "Laajuusyksikkö ei vastaa koulutukselle syötettyä laajuusyksikköä",
     "minmaxMsg": "Minimiarvon tulee olla suurempi kuin maksimiarvon",
     "invalidTilaForLiitettyOpintojaksoOnJulkaisu": "Väärä julkaisutila: julkaistuun opintokokonaisuuteen liitetyn opintojakson tulee olla julkaistu.",
+    "invalidTilaForLiitettyOsaamismerkkiOnJulkaisu": "Väärä julkaisutila: julkaistuun toteutukseen liitetyn osaamismerkin tulee olla julkaistu.",
     "nimiJollainKielellaPakollinen": "Lisää yhteystiedon nimi",
     "cannotChangeIsAvoinKorkeakoulutus": "Avoimen korkeakoulutuksen valintaa ei voi poistaa, koska koulutukseen on jo liitetty toteutuksia.",
     "invalidIsAvoinKorkeakoulutusIntegrity": "Toteutuksen voi tallentaa avoimena korkeakoulutuksena vain jos sen koulutus on myös avointa korkeakoulutusta.",
@@ -357,7 +359,9 @@
     "cannotRemoveTarjoajaFromAvoinKorkeakoulutus": "Koulutuksen tarjoajaa ei voi enää poistaa, koska koulutukseen on liitetty toteutuksia, joissa tarjoaja on lisätty järjestäjäksi",
     "vaaraMaksullisuustyyppiApurahalle": "Apurahan voi asettaa vain lukuvuosimaksulliselle toteutukselle.",
     "invalidOpetuskieliWithLukuvuosimaksu": "Lukuvuosimaksun voi valita maksullisuustyypiksi vain englanninkielisille toteutuksille.",
-    "missingTarjoajatForNonJulkinenKoulutus": "Tämän tyyppiselle koulutukselle täytyy valita vähintään yksi järjestäjä, ellei koulutus ole julkinen"
+    "missingTarjoajatForNonJulkinenKoulutus": "Tämän tyyppiselle koulutukselle täytyy valita vähintään yksi järjestäjä, ellei koulutus ole julkinen",
+    "invalidStateChangeForLiitetty": "Entiteetin tilaa ei voi vaihtaa, koska se on liitetty entiteetteihin {{julkaistutToteutukset}}, joiden tila on Julkaistu.",
+    "deprecatedOsaamismerkki": "Osaamismerkin voimassaolo on päättynyt eikä sitä voi liittää toteutukselle."
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",
@@ -653,7 +657,11 @@
     "isTaydennyskoulutus": "Koulutus on täydennyskoulutusta",
     "isTyovoimakoulutus": "Koulutus on työvoimakoulutusta",
     "valitseTaiteenalat": "Valitse taiteenalat",
-    "suoritetaanNayttona": "Suoritetaan näyttönä"
+    "suoritetaanNayttona": "Suoritetaan näyttönä",
+    "siirryOsaamismerkinTietoihin": "Siirry osaamismerkin tietoihin",
+    "osaamismerkki": "Osaamismerkki",
+    "osaamismerkit": "Osaamismerkit",
+    "lisaaOsaamismerkki": "Lisää osaamismerkki"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",
@@ -844,6 +852,7 @@
   "osaamismerkki": {
     "osaamistavoitteet": "Osaamistavoitteet",
     "arviointikriteerit": "Arviointikriteerit",
-    "logo": "Osaamismerkkilogo"
+    "logo": "Osaamismerkkilogo",
+    "voimassaoloLoppunut": "Osaamismerkin voimassaolo on päättynyt"
   }
 }

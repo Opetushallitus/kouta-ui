@@ -33,20 +33,23 @@ const InfoBoxRow = ({ title, description, suffix }) => {
   );
 };
 
-export const InfoBoxGrid = ({ rows, ...props }) => (
-  <Grid
-    columns={'auto minmax(0, 1fr)'}
-    columnGap="20px"
-    rowGap="25px"
-    {...props}
-  >
-    {rows.map(({ title, description, suffix }) => (
-      <InfoBoxRow
-        key={title}
-        title={title}
-        description={description}
-        suffix={suffix}
-      />
-    ))}
-  </Grid>
-);
+export const InfoBoxGrid = ({ rows, ...props }) => {
+  const rowsWithoutNulls = _.filter(rows, row => !_.isNull(row));
+  return (
+    <Grid
+      columns={'auto minmax(0, 1fr)'}
+      columnGap="20px"
+      rowGap="25px"
+      {...props}
+    >
+      {rowsWithoutNulls.map(({ title, description, suffix }) => (
+        <InfoBoxRow
+          key={title}
+          title={title}
+          description={description}
+          suffix={suffix}
+        />
+      ))}
+    </Grid>
+  );
+};

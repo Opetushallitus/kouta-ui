@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { TFunction } from 'i18next';
-import { isEmpty, lowerCase } from 'lodash';
+import { isEmpty, lowerCase, some, now } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useUnmount } from 'react-use';
 import { Field } from 'redux-form';
@@ -31,6 +31,7 @@ import {
   getTestIdProps,
 } from '#/src/utils';
 import { getOsaamismerkkiStatusCss } from '#/src/utils/ePeruste/osaamismerkkiStatus';
+import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 type OsaamismerkkiKuvausEntity = {
@@ -114,6 +115,25 @@ const StyledTilaBadge = styled(TilaBadge)`
   }}
 `;
 
+export const OsaamismerkkiVoimassaoloLoppunut = ({
+  text,
+  className,
+}: {
+  text?: string;
+  className?: string;
+}) => {
+  return (
+    <div>
+      <div className={className}>{text}</div>
+    </div>
+  );
+};
+
+const StyledOsaamismerkkiVoimassaoloLoppunut = styled(
+  OsaamismerkkiVoimassaoloLoppunut
+).attrs({ type: 'error' })`
+  color: ${({ theme }) => theme.colors.red.main};
+`;
 const OsaamismerkkitiedotReadOnly = ({
   osaamismerkkiData,
   t,
@@ -127,6 +147,21 @@ const OsaamismerkkitiedotReadOnly = ({
 
   const logo = osaamismerkkiData?.kategoria?.liite?.binarydata;
 
+  const voimassaoloLoppuu = osaamismerkkiData?.voimassaoloLoppuu;
+  const isDeprecated = voimassaoloLoppuu < now();
+  const voimassaoloLoppuuRow =
+    voimassaoloLoppuu && isDeprecated
+      ? {
+          title: t('yleiset.voimassaoloLoppuu'),
+          description: (
+            <StyledOsaamismerkkiVoimassaoloLoppunut
+              text={`${t(
+                'osaamismerkki.voimassaoloLoppunut'
+              )} ${getReadableDate(osaamismerkkiData?.voimassaoloLoppuu)}`}
+            />
+          ),
+        }
+      : null;
   return (
     <Box>
       <InfoBoxGrid
@@ -150,6 +185,7 @@ const OsaamismerkkitiedotReadOnly = ({
             title: t('yleiset.voimaantulo'),
             description: getReadableDate(osaamismerkkiData?.voimassaoloAlkaa),
           },
+          voimassaoloLoppuuRow,
           {
             title: t('yleiset.tila'),
             description: <StyledTilaBadge status={osaamismerkkiData?.tila} />,
@@ -176,6 +212,28 @@ const OsaamismerkkitiedotReadOnly = ({
   );
 };
 
+export const updateOptionsWithMaybeDeprecatedOsaamismerkki = (
+  options: Array<SelectOptions>,
+  osaamismerkkiId: string,
+  osaamismerkkidata: Osaamismerkki,
+  language: LanguageCode
+) => {
+  const alreadyExists = some(options, ({ value }) => {
+    return (
+      koodiUriWithoutVersion(value) === koodiUriWithoutVersion(osaamismerkkiId)
+    );
+  });
+
+  return osaamismerkkiId && osaamismerkkidata?.nimi && !alreadyExists
+    ? options.concat([
+        {
+          value: osaamismerkkiId,
+          label: getFirstLanguageValue(osaamismerkkidata.nimi, language),
+        },
+      ])
+    : options;
+};
+
 export const OsaamismerkkiField = (props: SelectFieldProps) => {
   const { t } = useTranslation();
   const {
@@ -192,6 +250,17 @@ export const OsaamismerkkiField = (props: SelectFieldProps) => {
 
   const osaamismerkkiId = useFieldValue(name)?.value;
 
+  const { data: osaamismerkkiData, isLoading: osaamismerkkiIsLoading } =
+    useOsaamismerkki(osaamismerkkiId);
+
+  const optionsWithMaybeDeprecatedOsaamismerkki =
+    updateOptionsWithMaybeDeprecatedOsaamismerkki(
+      options,
+      osaamismerkkiId,
+      osaamismerkkiData,
+      language
+    );
+
   const { change } = useBoundFormActions();
   const isDirty = useIsDirty();
 
@@ -207,9 +276,6 @@ export const OsaamismerkkiField = (props: SelectFieldProps) => {
     change(name, null);
   });
 
-  const { data: osaamismerkkiData, isLoading: osaamismerkkiIsLoading } =
-    useOsaamismerkki(osaamismerkkiId);
-
   return osaamismerkkiIsLoading ? (
     <Spin />
   ) : (
@@ -218,7 +284,7 @@ export const OsaamismerkkiField = (props: SelectFieldProps) => {
         <Field
           isLoading={isLoading}
           component={FormFieldSelect}
-          options={options}
+          options={optionsWithMaybeDeprecatedOsaamismerkki}
           label={t('koulutuslomake.valitseOsaamismerkki')}
           showAllOptions={true}
           isMulti={isMultiSelect}

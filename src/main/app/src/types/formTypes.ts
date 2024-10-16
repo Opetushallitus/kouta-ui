@@ -3,7 +3,11 @@ import { EditorState } from 'lexical';
 import { ValueType } from 'react-select';
 
 import { TableInputRows } from '#/src/components/TableInput/utils';
-import { Alkamiskausityyppi, Koulutustyyppi } from '#/src/constants';
+import {
+  Alkamiskausityyppi,
+  KOULUTUSTYYPPI,
+  Koulutustyyppi,
+} from '#/src/constants';
 
 interface FieldBaseProps {
   name: string;
@@ -41,10 +45,22 @@ export type FormError = {
   errorKey: string | ((t: TFunction) => string) | null;
 };
 
-type KoutaErrorResponse = { errorType: string; msg: string; path: string };
+type KoutaErrorResponse = {
+  errorType: string;
+  msg: string;
+  path: string;
+  meta?: { entiteetit?: Array<string>; julkaistutToteutukset: Array<string> };
+};
+
+type KoutaErrorData = {
+  koulutustyyppi?: KOULUTUSTYYPPI;
+  opintojaksojenLiittaminen?: { opintojaksot: Array<string> };
+  osaamismerkkienLiittaminen?: { osaamismerkit: Array<string> };
+};
 
 export type RemoteErrorsToFormErrors = (
-  response: KoutaErrorResponse
+  response: KoutaErrorResponse,
+  formValues?: KoutaErrorData
 ) => FormError | Array<FormError> | void;
 
 export type Tilaisuus = {

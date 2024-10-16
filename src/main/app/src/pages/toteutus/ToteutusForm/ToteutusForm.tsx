@@ -42,6 +42,7 @@ import { LukiolinjatSection } from './LukiolinjatSection';
 import { NayttamisTiedotSection } from './NayttamisTiedotSection';
 import { OpintojaksojenLiittamisSection } from './OpintojaksojenLiittamisSection';
 import { OsaamisalatSection } from './OsaamisalatSection';
+import { OsaamismerkkienLiittamisSection } from './OsaamismerkkienLiittamisSection';
 import {
   AikuistenperusopetusTiedotSection,
   AmmMuuTiedotSection,
@@ -256,6 +257,18 @@ const ToteutusForm = ({
             section="opintojaksojenLiittaminen"
             header={t('toteutuslomake.opintojaksojenLiittaminen')}
             Component={OpintojaksojenLiittamisSection}
+            organisaatioOid={organisaatioOid}
+            entity={toteutus}
+          />
+        )}
+        {[
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+        ].includes(koulutustyyppi) && (
+          <FormCollapse
+            section="osaamismerkkienLiittaminen"
+            header={t('toteutuslomake.osaamismerkkienLiittaminen')}
+            Component={OsaamismerkkienLiittamisSection}
             organisaatioOid={organisaatioOid}
             entity={toteutus}
           />

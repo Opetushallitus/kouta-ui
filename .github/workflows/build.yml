@@ -33,7 +33,7 @@ jobs:
         run: |
           git clone https://github.com/Opetushallitus/ci-tools.git
           source ci-tools/common/setup-tools.sh
-          mvn clean package -B
+          mvn clean spotless:check package -B
 
       - uses: actions/cache@v3
         id: restore-build

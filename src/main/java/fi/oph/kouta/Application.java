@@ -13,34 +13,36 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 
-    @Bean
-    public ConfigurableServletWebServerFactory webServerFactory(@Autowired UrlConfiguration configuration)
-    {
-        JettyServletWebServerFactory factory = new JettyServletWebServerFactory();
-        factory.addServerCustomizers(new JettyServerCustomizer() {
-            @Override
-            public void customize(org.eclipse.jetty.server.Server server) {
-                server.setRequestLog(requestLog());
-            }
-            
-            private RequestLog requestLog() {
-                RequestLogImpl requestLog = new RequestLogImpl();
+  @Bean
+  public ConfigurableServletWebServerFactory webServerFactory(
+      @Autowired UrlConfiguration configuration) {
+    JettyServletWebServerFactory factory = new JettyServletWebServerFactory();
+    factory.addServerCustomizers(
+        new JettyServerCustomizer() {
+          @Override
+          public void customize(org.eclipse.jetty.server.Server server) {
+            server.setRequestLog(requestLog());
+          }
 
-                String logbackAccess = configuration.getOrElse("logback.access", null);
-                if (logbackAccess != null) {
-                    requestLog.setFileName(logbackAccess);
-                } else {
-                    System.out.println("JettyLauncher: Jetty access log is printed to console, use -Dlogback.access to set configuration file");
-                    requestLog.setResource("/logback-access.xml");
-                }
-                requestLog.start();
-                return requestLog;
+          private RequestLog requestLog() {
+            RequestLogImpl requestLog = new RequestLogImpl();
+
+            String logbackAccess = configuration.getOrElse("logback.access", null);
+            if (logbackAccess != null) {
+              requestLog.setFileName(logbackAccess);
+            } else {
+              System.out.println(
+                  "JettyLauncher: Jetty access log is printed to console, use -Dlogback.access to set configuration file");
+              requestLog.setResource("/logback-access.xml");
             }
+            requestLog.start();
+            return requestLog;
+          }
         });
-        return factory;
-    }
+    return factory;
+  }
 }

@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/rest/config")
 public class ConfigurationController {
 
-    @Autowired
-    private UrlConfiguration urlConfiguration;
+  @Autowired private UrlConfiguration urlConfiguration;
 
-    @GetMapping(value = "/frontProperties", produces = "application/json")
-    public String frontProperties() {
-        return urlConfiguration.frontPropertiesToJson();
-    }
+  @GetMapping(value = "/frontProperties", produces = "application/json")
+  public String frontProperties() {
+    return urlConfiguration.frontPropertiesToJson();
+  }
 }

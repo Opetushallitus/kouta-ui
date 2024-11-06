@@ -27,7 +27,7 @@
   "dependencies": {
     "@lexical/link": "^0.10.0",
     "@lexical/list": "^0.10.0",
-    "@lexical/react": "^0.10.0",
+    "@lexical/react": "^0.14.5",
     "@opetushallitus/virkailija-ui-components": "^0.4.7",
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.5",

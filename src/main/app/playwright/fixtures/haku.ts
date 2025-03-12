@@ -37,6 +37,9 @@ const haku = ({ hakutapaKoodiUri }: { hakutapaKoodiUri?: string } = {}) => ({
         wwwSivu: {
           fi: 'http://verkkosivu',
         },
+        wwwSivuTeksti: {
+          fi: 'wwwSivuTeksti',
+        },
         sahkoposti: {
           fi: 'sähkoposti',
         },

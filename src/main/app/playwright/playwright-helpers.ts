@@ -330,6 +330,46 @@ export const fillYhteystiedotSection = (page: Page) =>
       .fill('verkkosivun teksti');
   });
 
+export const fillYhteystiedotWithoutVerkkosivuSection = (page: Page) =>
+  withinSection(page, 'yhteyshenkilot', async section => {
+    await section
+      .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
+      .click();
+    await section.getByRole('textbox', { name: 'yleiset.nimi' }).fill('nimi');
+    await section
+      .getByRole('textbox', { name: 'yleiset.titteli' })
+      .fill('titteli');
+    await section
+      .getByRole('textbox', { name: 'yleiset.sahkoposti' })
+      .fill('sähköposti');
+    await section
+      .getByRole('textbox', { name: 'yleiset.puhelinnumero' })
+      .fill('puhelin');
+    await section
+      .getByRole('textbox', { name: 'yleiset.verkkosivun-teksti', exact: true })
+      .fill('verkkosivun teksti');
+  });
+
+export const fillYhteystiedotWithoutVerkkosivuTekstiSection = (page: Page) =>
+  withinSection(page, 'yhteyshenkilot', async section => {
+    await section
+      .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
+      .click();
+    await section.getByRole('textbox', { name: 'yleiset.nimi' }).fill('nimi');
+    await section
+      .getByRole('textbox', { name: 'yleiset.titteli' })
+      .fill('titteli');
+    await section
+      .getByRole('textbox', { name: 'yleiset.sahkoposti' })
+      .fill('sähköposti');
+    await section
+      .getByRole('textbox', { name: 'yleiset.puhelinnumero' })
+      .fill('puhelin');
+    await section
+      .getByRole('textbox', { name: 'yleiset.verkkosivu', exact: true })
+      .fill('verkkosivu');
+  });
+
 export const copyPohja = (page: Page, baseEntityName: string) =>
   withinSection(page, 'pohja', async section => {
     await getLabel(section, '.kopioiPohjaksi').click();

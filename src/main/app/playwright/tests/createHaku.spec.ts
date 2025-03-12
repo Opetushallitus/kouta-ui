@@ -1,4 +1,4 @@
-import { Page, test } from '@playwright/test';
+import { Page, test, expect } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -14,6 +14,8 @@ import {
   fillAjankohtaFields,
   fillYhteystiedotSection,
   assertBaseTilaNotCopied,
+  fillYhteystiedotWithoutVerkkosivuSection,
+  fillYhteystiedotWithoutVerkkosivuTekstiSection,
 } from '#/playwright/playwright-helpers';
 import { stubHakuRoutes } from '#/playwright/stubHakuRoutes';
 import { ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
@@ -126,6 +128,44 @@ test.describe('Create haku', () => {
       await fillTilaSection(page);
       await tallenna(page);
     }));
+
+  test('Should show validation error for verkkosivun teksti', async ({
+    page,
+  }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+    await fillNimiSection(page);
+    await fillKohdejoukkoSection(page);
+    await fillHakutapaSection(page);
+    await fillAikatauluSection(page);
+    await fillHakulomakeSection(page, HAKULOMAKETYYPPI.ATARU);
+    await fillYhteystiedotWithoutVerkkosivuTekstiSection(page);
+    await fillTilaSection(page);
+    await tallenna(page);
+    await expect(
+      page
+        .getByTestId('form-control_yhteyshenkilot[0].verkkosivuTeksti')
+        .getByText('validointivirheet.pakollinen')
+    ).toBeVisible();
+  });
+
+  test('Should show validation error for verkkosivu', async ({ page }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+    await fillNimiSection(page);
+    await fillKohdejoukkoSection(page);
+    await fillHakutapaSection(page);
+    await fillAikatauluSection(page);
+    await fillHakulomakeSection(page, HAKULOMAKETYYPPI.ATARU);
+    await fillYhteystiedotWithoutVerkkosivuSection(page);
+    await fillTilaSection(page);
+    await tallenna(page);
+    await expect(
+      page
+        .getByTestId('form-control_yhteyshenkilot[0].verkkosivu')
+        .getByText('validointivirheet.pakollinen')
+    ).toBeVisible();
+  });
 
   test('Should be able to create haku with "muu"-hakulomake', ({
     page,

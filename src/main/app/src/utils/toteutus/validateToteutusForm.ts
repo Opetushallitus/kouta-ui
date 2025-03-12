@@ -16,12 +16,14 @@ import createErrorBuilder, {
   validateInteger,
   validateTranslations,
   validateUrl,
+  validateArray,
 } from '#/src/utils/form/createErrorBuilder';
 import {
   getKielivalinta,
   validateIf,
   validateOptionalTranslatedField,
   validatePohja,
+  validateYhteyshenkilo,
 } from '#/src/utils/form/formConfigUtils';
 
 import {
@@ -193,6 +195,7 @@ export const validateToteutusForm = (
         },
         'validointivirheet.positiivinenKokonaisluku'
       ),
+      validateArray('yhteyshenkilot', validateYhteyshenkilo(kieliversiot)),
       validateOptionalTranslatedField(
         'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
       ),

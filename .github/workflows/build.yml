@@ -42,7 +42,7 @@ jobs:
           key: ${{ github.sha }}
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     defaults:
       run:
         working-directory: ./src/main/app

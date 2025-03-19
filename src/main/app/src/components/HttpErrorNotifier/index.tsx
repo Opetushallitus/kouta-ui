@@ -12,6 +12,7 @@ const getToastOptions = (error, t) => {
   const data = response?.data;
 
   const label = match(status)
+    .with(404, () => t('ilmoitukset.kohdettaEiLoydy'))
     .with(403, () => t('ilmoitukset.kayttooikeusVirhe'))
     .with(400, () => t('ilmoitukset.virheellinenPalvelinpyynto'))
     .otherwise(() => t('ilmoitukset.tuntematonVirhe.viesti'));
@@ -19,7 +20,7 @@ const getToastOptions = (error, t) => {
   return {
     status: 'danger',
     label,
-    error: status >= 400 && data,
+    error: status >= 400 && status !== 404 && data,
   };
 };
 

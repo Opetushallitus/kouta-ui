@@ -34,7 +34,7 @@
     "@xstate/immer": "^0.3.3",
     "@xstate/inspect": "^0.8.0",
     "@xstate/react": "^3.2.2",
-    "axios": "^1.6.8",
+    "axios": "^1.7.9",
     "date-fns": "^2.30.0",
     "debounce-promise": "^3.1.2",
     "history": "^4.10.1",
@@ -126,6 +126,9 @@
     "vite-plugin-rewrite-all": "^1.0.1",
     "vite-plugin-svgr": "^3.2.0",
     "vitest": "^0.34.1"
+  },
+  "overrides": {
+    "path-to-regexp": "1.9.0"
   },
   "browserslist": [
     ">0.2%",

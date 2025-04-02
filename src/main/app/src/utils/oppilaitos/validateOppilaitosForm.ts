@@ -5,6 +5,7 @@ import createErrorBuilder, {
   validateArrayMinLength,
 } from '#/src/utils/form/createErrorBuilder';
 import {
+  crossCheckWwwSivu,
   getKielivalinta,
   validateIfJulkaistu,
   validateOptionalTranslatedField,
@@ -21,7 +22,8 @@ export const validateOppilaitosForm = values => {
       validateOptionalTranslatedField('hakijapalveluidenYhteystiedot.nimi'),
       validateIfJulkaistu(eb =>
         eb.validateTranslations('perustiedot.wwwSivuUrl', kieliversiot)
-      )
+      ),
+      crossCheckWwwSivu(kieliversiot)
     )(createErrorBuilder(values))
     .getErrors();
 };

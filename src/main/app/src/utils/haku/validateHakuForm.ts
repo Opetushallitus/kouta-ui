@@ -20,6 +20,7 @@ import {
   validateIf,
   validateOptionalTranslatedField,
   validatePohja,
+  validateYhteyshenkilo,
 } from '#/src/utils/form/formConfigUtils';
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
@@ -46,6 +47,7 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
       validateTranslations('nimi'),
       validateExistence('hakutapa'),
       validateExistence('kohdejoukko.kohdejoukko'),
+      validateArray('yhteyshenkilot', validateYhteyshenkilo(kieliversiot)),
       validateIf(
         isJulkaistu,
         _fp.flow(

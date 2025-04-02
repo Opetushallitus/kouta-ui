@@ -7,6 +7,30 @@ import {
   validateTranslations,
 } from '#/src/utils/form/createErrorBuilder';
 
+export const crossCheckWwwSivu = kieliversiot => eb => {
+  const values = eb.getValues();
+  const wwwSivuUrl = _fp.get('perustiedot.wwwSivuUrl', values);
+  const wwwSivuNimi = _fp.get('perustiedot.wwwSivuNimi', values);
+  return _fp.flow(
+    ...kieliversiot.map(kieli =>
+      _fp.flow(
+        validateIf(
+          !wwwSivuUrl?.[kieli] && wwwSivuNimi?.[kieli],
+          validateTranslations('perustiedot.wwwSivuUrl', kieliversiot, {
+            message: 'validointivirheet.pakollinen',
+          })
+        ),
+        validateIf(
+          wwwSivuUrl?.[kieli] && !wwwSivuNimi?.[kieli],
+          validateTranslations('perustiedot.wwwSivuNimi', kieliversiot, {
+            message: 'validointivirheet.pakollinen',
+          })
+        )
+      )
+    )
+  )(eb);
+};
+
 export const validateIfJulkaistu =
   (...validateFns) =>
   eb => {
@@ -82,3 +106,26 @@ export const validatePohja = eb =>
     eb.getValues()?.pohja?.tapa === POHJAVALINTA.KOPIO,
     validateExistence('pohja.valinta')
   )(eb);
+
+export const validateYhteyshenkilo =
+  kieliversiot =>
+  (eb, { verkkosivu, verkkosivuTeksti }) =>
+    _fp.flow(
+      ...(kieliversiot ?? []).map(kieli =>
+        _fp.flow(
+          validateTranslations('nimi'),
+          validateIf(
+            verkkosivu?.[kieli] && !verkkosivuTeksti?.[kieli],
+            validateTranslations('verkkosivuTeksti', kieliversiot, {
+              message: 'validointivirheet.pakollinen',
+            })
+          ),
+          validateIf(
+            !verkkosivu?.[kieli] && verkkosivuTeksti?.[kieli],
+            validateTranslations('verkkosivu', kieliversiot, {
+              message: 'validointivirheet.pakollinen',
+            })
+          )
+        )
+      )
+    )(eb);

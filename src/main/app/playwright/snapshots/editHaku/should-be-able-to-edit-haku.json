@@ -43,7 +43,9 @@
         "wwwSivu": {
           "fi": "http://verkkosivu"
         },
-        "wwwSivuTeksti": {},
+        "wwwSivuTeksti": {
+          "fi": "wwwSivuTeksti"
+        },
         "sahkoposti": {
           "fi": "sähkoposti"
         }

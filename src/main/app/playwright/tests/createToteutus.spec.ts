@@ -21,6 +21,8 @@ import {
   getLabel,
   getSelectByLabel,
   assertBaseTilaNotCopied,
+  fillYhteystiedotWithoutVerkkosivuTekstiSection,
+  fillYhteystiedotWithoutVerkkosivuSection,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
 import { stubToteutusRoutes } from '#/playwright/stubToteutusRoutes';
@@ -754,6 +756,50 @@ test.describe('Create toteutus', () => {
       await fillTilaSection(page);
       await tallenna(page);
     }));
+
+  test('should show validation error for verkkosivun teksti', async ({
+    page,
+  }) => {
+    const tyyppi = 'taiteen-perusopetus';
+    await prepareTest(page, tyyppi);
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+    await fillTiedotSection(page, tyyppi);
+    await fillKuvausSection(page);
+    await fillJarjestamistiedotSection(page);
+    await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+    await fillJarjestajaSection(page);
+    await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+    await fillYhteystiedotWithoutVerkkosivuTekstiSection(page);
+    await fillTilaSection(page);
+    await tallenna(page);
+    await expect(
+      page
+        .getByTestId('form-control_yhteyshenkilot[0].verkkosivuTeksti')
+        .getByText('validointivirheet.pakollinen')
+    ).toBeVisible();
+  });
+
+  test('should show validation error for verkkosivu', async ({ page }) => {
+    const tyyppi = 'taiteen-perusopetus';
+    await prepareTest(page, tyyppi);
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+    await fillTiedotSection(page, tyyppi);
+    await fillKuvausSection(page);
+    await fillJarjestamistiedotSection(page);
+    await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+    await fillJarjestajaSection(page);
+    await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+    await fillYhteystiedotWithoutVerkkosivuSection(page);
+    await fillTilaSection(page);
+    await tallenna(page);
+    await expect(
+      page
+        .getByTestId('form-control_yhteyshenkilot[0].verkkosivu')
+        .getByText('validointivirheet.pakollinen')
+    ).toBeVisible();
+  });
 
   test('Should not copy publishing state when using existing entity as base', async ({
     page,

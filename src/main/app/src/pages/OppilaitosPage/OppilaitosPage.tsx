@@ -63,8 +63,8 @@ export const OppilaitosPage = () => {
             },
           }
         : oppilaitos
-        ? getFormValuesByOppilaitos(oppilaitos)
-        : {}),
+          ? getFormValuesByOppilaitos(oppilaitos)
+          : {}),
     }),
     [formMode, organisaatio, oppilaitos]
   );

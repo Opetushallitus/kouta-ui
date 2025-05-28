@@ -29,6 +29,20 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
         { value: 'koulutusala_1#1' },
         { value: 'koulutusala_2#1' },
       ],
+      luokittelutermit: {
+        fi: [
+          {
+            label: 'termi1',
+            value: 'termi1',
+          },
+        ],
+        sv: [
+          {
+            label: 'termi2',
+            value: 'termi2',
+          },
+        ],
+      },
     },
     koulutustyyppi: KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
     lisatiedot: {

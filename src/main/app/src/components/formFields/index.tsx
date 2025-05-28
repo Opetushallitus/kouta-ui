@@ -10,7 +10,11 @@ import { LanguageSelect } from '#/src/components/LanguageSelect';
 import { LexicalEditorUI } from '#/src/components/LexicalEditorUI';
 import { FloatInput, IntegerInput } from '#/src/components/NumberInput';
 import { PostinumeroSelect } from '#/src/components/PostinumeroSelect';
-import { Select, AsyncSelect } from '#/src/components/Select';
+import {
+  AsyncCreatableSelect,
+  Select,
+  AsyncSelect,
+} from '#/src/components/Select';
 import { SoraKuvausSelect } from '#/src/components/SoraKuvausSelect';
 import { Switch } from '#/src/components/Switch';
 import { TimeInput } from '#/src/components/TimeInput';
@@ -172,3 +176,8 @@ export const FormFieldIntegerInput = createComponent(
 );
 
 export const FormFieldFloatInput = createComponent(FloatInput, simpleMapProps);
+
+export const FormFieldAsyncCreatableSelect = createComponent(
+  AsyncCreatableSelect,
+  selectMapProps
+);

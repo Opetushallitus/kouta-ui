@@ -10,7 +10,12 @@ import {
   KoulutusFormValues,
   TutkinnonOsa,
 } from '#/src/types/koulutusTypes';
-import { maybeParseNumber, parseFloatComma, valueToArray } from '#/src/utils';
+import {
+  getTermsByLanguage,
+  maybeParseNumber,
+  parseFloatComma,
+  valueToArray,
+} from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import {
@@ -149,6 +154,9 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       erikoistumiskoulutusKoodiUri:
         values?.information?.erikoistumiskoulutus?.value || null,
       osaamismerkkiKoodiUri: values?.information?.osaamismerkki?.value || null,
+      luokittelutermit: getTermsByLanguage(
+        values?.information?.luokittelutermit
+      ),
     },
   };
 };

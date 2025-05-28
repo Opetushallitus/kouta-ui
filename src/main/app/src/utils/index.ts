@@ -111,7 +111,7 @@ export const formatDateValue = (
     if (isValidDate(parsed)) {
       return formatDate(parsed as Date, format);
     }
-  } catch (e) {}
+  } catch {}
   return null;
 };
 

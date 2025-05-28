@@ -121,10 +121,10 @@
     "start-server-and-test": "^1.14.0",
     "typescript": "5.8",
     "vite": "^6.3.5",
-    "vite-bundle-visualizer": "^0.10.0",
-    "vite-plugin-checker": "^0.6.1",
+    "vite-bundle-visualizer": "^1.2.1",
+    "vite-plugin-checker": "^0.9.3",
     "vite-plugin-rewrite-all": "^1.0.1",
-    "vite-plugin-svgr": "^3.2.0",
+    "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.1.4"
   },
   "overrides": {

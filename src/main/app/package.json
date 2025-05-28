@@ -115,7 +115,7 @@
     "https-pem": "^3.0.0",
     "husky": "^9.1.7",
     "jest-styled-components": "^7.2.0",
-    "jsdom": "^22.1.0",
+    "jsdom": "^26.1.0",
     "lint-staged": "^13.2.3",
     "prettier": "^3.5.3",
     "start-server-and-test": "^1.14.0",

@@ -32,6 +32,20 @@ exports[`getFormValuesByKoulutus returns correct form values for ammatillinen ko
       },
     ],
     "laajuusNumeroTyyppi": "single",
+    "luokittelutermit": {
+      "fi": [
+        {
+          "label": "termi1",
+          "value": "termi1",
+        },
+      ],
+      "sv": [
+        {
+          "label": "termi2",
+          "value": "termi2",
+        },
+      ],
+    },
     "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
@@ -133,6 +147,7 @@ exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskou
       },
     ],
     "laajuusNumeroTyyppi": "range",
+    "luokittelutermit": {},
     "nimi": {},
     "opinnonTyyppi": {
       "value": undefined,
@@ -210,6 +225,7 @@ exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] 
       },
     ],
     "laajuusNumeroTyyppi": "single",
+    "luokittelutermit": {},
     "nimi": {
       "fi": "Fi nimi",
       "sv": "Sv nimi",

@@ -436,6 +436,20 @@ export const toEnumValue = <T extends object>(
   return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
 };
 
+export const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
+  if (curr?.kieli && curr?.arvo) {
+    return {
+      ...acc,
+      [curr.kieli]: [
+        ...(acc[curr.kieli] ?? []),
+        { label: curr.arvo, value: curr.arvo },
+      ],
+    };
+  }
+
+  return acc;
+}, {});
+
 type SelectValuesByLanguage =
   | Partial<Record<LanguageCode, SelectOptions>>
   | undefined;

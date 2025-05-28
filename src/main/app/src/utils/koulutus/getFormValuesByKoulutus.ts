@@ -3,7 +3,11 @@ import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
-import { isNumeric, toSelectValue } from '#/src/utils';
+import {
+  isNumeric,
+  kieliArvoListToMultiSelectValue,
+  toSelectValue,
+} from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -67,6 +71,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     opinnonTyyppiKoodiUri,
     erikoistumiskoulutusKoodiUri = '',
     osaamismerkkiKoodiUri,
+    luokittelutermit,
   } = metadata;
 
   return {
@@ -107,6 +112,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         value: erikoistumiskoulutusKoodiUri,
       },
       osaamismerkki: { value: osaamismerkkiKoodiUri },
+      luokittelutermit: kieliArvoListToMultiSelectValue(luokittelutermit),
     },
     koulutustyyppi,
     lisatiedot: {

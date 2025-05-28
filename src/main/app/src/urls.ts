@@ -48,6 +48,7 @@ const development = {
   'kouta-backend.valintaperuste-list': `${koutaBackendDevUrl}/valintaperuste/list`,
   'kouta-backend.ammattinimike-search': `${koutaBackendDevUrl}/ammattinimike/search/$1`,
   'kouta-backend.asiasana-search': `${koutaBackendDevUrl}/asiasana/search/$1`,
+  'kouta-backend.luokittelutermi-search': `${koutaBackendDevUrl}/luokittelutermi/search/$1`,
   'kouta-backend.login': `${koutaBackendDevUrl}/auth/login`,
   'kouta-backend.session': `${koutaBackendDevUrl}/auth/session`,
   'kouta-backend.soraKuvaus': `${koutaBackendDevUrl}/sorakuvaus`,

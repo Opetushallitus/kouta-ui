@@ -25,9 +25,10 @@
     "postinstall": "npm run xstate:typegen"
   },
   "dependencies": {
-    "@lexical/link": "^0.10.0",
-    "@lexical/list": "^0.10.0",
-    "@lexical/react": "^0.10.0",
+    "@lexical/link": "^0.14.5",
+    "@lexical/list": "^0.14.5",
+    "@lexical/react": "^0.14.5",
+    "@lexical/table": "^0.14.5",
     "@opetushallitus/virkailija-ui-components": "^0.4.7",
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.5",
@@ -42,7 +43,7 @@
     "i18next": "^23.4.2",
     "i18next-http-backend": "^3.0.2",
     "immer": "^10.1.1",
-    "lexical": "^0.10.0",
+    "lexical": "^0.14.5",
     "lodash": "^4.17.21",
     "memoizee": "^0.4.15",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",

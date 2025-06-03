@@ -73,7 +73,7 @@
     "xstate": "^4.38.2"
   },
   "devDependencies": {
-    "@optimize-lodash/rollup-plugin": "^4.0.3",
+    "@optimize-lodash/rollup-plugin": "^5.0.2",
     "@playwright/test": "^1.52.0",
     "@popperjs/core": "^2.11.8",
     "@storybook/addon-actions": "^7.2.1",
@@ -87,7 +87,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "^13.5.0",
-    "@types/lodash": "^4.14.179",
+    "@types/lodash": "^4.17.17",
     "@types/node": "^22.15.23",
     "@types/react": "^16.14.5",
     "@types/react-dom": "^16.9.12",
@@ -107,7 +107,7 @@
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-lodash": "^7.4.0",
+    "eslint-plugin-lodash": "^8.0.0",
     "eslint-plugin-playwright": "^2.2.0",
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-react": "^7.37.5",

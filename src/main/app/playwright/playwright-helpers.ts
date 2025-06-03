@@ -51,6 +51,7 @@ export const wrapMutationTest =
     await run();
     const request = await requestPromise;
     const reqData = JSON.stringify(request.postDataJSON(), null, 2);
+    // eslint-disable-next-line playwright/no-standalone-expect
     await expect(reqData).toMatchSnapshot(`${testInfo.title}.json`);
   };
 

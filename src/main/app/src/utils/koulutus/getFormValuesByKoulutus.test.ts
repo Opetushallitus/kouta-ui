@@ -69,6 +69,7 @@ test('getFormValuesByKoulutus returns correct form values for ammatillinen koulu
       tutkintonimikeKoodiUrit: ['nimike_1#1', 'nimike_2#1'],
       tyyppi: 'amm',
       koulutusalaKoodiUrit: ['koulutusala_1#1', 'koulutusala_2#1'],
+      luokittelutermit: ['term1', 'term2'],
     },
     nimi: {
       fi: 'Fi nimi',

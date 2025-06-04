@@ -55,6 +55,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const isLaajuusRange =
     values?.information?.laajuusNumeroTyyppi === MaaraTyyppi.VAIHTELUVALI;
 
+  console.log(values);
   return {
     organisaatioOid: values?.organisaatioOid?.value,
     externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
@@ -149,6 +150,9 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       erikoistumiskoulutusKoodiUri:
         values?.information?.erikoistumiskoulutus?.value || null,
       osaamismerkkiKoodiUri: values?.information?.osaamismerkki?.value || null,
+      luokittelutermit: (values?.information?.luokittelutermit ?? []).map(
+        ({ value }) => value
+      ),
     },
   };
 };

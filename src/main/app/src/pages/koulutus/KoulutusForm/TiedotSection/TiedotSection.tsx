@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +8,7 @@ import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusFi
 import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
+import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
 import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
@@ -117,6 +118,7 @@ export const TuvaTiedotSection = ({
         name={name}
         language={language}
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -140,6 +142,7 @@ export const TelmaTiedotSection = ({
         name={name}
         language={language}
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -167,6 +170,7 @@ export const AikuistenPerusopetusTiedotSection = ({
         name={name}
         language={language}
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -196,6 +200,7 @@ export const TaiteenPerusopetusTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -223,6 +228,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -244,6 +250,7 @@ export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
           language={language}
         />
       </Box>
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -263,6 +270,7 @@ export const AmmMuuTiedotSection = ({ disabled, language, name }) => {
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -284,6 +292,7 @@ export const MuuTiedotSection = ({ disabled, language, name }) => {
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -310,6 +319,7 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
       <TunnisteField name={name} />
       <OpinnonTyyppiField name={name} />
       <AvoinKorkeakoulutusField name={name} />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -359,6 +369,7 @@ export const ErikoislaakariTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -453,6 +464,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           />
         </Box>
       )}
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -483,6 +495,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
       <TunnisteField name={name} />
       <OpinnonTyyppiField name={name} />
       <AvoinKorkeakoulutusField name={name} />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };
@@ -520,6 +533,7 @@ export const ErikoistumisKoulutusTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
+      <LuokittelutermitField name={name} language={language} />
     </VerticalBox>
   );
 };

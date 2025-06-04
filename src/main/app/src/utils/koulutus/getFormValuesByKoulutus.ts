@@ -67,6 +67,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     opinnonTyyppiKoodiUri,
     erikoistumiskoulutusKoodiUri = '',
     osaamismerkkiKoodiUri,
+    luokittelutermit,
   } = metadata;
 
   return {
@@ -107,6 +108,14 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         value: erikoistumiskoulutusKoodiUri,
       },
       osaamismerkki: { value: osaamismerkkiKoodiUri },
+      luokittelutermit: luokittelutermit?.map(
+        (value: string): { label: string; value: string } => {
+          return {
+            label: value,
+            value: value,
+          };
+        }
+      ),
     },
     koulutustyyppi,
     lisatiedot: {

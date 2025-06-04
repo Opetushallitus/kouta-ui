@@ -1,6 +1,6 @@
 import { format as formatDate, parseISO } from 'date-fns';
 import { TFunction } from 'i18next';
-import _ from 'lodash';
+import _, { flow, flatMap, toPairs } from 'lodash';
 import _fp from 'lodash/fp';
 import stripTags from 'striptags';
 import { match } from 'ts-pattern';
@@ -434,4 +434,37 @@ export const toEnumValue = <T extends object>(
   const values = Object.values(obj);
   const index = values.indexOf(value);
   return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
+};
+
+export const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
+  if (curr?.kieli && curr?.arvo) {
+    return {
+      ...acc,
+      [curr.kieli]: [
+        ...(acc[curr.kieli] ?? []),
+        { label: curr.arvo, value: curr.arvo },
+      ],
+    };
+  }
+
+  return acc;
+}, {});
+
+type SelectValuesByLanguage =
+  | Partial<Record<LanguageCode, SelectOptions>>
+  | undefined;
+
+export const getTermsByLanguage = (
+  values: SelectValuesByLanguage
+): Array<{ kieli: string; arvo: string }> => {
+  return flow(
+    (values: SelectValuesByLanguage) => toPairs(values || {}),
+    langTermTuples =>
+      flatMap(langTermTuples, ([language, terms]: [string, SelectOptions]) => {
+        return (terms || []).map(({ value }: SelectOption<string>) => ({
+          kieli: language,
+          arvo: value,
+        }));
+      })
+  )(values);
 };

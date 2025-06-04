@@ -179,14 +179,8 @@ exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] 
       },
     ],
     "luokittelutermit": [
-      {
-        "arvo": "termi1",
-        "kieli": "fi",
-      },
-      {
-        "arvo": "termi2",
-        "kieli": "sv",
-      },
+      "termi1",
+      "termi2",
     ],
     "opinnonTyyppiKoodiUri": null,
     "opintojenLaajuusNumero": null,

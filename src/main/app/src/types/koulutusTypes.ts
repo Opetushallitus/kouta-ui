@@ -21,7 +21,7 @@ export type InformationSectionValues = {
   tutkintonimike: SelectOptions;
   koulutusalat: SelectOptions;
   erikoistumiskoulutus?: SelectOption;
-  luokittelutermit?: TranslatedField<SelectOptions>;
+  luokittelutermit?: Array<SelectOption>;
   // Avoimen korkeakoulutuksen kentät:
   isAvoinKorkeakoulutus?: boolean;
   tunniste?: string;

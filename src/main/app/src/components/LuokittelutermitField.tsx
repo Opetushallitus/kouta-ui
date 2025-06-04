@@ -43,7 +43,7 @@ export const LuokittelutermitField = ({
   return (
     <Box>
       <Field
-        name={`${name}.luokittelutermit.${language}`}
+        name={`${name}.luokittelutermit`}
         component={FormFieldAsyncCreatableSelect}
         isMulti
         isClearable

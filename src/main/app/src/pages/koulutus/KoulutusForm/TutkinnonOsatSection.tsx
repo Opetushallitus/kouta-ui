@@ -5,6 +5,7 @@ import { FieldArray } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
+import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
@@ -90,6 +91,7 @@ export const TutkinnonOsatSection = ({
           language={language}
         />
       </Box>
+      <LuokittelutermitField name={name} language={language} />
     </Box>
   );
 };

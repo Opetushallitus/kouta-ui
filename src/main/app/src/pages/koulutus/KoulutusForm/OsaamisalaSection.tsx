@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
 import { Box } from '#/src/components/virkailija';
 
 import { WithKoulutusSelect } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';
@@ -18,6 +19,7 @@ export const OsaamisalaSection = ({ disabled, language, name }) => {
           />
         )}
       </WithKoulutusSelect>
+      <LuokittelutermitField name={name} language={language} />
     </Box>
   );
 };

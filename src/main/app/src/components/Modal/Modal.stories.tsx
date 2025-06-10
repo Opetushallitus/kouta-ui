@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { FormButton } from '#/src/components/FormButton';
 import { Typography } from '#/src/components/virkailija';

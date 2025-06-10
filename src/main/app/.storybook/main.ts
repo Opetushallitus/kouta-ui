@@ -3,7 +3,7 @@ export default {
   framework: '@storybook/react-vite',
   staticDirs: ['../public'],
   features: {},
-  addons: ['@storybook/addon-essentials', '@storybook/addon-links'],
+  addons: ['@storybook/addon-links'],
   core: {
     builder: '@storybook/builder-vite',
   },

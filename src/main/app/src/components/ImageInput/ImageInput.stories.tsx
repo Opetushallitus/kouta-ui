@@ -40,28 +40,33 @@ export default {
   title: 'ImageInput',
 };
 
-export const WithExternalValue = () => <Story />;
+export const WithExternalValue = {
+  render: () => <Story />,
+  name: 'With external value',
+};
 
-WithExternalValue.storyName = 'With external value';
+export const WithDisabled = {
+  render: () => <ImageInput onChange={() => action('change')} disabled />,
 
-export const WithDisabled = () => (
-  <ImageInput onChange={() => action('change')} disabled />
-);
+  name: 'With disabled',
+};
 
-WithDisabled.storyName = 'With disabled';
+export const WithExternalError = {
+  render: () => (
+    <ImageInput
+      onChange={() => action('change')}
+      upload={upload}
+      error="Attribuuttina annettu virhe"
+    />
+  ),
 
-export const WithExternalError = () => (
-  <ImageInput
-    onChange={() => action('change')}
-    upload={upload}
-    error="Attribuuttina annettu virhe"
-  />
-);
+  name: 'With external error',
+};
 
-WithExternalError.storyName = 'With external error';
+export const WithFailingUpload = {
+  render: () => (
+    <ImageInput onChange={() => action('change')} upload={errorUpload} />
+  ),
 
-export const WithFailingUpload = () => (
-  <ImageInput onChange={() => action('change')} upload={errorUpload} />
-);
-
-WithFailingUpload.storyName = 'With failing upload';
+  name: 'With failing upload',
+};

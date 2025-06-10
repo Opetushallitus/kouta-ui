@@ -1,3 +1,4 @@
 service-worker.js
 src/types/kouta-backend.api.ts
 *.typegen.ts
+!.storybook

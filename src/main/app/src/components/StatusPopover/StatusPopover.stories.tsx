@@ -30,17 +30,19 @@ export const Basic = () => (
   </div>
 );
 
-export const WithDangerStatus = () => (
-  <div style={{ paddingTop: '80vh' }}>
-    <StatusPopover
-      header="Toteutuksesi julkaisu epäonnistui"
-      body={<Typography>Yritä uudelleen</Typography>}
-      status="danger"
-      visible
-    >
-      {({ ref }) => <FormButton ref={ref}>Button</FormButton>}
-    </StatusPopover>
-  </div>
-);
+export const WithDangerStatus = {
+  render: () => (
+    <div style={{ paddingTop: '80vh' }}>
+      <StatusPopover
+        header="Toteutuksesi julkaisu epäonnistui"
+        body={<Typography>Yritä uudelleen</Typography>}
+        status="danger"
+        visible
+      >
+        {({ ref }) => <FormButton ref={ref}>Button</FormButton>}
+      </StatusPopover>
+    </div>
+  ),
 
-WithDangerStatus.storyName = 'With danger status';
+  name: 'With danger status',
+};

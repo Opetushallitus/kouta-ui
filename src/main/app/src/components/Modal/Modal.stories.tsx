@@ -23,16 +23,18 @@ export const Basic = () => (
   </Modal>
 );
 
-export const WithFullWidth = () => (
-  <Modal
-    header={header}
-    footer={footer}
-    onClose={action('close')}
-    fullWidth
-    open
-  >
-    {content}
-  </Modal>
-);
+export const WithFullWidth = {
+  render: () => (
+    <Modal
+      header={header}
+      footer={footer}
+      onClose={action('close')}
+      fullWidth
+      open
+    >
+      {content}
+    </Modal>
+  ),
 
-WithFullWidth.storyName = 'With fullWidth';
+  name: 'With fullWidth',
+};

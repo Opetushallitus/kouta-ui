@@ -7,7 +7,7 @@ const pem = require('https-pem');
 const app = express();
 app.use('/kouta', express.static(path.join(__dirname, 'build')));
 
-app.get(['/kouta', '/kouta/*'], function (req, res) {
+app.get(['/kouta', '/kouta/*splat'], function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 

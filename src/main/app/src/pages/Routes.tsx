@@ -72,121 +72,115 @@ const Routes = ({ history }) => {
           }}
         />
         <Switch>
-          <Route path="/" exact component={HomePage} />
-          <Route
-            path="/organisaatio/:organisaatioOid/koulutus"
-            component={CreateKoulutusPage}
-            exact
-          />
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/organisaatio/:organisaatioOid/koulutus">
+            <CreateKoulutusPage />
+          </Route>
           <Route
             path="/organisaatio/:organisaatioOid/koulutus/:oid/muokkaus"
-            component={EditKoulutusPage}
             exact
-          />
-          <Route
-            path={['/koulutus/:oid', '/koulutus/:oid/muokkaus']}
-            component={RedirectKoulutusPage}
-            exact
-          />
+          >
+            <EditKoulutusPage />
+          </Route>
+          <Route exact path={['/koulutus/:oid', '/koulutus/:oid/muokkaus']}>
+            <RedirectKoulutusPage />
+          </Route>
 
           <Route
             path="/organisaatio/:organisaatioOid/koulutus/:koulutusOid/toteutus"
-            component={CreateToteutusPage}
             exact
-          />
+          >
+            <CreateToteutusPage />
+          </Route>
           <Route
             path="/organisaatio/:organisaatioOid/toteutus/:oid/muokkaus"
-            component={EditToteutusPage}
             exact
-          />
-          <Route
-            path={['/toteutus/:oid', '/toteutus/:oid/muokkaus']}
-            component={RedirectToteutusPage}
-            exact
-          />
+          >
+            <EditToteutusPage />
+          </Route>
+          <Route exact path={['/toteutus/:oid', '/toteutus/:oid/muokkaus']}>
+            <RedirectToteutusPage />
+          </Route>
 
-          <Route
-            path="/organisaatio/:organisaatioOid/haku"
-            component={CreateHakuPage}
-            exact
-          />
-          <Route
-            path="/organisaatio/:organisaatioOid/haku/:oid/muokkaus"
-            component={EditHakuPage}
-            exact
-          />
-          <Route
-            path={['/haku/:oid', '/haku/:oid/muokkaus']}
-            component={RedirectHakuPage}
-            exact
-          />
+          <Route exact path="/organisaatio/:organisaatioOid/haku">
+            <CreateHakuPage />
+          </Route>
+          <Route exact path="/organisaatio/:organisaatioOid/haku/:oid/muokkaus">
+            <EditHakuPage />
+          </Route>
+          <Route exact path={['/haku/:oid', '/haku/:oid/muokkaus']}>
+            <RedirectHakuPage />
+          </Route>
 
           <Route
             path="/organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde"
-            component={CreateHakukohdePage}
             exact
-          />
+          >
+            <CreateHakukohdePage />
+          </Route>
           <Route
             path="/organisaatio/:organisaatioOid/hakukohde/:oid/muokkaus"
-            component={EditHakukohdePage}
             exact
-          />
-          <Route
-            path={['/hakukohde/:oid', '/hakukohde/:oid/muokkaus']}
-            component={RedirectHakukohdePage}
-            exact
-          />
+          >
+            <EditHakukohdePage />
+          </Route>
+          <Route exact path={['/hakukohde/:oid', '/hakukohde/:oid/muokkaus']}>
+            <RedirectHakukohdePage />
+          </Route>
 
           <Route
             path="/organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat?"
-            component={CreateValintaperustePage}
             exact
-          />
+          >
+            <CreateValintaperustePage />
+          </Route>
           <Route
             path="/organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat/koulutustyyppi/:koulutustyyppi"
-            component={CreateValintaperustePage}
             exact
-          />
+          >
+            <CreateValintaperustePage />
+          </Route>
           <Route
             path="/organisaatio/:organisaatioOid/valintaperusteet/:id/muokkaus"
-            component={EditValintaperustePage}
             exact
-          />
+          >
+            <EditValintaperustePage />
+          </Route>
           <Route
             path={['/valintaperusteet/:oid', '/valintaperusteet/:oid/muokkaus']}
-            component={RedirectValintaperustePage}
             exact
-          />
+          >
+            <RedirectValintaperustePage />
+          </Route>
 
           <Route
             path="/organisaatio/:organisaatioOid/sora-kuvaus/kielivalinnat/:kieliValinnat?"
-            component={CreateSoraKuvausPage}
             exact
-          />
+          >
+            <CreateSoraKuvausPage />
+          </Route>
           <Route
             path="/organisaatio/:organisaatioOid/sora-kuvaus/:id/muokkaus"
-            component={EditSoraKuvausPage}
             exact
-          />
+          >
+            <EditSoraKuvausPage />
+          </Route>
 
-          <Route
-            path={['/sora-kuvaus/:oid', '/sora-kuvaus/:oid/muokkaus']}
-            component={RedirectSoraKuvausPage}
-            exact
-          />
+          <Route path={['/sora-kuvaus/:oid', '/sora-kuvaus/:oid/muokkaus']}>
+            <RedirectSoraKuvausPage />
+          </Route>
 
-          <Route
-            path="/organisaatio/:organisaatioOid/oppilaitos"
-            component={OppilaitosPage}
-            exact
-          />
+          <Route exact path="/organisaatio/:organisaatioOid/oppilaitos">
+            <OppilaitosPage />
+          </Route>
 
-          <Route
-            path="/organisaatio/:organisaatioOid/oppilaitoksen-osa"
-            component={OppilaitoksenOsaPage}
-            exact
-          />
-          <Redirect to="/" />
+          <Route exact path="/organisaatio/:organisaatioOid/oppilaitoksen-osa">
+            <OppilaitoksenOsaPage />
+          </Route>
+
+          <Route render={() => <Redirect to="/" />} />
         </Switch>
       </RouterScrollToTop>
     </Router>

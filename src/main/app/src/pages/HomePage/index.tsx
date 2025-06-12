@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Alert } from '#/src/components/Alert';
@@ -93,8 +93,8 @@ const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
   return <HomeContent organisaatioOid={organisaatioOid} />;
 };
 
-const HomePage = ({ location }) => {
-  const { search } = location;
+const HomePage = () => {
+  const { search } = useLocation();
   const { t } = useTranslation();
   const persistedOrganisaatioOid = useSelector(state =>
     selectOrganisaatio(state)

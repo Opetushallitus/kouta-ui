@@ -108,14 +108,18 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         value: erikoistumiskoulutusKoodiUri,
       },
       osaamismerkki: { value: osaamismerkkiKoodiUri },
-      luokittelutermit: luokittelutermit?.map(
-        (value: string): { label: string; value: string } => {
-          return {
-            label: value,
-            value: value,
-          };
-        }
-      ),
+      ...(![KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA].includes(
+        koulutustyyppi
+      ) && {
+        luokittelutermit: luokittelutermit?.map(
+          (value: string): { label: string; value: string } => {
+            return {
+              label: value,
+              value: value,
+            };
+          }
+        ),
+      }),
     },
     koulutustyyppi,
     lisatiedot: {
@@ -131,6 +135,18 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       osiot: lisatiedot
         .filter(({ otsikkoKoodiUri }) => Boolean(otsikkoKoodiUri))
         .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })),
+      ...([KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA].includes(
+        koulutustyyppi
+      ) && {
+        luokittelutermit: luokittelutermit?.map(
+          (value: string): { label: string; value: string } => {
+            return {
+              label: value,
+              value: value,
+            };
+          }
+        ),
+      }),
     },
     tutkinnonosat: {
       osat: _fp.values(

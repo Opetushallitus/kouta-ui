@@ -37,7 +37,7 @@ const HomeContent = ({ organisaatioOid }) => {
     value => {
       const searchParams = new URLSearchParams(search);
       searchParams.set('organisaatioOid', value);
-      history.replace({ search: searchParams.toString() });
+      history.push({ search: searchParams.toString() });
       dispatch(setOrganisaatio(value));
     },
     [history, dispatch, search]

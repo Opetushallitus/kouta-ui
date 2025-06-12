@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { connect } from 'react-redux';
+import { useLocation } from 'react-router';
 import { useHistory } from 'react-router-dom';
 
 import Container from '#/src/components/Container';
@@ -12,6 +12,7 @@ import {
   HAKUKOHDE_ROLE,
   VALINTAPERUSTE_ROLE,
 } from '#/src/constants';
+import { useDispatch } from '#/src/hooks/reduxHooks';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { setOrganisaatio } from '#/src/state/organisaatioSelection';
@@ -24,23 +25,22 @@ import NavigationProvider from './NavigationProvider';
 import ToteutuksetSection from './ToteutuksetSection';
 import ValintaperusteetSection from './ValintaperusteetSection';
 
-const HomeContent = ({
-  organisaatioOid,
-  onOrganisaatioChange: onOrganisaatioChangeProp,
-}) => {
+const HomeContent = ({ organisaatioOid }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
+  const { search } = useLocation();
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const onOrganisaatioChange = useCallback(
     value => {
-      history.push({
-        search: null,
-      });
-      onOrganisaatioChangeProp(value);
+      const searchParams = new URLSearchParams(search);
+      searchParams.set('organisaatioOid', value);
+      history.replace({ search: searchParams.toString() });
+      dispatch(setOrganisaatio(value));
     },
-    [history, onOrganisaatioChangeProp]
+    [history, dispatch, search]
   );
 
   const hasKoulutusWriteRole = useMemo(() => {
@@ -138,6 +138,4 @@ const HomeContent = ({
   );
 };
 
-export default connect(null, dispatch => ({
-  onOrganisaatioChange: oid => dispatch(setOrganisaatio(oid)),
-}))(HomeContent);
+export default HomeContent;

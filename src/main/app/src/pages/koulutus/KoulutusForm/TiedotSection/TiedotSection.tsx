@@ -118,7 +118,7 @@ export const TuvaTiedotSection = ({
         name={name}
         language={language}
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -142,7 +142,7 @@ export const TelmaTiedotSection = ({
         name={name}
         language={language}
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -170,7 +170,7 @@ export const AikuistenPerusopetusTiedotSection = ({
         name={name}
         language={language}
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -200,7 +200,7 @@ export const TaiteenPerusopetusTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -228,7 +228,7 @@ export const VapaaSivistystyoOpistovuosiTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -250,7 +250,7 @@ export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
           language={language}
         />
       </Box>
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -270,7 +270,7 @@ export const AmmMuuTiedotSection = ({ disabled, language, name }) => {
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -292,7 +292,7 @@ export const MuuTiedotSection = ({ disabled, language, name }) => {
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -319,7 +319,7 @@ export const KkOpintojaksoTiedotSection = ({ disabled, language, name }) => {
       <TunnisteField name={name} />
       <OpinnonTyyppiField name={name} />
       <AvoinKorkeakoulutusField name={name} />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -369,7 +369,7 @@ export const ErikoislaakariTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -464,7 +464,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           />
         </Box>
       )}
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -495,7 +495,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
       <TunnisteField name={name} />
       <OpinnonTyyppiField name={name} />
       <AvoinKorkeakoulutusField name={name} />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };
@@ -533,7 +533,7 @@ export const ErikoistumisKoulutusTiedotSection = ({
         helperText={t('koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus')}
         required
       />
-      <LuokittelutermitField name={name} language={language} />
+      <LuokittelutermitField name={name} />
     </VerticalBox>
   );
 };

@@ -81,7 +81,7 @@ export const LisatiedotSection = ({
       />
       {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
         koulutustyyppi
-      ) && <LuokittelutermitField name={name} language={language} />}
+      ) && <LuokittelutermitField name={name} />}
     </>
   );
 };

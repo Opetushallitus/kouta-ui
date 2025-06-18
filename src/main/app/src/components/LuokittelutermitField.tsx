@@ -9,13 +9,7 @@ import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { getLuokittelutermit } from '#/src/utils/api/getLuokittelutermitSearch';
 
-export const LuokittelutermitField = ({
-  language,
-  name,
-}: {
-  language: string;
-  name: string;
-}) => {
+export const LuokittelutermitField = ({ name }: { name: string }) => {
   const { t } = useTranslation();
 
   const httpClient = useHttpClient();
@@ -27,7 +21,6 @@ export const LuokittelutermitField = ({
         httpClient,
         apiUrls,
         searchStr: inputValue,
-        language,
       });
 
       return termit.map((termi: string): { value: string; label: string } => {
@@ -37,7 +30,7 @@ export const LuokittelutermitField = ({
         };
       });
     },
-    [httpClient, apiUrls, language]
+    [httpClient, apiUrls]
   );
 
   return (

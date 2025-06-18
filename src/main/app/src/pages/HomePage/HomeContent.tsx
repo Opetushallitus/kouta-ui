@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useLocation } from 'react-router';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import Container from '#/src/components/Container';
 import { Box, Spin } from '#/src/components/virkailija';
@@ -26,7 +25,7 @@ import ToteutuksetSection from './ToteutuksetSection';
 import ValintaperusteetSection from './ValintaperusteetSection';
 
 const HomeContent = ({ organisaatioOid }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -37,10 +36,10 @@ const HomeContent = ({ organisaatioOid }) => {
     value => {
       const searchParams = new URLSearchParams(search);
       searchParams.set('organisaatioOid', value);
-      history.push({ search: searchParams.toString() });
+      navigate({ search: searchParams.toString() });
       dispatch(setOrganisaatio(value));
     },
-    [history, dispatch, search]
+    [navigate, dispatch, search]
   );
 
   const hasKoulutusWriteRole = useMemo(() => {

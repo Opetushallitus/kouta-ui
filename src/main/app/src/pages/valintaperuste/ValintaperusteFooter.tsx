@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
@@ -28,7 +28,7 @@ export const ValintaperusteFooter = ({
   valintaperuste = {},
   canUpdate,
 }: ValintaperusteFooterProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const form = useForm();
 
@@ -55,15 +55,15 @@ export const ValintaperusteFooter = ({
       });
 
       if (formMode === FormMode.CREATE) {
-        history.push(
+        navigate(
           `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`
         );
       } else {
-        afterUpdate(queryClient, history, ENTITY.VALINTAPERUSTE, values.tila);
+        afterUpdate(queryClient, navigate, ENTITY.VALINTAPERUSTE, values.tila);
       }
       return { warnings: warnings };
     },
-    [formMode, organisaatioOid, valintaperuste, history, queryClient]
+    [formMode, organisaatioOid, valintaperuste, navigate, queryClient]
   );
 
   const formName = useFormName();

@@ -19,7 +19,7 @@ import OppilaitosForm, {
 } from './OppilaitosForm';
 
 export const OppilaitosPage = () => {
-  const { organisaatioOid } = useParams();
+  const { organisaatioOid } = useParams() as { organisaatioOid: string };
 
   const [formMode, setFormMode] = useState<FormMode>(FormMode.EDIT);
 

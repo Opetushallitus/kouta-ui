@@ -18,7 +18,10 @@ import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm } from './ValintaperusteForm';
 
 export const EditValintaperustePage = () => {
-  const { organisaatioOid, id } = useParams();
+  const { organisaatioOid, id } = useParams() as {
+    organisaatioOid: string;
+    id: string;
+  };
   const valintaperusteQueryResult = useValintaperusteById(id);
   const { data: valintaperuste } = valintaperusteQueryResult;
 

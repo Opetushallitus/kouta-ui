@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
@@ -30,7 +30,7 @@ export const HakuFooter = ({
   haku = {},
   canUpdate,
 }: HakuFooterProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const form = useForm();
@@ -59,9 +59,9 @@ export const HakuFooter = ({
       });
 
       if (formMode === FormMode.CREATE) {
-        history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
+        navigate(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
       } else {
-        afterUpdate(queryClient, history, ENTITY.HAKU, valuesForSaving.tila);
+        afterUpdate(queryClient, navigate, ENTITY.HAKU, valuesForSaving.tila);
       }
       return { warnings: warnings };
     },
@@ -70,7 +70,7 @@ export const HakuFooter = ({
       form.registeredFields,
       formMode,
       haku,
-      history,
+      navigate,
       initialValues,
       unregisteredFields,
       queryClient,

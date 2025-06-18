@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import { isFuture } from 'date-fns';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { EntityModal } from '#/src/components/EntityModal';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
@@ -13,7 +13,7 @@ const getEntitySuffix = e =>
 
 export const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { data } = useSearchAllKoulutuksetWithOid({
     organisaatioOid,
@@ -33,9 +33,9 @@ export const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
 
   const onSubmit = useCallback(
     ({ oid }) => {
-      history.push(`/organisaatio/${organisaatioOid}/koulutus/${oid}/toteutus`);
+      navigate(`/organisaatio/${organisaatioOid}/koulutus/${oid}/toteutus`);
     },
-    [history, organisaatioOid]
+    [navigate, organisaatioOid]
   );
 
   return (

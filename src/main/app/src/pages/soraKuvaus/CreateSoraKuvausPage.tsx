@@ -42,7 +42,10 @@ const getInitialValues = (soraKuvaus, kieliValinnat) => {
 };
 
 export const CreateSoraKuvausPage = () => {
-  const { organisaatioOid, kieliValinnat } = useParams();
+  const { organisaatioOid, kieliValinnat } = useParams() as {
+    organisaatioOid: string;
+    kieliValinnat: string | undefined;
+  };
   const { t } = useTranslation();
 
   const { data: soraKuvaus } = usePohjaEntity(ENTITY.SORA_KUVAUS);

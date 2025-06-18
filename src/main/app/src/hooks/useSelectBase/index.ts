@@ -1,25 +1,27 @@
 import { useCallback } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { POHJAVALINTA } from '#/src/constants';
 import { assignQueryString } from '#/src/utils/assignQueryString';
 
 export const useSelectBase = ({ kopioParam = 'kopio' } = {}) => {
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
   return useCallback(
     ({ tapa, valinta }) => {
-      const {
-        location: { search },
-      } = history;
+      const { search } = location;
 
-      const setNewSearch = newSearch => {
+      const setNewSearch = (newSearch: string) => {
         return (
           (newSearch !== search &&
-            history.replace({
-              search: newSearch,
-            })) ||
-          history
+            navigate(
+              {
+                search: newSearch,
+              },
+              { replace: true }
+            )) ||
+          navigate
         );
       };
       if (tapa === POHJAVALINTA.KOPIO && valinta) {
@@ -36,6 +38,6 @@ export const useSelectBase = ({ kopioParam = 'kopio' } = {}) => {
         })
       );
     },
-    [kopioParam, history]
+    [kopioParam, location, navigate]
   );
 };

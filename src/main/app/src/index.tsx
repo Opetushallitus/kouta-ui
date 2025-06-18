@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Globals } from '@react-spring/web';
 import { inspect } from '@xstate/inspect';
-import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
 import ReactDOM from 'react-dom';
 
@@ -23,8 +22,6 @@ if (import.meta.env.VITE_XSTATE_INSPECTOR) {
     iframe: false, // open in new window
   });
 }
-
-const history = createBrowserHistory({ basename: 'kouta' });
 
 (async () => {
   let apiUrls = ophUrls;
@@ -47,7 +44,6 @@ const history = createBrowserHistory({ basename: 'kouta' });
       theme={defaultTheme}
       urls={apiUrls}
       httpClient={httpClient}
-      history={history}
       localization={localizationInstance}
       persistor={persistor}
     />,

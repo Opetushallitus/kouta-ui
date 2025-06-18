@@ -53,7 +53,10 @@ const getInitialValues = ({
 };
 
 export const CreateToteutusPage = () => {
-  const { organisaatioOid, koulutusOid } = useParams();
+  const { organisaatioOid, koulutusOid } = useParams() as {
+    organisaatioOid: string;
+    koulutusOid: string;
+  };
   const koulutusQueryResult = useKoulutusByOid(koulutusOid);
   const { data: koulutus } = koulutusQueryResult;
 

@@ -1,10 +1,11 @@
 import { QueryClient, QueryKey } from 'react-query';
+import { NavigateFunction } from 'react-router-dom';
 
 import { JULKAISUTILA } from '../constants';
 
 export const afterUpdate = (
   queryClient: QueryClient,
-  history,
+  navigate: NavigateFunction,
   entityType: QueryKey,
   newTila: JULKAISUTILA
 ) => {
@@ -13,7 +14,7 @@ export const afterUpdate = (
 
   queryClient.invalidateQueries(entityType, { refetchActive }).then(() => {
     if (redirectToFrontpage) {
-      history.push('/');
+      navigate('/');
     }
   });
 };

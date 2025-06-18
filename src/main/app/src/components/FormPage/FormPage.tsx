@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { QueryObserverResult } from 'react-query';
-import NavigationPrompt from 'react-router-navigation-prompt';
+import ReactRouterPrompt from 'react-router-prompt';
 import styled from 'styled-components';
 
 import Container from '#/src/components/Container';
@@ -10,10 +10,11 @@ import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { ReduxForm } from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
-import { ENTITY, FormMode } from '#/src/constants';
-import { useIsDirty, useIsSubmitting } from '#/src/hooks/form';
+import { ENTITY, FormMode, JULKAISUTILA } from '#/src/constants';
+import { useFieldValue, useIsDirty, useIsSubmitting } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
+
+import UnsavedChangesDialog from '../UnsavedChangesDialog';
 
 const HeaderContainer = styled.div`
   background-color: white;
@@ -88,20 +89,24 @@ const FormPageContent = ({
 }: any) => {
   const isSubmitting = useIsSubmitting();
   const isDirty = useIsDirty();
+  const tila: string = useFieldValue('tila');
   return (
     <>
       {isSubmitting && <OverlaySpin />}
       <Title>{title}</Title>
-      <NavigationPrompt
-        when={(currentLoc, nextLoc) => {
-          const samePath =
-            (nextLoc && nextLoc.pathname) ===
-            (currentLoc && currentLoc.pathname);
-          return !samePath && !isSubmitting && isDirty;
-        }}
-      >
-        {props => <UnsavedChangesDialog {...props} />}
-      </NavigationPrompt>
+      {
+        <ReactRouterPrompt
+          when={({ currentLocation, nextLocation }) => {
+            const samePath =
+              (nextLocation && nextLocation.pathname) ===
+              (currentLocation && currentLocation.pathname);
+            const deleting = tila === JULKAISUTILA.POISTETTU;
+            return !samePath && !isSubmitting && isDirty && !deleting;
+          }}
+        >
+          {props => <UnsavedChangesDialog {...props} />}
+        </ReactRouterPrompt>
+      }
       <Wrapper>
         <HeaderContainer>
           <Container>{header}</Container>

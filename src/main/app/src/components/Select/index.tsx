@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useCallback } from 'react';
+import { useMemo, useContext, useCallback } from 'react';
 
 import UiSelect, {
   getStyles,
@@ -16,6 +16,8 @@ import { ThemeContext } from 'styled-components';
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { valueToArray, safeArrayToValue } from '#/src/utils';
 import { memoizeOne } from '#/src/utils/memoize';
+
+import { Button } from '../virkailija';
 
 const OptionComponent = props => (
   <components.Option
@@ -157,6 +159,33 @@ export const CreatableSelect = ({ error = false, id, disabled, ...props }) => {
   );
 };
 
+const OptionWithCreateButton = props => {
+  const { t } = useTranslation();
+
+  const onClick = () => {
+    props.selectOption(props.data);
+  };
+
+  const innerProps = {
+    ...props.innerProps,
+    onClick: null,
+  };
+
+  const { value } = props.data;
+
+  if (props.data.__isNew__) {
+    return (
+      <components.Option {...props} innerProps={innerProps}>
+        {value}
+        <Button onClick={onClick}>
+          {t('yleiset.lisaaUusi', { kohde: 'avainsana' })}
+        </Button>
+      </components.Option>
+    );
+  }
+  return <components.Option {...props}>{props.children}</components.Option>;
+};
+
 export const AsyncCreatableSelect = ({
   error = false,
   id,
@@ -176,6 +205,8 @@ export const AsyncCreatableSelect = ({
       inputId={id}
       isDisabled={disabled}
       {...props}
+      components={{ Option: OptionWithCreateButton }}
+      createOptionPosition="first"
     />
   );
 };

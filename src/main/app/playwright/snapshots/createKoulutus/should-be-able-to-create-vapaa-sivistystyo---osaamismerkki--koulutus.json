@@ -37,6 +37,7 @@
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,
     "erikoistumiskoulutusKoodiUri": null,
-    "osaamismerkkiKoodiUri": "osaamismerkit_1007#1"
+    "osaamismerkkiKoodiUri": "osaamismerkit_1007#1",
+    "luokittelutermit": []
   }
 }

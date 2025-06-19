@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Box } from '#/src/components/virkailija';
 
 import { WithKoulutusSelect } from './AmmatillinenTiedotSection/AmmatillinenTiedotSection';

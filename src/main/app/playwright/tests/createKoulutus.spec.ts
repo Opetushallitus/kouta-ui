@@ -65,7 +65,7 @@ test.describe('Create koulutus', () => {
       await fillKoulutustyyppiSection(page, ['amm']);
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
-      await withinSection(page, 'information', async () => {
+      await withinSection(page, 'information', async section => {
         await fillAsyncSelect(
           page.getByTestId('koulutusSelect'),
           'Kaivosalan perustutkinto'
@@ -73,6 +73,11 @@ test.describe('Create koulutus', () => {
         await fillAsyncSelect(
           page.getByTestId('ePerusteSelect'),
           'Kaivosalan perustutkinto'
+        );
+        await fillAsyncSelect(
+          getSelectByLabel(section, 'koulutuslomake.luokittelutermit'),
+          'luokittelutermi',
+          'yleiset.luoKohde'
         );
       });
       await fillLisatiedotSection(page);

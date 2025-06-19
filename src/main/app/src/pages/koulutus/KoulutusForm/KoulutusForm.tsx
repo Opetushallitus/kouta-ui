@@ -341,6 +341,7 @@ export const KoulutusForm = ({
                 Component={LisatiedotSection}
                 languages={languageTabs}
                 disabled={onlyTarjoajaRights}
+                koulutustyyppi={koulutustyyppi}
               />
             )}
 

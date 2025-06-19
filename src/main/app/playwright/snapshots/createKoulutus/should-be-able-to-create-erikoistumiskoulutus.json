@@ -48,6 +48,7 @@
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,
     "erikoistumiskoulutusKoodiUri": "erikoistumiskoulutukset_001#2",
-    "osaamismerkkiKoodiUri": null
+    "osaamismerkkiKoodiUri": null,
+    "luokittelutermit": []
   }
 }

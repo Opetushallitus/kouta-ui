@@ -20,7 +20,8 @@ export type InformationSectionValues = {
   laajuusNumeroTyyppi?: MaaraTyyppi;
   tutkintonimike: SelectOptions;
   koulutusalat: SelectOptions;
-  erikoistumiskoulutus: SelectOption;
+  erikoistumiskoulutus?: SelectOption;
+  luokittelutermit?: Array<SelectOption>;
   // Avoimen korkeakoulutuksen kentät:
   isAvoinKorkeakoulutus?: boolean;
   tunniste?: string;

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
@@ -27,7 +27,7 @@ export const SoraKuvausFooter = ({
   canUpdate,
 }: SoraKuvausFooterProps) => {
   const queryClient = useQueryClient();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -49,14 +49,12 @@ export const SoraKuvausFooter = ({
       });
 
       if (formMode === FormMode.CREATE) {
-        history.push(
-          `/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`
-        );
+        navigate(`/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`);
       } else {
-        afterUpdate(queryClient, history, ENTITY.SORA_KUVAUS, values.tila);
+        afterUpdate(queryClient, navigate, ENTITY.SORA_KUVAUS, values.tila);
       }
     },
-    [formMode, soraKuvaus, history, queryClient, organisaatioOid]
+    [formMode, soraKuvaus, navigate, queryClient, organisaatioOid]
   );
 
   const save = useSaveForm({

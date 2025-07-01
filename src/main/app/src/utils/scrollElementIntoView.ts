@@ -6,7 +6,7 @@ const scrollElementIntoView = (element, delay = 0) => {
   setTimeout(() => {
     try {
       element.scrollIntoView(SCROLL_OPTIONS);
-    } catch (e) {}
+    } catch {}
   }, delay);
 };
 

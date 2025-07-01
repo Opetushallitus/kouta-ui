@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { FormButton } from '#/src/components/FormButton';
 import { Typography } from '#/src/components/virkailija';
@@ -33,16 +33,18 @@ export const Basic = () => (
   </Collapse>
 );
 
-export const WithActive = () => (
-  <Collapse
-    header={header}
-    footer={footer}
-    open={true}
-    active={true}
-    onToggle={action('toggle')}
-  >
-    {children}
-  </Collapse>
-);
+export const WithActive = {
+  render: () => (
+    <Collapse
+      header={header}
+      footer={footer}
+      open={true}
+      active={true}
+      onToggle={action('toggle')}
+    >
+      {children}
+    </Collapse>
+  ),
 
-WithActive.storyName = 'With active';
+  name: 'With active',
+};

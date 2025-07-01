@@ -97,9 +97,9 @@ test('getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika', () => {
 
 test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti', () => {
   const henkKohtLisatiedotValues = {
-    fi: '<p>hlokoht fi </p>',
-    sv: '<p>hlokoht sv </p>',
-    en: '<p>hlokoht en </p>',
+    fi: '<p>hlokoht fi</p>',
+    sv: '<p>hlokoht sv</p>',
+    en: '<p>hlokoht en</p>',
   };
 
   const values = getFormValuesByHaku(

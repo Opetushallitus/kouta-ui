@@ -45,8 +45,8 @@ export const useOrganisaatioHierarkia = (
         oids: oid,
       }
     : oid === OPETUSHALLITUS_ORGANISAATIO_OID
-    ? {}
-    : { oid };
+      ? {}
+      : { oid };
 
   const { data, ...rest } = useApiQuery(
     'getOrganisaatioHierarkia',

@@ -15,8 +15,10 @@ export default {
   },
 };
 
-export const Basic = props => (
-  <Alert title="Alert title" {...props}>
-    Description
-  </Alert>
-);
+export const Basic = {
+  render: props => (
+    <Alert title="Alert title" {...props}>
+      Description
+    </Alert>
+  ),
+};

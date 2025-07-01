@@ -43,7 +43,10 @@ const useInitialValues = hakukohde => {
 };
 
 export const EditHakukohdePage = () => {
-  const { organisaatioOid, oid } = useParams();
+  const { organisaatioOid, oid } = useParams() as {
+    organisaatioOid: string;
+    oid: string;
+  };
 
   const hakukohdeQueryResult = useHakukohdeByOid(oid);
   const { data: hakukohde } = hakukohdeQueryResult;

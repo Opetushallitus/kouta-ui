@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 import _ from 'lodash';
 import { usePrevious } from 'react-use';
@@ -97,7 +97,7 @@ export const useNimiFromKoulutusKoodi = ({
 
   // When koulutus field value has changed to a defined value (koodi exists) or selected languages (kielivalinta) has changed
   // change the language versioned nimi fields accordingly
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       shouldUpdateNimi(
         nimiFieldName,

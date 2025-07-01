@@ -52,7 +52,11 @@ const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
 };
 
 export const CreateHakukohdePage = () => {
-  const { organisaatioOid, toteutusOid, hakuOid } = useParams();
+  const { organisaatioOid, toteutusOid, hakuOid } = useParams() as {
+    organisaatioOid: string;
+    toteutusOid: string;
+    hakuOid: string;
+  };
   const { t } = useTranslation();
 
   const pageDataQueryResult = useHakukohdePageData({

@@ -34,7 +34,7 @@ const getOptions = ({
       value: `${koodi?.koodiUri}#${koodi?.versio}`,
       label: _.isFunction(formatLabel)
         ? formatLabel(koodi, language)
-        : getKoodiNimiTranslation(koodi, language) ?? undefined,
+        : (getKoodiNimiTranslation(koodi, language) ?? undefined),
     }))
   );
 

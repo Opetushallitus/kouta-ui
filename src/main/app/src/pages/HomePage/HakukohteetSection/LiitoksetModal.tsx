@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
@@ -19,7 +19,7 @@ import { useToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [haku, setHaku] = useState();
   const [toteutus, setToteutus] = useState();
 
@@ -39,11 +39,11 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
 
   const onSubmit = useCallback(() => {
     if (!disabled) {
-      history.push(
+      navigate(
         `/organisaatio/${organisaatioOid}/toteutus/${toteutus.value}/haku/${haku.value}/hakukohde`
       );
     }
-  }, [history, haku, toteutus, disabled, organisaatioOid]);
+  }, [navigate, haku, toteutus, disabled, organisaatioOid]);
 
   return (
     <Modal open={open}>

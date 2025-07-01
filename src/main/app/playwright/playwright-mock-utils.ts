@@ -12,7 +12,9 @@ export const mocksFromFile = async (
     url: string;
     method: string;
     response: { status: number; body: any };
-  }> = (await import(path.resolve(MOCKS_PATH, fileName))).default;
+  }> = (
+    await import(path.resolve(MOCKS_PATH, fileName), { with: { type: 'json' } })
+  ).default;
 
   await Promise.all(
     mocks.map(async mock => {

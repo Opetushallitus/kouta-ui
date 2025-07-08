@@ -4,7 +4,10 @@ import { POHJAVALINTA, DEFAULT_JULKAISUTILA } from '#/src/constants';
 
 export { ValintaperusteForm } from './ValintaperusteForm';
 
-export const initialValues = (kieliValinnat, koulutustyyppi) => ({
+export const initialValues = (
+  kieliValinnat: Array<string>,
+  koulutustyyppi: string | undefined
+) => ({
   tila: DEFAULT_JULKAISUTILA,
   esikatselu: true,
   pohja: {

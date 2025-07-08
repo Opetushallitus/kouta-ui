@@ -74,7 +74,6 @@ export default defineConfig(({ mode }) => {
     server: {
       port: Number(env.PORT) || 3000,
       host: 'localhost',
-      https: true,
       proxy: DISABLE_LOCAL_PROXY
         ? undefined
         : {

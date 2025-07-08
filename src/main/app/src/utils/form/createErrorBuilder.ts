@@ -93,7 +93,7 @@ class ErrorBuilder {
       try {
         const url = new URL(str);
         return _.includes(['http:', 'https:'], url.protocol);
-      } catch (_) {
+      } catch {
         return false;
       }
     };
@@ -198,8 +198,8 @@ class ErrorBuilder {
     const errorMessage = message
       ? message
       : min === 1
-      ? 'validointivirheet.listaVahintaanYksi'
-      : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
+        ? 'validointivirheet.listaVahintaanYksi'
+        : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
 
     if (!_.isArray(value) || value.length < min) {
       this.setError(isFieldArray ? `${path}._error` : path, errorMessage);

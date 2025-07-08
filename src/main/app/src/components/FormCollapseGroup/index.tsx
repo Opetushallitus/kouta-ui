@@ -53,7 +53,7 @@ export const FormCollapseGroup = ({
       flattenedChildren.map(child => {
         // Get the 'section'-prop of the FormCollapse component
         // TODO: Enforce prop types
-        const firstSection = _.get(child, 'props.section');
+        const firstSection = child.props.section || '';
         return _.get(formErrors, firstSection) != null;
       }),
     [formErrors, flattenedChildren]

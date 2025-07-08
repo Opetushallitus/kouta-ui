@@ -49,7 +49,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
           }
           await loggingInPromise;
           return client(error.config);
-        } catch (e) {
+        } catch {
           return Promise.reject(error);
         } finally {
           loggingInPromise = null;
@@ -68,7 +68,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
           });
 
           return client(error.config);
-        } catch (e) {
+        } catch {
           return Promise.reject(error);
         }
       }

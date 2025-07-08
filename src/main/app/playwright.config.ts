@@ -40,7 +40,7 @@ export default defineConfig({
     storageState: './playwright/storage.json',
     ignoreHTTPSErrors: true,
   },
-
+  snapshotPathTemplate: './playwright/snapshots/{testFileName}/{arg}{ext}',
   /* Configure projects for major browsers */
   projects: [
     {

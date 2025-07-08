@@ -10,7 +10,7 @@ export const getHakukohdeByOid = async ({ oid, httpClient, apiUrls }) =>
     apiUrls,
   });
 
-export const useHakukohdeByOid = (oid, options = {}) =>
+export const useHakukohdeByOid = (oid: string, options = {}) =>
   useEntityByOid<HakukohdeModel>(ENTITY.HAKUKOHDE, { oid }, options);
 
 export default getHakukohdeByOid;

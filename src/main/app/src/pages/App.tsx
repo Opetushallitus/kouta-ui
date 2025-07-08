@@ -4,6 +4,7 @@ import { I18nextProvider } from 'react-i18next';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
 
@@ -18,7 +19,7 @@ import UrlContext from '#/src/contexts/UrlContext';
 import { UserGate } from '#/src/pages/UserGate';
 import { isDev } from '#/src/utils';
 
-import Routes from './Routes';
+import router from './Routes';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,15 +31,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = ({
-  store,
-  theme,
-  httpClient,
-  urls,
-  history,
-  localization,
-  persistor,
-}) => (
+const App = ({ store, theme, httpClient, urls, localization, persistor }) => (
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       {isDev && <ReactQueryDevtools initialIsOpen={false} />}
@@ -57,7 +50,7 @@ const App = ({
                     <VirkailijaRaamit />
                     <UserGate fallback={<FullSpin size="large" />}>
                       <HttpErrorNotifier />
-                      <Routes history={history} />
+                      <RouterProvider router={router} />
                     </UserGate>
                   </ErrorBoundaryNotifier>
                 </Suspense>

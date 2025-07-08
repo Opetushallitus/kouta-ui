@@ -40,7 +40,7 @@ const getInitialValues = haku => {
 };
 
 export const CreateHakuPage = () => {
-  const { organisaatioOid } = useParams();
+  const { organisaatioOid } = useParams() as { organisaatioOid: string };
   const { t } = useTranslation();
 
   const { data } = usePohjaEntity(ENTITY.HAKU);

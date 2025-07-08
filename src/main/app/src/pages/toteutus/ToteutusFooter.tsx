@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import _ from 'lodash';
 import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
@@ -44,7 +44,7 @@ export const ToteutusFooter = ({
     toteutus?.tarjoajat
   );
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const form = useForm();
@@ -90,13 +90,11 @@ export const ToteutusFooter = ({
       });
 
       if (formMode === FormMode.CREATE) {
-        history.push(
-          `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`
-        );
+        navigate(`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`);
       } else {
         afterUpdate(
           queryClient,
-          history,
+          navigate,
           ENTITY.TOTEUTUS,
           valuesForSaving.tila
         );
@@ -108,7 +106,7 @@ export const ToteutusFooter = ({
       form.registeredFields,
       formMode,
       hierarkia,
-      history,
+      navigate,
       initialValues,
       koulutus,
       koulutustyyppi,

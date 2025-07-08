@@ -50,6 +50,6 @@ Wrapper.args = {
   koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 };
 
-export const basic = ({ koulutustyyppi }) => (
-  <Wrapper koulutustyyppi={koulutustyyppi} />
-);
+export const Basic = {
+  render: ({ koulutustyyppi }) => <Wrapper koulutustyyppi={koulutustyyppi} />,
+};

@@ -48,7 +48,8 @@
     "erikoistumiskoulutusKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
     "luokittelutermit": [
-      "luokittelutermi"
+      "luokittelutermi",
+      "testitägi"
     ]
   }
 }

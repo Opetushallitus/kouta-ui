@@ -111,6 +111,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     isTaydennyskoulutus,
     isTyovoimakoulutus,
     isAvoinKorkeakoulutus,
+    isPieniOsaamiskokonaisuus,
     suoritetaanNayttona,
     tunniste,
     opinnonTyyppiKoodiUri,
@@ -166,6 +167,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opintojenLaajuusyksikko: toSelectValue(opintojenLaajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},
       isAvoinKorkeakoulutus: Boolean(isAvoinKorkeakoulutus),
+      isPieniOsaamiskokonaisuus: Boolean(isPieniOsaamiskokonaisuus),
       tunniste,
       opinnonTyyppi: {
         value: opinnonTyyppiKoodiUri,

@@ -11,7 +11,7 @@ import { components, Props } from 'react-select';
 import ReactAsyncSelect from 'react-select/async';
 import ReactAsyncCreatableSelect from 'react-select/async-creatable';
 import ReactCreatable from 'react-select/creatable';
-import { ThemeContext } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { valueToArray, safeArrayToValue } from '#/src/utils';
@@ -159,6 +159,10 @@ export const CreatableSelect = ({ error = false, id, disabled, ...props }) => {
   );
 };
 
+const StyledButton = styled(Button)`
+  margin-left: auto;
+`;
+
 const OptionWithCreateButton = props => {
   const { t } = useTranslation();
 
@@ -177,9 +181,9 @@ const OptionWithCreateButton = props => {
     return (
       <components.Option {...props} innerProps={innerProps}>
         {value}
-        <Button onClick={onClick}>
+        <StyledButton onClick={onClick}>
           {t('yleiset.lisaaUusi', { kohde: 'avainsana' })}
-        </Button>
+        </StyledButton>
       </components.Option>
     );
   }
@@ -199,7 +203,14 @@ export const AsyncCreatableSelect = ({
     <ReactAsyncCreatableSelect
       {...getDefaultProps(t)}
       placeholder={t('yleiset.kirjoitaHakusana')}
-      styles={getStyles(theme, error)}
+      styles={{
+        ...getStyles(theme, error),
+        option: baseStyles => ({
+          ...baseStyles,
+          display: 'flex',
+          alignItems: 'center',
+        }),
+      }}
       theme={getTheme(theme)}
       cacheOptions={true}
       inputId={id}

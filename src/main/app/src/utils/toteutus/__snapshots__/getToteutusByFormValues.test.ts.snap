@@ -86,6 +86,7 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
     },
     "isAvoinKorkeakoulutus": false,
     "isHakukohteetKaytossa": false,
+    "isPieniOsaamiskokonaisuus": undefined,
     "isTaydennyskoulutus": false,
     "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,

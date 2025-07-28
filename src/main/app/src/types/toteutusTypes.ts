@@ -72,6 +72,7 @@ export type ToteutusFormValues = {
     isTyovoimakoulutus: boolean;
     isTaydennyskoulutus: boolean;
     isAvoinKorkeakoulutus?: boolean;
+    isPieniOsaamiskokonaisuus?: boolean;
     suoritetaanNayttona?: boolean;
     tunniste?: string;
     opinnonTyyppi?: SelectOption;

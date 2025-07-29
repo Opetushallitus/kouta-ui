@@ -59,6 +59,20 @@ const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
   );
 };
 
+const PieniOsaamiskokonaisuusField = ({ name }: { name: string }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Field
+      name={`${name}.isPieniOsaamiskokonaisuus`}
+      component={FormFieldSwitch}
+      helperText={t('toteutuslomake.pieniOsaamiskokonaisuusOhje')}
+    >
+      {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
+    </Field>
+  );
+};
+
 type CommonTiedotProps = {
   name: string;
 };
@@ -218,7 +232,6 @@ export const VapaaSivistystyoMuuTiedotSection = ({
   language,
   name,
 }: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
   useNimiFromKoulutus({ koulutus, name });
 
   return (
@@ -230,12 +243,7 @@ export const VapaaSivistystyoMuuTiedotSection = ({
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
       />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonVSTFields name={name} />
     </VerticalBox>
   );
@@ -248,18 +256,12 @@ export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
   language,
   name,
 }: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
   useNimiFromKoulutus({ koulutus, name });
 
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonVSTFields name={name} />
     </VerticalBox>
   );
@@ -270,64 +272,42 @@ export const KkOpintojaksoTiedotSection = ({
   disabled,
   name,
   koulutus,
-}: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={disabled} />
-      <OpintojenLaajuusFieldExtended
-        name={name}
-        disabled={disabled}
-        fixedLaajuusYksikko={
-          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
-        }
-      />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
-      <CommonTiedotFields name={name} />
-      <TunnisteField name={name} />
-      <OpinnonTyyppiField name={name} />
-      <AvoinKorkeakoulutusField name={name} />
-    </VerticalBox>
-  );
-};
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <OpintojenLaajuusFieldExtended
+      name={name}
+      disabled={disabled}
+      fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
+    />
+    <PieniOsaamiskokonaisuusField name={name} />
+    <CommonTiedotFields name={name} />
+    <TunnisteField name={name} />
+    <OpinnonTyyppiField name={name} />
+    <AvoinKorkeakoulutusField name={name} />
+  </VerticalBox>
+);
 
 export const KkOpintokokonaisuusTiedotSection = ({
   language,
   disabled,
   name,
   koulutus,
-}: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={disabled} />
-      <OpintojenLaajuusFieldExtended
-        name={name}
-        disabled={disabled}
-        fixedLaajuusYksikko={
-          koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
-        }
-      />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
-      <TunnisteField name={name} />
-      <OpinnonTyyppiField name={name} />
-      <AvoinKorkeakoulutusField name={name} />
-      <CommonTiedotFields name={name} />
-    </VerticalBox>
-  );
-};
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <OpintojenLaajuusFieldExtended
+      name={name}
+      disabled={disabled}
+      fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
+    />
+    <PieniOsaamiskokonaisuusField name={name} />
+    <TunnisteField name={name} />
+    <OpinnonTyyppiField name={name} />
+    <AvoinKorkeakoulutusField name={name} />
+    <CommonTiedotFields name={name} />
+  </VerticalBox>
+);
 
 export const OpettajaTiedotSection = ({
   koulutus,
@@ -350,51 +330,32 @@ export const TutkinnonOsaTiedotSection = ({
   language,
   disabled,
   name,
-}: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={disabled} />
-      <OpintojenLaajuus
-        koulutus={koulutus}
-        laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
-      />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
-      <CommonTiedotFields name={name} />
-    </VerticalBox>
-  );
-};
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={disabled} />
+    <OpintojenLaajuus
+      koulutus={koulutus}
+      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
+    />
+    <PieniOsaamiskokonaisuusField name={name} />
+    <CommonTiedotFields name={name} />
+  </VerticalBox>
+);
 
 export const OsaamisalaTiedotSection = ({
   koulutus,
   language,
   name,
-}: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} disabled={true} />
-      <OpintojenLaajuus
-        koulutus={koulutus}
-        laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
-      />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
-      <CommonTiedotFields name={name} />
-    </VerticalBox>
-  );
-};
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} disabled={true} />
+    <OpintojenLaajuus
+      koulutus={koulutus}
+      laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
+    />
+    <PieniOsaamiskokonaisuusField name={name} />
+  </VerticalBox>
+);
 
 export const TutkintoonJohtavaTiedotSection = ({
   language,
@@ -436,19 +397,12 @@ export const ErikoistumiskoulutusTiedotSection = ({
   language,
   name,
 }: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
   useNimiFromKoulutus({ koulutus, name });
 
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonTiedotFields name={name} />
     </VerticalBox>
   );
@@ -466,21 +420,11 @@ export const MuuTiedotSection = ({
   name,
   language,
   disabled,
-}: ToteutusTiedotSectionProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <VerticalBox gap={2}>
-      <NimiSection name={name} language={language} />
-      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
-      <Field
-        name={`${name}.isPieniOsaamiskokonaisuus`}
-        component={FormFieldSwitch}
-      >
-        {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
-      </Field>
-
-      <CommonTiedotFields name={name} />
-    </VerticalBox>
-  );
-};
+}: ToteutusTiedotSectionProps) => (
+  <VerticalBox gap={2}>
+    <NimiSection name={name} language={language} />
+    <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+    <PieniOsaamiskokonaisuusField name={name} />
+    <CommonTiedotFields name={name} />
+  </VerticalBox>
+);

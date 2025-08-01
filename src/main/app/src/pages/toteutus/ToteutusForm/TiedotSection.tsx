@@ -354,6 +354,7 @@ export const OsaamisalaTiedotSection = ({
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
     <PieniOsaamiskokonaisuusField name={name} />
+    <CommonTiedotFields name={name} />
   </VerticalBox>
 );
 
@@ -420,11 +421,13 @@ export const MuuTiedotSection = ({
   name,
   language,
   disabled,
-}: ToteutusTiedotSectionProps) => (
-  <VerticalBox gap={2}>
-    <NimiSection name={name} language={language} />
-    <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
-    <PieniOsaamiskokonaisuusField name={name} />
-    <CommonTiedotFields name={name} />
-  </VerticalBox>
-);
+}: ToteutusTiedotSectionProps) => {
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} />
+      <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <PieniOsaamiskokonaisuusField name={name} />
+      <CommonTiedotFields name={name} />
+    </VerticalBox>
+  );
+};

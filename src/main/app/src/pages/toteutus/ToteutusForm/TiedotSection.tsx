@@ -59,8 +59,25 @@ const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
   );
 };
 
-const PieniOsaamiskokonaisuusField = ({ name }: { name: string }) => {
+const PieniOsaamiskokonaisuusField = ({
+  name,
+  koulutus,
+}: {
+  name: string;
+  koulutus?: any;
+}) => {
   const { t } = useTranslation();
+  const { change } = useBoundFormActions();
+  const currValue = useFieldValue(`${name}.isPieniOsaamiskokonaisuus`);
+
+  useEffect(() => {
+    if (
+      _fp.isUndefined(currValue) &&
+      KOULUTUSTYYPPI.TUTKINNON_OSA === koulutus?.koulutustyyppi
+    ) {
+      change(`${name}.isPieniOsaamiskokonaisuus`, true);
+    }
+  }, [change, currValue, koulutus, name, t]);
 
   return (
     <Field
@@ -337,7 +354,7 @@ export const TutkinnonOsaTiedotSection = ({
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
-    <PieniOsaamiskokonaisuusField name={name} />
+    <PieniOsaamiskokonaisuusField name={name} koulutus={koulutus} />
     <CommonTiedotFields name={name} />
   </VerticalBox>
 );

@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useCallback } from 'react';
+import { useMemo, useContext, useCallback } from 'react';
 
 import UiSelect, {
   getStyles,
@@ -11,11 +11,13 @@ import { components, Props } from 'react-select';
 import ReactAsyncSelect from 'react-select/async';
 import ReactAsyncCreatableSelect from 'react-select/async-creatable';
 import ReactCreatable from 'react-select/creatable';
-import { ThemeContext } from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { valueToArray, safeArrayToValue } from '#/src/utils';
 import { memoizeOne } from '#/src/utils/memoize';
+
+import { Button } from '../virkailija';
 
 const OptionComponent = props => (
   <components.Option
@@ -157,6 +159,37 @@ export const CreatableSelect = ({ error = false, id, disabled, ...props }) => {
   );
 };
 
+const StyledButton = styled(Button)`
+  margin-left: auto;
+`;
+
+const OptionWithCreateButton = props => {
+  const { t } = useTranslation();
+
+  const onClick = () => {
+    props.selectOption(props.data);
+  };
+
+  const innerProps = {
+    ...props.innerProps,
+    onClick: null,
+  };
+
+  const { value } = props.data;
+
+  if (props.data.__isNew__) {
+    return (
+      <components.Option {...props} innerProps={innerProps}>
+        {value}
+        <StyledButton onClick={onClick}>
+          {t('yleiset.lisaaUusi', { kohde: 'avainsana' })}
+        </StyledButton>
+      </components.Option>
+    );
+  }
+  return <components.Option {...props}>{props.children}</components.Option>;
+};
+
 export const AsyncCreatableSelect = ({
   error = false,
   id,
@@ -170,12 +203,21 @@ export const AsyncCreatableSelect = ({
     <ReactAsyncCreatableSelect
       {...getDefaultProps(t)}
       placeholder={t('yleiset.kirjoitaHakusana')}
-      styles={getStyles(theme, error)}
+      styles={{
+        ...getStyles(theme, error),
+        option: baseStyles => ({
+          ...baseStyles,
+          display: 'flex',
+          alignItems: 'center',
+        }),
+      }}
       theme={getTheme(theme)}
       cacheOptions={true}
       inputId={id}
       isDisabled={disabled}
       {...props}
+      components={{ Option: OptionWithCreateButton }}
+      createOptionPosition="first"
     />
   );
 };

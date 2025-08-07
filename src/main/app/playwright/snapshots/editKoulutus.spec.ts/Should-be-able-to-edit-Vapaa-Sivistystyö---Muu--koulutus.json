@@ -42,7 +42,8 @@
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,
     "erikoistumiskoulutusKoodiUri": null,
-    "osaamismerkkiKoodiUri": null
+    "osaamismerkkiKoodiUri": null,
+    "luokittelutermit": []
   },
   "julkinen": true,
   "muokkaaja": "1.2.246.562.24.62301161440",

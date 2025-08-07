@@ -69,15 +69,32 @@ const PieniOsaamiskokonaisuusField = ({
   const { t } = useTranslation();
   const { change } = useBoundFormActions();
   const currValue = useFieldValue(`${name}.isPieniOsaamiskokonaisuus`);
+  const koulutustyyppi = koulutus?.koulutustyyppi;
+  const opintojenLaajuusNumeroMax =
+    koulutus?.metadata?.opintojenLaajuusNumeroMax ||
+    koulutus?.metadata?.opintojenLaajuusNumero;
 
   useEffect(() => {
     if (
       _fp.isUndefined(currValue) &&
-      KOULUTUSTYYPPI.TUTKINNON_OSA === koulutus?.koulutustyyppi
+      (KOULUTUSTYYPPI.TUTKINNON_OSA === koulutustyyppi ||
+        ([
+          KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+          KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+        ].includes(koulutustyyppi) &&
+          opintojenLaajuusNumeroMax < 60))
     ) {
       change(`${name}.isPieniOsaamiskokonaisuus`, true);
     }
-  }, [change, currValue, koulutus, name, t]);
+  }, [
+    change,
+    currValue,
+    koulutus,
+    koulutustyyppi,
+    name,
+    opintojenLaajuusNumeroMax,
+    t,
+  ]);
 
   return (
     <Field
@@ -297,7 +314,7 @@ export const KkOpintojaksoTiedotSection = ({
       disabled={disabled}
       fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
-    <PieniOsaamiskokonaisuusField name={name} />
+    <PieniOsaamiskokonaisuusField name={name} koulutus={koulutus} />
     <CommonTiedotFields name={name} />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
@@ -318,7 +335,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
       disabled={disabled}
       fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
-    <PieniOsaamiskokonaisuusField name={name} />
+    <PieniOsaamiskokonaisuusField name={name} koulutus={koulutus} />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
     <AvoinKorkeakoulutusField name={name} />

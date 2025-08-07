@@ -18,6 +18,7 @@ import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
+import { isNumeric } from '#/src/utils';
 
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
 
@@ -69,10 +70,8 @@ const PieniOsaamiskokonaisuusField = ({
   const { t } = useTranslation();
   const { change } = useBoundFormActions();
   const currValue = useFieldValue(`${name}.isPieniOsaamiskokonaisuus`);
+  const toteutuksenLaajuus = useFieldValue(`${name}.opintojenLaajuusNumero`);
   const koulutustyyppi = koulutus?.koulutustyyppi;
-  const opintojenLaajuusNumeroMax =
-    koulutus?.metadata?.opintojenLaajuusNumeroMax ||
-    koulutus?.metadata?.opintojenLaajuusNumero;
 
   useEffect(() => {
     if (
@@ -82,19 +81,12 @@ const PieniOsaamiskokonaisuusField = ({
           KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
           KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
         ].includes(koulutustyyppi) &&
-          opintojenLaajuusNumeroMax < 60))
+          isNumeric(toteutuksenLaajuus) &&
+          toteutuksenLaajuus < 60))
     ) {
       change(`${name}.isPieniOsaamiskokonaisuus`, true);
     }
-  }, [
-    change,
-    currValue,
-    koulutus,
-    koulutustyyppi,
-    name,
-    opintojenLaajuusNumeroMax,
-    t,
-  ]);
+  }, [change, currValue, koulutustyyppi, name, toteutuksenLaajuus]);
 
   return (
     <Field

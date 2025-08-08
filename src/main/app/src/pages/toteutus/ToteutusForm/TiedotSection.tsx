@@ -20,8 +20,12 @@ import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/Tie
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { isNumeric } from '#/src/utils';
 import { usePerusteenOsat } from '#/src/utils/api/getPerusteenOsat';
+import { useEPerusteRakenne } from '#/src/utils/ePeruste/getEPerusteRakenne';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import getOsaamisalaLaajuus from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
+import { OsaamisalaOsa } from '../../koulutus/KoulutusForm/AmmatillinenTiedotSection/ValitseOsaamisalaBox';
 
 type NimiSectionProps = {
   name: string;
@@ -85,6 +89,42 @@ const OpintojenLaajuusForTutkinnonosat = ({
           koodiUri={laajuusyksikkoKoodiUri}
           label={t('toteutuslomake.laajuus')}
           prefix={combinedLaajuudet}
+        />
+      </Box>
+    </Box>
+  );
+};
+
+const OpintojenLaajuusForOsaamisala = ({
+  koulutus,
+  laajuusyksikkoKoodiUri,
+}: {
+  koulutus: any;
+  laajuusyksikkoKoodiUri: string;
+}) => {
+  const selectedLanguage = useLanguageTab();
+  const { t } = useTranslation();
+
+  const { ePerusteId } = koulutus || {};
+  const { data: ePerusteRakenne } = useEPerusteRakenne({ ePerusteId });
+  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat || [];
+
+  const osaamisalaKoodiUri = koulutus?.metadata?.osaamisalaKoodiUri;
+  const { koodiArvo } = parseKoodiUri(osaamisalaKoodiUri);
+
+  const osaamisalaLaajuus = getOsaamisalaLaajuus(
+    ePerusteRakenneOsat,
+    koodiArvo
+  );
+
+  return (
+    <Box display="flex">
+      <Box maxWidth="300px">
+        <FixedValueKoodiInput
+          selectedLanguage={selectedLanguage}
+          koodiUri={laajuusyksikkoKoodiUri}
+          label={t('toteutuslomake.laajuus')}
+          prefix={osaamisalaLaajuus || ''}
         />
       </Box>
     </Box>
@@ -406,7 +446,7 @@ export const OsaamisalaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={true} />
-    <OpintojenLaajuus
+    <OpintojenLaajuusForOsaamisala
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />

@@ -73,8 +73,8 @@ const getAsyncValue = async (
       ...singleValue,
       label:
         singleValue?.label === singleValue?.value
-          ? (await loadLabel(singleValue?.value).catch(() => undefined)) ??
-            singleValue?.value
+          ? ((await loadLabel(singleValue?.value).catch(() => undefined)) ??
+            singleValue?.value)
           : singleValue?.label,
     }))
   );

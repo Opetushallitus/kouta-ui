@@ -275,9 +275,9 @@ exports[`getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen su
       },
     ],
     "henkilokohtaisenSuunnitelmanLisatiedot": {
-      "en": "<p>hlokoht en </p>",
-      "fi": "<p>hlokoht fi </p>",
-      "sv": "<p>hlokoht sv </p>",
+      "en": "<p>hlokoht en</p>",
+      "fi": "<p>hlokoht fi</p>",
+      "sv": "<p>hlokoht sv</p>",
     },
     "kausi": null,
     "lisaamisenTakaraja": "2019-03-29T12:28",

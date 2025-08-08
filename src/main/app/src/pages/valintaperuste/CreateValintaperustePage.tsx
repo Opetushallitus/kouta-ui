@@ -29,9 +29,12 @@ const getCopyValues = valintaperusteId => ({
   },
 });
 
-const getInitialValues = (valintaperuste, kieliValinnat, koulutustyyppi) => {
-  const kieliValinnatLista =
-    kieliValinnat == null ? [] : kieliValinnat.split(',');
+const getInitialValues = (
+  valintaperuste: any,
+  kieliValinnat: string | undefined,
+  koulutustyyppi: string | undefined
+) => {
+  const kieliValinnatLista = kieliValinnat?.split(',') ?? [];
   return valintaperuste && valintaperuste.id
     ? {
         ...getCopyValues(valintaperuste.id),
@@ -49,7 +52,11 @@ export const CreateValintaperustePage = () => {
     organisaatioOid: luojaOrganisaatioOid,
     kieliValinnat,
     koulutustyyppi,
-  } = useParams();
+  } = useParams() as {
+    organisaatioOid: string;
+    kieliValinnat: string | undefined;
+    koulutustyyppi: string | undefined;
+  };
 
   const { t } = useTranslation();
 

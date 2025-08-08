@@ -18,7 +18,10 @@ import { SoraKuvausFooter } from './SoraKuvausFooter';
 import SoraKuvausForm from './SoraKuvausForm';
 
 export const EditSoraKuvausPage = props => {
-  const { organisaatioOid, id } = useParams();
+  const { organisaatioOid, id } = useParams() as {
+    organisaatioOid: string;
+    id: string;
+  };
 
   const soraKuvausQueryResult = useSoraKuvausById(id);
   const { data: soraKuvaus } = soraKuvausQueryResult;

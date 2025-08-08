@@ -289,8 +289,8 @@ exports[`getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen su
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
       "henkilokohtaisenSuunnitelmanLisatiedot": {
-        "fi": "<p>hlokoht fi </p>",
-        "sv": "<p>hlokoht sv </p>",
+        "fi": "<p>hlokoht fi</p>",
+        "sv": "<p>hlokoht sv</p>",
       },
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
       "koulutuksenAlkamispaivamaara": null,

@@ -20,8 +20,8 @@ export default {
 
 export const Basic = () => <Story />;
 
-export const WithInvalidKoodistoVersion = () => (
-  <StoryWithInvalidKoodistoVersion />
-);
+export const WithInvalidKoodistoVersion = {
+  render: () => <StoryWithInvalidKoodistoVersion />,
 
-WithInvalidKoodistoVersion.storyName = 'With invalid koodisto version';
+  name: 'With invalid koodisto version',
+};

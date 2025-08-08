@@ -13,6 +13,7 @@ module.exports = {
     'prettier',
     'plugin:lodash/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended',
   ],
   plugins: ['@typescript-eslint', 'prettier', 'lodash', 'import'],
   env: {
@@ -35,13 +36,12 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    '@typescript-eslint/ban-types': [
+    '@typescript-eslint/no-empty-object-type': 'off',
+    '@typescript-eslint/no-unused-expressions': [
       'error',
       {
-        types: {
-          object: false,
-        },
-        extendDefaults: true,
+        allowTernary: true,
+        allowShortCircuit: true,
       },
     ],
     '@typescript-eslint/array-type': [

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
@@ -43,7 +43,7 @@ export const HakukohdeFooter = ({
   canUpdate,
   infoTextTranslationKey,
 }: HakukohdeFooterProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const form = useForm();
@@ -80,13 +80,11 @@ export const HakukohdeFooter = ({
       });
 
       if (formMode === FormMode.CREATE) {
-        history.push(
-          `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
-        );
+        navigate(`/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`);
       } else {
         afterUpdate(
           queryClient,
-          history,
+          navigate,
           ENTITY.HAKUKOHDE,
           valuesForSaving.tila
         );
@@ -99,7 +97,7 @@ export const HakukohdeFooter = ({
       formMode,
       haku,
       hakukohde,
-      history,
+      navigate,
       initialValues,
       toteutus,
       unregisteredFields,

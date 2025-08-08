@@ -19,6 +19,7 @@ import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
 import { isNumeric } from '#/src/utils';
+import { usePerusteenOsat } from '#/src/utils/api/getPerusteenOsat';
 
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
 
@@ -54,6 +55,36 @@ const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
           koodiUri={laajuusyksikkoKoodiUri}
           label={t('toteutuslomake.laajuus')}
           prefix={koulutus?.metadata?.opintojenLaajuusNumero}
+        />
+      </Box>
+    </Box>
+  );
+};
+
+const OpintojenLaajuusForTutkinnonosat = ({
+  koulutus,
+  laajuusyksikkoKoodiUri,
+}: {
+  koulutus: any;
+  laajuusyksikkoKoodiUri: string;
+}) => {
+  const selectedLanguage = useLanguageTab();
+  const { t } = useTranslation();
+  const tutkinnonOsat = koulutus?.metadata?.tutkinnonOsat || [];
+
+  const { data: tutkinnonOsienTiedot } = usePerusteenOsat({ tutkinnonOsat });
+
+  const laajuudet = tutkinnonOsienTiedot?.map(osa => osa.laajuus);
+  const combinedLaajuudet = laajuudet?.join(' + ') || '';
+
+  return (
+    <Box display="flex">
+      <Box maxWidth="300px">
+        <FixedValueKoodiInput
+          selectedLanguage={selectedLanguage}
+          koodiUri={laajuusyksikkoKoodiUri}
+          label={t('toteutuslomake.laajuus')}
+          prefix={combinedLaajuudet}
         />
       </Box>
     </Box>
@@ -359,7 +390,7 @@ export const TutkinnonOsaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <OpintojenLaajuus
+    <OpintojenLaajuusForTutkinnonosat
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />

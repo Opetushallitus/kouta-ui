@@ -16,7 +16,10 @@ import {
   getSection,
   assertBaseTilaNotCopied,
 } from '#/playwright/playwright-helpers';
-import { fixtureFromFile } from '#/playwright/playwright-mock-utils';
+import {
+  fixtureFromFile,
+  fixtureJSON,
+} from '#/playwright/playwright-mock-utils';
 import { stubKoulutusRoutes } from '#/playwright/stubKoulutusRoutes';
 import { ENTITY } from '#/src/constants';
 
@@ -58,6 +61,14 @@ test.describe('Create koulutus', () => {
   test.beforeEach(async ({ page }) => {
     await stubKoulutusRoutes(page, organisaatioOid);
     await page.goto(`/kouta/organisaatio/${organisaatioOid}/koulutus`);
+    await page.route(
+      '**/kouta-backend/luokittelutermi/search/luokittelutermi*',
+      fixtureJSON([])
+    );
+    await page.route(
+      '**/kouta-backend/luokittelutermi/search/testi?*',
+      fixtureJSON(['testi', 'testitägi'])
+    );
   });
 
   test('Should be able to create ammatillinen koulutus', ({ page }, testInfo) =>
@@ -65,7 +76,7 @@ test.describe('Create koulutus', () => {
       await fillKoulutustyyppiSection(page, ['amm']);
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
-      await withinSection(page, 'information', async () => {
+      await withinSection(page, 'information', async section => {
         await fillAsyncSelect(
           page.getByTestId('koulutusSelect'),
           'Kaivosalan perustutkinto'
@@ -74,6 +85,18 @@ test.describe('Create koulutus', () => {
           page.getByTestId('ePerusteSelect'),
           'Kaivosalan perustutkinto'
         );
+
+        const input = section.getByLabel('koulutuslomake.luokittelutermit');
+        await input.fill('luokittelutermi');
+        const createButton = section.getByRole('button', {
+          name: 'yleiset.lisaaUusi',
+        });
+        await createButton.click();
+        await expect(input).toHaveCount(1);
+        await input.fill('testi');
+        const option = section.getByText('testitägi');
+        await option.click();
+        await expect(input).toHaveCount(1);
       });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);

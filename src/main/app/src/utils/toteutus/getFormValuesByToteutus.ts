@@ -8,23 +8,13 @@ import {
   LukiolinjatOsio,
   LukioDiplomiValues,
 } from '#/src/types/toteutusTypes';
-import { toSelectValue, toSelectValueList } from '#/src/utils';
+import {
+  kieliArvoListToMultiSelectValue,
+  toSelectValue,
+  toSelectValueList,
+} from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
-
-const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
-  if (curr?.kieli && curr?.arvo) {
-    return {
-      ...acc,
-      [curr.kieli]: [
-        ...(acc[curr.kieli] ?? []),
-        { label: curr.arvo, value: curr.arvo },
-      ],
-    };
-  }
-
-  return acc;
-}, {});
 
 const lukiolinjatiedotToFormValues = (lukiolinjatiedot): LukiolinjatOsio => {
   const result = {

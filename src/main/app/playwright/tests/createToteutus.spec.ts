@@ -247,17 +247,22 @@ const fillNayttamistiedotSection = (
 ) =>
   withinSection(page, 'nayttamistiedot', async section => {
     if (ammattinimikkeet) {
-      await fillAsyncSelect(
-        section.getByTestId('ammattinimikkeetSelect'),
-        'ammattinimike',
-        'yleiset.luoKohde'
-      );
+      const input = section.getByLabel('toteutuslomake.ammattinimikkeet');
+      await input.fill('ammattinimike');
+      const createButton = section.getByRole('button', {
+        name: 'yleiset.lisaaUusi',
+      });
+      await createButton.click();
+      await expect(input).toHaveCount(1);
     }
-    await fillAsyncSelect(
-      section.getByTestId('avainsanatSelect'),
-      'avainsana',
-      'yleiset.luoKohde'
-    );
+
+    const input = section.getByLabel('toteutuslomake.avainsanat');
+    await input.fill('avainsana');
+    const createButton = section.getByRole('button', {
+      name: 'yleiset.lisaaUusi',
+    });
+    await createButton.click();
+    await expect(input).toHaveCount(1);
   });
 
 const fillHakeutumisTaiIlmoittautumisTapaSection = (

@@ -37,6 +37,16 @@ function getKoulutuksetKoodiUri(
   return valueToArray(information?.koulutus?.value);
 }
 
+const getLuokittelutermit = (koulutustyyppi, values) => {
+  const luokittelutermit = [
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+    KOULUTUSTYYPPI.OSAAMISALA,
+  ].includes(koulutustyyppi)
+    ? values?.lisatiedot?.luokittelutermit
+    : values?.information?.luokittelutermit;
+  return (luokittelutermit ?? []).map(({ value }) => value);
+};
+
 const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const { muokkaaja, tila, esikatselu = false } = values;
   const kielivalinta = values?.kieliversiot ?? [];
@@ -149,6 +159,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       erikoistumiskoulutusKoodiUri:
         values?.information?.erikoistumiskoulutus?.value || null,
       osaamismerkkiKoodiUri: values?.information?.osaamismerkki?.value || null,
+      luokittelutermit: getLuokittelutermit(koulutustyyppi, values),
     },
   };
 };

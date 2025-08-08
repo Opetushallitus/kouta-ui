@@ -46,6 +46,10 @@
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,
     "erikoistumiskoulutusKoodiUri": null,
-    "osaamismerkkiKoodiUri": null
+    "osaamismerkkiKoodiUri": null,
+    "luokittelutermit": [
+      "luokittelutermi",
+      "testitägi"
+    ]
   }
 }

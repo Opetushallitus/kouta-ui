@@ -17,6 +17,7 @@
     "eiValittaviaKohteita": "Valittavia kohteita ei löytynyt",
     "eiValittaviaKohteitaHakusanalla": "Hakusanallasi ei löytynyt valittavia kohteita",
     "luoKohde": "Luo kohde \"{{kohde}}\"",
+    "lisaaUusi": "Lisää uusi {{kohde}}",
     "yritaUudelleen": "Yritä uudelleen",
     "koulutus": "Koulutus",
     "toteutus": "Toteutus",
@@ -523,7 +524,9 @@
     "epayhteensopiviaToteutuksia": "Koulutuksen arvot eivät ole yhteensopivia kaikkien siihen liitettyjen toteutusten kanssa",
     "haeJarjestajanNimella": "Hae järjestäjän nimellä",
     "naytaVainValitut": "Näytä vain valitut",
-    "valitseErikoistumiskoulutus": "Valitse erikoistumiskoulutus"
+    "valitseErikoistumiskoulutus": "Valitse erikoistumiskoulutus",
+    "luokittelutermit": "Koulutuksen luokitteluun liittyviä avainsanoja",
+    "luokittelutermitOhje": "Luokittelutermejä käytetään koulutusten hakemiseen ohjelmallisesti eikä niitä näytetä Opintopolussa"
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",

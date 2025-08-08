@@ -77,6 +77,7 @@ const development = {
   'eperusteet-service.base-url': `${virkailijaDevUrl}/eperusteet-service`,
   'eperusteet-service.peruste-by-id': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1`,
   'eperusteet-service.tutkinnonosankuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteenosat/$1`,
+  'eperusteet-service.perusteenosa': `${virkailijaDevUrl}/eperusteet-service/api/external/peruste/$1/perusteenosa/$2`,
   'eperusteet-service.peruste-tutkinnonosat': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/tutkinnonosat`,
   'eperusteet-service.peruste-rakenne': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/rakenne`,
   'eperusteet-service.peruste-sisalto': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/sisalto`,

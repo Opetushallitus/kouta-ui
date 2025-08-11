@@ -180,6 +180,8 @@ public class UrlConfiguration extends OphProperties {
         "eperusteet-service.tutkinnonosankuvaukset",
         this.require("eperusteet-service.tutkinnonosankuvaukset"));
     this.frontProperties.setProperty(
+        "eperusteet-service.perusteenosa", this.require("eperusteet-service.perusteenosa"));
+    this.frontProperties.setProperty(
         "eperusteet-service.peruste-rakenne", this.require("eperusteet-service.peruste-rakenne"));
     this.frontProperties.setProperty(
         "eperusteet-service.peruste-sisalto", this.require("eperusteet-service.peruste-sisalto"));

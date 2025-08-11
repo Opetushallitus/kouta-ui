@@ -660,6 +660,8 @@
     "muokkaaOpintojaksoa": "Muokkaa opintojaksoa",
     "isTaydennyskoulutus": "Koulutus on täydennyskoulutusta",
     "isTyovoimakoulutus": "Koulutus on työvoimakoulutusta",
+    "isPieniOsaamiskokonaisuus": "Pieni osaamiskokonaisuus",
+    "pieniOsaamiskokonaisuusOhje": "Tähän ohjeteksti pienen osaamiskokonaisuuden käyttämistä varten lorem ipsum",
     "valitseTaiteenalat": "Valitse taiteenalat",
     "suoritetaanNayttona": "Suoritetaan näyttönä",
     "siirryOsaamismerkinTietoihin": "Siirry osaamismerkin tietoihin",

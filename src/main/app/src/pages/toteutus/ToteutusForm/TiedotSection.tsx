@@ -59,6 +59,20 @@ const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
   );
 };
 
+const PieniOsaamiskokonaisuusField = ({ name }: { name: string }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Field
+      name={`${name}.isPieniOsaamiskokonaisuus`}
+      component={FormFieldSwitch}
+      helperText={t('toteutuslomake.pieniOsaamiskokonaisuusOhje')}
+    >
+      {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
+    </Field>
+  );
+};
+
 type CommonTiedotProps = {
   name: string;
 };
@@ -229,6 +243,7 @@ export const VapaaSivistystyoMuuTiedotSection = ({
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
       />
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonVSTFields name={name} />
     </VerticalBox>
   );
@@ -246,6 +261,7 @@ export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonVSTFields name={name} />
     </VerticalBox>
   );
@@ -264,6 +280,7 @@ export const KkOpintojaksoTiedotSection = ({
       disabled={disabled}
       fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
+    <PieniOsaamiskokonaisuusField name={name} />
     <CommonTiedotFields name={name} />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
@@ -284,6 +301,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
       disabled={disabled}
       fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
+    <PieniOsaamiskokonaisuusField name={name} />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
     <AvoinKorkeakoulutusField name={name} />
@@ -319,6 +337,7 @@ export const TutkinnonOsaTiedotSection = ({
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
+    <PieniOsaamiskokonaisuusField name={name} />
     <CommonTiedotFields name={name} />
   </VerticalBox>
 );
@@ -334,6 +353,7 @@ export const OsaamisalaTiedotSection = ({
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
+    <PieniOsaamiskokonaisuusField name={name} />
     <CommonTiedotFields name={name} />
   </VerticalBox>
 );
@@ -373,7 +393,21 @@ export const DIATiedotSection = ({
 
 export const EBTiedotSection = DIATiedotSection;
 
-export const ErikoistumiskoulutusTiedotSection = DIATiedotSection;
+export const ErikoistumiskoulutusTiedotSection = ({
+  koulutus,
+  language,
+  name,
+}: ToteutusTiedotSectionProps) => {
+  useNimiFromKoulutus({ koulutus, name });
+
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} disabled={false} />
+      <PieniOsaamiskokonaisuusField name={name} />
+      <CommonTiedotFields name={name} />
+    </VerticalBox>
+  );
+};
 
 export const LukioTiedotSection = ({ name }: ToteutusTiedotSectionProps) => {
   return (
@@ -392,6 +426,7 @@ export const MuuTiedotSection = ({
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} />
       <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonTiedotFields name={name} />
     </VerticalBox>
   );

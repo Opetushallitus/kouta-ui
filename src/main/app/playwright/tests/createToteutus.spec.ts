@@ -159,6 +159,11 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
       await expect(laajuusyksikko).toBeDisabled();
       await expect(laajuusyksikko).toHaveValue('opintopistettä');
 
+      await getLabel(
+        section,
+        'toteutuslomake.isPieniOsaamiskokonaisuus'
+      ).click();
+
       await section.getByLabel('yleiset.tunniste').fill('ABC-123');
 
       await fillAsyncSelect(
@@ -237,17 +242,22 @@ const fillNayttamistiedotSection = (
 ) =>
   withinSection(page, 'nayttamistiedot', async section => {
     if (ammattinimikkeet) {
-      await fillAsyncSelect(
-        section.getByTestId('ammattinimikkeetSelect'),
-        'ammattinimike',
-        'yleiset.luoKohde'
-      );
+      const input = section.getByLabel('toteutuslomake.ammattinimikkeet');
+      await input.fill('ammattinimike');
+      const createButton = section.getByRole('button', {
+        name: 'yleiset.lisaaUusi',
+      });
+      await createButton.click();
+      await expect(input).toHaveCount(1);
     }
-    await fillAsyncSelect(
-      section.getByTestId('avainsanatSelect'),
-      'avainsana',
-      'yleiset.luoKohde'
-    );
+
+    const input = section.getByLabel('toteutuslomake.avainsanat');
+    await input.fill('avainsana');
+    const createButton = section.getByRole('button', {
+      name: 'yleiset.lisaaUusi',
+    });
+    await createButton.click();
+    await expect(input).toHaveCount(1);
   });
 
 const fillHakeutumisTaiIlmoittautumisTapaSection = (

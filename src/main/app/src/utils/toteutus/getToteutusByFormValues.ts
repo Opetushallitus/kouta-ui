@@ -2,7 +2,11 @@ import _fp from 'lodash/fp';
 
 import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
-import { isPartialDate, maybeParseNumber } from '#/src/utils';
+import {
+  getTermsByLanguage,
+  isPartialDate,
+  maybeParseNumber,
+} from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { serializeSisaltoField } from '#/src/utils/form/serializeSisaltoField';
 
@@ -150,6 +154,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       hasJotpaRahoitus: values?.tiedot?.hasJotpaRahoitus,
       isTaydennyskoulutus: values?.tiedot?.isTaydennyskoulutus,
       isTyovoimakoulutus: values?.tiedot?.isTyovoimakoulutus,
+      isPieniOsaamiskokonaisuus: values?.tiedot?.isPieniOsaamiskokonaisuus,
       suoritetaanNayttona: values?.tiedot?.suoritetaanNayttona,
       yleislinja: values?.lukiolinjat?.yleislinja,
       painotukset: getLukiolinjatByValues(
@@ -191,22 +196,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           wwwSivuTeksti: kieleistykset(verkkosivuTeksti),
         })
       ),
-      ammattinimikkeet: _fp
-        .toPairs(kieleistykset(values?.nayttamistiedot?.ammattinimikkeet))
-        .flatMap(([language, nimikkeet]) => {
-          return (nimikkeet || []).map(({ value }) => ({
-            kieli: language,
-            arvo: value,
-          }));
-        }),
-      asiasanat: _fp
-        .toPairs(kieleistykset(values?.nayttamistiedot?.avainsanat))
-        .flatMap(([language, sanat]) => {
-          return (sanat || []).map(({ value }) => ({
-            kieli: language,
-            arvo: value,
-          }));
-        }),
+      ammattinimikkeet: getTermsByLanguage(
+        values?.nayttamistiedot?.ammattinimikkeet
+      ),
+      asiasanat: getTermsByLanguage(values?.nayttamistiedot?.avainsanat),
       kuvaus: kieleistyksetSerialized(values?.kuvaus),
       tyyppi: koulutustyyppi,
       opintojenLaajuusyksikkoKoodiUri:

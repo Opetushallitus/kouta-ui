@@ -6,6 +6,7 @@ import {
   maybeParseNumber,
   parseBooleanToString,
   parseStringToBoolean,
+  getTermsByLanguage,
 } from '#/src/utils';
 
 const OBJECT_IN_ARRAY = [
@@ -209,4 +210,68 @@ test('parseStringToBoolen is undefined when value not given or invalid', () => {
   expect(parseStringToBoolean('foo')).toBe(undefined);
   expect(parseStringToBoolean('true')).toBe(true);
   expect(parseStringToBoolean('false')).toBe(false);
+});
+
+describe('getTermsByLanguage', () => {
+  test('it should return empty array when no terms to store', () => {
+    const values = {};
+    expect(getTermsByLanguage(values)).toEqual([]);
+  });
+
+  test('it should return an array with one language-term pair', () => {
+    const values = {
+      fi: [
+        {
+          label: 'foo',
+          value: 'foo',
+        },
+      ],
+    };
+    expect(getTermsByLanguage(values)).toEqual([{ kieli: 'fi', arvo: 'foo' }]);
+  });
+
+  test('it should return an array with several language-term pairs', () => {
+    const values = {
+      fi: [
+        {
+          label: 'foo',
+          value: 'foo',
+        },
+        {
+          label: 'joo',
+          value: 'joo',
+        },
+      ],
+    };
+    expect(getTermsByLanguage(values)).toEqual([
+      { kieli: 'fi', arvo: 'foo' },
+      { kieli: 'fi', arvo: 'joo' },
+    ]);
+  });
+
+  test('it should return an array with several language-term pairs for two different languages', () => {
+    const values = {
+      fi: [
+        {
+          label: 'foo',
+          value: 'foo',
+        },
+      ],
+      sv: [
+        {
+          label: 'heja',
+          value: 'heja',
+        },
+        {
+          label: 'hopsan',
+          value: 'hopsan',
+        },
+      ],
+    };
+    expect(getTermsByLanguage(values)).toEqual([
+      { kieli: 'fi', arvo: 'foo' },
+      { kieli: 'sv', arvo: 'heja' },
+      { kieli: 'sv', arvo: 'hopsan' },
+    ]);
+  });
 });

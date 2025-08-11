@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
 import { Box, Typography } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
@@ -42,7 +44,12 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
   ));
 };
 
-export const LisatiedotSection = ({ disabled, language, name }) => {
+export const LisatiedotSection = ({
+  disabled,
+  language,
+  name,
+  koulutustyyppi,
+}) => {
   const { t } = useTranslation();
 
   const { options: osiotOptions } = useKoodistoOptions({
@@ -72,6 +79,9 @@ export const LisatiedotSection = ({ disabled, language, name }) => {
         language={language}
         osiotOptions={osiotOptions}
       />
+      {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+        koulutustyyppi
+      ) && <LuokittelutermitField name={name} />}
     </>
   );
 };

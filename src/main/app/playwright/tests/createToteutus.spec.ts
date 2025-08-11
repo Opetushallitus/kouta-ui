@@ -159,6 +159,11 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
       await expect(laajuusyksikko).toBeDisabled();
       await expect(laajuusyksikko).toHaveValue('opintopistettä');
 
+      await getLabel(
+        section,
+        'toteutuslomake.isPieniOsaamiskokonaisuus'
+      ).click();
+
       await section.getByLabel('yleiset.tunniste').fill('ABC-123');
 
       await fillAsyncSelect(

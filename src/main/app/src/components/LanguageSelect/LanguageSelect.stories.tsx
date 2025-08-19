@@ -10,8 +10,8 @@ export default {
 
 export const Basic = () => <LanguageSelect onChange={action('change')} />;
 
-export const WithTranslation = () => (
-  <LanguageSelect onChange={action('change')} language="en" />
-);
+export const WithTranslation = {
+  render: () => <LanguageSelect onChange={action('change')} language="en" />,
 
-WithTranslation.storyName = 'With translation';
+  name: 'With translation',
+};

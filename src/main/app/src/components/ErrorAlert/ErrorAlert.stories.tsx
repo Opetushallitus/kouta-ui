@@ -9,8 +9,9 @@ export default {
 };
 
 export const Basic = () => <ErrorAlert onReload={action('reload')} />;
-export const WithCenter = () => (
-  <ErrorAlert onReload={action('reload')} center />
-);
 
-WithCenter.storyName = 'With center';
+export const WithCenter = {
+  render: () => <ErrorAlert onReload={action('reload')} center />,
+
+  name: 'With center',
+};

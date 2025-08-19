@@ -13,6 +13,7 @@ module.exports = {
     'prettier',
     'plugin:lodash/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended',
   ],
   plugins: ['@typescript-eslint', 'prettier', 'lodash', 'import'],
   env: {

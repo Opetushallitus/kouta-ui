@@ -43,6 +43,6 @@ Wrapper.args = {
   koulutustyyppi: 'amm',
 };
 
-export const basic = ({ koulutustyyppi }) => (
-  <Wrapper koulutustyyppi={koulutustyyppi} />
-);
+export const Basic = {
+  render: ({ koulutustyyppi }) => <Wrapper koulutustyyppi={koulutustyyppi} />,
+};

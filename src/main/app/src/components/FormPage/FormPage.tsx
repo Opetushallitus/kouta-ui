@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { QueryObserverResult } from 'react-query';
 import ReactRouterPrompt from 'react-router-prompt';
@@ -69,6 +69,7 @@ type FormPageProps = {
   steps?: React.ReactNode;
   footer?: React.ReactNode;
   readOnly?: boolean;
+  children: ReactNode;
 };
 
 const ConditionalQueryResult = ({ queryResult, children }) =>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import _ from 'lodash';
 import { SpaceProps } from 'styled-system';
@@ -11,6 +11,7 @@ type FieldGroupProps = {
   HeadingComponent?: React.ComponentType;
   name?: string;
   required?: boolean;
+  children: ReactNode;
 } & SpaceProps;
 
 const DefaultHeadingComponent = ({ children, ...props }) => (

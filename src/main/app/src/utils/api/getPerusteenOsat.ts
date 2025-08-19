@@ -20,24 +20,21 @@ export const getPerusteenOsat = async ({
   apiUrls: any;
   tutkinnonOsat: Array<tutkinnonOsa>;
 }) => {
-  if (_.isNil(tutkinnonOsat)) {
-    return null;
-  }
-
-  const perusteenosat = await Promise.all(
-    tutkinnonOsat.map(({ ePerusteId, tutkinnonosaId }) => {
-      return httpClient
-        .get(
-          apiUrls.url(
-            'eperusteet-service.perusteenosa',
-            ePerusteId,
-            tutkinnonosaId
-          )
-        )
-        .then(({ data }) => data);
-    })
-  );
-  return perusteenosat;
+  return _.isEmpty(tutkinnonOsat)
+    ? null
+    : await Promise.all(
+        tutkinnonOsat.map(({ ePerusteId, tutkinnonosaId }) => {
+          return httpClient
+            .get(
+              apiUrls.url(
+                'eperusteet-service.perusteenosa',
+                ePerusteId,
+                tutkinnonosaId
+              )
+            )
+            .then(({ data }) => data);
+        })
+      );
 };
 
 type PerusteenOsaProps = {

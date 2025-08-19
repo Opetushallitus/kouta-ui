@@ -14,8 +14,8 @@ import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsa
 import { useEPerusteTutkinnonOsat } from '#/src/utils/koulutus/getTutkinnonosaViite';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
-import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
+import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 
 const BodyHeading = styled(Typography).attrs({ variant: 'h6' })`
   color: ${getThemeProp('colors.text.primary')};

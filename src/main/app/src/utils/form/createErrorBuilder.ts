@@ -93,7 +93,7 @@ class ErrorBuilder {
       try {
         const url = new URL(str);
         return _.includes(['http:', 'https:'], url.protocol);
-      } catch (_) {
+      } catch {
         return false;
       }
     };

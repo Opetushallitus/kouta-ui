@@ -1,12 +1,24 @@
+import { AxiosInstance } from 'axios';
 import _ from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 
+type tutkinnonOsa = {
+  ePerusteId: string;
+  koulutusKoodiUri: string;
+  tutkinnonosaId: string;
+  tutkinnonosaViite: string;
+};
+
 export const getPerusteenOsat = async ({
   httpClient,
   apiUrls,
   tutkinnonOsat,
+}: {
+  httpClient: AxiosInstance;
+  apiUrls: any;
+  tutkinnonOsat: Array<tutkinnonOsa>;
 }) => {
   if (_.isNil(tutkinnonOsat)) {
     return null;
@@ -28,7 +40,11 @@ export const getPerusteenOsat = async ({
   return perusteenosat;
 };
 
-export const usePerusteenOsat = props => {
+type PerusteenOsaProps = {
+  tutkinnonOsat: Array<tutkinnonOsa>;
+};
+
+export const usePerusteenOsat = (props: PerusteenOsaProps) => {
   return useApiQuery(
     'getPerusteenOsat',
     getPerusteenOsat,

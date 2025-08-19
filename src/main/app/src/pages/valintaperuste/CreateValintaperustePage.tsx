@@ -34,8 +34,7 @@ const getInitialValues = (
   kieliValinnat: string | undefined,
   koulutustyyppi: string | undefined
 ) => {
-  const kieliValinnatLista =
-    kieliValinnat == undefined ? [] : kieliValinnat.split(',');
+  const kieliValinnatLista = kieliValinnat?.split(',') ?? [];
   return valintaperuste && valintaperuste.id
     ? {
         ...getCopyValues(valintaperuste.id),

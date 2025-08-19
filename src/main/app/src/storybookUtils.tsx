@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import axios from 'axios';
 import { urls as ophUrls } from 'oph-urls-js';
 import { I18nextProvider } from 'react-i18next';
@@ -8,6 +7,7 @@ import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { useAsync } from 'react-use';
+import { action } from 'storybook/actions';
 import { ThemeProvider } from 'styled-components';
 
 import UrlContext from '#/src/contexts/UrlContext';

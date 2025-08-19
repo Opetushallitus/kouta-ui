@@ -9,7 +9,9 @@ export default {
   },
 };
 
-export const Basic = props =>
-  React.createElement(() => {
-    return <KoulutustyyppiSelect {...props} />;
-  });
+export const Basic = {
+  render: props =>
+    React.createElement(() => {
+      return <KoulutustyyppiSelect {...props} />;
+    }),
+};

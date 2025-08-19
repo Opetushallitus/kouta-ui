@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -19,8 +19,11 @@ import { KoulutusFooter } from './KoulutusFooter';
 import { KoulutusForm } from './KoulutusForm';
 
 export const EditKoulutusPage = () => {
-  const history = useHistory();
-  const { organisaatioOid, oid } = useParams();
+  const navigate = useNavigate();
+  const { organisaatioOid, oid } = useParams() as {
+    organisaatioOid: string;
+    oid: string;
+  };
 
   const koulutusQueryResult = useKoulutusByOid(oid);
 
@@ -34,10 +37,10 @@ export const EditKoulutusPage = () => {
   const onAttachToteutus = useCallback(() => {
     organisaatioOid &&
       koulutus &&
-      history.push(
+      navigate(
         `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`
       );
-  }, [history, koulutus, organisaatioOid]);
+  }, [navigate, koulutus, organisaatioOid]);
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.KOULUTUS,

@@ -7,8 +7,8 @@ export const useMuokkaajaName = entity => {
   let muokkaajanNimi = entity?._enrichedData?.muokkaajanNimi
     ? entity?._enrichedData?.muokkaajanNimi
     : muokkaajaOid
-    ? muokkaajaOid
-    : null;
+      ? muokkaajaOid
+      : null;
 
   if (entity?.metadata?.isMuokkaajaOphVirkailija) {
     muokkaajanNimi = `${muokkaajanNimi} (${t('yleiset.oph')})`;

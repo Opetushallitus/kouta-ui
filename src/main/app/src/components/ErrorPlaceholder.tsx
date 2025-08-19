@@ -9,7 +9,7 @@ import { getFieldNameWithoutLanguage } from '#/src/utils';
 
 export const ErrorPlaceholder = props => {
   const { name } = props;
-  const errors = useSubmitErrors(null);
+  const errors = useSubmitErrors();
   const error = _.get(errors, name);
   const isError = !_.isNil(error);
 

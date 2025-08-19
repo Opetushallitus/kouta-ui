@@ -44,7 +44,9 @@ const getInitialValues = koulutus => {
 };
 
 export const CreateKoulutusPage = () => {
-  const { organisaatioOid: valittuOrganisaatioOid } = useParams();
+  const { organisaatioOid: valittuOrganisaatioOid } = useParams() as {
+    organisaatioOid: string;
+  };
   const { t } = useTranslation();
 
   const { data } = usePohjaEntity(ENTITY.KOULUTUS);

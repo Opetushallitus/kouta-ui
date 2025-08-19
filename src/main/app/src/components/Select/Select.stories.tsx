@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import Select, { CreatableSelect } from './index';
 
@@ -17,14 +17,16 @@ export const Basic = () => (
   <Select options={options} onChange={action('change')} />
 );
 
-export const WithError = () => (
-  <Select options={options} onChange={action('change')} error />
-);
+export const WithError = {
+  render: () => <Select options={options} onChange={action('change')} error />,
 
-WithError.storyName = 'With error';
+  name: 'With error',
+};
 
-export const WithCreatableSelect = () => (
-  <CreatableSelect isClearable isMulti onChange={action('change')} />
-);
+export const WithCreatableSelect = {
+  render: () => (
+    <CreatableSelect isClearable isMulti onChange={action('change')} />
+  ),
 
-WithCreatableSelect.storyName = 'With CreatableSelect';
+  name: 'With CreatableSelect',
+};

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -20,8 +20,11 @@ import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
 
 export const EditToteutusPage = () => {
-  const history = useHistory();
-  const { organisaatioOid, oid } = useParams();
+  const navigate = useNavigate();
+  const { organisaatioOid, oid } = useParams() as {
+    organisaatioOid: string;
+    oid: string;
+  };
 
   const toteutusQueryResult = useToteutusByOid(oid);
 
@@ -39,12 +42,12 @@ export const EditToteutusPage = () => {
   const onAttachHakukohde = useCallback(
     ({ hakuOid }) => {
       if (hakuOid && toteutus) {
-        history.push(
+        navigate(
           `/organisaatio/${toteutus.organisaatioOid}/toteutus/${toteutus.oid}/haku/${hakuOid}/hakukohde`
         );
       }
     },
-    [history, toteutus]
+    [navigate, toteutus]
   );
 
   const canUpdate = useCurrentUserHasRole(

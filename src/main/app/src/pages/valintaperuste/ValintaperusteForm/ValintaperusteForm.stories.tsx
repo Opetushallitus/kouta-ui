@@ -23,4 +23,4 @@ const Wrapper = () => {
   );
 };
 
-export const basic = () => <Wrapper />;
+export const Basic = () => <Wrapper />;

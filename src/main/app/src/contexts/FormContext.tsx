@@ -12,7 +12,7 @@ export const FormContext = React.createContext<FormContextType>({});
 
 FormContext.displayName = 'FormContext';
 
-export const useFormName = () => useContext(FormContext)?.name;
+export const useFormName = () => useContext(FormContext).name as string;
 export const useFormIsDisabled = () =>
   useContext(FormContext)?.disabled ?? false;
 export const useFormMode = () => useContext(FormContext)?.mode;

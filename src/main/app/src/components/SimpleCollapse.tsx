@@ -33,7 +33,7 @@ const SimpleCollapseToggle = ({
   return (
     <SimpleCollapseHeader onClick={onToggle} {...props}>
       <Heading hasDivider>
-        <span>{open ? header : hiddenHeader ?? header}</span>
+        <span>{open ? header : (hiddenHeader ?? header)}</span>
         <Icon
           style={{ float: 'right' }}
           type={open ? 'expand_more' : 'expand_less'}

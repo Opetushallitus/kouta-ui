@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -18,8 +18,11 @@ import { HakuFooter } from './HakuFooter';
 import HakuForm from './HakuForm';
 
 export const EditHakuPage = () => {
-  const history = useHistory();
-  const { organisaatioOid, oid } = useParams();
+  const navigate = useNavigate();
+  const { organisaatioOid, oid } = useParams() as {
+    organisaatioOid: string;
+    oid: string;
+  };
   const hakuQueryResult = useHakuByOid(oid);
   const { data: haku } = hakuQueryResult;
   const { t } = useTranslation();
@@ -27,12 +30,12 @@ export const EditHakuPage = () => {
   const onAttachHakukohde = useCallback(
     ({ toteutusOid }) => {
       if (toteutusOid) {
-        history.push(
+        navigate(
           `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${haku?.oid}/hakukohde`
         );
       }
     },
-    [history, organisaatioOid, haku]
+    [navigate, organisaatioOid, haku]
   );
 
   const canUpdate = useCurrentUserHasRole(

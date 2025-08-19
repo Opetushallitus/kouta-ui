@@ -11,7 +11,9 @@ import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import { useDispatch, useSelector } from './reduxHooks';
 import { useActions } from './useActions';
 
-export const useForm = (formNameProp?: string) => {
+export const useForm: (formNameProp?: string) => any = (
+  formNameProp?: string
+) => {
   const formName = useFormName();
 
   return useSelector(state => _.get(state, `form.${formNameProp || formName}`));
@@ -41,7 +43,7 @@ export function useIsSubmitting(formNameProp?: string) {
   const formName = useFormName();
   return useSelector(isSubmitting(formNameProp ?? formName));
 }
-export function useSubmitErrors(formNameProp) {
+export function useSubmitErrors(formNameProp?: string) {
   const formName = useFormName();
   return useSelector(getFormSubmitErrors(formNameProp ?? formName));
 }

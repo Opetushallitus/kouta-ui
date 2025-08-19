@@ -33,7 +33,7 @@
     "src/**/*.jsx",
     "src/**/*.js",
     "playwright/**/*.ts",
-    "*.config.ts",
+    "*.config.?ts",
   ],
   "exclude": [
     "node_modules"

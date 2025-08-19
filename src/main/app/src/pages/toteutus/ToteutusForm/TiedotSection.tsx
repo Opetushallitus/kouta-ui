@@ -47,7 +47,13 @@ const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   );
 };
 
-const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
+const OpintojenLaajuus = ({
+  koulutus,
+  laajuusyksikkoKoodiUri,
+}: {
+  koulutus: any;
+  laajuusyksikkoKoodiUri: string;
+}) => {
   const selectedLanguage = useLanguageTab();
   const { t } = useTranslation();
 

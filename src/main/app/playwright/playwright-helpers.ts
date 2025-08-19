@@ -29,10 +29,9 @@ export const wrapMutationTest =
 
     // Tallennetaan snapshot tiedostoon ./snapshots/<testitiedosto>/<testin-nimi>.json
     testInfo.snapshotPath = (name: string) =>
-      `${path.resolve(testInfo.file, '../..')}/snapshots/${split(
-        testInfo.titlePath[0],
-        '.'
-      )?.[0]}/${deburr(toLower(name))}`;
+      `${path.resolve(testInfo.file, '../..')}/snapshots/${
+        split(testInfo.titlePath[0], '.')?.[0]
+      }/${deburr(toLower(name))}`;
 
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();

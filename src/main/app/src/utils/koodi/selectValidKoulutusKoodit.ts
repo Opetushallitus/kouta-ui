@@ -11,7 +11,7 @@ export const selectValidKoulutusKoodit = (
         const data = response?.data;
         return _fp.isArray(data) ? data : [];
       })
-    : response?.data ?? [];
+    : (response?.data ?? []);
 
   return _fp.flow(
     _fp.filter(isValidKoulutusKoodi),

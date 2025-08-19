@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => {
   } = env;
 
   return {
-    base: '/kouta',
+    base: '/kouta/',
     build: {
       outDir: 'build',
       target: browserslistToEsbuild(),

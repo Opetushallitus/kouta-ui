@@ -82,7 +82,7 @@ const OpintojenLaajuusForTutkinnonosat = ({
   const { t } = useTranslation();
   const tutkinnonOsat = koulutus?.metadata?.tutkinnonOsat || [];
 
-  const { data: tutkinnonOsienTiedot } = usePerusteenOsat({ tutkinnonOsat });
+  const { data: tutkinnonOsienTiedot } = usePerusteenOsat(tutkinnonOsat);
 
   const laajuudet = tutkinnonOsienTiedot?.map(osa => osa.laajuus);
   const combinedLaajuudet = laajuudet?.join(' + ') || '';

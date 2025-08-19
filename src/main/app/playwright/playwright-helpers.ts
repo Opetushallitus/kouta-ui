@@ -1,5 +1,3 @@
-import path from 'path';
-
 import {
   BrowserContext,
   Locator,
@@ -7,7 +5,7 @@ import {
   TestInfo,
   expect,
 } from '@playwright/test';
-import { deburr, includes, last, split, toLower } from 'lodash';
+import { includes, last, toLower } from 'lodash';
 
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -26,12 +24,6 @@ export const wrapMutationTest =
   async (args: { page: Page; testInfo: TestInfo }, run: () => Promise<any>) => {
     const { page, testInfo } = args;
     const entityLower = toLower(entityName);
-
-    // Tallennetaan snapshot tiedostoon ./snapshots/<testitiedosto>/<testin-nimi>.json
-    testInfo.snapshotPath = (name: string) =>
-      `${path.resolve(testInfo.file, '../..')}/snapshots/${
-        split(testInfo.titlePath[0], '.')?.[0]
-      }/${deburr(toLower(name))}`;
 
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();

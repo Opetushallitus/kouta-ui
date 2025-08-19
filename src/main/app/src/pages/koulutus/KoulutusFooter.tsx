@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
@@ -29,7 +29,7 @@ export const KoulutusFooter = ({
   koulutus,
   canUpdate,
 }: KoulutusFooterProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const form = useForm();
@@ -64,13 +64,11 @@ export const KoulutusFooter = ({
       });
 
       if (formMode === FormMode.CREATE) {
-        history.push(
-          `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`
-        );
+        navigate(`/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`);
       } else {
         afterUpdate(
           queryClient,
-          history,
+          navigate,
           ENTITY.KOULUTUS,
           valuesForSaving.tila
         );
@@ -81,7 +79,7 @@ export const KoulutusFooter = ({
       dataSendFn,
       form.registeredFields,
       formMode,
-      history,
+      navigate,
       initialValues,
       koulutus,
       organisaatioOid,

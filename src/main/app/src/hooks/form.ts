@@ -43,7 +43,7 @@ export function useIsSubmitting(formNameProp?: string) {
   const formName = useFormName();
   return useSelector(isSubmitting(formNameProp ?? formName));
 }
-export function useSubmitErrors(formNameProp) {
+export function useSubmitErrors(formNameProp?: string) {
   const formName = useFormName();
   return useSelector(getFormSubmitErrors(formNameProp ?? formName));
 }

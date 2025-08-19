@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Router, Route, Redirect, Switch } from 'react-router-dom';
+import { Navigate, createBrowserRouter, Outlet } from 'react-router-dom';
 
 import RouterScrollToTop from '#/src/components/RouterScrollToTop';
 import { Toaster } from '#/src/components/Toaster';
@@ -59,132 +59,129 @@ const RedirectSoraKuvausPage = createRedirectEntityPage({
     `/organisaatio/${organisaatioOid}/sora-kuvaus/${oid}/muokkaus`,
 });
 
-const Routes = ({ history }) => {
+const Layout = () => {
   return (
-    <Router history={history}>
-      <RouterScrollToTop>
-        <Toaster
-          style={{
-            position: 'fixed',
-            top: '16px',
-            right: '16px',
-            zIndex: '9999',
-          }}
-        />
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route exact path="/organisaatio/:organisaatioOid/koulutus">
-            <CreateKoulutusPage />
-          </Route>
-          <Route
-            path="/organisaatio/:organisaatioOid/koulutus/:oid/muokkaus"
-            exact
-          >
-            <EditKoulutusPage />
-          </Route>
-          <Route exact path={['/koulutus/:oid', '/koulutus/:oid/muokkaus']}>
-            <RedirectKoulutusPage />
-          </Route>
-
-          <Route
-            path="/organisaatio/:organisaatioOid/koulutus/:koulutusOid/toteutus"
-            exact
-          >
-            <CreateToteutusPage />
-          </Route>
-          <Route
-            path="/organisaatio/:organisaatioOid/toteutus/:oid/muokkaus"
-            exact
-          >
-            <EditToteutusPage />
-          </Route>
-          <Route exact path={['/toteutus/:oid', '/toteutus/:oid/muokkaus']}>
-            <RedirectToteutusPage />
-          </Route>
-
-          <Route exact path="/organisaatio/:organisaatioOid/haku">
-            <CreateHakuPage />
-          </Route>
-          <Route exact path="/organisaatio/:organisaatioOid/haku/:oid/muokkaus">
-            <EditHakuPage />
-          </Route>
-          <Route exact path={['/haku/:oid', '/haku/:oid/muokkaus']}>
-            <RedirectHakuPage />
-          </Route>
-
-          <Route
-            path="/organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde"
-            exact
-          >
-            <CreateHakukohdePage />
-          </Route>
-          <Route
-            path="/organisaatio/:organisaatioOid/hakukohde/:oid/muokkaus"
-            exact
-          >
-            <EditHakukohdePage />
-          </Route>
-          <Route exact path={['/hakukohde/:oid', '/hakukohde/:oid/muokkaus']}>
-            <RedirectHakukohdePage />
-          </Route>
-
-          <Route
-            path="/organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat?"
-            exact
-          >
-            <CreateValintaperustePage />
-          </Route>
-          <Route
-            path="/organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat/koulutustyyppi/:koulutustyyppi"
-            exact
-          >
-            <CreateValintaperustePage />
-          </Route>
-          <Route
-            path="/organisaatio/:organisaatioOid/valintaperusteet/:id/muokkaus"
-            exact
-          >
-            <EditValintaperustePage />
-          </Route>
-          <Route
-            path={['/valintaperusteet/:oid', '/valintaperusteet/:oid/muokkaus']}
-            exact
-          >
-            <RedirectValintaperustePage />
-          </Route>
-
-          <Route
-            path="/organisaatio/:organisaatioOid/sora-kuvaus/kielivalinnat/:kieliValinnat?"
-            exact
-          >
-            <CreateSoraKuvausPage />
-          </Route>
-          <Route
-            path="/organisaatio/:organisaatioOid/sora-kuvaus/:id/muokkaus"
-            exact
-          >
-            <EditSoraKuvausPage />
-          </Route>
-
-          <Route path={['/sora-kuvaus/:oid', '/sora-kuvaus/:oid/muokkaus']}>
-            <RedirectSoraKuvausPage />
-          </Route>
-
-          <Route exact path="/organisaatio/:organisaatioOid/oppilaitos">
-            <OppilaitosPage />
-          </Route>
-
-          <Route exact path="/organisaatio/:organisaatioOid/oppilaitoksen-osa">
-            <OppilaitoksenOsaPage />
-          </Route>
-
-          <Route render={() => <Redirect to="/" />} />
-        </Switch>
-      </RouterScrollToTop>
-    </Router>
+    <RouterScrollToTop>
+      <Toaster
+        style={{
+          position: 'fixed',
+          top: '16px',
+          right: '16px',
+          zIndex: '9999',
+        }}
+      />
+      <Outlet />
+    </RouterScrollToTop>
   );
 };
 
-export default Routes;
+const router = createBrowserRouter(
+  [
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <HomePage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/koulutus',
+          element: <CreateKoulutusPage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/koulutus/:oid/muokkaus',
+          element: <EditKoulutusPage />,
+        },
+        { path: 'koulutus/:oid', element: <RedirectKoulutusPage /> },
+        { path: 'koulutus/:oid/muokkaus', element: <RedirectKoulutusPage /> },
+
+        {
+          path: 'organisaatio/:organisaatioOid/koulutus/:koulutusOid/toteutus',
+          element: <CreateToteutusPage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/toteutus/:oid/muokkaus',
+          element: <EditToteutusPage />,
+        },
+        { path: 'toteutus/:oid', element: <RedirectToteutusPage /> },
+        { path: 'toteutus/:oid/muokkaus', element: <RedirectToteutusPage /> },
+
+        {
+          path: 'organisaatio/:organisaatioOid/haku',
+          element: <CreateHakuPage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/haku/:oid/muokkaus',
+          element: <EditHakuPage />,
+        },
+        { path: 'haku/:oid', element: <RedirectHakuPage /> },
+        { path: 'haku/:oid/muokkaus', element: <RedirectHakuPage /> },
+
+        {
+          path: 'organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde',
+          element: <CreateHakukohdePage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/hakukohde/:oid/muokkaus',
+          element: <EditHakukohdePage />,
+        },
+        { path: 'hakukohde/:oid', element: <RedirectHakukohdePage /> },
+        {
+          path: 'hakukohde/:oid/muokkaus',
+          element: <RedirectHakukohdePage />,
+        },
+
+        {
+          path: 'organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat?',
+          element: <CreateValintaperustePage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat/koulutustyyppi/:koulutustyyppi',
+          element: <CreateValintaperustePage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/valintaperusteet/:id/muokkaus',
+          element: <EditValintaperustePage />,
+        },
+        {
+          path: 'valintaperusteet/:oid',
+          element: <RedirectValintaperustePage />,
+        },
+        {
+          path: 'valintaperusteet/:oid/muokkaus',
+          element: <RedirectValintaperustePage />,
+        },
+
+        {
+          path: 'organisaatio/:organisaatioOid/sora-kuvaus/kielivalinnat/:kieliValinnat?',
+          element: <CreateSoraKuvausPage />,
+        },
+        {
+          path: 'organisaatio/:organisaatioOid/sora-kuvaus/:id/muokkaus',
+          element: <EditSoraKuvausPage />,
+        },
+        { path: 'sora-kuvaus/:oid', element: <RedirectSoraKuvausPage /> },
+        {
+          path: 'sora-kuvaus/:oid/muokkaus',
+          element: <RedirectSoraKuvausPage />,
+        },
+
+        {
+          path: 'organisaatio/:organisaatioOid/oppilaitos',
+          element: <OppilaitosPage />,
+        },
+
+        {
+          path: 'organisaatio/:organisaatioOid/oppilaitoksen-osa',
+          element: <OppilaitoksenOsaPage />,
+        },
+
+        { path: '*', element: <Navigate replace to="/" /> },
+      ],
+    },
+  ],
+
+  { basename: '/kouta/' }
+);
+
+export default router;

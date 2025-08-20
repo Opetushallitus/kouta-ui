@@ -182,7 +182,8 @@ const getKorkeakoulutusOpintojaksoFields = () => {
   return merge(getBaseFields('kk-opintojakso'), {
     nimi: { fi: 'KK-opintojakso' },
     metadata: {
-      opintojenLaajuusNumero: 13,
+      opintojenLaajuusNumeroMin: 13,
+      opintojenLaajuusNumeroMax: 13,
       opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
       kuvaus: { fi: 'kuvausteksti' },
     },
@@ -200,7 +201,8 @@ const getKorkeakoulutusOpintokokonaisuusFields = () => {
   return merge(getBaseFields('kk-opintokokonaisuus'), {
     nimi: { fi: 'KK-opintokokonaisuus' },
     metadata: {
-      opintojenLaajuusNumero: '10 - 20',
+      opintojenLaajuusNumeroMin: '10',
+      opintojenLaajuusNumeroMax: '20',
       opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
       kuvaus: { fi: 'kuvausteksti' },
     },

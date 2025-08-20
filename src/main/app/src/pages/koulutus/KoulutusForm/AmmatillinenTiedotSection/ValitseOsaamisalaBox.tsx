@@ -23,7 +23,7 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
-type OsaamisalaOsa = {
+export type OsaamisalaOsa = {
   muodostumisSaanto: { laajuus: { minimi: number } };
   osaamisala: { osaamisalakoodiArvo: number };
 };

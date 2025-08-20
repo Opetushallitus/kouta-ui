@@ -155,9 +155,19 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
 
       await section.getByLabel('.valitseOpintojenLaajuus').fill('10');
 
+      const isPieniOsaamiskokonaisuus = getLabel(
+        section,
+        'toteutuslomake.isPieniOsaamiskokonaisuus'
+      );
+
+      // Opintojen laajuus is 10 so isPieniOsaamiskokonaisuus defaults to true
+      await expect(isPieniOsaamiskokonaisuus).toBeChecked();
       const laajuusyksikko = section.getByLabel('Laajuusyksikko');
       await expect(laajuusyksikko).toBeDisabled();
       await expect(laajuusyksikko).toHaveValue('opintopistettä');
+
+      // isPieniOsaamiskokonaisuus is clicked to make it false
+      await isPieniOsaamiskokonaisuus.click();
 
       await section.getByLabel('yleiset.tunniste').fill('ABC-123');
 

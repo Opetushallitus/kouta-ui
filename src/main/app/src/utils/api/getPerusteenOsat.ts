@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { ApiUrls } from '#/src/urls';
 
 type TutkinnonOsa = {
   ePerusteId: string;
@@ -17,7 +18,7 @@ export const getPerusteenOsat = async ({
   tutkinnonOsat,
 }: {
   httpClient: AxiosInstance;
-  apiUrls: any;
+  apiUrls: ApiUrls;
   tutkinnonOsat: Array<TutkinnonOsa>;
 }) => {
   return _.isEmpty(tutkinnonOsat)
@@ -38,7 +39,6 @@ export const getPerusteenOsat = async ({
 };
 
 export const usePerusteenOsat = (tutkinnonOsat: Array<TutkinnonOsa>) => {
-  console.log(tutkinnonOsat);
   return useApiQuery(
     'getPerusteenOsat',
     getPerusteenOsat,

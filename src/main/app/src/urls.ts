@@ -1,3 +1,5 @@
+import { AxiosInstance } from 'axios';
+
 import { isDev, isPlaywright } from './utils';
 
 const {
@@ -90,9 +92,9 @@ const development = {
   'kayttooikeus-service.omattiedot': `${virkailijaDevUrl}/kayttooikeus-service/henkilo/current/omattiedot`,
   'kayttooikeus-service.kayttajan-organisaatiot': `${virkailijaDevUrl}/kayttooikeus-service/organisaatiohenkilo/organisaatioOid`,
   'cas.login': `${virkailijaDevUrl}/cas/login`,
-  ...(!isPlaywright && {
-    'virkailija-raamit.raamitJs': `${virkailijaDevUrl}/virkailija-raamit/apply-raamit.js`,
-  }),
+  'virkailija-raamit.raamitJs': isPlaywright
+    ? ''
+    : `${virkailijaDevUrl}/virkailija-raamit/apply-raamit.js`,
   'lomake-editori.lomakkeet': `${virkailijaDevUrl}/lomake-editori/api/forms`,
   'lomake-editori.cas': `${virkailijaDevUrl}/lomake-editori/auth/cas`,
   'lomake-editori.muokkaus-sivu': `${virkailijaDevUrl}/lomake-editori/editor/$1`,
@@ -104,9 +106,9 @@ const development = {
   'eperusteet.osaamismerkit': `${ePerusteetDevUrl}/#/$1/osaamismerkit/osaamismerkki/$2`,
   'hakukohderyhmapalvelu.haun-asetukset': `${virkailijaDevUrl}/hakukohderyhmapalvelu/haun-asetukset?hakuOid=$1`,
   'organisaatiopalvelu.organisaation-muokkaus-ui': `${virkailijaDevUrl}/organisaatio-service/lomake/$1`,
-};
+} as const;
 
-export const configure = async (urls, httpClient) => {
+export const configure = async (urls: ApiUrls, httpClient: AxiosInstance) => {
   if (isDev || isPlaywright || STORYBOOK) {
     urls.addProperties(development);
   } else {
@@ -115,4 +117,9 @@ export const configure = async (urls, httpClient) => {
   }
 
   return urls;
+};
+
+export type ApiUrls = {
+  addProperties: (properties: Record<string, string>) => void;
+  url: (key: keyof typeof development, ...params: Array<string>) => string;
 };

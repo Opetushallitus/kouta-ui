@@ -198,6 +198,13 @@ test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () =>
       ],
     },
     koulutustyyppi: KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+    description: {
+      kuvaus: {},
+      osaamistavoitteet: {
+        fi: parseEditorState('Fi osaamistavoitteet'),
+        sv: parseEditorState('Sv osaamistavoitteet'),
+      },
+    },
   });
 
   expect(koulutus).toMatchSnapshot();

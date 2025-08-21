@@ -52,8 +52,12 @@ export const LisatiedotSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const { options: osiotOptions } = useKoodistoOptions({
+  const { options } = useKoodistoOptions({
     koodisto: 'koulutuksenlisatiedot',
+  });
+
+  const osiotOptionsWithoutOsaamistavoitteet = options.filter(option => {
+    return !option.value.startsWith('koulutuksenlisatiedot_13#');
   });
 
   return (
@@ -67,7 +71,7 @@ export const LisatiedotSection = ({
             disabled={disabled}
             name={`${name}.osiot`}
             component={FormFieldSelect}
-            options={osiotOptions}
+            options={osiotOptionsWithoutOsaamistavoitteet}
             label={t('yleiset.valitseLisattavaOsio')}
             isMulti
           />
@@ -77,7 +81,7 @@ export const LisatiedotSection = ({
         disabled={disabled}
         name={name}
         language={language}
-        osiotOptions={osiotOptions}
+        osiotOptions={osiotOptionsWithoutOsaamistavoitteet}
       />
       {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
         koulutustyyppi

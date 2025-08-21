@@ -7,7 +7,10 @@ exports[`for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved 1`] 
   "externalId": null,
   "johtaaTutkintoon": false,
   "julkinen": false,
-  "kielivalinta": [],
+  "kielivalinta": [
+    "fi",
+    "sv",
+  ],
   "koulutuksetKoodiUri": [],
   "koulutustyyppi": "erikoistumiskoulutus",
   "metadata": {
@@ -29,6 +32,10 @@ exports[`for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved 1`] 
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_2#1",
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
+    "osaamistavoitteet": {
+      "fi": "<p>Fi osaamistavoitteet</p>",
+      "sv": "<p>Sv osaamistavoitteet</p>",
+    },
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -72,6 +79,7 @@ exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
+    "osaamistavoitteet": {},
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -118,6 +126,7 @@ exports[`getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatil
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
+    "osaamistavoitteet": {},
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
@@ -189,6 +198,7 @@ exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] 
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
+    "osaamistavoitteet": {},
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
@@ -238,6 +248,7 @@ exports[`it should return empty array if no koulutusKoodiUri given 1`] = `
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
+    "osaamistavoitteet": {},
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],

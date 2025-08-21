@@ -68,6 +68,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     erikoistumiskoulutusKoodiUri = '',
     osaamismerkkiKoodiUri,
     luokittelutermit,
+    osaamistavoitteet,
   } = metadata;
 
   return {
@@ -175,6 +176,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     },
     description: {
       kuvaus: _fp.mapValues(parseEditorState, kuvaus),
+      osaamistavoitteet: _fp.mapValues(parseEditorState, osaamistavoitteet),
       linkkiEPerusteisiin,
     },
     esikatselu,

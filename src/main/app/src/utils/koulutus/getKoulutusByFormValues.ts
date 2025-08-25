@@ -131,6 +131,9 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         ),
       })),
       kuvaus: kieleistyksetSerialized(values?.description?.kuvaus),
+      osaamistavoitteet: kieleistyksetSerialized(
+        values?.description?.osaamistavoitteet
+      ),
       opintojenLaajuusyksikkoKoodiUri:
         values?.information?.opintojenLaajuusyksikko?.value || null,
       opintojenLaajuusNumero:

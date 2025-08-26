@@ -91,6 +91,16 @@ export const useKoodistoOptions = ({
   return { ...rest, options };
 };
 
+export const useLisatiedotOptions = () => {
+  const { options } = useKoodistoOptions({
+    koodisto: 'koulutuksenlisatiedot',
+  });
+
+  return options.filter((option: SelectOption<string>) => {
+    return !option.value.startsWith('koulutuksenlisatiedot_13#');
+  });
+};
+
 type UseValintakokeentyyppiKoodistoOptionsProps = {
   koulutuskoodit: Array<string>;
   hakutapa?: string;

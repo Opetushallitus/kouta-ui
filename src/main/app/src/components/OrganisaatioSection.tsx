@@ -18,14 +18,15 @@ import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import { FormFieldAsyncSelect } from './formFields';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
 
-export const OrganisaatioSection = () => {
+export const OrganisaatioSection = ({ organisaatioOid }) => {
   const language = useUserLanguage();
   const isOphVirkailija = useIsOphVirkailija();
 
   const { hierarkia, isLoading } = useOrganisaatioHierarkia(
-    OPETUSHALLITUS_ORGANISAATIO_OID,
+    isOphVirkailija ? OPETUSHALLITUS_ORGANISAATIO_OID : organisaatioOid,
     {
-      enabled: isOphVirkailija,
+      skipParents: true,
+      enabled: true,
     }
   );
 
@@ -71,7 +72,6 @@ export const OrganisaatioSection = () => {
           component={FormFieldAsyncSelect}
           loadOptions={loadOptions}
           loadLabel={loadLabel}
-          disabled={!isOphVirkailija}
           isLoading={isLoading}
         />
       </Box>

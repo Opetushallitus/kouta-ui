@@ -9,7 +9,8 @@ import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
 import { Box, Typography } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useLisatiedotOptions } from '#/src/hooks/useKoodistoOptions';
+import { Kielivalinta } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 
 const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
@@ -49,16 +50,15 @@ export const LisatiedotSection = ({
   language,
   name,
   koulutustyyppi,
+}: {
+  disabled: boolean;
+  language: Kielivalinta;
+  name: string;
+  koulutustyyppi: KOULUTUSTYYPPI;
 }) => {
   const { t } = useTranslation();
 
-  const { options } = useKoodistoOptions({
-    koodisto: 'koulutuksenlisatiedot',
-  });
-
-  const osiotOptionsWithoutOsaamistavoitteet = options.filter(option => {
-    return !option.value.startsWith('koulutuksenlisatiedot_13#');
-  });
+  const osiotOptions = useLisatiedotOptions();
 
   return (
     <>
@@ -71,7 +71,7 @@ export const LisatiedotSection = ({
             disabled={disabled}
             name={`${name}.osiot`}
             component={FormFieldSelect}
-            options={osiotOptionsWithoutOsaamistavoitteet}
+            options={osiotOptions}
             label={t('yleiset.valitseLisattavaOsio')}
             isMulti
           />
@@ -81,7 +81,7 @@ export const LisatiedotSection = ({
         disabled={disabled}
         name={name}
         language={language}
-        osiotOptions={osiotOptionsWithoutOsaamistavoitteet}
+        osiotOptions={osiotOptions}
       />
       {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
         koulutustyyppi

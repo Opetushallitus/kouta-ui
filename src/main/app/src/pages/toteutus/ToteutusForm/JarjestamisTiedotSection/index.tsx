@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,7 @@ import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenA
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, TOHTORITUTKINTOTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useLisatiedotOptions } from '#/src/hooks/useKoodistoOptions';
 import { useKoulutuksetByTutkintotyyppi } from '#/src/hooks/useKoulutuksetByTutkintotyyppi';
 import { getTestIdProps } from '#/src/utils';
 import { isEnglishChosen } from '#/src/utils/isEnglishChosen';
@@ -151,9 +151,7 @@ export const JarjestamisTiedotSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const { options: osiotOptions } = useKoodistoOptions({
-    koodisto: 'koulutuksenlisatiedot',
-  });
+  const osiotOptions = useLisatiedotOptions();
 
   const opetuskielet = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 

@@ -55,7 +55,10 @@
     "ammattinimikkeet": [],
     "asiasanat": [],
     "kuvaus": {
-      "fi": "<p>kuvausteksti</p>"
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
+    "osaamistavoitteet": {
+      "fi": "<p>Osaamistavoitteet</p>"
     },
     "tyyppi": "amm-muu",
     "opintojenLaajuusyksikkoKoodiUri": "opintojenlaajuusyksikko_6#1",

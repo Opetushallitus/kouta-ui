@@ -38,6 +38,10 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         fi: 'Fi toteutuksenkuvaus',
         sv: 'Sv toteutuksenkuvaus',
       },
+      osaamistavoitteet: {
+        fi: 'Fi osaamistavoitteet',
+        sv: 'Sv osaamistavoitteet',
+      },
       ammatillinenPerustutkintoErityisopetuksena: true,
       yleislinja: true,
       painotukset: [
@@ -288,10 +292,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
     nimi: {
       fi: 'Fi nimi',
       sv: 'Sv nimi',
-    },
-    kuvaus: {
-      fi: 'Fi toteutuksenkuvaus',
-      sv: 'Sv toteutuksenkuvaus',
     },
     tarjoajat: ['org1', 'org2'],
   });

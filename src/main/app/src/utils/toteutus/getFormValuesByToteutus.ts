@@ -106,6 +106,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     opinnonTyyppiKoodiUri,
     taiteenalaKoodiUrit,
     tyyppi,
+    osaamistavoitteet,
   } = metadata;
 
   const {
@@ -163,6 +164,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       taiteenalat: toSelectValueList(taiteenalaKoodiUrit),
     },
     kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
+    osaamistavoitteet: _fp.mapValues(parseEditorState, osaamistavoitteet || {}),
     kieliversiot: kielivalinta ?? [],
     tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {

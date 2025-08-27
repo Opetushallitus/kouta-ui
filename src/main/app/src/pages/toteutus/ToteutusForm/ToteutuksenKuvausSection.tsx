@@ -22,14 +22,24 @@ export const ToteutuksenKuvausSection = ({ language }) => {
   const { t } = useTranslation();
 
   return (
-    <Box mb={2}>
-      <Field
-        name={`kuvaus.${language}`}
-        component={FormFieldEditor}
-        label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
-        required
-      />
-    </Box>
+    <>
+      <Box mb={2}>
+        <Field
+          name={`kuvaus.${language}`}
+          component={FormFieldEditor}
+          label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
+          required
+        />
+      </Box>
+      <Box mb={2}>
+        <Field
+          name={`osaamistavoitteet.${language}`}
+          component={FormFieldEditor}
+          label={t('yleiset.osaamistavoitteet')}
+          required={true}
+        />
+      </Box>
+    </>
   );
 };
 

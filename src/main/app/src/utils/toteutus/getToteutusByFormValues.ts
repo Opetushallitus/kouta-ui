@@ -201,6 +201,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       ),
       asiasanat: getTermsByLanguage(values?.nayttamistiedot?.avainsanat),
       kuvaus: kieleistyksetSerialized(values?.kuvaus),
+      osaamistavoitteet: kieleistyksetSerialized(values?.osaamistavoitteet),
       tyyppi: koulutustyyppi,
       opintojenLaajuusyksikkoKoodiUri:
         values?.tiedot?.opintojenLaajuusyksikko?.value || null,

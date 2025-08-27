@@ -177,6 +177,10 @@ test.describe('Edit toteutus', () => {
         await expect(laajuus).toBeDisabled();
         await expect(laajuus).toHaveValue('12 osaamispistettä');
       });
+      await withinSection(page, 'kuvaus', async section => {
+        await section.getByRole('textbox').nth(0).fill('Toteutuksen kuvaus');
+        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+      });
       const hakukohteetSection = getSection(page, 'hakukohteet');
       await withinSection(
         page,

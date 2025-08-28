@@ -30,7 +30,7 @@ test.describe('frontPage', () => {
 
     await page.route('**/koodi?onlyValidKoodis=true', fixtureJSON({}));
     await page.route('**/kouta-backend/**/list*', fixtureJSON([]));
-    await page.goto('/kouta');
+    await page.goto('/kouta/');
   });
 
   test('Should display organization hierarchy', async ({ page }) => {

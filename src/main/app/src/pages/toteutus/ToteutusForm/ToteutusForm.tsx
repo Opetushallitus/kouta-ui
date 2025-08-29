@@ -241,7 +241,7 @@ const ToteutusForm = ({
         />
 
         <FormCollapse
-          section="kuvaus"
+          section="description"
           header={t('toteutuslomake.toteutuksenKuvaus')}
           languages={languages}
           koulutus={koulutus}

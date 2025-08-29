@@ -2,6 +2,16 @@
 
 exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] = `
 {
+  "description": {
+    "kuvaus": {
+      "fi": "<p>Fi toteutuksenkuvaus</p>",
+      "sv": "<p>Sv toteutuksenkuvaus</p>",
+    },
+    "osaamistavoitteet": {
+      "fi": "<p>Fi osaamistavoitteet</p>",
+      "sv": "<p>Sv osaamistavoitteet</p>",
+    },
+  },
   "esikatselu": false,
   "externalId": "ext1",
   "hakeutumisTaiIlmoittautumistapa": {
@@ -159,10 +169,6 @@ exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] 
     "sv",
   ],
   "koulutustyyppi": undefined,
-  "kuvaus": {
-    "fi": "<p>Fi toteutuksenkuvaus</p>",
-    "sv": "<p>Sv toteutuksenkuvaus</p>",
-  },
   "lukiolinjat": {
     "erityisetKoulutustehtavat": {
       "kaytossa": true,
@@ -256,10 +262,6 @@ exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] 
   },
   "osaamismerkkienLiittaminen": {
     "osaamismerkit": [],
-  },
-  "osaamistavoitteet": {
-    "fi": "<p>Fi osaamistavoitteet</p>",
-    "sv": "<p>Sv osaamistavoitteet</p>",
   },
   "soraKuvaus": undefined,
   "tarjoajat": [

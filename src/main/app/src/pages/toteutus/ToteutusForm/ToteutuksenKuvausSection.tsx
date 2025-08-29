@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { TFunction } from 'i18next';
 import { isEmpty } from 'lodash';
@@ -18,14 +18,20 @@ import {
   OsaamismerkkiKuvaus,
 } from '../../koulutus/KoulutusForm/TiedotSection/OsaamismerkkiField';
 
-export const ToteutuksenKuvausSection = ({ language }) => {
+export const ToteutuksenKuvausSection = ({
+  language,
+  name,
+}: {
+  language: string;
+  name: string;
+}) => {
   const { t } = useTranslation();
 
   return (
     <>
       <Box mb={2}>
         <Field
-          name={`kuvaus.${language}`}
+          name={`${name}.kuvaus.${language}`}
           component={FormFieldEditor}
           label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
           required
@@ -33,7 +39,7 @@ export const ToteutuksenKuvausSection = ({ language }) => {
       </Box>
       <Box mb={2}>
         <Field
-          name={`osaamistavoitteet.${language}`}
+          name={`${name}.osaamistavoitteet.${language}`}
           component={FormFieldEditor}
           label={t('yleiset.osaamistavoitteet')}
           required={true}
@@ -140,12 +146,12 @@ export const OsaamismerkkiToteutuksenKuvausSection = ({
   const { t } = useTranslation();
 
   const osaamismerkkiId = koulutus?.metadata?.osaamismerkkiKoodiUri;
-  useKuvausFromEPerusteet(osaamismerkkiId, name, language, t);
+  useKuvausFromEPerusteet(osaamismerkkiId, `${name}.kuvaus`, language, t);
 
   return (
     <Box mb={2}>
       <Field
-        name={`kuvaus.${language}`}
+        name={`${name}.kuvaus.${language}`}
         component={FormFieldEditor}
         label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
         required

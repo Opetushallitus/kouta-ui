@@ -165,8 +165,13 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       },
       taiteenalat: toSelectValueList(taiteenalaKoodiUrit),
     },
-    kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
-    osaamistavoitteet: _fp.mapValues(parseEditorState, osaamistavoitteet || {}),
+    description: {
+      kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
+      osaamistavoitteet: _fp.mapValues(
+        parseEditorState,
+        osaamistavoitteet || {}
+      ),
+    },
     kieliversiot: kielivalinta ?? [],
     tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {

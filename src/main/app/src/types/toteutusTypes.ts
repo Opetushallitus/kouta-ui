@@ -84,8 +84,10 @@ export type ToteutusFormValues = {
   osaamismerkkienLiittaminen?: {
     osaamismerkit: Array<{ osaamismerkki: SelectOption }>;
   };
-  kuvaus: TranslatedField<EditorState>;
-  osaamistavoitteet: TranslatedField<EditorState>;
+  description: {
+    kuvaus: TranslatedField<EditorState>;
+    osaamistavoitteet: TranslatedField<EditorState>;
+  };
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;
   jarjestamistiedot: {

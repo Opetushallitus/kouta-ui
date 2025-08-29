@@ -42,9 +42,15 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       isTyovoimakoulutus: false,
       isTaydennyskoulutus: false,
     },
-    kuvaus: {
-      fi: parseEditorState('Fi toteutuksenkuvaus'),
-      sv: parseEditorState('Sv toteutuksenkuvaus'),
+    description: {
+      kuvaus: {
+        fi: parseEditorState('Fi toteutuksenkuvaus'),
+        sv: parseEditorState('Sv toteutuksenkuvaus'),
+      },
+      osaamistavoitteet: {
+        fi: parseEditorState('Fi osaamistavoitteet'),
+        sv: parseEditorState('Sv osaamistavoitteet'),
+      },
     },
     osaamistavoitteet: {
       fi: parseEditorState('Fi osaamistavoitteet'),

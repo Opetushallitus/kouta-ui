@@ -240,7 +240,7 @@ const fillKuvausSection = (
   page: Page,
   withOsaamistavoitteet: boolean = false
 ) =>
-  withinSection(page, 'kuvaus', async section => {
+  withinSection(page, 'description', async section => {
     await section.getByRole('textbox').nth(0).fill('Toteutuksen kuvaus');
     if (withOsaamistavoitteet) {
       await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');

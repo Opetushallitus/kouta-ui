@@ -185,6 +185,10 @@ const getKorkeakoulutusOpintojaksoFields = () => {
       opintojenLaajuusNumero: 13,
       opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
       kuvaus: { fi: 'kuvausteksti' },
+      osaamistavoitteet: {
+        fi: 'Koulutuksen osaamistavoitteet',
+        sv: 'Koulutuksen osaamistavoitteet sv',
+      },
     },
   });
 };

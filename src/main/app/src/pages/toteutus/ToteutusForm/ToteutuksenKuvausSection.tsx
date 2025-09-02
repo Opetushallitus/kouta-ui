@@ -1,13 +1,18 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { TFunction } from 'i18next';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import DeleteConfirmationDialog from '#/src/components/DeleteConfirmationDialog';
+import { FormButton } from '#/src/components/FormButton';
 import { FormFieldEditor } from '#/src/components/formFields';
-import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
-import { Box } from '#/src/components/virkailija';
+import {
+  isEditorEmpty,
+  parseEditorState,
+} from '#/src/components/LexicalEditorUI/utils';
+import { Box, FormLabel } from '#/src/components/virkailija';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useOsaamismerkki } from '#/src/hooks/useEPeruste/useOsaamismerkki';
 import { sanitizeHTML } from '#/src/utils';
@@ -21,11 +26,46 @@ import {
 export const ToteutuksenKuvausSection = ({
   language,
   name,
+  koulutus,
 }: {
   language: string;
   name: string;
+  koulutus: any;
 }) => {
   const { t } = useTranslation();
+  const { change } = useBoundFormActions();
+  const currOsaamistavoitteet = useFieldValue(
+    `${name}.osaamistavoitteet.${language}`
+  );
+  const isOsaamistavoitteetEditorEmpty = isEditorEmpty(currOsaamistavoitteet);
+  const koulutuksenOsaamistavoitteet = koulutus?.metadata?.osaamistavoitteet;
+
+  const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);
+
+  const doReplaceOsaamistavoitteet = () => {
+    toggleConfirmationDialog(false);
+    change(
+      `${name}.osaamistavoitteet.${language}`,
+      parseEditorState(koulutuksenOsaamistavoitteet?.[language] || '')
+    );
+  };
+
+  const useKoulutuksenOsaamistavoitteet = useCallback(() => {
+    if (isOsaamistavoitteetEditorEmpty) {
+      change(
+        `${name}.osaamistavoitteet.${language}`,
+        parseEditorState(koulutuksenOsaamistavoitteet?.[language] || '')
+      );
+    } else {
+      toggleConfirmationDialog(true);
+    }
+  }, [
+    change,
+    isOsaamistavoitteetEditorEmpty,
+    koulutuksenOsaamistavoitteet,
+    language,
+    name,
+  ]);
 
   return (
     <>
@@ -38,10 +78,30 @@ export const ToteutuksenKuvausSection = ({
         />
       </Box>
       <Box mb={2}>
+        <DeleteConfirmationDialog
+          isOpen={isConfirmationDialogOpen}
+          onConfirm={doReplaceOsaamistavoitteet}
+          onCancel={() => {
+            toggleConfirmationDialog(false);
+          }}
+          headerText={t('ilmoitukset.osaamistavoitteet.otsikko')}
+          message={t('ilmoitukset.osaamistavoitteet.viesti')}
+        />
+        <FormLabel htmlFor="osaamistavoitteet">
+          {`${t('yleiset.osaamistavoitteet')} *`}
+        </FormLabel>
+        <FormButton
+          variant="outlined"
+          color="primary"
+          type="button"
+          style={{ marginBottom: '1rem' }}
+          onClick={useKoulutuksenOsaamistavoitteet}
+        >
+          {t('toteutuslomake.kaytaKoulutuksenOsaamistavoitteita')}
+        </FormButton>
         <Field
           name={`${name}.osaamistavoitteet.${language}`}
           component={FormFieldEditor}
-          label={t('yleiset.osaamistavoitteet')}
           required={true}
         />
       </Box>

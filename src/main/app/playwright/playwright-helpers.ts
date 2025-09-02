@@ -161,9 +161,7 @@ export const assertNoUnsavedChangesDialog = async (page: Page) => {
 };
 
 export const confirmDelete = async (page: Page) => {
-  await page
-    .getByRole('button', { name: 'ilmoitukset.luonnoksenPoisto.jatka' })
-    .click();
+  await page.getByRole('button', { name: 'ilmoitukset.jatka' }).click();
   await assertOnFrontPage(page);
 };
 

@@ -238,12 +238,24 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
 
 const fillKuvausSection = (
   page: Page,
-  withOsaamistavoitteet: boolean = false
+  withOsaamistavoitteet: boolean = false,
+  kaytaKoulutuksenOsaamistavoitteita: boolean = false
 ) =>
   withinSection(page, 'description', async section => {
     await section.getByRole('textbox').nth(0).fill('Toteutuksen kuvaus');
+
     if (withOsaamistavoitteet) {
       await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+    }
+
+    if (kaytaKoulutuksenOsaamistavoitteita) {
+      section
+        .getByRole('button', {
+          name: 'toteutuslomake.kaytaKoulutuksenOsaamistavoitteita',
+        })
+        .click();
+
+      await page.getByRole('button', { name: 'ilmoitukset.jatka' }).click();
     }
   });
 
@@ -555,7 +567,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, true);
+      await fillKuvausSection(page, true, true);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);

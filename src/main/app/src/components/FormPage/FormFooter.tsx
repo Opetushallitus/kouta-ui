@@ -67,11 +67,14 @@ export const FormFooter = ({
     <>
       <DeleteConfirmationDialog
         isOpen={isConfirmationDialogOpen}
-        name={theEntityName}
         onConfirm={doDelete}
         onCancel={() => {
           toggleConfirmationDialog(false);
         }}
+        headerText={t('ilmoitukset.luonnoksenPoisto.otsikko')}
+        message={t('ilmoitukset.luonnoksenPoisto.viesti', {
+          name: theEntityName,
+        })}
       />
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" justifyContent="flex-start" alignItems="center">

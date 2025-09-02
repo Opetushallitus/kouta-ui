@@ -6,6 +6,7 @@ import {
   $getRoot,
   createEditor,
   CreateEditorArgs,
+  ElementNode,
   LexicalEditor,
   TextNode,
   DOMExportOutput,
@@ -14,6 +15,7 @@ import {
   $createParagraphNode,
   $isElementNode,
   $isDecoratorNode,
+  $isTextNode,
   SerializedTextNode,
 } from 'lexical';
 
@@ -178,3 +180,31 @@ export const isEditorState = (value: unknown): value is EditorState => {
 
 export const isEmptyEditorState = (state: unknown) =>
   isEditorState(state) && state.isEmpty();
+
+export function hasWhitespace(node: ElementNode): boolean {
+  for (const child of node.getChildren()) {
+    if (
+      ($isElementNode(child) && !hasWhitespace(child)) ||
+      ($isTextNode(child) && child.getTextContent().trim() !== '') ||
+      $isDecoratorNode(child)
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+export const isEditorEmpty = (value: EditorState) => {
+  return value?.read(() => {
+    const root = $getRoot();
+    const child = root.getFirstChild();
+
+    if (
+      child == null ||
+      ($isElementNode(child) && child.isEmpty() && root.getChildrenSize() === 1)
+    ) {
+      return true;
+    }
+
+    return hasWhitespace(root);
+  });
+};

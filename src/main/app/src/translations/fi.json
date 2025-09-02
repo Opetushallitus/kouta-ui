@@ -212,7 +212,8 @@
     "opinnonTyyppi": "Valitse opinnon tyyppi",
     "vaihdaTila": "Vaihda tila",
     "kategoria": "Kategoria",
-    "voimassaoloLoppuu": "Voimassaolo loppuu"
+    "voimassaoloLoppuu": "Voimassaolo loppuu",
+    "osaamistavoitteet": "Osaamistavoitteet"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -251,6 +252,8 @@
     "indeksointiEpaonnistui": "Tallennus onnistui, mutta indeksoinnissa oli ongelmia. Etusivun listaukset eivät ole välttämättä vielä päivittyneet - odotathan hetkisen!"
   },
   "ilmoitukset": {
+    "jatka": "Jatka",
+    "peruuta": "Peruuta",
     "tallentamattomiaMuutoksia": {
       "otsikko": "Tallentamattomia muutoksia",
       "viesti": "Lomakkeella on tallentamattomia muutoksia. Haluatko varmasti jatkaa?",
@@ -292,6 +295,10 @@
       "haullaHakukohteita": "Hakua ei voi poistaa koska siihen on liitetty hakukohteita",
       "sorakuvauksellaKoulutuksia": "SORA-kuvausta ei voi poistaa koska siihen on liitetty koulutuksia",
       "valintaperusteellaHakukohteita": "Valintaperustetta ei voi poistaa koska siihen on liitetty hakukohteita"
+    },
+    "osaamistavoitteet": {
+      "otsikko": "Osaamistavoitteiden kopioiminen koulutukselta",
+      "viesti": "Olet korvaamassa toteutuksen osaamistavoitekuvausta koulutuksen osaamistavoitekuvauksella. Haluatko varmasti jatkaa?"
     }
   },
   "sivuTitlet": {
@@ -667,7 +674,8 @@
     "siirryOsaamismerkinTietoihin": "Siirry osaamismerkin tietoihin",
     "osaamismerkki": "Osaamismerkki",
     "osaamismerkit": "Osaamismerkit",
-    "lisaaOsaamismerkki": "Lisää osaamismerkki"
+    "lisaaOsaamismerkki": "Lisää osaamismerkki",
+    "kaytaKoulutuksenOsaamistavoitteita": "Käytä koulutuksella olevaa osaamistavoitekuvausta"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

@@ -297,8 +297,8 @@
       "valintaperusteellaHakukohteita": "Valintaperustetta ei voi poistaa koska siihen on liitetty hakukohteita"
     },
     "osaamistavoitteet": {
-      "otsikko": "Osaamistavoitteiden kopioiminen koulutukselta",
-      "viesti": "Olet korvaamassa toteutuksen osaamistavoitekuvausta koulutuksen osaamistavoitekuvauksella. Haluatko varmasti jatkaa?"
+      "otsikko": "Vahvista osaamistavoitteiden tuonti",
+      "viesti": "Tuonti korvaa nykyisen kuvauksen. Haluatko jatkaa?"
     }
   },
   "sivuTitlet": {
@@ -675,7 +675,7 @@
     "osaamismerkki": "Osaamismerkki",
     "osaamismerkit": "Osaamismerkit",
     "lisaaOsaamismerkki": "Lisää osaamismerkki",
-    "kaytaKoulutuksenOsaamistavoitteita": "Käytä koulutuksella olevaa osaamistavoitekuvausta"
+    "kaytaKoulutuksenOsaamistavoitteita": "Tuo osaamistavoitekuvaus koulutukselta"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

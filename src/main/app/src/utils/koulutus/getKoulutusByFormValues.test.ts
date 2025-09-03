@@ -128,6 +128,7 @@ test('it should return empty array if no koulutusKoodiUri given', () => {
 
 test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () => {
   const koulutus = getKoulutusByFormValues({
+    kieliversiot: ['fi', 'sv'],
     information: {
       erikoistumiskoulutus: {
         value: 'erikoistumiskoulutukset_001#2',
@@ -142,6 +143,13 @@ test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () =>
         { value: 'koulutusala_1#1' },
         { value: 'koulutusala_2#1' },
       ],
+    },
+    description: {
+      kuvaus: {},
+      osaamistavoitteet: {
+        fi: parseEditorState('Fi osaamistavoitteet'),
+        sv: parseEditorState('Sv osaamistavoitteet'),
+      },
     },
     koulutustyyppi: 'erikoistumiskoulutus',
   });

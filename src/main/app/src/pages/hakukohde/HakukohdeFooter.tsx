@@ -27,8 +27,8 @@ type HakukohdeFooterProps = {
   organisaatioOid: string;
   hakukohde?: HakukohdeModel;
   koulutustyyppi: string;
-  haku: HakuModel;
-  toteutus: ToteutusModel;
+  haku?: HakuModel;
+  toteutus?: ToteutusModel;
   canUpdate?: boolean;
   infoTextTranslationKey?: string;
 };

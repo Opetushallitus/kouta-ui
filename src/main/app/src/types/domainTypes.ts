@@ -16,6 +16,9 @@ export type OppilaitosModel = components['schemas']['Oppilaitos'] & {
   lastModified: string | null;
 };
 
+export type OppilaitoksetResponseModel =
+  components['schemas']['OppilaitoksetResponse'];
+
 export type OppilaitoksenOsaModel =
   components['schemas']['OppilaitoksenOsa'] & { lastModified: string | null };
 
@@ -30,9 +33,10 @@ export type SisaltoTaulukkoModel = components['schemas']['SisaltoTaulukko'];
 
 export type Kielivalinta = Array<components['schemas']['Kieli']>;
 
-export type Organisaatio = components['schemas']['Organisaatio'] & {
-  jarjestaaUrheilijanAmmKoulutusta: boolean | null;
-};
+export type OrganisaatioModel = components['schemas']['Organisaatio'];
+
+export type OrganisaatioHierarkiaModel =
+  components['schemas']['OrganisaatioHierarkia'];
 
 export type Osoite = components['schemas']['Osoite'];
 

@@ -1,14 +1,12 @@
 import { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
-
 import {
   LONG_CACHE_QUERY_OPTIONS,
   OPETUSHALLITUS_ORGANISAATIO_OID,
   ORGANISAATIOTYYPPI,
 } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { oneAndOnlyOne } from '#/src/utils';
 import filterTree from '#/src/utils/filterTree';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
@@ -21,7 +19,7 @@ type UseOrganisaatioHierarkiaOptions =
     }
   | undefined;
 
-export const defaultFilter = (org: Organisaatio) => {
+export const defaultFilter = (org: OrganisaatioModel) => {
   const organisaatiotyypit = org?.organisaatiotyyppiUris;
 
   const onlyOrganisaatiotyyppi = oneAndOnlyOne(organisaatiotyypit);
@@ -36,11 +34,11 @@ export const useOrganisaatioHierarkia = (
   oid?: string | Array<string>,
   {
     skipParents = false,
-    filter = _fp.T,
+    filter = () => true,
     enabled = true,
   }: UseOrganisaatioHierarkiaOptions = {}
 ) => {
-  const oidsParams = _fp.isArray(oid)
+  const oidsParams = Array.isArray(oid)
     ? {
         oids: oid,
       }

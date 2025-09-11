@@ -14,7 +14,7 @@ import { Box, Typography } from '#/src/components/virkailija';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -131,7 +131,7 @@ export const PerustiedotSection = ({
 }: {
   language: LanguageCode;
   name: string;
-  organisaatio?: Organisaatio;
+  organisaatio?: OrganisaatioModel;
 }) => {
   const { t } = useTranslation();
 

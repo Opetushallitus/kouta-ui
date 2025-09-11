@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 
 import { useItemsToShow } from './useItemsToShow';
 
@@ -12,7 +12,7 @@ const createOrg = ({
   parentOids = [],
   organisaatiotyyppiUris = [],
   children = [],
-}: Partial<Organisaatio>): Organisaatio => ({
+}: Partial<OrganisaatioModel>): OrganisaatioModel => ({
   oid,
   nimi,
   kieletUris,

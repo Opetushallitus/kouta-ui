@@ -2,22 +2,27 @@ import { castArray, isEmpty, head, filter, some, uniq } from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { KoutaApiQueryConfig, useApiQuery } from '#/src/hooks/useApiQuery';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
 import getUserRoles from '#/src/utils/getUserRoles';
 import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOppilaitostyypitByKoulutustyypit';
 import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
 
-export const useOrganisaatio = (oid, options = {}) => {
+export const useOrganisaatio = (
+  oid: string,
+  options: KoutaApiQueryConfig = {}
+) => {
   const { organisaatiot, ...rest } = useOrganisaatiot(oid, options);
 
   return { organisaatio: organisaatiot?.[0], ...rest };
 };
 
-export const useOrganisaatiot = (oids, options = {}) => {
-  const { data: organisaatiot, ...rest } = useApiQuery<Array<Organisaatio>>(
+export const useOrganisaatiot = (oids, options: KoutaApiQueryConfig = {}) => {
+  const { data: organisaatiot, ...rest } = useApiQuery<
+    Array<OrganisaatioModel>
+  >(
     'getOrganisaatiot',
     getOrganisaatiotByOids,
     { oids: castArray(oids) },
@@ -89,8 +94,8 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
 };
 
 export const usePreferredOrganisaatio = (
-  creatorOrganisaatioOid,
-  creatorOrganisaatioIsLoading
+  creatorOrganisaatioOid: string,
+  creatorOrganisaatioIsLoading: boolean
 ) => {
   const user = useAuthorizedUser();
   const roles = getUserRoles(user);

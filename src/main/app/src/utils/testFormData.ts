@@ -5,9 +5,10 @@ import {
   JULKAISUTILA,
   LIITTEEN_TOIMITUSTAPA,
 } from '../constants';
+import { Tilaisuus } from '../types/formTypes';
 import { HakukohdeFormValues } from '../types/hakukohdeTypes';
 
-const valintaTilaisuus = {
+const valintaTilaisuus: Tilaisuus = {
   osoite: { fi: 'fi osoite', sv: 'sv osoite' },
   postinumero: {
     fi: { value: 'posti_1#1' },

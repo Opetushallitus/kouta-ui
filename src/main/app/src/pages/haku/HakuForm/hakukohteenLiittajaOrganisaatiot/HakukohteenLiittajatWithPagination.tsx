@@ -9,14 +9,14 @@ import { Switch } from '#/src/components/Switch';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import { useFormIsDisabled } from '#/src/contexts/FormContext';
 import { useItemsToShow } from '#/src/hooks/useItemsToShow';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 
 export const PAGE_SIZE = 15;
 export const countPageNumber = orgs => Math.ceil(orgs.length / PAGE_SIZE);
 
 type Props = {
-  liittajaOrganisaatiot: Array<Organisaatio>;
+  liittajaOrganisaatiot: Array<OrganisaatioModel>;
   value: Array<string>;
   onChange: (val: Array<string>) => void;
   language: LanguageCode;

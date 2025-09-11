@@ -73,26 +73,8 @@ jobs:
           npm run lint
           npm run test:ci
 
-  publish-storybook:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version-file: 'src/main/app/.nvmrc'
-          cache: 'npm'
-          cache-dependency-path: src/main/app/package-lock.json
-
-      - name: Build and publish storybook
-        run: |
-          git clone https://github.com/Opetushallitus/ci-tools.git
-          source ci-tools/common/setup-tools.sh
-          sh scripts/publish-storybook.sh       
-
   deploy-container:
-    needs: [build, test, publish-storybook]
+    needs: [build, test]
     runs-on: ubuntu-latest
 
     steps:

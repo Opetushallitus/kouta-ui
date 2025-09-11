@@ -1,6 +1,43 @@
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
+import { KoulutusFormValues } from '#/src/types/koulutusTypes';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
+
+const KOULUTUS_FORM_VALUES_BASE: KoulutusFormValues = {
+  tila: JULKAISUTILA.TALLENNETTU,
+  muokkaaja: undefined,
+  kieliversiot: [],
+  tarjoajat: {
+    kaytaPohjanJarjestajaa: false,
+    tarjoajat: [],
+  },
+  information: {
+    nimi: {},
+    eperuste: { value: undefined },
+    koulutus: {
+      value: undefined,
+    },
+    korkeakoulutukset: [],
+    tutkintonimike: [],
+    koulutusalat: [],
+  },
+  koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+  lisatiedot: {
+    osioKuvaukset: {},
+    osiot: [],
+  },
+  description: {
+    kuvaus: {},
+  },
+  tutkinnonosat: {
+    nimi: {},
+    osat: [],
+  },
+  soraKuvaus: {
+    value: '',
+  },
+  julkinen: false,
+};
 
 test('getKoulutusByFormValues returns correct koulutus given form values', () => {
   const koulutus = getKoulutusByFormValues({
@@ -56,18 +93,17 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
         fi: parseEditorState('Fi kuvaus'),
         sv: parseEditorState('Sv kuvaus'),
       },
+    },
+    tutkinnonosat: {
       nimi: {
         fi: 'Fi nimi',
         sv: 'Sv nimi',
       },
-    },
-    tutkinnonosat: {
       osat: [
         {
           eperuste: { value: '1234' },
           koulutus: { value: 'koulutuskoodi_2#1' },
-          tutkinnonosa: { value: '567567' },
-          tutkinnonosaviite: '9847598475',
+          osat: [],
         },
       ],
     },
@@ -82,13 +118,10 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
 
 test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus', () => {
   const koulutus = getKoulutusByFormValues({
+    ...KOULUTUS_FORM_VALUES_BASE,
     externalId: 'ext1',
-    koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
     information: {
-      nimi: {
-        fi: 'Fi nimi',
-        sv: 'Sv nimi',
-      },
+      nimi: {},
       eperuste: { value: '1' },
       koulutus: {
         value: 'koulutuskoodi_1#1',
@@ -100,6 +133,14 @@ test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillin
         { value: 'koulutusala_2#1' },
       ],
     },
+    koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    tutkinnonosat: {
+      nimi: {
+        fi: 'Fi nimi',
+        sv: 'Sv nimi',
+      },
+      osat: [],
+    },
   });
 
   expect(koulutus).toMatchSnapshot();
@@ -107,11 +148,22 @@ test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillin
 
 test('for osaamisala koulutus, koulutusKoodiUri is resolved', () => {
   const koulutus = getKoulutusByFormValues({
+    ...KOULUTUS_FORM_VALUES_BASE,
     information: {
+      nimi: {},
+      koulutus: {
+        value: 'koulutuskoodi_1#1',
+      },
       korkeakoulutukset: [],
+      tutkintonimike: [],
+      koulutusalat: [],
     },
-    osaamisala: { koulutus: { value: 'koulutus_371101#1' } },
-    koulutustyyppi: 'amm-osaamisala',
+    osaamisala: {
+      koulutus: { value: 'koulutus_371101#1' },
+      eperuste: { value: undefined },
+      osaamisala: { value: undefined },
+    },
+    koulutustyyppi: KOULUTUSTYYPPI.OSAAMISALA,
   });
 
   expect(koulutus).toMatchSnapshot();
@@ -119,8 +171,8 @@ test('for osaamisala koulutus, koulutusKoodiUri is resolved', () => {
 
 test('it should return empty array if no koulutusKoodiUri given', () => {
   const koulutus = getKoulutusByFormValues({
-    information: {},
-    koulutustyyppi: 'yo',
+    ...KOULUTUS_FORM_VALUES_BASE,
+    koulutustyyppi: KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
   });
 
   expect(koulutus).toMatchSnapshot();
@@ -128,7 +180,9 @@ test('it should return empty array if no koulutusKoodiUri given', () => {
 
 test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () => {
   const koulutus = getKoulutusByFormValues({
+    ...KOULUTUS_FORM_VALUES_BASE,
     information: {
+      ...KOULUTUS_FORM_VALUES_BASE.information,
       erikoistumiskoulutus: {
         value: 'erikoistumiskoulutukset_001#2',
       },
@@ -143,7 +197,7 @@ test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () =>
         { value: 'koulutusala_2#1' },
       ],
     },
-    koulutustyyppi: 'erikoistumiskoulutus',
+    koulutustyyppi: KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
   });
 
   expect(koulutus).toMatchSnapshot();

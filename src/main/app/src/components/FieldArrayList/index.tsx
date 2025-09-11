@@ -1,7 +1,6 @@
-import React from 'react';
-
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { FieldArrayFieldsProps } from 'redux-form';
 import styled, { css } from 'styled-components';
 
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
@@ -9,7 +8,11 @@ import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
 
-const Item = styled.div`
+const Item = styled.div<{
+  isLast?: boolean;
+  isFirst?: boolean;
+  hasDivider?: boolean;
+}>`
   padding-bottom: ${spacing(4)};
 
   ${({ isLast, hasDivider }) =>
@@ -31,17 +34,32 @@ const ItemFlex = styled(Box)`
   min-width: 0;
 `;
 
-export const FieldArrayList = ({
+export function FieldArrayList<T>({
   fields,
   meta,
   hasDivider = true,
   hasRemoveButton = true,
   removeButtonText: removeButtonTextProp,
   children,
-}) => {
+}: {
+  fields: FieldArrayFieldsProps<T>;
+  meta?: { error?: string | Array<string> | undefined };
+  hasDivider?: boolean;
+  hasRemoveButton?: boolean;
+  removeButtonText?: string;
+  children: ({
+    field,
+    index,
+    fields,
+  }: {
+    field: string;
+    index: number;
+    fields: FieldArrayFieldsProps<T>;
+  }) => React.ReactNode;
+}) {
   const { t } = useTranslation();
   const removeButtonText = removeButtonTextProp || t('yleiset.poista');
-  const error = _.get(meta, 'error');
+  const error = meta?.error;
 
   const fieldsContent = fields.map((field, index, f) => {
     return (
@@ -75,6 +93,6 @@ export const FieldArrayList = ({
       {fieldsContent}
     </FormControl>
   );
-};
+}
 
 export default FieldArrayList;

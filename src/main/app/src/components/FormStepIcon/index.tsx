@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const IconContainer = styled.div`
+const IconContainer = styled.div<{ active: boolean; done: boolean }>`
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
@@ -36,7 +36,7 @@ const IconContainer = styled.div`
     `}
 `;
 
-const LabelContainer = styled.div`
+const LabelContainer = styled.div<{ active: boolean }>`
   margin-top: ${getThemeProp('spacing.unit')}px;
   text-align: center;
   font-family: ${getThemeProp('typography.fontFamily')};

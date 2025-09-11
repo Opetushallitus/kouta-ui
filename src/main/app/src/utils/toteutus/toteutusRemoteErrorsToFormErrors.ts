@@ -226,7 +226,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   ) {
     const liitetytEntiteetit =
       formValues?.osaamismerkkienLiittaminen?.osaamismerkit;
-    const liitetytOids = liitetytEntiteetit.map(e => e?.osaamismerkki?.value);
+    const liitetytOids = liitetytEntiteetit?.map(e => e?.osaamismerkki?.value);
 
     const indicesWithDeprecated = findIndices(
       liitetytOids,

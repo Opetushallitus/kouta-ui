@@ -29,7 +29,9 @@ export const getKokeetTaiLisanaytotValues = (
   formMode?: FormMode
 ): ValintakokeetValues => {
   return {
-    yleisKuvaus: _.mapValues(yleisKuvaus, kuvaus => parseEditorState(kuvaus)),
+    yleisKuvaus: _.mapValues(yleisKuvaus, kuvaus =>
+      kuvaus ? parseEditorState(kuvaus) : undefined
+    ),
     kokeetTaiLisanaytot: valintakokeet.map(
       ({
         id,

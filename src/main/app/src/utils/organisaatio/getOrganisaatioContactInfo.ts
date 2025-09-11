@@ -109,7 +109,7 @@ export const getKielistettyOsoite = (osoitteet, ulkomaisetOsoitteet = []) => {
       return _.startsWith(osoite.kieli, 'kieli_en');
     });
 
-    enOsoite = { [kieli]: enUlkomainenOsoite.osoite.replace(/\n/g, ', ') };
+    enOsoite = { [kieli]: enUlkomainenOsoite?.osoite.replace(/\n/g, ', ') };
   }
 
   return { ...kielistetytOsoitteet, ...enOsoite };

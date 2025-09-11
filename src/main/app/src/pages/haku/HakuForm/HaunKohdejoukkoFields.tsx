@@ -15,7 +15,9 @@ import { getThemeProp, spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 
-const KohdejoukkoFlexItem = styled(Box).attrs({ flexGrow: 0 })`
+const KohdejoukkoFlexItem = styled(Box).attrs({
+  flexGrow: 0,
+})<{ showTarkenteet: boolean }>`
   ${({ showTarkenteet }) =>
     showTarkenteet &&
     css`

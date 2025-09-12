@@ -136,7 +136,7 @@ export const createChainedFunction =
   };
 
 export const getTestIdProps = testId => ({
-  'data-testid': testId,
+  'data-test-id': testId,
 });
 
 export const getImageFileDimensions = imgFile => {

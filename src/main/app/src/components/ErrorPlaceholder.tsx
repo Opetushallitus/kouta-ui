@@ -16,7 +16,7 @@ export const ErrorPlaceholder = props => {
   return (
     <div
       className={isError ? FIELD_ERROR_CLASSNAME : ''}
-      data-testid={`form-control_${getFieldNameWithoutLanguage(name)}`}
+      data-test-id={`form-control_${getFieldNameWithoutLanguage(name)}`}
     >
       <FormHelperTextMulti errorMessage={error} />
     </div>

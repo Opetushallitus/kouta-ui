@@ -21,7 +21,6 @@ import { searchHaut } from '#/src/utils/haku/searchHaut';
 
 import { EntitySearchList } from './EntitySearchList';
 import ListCollapse from './ListCollapse';
-import NavigationAnchor from './NavigationAnchor';
 
 const { HAKU } = ENTITY;
 
@@ -66,8 +65,7 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
   const filterState = useFilterState(HAKU, hakuService);
 
   return (
-    <>
-      <NavigationAnchor id="haut" />
+    <div id="haut" data-test-id="hautSection">
       <ListCollapse
         icon={ICONS[HAKU]}
         header={t('yleiset.haut')}
@@ -86,7 +84,7 @@ const HautSection = ({ organisaatioOid, canCreate }) => {
           searchPage="homepage.haut"
         />
       </ListCollapse>
-    </>
+    </div>
   );
 };
 

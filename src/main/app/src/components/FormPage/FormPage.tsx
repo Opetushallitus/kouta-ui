@@ -97,7 +97,9 @@ const FormPageContent = ({
       <Title>{title}</Title>
       {
         <ReactRouterPrompt
-          when={({ currentLocation, nextLocation }) => {
+          when={params => {
+            const currentLocation = params?.currentLocation;
+            const nextLocation = params?.nextLocation;
             const samePath =
               (nextLocation && nextLocation.pathname) ===
               (currentLocation && currentLocation.pathname);

@@ -43,7 +43,7 @@ export function FieldArrayList<T>({
   children,
 }: {
   fields: FieldArrayFieldsProps<T>;
-  meta?: { error?: string | Array<string> | undefined };
+  meta?: { error: string | Array<string> | undefined };
   hasDivider?: boolean;
   hasRemoveButton?: boolean;
   removeButtonText?: string;

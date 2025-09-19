@@ -69,9 +69,10 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for one org', () => {
         '1.2.246.562.10.2013110715495487451932',
         '1.2.246.562.10.2013111415031319523704',
       ],
-      jarjestaaUrheilijanAmmKoulutusta: true,
       nimi: {},
       kieletUris: [],
+      jarjestaaUrheilijanAmmKoulutusta: true,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
     },
   ];
   expect(
@@ -161,6 +162,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
         '1.2.246.562.10.2013111415031319523704',
       ],
       jarjestaaUrheilijanAmmKoulutusta: true,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
       nimi: {},
       kieletUris: [],
     },
@@ -173,6 +175,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
         '1.2.246.562.10.2013111415312640960525',
       ],
       jarjestaaUrheilijanAmmKoulutusta: false,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: false,
       nimi: {},
       kieletUris: [],
     },
@@ -217,6 +220,7 @@ test('should not add jarjestaaUrheilijanAmmKoulutusta for oppilaitos org that do
       nimi: {},
       kieletUris: [],
       jarjestaaUrheilijanAmmKoulutusta: false,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: false,
     },
   ];
   expect(
@@ -266,7 +270,8 @@ test('should add jarjestaaUrheilijanAmmKolutusta from parent oppilaitos to toimi
       ],
       nimi: {},
       kieletUris: [],
-      jarjestaaUrheilijanAmmKoulutusta: true,
+      jarjestaaUrheilijanAmmKoulutusta: false,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
     },
   ];
   expect(

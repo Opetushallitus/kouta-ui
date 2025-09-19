@@ -16,7 +16,7 @@ import useKoodisto from '#/src/hooks/useKoodisto';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import JarjestaaUrheilijanAmmatillistaKoulutustaField from '#/src/pages/hakukohde/HakukohdeForm/JarjestaaUrheilijanAmmatillistaKoulutustaField';
-import { getTestIdProps, isTruthy } from '#/src/utils';
+import { isTruthy } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { useOppilaitoksetByOids } from '#/src/utils/hakukohde/getOppilaitoksetByOids';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
@@ -155,7 +155,7 @@ export const JarjestyspaikkaSection = ({
     });
 
   return (
-    <div {...getTestIdProps('jarjestyspaikkaOidSelection')}>
+    <div>
       <Field
         label={t('hakukohdelomake.valitseJarjestyspaikka')}
         component={JarjestyspaikkaRadioGroup}

@@ -271,9 +271,17 @@ const fillLiitteetSection = (page: Page) =>
       .fill('example.com');
   });
 
-const fillJarjestyspaikkaSection = (page: Page) =>
-  withinSection(page, 'jarjestyspaikkaOid', async section => {
+const fillJarjestyspaikkaSection = (
+  page: Page,
+  options?: { jarjestaaUrheilijanAmmKoulutusta?: boolean }
+) =>
+  withinSection(page, 'jarjestyspaikka', async section => {
     await section.getByText(selectedToimipisteNimi).click();
+    if (options?.jarjestaaUrheilijanAmmKoulutusta) {
+      await section
+        .getByText('hakukohdelomake.jarjestaaUrheilijanAmmKoulutusta')
+        .click();
+    }
   });
 
 const fillLukiolinjatSection = (page: Page) =>
@@ -583,5 +591,26 @@ test.describe('Create hakukohde as oppilaitos user', () => {
       name: 'yleiset.tallenna',
     });
     await expect(tallennaBtn).toBeEnabled();
+  });
+
+  test('should be possible to set "Järjestää urheilijan ammatillista koulutusta" when tarjoaja parent has this setting turned on', async ({
+    page,
+  }) => {
+    await prepareTest(page, {
+      tyyppi: 'amm',
+      hakuOid,
+      organisaatioOid,
+      tarjoajat,
+      hakukohteenLiittaminenHasExpired: true,
+      hakuWithoutMuokkaamisenTakaraja: true,
+    });
+    await stubOrgPaakayttajaRights(page, organisaatioOid);
+    await loadHakukohdePage(page);
+
+    await fillKieliversiotSection(page);
+
+    await fillJarjestyspaikkaSection(page, {
+      jarjestaaUrheilijanAmmKoulutusta: true,
+    });
   });
 });

@@ -14,7 +14,7 @@ export function enrichOrganisaatiot(
       .toReversed()
       .some(parentOid => {
         const oppilaitos = oppilaitoksetJaOsat?.find(
-          oppilaitos => oppilaitos.organisaatioOid === parentOid
+          oppilaitos => oppilaitos.oid === parentOid
         );
         return Boolean(oppilaitos?.metadata?.jarjestaaUrheilijanAmmKoulutusta);
       });

@@ -92,7 +92,8 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
       value: org?.oid,
       label: getOrganisaatioLabel(org, language, organisaatiotyyppiMap, t),
       disabled: !getCanUpdate(org),
-      jarjestaaUrheilijanAmmKoulutusta: org.jarjestaaUrheilijanAmmKoulutusta,
+      jarjestaaUrheilijanAmmKoulutusta:
+        org.mahdollisuusJarjestaaUrheilijanAmmKoulutusta,
     }));
     return sortBy(unsorted, 'label');
   }, [getCanUpdate, language, organisaatiotyyppiMap, enrichedOrgs, t]);

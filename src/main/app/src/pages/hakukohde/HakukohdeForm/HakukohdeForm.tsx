@@ -65,7 +65,6 @@ export const HakukohdeForm = ({
   organisaatioOid,
   haku,
   toteutus,
-  tarjoajat,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   hakukohde = undefined,
 }: {
@@ -73,7 +72,6 @@ export const HakukohdeForm = ({
   organisaatioOid: string;
   haku?: HakuModel;
   toteutus?: ToteutusModel;
-  tarjoajat?: Array<string>;
   koulutustyyppi?: KOULUTUSTYYPPI;
   hakukohde?: HakukohdeModel;
 }) => {
@@ -81,9 +79,14 @@ export const HakukohdeForm = ({
   const languages = useFieldValue('kieliversiot') || [];
 
   const formMode = useFormMode();
-  const isDIAkoulutus = isDIA(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
-  const isEBkoulutus = isEB(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
+  const tarjoajat = toteutus?.tarjoajat;
+
+  const koulutusKoodiUrit = toteutus?.koulutuksetKoodiUri;
+
+  const isDIAkoulutus = isDIA(koulutusKoodiUrit, koulutustyyppi);
+
+  const isEBkoulutus = isEB(koulutusKoodiUrit, koulutustyyppi);
 
   const hakutapa = haku?.hakutapaKoodiUri;
 
@@ -199,7 +202,7 @@ export const HakukohdeForm = ({
         header={t('yleiset.kokeetTaiLisanaytot')}
         languages={languages}
         haku={haku}
-        koulutuskoodit={toteutus?.koulutuksetKoodiUri}
+        koulutuskoodit={koulutusKoodiUrit}
         osaamisalat={toteutus?.metadata?.osaamisalat?.map(oa => oa.koodiUri)}
         Component={HakukohteenValintakokeetSection}
       />

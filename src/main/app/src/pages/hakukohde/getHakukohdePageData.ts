@@ -24,7 +24,6 @@ export const getHakukohdePageData = async ({
     toteutus,
     haku,
     koulutustyyppi: toteutus?.metadata?.tyyppi,
-    tarjoajat: toteutus?.tarjoajat,
   };
 };
 

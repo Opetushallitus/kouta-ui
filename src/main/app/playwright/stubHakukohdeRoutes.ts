@@ -83,9 +83,17 @@ export const stubHakukohdeRoutes = async (
   await page.route(
     '**/kouta-backend/oppilaitos/oppilaitokset',
     fixtureJSON({
+      oppilaitokset: [
+        {
+          oid: organisaatioOid,
+          metadata: {
+            jarjestaaUrheilijanAmmKoulutusta: true,
+          },
+        },
+      ],
       organisaatioHierarkia: organisaatioHierarkia({
-        rootOid: organisaatioOid,
         toimipistenimi: selectedToimipisteNimi,
+        oppilaitosOid: organisaatioOid,
         jarjestyspaikkaOid: tarjoajat[0],
       }),
     })

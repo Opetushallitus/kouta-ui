@@ -1,16 +1,27 @@
-import _ from 'lodash';
+import { OppilaitosModel, OrganisaatioModel } from '#/src/types/domainTypes';
 
-export const enrichOrganisaatiot = (orgs, oppilaitokset) => {
-  const osat = oppilaitokset?.flatMap(oppilaitos => oppilaitos.osat);
+export function enrichOrganisaatiot(
+  flatOrgs: Array<OrganisaatioModel>,
+  oppilaitokset?: Array<OppilaitosModel>
+) {
+  const oppilaitoksetJaOsat = oppilaitokset?.flatMap(oppilaitos => [
+    oppilaitos,
+    ...(oppilaitos.osat ?? []),
+  ]);
 
-  return orgs.map(org => {
-    const oppilaitosOrOsa =
-      _.find(osat, ['oid', org.oid]) || _.find(oppilaitokset, ['oid', org.oid]);
+  return flatOrgs.map(org => {
+    const jarjestaaUrheilijanAmmKoulutusta = org.parentOids
+      .toReversed()
+      .some(parentOid => {
+        const oppilaitos = oppilaitoksetJaOsat?.find(
+          oppilaitos => oppilaitos.organisaatioOid === parentOid
+        );
+        return Boolean(oppilaitos?.metadata?.jarjestaaUrheilijanAmmKoulutusta);
+      });
 
     return {
       ...org,
-      jarjestaaUrheilijanAmmKoulutusta:
-        oppilaitosOrOsa?.metadata?.jarjestaaUrheilijanAmmKoulutusta,
+      jarjestaaUrheilijanAmmKoulutusta,
     };
   });
-};
+}

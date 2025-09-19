@@ -1,13 +1,15 @@
 import { OrganisaatioModel } from '#/src/types/domainTypes';
 
-export const flattenHierarkia = (orgs: Array<OrganisaatioModel>) =>
-  orgs.flatMap((org: OrganisaatioModel) => [
+export const flattenHierarkia: (
+  orgs?: Array<OrganisaatioModel>
+) => Array<OrganisaatioModel> = orgs =>
+  orgs?.flatMap((org: OrganisaatioModel) => [
     org,
-    ...flattenHierarkia(org?.children ?? []),
-  ]);
+    ...flattenHierarkia(org?.children),
+  ]) ?? ([] as Array<OrganisaatioModel>);
 
 export const flatFilterHierarkia = (
-  hierarkia: Array<OrganisaatioModel>,
+  hierarkia: Array<OrganisaatioModel> | undefined,
   filterFn: (org: OrganisaatioModel) => boolean
 ) => flattenHierarkia(hierarkia).filter(filterFn);
 

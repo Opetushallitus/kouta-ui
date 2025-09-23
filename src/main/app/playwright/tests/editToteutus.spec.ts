@@ -41,11 +41,6 @@ const testToteutusFields = {
 
 const prepareTest = async (page: Page, tyyppi: TestiKoulutustyyppi) => {
   await page.route(
-    `**/toteutus/${toteutusOid}/hakukohteet/list*`,
-    fixtureJSON([])
-  );
-
-  await page.route(
     `**/koulutus/${koulutusOid}`,
     fixtureJSON(merge(koulutus(tyyppi), testKoulutusFields))
   );

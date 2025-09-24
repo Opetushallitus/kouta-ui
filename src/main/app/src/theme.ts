@@ -56,9 +56,6 @@ export const createTheme = () => {
         contrastText: '#ffffff',
       },
     },
-    zIndices: {
-      homeNavigation: 400,
-    },
     shape: {
       borderRadius: `${theme.radii[1]}px`,
     },

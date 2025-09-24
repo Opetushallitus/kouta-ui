@@ -3,6833 +3,8251 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/indexer/tarjoaja/{organisaatioOid}/koulutukset": {
-    /**
-     * Hakee julkaistut koulutukset, joissa organisaatio tai sen aliorganisaatio on tarjoajana
-     * @description Hakee kaikkien niiden koulutusten kaikki tiedot, joissa organisaatio tai sen aliorganisaatio on tarjoajana ja jotka on julkaistu. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerJulkaistutKoulutukset"];
-  };
-  "/hakukohde/:oid/tila/{tila}": {
-    /**
-     * Onko tilamuutos hakukohteelle sallittu
-     * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa true/false sen perusteella onko tilamuutos sallittu.
-     */
-    get: operations["Onko tilamuutos sallittu hakukohteelle"];
-  };
-  "/oppilaitos/{oid}": {
-    /**
-     * Hae oppilaitoksen kuvailutiedot
-     * @description Hakee oppilaitoksen kuvailutiedot
-     */
-    get: operations["getOppilaitos"];
-  };
-  "/search/valintaperusteet": {
-    /**
-     * Hakee organisaation valintaperustekuvauksia annetuilla parametreilla
-     * @description Hakee organisaation valintaperustekuvaukset annetuilla parametreilla
-     */
-    get: operations["searchValintaperusteet"];
-  };
-  "/upload/teemakuva": {
-    /**
-     * Tallenna teemakuva
-     * @description Tallenna teemakuva väliaikaiseen sijaintiin. Teemakuva siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
-     */
-    post: operations["Tallenna teemakuva"];
-  };
-  "/indexer/koulutus/{oid}/toteutukset/list": {
-    /**
-     * Listaa kaikki koulutuksen toteutukset
-     * @description Listaa kaikki koulutuksen toteutukset. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerListKoulutusToteutukset"];
-  };
-  "/indexer/haku/{oid}/hakukohteet/list": {
-    /**
-     * Listaa kaikki hakukohteet, jotka on liitetty hakuun
-     * @description Listaa hakuun liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerListHakuHakukohteet"];
-  };
-  "/haku/": {
-    /**
-     * Tallenna uusi haku
-     * @description Tallenna uuden haun tiedot. Rajapinta palauttaa haulle generoidun yksilöivän haku-oidin.
-     */
-    put: operations["Tallenna uusi haku"];
-    /**
-     * Muokkaa olemassa olevaa hakua
-     * @description Muokkaa olemassa olevaa hakua. Rajapinnalle annetaan haun kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["Muokkaa hakua"];
-  };
-  "/search/koulutukset": {
-    /**
-     * Hakee organisaation koulutuksia annetuilla parametreilla
-     * @description Hakee organisaation koulutukset annetuilla parametreilla
-     */
-    get: operations["searchKoulutukset"];
-  };
-  "/haku/list": {
-    /**
-     * Listaa organisaation käytettävissä olevat haut
-     * @description Listaa niiden hakujen tiedot, jotka ovat organisaation käytettävissä
-     */
-    get: operations["Listaa haut"];
-  };
-  "/siirtotiedosto/pistehistoria": {
-    /**
-     * Tallentaa pistehistorian siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut pistehistoriatiedot ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoPistehistoria"];
-  };
-  "/upload/logo": {
-    /**
-     * Tallenna logo
-     * @description Tallenna oppilaitoksen logo väliaikaiseen sijaintiin. Logo siirretään lopulliseen sijaintiinsa, kun se asetetaan oppilaitoksen logoksi.
-     */
-    post: operations["Tallenna logo"];
-  };
-  "/indexer/pistehistoria": {
-    /**
-     * Palauttaa tarjoajan ja hakukohdekoodin tai lukiolinjakoodin yhdistelmään liittyvät pistetiedot
-     * @description Listaa pistetiedot. Tarjoaja JA joko hakukohdekoodi TAI lukiolinjakoodi annettava.
-     */
-    get: operations["indexerListPistetiedot"];
-  };
-  "/siirtotiedosto/hakukohteet": {
-    /**
-     * Tallentaa hakukohteet siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut hakukohteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoHakukohteet"];
-  };
-  "/oppilaitos/oppilaitokset": {
-    /**
-     * Hae oppilaitosten ja/tai oppilaitosten osien tiedot
-     * @description Hakee oppilaitoksen ja/tai oppilaitoksen osan tiedot
-     */
-    post: operations["listOppilaitosOppilaitokset"];
-  };
-  "/external/sorakuvaus/": {
-    /**
-     * Tallenna uusi SORA-kuvaus
-     * @description Tallenna uuden SORA-kuvauksen tiedot. Rajapinta palauttaa SORA-kuvaukselle generoidun yksilöivän id:n
-     */
-    put: operations["externalSorakuvausSave"];
-    /**
-     * Muokkaa olemassa olevaa SORA-kuvausta
-     * @description Muokkaa olemassa olevaa SORA-kuvausta. Rajapinnalle annetaan SORA-kuvauksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["externalSorakuvausEdit"];
-  };
-  "/toteutus/": {
-    /**
-     * Tallenna uusi toteutus
-     * @description Tallenna uuden toteutuksen tiedot. Rajapinta palauttaa toteutukselle generoidun yksilöivän toteutus-oidin.
-     */
-    put: operations["Tallenna uusi toteutus"];
-    /**
-     * Muokkaa olemassa olevaa toteutusta
-     * @description Muokkaa olemassa olevaa toteutusta. Rajapinnalle annetaan toteutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["Muokkaa toteutusta"];
-  };
-  "/ammattinimike/": {
-    /**
-     * Tallenna ammattinimikkeitä
-     * @description Tallenna ammattinimikkeitä
-     */
-    post: operations["Tallenna ammattinimikkeita"];
-  };
-  "/toteutus/copy": {
-    /**
-     * Tallenna kopiot toteutuksista
-     * @description Tallennetaan kopioitavien toteutusten tiedot tietokantaan. Kopiototeutukset tallennetaan luonnostilaisina. Rajapinta palauttaa toteutuksille generoidut yksilöivät toteutus-oidit.
-     */
-    put: operations["Tallenna kopiot toteutuksista"];
-  };
-  "/luokittelutermi/": {
-    /**
-     * Tallenna luokittelutermejä
-     * @description Tallenna luokittelutermejä
-     */
-    post: operations["Tallenna luokittelutermejä"];
-  };
-  "/indexer/pistehistoria/sync": {
-    /**
-     * Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
-     * @description Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
-     */
-    get: operations["indexerSyncHaunPistetiedot"];
-  };
-  "/koodisto/koulutukset/{ylakoodi}": {
-    /**
-     * Hae koulutukset yläkoodin perusteella
-     * @description Hakee voimassa olevat koulutukset ja niiden metadatan versioimattoman yläkoodin perusteella. Väliotsikkokoodit (päättyvät "00") on suodatettu pois.
-     */
-    get: operations["Hae koulutukset"];
-  };
-  "/sorakuvaus/{id}": {
-    /**
-     * Hae SORA-kuvauksen tiedot
-     * @description Hakee SORA-kuvauksen kaikki tiedot
-     */
-    get: operations["Hae sorakuvaus"];
-  };
-  "/organisaatio/{oid}": {
-    /**
-     * Hae organisaation tiedot organisaatiopalvelusta
-     * @description Hakee organisaation tiedot organisaatiopalvelusta
-     */
-    get: operations["getOrganisaatio"];
-  };
-  "/siirtotiedosto/ammattinimikkeet": {
-    /**
-     * Tallentaa ammattinimikkeet siirtotiedostoon
-     * @description Hakee kaikki ammattinimikkeet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoAmmattinimikkeet"];
-  };
-  "/external/koulutus": {
-    /**
-     * Tallenna uusi koulutus
-     * @description Tallenna uuden koulutuksen tiedot. Rajapinta palauttaa koulutukselle generoidun yksilöivän koulutus-oidin.
-     */
-    put: operations["externalKoulutusSave"];
-    /**
-     * Muokkaa olemassa olevaa koulutusta
-     * @description Muokkaa olemassa olevaa koulutusta. Rajapinnalle annetaan koulutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["externalKoulutusEdit"];
-  };
-  "/ammattinimike/search/{term}": {
-    /**
-     * Hakee ammattinimikkeitä annetulla hakutermillä
-     * @description Hakee ammattinimikkeitä annetulla hakutermillä
-     */
-    get: operations["Hae ammattinimikkeita"];
-  };
-  "/toteutus/list": {
-    /**
-     * Listaa organisaation käytettävissä olevat toteutukset
-     * @description Listaa niiden toteutusten tiedot, jotka ovat organisaation käytettävissä
-     */
-    get: operations["Listaa toteutukset"];
-  };
-  "/indexer/oppilaitos/{oid}/osat/list": {
-    /**
-     * Listaa kaikki oppilaitoksen osien kuvailutiedot
-     * @description Listaa oppilaitoksen kaikki osat. Tämä rajapinta on ideksointia varten
-     */
-    get: operations["indexerListOppilaitosOsat"];
-  };
-  "/toteutus/{oid}/hakukohteet/list": {
-    /**
-     * Listaa kaikki toteutukseen liitetyt hakukohteet
-     * @description Listaa kaikki toteutukseen liitetyt hakukohteet, mikäli käyttäjällä on oikeus nähdä ne
-     */
-    get: operations["Listaa toteutuksen hakukohteet"];
-  };
-  "/external/toteutus": {
-    /**
-     * Tallenna uusi toteutus
-     * @description Tallenna uuden toteutuksen tiedot. Rajapinta palauttaa toteutukselle generoidun yksilöivän toteutus-oidin.
-     */
-    put: operations["externalToteutusSave"];
-    /**
-     * Muokkaa olemassa olevaa toteutusta
-     * @description Muokkaa olemassa olevaa toteutusta. Rajapinnalle annetaan toteutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["externalToteutusEdit"];
-  };
-  "/koulutus/": {
-    /**
-     * Tallenna uusi koulutus
-     * @description Tallenna uuden koulutuksen tiedot. Rajapinta palauttaa koulutukselle generoidun yksilöivän koulutus-oidin.
-     */
-    put: operations["Tallenna uusi koulutus"];
-    /**
-     * Muokkaa olemassa olevaa koulutusta
-     * @description Muokkaa olemassa olevaa koulutusta. Rajapinnalle annetaan koulutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["Muokkaa koulutusta"];
-  };
-  "/organisaatio/hierarkia": {
-    /**
-     * Hae organisaatiohierarkian organisaatiopalvelusta
-     * @description Hakee organisaatiohierarkian organisaatiopalvelusta
-     */
-    get: operations["getHierarkia"];
-  };
-  "/search/toteutukset": {
-    /**
-     * Hakee organisaation toteutuksia annetuilla parametreilla
-     * @description Hakee organisaation toteutukset annetuilla parametreilla
-     */
-    get: operations["searchToteutukset"];
-  };
-  "/indexer/valintaperuste/{id}/hakukohteet/list": {
-    /**
-     * Listaa kaikki hakukohteet, joihin valintaperustekuvaus on liitetty
-     * @description Listaa kaikki hakukohteet, joihin valintaperustekuvaus on liitetty, mikäli käyttäjällä on oikeus nähdä ne
-     */
-    get: operations["indexerListValintaperusteHakukohteet"];
-  };
-  "/koodisto/valintakokeentyypit": {
-    /**
-     * Hakee valintakokeentyypit, kaikki tai suodattaa niitä koodirelaatioiden kautta annetuilla parametreilla
-     * @description Hakee voimassa olevat valintakokeentyypit ja niiden metadatat. Suodatetaan yläkoodirelaatioden kautta annetuilla parametreilla. Jos valintakokeentyyppikoodilla ei ole ollenkaan relaatiota yläkoodiston koodiin, niin silloin se on mukana palautettavassa listassa.
-     */
-    get: operations["Hae valintakokeentyypit"];
-  };
-  "/archiver/start": {
-    /**
-     * Käynnistä hakujen arkistointi
-     * @description Käynnistä hakujen arkistointi manuaalisesti. Arkistoi ja uudelleenindeksoi kaikki haut, joilla arkistointipäivämäärä on määritelty tai haun loppumisesta on yli 10 kuukautta. Arkistoi myös hakujen hakukohteet.
-     */
-    post: operations["Käynnistä hakujen arkistointi"];
-  };
-  "/indexer/oppilaitos/{oid}/osat": {
-    /**
-     * Hakee oppilaitoksen kaikkien osien kuvailutiedot
-     * @description Hakee oppilaitoksen kaikkien osien kuvailutiedot. Tämä rajapinta on ideksointia varten
-     */
-    get: operations["indexerGetOppilaitosOsat"];
-  };
-  "/external/hakukohde": {
-    /**
-     * Tallenna uusi hakukohde
-     * @description Tallenna uuden hakukohteen tiedot. Rajapinta palauttaa hakukohteelle generoidun yksilöivän hakukohde-oidin.
-     */
-    put: operations["externalHakukohdeSave"];
-    /**
-     * Muokkaa olemassa olevaa hakukohdetta
-     * @description Muokkaa olemassa olevaa hakukohdetta. Rajapinnalle annetaan hakukohteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["externalHakukohdeEdit"];
-  };
-  "/organisaatio/organisaatiot": {
-    /**
-     * Hae organisaatioiden tiedot organisaatiopalvelusta
-     * @description Hakee organisaatioiden tiedot organisaatiopalvelusta
-     */
-    post: operations["getOrganisaatiot"];
-  };
-  "/external/haku": {
-    /**
-     * Tallenna uusi haku
-     * @description Tallenna uuden haun tiedot. Rajapinta palauttaa haulle generoidun yksilöivän haku-oidin.
-     */
-    put: operations["externalHakuSave"];
-    /**
-     * Muokkaa olemassa olevaa hakua
-     * @description Muokkaa olemassa olevaa hakua. Rajapinnalle annetaan haun kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["externalHakuEdit"];
-  };
-  "/valintaperuste/": {
-    /**
-     * Tallenna uusi valintaperustekuvaus
-     * @description Tallenna uuden valintaperustekuvauksen tiedot. Rajapinta palauttaa valintaperustekuvaukselle generoidun yksilöivän id:n
-     */
-    put: operations["Tallenna uusi valintaperuste"];
-    /**
-     * Muokkaa olemassa olevaa valintaperustekuvausta
-     * @description Muokkaa olemassa olevaa valintaperustekuvausta. Rajapinnalle annetaan valintaperusteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["Muokkaa valintaperustetta"];
-  };
-  "/indexer/koulutus/{oid}/toteutukset": {
-    /**
-     * Hae koulutuksen toteutukset
-     * @description Hakee koulutuksen kaikkien toteutusten kaikki tiedot. Tämä rajapinta on ideksointia varten
-     */
-    get: operations["indexerKoulutusToteutukset"];
-  };
-  "/upload/icon": {
-    /**
-     * Tallenna kuvake
-     * @description Tallenna kuvake väliaikaiseen sijaintiin. Kuvake siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
-     */
-    post: operations["Tallenna kuvake"];
-  };
-  "/indexer/haku/{oid}/koulutukset/list": {
-    /**
-     * Listaa kaikki hakuun liitetyt koulutukset
-     * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) koulutukset. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerListHakuKoulutukset"];
-  };
-  "/siirtotiedosto/valintaperusteet": {
-    /**
-     * Tallentaa valintaperusteet siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut valintaperusteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoValintaperusteet"];
-  };
-  "/indexer/toteutus/{oid}/haut/list": {
-    /**
-     * Listaa kaikki toteutukseen liitetyt haut
-     * @description Listaa kaikki toteutukseen liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerListToteutusHaut"];
-  };
-  "/siirtotiedosto/toteutukset": {
-    /**
-     * Tallentaa toteutukset siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut toteutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoToteutukset"];
-  };
-  "/search/hakukohteet": {
-    /**
-     * Hakee organisaation hakukohteita annetuilla parametreilla
-     * @description Hakee organisaation hakukohteet annetuilla parametreilla
-     */
-    get: operations["searchHakukohteet"];
-  };
-  "/toteutus/{oid}": {
-    /**
-     * Hae koulutuksen toteutus
-     * @description Hakee koulutuksen toteutuksen tiedot
-     */
-    get: operations["Hae toteutus"];
-  };
-  "/indexer/koulutukset/eperusteet/list": {
-    /**
-     * Listaa kaikki ePerusteIDt joita on liitetty olemassaoleviin koulutuksiin.
-     * @description Listaa kaikki ePerusteIDt joita on liitetty olemassaoleviin koulutuksiin. Tämä rajapinta on indeksointia varten.
-     */
-    get: operations["indexerListKoulutuksetEPerusteIds"];
-  };
-  "/indexer/sorakuvaus/{id}/koulutukset/list": {
-    /**
-     * Listaa kaikki koulutukset, joihin SORA-kuvaus on liitetty
-     * @description Listaa kaikki koulutukset, joihin SORA-kuvaus on liitetty, mikäli käyttäjällä on oikeus nähdä ne
-     */
-    get: operations["indexerListSorakuvausKoulutukset"];
-  };
-  "/koulutus/list": {
-    /**
-     * Listaa organisaation käytettävissä olevat koulutukset
-     * @description Listaa niiden koulutusten tiedot, jotka ovat organisaation käytettävissä esim. uutta toteutusta luotaessa
-     */
-    get: operations["Listaa koulutukset"];
-  };
-  "/hakukohde/tila/{tila}": {
-    /**
-     * Muuttaa usean hakukohteen tilat
-     * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen hakukohteiden yksilöivät oidit.
-     */
-    post: operations["Muuttaa hakukohteiden tilat"];
-  };
-  "/koodisto/{koodisto}/koodit": {
-    /**
-     * Hakee koodiston koodit
-     * @description Hakee voimassa olevat koodiston koodit.
-     */
-    get: {
-      parameters: {
-        query?: {
-          /**
-           * @description koodiston versio, jos ei annettu käytetään viimeisintä versiota koodistosta
-           * @example 2
-           */
-          versio?: number;
+    "/indexer/tarjoaja/{organisaatioOid}/koulutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        path: {
-          /**
-           * @description koodisto
-           * @example koulutustyyppi
-           */
-          koodisto: string;
+        /**
+         * Hakee julkaistut koulutukset, joissa organisaatio tai sen aliorganisaatio on tarjoajana
+         * @description Hakee kaikkien niiden koulutusten kaikki tiedot, joissa organisaatio tai sen aliorganisaatio on tarjoajana ja jotka on julkaistu. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerJulkaistutKoulutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/hakukohde/:oid/tila/{tila}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Ok */
-        200: {
-          content: {
-            "application/json": {
+        /**
+         * Onko tilamuutos hakukohteelle sallittu
+         * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa true/false sen perusteella onko tilamuutos sallittu.
+         */
+        get: operations["Onko tilamuutos sallittu hakukohteelle"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/oppilaitos/{oid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae oppilaitoksen kuvailutiedot
+         * @description Hakee oppilaitoksen kuvailutiedot
+         */
+        get: operations["getOppilaitos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/search/valintaperusteet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee organisaation valintaperustekuvauksia annetuilla parametreilla
+         * @description Hakee organisaation valintaperustekuvaukset annetuilla parametreilla
+         */
+        get: operations["searchValintaperusteet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/upload/teemakuva": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Tallenna teemakuva
+         * @description Tallenna teemakuva väliaikaiseen sijaintiin. Teemakuva siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
+         */
+        post: operations["Tallenna teemakuva"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/koulutus/{oid}/toteutukset/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki koulutuksen toteutukset
+         * @description Listaa kaikki koulutuksen toteutukset. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerListKoulutusToteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/haku/{oid}/hakukohteet/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki hakukohteet, jotka on liitetty hakuun
+         * @description Listaa hakuun liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerListHakuHakukohteet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/haku/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi haku
+         * @description Tallenna uuden haun tiedot. Rajapinta palauttaa haulle generoidun yksilöivän haku-oidin.
+         */
+        put: operations["Tallenna uusi haku"];
+        /**
+         * Muokkaa olemassa olevaa hakua
+         * @description Muokkaa olemassa olevaa hakua. Rajapinnalle annetaan haun kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["Muokkaa hakua"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/search/koulutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee organisaation koulutuksia annetuilla parametreilla
+         * @description Hakee organisaation koulutukset annetuilla parametreilla
+         */
+        get: operations["searchKoulutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/haku/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation käytettävissä olevat haut
+         * @description Listaa niiden hakujen tiedot, jotka ovat organisaation käytettävissä
+         */
+        get: operations["Listaa haut"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/pistehistoria": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa pistehistorian siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut pistehistoriatiedot ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoPistehistoria"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/upload/logo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Tallenna logo
+         * @description Tallenna oppilaitoksen logo väliaikaiseen sijaintiin. Logo siirretään lopulliseen sijaintiinsa, kun se asetetaan oppilaitoksen logoksi.
+         */
+        post: operations["Tallenna logo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/pistehistoria": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Palauttaa tarjoajan ja hakukohdekoodin tai lukiolinjakoodin yhdistelmään liittyvät pistetiedot
+         * @description Listaa pistetiedot. Tarjoaja JA joko hakukohdekoodi TAI lukiolinjakoodi annettava.
+         */
+        get: operations["indexerListPistetiedot"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/hakukohteet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa hakukohteet siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut hakukohteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoHakukohteet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/oppilaitos/oppilaitokset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hae oppilaitosten ja/tai oppilaitosten osien tiedot
+         * @description Hakee oppilaitoksen ja/tai oppilaitoksen osan tiedot
+         */
+        post: operations["listOppilaitosOppilaitokset"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/external/sorakuvaus/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi SORA-kuvaus
+         * @description Tallenna uuden SORA-kuvauksen tiedot. Rajapinta palauttaa SORA-kuvaukselle generoidun yksilöivän id:n
+         */
+        put: operations["externalSorakuvausSave"];
+        /**
+         * Muokkaa olemassa olevaa SORA-kuvausta
+         * @description Muokkaa olemassa olevaa SORA-kuvausta. Rajapinnalle annetaan SORA-kuvauksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["externalSorakuvausEdit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/toteutus/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi toteutus
+         * @description Tallenna uuden toteutuksen tiedot. Rajapinta palauttaa toteutukselle generoidun yksilöivän toteutus-oidin.
+         */
+        put: operations["Tallenna uusi toteutus"];
+        /**
+         * Muokkaa olemassa olevaa toteutusta
+         * @description Muokkaa olemassa olevaa toteutusta. Rajapinnalle annetaan toteutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["Muokkaa toteutusta"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ammattinimike/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Tallenna ammattinimikkeitä
+         * @description Tallenna ammattinimikkeitä
+         */
+        post: operations["Tallenna ammattinimikkeita"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/toteutus/copy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna kopiot toteutuksista
+         * @description Tallennetaan kopioitavien toteutusten tiedot tietokantaan. Kopiototeutukset tallennetaan luonnostilaisina. Rajapinta palauttaa toteutuksille generoidut yksilöivät toteutus-oidit.
+         */
+        put: operations["Tallenna kopiot toteutuksista"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/pistehistoria/sync": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
+         * @description Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
+         */
+        get: operations["indexerSyncHaunPistetiedot"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koodisto/koulutukset/{ylakoodi}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae koulutukset yläkoodin perusteella
+         * @description Hakee voimassa olevat koulutukset ja niiden metadatan versioimattoman yläkoodin perusteella. Väliotsikkokoodit (päättyvät "00") on suodatettu pois.
+         */
+        get: operations["Hae koulutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sorakuvaus/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae SORA-kuvauksen tiedot
+         * @description Hakee SORA-kuvauksen kaikki tiedot
+         */
+        get: operations["Hae sorakuvaus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/organisaatio/{oid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae organisaation tiedot organisaatiopalvelusta
+         * @description Hakee organisaation tiedot organisaatiopalvelusta
+         */
+        get: operations["getOrganisaatio"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/ammattinimikkeet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa ammattinimikkeet siirtotiedostoon
+         * @description Hakee kaikki ammattinimikkeet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoAmmattinimikkeet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/external/koulutus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi koulutus
+         * @description Tallenna uuden koulutuksen tiedot. Rajapinta palauttaa koulutukselle generoidun yksilöivän koulutus-oidin.
+         */
+        put: operations["externalKoulutusSave"];
+        /**
+         * Muokkaa olemassa olevaa koulutusta
+         * @description Muokkaa olemassa olevaa koulutusta. Rajapinnalle annetaan koulutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["externalKoulutusEdit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/ammattinimike/search/{term}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee ammattinimikkeitä annetulla hakutermillä
+         * @description Hakee ammattinimikkeitä annetulla hakutermillä
+         */
+        get: operations["Hae ammattinimikkeita"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/toteutus/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation käytettävissä olevat toteutukset
+         * @description Listaa niiden toteutusten tiedot, jotka ovat organisaation käytettävissä
+         */
+        get: operations["Listaa toteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/oppilaitos/{oid}/osat/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki oppilaitoksen osien kuvailutiedot
+         * @description Listaa oppilaitoksen kaikki osat. Tämä rajapinta on ideksointia varten
+         */
+        get: operations["indexerListOppilaitosOsat"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/external/toteutus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi toteutus
+         * @description Tallenna uuden toteutuksen tiedot. Rajapinta palauttaa toteutukselle generoidun yksilöivän toteutus-oidin.
+         */
+        put: operations["externalToteutusSave"];
+        /**
+         * Muokkaa olemassa olevaa toteutusta
+         * @description Muokkaa olemassa olevaa toteutusta. Rajapinnalle annetaan toteutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["externalToteutusEdit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koulutus/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi koulutus
+         * @description Tallenna uuden koulutuksen tiedot. Rajapinta palauttaa koulutukselle generoidun yksilöivän koulutus-oidin.
+         */
+        put: operations["Tallenna uusi koulutus"];
+        /**
+         * Muokkaa olemassa olevaa koulutusta
+         * @description Muokkaa olemassa olevaa koulutusta. Rajapinnalle annetaan koulutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["Muokkaa koulutusta"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/organisaatio/hierarkia": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae organisaatiohierarkian organisaatiopalvelusta
+         * @description Hakee organisaatiohierarkian organisaatiopalvelusta
+         */
+        get: operations["getHierarkia"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/search/toteutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee organisaation toteutuksia annetuilla parametreilla
+         * @description Hakee organisaation toteutukset annetuilla parametreilla
+         */
+        get: operations["searchToteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/valintaperuste/{id}/hakukohteet/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki hakukohteet, joihin valintaperustekuvaus on liitetty
+         * @description Listaa kaikki hakukohteet, joihin valintaperustekuvaus on liitetty, mikäli käyttäjällä on oikeus nähdä ne
+         */
+        get: operations["indexerListValintaperusteHakukohteet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koodisto/valintakokeentyypit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee valintakokeentyypit, kaikki tai suodattaa niitä koodirelaatioiden kautta annetuilla parametreilla
+         * @description Hakee voimassa olevat valintakokeentyypit ja niiden metadatat. Suodatetaan yläkoodirelaatioden kautta annetuilla parametreilla. Jos valintakokeentyyppikoodilla ei ole ollenkaan relaatiota yläkoodiston koodiin, niin silloin se on mukana palautettavassa listassa.
+         */
+        get: operations["Hae valintakokeentyypit"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/archiver/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Käynnistä hakujen arkistointi
+         * @description Käynnistä hakujen arkistointi manuaalisesti. Arkistoi ja uudelleenindeksoi kaikki haut, joilla arkistointipäivämäärä on määritelty tai haun loppumisesta on yli 10 kuukautta. Arkistoi myös hakujen hakukohteet.
+         */
+        post: operations["K\u00E4ynnist\u00E4 hakujen arkistointi"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/oppilaitos/{oid}/osat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee oppilaitoksen kaikkien osien kuvailutiedot
+         * @description Hakee oppilaitoksen kaikkien osien kuvailutiedot. Tämä rajapinta on ideksointia varten
+         */
+        get: operations["indexerGetOppilaitosOsat"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/external/hakukohde": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi hakukohde
+         * @description Tallenna uuden hakukohteen tiedot. Rajapinta palauttaa hakukohteelle generoidun yksilöivän hakukohde-oidin.
+         */
+        put: operations["externalHakukohdeSave"];
+        /**
+         * Muokkaa olemassa olevaa hakukohdetta
+         * @description Muokkaa olemassa olevaa hakukohdetta. Rajapinnalle annetaan hakukohteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["externalHakukohdeEdit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/organisaatio/organisaatiot": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hae organisaatioiden tiedot organisaatiopalvelusta
+         * @description Hakee organisaatioiden tiedot organisaatiopalvelusta
+         */
+        post: operations["getOrganisaatiot"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/external/haku": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi haku
+         * @description Tallenna uuden haun tiedot. Rajapinta palauttaa haulle generoidun yksilöivän haku-oidin.
+         */
+        put: operations["externalHakuSave"];
+        /**
+         * Muokkaa olemassa olevaa hakua
+         * @description Muokkaa olemassa olevaa hakua. Rajapinnalle annetaan haun kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["externalHakuEdit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/valintaperuste/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi valintaperustekuvaus
+         * @description Tallenna uuden valintaperustekuvauksen tiedot. Rajapinta palauttaa valintaperustekuvaukselle generoidun yksilöivän id:n
+         */
+        put: operations["Tallenna uusi valintaperuste"];
+        /**
+         * Muokkaa olemassa olevaa valintaperustekuvausta
+         * @description Muokkaa olemassa olevaa valintaperustekuvausta. Rajapinnalle annetaan valintaperusteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["Muokkaa valintaperustetta"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/koulutus/{oid}/toteutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae koulutuksen toteutukset
+         * @description Hakee koulutuksen kaikkien toteutusten kaikki tiedot. Tämä rajapinta on ideksointia varten
+         */
+        get: operations["indexerKoulutusToteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/upload/icon": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Tallenna kuvake
+         * @description Tallenna kuvake väliaikaiseen sijaintiin. Kuvake siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
+         */
+        post: operations["Tallenna kuvake"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/haku/{oid}/koulutukset/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki hakuun liitetyt koulutukset
+         * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) koulutukset. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerListHakuKoulutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/valintaperusteet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa valintaperusteet siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut valintaperusteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoValintaperusteet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/toteutus/{oid}/haut/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki toteutukseen liitetyt haut
+         * @description Listaa kaikki toteutukseen liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerListToteutusHaut"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/toteutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa toteutukset siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut toteutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoToteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/search/hakukohteet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee organisaation hakukohteita annetuilla parametreilla
+         * @description Hakee organisaation hakukohteet annetuilla parametreilla
+         */
+        get: operations["searchHakukohteet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/toteutus/{oid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae koulutuksen toteutus
+         * @description Hakee koulutuksen toteutuksen tiedot
+         */
+        get: operations["Hae toteutus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/koulutukset/eperusteet/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki ePerusteIDt joita on liitetty olemassaoleviin koulutuksiin.
+         * @description Listaa kaikki ePerusteIDt joita on liitetty olemassaoleviin koulutuksiin. Tämä rajapinta on indeksointia varten.
+         */
+        get: operations["indexerListKoulutuksetEPerusteIds"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/sorakuvaus/{id}/koulutukset/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki koulutukset, joihin SORA-kuvaus on liitetty
+         * @description Listaa kaikki koulutukset, joihin SORA-kuvaus on liitetty, mikäli käyttäjällä on oikeus nähdä ne
+         */
+        get: operations["indexerListSorakuvausKoulutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koulutus/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation käytettävissä olevat koulutukset
+         * @description Listaa niiden koulutusten tiedot, jotka ovat organisaation käytettävissä esim. uutta toteutusta luotaessa
+         */
+        get: operations["Listaa koulutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/hakukohde/tila/{tila}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Muuttaa usean hakukohteen tilat
+         * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen hakukohteiden yksilöivät oidit.
+         */
+        post: operations["Muuttaa hakukohteiden tilat"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koodisto/{koodisto}/koodit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee koodiston koodit
+         * @description Hakee voimassa olevat koodiston koodit.
+         */
+        get: {
+            parameters: {
+                query?: {
+                    /**
+                     * @description koodiston versio, jos ei annettu käytetään viimeisintä versiota koodistosta
+                     * @example 2
+                     */
+                    versio?: number;
+                };
+                header?: never;
+                path: {
+                    /**
+                     * @description koodisto
+                     * @example koulutustyyppi
+                     */
+                    koodisto: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Ok */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /**
+                             * @description koodiUri.
+                             * @example koulutusTyyppi_25
+                             */
+                            koodiUri?: string;
+                            /** @description Koodiurin numeerinen tunniste */
+                            koodiArvo?: string;
+                            /**
+                             * @description Koodin versio
+                             * @example 1
+                             */
+                            versio?: number;
+                            /** @description Koodisto johon koodi kuuluu */
+                            koodisto?: {
+                                /** @description Koodiston uri, tässä tapauksessa "koulutus" */
+                                koodistoUri?: string;
+                            };
+                            /**
+                             * @description Päivämäärä johon asti koodi on voimassa
+                             * @example 2015-04-24
+                             */
+                            voimassaLoppuPvm?: string;
+                            /** @description Koodin metadata */
+                            metadata?: {
+                                /**
+                                 * @description Koodin nimi
+                                 * @example Insinööri (AMK), bio- ja elintarviketekniikka
+                                 */
+                                nimi?: string;
+                                /**
+                                 * @description Metadataelementin kielitunniste
+                                 * @example FI
+                                 */
+                                kieli?: string;
+                            }[];
+                        }[];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koulutus/listOppilaitostyypitByKoulutustyypit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa oppilaitostyypit koulutustyypeittäin
+         * @description Listaa jokaisen koulutustyypin osalta oppilaitostyypit, jotka voivat tarjota ko. koulutusta, ts. mäppäykset koulutustyypistä oppilaitostyyppeihin
+         */
+        get: operations["Listaa oppilaitostyypit"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sorakuvaus/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi SORA-kuvaus
+         * @description Tallenna uuden SORA-kuvauksen tiedot. Rajapinta palauttaa SORA-kuvaukselle generoidun yksilöivän id:n
+         */
+        put: operations["Tallenna uusi sorakuvaus"];
+        /**
+         * Muokkaa olemassa olevaa SORA-kuvausta
+         * @description Muokkaa olemassa olevaa SORA-kuvausta. Rajapinnalle annetaan SORA-kuvauksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["Muokkaa sorakuvausta"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/sorakuvaus/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation käytettävissä olevat SORA-kuvaukset
+         * @description Listaa niiden SORA-kuvausten tiedot, jotka ovat organisaation käytettävissä.
+         */
+        get: operations["Listaa sorakuvaukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/organisaatio/oppilaitokset-for-avoin-korkeakoulutus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa avoimen korkeakoulutuksen oppilaitokset (ei osia)
+         * @description Listaa avoimen korkeakoulutuksen oppilaitokset organisaatiopalvelusta
+         */
+        get: operations["getHierarkiaForAvoinKorkeakoulutus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/koulutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hakee koulutukset, joiden oidit annettu requestBodyssä
+         * @description Hakee koulutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
+         */
+        post: operations["indexerKoulutukset"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/koulutus/{oid}/hakutiedot": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae koulutukseen liittyvät hakutiedot
+         * @description Hakee koulutuksen olemassaolevat (=ei poistetut) ja arkistoimattomat hakutiedot. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerKoulutusHakutiedot"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/haut": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa haut siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut haut ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoHaut"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/list-toteutus-oids-by-tarjoajat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hakee tarjoajaa (oppilaitos tai toimipiste) vastaavat toteutukset
+         * @description Hakee kaikkien niiden toteutusten oidit, joissa annettu oppilaitos/toimipiste on sen tarjoajana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
+         */
+        post: operations["indexerListToteutusOidsByTarjoajat"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/hakukohde/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi hakukohde
+         * @description Tallenna uuden hakukohteen tiedot. Rajapinta palauttaa hakukohteelle generoidun yksilöivän hakukohde-oidin.
+         */
+        put: operations["Tallenna uusi hakukohde"];
+        /**
+         * Muokkaa olemassa olevaa hakukohdetta
+         * @description Muokkaa olemassa olevaa hakukohdetta. Rajapinnalle annetaan hakukohteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["Muokkaa hakukohdetta"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/list-koulutus-oids-by-tarjoajat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hakee tarjoajaa (oppilaitos tai toimipiste) vastaavat koulutukset
+         * @description Hakee kaikkien niiden koulutusten oidit, joissa annettu oppilaitos/toimipiste on sen tarjoajana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
+         */
+        post: operations["indexerListKoulutusOidsByTarjoajat"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/toteutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hakee toteutukset, joiden oidit annettu requestBodyssä
+         * @description Hakee toteutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
+         */
+        post: operations["indexerToteutukset"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/asiasanat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa asiasanat siirtotiedostoon
+         * @description Hakee kaikki asiasanat ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoAsiasanat"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/hakukohde/copy/{hakuOid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna kopiot hakukohteista ja niihin liitetyistä toteutuksista
+         * @description Luodaan kopiot pyynnössä listatuista hakukohteista sekä niihin liitetyistä toteutuksista. Hakukohteesta tehtävä kopio liitetään hakuun, jonka oid annetaan parametrina. Kopiot tallennetaan luonnostilaisina. Rajapinta palauttaa tallennettujen hakukohteiden ja toteutusten yksilöivät oidit.
+         */
+        put: operations["Tallenna kopiot hakukohteista"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/session": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tarkista käyttäjän sessio
+         * @description Tarkista käyttäjän sessio
+         */
+        get: operations["Tarkista sessio"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koulutus/{oid}/toteutukset/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation käytettävissä olevat tietyn koulutuksen toteutukset
+         * @description Listaa ne tietyn koulutuksen toteutukset, jotka ovat organisaation käytettävissä.
+         */
+        get: operations["listKoulutusToteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/toteutus/tila/{tila}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Muuttaa usean toteutuksen tilat
+         * @description Muuttaa annettavien toteutusoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen toteutusten yksilöivät oidit.
+         */
+        post: operations["Muuttaa toteutusten tilat"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/asiasana/search/{term}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee asiasanoja annetulla hakutermillä
+         * @description Hakee asiasanoja annetulla hakutermillä
+         */
+        get: operations["Hae asiasanoja"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/search/haut": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee organisaation hakuja annetuilla parametreilla
+         * @description Hakee organisaation haut annetuilla parametreilla
+         */
+        get: operations["searchHaut"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/oppilaitos/{oid}/osat/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation käytettävissä olevat oppilaitoksen osien kuvailutiedot
+         * @description Listaa ne oppilaitoksen osat, jotka ovat organisaation käytettävissä.
+         */
+        get: operations["listOppilaitosOsat"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/list-opintokokonaisuudet": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hakee tiedot niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty
+         * @description Hakee tiedot niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty. Tämä rajapinta on indeksointia varten
+         */
+        post: operations["indexerListOpintokokonaisuudet"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/haku/{oid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae haun tiedot
+         * @description Hakee haun kaikki tiedot
+         */
+        get: operations["Hae haku"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/oppilaitoksen-osa/{oid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae oppilaitoksen osan kuvailutiedot
+         * @description Hakee oppilaitoksen osan kuvailutiedot
+         */
+        get: operations["getOppilaitoksenOsa"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/sorakuvaukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa sorakuvaukset siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut sorakuvaukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoSorakuvaukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/healthcheck/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Healthcheck-rajapinta
+         * @description Healthcheck-rajapinta
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Ok */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/hakukohde/{oid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae hakukohteen tiedot
+         * @description Hakee hakukohteen kaikki tiedot
+         */
+        get: operations["Hae hakukohde"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/toteutus/opintojaksot/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation käytettävissä olevat opintojaksot
+         * @description Listaa organisaation käytettävissä olevat opintojaksot uutta opintokokonaisuustoteutusta luotaessa
+         */
+        get: operations["Listaa opintojaksot"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Kirjaudu sisään
+         * @description Kirjaudu sisään
+         */
+        get: operations["Kirjaudu sisaan"];
+        put?: never;
+        /**
+         * Kirjaudu ulos
+         * @description Kirjaudu ulos
+         */
+        post: operations["Kirjaudu ulos"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/oppilaitoksen-osa/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi oppilaitoksen osan kuvailutieto
+         * @description Tallenna uusi oppilaitoksen osan kuvailutieto. Palauttaa tallennetun oppilaitoksen osan organisaatio-oidin.
+         */
+        put: operations["saveOppilaitoksenOsa"];
+        /**
+         * Muokkaa olemassa olevaa oppilaitoksen osan kuvailutietoa
+         * @description Muokkaa olemassa olevaa oppilaitoksen osan kuvailutietoa. Rajapinnalle annetaan oppilaitoksen osan kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["editOppilaitoksenOsa"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/koulutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa koulutukset siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoKoulutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/haku/{oid}/toteutukset/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa kaikki hakuun liitetyt toteutukset
+         * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) toteutukset. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerListHakuToteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/external/valintaperuste/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi valintaperustekuvaus
+         * @description Tallenna uuden valintaperustekuvauksen tiedot. Rajapinta palauttaa valintaperustekuvaukselle generoidun yksilöivän id:n
+         */
+        put: operations["externalValintaperusteSave"];
+        /**
+         * Muokkaa olemassa olevaa valintaperustekuvausta
+         * @description Muokkaa olemassa olevaa valintaperustekuvausta. Rajapinnalle annetaan valintaperusteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["externalValintaperusteEdit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/list-hakukohde-oids-by-jarjestyspaikat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hakee järjestyspaikkaa (oppilaitos tai toimipiste) vastaavat hakukohteet
+         * @description Hakee kaikkien niiden hakukohteiden oidit, joissa annettu oppilaitos/toimipiste on sen järjestyspaikkana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
+         */
+        post: operations["indexerListHakukohdeOidsByJarjestyspaikat"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/oppilaitos/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Tallenna uusi oppilaitoksen kuvailutieto
+         * @description Tallenna uusi oppilaitoksen kuvailutieto. Palauttaa tallennetun oppilaitoksen organisaatio-oidin.
+         */
+        put: operations["saveOppilaitos"];
+        /**
+         * Muokkaa olemassa olevaa oppilaitoksen kuvailutietoa
+         * @description Muokkaa olemassa olevaa oppilaitoksen kuvailutietoa. Rajapinnalle annetaan oppilaitoksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
+         */
+        post: operations["editOppilaitos"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/indexer/modifiedSince/{since}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen
+         * @description Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen. Tämä rajapinta on indeksointia varten
+         */
+        get: operations["indexerModifiedSince"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/asiasana/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Tallenna asiasanoja
+         * @description Tallenna asiasanoja
+         */
+        post: operations["Tallenna asiasanoja"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/koulutus/{oid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae koulutus
+         * @description Hae koulutuksen tiedot annetulla koulutus-oidilla
+         */
+        get: operations["Hae koulutus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/luokittelutermi/search/{term}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hakee luokittelutermejä annetulla hakutermillä
+         * @description Hakee luokittelutermejä annetulla hakutermillä
+         */
+        get: operations["Hae luokittelutermej\u00E4"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/valintaperuste/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae valintaperustekuvauksen tiedot
+         * @description Hakee valintaperustekuvauksen kaikki tiedot
+         */
+        get: operations["Hae valintaperuste"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/siirtotiedosto/oppilaitoksetJaOsat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tallentaa oppilaitokset ja niiden osat siirtotiedostoon
+         * @description Hakee annetulla aikavälillä luodut/modifioidut oppilaitokset ja osat, ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
+         */
+        get: operations["siirtotiedostoOppilaitoksetJaOsat"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/valintaperuste/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Listaa organisaation tietyn haun hakukohteille käytettävissä olevat valintaperustekuvaukset
+         * @description Listaa niiden valintaperustekuvausten tiedot, jotka ovat organisaation käytettävissä. Jos haku-oid on annettu, listataan ne kuvaukset, joita voi käyttää kyseisen haun hakukohteille
+         */
+        get: operations["Listaa valintaperusteet"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+}
+export type webhooks = Record<string, never>;
+export interface components {
+    schemas: {
+        /** @enum {string} */
+        Koulutustyyppi: "aikuisten-perusopetus" | "amk" | "amm" | "amm-muu" | "amm-ope-erityisope-ja-opo" | "amm-osaamisala" | "amm-tutkinnon-osa" | "ope-pedag-opinnot" | "erikoislaakari" | "kk-opintojakso" | "kk-opintokokonaisuus" | "erikoistumiskoulutus" | "lk" | "muu" | "taiteen-perusopetus" | "telma" | "tuva" | "vapaa-sivistystyo-muu" | "vapaa-sivistystyo-opistovuosi" | "vapaa-sivistystyo-osaamismerkki" | "yo";
+        /** @enum {string} */
+        Kieli: "fi" | "sv" | "en";
+        /** @enum {string} */
+        Julkaisutila: "julkaistu" | "tallennettu" | "arkistoitu" | "poistettu";
+        Teksti: {
+            /**
+             * @description Suomenkielinen teksti, jos kielivalinnassa on 'fi'
+             * @example Suomenkielinen teksti
+             */
+            fi?: string;
+            /**
+             * @description Ruotsinkielinen teksti, jos kielivalinnassa on 'sv'
+             * @example Ruotsinkielinen teksti
+             */
+            sv?: string;
+            /**
+             * @description Englanninkielinen teksti, jos kielivalinnassa on 'en'
+             * @example Englanninkielinen teksti
+             */
+            en?: string;
+        };
+        Nimi: {
+            /**
+             * @description Suomenkielinen nimi, jos kielivalinnassa on 'fi'
+             * @example Suomenkielinen nimi
+             */
+            fi?: string;
+            /**
+             * @description Ruotsinkielinen nimi, jos kielivalinnassa on 'sv'
+             * @example Ruotsinkielinen nimi
+             */
+            sv?: string;
+            /**
+             * @description Englanninkielinen nimi, jos kielivalinnassa on 'en'
+             * @example Englanninkielinen nimi
+             */
+            en?: string;
+        };
+        Kuvaus: {
+            /**
+             * @description Suomenkielinen kuvaus, jos kielivalinnassa on 'fi'
+             * @example Suomenkielinen kuvaus
+             */
+            fi?: string;
+            /**
+             * @description Ruotsinkielinen kuvaus, jos kielivalinnassa on 'sv'
+             * @example Ruotsinkielinen kuvaus
+             */
+            sv?: string;
+            /**
+             * @description Englanninkielinen kuvaus, jos kielivalinnassa on 'en'
+             * @example Englanninkielinen kuvaus
+             */
+            en?: string;
+        };
+        Linkki: {
+            /**
+             * @description Linkki suomenkieliselle sivulle, jos kielivalinnassa on 'fi'
+             * @example Linkki suomenkieliselle sivulle
+             */
+            fi?: string;
+            /**
+             * @description Linkki ruotsinkieliselle sivulle, jos kielivalinnassa on 'sv'
+             * @example Linkki ruotsinkieliselle sivulle
+             */
+            sv?: string;
+            /**
+             * @description Linkki englanninkieliselle sivulle, jos kielivalinnassa on 'en'
+             * @example Linkki englanninkieliselle sivulle
+             */
+            en?: string;
+        };
+        Lisatieto: {
+            /**
+             * @description Lisätiedon otsikon koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutuksenlisatiedot/1)
+             * @example koulutuksenlisatiedot_03#1
+             */
+            otsikkoKoodiUri?: string;
+            /** @description Lisätiedon teksti eri kielillä. Kielet on määritetty kielivalinnassa. */
+            teksti?: components["schemas"]["Teksti"];
+        };
+        Yhteyshenkilo: {
+            /** @description Yhteyshenkilön nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+            nimi?: components["schemas"]["Teksti"];
+            /** @description Yhteyshenkilön titteli eri kielillä. Kielet on määritetty kielivalinnassa. */
+            titteli?: components["schemas"]["Teksti"];
+            /** @description Yhteyshenkilön sähköpostiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
+            sahkoposti?: components["schemas"]["Teksti"];
+            /** @description Yhteyshenkilön puhelinnumero eri kielillä. Kielet on määritetty kielivalinnassa. */
+            puhelinnumero?: components["schemas"]["Teksti"];
+            /** @description Yhteyshenkilön www-sivun linkki eri kielillä. Kielet on määritetty kielivalinnassa. */
+            wwwSivu?: components["schemas"]["Teksti"];
+            /** @description Yhteyshenkilön www-sivun linkin kanssa näytettävä teksti eri kielillä. Kielet on määritetty kielivalinnassa. */
+            wwwSivuTeksti?: components["schemas"]["Teksti"];
+        };
+        /** @enum {string} */
+        Hakulomaketyyppi: "ataru" | "ei sähköistä" | "muu";
+        Ajanjakso: {
+            /**
+             * Format: date-time
+             * @description Ajanjakson alkuaika
+             * @example 2019-08-23T09:55
+             */
+            alkaa?: string;
+            /**
+             * Format: date-time
+             * @description Ajanjakson päättymisaika
+             * @example 2019-08-23T09:55
+             */
+            paattyy?: string;
+        };
+        Osoite: {
+            /** @description Osoite eri kielillä. Kielet on määritetty kielivalinnassa. */
+            osoite?: components["schemas"]["Teksti"];
+            postinumeroKoodiUri?: {
                 /**
-                 * @description koodiUri.
-                 * @example koulutusTyyppi_25
+                 * @description Suomenkielisen osoitteen postinumero, jos kielivalinnassa on 'fi'
+                 * @example posti_04230#2
                  */
-                koodiUri?: string;
-                /** @description Koodiurin numeerinen tunniste */
-                koodiArvo?: string;
+                fi?: string;
                 /**
-                 * @description Koodin versio
+                 * @description Ruotsinkielisen osoitteen postinumero, jos kielivalinnassa on 'sv'
+                 * @example posti_04231#2
+                 */
+                sv?: string;
+                /**
+                 * @description Englanninkielisen osoitteen postinumero, jos kielivalinnassa on 'en'
+                 * @example posti_04232#2
+                 */
+                en?: string;
+            };
+        };
+        /** @description Valintakokeen tiedot */
+        Valintakoe: {
+            /**
+             * @description Valintakokeen yksilöivä tunniste. Järjestelmän generoima.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+            /**
+             * @description Valintakokeen tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/valintakokeentyyppi/1)
+             * @example valintakokeentyyppi_1#1
+             */
+            tyyppiKoodiUri?: string;
+            /** @description Valintakokeen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            metadata?: components["schemas"]["ValintakoeMetadata"];
+            /** @description Valintakokeen järjestämistilaisuudet */
+            tilaisuudet?: components["schemas"]["Valintakoetilaisuus"][];
+        };
+        ValintakoeMetadata: {
+            /** @description Tietoa valintakokeesta */
+            tietoja?: components["schemas"]["Teksti"];
+            /**
+             * Format: double
+             * @description Valintakokeen vähimmäispisteet
+             * @example 10
+             */
+            vahimmaispisteet?: number;
+            /** @description Liittyykö valintakokeeseen ennakkovalmistautumista */
+            liittyyEnnakkovalmistautumista?: boolean;
+            /** @description Ohjeet valintakokeen ennakkojärjestelyihin */
+            ohjeetEnnakkovalmistautumiseen?: components["schemas"]["Teksti"];
+            /** @description Ovatko erityisjärjestelyt mahdollisia valintakokeessa */
+            erityisjarjestelytMahdollisia?: boolean;
+            /** @description Ohjeet valintakokeen erityisjärjestelyihin */
+            ohjeetErityisjarjestelyihin?: components["schemas"]["Teksti"];
+        };
+        Valintakoetilaisuus: {
+            /** @description Valintakokeen järjestämispaikan osoite */
+            osoite?: components["schemas"]["Osoite"];
+            /** @description Valintakokeen järjestämisaika */
+            aika?: components["schemas"]["Ajanjakso"];
+            /** @description Valintakokeen järjestämispaikka eri kielillä. Kielet on määritetty kielivalinnassa. */
+            jarjestamispaikka?: components["schemas"]["Teksti"];
+            /** @description Lisätietoja valintakokeesta eri kielillä. Kielet on määritetty kielivalinnassa. */
+            lisatietoja?: components["schemas"]["Teksti"];
+        };
+        /** @enum {string} */
+        LiitteenToimitustapa: "hakijapalvelu" | "osoite" | "lomake";
+        ListEverything: {
+            koulutukset?: string[];
+            toteutukset?: string[];
+            haut?: string[];
+            hakukohteet?: string[];
+            valintaperusteet?: string[];
+            oppilaitokset?: string[];
+            sorakuvaukset?: string[];
+        };
+        Authenticated: {
+            /**
+             * @description Session id (UUID)
+             * @example b0c9ccd3-9f56-4d20-8df4-21a1239fcf89
+             */
+            id?: string;
+            /**
+             * @description Kutsujan IP
+             * @example 127.0.0.1
+             */
+            ip?: string;
+            /**
+             * @description Kutsujan user-agent
+             * @example Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+             */
+            userAgent?: string;
+            session?: {
+                /**
+                 * @description Henkilön oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                personOid?: string;
+                authorities?: {
+                    /**
+                     * @description Yksittäinen käyttöoikeus
+                     * @example APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001
+                     */
+                    authority?: string;
+                }[];
+            };
+        };
+        TutkinnonOsa: {
+            /**
+             * @description Tutkinnon osan käyttämän ePerusteen id.
+             * @example 4804100
+             */
+            ePerusteId?: number;
+            /**
+             * @description Koulutuksen koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11)
+             * @example koulutus_371101#1
+             */
+            koulutusKoodiUri?: string;
+            /**
+             * @description Tutkinnon osan id ePerusteissa
+             * @example 12345
+             */
+            tutkinnonosaId?: number;
+            /**
+             * @description Tutkinnon osan viite
+             * @example 2449201
+             */
+            tutkinnonosaViite?: number;
+        };
+        KoulutuksenAlkamiskausi: {
+            /**
+             * @description Alkamiskauden tyyppi
+             * @enum {string}
+             */
+            alkamiskausityyppi?: "henkilokohtainen suunnitelma" | "tarkka alkamisajankohta" | "alkamiskausi ja -vuosi";
+            /**
+             * @description Koulutuksen tarkka alkamisen päivämäärä
+             * @example 2019-11-20T12:00
+             */
+            koulutuksenAlkamispaivamaara?: string;
+            /**
+             * @description Koulutuksen päättymisen päivämäärä
+             * @example 2019-11-20T12:00
+             */
+            koulutuksenPaattymispaivamaara?: string;
+            /**
+             * @description Haun koulutusten alkamiskausi. Hakukohteella voi olla eri alkamiskausi kuin haulla. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kausi/1)
+             * @example kausi_k#1
+             */
+            koulutuksenAlkamiskausiKoodiUri?: string;
+            /**
+             * @description Haun koulutusten alkamisvuosi. Hakukohteella voi olla eri alkamisvuosi kuin haulla.
+             * @example 2020
+             */
+            koulutuksenAlkamisvuosi?: string;
+            /** @description Lisätietoa koulutuksen alkamisesta henkilökohtaisen suunnitelman mukaan eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+            henkilokohtaisenSuunnitelmanLisatiedot?: components["schemas"]["Teksti"];
+        };
+        NimettyLinkki: {
+            /** @description Linkin url eri kielillä */
+            url?: components["schemas"]["Linkki"];
+            /** @description Käyttäjälle näkyvä teksti linkissä */
+            nimi?: components["schemas"]["Teksti"];
+        };
+        /** @description Hakukohteella lisätyt valintakokeen lisätilaisuudet */
+        ValintakokeenLisatilaisuudet: {
+            /**
+             * @description Valintakokeen yksilöivä tunniste. Järjestelmän generoima.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+            /** @description Hakukohteella syötetyt valintaperusteen valintakokeen lisäjärjestämistilaisuudet */
+            tilaisuudet?: components["schemas"]["Valintakoetilaisuus"][];
+        };
+        Aloituspaikat: {
+            /**
+             * @description Hakukohteen aloituspaikkojen lukumäärä
+             * @example 100
+             */
+            lukumaara?: number;
+            /**
+             * @description Hakukohteen ensikertalaisten aloituspaikkojen lukumäärä
+             * @example 50
+             */
+            ensikertalaisille?: number;
+            /** @description Tarkempi kuvaus aloituspaikoista */
+            kuvaus?: components["schemas"]["Kuvaus"];
+        };
+        /** @enum {string} */
+        Hakutermi: "hakeutuminen" | "ilmoittautuminen";
+        CopyResult: {
+            oid?: string;
+            status?: string;
+            created?: string[];
+        };
+        Pistetieto: {
+            tarjoaja?: string;
+            hakukohdekoodi?: string;
+            pisteet?: Record<string, never>;
+            vuosi?: string;
+        };
+        TilaChangeResult: {
+            oid?: string;
+            status?: string;
+            errorPaths?: string[];
+            errorMessages?: string[];
+            errorTypes?: string[];
+        };
+        Korkeakoulutustyyppi: {
+            /**
+             * @description Korkeakoulutustyyppi, sallitut arvot: 'yo' (yliopisto), 'amk' (ammattikorkea)
+             * @example yo
+             */
+            koulutustyyppi?: string;
+            /**
+             * @description Ko. korkeakoulutustyyppiä tarjoavien organisaatioiden yksilöivät organisaatio-oidit.
+             * @example [
+             *       "1.2.246.562.10.00101010101",
+             *       "1.2.246.562.10.00101010102"
+             *     ]
+             */
+            tarjoajat?: string[];
+        };
+        Asiasana: {
+            /**
+             * @description Asiasanan kieli
+             * @example fi
+             */
+            kieli?: string & components["schemas"]["Kieli"];
+            /**
+             * @description Asiasana annetulla kielellä
+             * @example robotiikka
+             */
+            arvo?: string;
+        };
+        Ammattinimike: {
+            /**
+             * @description Ammattinimikkeen kieli
+             * @example fi
+             */
+            kieli?: string & components["schemas"]["Kieli"];
+            /**
+             * @description Ammattinimike annetulla kielellä
+             * @example insinööri
+             */
+            arvo?: string;
+        };
+        Luokittelutermi: string[];
+        Koulutus: {
+            /**
+             * @description Koulutuksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.13.00000000000000000009
+             */
+            oid?: string;
+            /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
+            externalId?: string;
+            /** @description Onko koulutus tutkintoon johtavaa */
+            johtaaTutkintoon?: boolean;
+            /**
+             * @description Koulutuksen tyyppi. Sallitut arvot: 'amm' (ammatillinen), 'yo' (yliopisto), 'lk' (lukio), 'amk' (ammattikorkea), 'amm-ope-erityisope-ja-opo' (Ammatillinen opettaja-, erityisopettaja ja opinto-ohjaajakoulutus), 'ope-pedag-opinnot' (Opettajien pedagogiset opinnot), 'kk-opintojakso', 'kk-opintokokonaisuus', 'amm-tutkinnon-osa', 'amm-osaamisala', 'amm-muu', 'tuva' (tutkintokoulutukseen valmentava koulutus), 'telma' (työhön ja itsenäiseen elämään valmentava koulutus), 'vapaa-sivistystyo-opistovuosi', 'vapaa-sivistystyo-muu', 'aikuisten-perusopetus', 'taiteen-perusopetus', 'muu'
+             * @example amm
+             */
+            koulutustyyppi?: components["schemas"]["Koulutustyyppi"];
+            /**
+             * @description Koulutuksen koodi URIt. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11)
+             * @example [
+             *       "koulutus_371101#1",
+             *       "koulutus_201001#1"
+             *     ]
+             */
+            koulutuksetKoodiUri?: string[];
+            /** @description Koulutuksen julkaisutila. Jos koulutus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Onko koulutus nähtävissä esikatselussa */
+            esikatselu?: boolean;
+            /**
+             * @description Koulutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
+             * @example [
+             *       "1.2.246.562.10.00101010101",
+             *       "1.2.246.562.10.00101010102"
+             *     ]
+             */
+            tarjoajat?: string[];
+            /** @description Voivatko muut oppilaitokset käyttää koulutusta */
+            julkinen?: boolean;
+            /**
+             * @description Kielet, joille koulutuksen nimi, kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            /** @description Koulutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description Koulutukseen liittyvän SORA-kuvauksen yksilöivä tunniste
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            sorakuvausId?: string;
+            /** @example {
+             *       "koulutustyyppi": "amm",
+             *       "koulutusalaKoodiUrit": [
+             *         "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
+             *         "kansallinenkoulutusluokitus2016koulutusalataso2_055#1"
+             *       ],
+             *       "kuvaus": {
+             *         "fi": "Suomenkielinen kuvaus",
+             *         "sv": "Ruotsinkielinen kuvaus"
+             *       },
+             *       "lisatiedot": [
+             *         {
+             *           "otsikkoKoodiUri": "koulutuksenlisatiedot_03#1",
+             *           "teksti": {
+             *             "fi": "Opintojen suomenkielinen lisätietokuvaus",
+             *             "sv": "Opintojen ruotsinkielinen lisätietokuvaus"
+             *           }
+             *         }
+             *       ]
+             *     } */
+            metadata?: components["schemas"]["YliopistoKoulutusMetadata"] | components["schemas"]["AmmatillinenKoulutusMetadata"] | components["schemas"]["AmmattikorkeaKoulutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoKoulutusMetadata"] | components["schemas"]["OpePedagOpinnotKoulutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaKoulutusMetadata"] | components["schemas"]["KkOpintojaksoKoulutusMetadata"] | components["schemas"]["KkOpintokokonaisuusKoulutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaKoulutusMetadata"] | components["schemas"]["AmmatillinenMuuKoulutusMetadata"] | components["schemas"]["LukioKoulutusMetadata"] | components["schemas"]["TuvaKoulutusMetadata"] | components["schemas"]["TelmaKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoOsaamismerkkiKoulutusMetadata"] | components["schemas"]["AikuistenPerusopetusKoulutusMetadata"] | components["schemas"]["ErikoislaakariKoulutusMetadata"] | components["schemas"]["ErikoistumiskoulutusMetadata"] | components["schemas"]["TaiteenPerusopetusKoulutusMetadata"] | components["schemas"]["MuuKoulutusMetadata"];
+            /**
+             * @description Koulutusta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Koulutuksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * @description Koulutuksen Opintopolussa näytettävän teemakuvan URL.
+             * @example https://konfo-files.opintopolku.fi/koulutus-teemakuva/1.2.246.562.13.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
+             */
+            teemakuva?: string;
+            /**
+             * @description Koulutuksen käyttämän ePerusteen id.
+             * @example 4804100
+             */
+            ePerusteId?: number;
+            /**
+             * Format: date-time
+             * @description Koulutuksen viimeisin muokkausaika. Järjestelmän generoima.
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        KoulutusListItem: {
+            /**
+             * @description Koulutuksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.13.00000000000000000009
+             */
+            oid?: string;
+            /** @description Koulutuksen julkaisutila. Jos koulutus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /**
+             * @description Koulutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
+             * @example [
+             *       "1.2.246.562.10.00101010101",
+             *       "1.2.246.562.10.00101010102"
+             *     ]
+             */
+            tarjoajat?: string[];
+            /** @description Koulutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description Koulutusta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Koulutuksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Koulutuksen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        KoulutusMetadata: {
+            /** @description Koulutuksen kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            kuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Koulutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
+            lisatiedot?: components["schemas"]["Lisatieto"][];
+        };
+        AmmatillinenKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amm
+             * @enum {string}
+             */
+            tyyppi?: "amm";
+            /**
+             * @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/kansallinenkoulutusluokitus2016koulutusalataso2).
+             *     HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
+             *
+             * @example [
+             *       "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
+             *       "kansallinenkoulutusluokitus2016koulutusalataso2_055#1"
+             *     ]
+             */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Lista koulutuksen tutkintonimikkeistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/tutkintonimikkeet).
+             *     HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
+             *
+             * @example [
+             *       "tutkintonimikkeet_10091#2",
+             *       "tutkintonimikkeet_10015#2"
+             *     ]
+             */
+            tutkintonimikeKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/opintojenlaajuusyksikko).
+             *     HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
+             *
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona. HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        };
+        KorkeakouluMetadata: {
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso2/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Lista koulutuksen tutkintonimikkeistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/tutkintonimikekk/2)
+             * @example [
+             *       "tutkintonimikekk_110#2",
+             *       "tutkintonimikekk_111#2"
+             *     ]
+             */
+            tutkintonimikeKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        } & components["schemas"]["KoulutusMetadata"];
+        AmmattikorkeaKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amk
+             * @enum {string}
+             */
+            tyyppi?: "amk";
+        };
+        AmmOpeErityisopeJaOpoKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amm-ope-erityisope-ja-opo
+             * @enum {string}
+             */
+            tyyppi?: "amm-ope-erityisope-ja-opo";
+        };
+        OpePedagOpinnotKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example ope-pedag-opinnot
+             * @enum {string}
+             */
+            tyyppi?: "ope-pedag-opinnot";
+        };
+        YliopistoKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example yo
+             * @enum {string}
+             */
+            tyyppi?: "yo";
+        };
+        KkOpintojaksoKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example kk-opintojakso
+             * @enum {string}
+             */
+            tyyppi?: "kk-opintojakso";
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuuden vähimmäismäärä numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumeroMin?: number;
+            /**
+             * @description Opintojen laajuuden enimmäismäärä numeroarvona
+             * @example 20
+             */
+            opintojenLaajuusNumeroMax?: number;
+            /** @description Onko koulutus avointa korkeakoulutusta? */
+            isAvoinKorkeakoulutus?: boolean;
+            /** @description Hakijalle näkyvä tunniste */
+            tunniste?: string;
+            /**
+             * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
+             * @example opinnontyyppi_1#1
+             */
+            opinnonTyyppiKoodiUri?: string;
+            /** @description Lista korkeakoulutustyypeistä (amk, yo) minkä tyyppisenä ko. koulutus käytännössä järjestetään. Jos tyyppejä on useita, listataan jokaiselle tyypille tarjoajat erikseen. */
+            korkeakoulutustyypit?: components["schemas"]["Korkeakoulutustyyppi"][];
+        };
+        AmmatillinenTutkinnonOsaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amm-tutkinnon-osa
+             * @enum {string}
+             */
+            tyyppi?: "amm-tutkinnon-osa";
+            /** @description Tutkinnon osat */
+            tutkinnonOsat?: components["schemas"]["TutkinnonOsa"][];
+        };
+        AmmatillinenOsaamisalaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amm
+             * @enum {string}
+             */
+            tyyppi?: "amm";
+            /**
+             * @description Osaamisala. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/osaamisala/1)
+             * @example osaamisala_10#1
+             */
+            osaamisalaKoodiUri?: string;
+        };
+        AmmatillinenMuuKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amm-muu
+             * @enum {string}
+             */
+            tyyppi?: "amm-muu";
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_6#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        };
+        LukioKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example lk
+             * @enum {string}
+             */
+            tyyppi?: "lk";
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        };
+        TuvaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example tuva
+             * @enum {string}
+             */
+            tyyppi?: "tuva";
+            /**
+             * @description Linkki koulutuksen eperusteisiin
+             * @example https://eperusteet.opintopolku.fi/#/fi/kooste/telma
+             */
+            linkkiEPerusteisiin?: string;
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_8#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        };
+        TelmaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example telma
+             * @enum {string}
+             */
+            tyyppi?: "telma";
+            /**
+             * @description Linkki koulutuksen eperusteisiin
+             * @example https://eperusteet.opintopolku.fi/#/fi/kooste/telma
+             */
+            linkkiEPerusteisiin?: string;
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_6#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        };
+        VapaaSivistystyoKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example vapaa-sivistystyo-opistovuosi
+             * @enum {string}
+             */
+            tyyppi?: "vapaa-sivistystyo-opistovuosi" | "vapaa-sivistystyo-muu";
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        };
+        VapaaSivistystyoOsaamismerkkiKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example vapaa-sivistystyo-osaamismerkki
+             * @enum {string}
+             */
+            tyyppi?: "vapaa-sivistystyo-osaamismerkki";
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Osaamismerkki. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/osaamismerkit/1)
+             * @example osaamismerkit_1009#1
+             */
+            osaamismerkkiKoodiUri?: string;
+        };
+        AikuistenPerusopetusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example aikuisten-perusopetus
+             * @enum {string}
+             */
+            tyyppi?: "aikuisten-perusopetus";
+            /**
+             * @description Linkki koulutuksen eperusteisiin
+             * @example https://eperusteet.opintopolku.fi/#/fi/kooste/telma
+             */
+            linkkiEPerusteisiin?: string;
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_6#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+        };
+        ErikoislaakariKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example erikoislaakari
+             * @enum {string}
+             */
+            tyyppi?: "erikoislaakari";
+            /**
+             * @description Lista koulutuksen tutkintonimikkeistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/tutkintonimikekk/2)
+             * @example [
+             *       "tutkintonimikekk_110#2",
+             *       "tutkintonimikekk_111#2"
+             *     ]
+             */
+            tutkintonimikeKoodiUrit?: string[];
+        };
+        KkOpintokokonaisuusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example kk-opintokokonaisuus
+             * @enum {string}
+             */
+            tyyppi?: "kk-opintokokonaisuus";
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuuden vähimmäismäärä numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumeroMin?: number;
+            /**
+             * @description Opintojen laajuuden enimmäismäärä numeroarvona
+             * @example 20
+             */
+            opintojenLaajuusNumeroMax?: number;
+            /** @description Onko koulutus avointa korkeakoulutusta? */
+            isAvoinKorkeakoulutus?: boolean;
+            /** @description Hakijalle näkyvä tunniste */
+            tunniste?: string;
+            /**
+             * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
+             * @example opinnontyyppi_1#1
+             */
+            opinnonTyyppiKoodiUri?: string;
+            /** @description Lista korkeakoulutustyypeistä (amk, yo) minkä tyyppisenä ko. koulutus käytännössä järjestetään. Jos tyyppejä on useita, listataan jokaiselle tyypille tarjoajat erikseen. */
+            korkeakoulutustyypit?: components["schemas"]["Korkeakoulutustyyppi"][];
+        };
+        ErikoistumiskoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example erikoistumiskoulutus
+             * @enum {string}
+             */
+            tyyppi?: "erikoistumiskoulutus";
+            /**
+             * @description Erikoistumiskoulutuksen koodiURI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/erikoistumiskoulutukset/2)
+             * @example [
+             *       "erikoistumiskoulutukset_001#2"
+             *     ]
+             */
+            erikoistumiskoulutusKoodiUri?: string;
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /** @description Lista korkeakoulutustyypeistä (amk, yo) minkä tyyppisenä ko. koulutus käytännössä järjestetään. Jos tyyppejä on useita, listataan jokaiselle tyypille tarjoajat erikseen. */
+            korkeakoulutustyypit?: components["schemas"]["Korkeakoulutustyyppi"][];
+            /**
+             * @description Opintojen laajuuden vähimmäismäärä numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumeroMin?: number;
+            /**
+             * @description Opintojen laajuuden enimmäismäärä numeroarvona
+             * @example 20
+             */
+            opintojenLaajuusNumeroMax?: number;
+        };
+        TaiteenPerusopetusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example taiteen-perusopetus
+             * @enum {string}
+             */
+            tyyppi?: "taiteen-perusopetus";
+            /**
+             * @description Linkki koulutuksen eperusteisiin
+             * @example https://eperusteet.opintopolku.fi/#/fi/kooste/taiteenperusopetus
+             */
+            linkkiEPerusteisiin?: string;
+        };
+        MuuKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example muu
+             * @enum {string}
+             */
+            tyyppi?: "muu";
+            /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
+            koulutusalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_2#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuuden vähimmäismäärä numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumeroMin?: number;
+            /**
+             * @description Opintojen laajuuden enimmäismäärä numeroarvona
+             * @example 20
+             */
+            opintojenLaajuusNumeroMax?: number;
+        };
+        Toteutus: {
+            /**
+             * @description Toteutuksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.17.00000000000000000009
+             */
+            oid?: string;
+            /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
+            externalId?: string;
+            /**
+             * @description Toteutukseen liittyvän koulutuksen yksilöivä tunniste.
+             * @example 1.2.246.562.13.00000000000000000009
+             */
+            koulutusOid?: string;
+            /** @description Toteutuksen julkaisutila. Jos toteutus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Onko toteutus nähtävissä esikatselussa */
+            esikatselu?: boolean;
+            /**
+             * @description Toteutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
+             * @example [
+             *       "1.2.246.562.10.00101010101",
+             *       "1.2.246.562.10.00101010102"
+             *     ]
+             */
+            tarjoajat?: string[];
+            /**
+             * @description Kielet, joille toteutuksen nimi, kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            /** @description Toteutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /** @example {
+             *       "tyyppi": "amm",
+             *       "kuvaus": {
+             *         "fi": "Suomenkielinen kuvaus",
+             *         "sv": "Ruotsinkielinen kuvaus"
+             *       },
+             *       "osaamisalat": [
+             *         {
+             *           "koodiUri": "osaamisala_0001#1",
+             *           "linkki": {
+             *             "fi": "http://osaamisala.fi/linkki/fi",
+             *             "sv": "http://osaamisala.fi/linkki/sv"
+             *           },
+             *           "otsikko": {
+             *             "fi": "Katso osaamisalan tarkempi kuvaus tästä",
+             *             "sv": "Katso osaamisalan tarkempi kuvaus tästä ruotsiksi"
+             *           }
+             *         }
+             *       ],
+             *       "opetus": {
+             *         "opetuskieliKoodiUrit": [
+             *           "oppilaitoksenopetuskieli_1#1"
+             *         ],
+             *         "opetuskieletKuvaus": {
+             *           "fi": "Opetuskielen suomenkielinen kuvaus",
+             *           "sv": "Opetuskielen ruotsinkielinen kuvaus"
+             *         },
+             *         "opetusaikaKoodiUrit": [
+             *           "opetusaikakk_1#1"
+             *         ],
+             *         "opetusaikaKuvaus": {
+             *           "fi": "Opetusajan suomenkielinen kuvaus",
+             *           "sv": "Opetusajan ruotsinkielinen kuvaus"
+             *         },
+             *         "opetustapaKoodiUrit": [
+             *           "opetuspaikkakk_1#1",
+             *           "opetuspaikkakk_2#1"
+             *         ],
+             *         "opetustapaKuvaus": {
+             *           "fi": "Opetustavan suomenkielinen kuvaus",
+             *           "sv": "Opetustavan ruotsinkielinen kuvaus"
+             *         },
+             *         "maksullisuustyyppi": "maksullinen,",
+             *         "maksullisuusKuvaus": {
+             *           "fi": "Maksullisuuden suomenkielinen kuvaus",
+             *           "sv": "Maksullisuuden ruotsinkielinen kuvaus"
+             *         },
+             *         "maksunMaara": 200.5,
+             *         "alkamiskausiKoodiUri": "kausi_k#1",
+             *         "alkamisvuosi": 2020,
+             *         "alkamisaikaKuvaus": {
+             *           "fi": "Alkamisajan suomenkielinen kuvaus",
+             *           "sv": "Alkamisajan ruotsinkielinen kuvaus"
+             *         },
+             *         "lisatiedot": [
+             *           {
+             *             "otsikkoKoodiUri": "koulutuksenlisatiedot_03#1",
+             *             "teksti": {
+             *               "fi": "Suomenkielinen lisätietoteksti",
+             *               "sv": "Ruotsinkielinen lisätietoteksti"
+             *             }
+             *           }
+             *         ],
+             *         "lukuvuosimaksu": {
+             *           "fi": "200 lukukaudessa",
+             *           "sv": "200 på svenska"
+             *         },
+             *         "lukuvuosimaksuKuvaus": {
+             *           "fi": "Lukuvuosimaksun suomenkielinen kuvaus",
+             *           "sv": "Lukuvuosimaksun ruotsinkielinen kuvaus"
+             *         }
+             *       },
+             *       "ammattinimikkeet": [
+             *         {
+             *           "kieli": "fi",
+             *           "arvo": "insinööri"
+             *         },
+             *         {
+             *           "kieli": "en",
+             *           "arvo": "engineer"
+             *         }
+             *       ],
+             *       "asiasanat": [
+             *         {
+             *           "kieli": "fi",
+             *           "arvo": "ravintotiede"
+             *         },
+             *         {
+             *           "kieli": "en",
+             *           "arvo": "nutrition"
+             *         }
+             *       ],
+             *       "yhteyshenkilot": [
+             *         {
+             *           "nimi": {
+             *             "fi": "Aku Ankka",
+             *             "sv": "Kalle Ankka"
+             *           },
+             *           "titteli": {
+             *             "fi": "Ankka",
+             *             "sv": "Ankka ruotsiksi"
+             *           },
+             *           "sahkoposti": {
+             *             "fi": "aku.ankka@ankkalinnankoulu.fi",
+             *             "sv": "aku.ankka@ankkalinnankoulu.fi"
+             *           },
+             *           "puhelinnumero": {
+             *             "fi": 123,
+             *             "sv": 223
+             *           },
+             *           "wwwSivu": {
+             *             "fi": "http://opintopolku.fi",
+             *             "sv": "http://studieinfo.fi"
+             *           }
+             *         }
+             *       ]
+             *     } */
+            metadata?: components["schemas"]["YliopistoToteutusMetadata"] | components["schemas"]["AmmatillinenToteutusMetadata"] | components["schemas"]["AmmattikorkeaToteutusMetadata"] | components["schemas"]["KkOpintojaksoToteutusMetadata"] | components["schemas"]["KkOpintokokonaisuusToteutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaToteutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaToteutusMetadata"] | components["schemas"]["AmmatillinenMuuToteutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoToteutusMetadata"] | components["schemas"]["OpePedagOpinnotToteutusMetadata"] | components["schemas"]["LukioToteutusMetadata"] | components["schemas"]["TuvaToteutusMetadata"] | components["schemas"]["TelmaToteutusMetadata"] | components["schemas"]["VapaaSivistystyoOpistovuosiToteutusMetadata"] | components["schemas"]["VapaaSivistystyoMuuToteutusMetadata"] | components["schemas"]["AikuistenPerusopetusToteutusMetadata"] | components["schemas"]["ErikoislaakariToteutusMetadata"] | components["schemas"]["ErikoistumiskoulutusToteutusMetadata"] | components["schemas"]["TaiteenPerusopetusToteutusMetadata"] | components["schemas"]["MuuToteutusMetadata"];
+            /**
+             * @description Toteutusta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Toteutuksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * @description Toteutuksen Opintopolussa näytettävän teemakuvan URL.
+             * @example https://konfo-files.opintopolku.fi/toteutus-teemakuva/1.2.246.562.13.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
+             */
+            teemakuva?: string;
+            /**
+             * Format: date-time
+             * @description Toteutuksen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        ToteutusListItem: {
+            /**
+             * @description Toteutuksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.17.00000000000000000009
+             */
+            oid?: string;
+            /**
+             * @description Toteutukseen liittyvän koulutuksen yksilöivä tunniste.
+             * @example 1.2.246.562.13.00000000000000000009
+             */
+            koulutusOid?: string;
+            /** @description Koulutuksen toteutuksen julkaisutila. Jos koulutus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /**
+             * @description Koulutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
+             * @example [
+             *       "1.2.246.562.10.00101010101",
+             *       "1.2.246.562.10.00101010102"
+             *     ]
+             */
+            tarjoajat?: string[];
+            /** @description Toteutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description Toteutusta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Toteutuksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Toteutuksen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        Opetus: {
+            /** @description Lista koulutuksen toteutuksen opetuskielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/oppilaitoksenopetuskieli/1) */
+            opetuskieliKoodiUrit?: string[];
+            /** @description Koulutuksen toteutuksen opetuskieliä tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            opetuskieletKuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Lista koulutuksen toteutuksen opetusajoista. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opetusaikakk/1) */
+            opetusaikaKoodiUrit?: string[];
+            /** @description Koulutuksen toteutuksen opetusaikoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            opetusaikaKuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Lista koulutuksen toteutuksen opetustavoista. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opetuspaikkakk/1) */
+            opetustapaKoodiUrit?: string[];
+            /** @description Koulutuksen toteutuksen opetustapoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            opetustapaKuvaus?: components["schemas"]["Kuvaus"];
+            /**
+             * @description Maksullisuuden tyyppi
+             * @enum {string}
+             */
+            maksullisuustyyppi?: "maksullinen" | "maksuton" | "lukuvuosimaksu";
+            /** @description Koulutuksen toteutuksen maksullisuutta tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            maksullisuusKuvaus?: components["schemas"]["Kuvaus"];
+            /**
+             * Format: double
+             * @description Koulutuksen toteutuksen maksun määrä euroissa?
+             * @example 220.5
+             */
+            maksunMaara?: number;
+            /** @description Koulutuksen alkamiskausi */
+            koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
+            /** @description Koulutuksen toteutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
+            lisatiedot?: components["schemas"]["Lisatieto"][];
+            /** @description Onko koulutukseen apurahaa? */
+            onkoApuraha?: boolean;
+            /** @description Koulutuksen apurahatiedot */
+            apuraha?: components["schemas"]["Apuraha"];
+            /**
+             * @description Koulutuksen suunniteltu kesto vuosina
+             * @example 2
+             */
+            suunniteltuKestoVuodet?: number;
+            /**
+             * @description Koulutuksen suunniteltu kesto kuukausina
+             * @example 2
+             */
+            suunniteltuKestoKuukaudet?: number;
+            /** @description Koulutuksen toteutuksen suunnitellun keston kuvaus eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
+            suunniteltuKestoKuvaus?: components["schemas"]["Kuvaus"];
+        };
+        Apuraha: {
+            /**
+             * @description Apurahan minimi euromäärä tai minimi prosenttiosuus lukuvuosimaksusta
+             * @example 100
+             */
+            min?: number;
+            /**
+             * @description Apurahan maksimi euromäärä tai maksimi prosenttiosuus lukuvuosimaksusta
+             * @example 200
+             */
+            max?: number;
+            /**
+             * @description Apurahan yksikkö
+             * @example euro
+             * @enum {string}
+             */
+            yksikko?: "euro" | "prosentti";
+            /** @description Koulutuksen toteutuksen apurahaa tarkentava kuvausteksti eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
+            kuvaus?: components["schemas"]["Kuvaus"];
+        };
+        Kielivalikoima: {
+            /** @description Lista koulutuksen toteutuksen A1 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
+            A1Kielet?: string[];
+            /** @description Lista koulutuksen toteutuksen A2 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
+            A2Kielet?: string[];
+            /** @description Lista koulutuksen toteutuksen B1 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
+            B1Kielet?: string[];
+            /** @description Lista koulutuksen toteutuksen B2 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
+            B2Kielet?: string[];
+            /** @description Lista koulutuksen toteutuksen B3 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
+            B3Kielet?: string[];
+            /** @description Lista koulutuksen toteutuksen äidinkielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
+            aidinkielet?: string[];
+            /** @description Lista koulutuksen toteutuksen muista kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
+            muutKielet?: string[];
+        };
+        ToteutusMetadata: {
+            /** @description Toteutuksen kuvausteksti eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
+            kuvaus?: components["schemas"]["Kuvaus"];
+            opetus?: components["schemas"]["Opetus"];
+            /** @description Lista toteutuksen yhteyshenkilöistä */
+            yhteyshenkilot?: components["schemas"]["Yhteyshenkilo"][];
+            /** @description Lista toteutukseen liittyvistä asiasanoista, joiden avulla opiskelija voi hakea koulutusta Opintopolusta */
+            asiasanat?: components["schemas"]["Asiasana"][];
+            /** @description Lista toteutukseen liittyvistä ammattinimikkeistä, joiden avulla opiskelija voi hakea koulutusta Opintopolusta */
+            ammattinimikkeet?: components["schemas"]["Ammattinimike"][];
+            /** @description Onko toteutus JOTPA-rahoitettua? */
+            hasJotpaRahoitus?: boolean;
+            /** @description Onko toteutus työvoimakoulutusta? */
+            isTyovoimakoulutus?: boolean;
+            /** @description Onko toteutus täydennyskoulutusta? */
+            isTaydennyskoulutus?: boolean;
+        };
+        KorkeakouluOsaamisala: {
+            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. nimi */
+            nimi?: components["schemas"]["Nimi"];
+            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. kuvaus */
+            kuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. linkki */
+            linkki?: components["schemas"]["Linkki"];
+            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. linkin otsikko */
+            otsikko?: components["schemas"]["Teksti"];
+        };
+        Osaamisala: {
+            /**
+             * @description Osaamisalan koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/osaamisala/1)
+             * @example osaamisala_0001#1
+             */
+            koodiUri?: string;
+            /** @description Osaamisalan linkki */
+            linkki?: components["schemas"]["Linkki"];
+            /** @description Osaamisalan linkin otsikko */
+            otsikko?: components["schemas"]["Teksti"];
+        };
+        AmmattikorkeaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amk
+             * @enum {string}
+             */
+            tyyppi?: "amk";
+        };
+        AmmOpeErityisopeJaOpoToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amm-ope-erityisope-ja-opo
+             * @enum {string}
+             */
+            tyyppi?: "amm-ope-erityisope-ja-opo";
+        };
+        OpePedagOpinnotToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example ope-pedag-opinnot
+             * @enum {string}
+             */
+            tyyppi?: "ope-pedag-opinnot";
+        };
+        KkOpintojaksoToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example kk-opintojakso
+             * @enum {string}
+             */
+            tyyppi?: "kk-opintojakso";
+            /** @description Onko koulutus avointa korkeakoulutusta? */
+            isAvoinKorkeakoulutus?: boolean;
+            /** @description Hakijalle näkyvä tunniste */
+            tunniste?: string;
+            /**
+             * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
+             * @example opinnontyyppi_1#1
+             */
+            opinnonTyyppiKoodiUri?: string;
+        };
+        YliopistoToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example yo
+             * @enum {string}
+             */
+            tyyppi?: "yo";
+        };
+        AmmatillinenToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /** @description Lista ammatillisen koulutuksen osaamisalojen kuvauksia */
+            osaamisalat?: components["schemas"]["Osaamisala"][];
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example amm
+             * @enum {string}
+             */
+            tyyppi?: "amm";
+            /** @description Onko koulutuksen tyyppi \"Ammatillinen perustutkinto erityisopetuksena\"? */
+            ammatillinenPerustutkintoErityisopetuksena?: boolean;
+        };
+        TutkintoonJohtamatonToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /** @description Tieto siitä onko toteutuksella käytössä hakukohteet */
+            isHakukohteetKaytossa?: boolean;
+            hakutermi?: components["schemas"]["Hakutermi"];
+            /**
+             * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus.
+             * @example ataru
+             * @enum {string}
+             */
+            hakulomaketyyppi?: "ataru" | "haku-app" | "ei sähköistä" | "muu";
+            /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+            hakulomakeLinkki?: components["schemas"]["Linkki"];
+            /** @description Lisätietoa hakeutumisesta eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+            lisatietoaHakeutumisesta?: components["schemas"]["Teksti"];
+            /** @description Lisätietoa valintaperusteista eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+            lisatietoaValintaperusteista?: components["schemas"]["Teksti"];
+            /** @description Toteutuksen hakuaika */
+            hakuaika?: components["schemas"]["Ajanjakso"];
+            /**
+             * @description Toteutuksen aloituspaikkojen lukumäärä
+             * @example 100
+             */
+            aloituspaikat?: number;
+            /** @description Koulutuksen toteutuksen aloituspaikkoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            aloituspaikkakuvaus?: components["schemas"]["Teksti"];
+        };
+        AmmatillinenTutkinnonOsaToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example amm-tutkinnon-osa
+             * @enum {string}
+             */
+            tyyppi?: "amm-tutkinnon-osa";
+        };
+        AmmatillinenOsaamisalaToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example amm-osaamisala
+             * @enum {string}
+             */
+            tyyppi?: "amm-osaamisala";
+        };
+        AmmatillinenMuuToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example amm-muu
+             * @enum {string}
+             */
+            tyyppi?: "amm-muu";
+        };
+        TuvaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example tuva
+             * @enum {string}
+             */
+            tyyppi?: "tuva";
+            /** @description Tieto siitä järjestetäänkö toteutus erityisopetuksena */
+            jarjestetaanErityisopetuksena?: boolean;
+        };
+        /** @description Toteutuksen yksittäisen lukiolinjatiedon kentät */
+        LukiolinjaTieto: {
+            /** @description Lukiolinjatiedon koodiUri. */
+            koodiUri?: string;
+            /** @description Lukiolinjatiedon kuvaus eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
+            kuvaus?: components["schemas"]["Kuvaus"];
+        };
+        LukioToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example lk
+             * @enum {string}
+             */
+            tyyppi?: "lk";
+            /** @description Koulutuksen kielivalikoima */
+            kielivalikoima?: components["schemas"]["Kielivalikoima"];
+            /** @description Onko lukio-toteutuksella yleislinja? */
+            yleislinja?: Record<string, never>;
+            /** @description Lukio-toteutuksen painotukset. Taulukon alkioiden koodiUri-kentät viittaavat [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/lukiopainotukset/1). */
+            painotukset?: components["schemas"]["LukiolinjaTieto"][];
+            /** @description Lukio-toteutuksen erityiset koulutustehtävät. Taulukon alkioiden koodiUri-kentät viittaavat [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/lukiolinjaterityinenkoulutustehtava/1). */
+            erityisetKoulutustehtavat?: components["schemas"]["LukiolinjaTieto"][];
+            /** @description Lukio-toteutuksen diplomit */
+            diplomit?: components["schemas"]["LukiodiplomiTieto"][];
+        };
+        /** @description Toteutuksen yksittäisen lukiodiplomitiedon kentät */
+        LukiodiplomiTieto: {
+            /** @description Lukiodiplomin koodiUri. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/moduulikoodistolops2021/1). */
+            koodiUri?: string;
+            /** @description Lukiodiplomin kielistetyt lisätietolinkit. Kielet on määritetty toteutuksen kielivalinnassa. */
+            linkki?: components["schemas"]["Linkki"];
+            /** @description Lukiodiplomin kielistettyjen lisätietolinkkien alt-tekstit. Kielet on määritetty toteutuksen kielivalinnassa. */
+            linkinAltTeksti?: components["schemas"]["Teksti"];
+        };
+        VapaaSivistystyoOpistovuosiToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example vapaa-sivistystyo-opistovuosi
+             * @enum {string}
+             */
+            tyyppi?: "vapaa-sivistystyo-opistovuosi";
+            /**
+             * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
+             * @example false
+             */
+            suoritetaanNayttona?: boolean;
+        };
+        VapaaSivistystyoMuuToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example vapaa-sivistystyo-muu
+             * @enum {string}
+             */
+            tyyppi?: "vapaa-sivistystyo-muu";
+            /**
+             * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
+             * @example false
+             */
+            suoritetaanNayttona?: boolean;
+        };
+        VapaaSivistystyoOsaamismerkkiToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example vapaa-sivistystyo-osaamismerkki
+             * @enum {string}
+             */
+            tyyppi?: "vapaa-sivistystyo-osaamismerkki";
+            /**
+             * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
+             * @example false
+             */
+            suoritetaanNayttona?: boolean;
+        };
+        TelmaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example telma
+             * @enum {string}
+             */
+            tyyppi?: "telma";
+        };
+        AikuistenPerusopetusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example aikuisten-perusopetus
+             * @enum {string}
+             */
+            tyyppi?: "aikuisten-perusopetus";
+        };
+        ErikoislaakariToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example erikoislaakari
+             * @enum {string}
+             */
+            tyyppi?: "erikoislaakari";
+        };
+        KkOpintokokonaisuusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example kk-opintokokonaisuus
+             * @enum {string}
+             */
+            tyyppi?: "kk-opintokokonaisuus";
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_6#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
+            /** @description Onko koulutus avointa korkeakoulutusta? */
+            isAvoinKorkeakoulutus?: boolean;
+            /** @description Hakijalle näkyvä tunniste */
+            tunniste?: string;
+            /**
+             * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
+             * @example opinnontyyppi_1#1
+             */
+            opinnonTyyppiKoodiUri?: string;
+        };
+        ErikoistumiskoulutusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Koulutuksen metatiedon tyyppi
+             * @example erikoistumiskoulutus
+             * @enum {string}
+             */
+            tyyppi?: "erikoistumiskoulutus";
+        };
+        TaiteenPerusopetusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example taiteen-perusopetus
+             * @enum {string}
+             */
+            tyyppi?: "taiteen-perusopetus";
+            /**
+             * @description Lista taiteenaloja. Viittaa [koodistoon](https://virkailija.opintopolku.fi/koodisto-app/koodisto/view/taiteenperusopetustaiteenala/1)
+             * @example [
+             *       "taiteenperusopetustaiteenala_kuvataide#1",
+             *       "taiteenperusopetustaiteenala_arkkitehtuuri#1"
+             *     ]
+             */
+            taiteenalaKoodiUrit?: string[];
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example [
+             *       "opintojenlaajuusyksikko_2#1"
+             *     ]
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuuden vähimmäismäärä numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumeroMin?: number;
+            /**
+             * @description Opintojen laajuuden enimmäismäärä numeroarvona
+             * @example 20
+             */
+            opintojenLaajuusNumeroMax?: number;
+        };
+        MuuToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
+            /**
+             * @description Toteutuksen metatiedon tyyppi
+             * @example muu
+             * @enum {string}
+             */
+            tyyppi?: "muu";
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example [
+             *       "opintojenlaajuusyksikko_2#1"
+             *     ]
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuuden vähimmäismäärä numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumeroMin?: number;
+            /**
+             * @description Opintojen laajuuden enimmäismäärä numeroarvona
+             * @example 20
+             */
+            opintojenLaajuusNumeroMax?: number;
+        };
+        Hakutieto: {
+            /**
+             * @description Toteutuksen yksilöivä tunniste.
+             * @example 1.2.246.562.13.00000000000000000009
+             */
+            toteutusOid?: string;
+            haut?: {
+                /**
+                 * @description Toteutukseen liittyvän haun yksilöivä tunniste.
+                 * @example 1.2.246.562.29.00000000000000000009
+                 */
+                hakuOid?: string;
+                /** @description Haun Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+                nimi?: components["schemas"]["Nimi"];
+                /**
+                 * @description Haun hakutapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/hakutapa/11)
+                 * @example hakutapa_03#1
+                 */
+                hakutapaKoodiUri?: string;
+                /** @description Haun julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
+                tila?: components["schemas"]["Julkaisutila"];
+                /** @description Koulutuksen alkamiskausi */
+                koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
+                /**
+                 * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus. Hakukohteella voi olla eri hakulomake kuin haulla.
+                 * @example ataru
+                 * @enum {string}
+                 */
+                hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
+                /**
+                 * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake. Hakukohteella voi olla eri hakulomake kuin haulla.
+                 * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                 */
+                hakulomakeAtaruId?: string;
+                /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
+                hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
+                /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
+                hakulomakeLinkki?: components["schemas"]["Linkki"];
+                /**
+                 * @description Haun luoneen organisaation oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid?: string;
+                /**
+                 * @description Haun kohdejoukko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukko/1)
+                 * @example haunkohdejoukko_17#1
+                 */
+                kohdejoukkoKoodiUri?: string;
+                /** @description Haun hakuajat. Hakukohteella voi olla omat hakuajat. */
+                hakuajat?: components["schemas"]["Ajanjakso"][];
+                /**
+                 * @description Hakua viimeksi muokanneen virkailijan henkilö-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                muokkaaja?: string;
+                /**
+                 * Format: date-time
+                 * @description Haun viimeisin muokkausaika. Järjestelmän generoima
+                 * @example 2019-08-23T09:55:17
+                 */
+                modified?: string;
+                /** @description Hakuun liittyvien hakukohteiden hakutiedot */
+                hakukohteet?: {
+                    /**
+                     * @description Hakukohteen yksilöivä tunniste. Järjestelmän generoima.
+                     * @example 1.2.246.562.20.00000000000000000009
+                     */
+                    hakukohdeOid?: string;
+                    /** @description Hakukohteen julkaisutila. Jos hakukohde on julkaistu, se näkyy oppijalle Opintopolussa. */
+                    tila?: components["schemas"]["Julkaisutila"];
+                    /** @description Onko hakukohde nähtävissä esikatselussa */
+                    esikatselu?: boolean;
+                    /** @description Hakukohteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+                    nimi?: components["schemas"]["Nimi"];
+                    /** @description Koulutuksen alkamiskausi */
+                    koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
+                    /** @description Käytetäänkö haun alkamiskautta ja -vuotta vai onko hakukohteelle määritelty oma alkamisajankohta? */
+                    kaytetaanHaunAlkamiskautta?: boolean;
+                    /**
+                     * @description Hakukohteen järjestyspaikan organisaatio
+                     * @example 1.2.246.562.10.00101010101
+                     */
+                    jarjestyspaikkaOid?: string;
+                    /**
+                     * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus.
+                     * @example ataru
+                     * @enum {string}
+                     */
+                    hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
+                    /**
+                     * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake
+                     * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                     */
+                    hakulomakeAtaruId?: string;
+                    /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+                    hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
+                    /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+                    hakulomakeLinkki?: components["schemas"]["Linkki"];
+                    /** @description Käytetäänkö haun hakulomaketta vai onko hakukohteelle määritelty oma hakulomake? */
+                    kaytetaanHaunHakulomaketta?: boolean;
+                    /** @description Hakukohteen aloituspaikat */
+                    aloituspaikat?: components["schemas"]["Aloituspaikat"];
+                    /** @description lukiototeutuksen hakukohteen linja */
+                    hakukohteenLinja?: components["schemas"]["HakukohteenLinja"];
+                    /** @description Käytetäänkö haun hakuaikoja vai onko hakukohteelle määritelty omat hakuajat? */
+                    kaytetaanHaunAikataulua?: boolean;
+                    /** @description Hakukohteen hakuajat, jos ei käytetä haun hakuaikoja */
+                    hakuajat?: components["schemas"]["Ajanjakso"][];
+                    /**
+                     * @description Hakukohteen pohjakoulutusvaatimusKoodiUrit
+                     * @example [
+                     *       "pohjakoulutusvaatimuskouta_pk#1",
+                     *       "pohjakoulutusvaatimuskouta_yo#1"
+                     *     ]
+                     */
+                    pohjakoulutusvaatimusKoodiUrit?: string[];
+                    /** @description Hakukohteen pohjakoulutusvaatimuksen tarkennus */
+                    pohjakoulutusvaatimusTarkenne?: components["schemas"]["Kuvaus"];
+                    /**
+                     * @description Hakukohdetta viimeksi muokanneen virkailijan henkilö-oid
+                     * @example 1.2.246.562.10.00101010101
+                     */
+                    muokkaaja?: string;
+                    /**
+                     * @description Hakukohteen luoneen organisaation oid
+                     * @example 1.2.246.562.10.00101010101
+                     */
+                    organisaatioOid?: string;
+                    /**
+                     * @description Hakukohteeseen liitetyn valintaperusteen valintatapojen koodiUrit
+                     * @example [
+                     *       "valintatapajono_av#1",
+                     *       "valintatapajono_tv#1"
+                     *     ]
+                     */
+                    valintatapaKoodiUrit?: string[];
+                    /**
+                     * Format: date-time
+                     * @description Hakukohteen viimeisin muokkausaika. Järjestelmän generoima
+                     * @example 2019-08-23T09:55:17
+                     */
+                    modified?: string;
+                }[];
+            }[];
+        };
+        HakukohdeListItem: {
+            /**
+             * @description Hakukohteen yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.20.00000000000000000009
+             */
+            oid?: string;
+            /**
+             * @description Hakukohteeseen liitetyn toteutuksen yksilöivä tunniste.
+             * @example 1.2.246.562.17.00000000000000000009
+             */
+            toteutusOid?: string;
+            /**
+             * @description Hakukohteeseen liitetyn haun yksilöivä tunniste.
+             * @example 1.2.246.562.29.00000000000000000009
+             */
+            hakuOid?: string;
+            /**
+             * @description Hakukohteeseen liitetyn valintaperusteen yksilöivä tunniste.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            valintaperusteId?: string;
+            /** @description Hakukohteen julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Hakukohteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description Hakukohdetta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Hakukohteen järjestyspaikan organisaatio
+             * @example 1.2.246.562.10.00101010101
+             */
+            jarjestyspaikkaOid?: string;
+            /**
+             * @description Hakukohteen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Hakukohteen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        Hakukohde: {
+            /**
+             * @description Hakukohteen yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.20.00000000000000000009
+             */
+            oid?: string;
+            /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
+            externalId?: string;
+            /**
+             * @description Hakukohteeseen liitetyn toteutuksen yksilöivä tunniste.
+             * @example 1.2.246.562.17.00000000000000000009
+             */
+            toteutusOid?: string;
+            /**
+             * @description Hakukohteeseen liitetyn haun yksilöivä tunniste.
+             * @example 1.2.246.562.29.00000000000000000009
+             */
+            hakuOid?: string;
+            /** @description Haun julkaisutila. Jos hakukohde on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Onko hakukohde nähtävissä esikatselussa */
+            esikatselu?: boolean;
+            /** @description Hakukohteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /** @description KoodiUri, josta hakukohteen nimi muodostetaan. Hakukohteella täytyy olla joko hakukohdeKoodiUri tai nimi. Jos koodiUri löytyy, muodostetaan nimi sen avulla. */
+            hakukohdeKoodiUri?: string;
+            /**
+             * @description Hakukohteen järjestyspaikan organisaatio
+             * @example 1.2.246.562.10.00101010101
+             */
+            jarjestyspaikkaOid?: string;
+            /**
+             * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus.
+             * @example ataru
+             * @enum {string}
+             */
+            hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
+            /**
+             * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            hakulomakeAtaruId?: string;
+            /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+            hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. */
+            hakulomakeLinkki?: components["schemas"]["Linkki"];
+            /** @description Käytetäänkö haun hakulomaketta vai onko hakukohteelle määritelty oma hakulomake? */
+            kaytetaanHaunHakulomaketta?: boolean;
+            /**
+             * @deprecated
+             * @description Hakukohteen aloituspaikkojen lukumäärä
+             * @example 100
+             */
+            aloituspaikat?: number;
+            /**
+             * @deprecated
+             * @description Hakukohteen ensikertalaisen aloituspaikkojen lukumäärä
+             * @example 50
+             */
+            ensikertalaisenAloituspaikat?: number;
+            /**
+             * @description Lista hakukohteen pohjakoulutusvaatimuksista. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/pohjakoulutusvaatimuskouta/1)
+             * @example [
+             *       "pohjakoulutusvaatimuskouta_104#1",
+             *       "pohjakoulutusvaatimuskouta_109#1"
+             *     ]
+             */
+            pohjakoulutusvaatimusKoodiUrit?: string[];
+            /** @description Pohjakoulutusvaatimukset tarkenneteksti eri kielillä */
+            pohjakoulutusvaatimusTarkenne?: components["schemas"]["Kuvaus"];
+            /** @description Hakukohteen muiden pohjakoulutusvaatimusten kuvaus eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            muuPohjakoulutusvaatimus?: components["schemas"]["Kuvaus"];
+            /** @description Onko hakukohteen toisen asteen koulutuksessa mahdollista suorittaa kaksoistutkinto? */
+            toinenAsteOnkoKaksoistutkinto?: boolean;
+            /** @description Käytetäänkö haun hakuaikoja vai onko hakukohteelle määritelty omat hakuajat? */
+            kaytetaanHaunAikataulua?: boolean;
+            /** @description Hakukohteen hakuajat, jos ei käytetä haun hakuaikoja */
+            hakuajat?: components["schemas"]["Ajanjakso"][];
+            /**
+             * @description Hakukohteeseen liittyvän valintaperustekuvauksen yksilöivä tunniste
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            valintaperusteId?: string;
+            /** @description Onko kaikilla hakukohteen liitteillä sama toimitusaika? */
+            liitteetOnkoSamaToimitusaika?: boolean;
+            /** @description Onko kaikilla hakukohteen liitteillä sama toimitusosoite? */
+            liitteetOnkoSamaToimitusosoite?: boolean;
+            /**
+             * Format: date-time
+             * @description Jos liitteillä on sama toimitusaika, se ilmoitetaan tässä
+             * @example 2019-08-23T09:55
+             */
+            liitteidenToimitusaika?: string;
+            /**
+             * @description Jos liitteillä on sama toimitustapa, se ilmoitetaan tässä
+             * @example hakijapalvelu
+             * @enum {string}
+             */
+            liitteidenToimitustapa?: "hakijapalvelu" | "osoite" | "lomake";
+            /** @description Jos liitteillä on sama toimitusosoite, se ilmoitetaan tässä */
+            liitteidenToimitusosoite?: components["schemas"]["LiitteenToimitusosoite"];
+            /** @description Hakukohteen liitteet */
+            liitteet?: components["schemas"]["Liite"][];
+            /** @description Hakukohteeseen liittyvät valintakokeet */
+            valintakokeet?: components["schemas"]["Valintakoe"][];
+            /**
+             * @description Kielet, joille hakukohteen nimi, kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            metadata?: components["schemas"]["HakukohdeMetadata"];
+            /**
+             * @description Hakukohdetta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Hakukohteen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Hakukohteen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+            _enrichedData?: components["schemas"]["EnrichedData"];
+        };
+        HakukohdeMetadata: {
+            /** @description Valintakokeiden yleiskuvaus eri kielillä. Kielet on määritetty hakukohteen kielivalinnassa. */
+            valintakokeidenYleiskuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Hakukohteen kynnysehto eri kielillä. Kielet on määritetty hakukohteen kielivalinnassa. */
+            kynnysehto?: components["schemas"]["Kuvaus"];
+            /** @description Hakukohteeseen liitetyn valintaperusteen valintakokeisiin liitetyt lisätilaisuudet */
+            valintaperusteenValintakokeidenLisatilaisuudet?: components["schemas"]["ValintakokeenLisatilaisuudet"][];
+            /** @description Koulutuksen alkamiskausi */
+            koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
+            /** @description Käytetäänkö haun alkamiskautta ja -vuotta vai onko hakukohteelle määritelty oma alkamisajankohta? */
+            kaytetaanHaunAlkamiskautta?: boolean;
+            /** @description Hakukohteen aloituspaikkojen tiedot */
+            aloituspaikat?: components["schemas"]["Aloituspaikat"];
+            /** @description lukiototeutuksen hakukohteen linja */
+            hakukohteenLinja?: components["schemas"]["HakukohteenLinja"];
+            /** @description Uuden opiskelijan ohjeita sisältävän verkkosivun URL */
+            uudenOpiskelijanUrl?: components["schemas"]["Linkki"];
+            /** @description Hakukohde on urheilijoille tarkoitettua ammatillista koulutusta */
+            jarjestaaUrheilijanAmmKoulutusta?: boolean;
+        };
+        Liite: {
+            /**
+             * @description Liitteen yksilöivä tunniste. Järjestelmän generoima.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+            /**
+             * @description Liitteen tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/liitetyypitamm/1)
+             * @example liitetyypitamm_3#1
+             */
+            tyyppiKoodiUri?: string;
+            /** @description Liitteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /** @description Liitteen Opintopolussa näytettävä kuvaus eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            kuvaus?: components["schemas"]["Kuvaus"];
+            /**
+             * Format: date-time
+             * @description Liitteen toimitusaika, jos ei ole sama kuin kaikilla hakukohteen liitteillä
+             * @example 2019-08-23T09:55
+             */
+            toimitusaika?: string;
+            /**
+             * @description Liitteen toimitustapa, jos ei ole sama kuin kaikilla hakukohteen liitteillä
+             * @example hakijapalvelu
+             * @enum {string}
+             */
+            toimitustapa?: "hakijapalvelu" | "osoite" | "lomake";
+            /** @description Liitteen toimitusosoite, jos ei ole sama kuin kaikilla hakukohteen liitteillä */
+            toimitusosoite?: components["schemas"]["LiitteenToimitusosoite"];
+        };
+        LiitteenToimitusosoite: {
+            /** @description Liitteen toimitusosoite */
+            osoite?: components["schemas"]["Osoite"];
+            /** @description Sähköpostiosoite, johon liite voidaan toimittaa */
+            sahkoposti?: components["schemas"]["Teksti"];
+            /** @description Verkkosivu, jonka kautta liitteet voidaan toimittaa */
+            verkkosivu?: components["schemas"]["Teksti"];
+        };
+        PainotettuOppiaine: {
+            /** @description Oppiaineen (ja mahdollisesti kielen) koodistokoodiURI */
+            koodiUrit?: components["schemas"]["OppiaineKoodiUrit"];
+            /**
+             * @description Oppiaineelle määritty opiskelijavalinnassa käytettävä painokerroin
+             * @example 1.2
+             */
+            painokerroin?: number;
+        };
+        OppiaineKoodiUrit: {
+            /**
+             * @description Oppiaineen koodiURI tai kielitason koodiURI-etuliite (esim. "painotettavatoppiaineetlukiossa_b2")
+             * @example painotettavatoppiaineetlukiossa_b2
+             */
+            oppiaine?: string;
+            /**
+             * @description Kielen koodiURI koodistossa
+             * @example kieli_en
+             */
+            kieli?: string;
+        };
+        HakukohteenLinja: {
+            /**
+             * @description Linjan koodiUri, tai tyhjä arvo (= yleislinja)
+             * @example lukiopainotukset_0102#1
+             */
+            linja?: string;
+            /**
+             * @description Linjan alin hyväksytty keskiarvo
+             * @example 8,2
+             */
+            alinHyvaksyttyKeskiarvo?: number;
+            /** @description Lisätietoa keskiarvosta */
+            lisatietoa?: components["schemas"]["Kuvaus"];
+            /** @description Opiskelijavalinnassa käytettävät oppiaineet, joita painotetaan valintaa tehdessä */
+            painotetutArvosanat?: components["schemas"]["PainotettuOppiaine"][];
+        };
+        EnrichedData: {
+            /** @description Koulutustyyppikohtainen esittämistä varten muodostettu nimi käytettäväksi kouta-uin puolella */
+            esitysnimi?: components["schemas"]["Nimi"];
+        };
+        Haku: {
+            /**
+             * @description Haun yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.29.00000000000000000009
+             */
+            oid?: string;
+            /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
+            externalId?: string;
+            /** @description Haun julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Haun Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description Haun hakutapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/hakutapa/1)
+             * @example hakutapa_03#1
+             */
+            hakutapaKoodiUri?: string;
+            /**
+             * Format: date-time
+             * @description Viimeinen ajanhetki, jolloin hakuun saa liittää hakukohteen. Hakukohteita ei saa lisätä enää sen jälkeen, kun haku on käynnissä.
+             * @example 2019-08-23T09:55
+             */
+            hakukohteenLiittamisenTakaraja?: string;
+            /**
+             * Format: date-time
+             * @description Viimeinen ajanhetki, jolloin hakuun liitettyä hakukohdetta on sallittua muokata. Hakukohteen tietoja ei saa muokata enää sen jälkeen, kun haku on käynnissä.
+             * @example 2019-08-23T09:55
+             */
+            hakukohteenMuokkaamisenTakaraja?: string;
+            /**
+             * @description Hakukohteen liittajaorganisaatioiden oidit
+             * @example [
+             *       "1.2.246.562.10.00101010101",
+             *       "1.2.246.562.10.00101010102"
+             *     ]
+             */
+            hakukohteenLiittajaOrganisaatiot?: string[];
+            /**
+             * Format: date-time
+             * @description Ajanhetki, jolloin haku ja siihen liittyvät hakukohteet ja koulutukset julkaistaan automaattisesti Opintopolussa, jos ne eivät vielä ole julkisia
+             * @example 2019-08-23T09:55
+             */
+            ajastettuJulkaisu?: string;
+            /**
+             * Format: date-time
+             * @description Ajanhetki, jolloin haku ja siihen liittyvät hakukohteet arkistoidaan. Jos tyhjä, arkistoidaan hakukohteet 10 kuukautta hakuajan päättymisen jälkeen.
+             * @example 2019-08-23T09:55
+             */
+            ajastettuHaunJaHakukohteidenArkistointi?: string;
+            /**
+             * Format: date-time
+             * @description Ajanhetki, jolloin haun ja siihen liittyvät hakukohteiden ajastettu arkistointi on ajettu kyseiselle haulle.
+             * @example 2019-08-23T09:55
+             */
+            ajastettuHaunJaHakukohteidenArkistointiAjettu?: string;
+            /**
+             * @description Haun kohdejoukko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukko/1)
+             * @example haunkohdejoukko_17#1
+             */
+            kohdejoukkoKoodiUri?: string;
+            /**
+             * @description Haun kohdejoukon tarkenne. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukontarkenne/1)
+             * @example haunkohdejoukontarkenne_1#1
+             */
+            kohdejoukonTarkenneKoodiUri?: string;
+            /**
+             * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus. Hakukohteella voi olla eri hakulomake kuin haulla.
+             * @example ataru
+             * @enum {string}
+             */
+            hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
+            /**
+             * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake. Hakukohteella voi olla eri hakulomake kuin haulla.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            hakulomakeAtaruId?: string;
+            /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
+            hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
+            hakulomakeLinkki?: components["schemas"]["Linkki"];
+            /** @description Haun hakuajat. Hakukohteella voi olla omat hakuajat. */
+            hakuajat?: components["schemas"]["Ajanjakso"][];
+            metadata?: components["schemas"]["HakuMetadata"];
+            /**
+             * @description Kielet, joille haun nimi, kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            /**
+             * @description Hakua viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Haun luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Haun viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        HakuMetadata: {
+            /** @description Lista haun yhteyshenkilöistä */
+            yhteyshenkilot?: components["schemas"]["Yhteyshenkilo"][];
+            /** @description Oppijalle Opintopolussa näytettävät haun mahdolliset tulevat hakuajat */
+            tulevaisuudenAikataulu?: components["schemas"]["Ajanjakso"][];
+            /** @description Koulutuksen alkamiskausi */
+            koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
+        };
+        HakuListItem: {
+            /**
+             * @description Haun yksilöivä tunniste. Järjestelmän generoima.
+             * @example 1.2.246.562.29.00000000000000000009
+             */
+            oid?: string;
+            /** @description Haun julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Haun Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description Hakua viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Haun luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Haun viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        Valintatapa: {
+            /**
+             * @description Valintatapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/valintatapajono/1)
+             * @example valintatapajono_av#1
+             */
+            valintatapaKoodiUri?: string;
+            /** @description Valintatapakuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /** @description Valintatavan kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+            kuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Valintatavan sisältö. Voi sisältää sekä teksti- että taulukkoelementtejä. */
+            sisalto?: components["schemas"]["SisaltoItem"][];
+            /** @description Käytetäänkö muuntotaulukkoa? */
+            kaytaMuuntotaulukkoa?: boolean;
+            /** @description Kynnysehdon kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+            kynnysehto?: components["schemas"]["Kuvaus"];
+            /**
+             * Format: double
+             * @description Valintatavan enimmäispisteet
+             * @example 20
+             */
+            enimmaispisteet?: number;
+            /**
+             * Format: double
+             * @description Valintatavan vähimmäispisteet
+             * @example 10
+             */
+            vahimmaispisteet?: number;
+        };
+        /** @description Valintatavan Opintopolussa näytettävä kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+        SisaltoTeksti: {
+            /** @enum {string} */
+            tyyppi: "teksti";
+            data?: components["schemas"]["Teksti"];
+        };
+        /** @description Taulukkomuotoinen valintatavan sisällön kuvaus */
+        SisaltoTaulukko: {
+            /** @enum {string} */
+            tyyppi: "taulukko";
+            data?: {
+                /**
+                 * @description Taulukon yksilöivä tunnus
+                 * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                 */
+                id?: string;
+                /** @description Taulukon Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+                nimi?: components["schemas"]["Nimi"];
+                /** @description Taulukon rivit */
+                rows?: {
+                    /** @description Rivin järjestysnumero */
+                    index?: number;
+                    /** @description Onko rivi otsikkorivi */
+                    isHeader?: boolean;
+                    /** @description Rivin sarakkeet */
+                    columns?: {
+                        /** @description Sarakkeen järjestysnumero */
+                        index?: number;
+                        /** @description Sarakkeen Opintopolussa näytettävä teksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
+                        text?: components["schemas"]["Teksti"];
+                    }[];
+                }[];
+            };
+        };
+        SisaltoItem: components["schemas"]["SisaltoTeksti"] | components["schemas"]["SisaltoTaulukko"];
+        ValintaperusteMetadata: {
+            /** @description Valintaperustekuvauksen metatiedon (koulutus)tyyppi */
+            tyyppi?: components["schemas"]["Koulutustyyppi"];
+            /** @description Lista valintaperustekuvauksen valintatavoista */
+            valintatavat?: components["schemas"]["Valintatapa"][];
+            /** @description Valintakokeiden yleiskuvaus eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
+            valintakokeidenYleiskuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Valintaperustekuvauksen kuvausteksti eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
+            kuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Valintaperustekuvauksen hakukelpoisuus eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
+            hakukelpoisuus?: components["schemas"]["Kuvaus"];
+            /** @description Valintaperustekuvauksen lisatiedot eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
+            lisatiedot?: components["schemas"]["Kuvaus"];
+            /** @description Valintaperusteen kuvauksen sisältö. Voi sisältää sekä teksti- että taulukkoelementtejä. */
+            sisalto?: components["schemas"]["SisaltoItem"][];
+        };
+        Valintaperuste: {
+            /**
+             * @description Valintaperustekuvauksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+            /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
+            externalId?: string;
+            /** @description Valintaperustekuvauksen julkaisutila. Jos kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Onko valintaperuste nähtävissä esikatselussa */
+            esikatselu?: boolean;
+            /**
+             * @description Minkä tyyppisille koulutuksille valintaperustekuvaus on tarkoitettu käytettäväksi?
+             * @example amm
+             */
+            koulutustyyppi?: components["schemas"]["Koulutustyyppi"];
+            /**
+             * @description Valintaperustekuvaukseen liittyvä hakutapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/hakutapa/11)
+             * @example hakutapa_03#1
+             */
+            hakutapaKoodiUri?: string;
+            /**
+             * @description Valintaperustekuvaukseen liittyvä kohdejoukko. Valintaperusteen ja siihen hakukohteen kautta liittyvän haun kohdejoukon tulee olla sama. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukko/1)
+             * @example haunkohdejoukko_17#1
+             */
+            kohdejoukkoKoodiUri?: string;
+            /**
+             * @deprecated
+             * @description Valintaperustekuvaukseen liittyvän SORA-kuvauksen yksilöivä tunniste
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            sorakuvausId?: string;
+            /** @description Voivatko muut oppilaitokset käyttää valintaperustekuvausta */
+            julkinen?: boolean;
+            /**
+             * @description Kielet, joille valintaperustekuvauksen nimi, kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            /** @description Valintaperustekuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /** @description Hakuun liittyvät valintakokeet */
+            valintakokeet?: components["schemas"]["Valintakoe"][];
+            /** @example {
+             *       "tyyppi": "amm",
+             *       "valintatavat": [
+             *         {
+             *           "valintatapaKoodiUri": "valintatapajono_tv#1",
+             *           "kuvaus": {
+             *             "fi": "Valintatavan suomenkielinen kuvaus",
+             *             "sv": "Valintatavan ruotsinkielinen kuvaus"
+             *           },
+             *           "sisalto": [
+             *             {
+             *               "tyyppi": "teksti",
+             *               "data": {
+             *                 "fi": "Suomenkielinen sisältöteksti",
+             *                 "sv": "Ruotsinkielinen sisältöteksti"
+             *               }
+             *             },
+             *             {
+             *               "tyyppi": "taulukko",
+             *               "data": {
+             *                 "nimi": {
+             *                   "fi": "Taulukon nimi suomeksi",
+             *                   "sv": "Taulukon nimi ruotsiksi"
+             *                 },
+             *                 "rows": [
+             *                   {
+             *                     "index": 0,
+             *                     "isHeader": true,
+             *                     "columns": [
+             *                       {
+             *                         "index": 0,
+             *                         "text": {
+             *                           "fi": "Otsikko suomeksi",
+             *                           "sv": "Otsikko ruotsiksi"
+             *                         }
+             *                       }
+             *                     ]
+             *                   }
+             *                 ]
+             *               }
+             *             }
+             *           ],
+             *           "kaytaMuuntotaulukkoa": true,
+             *           "kynnysehto": {
+             *             "fi": "Kynnysehto suomeksi",
+             *             "sv": "Kynnysehto ruotsiksi"
+             *           },
+             *           "enimmaispisteet": 18.1,
+             *           "vahimmaispisteet": 10.1
+             *         }
+             *       ],
+             *       "koulutusalaKoodiUrit": [
+             *         "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
+             *         "kansallinenkoulutusluokitus2016koulutusalataso2_055#1"
+             *       ],
+             *       "kuvaus": {
+             *         "fi": "Suomenkielinen kuvaus",
+             *         "sv": "Ruotsinkielinen kuvaus"
+             *       }
+             *     } */
+            metadata?: components["schemas"]["ValintaperusteMetadata"];
+            /**
+             * @description Valintaperustekuvausta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Valintaperustekuvauksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Valintaperustekuvauksen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        ValintaperusteListItem: {
+            /**
+             * @description Valintaperustekuvauksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+            /** @description Valintaperustekuvauksen julkaisutila. Jos kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Valintaperustekuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description Valintaperustekuvausta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Valintaperustekuvauksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Valintaperustekuvauksen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        Sorakuvaus: {
+            /**
+             * @description SORA-kuvauksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+            /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
+            externalId?: string;
+            /**
+             * @description Minkä tyyppisiin koulutuksiin SORA-kuvaus liittyy. Sallitut arvot: 'amm' (ammatillinen), 'yo' (yliopisto), 'lk' (lukio), 'amk' (ammattikorkea), 'muu' (muu koulutus)
+             * @example amm
+             * @enum {string}
+             */
+            koulutustyyppi?: "amm" | "yo" | "amk" | "lk" | "muu";
+            /** @description SORA-kuvauksen julkaisutila. Jos SORA-kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /**
+             * @description Kielet, joille SORA-kuvauksen nimi, kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            /** @description SORA-kuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty SORA-kuvauksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /** @description SORA-kuvauksen kuvailutiedot eri kielillä */
+            metadata?: {
+                /** @description SORA-kuvauksen kuvausteksti eri kielillä. Kielet on määritetty kuvauksen kielivalinnassa. */
+                kuvaus?: components["schemas"]["Kuvaus"];
+                /** @description Koulutuksen koodi URIt. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11) */
+                koulutusKoodiUrit?: string[];
+                /**
+                 * @description Koulutusala. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso2/1)
+                 * @example kansallinenkoulutusluokitus2016koulutusalataso2_054#1
+                 */
+                koulutusalaKoodiUri?: string;
+            };
+            /**
+             * @description SORA-kuvausta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description SORA-kuvauksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description SORA-kuvauksen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        SorakuvausListItem: {
+            /**
+             * @description SORA-kuvauksen yksilöivä tunniste. Järjestelmän generoima.
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+            /** @description SORA-kuvauksen julkaisutila. Jos SORA-kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description SORA-kuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty SORA-kuvauksen kielivalinnassa. */
+            nimi?: components["schemas"]["Nimi"];
+            /**
+             * @description SORA-kuvausta viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description SORA-kuvauksen luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description SORA-kuvauksen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        Oppilaitos: {
+            /**
+             * @description Oppilaitoksen organisaatio-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            oid?: string;
+            /** @description Oppilaitoksen julkaisutila. Jos oppilaitos on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Onko oppilaitos nähtävissä esikatselussa */
+            esikatselu?: boolean;
+            /**
+             * @description Kielet, joille oppilaitoksen kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            metadata?: components["schemas"]["OppilaitosMetadata"];
+            /**
+             * @description Oppilaitosta kuvailutietoja viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.24.00101010101.
+             */
+            muokkaaja?: string;
+            /**
+             * @description Oppilaitoksen kuvailutiedot luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * @description Oppilaitoksen Opintopolussa näytettävän teemakuvan URL.
+             * @example https://konfo-files.opintopolku.fi/oppilaitos-teemakuva/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
+             */
+            teemakuva?: string;
+            /**
+             * @description Oppilaitoksen Opintopolussa näytettävän logon URL.
+             * @example https://konfo-files.opintopolku.fi/oppilaitos-logo/1.2.246.562.10.00000000000000000009/ba9dd816-81fb-44ea-aafd-14ee3014e086.png
+             */
+            logo?: string;
+            /**
+             * Format: date-time
+             * @description Oppilaitoksen kuvailutietojen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+            osat?: components["schemas"]["OppilaitoksenOsa"][];
+            _enrichedData?: components["schemas"]["OppilaitosEnrichedData"];
+        };
+        OppilaitoksenOsa: {
+            /**
+             * @description Oppilaitoksen osan organisaatio-oid
+             * @example 1.2.246.562.10.00101010102
+             */
+            oid?: string;
+            /**
+             * @description Oppilaitoksen osan oppilaitoksen organisaatio-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            oppilaitosOid?: string;
+            /** @description Oppilaitoksen osan julkaisutila. Jos oppilaitoksen osa on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /** @description Onko oppilaitoksen osa nähtävissä esikatselussa */
+            esikatselu?: boolean;
+            /**
+             * @description Kielet, joille oppilaitoksen osan kuvailutiedot ja muut tekstit on käännetty
+             * @example [
+             *       "fi",
+             *       "sv"
+             *     ]
+             */
+            kielivalinta?: components["schemas"]["Kieli"][];
+            metadata?: components["schemas"]["OppilaitoksenOsaMetadata"];
+            /**
+             * @description Oppilaitoksen osan kuvailutietoja viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Oppilaitoksen osan kuvailutiedot luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * @description Oppilaitoksen osan Opintopolussa näytettävän teemakuvan URL.
+             * @example https://konfo-files.opintopolku.fi/oppilaitoksen-osa-teemakuva/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
+             */
+            teemakuva?: string;
+            /**
+             * Format: date-time
+             * @description Oppilaitoksen osan kuvailutietojen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+            _enrichedData?: components["schemas"]["OppilaitosEnrichedData"];
+        };
+        OppilaitosMetadata: {
+            /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+            wwwSivu?: components["schemas"]["NimettyLinkki"];
+            /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+            esittelyvideo?: components["schemas"]["NimettyLinkki"];
+            /** @description Opintopolussa näytettävien sosiaalisen median kanavien osoitteita. Koodiurit toimivat avaimena. */
+            some?: Record<string, never>;
+            /** @description Oppilaitokseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
+            tietoaOpiskelusta?: components["schemas"]["TietoaOpiskelusta"][];
+            /** @description Oppilaitoksen Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            esittely?: components["schemas"]["Kuvaus"];
+            /** @description Oppilaitoksen opiskelijoiden lkm */
+            opiskelijoita?: number;
+            /** @description Oppilaitoksen korkeakoulujen lkm */
+            korkeakouluja?: number;
+            /** @description Oppilaitoksen tiedekuntien lkm */
+            tiedekuntia?: number;
+            /** @description Oppilaitoksen kampuksien lkm */
+            kampuksia?: number;
+            /** @description Oppilaitoksen yksiköiden lkm */
+            yksikoita?: number;
+            /** @description Oppilaitoksen toimipisteiden lkm */
+            toimipisteita?: number;
+            /** @description Oppilaitoksen akatemioiden lkm */
+            akatemioita?: number;
+            /**
+             * @description Oppilaitoksen Opintopolussa näytettävän teemakuvan URL.
+             * @example https://konfo-files.opintopolku.fi/toteutus-teema/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
+             */
+            teemakuva?: string;
+            /** @description Järjestääkö oppilaitos urheilijan ammatillista koulutusta? */
+            jarjestaaUrheilijanAmmKoulutusta?: boolean;
+        };
+        OppilaitoksenOsaMetadata: {
+            /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+            wwwSivu?: components["schemas"]["NimettyLinkki"];
+            /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+            esittelyvideo?: components["schemas"]["NimettyLinkki"];
+            /** @description Oppilaitoksen Opintopolussa näytettävät hakijapalveluiden yhteystiedot */
+            hakijapalveluidenYhteystiedot?: components["schemas"]["Yhteystieto"];
+            /** @description Oppilaitoksen osan Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            esittely?: components["schemas"]["Kuvaus"];
+            /** @description Oppilaitoksen osan kampuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            kampus?: components["schemas"]["Nimi"];
+            /** @description Oppilaitoksen osan opiskelijoiden lkm */
+            opiskelijoita?: number;
+            /**
+             * @description Oppilaitoksen osan Opintopolussa näytettävän teemakuvan URL.
+             * @example https://konfo-files.opintopolku.fi/toteutus-teema/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
+             */
+            teemakuva?: string;
+            /** @description Järjestääkö oppilaitoksen osa urheilijan ammatillista koulutusta? */
+            jarjestaaUrheilijanAmmKoulutusta?: boolean;
+        };
+        OppilaitosEnrichedData: {
+            /** @description Oppilaitoksen osan kuvailutietoja viimeksi muokanneen virkailijan henkilön nimi */
+            muokkaajanNimi?: components["schemas"]["Nimi"];
+            organisaatio?: components["schemas"]["Organisaatio"];
+        };
+        OppilaitoksenOsaListItem: {
+            /**
+             * @description Oppilaitoksen osan organisaatio-oid
+             * @example 1.2.246.562.10.00101010102
+             */
+            oid?: string;
+            /**
+             * @description Oppilaitoksen osan oppilaitoksen organisaatio-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            oppilaitosOid?: string;
+            /** @description Oppilaitoksen osan julkaisutila. Jos oppilaitoksen osa on julkaistu, se näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+            /**
+             * @description Oppilaitoksen osan kuvailutietoja viimeksi muokanneen virkailijan henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            muokkaaja?: string;
+            /**
+             * @description Oppilaitoksen osan kuvailutiedot luoneen organisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            organisaatioOid?: string;
+            /**
+             * Format: date-time
+             * @description Oppilaitoksen osan kuvailutietojen viimeisin muokkausaika. Järjestelmän generoima
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+        };
+        Yhteystieto: {
+            /** @description Opintopolussa näytettävä yhteystiedon nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
+            nimi?: components["schemas"]["Teksti"];
+            /** @description Opintopolussa näytettävä postiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
+            postiosoite?: components["schemas"]["Osoite"];
+            /** @description Opintopolussa näytettävä käyntiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
+            kayntiosoite?: components["schemas"]["Osoite"];
+            /** @description Opintopolussa näytettävä sähköpostiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
+            sahkoposti?: components["schemas"]["Teksti"];
+            /** @description Opintopolussa näytettävä puhelinnumero eri kielillä. Kielet on määritetty kielivalinnassa. */
+            puhelinnumero?: components["schemas"]["Teksti"];
+            /** @description Opintopolussa näytettävä verkkosivu eri kielillä. Kielet on määritetty kielivalinnassa. */
+            www?: components["schemas"]["Teksti"];
+        };
+        TietoaOpiskelusta: {
+            /**
+             * @description Lisätiedon otsikon koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/organisaationkuvaustiedot/1)
+             * @example organisaationkuvaustiedot_03#1
+             */
+            otsikkoKoodiUri?: string;
+            /** @description Lisätiedon teksti eri kielillä. Kielet on määritetty kielivalinnassa. */
+            teksti?: components["schemas"]["Teksti"];
+        };
+        OppilaitoksetResponse: {
+            oppilaitokset?: components["schemas"]["Oppilaitos"][];
+            organisaatioHierarkia?: components["schemas"]["OrganisaatioHierarkia"];
+        };
+        Organisaatio: {
+            /** @example 1.2.246.562.10.66634895871 */
+            oid: string;
+            parentOids: string[];
+            nimi: components["schemas"]["Nimi"];
+            kieletUris: string[];
+            yhteystiedot?: components["schemas"]["Yhteystieto"];
+            /** @example [
+             *       "kunta_091",
+             *       "kunta_398"
+             *     ] */
+            kotipaikkaUri?: string;
+            /** @example {
+             *       "oid": "1.2.246.562.10.66634895777",
+             *       "parentOids": [
+             *         "1.2.246.562.10.66634895871",
+             *         "1.2.246.562.10.594252633210",
+             *         "1.2.246.562.10.00000000001"
+             *       ],
+             *       "nimi": {
+             *         "fi": "Lapsiorganisaation nimi fi",
+             *         "sv": "Lapsiorganisaation nimi sv",
+             *         "en": "Lapsiorganisaation nimi en"
+             *       },
+             *       "kieletUris": [
+             *         "oppilaitoksenopetuskieli_1"
+             *       ]
+             *     } */
+            children?: components["schemas"]["Organisaatio"][];
+            /** @example oppilaitostyyppi_21 */
+            oppilaitostyyppiUri?: string;
+            organisaatiotyyppiUris?: string[];
+        };
+        OrganisaatioHierarkia: {
+            organisaatiot?: components["schemas"]["Organisaatio"][];
+        };
+        IndexedOrganisaatio: {
+            /**
+             * @description Organisaation nimi
+             * @example Hieno oppilaitos
+             */
+            nimi?: string;
+            /**
+             * @description Oorganisaation oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            oid?: string;
+        };
+        Muokkaaja: {
+            /**
+             * @description Muokkaajan (virkailijan) nimi
+             * @example Mauri Muokkaaja
+             */
+            nimi?: string;
+            /**
+             * @description Muokkaajan (virkailijan) henkilö-oid
+             * @example 1.2.246.562.10.00101010101
+             */
+            oid?: string;
+        };
+        SearchItem: {
+            /** @description Opintopolussa näytettävä nimi eri kielillä */
+            nimi?: components["schemas"]["Nimi"];
+            /** @description Viimeisin muokkaaja */
+            muokkaaja?: components["schemas"]["Muokkaaja"];
+            /** @description Luoja-organisaatio */
+            organisaatio?: components["schemas"]["IndexedOrganisaatio"];
+            /**
+             * Format: date-time
+             * @description Viimeisin muokkausaika
+             * @example 2019-08-23T09:55:17
+             */
+            modified?: string;
+            /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
+            tila?: components["schemas"]["Julkaisutila"];
+        };
+        EPeruste: {
+            /**
+             * @description Koulutuksen ePerusteen id
+             * @example 1234
+             */
+            id?: number;
+            /**
+             * @description Koulutuksen ePerusteen diaarinumero
+             * @example 1234-OPH-2021
+             */
+            diaarinumero?: string;
+            /**
+             * @description Koulutuksen ePerusteen voimassaolon loppumishetki
+             * @example 2030-12-12T00:00:00
+             */
+            voimassaoloLoppuu?: string;
+        };
+        KoulutusSearchItem: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Koulutuksen yksilöivä tunniste
+             * @example 1.2.246.562.13.00000000000000000009
+             */
+            oid?: string;
+            /** @description Koulutuksen ePerusteen tiedot */
+            eperuste?: components["schemas"]["EPeruste"];
+            /**
+             * @description Koulutukseen liitettyjen organisaation toteutusten lukumäärä
+             * @example 6
+             */
+            toteutusCount?: number;
+        };
+        KoulutusSearchItemWithToteutukset: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Koulutuksen yksilöivä tunniste
+             * @example 1.2.246.562.13.00000000000000000009
+             */
+            oid?: string;
+            /** @description Koulutuksen ePerusteen tiedot */
+            eperuste?: components["schemas"]["EPeruste"];
+            /** @description Koulutukseen liitetyt toteutukset */
+            toteutukset?: {
+                /**
+                 * @description Toteutuksen yksilöivä tunniste
+                 * @example 1.2.246.562.17.00000000000000000009
+                 */
+                oid?: string;
+                /** @description Opintopolussa näytettävä nimi eri kielillä */
+                nimi?: components["schemas"]["Nimi"];
+                /** @description Luoja-organisaatio */
+                organisaatio?: components["schemas"]["IndexedOrganisaatio"];
+                /**
+                 * Format: date-time
+                 * @description Viimeisin muokkausaika
+                 * @example 2019-08-23T09:55:17
+                 */
+                modified?: string;
+                /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
+                tila?: components["schemas"]["Julkaisutila"];
+            };
+        };
+        KoulutusSearchResult: {
+            /**
+             * @description Hakutulosten kokonaismäärä
+             * @example 100
+             */
+            totalCount?: number;
+            /** @description Haussa löytyneet koulutukset */
+            result?: components["schemas"]["KoulutusSearchItem"][];
+        };
+        ToteutusSearchItem: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Toteutuksen yksilöivä tunniste
+             * @example 1.2.246.562.17.00000000000000000009
+             */
+            oid?: string;
+            /**
+             * @description Toteutukseen liitettyjen hakukohteiden lukumäärä
+             * @example 6
+             */
+            hakukohdeCount?: number;
+        };
+        ToteutusSearchItemWithHakukohteet: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Toteutuksen yksilöivä tunniste
+             * @example 1.2.246.562.17.00000000000000000009
+             */
+            oid?: string;
+            /** @description Toteutukseen liitetyt hakukohteet */
+            hakukohteet?: {
+                /**
+                 * @description Hakukohteen yksilöivä tunniste
+                 * @example 1.2.246.562.20.00000000000000000009
+                 */
+                hakukohdeOid?: string;
+                /** @description Opintopolussa näytettävä nimi eri kielillä */
+                nimi?: components["schemas"]["Nimi"];
+                /** @description Luoja-organisaatio */
+                organisaatio?: components["schemas"]["IndexedOrganisaatio"];
+                /**
+                 * Format: date-time
+                 * @description Viimeisin muokkausaika
+                 * @example 2019-08-23T09:55:17
+                 */
+                modified?: string;
+                /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
+                tila?: components["schemas"]["Julkaisutila"];
+            };
+        };
+        ToteutusSearchResult: {
+            /**
+             * @description Hakutulosten kokonaismäärä
+             * @example 100
+             */
+            totalCount?: number;
+            /** @description Haussa löytyneet toteutukset */
+            result?: components["schemas"]["ToteutusSearchItem"][];
+        };
+        HakukohdeSearchItem: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Hakukohteen yksilöivä tunniste
+             * @example 1.2.246.562.20.00000000000000000009
+             */
+            oid?: string;
+        };
+        HakukohdeSearchResult: {
+            /**
+             * @description Hakutulosten kokonaismäärä
+             * @example 100
+             */
+            totalCount?: number;
+            /** @description Haussa löytyneet hakukohteet */
+            result?: components["schemas"]["HakukohdeSearchItem"][];
+        };
+        HakuSearchItem: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Haun yksilöivä tunniste
+             * @example 1.2.246.562.29.00000000000000000009
+             */
+            oid?: string;
+            /**
+             * @description Hakuun liitettyjen hakukohteiden lukumäärä
+             * @example 6
+             */
+            hakukohdeCount?: number;
+        };
+        HakuSearchItemWithHakukohteet: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Haun yksilöivä tunniste
+             * @example 1.2.246.562.29.00000000000000000009
+             */
+            oid?: string;
+            /** @description Hakuun liitetyt hakukohteet */
+            hakukohteet?: {
+                /**
+                 * @description Hakukohteen yksilöivä tunniste
+                 * @example 1.2.246.562.20.00000000000000000009
+                 */
+                oid?: string;
+                /** @description Opintopolussa näytettävä nimi eri kielillä */
+                nimi?: components["schemas"]["Nimi"];
+                /** @description Luoja-organisaatio */
+                organisaatio?: components["schemas"]["IndexedOrganisaatio"];
+                /**
+                 * Format: date-time
+                 * @description Viimeisin muokkausaika
+                 * @example 2019-08-23T09:55:17
+                 */
+                modified?: string;
+                /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
+                tila?: components["schemas"]["Julkaisutila"];
+            };
+        };
+        HakuSearchResult: {
+            /**
+             * @description Hakutulosten kokonaismäärä
+             * @example 100
+             */
+            totalCount?: number;
+            /** @description Haussa löytyneet haut */
+            result?: components["schemas"]["HakuSearchItem"][];
+        };
+        ValintaperusteSearchItem: components["schemas"]["SearchItem"] & {
+            /**
+             * @description Valintaperusteen yksilöivä tunniste
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            id?: string;
+        };
+        ValintaperusteSearchResult: {
+            /**
+             * @description Hakutulosten kokonaismäärä
+             * @example 100
+             */
+            totalCount?: number;
+            /** @description Haussa löytyneet valintaperusteet */
+            result?: components["schemas"]["ValintaperusteSearchItem"][];
+        };
+        /** @description Koulutustyyppiin liitetyt oppilaitostyypit */
+        KoulutustyyppiToOppilaitostyypit: {
+            /**
+             * @description Koulutustyyppi
+             * @example amm
+             */
+            koulutustyyppi?: components["schemas"]["Koulutustyyppi"];
+            /**
+             * @description Oppilaitostyypit (koodiUrit)
+             * @example [
+             *       "oppilaitostyyppi_21#1",
+             *       "oppilaitostyyppi_22#1"
+             *     ]
+             */
+            oppilaitostyypit?: string[];
+        };
+        /** @description Jokaisen koulutustyypin osalta oppilaitostyypit, jotka voivat tarjota ko. koulutusta, ts. mäppäykset koulutustyypistä oppilaitostyyppeihin */
+        KoulutustyyppiToOppilaitostyyppiResult: {
+            koulutustyypitToOppilaitostyypit?: components["schemas"]["KoulutustyyppiToOppilaitostyypit"][];
+        };
+    };
+    responses: never;
+    parameters: {
+        /** @description Vastaavan GETin x-Last-Modified */
+        xIfUnmodifiedSince: string;
+    };
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
+}
+export type $defs = Record<string, never>;
+export interface operations {
+    indexerJulkaistutKoulutukset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KoulutusListItem"][];
+                };
+            };
+        };
+    };
+    "Onko tilamuutos sallittu hakukohteelle": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Hakukohde-oid
+                 * @example 1.2.246.562.20.00000000000000000009
+                 */
+                oid: string;
+                /**
+                 * @description Tila jolle kysytään
+                 * @example poistettu
+                 */
+                tila: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": boolean;
+                };
+            };
+        };
+    };
+    getOppilaitos: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko yhteystiedot myös oppilaitoksen osille? */
+                yhteystiedotForOsat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Oppilaitoksen organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Oppilaitos"];
+                };
+            };
+        };
+    };
+    searchValintaperusteet: {
+        parameters: {
+            query: {
+                /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
+                koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
+                /** @description Organisaation oid */
+                organisaatioOid: string;
+                /** @description Suodata annetulla nimellä tai oidilla */
+                nimi?: string;
+                /** @description Suodata muokkaajan nimellä tai oidilla */
+                muokkaaja?: string;
+                /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
+                tila?: string[];
+                /** @description Suodata entiteetin näkyvyydellä */
+                julkinen?: boolean;
+                /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
+                hakutapa?: string[];
+                /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
+                koulutuksenAlkamiskausi?: string[];
+                /** @description Suodata pilkulla erotetuilla vuosilla */
+                koulutuksenAlkamisvuosi?: number[];
+                /** @description Suodata haun oidilla */
+                hakuOid?: string;
+                /** @description Suodata toteutuksen oidilla */
+                toteutusOid?: string;
+                /** @description Suodata koulutuksen oidilla */
+                koulutusOid?: string;
+                /**
+                 * @description Sivunumero
                  * @example 1
                  */
-                versio?: number;
-                /** @description Koodisto johon koodi kuuluu */
-                koodisto?: {
-                  /** @description Koodiston uri, tässä tapauksessa "koulutus" */
-                  koodistoUri?: string;
-                };
+                page?: number;
                 /**
-                 * @description Päivämäärä johon asti koodi on voimassa
-                 * @example 2015-04-24
+                 * @description Sivun koko
+                 * @example 10
                  */
-                voimassaLoppuPvm?: string;
-                /** @description Koodin metadata */
-                metadata?: {
-                    /**
-                     * @description Koodin nimi
-                     * @example Insinööri (AMK), bio- ja elintarviketekniikka
-                     */
-                    nimi?: string;
-                    /**
-                     * @description Metadataelementin kielitunniste
-                     * @example FI
-                     */
-                    kieli?: string;
-                  }[];
-              }[];
-          };
-        };
-      };
-    };
-  };
-  "/koulutus/listOppilaitostyypitByKoulutustyypit": {
-    /**
-     * Listaa oppilaitostyypit koulutustyypeittäin
-     * @description Listaa jokaisen koulutustyypin osalta oppilaitostyypit, jotka voivat tarjota ko. koulutusta, ts. mäppäykset koulutustyypistä oppilaitostyyppeihin
-     */
-    get: operations["Listaa oppilaitostyypit"];
-  };
-  "/sorakuvaus/": {
-    /**
-     * Tallenna uusi SORA-kuvaus
-     * @description Tallenna uuden SORA-kuvauksen tiedot. Rajapinta palauttaa SORA-kuvaukselle generoidun yksilöivän id:n
-     */
-    put: operations["Tallenna uusi sorakuvaus"];
-    /**
-     * Muokkaa olemassa olevaa SORA-kuvausta
-     * @description Muokkaa olemassa olevaa SORA-kuvausta. Rajapinnalle annetaan SORA-kuvauksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["Muokkaa sorakuvausta"];
-  };
-  "/sorakuvaus/list": {
-    /**
-     * Listaa organisaation käytettävissä olevat SORA-kuvaukset
-     * @description Listaa niiden SORA-kuvausten tiedot, jotka ovat organisaation käytettävissä.
-     */
-    get: operations["Listaa sorakuvaukset"];
-  };
-  "/organisaatio/oppilaitokset-for-avoin-korkeakoulutus": {
-    /**
-     * Listaa avoimen korkeakoulutuksen oppilaitokset (ei osia)
-     * @description Listaa avoimen korkeakoulutuksen oppilaitokset organisaatiopalvelusta
-     */
-    get: operations["getHierarkiaForAvoinKorkeakoulutus"];
-  };
-  "/indexer/koulutukset": {
-    /**
-     * Hakee koulutukset, joiden oidit annettu requestBodyssä
-     * @description Hakee koulutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
-     */
-    post: operations["indexerKoulutukset"];
-  };
-  "/indexer/koulutus/{oid}/hakutiedot": {
-    /**
-     * Hae koulutukseen liittyvät hakutiedot
-     * @description Hakee koulutuksen olemassaolevat (=ei poistetut) ja arkistoimattomat hakutiedot. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerKoulutusHakutiedot"];
-  };
-  "/siirtotiedosto/haut": {
-    /**
-     * Tallentaa haut siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut haut ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoHaut"];
-  };
-  "/indexer/list-toteutus-oids-by-tarjoajat": {
-    /**
-     * Hakee tarjoajaa (oppilaitos tai toimipiste) vastaavat toteutukset
-     * @description Hakee kaikkien niiden toteutusten oidit, joissa annettu oppilaitos/toimipiste on sen tarjoajana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
-     */
-    post: operations["indexerListToteutusOidsByTarjoajat"];
-  };
-  "/indexer/toteutus/{oid}/hakukohteet/list": {
-    /**
-     * Listaa kaikki toteutukseen liitetyt hakukohteet
-     * @description Listaa kaikki toteutukseen liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["listToteutusHakukohteet"];
-  };
-  "/hakukohde/": {
-    /**
-     * Tallenna uusi hakukohde
-     * @description Tallenna uuden hakukohteen tiedot. Rajapinta palauttaa hakukohteelle generoidun yksilöivän hakukohde-oidin.
-     */
-    put: operations["Tallenna uusi hakukohde"];
-    /**
-     * Muokkaa olemassa olevaa hakukohdetta
-     * @description Muokkaa olemassa olevaa hakukohdetta. Rajapinnalle annetaan hakukohteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["Muokkaa hakukohdetta"];
-  };
-  "/indexer/list-koulutus-oids-by-tarjoajat": {
-    /**
-     * Hakee tarjoajaa (oppilaitos tai toimipiste) vastaavat koulutukset
-     * @description Hakee kaikkien niiden koulutusten oidit, joissa annettu oppilaitos/toimipiste on sen tarjoajana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
-     */
-    post: operations["indexerListKoulutusOidsByTarjoajat"];
-  };
-  "/indexer/toteutukset": {
-    /**
-     * Hakee toteutukset, joiden oidit annettu requestBodyssä
-     * @description Hakee toteutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
-     */
-    post: operations["indexerToteutukset"];
-  };
-  "/siirtotiedosto/asiasanat": {
-    /**
-     * Tallentaa asiasanat siirtotiedostoon
-     * @description Hakee kaikki asiasanat ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoAsiasanat"];
-  };
-  "/hakukohde/copy/{hakuOid}": {
-    /**
-     * Tallenna kopiot hakukohteista ja niihin liitetyistä toteutuksista
-     * @description Luodaan kopiot pyynnössä listatuista hakukohteista sekä niihin liitetyistä toteutuksista. Hakukohteesta tehtävä kopio liitetään hakuun, jonka oid annetaan parametrina. Kopiot tallennetaan luonnostilaisina. Rajapinta palauttaa tallennettujen hakukohteiden ja toteutusten yksilöivät oidit.
-     */
-    put: operations["Tallenna kopiot hakukohteista"];
-  };
-  "/auth/session": {
-    /**
-     * Tarkista käyttäjän sessio
-     * @description Tarkista käyttäjän sessio
-     */
-    get: operations["Tarkista sessio"];
-  };
-  "/koulutus/{oid}/toteutukset/list": {
-    /**
-     * Listaa organisaation käytettävissä olevat tietyn koulutuksen toteutukset
-     * @description Listaa ne tietyn koulutuksen toteutukset, jotka ovat organisaation käytettävissä.
-     */
-    get: operations["listKoulutusToteutukset"];
-  };
-  "/haku/{oid}/hakukohteet/list": {
-    /**
-     * Listaa kaikki organisaatiolle kuuluvat hakukohteet, jotka on liitetty hakuun
-     * @description Listaa ne hakuun liitetyt hakukohteet, jotka ovat organisaatiolla on oikeus nähdä. Jos organisaatio-oidia ei ole annettu, listaa haun kaikki hakukohteet, mikäli käyttäjällä on oikeus nähdä ne
-     */
-    get: operations["Listaa haun hakukohteet"];
-  };
-  "/toteutus/tila/{tila}": {
-    /**
-     * Muuttaa usean toteutuksen tilat
-     * @description Muuttaa annettavien toteutusoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen toteutusten yksilöivät oidit.
-     */
-    post: operations["Muuttaa toteutusten tilat"];
-  };
-  "/asiasana/search/{term}": {
-    /**
-     * Hakee asiasanoja annetulla hakutermillä
-     * @description Hakee asiasanoja annetulla hakutermillä
-     */
-    get: operations["Hae asiasanoja"];
-  };
-  "/search/haut": {
-    /**
-     * Hakee organisaation hakuja annetuilla parametreilla
-     * @description Hakee organisaation haut annetuilla parametreilla
-     */
-    get: operations["searchHaut"];
-  };
-  "/oppilaitos/{oid}/osat/list": {
-    /**
-     * Listaa organisaation käytettävissä olevat oppilaitoksen osien kuvailutiedot
-     * @description Listaa ne oppilaitoksen osat, jotka ovat organisaation käytettävissä.
-     */
-    get: operations["listOppilaitosOsat"];
-  };
-  "/indexer/list-opintokokonaisuudet": {
-    /**
-     * Hakee tiedot niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty
-     * @description Hakee tiedot niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty. Tämä rajapinta on indeksointia varten
-     */
-    post: operations["indexerListOpintokokonaisuudet"];
-  };
-  "/haku/{oid}": {
-    /**
-     * Hae haun tiedot
-     * @description Hakee haun kaikki tiedot
-     */
-    get: operations["Hae haku"];
-  };
-  "/oppilaitoksen-osa/{oid}": {
-    /**
-     * Hae oppilaitoksen osan kuvailutiedot
-     * @description Hakee oppilaitoksen osan kuvailutiedot
-     */
-    get: operations["getOppilaitoksenOsa"];
-  };
-  "/siirtotiedosto/sorakuvaukset": {
-    /**
-     * Tallentaa sorakuvaukset siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut sorakuvaukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoSorakuvaukset"];
-  };
-  "/healthcheck/": {
-    /**
-     * Healthcheck-rajapinta
-     * @description Healthcheck-rajapinta
-     */
-    get: {
-      responses: {
-        /** @description Ok */
-        200: {
-          content: never;
-        };
-      };
-    };
-  };
-  "/hakukohde/{oid}": {
-    /**
-     * Hae hakukohteen tiedot
-     * @description Hakee hakukohteen kaikki tiedot
-     */
-    get: operations["Hae hakukohde"];
-  };
-  "/toteutus/opintojaksot/list": {
-    /**
-     * Listaa organisaation käytettävissä olevat opintojaksot
-     * @description Listaa organisaation käytettävissä olevat opintojaksot uutta opintokokonaisuustoteutusta luotaessa
-     */
-    get: operations["Listaa opintojaksot"];
-  };
-  "/auth/login": {
-    /**
-     * Kirjaudu sisään
-     * @description Kirjaudu sisään
-     */
-    get: operations["Kirjaudu sisaan"];
-    /**
-     * Kirjaudu ulos
-     * @description Kirjaudu ulos
-     */
-    post: operations["Kirjaudu ulos"];
-  };
-  "/oppilaitoksen-osa/": {
-    /**
-     * Tallenna uusi oppilaitoksen osan kuvailutieto
-     * @description Tallenna uusi oppilaitoksen osan kuvailutieto. Palauttaa tallennetun oppilaitoksen osan organisaatio-oidin.
-     */
-    put: operations["saveOppilaitoksenOsa"];
-    /**
-     * Muokkaa olemassa olevaa oppilaitoksen osan kuvailutietoa
-     * @description Muokkaa olemassa olevaa oppilaitoksen osan kuvailutietoa. Rajapinnalle annetaan oppilaitoksen osan kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["editOppilaitoksenOsa"];
-  };
-  "/siirtotiedosto/koulutukset": {
-    /**
-     * Tallentaa koulutukset siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoKoulutukset"];
-  };
-  "/indexer/haku/{oid}/toteutukset/list": {
-    /**
-     * Listaa kaikki hakuun liitetyt toteutukset
-     * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) toteutukset. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerListHakuToteutukset"];
-  };
-  "/external/valintaperuste/": {
-    /**
-     * Tallenna uusi valintaperustekuvaus
-     * @description Tallenna uuden valintaperustekuvauksen tiedot. Rajapinta palauttaa valintaperustekuvaukselle generoidun yksilöivän id:n
-     */
-    put: operations["externalValintaperusteSave"];
-    /**
-     * Muokkaa olemassa olevaa valintaperustekuvausta
-     * @description Muokkaa olemassa olevaa valintaperustekuvausta. Rajapinnalle annetaan valintaperusteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["externalValintaperusteEdit"];
-  };
-  "/indexer/list-hakukohde-oids-by-jarjestyspaikat": {
-    /**
-     * Hakee järjestyspaikkaa (oppilaitos tai toimipiste) vastaavat hakukohteet
-     * @description Hakee kaikkien niiden hakukohteiden oidit, joissa annettu oppilaitos/toimipiste on sen järjestyspaikkana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
-     */
-    post: operations["indexerListHakukohdeOidsByJarjestyspaikat"];
-  };
-  "/oppilaitos/": {
-    /**
-     * Tallenna uusi oppilaitoksen kuvailutieto
-     * @description Tallenna uusi oppilaitoksen kuvailutieto. Palauttaa tallennetun oppilaitoksen organisaatio-oidin.
-     */
-    put: operations["saveOppilaitos"];
-    /**
-     * Muokkaa olemassa olevaa oppilaitoksen kuvailutietoa
-     * @description Muokkaa olemassa olevaa oppilaitoksen kuvailutietoa. Rajapinnalle annetaan oppilaitoksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-     */
-    post: operations["editOppilaitos"];
-  };
-  "/indexer/modifiedSince/{since}": {
-    /**
-     * Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen
-     * @description Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen. Tämä rajapinta on indeksointia varten
-     */
-    get: operations["indexerModifiedSince"];
-  };
-  "/asiasana/": {
-    /**
-     * Tallenna asiasanoja
-     * @description Tallenna asiasanoja
-     */
-    post: operations["Tallenna asiasanoja"];
-  };
-  "/koulutus/{oid}": {
-    /**
-     * Hae koulutus
-     * @description Hae koulutuksen tiedot annetulla koulutus-oidilla
-     */
-    get: operations["Hae koulutus"];
-  };
-  "/luokittelutermi/search/{term}": {
-    /**
-     * Hakee luokittelutermejä annetulla hakutermillä
-     * @description Hakee luokittelutermejä annetulla hakutermillä
-     */
-    get: operations["Hae luokittelutermejä"];
-  };
-  "/valintaperuste/{id}": {
-    /**
-     * Hae valintaperustekuvauksen tiedot
-     * @description Hakee valintaperustekuvauksen kaikki tiedot
-     */
-    get: operations["Hae valintaperuste"];
-  };
-  "/siirtotiedosto/oppilaitoksetJaOsat": {
-    /**
-     * Tallentaa oppilaitokset ja niiden osat siirtotiedostoon
-     * @description Hakee annetulla aikavälillä luodut/modifioidut oppilaitokset ja osat, ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-     */
-    get: operations["siirtotiedostoOppilaitoksetJaOsat"];
-  };
-  "/valintaperuste/list": {
-    /**
-     * Listaa organisaation tietyn haun hakukohteille käytettävissä olevat valintaperustekuvaukset
-     * @description Listaa niiden valintaperustekuvausten tiedot, jotka ovat organisaation käytettävissä. Jos haku-oid on annettu, listataan ne kuvaukset, joita voi käyttää kyseisen haun hakukohteille
-     */
-    get: operations["Listaa valintaperusteet"];
-  };
-}
-
-export type webhooks = Record<string, never>;
-
-export interface components {
-  schemas: {
-    /** @enum {string} */
-    Koulutustyyppi: "aikuisten-perusopetus" | "amk" | "amm" | "amm-muu" | "amm-ope-erityisope-ja-opo" | "amm-osaamisala" | "amm-tutkinnon-osa" | "ope-pedag-opinnot" | "erikoislaakari" | "kk-opintojakso" | "kk-opintokokonaisuus" | "erikoistumiskoulutus" | "lk" | "muu" | "taiteen-perusopetus" | "telma" | "tuva" | "vapaa-sivistystyo-muu" | "vapaa-sivistystyo-opistovuosi" | "vapaa-sivistystyo-osaamismerkki" | "yo";
-    /** @enum {string} */
-    Kieli: "fi" | "sv" | "en";
-    /** @enum {string} */
-    Julkaisutila: "julkaistu" | "tallennettu" | "arkistoitu" | "poistettu";
-    Teksti: {
-      /**
-       * @description Suomenkielinen teksti, jos kielivalinnassa on 'fi'
-       * @example Suomenkielinen teksti
-       */
-      fi?: string;
-      /**
-       * @description Ruotsinkielinen teksti, jos kielivalinnassa on 'sv'
-       * @example Ruotsinkielinen teksti
-       */
-      sv?: string;
-      /**
-       * @description Englanninkielinen teksti, jos kielivalinnassa on 'en'
-       * @example Englanninkielinen teksti
-       */
-      en?: string;
-    };
-    Nimi: {
-      /**
-       * @description Suomenkielinen nimi, jos kielivalinnassa on 'fi'
-       * @example Suomenkielinen nimi
-       */
-      fi?: string;
-      /**
-       * @description Ruotsinkielinen nimi, jos kielivalinnassa on 'sv'
-       * @example Ruotsinkielinen nimi
-       */
-      sv?: string;
-      /**
-       * @description Englanninkielinen nimi, jos kielivalinnassa on 'en'
-       * @example Englanninkielinen nimi
-       */
-      en?: string;
-    };
-    Kuvaus: {
-      /**
-       * @description Suomenkielinen kuvaus, jos kielivalinnassa on 'fi'
-       * @example Suomenkielinen kuvaus
-       */
-      fi?: string;
-      /**
-       * @description Ruotsinkielinen kuvaus, jos kielivalinnassa on 'sv'
-       * @example Ruotsinkielinen kuvaus
-       */
-      sv?: string;
-      /**
-       * @description Englanninkielinen kuvaus, jos kielivalinnassa on 'en'
-       * @example Englanninkielinen kuvaus
-       */
-      en?: string;
-    };
-    Linkki: {
-      /**
-       * @description Linkki suomenkieliselle sivulle, jos kielivalinnassa on 'fi'
-       * @example Linkki suomenkieliselle sivulle
-       */
-      fi?: string;
-      /**
-       * @description Linkki ruotsinkieliselle sivulle, jos kielivalinnassa on 'sv'
-       * @example Linkki ruotsinkieliselle sivulle
-       */
-      sv?: string;
-      /**
-       * @description Linkki englanninkieliselle sivulle, jos kielivalinnassa on 'en'
-       * @example Linkki englanninkieliselle sivulle
-       */
-      en?: string;
-    };
-    Lisatieto: {
-      /**
-       * @description Lisätiedon otsikon koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutuksenlisatiedot/1)
-       * @example koulutuksenlisatiedot_03#1
-       */
-      otsikkoKoodiUri?: string;
-      /** @description Lisätiedon teksti eri kielillä. Kielet on määritetty kielivalinnassa. */
-      teksti?: components["schemas"]["Teksti"];
-    };
-    Yhteyshenkilo: {
-      /** @description Yhteyshenkilön nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      nimi?: components["schemas"]["Teksti"];
-      /** @description Yhteyshenkilön titteli eri kielillä. Kielet on määritetty kielivalinnassa. */
-      titteli?: components["schemas"]["Teksti"];
-      /** @description Yhteyshenkilön sähköpostiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
-      sahkoposti?: components["schemas"]["Teksti"];
-      /** @description Yhteyshenkilön puhelinnumero eri kielillä. Kielet on määritetty kielivalinnassa. */
-      puhelinnumero?: components["schemas"]["Teksti"];
-      /** @description Yhteyshenkilön www-sivun linkki eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivu?: components["schemas"]["Teksti"];
-      /** @description Yhteyshenkilön www-sivun linkin kanssa näytettävä teksti eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivuTeksti?: components["schemas"]["Teksti"];
-    };
-    /** @enum {string} */
-    Hakulomaketyyppi: "ataru" | "ei sähköistä" | "muu";
-    Ajanjakso: {
-      /**
-       * Format: date-time
-       * @description Ajanjakson alkuaika
-       * @example 2019-08-23T09:55
-       */
-      alkaa?: string;
-      /**
-       * Format: date-time
-       * @description Ajanjakson päättymisaika
-       * @example 2019-08-23T09:55
-       */
-      paattyy?: string;
-    };
-    Osoite: {
-      /** @description Osoite eri kielillä. Kielet on määritetty kielivalinnassa. */
-      osoite?: components["schemas"]["Teksti"];
-      postinumeroKoodiUri?: {
-        /**
-         * @description Suomenkielisen osoitteen postinumero, jos kielivalinnassa on 'fi'
-         * @example posti_04230#2
-         */
-        fi?: string;
-        /**
-         * @description Ruotsinkielisen osoitteen postinumero, jos kielivalinnassa on 'sv'
-         * @example posti_04231#2
-         */
-        sv?: string;
-        /**
-         * @description Englanninkielisen osoitteen postinumero, jos kielivalinnassa on 'en'
-         * @example posti_04232#2
-         */
-        en?: string;
-      };
-    };
-    /** @description Valintakokeen tiedot */
-    Valintakoe: {
-      /**
-       * @description Valintakokeen yksilöivä tunniste. Järjestelmän generoima.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /**
-       * @description Valintakokeen tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/valintakokeentyyppi/1)
-       * @example valintakokeentyyppi_1#1
-       */
-      tyyppiKoodiUri?: string;
-      /** @description Valintakokeen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      metadata?: components["schemas"]["ValintakoeMetadata"];
-      /** @description Valintakokeen järjestämistilaisuudet */
-      tilaisuudet?: components["schemas"]["Valintakoetilaisuus"][];
-    };
-    ValintakoeMetadata: {
-      /** @description Tietoa valintakokeesta */
-      tietoja?: components["schemas"]["Teksti"];
-      /**
-       * Format: double
-       * @description Valintakokeen vähimmäispisteet
-       * @example 10
-       */
-      vahimmaispisteet?: number;
-      /** @description Liittyykö valintakokeeseen ennakkovalmistautumista */
-      liittyyEnnakkovalmistautumista?: boolean;
-      /** @description Ohjeet valintakokeen ennakkojärjestelyihin */
-      ohjeetEnnakkovalmistautumiseen?: components["schemas"]["Teksti"];
-      /** @description Ovatko erityisjärjestelyt mahdollisia valintakokeessa */
-      erityisjarjestelytMahdollisia?: boolean;
-      /** @description Ohjeet valintakokeen erityisjärjestelyihin */
-      ohjeetErityisjarjestelyihin?: components["schemas"]["Teksti"];
-    };
-    Valintakoetilaisuus: {
-      /** @description Valintakokeen järjestämispaikan osoite */
-      osoite?: components["schemas"]["Osoite"];
-      /** @description Valintakokeen järjestämisaika */
-      aika?: components["schemas"]["Ajanjakso"];
-      /** @description Valintakokeen järjestämispaikka eri kielillä. Kielet on määritetty kielivalinnassa. */
-      jarjestamispaikka?: components["schemas"]["Teksti"];
-      /** @description Lisätietoja valintakokeesta eri kielillä. Kielet on määritetty kielivalinnassa. */
-      lisatietoja?: components["schemas"]["Teksti"];
-    };
-    /** @enum {string} */
-    LiitteenToimitustapa: "hakijapalvelu" | "osoite" | "lomake";
-    ListEverything: {
-      koulutukset?: string[];
-      toteutukset?: string[];
-      haut?: string[];
-      hakukohteet?: string[];
-      valintaperusteet?: string[];
-      oppilaitokset?: string[];
-      sorakuvaukset?: string[];
-    };
-    Authenticated: {
-      /**
-       * @description Session id (UUID)
-       * @example b0c9ccd3-9f56-4d20-8df4-21a1239fcf89
-       */
-      id?: string;
-      /**
-       * @description Kutsujan IP
-       * @example 127.0.0.1
-       */
-      ip?: string;
-      /**
-       * @description Kutsujan user-agent
-       * @example Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
-       */
-      userAgent?: string;
-      session?: {
-        /**
-         * @description Henkilön oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        personOid?: string;
-        authorities?: {
-            /**
-             * @description Yksittäinen käyttöoikeus
-             * @example APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001
-             */
-            authority?: string;
-          }[];
-      };
-    };
-    TutkinnonOsa: {
-      /**
-       * @description Tutkinnon osan käyttämän ePerusteen id.
-       * @example 4804100
-       */
-      ePerusteId?: number;
-      /**
-       * @description Koulutuksen koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11)
-       * @example koulutus_371101#1
-       */
-      koulutusKoodiUri?: string;
-      /**
-       * @description Tutkinnon osan id ePerusteissa
-       * @example 12345
-       */
-      tutkinnonosaId?: number;
-      /**
-       * @description Tutkinnon osan viite
-       * @example 2449201
-       */
-      tutkinnonosaViite?: number;
-    };
-    KoulutuksenAlkamiskausi: {
-      /**
-       * @description Alkamiskauden tyyppi
-       * @enum {string}
-       */
-      alkamiskausityyppi?: "henkilokohtainen suunnitelma" | "tarkka alkamisajankohta" | "alkamiskausi ja -vuosi";
-      /**
-       * @description Koulutuksen tarkka alkamisen päivämäärä
-       * @example 2019-11-20T12:00
-       */
-      koulutuksenAlkamispaivamaara?: string;
-      /**
-       * @description Koulutuksen päättymisen päivämäärä
-       * @example 2019-11-20T12:00
-       */
-      koulutuksenPaattymispaivamaara?: string;
-      /**
-       * @description Haun koulutusten alkamiskausi. Hakukohteella voi olla eri alkamiskausi kuin haulla. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kausi/1)
-       * @example kausi_k#1
-       */
-      koulutuksenAlkamiskausiKoodiUri?: string;
-      /**
-       * @description Haun koulutusten alkamisvuosi. Hakukohteella voi olla eri alkamisvuosi kuin haulla.
-       * @example 2020
-       */
-      koulutuksenAlkamisvuosi?: string;
-      /** @description Lisätietoa koulutuksen alkamisesta henkilökohtaisen suunnitelman mukaan eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-      henkilokohtaisenSuunnitelmanLisatiedot?: components["schemas"]["Teksti"];
-    };
-    NimettyLinkki: {
-      /** @description Linkin url eri kielillä */
-      url?: components["schemas"]["Linkki"];
-      /** @description Käyttäjälle näkyvä teksti linkissä */
-      nimi?: components["schemas"]["Teksti"];
-    };
-    /** @description Hakukohteella lisätyt valintakokeen lisätilaisuudet */
-    ValintakokeenLisatilaisuudet: {
-      /**
-       * @description Valintakokeen yksilöivä tunniste. Järjestelmän generoima.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /** @description Hakukohteella syötetyt valintaperusteen valintakokeen lisäjärjestämistilaisuudet */
-      tilaisuudet?: components["schemas"]["Valintakoetilaisuus"][];
-    };
-    Aloituspaikat: {
-      /**
-       * @description Hakukohteen aloituspaikkojen lukumäärä
-       * @example 100
-       */
-      lukumaara?: number;
-      /**
-       * @description Hakukohteen ensikertalaisten aloituspaikkojen lukumäärä
-       * @example 50
-       */
-      ensikertalaisille?: number;
-      /** @description Tarkempi kuvaus aloituspaikoista */
-      kuvaus?: components["schemas"]["Kuvaus"];
-    };
-    /** @enum {string} */
-    Hakutermi: "hakeutuminen" | "ilmoittautuminen";
-    CopyResult: {
-      oid?: string;
-      status?: string;
-      created?: string[];
-    };
-    Pistetieto: {
-      tarjoaja?: string;
-      hakukohdekoodi?: string;
-      pisteet?: Record<string, never>;
-      vuosi?: string;
-    };
-    TilaChangeResult: {
-      oid?: string;
-      status?: string;
-      errorPaths?: string[];
-      errorMessages?: string[];
-      errorTypes?: string[];
-    };
-    Korkeakoulutustyyppi: {
-      /**
-       * @description Korkeakoulutustyyppi, sallitut arvot: 'yo' (yliopisto), 'amk' (ammattikorkea)
-       * @example yo
-       */
-      koulutustyyppi?: string;
-      /**
-       * @description Ko. korkeakoulutustyyppiä tarjoavien organisaatioiden yksilöivät organisaatio-oidit.
-       * @example [
-       *   "1.2.246.562.10.00101010101",
-       *   "1.2.246.562.10.00101010102"
-       * ]
-       */
-      tarjoajat?: string[];
-    };
-    Asiasana: {
-      /**
-       * @description Asiasanan kieli
-       * @example fi
-       */
-      kieli?: string;
-      /**
-       * @description Asiasana annetulla kielellä
-       * @example robotiikka
-       */
-      arvo?: string;
-    };
-    Ammattinimike: {
-      /**
-       * @description Ammattinimikkeen kieli
-       * @example fi
-       */
-      kieli?: string;
-      /**
-       * @description Ammattinimike annetulla kielellä
-       * @example insinööri
-       */
-      arvo?: string;
-    };
-    Luokittelutermi: {
-      /**
-       * @description Luokittelutermin kieli
-       * @example fi
-       */
-      kieli?: string;
-      /**
-       * @description Luokittelutermi annetulla kielellä, käytetään tiedon luokitteluun rajapintojen kautta
-       * @example jod-ohjaaja
-       */
-      arvo?: string;
-    };
-    Koulutus: {
-      /**
-       * @description Koulutuksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.13.00000000000000000009
-       */
-      oid?: string;
-      /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
-      externalId?: string;
-      /** @description Onko koulutus tutkintoon johtavaa */
-      johtaaTutkintoon?: boolean;
-      /**
-       * @description Koulutuksen tyyppi. Sallitut arvot: 'amm' (ammatillinen), 'yo' (yliopisto), 'lk' (lukio), 'amk' (ammattikorkea), 'amm-ope-erityisope-ja-opo' (Ammatillinen opettaja-, erityisopettaja ja opinto-ohjaajakoulutus), 'ope-pedag-opinnot' (Opettajien pedagogiset opinnot), 'kk-opintojakso', 'kk-opintokokonaisuus', 'amm-tutkinnon-osa', 'amm-osaamisala', 'amm-muu', 'tuva' (tutkintokoulutukseen valmentava koulutus), 'telma' (työhön ja itsenäiseen elämään valmentava koulutus), 'vapaa-sivistystyo-opistovuosi', 'vapaa-sivistystyo-muu', 'aikuisten-perusopetus', 'taiteen-perusopetus', 'muu'
-       * @example amm
-       */
-      koulutustyyppi?: components["schemas"]["Koulutustyyppi"];
-      /**
-       * @description Koulutuksen koodi URIt. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11)
-       * @example [
-       *   "koulutus_371101#1",
-       *   "koulutus_201001#1"
-       * ]
-       */
-      koulutuksetKoodiUri?: string[];
-      /** @description Koulutuksen julkaisutila. Jos koulutus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Onko koulutus nähtävissä esikatselussa */
-      esikatselu?: boolean;
-      /**
-       * @description Koulutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
-       * @example [
-       *   "1.2.246.562.10.00101010101",
-       *   "1.2.246.562.10.00101010102"
-       * ]
-       */
-      tarjoajat?: string[];
-      /** @description Voivatko muut oppilaitokset käyttää koulutusta */
-      julkinen?: boolean;
-      /**
-       * @description Kielet, joille koulutuksen nimi, kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      /** @description Koulutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description Koulutukseen liittyvän SORA-kuvauksen yksilöivä tunniste
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      sorakuvausId?: string;
-      /**
-       * @example {
-       *   "koulutustyyppi": "amm",
-       *   "koulutusalaKoodiUrit": [
-       *     "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
-       *     "kansallinenkoulutusluokitus2016koulutusalataso2_055#1"
-       *   ],
-       *   "kuvaus": {
-       *     "fi": "Suomenkielinen kuvaus",
-       *     "sv": "Ruotsinkielinen kuvaus"
-       *   },
-       *   "lisatiedot": [
-       *     {
-       *       "otsikkoKoodiUri": "koulutuksenlisatiedot_03#1",
-       *       "teksti": {
-       *         "fi": "Opintojen suomenkielinen lisätietokuvaus",
-       *         "sv": "Opintojen ruotsinkielinen lisätietokuvaus"
-       *       }
-       *     }
-       *   ]
-       * }
-       */
-      metadata?: components["schemas"]["YliopistoKoulutusMetadata"] | components["schemas"]["AmmatillinenKoulutusMetadata"] | components["schemas"]["AmmattikorkeaKoulutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoKoulutusMetadata"] | components["schemas"]["OpePedagOpinnotKoulutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaKoulutusMetadata"] | components["schemas"]["KkOpintojaksoKoulutusMetadata"] | components["schemas"]["KkOpintokokonaisuusKoulutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaKoulutusMetadata"] | components["schemas"]["AmmatillinenMuuKoulutusMetadata"] | components["schemas"]["LukioKoulutusMetadata"] | components["schemas"]["TuvaKoulutusMetadata"] | components["schemas"]["TelmaKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoOsaamismerkkiKoulutusMetadata"] | components["schemas"]["AikuistenPerusopetusKoulutusMetadata"] | components["schemas"]["ErikoislaakariKoulutusMetadata"] | components["schemas"]["ErikoistumiskoulutusMetadata"] | components["schemas"]["TaiteenPerusopetusKoulutusMetadata"] | components["schemas"]["MuuKoulutusMetadata"];
-      /**
-       * @description Koulutusta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Koulutuksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * @description Koulutuksen Opintopolussa näytettävän teemakuvan URL.
-       * @example https://konfo-files.opintopolku.fi/koulutus-teemakuva/1.2.246.562.13.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
-       */
-      teemakuva?: string;
-      /**
-       * @description Koulutuksen käyttämän ePerusteen id.
-       * @example 4804100
-       */
-      ePerusteId?: number;
-      /**
-       * Format: date-time
-       * @description Koulutuksen viimeisin muokkausaika. Järjestelmän generoima.
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    KoulutusListItem: {
-      /**
-       * @description Koulutuksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.13.00000000000000000009
-       */
-      oid?: string;
-      /** @description Koulutuksen julkaisutila. Jos koulutus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /**
-       * @description Koulutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
-       * @example [
-       *   "1.2.246.562.10.00101010101",
-       *   "1.2.246.562.10.00101010102"
-       * ]
-       */
-      tarjoajat?: string[];
-      /** @description Koulutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description Koulutusta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Koulutuksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Koulutuksen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    KoulutusMetadata: {
-      /** @description Koulutuksen kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      kuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Koulutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
-      lisatiedot?: components["schemas"]["Lisatieto"][];
-    };
-    AmmatillinenKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & ({
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amm
-       * @enum {string}
-       */
-      tyyppi?: "amm";
-      /**
-       * @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/kansallinenkoulutusluokitus2016koulutusalataso2).
-       * HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
-       *
-       * @example [
-       *   "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
-       *   "kansallinenkoulutusluokitus2016koulutusalataso2_055#1"
-       * ]
-       */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Lista koulutuksen tutkintonimikkeistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/tutkintonimikkeet).
-       * HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
-       *
-       * @example [
-       *   "tutkintonimikkeet_10091#2",
-       *   "tutkintonimikkeet_10015#2"
-       * ]
-       */
-      tutkintonimikeKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/opintojenlaajuusyksikko).
-       * HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
-       *
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona. HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    });
-    KorkeakouluMetadata: {
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso2/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Lista koulutuksen tutkintonimikkeistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/tutkintonimikekk/2)
-       * @example [
-       *   "tutkintonimikekk_110#2",
-       *   "tutkintonimikekk_111#2"
-       * ]
-       */
-      tutkintonimikeKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    } & components["schemas"]["KoulutusMetadata"];
-    AmmattikorkeaKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amk
-       * @enum {string}
-       */
-      tyyppi?: "amk";
-    };
-    AmmOpeErityisopeJaOpoKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amm-ope-erityisope-ja-opo
-       * @enum {string}
-       */
-      tyyppi?: "amm-ope-erityisope-ja-opo";
-    };
-    OpePedagOpinnotKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example ope-pedag-opinnot
-       * @enum {string}
-       */
-      tyyppi?: "ope-pedag-opinnot";
-    };
-    YliopistoKoulutusMetadata: components["schemas"]["KorkeakouluMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example yo
-       * @enum {string}
-       */
-      tyyppi?: "yo";
-    };
-    KkOpintojaksoKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example kk-opintojakso
-       * @enum {string}
-       */
-      tyyppi?: "kk-opintojakso";
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuuden vähimmäismäärä numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumeroMin?: number;
-      /**
-       * @description Opintojen laajuuden enimmäismäärä numeroarvona
-       * @example 20
-       */
-      opintojenLaajuusNumeroMax?: number;
-      /** @description Onko koulutus avointa korkeakoulutusta? */
-      isAvoinKorkeakoulutus?: boolean;
-      /** @description Hakijalle näkyvä tunniste */
-      tunniste?: string;
-      /**
-       * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
-       * @example opinnontyyppi_1#1
-       */
-      opinnonTyyppiKoodiUri?: string;
-      /** @description Lista korkeakoulutustyypeistä (amk, yo) minkä tyyppisenä ko. koulutus käytännössä järjestetään. Jos tyyppejä on useita, listataan jokaiselle tyypille tarjoajat erikseen. */
-      korkeakoulutustyypit?: components["schemas"]["Korkeakoulutustyyppi"][];
-    };
-    AmmatillinenTutkinnonOsaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amm-tutkinnon-osa
-       * @enum {string}
-       */
-      tyyppi?: "amm-tutkinnon-osa";
-      /** @description Tutkinnon osat */
-      tutkinnonOsat?: components["schemas"]["TutkinnonOsa"][];
-    };
-    AmmatillinenOsaamisalaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amm
-       * @enum {string}
-       */
-      tyyppi?: "amm";
-      /**
-       * @description Osaamisala. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/osaamisala/1)
-       * @example osaamisala_10#1
-       */
-      osaamisalaKoodiUri?: string;
-    };
-    AmmatillinenMuuKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amm-muu
-       * @enum {string}
-       */
-      tyyppi?: "amm-muu";
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_6#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    };
-    LukioKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example lk
-       * @enum {string}
-       */
-      tyyppi?: "lk";
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    };
-    TuvaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example tuva
-       * @enum {string}
-       */
-      tyyppi?: "tuva";
-      /**
-       * @description Linkki koulutuksen eperusteisiin
-       * @example https://eperusteet.opintopolku.fi/#/fi/kooste/telma
-       */
-      linkkiEPerusteisiin?: string;
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_8#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    };
-    TelmaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example telma
-       * @enum {string}
-       */
-      tyyppi?: "telma";
-      /**
-       * @description Linkki koulutuksen eperusteisiin
-       * @example https://eperusteet.opintopolku.fi/#/fi/kooste/telma
-       */
-      linkkiEPerusteisiin?: string;
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_6#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    };
-    VapaaSivistystyoKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & ({
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example vapaa-sivistystyo-opistovuosi
-       * @enum {string}
-       */
-      tyyppi?: "vapaa-sivistystyo-opistovuosi" | "vapaa-sivistystyo-muu";
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    });
-    VapaaSivistystyoOsaamismerkkiKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example vapaa-sivistystyo-osaamismerkki
-       * @enum {string}
-       */
-      tyyppi?: "vapaa-sivistystyo-osaamismerkki";
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Osaamismerkki. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/osaamismerkit/1)
-       * @example osaamismerkit_1009#1
-       */
-      osaamismerkkiKoodiUri?: string;
-    };
-    AikuistenPerusopetusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example aikuisten-perusopetus
-       * @enum {string}
-       */
-      tyyppi?: "aikuisten-perusopetus";
-      /**
-       * @description Linkki koulutuksen eperusteisiin
-       * @example https://eperusteet.opintopolku.fi/#/fi/kooste/telma
-       */
-      linkkiEPerusteisiin?: string;
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_6#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-    };
-    ErikoislaakariKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example erikoislaakari
-       * @enum {string}
-       */
-      tyyppi?: "erikoislaakari";
-      /**
-       * @description Lista koulutuksen tutkintonimikkeistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/tutkintonimikekk/2)
-       * @example [
-       *   "tutkintonimikekk_110#2",
-       *   "tutkintonimikekk_111#2"
-       * ]
-       */
-      tutkintonimikeKoodiUrit?: string[];
-    };
-    KkOpintokokonaisuusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example kk-opintokokonaisuus
-       * @enum {string}
-       */
-      tyyppi?: "kk-opintokokonaisuus";
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuuden vähimmäismäärä numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumeroMin?: number;
-      /**
-       * @description Opintojen laajuuden enimmäismäärä numeroarvona
-       * @example 20
-       */
-      opintojenLaajuusNumeroMax?: number;
-      /** @description Onko koulutus avointa korkeakoulutusta? */
-      isAvoinKorkeakoulutus?: boolean;
-      /** @description Hakijalle näkyvä tunniste */
-      tunniste?: string;
-      /**
-       * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
-       * @example opinnontyyppi_1#1
-       */
-      opinnonTyyppiKoodiUri?: string;
-      /** @description Lista korkeakoulutustyypeistä (amk, yo) minkä tyyppisenä ko. koulutus käytännössä järjestetään. Jos tyyppejä on useita, listataan jokaiselle tyypille tarjoajat erikseen. */
-      korkeakoulutustyypit?: components["schemas"]["Korkeakoulutustyyppi"][];
-    };
-    ErikoistumiskoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example erikoistumiskoulutus
-       * @enum {string}
-       */
-      tyyppi?: "erikoistumiskoulutus";
-      /**
-       * @description Erikoistumiskoulutuksen koodiURI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/erikoistumiskoulutukset/2)
-       * @example [
-       *   "erikoistumiskoulutukset_001#2"
-       * ]
-       */
-      erikoistumiskoulutusKoodiUri?: string;
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /** @description Lista korkeakoulutustyypeistä (amk, yo) minkä tyyppisenä ko. koulutus käytännössä järjestetään. Jos tyyppejä on useita, listataan jokaiselle tyypille tarjoajat erikseen. */
-      korkeakoulutustyypit?: components["schemas"]["Korkeakoulutustyyppi"][];
-      /**
-       * @description Opintojen laajuuden vähimmäismäärä numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumeroMin?: number;
-      /**
-       * @description Opintojen laajuuden enimmäismäärä numeroarvona
-       * @example 20
-       */
-      opintojenLaajuusNumeroMax?: number;
-    };
-    TaiteenPerusopetusKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example taiteen-perusopetus
-       * @enum {string}
-       */
-      tyyppi?: "taiteen-perusopetus";
-      /**
-       * @description Linkki koulutuksen eperusteisiin
-       * @example https://eperusteet.opintopolku.fi/#/fi/kooste/taiteenperusopetus
-       */
-      linkkiEPerusteisiin?: string;
-    };
-    MuuKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example muu
-       * @enum {string}
-       */
-      tyyppi?: "muu";
-      /** @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso1/1) */
-      koulutusalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_2#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuuden vähimmäismäärä numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumeroMin?: number;
-      /**
-       * @description Opintojen laajuuden enimmäismäärä numeroarvona
-       * @example 20
-       */
-      opintojenLaajuusNumeroMax?: number;
-    };
-    Toteutus: {
-      /**
-       * @description Toteutuksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.17.00000000000000000009
-       */
-      oid?: string;
-      /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
-      externalId?: string;
-      /**
-       * @description Toteutukseen liittyvän koulutuksen yksilöivä tunniste.
-       * @example 1.2.246.562.13.00000000000000000009
-       */
-      koulutusOid?: string;
-      /** @description Toteutuksen julkaisutila. Jos toteutus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Onko toteutus nähtävissä esikatselussa */
-      esikatselu?: boolean;
-      /**
-       * @description Toteutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
-       * @example [
-       *   "1.2.246.562.10.00101010101",
-       *   "1.2.246.562.10.00101010102"
-       * ]
-       */
-      tarjoajat?: string[];
-      /**
-       * @description Kielet, joille toteutuksen nimi, kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      /** @description Toteutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @example {
-       *   "tyyppi": "amm",
-       *   "kuvaus": {
-       *     "fi": "Suomenkielinen kuvaus",
-       *     "sv": "Ruotsinkielinen kuvaus"
-       *   },
-       *   "osaamisalat": [
-       *     {
-       *       "koodiUri": "osaamisala_0001#1",
-       *       "linkki": {
-       *         "fi": "http://osaamisala.fi/linkki/fi",
-       *         "sv": "http://osaamisala.fi/linkki/sv"
-       *       },
-       *       "otsikko": {
-       *         "fi": "Katso osaamisalan tarkempi kuvaus tästä",
-       *         "sv": "Katso osaamisalan tarkempi kuvaus tästä ruotsiksi"
-       *       }
-       *     }
-       *   ],
-       *   "opetus": {
-       *     "opetuskieliKoodiUrit": [
-       *       "oppilaitoksenopetuskieli_1#1"
-       *     ],
-       *     "opetuskieletKuvaus": {
-       *       "fi": "Opetuskielen suomenkielinen kuvaus",
-       *       "sv": "Opetuskielen ruotsinkielinen kuvaus"
-       *     },
-       *     "opetusaikaKoodiUrit": [
-       *       "opetusaikakk_1#1"
-       *     ],
-       *     "opetusaikaKuvaus": {
-       *       "fi": "Opetusajan suomenkielinen kuvaus",
-       *       "sv": "Opetusajan ruotsinkielinen kuvaus"
-       *     },
-       *     "opetustapaKoodiUrit": [
-       *       "opetuspaikkakk_1#1",
-       *       "opetuspaikkakk_2#1"
-       *     ],
-       *     "opetustapaKuvaus": {
-       *       "fi": "Opetustavan suomenkielinen kuvaus",
-       *       "sv": "Opetustavan ruotsinkielinen kuvaus"
-       *     },
-       *     "maksullisuustyyppi": "maksullinen,",
-       *     "maksullisuusKuvaus": {
-       *       "fi": "Maksullisuuden suomenkielinen kuvaus",
-       *       "sv": "Maksullisuuden ruotsinkielinen kuvaus"
-       *     },
-       *     "maksunMaara": 200.5,
-       *     "alkamiskausiKoodiUri": "kausi_k#1",
-       *     "alkamisvuosi": 2020,
-       *     "alkamisaikaKuvaus": {
-       *       "fi": "Alkamisajan suomenkielinen kuvaus",
-       *       "sv": "Alkamisajan ruotsinkielinen kuvaus"
-       *     },
-       *     "lisatiedot": [
-       *       {
-       *         "otsikkoKoodiUri": "koulutuksenlisatiedot_03#1",
-       *         "teksti": {
-       *           "fi": "Suomenkielinen lisätietoteksti",
-       *           "sv": "Ruotsinkielinen lisätietoteksti"
-       *         }
-       *       }
-       *     ],
-       *     "lukuvuosimaksu": {
-       *       "fi": "200 lukukaudessa",
-       *       "sv": "200 på svenska"
-       *     },
-       *     "lukuvuosimaksuKuvaus": {
-       *       "fi": "Lukuvuosimaksun suomenkielinen kuvaus",
-       *       "sv": "Lukuvuosimaksun ruotsinkielinen kuvaus"
-       *     }
-       *   },
-       *   "ammattinimikkeet": [
-       *     {
-       *       "kieli": "fi",
-       *       "arvo": "insinööri"
-       *     },
-       *     {
-       *       "kieli": "en",
-       *       "arvo": "engineer"
-       *     }
-       *   ],
-       *   "asiasanat": [
-       *     {
-       *       "kieli": "fi",
-       *       "arvo": "ravintotiede"
-       *     },
-       *     {
-       *       "kieli": "en",
-       *       "arvo": "nutrition"
-       *     }
-       *   ],
-       *   "yhteyshenkilot": [
-       *     {
-       *       "nimi": {
-       *         "fi": "Aku Ankka",
-       *         "sv": "Kalle Ankka"
-       *       },
-       *       "titteli": {
-       *         "fi": "Ankka",
-       *         "sv": "Ankka ruotsiksi"
-       *       },
-       *       "sahkoposti": {
-       *         "fi": "aku.ankka@ankkalinnankoulu.fi",
-       *         "sv": "aku.ankka@ankkalinnankoulu.fi"
-       *       },
-       *       "puhelinnumero": {
-       *         "fi": 123,
-       *         "sv": 223
-       *       },
-       *       "wwwSivu": {
-       *         "fi": "http://opintopolku.fi",
-       *         "sv": "http://studieinfo.fi"
-       *       }
-       *     }
-       *   ]
-       * }
-       */
-      metadata?: components["schemas"]["YliopistoToteutusMetadata"] | components["schemas"]["AmmatillinenToteutusMetadata"] | components["schemas"]["AmmattikorkeaToteutusMetadata"] | components["schemas"]["KkOpintojaksoToteutusMetadata"] | components["schemas"]["KkOpintokokonaisuusToteutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaToteutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaToteutusMetadata"] | components["schemas"]["AmmatillinenMuuToteutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoToteutusMetadata"] | components["schemas"]["OpePedagOpinnotToteutusMetadata"] | components["schemas"]["LukioToteutusMetadata"] | components["schemas"]["TuvaToteutusMetadata"] | components["schemas"]["TelmaToteutusMetadata"] | components["schemas"]["VapaaSivistystyoOpistovuosiToteutusMetadata"] | components["schemas"]["VapaaSivistystyoMuuToteutusMetadata"] | components["schemas"]["AikuistenPerusopetusToteutusMetadata"] | components["schemas"]["ErikoislaakariToteutusMetadata"] | components["schemas"]["ErikoistumiskoulutusToteutusMetadata"] | components["schemas"]["TaiteenPerusopetusToteutusMetadata"] | components["schemas"]["MuuToteutusMetadata"];
-      /**
-       * @description Toteutusta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Toteutuksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * @description Toteutuksen Opintopolussa näytettävän teemakuvan URL.
-       * @example https://konfo-files.opintopolku.fi/toteutus-teemakuva/1.2.246.562.13.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
-       */
-      teemakuva?: string;
-      /**
-       * Format: date-time
-       * @description Toteutuksen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    ToteutusListItem: {
-      /**
-       * @description Toteutuksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.17.00000000000000000009
-       */
-      oid?: string;
-      /**
-       * @description Toteutukseen liittyvän koulutuksen yksilöivä tunniste.
-       * @example 1.2.246.562.13.00000000000000000009
-       */
-      koulutusOid?: string;
-      /** @description Koulutuksen toteutuksen julkaisutila. Jos koulutus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /**
-       * @description Koulutusta tarjoavien organisaatioiden yksilöivät organisaatio-oidit
-       * @example [
-       *   "1.2.246.562.10.00101010101",
-       *   "1.2.246.562.10.00101010102"
-       * ]
-       */
-      tarjoajat?: string[];
-      /** @description Toteutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description Toteutusta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Toteutuksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Toteutuksen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    Opetus: {
-      /** @description Lista koulutuksen toteutuksen opetuskielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/oppilaitoksenopetuskieli/1) */
-      opetuskieliKoodiUrit?: string[];
-      /** @description Koulutuksen toteutuksen opetuskieliä tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      opetuskieletKuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Lista koulutuksen toteutuksen opetusajoista. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opetusaikakk/1) */
-      opetusaikaKoodiUrit?: string[];
-      /** @description Koulutuksen toteutuksen opetusaikoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      opetusaikaKuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Lista koulutuksen toteutuksen opetustavoista. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opetuspaikkakk/1) */
-      opetustapaKoodiUrit?: string[];
-      /** @description Koulutuksen toteutuksen opetustapoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      opetustapaKuvaus?: components["schemas"]["Kuvaus"];
-      /**
-       * @description Maksullisuuden tyyppi
-       * @enum {string}
-       */
-      maksullisuustyyppi?: "maksullinen" | "maksuton" | "lukuvuosimaksu";
-      /** @description Koulutuksen toteutuksen maksullisuutta tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      maksullisuusKuvaus?: components["schemas"]["Kuvaus"];
-      /**
-       * Format: double
-       * @description Koulutuksen toteutuksen maksun määrä euroissa?
-       * @example 220.5
-       */
-      maksunMaara?: number;
-      /** @description Koulutuksen alkamiskausi */
-      koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
-      /** @description Koulutuksen toteutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
-      lisatiedot?: components["schemas"]["Lisatieto"][];
-      /** @description Onko koulutukseen apurahaa? */
-      onkoApuraha?: boolean;
-      /** @description Koulutuksen apurahatiedot */
-      apuraha?: components["schemas"]["Apuraha"];
-      /**
-       * @description Koulutuksen suunniteltu kesto vuosina
-       * @example 2
-       */
-      suunniteltuKestoVuodet?: number;
-      /**
-       * @description Koulutuksen suunniteltu kesto kuukausina
-       * @example 2
-       */
-      suunniteltuKestoKuukaudet?: number;
-      /** @description Koulutuksen toteutuksen suunnitellun keston kuvaus eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
-      suunniteltuKestoKuvaus?: components["schemas"]["Kuvaus"];
-    };
-    Apuraha: {
-      /**
-       * @description Apurahan minimi euromäärä tai minimi prosenttiosuus lukuvuosimaksusta
-       * @example 100
-       */
-      min?: number;
-      /**
-       * @description Apurahan maksimi euromäärä tai maksimi prosenttiosuus lukuvuosimaksusta
-       * @example 200
-       */
-      max?: number;
-      /**
-       * @description Apurahan yksikkö
-       * @example euro
-       * @enum {string}
-       */
-      yksikko?: "euro" | "prosentti";
-      /** @description Koulutuksen toteutuksen apurahaa tarkentava kuvausteksti eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
-      kuvaus?: components["schemas"]["Kuvaus"];
-    };
-    Kielivalikoima: {
-      /** @description Lista koulutuksen toteutuksen A1 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
-      A1Kielet?: string[];
-      /** @description Lista koulutuksen toteutuksen A2 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
-      A2Kielet?: string[];
-      /** @description Lista koulutuksen toteutuksen B1 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
-      B1Kielet?: string[];
-      /** @description Lista koulutuksen toteutuksen B2 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
-      B2Kielet?: string[];
-      /** @description Lista koulutuksen toteutuksen B3 kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
-      B3Kielet?: string[];
-      /** @description Lista koulutuksen toteutuksen äidinkielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
-      aidinkielet?: string[];
-      /** @description Lista koulutuksen toteutuksen muista kielistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kieli/1) */
-      muutKielet?: string[];
-    };
-    ToteutusMetadata: {
-      /** @description Toteutuksen kuvausteksti eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
-      kuvaus?: components["schemas"]["Kuvaus"];
-      opetus?: components["schemas"]["Opetus"];
-      /** @description Lista toteutuksen yhteyshenkilöistä */
-      yhteyshenkilot?: components["schemas"]["Yhteyshenkilo"][];
-      /** @description Lista toteutukseen liittyvistä asiasanoista, joiden avulla opiskelija voi hakea koulutusta Opintopolusta */
-      asiasanat?: components["schemas"]["Asiasana"][];
-      /** @description Lista toteutukseen liittyvistä ammattinimikkeistä, joiden avulla opiskelija voi hakea koulutusta Opintopolusta */
-      ammattinimikkeet?: components["schemas"]["Ammattinimike"][];
-      /** @description Onko toteutus JOTPA-rahoitettua? */
-      hasJotpaRahoitus?: boolean;
-      /** @description Onko toteutus työvoimakoulutusta? */
-      isTyovoimakoulutus?: boolean;
-      /** @description Onko toteutus täydennyskoulutusta? */
-      isTaydennyskoulutus?: boolean;
-    };
-    KorkeakouluOsaamisala: {
-      /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. nimi */
-      nimi?: components["schemas"]["Nimi"];
-      /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. kuvaus */
-      kuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. linkki */
-      linkki?: components["schemas"]["Linkki"];
-      /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. linkin otsikko */
-      otsikko?: components["schemas"]["Teksti"];
-    };
-    Osaamisala: {
-      /**
-       * @description Osaamisalan koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/osaamisala/1)
-       * @example osaamisala_0001#1
-       */
-      koodiUri?: string;
-      /** @description Osaamisalan linkki */
-      linkki?: components["schemas"]["Linkki"];
-      /** @description Osaamisalan linkin otsikko */
-      otsikko?: components["schemas"]["Teksti"];
-    };
-    AmmattikorkeaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amk
-       * @enum {string}
-       */
-      tyyppi?: "amk";
-    };
-    AmmOpeErityisopeJaOpoToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amm-ope-erityisope-ja-opo
-       * @enum {string}
-       */
-      tyyppi?: "amm-ope-erityisope-ja-opo";
-    };
-    OpePedagOpinnotToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example ope-pedag-opinnot
-       * @enum {string}
-       */
-      tyyppi?: "ope-pedag-opinnot";
-    };
-    KkOpintojaksoToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example kk-opintojakso
-       * @enum {string}
-       */
-      tyyppi?: "kk-opintojakso";
-      /** @description Onko koulutus avointa korkeakoulutusta? */
-      isAvoinKorkeakoulutus?: boolean;
-      /** @description Hakijalle näkyvä tunniste */
-      tunniste?: string;
-      /**
-       * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
-       * @example opinnontyyppi_1#1
-       */
-      opinnonTyyppiKoodiUri?: string;
-    };
-    YliopistoToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example yo
-       * @enum {string}
-       */
-      tyyppi?: "yo";
-    };
-    AmmatillinenToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /** @description Lista ammatillisen koulutuksen osaamisalojen kuvauksia */
-      osaamisalat?: components["schemas"]["Osaamisala"][];
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example amm
-       * @enum {string}
-       */
-      tyyppi?: "amm";
-      /** @description Onko koulutuksen tyyppi \"Ammatillinen perustutkinto erityisopetuksena\"? */
-      ammatillinenPerustutkintoErityisopetuksena?: boolean;
-    };
-    TutkintoonJohtamatonToteutusMetadata: components["schemas"]["ToteutusMetadata"] & ({
-      /** @description Tieto siitä onko toteutuksella käytössä hakukohteet */
-      isHakukohteetKaytossa?: boolean;
-      hakutermi?: components["schemas"]["Hakutermi"];
-      /**
-       * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus.
-       * @example ataru
-       * @enum {string}
-       */
-      hakulomaketyyppi?: "ataru" | "haku-app" | "ei sähköistä" | "muu";
-      /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-      hakulomakeLinkki?: components["schemas"]["Linkki"];
-      /** @description Lisätietoa hakeutumisesta eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-      lisatietoaHakeutumisesta?: components["schemas"]["Teksti"];
-      /** @description Lisätietoa valintaperusteista eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-      lisatietoaValintaperusteista?: components["schemas"]["Teksti"];
-      /** @description Toteutuksen hakuaika */
-      hakuaika?: components["schemas"]["Ajanjakso"];
-      /**
-       * @description Toteutuksen aloituspaikkojen lukumäärä
-       * @example 100
-       */
-      aloituspaikat?: number;
-      /** @description Koulutuksen toteutuksen aloituspaikkoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      aloituspaikkakuvaus?: components["schemas"]["Teksti"];
-    });
-    AmmatillinenTutkinnonOsaToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example amm-tutkinnon-osa
-       * @enum {string}
-       */
-      tyyppi?: "amm-tutkinnon-osa";
-    };
-    AmmatillinenOsaamisalaToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example amm-osaamisala
-       * @enum {string}
-       */
-      tyyppi?: "amm-osaamisala";
-    };
-    AmmatillinenMuuToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example amm-muu
-       * @enum {string}
-       */
-      tyyppi?: "amm-muu";
-    };
-    TuvaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example tuva
-       * @enum {string}
-       */
-      tyyppi?: "tuva";
-      /** @description Tieto siitä järjestetäänkö toteutus erityisopetuksena */
-      jarjestetaanErityisopetuksena?: boolean;
-    };
-    /** @description Toteutuksen yksittäisen lukiolinjatiedon kentät */
-    LukiolinjaTieto: {
-      /** @description Lukiolinjatiedon koodiUri. */
-      koodiUri?: string;
-      /** @description Lukiolinjatiedon kuvaus eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
-      kuvaus?: components["schemas"]["Kuvaus"];
-    };
-    LukioToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example lk
-       * @enum {string}
-       */
-      tyyppi?: "lk";
-      /** @description Koulutuksen kielivalikoima */
-      kielivalikoima?: components["schemas"]["Kielivalikoima"];
-      /** @description Onko lukio-toteutuksella yleislinja? */
-      yleislinja?: Record<string, never>;
-      /** @description Lukio-toteutuksen painotukset. Taulukon alkioiden koodiUri-kentät viittaavat [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/lukiopainotukset/1). */
-      painotukset?: components["schemas"]["LukiolinjaTieto"][];
-      /** @description Lukio-toteutuksen erityiset koulutustehtävät. Taulukon alkioiden koodiUri-kentät viittaavat [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/lukiolinjaterityinenkoulutustehtava/1). */
-      erityisetKoulutustehtavat?: components["schemas"]["LukiolinjaTieto"][];
-      /** @description Lukio-toteutuksen diplomit */
-      diplomit?: components["schemas"]["LukiodiplomiTieto"][];
-    };
-    /** @description Toteutuksen yksittäisen lukiodiplomitiedon kentät */
-    LukiodiplomiTieto: {
-      /** @description Lukiodiplomin koodiUri. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/moduulikoodistolops2021/1). */
-      koodiUri?: string;
-      /** @description Lukiodiplomin kielistetyt lisätietolinkit. Kielet on määritetty toteutuksen kielivalinnassa. */
-      linkki?: components["schemas"]["Linkki"];
-      /** @description Lukiodiplomin kielistettyjen lisätietolinkkien alt-tekstit. Kielet on määritetty toteutuksen kielivalinnassa. */
-      linkinAltTeksti?: components["schemas"]["Teksti"];
-    };
-    VapaaSivistystyoOpistovuosiToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example vapaa-sivistystyo-opistovuosi
-       * @enum {string}
-       */
-      tyyppi?: "vapaa-sivistystyo-opistovuosi";
-      /**
-       * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
-       * @example false
-       */
-      suoritetaanNayttona?: boolean;
-    };
-    VapaaSivistystyoMuuToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example vapaa-sivistystyo-muu
-       * @enum {string}
-       */
-      tyyppi?: "vapaa-sivistystyo-muu";
-      /**
-       * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
-       * @example false
-       */
-      suoritetaanNayttona?: boolean;
-    };
-    VapaaSivistystyoOsaamismerkkiToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example vapaa-sivistystyo-osaamismerkki
-       * @enum {string}
-       */
-      tyyppi?: "vapaa-sivistystyo-osaamismerkki";
-      /**
-       * @description Tieto siitä suoritetaanko koulutuksen toteutus nayttönä. Jos kentän arvona ei ole true, tarkoittaa se, että toteutus suoritetaan kurssimuotoisena.
-       * @example false
-       */
-      suoritetaanNayttona?: boolean;
-    };
-    TelmaToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example telma
-       * @enum {string}
-       */
-      tyyppi?: "telma";
-    };
-    AikuistenPerusopetusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example aikuisten-perusopetus
-       * @enum {string}
-       */
-      tyyppi?: "aikuisten-perusopetus";
-    };
-    ErikoislaakariToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example erikoislaakari
-       * @enum {string}
-       */
-      tyyppi?: "erikoislaakari";
-    };
-    KkOpintokokonaisuusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example kk-opintokokonaisuus
-       * @enum {string}
-       */
-      tyyppi?: "kk-opintokokonaisuus";
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example opintojenlaajuusyksikko_6#1
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuus tai kesto numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumero?: number;
-      /** @description Onko koulutus avointa korkeakoulutusta? */
-      isAvoinKorkeakoulutus?: boolean;
-      /** @description Hakijalle näkyvä tunniste */
-      tunniste?: string;
-      /**
-       * @description Opinnon tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/html/koodisto/opinnontyyppi/1)
-       * @example opinnontyyppi_1#1
-       */
-      opinnonTyyppiKoodiUri?: string;
-    };
-    ErikoistumiskoulutusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Koulutuksen metatiedon tyyppi
-       * @example erikoistumiskoulutus
-       * @enum {string}
-       */
-      tyyppi?: "erikoistumiskoulutus";
-    };
-    TaiteenPerusopetusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example taiteen-perusopetus
-       * @enum {string}
-       */
-      tyyppi?: "taiteen-perusopetus";
-      /**
-       * @description Lista taiteenaloja. Viittaa [koodistoon](https://virkailija.opintopolku.fi/koodisto-app/koodisto/view/taiteenperusopetustaiteenala/1)
-       * @example [
-       *   "taiteenperusopetustaiteenala_kuvataide#1",
-       *   "taiteenperusopetustaiteenala_arkkitehtuuri#1"
-       * ]
-       */
-      taiteenalaKoodiUrit?: string[];
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example [
-       *   "opintojenlaajuusyksikko_2#1"
-       * ]
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuuden vähimmäismäärä numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumeroMin?: number;
-      /**
-       * @description Opintojen laajuuden enimmäismäärä numeroarvona
-       * @example 20
-       */
-      opintojenLaajuusNumeroMax?: number;
-    };
-    MuuToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
-      /**
-       * @description Toteutuksen metatiedon tyyppi
-       * @example muu
-       * @enum {string}
-       */
-      tyyppi?: "muu";
-      /**
-       * @description Opintojen laajuusyksikko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
-       * @example [
-       *   "opintojenlaajuusyksikko_2#1"
-       * ]
-       */
-      opintojenLaajuusyksikkoKoodiUri?: string;
-      /**
-       * @description Opintojen laajuuden vähimmäismäärä numeroarvona
-       * @example 10
-       */
-      opintojenLaajuusNumeroMin?: number;
-      /**
-       * @description Opintojen laajuuden enimmäismäärä numeroarvona
-       * @example 20
-       */
-      opintojenLaajuusNumeroMax?: number;
-    };
-    Hakutieto: {
-      /**
-       * @description Toteutuksen yksilöivä tunniste.
-       * @example 1.2.246.562.13.00000000000000000009
-       */
-      toteutusOid?: string;
-      haut?: ({
-          /**
-           * @description Toteutukseen liittyvän haun yksilöivä tunniste.
-           * @example 1.2.246.562.29.00000000000000000009
-           */
-          hakuOid?: string;
-          /** @description Haun Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-          nimi?: components["schemas"]["Nimi"];
-          /**
-           * @description Haun hakutapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/hakutapa/11)
-           * @example hakutapa_03#1
-           */
-          hakutapaKoodiUri?: string;
-          /** @description Haun julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
-          tila?: components["schemas"]["Julkaisutila"];
-          /** @description Koulutuksen alkamiskausi */
-          koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
-          /**
-           * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus. Hakukohteella voi olla eri hakulomake kuin haulla.
-           * @example ataru
-           * @enum {string}
-           */
-          hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
-          /**
-           * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake. Hakukohteella voi olla eri hakulomake kuin haulla.
-           * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-           */
-          hakulomakeAtaruId?: string;
-          /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
-          hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
-          /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
-          hakulomakeLinkki?: components["schemas"]["Linkki"];
-          /**
-           * @description Haun luoneen organisaation oid
-           * @example 1.2.246.562.10.00101010101
-           */
-          organisaatioOid?: string;
-          /**
-           * @description Haun kohdejoukko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukko/1)
-           * @example haunkohdejoukko_17#1
-           */
-          kohdejoukkoKoodiUri?: string;
-          /** @description Haun hakuajat. Hakukohteella voi olla omat hakuajat. */
-          hakuajat?: components["schemas"]["Ajanjakso"][];
-          /**
-           * @description Hakua viimeksi muokanneen virkailijan henkilö-oid
-           * @example 1.2.246.562.10.00101010101
-           */
-          muokkaaja?: string;
-          /**
-           * Format: date-time
-           * @description Haun viimeisin muokkausaika. Järjestelmän generoima
-           * @example "2019-08-23T09:55:17.000Z"
-           */
-          modified?: string;
-          /** @description Hakuun liittyvien hakukohteiden hakutiedot */
-          hakukohteet?: ({
-              /**
-               * @description Hakukohteen yksilöivä tunniste. Järjestelmän generoima.
-               * @example 1.2.246.562.20.00000000000000000009
-               */
-              hakukohdeOid?: string;
-              /** @description Hakukohteen julkaisutila. Jos hakukohde on julkaistu, se näkyy oppijalle Opintopolussa. */
-              tila?: components["schemas"]["Julkaisutila"];
-              /** @description Onko hakukohde nähtävissä esikatselussa */
-              esikatselu?: boolean;
-              /** @description Hakukohteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-              nimi?: components["schemas"]["Nimi"];
-              /** @description Koulutuksen alkamiskausi */
-              koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
-              /** @description Käytetäänkö haun alkamiskautta ja -vuotta vai onko hakukohteelle määritelty oma alkamisajankohta? */
-              kaytetaanHaunAlkamiskautta?: boolean;
-              /**
-               * @description Hakukohteen järjestyspaikan organisaatio
-               * @example 1.2.246.562.10.00101010101
-               */
-              jarjestyspaikkaOid?: string;
-              /**
-               * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus.
-               * @example ataru
-               * @enum {string}
-               */
-              hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
-              /**
-               * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake
-               * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-               */
-              hakulomakeAtaruId?: string;
-              /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-              hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
-              /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-              hakulomakeLinkki?: components["schemas"]["Linkki"];
-              /** @description Käytetäänkö haun hakulomaketta vai onko hakukohteelle määritelty oma hakulomake? */
-              kaytetaanHaunHakulomaketta?: boolean;
-              /** @description Hakukohteen aloituspaikat */
-              aloituspaikat?: components["schemas"]["Aloituspaikat"];
-              /** @description lukiototeutuksen hakukohteen linja */
-              hakukohteenLinja?: components["schemas"]["HakukohteenLinja"];
-              /** @description Käytetäänkö haun hakuaikoja vai onko hakukohteelle määritelty omat hakuajat? */
-              kaytetaanHaunAikataulua?: boolean;
-              /** @description Hakukohteen hakuajat, jos ei käytetä haun hakuaikoja */
-              hakuajat?: components["schemas"]["Ajanjakso"][];
-              /**
-               * @description Hakukohteen pohjakoulutusvaatimusKoodiUrit
-               * @example [
-               *   "pohjakoulutusvaatimuskouta_pk#1",
-               *   "pohjakoulutusvaatimuskouta_yo#1"
-               * ]
-               */
-              pohjakoulutusvaatimusKoodiUrit?: string[];
-              /** @description Hakukohteen pohjakoulutusvaatimuksen tarkennus */
-              pohjakoulutusvaatimusTarkenne?: components["schemas"]["Kuvaus"];
-              /**
-               * @description Hakukohdetta viimeksi muokanneen virkailijan henkilö-oid
-               * @example 1.2.246.562.10.00101010101
-               */
-              muokkaaja?: string;
-              /**
-               * @description Hakukohteen luoneen organisaation oid
-               * @example 1.2.246.562.10.00101010101
-               */
-              organisaatioOid?: string;
-              /**
-               * @description Hakukohteeseen liitetyn valintaperusteen valintatapojen koodiUrit
-               * @example [
-               *   "valintatapajono_av#1",
-               *   "valintatapajono_tv#1"
-               * ]
-               */
-              valintatapaKoodiUrit?: string[];
-              /**
-               * Format: date-time
-               * @description Hakukohteen viimeisin muokkausaika. Järjestelmän generoima
-               * @example "2019-08-23T09:55:17.000Z"
-               */
-              modified?: string;
-            })[];
-        })[];
-    };
-    HakukohdeListItem: {
-      /**
-       * @description Hakukohteen yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.20.00000000000000000009
-       */
-      oid?: string;
-      /**
-       * @description Hakukohteeseen liitetyn toteutuksen yksilöivä tunniste.
-       * @example 1.2.246.562.17.00000000000000000009
-       */
-      toteutusOid?: string;
-      /**
-       * @description Hakukohteeseen liitetyn haun yksilöivä tunniste.
-       * @example 1.2.246.562.29.00000000000000000009
-       */
-      hakuOid?: string;
-      /**
-       * @description Hakukohteeseen liitetyn valintaperusteen yksilöivä tunniste.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      valintaperusteId?: string;
-      /** @description Hakukohteen julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Hakukohteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description Hakukohdetta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Hakukohteen järjestyspaikan organisaatio
-       * @example 1.2.246.562.10.00101010101
-       */
-      jarjestyspaikkaOid?: string;
-      /**
-       * @description Hakukohteen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Hakukohteen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    Hakukohde: {
-      /**
-       * @description Hakukohteen yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.20.00000000000000000009
-       */
-      oid?: string;
-      /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
-      externalId?: string;
-      /**
-       * @description Hakukohteeseen liitetyn toteutuksen yksilöivä tunniste.
-       * @example 1.2.246.562.17.00000000000000000009
-       */
-      toteutusOid?: string;
-      /**
-       * @description Hakukohteeseen liitetyn haun yksilöivä tunniste.
-       * @example 1.2.246.562.29.00000000000000000009
-       */
-      hakuOid?: string;
-      /** @description Haun julkaisutila. Jos hakukohde on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Onko hakukohde nähtävissä esikatselussa */
-      esikatselu?: boolean;
-      /** @description Hakukohteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /** @description KoodiUri, josta hakukohteen nimi muodostetaan. Hakukohteella täytyy olla joko hakukohdeKoodiUri tai nimi. Jos koodiUri löytyy, muodostetaan nimi sen avulla. */
-      hakukohdeKoodiUri?: string;
-      /**
-       * @description Hakukohteen järjestyspaikan organisaatio
-       * @example 1.2.246.562.10.00101010101
-       */
-      jarjestyspaikkaOid?: string;
-      /**
-       * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus.
-       * @example ataru
-       * @enum {string}
-       */
-      hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
-      /**
-       * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      hakulomakeAtaruId?: string;
-      /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-      hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. */
-      hakulomakeLinkki?: components["schemas"]["Linkki"];
-      /** @description Käytetäänkö haun hakulomaketta vai onko hakukohteelle määritelty oma hakulomake? */
-      kaytetaanHaunHakulomaketta?: boolean;
-      /**
-       * @deprecated
-       * @description Hakukohteen aloituspaikkojen lukumäärä
-       * @example 100
-       */
-      aloituspaikat?: number;
-      /**
-       * @deprecated
-       * @description Hakukohteen ensikertalaisen aloituspaikkojen lukumäärä
-       * @example 50
-       */
-      ensikertalaisenAloituspaikat?: number;
-      /**
-       * @description Lista hakukohteen pohjakoulutusvaatimuksista. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/pohjakoulutusvaatimuskouta/1)
-       * @example [
-       *   "pohjakoulutusvaatimuskouta_104#1",
-       *   "pohjakoulutusvaatimuskouta_109#1"
-       * ]
-       */
-      pohjakoulutusvaatimusKoodiUrit?: string[];
-      /** @description Pohjakoulutusvaatimukset tarkenneteksti eri kielillä */
-      pohjakoulutusvaatimusTarkenne?: components["schemas"]["Kuvaus"];
-      /** @description Hakukohteen muiden pohjakoulutusvaatimusten kuvaus eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      muuPohjakoulutusvaatimus?: components["schemas"]["Kuvaus"];
-      /** @description Onko hakukohteen toisen asteen koulutuksessa mahdollista suorittaa kaksoistutkinto? */
-      toinenAsteOnkoKaksoistutkinto?: boolean;
-      /** @description Käytetäänkö haun hakuaikoja vai onko hakukohteelle määritelty omat hakuajat? */
-      kaytetaanHaunAikataulua?: boolean;
-      /** @description Hakukohteen hakuajat, jos ei käytetä haun hakuaikoja */
-      hakuajat?: components["schemas"]["Ajanjakso"][];
-      /**
-       * @description Hakukohteeseen liittyvän valintaperustekuvauksen yksilöivä tunniste
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      valintaperusteId?: string;
-      /** @description Onko kaikilla hakukohteen liitteillä sama toimitusaika? */
-      liitteetOnkoSamaToimitusaika?: boolean;
-      /** @description Onko kaikilla hakukohteen liitteillä sama toimitusosoite? */
-      liitteetOnkoSamaToimitusosoite?: boolean;
-      /**
-       * Format: date-time
-       * @description Jos liitteillä on sama toimitusaika, se ilmoitetaan tässä
-       * @example 2019-08-23T09:55
-       */
-      liitteidenToimitusaika?: string;
-      /**
-       * @description Jos liitteillä on sama toimitustapa, se ilmoitetaan tässä
-       * @example hakijapalvelu
-       * @enum {string}
-       */
-      liitteidenToimitustapa?: "hakijapalvelu" | "osoite" | "lomake";
-      /** @description Jos liitteillä on sama toimitusosoite, se ilmoitetaan tässä */
-      liitteidenToimitusosoite?: components["schemas"]["LiitteenToimitusosoite"];
-      /** @description Hakukohteen liitteet */
-      liitteet?: components["schemas"]["Liite"][];
-      /** @description Hakukohteeseen liittyvät valintakokeet */
-      valintakokeet?: components["schemas"]["Valintakoe"][];
-      /**
-       * @description Kielet, joille hakukohteen nimi, kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      metadata?: components["schemas"]["HakukohdeMetadata"];
-      /**
-       * @description Hakukohdetta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Hakukohteen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Hakukohteen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-      _enrichedData?: components["schemas"]["EnrichedData"];
-    };
-    HakukohdeMetadata: {
-      /** @description Valintakokeiden yleiskuvaus eri kielillä. Kielet on määritetty hakukohteen kielivalinnassa. */
-      valintakokeidenYleiskuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Hakukohteen kynnysehto eri kielillä. Kielet on määritetty hakukohteen kielivalinnassa. */
-      kynnysehto?: components["schemas"]["Kuvaus"];
-      /** @description Hakukohteeseen liitetyn valintaperusteen valintakokeisiin liitetyt lisätilaisuudet */
-      valintaperusteenValintakokeidenLisatilaisuudet?: components["schemas"]["ValintakokeenLisatilaisuudet"][];
-      /** @description Koulutuksen alkamiskausi */
-      koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
-      /** @description Käytetäänkö haun alkamiskautta ja -vuotta vai onko hakukohteelle määritelty oma alkamisajankohta? */
-      kaytetaanHaunAlkamiskautta?: boolean;
-      /** @description Hakukohteen aloituspaikkojen tiedot */
-      aloituspaikat?: components["schemas"]["Aloituspaikat"];
-      /** @description lukiototeutuksen hakukohteen linja */
-      hakukohteenLinja?: components["schemas"]["HakukohteenLinja"];
-      /** @description Uuden opiskelijan ohjeita sisältävän verkkosivun URL */
-      uudenOpiskelijanUrl?: components["schemas"]["Linkki"];
-      /** @description Hakukohde on urheilijoille tarkoitettua ammatillista koulutusta */
-      jarjestaaUrheilijanAmmKoulutusta?: boolean;
-    };
-    Liite: {
-      /**
-       * @description Liitteen yksilöivä tunniste. Järjestelmän generoima.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /**
-       * @description Liitteen tyyppi. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/liitetyypitamm/1)
-       * @example liitetyypitamm_3#1
-       */
-      tyyppiKoodiUri?: string;
-      /** @description Liitteen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /** @description Liitteen Opintopolussa näytettävä kuvaus eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      kuvaus?: components["schemas"]["Kuvaus"];
-      /**
-       * Format: date-time
-       * @description Liitteen toimitusaika, jos ei ole sama kuin kaikilla hakukohteen liitteillä
-       * @example 2019-08-23T09:55
-       */
-      toimitusaika?: string;
-      /**
-       * @description Liitteen toimitustapa, jos ei ole sama kuin kaikilla hakukohteen liitteillä
-       * @example hakijapalvelu
-       * @enum {string}
-       */
-      toimitustapa?: "hakijapalvelu" | "osoite" | "lomake";
-      /** @description Liitteen toimitusosoite, jos ei ole sama kuin kaikilla hakukohteen liitteillä */
-      toimitusosoite?: components["schemas"]["LiitteenToimitusosoite"];
-    };
-    LiitteenToimitusosoite: {
-      /** @description Liitteen toimitusosoite */
-      osoite?: components["schemas"]["Osoite"];
-      /** @description Sähköpostiosoite, johon liite voidaan toimittaa */
-      sahkoposti?: components["schemas"]["Teksti"];
-      /** @description Verkkosivu, jonka kautta liitteet voidaan toimittaa */
-      verkkosivu?: components["schemas"]["Teksti"];
-    };
-    PainotettuOppiaine: {
-      /** @description Oppiaineen (ja mahdollisesti kielen) koodistokoodiURI */
-      koodiUrit?: components["schemas"]["OppiaineKoodiUrit"];
-      /**
-       * @description Oppiaineelle määritty opiskelijavalinnassa käytettävä painokerroin
-       * @example 1.2
-       */
-      painokerroin?: number;
-    };
-    OppiaineKoodiUrit: {
-      /**
-       * @description Oppiaineen koodiURI tai kielitason koodiURI-etuliite (esim. "painotettavatoppiaineetlukiossa_b2")
-       * @example painotettavatoppiaineetlukiossa_b2
-       */
-      oppiaine?: string;
-      /**
-       * @description Kielen koodiURI koodistossa
-       * @example kieli_en
-       */
-      kieli?: string;
-    };
-    HakukohteenLinja: {
-      /**
-       * @description Linjan koodiUri, tai tyhjä arvo (= yleislinja)
-       * @example lukiopainotukset_0102#1
-       */
-      linja?: string;
-      /**
-       * @description Linjan alin hyväksytty keskiarvo
-       * @example 8,2
-       */
-      alinHyvaksyttyKeskiarvo?: number;
-      /** @description Lisätietoa keskiarvosta */
-      lisatietoa?: components["schemas"]["Kuvaus"];
-      /** @description Opiskelijavalinnassa käytettävät oppiaineet, joita painotetaan valintaa tehdessä */
-      painotetutArvosanat?: components["schemas"]["PainotettuOppiaine"][];
-    };
-    EnrichedData: {
-      /** @description Koulutustyyppikohtainen esittämistä varten muodostettu nimi käytettäväksi kouta-uin puolella */
-      esitysnimi?: components["schemas"]["Nimi"];
-    };
-    Haku: {
-      /**
-       * @description Haun yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.29.00000000000000000009
-       */
-      oid?: string;
-      /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
-      externalId?: string;
-      /** @description Haun julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Haun Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description Haun hakutapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/hakutapa/1)
-       * @example hakutapa_03#1
-       */
-      hakutapaKoodiUri?: string;
-      /**
-       * Format: date-time
-       * @description Viimeinen ajanhetki, jolloin hakuun saa liittää hakukohteen. Hakukohteita ei saa lisätä enää sen jälkeen, kun haku on käynnissä.
-       * @example 2019-08-23T09:55
-       */
-      hakukohteenLiittamisenTakaraja?: string;
-      /**
-       * Format: date-time
-       * @description Viimeinen ajanhetki, jolloin hakuun liitettyä hakukohdetta on sallittua muokata. Hakukohteen tietoja ei saa muokata enää sen jälkeen, kun haku on käynnissä.
-       * @example 2019-08-23T09:55
-       */
-      hakukohteenMuokkaamisenTakaraja?: string;
-      /**
-       * @description Hakukohteen liittajaorganisaatioiden oidit
-       * @example [
-       *   "1.2.246.562.10.00101010101",
-       *   "1.2.246.562.10.00101010102"
-       * ]
-       */
-      hakukohteenLiittajaOrganisaatiot?: string[];
-      /**
-       * Format: date-time
-       * @description Ajanhetki, jolloin haku ja siihen liittyvät hakukohteet ja koulutukset julkaistaan automaattisesti Opintopolussa, jos ne eivät vielä ole julkisia
-       * @example 2019-08-23T09:55
-       */
-      ajastettuJulkaisu?: string;
-      /**
-       * Format: date-time
-       * @description Ajanhetki, jolloin haku ja siihen liittyvät hakukohteet arkistoidaan. Jos tyhjä, arkistoidaan hakukohteet 10 kuukautta hakuajan päättymisen jälkeen.
-       * @example 2019-08-23T09:55
-       */
-      ajastettuHaunJaHakukohteidenArkistointi?: string;
-      /**
-       * Format: date-time
-       * @description Ajanhetki, jolloin haun ja siihen liittyvät hakukohteiden ajastettu arkistointi on ajettu kyseiselle haulle.
-       * @example 2019-08-23T09:55
-       */
-      ajastettuHaunJaHakukohteidenArkistointiAjettu?: string;
-      /**
-       * @description Haun kohdejoukko. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukko/1)
-       * @example haunkohdejoukko_17#1
-       */
-      kohdejoukkoKoodiUri?: string;
-      /**
-       * @description Haun kohdejoukon tarkenne. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukontarkenne/1)
-       * @example haunkohdejoukontarkenne_1#1
-       */
-      kohdejoukonTarkenneKoodiUri?: string;
-      /**
-       * @description Hakulomakkeen tyyppi. Kertoo, käytetäänkö Atarun (hakemuspalvelun) hakulomaketta, muuta hakulomaketta (jolloin voidaan lisätä hakulomakkeeseen linkki) tai onko niin, ettei sähkököistä hakulomaketta ole lainkaan, jolloin sille olisi hyvä lisätä kuvaus. Hakukohteella voi olla eri hakulomake kuin haulla.
-       * @example ataru
-       * @enum {string}
-       */
-      hakulomaketyyppi?: "ataru" | "ei sähköistä" | "muu";
-      /**
-       * @description Hakulomakkeen yksilöivä tunniste, jos käytössä on Atarun (hakemuspalvelun) hakulomake. Hakukohteella voi olla eri hakulomake kuin haulla.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      hakulomakeAtaruId?: string;
-      /** @description Hakulomakkeen kuvausteksti eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
-      hakulomakeKuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Hakulomakkeen linkki eri kielillä. Kielet on määritetty haun kielivalinnassa. Hakukohteella voi olla eri hakulomake kuin haulla. */
-      hakulomakeLinkki?: components["schemas"]["Linkki"];
-      /** @description Haun hakuajat. Hakukohteella voi olla omat hakuajat. */
-      hakuajat?: components["schemas"]["Ajanjakso"][];
-      metadata?: components["schemas"]["HakuMetadata"];
-      /**
-       * @description Kielet, joille haun nimi, kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      /**
-       * @description Hakua viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Haun luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Haun viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    HakuMetadata: {
-      /** @description Lista haun yhteyshenkilöistä */
-      yhteyshenkilot?: components["schemas"]["Yhteyshenkilo"][];
-      /** @description Oppijalle Opintopolussa näytettävät haun mahdolliset tulevat hakuajat */
-      tulevaisuudenAikataulu?: components["schemas"]["Ajanjakso"][];
-      /** @description Koulutuksen alkamiskausi */
-      koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
-    };
-    HakuListItem: {
-      /**
-       * @description Haun yksilöivä tunniste. Järjestelmän generoima.
-       * @example 1.2.246.562.29.00000000000000000009
-       */
-      oid?: string;
-      /** @description Haun julkaisutila. Jos haku on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Haun Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description Hakua viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Haun luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Haun viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    Valintatapa: {
-      /**
-       * @description Valintatapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/valintatapajono/1)
-       * @example valintatapajono_av#1
-       */
-      valintatapaKoodiUri?: string;
-      /** @description Valintatapakuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /** @description Valintatavan kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-      kuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Valintatavan sisältö. Voi sisältää sekä teksti- että taulukkoelementtejä. */
-      sisalto?: components["schemas"]["SisaltoItem"][];
-      /** @description Käytetäänkö muuntotaulukkoa? */
-      kaytaMuuntotaulukkoa?: boolean;
-      /** @description Kynnysehdon kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-      kynnysehto?: components["schemas"]["Kuvaus"];
-      /**
-       * Format: double
-       * @description Valintatavan enimmäispisteet
-       * @example 20
-       */
-      enimmaispisteet?: number;
-      /**
-       * Format: double
-       * @description Valintatavan vähimmäispisteet
-       * @example 10
-       */
-      vahimmaispisteet?: number;
-    };
-    /** @description Valintatavan Opintopolussa näytettävä kuvausteksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-    SisaltoTeksti: {
-      /** @enum {string} */
-      tyyppi: "teksti";
-      data?: components["schemas"]["Teksti"];
-    };
-    /** @description Taulukkomuotoinen valintatavan sisällön kuvaus */
-    SisaltoTaulukko: {
-      /** @enum {string} */
-      tyyppi: "taulukko";
-      data?: {
-        /**
-         * @description Taulukon yksilöivä tunnus
-         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-         */
-        id?: string;
-        /** @description Taulukon Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-        nimi?: components["schemas"]["Nimi"];
-        /** @description Taulukon rivit */
-        rows?: {
-            /** @description Rivin järjestysnumero */
-            index?: number;
-            /** @description Onko rivi otsikkorivi */
-            isHeader?: boolean;
-            /** @description Rivin sarakkeet */
-            columns?: {
-                /** @description Sarakkeen järjestysnumero */
-                index?: number;
-                /** @description Sarakkeen Opintopolussa näytettävä teksti eri kielillä. Kielet on määritetty valintaperusteen kielivalinnassa. */
-                text?: components["schemas"]["Teksti"];
-              }[];
-          }[];
-      };
-    };
-    SisaltoItem: components["schemas"]["SisaltoTeksti"] | components["schemas"]["SisaltoTaulukko"];
-    ValintaperusteMetadata: {
-      /** @description Valintaperustekuvauksen metatiedon (koulutus)tyyppi */
-      tyyppi?: components["schemas"]["Koulutustyyppi"];
-      /** @description Lista valintaperustekuvauksen valintatavoista */
-      valintatavat?: components["schemas"]["Valintatapa"][];
-      /** @description Valintakokeiden yleiskuvaus eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
-      valintakokeidenYleiskuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Valintaperustekuvauksen kuvausteksti eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
-      kuvaus?: components["schemas"]["Kuvaus"];
-      /** @description Valintaperustekuvauksen hakukelpoisuus eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
-      hakukelpoisuus?: components["schemas"]["Kuvaus"];
-      /** @description Valintaperustekuvauksen lisatiedot eri kielillä. Kielet on määritetty valintaperustekuvauksen kielivalinnassa. */
-      lisatiedot?: components["schemas"]["Kuvaus"];
-      /** @description Valintaperusteen kuvauksen sisältö. Voi sisältää sekä teksti- että taulukkoelementtejä. */
-      sisalto?: components["schemas"]["SisaltoItem"][];
-    };
-    Valintaperuste: {
-      /**
-       * @description Valintaperustekuvauksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
-      externalId?: string;
-      /** @description Valintaperustekuvauksen julkaisutila. Jos kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Onko valintaperuste nähtävissä esikatselussa */
-      esikatselu?: boolean;
-      /**
-       * @description Minkä tyyppisille koulutuksille valintaperustekuvaus on tarkoitettu käytettäväksi?
-       * @example amm
-       */
-      koulutustyyppi?: components["schemas"]["Koulutustyyppi"];
-      /**
-       * @description Valintaperustekuvaukseen liittyvä hakutapa. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/hakutapa/11)
-       * @example hakutapa_03#1
-       */
-      hakutapaKoodiUri?: string;
-      /**
-       * @description Valintaperustekuvaukseen liittyvä kohdejoukko. Valintaperusteen ja siihen hakukohteen kautta liittyvän haun kohdejoukon tulee olla sama. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/haunkohdejoukko/1)
-       * @example haunkohdejoukko_17#1
-       */
-      kohdejoukkoKoodiUri?: string;
-      /**
-       * @deprecated
-       * @description Valintaperustekuvaukseen liittyvän SORA-kuvauksen yksilöivä tunniste
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      sorakuvausId?: string;
-      /** @description Voivatko muut oppilaitokset käyttää valintaperustekuvausta */
-      julkinen?: boolean;
-      /**
-       * @description Kielet, joille valintaperustekuvauksen nimi, kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      /** @description Valintaperustekuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /** @description Hakuun liittyvät valintakokeet */
-      valintakokeet?: components["schemas"]["Valintakoe"][];
-      /**
-       * @example {
-       *   "tyyppi": "amm",
-       *   "valintatavat": [
-       *     {
-       *       "valintatapaKoodiUri": "valintatapajono_tv#1",
-       *       "kuvaus": {
-       *         "fi": "Valintatavan suomenkielinen kuvaus",
-       *         "sv": "Valintatavan ruotsinkielinen kuvaus"
-       *       },
-       *       "sisalto": [
-       *         {
-       *           "tyyppi": "teksti",
-       *           "data": {
-       *             "fi": "Suomenkielinen sisältöteksti",
-       *             "sv": "Ruotsinkielinen sisältöteksti"
-       *           }
-       *         },
-       *         {
-       *           "tyyppi": "taulukko",
-       *           "data": {
-       *             "nimi": {
-       *               "fi": "Taulukon nimi suomeksi",
-       *               "sv": "Taulukon nimi ruotsiksi"
-       *             },
-       *             "rows": [
-       *               {
-       *                 "index": 0,
-       *                 "isHeader": true,
-       *                 "columns": [
-       *                   {
-       *                     "index": 0,
-       *                     "text": {
-       *                       "fi": "Otsikko suomeksi",
-       *                       "sv": "Otsikko ruotsiksi"
-       *                     }
-       *                   }
-       *                 ]
-       *               }
-       *             ]
-       *           }
-       *         }
-       *       ],
-       *       "kaytaMuuntotaulukkoa": true,
-       *       "kynnysehto": {
-       *         "fi": "Kynnysehto suomeksi",
-       *         "sv": "Kynnysehto ruotsiksi"
-       *       },
-       *       "enimmaispisteet": 18.1,
-       *       "vahimmaispisteet": 10.1
-       *     }
-       *   ],
-       *   "koulutusalaKoodiUrit": [
-       *     "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
-       *     "kansallinenkoulutusluokitus2016koulutusalataso2_055#1"
-       *   ],
-       *   "kuvaus": {
-       *     "fi": "Suomenkielinen kuvaus",
-       *     "sv": "Ruotsinkielinen kuvaus"
-       *   }
-       * }
-       */
-      metadata?: components["schemas"]["ValintaperusteMetadata"];
-      /**
-       * @description Valintaperustekuvausta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Valintaperustekuvauksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Valintaperustekuvauksen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    ValintaperusteListItem: {
-      /**
-       * @description Valintaperustekuvauksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /** @description Valintaperustekuvauksen julkaisutila. Jos kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Valintaperustekuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description Valintaperustekuvausta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Valintaperustekuvauksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Valintaperustekuvauksen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    Sorakuvaus: {
-      /**
-       * @description SORA-kuvauksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /** @description Ulkoinen tunniste jota voidaan käyttää Kouta lomakkeiden mäppäykseen oppilaitosten omien tietojärjestelmien kanssa */
-      externalId?: string;
-      /**
-       * @description Minkä tyyppisiin koulutuksiin SORA-kuvaus liittyy. Sallitut arvot: 'amm' (ammatillinen), 'yo' (yliopisto), 'lk' (lukio), 'amk' (ammattikorkea), 'muu' (muu koulutus)
-       * @example amm
-       * @enum {string}
-       */
-      koulutustyyppi?: "amm" | "yo" | "amk" | "lk" | "muu";
-      /** @description SORA-kuvauksen julkaisutila. Jos SORA-kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /**
-       * @description Kielet, joille SORA-kuvauksen nimi, kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      /** @description SORA-kuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty SORA-kuvauksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /** @description SORA-kuvauksen kuvailutiedot eri kielillä */
-      metadata?: {
-        /** @description SORA-kuvauksen kuvausteksti eri kielillä. Kielet on määritetty kuvauksen kielivalinnassa. */
-        kuvaus?: components["schemas"]["Kuvaus"];
-        /** @description Koulutuksen koodi URIt. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11) */
-        koulutusKoodiUrit?: string[];
-        /**
-         * @description Koulutusala. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/kansallinenkoulutusluokitus2016koulutusalataso2/1)
-         * @example kansallinenkoulutusluokitus2016koulutusalataso2_054#1
-         */
-        koulutusalaKoodiUri?: string;
-      };
-      /**
-       * @description SORA-kuvausta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description SORA-kuvauksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description SORA-kuvauksen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    SorakuvausListItem: {
-      /**
-       * @description SORA-kuvauksen yksilöivä tunniste. Järjestelmän generoima.
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-      /** @description SORA-kuvauksen julkaisutila. Jos SORA-kuvaus on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description SORA-kuvauksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty SORA-kuvauksen kielivalinnassa. */
-      nimi?: components["schemas"]["Nimi"];
-      /**
-       * @description SORA-kuvausta viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description SORA-kuvauksen luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description SORA-kuvauksen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    Oppilaitos: {
-      /**
-       * @description Oppilaitoksen organisaatio-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      oid?: string;
-      /** @description Oppilaitoksen julkaisutila. Jos oppilaitos on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Onko oppilaitos nähtävissä esikatselussa */
-      esikatselu?: boolean;
-      /**
-       * @description Kielet, joille oppilaitoksen kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      metadata?: components["schemas"]["OppilaitosMetadata"];
-      /**
-       * @description Oppilaitosta kuvailutietoja viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.24.00101010101.
-       */
-      muokkaaja?: string;
-      /**
-       * @description Oppilaitoksen kuvailutiedot luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * @description Oppilaitoksen Opintopolussa näytettävän teemakuvan URL.
-       * @example https://konfo-files.opintopolku.fi/oppilaitos-teemakuva/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
-       */
-      teemakuva?: string;
-      /**
-       * @description Oppilaitoksen Opintopolussa näytettävän logon URL.
-       * @example https://konfo-files.opintopolku.fi/oppilaitos-logo/1.2.246.562.10.00000000000000000009/ba9dd816-81fb-44ea-aafd-14ee3014e086.png
-       */
-      logo?: string;
-      /**
-       * Format: date-time
-       * @description Oppilaitoksen kuvailutietojen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-      osat?: components["schemas"]["OppilaitoksenOsa"][];
-      _enrichedData?: components["schemas"]["OppilaitosEnrichedData"];
-    };
-    OppilaitoksenOsa: {
-      /**
-       * @description Oppilaitoksen osan organisaatio-oid
-       * @example 1.2.246.562.10.00101010102
-       */
-      oid?: string;
-      /**
-       * @description Oppilaitoksen osan oppilaitoksen organisaatio-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      oppilaitosOid?: string;
-      /** @description Oppilaitoksen osan julkaisutila. Jos oppilaitoksen osa on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /** @description Onko oppilaitoksen osa nähtävissä esikatselussa */
-      esikatselu?: boolean;
-      /**
-       * @description Kielet, joille oppilaitoksen osan kuvailutiedot ja muut tekstit on käännetty
-       * @example [
-       *   "fi",
-       *   "sv"
-       * ]
-       */
-      kielivalinta?: components["schemas"]["Kieli"][];
-      metadata?: components["schemas"]["OppilaitoksenOsaMetadata"];
-      /**
-       * @description Oppilaitoksen osan kuvailutietoja viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Oppilaitoksen osan kuvailutiedot luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * @description Oppilaitoksen osan Opintopolussa näytettävän teemakuvan URL.
-       * @example https://konfo-files.opintopolku.fi/oppilaitoksen-osa-teemakuva/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
-       */
-      teemakuva?: string;
-      /**
-       * Format: date-time
-       * @description Oppilaitoksen osan kuvailutietojen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-      _enrichedData?: components["schemas"]["OppilaitosEnrichedData"];
-    };
-    OppilaitosMetadata: {
-      /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivu?: components["schemas"]["NimettyLinkki"];
-      /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      esittelyvideo?: components["schemas"]["NimettyLinkki"];
-      /** @description Opintopolussa näytettävien sosiaalisen median kanavien osoitteita. Koodiurit toimivat avaimena. */
-      some?: Record<string, never>;
-      /** @description Oppilaitokseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
-      tietoaOpiskelusta?: components["schemas"]["TietoaOpiskelusta"][];
-      /** @description Oppilaitoksen Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      esittely?: components["schemas"]["Kuvaus"];
-      /** @description Oppilaitoksen opiskelijoiden lkm */
-      opiskelijoita?: number;
-      /** @description Oppilaitoksen korkeakoulujen lkm */
-      korkeakouluja?: number;
-      /** @description Oppilaitoksen tiedekuntien lkm */
-      tiedekuntia?: number;
-      /** @description Oppilaitoksen kampuksien lkm */
-      kampuksia?: number;
-      /** @description Oppilaitoksen yksiköiden lkm */
-      yksikoita?: number;
-      /** @description Oppilaitoksen toimipisteiden lkm */
-      toimipisteita?: number;
-      /** @description Oppilaitoksen akatemioiden lkm */
-      akatemioita?: number;
-      /**
-       * @description Oppilaitoksen Opintopolussa näytettävän teemakuvan URL.
-       * @example https://konfo-files.opintopolku.fi/toteutus-teema/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
-       */
-      teemakuva?: string;
-      /** @description Järjestääkö oppilaitos urheilijan ammatillista koulutusta? */
-      jarjestaaUrheilijanAmmKoulutusta?: boolean;
-    };
-    OppilaitoksenOsaMetadata: {
-      /** @description Opintopolussa käytettävä www-sivu ja sivun nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      wwwSivu?: components["schemas"]["NimettyLinkki"];
-      /** @description Opintopolussa näytettävän esittelyvideon linkki ja linkin nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      esittelyvideo?: components["schemas"]["NimettyLinkki"];
-      /** @description Oppilaitoksen Opintopolussa näytettävät hakijapalveluiden yhteystiedot */
-      hakijapalveluidenYhteystiedot?: components["schemas"]["Yhteystieto"];
-      /** @description Oppilaitoksen osan Opintopolussa näytettävä esittely eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      esittely?: components["schemas"]["Kuvaus"];
-      /** @description Oppilaitoksen osan kampuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
-      kampus?: components["schemas"]["Nimi"];
-      /** @description Oppilaitoksen osan opiskelijoiden lkm */
-      opiskelijoita?: number;
-      /**
-       * @description Oppilaitoksen osan Opintopolussa näytettävän teemakuvan URL.
-       * @example https://konfo-files.opintopolku.fi/toteutus-teema/1.2.246.562.10.00000000000000000009/f4ecc80a-f664-40ef-98e6-eaf8dfa57f6e.png
-       */
-      teemakuva?: string;
-      /** @description Järjestääkö oppilaitoksen osa urheilijan ammatillista koulutusta? */
-      jarjestaaUrheilijanAmmKoulutusta?: boolean;
-    };
-    OppilaitosEnrichedData: {
-      /** @description Oppilaitoksen osan kuvailutietoja viimeksi muokanneen virkailijan henkilön nimi */
-      muokkaajanNimi?: components["schemas"]["Nimi"];
-      organisaatio?: components["schemas"]["Organisaatio"];
-    };
-    OppilaitoksenOsaListItem: {
-      /**
-       * @description Oppilaitoksen osan organisaatio-oid
-       * @example 1.2.246.562.10.00101010102
-       */
-      oid?: string;
-      /**
-       * @description Oppilaitoksen osan oppilaitoksen organisaatio-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      oppilaitosOid?: string;
-      /** @description Oppilaitoksen osan julkaisutila. Jos oppilaitoksen osa on julkaistu, se näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-      /**
-       * @description Oppilaitoksen osan kuvailutietoja viimeksi muokanneen virkailijan henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      muokkaaja?: string;
-      /**
-       * @description Oppilaitoksen osan kuvailutiedot luoneen organisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      organisaatioOid?: string;
-      /**
-       * Format: date-time
-       * @description Oppilaitoksen osan kuvailutietojen viimeisin muokkausaika. Järjestelmän generoima
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-    };
-    Yhteystieto: {
-      /** @description Opintopolussa näytettävä yhteystiedon nimi eri kielillä. Kielet on määritetty kielivalinnassa. */
-      nimi?: components["schemas"]["Teksti"];
-      /** @description Opintopolussa näytettävä postiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
-      postiosoite?: components["schemas"]["Osoite"];
-      /** @description Opintopolussa näytettävä käyntiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
-      kayntiosoite?: components["schemas"]["Osoite"];
-      /** @description Opintopolussa näytettävä sähköpostiosoite eri kielillä. Kielet on määritetty kielivalinnassa. */
-      sahkoposti?: components["schemas"]["Teksti"];
-      /** @description Opintopolussa näytettävä puhelinnumero eri kielillä. Kielet on määritetty kielivalinnassa. */
-      puhelinnumero?: components["schemas"]["Teksti"];
-      /** @description Opintopolussa näytettävä verkkosivu eri kielillä. Kielet on määritetty kielivalinnassa. */
-      www?: components["schemas"]["Teksti"];
-    };
-    TietoaOpiskelusta: {
-      /**
-       * @description Lisätiedon otsikon koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/organisaationkuvaustiedot/1)
-       * @example organisaationkuvaustiedot_03#1
-       */
-      otsikkoKoodiUri?: string;
-      /** @description Lisätiedon teksti eri kielillä. Kielet on määritetty kielivalinnassa. */
-      teksti?: components["schemas"]["Teksti"];
-    };
-    OppilaitoksetResponse: {
-      oppilaitokset?: components["schemas"]["Oppilaitos"][];
-      organisaatioHierarkia?: components["schemas"]["OrganisaatioHierarkia"];
-    };
-    Organisaatio: {
-      /** @example 1.2.246.562.10.66634895871 */
-      oid: string;
-      parentOids: string[];
-      nimi: components["schemas"]["Nimi"];
-      kieletUris: string[];
-      yhteystiedot?: components["schemas"]["Yhteystieto"];
-      /**
-       * @example [
-       *   "kunta_091",
-       *   "kunta_398"
-       * ]
-       */
-      kotipaikkaUri?: string;
-      /**
-       * @example {
-       *   "oid": "1.2.246.562.10.66634895777",
-       *   "parentOids": [
-       *     "1.2.246.562.10.66634895871",
-       *     "1.2.246.562.10.594252633210",
-       *     "1.2.246.562.10.00000000001"
-       *   ],
-       *   "nimi": {
-       *     "fi": "Lapsiorganisaation nimi fi",
-       *     "sv": "Lapsiorganisaation nimi sv",
-       *     "en": "Lapsiorganisaation nimi en"
-       *   },
-       *   "kieletUris": [
-       *     "oppilaitoksenopetuskieli_1"
-       *   ]
-       * }
-       */
-      children?: components["schemas"]["Organisaatio"][];
-      /** @example oppilaitostyyppi_21 */
-      oppilaitostyyppiUri?: string;
-      organisaatiotyyppiUris?: string[];
-    };
-    OrganisaatioHierarkia: {
-      organisaatiot?: components["schemas"]["Organisaatio"][];
-    };
-    IndexedOrganisaatio: {
-      /**
-       * @description Organisaation nimi
-       * @example Hieno oppilaitos
-       */
-      nimi?: string;
-      /**
-       * @description Oorganisaation oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      oid?: string;
-    };
-    Muokkaaja: {
-      /**
-       * @description Muokkaajan (virkailijan) nimi
-       * @example Mauri Muokkaaja
-       */
-      nimi?: string;
-      /**
-       * @description Muokkaajan (virkailijan) henkilö-oid
-       * @example 1.2.246.562.10.00101010101
-       */
-      oid?: string;
-    };
-    SearchItem: {
-      /** @description Opintopolussa näytettävä nimi eri kielillä */
-      nimi?: components["schemas"]["Nimi"];
-      /** @description Viimeisin muokkaaja */
-      muokkaaja?: components["schemas"]["Muokkaaja"];
-      /** @description Luoja-organisaatio */
-      organisaatio?: components["schemas"]["IndexedOrganisaatio"];
-      /**
-       * Format: date-time
-       * @description Viimeisin muokkausaika
-       * @example "2019-08-23T09:55:17.000Z"
-       */
-      modified?: string;
-      /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
-      tila?: components["schemas"]["Julkaisutila"];
-    };
-    EPeruste: {
-      /**
-       * @description Koulutuksen ePerusteen id
-       * @example 1234
-       */
-      id?: number;
-      /**
-       * @description Koulutuksen ePerusteen diaarinumero
-       * @example 1234-OPH-2021
-       */
-      diaarinumero?: string;
-      /**
-       * @description Koulutuksen ePerusteen voimassaolon loppumishetki
-       * @example "2030-12-12T00:00:00.000Z"
-       */
-      voimassaoloLoppuu?: string;
-    };
-    KoulutusSearchItem: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Koulutuksen yksilöivä tunniste
-       * @example 1.2.246.562.13.00000000000000000009
-       */
-      oid?: string;
-      /** @description Koulutuksen ePerusteen tiedot */
-      eperuste?: components["schemas"]["EPeruste"];
-      /**
-       * @description Koulutukseen liitettyjen organisaation toteutusten lukumäärä
-       * @example 6
-       */
-      toteutusCount?: number;
-    };
-    KoulutusSearchItemWithToteutukset: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Koulutuksen yksilöivä tunniste
-       * @example 1.2.246.562.13.00000000000000000009
-       */
-      oid?: string;
-      /** @description Koulutuksen ePerusteen tiedot */
-      eperuste?: components["schemas"]["EPeruste"];
-      /** @description Koulutukseen liitetyt toteutukset */
-      toteutukset?: {
-        /**
-         * @description Toteutuksen yksilöivä tunniste
-         * @example 1.2.246.562.17.00000000000000000009
-         */
-        oid?: string;
-        /** @description Opintopolussa näytettävä nimi eri kielillä */
-        nimi?: components["schemas"]["Nimi"];
-        /** @description Luoja-organisaatio */
-        organisaatio?: components["schemas"]["IndexedOrganisaatio"];
-        /**
-         * Format: date-time
-         * @description Viimeisin muokkausaika
-         * @example "2019-08-23T09:55:17.000Z"
-         */
-        modified?: string;
-        /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
-        tila?: components["schemas"]["Julkaisutila"];
-      };
-    };
-    KoulutusSearchResult: {
-      /**
-       * @description Hakutulosten kokonaismäärä
-       * @example 100
-       */
-      totalCount?: number;
-      /** @description Haussa löytyneet koulutukset */
-      result?: components["schemas"]["KoulutusSearchItem"][];
-    };
-    ToteutusSearchItem: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Toteutuksen yksilöivä tunniste
-       * @example 1.2.246.562.17.00000000000000000009
-       */
-      oid?: string;
-      /**
-       * @description Toteutukseen liitettyjen hakukohteiden lukumäärä
-       * @example 6
-       */
-      hakukohdeCount?: number;
-    };
-    ToteutusSearchItemWithHakukohteet: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Toteutuksen yksilöivä tunniste
-       * @example 1.2.246.562.17.00000000000000000009
-       */
-      oid?: string;
-      /** @description Toteutukseen liitetyt hakukohteet */
-      hakukohteet?: {
-        /**
-         * @description Hakukohteen yksilöivä tunniste
-         * @example 1.2.246.562.20.00000000000000000009
-         */
-        hakukohdeOid?: string;
-        /** @description Opintopolussa näytettävä nimi eri kielillä */
-        nimi?: components["schemas"]["Nimi"];
-        /** @description Luoja-organisaatio */
-        organisaatio?: components["schemas"]["IndexedOrganisaatio"];
-        /**
-         * Format: date-time
-         * @description Viimeisin muokkausaika
-         * @example "2019-08-23T09:55:17.000Z"
-         */
-        modified?: string;
-        /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
-        tila?: components["schemas"]["Julkaisutila"];
-      };
-    };
-    ToteutusSearchResult: {
-      /**
-       * @description Hakutulosten kokonaismäärä
-       * @example 100
-       */
-      totalCount?: number;
-      /** @description Haussa löytyneet toteutukset */
-      result?: components["schemas"]["ToteutusSearchItem"][];
-    };
-    HakukohdeSearchItem: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Hakukohteen yksilöivä tunniste
-       * @example 1.2.246.562.20.00000000000000000009
-       */
-      oid?: string;
-    };
-    HakukohdeSearchResult: {
-      /**
-       * @description Hakutulosten kokonaismäärä
-       * @example 100
-       */
-      totalCount?: number;
-      /** @description Haussa löytyneet hakukohteet */
-      result?: components["schemas"]["HakukohdeSearchItem"][];
-    };
-    HakuSearchItem: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Haun yksilöivä tunniste
-       * @example 1.2.246.562.29.00000000000000000009
-       */
-      oid?: string;
-      /**
-       * @description Hakuun liitettyjen hakukohteiden lukumäärä
-       * @example 6
-       */
-      hakukohdeCount?: number;
-    };
-    HakuSearchItemWithHakukohteet: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Haun yksilöivä tunniste
-       * @example 1.2.246.562.29.00000000000000000009
-       */
-      oid?: string;
-      /** @description Hakuun liitetyt hakukohteet */
-      hakukohteet?: {
-        /**
-         * @description Hakukohteen yksilöivä tunniste
-         * @example 1.2.246.562.20.00000000000000000009
-         */
-        oid?: string;
-        /** @description Opintopolussa näytettävä nimi eri kielillä */
-        nimi?: components["schemas"]["Nimi"];
-        /** @description Luoja-organisaatio */
-        organisaatio?: components["schemas"]["IndexedOrganisaatio"];
-        /**
-         * Format: date-time
-         * @description Viimeisin muokkausaika
-         * @example "2019-08-23T09:55:17.000Z"
-         */
-        modified?: string;
-        /** @description Julkaisutila. Jos julkaistu, näkyy oppijalle Opintopolussa. */
-        tila?: components["schemas"]["Julkaisutila"];
-      };
-    };
-    HakuSearchResult: {
-      /**
-       * @description Hakutulosten kokonaismäärä
-       * @example 100
-       */
-      totalCount?: number;
-      /** @description Haussa löytyneet haut */
-      result?: components["schemas"]["HakuSearchItem"][];
-    };
-    ValintaperusteSearchItem: components["schemas"]["SearchItem"] & {
-      /**
-       * @description Valintaperusteen yksilöivä tunniste
-       * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-       */
-      id?: string;
-    };
-    ValintaperusteSearchResult: {
-      /**
-       * @description Hakutulosten kokonaismäärä
-       * @example 100
-       */
-      totalCount?: number;
-      /** @description Haussa löytyneet valintaperusteet */
-      result?: components["schemas"]["ValintaperusteSearchItem"][];
-    };
-    /** @description Koulutustyyppiin liitetyt oppilaitostyypit */
-    KoulutustyyppiToOppilaitostyypit: {
-      /**
-       * @description Koulutustyyppi
-       * @example amm
-       */
-      koulutustyyppi?: components["schemas"]["Koulutustyyppi"];
-      /**
-       * @description Oppilaitostyypit (koodiUrit)
-       * @example [
-       *   "oppilaitostyyppi_21#1",
-       *   "oppilaitostyyppi_22#1"
-       * ]
-       */
-      oppilaitostyypit?: string[];
-    };
-    /** @description Jokaisen koulutustyypin osalta oppilaitostyypit, jotka voivat tarjota ko. koulutusta, ts. mäppäykset koulutustyypistä oppilaitostyyppeihin */
-    KoulutustyyppiToOppilaitostyyppiResult: {
-      koulutustyypitToOppilaitostyypit?: components["schemas"]["KoulutustyyppiToOppilaitostyypit"][];
-    };
-  };
-  responses: never;
-  parameters: {
-    /** @description Vastaavan GETin x-Last-Modified */
-    xIfUnmodifiedSince: string;
-  };
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
-}
-
-export type $defs = Record<string, never>;
-
-export type external = Record<string, never>;
-
-export interface operations {
-
-  /**
-   * Hakee julkaistut koulutukset, joissa organisaatio tai sen aliorganisaatio on tarjoajana
-   * @description Hakee kaikkien niiden koulutusten kaikki tiedot, joissa organisaatio tai sen aliorganisaatio on tarjoajana ja jotka on julkaistu. Tämä rajapinta on indeksointia varten
-   */
-  indexerJulkaistutKoulutukset: {
-    parameters: {
-      path: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["KoulutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Onko tilamuutos hakukohteelle sallittu
-   * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa true/false sen perusteella onko tilamuutos sallittu.
-   */
-  "Onko tilamuutos sallittu hakukohteelle": {
-    parameters: {
-      path: {
-        /**
-         * @description Hakukohde-oid
-         * @example 1.2.246.562.20.00000000000000000009
-         */
-        oid: string;
-        /**
-         * @description Tila jolle kysytään
-         * @example poistettu
-         */
-        tila: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": boolean;
-        };
-      };
-    };
-  };
-  /**
-   * Hae oppilaitoksen kuvailutiedot
-   * @description Hakee oppilaitoksen kuvailutiedot
-   */
-  getOppilaitos: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko yhteystiedot myös oppilaitoksen osille? */
-        yhteystiedotForOsat?: boolean;
-      };
-      path: {
-        /**
-         * @description Oppilaitoksen organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Oppilaitos"];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee organisaation valintaperustekuvauksia annetuilla parametreilla
-   * @description Hakee organisaation valintaperustekuvaukset annetuilla parametreilla
-   */
-  searchValintaperusteet: {
-    parameters: {
-      query: {
-        /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
-        koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
-        /** @description Organisaation oid */
-        organisaatioOid: string;
-        /** @description Suodata annetulla nimellä tai oidilla */
-        nimi?: string;
-        /** @description Suodata muokkaajan nimellä tai oidilla */
-        muokkaaja?: string;
-        /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
-        tila?: string[];
-        /** @description Suodata entiteetin näkyvyydellä */
-        julkinen?: boolean;
-        /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
-        hakutapa?: string[];
-        /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
-        koulutuksenAlkamiskausi?: string[];
-        /** @description Suodata pilkulla erotetuilla vuosilla */
-        koulutuksenAlkamisvuosi?: number[];
-        /** @description Suodata haun oidilla */
-        hakuOid?: string;
-        /** @description Suodata toteutuksen oidilla */
-        toteutusOid?: string;
-        /** @description Suodata koulutuksen oidilla */
-        koulutusOid?: string;
-        /**
-         * @description Sivunumero
-         * @example 1
-         */
-        page?: number;
-        /**
-         * @description Sivun koko
-         * @example 10
-         */
-        size?: number;
-        /**
-         * @description Haun kieli (fi/sv/en)
-         * @example fi
-         */
-        lng?: string;
-        /**
-         * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
-         * @example nimi
-         */
-        "order-by"?: string;
-        /** @description Hakutuloksen järjestys (asc/desc) */
-        order?: "asc" | "desc";
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ValintaperusteSearchResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna teemakuva
-   * @description Tallenna teemakuva väliaikaiseen sijaintiin. Teemakuva siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
-   */
-  "Tallenna teemakuva": {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko myös mahdollisesti poistettu koulutus */
-        isSmallTeemakuva?: boolean;
-      };
-    };
-    requestBody?: {
-      content: {
-        "image/jpeg": string;
-        "image/png": string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa kaikki koulutuksen toteutukset
-   * @description Listaa kaikki koulutuksen toteutukset. Tämä rajapinta on indeksointia varten
-   */
-  indexerListKoulutusToteutukset: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) toteutukset */
-        vainOlemassaolevat?: boolean;
-      };
-      path: {
-        /**
-         * @description Koulutus-oid
-         * @example 1.2.246.562.13.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ToteutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa kaikki hakukohteet, jotka on liitetty hakuun
-   * @description Listaa hakuun liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
-   */
-  indexerListHakuHakukohteet: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
-        vainOlemassaolevat?: boolean;
-      };
-      path: {
-        /**
-         * @description Haku-oid
-         * @example 1.2.246.562.29.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakukohdeListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi haku
-   * @description Tallenna uuden haun tiedot. Rajapinta palauttaa haulle generoidun yksilöivän haku-oidin.
-   */
-  "Tallenna uusi haku": {
-    /** @description Tallennettava haku */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Haku"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden haun yksilöivä oid
-             * @example 1.2.246.562.29.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa hakua
-   * @description Muokkaa olemassa olevaa hakua. Rajapinnalle annetaan haun kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  "Muokkaa hakua": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan haun kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Haku"];
-      };
-    };
-    responses: {
-      /** @description O */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee organisaation koulutuksia annetuilla parametreilla
-   * @description Hakee organisaation koulutukset annetuilla parametreilla
-   */
-  searchKoulutukset: {
-    parameters: {
-      query: {
-        /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
-        koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
-        /** @description Organisaation oid */
-        organisaatioOid: string;
-        /** @description Suodata annetulla nimellä tai oidilla */
-        nimi?: string;
-        /** @description Suodata muokkaajan nimellä tai oidilla */
-        muokkaaja?: string;
-        /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
-        tila?: string[];
-        /** @description Suodata entiteetin näkyvyydellä */
-        julkinen?: boolean;
-        /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
-        hakutapa?: string[];
-        /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
-        koulutuksenAlkamiskausi?: string[];
-        /** @description Suodata pilkulla erotetuilla vuosilla */
-        koulutuksenAlkamisvuosi?: number[];
-        /** @description Suodata haun oidilla */
-        hakuOid?: string;
-        /** @description Suodata toteutuksen oidilla */
-        toteutusOid?: string;
-        /** @description Suodata koulutuksen oidilla */
-        koulutusOid?: string;
-        /**
-         * @description Sivunumero
-         * @example 1
-         */
-        page?: number;
-        /**
-         * @description Sivun koko
-         * @example 10
-         */
-        size?: number;
-        /**
-         * @description Haun kieli (fi/sv/en)
-         * @example fi
-         */
-        lng?: string;
-        /**
-         * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
-         * @example nimi
-         */
-        "order-by"?: string;
-        /** @description Hakutuloksen järjestys (asc/desc) */
-        order?: "asc" | "desc";
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["KoulutusSearchResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa organisaation käytettävissä olevat haut
-   * @description Listaa niiden hakujen tiedot, jotka ovat organisaation käytettävissä
-   */
-  "Listaa haut": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-        /** @description Listataanko myös arkistoidut haut */
-        myosArkistoidut?: boolean;
-        /** @description Listataanko myös yhteishaut */
-        yhteishaut?: boolean;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakuListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa pistehistorian siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut pistehistoriatiedot ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoPistehistoria: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna logo
-   * @description Tallenna oppilaitoksen logo väliaikaiseen sijaintiin. Logo siirretään lopulliseen sijaintiinsa, kun se asetetaan oppilaitoksen logoksi.
-   */
-  "Tallenna logo": {
-    requestBody?: {
-      content: {
-        "image/jpeg": string;
-        "image/png": string;
-        "image/svg+xml": string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Palauttaa tarjoajan ja hakukohdekoodin tai lukiolinjakoodin yhdistelmään liittyvät pistetiedot
-   * @description Listaa pistetiedot. Tarjoaja JA joko hakukohdekoodi TAI lukiolinjakoodi annettava.
-   */
-  indexerListPistetiedot: {
-    parameters: {
-      query?: {
-        /**
-         * @description Tarjoajaorganisaation oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        tarjoaja?: Record<string, never>;
-        /**
-         * @description hakukohdekoodi
-         * @example hakukohteet_000
-         */
-        hakukohdekoodi?: Record<string, never>;
-        /** @description lukiolinjakoodi */
-        lukiolinjakoodi?: Record<string, never>;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Pistetieto"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa hakukohteet siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut hakukohteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoHakukohteet: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae oppilaitosten ja/tai oppilaitosten osien tiedot
-   * @description Hakee oppilaitoksen ja/tai oppilaitoksen osan tiedot
-   */
-  listOppilaitosOppilaitokset: {
-    /** @description Lista haettavien oppilaitosten tai niiden osien id:itä */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["OppilaitoksetResponse"];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi SORA-kuvaus
-   * @description Tallenna uuden SORA-kuvauksen tiedot. Rajapinta palauttaa SORA-kuvaukselle generoidun yksilöivän id:n
-   */
-  externalSorakuvausSave: {
-    /** @description Tallennettava SORA-kuvaus */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          sorakuvaus?: components["schemas"]["Sorakuvaus"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden SORA-kuvauksen yksilöivä id
-             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa SORA-kuvausta
-   * @description Muokkaa olemassa olevaa SORA-kuvausta. Rajapinnalle annetaan SORA-kuvauksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  externalSorakuvausEdit: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan SORA-kuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          sorakuvaus?: components["schemas"]["Sorakuvaus"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna uusi toteutus
-   * @description Tallenna uuden toteutuksen tiedot. Rajapinta palauttaa toteutukselle generoidun yksilöivän toteutus-oidin.
-   */
-  "Tallenna uusi toteutus": {
-    /** @description Tallennettava toteutus */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Toteutus"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden toteutuksen yksilöivä oid
-             * @example 1.2.246.562.17.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa toteutusta
-   * @description Muokkaa olemassa olevaa toteutusta. Rajapinnalle annetaan toteutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  "Muokkaa toteutusta": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan toteutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Toteutus"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna ammattinimikkeitä
-   * @description Tallenna ammattinimikkeitä
-   */
-  "Tallenna ammattinimikkeita": {
-    parameters: {
-      query?: {
-        /** @description Tallennettavan ammattinimikkeen kieli */
-        kieli?: "fi" | "sv" | "en";
-      };
-    };
-    /** @description Lista tallennettavia ammattinimikkeitä */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description O */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna kopiot toteutuksista
-   * @description Tallennetaan kopioitavien toteutusten tiedot tietokantaan. Kopiototeutukset tallennetaan luonnostilaisina. Rajapinta palauttaa toteutuksille generoidut yksilöivät toteutus-oidit.
-   */
-  "Tallenna kopiot toteutuksista": {
-    /** @description Lista kopioitavien toteutusten id:itä */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["CopyResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna luokittelutermejä
-   * @description Tallenna luokittelutermejä
-   */
-  "Tallenna luokittelutermejä": {
-    parameters: {
-      query?: {
-        /** @description Tallennettavan luokittelutermin kieli */
-        kieli?: "fi" | "sv" | "en";
-      };
-    };
-    /** @description Lista tallennettavia luokittelutermejä */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description O */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
-   * @description Hakee haun hakukohteiden alimmat pisteet ja tallentaa ne kantaan
-   */
-  indexerSyncHaunPistetiedot: {
-    parameters: {
-      query?: {
-        /**
-         * @description Yksittäisen haun oid tai "defaults" viiden edellisen toisen asteen yhteishaun synkronoimiseksi (2023)
-         * @example 1.2.246.562.29.00000000000000021303
-         */
-        hakuOid?: Record<string, never>;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "text/plain": string;
-        };
-      };
-      /** @description Pakollinen parametri puuttuu */
-      400: {
-        content: {
-          "text/plain": string;
-        };
-      };
-      /** @description Palvelinvirhe */
-      500: {
-        content: {
-          "text/plain": string;
-        };
-      };
-    };
-  };
-  /**
-   * Hae koulutukset yläkoodin perusteella
-   * @description Hakee voimassa olevat koulutukset ja niiden metadatan versioimattoman yläkoodin perusteella. Väliotsikkokoodit (päättyvät "00") on suodatettu pois.
-   */
-  "Hae koulutukset": {
-    parameters: {
-      path: {
-        /**
-         * @description yläkoodin koodiUri ilman versiotietoa
-         * @example koulutustyyppi_06
-         */
-        tyyppi: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-              /**
-               * @description koodiUri.
-               * @example koulutusTyyppi_25
-               */
-              koodiUri?: string;
-              /** @description Koodiurin numeerinen tunniste */
-              koodiArvo?: string;
-              /**
-               * @description Koodin versio
-               * @example 1
-               */
-              versio?: number;
-              /** @description Koodisto johon koodi kuuluu */
-              koodisto?: {
-                /** @description Koodiston uri, tässä tapauksessa "koulutus" */
-                koodistoUri?: string;
-              };
-              /**
-               * @description Päivämäärä johon asti koodi on voimassa
-               * @example 2015-04-24
-               */
-              voimassaLoppuPvm?: string;
-              /** @description Koodin metadata */
-              metadata?: {
-                  /**
-                   * @description Koodin nimi
-                   * @example Insinööri (AMK), bio- ja elintarviketekniikka
-                   */
-                  nimi?: string;
-                  /**
-                   * @description Metadataelementin kielitunniste
-                   * @example FI
-                   */
-                  kieli?: string;
-                }[];
-            }[];
-        };
-      };
-    };
-  };
-  /**
-   * Hae SORA-kuvauksen tiedot
-   * @description Hakee SORA-kuvauksen kaikki tiedot
-   */
-  "Hae sorakuvaus": {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko myös mahdollisesti poistettu SORA-kuvaus */
-        myosPoistetut?: boolean;
-      };
-      path: {
-        /**
-         * @description Sorakuvaus-id
-         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-         */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Sorakuvaus"];
-        };
-      };
-    };
-  };
-  /**
-   * Hae organisaation tiedot organisaatiopalvelusta
-   * @description Hakee organisaation tiedot organisaatiopalvelusta
-   */
-  getOrganisaatio: {
-    parameters: {
-      path: {
-        /**
-         * @description Oppilaitoksen organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Organisaatio"];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa ammattinimikkeet siirtotiedostoon
-   * @description Hakee kaikki ammattinimikkeet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoAmmattinimikkeet: {
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna uusi koulutus
-   * @description Tallenna uuden koulutuksen tiedot. Rajapinta palauttaa koulutukselle generoidun yksilöivän koulutus-oidin.
-   */
-  externalKoulutusSave: {
-    /** @description Tallennettava koulutus */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          koulutus?: components["schemas"]["Koulutus"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden koulutuksen yksilöivä oid
-             * @example 1.2.246.562.13.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa koulutusta
-   * @description Muokkaa olemassa olevaa koulutusta. Rajapinnalle annetaan koulutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  externalKoulutusEdit: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan koulutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          koulutus?: components["schemas"]["Koulutus"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee ammattinimikkeitä annetulla hakutermillä
-   * @description Hakee ammattinimikkeitä annetulla hakutermillä
-   */
-  "Hae ammattinimikkeita": {
-    parameters: {
-      query?: {
-        /** @description Haettavan ammattinimikkeen kieli */
-        kieli?: "fi" | "sv" | "en";
-        /** @description Palautettavien ammattinimikkeiden maksimimäärä */
-        limit?: number;
-      };
-      path: {
-        /**
-         * @description hakutermi
-         * @example kone
-         */
-        term: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": string[];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa organisaation käytettävissä olevat toteutukset
-   * @description Listaa niiden toteutusten tiedot, jotka ovat organisaation käytettävissä
-   */
-  "Listaa toteutukset": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-        /** @description Listataanko vain ne toteutukset, jotka voi liittää hakukohteeseen */
-        vainHakukohteeseenLiitettavat?: boolean;
-        /** @description Listataanko myös arkistoidut toteutukset */
-        myosArkistoidut?: boolean;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ToteutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa kaikki oppilaitoksen osien kuvailutiedot
-   * @description Listaa oppilaitoksen kaikki osat. Tämä rajapinta on ideksointia varten
-   */
-  indexerListOppilaitosOsat: {
-    parameters: {
-      path: {
-        /**
-         * @description Oppilaitoksen organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["OppilaitoksenOsaListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa kaikki toteutukseen liitetyt hakukohteet
-   * @description Listaa kaikki toteutukseen liitetyt hakukohteet, mikäli käyttäjällä on oikeus nähdä ne
-   */
-  "Listaa toteutuksen hakukohteet": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-      };
-      path: {
-        /**
-         * @description Toteutus-oid
-         * @example 1.2.246.562.17.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakukohdeListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi toteutus
-   * @description Tallenna uuden toteutuksen tiedot. Rajapinta palauttaa toteutukselle generoidun yksilöivän toteutus-oidin.
-   */
-  externalToteutusSave: {
-    /** @description Tallennettava toteutus */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          toteutus?: components["schemas"]["Toteutus"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden toteutuksen yksilöivä oid
-             * @example 1.2.246.562.17.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa toteutusta
-   * @description Muokkaa olemassa olevaa toteutusta. Rajapinnalle annetaan toteutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  externalToteutusEdit: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan toteutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          toteutus?: components["schemas"]["Toteutus"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna uusi koulutus
-   * @description Tallenna uuden koulutuksen tiedot. Rajapinta palauttaa koulutukselle generoidun yksilöivän koulutus-oidin.
-   */
-  "Tallenna uusi koulutus": {
-    /** @description Tallennettava koulutus */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Koulutus"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden koulutuksen yksilöivä oid
-             * @example 1.2.246.562.13.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa koulutusta
-   * @description Muokkaa olemassa olevaa koulutusta. Rajapinnalle annetaan koulutuksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  "Muokkaa koulutusta": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan koulutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Koulutus"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae organisaatiohierarkian organisaatiopalvelusta
-   * @description Hakee organisaatiohierarkian organisaatiopalvelusta
-   */
-  getHierarkia: {
-    parameters: {
-      query?: {
-        /**
-         * @description Hakumerkkijono
-         * @example Tampereen yliopisto
-         */
-        searchStr?: string;
-        /**
-         * @description Haettavan organisaation oid
-         * @example 1.2.246.562.10.60198812360
-         */
-        oid?: string;
-        /**
-         * @description Lista haettavien organisaatioiden oideja
-         * @example [
-         *   "1.2.246.562.10.60198812368",
-         *   "1.2.246.562.10.60198812360"
-         * ]
-         */
-        oidRestrictionList?: string[];
-        /**
-         * @description Otetaanko aktiiviset organisaatiot mukaan hakutuloksiin
-         * @example false
-         */
-        aktiiviset?: boolean;
-        /**
-         * @description Otetaanko suunnitellut organisaatiot mukaan hakutuloksiin
-         * @example false
-         */
-        suunnitellut?: boolean;
-        /**
-         * @description Otetaanko lakkautetut organisaatiot mukaan hakutuloksiin
-         * @example false
-         */
-        lakkautetut?: boolean;
-        /**
-         * @description Jätetäänkö yläorganisaatiot pois hakutuloksista
-         * @example false
-         */
-        skipParents?: boolean;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["OrganisaatioHierarkia"];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee organisaation toteutuksia annetuilla parametreilla
-   * @description Hakee organisaation toteutukset annetuilla parametreilla
-   */
-  searchToteutukset: {
-    parameters: {
-      query: {
-        /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
-        koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
-        /** @description Organisaation oid */
-        organisaatioOid: string;
-        /** @description Suodata annetulla nimellä tai oidilla */
-        nimi?: string;
-        /** @description Suodata muokkaajan nimellä tai oidilla */
-        muokkaaja?: string;
-        /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
-        tila?: string[];
-        /** @description Suodata entiteetin näkyvyydellä */
-        julkinen?: boolean;
-        /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
-        hakutapa?: string[];
-        /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
-        koulutuksenAlkamiskausi?: string[];
-        /** @description Suodata pilkulla erotetuilla vuosilla */
-        koulutuksenAlkamisvuosi?: number[];
-        /** @description Suodata haun oidilla */
-        hakuOid?: string;
-        /** @description Suodata toteutuksen oidilla */
-        toteutusOid?: string;
-        /** @description Suodata koulutuksen oidilla */
-        koulutusOid?: string;
-        /**
-         * @description Sivunumero
-         * @example 1
-         */
-        page?: number;
-        /**
-         * @description Sivun koko
-         * @example 10
-         */
-        size?: number;
-        /**
-         * @description Haun kieli (fi/sv/en)
-         * @example fi
-         */
-        lng?: string;
-        /**
-         * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
-         * @example nimi
-         */
-        "order-by"?: string;
-        /** @description Hakutuloksen järjestys (asc/desc) */
-        order?: "asc" | "desc";
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ToteutusSearchResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa kaikki hakukohteet, joihin valintaperustekuvaus on liitetty
-   * @description Listaa kaikki hakukohteet, joihin valintaperustekuvaus on liitetty, mikäli käyttäjällä on oikeus nähdä ne
-   */
-  indexerListValintaperusteHakukohteet: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
-        vainOlemassaolevat?: boolean;
-      };
-      path: {
-        /**
-         * @description Valintaperusteen id
-         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-         */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakukohdeListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee valintakokeentyypit, kaikki tai suodattaa niitä koodirelaatioiden kautta annetuilla parametreilla
-   * @description Hakee voimassa olevat valintakokeentyypit ja niiden metadatat. Suodatetaan yläkoodirelaatioden kautta annetuilla parametreilla. Jos valintakokeentyyppikoodilla ei ole ollenkaan relaatiota yläkoodiston koodiin, niin silloin se on mukana palautettavassa listassa.
-   */
-  "Hae valintakokeentyypit": {
-    parameters: {
-      query?: {
-        /**
-         * @description koulutuskoodit, millä rajataan valintakokeentyyppejä
-         * @example [
-         *   "koulutus_354345#12"
-         * ]
-         */
-        koulutuskoodi?: string[];
-        /**
-         * @description osaamisalat, millä rajataan valintakokeentyyppejä
-         * @example [
-         *   "osaamisala_1791#1"
-         * ]
-         */
-        osaamisalakoodi?: string[];
-        /**
-         * @description hakutapakoodi, millä rajataan valintakokeentyyppejä
-         * @example hakutapa_03#1
-         */
-        hakutapakoodi?: string;
-        /**
-         * @description haunkohdejoukkokoodi, millä rajataan valintakokeentyyppejä
-         * @example haunkohdejoukko_23#1
-         */
-        haunkohdejoukkokoodi?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-              /**
-               * @description koodiUri.
-               * @example koulutusTyyppi_25
-               */
-              koodiUri?: string;
-              /** @description Koodiurin numeerinen tunniste */
-              koodiArvo?: string;
-              /**
-               * @description Koodin versio
-               * @example 1
-               */
-              versio?: number;
-              /** @description Koodisto johon koodi kuuluu */
-              koodisto?: {
-                /** @description Koodiston uri, tässä tapauksessa "koulutus" */
-                koodistoUri?: string;
-              };
-              /**
-               * @description Päivämäärä johon asti koodi on voimassa
-               * @example 2015-04-24
-               */
-              voimassaLoppuPvm?: string;
-              /** @description Koodin metadata */
-              metadata?: {
-                  /**
-                   * @description Koodin nimi
-                   * @example Insinööri (AMK), bio- ja elintarviketekniikka
-                   */
-                  nimi?: string;
-                  /**
-                   * @description Metadataelementin kielitunniste
-                   * @example FI
-                   */
-                  kieli?: string;
-                }[];
-            }[];
-        };
-      };
-    };
-  };
-  /**
-   * Käynnistä hakujen arkistointi
-   * @description Käynnistä hakujen arkistointi manuaalisesti. Arkistoi ja uudelleenindeksoi kaikki haut, joilla arkistointipäivämäärä on määritelty tai haun loppumisesta on yli 10 kuukautta. Arkistoi myös hakujen hakukohteet.
-   */
-  "Käynnistä hakujen arkistointi": {
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee oppilaitoksen kaikkien osien kuvailutiedot
-   * @description Hakee oppilaitoksen kaikkien osien kuvailutiedot. Tämä rajapinta on ideksointia varten
-   */
-  indexerGetOppilaitosOsat: {
-    parameters: {
-      path: {
-        /**
-         * @description Oppilaitoksen organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["OppilaitoksenOsa"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi hakukohde
-   * @description Tallenna uuden hakukohteen tiedot. Rajapinta palauttaa hakukohteelle generoidun yksilöivän hakukohde-oidin.
-   */
-  externalHakukohdeSave: {
-    /** @description Tallennettava hakukohde */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          hakukohde?: components["schemas"]["Hakukohde"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden hakukohteen yksilöivä oid
-             * @example 1.2.246.562.20.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa hakukohdetta
-   * @description Muokkaa olemassa olevaa hakukohdetta. Rajapinnalle annetaan hakukohteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  externalHakukohdeEdit: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan hakukohteen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          hakukohde?: components["schemas"]["Hakukohde"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae organisaatioiden tiedot organisaatiopalvelusta
-   * @description Hakee organisaatioiden tiedot organisaatiopalvelusta
-   */
-  getOrganisaatiot: {
-    /** @description Lista haettavien organisaatioiden oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Organisaatio"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi haku
-   * @description Tallenna uuden haun tiedot. Rajapinta palauttaa haulle generoidun yksilöivän haku-oidin.
-   */
-  externalHakuSave: {
-    /** @description Tallennettava haku */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          haku?: components["schemas"]["Haku"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden haun yksilöivä oid
-             * @example 1.2.246.562.29.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa hakua
-   * @description Muokkaa olemassa olevaa hakua. Rajapinnalle annetaan haun kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  externalHakuEdit: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan haun kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          haku?: components["schemas"]["Haku"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna uusi valintaperustekuvaus
-   * @description Tallenna uuden valintaperustekuvauksen tiedot. Rajapinta palauttaa valintaperustekuvaukselle generoidun yksilöivän id:n
-   */
-  "Tallenna uusi valintaperuste": {
-    /** @description Tallennettava valintaperustekuvaus */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Valintaperuste"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden valintaperustekuvauksen yksilöivä id
-             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-             */
-            id?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa valintaperustekuvausta
-   * @description Muokkaa olemassa olevaa valintaperustekuvausta. Rajapinnalle annetaan valintaperusteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  "Muokkaa valintaperustetta": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan valintaperustekuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Valintaperuste"];
-      };
-    };
-    responses: {
-      /** @description O */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae koulutuksen toteutukset
-   * @description Hakee koulutuksen kaikkien toteutusten kaikki tiedot. Tämä rajapinta on ideksointia varten
-   */
-  indexerKoulutusToteutukset: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko vain julkaistut, Opintopolussa näytettävät toteutukset */
-        vainJulkaistut?: boolean;
-        /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) toteutukset */
-        vainOlemassaolevat?: boolean;
-      };
-      path: {
-        /**
-         * @description Koulutus-oid
-         * @example 1.2.246.562.13.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Toteutus"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna kuvake
-   * @description Tallenna kuvake väliaikaiseen sijaintiin. Kuvake siirretään lopulliseen sijaintiinsa, kun se asetetaan jonkin objektin teemakuvaksi.
-   */
-  "Tallenna kuvake": {
-    requestBody?: {
-      content: {
-        "image/jpeg": string;
-        "image/png": string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa kaikki hakuun liitetyt koulutukset
-   * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) koulutukset. Tämä rajapinta on indeksointia varten
-   */
-  indexerListHakuKoulutukset: {
-    parameters: {
-      path: {
-        /**
-         * @description Haku-oid
-         * @example 1.2.246.562.29.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["KoulutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa valintaperusteet siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut valintaperusteet ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoValintaperusteet: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa kaikki toteutukseen liitetyt haut
-   * @description Listaa kaikki toteutukseen liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
-   */
-  indexerListToteutusHaut: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) haut */
-        vainOlemassaolevat?: boolean;
-      };
-      path: {
-        /**
-         * @description Toteutus-oid
-         * @example 1.2.246.562.17.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakuListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa toteutukset siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut toteutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoToteutukset: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee organisaation hakukohteita annetuilla parametreilla
-   * @description Hakee organisaation hakukohteet annetuilla parametreilla
-   */
-  searchHakukohteet: {
-    parameters: {
-      query: {
-        /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
-        koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
-        /** @description Organisaation oid */
-        organisaatioOid: string;
-        /** @description Suodata annetulla nimellä tai oidilla */
-        nimi?: string;
-        /** @description Suodata muokkaajan nimellä tai oidilla */
-        muokkaaja?: string;
-        /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
-        tila?: string[];
-        /** @description Suodata entiteetin näkyvyydellä */
-        julkinen?: boolean;
-        /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
-        hakutapa?: string[];
-        /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
-        koulutuksenAlkamiskausi?: string[];
-        /** @description Suodata pilkulla erotetuilla vuosilla */
-        koulutuksenAlkamisvuosi?: number[];
-        /** @description Suodata haun oidilla */
-        hakuOid?: string;
-        /** @description Suodata toteutuksen oidilla */
-        toteutusOid?: string;
-        /** @description Suodata koulutuksen oidilla */
-        koulutusOid?: string;
-        /**
-         * @description Sivunumero
-         * @example 1
-         */
-        page?: number;
-        /**
-         * @description Sivun koko
-         * @example 10
-         */
-        size?: number;
-        /**
-         * @description Haun kieli (fi/sv/en)
-         * @example fi
-         */
-        lng?: string;
-        /**
-         * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
-         * @example nimi
-         */
-        "order-by"?: string;
-        /** @description Hakutuloksen järjestys (asc/desc) */
-        order?: "asc" | "desc";
-        /** @description Suodata annetulla haun nimellä tai oidilla */
-        hakuNimi?: string;
-        /** @description Rajaa palautuvia hakukohteita organisaation mukaan. Pilkulla erotettuja organisaatio-oideja. */
-        orgWhitelist?: string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakukohdeSearchResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Hae koulutuksen toteutus
-   * @description Hakee koulutuksen toteutuksen tiedot
-   */
-  "Hae toteutus": {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko myös mahdollisesti poistettu toteutus */
-        myosPoistetut?: boolean;
-      };
-      path: {
-        /**
-         * @description toteutus-oid
-         * @example 1.2.246.562.17.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Toteutus"];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa kaikki ePerusteIDt joita on liitetty olemassaoleviin koulutuksiin.
-   * @description Listaa kaikki ePerusteIDt joita on liitetty olemassaoleviin koulutuksiin. Tämä rajapinta on indeksointia varten.
-   */
-  indexerListKoulutuksetEPerusteIds: {
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": string[];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa kaikki koulutukset, joihin SORA-kuvaus on liitetty
-   * @description Listaa kaikki koulutukset, joihin SORA-kuvaus on liitetty, mikäli käyttäjällä on oikeus nähdä ne
-   */
-  indexerListSorakuvausKoulutukset: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) koulutukset */
-        vainOlemassaolevat?: boolean;
-      };
-      path: {
-        /**
-         * @description SORA-kuvauksen id
-         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-         */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": string[];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa organisaation käytettävissä olevat koulutukset
-   * @description Listaa niiden koulutusten tiedot, jotka ovat organisaation käytettävissä esim. uutta toteutusta luotaessa
-   */
-  "Listaa koulutukset": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-        /**
-         * @description Koulutustyyppi
-         * @example amm
-         */
-        koulutustyyppi?: string;
-        /** @description Listataanko myös arkistoidut koulutukset */
-        myosArkistoidut?: boolean;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["KoulutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Muuttaa usean hakukohteen tilat
-   * @description Muuttaa annettavien hakukohdeoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen hakukohteiden yksilöivät oidit.
-   */
-  "Muuttaa hakukohteiden tilat": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-      path: {
-        /**
-         * @description Hakukohteen julkaisutila, joka päivitetään hakukohteille
-         * @example tallennettu
-         */
-        tila: string;
-      };
-    };
-    /** @description Lista muutettavien hakukohteiden oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["TilaChangeResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa oppilaitostyypit koulutustyypeittäin
-   * @description Listaa jokaisen koulutustyypin osalta oppilaitostyypit, jotka voivat tarjota ko. koulutusta, ts. mäppäykset koulutustyypistä oppilaitostyyppeihin
-   */
-  "Listaa oppilaitostyypit": {
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["KoulutustyyppiToOppilaitostyyppiResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi SORA-kuvaus
-   * @description Tallenna uuden SORA-kuvauksen tiedot. Rajapinta palauttaa SORA-kuvaukselle generoidun yksilöivän id:n
-   */
-  "Tallenna uusi sorakuvaus": {
-    /** @description Tallennettava SORA-kuvaus */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Sorakuvaus"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden SORA-kuvauksen yksilöivä id
-             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa SORA-kuvausta
-   * @description Muokkaa olemassa olevaa SORA-kuvausta. Rajapinnalle annetaan SORA-kuvauksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  "Muokkaa sorakuvausta": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan SORA-kuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Sorakuvaus"];
-      };
-    };
-    responses: {
-      /** @description O */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa organisaation käytettävissä olevat SORA-kuvaukset
-   * @description Listaa niiden SORA-kuvausten tiedot, jotka ovat organisaation käytettävissä.
-   */
-  "Listaa sorakuvaukset": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-        /** @description Listataanko myös arkistoidut sorakuvaukset */
-        myosArkistoidut?: boolean;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["SorakuvausListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa avoimen korkeakoulutuksen oppilaitokset (ei osia)
-   * @description Listaa avoimen korkeakoulutuksen oppilaitokset organisaatiopalvelusta
-   */
-  getHierarkiaForAvoinKorkeakoulutus: {
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["OrganisaatioHierarkia"];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee koulutukset, joiden oidit annettu requestBodyssä
-   * @description Hakee koulutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
-   */
-  indexerKoulutukset: {
-    /** @description Lista koulutusOideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae koulutukseen liittyvät hakutiedot
-   * @description Hakee koulutuksen olemassaolevat (=ei poistetut) ja arkistoimattomat hakutiedot. Tämä rajapinta on indeksointia varten
-   */
-  indexerKoulutusHakutiedot: {
-    parameters: {
-      path: {
-        /**
-         * @description Koulutus-oid
-         * @example 1.2.246.562.13.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Hakutieto"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa haut siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut haut ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoHaut: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee tarjoajaa (oppilaitos tai toimipiste) vastaavat toteutukset
-   * @description Hakee kaikkien niiden toteutusten oidit, joissa annettu oppilaitos/toimipiste on sen tarjoajana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
-   */
-  indexerListToteutusOidsByTarjoajat: {
-    /** @description Lista tarjoajien organisaatio-oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa kaikki toteutukseen liitetyt hakukohteet
-   * @description Listaa kaikki toteutukseen liitetyt hakukohteet. Tämä rajapinta on indeksointia varten
-   */
-  listToteutusHakukohteet: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
-        vainOlemassaolevat?: boolean;
-      };
-      path: {
-        /**
-         * @description Toteutus-oid
-         * @example 1.2.246.562.17.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakukohdeListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi hakukohde
-   * @description Tallenna uuden hakukohteen tiedot. Rajapinta palauttaa hakukohteelle generoidun yksilöivän hakukohde-oidin.
-   */
-  "Tallenna uusi hakukohde": {
-    /** @description Tallennettava hakukohde */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Hakukohde"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden hakukohteen yksilöivä oid
-             * @example 1.2.246.562.20.00000000000000000009
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa hakukohdetta
-   * @description Muokkaa olemassa olevaa hakukohdetta. Rajapinnalle annetaan hakukohteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  "Muokkaa hakukohdetta": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan hakukohteen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Hakukohde"];
-      };
-    };
-    responses: {
-      /** @description O */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee tarjoajaa (oppilaitos tai toimipiste) vastaavat koulutukset
-   * @description Hakee kaikkien niiden koulutusten oidit, joissa annettu oppilaitos/toimipiste on sen tarjoajana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
-   */
-  indexerListKoulutusOidsByTarjoajat: {
-    /** @description Lista tarjoajien organisaatio-oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee toteutukset, joiden oidit annettu requestBodyssä
-   * @description Hakee toteutukset, joiden oidit annettu requestBodyssä. Tämä rajapinta on indeksointia varten
-   */
-  indexerToteutukset: {
-    /** @description Lista toteutusten oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallentaa asiasanat siirtotiedostoon
-   * @description Hakee kaikki asiasanat ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoAsiasanat: {
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna kopiot hakukohteista ja niihin liitetyistä toteutuksista
-   * @description Luodaan kopiot pyynnössä listatuista hakukohteista sekä niihin liitetyistä toteutuksista. Hakukohteesta tehtävä kopio liitetään hakuun, jonka oid annetaan parametrina. Kopiot tallennetaan luonnostilaisina. Rajapinta palauttaa tallennettujen hakukohteiden ja toteutusten yksilöivät oidit.
-   */
-  "Tallenna kopiot hakukohteista": {
-    parameters: {
-      path: {
-        /**
-         * @description Sen haun oid, johon kopioitavat hakukohteen liitetään
-         * @example 1.2.246.562.29.00000000000000011030
-         */
-        hakuOid: string;
-      };
-    };
-    /** @description Lista kopioitavien hakukohteiden oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["CopyResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tarkista käyttäjän sessio
-   * @description Tarkista käyttäjän sessio
-   */
-  "Tarkista sessio": {
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-      /** @description Unauthorized */
-      401: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa organisaation käytettävissä olevat tietyn koulutuksen toteutukset
-   * @description Listaa ne tietyn koulutuksen toteutukset, jotka ovat organisaation käytettävissä.
-   */
-  listKoulutusToteutukset: {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-      };
-      path: {
-        /**
-         * @description Koulutus-oid
-         * @example 1.2.246.562.13.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ToteutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa kaikki organisaatiolle kuuluvat hakukohteet, jotka on liitetty hakuun
-   * @description Listaa ne hakuun liitetyt hakukohteet, jotka ovat organisaatiolla on oikeus nähdä. Jos organisaatio-oidia ei ole annettu, listaa haun kaikki hakukohteet, mikäli käyttäjällä on oikeus nähdä ne
-   */
-  "Listaa haun hakukohteet": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-      };
-      path: {
-        /**
-         * @description Haku-oid
-         * @example 1.2.246.562.29.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakukohdeListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Muuttaa usean toteutuksen tilat
-   * @description Muuttaa annettavien toteutusoidien tilat. Tila annetaan parametrina. Rajapinta palauttaa muutettujen toteutusten yksilöivät oidit.
-   */
-  "Muuttaa toteutusten tilat": {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-      path: {
-        /**
-         * @description Toteutuksen julkaisutila, joka päivitetään toteutuksille
-         * @example tallennettu
-         */
-        tila: string;
-      };
-    };
-    /** @description Lista muutettavien toteutusten oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["TilaChangeResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee asiasanoja annetulla hakutermillä
-   * @description Hakee asiasanoja annetulla hakutermillä
-   */
-  "Hae asiasanoja": {
-    parameters: {
-      query?: {
-        /** @description Haettavan asiasanan kieli */
-        kieli?: "fi" | "sv" | "en";
-        /** @description Palautettavien asiasanojen maksimimäärä */
-        limit?: number;
-      };
-      path: {
-        /**
-         * @description hakutermi
-         * @example robo
-         */
-        term: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": string[];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee organisaation hakuja annetuilla parametreilla
-   * @description Hakee organisaation haut annetuilla parametreilla
-   */
-  searchHaut: {
-    parameters: {
-      query: {
-        /** @description Organisaation oid */
-        organisaatioOid: string;
-        /** @description Suodata annetulla nimellä tai oidilla */
-        nimi?: string;
-        /** @description Suodata muokkaajan nimellä tai oidilla */
-        muokkaaja?: string;
-        /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
-        tila?: string[];
-        /** @description Suodata entiteetin näkyvyydellä */
-        julkinen?: boolean;
-        /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
-        hakutapa?: string[];
-        /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
-        koulutuksenAlkamiskausi?: string[];
-        /** @description Suodata pilkulla erotetuilla vuosilla */
-        koulutuksenAlkamisvuosi?: number[];
-        /** @description Suodata haun oidilla */
-        hakuOid?: string;
-        /** @description Suodata toteutuksen oidilla */
-        toteutusOid?: string;
-        /** @description Suodata koulutuksen oidilla */
-        koulutusOid?: string;
-        /**
-         * @description Sivunumero
-         * @example 1
-         */
-        page?: number;
-        /**
-         * @description Sivun koko
-         * @example 10
-         */
-        size?: number;
-        /**
-         * @description Haun kieli (fi/sv/en)
-         * @example fi
-         */
-        lng?: string;
-        /**
-         * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
-         * @example nimi
-         */
-        "order-by"?: string;
-        /** @description Hakutuloksen järjestys (asc/desc) */
-        order?: "asc" | "desc";
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["HakuSearchResult"][];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa organisaation käytettävissä olevat oppilaitoksen osien kuvailutiedot
-   * @description Listaa ne oppilaitoksen osat, jotka ovat organisaation käytettävissä.
-   */
-  listOppilaitosOsat: {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-      };
-      path: {
-        /**
-         * @description Oppilaitoksen organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["OppilaitoksenOsaListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee tiedot niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty
-   * @description Hakee tiedot niille opintokokonaisuuksille, joihin requestBodyssä annetut toteutus-oidit on liitetty. Tämä rajapinta on indeksointia varten
-   */
-  indexerListOpintokokonaisuudet: {
-    /** @description Lista toteutusten (opintojaksojen) oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae haun tiedot
-   * @description Hakee haun kaikki tiedot
-   */
-  "Hae haku": {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko myös mahdollisesti poistettu haku */
-        myosPoistetut?: boolean;
-      };
-      path: {
-        /**
-         * @description Haku-oid
-         * @example 1.2.246.562.29.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Haku"];
-        };
-      };
-    };
-  };
-  /**
-   * Hae oppilaitoksen osan kuvailutiedot
-   * @description Hakee oppilaitoksen osan kuvailutiedot
-   */
-  getOppilaitoksenOsa: {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko yhteystiedot myös oppilaitoksen osien osille? */
-        yhteystiedotForOsat?: boolean;
-      };
-      path: {
-        /**
-         * @description Oppilaitoksen organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["OppilaitoksenOsa"];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa sorakuvaukset siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut sorakuvaukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoSorakuvaukset: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae hakukohteen tiedot
-   * @description Hakee hakukohteen kaikki tiedot
-   */
-  "Hae hakukohde": {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko myös mahdollisesti poistettu hakukohde */
-        myosPoistetut?: boolean;
-      };
-      path: {
-        /**
-         * @description Hakukohde-oid
-         * @example 1.2.246.562.20.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Hakukohde"];
-        };
-      };
-    };
-  };
-  /**
-   * Listaa organisaation käytettävissä olevat opintojaksot
-   * @description Listaa organisaation käytettävissä olevat opintojaksot uutta opintokokonaisuustoteutusta luotaessa
-   */
-  "Listaa opintojaksot": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ToteutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Kirjaudu sisään
-   * @description Kirjaudu sisään
-   */
-  "Kirjaudu sisaan": {
-    parameters: {
-      query: {
-        /** @description CAS-tiketti */
-        ticket: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-      /** @description Unauthorized */
-      401: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Kirjaudu ulos
-   * @description Kirjaudu ulos
-   */
-  "Kirjaudu ulos": {
-    requestBody: {
-      content: {
-        "application/json": {
-          logoutRequest: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna uusi oppilaitoksen osan kuvailutieto
-   * @description Tallenna uusi oppilaitoksen osan kuvailutieto. Palauttaa tallennetun oppilaitoksen osan organisaatio-oidin.
-   */
-  saveOppilaitoksenOsa: {
-    /** @description Tallennettavan oppilaitoksen osan tiedot */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["OppilaitoksenOsa"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden toteutuksen yksilöivä oid
-             * @example 1.2.246.562.10.00101010101
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa oppilaitoksen osan kuvailutietoa
-   * @description Muokkaa olemassa olevaa oppilaitoksen osan kuvailutietoa. Rajapinnalle annetaan oppilaitoksen osan kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  editOppilaitoksenOsa: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan oppilaitoksen osan kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["OppilaitoksenOsa"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallentaa koulutukset siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut koulutukset ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoKoulutukset: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa kaikki hakuun liitetyt toteutukset
-   * @description Listaa kaikki hakuun liitetyt olemassaolevat (=ei poistetut) toteutukset. Tämä rajapinta on indeksointia varten
-   */
-  indexerListHakuToteutukset: {
-    parameters: {
-      path: {
-        /**
-         * @description Haku-oid
-         * @example 1.2.246.562.29.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ToteutusListItem"][];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna uusi valintaperustekuvaus
-   * @description Tallenna uuden valintaperustekuvauksen tiedot. Rajapinta palauttaa valintaperustekuvaukselle generoidun yksilöivän id:n
-   */
-  externalValintaperusteSave: {
-    /** @description Tallennettava valintaperustekuvaus */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          valintaperuste?: components["schemas"]["Valintaperuste"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden valintaperustekuvauksen yksilöivä id
-             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-             */
-            id?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa valintaperustekuvausta
-   * @description Muokkaa olemassa olevaa valintaperustekuvausta. Rajapinnalle annetaan valintaperusteen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  externalValintaperusteEdit: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan valintaperustekuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": {
-          authenticated?: components["schemas"]["Authenticated"];
-          valintaperuste?: components["schemas"]["Valintaperuste"];
-        };
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee järjestyspaikkaa (oppilaitos tai toimipiste) vastaavat hakukohteet
-   * @description Hakee kaikkien niiden hakukohteiden oidit, joissa annettu oppilaitos/toimipiste on sen järjestyspaikkana suoraan tai oppilaitoksen kautta (jos toimipiste). Tämä rajapinta on indeksointia varten
-   */
-  indexerListHakukohdeOidsByJarjestyspaikat: {
-    /** @description Lista järjestyspaikkojen organisaatio-oideja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Tallenna uusi oppilaitoksen kuvailutieto
-   * @description Tallenna uusi oppilaitoksen kuvailutieto. Palauttaa tallennetun oppilaitoksen organisaatio-oidin.
-   */
-  saveOppilaitos: {
-    /** @description Tallennettavan oppilaitoksen tiedot */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Oppilaitos"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": {
-            /**
-             * @description Uuden toteutuksen yksilöivä oid
-             * @example 1.2.246.562.10.00101010101
-             */
-            oid?: string;
-          };
-        };
-      };
-    };
-  };
-  /**
-   * Muokkaa olemassa olevaa oppilaitoksen kuvailutietoa
-   * @description Muokkaa olemassa olevaa oppilaitoksen kuvailutietoa. Rajapinnalle annetaan oppilaitoksen kaikki tiedot, ja muuttuneet tiedot tallennetaan kantaan.
-   */
-  editOppilaitos: {
-    parameters: {
-      header: {
-        "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
-      };
-    };
-    /** @description Muokattavan oppilaitoksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["Oppilaitos"];
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen
-   * @description Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen. Tämä rajapinta on indeksointia varten
-   */
-  indexerModifiedSince: {
-    parameters: {
-      path: {
-        /** @example Thu, 1 Jan 1970 00:00:00 GMT */
-        since: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ListEverything"];
-        };
-      };
-    };
-  };
-  /**
-   * Tallenna asiasanoja
-   * @description Tallenna asiasanoja
-   */
-  "Tallenna asiasanoja": {
-    parameters: {
-      query?: {
-        /** @description Tallennettavan asiasanan kieli */
-        kieli?: "fi" | "sv" | "en";
-      };
-    };
-    /** @description Lista tallennettavia asiasanoja */
-    requestBody: {
-      content: {
-        "application/json": string[];
-      };
-    };
-    responses: {
-      /** @description O */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Hae koulutus
-   * @description Hae koulutuksen tiedot annetulla koulutus-oidilla
-   */
-  "Hae koulutus": {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko myös mahdollisesti poistettu koulutus */
-        myosPoistetut?: boolean;
-      };
-      path: {
-        /**
-         * @description Koulutus-oid
-         * @example 1.2.246.562.13.00000000000000000009
-         */
-        oid: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Koulutus"];
-        };
-      };
-    };
-  };
-  /**
-   * Hakee luokittelutermejä annetulla hakutermillä
-   * @description Hakee luokittelutermejä annetulla hakutermillä
-   */
-  "Hae luokittelutermejä": {
-    parameters: {
-      query?: {
-        /** @description Haettavan asiasanan kieli */
-        kieli?: "fi" | "sv" | "en";
-        /** @description Palautettavien luokittelutermien maksimimäärä */
-        limit?: number;
-      };
-      path: {
-        /**
-         * @description hakutermi
-         * @example robo
-         */
-        term: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": string[];
-        };
-      };
-    };
-  };
-  /**
-   * Hae valintaperustekuvauksen tiedot
-   * @description Hakee valintaperustekuvauksen kaikki tiedot
-   */
-  "Hae valintaperuste": {
-    parameters: {
-      query?: {
-        /** @description Palautetaanko myös mahdollisesti poistettu valintaperuste */
-        myosPoistetut?: boolean;
-      };
-      path: {
-        /**
-         * @description Valintaperuste-id
-         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
-         */
-        id: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Valintaperuste"];
-        };
-      };
-    };
-  };
-  /**
-   * Tallentaa oppilaitokset ja niiden osat siirtotiedostoon
-   * @description Hakee annetulla aikavälillä luodut/modifioidut oppilaitokset ja osat, ja tallentaa ne siirtotiedostoon (S3 -bucketiin)
-   */
-  siirtotiedostoOppilaitoksetJaOsat: {
-    parameters: {
-      query?: {
-        /** @example 2025-06-03T08:01:05 */
-        startTime?: string;
-        /**
-         * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-         * @example 2025-06-03T08:01:05
-         */
-        endTime?: string;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: never;
-      };
-    };
-  };
-  /**
-   * Listaa organisaation tietyn haun hakukohteille käytettävissä olevat valintaperustekuvaukset
-   * @description Listaa niiden valintaperustekuvausten tiedot, jotka ovat organisaation käytettävissä. Jos haku-oid on annettu, listataan ne kuvaukset, joita voi käyttää kyseisen haun hakukohteille
-   */
-  "Listaa valintaperusteet": {
-    parameters: {
-      query: {
-        /**
-         * @description Organisaatio-oid
-         * @example 1.2.246.562.10.00101010101
-         */
-        organisaatioOid: string;
-        /**
-         * @description Haku-oid
-         * @example 1.2.246.562.29.00000000000000000009
-         */
-        hakuOid?: string;
-        /**
-         * @description Koulutustyyppi
-         * @example amm
-         */
-        koulutustyyppi?: string;
-        /** @description Listataanko myös arkistoidut valintaperusteet */
-        myosArkistoidut?: boolean;
-      };
-    };
-    responses: {
-      /** @description Ok */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ValintaperusteListItem"][];
-        };
-      };
-    };
-  };
+                size?: number;
+                /**
+                 * @description Haun kieli (fi/sv/en)
+                 * @example fi
+                 */
+                lng?: string;
+                /**
+                 * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
+                 * @example nimi
+                 */
+                "order-by"?: string;
+                /** @description Hakutuloksen järjestys (asc/desc) */
+                order?: "asc" | "desc";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ValintaperusteSearchResult"][];
+                };
+            };
+        };
+    };
+    "Tallenna teemakuva": {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko myös mahdollisesti poistettu koulutus */
+                isSmallTeemakuva?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "image/jpeg": string;
+                "image/png": string;
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListKoulutusToteutukset: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) toteutukset */
+                vainOlemassaolevat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Koulutus-oid
+                 * @example 1.2.246.562.13.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ToteutusListItem"][];
+                };
+            };
+        };
+    };
+    indexerListHakuHakukohteet: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
+                vainOlemassaolevat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Haku-oid
+                 * @example 1.2.246.562.29.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HakukohdeListItem"][];
+                };
+            };
+        };
+    };
+    "Tallenna uusi haku": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava haku */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Haku"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden haun yksilöivä oid
+                         * @example 1.2.246.562.29.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    "Muokkaa hakua": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan haun kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Haku"];
+            };
+        };
+        responses: {
+            /** @description O */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    searchKoulutukset: {
+        parameters: {
+            query: {
+                /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
+                koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
+                /** @description Organisaation oid */
+                organisaatioOid: string;
+                /** @description Suodata annetulla nimellä tai oidilla */
+                nimi?: string;
+                /** @description Suodata muokkaajan nimellä tai oidilla */
+                muokkaaja?: string;
+                /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
+                tila?: string[];
+                /** @description Suodata entiteetin näkyvyydellä */
+                julkinen?: boolean;
+                /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
+                hakutapa?: string[];
+                /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
+                koulutuksenAlkamiskausi?: string[];
+                /** @description Suodata pilkulla erotetuilla vuosilla */
+                koulutuksenAlkamisvuosi?: number[];
+                /** @description Suodata haun oidilla */
+                hakuOid?: string;
+                /** @description Suodata toteutuksen oidilla */
+                toteutusOid?: string;
+                /** @description Suodata koulutuksen oidilla */
+                koulutusOid?: string;
+                /**
+                 * @description Sivunumero
+                 * @example 1
+                 */
+                page?: number;
+                /**
+                 * @description Sivun koko
+                 * @example 10
+                 */
+                size?: number;
+                /**
+                 * @description Haun kieli (fi/sv/en)
+                 * @example fi
+                 */
+                lng?: string;
+                /**
+                 * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
+                 * @example nimi
+                 */
+                "order-by"?: string;
+                /** @description Hakutuloksen järjestys (asc/desc) */
+                order?: "asc" | "desc";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KoulutusSearchResult"][];
+                };
+            };
+        };
+    };
+    "Listaa haut": {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+                /** @description Listataanko myös arkistoidut haut */
+                myosArkistoidut?: boolean;
+                /** @description Listataanko myös yhteishaut */
+                yhteishaut?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HakuListItem"][];
+                };
+            };
+        };
+    };
+    siirtotiedostoPistehistoria: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna logo": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "image/jpeg": string;
+                "image/png": string;
+                "image/svg+xml": string;
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListPistetiedot: {
+        parameters: {
+            query?: {
+                /**
+                 * @description Tarjoajaorganisaation oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                tarjoaja?: Record<string, never>;
+                /**
+                 * @description hakukohdekoodi
+                 * @example hakukohteet_000
+                 */
+                hakukohdekoodi?: Record<string, never>;
+                /** @description lukiolinjakoodi */
+                lukiolinjakoodi?: Record<string, never>;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Pistetieto"][];
+                };
+            };
+        };
+    };
+    siirtotiedostoHakukohteet: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    listOppilaitosOppilaitokset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista haettavien oppilaitosten tai niiden osien id:itä */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OppilaitoksetResponse"];
+                };
+            };
+        };
+    };
+    externalSorakuvausSave: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava SORA-kuvaus */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    sorakuvaus?: components["schemas"]["Sorakuvaus"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden SORA-kuvauksen yksilöivä id
+                         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    externalSorakuvausEdit: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan SORA-kuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    sorakuvaus?: components["schemas"]["Sorakuvaus"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna uusi toteutus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava toteutus */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Toteutus"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden toteutuksen yksilöivä oid
+                         * @example 1.2.246.562.17.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    "Muokkaa toteutusta": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan toteutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Toteutus"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna ammattinimikkeita": {
+        parameters: {
+            query?: {
+                /** @description Tallennettavan ammattinimikkeen kieli */
+                kieli?: "fi" | "sv" | "en";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista tallennettavia ammattinimikkeitä */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description O */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna kopiot toteutuksista": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista kopioitavien toteutusten id:itä */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CopyResult"][];
+                };
+            };
+        };
+    };
+    indexerSyncHaunPistetiedot: {
+        parameters: {
+            query?: {
+                /**
+                 * @description Yksittäisen haun oid tai "defaults" viiden edellisen toisen asteen yhteishaun synkronoimiseksi (2023)
+                 * @example 1.2.246.562.29.00000000000000021303
+                 */
+                hakuOid?: Record<string, never>;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Pakollinen parametri puuttuu */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Palvelinvirhe */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+        };
+    };
+    "Hae koulutukset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description yläkoodin koodiUri ilman versiotietoa
+                 * @example koulutustyyppi_06
+                 */
+                tyyppi: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description koodiUri.
+                         * @example koulutusTyyppi_25
+                         */
+                        koodiUri?: string;
+                        /** @description Koodiurin numeerinen tunniste */
+                        koodiArvo?: string;
+                        /**
+                         * @description Koodin versio
+                         * @example 1
+                         */
+                        versio?: number;
+                        /** @description Koodisto johon koodi kuuluu */
+                        koodisto?: {
+                            /** @description Koodiston uri, tässä tapauksessa "koulutus" */
+                            koodistoUri?: string;
+                        };
+                        /**
+                         * @description Päivämäärä johon asti koodi on voimassa
+                         * @example 2015-04-24
+                         */
+                        voimassaLoppuPvm?: string;
+                        /** @description Koodin metadata */
+                        metadata?: {
+                            /**
+                             * @description Koodin nimi
+                             * @example Insinööri (AMK), bio- ja elintarviketekniikka
+                             */
+                            nimi?: string;
+                            /**
+                             * @description Metadataelementin kielitunniste
+                             * @example FI
+                             */
+                            kieli?: string;
+                        }[];
+                    }[];
+                };
+            };
+        };
+    };
+    "Hae sorakuvaus": {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko myös mahdollisesti poistettu SORA-kuvaus */
+                myosPoistetut?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Sorakuvaus-id
+                 * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Sorakuvaus"];
+                };
+            };
+        };
+    };
+    getOrganisaatio: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Oppilaitoksen organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Organisaatio"];
+                };
+            };
+        };
+    };
+    siirtotiedostoAmmattinimikkeet: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    externalKoulutusSave: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava koulutus */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    koulutus?: components["schemas"]["Koulutus"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden koulutuksen yksilöivä oid
+                         * @example 1.2.246.562.13.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    externalKoulutusEdit: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan koulutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    koulutus?: components["schemas"]["Koulutus"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Hae ammattinimikkeita": {
+        parameters: {
+            query?: {
+                /** @description Haettavan ammattinimikkeen kieli */
+                kieli?: "fi" | "sv" | "en";
+                /** @description Palautettavien ammattinimikkeiden maksimimäärä */
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description hakutermi
+                 * @example kone
+                 */
+                term: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
+                };
+            };
+        };
+    };
+    "Listaa toteutukset": {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+                /** @description Listataanko vain ne toteutukset, jotka voi liittää hakukohteeseen */
+                vainHakukohteeseenLiitettavat?: boolean;
+                /** @description Listataanko myös arkistoidut toteutukset */
+                myosArkistoidut?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ToteutusListItem"][];
+                };
+            };
+        };
+    };
+    indexerListOppilaitosOsat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Oppilaitoksen organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OppilaitoksenOsaListItem"][];
+                };
+            };
+        };
+    };
+    externalToteutusSave: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava toteutus */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    toteutus?: components["schemas"]["Toteutus"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden toteutuksen yksilöivä oid
+                         * @example 1.2.246.562.17.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    externalToteutusEdit: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan toteutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    toteutus?: components["schemas"]["Toteutus"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna uusi koulutus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava koulutus */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Koulutus"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden koulutuksen yksilöivä oid
+                         * @example 1.2.246.562.13.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    "Muokkaa koulutusta": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan koulutuksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Koulutus"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getHierarkia: {
+        parameters: {
+            query?: {
+                /**
+                 * @description Hakumerkkijono
+                 * @example Tampereen yliopisto
+                 */
+                searchStr?: string;
+                /**
+                 * @description Haettavan organisaation oid
+                 * @example 1.2.246.562.10.60198812360
+                 */
+                oid?: string;
+                /**
+                 * @description Lista haettavien organisaatioiden oideja
+                 * @example [
+                 *       "1.2.246.562.10.60198812368",
+                 *       "1.2.246.562.10.60198812360"
+                 *     ]
+                 */
+                oidRestrictionList?: string[];
+                /**
+                 * @description Otetaanko aktiiviset organisaatiot mukaan hakutuloksiin
+                 * @example false
+                 */
+                aktiiviset?: boolean;
+                /**
+                 * @description Otetaanko suunnitellut organisaatiot mukaan hakutuloksiin
+                 * @example false
+                 */
+                suunnitellut?: boolean;
+                /**
+                 * @description Otetaanko lakkautetut organisaatiot mukaan hakutuloksiin
+                 * @example false
+                 */
+                lakkautetut?: boolean;
+                /**
+                 * @description Jätetäänkö yläorganisaatiot pois hakutuloksista
+                 * @example false
+                 */
+                skipParents?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrganisaatioHierarkia"];
+                };
+            };
+        };
+    };
+    searchToteutukset: {
+        parameters: {
+            query: {
+                /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
+                koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
+                /** @description Organisaation oid */
+                organisaatioOid: string;
+                /** @description Suodata annetulla nimellä tai oidilla */
+                nimi?: string;
+                /** @description Suodata muokkaajan nimellä tai oidilla */
+                muokkaaja?: string;
+                /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
+                tila?: string[];
+                /** @description Suodata entiteetin näkyvyydellä */
+                julkinen?: boolean;
+                /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
+                hakutapa?: string[];
+                /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
+                koulutuksenAlkamiskausi?: string[];
+                /** @description Suodata pilkulla erotetuilla vuosilla */
+                koulutuksenAlkamisvuosi?: number[];
+                /** @description Suodata haun oidilla */
+                hakuOid?: string;
+                /** @description Suodata toteutuksen oidilla */
+                toteutusOid?: string;
+                /** @description Suodata koulutuksen oidilla */
+                koulutusOid?: string;
+                /**
+                 * @description Sivunumero
+                 * @example 1
+                 */
+                page?: number;
+                /**
+                 * @description Sivun koko
+                 * @example 10
+                 */
+                size?: number;
+                /**
+                 * @description Haun kieli (fi/sv/en)
+                 * @example fi
+                 */
+                lng?: string;
+                /**
+                 * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
+                 * @example nimi
+                 */
+                "order-by"?: string;
+                /** @description Hakutuloksen järjestys (asc/desc) */
+                order?: "asc" | "desc";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ToteutusSearchResult"][];
+                };
+            };
+        };
+    };
+    indexerListValintaperusteHakukohteet: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) hakukohteet */
+                vainOlemassaolevat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Valintaperusteen id
+                 * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HakukohdeListItem"][];
+                };
+            };
+        };
+    };
+    "Hae valintakokeentyypit": {
+        parameters: {
+            query?: {
+                /**
+                 * @description koulutuskoodit, millä rajataan valintakokeentyyppejä
+                 * @example [
+                 *       "koulutus_354345#12"
+                 *     ]
+                 */
+                koulutuskoodi?: string[];
+                /**
+                 * @description osaamisalat, millä rajataan valintakokeentyyppejä
+                 * @example [
+                 *       "osaamisala_1791#1"
+                 *     ]
+                 */
+                osaamisalakoodi?: string[];
+                /**
+                 * @description hakutapakoodi, millä rajataan valintakokeentyyppejä
+                 * @example hakutapa_03#1
+                 */
+                hakutapakoodi?: string;
+                /**
+                 * @description haunkohdejoukkokoodi, millä rajataan valintakokeentyyppejä
+                 * @example haunkohdejoukko_23#1
+                 */
+                haunkohdejoukkokoodi?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description koodiUri.
+                         * @example koulutusTyyppi_25
+                         */
+                        koodiUri?: string;
+                        /** @description Koodiurin numeerinen tunniste */
+                        koodiArvo?: string;
+                        /**
+                         * @description Koodin versio
+                         * @example 1
+                         */
+                        versio?: number;
+                        /** @description Koodisto johon koodi kuuluu */
+                        koodisto?: {
+                            /** @description Koodiston uri, tässä tapauksessa "koulutus" */
+                            koodistoUri?: string;
+                        };
+                        /**
+                         * @description Päivämäärä johon asti koodi on voimassa
+                         * @example 2015-04-24
+                         */
+                        voimassaLoppuPvm?: string;
+                        /** @description Koodin metadata */
+                        metadata?: {
+                            /**
+                             * @description Koodin nimi
+                             * @example Insinööri (AMK), bio- ja elintarviketekniikka
+                             */
+                            nimi?: string;
+                            /**
+                             * @description Metadataelementin kielitunniste
+                             * @example FI
+                             */
+                            kieli?: string;
+                        }[];
+                    }[];
+                };
+            };
+        };
+    };
+    "K\u00E4ynnist\u00E4 hakujen arkistointi": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerGetOppilaitosOsat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Oppilaitoksen organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OppilaitoksenOsa"][];
+                };
+            };
+        };
+    };
+    externalHakukohdeSave: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava hakukohde */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    hakukohde?: components["schemas"]["Hakukohde"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden hakukohteen yksilöivä oid
+                         * @example 1.2.246.562.20.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    externalHakukohdeEdit: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan hakukohteen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    hakukohde?: components["schemas"]["Hakukohde"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getOrganisaatiot: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista haettavien organisaatioiden oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Organisaatio"][];
+                };
+            };
+        };
+    };
+    externalHakuSave: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava haku */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    haku?: components["schemas"]["Haku"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden haun yksilöivä oid
+                         * @example 1.2.246.562.29.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    externalHakuEdit: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan haun kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    haku?: components["schemas"]["Haku"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna uusi valintaperuste": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava valintaperustekuvaus */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Valintaperuste"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden valintaperustekuvauksen yksilöivä id
+                         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                         */
+                        id?: string;
+                    };
+                };
+            };
+        };
+    };
+    "Muokkaa valintaperustetta": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan valintaperustekuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Valintaperuste"];
+            };
+        };
+        responses: {
+            /** @description O */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerKoulutusToteutukset: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko vain julkaistut, Opintopolussa näytettävät toteutukset */
+                vainJulkaistut?: boolean;
+                /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) toteutukset */
+                vainOlemassaolevat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Koulutus-oid
+                 * @example 1.2.246.562.13.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Toteutus"][];
+                };
+            };
+        };
+    };
+    "Tallenna kuvake": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "image/jpeg": string;
+                "image/png": string;
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListHakuKoulutukset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Haku-oid
+                 * @example 1.2.246.562.29.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KoulutusListItem"][];
+                };
+            };
+        };
+    };
+    siirtotiedostoValintaperusteet: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListToteutusHaut: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) haut */
+                vainOlemassaolevat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Toteutus-oid
+                 * @example 1.2.246.562.17.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HakuListItem"][];
+                };
+            };
+        };
+    };
+    siirtotiedostoToteutukset: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    searchHakukohteet: {
+        parameters: {
+            query: {
+                /** @description Suodata pilkulla erotetuilla koulutustyypeillä */
+                koulutustyyppi?: components["schemas"]["Koulutustyyppi"][];
+                /** @description Organisaation oid */
+                organisaatioOid: string;
+                /** @description Suodata annetulla nimellä tai oidilla */
+                nimi?: string;
+                /** @description Suodata muokkaajan nimellä tai oidilla */
+                muokkaaja?: string;
+                /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
+                tila?: string[];
+                /** @description Suodata entiteetin näkyvyydellä */
+                julkinen?: boolean;
+                /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
+                hakutapa?: string[];
+                /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
+                koulutuksenAlkamiskausi?: string[];
+                /** @description Suodata pilkulla erotetuilla vuosilla */
+                koulutuksenAlkamisvuosi?: number[];
+                /** @description Suodata haun oidilla */
+                hakuOid?: string;
+                /** @description Suodata toteutuksen oidilla */
+                toteutusOid?: string;
+                /** @description Suodata koulutuksen oidilla */
+                koulutusOid?: string;
+                /**
+                 * @description Sivunumero
+                 * @example 1
+                 */
+                page?: number;
+                /**
+                 * @description Sivun koko
+                 * @example 10
+                 */
+                size?: number;
+                /**
+                 * @description Haun kieli (fi/sv/en)
+                 * @example fi
+                 */
+                lng?: string;
+                /**
+                 * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
+                 * @example nimi
+                 */
+                "order-by"?: string;
+                /** @description Hakutuloksen järjestys (asc/desc) */
+                order?: "asc" | "desc";
+                /** @description Suodata annetulla haun nimellä tai oidilla */
+                hakuNimi?: string;
+                /** @description Rajaa palautuvia hakukohteita organisaation mukaan. Pilkulla erotettuja organisaatio-oideja. */
+                orgWhitelist?: string[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HakukohdeSearchResult"][];
+                };
+            };
+        };
+    };
+    "Hae toteutus": {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko myös mahdollisesti poistettu toteutus */
+                myosPoistetut?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description toteutus-oid
+                 * @example 1.2.246.562.17.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Toteutus"];
+                };
+            };
+        };
+    };
+    indexerListKoulutuksetEPerusteIds: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
+                };
+            };
+        };
+    };
+    indexerListSorakuvausKoulutukset: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko ainoastaan olemassaolevat (=ei poistetut) koulutukset */
+                vainOlemassaolevat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description SORA-kuvauksen id
+                 * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
+                };
+            };
+        };
+    };
+    "Listaa koulutukset": {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+                /**
+                 * @description Koulutustyyppi
+                 * @example amm
+                 */
+                koulutustyyppi?: string;
+                /** @description Listataanko myös arkistoidut koulutukset */
+                myosArkistoidut?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KoulutusListItem"][];
+                };
+            };
+        };
+    };
+    "Muuttaa hakukohteiden tilat": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path: {
+                /**
+                 * @description Hakukohteen julkaisutila, joka päivitetään hakukohteille
+                 * @example tallennettu
+                 */
+                tila: string;
+            };
+            cookie?: never;
+        };
+        /** @description Lista muutettavien hakukohteiden oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TilaChangeResult"][];
+                };
+            };
+        };
+    };
+    "Listaa oppilaitostyypit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["KoulutustyyppiToOppilaitostyyppiResult"][];
+                };
+            };
+        };
+    };
+    "Tallenna uusi sorakuvaus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava SORA-kuvaus */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Sorakuvaus"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden SORA-kuvauksen yksilöivä id
+                         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    "Muokkaa sorakuvausta": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan SORA-kuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Sorakuvaus"];
+            };
+        };
+        responses: {
+            /** @description O */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Listaa sorakuvaukset": {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+                /** @description Listataanko myös arkistoidut sorakuvaukset */
+                myosArkistoidut?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SorakuvausListItem"][];
+                };
+            };
+        };
+    };
+    getHierarkiaForAvoinKorkeakoulutus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrganisaatioHierarkia"];
+                };
+            };
+        };
+    };
+    indexerKoulutukset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista koulutusOideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerKoulutusHakutiedot: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Koulutus-oid
+                 * @example 1.2.246.562.13.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Hakutieto"][];
+                };
+            };
+        };
+    };
+    siirtotiedostoHaut: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListToteutusOidsByTarjoajat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista tarjoajien organisaatio-oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna uusi hakukohde": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava hakukohde */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Hakukohde"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden hakukohteen yksilöivä oid
+                         * @example 1.2.246.562.20.00000000000000000009
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    "Muokkaa hakukohdetta": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan hakukohteen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Hakukohde"];
+            };
+        };
+        responses: {
+            /** @description O */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListKoulutusOidsByTarjoajat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista tarjoajien organisaatio-oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerToteutukset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista toteutusten oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    siirtotiedostoAsiasanat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Tallenna kopiot hakukohteista": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Sen haun oid, johon kopioitavat hakukohteen liitetään
+                 * @example 1.2.246.562.29.00000000000000011030
+                 */
+                hakuOid: string;
+            };
+            cookie?: never;
+        };
+        /** @description Lista kopioitavien hakukohteiden oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CopyResult"][];
+                };
+            };
+        };
+    };
+    "Tarkista sessio": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    listKoulutusToteutukset: {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Koulutus-oid
+                 * @example 1.2.246.562.13.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ToteutusListItem"][];
+                };
+            };
+        };
+    };
+    "Muuttaa toteutusten tilat": {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path: {
+                /**
+                 * @description Toteutuksen julkaisutila, joka päivitetään toteutuksille
+                 * @example tallennettu
+                 */
+                tila: string;
+            };
+            cookie?: never;
+        };
+        /** @description Lista muutettavien toteutusten oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TilaChangeResult"][];
+                };
+            };
+        };
+    };
+    "Hae asiasanoja": {
+        parameters: {
+            query?: {
+                /** @description Haettavan asiasanan kieli */
+                kieli?: "fi" | "sv" | "en";
+                /** @description Palautettavien asiasanojen maksimimäärä */
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description hakutermi
+                 * @example robo
+                 */
+                term: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
+                };
+            };
+        };
+    };
+    searchHaut: {
+        parameters: {
+            query: {
+                /** @description Organisaation oid */
+                organisaatioOid: string;
+                /** @description Suodata annetulla nimellä tai oidilla */
+                nimi?: string;
+                /** @description Suodata muokkaajan nimellä tai oidilla */
+                muokkaaja?: string;
+                /** @description Suodata pilkulla erotetuilla tiloilla (julkaistu/tallennettu/arkistoitu/poistettu) */
+                tila?: string[];
+                /** @description Suodata entiteetin näkyvyydellä */
+                julkinen?: boolean;
+                /** @description Suodata pilkulla erotetuilla hakutapakoodiureilla */
+                hakutapa?: string[];
+                /** @description Suodata koulutuksen alkamiskausi-koodiureilla */
+                koulutuksenAlkamiskausi?: string[];
+                /** @description Suodata pilkulla erotetuilla vuosilla */
+                koulutuksenAlkamisvuosi?: number[];
+                /** @description Suodata haun oidilla */
+                hakuOid?: string;
+                /** @description Suodata toteutuksen oidilla */
+                toteutusOid?: string;
+                /** @description Suodata koulutuksen oidilla */
+                koulutusOid?: string;
+                /**
+                 * @description Sivunumero
+                 * @example 1
+                 */
+                page?: number;
+                /**
+                 * @description Sivun koko
+                 * @example 10
+                 */
+                size?: number;
+                /**
+                 * @description Haun kieli (fi/sv/en)
+                 * @example fi
+                 */
+                lng?: string;
+                /**
+                 * @description Kenttä, jonka perusteella hakutulos järjestetään (nimi/tila/muokkaaja/modified)
+                 * @example nimi
+                 */
+                "order-by"?: string;
+                /** @description Hakutuloksen järjestys (asc/desc) */
+                order?: "asc" | "desc";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HakuSearchResult"][];
+                };
+            };
+        };
+    };
+    listOppilaitosOsat: {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Oppilaitoksen organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OppilaitoksenOsaListItem"][];
+                };
+            };
+        };
+    };
+    indexerListOpintokokonaisuudet: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista toteutusten (opintojaksojen) oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Hae haku": {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko myös mahdollisesti poistettu haku */
+                myosPoistetut?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Haku-oid
+                 * @example 1.2.246.562.29.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Haku"];
+                };
+            };
+        };
+    };
+    getOppilaitoksenOsa: {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko yhteystiedot myös oppilaitoksen osien osille? */
+                yhteystiedotForOsat?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Oppilaitoksen organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OppilaitoksenOsa"];
+                };
+            };
+        };
+    };
+    siirtotiedostoSorakuvaukset: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Hae hakukohde": {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko myös mahdollisesti poistettu hakukohde */
+                myosPoistetut?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Hakukohde-oid
+                 * @example 1.2.246.562.20.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Hakukohde"];
+                };
+            };
+        };
+    };
+    "Listaa opintojaksot": {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ToteutusListItem"][];
+                };
+            };
+        };
+    };
+    "Kirjaudu sisaan": {
+        parameters: {
+            query: {
+                /** @description CAS-tiketti */
+                ticket: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Kirjaudu ulos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    logoutRequest: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    saveOppilaitoksenOsa: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettavan oppilaitoksen osan tiedot */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OppilaitoksenOsa"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden toteutuksen yksilöivä oid
+                         * @example 1.2.246.562.10.00101010101
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    editOppilaitoksenOsa: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan oppilaitoksen osan kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OppilaitoksenOsa"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    siirtotiedostoKoulutukset: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListHakuToteutukset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Haku-oid
+                 * @example 1.2.246.562.29.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ToteutusListItem"][];
+                };
+            };
+        };
+    };
+    externalValintaperusteSave: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettava valintaperustekuvaus */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    valintaperuste?: components["schemas"]["Valintaperuste"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden valintaperustekuvauksen yksilöivä id
+                         * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                         */
+                        id?: string;
+                    };
+                };
+            };
+        };
+    };
+    externalValintaperusteEdit: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan valintaperustekuvauksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": {
+                    authenticated?: components["schemas"]["Authenticated"];
+                    valintaperuste?: components["schemas"]["Valintaperuste"];
+                };
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerListHakukohdeOidsByJarjestyspaikat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista järjestyspaikkojen organisaatio-oideja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    saveOppilaitos: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Tallennettavan oppilaitoksen tiedot */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Oppilaitos"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @description Uuden toteutuksen yksilöivä oid
+                         * @example 1.2.246.562.10.00101010101
+                         */
+                        oid?: string;
+                    };
+                };
+            };
+        };
+    };
+    editOppilaitos: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Vastaavan GETin x-Last-Modified */
+                "x-If-Unmodified-Since": components["parameters"]["xIfUnmodifiedSince"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Muokattavan oppilaitoksen kaikki tiedot. Kantaan tallennetaan muuttuneet tiedot. */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Oppilaitos"];
+            };
+        };
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    indexerModifiedSince: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example Thu, 1 Jan 1970 00:00:00 GMT */
+                since: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListEverything"];
+                };
+            };
+        };
+    };
+    "Tallenna asiasanoja": {
+        parameters: {
+            query?: {
+                /** @description Tallennettavan asiasanan kieli */
+                kieli?: "fi" | "sv" | "en";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Lista tallennettavia asiasanoja */
+        requestBody: {
+            content: {
+                "application/json": string[];
+            };
+        };
+        responses: {
+            /** @description O */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Hae koulutus": {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko myös mahdollisesti poistettu koulutus */
+                myosPoistetut?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Koulutus-oid
+                 * @example 1.2.246.562.13.00000000000000000009
+                 */
+                oid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Koulutus"];
+                };
+            };
+        };
+    };
+    "Hae luokittelutermej\u00E4": {
+        parameters: {
+            query?: {
+                /** @description Palautettavien luokittelutermien maksimimäärä */
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description hakutermi
+                 * @example robo
+                 */
+                term: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": string[];
+                };
+            };
+        };
+    };
+    "Hae valintaperuste": {
+        parameters: {
+            query?: {
+                /** @description Palautetaanko myös mahdollisesti poistettu valintaperuste */
+                myosPoistetut?: boolean;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description Valintaperuste-id
+                 * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Valintaperuste"];
+                };
+            };
+        };
+    };
+    siirtotiedostoOppilaitoksetJaOsat: {
+        parameters: {
+            query?: {
+                /** @example 2025-09-16T08:01:22 */
+                startTime?: string;
+                /**
+                 * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
+                 * @example 2025-09-16T08:01:22
+                 */
+                endTime?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "Listaa valintaperusteet": {
+        parameters: {
+            query: {
+                /**
+                 * @description Organisaatio-oid
+                 * @example 1.2.246.562.10.00101010101
+                 */
+                organisaatioOid: string;
+                /**
+                 * @description Haku-oid
+                 * @example 1.2.246.562.29.00000000000000000009
+                 */
+                hakuOid?: string;
+                /**
+                 * @description Koulutustyyppi
+                 * @example amm
+                 */
+                koulutustyyppi?: string;
+                /** @description Listataanko myös arkistoidut valintaperusteet */
+                myosArkistoidut?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Ok */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ValintaperusteListItem"][];
+                };
+            };
+        };
+    };
 }

@@ -69,7 +69,11 @@ const FileUploadedMessage = styled(Typography)`
   background: transparent;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{
+  nodrag?: boolean;
+  error?: boolean;
+  url?: string;
+}>`
   border: 1px dashed ${getThemeProp('palette.border')};
   border-radius: 2px;
   padding: ${spacing(3)};

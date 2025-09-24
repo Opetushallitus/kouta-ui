@@ -17,7 +17,7 @@ import {
   getKielistettyOsoite,
 } from '#/src/utils/languageUtils';
 
-import { Organisaatio } from '../types/domainTypes';
+import { OrganisaatioModel } from '../types/domainTypes';
 
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
@@ -25,18 +25,18 @@ export const YhteystietoSection = ({ description, name, language }) => {
   return (
     <Grid>
       {description && (
-        <Cell css={'margin-top: 24px'} width={12}>
+        <Cell style={{ marginTop: '24px' }} width={12}>
           {description}
         </Cell>
       )}
-      <Cell css={'margin-top: 24px'} width={12}>
+      <Cell style={{ marginTop: '24px' }} width={12}>
         <Field
           component={FormFieldInput}
           name={`${name}.nimi.${language}`}
           label={t('oppilaitoslomake.yhteystiedonNimi')}
         />
       </Cell>
-      <Cell css={'margin-top: 24px'} width={12}>
+      <Cell style={{ marginTop: '24px' }} width={12}>
         {t('yleiset.postiosoite')}
       </Cell>
       <Cell width={12}>
@@ -56,7 +56,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
           label={t('yleiset.postinumero')}
         />
       </Cell>
-      <Cell css={'margin-top: 24px'} width={12}>
+      <Cell style={{ marginTop: '24px' }} width={12}>
         {t('yleiset.kayntiosoite')}
       </Cell>
       <Cell width={12}>
@@ -76,7 +76,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
           label={t('yleiset.postinumero')}
         />
       </Cell>
-      <Cell css={'margin-top: 24px'} width={12}>
+      <Cell style={{ marginTop: '24px' }} width={12}>
         {t('oppilaitoslomake.muutYhteystiedot')}
       </Cell>
       <Cell width={12}>
@@ -124,7 +124,7 @@ export const YhteystiedotSection = ({
 }: {
   language: LanguageCode;
   organisaatioOid: string;
-  organisaatio: Organisaatio;
+  organisaatio: OrganisaatioModel;
 }) => {
   const { t } = useTranslation();
 
@@ -134,8 +134,8 @@ export const YhteystiedotSection = ({
   const nimi = getFirstLanguageValue(organisaationNimet, language);
 
   const kayntiosoitePostinumeroKoodiUri =
-    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri[language] ||
-    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri['fi'];
+    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri?.[language] ||
+    yhteystiedot?.kayntiosoite?.postinumeroKoodiUri?.['fi'];
 
   const { koodi: kayntiosoitePostinumeroKoodi } = useKoodi(
     kayntiosoitePostinumeroKoodiUri
@@ -148,8 +148,8 @@ export const YhteystiedotSection = ({
   );
 
   const postiosoitePostinumeroKoodiUri =
-    yhteystiedot?.postiosoite?.postinumeroKoodiUri[language] ||
-    yhteystiedot?.postiosoite?.postinumeroKoodiUri['fi'];
+    yhteystiedot?.postiosoite?.postinumeroKoodiUri?.[language] ||
+    yhteystiedot?.postiosoite?.postinumeroKoodiUri?.['fi'];
   const { koodi: postiosoitePostinumeroKoodi } = useKoodi(
     postiosoitePostinumeroKoodiUri
   );

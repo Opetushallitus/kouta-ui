@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { type Page } from '@playwright/test';
 import { sub } from 'date-fns';
 import { merge } from 'lodash';
 
@@ -37,12 +37,12 @@ export const stubHakukohdeRoutes = async (
 ) => {
   const hakuMockData = haku({ hakutapaKoodiUri });
   if (hakuWithoutTakarajat) {
-    hakuMockData.hakukohteenLiittamisenTakaraja = null;
-    hakuMockData.hakukohteenMuokkaamisenTakaraja = null;
+    hakuMockData.hakukohteenLiittamisenTakaraja = undefined;
+    hakuMockData.hakukohteenMuokkaamisenTakaraja = undefined;
   }
 
   if (hakuWithoutMuokkaamisenTakaraja) {
-    hakuMockData.hakukohteenMuokkaamisenTakaraja = null;
+    hakuMockData.hakukohteenMuokkaamisenTakaraja = undefined;
   }
 
   if (
@@ -53,11 +53,15 @@ export const stubHakukohdeRoutes = async (
     const muokkaamisenTakaraja = hakuMockData.hakukohteenMuokkaamisenTakaraja;
     let takaraja = liittamisenTakaraja;
 
-    if (muokkaamisenTakaraja && muokkaamisenTakaraja < liittamisenTakaraja) {
+    if (
+      muokkaamisenTakaraja &&
+      liittamisenTakaraja &&
+      muokkaamisenTakaraja < liittamisenTakaraja
+    ) {
       takaraja = muokkaamisenTakaraja;
     }
 
-    const fakeNow = sub(new Date(takaraja), { days: 1 });
+    const fakeNow = sub(new Date(takaraja!), { days: 1 });
     await setFakeTime(page, fakeNow);
   }
 
@@ -79,9 +83,17 @@ export const stubHakukohdeRoutes = async (
   await page.route(
     '**/kouta-backend/oppilaitos/oppilaitokset',
     fixtureJSON({
+      oppilaitokset: [
+        {
+          oid: organisaatioOid,
+          metadata: {
+            jarjestaaUrheilijanAmmKoulutusta: true,
+          },
+        },
+      ],
       organisaatioHierarkia: organisaatioHierarkia({
-        rootOid: organisaatioOid,
         toimipistenimi: selectedToimipisteNimi,
+        oppilaitosOid: organisaatioOid,
         jarjestyspaikkaOid: tarjoajat[0],
       }),
     })

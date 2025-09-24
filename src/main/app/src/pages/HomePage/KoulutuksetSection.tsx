@@ -20,7 +20,6 @@ import { searchKoulutukset } from '#/src/utils/koulutus/searchKoulutukset';
 
 import { EntitySearchList } from './EntitySearchList';
 import ListCollapse from './ListCollapse';
-import NavigationAnchor from './NavigationAnchor';
 
 const { KOULUTUS } = ENTITY;
 
@@ -62,8 +61,7 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const filterState = useFilterState(KOULUTUS, koulutusService);
   return (
-    <>
-      <NavigationAnchor id="koulutukset" />
+    <div id="koulutukset" data-test-id="koulutuksetSection">
       <ListCollapse
         icon={ICONS[KOULUTUS]}
         header={t('yleiset.koulutukset')}
@@ -82,6 +80,6 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           searchPage="homepage.koulutukset"
         />
       </ListCollapse>
-    </>
+    </div>
   );
 };

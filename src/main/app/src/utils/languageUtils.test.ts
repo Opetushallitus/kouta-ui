@@ -28,7 +28,7 @@ describe('getKielistettyOsoite', () => {
       },
       postinumeroKoodiUri: { fi: 'posti_15110' },
     };
-    const koodi = {
+    const koodi: Koodi = {
       koodiUri: 'posti_15110',
       koodiArvo: '15110',
       versio: 2,
@@ -45,7 +45,6 @@ describe('getKielistettyOsoite', () => {
           kieli: 'FI',
         },
       ],
-      ylaRelaatiot: [],
     };
     const language = 'fi';
     expect(getKielistettyOsoite(osoite, koodi, language)).toEqual(
@@ -74,7 +73,7 @@ describe('getKielistettyOsoite', () => {
       },
       postinumeroKoodiUri: { fi: 'posti_15110' },
     };
-    const koodi = {
+    const koodi: Koodi = {
       koodiUri: 'posti_15110',
       koodiArvo: '15110',
       versio: 2,
@@ -91,7 +90,6 @@ describe('getKielistettyOsoite', () => {
           kieli: 'FI',
         },
       ],
-      ylaRelaatiot: [],
     };
     const language = 'sv';
     expect(getKielistettyOsoite(osoite, koodi, language)).toEqual(
@@ -107,7 +105,7 @@ describe('getKielistettyOsoite', () => {
       },
       postinumeroKoodiUri: { sv: 'posti_15110', en: 'posti_15111' },
     };
-    const koodi = {
+    const koodi: Koodi = {
       koodiUri: 'posti_15111',
       koodiArvo: '15111',
       versio: 2,
@@ -124,7 +122,6 @@ describe('getKielistettyOsoite', () => {
           kieli: 'FI',
         },
       ],
-      ylaRelaatiot: [],
     };
     const language = 'fi';
     expect(getKielistettyOsoite(osoite, koodi, language)).toEqual(

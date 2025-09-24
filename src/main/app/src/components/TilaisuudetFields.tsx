@@ -18,7 +18,7 @@ import { Box } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 
-const SubSectionBox = styled(Box)`
+const SubSectionBox = styled(Box)<{ backgroundColor?: string }>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor || getThemeProp('colors.grayLighten6')};
   padding: ${spacing(4)};

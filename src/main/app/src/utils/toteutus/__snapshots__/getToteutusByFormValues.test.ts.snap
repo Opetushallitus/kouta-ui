@@ -79,15 +79,15 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
     "hakulomakeLinkki": {},
     "hakulomaketyyppi": "muu",
     "hakutermi": "ilmoittautuminen",
-    "hasJotpaRahoitus": undefined,
+    "hasJotpaRahoitus": false,
     "ilmoittautumislinkki": {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
     "isAvoinKorkeakoulutus": false,
     "isHakukohteetKaytossa": false,
-    "isTaydennyskoulutus": undefined,
-    "isTyovoimakoulutus": undefined,
+    "isTaydennyskoulutus": false,
+    "isTyovoimakoulutus": false,
     "jarjestetaanErityisopetuksena": false,
     "kielivalikoima": {
       "A1Kielet": [
@@ -275,6 +275,11 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
           },
           {
             "data": {
+              "id": "table-1",
+              "nimi": {
+                "fi": "Fi taulukko",
+                "sv": "Sv taulukko",
+              },
               "rows": [
                 {
                   "columns": [

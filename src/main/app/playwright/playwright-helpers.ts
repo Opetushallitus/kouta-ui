@@ -1,8 +1,8 @@
 import {
-  BrowserContext,
-  Locator,
-  Page,
-  TestInfo,
+  type BrowserContext,
+  type Locator,
+  type Page,
+  type TestInfo,
   expect,
 } from '@playwright/test';
 import { includes, last, toLower } from 'lodash';

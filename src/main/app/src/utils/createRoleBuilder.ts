@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { OPH_PAAKAYTTAJA_ROLE } from '#/src/constants';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
 import isOid from './isOid';
@@ -44,7 +44,7 @@ const createRoleLookup = roles => {
 };
 
 const getParentAndSelfOids = (
-  organisaatioOrOids: Organisaatio | Array<string> | string
+  organisaatioOrOids: OrganisaatioModel | Array<string> | string
 ) => {
   if (_.isString(organisaatioOrOids)) {
     return [organisaatioOrOids];

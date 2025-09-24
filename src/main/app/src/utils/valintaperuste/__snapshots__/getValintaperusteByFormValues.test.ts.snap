@@ -53,6 +53,11 @@ exports[`Should convert valintaperuste form with valintatapa 1`] = `
           },
           {
             "data": {
+              "id": "table-1",
+              "nimi": {
+                "fi": "Fi taulukko",
+                "sv": "Sv taulukko",
+              },
               "rows": [
                 {
                   "columns": [

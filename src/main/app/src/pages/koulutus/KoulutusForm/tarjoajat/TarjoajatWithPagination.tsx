@@ -8,7 +8,7 @@ import Pagination from '#/src/components/Pagination';
 import { Switch } from '#/src/components/Switch';
 import { Box, Input, InputIcon } from '#/src/components/virkailija';
 import { useItemsToShow } from '#/src/hooks/useItemsToShow';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { searchOrgsFromHierarkiaWithName } from '#/src/utils/searchOrgsFromHierarkiaWithName';
 
 import { useResetAvoinTarjoajat } from './useResetAvoinTarjoajat';
@@ -18,7 +18,7 @@ export const countPageNumber = orgs => Math.ceil(orgs.length / PAGE_SIZE);
 
 type Props = {
   organisaatioOid: string;
-  tarjoajat: Array<Organisaatio>;
+  tarjoajat: Array<OrganisaatioModel>;
   value: Array<string>;
   onChange: (val: Array<string>) => void;
   language: LanguageCode;

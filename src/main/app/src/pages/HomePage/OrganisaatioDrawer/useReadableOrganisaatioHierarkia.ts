@@ -8,7 +8,7 @@ import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import getUserRoles from '#/src/utils/getUserRoles';
 import isOid from '#/src/utils/isOid';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
@@ -40,7 +40,7 @@ const invalidOrganisaatioTypeMap = {
   organisaatiotyyppi_08: true,
 };
 
-const organisaatioHasCorrectType = (organisaatio: Organisaatio) => {
+const organisaatioHasCorrectType = (organisaatio: OrganisaatioModel) => {
   const { organisaatiotyyppiUris: organisaatiotyypit } = organisaatio;
 
   if (!_.isArray(organisaatiotyypit)) {

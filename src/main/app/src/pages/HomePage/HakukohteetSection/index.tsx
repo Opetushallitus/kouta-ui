@@ -25,7 +25,6 @@ import { searchHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import LiitoksetModal from './LiitoksetModal';
 import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
-import NavigationAnchor from '../NavigationAnchor';
 
 const { HAKUKOHDE } = ENTITY;
 
@@ -103,26 +102,27 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
         getLinkUrl={createGetHakukohdeLinkUrl(organisaatioOid)}
         entityTranslationKeyPath={'etusivu.hakukohde'}
       />
-      <NavigationAnchor id="hakukohteet" />
-      <ListCollapse
-        icon={ICONS[HAKUKOHDE]}
-        header={t('yleiset.hakukohteet')}
-        actions={
-          canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
-        }
-        defaultOpen
-      >
-        <EntitySearchList
-          ActionBar={HakukohdeActionBar}
-          searchEntities={searchHakukohteet}
-          organisaatioOid={organisaatioOid}
-          entityType={HAKUKOHDE}
-          columns={columns}
-          nimiPlaceholder={t('etusivu.haeHakukohteita')}
-          filterState={filterState}
-          searchPage="homepage.hakukohteet"
-        />
-      </ListCollapse>
+      <div id="hakukohteet" data-test-id="hakukohteetSection">
+        <ListCollapse
+          icon={ICONS[HAKUKOHDE]}
+          header={t('yleiset.hakukohteet')}
+          actions={
+            canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
+          }
+          defaultOpen
+        >
+          <EntitySearchList
+            ActionBar={HakukohdeActionBar}
+            searchEntities={searchHakukohteet}
+            organisaatioOid={organisaatioOid}
+            entityType={HAKUKOHDE}
+            columns={columns}
+            nimiPlaceholder={t('etusivu.haeHakukohteita')}
+            filterState={filterState}
+            searchPage="homepage.hakukohteet"
+          />
+        </ListCollapse>
+      </div>
     </StateChangeConfirmationWrapper>
   );
 };

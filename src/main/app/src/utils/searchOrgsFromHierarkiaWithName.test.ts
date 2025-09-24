@@ -1,4 +1,4 @@
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 
 import { searchOrgsFromHierarkiaWithName } from './searchOrgsFromHierarkiaWithName';
 
@@ -32,14 +32,14 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ] as Array<Organisaatio>,
+      ] as Array<OrganisaatioModel>,
       organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
         'organisaatiotyyppi_09',
       ],
     },
-  ] as Array<Organisaatio>;
+  ] as Array<OrganisaatioModel>;
 
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'Joku')).toEqual(hierarkia);
 });
@@ -75,7 +75,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ] as Array<Organisaatio>,
+      ] as Array<OrganisaatioModel>,
       organisaatiotyyppiUris: ['organisaatiotyyppi_01'],
     },
     {
@@ -114,7 +114,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
         'organisaatiotyyppi_09',
       ],
     },
-  ] as Array<Organisaatio>;
+  ] as Array<OrganisaatioModel>;
 
   const result = [
     {
@@ -146,14 +146,14 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ] as Array<Organisaatio>,
+      ] as Array<OrganisaatioModel>,
       organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
         'organisaatiotyyppi_09',
       ],
     },
-  ] as Array<Organisaatio>;
+  ] as Array<OrganisaatioModel>;
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'Joku')).toEqual(result);
 });
 
@@ -188,14 +188,14 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ] as Array<Organisaatio>,
+      ] as Array<OrganisaatioModel>,
       organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
         'organisaatiotyyppi_09',
       ],
     },
-  ] as Array<Organisaatio>;
+  ] as Array<OrganisaatioModel>;
 
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'Eriniminen')).toEqual(
     hierarkia
@@ -230,10 +230,10 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
             en: 'Etelä-Helsingin kansalaisopisto',
           },
           kotipaikkaUri: 'kunta_091',
-          children: [] as Array<Organisaatio>,
+          children: [] as Array<OrganisaatioModel>,
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ] as Array<Organisaatio>,
+      ] as Array<OrganisaatioModel>,
       organisaatiotyyppiUris: ['organisaatiotyyppi_01'],
     },
     {
@@ -283,7 +283,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 en: 'Lapsenlapsiopisto',
               },
               kotipaikkaUri: 'kunta_208',
-              children: [] as Array<Organisaatio>,
+              children: [] as Array<OrganisaatioModel>,
               organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
             },
             {
@@ -301,14 +301,14 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
                 en: 'Lapsiopisto',
               },
               kotipaikkaUri: 'kunta_208',
-              children: [] as Array<Organisaatio>,
+              children: [] as Array<OrganisaatioModel>,
               organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
             },
-          ] as Array<Organisaatio>,
+          ] as Array<OrganisaatioModel>,
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
         },
-      ] as Array<Organisaatio>,
-    } as Organisaatio,
+      ] as Array<OrganisaatioModel>,
+    } as OrganisaatioModel,
   ];
 
   expect(searchOrgsFromHierarkiaWithName(hierarkia, 'laps')).toEqual([

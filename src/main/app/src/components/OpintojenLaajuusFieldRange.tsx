@@ -52,7 +52,7 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
           alignItems="center"
           justifyContent="space-between"
         >
-          <Box flexBasis="70px" flexGrow={0} data-testid="laajuusMin">
+          <Box flexBasis="70px" flexGrow={0} data-test-id="laajuusMin">
             <Field
               name={`${section}.opintojenLaajuusNumeroMin`}
               component={FormFieldFloatInput}
@@ -66,7 +66,7 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
               <Box style={{ textAlign: 'center', width: '20px', flexGrow: 0 }}>
                 {NDASH}
               </Box>
-              <Box flexBasis="70px" flexGrow={0} data-testid="laajuusMax">
+              <Box flexBasis="70px" flexGrow={0} data-test-id="laajuusMax">
                 <Field
                   name={`${section}.opintojenLaajuusNumeroMax`}
                   component={FormFieldFloatInput}
@@ -78,14 +78,14 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
             </>
           )}
           {fixedLaajuusYksikko ? (
-            <Box flexGrow={2} ml={1} data-testid="fixedLaajuusyksikko">
+            <Box flexGrow={2} ml={1} data-test-id="fixedLaajuusyksikko">
               <FixedValueKoodiInput
                 koodiUri={fixedLaajuusYksikko}
                 selectedLanguage={selectedLanguage}
               />
             </Box>
           ) : (
-            <Box flexGrow={2} ml={1} data-testid="laajuusyksikko">
+            <Box flexGrow={2} ml={1} data-test-id="laajuusyksikko">
               <Field
                 component={FormFieldAsyncKoodistoSelect}
                 name={`${section}.opintojenLaajuusyksikko`}

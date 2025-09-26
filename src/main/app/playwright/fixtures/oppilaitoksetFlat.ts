@@ -1,5 +1,5 @@
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { type OrganisaatioModel } from '#/src/types/domainTypes';
 
 export default ({
   rootOid = '1.1.1.1.1.1',
@@ -23,6 +23,6 @@ export default ({
         parentOids: ['1.3.1.1.1.1', rootOid, OPETUSHALLITUS_ORGANISAATIO_OID],
         children: [],
       },
-    ] as Array<Organisaatio>,
+    ] as Array<OrganisaatioModel>,
   };
 };

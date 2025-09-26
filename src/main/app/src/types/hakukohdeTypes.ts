@@ -16,9 +16,9 @@ type ToimitustapaFields = {
       rivi1: TranslatedField<string>;
       rivi2: TranslatedField<string>;
     };
-    postinumero?: {
+    postinumero?: TranslatedField<{
       value: string;
-    };
+    }>;
     verkkosivu: string;
   };
 };

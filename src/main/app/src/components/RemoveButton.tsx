@@ -1,18 +1,19 @@
-import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 
-import IconButton from '#/src/components/IconButton';
+import IconButton, { IconButtonProps } from '#/src/components/IconButton';
 
-export default function RemoveButton({ children = undefined, ...props }) {
+export default function RemoveButton({
+  children,
+  ...props
+}: Omit<IconButtonProps, 'iconType'>) {
   const { t } = useTranslation();
   return (
     <IconButton
       type="button"
       variant="outlined"
       color="secondary"
-      iconType="delete"
       {...props}
+      iconType="delete"
     >
       {children ? children : t('yleiset.poista')}
     </IconButton>

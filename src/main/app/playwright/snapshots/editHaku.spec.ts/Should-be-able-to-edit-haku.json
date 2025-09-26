@@ -60,10 +60,10 @@
     }
   ],
   "ajastettuJulkaisu": "2019-12-05T06:45",
-  "ajastettuHaunJaHakukohteidenArkistointi": null,
   "muokkaaja": "1.2.246.562.24.62301161440",
   "kielivalinta": [
     "fi"
   ],
-  "externalId": null
+  "externalId": null,
+  "ajastettuHaunJaHakukohteidenArkistointi": null
 }

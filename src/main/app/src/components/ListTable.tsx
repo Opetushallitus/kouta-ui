@@ -249,7 +249,6 @@ export const ListTable = ({
   renderActionsMenu,
   defaultCollapsedRow,
   defaultCollapsedColumn,
-  ...props
 }: ListTableProps) => {
   const [collapsed, setCollapsed] = useState<{
     row?: string;
@@ -267,7 +266,7 @@ export const ListTable = ({
   const columnCount = columns.length;
 
   return (
-    <Table {...props}>
+    <Table>
       <TableHead>
         <TableRow>
           {columns.map(columnProps => {
@@ -299,8 +298,7 @@ export const ListTable = ({
         </TableRow>
       </TableHead>
       <TableBody>
-        {rows.map(rowProps => {
-          const { key } = rowProps;
+        {rows.map(({ key, ...rowProps }) => {
           const rowIsCollapsed = collapsedRow === key;
 
           return (

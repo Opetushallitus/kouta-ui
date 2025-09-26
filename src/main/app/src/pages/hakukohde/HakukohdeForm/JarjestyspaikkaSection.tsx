@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { sortBy } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -9,26 +9,19 @@ import {
   simpleMapProps,
 } from '#/src/components/formFields';
 import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
-import {
-  CRUD_ROLES,
-  ENTITY,
-  KOULUTUSTYYPPI,
-  ORGANISAATIOTYYPPI,
-} from '#/src/constants';
+import { CRUD_ROLES, ENTITY, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import JarjestaaUrheilijanAmmatillistaKoulutustaField from '#/src/pages/hakukohde/HakukohdeForm/JarjestaaUrheilijanAmmatillistaKoulutustaField';
-import { Organisaatio } from '#/src/types/domainTypes';
-import { getTestIdProps } from '#/src/utils';
+import { isTruthy } from '#/src/utils';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { useOppilaitoksetByOids } from '#/src/utils/hakukohde/getOppilaitoksetByOids';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { enrichOrganisaatiot } from '#/src/utils/organisaatio/enrichOrganisaatiot';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
-import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const useOrganisaatiotyyppiMap = () => {
   const { data: organisaatiotyypit } = useKoodisto({
@@ -37,13 +30,12 @@ const useOrganisaatiotyyppiMap = () => {
 
   return useMemo(
     () =>
-      _fp.flow(
-        _fp.map((k: any) => [
+      Object.fromEntries(
+        organisaatiotyypit?.map(k => [
           k?.koodiUri,
-          _fp.toLower(getKoodiNimiTranslation(k)),
-        ]),
-        _fp.fromPairs
-      )(organisaatiotyypit),
+          getKoodiNimiTranslation(k)?.toLowerCase(),
+        ]) ?? []
+      ),
     [organisaatiotyypit]
   );
 };
@@ -68,14 +60,19 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
 
   const selectedValue = useFieldValue('jarjestyspaikkaOid');
 
-  const { hierarkia, oppilaitokset } = useOppilaitoksetByOids(tarjoajaOids);
+  const {
+    hierarkia,
+    oppilaitokset,
+    isLoading: isOppilaitoksetLoading,
+  } = useOppilaitoksetByOids(tarjoajaOids);
 
   const flattenedHierarkia = useMemo(
-    () => flattenHierarkia(hierarkia),
-    [hierarkia]
+    () =>
+      flattenHierarkia(hierarkia).filter(org => tarjoajaOids.includes(org.oid)),
+    [tarjoajaOids, hierarkia]
   );
 
-  const hierarkiaOids = flattenedHierarkia.map((org: Organisaatio) => org.oid);
+  const hierarkiaOids = tarjoajaOids;
 
   const { organisaatio: selectedOrganisaatio, isLoading: isSelectedLoading } =
     useOrganisaatio(
@@ -83,37 +80,27 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
       { enabled: !hierarkiaOids.includes(selectedValue) }
     );
 
-  const orgs = [selectedOrganisaatio, ...flattenedHierarkia].filter(Boolean);
+  const orgs = [selectedOrganisaatio, ...flattenedHierarkia].filter(isTruthy);
   const enrichedOrgs = enrichOrganisaatiot(orgs, oppilaitokset);
 
   const language = useUserLanguage();
 
   const organisaatiotyyppiMap = useOrganisaatiotyyppiMap();
 
-  const jarjestyspaikkaOptions = useMemo(
-    () =>
-      _fp.flow(
-        _fp.filter(
-          organisaatioMatchesTyyppi([
-            ORGANISAATIOTYYPPI.TOIMIPISTE,
-            ORGANISAATIOTYYPPI.OPPILAITOS,
-          ])
-        ),
-        _fp.map(org => ({
-          value: org?.oid,
-          label: getOrganisaatioLabel(org, language, organisaatiotyyppiMap, t),
-          disabled: !getCanUpdate(org),
-          jarjestaaUrheilijanAmmKoulutusta:
-            org.jarjestaaUrheilijanAmmKoulutusta,
-        })),
-        _fp.sortBy('label')
-      )(enrichedOrgs),
-    [getCanUpdate, language, organisaatiotyyppiMap, enrichedOrgs, t]
-  );
+  const jarjestyspaikkaOptions = useMemo(() => {
+    const unsorted = enrichedOrgs.map(org => ({
+      value: org?.oid,
+      label: getOrganisaatioLabel(org, language, organisaatiotyyppiMap, t),
+      disabled: !getCanUpdate(org),
+      jarjestaaUrheilijanAmmKoulutusta:
+        org.mahdollisuusJarjestaaUrheilijanAmmKoulutusta,
+    }));
+    return sortBy(unsorted, 'label');
+  }, [getCanUpdate, language, organisaatiotyyppiMap, enrichedOrgs, t]);
 
   return {
     options: jarjestyspaikkaOptions,
-    isLoading: isSelectedLoading,
+    isLoading: isSelectedLoading || isOppilaitoksetLoading,
   };
 };
 
@@ -169,7 +156,7 @@ export const JarjestyspaikkaSection = ({
     });
 
   return (
-    <div {...getTestIdProps('jarjestyspaikkaOidSelection')}>
+    <div>
       <Field
         label={t('hakukohdelomake.valitseJarjestyspaikka')}
         component={JarjestyspaikkaRadioGroup}

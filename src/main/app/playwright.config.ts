@@ -37,7 +37,7 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    testIdAttribute: 'data-testid',
+    testIdAttribute: 'data-test-id',
     storageState: path.resolve(__dirname, 'playwright', 'storage.json'),
     ignoreHTTPSErrors: true,
   },

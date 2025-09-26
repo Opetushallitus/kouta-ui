@@ -1,5 +1,8 @@
-import _ from 'lodash';
 import queryString from 'query-string';
+
+import { HttpClient } from '#/src/httpClient';
+import { type OrganisaatioHierarkiaModel } from '#/src/types/domainTypes';
+import { ApiUrls } from '#/src/urls';
 
 const getOrganisaatioHierarkia = async ({
   searchString,
@@ -11,6 +14,16 @@ const getOrganisaatioHierarkia = async ({
   skipParents = false,
   apiUrls,
   httpClient,
+}: {
+  searchString?: string;
+  oid?: string;
+  oids?: Array<string>;
+  aktiiviset?: boolean;
+  suunnitellut?: boolean;
+  lakkautetut?: boolean;
+  skipParents?: boolean;
+  apiUrls: ApiUrls;
+  httpClient: HttpClient;
 }) => {
   const params = {
     ...(oid ? { oid } : {}),
@@ -19,18 +32,18 @@ const getOrganisaatioHierarkia = async ({
     suunnitellut: suunnitellut ? 'true' : 'false',
     lakkautetut: lakkautetut ? 'true' : 'false',
     skipParents: skipParents ? 'true' : 'false',
-    ...(_.isArray(oids) && { oidRestrictionList: oids }),
+    ...(Array.isArray(oids) && { oidRestrictionList: oids }),
   };
 
-  const { data } = await httpClient.get(
+  const { data } = await httpClient.get<OrganisaatioHierarkiaModel>(
     apiUrls.url('kouta-backend.organisaatio-hierarkia'),
     {
       params,
-      paramsSerializer: queryString.stringify,
+      paramsSerializer: params => queryString.stringify(params),
     }
   );
 
-  return _.get(data, 'organisaatiot') || [];
+  return data?.organisaatiot ?? [];
 };
 
 export default getOrganisaatioHierarkia;

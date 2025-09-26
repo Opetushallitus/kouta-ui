@@ -96,7 +96,7 @@ test.describe('Edit haku', () => {
   }) => {
     const hakuMockData = haku();
     const takaraja = hakuMockData.hakukohteenLiittamisenTakaraja;
-    const oneDayBeforeDeadline = sub(new Date(takaraja), { days: 1 });
+    const oneDayBeforeDeadline = sub(new Date(takaraja!), { days: 1 });
     await setFakeTime(page, oneDayBeforeDeadline);
     await stubOrgPaakayttajaRights(page, organisaatioOid);
 
@@ -122,7 +122,7 @@ test.describe('Edit haku', () => {
     page,
   }) => {
     const hakuMockData = haku();
-    hakuMockData.hakukohteenLiittamisenTakaraja = null;
+    hakuMockData.hakukohteenLiittamisenTakaraja = undefined;
     await stubOrgPaakayttajaRights(page, organisaatioOid);
     await page.route(
       `**/kouta-backend/haku/${hakuOid}`,

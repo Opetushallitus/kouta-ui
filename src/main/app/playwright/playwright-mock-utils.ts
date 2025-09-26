@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Page, Route } from '@playwright/test';
+import type { Page, Route } from '@playwright/test';
 
 const MOCKS_PATH = path.resolve(__dirname, './apiMocks');
 

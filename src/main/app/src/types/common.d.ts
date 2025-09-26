@@ -8,7 +8,7 @@ type TranslatedField<T = string> = Partial<Record<LanguageCode, T>>;
 
 type KoodiMetadata = {
   nimi: string;
-  kieli: LanguageCode;
+  kieli: 'FI' | 'SV' | 'EN';
 };
 
 type Koodi = {
@@ -16,6 +16,9 @@ type Koodi = {
   versio: number;
   koodiArvo: string;
   metadata: Array<KoodiMetadata>;
+  koodisto: {
+    koodistoUri: string;
+  };
 };
 
 type Yhteystieto = {

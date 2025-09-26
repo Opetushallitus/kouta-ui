@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { isEmpty } from 'lodash';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
-import { Organisaatio } from '#/src/types/domainTypes';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { organisaatioMatchesTyyppi } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 type Props = {
-  organisaatiot: Array<Organisaatio>;
+  organisaatiot: Array<OrganisaatioModel>;
   value: Array<string>;
   naytaVainValitut: boolean;
 };

@@ -5,7 +5,7 @@ import {
   JULKAISUTILA,
   LIITTEEN_TOIMITUSTAPA,
 } from '../constants';
-import { Tilaisuus } from '../types/formTypes';
+import { SisaltoValues, Tilaisuus } from '../types/formTypes';
 import { HakukohdeFormValues } from '../types/hakukohdeTypes';
 
 const valintaTilaisuus: Tilaisuus = {
@@ -399,7 +399,7 @@ export const BASE_VALINTAPERUSTE_FORM_DATA = {
   tila: 'julkaistu',
 };
 
-export const sisalto = [
+export const sisalto: SisaltoValues = [
   {
     tyyppi: 'teksti',
     data: {
@@ -410,6 +410,8 @@ export const sisalto = [
   {
     tyyppi: 'taulukko',
     data: {
+      id: 'table-1',
+      nimi: { fi: 'Fi taulukko', sv: 'Sv taulukko' },
       rows: [
         {
           columns: [

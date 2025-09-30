@@ -97,7 +97,7 @@ export const getKoutaDateString = (dateData: Date) => {
 };
 
 export const formatDateValue = (
-  date?: Date | string | number,
+  date?: Date | string | number | null,
   format: string = "dd.MM.yyyy' 'HH:mm"
 ) => {
   try {

@@ -40,7 +40,7 @@ exports[`for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved 1`] 
   "sorakuvausId": null,
   "tarjoajat": [],
   "teemakuva": undefined,
-  "tila": undefined,
+  "tila": "tallennettu",
 }
 `;
 
@@ -83,7 +83,7 @@ exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
   "sorakuvausId": null,
   "tarjoajat": [],
   "teemakuva": undefined,
-  "tila": undefined,
+  "tila": "tallennettu",
 }
 `;
 
@@ -132,7 +132,7 @@ exports[`getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatil
   "sorakuvausId": null,
   "tarjoajat": [],
   "teemakuva": undefined,
-  "tila": undefined,
+  "tila": "tallennettu",
 }
 `;
 
@@ -249,6 +249,6 @@ exports[`it should return empty array if no koulutusKoodiUri given 1`] = `
   "sorakuvausId": null,
   "tarjoajat": [],
   "teemakuva": undefined,
-  "tila": undefined,
+  "tila": "tallennettu",
 }
 `;

@@ -23,6 +23,11 @@ import {
 } from '#/src/hooks/form';
 import { useHakukohdeAllowsPoistettuTila } from '#/src/hooks/useHakukohdeInfo';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
+import {
+  HakukohdeModel,
+  HakuModel,
+  ToteutusModel,
+} from '#/src/types/domainTypes';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
@@ -63,6 +68,14 @@ export const HakukohdeForm = ({
   tarjoajat,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   hakukohde = undefined,
+}: {
+  steps?: boolean;
+  organisaatioOid: string;
+  haku?: HakuModel;
+  toteutus?: ToteutusModel;
+  tarjoajat?: Array<string>;
+  koulutustyyppi?: KOULUTUSTYYPPI;
+  hakukohde?: HakukohdeModel;
 }) => {
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];

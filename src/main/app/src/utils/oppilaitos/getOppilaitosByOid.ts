@@ -1,5 +1,7 @@
 import { ENTITY } from '#/src/constants';
-import { OppilaitosModel } from '#/src/types/domainTypes';
+import { type HttpClient } from '#/src/httpClient';
+import { type OppilaitosModel } from '#/src/types/domainTypes';
+import { type ApiUrls } from '#/src/urls';
 
 import { getEntityByOid, useEntityByOid } from '../api/getEntityByOid';
 
@@ -8,8 +10,13 @@ export const getOppilaitosByOid = async ({
   httpClient,
   apiUrls,
   silent = true,
+}: {
+  oid: string;
+  httpClient: HttpClient;
+  apiUrls: ApiUrls;
+  silent?: boolean;
 }) =>
-  getEntityByOid({
+  getEntityByOid<OppilaitosModel>({
     entityType: ENTITY.OPPILAITOS,
     oid,
     apiUrls,

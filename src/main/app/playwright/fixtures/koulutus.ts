@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 
-import { TestiKoulutustyyppi } from '#/playwright/test-types';
+import { type TestiKoulutustyyppi } from '#/playwright/test-types';
 import { OpintojenLaajuusyksikko } from '#/src/constants';
 
 const getBaseFields = (tyyppi: TestiKoulutustyyppi = 'amm') => {

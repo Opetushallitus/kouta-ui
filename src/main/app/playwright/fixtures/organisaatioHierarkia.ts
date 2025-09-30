@@ -1,4 +1,4 @@
-import { Organisaatio } from '#/src/types/domainTypes';
+import { type OrganisaatioModel } from '#/src/types/domainTypes';
 const OPH_OID = '1.2.246.562.10.00000000001';
 
 export default ({
@@ -30,7 +30,7 @@ export default ({
                 organisaatiotyyppiUris: ['organisaatiotyyppi_03'],
                 parentOids: ['1.2.2.1.1.1', '1.2.1.1.1.1', rootOid, OPH_OID],
               },
-            ] as Array<Organisaatio>,
+            ] as Array<OrganisaatioModel>,
           },
           {
             nimi: { fi: `${rootName}_1_2` },
@@ -45,10 +45,10 @@ export default ({
                 organisaatiotyyppiUris: ['organisaatiotyyppi_03'],
                 parentOids: ['1.3.2.1.1.1', '1.3.1.1.1.1', rootOid, OPH_OID],
               },
-            ] as Array<Organisaatio>,
+            ] as Array<OrganisaatioModel>,
           },
-        ] as Array<Organisaatio>,
+        ] as Array<OrganisaatioModel>,
       },
-    ] as Array<Organisaatio>,
+    ] as Array<OrganisaatioModel>,
   };
 };

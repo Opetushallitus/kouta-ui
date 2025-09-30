@@ -67,6 +67,7 @@ import {
 import {
   OsaamismerkkiToteutuksenKuvausSection,
   ToteutuksenKuvausSection,
+  ToteutuksenKuvausJaOsaamistavoitteetSection,
 } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
@@ -250,7 +251,13 @@ const ToteutusForm = ({
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               () => OsaamismerkkiToteutuksenKuvausSection
             )
-            .otherwise(() => ToteutuksenKuvausSection)}
+            .with(
+              KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+              KOULUTUSTYYPPI.OSAAMISALA,
+              KOULUTUSTYYPPI.TUTKINNON_OSA,
+              () => ToteutuksenKuvausSection
+            )
+            .otherwise(() => ToteutuksenKuvausJaOsaamistavoitteetSection)}
         />
         {koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS && (
           <FormCollapse

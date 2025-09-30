@@ -216,7 +216,7 @@ export const HakukohdeForm = ({
       />
 
       <FormCollapse
-        section="jarjestyspaikkaOid"
+        section="jarjestyspaikka"
         header={t('hakukohdelomake.hakukohteenJarjestyspaikka')}
         tarjoajat={tarjoajat}
         koulutustyyppi={koulutustyyppi}

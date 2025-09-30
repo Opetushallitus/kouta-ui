@@ -22,7 +22,7 @@ import { stubKayttoOikeusOmatTiedot } from '#/playwright/stubKayttoOikeusOmatTie
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const fillJarjestyspaikkaSection = (page: Page) =>
-  withinSection(page, 'jarjestyspaikkaOid', async section => {
+  withinSection(page, 'jarjestyspaikka', async section => {
     await section.getByText(selectedToimipisteNimi).click();
   });
 

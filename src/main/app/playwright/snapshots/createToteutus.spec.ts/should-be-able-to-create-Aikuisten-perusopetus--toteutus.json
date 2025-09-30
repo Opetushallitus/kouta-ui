@@ -102,7 +102,9 @@
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "osaamistavoitteet": {},
+    "osaamistavoitteet": {
+      "fi": "<p>Osaamistavoitteet</p>"
+    },
     "tyyppi": "aikuisten-perusopetus",
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": null,

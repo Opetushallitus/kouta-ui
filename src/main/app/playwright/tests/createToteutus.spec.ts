@@ -91,11 +91,11 @@ const fillJarjestamistiedotSection = (
     }
 
     if (values?.apuraha) {
-      await expect(
+      expect(
         values.opetuskieli,
         'Opetuskielen täytyy olla englanti, jotta apurahan voi asettaa!'
       ).toBe('englanti');
-      await expect(
+      expect(
         values.maksullisuusTyyppi,
         'Maksullisuustyypin täytyy olla lukuvuosimaksu, jotta apurahan voi asettaa!'
       ).toBe(MaksullisuusTyyppi.LUKUVUOSIMAKSU);
@@ -226,17 +226,19 @@ const fillTiedotSection = (page: Page, tyyppi: TestiKoulutustyyppi) =>
     }
   });
 
-const fillKuvausSection = (
+const fillKuvausSection = (page: Page) =>
+  withinSection(page, 'description', async section => {
+    await typeToEditor(section, 'Toteutuksen kuvaus');
+  });
+
+const fillKuvausJaOsaamistavoitteetSection = (
   page: Page,
-  withOsaamistavoitteet: boolean = false,
   kaytaKoulutuksenOsaamistavoitteita: boolean = false
 ) =>
   withinSection(page, 'description', async section => {
     await section.getByRole('textbox').nth(0).fill('Toteutuksen kuvaus');
 
-    if (withOsaamistavoitteet) {
-      await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
-    }
+    await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
 
     if (kaytaKoulutuksenOsaamistavoitteita) {
       section
@@ -465,7 +467,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -483,7 +485,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausSection(page);
       await withinSection(page, 'osaamisalat', async section => {
         await section
           .locator('label')
@@ -514,7 +516,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, true);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page, {
         opetuskieli: 'englanti',
         maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
@@ -539,7 +541,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, true);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: true });
       await fillJarjestajaSection(page);
@@ -557,7 +559,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, true, true);
+      await fillKuvausJaOsaamistavoitteetSection(page, true);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -576,7 +578,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, true);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillLiitetytOpintojaksotSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
@@ -594,7 +596,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page, { lukiotiedot: true });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -610,7 +612,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -628,7 +630,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -646,7 +648,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -665,7 +667,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -682,7 +684,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -700,7 +702,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, true);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -719,7 +721,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -736,7 +738,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page, { lukiotiedot: true });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -752,7 +754,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page, { lukiotiedot: true });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -770,7 +772,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page, false);
+      await fillKuvausJaOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
@@ -788,7 +790,7 @@ test.describe('Create toteutus', () => {
     await fillOrgSection(page, organisaatioOid);
     await fillKieliversiotSection(page);
     await fillTiedotSection(page, tyyppi);
-    await fillKuvausSection(page, false);
+    await fillKuvausJaOsaamistavoitteetSection(page);
     await fillJarjestamistiedotSection(page);
     await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
     await fillJarjestajaSection(page);
@@ -809,7 +811,7 @@ test.describe('Create toteutus', () => {
     await fillOrgSection(page, organisaatioOid);
     await fillKieliversiotSection(page);
     await fillTiedotSection(page, tyyppi);
-    await fillKuvausSection(page, false);
+    await fillKuvausJaOsaamistavoitteetSection(page);
     await fillJarjestamistiedotSection(page);
     await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
     await fillJarjestajaSection(page);

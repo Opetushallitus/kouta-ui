@@ -117,6 +117,10 @@ test.describe('Edit toteutus', () => {
       const tyyppi = 'lk';
       await prepareTest(page, tyyppi);
       await fillKieliversiotSection(page);
+      await withinSection(page, 'description', async section => {
+        await section.getByRole('textbox').nth(0).fill('Toteutuksen kuvaus');
+        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+      });
       await expect(
         getSection(page, 'hakeutumisTaiIlmoittautumistapa')
       ).toBeHidden();

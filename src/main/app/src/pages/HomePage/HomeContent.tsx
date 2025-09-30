@@ -20,7 +20,6 @@ import HakukohteetSection from './HakukohteetSection';
 import HautSection from './HautSection';
 import { KoulutuksetSection } from './KoulutuksetSection';
 import Navigation from './Navigation';
-import NavigationProvider from './NavigationProvider';
 import ToteutuksetSection from './ToteutuksetSection';
 import ValintaperusteetSection from './ValintaperusteetSection';
 
@@ -122,18 +121,17 @@ const HomeContent = ({ organisaatioOid }) => {
     ));
 
   return (
-    <NavigationProvider>
+    <>
       <Navigation
-        onOrganisaatioChange={onOrganisaatioChange}
         organisaatio={organisaatio}
-        maxInlineItems={5}
+        onOrganisaatioChange={onOrganisaatioChange}
       />
       <Container maxWidth="1600px">
         <Box py={4}>
           {organisaatio ? <Box mb={-4}>{listSections}</Box> : <Spin center />}
         </Box>
       </Container>
-    </NavigationProvider>
+    </>
   );
 };
 

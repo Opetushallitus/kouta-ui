@@ -4,11 +4,16 @@ import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
+import { HakukohdeModel } from '../types/domainTypes';
+
 export const useCanUpdateHakukohde = (
-  hakukohteenMuokkaamisenTakaraja,
-  hakukohde = undefined
+  hakukohteenMuokkaamisenTakaraja?: string,
+  hakukohde: HakukohdeModel | undefined = undefined
 ) => {
-  let result = {
+  let result: {
+    canUpdate: boolean;
+    reasonKey?: string;
+  } = {
     canUpdate: true,
   };
   const isOphVirkailija = useIsOphVirkailija();

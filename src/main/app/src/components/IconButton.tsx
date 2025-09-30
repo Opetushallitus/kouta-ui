@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
 import { Button, Icon } from '#/src/components/virkailija';
@@ -10,7 +8,15 @@ const SizedIcon = styled(Icon)`
   padding-right: 2px;
 `;
 
-export const IconButton = ({ iconType, children, ...props }) => (
+export type IconButtonProps = {
+  iconType: string;
+} & React.ComponentProps<typeof Button>;
+
+export const IconButton = ({
+  iconType,
+  children,
+  ...props
+}: IconButtonProps) => (
   <Button {...props}>
     <SizedIcon type={iconType} />
     {children}

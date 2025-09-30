@@ -59,7 +59,7 @@ export const EditHakukohdePage = () => {
     { enabled: Boolean(hakukohde) }
   );
 
-  const { data: { toteutus, haku, koulutustyyppi, tarjoajat } = {} } =
+  const { data: { toteutus, haku, koulutustyyppi } = {} } =
     hakukohdePageDataQueryResult;
 
   const { t } = useTranslation();
@@ -115,7 +115,6 @@ export const EditHakukohdePage = () => {
         haku={haku}
         hakukohde={hakukohde}
         toteutus={toteutus}
-        tarjoajat={tarjoajat}
         koulutustyyppi={koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS}
       />
     </FormPage>

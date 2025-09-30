@@ -1,3 +1,5 @@
+import { OrganisaatioModel } from '#/src/types/domainTypes';
+
 import {
   flatFilterHierarkia,
   flattenHierarkia,
@@ -7,14 +9,14 @@ import {
 const childWithChildren = {
   oid: '4',
   children: [{ oid: '5' }, { oid: '6' }],
-} as Organisaatio;
+} as OrganisaatioModel;
 
 const hierarchy = [
   {
     oid: '1',
     children: [{ oid: '2' }, { oid: '3' }, childWithChildren],
   },
-] as Array<Organisaatio>;
+] as Array<OrganisaatioModel>;
 
 test('flattens organization hierarchy', () => {
   const expected = [

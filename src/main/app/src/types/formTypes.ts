@@ -65,7 +65,7 @@ export type RemoteErrorsToFormErrors = (
 
 export type Tilaisuus = {
   osoite?: TranslatedField<string>;
-  postinumero?: { value: string };
+  postinumero?: TranslatedField<{ value: string }>;
   alkaa?: string;
   paattyy?: string;
   lisatietoja?: TranslatedField<EditorState>;

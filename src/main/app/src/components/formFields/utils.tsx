@@ -42,7 +42,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
     return (
       <div
         className={isError ? FIELD_ERROR_CLASSNAME : ''}
-        data-testid={`form-control_${getFieldNameWithoutLanguage(name)}`}
+        data-test-id={`form-control_${getFieldNameWithoutLanguage(name)}`}
       >
         <FormControl
           error={isError}

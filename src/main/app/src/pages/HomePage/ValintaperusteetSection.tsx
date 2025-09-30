@@ -19,7 +19,6 @@ import { searchValintaperusteet } from '#/src/utils/valintaperuste/searchValinta
 
 import { EntitySearchList } from './EntitySearchList';
 import ListCollapse from './ListCollapse';
-import NavigationAnchor from './NavigationAnchor';
 
 const { VALINTAPERUSTE } = ENTITY;
 
@@ -59,8 +58,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const filterState = useFilterState(VALINTAPERUSTE, valintaperusteService);
 
   return (
-    <>
-      <NavigationAnchor id="valintaperusteet" />
+    <div id="valintaperusteet" data-test-id="valintaperusteetSection">
       <ListCollapse
         icon={ICONS[VALINTAPERUSTE]}
         header={t('yleiset.valintaperusteet')}
@@ -79,7 +77,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
           searchPage="homepage.valintaperusteet"
         />
       </ListCollapse>
-    </>
+    </div>
   );
 };
 

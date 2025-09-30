@@ -13,14 +13,14 @@ type GetEntityTypeByOidProps = {
 };
 
 // NOTE: SORA-kuvaus and valintaperuste use "id" instead of "oid", but this works for them as well.
-export const getEntityByOid = async ({
+export async function getEntityByOid<T>({
   entityType,
   oid,
   httpClient,
   apiUrls,
   silent = false,
-}: GetEntityTypeByOidProps) => {
-  const { data, headers } = await httpClient.get(
+}: GetEntityTypeByOidProps) {
+  const { data, headers } = await httpClient.get<T>(
     apiUrls.url(`kouta-backend.${entityType}-by-oid`, oid),
     {
       errorNotifier: {
@@ -32,7 +32,7 @@ export const getEntityByOid = async ({
   const lastModified = _.get(headers, 'x-last-modified') || null;
 
   return _.isObject(data) ? { lastModified, ...data } : data;
-};
+}
 
 export const useEntityByOid = <E>(
   entityType: ENTITY,

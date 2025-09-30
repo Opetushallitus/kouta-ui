@@ -1,20 +1,26 @@
+import type {
+  OrganisaatioModel,
+  OppilaitosModel,
+} from '#/src/types/domainTypes';
+
 import { enrichOrganisaatiot } from './enrichOrganisaatiot';
 
 test('should add jarjestaaUrheilijanAmmKoulutusta for one org', () => {
-  const orgs_from_organisaatiopalvelu = [
+  const orgs_from_organisaatiopalvelu: Array<OrganisaatioModel> = [
     {
       oid: '1.2.246.562.10.2013111415031319523704',
-      parentOid: '1.2.246.562.10.2013110715495487451932',
       parentOids: [
-        '1.2.246.562.10.2013111415031319523704',
-        '1.2.246.562.10.2013110715495487451932',
-        '1.2.246.562.10.63184540803',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.63184540803',
+        '1.2.246.562.10.2013110715495487451932',
+        '1.2.246.562.10.2013111415031319523704',
       ],
+      nimi: {},
+      kieletUris: [],
     },
   ];
 
-  const oppilaitokset_from_kouta = [
+  const oppilaitokset_from_kouta: Array<OppilaitosModel> = [
     {
       oid: '1.2.246.562.10.2013110715495487451932',
       tila: 'julkaistu',
@@ -57,14 +63,16 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for one org', () => {
   const result = [
     {
       oid: '1.2.246.562.10.2013111415031319523704',
-      parentOid: '1.2.246.562.10.2013110715495487451932',
       parentOids: [
-        '1.2.246.562.10.2013111415031319523704',
-        '1.2.246.562.10.2013110715495487451932',
-        '1.2.246.562.10.63184540803',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.63184540803',
+        '1.2.246.562.10.2013110715495487451932',
+        '1.2.246.562.10.2013111415031319523704',
       ],
+      nimi: {},
+      kieletUris: [],
       jarjestaaUrheilijanAmmKoulutusta: true,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
     },
   ];
   expect(
@@ -73,30 +81,32 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for one org', () => {
 });
 
 test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
-  const orgs_from_organisaatiopalvelu = [
+  const orgs_from_organisaatiopalvelu: Array<OrganisaatioModel> = [
     {
       oid: '1.2.246.562.10.2013111415031319523704',
-      parentOid: '1.2.246.562.10.2013110715495487451932',
       parentOids: [
-        '1.2.246.562.10.2013111415031319523704',
-        '1.2.246.562.10.2013110715495487451932',
-        '1.2.246.562.10.63184540803',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.63184540803',
+        '1.2.246.562.10.2013110715495487451932',
+        '1.2.246.562.10.2013111415031319523704',
       ],
+      nimi: {},
+      kieletUris: [],
     },
     {
       oid: '1.2.246.562.10.2013111415312640960525',
-      parentOid: '1.2.246.562.10.2013110715495487451932',
       parentOids: [
-        '1.2.246.562.10.2013111415312640960525',
-        '1.2.246.562.10.2013110715495487451932',
-        '1.2.246.562.10.63184540803',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.63184540803',
+        '1.2.246.562.10.2013110715495487451932',
+        '1.2.246.562.10.2013111415312640960525',
       ],
+      nimi: {},
+      kieletUris: [],
     },
   ];
 
-  const oppilaitokset_from_kouta = [
+  const oppilaitokset_from_kouta: Array<OppilaitosModel> = [
     {
       oid: '1.2.246.562.10.2013110715495487451932',
       organisaatioOid: '1.2.246.562.10.2013110715495487451932',
@@ -145,25 +155,29 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
   const result = [
     {
       oid: '1.2.246.562.10.2013111415031319523704',
-      parentOid: '1.2.246.562.10.2013110715495487451932',
       parentOids: [
-        '1.2.246.562.10.2013111415031319523704',
-        '1.2.246.562.10.2013110715495487451932',
-        '1.2.246.562.10.63184540803',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.63184540803',
+        '1.2.246.562.10.2013110715495487451932',
+        '1.2.246.562.10.2013111415031319523704',
       ],
       jarjestaaUrheilijanAmmKoulutusta: true,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
+      nimi: {},
+      kieletUris: [],
     },
     {
       oid: '1.2.246.562.10.2013111415312640960525',
-      parentOid: '1.2.246.562.10.2013110715495487451932',
       parentOids: [
-        '1.2.246.562.10.2013111415312640960525',
-        '1.2.246.562.10.2013110715495487451932',
-        '1.2.246.562.10.63184540803',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.63184540803',
+        '1.2.246.562.10.2013110715495487451932',
+        '1.2.246.562.10.2013111415312640960525',
       ],
       jarjestaaUrheilijanAmmKoulutusta: false,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: false,
+      nimi: {},
+      kieletUris: [],
     },
   ];
   expect(
@@ -171,20 +185,21 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
   ).toEqual(result);
 });
 
-test('does not add jarjestaaUrheilijanAmmKoulutusta for oppilaitos org that does not have the value', () => {
-  const orgs_from_organisaatiopalvelu = [
+test('should not add jarjestaaUrheilijanAmmKoulutusta for oppilaitos org that does not have the value', () => {
+  const orgs_from_organisaatiopalvelu: Array<OrganisaatioModel> = [
     {
       oid: '1.2.246.562.10.96162204109',
-      parentOid: '1.2.246.562.10.48442622063',
       parentOids: [
-        '1.2.246.562.10.96162204109',
-        '1.2.246.562.10.48442622063',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.48442622063',
+        '1.2.246.562.10.96162204109',
       ],
+      nimi: {},
+      kieletUris: [],
     },
   ];
 
-  const oppilaitokset_from_kouta = [
+  const oppilaitokset_from_kouta: Array<OppilaitosModel> = [
     {
       oid: '1.2.246.562.10.96162204109',
       tila: 'julkaistu',
@@ -197,12 +212,66 @@ test('does not add jarjestaaUrheilijanAmmKoulutusta for oppilaitos org that does
   const result = [
     {
       oid: '1.2.246.562.10.96162204109',
-      parentOid: '1.2.246.562.10.48442622063',
       parentOids: [
-        '1.2.246.562.10.96162204109',
-        '1.2.246.562.10.48442622063',
         '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.48442622063',
+        '1.2.246.562.10.96162204109',
       ],
+      nimi: {},
+      kieletUris: [],
+      jarjestaaUrheilijanAmmKoulutusta: false,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: false,
+    },
+  ];
+  expect(
+    enrichOrganisaatiot(orgs_from_organisaatiopalvelu, oppilaitokset_from_kouta)
+  ).toEqual(result);
+});
+
+test('should add jarjestaaUrheilijanAmmKolutusta from parent oppilaitos to toimipiste even if it does not exist in kouta', () => {
+  const orgs_from_organisaatiopalvelu: Array<OrganisaatioModel> = [
+    {
+      oid: '1.2.246.562.10.1234567891234567891234',
+      parentOids: [
+        '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.48442622063',
+        '1.2.246.562.10.96162204109',
+        '1.2.246.562.10.1234567891234567891234',
+      ],
+      nimi: {},
+      kieletUris: [],
+    },
+  ];
+
+  const oppilaitokset_from_kouta: Array<OppilaitosModel> = [
+    {
+      oid: '1.2.246.562.10.96162204109',
+      tila: 'julkaistu',
+      organisaatioOid: '1.2.246.562.10.96162204109',
+      metadata: {
+        wwwSivu: {
+          nimi: {},
+          url: {},
+        },
+        jarjestaaUrheilijanAmmKoulutusta: true,
+      },
+      osat: [],
+    },
+  ];
+
+  const result = [
+    {
+      oid: '1.2.246.562.10.1234567891234567891234',
+      parentOids: [
+        '1.2.246.562.10.00000000001',
+        '1.2.246.562.10.48442622063',
+        '1.2.246.562.10.96162204109',
+        '1.2.246.562.10.1234567891234567891234',
+      ],
+      nimi: {},
+      kieletUris: [],
+      jarjestaaUrheilijanAmmKoulutusta: false,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
     },
   ];
   expect(

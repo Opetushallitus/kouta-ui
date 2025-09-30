@@ -23,6 +23,11 @@ import {
 } from '#/src/hooks/form';
 import { useHakukohdeAllowsPoistettuTila } from '#/src/hooks/useHakukohdeInfo';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
+import {
+  HakukohdeModel,
+  HakuModel,
+  ToteutusModel,
+} from '#/src/types/domainTypes';
 import { searchAllHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
@@ -60,17 +65,28 @@ export const HakukohdeForm = ({
   organisaatioOid,
   haku,
   toteutus,
-  tarjoajat,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   hakukohde = undefined,
+}: {
+  steps?: boolean;
+  organisaatioOid: string;
+  haku?: HakuModel;
+  toteutus?: ToteutusModel;
+  koulutustyyppi?: KOULUTUSTYYPPI;
+  hakukohde?: HakukohdeModel;
 }) => {
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
 
   const formMode = useFormMode();
-  const isDIAkoulutus = isDIA(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
 
-  const isEBkoulutus = isEB(toteutus?.koulutuksetKoodiUri, koulutustyyppi);
+  const tarjoajat = toteutus?.tarjoajat;
+
+  const koulutusKoodiUrit = toteutus?.koulutuksetKoodiUri;
+
+  const isDIAkoulutus = isDIA(koulutusKoodiUrit, koulutustyyppi);
+
+  const isEBkoulutus = isEB(koulutusKoodiUrit, koulutustyyppi);
 
   const hakutapa = haku?.hakutapaKoodiUri;
 
@@ -186,7 +202,7 @@ export const HakukohdeForm = ({
         header={t('yleiset.kokeetTaiLisanaytot')}
         languages={languages}
         haku={haku}
-        koulutuskoodit={toteutus?.koulutuksetKoodiUri}
+        koulutuskoodit={koulutusKoodiUrit}
         osaamisalat={toteutus?.metadata?.osaamisalat?.map(oa => oa.koodiUri)}
         Component={HakukohteenValintakokeetSection}
       />
@@ -200,7 +216,7 @@ export const HakukohdeForm = ({
       />
 
       <FormCollapse
-        section="jarjestyspaikkaOid"
+        section="jarjestyspaikka"
         header={t('hakukohdelomake.hakukohteenJarjestyspaikka')}
         tarjoajat={tarjoajat}
         koulutustyyppi={koulutustyyppi}

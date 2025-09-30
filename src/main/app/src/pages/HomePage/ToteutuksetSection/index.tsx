@@ -28,7 +28,6 @@ import { CopyResultModal } from '../CopyResultModal';
 import { EntityListActionBar } from '../EntityListActionBar';
 import { EntitySearchList } from '../EntitySearchList';
 import ListCollapse from '../ListCollapse';
-import NavigationAnchor from '../NavigationAnchor';
 import { SERVICE_BY_ENTITY, useEntitySelection } from '../useEntitySelection';
 
 const { TOTEUTUS } = ENTITY;
@@ -128,26 +127,27 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           getLinkUrl={createGetToteutusLinkUrl(organisaatioOid)}
           entityTranslationKeyPath={'etusivu.toteutus'}
         />
-        <NavigationAnchor id="toteutukset" />
-        <ListCollapse
-          icon={ICONS[TOTEUTUS]}
-          header={t('yleiset.toteutukset')}
-          actions={
-            canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
-          }
-          defaultOpen
-        >
-          <EntitySearchList
-            ActionBar={ToteutusActionBar}
-            searchEntities={searchToteutukset}
-            organisaatioOid={organisaatioOid}
-            entityType={TOTEUTUS}
-            columns={columns}
-            nimiPlaceholder={t('etusivu.haeToteutuksia')}
-            filterState={filterState}
-            searchPage="homepage.toteutukset"
-          />
-        </ListCollapse>
+        <div id="toteutukset" data-test-id="toteutuksetSection">
+          <ListCollapse
+            icon={ICONS[TOTEUTUS]}
+            header={t('yleiset.toteutukset')}
+            actions={
+              canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
+            }
+            defaultOpen
+          >
+            <EntitySearchList
+              ActionBar={ToteutusActionBar}
+              searchEntities={searchToteutukset}
+              organisaatioOid={organisaatioOid}
+              entityType={TOTEUTUS}
+              columns={columns}
+              nimiPlaceholder={t('etusivu.haeToteutuksia')}
+              filterState={filterState}
+              searchPage="homepage.toteutukset"
+            />
+          </ListCollapse>
+        </div>
       </StateChangeConfirmationWrapper>
     </CopyConfirmationWrapper>
   );

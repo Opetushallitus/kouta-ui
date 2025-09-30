@@ -131,7 +131,6 @@ export const CreateHakukohdePage = () => {
         organisaatioOid={organisaatioOid}
         haku={haku}
         toteutus={toteutus}
-        tarjoajat={data?.tarjoajat}
         koulutustyyppi={koulutustyyppi}
       />
     </FormPage>

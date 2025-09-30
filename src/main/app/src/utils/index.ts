@@ -1,7 +1,37 @@
-import { format as formatDate, parseISO } from 'date-fns';
+import { format as formatDate, isValid, parseISO } from 'date-fns';
 import { TFunction } from 'i18next';
-import _, { flow, flatMap, toPairs } from 'lodash';
-import _fp from 'lodash/fp';
+import {
+  flow,
+  flatMap,
+  toPairs,
+  isDate,
+  isNil,
+  isString,
+  isBoolean,
+  isObject,
+  isEmpty,
+  intersection,
+  keys,
+  every,
+  fromPairs,
+  isNumber,
+  isUndefined,
+  round,
+  toLower,
+  last,
+  stubFalse,
+  isPlainObject,
+  isObjectLike,
+  stubTrue,
+  has,
+  forEach,
+  get,
+  set,
+  cloneDeep,
+  size,
+  camelCase,
+  castArray,
+} from 'lodash';
 import stripTags from 'striptags';
 import { match } from 'ts-pattern';
 
@@ -21,7 +51,7 @@ import {
 } from '#/src/constants';
 import { EntityModelBase } from '#/src/types/domainTypes';
 import { SelectValue } from '#/src/types/formTypes';
-import { memoize, memoizeOne } from '#/src/utils/memoize';
+import { memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
@@ -33,10 +63,10 @@ export const isProd = import.meta.env.MODE === 'production';
 
 export const isPlaywright = Boolean(localStorage.getItem('isPlaywright'));
 
-export const isValidDate = value => _.isDate(value) && !_.isNaN(value);
+export const isValidDate = isValid;
 
 export const isPartialDate = date => {
-  const dateString = _.isDate(date) ? getKoutaDateString(date) : null;
+  const dateString = isDate(date) ? getKoutaDateString(date) : null;
   if (dateString) {
     const [date] = dateString.split('T');
     return date === 'NaN-NaN-NaN';
@@ -53,14 +83,12 @@ export const parseFloatComma = (
   value?: string | number | null,
   decimals?: number
 ): number | null => {
-  if (_.isNumber(value) && _.isFinite(value)) {
+  if (isNumber(value) && isFinite(value)) {
     return value;
-  } else if (_.isString(value)) {
+  } else if (isString(value)) {
     const parsedValue = parseFloat(value.replace(',', '.'));
-    if (_.isFinite(parsedValue)) {
-      return _.isUndefined(decimals)
-        ? parsedValue
-        : _.round(parsedValue, decimals);
+    if (isFinite(parsedValue)) {
+      return isUndefined(decimals) ? parsedValue : round(parsedValue, decimals);
     } else {
       return null;
     }
@@ -70,12 +98,12 @@ export const parseFloatComma = (
 };
 
 export const isNumeric = value => {
-  if (_.isNumber(value)) {
+  if (isNumber(value)) {
     return true;
   }
 
-  if (_.isString(value)) {
-    return !_.isNaN(parseFloat(value.replace(',', '.')));
+  if (isString(value)) {
+    return !isNaN(parseFloat(value.replace(',', '.')));
   }
 
   return false;
@@ -102,10 +130,10 @@ export const formatDateValue = (
 ) => {
   try {
     let parsed = date;
-    if (_.isString(date)) {
+    if (isString(date)) {
       parsed = parseISO(date);
     }
-    if (_.isNumber(date)) {
+    if (isNumber(date)) {
       parsed = new Date(date);
     }
     if (isValidDate(parsed)) {
@@ -123,17 +151,6 @@ export const formatDateRange = (
   `${formatDateValue(start, dateFormat) ?? ''} ${NDASH} ${
     formatDateValue(end, dateFormat) ?? ''
   }`;
-
-export const createChainedFunction =
-  (...fns) =>
-  (...args) => {
-    // eslint-disable-next-line
-    for (const fn of fns) {
-      if (_.isFunction(fn)) {
-        fn(...args);
-      }
-    }
-  };
 
 export const getTestIdProps = testId => ({
   'data-test-id': testId,
@@ -153,51 +170,55 @@ export const getImageFileDimensions = imgFile => {
 
 export const getFileExtension = (file: File) => {
   const parts = file.name.split('.');
-  return parts.length > 1 ? _.toLower(_.last(parts) as string) : '';
+  return parts.length > 1 ? toLower(last(parts) as string) : '';
 };
 
 export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
 
-export const parseKeyVal = memoize(
-  _fp.flow(
-    _fp.split(';'),
-    _fp.map(keyVal => _fp.trim(keyVal).split('=')),
-    _fp.fromPairs
-  )
-);
+export function getCookies() {
+  return Object.fromEntries(
+    document.cookie
+      .split('; ')
+      .filter(Boolean)
+      .map(cookieStr => {
+        const [key, ...rest] = cookieStr.split('=');
+        return [decodeURIComponent(key), decodeURIComponent(rest.join('='))];
+      })
+  );
+}
 
-export const getCookie = name => _.get(parseKeyVal(document.cookie), name);
+export const getCookie = (name: string) => getCookies()[name];
 
 const allFuncs =
   (...fns) =>
   value =>
-    _.every(fns, fn => fn(value));
+    every(fns, fn => fn(value));
 
 export const formValueExists = value =>
   match(value)
-    .when(_.isNil, _.stubFalse)
+    .when(isNil, stubFalse)
     .when(
       allFuncs(
-        v => _.isArray(v) || _.isString(v),
+        v => Array.isArray(v) || isString(v),
         v => v.length === 0
       ),
-      _.stubFalse
+      stubFalse
     )
-    .when(allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse)
+    .when(allFuncs(isPlainObject, isEmpty), stubFalse)
     .when(
       allFuncs(
-        _.isPlainObject,
-        v => _.has(v, 'value'),
-        v => v.value === '' || _.isNil(v.value)
+        isPlainObject,
+        v => has(v, 'value'),
+        v => v.value === '' || isNil(v.value)
       ),
-      _.stubFalse
+      stubFalse
     )
-    .when(allFuncs(isEditorState, isEmptyEditorState), _.stubFalse)
-    .otherwise(_.stubTrue);
+    .when(allFuncs(isEditorState, isEmptyEditorState), stubFalse)
+    .otherwise(stubTrue);
 
 export const isDeepEmptyFormValues = value =>
   !formValueExists(value) ||
-  (_.isObjectLike(value) && _.every(value, isDeepEmptyFormValues));
+  (isObjectLike(value) && every(value, isDeepEmptyFormValues));
 
 export const assert = console.assert;
 
@@ -209,21 +230,20 @@ export const oneAndOnlyOne = all => all && all.length === 1 && all[0];
  * but fall back to original value when conversion fails, which is less confusing when debugging.
  */
 export const maybeParseNumber = value => {
-  if (_.isNil(value) || value === '') {
+  if (isNil(value) || value === '') {
     return null;
   }
   const numberValue =
-    _.isString(value) && value.includes(',')
+    isString(value) && value.includes(',')
       ? Number(value.replace(',', '.'))
       : Number(value);
-  return _.isNaN(numberValue) ? value : numberValue;
+  return isNaN(numberValue) ? value : numberValue;
 };
 
-export const toSelectValue = value => (_.isNil(value) ? undefined : { value });
+export const toSelectValue = value => (isNil(value) ? undefined : { value });
 
-export const toSelectValueList = _fp.map((value: string) => ({
-  value,
-}));
+export const toSelectValueList = (list?: Array<string>) =>
+  list?.map(value => ({ value }));
 
 export const toKielistettyWithValueField = (
   obj: TranslatedField | undefined
@@ -245,7 +265,7 @@ export const toKielistettyWithValueStr = (
  * For other than boolean values returns undefined.
  */
 export const parseBooleanToString = (value): string | undefined => {
-  return _.isBoolean(value) ? String(value) : undefined;
+  return isBoolean(value) ? String(value) : undefined;
 };
 
 /** Parse a string representation of boolean from selection component to boolean.
@@ -260,15 +280,15 @@ export const getFieldNameWithoutLanguage = (name: string) =>
   name.match(`^(.+?)(\\.(${LANGUAGES.join('|')}))?$`)?.[1];
 
 const isEmptyTranslatedField = value =>
-  _.isObject(value) &&
-  !_.isEmpty(_.intersection(_.keys(value), LANGUAGES)) &&
-  _.every(value, v => !formValueExists(v));
+  isObject(value) &&
+  !isEmpty(intersection(keys(value), LANGUAGES)) &&
+  every(value, v => !formValueExists(v));
 
 const copyPathsIfDefined = (source, target, paths) => {
-  _.forEach(paths, path => {
-    const val = _.get(source, path);
-    if (!_.isUndefined(val)) {
-      _.set(target, path, val);
+  forEach(paths, path => {
+    const val = get(source, path);
+    if (!isUndefined(val)) {
+      set(target, path, val);
     }
   });
 };
@@ -285,12 +305,12 @@ export const getValuesForSaving = (
   initialValues: any = {}
 ) => {
   // Use initial values as a base. Both create and edit forms' changes are differences to the initial values.
-  const saveableValues: any = _.cloneDeep(initialValues);
+  const saveableValues: any = cloneDeep(initialValues);
 
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
-  _.forEach(unregisteredFields, ({ name }) => {
+  forEach(unregisteredFields, ({ name }) => {
     const fieldName = getFieldNameWithoutLanguage(name);
-    _.set(saveableValues, fieldName!, null);
+    set(saveableValues, fieldName!, null);
   });
 
   // In case of fields from multiple hierarchy levels, we want to process the lowest level one first so we don't accidentally
@@ -302,10 +322,10 @@ export const getValuesForSaving = (
   // Ensure that the fields that are registered (visible) will be saved
   sortedFields.forEach(name => {
     const fieldName = getFieldNameWithoutLanguage(name);
-    const fieldValue = _.get(values, fieldName!);
+    const fieldValue = get(values, fieldName!);
 
     const valueForSave = isEmptyTranslatedField(fieldValue) ? {} : fieldValue;
-    _.set(saveableValues, fieldName!, valueForSave);
+    set(saveableValues, fieldName!, valueForSave);
   });
 
   // Some exceptions (fields that should be saved even though they are not visible)
@@ -340,9 +360,9 @@ export const retryOnRedirect = async ({ httpClient, targetUrl }) => {
   return res?.data;
 };
 
-export const valueToArray = v => (_.isNil(v) ? [] : _.castArray(v));
+export const valueToArray = v => (isNil(v) ? [] : castArray(v));
 
-export const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
+export const safeArrayToValue = a => (size(a) > 1 ? a : get(a, 0));
 
 const postinumeroUriRegExp = /\d{5}/;
 export const getPostinumeroByPostinumeroUri = uri =>
@@ -365,7 +385,7 @@ export const getEntityNimiTranslation = (
 };
 
 export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
-  _.isNil(tyyppi) ? '' : `koulutustyypit.${_.camelCase(tyyppi)}`;
+  isNil(tyyppi) ? '' : `koulutustyypit.${camelCase(tyyppi)}`;
 
 export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
   hierarkia
@@ -400,7 +420,7 @@ export const koulutustyyppiHierarkiaToTranslationMap = memoizeOne(
       hierarkia,
       t
     );
-    return _fp.fromPairs(
+    return fromPairs(
       koulutustyyppiOptions.map(({ label, value }) => [value, label])
     );
   }
@@ -436,19 +456,25 @@ export const toEnumValue = <T extends object>(
   return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
 };
 
-export const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
-  if (curr?.kieli && curr?.arvo) {
-    return {
-      ...acc,
-      [curr.kieli]: [
-        ...(acc[curr.kieli] ?? []),
-        { label: curr.arvo, value: curr.arvo },
-      ],
-    };
-  }
+type KieliArvo = { kieli: string; arvo: string };
+type MultiSelectValue = Record<string, Array<{ label: string; value: string }>>;
 
-  return acc;
-}, {});
+export const kieliArvoListToMultiSelectValue = (
+  list?: Array<KieliArvo>
+): MultiSelectValue | undefined => {
+  return list?.reduce<MultiSelectValue>((acc, curr) => {
+    if (curr?.kieli && curr?.arvo) {
+      return {
+        ...acc,
+        [curr.kieli]: [
+          ...(acc[curr.kieli] ?? []),
+          { label: curr.arvo, value: curr.arvo },
+        ],
+      };
+    }
+    return acc;
+  }, {});
+};
 
 type SelectValuesByLanguage =
   | Partial<Record<LanguageCode, SelectOptions>>

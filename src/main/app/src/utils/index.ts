@@ -494,3 +494,6 @@ export const getTermsByLanguage = (
       })
   )(values);
 };
+
+export const isTruthy = <T>(value: T | false | null | undefined): value is T =>
+  Boolean(value);

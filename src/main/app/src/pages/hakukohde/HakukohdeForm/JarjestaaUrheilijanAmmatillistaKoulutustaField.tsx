@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -35,12 +33,13 @@ const JarjestaaUrheilijanAmmatillistaKoulutustaField = ({
     hasJarjestyspaikkaChanged &&
       !jarjestyspaikka.jarjestaaUrheilijanAmmKoulutusta
   );
-  const showUrheilijanAmmKoulutusField =
+
+  const isUrheilijanAmmKoulutusFieldVisible =
     koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS &&
     (jarjestaaUrheilijanAmmKoulutusta === true ||
-      jarjestyspaikka?.jarjestaaUrheilijanAmmKoulutusta);
+      jarjestyspaikka?.jarjestaaUrheilijanAmmKoulutusta === true);
 
-  return showUrheilijanAmmKoulutusField ? (
+  return isUrheilijanAmmKoulutusFieldVisible ? (
     <Box mt={3} mb={3}>
       <Field
         component={FormFieldSwitch}

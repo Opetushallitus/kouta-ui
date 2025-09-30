@@ -10,18 +10,27 @@ export function enrichOrganisaatiot(
   ]);
 
   return flatOrgs.map(org => {
-    const jarjestaaUrheilijanAmmKoulutusta = org.parentOids
-      .toReversed()
-      .some(parentOid => {
-        const oppilaitos = oppilaitoksetJaOsat?.find(
-          oppilaitos => oppilaitos.oid === parentOid
-        );
-        return Boolean(oppilaitos?.metadata?.jarjestaaUrheilijanAmmKoulutusta);
-      });
+    const oppilaitos = oppilaitoksetJaOsat?.find(
+      oppilaitos => oppilaitos.oid === org.oid
+    );
+
+    const jarjestaaUrheilijanAmmKoulutusta = Boolean(
+      oppilaitos?.metadata?.jarjestaaUrheilijanAmmKoulutusta
+    );
 
     return {
       ...org,
       jarjestaaUrheilijanAmmKoulutusta,
+      mahdollisuusJarjestaaUrheilijanAmmKoulutusta:
+        jarjestaaUrheilijanAmmKoulutusta ||
+        org.parentOids.toReversed().some(parentOid => {
+          const oppilaitos = oppilaitoksetJaOsat?.find(
+            oppilaitos => oppilaitos.oid === parentOid
+          );
+          return Boolean(
+            oppilaitos?.metadata?.jarjestaaUrheilijanAmmKoulutusta
+          );
+        }),
     };
   });
 }

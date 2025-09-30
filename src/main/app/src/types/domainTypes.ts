@@ -13,7 +13,7 @@ export type ValintaperusteModel = components['schemas']['Valintaperuste'];
 export type SoraKuvausModel = components['schemas']['Sorakuvaus'];
 
 export type OppilaitosModel = components['schemas']['Oppilaitos'] & {
-  lastModified: string | null;
+  lastModified?: string | null;
 };
 
 export type OppilaitoksetResponseModel =

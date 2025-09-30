@@ -1,35 +1,16 @@
-import React, {
-  useState,
-  useCallback,
-  useContext,
-  useMemo,
-  useEffect,
-  useRef,
-  useLayoutEffect,
-} from 'react';
+import { useState, useCallback, useLayoutEffect, useEffect } from 'react';
 
-import _ from 'lodash';
+import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { useEvent } from 'react-use';
 import styled, { css } from 'styled-components';
 
 import Container from '#/src/components/Container';
-import {
-  Box,
-  Button,
-  Typography,
-  Icon,
-  Dropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '#/src/components/virkailija';
-import useInView from '#/src/hooks/useInView';
+import { Box, Button, Typography, Icon } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
-import { NavigationStateContext } from './NavigationProvider';
 import OrganisaatioDrawer from './OrganisaatioDrawer';
 
 const NavigationContainer = styled.div`
@@ -37,15 +18,14 @@ const NavigationContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.divider};
 `;
 
-const FixedNavigationWrapper = styled(Box)`
+const StickyNavigationWrapper = styled(Box)`
   width: 100%;
-  position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  position: sticky;
   z-index: ${({ theme }) => theme.zIndices.homeNavigation};
 `;
 
-const NavigationItem = styled.div`
+const NavigationItem = styled.div<{ active?: boolean }>`
   cursor: pointer;
   margin-right: ${spacing(4)};
   padding-bottom: ${spacing(2)};
@@ -64,7 +44,7 @@ const NavigationItem = styled.div`
     `}
 `;
 
-const anchorOrder = [
+const ANCHOR_IDS = [
   'koulutukset',
   'toteutukset',
   'haut',
@@ -72,58 +52,38 @@ const anchorOrder = [
   'valintaperusteet',
 ];
 
-const getNavigationItems = (anchors, t) =>
-  anchorOrder
-    .filter(id => anchors[id])
-    .map(id => ({
-      id,
-      label: t(`yleiset.${id}`),
-    }));
+const scrollToEntitySection = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    const elementTop = element.getBoundingClientRect().top ?? 0;
 
-const NavigationItems = ({ items, activeItem, maxInlineItems }) => {
-  const inlineItems = useMemo(
-    () => items.slice(0, maxInlineItems),
-    [items, maxInlineItems]
-  );
+    const top = elementTop + document.body.scrollTop - NAVIGATION_OFFSET;
 
-  const moreItems = useMemo(
-    () => items.slice(maxInlineItems, items.length),
-    [items, maxInlineItems]
-  );
+    document.body.scrollTo({
+      top,
+      behavior: 'smooth',
+    });
+  }
+};
 
-  const moreItemsOverlay = (
-    <DropdownMenu>
-      {moreItems.map(({ id, label }) => (
-        <DropdownMenuItem
-          onClick={() => scrollElementIntoView(document.getElementById(id))}
-          key={id}
-        >
-          {label}
-        </DropdownMenuItem>
-      ))}
-    </DropdownMenu>
-  );
+const getNavigationItems = (t: TFunction) =>
+  ANCHOR_IDS.map(id => ({
+    id,
+    label: t(`yleiset.${id}`),
+  }));
 
+const NavigationItems = ({ items, activeItem }) => {
   return (
     <Box mr={-2} display="flex">
-      {inlineItems.map(({ id, label }) => (
+      {items.map(({ id, label }) => (
         <NavigationItem
           key={id}
           active={id === activeItem}
-          onClick={() => scrollElementIntoView(document.getElementById(id))}
+          onClick={() => scrollToEntitySection(id)}
         >
           {label}
         </NavigationItem>
       ))}
-      {moreItems.length > 0 && (
-        <NavigationItem>
-          <Dropdown overlay={moreItemsOverlay} overflow>
-            {({ ref, onToggle }) => (
-              <Icon type="more_horiz" ref={ref} onClick={onToggle} />
-            )}
-          </Dropdown>
-        </NavigationItem>
-      )}
     </Box>
   );
 };
@@ -131,9 +91,11 @@ const NavigationItems = ({ items, activeItem, maxInlineItems }) => {
 const NavigationBase = ({
   onOrganisaatioChange,
   organisaatio,
-  items,
   activeItem,
-  maxInlineItems,
+}: {
+  organisaatio?: OrganisaatioModel | null;
+  onOrganisaatioChange: (value: string) => void;
+  activeItem?: string;
 }) => {
   const { t } = useTranslation();
   const organisaatioOid = organisaatio?.oid;
@@ -143,6 +105,8 @@ const NavigationBase = ({
     () => setDrawerOpen(false),
     [setDrawerOpen]
   );
+
+  const items = getNavigationItems(t);
 
   useLayoutEffect(() => {
     document.body.style.overflowY = drawerOpen ? 'hidden' : 'auto';
@@ -166,11 +130,7 @@ const NavigationBase = ({
         <Container maxWidth="1600px">
           <Box display="flex" justifyContent="space-between">
             <Box display="flex" alignItems="flex-end" as="nav">
-              <NavigationItems
-                items={items}
-                activeItem={activeItem}
-                maxInlineItems={maxInlineItems}
-              />
+              <NavigationItems items={items} activeItem={activeItem} />
             </Box>
             <Box py={2}>
               <Box display="flex" alignItems="center">
@@ -201,73 +161,65 @@ const NavigationBase = ({
   );
 };
 
-const getElementViewportTop = element => {
-  if (!element || !_.isFunction(element.getBoundingClientRect)) {
-    return Number.MIN_SAFE_INTEGER;
+const NAVIGATION_OFFSET = 90;
+
+const checkIsElementVisible = (element: HTMLElement | null) => {
+  if (!element || !('getBoundingClientRect' in element)) {
+    return false;
   }
 
-  return _.get(element.getBoundingClientRect(), 'top');
+  const rect = element.getBoundingClientRect();
+
+  const windowHeight = window.innerHeight;
+  const topVisible = rect.top >= NAVIGATION_OFFSET && rect.top < windowHeight;
+  const fillsHeight =
+    rect.top < NAVIGATION_OFFSET &&
+    rect.bottom + NAVIGATION_OFFSET > windowHeight;
+
+  return topVisible || fillsHeight;
 };
 
-const getActiveAnchor = items => {
-  const idAndTop = items.map(({ id }) => {
-    return [id, Math.abs(getElementViewportTop(document.getElementById(id)))];
+const getActiveAnchor = () =>
+  ANCHOR_IDS.find(id => {
+    const element = document.getElementById(id);
+    return checkIsElementVisible(element);
   });
 
-  const min = _.minBy(idAndTop, ([, top]) => top);
-
-  return min ? min[0] : undefined;
-};
-
-const Navigation = ({ maxInlineItems = 3, ...props }) => {
-  const [hasScrolled, setHasScrolled] = useState(false);
-  const [ref, inView] = useInView();
-  const anchors = useContext(NavigationStateContext);
-  const { t } = useTranslation();
-  const items = useMemo(() => getNavigationItems(anchors, t), [anchors, t]);
-  const [activeItem, setActiveItem] = useState();
-  const setActiveItemThrottle = useRef();
+const Navigation = ({
+  organisaatio,
+  onOrganisaatioChange,
+}: {
+  organisaatio?: OrganisaatioModel;
+  onOrganisaatioChange: (value: string) => void;
+}) => {
+  const [activeItem, setActiveItem] = useState<string | undefined>(
+    () => 'koulutukset'
+  );
 
   useEffect(() => {
-    setActiveItem(getActiveAnchor(items));
-  }, [items, setActiveItem]);
+    const onScroll = () => {
+      setActiveItem(getActiveAnchor());
+    };
+    document.body.addEventListener('scroll', onScroll);
+    return () => document.body.removeEventListener('scroll', onScroll);
+  }, [setActiveItem]);
 
   useEffect(() => {
-    setActiveItemThrottle.current = _.throttle(() => {
-      setActiveItem(getActiveAnchor(items));
-    }, 500);
-  }, [items, setActiveItem]);
+    window.addEventListener('resize', () => setActiveItem(getActiveAnchor()));
+    return () =>
+      window.removeEventListener('resize', () =>
+        setActiveItem(getActiveAnchor())
+      );
+  }, []);
 
-  const onScroll = useCallback(() => {
-    if (!hasScrolled) {
-      setHasScrolled(true);
-    }
-
-    _.isFunction(setActiveItemThrottle.current) &&
-      setActiveItemThrottle.current();
-  }, [hasScrolled]);
-
-  useEvent('scroll', onScroll, window);
-
-  const navigationProps = {
-    items,
-    activeItem,
-    maxInlineItems,
-    ...props,
-  };
-
-  // TODO: This somehow causes rendering the navigation bar twice during tests. Should be fixed.
   return (
-    <>
-      <div ref={ref}>
-        <NavigationBase {...navigationProps} />
-      </div>
-      {!inView && hasScrolled && (
-        <FixedNavigationWrapper boxShadow={1}>
-          <NavigationBase {...navigationProps} />
-        </FixedNavigationWrapper>
-      )}
-    </>
+    <StickyNavigationWrapper boxShadow={1}>
+      <NavigationBase
+        organisaatio={organisaatio}
+        onOrganisaatioChange={onOrganisaatioChange}
+        activeItem={activeItem}
+      />
+    </StickyNavigationWrapper>
   );
 };
 

@@ -77,7 +77,7 @@ export const ApurahaMaaraFields = createFormFieldComponent(
           alignItems="center"
           justifyContent="space-between"
         >
-          <Box flexBasis="80px" flexGrow={1} data-testid="apurahaMin">
+          <Box flexBasis="80px" flexGrow={1} data-test-id="apurahaMin">
             <Field
               name={`${section}.apurahaMin`}
               placeholder={

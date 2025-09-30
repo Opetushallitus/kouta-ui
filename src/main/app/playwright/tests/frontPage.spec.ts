@@ -30,7 +30,7 @@ test.describe('frontPage', () => {
 
     await page.route('**/koodi?onlyValidKoodis=true', fixtureJSON({}));
     await page.route('**/kouta-backend/**/list*', fixtureJSON([]));
-    await page.goto('/kouta');
+    await page.goto('/kouta/');
   });
 
   test('Should display organization hierarchy', async ({ page }) => {
@@ -75,17 +75,17 @@ test.describe('frontPage', () => {
   });
 
   test('Should list entities', async ({ page }) => {
-    await expect(page.getByTestId('koulutusTable')).toContainText(
+    await expect(page.getByTestId('koulutuksetSection')).toContainText(
       'Koulutuksen nimi'
     );
-    await expect(page.getByTestId('toteutusTable')).toContainText(
+    await expect(page.getByTestId('toteutuksetSection')).toContainText(
       'Toteutuksen nimi'
     );
-    await expect(page.getByTestId('hakuTable')).toContainText('Haun nimi');
-    await expect(page.getByTestId('hakukohdeTable')).toContainText(
+    await expect(page.getByTestId('hautSection')).toContainText('Haun nimi');
+    await expect(page.getByTestId('hakukohteetSection')).toContainText(
       'Hakukohteen nimi'
     );
-    await expect(page.getByTestId('valintaperusteTable')).toContainText(
+    await expect(page.getByTestId('valintaperusteetSection')).toContainText(
       'Valintaperusteen nimi'
     );
   });

@@ -198,6 +198,7 @@ test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () =>
       ],
     },
     koulutustyyppi: KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+    kieliversiot: ['fi', 'sv'],
     description: {
       kuvaus: {},
       osaamistavoitteet: {

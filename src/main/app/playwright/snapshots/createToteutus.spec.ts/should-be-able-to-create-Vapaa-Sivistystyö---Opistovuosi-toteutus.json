@@ -102,7 +102,9 @@
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
-    "osaamistavoitteet": {},
+    "osaamistavoitteet": {
+      "fi": "<p>Osaamistavoitteet</p>"
+    },
     "tyyppi": "vapaa-sivistystyo-opistovuosi",
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": null,

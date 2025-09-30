@@ -26,6 +26,27 @@ import {
 export const ToteutuksenKuvausSection = ({
   language,
   name,
+}: {
+  language: string;
+  name: string;
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Box mb={2}>
+      <Field
+        name={`${name}.kuvaus.${language}`}
+        component={FormFieldEditor}
+        label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
+        required
+      />
+    </Box>
+  );
+};
+
+export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
+  language,
+  name,
   koulutus,
 }: {
   language: string;

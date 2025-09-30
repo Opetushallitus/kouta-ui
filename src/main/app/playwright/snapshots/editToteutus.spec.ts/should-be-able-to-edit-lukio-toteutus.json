@@ -37,6 +37,7 @@
     "isTyovoimakoulutus": false,
     "isPieniOsaamiskokonaisuus": false,
     "suoritetaanNayttona": false,
+    "yleislinja": true,
     "painotukset": [],
     "kielivalikoima": {
       "A1Kielet": [],
@@ -52,8 +53,12 @@
     "yhteyshenkilot": [],
     "ammattinimikkeet": [],
     "asiasanat": [],
-    "kuvaus": {},
-    "osaamistavoitteet": {},
+    "kuvaus": {
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
+    "osaamistavoitteet": {
+      "fi": "<p>Osaamistavoitteet</p>"
+    },
     "tyyppi": "lk",
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": 150,

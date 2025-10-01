@@ -52,10 +52,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         sv: parseEditorState('Sv osaamistavoitteet'),
       },
     },
-    osaamistavoitteet: {
-      fi: parseEditorState('Fi osaamistavoitteet'),
-      sv: parseEditorState('Sv osaamistavoitteet'),
-    },
     kieliversiot: ['fi', 'sv'],
     tarjoajat: ['org1', 'org2'],
     jarjestamistiedot: {

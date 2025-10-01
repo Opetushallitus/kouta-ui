@@ -48,7 +48,7 @@ export type KoulutusFormValues = {
   };
   description: {
     kuvaus: TranslatedField<EditorState>;
-    osaamistavoitteet: TranslatedField<EditorState>;
+    osaamistavoitteet?: TranslatedField<EditorState>;
     linkkiEPerusteisiin?: TranslatedField<string>;
   };
   tarjoajat: { tarjoajat: Array<string>; kaytaPohjanJarjestajaa?: boolean };

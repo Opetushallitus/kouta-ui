@@ -85,7 +85,7 @@ export type ToteutusFormValues = {
   };
   description: {
     kuvaus: TranslatedField<EditorState>;
-    osaamistavoitteet: TranslatedField<EditorState>;
+    osaamistavoitteet?: TranslatedField<EditorState>;
   };
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;

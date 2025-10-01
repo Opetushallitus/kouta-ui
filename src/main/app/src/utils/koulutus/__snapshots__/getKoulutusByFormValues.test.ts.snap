@@ -198,7 +198,10 @@ exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] 
     "opintojenLaajuusyksikkoKoodiUri": null,
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
-    "osaamistavoitteet": {},
+    "osaamistavoitteet": {
+      "fi": "<p>Fi osaamistavoitteet</p>",
+      "sv": "<p>Sv osaamistavoitteet</p>",
+    },
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [

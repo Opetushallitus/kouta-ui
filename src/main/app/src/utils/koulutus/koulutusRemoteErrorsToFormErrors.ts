@@ -144,4 +144,14 @@ export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
         }),
     };
   }
+
+  if (
+    path === 'metadata.osaamistavoitteet' &&
+    errorType === 'invalidKielistetty'
+  ) {
+    return LANGUAGES.map(lng => ({
+      field: `description.osaamistavoitteet.${lng}`,
+      errorKey: 'validointivirheet.pakollisetKaannokset',
+    }));
+  }
 };

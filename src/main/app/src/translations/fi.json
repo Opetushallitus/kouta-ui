@@ -494,7 +494,7 @@
     "tutkinnonOsienKuvaus": "Tutkinnon osien kuvaus",
     "eiTutkinnonOsia": "Ei valittuja tutkinnon osia",
     "koulutuksenTiedot": "Koulutuksen tiedot",
-    "koulutuksenKuvaus": "Valitun koulutuksen kuvaus",
+    "koulutuksenKuvausJaOsaamistavoitteet": "Valitun koulutuksen kuvaus ja osaamistavoitteet",
     "koulutuksenLisatiedot": "Koulutuksen lisätiedot",
     "koulutuksenTarjoajat": "Koulutusta järjestävät organisaatiot",
     "valitseJarjestajat": "Valitse ne organisaatiot, jotka järjestävät koulutusta",
@@ -537,7 +537,7 @@
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",
-    "toteutuksenKuvaus": "Toteutuksen kuvaus",
+    "toteutuksenKuvausJaOsaamistavoitteet": "Toteutuksen kuvaus ja osaamistavoitteet",
     "toteutuksenYleinenKuvaus": "Toteutuksen yleinen kuvaus",
     "ilmoittautumislinkki": "Ilmoittautumislinkki",
     "laajuus": "Laajuus",

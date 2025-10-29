@@ -232,7 +232,9 @@ export const KoulutusForm = ({
                 Monien koulutustyyppien metadatassa on kuvaus-kenttä, mutta siihen ei voi syöttää mitään. */}
                 <FormCollapse
                   section="description"
-                  header={t('koulutuslomake.koulutuksenKuvaus')}
+                  header={t(
+                    'koulutuslomake.koulutuksenKuvausJaOsaamistavoitteet'
+                  )}
                   Component={match(koulutustyyppi)
                     .with(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS, () =>
                       isAmmTutkintoWithoutEperuste

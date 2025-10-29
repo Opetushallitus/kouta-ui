@@ -18,8 +18,14 @@ import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { VaativaErityinenTukiField } from '#/src/pages/toteutus/ToteutusForm/TiedotSection/VaativaErityinenTukiField';
 import { ToteutusTiedotSectionProps } from '#/src/types/toteutusTypes';
+import { isNumeric } from '#/src/utils';
+import { usePerusteenOsat } from '#/src/utils/api/getPerusteenOsat';
+import { useEPerusteRakenne } from '#/src/utils/ePeruste/getEPerusteRakenne';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import getOsaamisalaLaajuus from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
+import { OsaamisalaOsa } from '../../koulutus/KoulutusForm/AmmatillinenTiedotSection/ValitseOsaamisalaBox';
 
 type NimiSectionProps = {
   name: string;
@@ -41,7 +47,13 @@ const NimiSection = ({ name, language, disabled }: NimiSectionProps) => {
   );
 };
 
-const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
+const OpintojenLaajuus = ({
+  koulutus,
+  laajuusyksikkoKoodiUri,
+}: {
+  koulutus: any;
+  laajuusyksikkoKoodiUri: string;
+}) => {
   const selectedLanguage = useLanguageTab();
   const { t } = useTranslation();
 
@@ -56,6 +68,111 @@ const OpintojenLaajuus = ({ koulutus, laajuusyksikkoKoodiUri }) => {
         />
       </Box>
     </Box>
+  );
+};
+
+const OpintojenLaajuusForTutkinnonosat = ({
+  koulutus,
+  laajuusyksikkoKoodiUri,
+}: {
+  koulutus: any;
+  laajuusyksikkoKoodiUri: string;
+}) => {
+  const selectedLanguage = useLanguageTab();
+  const { t } = useTranslation();
+  const tutkinnonOsat = koulutus?.metadata?.tutkinnonOsat || [];
+
+  const { data: tutkinnonOsienTiedot } = usePerusteenOsat(tutkinnonOsat);
+
+  const laajuudet = tutkinnonOsienTiedot?.map(osa => osa.laajuus);
+  const combinedLaajuudet = laajuudet?.join(' + ') || '';
+
+  return (
+    <Box display="flex">
+      <Box maxWidth="300px">
+        <FixedValueKoodiInput
+          selectedLanguage={selectedLanguage}
+          koodiUri={laajuusyksikkoKoodiUri}
+          label={t('toteutuslomake.laajuus')}
+          prefix={combinedLaajuudet}
+        />
+      </Box>
+    </Box>
+  );
+};
+
+const OpintojenLaajuusForOsaamisala = ({
+  koulutus,
+  laajuusyksikkoKoodiUri,
+}: {
+  koulutus: any;
+  laajuusyksikkoKoodiUri: string;
+}) => {
+  const selectedLanguage = useLanguageTab();
+  const { t } = useTranslation();
+
+  const { ePerusteId } = koulutus || {};
+  const { data: ePerusteRakenne } = useEPerusteRakenne({ ePerusteId });
+  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat || [];
+
+  const osaamisalaKoodiUri = koulutus?.metadata?.osaamisalaKoodiUri;
+  const { koodiArvo } = parseKoodiUri(osaamisalaKoodiUri);
+
+  const osaamisalaLaajuus = getOsaamisalaLaajuus(
+    ePerusteRakenneOsat,
+    koodiArvo
+  );
+
+  return (
+    <Box display="flex">
+      <Box maxWidth="300px">
+        <FixedValueKoodiInput
+          selectedLanguage={selectedLanguage}
+          koodiUri={laajuusyksikkoKoodiUri}
+          label={t('toteutuslomake.laajuus')}
+          prefix={osaamisalaLaajuus || ''}
+        />
+      </Box>
+    </Box>
+  );
+};
+
+const PieniOsaamiskokonaisuusField = ({
+  name,
+  koulutus,
+}: {
+  name: string;
+  koulutus?: any;
+}) => {
+  const { t } = useTranslation();
+  const { change } = useBoundFormActions();
+  const currValue = useFieldValue(`${name}.isPieniOsaamiskokonaisuus`);
+  const toteutuksenLaajuus = useFieldValue(`${name}.opintojenLaajuusNumero`);
+  const koulutustyyppi = koulutus?.koulutustyyppi;
+
+  useEffect(() => {
+    if (
+      _fp.isUndefined(currValue) &&
+      (KOULUTUSTYYPPI.TUTKINNON_OSA === koulutustyyppi ||
+        ([
+          KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
+          KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
+        ].includes(koulutustyyppi) &&
+          isNumeric(toteutuksenLaajuus) &&
+          toteutuksenLaajuus < 60))
+    ) {
+      change(`${name}.isPieniOsaamiskokonaisuus`, true);
+    }
+  }, [change, currValue, koulutustyyppi, name, toteutuksenLaajuus]);
+
+  return (
+    <Field
+      name={`${name}.isPieniOsaamiskokonaisuus`}
+      component={FormFieldSwitch}
+      helperText={t('toteutuslomake.pieniOsaamiskokonaisuusOhje')}
+    >
+      {t('toteutuslomake.isPieniOsaamiskokonaisuus')}
+    </Field>
   );
 };
 
@@ -229,6 +346,7 @@ export const VapaaSivistystyoMuuTiedotSection = ({
           koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri
         }
       />
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonVSTFields name={name} />
     </VerticalBox>
   );
@@ -246,6 +364,7 @@ export const VapaaSivistystyoOsaamismerkkiTiedotSection = ({
   return (
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} disabled={false} />
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonVSTFields name={name} />
     </VerticalBox>
   );
@@ -264,6 +383,7 @@ export const KkOpintojaksoTiedotSection = ({
       disabled={disabled}
       fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
+    <PieniOsaamiskokonaisuusField name={name} koulutus={koulutus} />
     <CommonTiedotFields name={name} />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
@@ -284,6 +404,7 @@ export const KkOpintokokonaisuusTiedotSection = ({
       disabled={disabled}
       fixedLaajuusYksikko={koulutus?.metadata?.opintojenLaajuusyksikkoKoodiUri}
     />
+    <PieniOsaamiskokonaisuusField name={name} koulutus={koulutus} />
     <TunnisteField name={name} />
     <OpinnonTyyppiField name={name} />
     <AvoinKorkeakoulutusField name={name} />
@@ -315,10 +436,11 @@ export const TutkinnonOsaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={disabled} />
-    <OpintojenLaajuus
+    <OpintojenLaajuusForTutkinnonosat
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
+    <PieniOsaamiskokonaisuusField name={name} koulutus={koulutus} />
     <CommonTiedotFields name={name} />
   </VerticalBox>
 );
@@ -330,10 +452,11 @@ export const OsaamisalaTiedotSection = ({
 }: ToteutusTiedotSectionProps) => (
   <VerticalBox gap={2}>
     <NimiSection name={name} language={language} disabled={true} />
-    <OpintojenLaajuus
+    <OpintojenLaajuusForOsaamisala
       koulutus={koulutus}
       laajuusyksikkoKoodiUri={OpintojenLaajuusyksikko.OSAAMISPISTE}
     />
+    <PieniOsaamiskokonaisuusField name={name} />
     <CommonTiedotFields name={name} />
   </VerticalBox>
 );
@@ -373,7 +496,21 @@ export const DIATiedotSection = ({
 
 export const EBTiedotSection = DIATiedotSection;
 
-export const ErikoistumiskoulutusTiedotSection = DIATiedotSection;
+export const ErikoistumiskoulutusTiedotSection = ({
+  koulutus,
+  language,
+  name,
+}: ToteutusTiedotSectionProps) => {
+  useNimiFromKoulutus({ koulutus, name });
+
+  return (
+    <VerticalBox gap={2}>
+      <NimiSection name={name} language={language} disabled={false} />
+      <PieniOsaamiskokonaisuusField name={name} />
+      <CommonTiedotFields name={name} />
+    </VerticalBox>
+  );
+};
 
 export const LukioTiedotSection = ({ name }: ToteutusTiedotSectionProps) => {
   return (
@@ -392,6 +529,7 @@ export const MuuTiedotSection = ({
     <VerticalBox gap={2}>
       <NimiSection name={name} language={language} />
       <OpintojenLaajuusFieldRange name={name} disabled={disabled} />
+      <PieniOsaamiskokonaisuusField name={name} />
       <CommonTiedotFields name={name} />
     </VerticalBox>
   );

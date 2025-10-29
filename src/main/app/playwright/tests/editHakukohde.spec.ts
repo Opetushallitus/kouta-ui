@@ -10,6 +10,7 @@ import {
   withinSection,
   confirmDelete,
   assertNoUnsavedChangesDialog,
+  setFakeTime,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import {
@@ -89,6 +90,25 @@ test.describe('Edit hakukohde', () => {
         organisaatioOid,
         tarjoajat,
       });
+      await loadHakukohdePage(page);
+      await fillKieliversiotSection(page);
+      await fillJarjestyspaikkaSection(page);
+      await fillTilaSection(page, 'poistettu');
+      await tallenna(page);
+      await confirmDelete(page);
+    }));
+
+  test('should be able to delete luonnos-tilainen hakukohde with hakuaika ongoing', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await prepareHakukohdeTest(page, {
+        tyyppi: 'yo',
+        hakuOid,
+        organisaatioOid,
+        tarjoajat,
+      });
+      await setFakeTime(page, new Date('2011-11-11T20:30:00'));
       await loadHakukohdePage(page);
       await fillKieliversiotSection(page);
       await fillJarjestyspaikkaSection(page);

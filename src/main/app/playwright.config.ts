@@ -40,6 +40,7 @@ export default defineConfig({
     testIdAttribute: 'data-test-id',
     storageState: path.resolve(__dirname, 'playwright', 'storage.json'),
     ignoreHTTPSErrors: true,
+    headless: true,
   },
   snapshotPathTemplate: './playwright/snapshots/{testFileName}/{arg}{ext}',
   /* Configure projects for major browsers */

@@ -107,11 +107,12 @@ export const HakukohdeForm = ({
 
   const initiaTila = useInitalFieldValue('tila');
   const currentTila = useFieldValue('tila');
-  useSetFieldValue(
-    'tila',
-    initiaTila,
-    hakukohteenHakuaikaMenossa && currentTila === JULKAISUTILA.POISTETTU
-  );
+  const updateTila =
+    (hakukohteenHakuaikaMenossa &&
+      initiaTila === JULKAISUTILA.ARKISTOITU &&
+      currentTila === JULKAISUTILA.POISTETTU) ||
+    false;
+  useSetFieldValue('tila', initiaTila, updateTila);
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>

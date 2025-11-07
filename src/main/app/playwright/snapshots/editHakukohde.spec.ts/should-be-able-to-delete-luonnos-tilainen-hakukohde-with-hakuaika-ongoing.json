@@ -1,0 +1,165 @@
+{
+  "oid": "1.2.3.4.5.6",
+  "toteutusOid": "2.1.1.1.1.1",
+  "hakuOid": "4.1.1.1.1.1",
+  "tila": "poistettu",
+  "nimi": {
+    "fi": "Hakukohteen nimi"
+  },
+  "alkamiskausiKoodiUri": "kausi_k#1",
+  "alkamisvuosi": "2024",
+  "hakulomake": {},
+  "pohjakoulutusvaatimusKoodiUrit": [
+    "pohjakoulutusvaatimuskouta_pk#1"
+  ],
+  "pohjakoulutusvaatimusTarkenne": {
+    "fi": "<p>Fi tarkenne</p>"
+  },
+  "muuPohjakoulutusvaatimus": {},
+  "toinenAsteOnkoKaksoistutkinto": true,
+  "kaytetaanHaunAikataulua": false,
+  "liitteetOnkoSamaToimitusaika": false,
+  "liitteetOnkoSamaToimitusosoite": false,
+  "liitteidenToimitusosoite": null,
+  "liitteidenToimitustapa": null,
+  "liitteet": [
+    {
+      "toimitustapa": "osoite",
+      "tyyppiKoodiUri": "liitetyypitamm_4#1",
+      "nimi": {
+        "fi": "Nimi"
+      },
+      "toimitusaika": "2011-11-11T10:30",
+      "toimitusosoite": {
+        "osoite": {
+          "osoite": {
+            "fi": "Osoite"
+          },
+          "postinumeroKoodiUri": {
+            "fi": "posti_00350#2"
+          }
+        },
+        "sahkoposti": "sahkoposti@email.com",
+        "verkkosivu": null
+      },
+      "kuvaus": {
+        "fi": "<p>Kuvaus</p>"
+      }
+    }
+  ],
+  "metadata": {
+    "jarjestaaUrheilijanAmmKoulutusta": false,
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+    },
+    "valintaperusteenValintakokeidenLisatilaisuudet": [
+      {
+        "id": "testi-id-123",
+        "tilaisuudet": [
+          {
+            "osoite": {
+              "osoite": {
+                "fi": "osoite"
+              },
+              "postinumeroKoodiUri": {
+                "fi": "posti_00350#2"
+              }
+            },
+            "aika": {
+              "alkaa": "2019-04-02T10:45",
+              "paattyy": "2019-04-02T19:00"
+            },
+            "lisatietoja": {
+              "fi": "<p>lisatietoja</p>"
+            },
+            "jarjestamispaikka": {
+              "fi": "paikka"
+            }
+          }
+        ]
+      }
+    ],
+    "kynnysehto": {},
+    "aloituspaikat": {
+      "lukumaara": 150,
+      "ensikertalaisille": 49,
+      "kuvaus": {}
+    },
+    "kaytetaanHaunAlkamiskautta": false,
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
+      "koulutuksenPaattymispaivamaara": "2021-12-12T00:00",
+      "koulutuksenAlkamiskausiKoodiUri": null,
+      "koulutuksenAlkamisvuosi": null,
+      "henkilokohtaisenSuunnitelmanLisatiedot": {}
+    },
+    "hakukohteenLinja": null
+  },
+  "valintakokeet": [
+    {
+      "tyyppiKoodiUri": "valintakokeentyyppi_1#1",
+      "nimi": {
+        "fi": "Kokeen nimi - fi"
+      },
+      "metadata": {
+        "tietoja": {
+          "fi": "<p>Tietoa kokeesta - fi</p>"
+        },
+        "vahimmaispisteet": 10.03,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+        },
+        "erityisjarjestelytMahdollisia": true,
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+        }
+      },
+      "tilaisuudet": [
+        {
+          "osoite": {
+            "osoite": {
+              "fi": "fi osoite"
+            },
+            "postinumeroKoodiUri": {
+              "fi": "posti_00350#2"
+            }
+          },
+          "aika": {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44"
+          },
+          "lisatietoja": {
+            "fi": "<p>fi lisatietoja</p>"
+          },
+          "jarjestamispaikka": {
+            "fi": "Jarjestamispaikka - fi"
+          }
+        }
+      ]
+    }
+  ],
+  "hakuajat": [
+    {
+      "alkaa": "2011-11-11T10:30",
+      "paattyy": "2011-11-12T11:45"
+    }
+  ],
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "organisaatioOid": "1.2.246.562.10.52251087186",
+  "kielivalinta": [
+    "fi"
+  ],
+  "kaytetaanHaunHakulomaketta": false,
+  "hakulomaketyyppi": "ataru",
+  "hakulomakeAtaruId": "12345",
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
+  "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928",
+  "externalId": null,
+  "esikatselu": false,
+  "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
+  "liitteidenToimitusaika": null,
+  "hakukohdeKoodiUri": null
+}

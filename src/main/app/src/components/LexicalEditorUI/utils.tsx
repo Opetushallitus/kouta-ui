@@ -3,70 +3,65 @@ import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { HeadingNode } from '@lexical/rich-text';
 import {
+  $applyNodeReplacement,
+  $createParagraphNode,
   $getRoot,
+  $insertNodes,
+  $isDecoratorNode,
+  $isElementNode,
   createEditor,
   CreateEditorArgs,
-  LexicalEditor,
-  TextNode,
+  DOMConversionMap,
   DOMExportOutput,
-  $insertNodes,
+  EditorConfig,
   EditorState,
-  $createParagraphNode,
-  $isElementNode,
-  $isDecoratorNode,
+  LexicalEditor,
+  LineBreakNode,
+  NodeKey,
   SerializedTextNode,
+  TextNode,
 } from 'lexical';
 
-function wrapElementWith(element: HTMLElement, tag: string): HTMLElement {
-  const el = document.createElement(tag);
-  el.appendChild(element);
-  return el;
-}
-
 class CustomTextNode extends TextNode {
+  constructor(text: string, key?: NodeKey) {
+    super(text, key);
+  }
+
   static getType() {
     return 'CustomTextNode';
   }
 
   static clone(node: CustomTextNode): CustomTextNode {
-    return new CustomTextNode(node.__text);
+    return new CustomTextNode(node.__text, node.__key);
+  }
+
+  createDOM(config: EditorConfig, editor?: LexicalEditor): HTMLElement {
+    return super.createDOM(config, editor);
   }
 
   static importJSON(serializedNode: SerializedTextNode): CustomTextNode {
-    const serialized = TextNode.importJSON(serializedNode);
-    return new CustomTextNode(serialized.__text);
+    return $createCustomTextNode().updateFromJSON(serializedNode);
   }
 
   exportJSON(): SerializedTextNode {
-    const node = super.exportJSON();
-    node.type = 'CustomTextNode';
-    return node;
-  }
-
-  exportDOM(_editor: LexicalEditor): DOMExportOutput {
-    let element = document.createElement('span');
-    element.textContent = this.getTextContent();
-
-    // This is the only way to properly add support for most clients,
-    // even if it's semantically incorrect to have to resort to using
-    // <b>, <u>, <s>, <i> elements.
-    if (this.hasFormat('bold')) {
-      element = wrapElementWith(element, 'strong');
-    }
-    if (this.hasFormat('italic')) {
-      element = wrapElementWith(element, 'em');
-    }
-    if (this.hasFormat('strikethrough')) {
-      element = wrapElementWith(element, 's');
-    }
-    if (this.hasFormat('underline')) {
-      element = wrapElementWith(element, 'u');
-    }
-
     return {
-      element,
+      ...super.exportJSON(),
+      type: 'CustomTextNode',
+      version: 1,
     };
   }
+
+  static importDOM(): DOMConversionMap | null {
+    return super.importDOM();
+  }
+
+  exportDOM(editor: LexicalEditor): DOMExportOutput {
+    return super.exportDOM(editor);
+  }
+}
+
+export function $createCustomTextNode(text: string = ''): CustomTextNode {
+  return $applyNodeReplacement(new CustomTextNode(text));
 }
 
 export const LEXICAL_NODES = [
@@ -75,11 +70,13 @@ export const LEXICAL_NODES = [
   ListItemNode,
   AutoLinkNode,
   LinkNode,
+  LineBreakNode,
   CustomTextNode,
   {
     replace: TextNode,
+    withKlass: CustomTextNode,
     with: (node: TextNode) => {
-      return new CustomTextNode(node.__text);
+      return $createCustomTextNode(node.__text);
     },
   },
 ];
@@ -124,6 +121,20 @@ const postprocessHtml = (html: string): string => {
   // unwrap unnecessary spans
   doc
     .querySelectorAll('span')
+    .forEach(elem => elem.replaceWith(...elem.childNodes));
+
+  // unwrap unnecessary b-elements
+  doc
+    .querySelectorAll('b')
+    .forEach(elem => elem.replaceWith(...elem.childNodes));
+
+  // remove unnecessary style-attributes
+  doc.querySelectorAll('strong').forEach(elem => elem.removeAttribute('style'));
+  doc.querySelectorAll('em').forEach(elem => elem.removeAttribute('style'));
+
+  // unwrap unnecessary i-elements
+  doc
+    .querySelectorAll('i')
     .forEach(elem => elem.replaceWith(...elem.childNodes));
 
   // lexical produces extra line breaks inside empty paragraphs -

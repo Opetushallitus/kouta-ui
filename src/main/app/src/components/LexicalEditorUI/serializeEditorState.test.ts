@@ -10,9 +10,9 @@ test('serializeEditorState simple paragraph', () => {
   expect(serializeEditorState(es)).toEqual('<p>test</p>');
 });
 
-test('serializeEditorState paragraph with content and line break', () => {
+test('serializeEditorState paragraph with content: accidental line break is removed', () => {
   const es = parseEditorState('<p>test<br></p>');
-  expect(serializeEditorState(es)).toEqual('<p>test<br></p>');
+  expect(serializeEditorState(es)).toEqual('<p>test</p>');
 });
 
 test('serializeEditorState paragraphs with empty paragraph in between', () => {

@@ -15,6 +15,7 @@ import {
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useOsaamismerkki } from '#/src/hooks/useEPeruste/useOsaamismerkki';
+import { KoulutusModel } from '#/src/types/domainTypes';
 import { sanitizeHTML } from '#/src/utils';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
@@ -51,7 +52,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
 }: {
   language: string;
   name: string;
-  koulutus: any;
+  koulutus: KoulutusModel;
 }) => {
   const { t } = useTranslation();
   const { change } = useBoundFormActions();

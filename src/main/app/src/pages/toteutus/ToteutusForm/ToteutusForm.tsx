@@ -129,6 +129,12 @@ const ToteutusForm = ({
   const hasHakukohdeAttached: boolean =
     toteutus?.oid && data?.totalCount ? Number(data?.totalCount) > 0 : false;
 
+  const hasOsaamistavoitteetField = ![
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+  ].includes(koulutustyyppi);
+
   return (
     <>
       <HakukohteetModal
@@ -243,7 +249,11 @@ const ToteutusForm = ({
 
         <FormCollapse
           section="description"
-          header={t('toteutuslomake.toteutuksenKuvausJaOsaamistavoitteet')}
+          header={
+            hasOsaamistavoitteetField
+              ? t('toteutuslomake.toteutuksenKuvausJaOsaamistavoitteet')
+              : t('toteutuslomake.toteutuksenKuvaus')
+          }
           languages={languages}
           koulutus={koulutus}
           Component={match(koulutustyyppi)
@@ -251,13 +261,11 @@ const ToteutusForm = ({
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               () => OsaamismerkkiToteutuksenKuvausSection
             )
-            .with(
-              KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-              KOULUTUSTYYPPI.OSAAMISALA,
-              KOULUTUSTYYPPI.TUTKINNON_OSA,
-              () => ToteutuksenKuvausSection
+            .when(
+              () => hasOsaamistavoitteetField,
+              () => ToteutuksenKuvausJaOsaamistavoitteetSection
             )
-            .otherwise(() => ToteutuksenKuvausJaOsaamistavoitteetSection)}
+            .otherwise(() => ToteutuksenKuvausSection)}
         />
         {koulutustyyppi === KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS && (
           <FormCollapse

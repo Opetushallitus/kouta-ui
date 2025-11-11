@@ -44,8 +44,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
     hakeutumisTaiIlmoittautumistapa: HTIT,
   } = values;
   const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
-  const kieleistykset = getKieleistyksetFromValues(values);
-  const kieleistyksetSerialized = getSerializedKieleistykset(values);
+  const kielistykset = getKieleistyksetFromValues(values);
+  const kielistyksetSerialized = getSerializedKieleistykset(values);
   const kielivalinta = getKielivalinta(values);
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
@@ -76,7 +76,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   return {
     organisaatioOid: values?.organisaatioOid?.value,
     externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
-    nimi: koulutustyyppi === 'lk' ? {} : kieleistykset(values?.tiedot?.nimi),
+    nimi: koulutustyyppi === 'lk' ? {} : kielistykset(values?.tiedot?.nimi),
     tarjoajat: values?.tarjoajat || [],
     kielivalinta,
     tila,
@@ -89,7 +89,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(
           ({ value }) => ({
             otsikkoKoodiUri: value,
-            teksti: kieleistyksetSerialized(osioKuvaukset[value]),
+            teksti: kielistyksetSerialized(osioKuvaukset[value]),
           })
         ),
         opetuskieliKoodiUrit: opetuskielet || [],
@@ -97,23 +97,23 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         maksunMaara: maybeParseNumber(maksunMaara),
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
-        opetuskieletKuvaus: kieleistyksetSerialized(
+        opetuskieletKuvaus: kielistyksetSerialized(
           values?.jarjestamistiedot?.opetuskieliKuvaus
         ),
-        opetustapaKuvaus: kieleistyksetSerialized(
+        opetustapaKuvaus: kielistyksetSerialized(
           values?.jarjestamistiedot?.opetustapaKuvaus
         ),
-        opetusaikaKuvaus: kieleistyksetSerialized(
+        opetusaikaKuvaus: kielistyksetSerialized(
           values?.jarjestamistiedot?.opetusaikaKuvaus
         ),
-        maksullisuusKuvaus: kieleistyksetSerialized(
+        maksullisuusKuvaus: kielistyksetSerialized(
           values?.jarjestamistiedot?.maksullisuusKuvaus
         ),
         onkoApuraha,
         apuraha:
           apurahaVisible && onkoApuraha
             ? {
-                kuvaus: kieleistyksetSerialized(
+                kuvaus: kielistyksetSerialized(
                   values?.jarjestamistiedot?.apurahaKuvaus
                 ),
                 ...(onkoApuraha
@@ -135,17 +135,17 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         suunniteltuKestoKuukaudet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.kuukautta
         ),
-        suunniteltuKestoKuvaus: kieleistyksetSerialized(
+        suunniteltuKestoKuvaus: kielistyksetSerialized(
           jarjestamistiedot?.suunniteltuKestoKuvaus
         ),
         koulutuksenAlkamiskausi: getAlkamiskausiData(
           ajankohta,
-          kieleistyksetSerialized
+          kielistyksetSerialized
         ),
       },
       diplomit: getDiplomitByValues(
         values?.jarjestamistiedot?.diplomit,
-        kieleistykset
+        kielistykset
       ),
       ammatillinenPerustutkintoErityisopetuksena:
         values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
@@ -159,7 +159,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       yleislinja: values?.lukiolinjat?.yleislinja,
       painotukset: getLukiolinjatByValues(
         values?.lukiolinjat?.painotukset,
-        kieleistyksetSerialized
+        kielistyksetSerialized
       ),
       kielivalikoima: {
         A1Kielet: (kielivalikoima?.A1Kielet || []).map(_fp.prop('value')),
@@ -172,7 +172,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       },
       erityisetKoulutustehtavat: getLukiolinjatByValues(
         values?.lukiolinjat?.erityisetKoulutustehtavat,
-        kieleistyksetSerialized
+        kielistyksetSerialized
       ),
       osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({
         koodiUri: osaamisala,
@@ -188,20 +188,20 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           verkkosivu,
           verkkosivuTeksti,
         }) => ({
-          nimi: kieleistykset(nimi),
-          titteli: kieleistykset(titteli),
-          sahkoposti: kieleistykset(sahkoposti),
-          puhelinnumero: kieleistykset(puhelinnumero),
-          wwwSivu: kieleistykset(verkkosivu),
-          wwwSivuTeksti: kieleistykset(verkkosivuTeksti),
+          nimi: kielistykset(nimi),
+          titteli: kielistykset(titteli),
+          sahkoposti: kielistykset(sahkoposti),
+          puhelinnumero: kielistykset(puhelinnumero),
+          wwwSivu: kielistykset(verkkosivu),
+          wwwSivuTeksti: kielistykset(verkkosivuTeksti),
         })
       ),
       ammattinimikkeet: getTermsByLanguage(
         values?.nayttamistiedot?.ammattinimikkeet
       ),
       asiasanat: getTermsByLanguage(values?.nayttamistiedot?.avainsanat),
-      kuvaus: kieleistyksetSerialized(values?.description?.kuvaus),
-      osaamistavoitteet: kieleistyksetSerialized(
+      kuvaus: kielistyksetSerialized(values?.description?.kuvaus),
+      osaamistavoitteet: kielistyksetSerialized(
         values?.description?.osaamistavoitteet
       ),
       tyyppi: koulutustyyppi,
@@ -216,14 +216,14 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       opintojenLaajuusNumeroMax: isLaajuusRange
         ? maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMax)
         : maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMin),
-      ilmoittautumislinkki: kieleistykset(values?.tiedot?.ilmoittautumislinkki),
+      ilmoittautumislinkki: kielistykset(values?.tiedot?.ilmoittautumislinkki),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
-          nimi: kieleistykset(nimi),
+          nimi: kielistykset(nimi),
           koodi: koodi || null,
-          laajuus: kieleistykset(laajuus),
-          ilmoittautumislinkki: kieleistykset(ilmoittautumislinkki),
-          kuvaus: kieleistyksetSerialized(kuvaus),
+          laajuus: kielistykset(laajuus),
+          ilmoittautumislinkki: kielistykset(ilmoittautumislinkki),
+          kuvaus: kielistyksetSerialized(kuvaus),
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
         })
       ),
@@ -231,14 +231,14 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       hakutermi: HTIT?.hakuTapa,
       hakulomaketyyppi,
       hakulomakeLinkki:
-        hakulomaketyyppi === MUU ? kieleistykset(HTIT?.linkki) : {},
+        hakulomaketyyppi === MUU ? kielistykset(HTIT?.linkki) : {},
       lisatietoaHakeutumisesta:
         hakulomaketyyppi === MUU || hakulomaketyyppi === EI_SAHKOISTA_HAKUA
-          ? kieleistyksetSerialized(HTIT?.lisatiedot)
+          ? kielistyksetSerialized(HTIT?.lisatiedot)
           : {},
       lisatietoaValintaperusteista:
         hakulomaketyyppi === MUU
-          ? kieleistyksetSerialized(HTIT?.lisatiedotValintaperusteista)
+          ? kielistyksetSerialized(HTIT?.lisatiedotValintaperusteista)
           : {},
       hakuaika:
         hakulomaketyyppi === MUU &&
@@ -255,7 +255,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       aloituspaikat: maybeParseNumber(
         values?.hakeutumisTaiIlmoittautumistapa?.aloituspaikat
       ),
-      aloituspaikkakuvaus: kieleistyksetSerialized(
+      aloituspaikkakuvaus: kielistyksetSerialized(
         values?.hakeutumisTaiIlmoittautumistapa?.aloituspaikkakuvaus
       ),
       liitetytOpintojaksot: values?.opintojaksojenLiittaminen?.opintojaksot

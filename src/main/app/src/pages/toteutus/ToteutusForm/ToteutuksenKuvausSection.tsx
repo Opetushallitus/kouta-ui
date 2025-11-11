@@ -71,7 +71,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
     );
   };
 
-  const useKoulutuksenOsaamistavoitteet = useCallback(() => {
+  const copyOsaamistavoitteetFromKoulutus = useCallback(() => {
     if (isOsaamistavoitteetEditorEmpty) {
       change(
         `${name}.osaamistavoitteet.${language}`,
@@ -116,7 +116,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
           color="primary"
           type="button"
           style={{ marginBottom: '1rem' }}
-          onClick={useKoulutuksenOsaamistavoitteet}
+          onClick={copyOsaamistavoitteetFromKoulutus}
           disabled={isEmpty(koulutuksenOsaamistavoitteet)}
         >
           {t('toteutuslomake.kaytaKoulutuksenOsaamistavoitteita')}

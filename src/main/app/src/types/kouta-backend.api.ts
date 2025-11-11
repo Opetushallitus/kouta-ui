@@ -2069,6 +2069,23 @@ export interface components {
              */
             en?: string;
         };
+        Osaamistavoitteet: {
+            /**
+             * @description Suomenkielinen osaamistavoitekuvaus, jos kielivalinnassa on 'fi'
+             * @example Suomenkielinen osaamistavoitekuvaus
+             */
+            fi?: string;
+            /**
+             * @description Ruotsinkielinen osaamistavoitekuvaus, jos kielivalinnassa on 'sv'
+             * @example Ruotsinkielinen osaamistavoitekuvaus
+             */
+            sv?: string;
+            /**
+             * @description Englanninkielinen osaamistavoitekuvaus, jos kielivalinnassa on 'en'
+             * @example Englanninkielinen osaamistavoitekuvaus
+             */
+            en?: string;
+        };
         Linkki: {
             /**
              * @description Linkki suomenkieliselle sivulle, jos kielivalinnassa on 'fi'
@@ -2427,7 +2444,8 @@ export interface components {
              * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
              */
             sorakuvausId?: string;
-            /** @example {
+            /**
+             * @example {
              *       "koulutustyyppi": "amm",
              *       "koulutusalaKoodiUrit": [
              *         "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
@@ -2446,7 +2464,8 @@ export interface components {
              *           }
              *         }
              *       ]
-             *     } */
+             *     }
+             */
             metadata?: components["schemas"]["YliopistoKoulutusMetadata"] | components["schemas"]["AmmatillinenKoulutusMetadata"] | components["schemas"]["AmmattikorkeaKoulutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoKoulutusMetadata"] | components["schemas"]["OpePedagOpinnotKoulutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaKoulutusMetadata"] | components["schemas"]["KkOpintojaksoKoulutusMetadata"] | components["schemas"]["KkOpintokokonaisuusKoulutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaKoulutusMetadata"] | components["schemas"]["AmmatillinenMuuKoulutusMetadata"] | components["schemas"]["LukioKoulutusMetadata"] | components["schemas"]["TuvaKoulutusMetadata"] | components["schemas"]["TelmaKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoKoulutusMetadata"] | components["schemas"]["VapaaSivistystyoOsaamismerkkiKoulutusMetadata"] | components["schemas"]["AikuistenPerusopetusKoulutusMetadata"] | components["schemas"]["ErikoislaakariKoulutusMetadata"] | components["schemas"]["ErikoistumiskoulutusMetadata"] | components["schemas"]["TaiteenPerusopetusKoulutusMetadata"] | components["schemas"]["MuuKoulutusMetadata"];
             /**
              * @description Koulutusta viimeksi muokanneen virkailijan henkilö-oid
@@ -2513,6 +2532,8 @@ export interface components {
         KoulutusMetadata: {
             /** @description Koulutuksen kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
             kuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Koulutuksen osaamistavoitteet eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            osaamistavoitteet?: components["schemas"]["Osaamistavoitteet"];
             /** @description Koulutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
             lisatiedot?: components["schemas"]["Lisatieto"][];
         };
@@ -2526,7 +2547,6 @@ export interface components {
             /**
              * @description Lista koulutusaloja. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/kansallinenkoulutusluokitus2016koulutusalataso2).
              *     HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
-             *
              * @example [
              *       "kansallinenkoulutusluokitus2016koulutusalataso2_054#1",
              *       "kansallinenkoulutusluokitus2016koulutusalataso2_055#1"
@@ -2536,7 +2556,6 @@ export interface components {
             /**
              * @description Lista koulutuksen tutkintonimikkeistä. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/tutkintonimikkeet).
              *     HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
-             *
              * @example [
              *       "tutkintonimikkeet_10091#2",
              *       "tutkintonimikkeet_10015#2"
@@ -2546,7 +2565,6 @@ export interface components {
             /**
              * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-app/koodisto/view/opintojenlaajuusyksikko).
              *     HUOM! Syötettävissä vain kun koulutuksetKoodiUri-kenttään on valittu jokin seuraavista&#58; koulutus_381501, koulutus_381502, koulutus_381503, koulutus_381521. Muuten käytetään valitulta ePerusteelta (ePerusteId) tulevaa arvoa.
-             *
              * @example opintojenlaajuusyksikko_2#1
              */
             opintojenLaajuusyksikkoKoodiUri?: string;
@@ -2972,7 +2990,8 @@ export interface components {
             kielivalinta?: components["schemas"]["Kieli"][];
             /** @description Toteutuksen Opintopolussa näytettävä nimi eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
             nimi?: components["schemas"]["Nimi"];
-            /** @example {
+            /**
+             * @example {
              *       "tyyppi": "amm",
              *       "kuvaus": {
              *         "fi": "Suomenkielinen kuvaus",
@@ -3088,7 +3107,8 @@ export interface components {
              *           }
              *         }
              *       ]
-             *     } */
+             *     }
+             */
             metadata?: components["schemas"]["YliopistoToteutusMetadata"] | components["schemas"]["AmmatillinenToteutusMetadata"] | components["schemas"]["AmmattikorkeaToteutusMetadata"] | components["schemas"]["KkOpintojaksoToteutusMetadata"] | components["schemas"]["KkOpintokokonaisuusToteutusMetadata"] | components["schemas"]["AmmatillinenTutkinnonOsaToteutusMetadata"] | components["schemas"]["AmmatillinenOsaamisalaToteutusMetadata"] | components["schemas"]["AmmatillinenMuuToteutusMetadata"] | components["schemas"]["AmmOpeErityisopeJaOpoToteutusMetadata"] | components["schemas"]["OpePedagOpinnotToteutusMetadata"] | components["schemas"]["LukioToteutusMetadata"] | components["schemas"]["TuvaToteutusMetadata"] | components["schemas"]["TelmaToteutusMetadata"] | components["schemas"]["VapaaSivistystyoOpistovuosiToteutusMetadata"] | components["schemas"]["VapaaSivistystyoMuuToteutusMetadata"] | components["schemas"]["AikuistenPerusopetusToteutusMetadata"] | components["schemas"]["ErikoislaakariToteutusMetadata"] | components["schemas"]["ErikoistumiskoulutusToteutusMetadata"] | components["schemas"]["TaiteenPerusopetusToteutusMetadata"] | components["schemas"]["MuuToteutusMetadata"];
             /**
              * @description Toteutusta viimeksi muokanneen virkailijan henkilö-oid
@@ -3111,6 +3131,14 @@ export interface components {
              * @example 2019-08-23T09:55:17
              */
             modified?: string;
+            /**
+             * @description Koulutuksen koodi URIt. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11)
+             * @example [
+             *       "koulutus_371101#1",
+             *       "koulutus_201001#1"
+             *     ]
+             */
+            koulutuksetKoodiUri?: string[];
         };
         ToteutusListItem: {
             /**
@@ -3238,6 +3266,8 @@ export interface components {
         ToteutusMetadata: {
             /** @description Toteutuksen kuvausteksti eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
             kuvaus?: components["schemas"]["Kuvaus"];
+            /** @description Toteutuksen osaamistavoitteet eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
+            osaamistavoitteet?: components["schemas"]["Osaamistavoitteet"];
             opetus?: components["schemas"]["Opetus"];
             /** @description Lista toteutuksen yhteyshenkilöistä */
             yhteyshenkilot?: components["schemas"]["Yhteyshenkilo"][];
@@ -4277,7 +4307,8 @@ export interface components {
             nimi?: components["schemas"]["Nimi"];
             /** @description Hakuun liittyvät valintakokeet */
             valintakokeet?: components["schemas"]["Valintakoe"][];
-            /** @example {
+            /**
+             * @example {
              *       "tyyppi": "amm",
              *       "valintatavat": [
              *         {
@@ -4336,7 +4367,8 @@ export interface components {
              *         "fi": "Suomenkielinen kuvaus",
              *         "sv": "Ruotsinkielinen kuvaus"
              *       }
-             *     } */
+             *     }
+             */
             metadata?: components["schemas"]["ValintaperusteMetadata"];
             /**
              * @description Valintaperustekuvausta viimeksi muokanneen virkailijan henkilö-oid
@@ -4682,12 +4714,15 @@ export interface components {
             nimi: components["schemas"]["Nimi"];
             kieletUris: string[];
             yhteystiedot?: components["schemas"]["Yhteystieto"];
-            /** @example [
+            /**
+             * @example [
              *       "kunta_091",
              *       "kunta_398"
-             *     ] */
+             *     ]
+             */
             kotipaikkaUri?: string;
-            /** @example {
+            /**
+             * @example {
              *       "oid": "1.2.246.562.10.66634895777",
              *       "parentOids": [
              *         "1.2.246.562.10.66634895871",
@@ -4702,7 +4737,8 @@ export interface components {
              *       "kieletUris": [
              *         "oppilaitoksenopetuskieli_1"
              *       ]
-             *     } */
+             *     }
+             */
             children?: components["schemas"]["Organisaatio"][];
             /** @example oppilaitostyyppi_21 */
             oppilaitostyyppiUri?: string;
@@ -5374,11 +5410,11 @@ export interface operations {
     siirtotiedostoPistehistoria: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };
@@ -5457,11 +5493,11 @@ export interface operations {
     siirtotiedostoHakukohteet: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };
@@ -6696,11 +6732,11 @@ export interface operations {
     siirtotiedostoValintaperusteet: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };
@@ -6751,11 +6787,11 @@ export interface operations {
     siirtotiedostoToteutukset: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };
@@ -7167,11 +7203,11 @@ export interface operations {
     siirtotiedostoHaut: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };
@@ -7668,11 +7704,11 @@ export interface operations {
     siirtotiedostoSorakuvaukset: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };
@@ -7858,11 +7894,11 @@ export interface operations {
     siirtotiedostoKoulutukset: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };
@@ -8189,11 +8225,11 @@ export interface operations {
     siirtotiedostoOppilaitoksetJaOsat: {
         parameters: {
             query?: {
-                /** @example 2025-09-16T08:01:22 */
+                /** @example 2025-11-11T11:04:49 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-09-16T08:01:22
+                 * @example 2025-11-11T11:04:49
                  */
                 endTime?: string;
             };

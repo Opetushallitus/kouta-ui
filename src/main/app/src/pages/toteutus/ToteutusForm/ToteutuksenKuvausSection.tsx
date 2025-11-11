@@ -50,7 +50,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
   name,
   koulutus,
 }: {
-  language: string;
+  language: 'fi' | 'sv' | 'en';
   name: string;
   koulutus: KoulutusModel;
 }) => {

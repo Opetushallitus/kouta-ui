@@ -96,19 +96,7 @@ export const typeToEditor = async (loc: Locator, text: string) => {
 };
 
 export const setFakeTime = async (page: Page, fakeDate: Date) => {
-  const fakeDateValue = fakeDate.valueOf();
-  await page.addInitScript(`{
-      Date = class extends Date {
-        constructor(...args) {
-          if (args.length === 0) {
-            super(${fakeDateValue});
-          } else {
-            super(...args);
-          }
-        }
-      }
-      Date.now = () => ${fakeDateValue};
-    }`);
+  await page.clock.setFixedTime(fakeDate);
 };
 
 export const tallenna = async (page: Page) => {

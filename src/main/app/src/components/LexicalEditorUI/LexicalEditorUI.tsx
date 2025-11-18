@@ -42,12 +42,22 @@ const useId = () => {
 
 /* We need this, so that when editor is updated in the fly,
    eg. when changing language, the state updates accordingly. */
-const UpdatePlugin = ({ value }) => {
+const UpdatePlugin = ({ value }: { value?: EditorState }) => {
   const [editor] = useLexicalComposerContext();
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    if (isEditorState(value) && !value.isEmpty()) {
-      editor.setEditorState(value);
+    // Skip the initial mount to avoid triggering onChange during setup
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    if (value) {
+      // If the update was done by lexical internally the editorstate object identity remains the same -> no need to reset the editor state
+      if (value !== editor.getEditorState()) {
+        editor.setEditorState(value);
+      }
     } else {
       editor.update(() => {
         $getRoot().clear();

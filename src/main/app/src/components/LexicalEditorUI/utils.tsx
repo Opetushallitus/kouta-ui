@@ -3,7 +3,6 @@ import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { HeadingNode } from '@lexical/rich-text';
 import {
-  $applyNodeReplacement,
   $createParagraphNode,
   $getRoot,
   $insertNodes,
@@ -11,58 +10,9 @@ import {
   $isElementNode,
   createEditor,
   CreateEditorArgs,
-  DOMConversionMap,
-  DOMExportOutput,
-  EditorConfig,
   EditorState,
-  LexicalEditor,
   LineBreakNode,
-  NodeKey,
-  SerializedTextNode,
-  TextNode,
 } from 'lexical';
-
-class CustomTextNode extends TextNode {
-  constructor(text: string, key?: NodeKey) {
-    super(text, key);
-  }
-
-  static getType() {
-    return 'CustomTextNode';
-  }
-
-  static clone(node: CustomTextNode): CustomTextNode {
-    return new CustomTextNode(node.__text, node.__key);
-  }
-
-  createDOM(config: EditorConfig, editor?: LexicalEditor): HTMLElement {
-    return super.createDOM(config, editor);
-  }
-
-  static importJSON(serializedNode: SerializedTextNode): CustomTextNode {
-    return $createCustomTextNode().updateFromJSON(serializedNode);
-  }
-
-  exportJSON(): SerializedTextNode {
-    return {
-      ...super.exportJSON(),
-      type: 'CustomTextNode',
-      version: 1,
-    };
-  }
-
-  static importDOM(): DOMConversionMap | null {
-    return super.importDOM();
-  }
-
-  exportDOM(editor: LexicalEditor): DOMExportOutput {
-    return super.exportDOM(editor);
-  }
-}
-
-export function $createCustomTextNode(text: string = ''): CustomTextNode {
-  return $applyNodeReplacement(new CustomTextNode(text));
-}
 
 export const LEXICAL_NODES = [
   HeadingNode,
@@ -71,14 +21,6 @@ export const LEXICAL_NODES = [
   AutoLinkNode,
   LinkNode,
   LineBreakNode,
-  CustomTextNode,
-  {
-    replace: TextNode,
-    withKlass: CustomTextNode,
-    with: (node: TextNode) => {
-      return $createCustomTextNode(node.__text);
-    },
-  },
 ];
 
 const editorConfig: CreateEditorArgs = {

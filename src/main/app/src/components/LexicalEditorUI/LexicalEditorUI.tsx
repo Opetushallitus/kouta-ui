@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useId } from 'react';
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -26,19 +26,6 @@ interface LexicalEditorUIProps {
   disabled?: boolean;
   hideHeaderSelect?: boolean;
 }
-
-const generateId = () =>
-  `LexicalEditor__${Math.round(Math.random() * 10000).toString()}`;
-
-const useId = () => {
-  const ref = useRef<string>();
-
-  if (!ref.current) {
-    ref.current = generateId();
-  }
-
-  return ref.current;
-};
 
 /* We need this, so that when editor is updated in the fly,
    eg. when changing language, the state updates accordingly. */
@@ -75,7 +62,9 @@ export const LexicalEditorUI = ({
   onBlur = () => {},
   disabled,
 }: LexicalEditorUIProps) => {
-  const editorId = useId();
+  const id = useId();
+  const editorId = `LexicalEditor__${id}`;
+
   const config = {
     namespace: editorId,
     theme: EditorTheme,
@@ -99,24 +88,22 @@ export const LexicalEditorUI = ({
 
   return (
     <Container className="Editor__" hasFocus={hasFocus} disabled={disabled}>
-      <LexicalComposer
-        onFocus={() => {
-          setHasFocus(true);
-          onFocus();
-        }}
-        onBlur={() => {
-          setHasFocus(false);
-          onBlur();
-        }}
-        onChange={onChange}
-        initialConfig={config}
-      >
+      <LexicalComposer initialConfig={config}>
         <ToolbarPlugin />
         <RichTextPlugin
           contentEditable={
             <EditorScroller>
               <Editor ref={onRef}>
-                <ContentEditable />
+                <ContentEditable
+                  onFocus={() => {
+                    setHasFocus(true);
+                    onFocus();
+                  }}
+                  onBlur={() => {
+                    setHasFocus(false);
+                    onBlur();
+                  }}
+                />
               </Editor>
             </EditorScroller>
           }
@@ -131,7 +118,7 @@ export const LexicalEditorUI = ({
           )}
         </>
         <HistoryPlugin />
-        <OnChangePlugin onChange={onChange} />
+        <OnChangePlugin onChange={onChange} ignoreSelectionChange />
         <UpdatePlugin value={value} />
       </LexicalComposer>
     </Container>

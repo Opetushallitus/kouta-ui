@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { spacing, getThemeProp } from '#/src/theme';
 
-export const Container = styled.div`
+export const Container = styled.div<{ hasFocus: boolean; disabled?: boolean }>`
   border: 1px solid ${getThemeProp('colors.inputBorder')};
   border-radius: ${getThemeProp('shape.borderRadius')};
   background-color: white;

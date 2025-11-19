@@ -6,27 +6,31 @@
   "scripts": {
     "prepare": "cd ../../../ && husky",
     "start": "vite dev",
-    "start:integration": "cross-env DISABLE_LOCAL_PROXY=true NODE_ENV=test npm run start",
-    "start:integration:debug": "cross-env VITE_CIMODE=1 NODE_ENV=test npm run start",
+    "start:integration": "cross-env DISABLE_LOCAL_PROXY=true NODE_ENV=test pnpm run start",
+    "start:integration:debug": "cross-env VITE_CIMODE=1 NODE_ENV=test pnpm run start",
     "build": "vite build",
     "build:test": "cross-env VITE_CIMODE=1 vite build",
-    "preview:watch": "npm run build:test -- --watch & npm run serve:test",
+    "preview:watch": "pnpm run build:test -- --watch & pnpm run serve:test",
     "serve:test": "node test-server.js",
     "test": "vitest",
     "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
     "tsc": "tsc",
-    "test:integration": "npm run build:test && START_SERVER_AND_TEST_INSECURE=1 start-server-and-test serve:test https://localhost:3000/kouta 'npx playwright test'",
-    "test:ci": "CI=true npm run test && npm run test:integration",
+    "test:integration": "pnpm run build:test && START_SERVER_AND_TEST_INSECURE=1 start-server-and-test 'pnpm run serve:test' https://localhost:3000/kouta 'pnpm exec playwright test'",
+    "test:ci": "CI=true pnpm run test && pnpm run test:integration",
     "analyze": "vite-bundle-visualizer",
     "xstate:typegen": "xstate typegen \"src/**/*.ts?(x)\"",
-    "postinstall": "npm run xstate:typegen"
+    "postinstall": "pnpm run xstate:typegen"
   },
   "dependencies": {
+    "@lexical/html": "^0.38.2",
     "@lexical/link": "^0.38.2",
     "@lexical/list": "^0.38.2",
     "@lexical/react": "^0.38.2",
+    "@lexical/rich-text": "^0.38.2",
+    "@lexical/selection": "^0.38.2",
     "@lexical/table": "^0.38.2",
+    "@lexical/utils": "^0.38.2",
     "@opetushallitus/virkailija-ui-components": "^0.4.7",
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.5",
@@ -137,5 +141,11 @@
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
-  }
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm"
+    }
+  },
+  "packageManager": "pnpm@10.22.0"
 }

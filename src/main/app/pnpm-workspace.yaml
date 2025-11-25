@@ -1,0 +1,6 @@
+ignoredBuiltDependencies:
+  - es5-ext
+  - esbuild
+
+onlyBuiltDependencies:
+  - https-pem

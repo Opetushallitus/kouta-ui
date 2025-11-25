@@ -41,7 +41,7 @@
         <dependency>
             <groupId>fi.vm.sade.java-utils</groupId>
             <artifactId>java-properties</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback.access</groupId>
@@ -110,27 +110,27 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.4</version>
+                <version>1.15.0</version>
                 <executions>
                     <execution>
-                        <id>Install node and npm locally to the project</id>
+                        <id>Install node and pnpm locally to the project</id>
                         <goals>
-                            <goal>install-node-and-npm</goal>
+                            <goal>install-node-and-pnpm</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>npm ci</id>
+                        <id>pnpm install</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>pnpm</goal>
                         </goals>
                         <configuration>
-                            <arguments>ci --no-audit --prefer-offline</arguments>
+                            <arguments>install</arguments>
                         </configuration>
                     </execution>
                     <execution>
                         <id>Build frontend</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>pnpm</goal>
                         </goals>
                         <configuration>
                             <environmentVariables>
@@ -142,7 +142,7 @@
                 </executions>
                 <configuration>
                     <nodeVersion>v20.19.2</nodeVersion>
-                    <failOnError>true</failOnError>
+                    <pnpmVersion>v10.22.0</pnpmVersion>
                     <workingDirectory>src/main/app</workingDirectory>
                 </configuration>
             </plugin>
@@ -182,6 +182,19 @@
     </build>
 
     <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/opetushallitus/packages</url>
+            <releases>
+                <enabled>false</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+        </repository>
         <repository>
             <id>oph-sade-artifactory-snapshots</id>
             <url>https://artifactory.opintopolku.fi/artifactory/oph-sade-snapshot-local</url>

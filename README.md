@@ -20,7 +20,7 @@ Kehityksen aikana käyttöliittymää kannattaa ajaa pelkästään nodella, joll
 
 `cd src/main/app`
 
-`npm run start`
+`pnpm run start`
 
 Hetken kuluttua käyttöliittymä on käytettävissä osoitteessa (selainta ei avata automaattisesti):
 
@@ -41,7 +41,7 @@ Kehittämisessä suositeltava editori on "Visual Studio Code", mutta sen käytt�
 
 Käytössä on ESlint ja Prettier koodin tyylin yhdenmukaistamiseksi ja staattiseen tarkistamiseen. Prettier ajetaan eslint-sääntönä, joten prettierin ajaminen JS/TS-tiedostoille erikseen ei ole tarpeen. Lisäksi eslint ajetaan Huskyn ja Lint-staged:n avulla Git precommit-hookissa, jolloin korjataan ne virheet/varoitukset, jotka pystytään. Jos ei kaikkea pystytty korjaamaan, commit epäonnistuu ja käyttäjän täytyy korjata jäljellä olevat ongelmat käsin.
 
-ESLintin voi ajaa käsin komennolla `npm run lint`, tai automaattisen fiksauksen kanssa `npm run lint:fix`.
+ESLintin voi ajaa käsin komennolla `pnpm run lint`, tai automaattisen fiksauksen kanssa `pnpm run lint:fix`.
 
 ## Ajaminen lokaalisti kouta-backendin kanssa
 
@@ -58,7 +58,7 @@ Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.development.local`-tiedostos
 
 Käynnistä kouta-ui lokaalisti komennolla:
 
-`npm run start`
+`pnpm run start`
 
 Käynnistä Opintopolun VPN, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan.
 
@@ -78,7 +78,7 @@ Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.local`-tiedostossa):
 
 Käynnistä kouta-ui lokaalisti komennolla: 
 
-`npm run start`
+`pnpm run start`
 
 Kirjaudu selaimella linkistä http://localhost:8099/kouta-backend/auth/login
 
@@ -111,32 +111,32 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 ## Yksikkötestit
 
-Yksikkötestit on toteutettu Jest-kirjastolla. Ne löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, ja ne voi ajaa komennolla `npm run test`. 
+Yksikkötestit on toteutettu Jest-kirjastolla. Ne löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, ja ne voi ajaa komennolla `pnpm run test`. 
 
 ## Integraatiotestit
 
 Koko sovellusta vasten ajettavat testit on toteutettu [Playwright](https://playwright.dev)-kirjastolla. 
 Ensimmäisellä kerralla, ja aina kun Playwright-riippuvuus päivittyy, täytyy sen käyttämät selaimet riippuvuuksineen asentaa käsin komennolla:
 
-    npx playwright install
+    pnpm exec playwright install
 
 Playwright-testit olettavat kälin löytyvän ajossa portista `3000` (ks. otsikko "Käyttöliittymän kehittäminen" yllä).
 Jos haluat ajaa **kaikki** testit kannattaa tehdä kuten Github Actionsissa, eli buildata ja servata sovellus:
 
-    npm run build:test
-    npm run serve:test
+    pnpm run build:test
+    pnpm run serve:test
 
 ja ajaa sitten kaikki testit toisessa terminaalissa komennolla
 
-    npx playwright test
+    pnpm exec playwrigh
 
-Playwright-testejä voi ajaa myös dev-serveriä vasten, mutta se on paljon hitaampaa kuin servattua tuotanto-buildia vasten. Aikakatkaisuja voi tulla, vaikka rajoja on kasvatettu. Playwright-testit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm run start:integration`tai `npm run start:integration:debug` komentoa dev-serverin käynnistämiseen. NPM-skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle, jolloin sovellusta voi testailla selaimella muutenkin. Tällöin täytyy kuitenkin olla tarkkana, että muistaa lisätä fixtuurit tarvittaville API-kyselyille.
+Playwright-testejä voi ajaa myös dev-serveriä vasten, mutta se on paljon hitaampaa kuin servattua tuotanto-buildia vasten. Aikakatkaisuja voi tulla, vaikka rajoja on kasvatettu. Playwright-testit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `pnpm run start:integration`tai `pnpm run start:integration:debug` komentoa dev-serverin käynnistämiseen. NPM-skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle, jolloin sovellusta voi testailla selaimella muutenkin. Tällöin täytyy kuitenkin olla tarkkana, että muistaa lisätä fixtuurit tarvittaville API-kyselyille.
 
 Kun sovellus on ajossa, kätevintä yksittäisten Playwright-testien ajaminen ja debuggaminen on käyttämällä "Visual Studio Code"-editorissa virallista Playwright-pluginia: https://playwright.dev/docs/getting-started-vscode
 
 Yksittäisiä testejä voi myös ajaa [Playwrightin UI-moodissa](https://playwright.dev/docs/test-ui-mode), jonka saa käynnistettyä komennolla:
 
-    npx playwright test --ui
+    pnpm exec playwright test --ui
 
 ## Lokalisaatio
 

@@ -3,71 +3,16 @@ import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { HeadingNode } from '@lexical/rich-text';
 import {
+  $createParagraphNode,
   $getRoot,
+  $insertNodes,
+  $isDecoratorNode,
+  $isElementNode,
   createEditor,
   CreateEditorArgs,
-  LexicalEditor,
-  TextNode,
-  DOMExportOutput,
-  $insertNodes,
   EditorState,
-  $createParagraphNode,
-  $isElementNode,
-  $isDecoratorNode,
-  SerializedTextNode,
+  LineBreakNode,
 } from 'lexical';
-
-function wrapElementWith(element: HTMLElement, tag: string): HTMLElement {
-  const el = document.createElement(tag);
-  el.appendChild(element);
-  return el;
-}
-
-class CustomTextNode extends TextNode {
-  static getType() {
-    return 'CustomTextNode';
-  }
-
-  static clone(node: CustomTextNode): CustomTextNode {
-    return new CustomTextNode(node.__text);
-  }
-
-  static importJSON(serializedNode: SerializedTextNode): CustomTextNode {
-    const serialized = TextNode.importJSON(serializedNode);
-    return new CustomTextNode(serialized.__text);
-  }
-
-  exportJSON(): SerializedTextNode {
-    const node = super.exportJSON();
-    node.type = 'CustomTextNode';
-    return node;
-  }
-
-  exportDOM(_editor: LexicalEditor): DOMExportOutput {
-    let element = document.createElement('span');
-    element.textContent = this.getTextContent();
-
-    // This is the only way to properly add support for most clients,
-    // even if it's semantically incorrect to have to resort to using
-    // <b>, <u>, <s>, <i> elements.
-    if (this.hasFormat('bold')) {
-      element = wrapElementWith(element, 'strong');
-    }
-    if (this.hasFormat('italic')) {
-      element = wrapElementWith(element, 'em');
-    }
-    if (this.hasFormat('strikethrough')) {
-      element = wrapElementWith(element, 's');
-    }
-    if (this.hasFormat('underline')) {
-      element = wrapElementWith(element, 'u');
-    }
-
-    return {
-      element,
-    };
-  }
-}
 
 export const LEXICAL_NODES = [
   HeadingNode,
@@ -75,13 +20,7 @@ export const LEXICAL_NODES = [
   ListItemNode,
   AutoLinkNode,
   LinkNode,
-  CustomTextNode,
-  {
-    replace: TextNode,
-    with: (node: TextNode) => {
-      return new CustomTextNode(node.__text);
-    },
-  },
+  LineBreakNode,
 ];
 
 const editorConfig: CreateEditorArgs = {
@@ -124,6 +63,20 @@ const postprocessHtml = (html: string): string => {
   // unwrap unnecessary spans
   doc
     .querySelectorAll('span')
+    .forEach(elem => elem.replaceWith(...elem.childNodes));
+
+  // unwrap unnecessary b-elements
+  doc
+    .querySelectorAll('b')
+    .forEach(elem => elem.replaceWith(...elem.childNodes));
+
+  // remove unnecessary style-attributes
+  doc.querySelectorAll('strong').forEach(elem => elem.removeAttribute('style'));
+  doc.querySelectorAll('em').forEach(elem => elem.removeAttribute('style'));
+
+  // unwrap unnecessary i-elements
+  doc
+    .querySelectorAll('i')
     .forEach(elem => elem.replaceWith(...elem.childNodes));
 
   // lexical produces extra line breaks inside empty paragraphs -

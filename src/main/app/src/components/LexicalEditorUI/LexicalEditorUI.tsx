@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useId } from 'react';
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
@@ -27,27 +27,24 @@ interface LexicalEditorUIProps {
   hideHeaderSelect?: boolean;
 }
 
-const generateId = () =>
-  `LexicalEditor__${Math.round(Math.random() * 10000).toString()}`;
-
-const useId = () => {
-  const ref = useRef<string>();
-
-  if (!ref.current) {
-    ref.current = generateId();
-  }
-
-  return ref.current;
-};
-
 /* We need this, so that when editor is updated in the fly,
    eg. when changing language, the state updates accordingly. */
-const UpdatePlugin = ({ value }) => {
+const UpdatePlugin = ({ value }: { value?: EditorState }) => {
   const [editor] = useLexicalComposerContext();
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    if (isEditorState(value) && !value.isEmpty()) {
-      editor.setEditorState(value);
+    // Skip the initial mount to avoid triggering onChange during setup
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    if (value) {
+      // If the update was done by lexical internally the editorstate object identity remains the same -> no need to reset the editor state
+      if (value !== editor.getEditorState()) {
+        editor.setEditorState(value);
+      }
     } else {
       editor.update(() => {
         $getRoot().clear();
@@ -65,7 +62,9 @@ export const LexicalEditorUI = ({
   onBlur = () => {},
   disabled,
 }: LexicalEditorUIProps) => {
-  const editorId = useId();
+  const id = useId();
+  const editorId = `LexicalEditor__${id}`;
+
   const config = {
     namespace: editorId,
     theme: EditorTheme,
@@ -89,24 +88,22 @@ export const LexicalEditorUI = ({
 
   return (
     <Container className="Editor__" hasFocus={hasFocus} disabled={disabled}>
-      <LexicalComposer
-        onFocus={() => {
-          setHasFocus(true);
-          onFocus();
-        }}
-        onBlur={() => {
-          setHasFocus(false);
-          onBlur();
-        }}
-        onChange={onChange}
-        initialConfig={config}
-      >
+      <LexicalComposer initialConfig={config}>
         <ToolbarPlugin />
         <RichTextPlugin
           contentEditable={
             <EditorScroller>
               <Editor ref={onRef}>
-                <ContentEditable />
+                <ContentEditable
+                  onFocus={() => {
+                    setHasFocus(true);
+                    onFocus();
+                  }}
+                  onBlur={() => {
+                    setHasFocus(false);
+                    onBlur();
+                  }}
+                />
               </Editor>
             </EditorScroller>
           }
@@ -121,7 +118,7 @@ export const LexicalEditorUI = ({
           )}
         </>
         <HistoryPlugin />
-        <OnChangePlugin onChange={onChange} />
+        <OnChangePlugin onChange={onChange} ignoreSelectionChange />
         <UpdatePlugin value={value} />
       </LexicalComposer>
     </Container>

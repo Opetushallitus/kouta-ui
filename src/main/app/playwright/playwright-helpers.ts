@@ -87,23 +87,16 @@ export const getFieldWrapperByName = (loc: Locator, name: string) =>
 
 export const parent = (loc: Locator) => loc.locator('xpath=..');
 
-export const typeToEditor = (loc: Locator, text: string) =>
-  loc.locator('.Editor__').locator('[contenteditable="true"]').fill(text);
+// Lexical editor requires explicit focus before filling to ensure
+// the editor state is properly initialized and onChange events fire correctly
+export const typeToEditor = async (loc: Locator, text: string) => {
+  const editor = loc.locator('.Editor__').locator('[contenteditable="true"]');
+  await editor.focus();
+  await editor.fill(text);
+};
 
 export const setFakeTime = async (page: Page, fakeDate: Date) => {
-  const fakeDateValue = fakeDate.valueOf();
-  await page.addInitScript(`{
-      Date = class extends Date {
-        constructor(...args) {
-          if (args.length === 0) {
-            super(${fakeDateValue});
-          } else {
-            super(...args);
-          }
-        }
-      }
-      Date.now = () => ${fakeDateValue};
-    }`);
+  await page.clock.setFixedTime(fakeDate);
 };
 
 export const tallenna = async (page: Page) => {

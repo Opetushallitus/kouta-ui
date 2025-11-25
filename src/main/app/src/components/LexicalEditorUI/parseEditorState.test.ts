@@ -5,7 +5,7 @@ const testHeading = (tag: string, text: string) => ({
   tag: tag,
   children: [
     {
-      type: 'CustomTextNode',
+      type: 'text',
       text: text,
     },
   ],
@@ -15,7 +15,7 @@ const testParagraphNode = (text: string) => ({
   type: 'paragraph',
   children: [
     {
-      type: 'CustomTextNode',
+      type: 'text',
       format: 0,
       text: text,
     },
@@ -54,7 +54,7 @@ const listItems = [
         mode: 'normal',
         style: '',
         text: 'Item1',
-        type: 'CustomTextNode',
+        type: 'text',
         version: 1,
       },
     ],
@@ -73,7 +73,7 @@ const listItems = [
         mode: 'normal',
         style: '',
         text: 'Item2',
-        type: 'CustomTextNode',
+        type: 'text',
         version: 1,
       },
     ],

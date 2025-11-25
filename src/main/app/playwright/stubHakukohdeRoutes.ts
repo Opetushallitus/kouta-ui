@@ -61,8 +61,10 @@ export const stubHakukohdeRoutes = async (
       takaraja = muokkaamisenTakaraja;
     }
 
-    const fakeNow = sub(new Date(takaraja!), { days: 1 });
-    await setFakeTime(page, fakeNow);
+    if (takaraja) {
+      const fakeNow = sub(new Date(takaraja!), { days: 1 });
+      await setFakeTime(page, fakeNow);
+    }
   }
 
   await page.route(

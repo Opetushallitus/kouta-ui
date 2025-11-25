@@ -1,5 +1,3 @@
-import React from 'react';
-
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
@@ -21,6 +19,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
+  AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -30,6 +29,7 @@ import { getTestIdProps } from '#/src/utils';
 import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
+import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 import { isHakeutumisTaiIlmoittautumisosioVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
@@ -129,11 +129,17 @@ const ToteutusForm = ({
   const hasHakukohdeAttached: boolean =
     toteutus?.oid && data?.totalCount ? Number(data?.totalCount) > 0 : false;
 
-  const hasOsaamistavoitteetField = ![
-    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-    KOULUTUSTYYPPI.OSAAMISALA,
-    KOULUTUSTYYPPI.TUTKINNON_OSA,
-  ].includes(koulutustyyppi);
+  const hasOsaamistavoitteetField =
+    ![
+      KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+      KOULUTUSTYYPPI.OSAAMISALA,
+      KOULUTUSTYYPPI.TUTKINNON_OSA,
+    ].includes(koulutustyyppi) ||
+    koulutus?.koulutuksetKoodiUri?.some(koodiUri =>
+      AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE.includes(
+        koodiUriWithoutVersion(koodiUri)
+      )
+    );
 
   return (
     <>

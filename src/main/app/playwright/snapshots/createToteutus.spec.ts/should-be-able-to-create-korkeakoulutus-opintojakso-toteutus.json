@@ -103,6 +103,9 @@
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
+    "osaamistavoitteet": {
+      "fi": "<p>Koulutuksen osaamistavoitteet</p>"
+    },
     "tyyppi": "kk-opintojakso",
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": 13,

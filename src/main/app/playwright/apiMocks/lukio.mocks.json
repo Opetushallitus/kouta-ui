@@ -1,6 +1,6 @@
 [
   {
-    "url": "https://localhost:3000/kouta-backend/koodisto/lukiolinjaerityinenkoulutustehtava/koodit",
+    "url": "https://localhost:3000/kouta-backend/koodisto/lukiolinjaterityinenkoulutustehtava/koodit",
     "response": {
       "body": [
         {

@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import { OrganisaatioModel } from '#/src/types/domainTypes';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -16,22 +14,32 @@ const ModalButton = styled(Button)`
   margin-left: 1em;
 `;
 
-const DeleteConfirmationDialog = ({ isOpen, name, onConfirm, onCancel }) => {
+const DeleteConfirmationDialog = ({
+  isOpen,
+  onConfirm,
+  onCancel,
+  headerText,
+  message,
+}: {
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+  headerText: string;
+  message: string;
+}) => {
   const { t } = useTranslation();
 
   return (
     <Modal open={isOpen}>
-      <ModalHeader>{t('ilmoitukset.luonnoksenPoisto.otsikko')}</ModalHeader>
-      <ModalBody>
-        {t('ilmoitukset.luonnoksenPoisto.viesti', { name })}
-      </ModalBody>
+      <ModalHeader>{headerText}</ModalHeader>
+      <ModalBody>{message}</ModalBody>
       <ModalFooter>
         <Box display="flex" justifyContent="center">
           <ModalButton color="danger" onClick={onConfirm}>
-            {t('ilmoitukset.luonnoksenPoisto.jatka')}
+            {t('ilmoitukset.jatka')}
           </ModalButton>
           <ModalButton onClick={onCancel}>
-            {t('ilmoitukset.luonnoksenPoisto.peruuta')}
+            {t('ilmoitukset.peruuta')}
           </ModalButton>
         </Box>
       </ModalFooter>

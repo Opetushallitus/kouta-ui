@@ -1,4 +1,4 @@
-import { Page, test, expect } from '@playwright/test';
+import { Page, test, expect, type Locator } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -12,6 +12,7 @@ import {
   assertURLEndsWith,
   assertNoUnsavedChangesDialog,
   confirmDelete,
+  getEditableEditors,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
 import { stubToteutusRoutes } from '#/playwright/stubToteutusRoutes';
@@ -37,6 +38,18 @@ const testToteutusFields = {
   tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
   organisaatioOid: organisaatioOid,
   koulutusOid: koulutusOid,
+};
+
+const fillKuvausJaOsaamistavoitteetSection = async (section: Locator) => {
+  const editors = getEditableEditors(section);
+
+  const editor1 = editors.nth(0);
+  await editor1.focus();
+  await editor1.fill('Toteutuksen kuvaus');
+
+  const editor2 = editors.nth(1);
+  await editor2.focus();
+  await editor2.fill('Osaamistavoitteet');
 };
 
 const prepareTest = async (page: Page, tyyppi: TestiKoulutustyyppi) => {
@@ -118,8 +131,13 @@ test.describe('Edit toteutus', () => {
       await prepareTest(page, tyyppi);
       await fillKieliversiotSection(page);
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Toteutuksen kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausJaOsaamistavoitteetSection(section);
+      });
+      await withinSection(page, 'lukiolinjat', async section => {
+        const yleislinja = section.getByLabel(
+          'toteutuslomake.lukionYleislinjaValinta'
+        );
+        expect(yleislinja).toBeChecked();
       });
       await expect(
         getSection(page, 'hakeutumisTaiIlmoittautumistapa')
@@ -182,8 +200,7 @@ test.describe('Edit toteutus', () => {
         await expect(laajuus).toHaveValue('12 osaamispistettä');
       });
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Toteutuksen kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausJaOsaamistavoitteetSection(section);
       });
       const hakukohteetSection = getSection(page, 'hakukohteet');
       await withinSection(

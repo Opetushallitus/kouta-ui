@@ -87,10 +87,14 @@ export const getFieldWrapperByName = (loc: Locator, name: string) =>
 
 export const parent = (loc: Locator) => loc.locator('xpath=..');
 
+export const getEditableEditors = (loc: Locator) => {
+  return loc.locator('.Editor__').locator('[contenteditable="true"]');
+};
+
 // Lexical editor requires explicit focus before filling to ensure
 // the editor state is properly initialized and onChange events fire correctly
 export const typeToEditor = async (loc: Locator, text: string) => {
-  const editor = loc.locator('.Editor__').locator('[contenteditable="true"]');
+  const editor = getEditableEditors(loc);
   await editor.focus();
   await editor.fill(text);
 };

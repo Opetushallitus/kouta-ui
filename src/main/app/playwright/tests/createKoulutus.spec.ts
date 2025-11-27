@@ -1,4 +1,4 @@
-import { Page, test, expect } from '@playwright/test';
+import { Page, test, expect, type Locator } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -15,6 +15,7 @@ import {
   getSelectByLabel,
   getSection,
   assertBaseTilaNotCopied,
+  getEditableEditors,
 } from '#/playwright/playwright-helpers';
 import {
   fixtureFromFile,
@@ -26,6 +27,18 @@ import { ENTITY } from '#/src/constants';
 const mutationTest = wrapMutationTest(ENTITY.KOULUTUS);
 
 const organisaatioOid = '1.1.1.1.1.1';
+
+const fillKuvausAndOsaamistavoitteet = async (section: Locator) => {
+  const editors = getEditableEditors(section);
+
+  const editor1 = editors.nth(0);
+  await editor1.focus();
+  await editor1.fill('Kuvaus');
+
+  const editor2 = editors.nth(1);
+  await editor2.focus();
+  await editor2.fill('Osaamistavoitteet');
+};
 
 const fillLisatiedotSection = (page: Page) =>
   withinSection(page, 'lisatiedot', async section => {
@@ -227,8 +240,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
 
       await fillLisatiedotSection(page);
@@ -264,9 +276,9 @@ test.describe('Create koulutus', () => {
         );
         await section.getByText('yleiset.isAvoinKorkeakoulutus').click();
       });
+
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillJarjestajaSection(page);
@@ -300,9 +312,9 @@ test.describe('Create koulutus', () => {
           'Muut opinnot'
         );
       });
+
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillJarjestajaSection(page);
@@ -348,8 +360,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
 
       await fillLisatiedotSection(page);
@@ -372,7 +383,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
 
       await fillLisatiedotSection(page);
@@ -395,8 +406,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -428,8 +438,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -465,8 +474,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -541,8 +549,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -577,8 +584,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
         await expect(
           section.getByLabel('koulutuslomake.linkkiEPerusteisiin')
         ).toBeHidden();
@@ -615,8 +621,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
         await expect(
           section.getByLabel('koulutuslomake.linkkiEPerusteisiin')
         ).toBeHidden();
@@ -647,8 +652,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -682,7 +686,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
@@ -711,7 +715,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
@@ -753,8 +757,7 @@ test.describe('Create koulutus', () => {
       });
 
       await withinSection(page, 'description', async section => {
-        await section.getByRole('textbox').nth(0).fill('Kuvaus');
-        await section.getByRole('textbox').nth(1).fill('Osaamistavoitteet');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);

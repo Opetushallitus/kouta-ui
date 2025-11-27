@@ -62,10 +62,11 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
   const isOsaamistavoitteetEditorEmpty = isEditorEmpty(currOsaamistavoitteet);
   const koulutuksenOsaamistavoitteet = koulutus?.metadata?.osaamistavoitteet;
 
-  const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);
+  const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
+    useState(false);
 
   const doReplaceOsaamistavoitteet = () => {
-    toggleConfirmationDialog(false);
+    setIsConfirmationDialogOpen(false);
     change(
       `${name}.osaamistavoitteet.${language}`,
       parseEditorState(koulutuksenOsaamistavoitteet?.[language] || '')
@@ -79,7 +80,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
         parseEditorState(koulutuksenOsaamistavoitteet?.[language] || '')
       );
     } else {
-      toggleConfirmationDialog(true);
+      setIsConfirmationDialogOpen(true);
     }
   }, [
     change,
@@ -104,7 +105,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
           isOpen={isConfirmationDialogOpen}
           onConfirm={doReplaceOsaamistavoitteet}
           onCancel={() => {
-            toggleConfirmationDialog(false);
+            setIsConfirmationDialogOpen(false);
           }}
           headerText={t('ilmoitukset.osaamistavoitteet.otsikko')}
           message={t('ilmoitukset.osaamistavoitteet.viesti')}

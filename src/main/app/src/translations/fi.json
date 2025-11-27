@@ -212,7 +212,8 @@
     "opinnonTyyppi": "Valitse opinnon tyyppi",
     "vaihdaTila": "Vaihda tila",
     "kategoria": "Kategoria",
-    "voimassaoloLoppuu": "Voimassaolo loppuu"
+    "voimassaoloLoppuu": "Voimassaolo loppuu",
+    "osaamistavoitteet": "Osaamistavoitteet"
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
@@ -251,6 +252,8 @@
     "indeksointiEpaonnistui": "Tallennus onnistui, mutta indeksoinnissa oli ongelmia. Etusivun listaukset eivät ole välttämättä vielä päivittyneet - odotathan hetkisen!"
   },
   "ilmoitukset": {
+    "jatka": "Jatka",
+    "peruuta": "Peruuta",
     "tallentamattomiaMuutoksia": {
       "otsikko": "Tallentamattomia muutoksia",
       "viesti": "Lomakkeella on tallentamattomia muutoksia. Haluatko varmasti jatkaa?",
@@ -292,6 +295,10 @@
       "haullaHakukohteita": "Hakua ei voi poistaa koska siihen on liitetty hakukohteita",
       "sorakuvauksellaKoulutuksia": "SORA-kuvausta ei voi poistaa koska siihen on liitetty koulutuksia",
       "valintaperusteellaHakukohteita": "Valintaperustetta ei voi poistaa koska siihen on liitetty hakukohteita"
+    },
+    "osaamistavoitteet": {
+      "otsikko": "Vahvista osaamistavoitteiden tuonti",
+      "viesti": "Tuonti korvaa nykyisen kuvauksen. Haluatko jatkaa?"
     }
   },
   "sivuTitlet": {
@@ -487,7 +494,7 @@
     "tutkinnonOsienKuvaus": "Tutkinnon osien kuvaus",
     "eiTutkinnonOsia": "Ei valittuja tutkinnon osia",
     "koulutuksenTiedot": "Koulutuksen tiedot",
-    "koulutuksenKuvaus": "Valitun koulutuksen kuvaus",
+    "koulutuksenKuvausJaOsaamistavoitteet": "Valitun koulutuksen kuvaus ja osaamistavoitteet",
     "koulutuksenLisatiedot": "Koulutuksen lisätiedot",
     "koulutuksenTarjoajat": "Koulutusta järjestävät organisaatiot",
     "valitseJarjestajat": "Valitse ne organisaatiot, jotka järjestävät koulutusta",
@@ -531,6 +538,7 @@
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",
     "toteutuksenKuvaus": "Toteutuksen kuvaus",
+    "toteutuksenKuvausJaOsaamistavoitteet": "Toteutuksen kuvaus ja osaamistavoitteet",
     "toteutuksenYleinenKuvaus": "Toteutuksen yleinen kuvaus",
     "ilmoittautumislinkki": "Ilmoittautumislinkki",
     "laajuus": "Laajuus",
@@ -667,7 +675,8 @@
     "siirryOsaamismerkinTietoihin": "Siirry osaamismerkin tietoihin",
     "osaamismerkki": "Osaamismerkki",
     "osaamismerkit": "Osaamismerkit",
-    "lisaaOsaamismerkki": "Lisää osaamismerkki"
+    "lisaaOsaamismerkki": "Lisää osaamismerkki",
+    "kaytaKoulutuksenOsaamistavoitteita": "Tuo osaamistavoitekuvaus koulutukselta"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

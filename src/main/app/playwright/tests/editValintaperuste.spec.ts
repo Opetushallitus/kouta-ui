@@ -35,7 +35,7 @@ const prepareTest = async (page: Page, tyyppi: KoulutustyyppiModel) => {
   );
 };
 
-test.describe('Create Valintaperuste', () => {
+test.describe('Edit Valintaperuste', () => {
   test('Should be able to edit valintaperuste', ({ page }, testInfo) =>
     mutationTest({ page, testInfo }, async () => {
       await prepareTest(page, 'amk');

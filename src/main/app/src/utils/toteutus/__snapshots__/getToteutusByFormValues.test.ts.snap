@@ -226,6 +226,10 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
         },
       },
     ],
+    "osaamistavoitteet": {
+      "fi": "<p>Fi osaamistavoitteet</p>",
+      "sv": "<p>Sv osaamistavoitteet</p>",
+    },
     "painotukset": [
       {
         "koodiUri": "painotus_1#1",

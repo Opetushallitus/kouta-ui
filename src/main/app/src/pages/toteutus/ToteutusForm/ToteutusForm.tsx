@@ -67,6 +67,7 @@ import {
 import {
   OsaamismerkkiToteutuksenKuvausSection,
   ToteutuksenKuvausSection,
+  ToteutuksenKuvausJaOsaamistavoitteetSection,
 } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
@@ -127,6 +128,12 @@ const ToteutusForm = ({
   // jos toteutusta ei vielä tallennettu, totalcount on koko organisaation hakukohdemäärä ilman toteutusrajausta
   const hasHakukohdeAttached: boolean =
     toteutus?.oid && data?.totalCount ? Number(data?.totalCount) > 0 : false;
+
+  const hasOsaamistavoitteetField = ![
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+  ].includes(koulutustyyppi);
 
   return (
     <>
@@ -241,14 +248,22 @@ const ToteutusForm = ({
         />
 
         <FormCollapse
-          section="kuvaus"
-          header={t('toteutuslomake.toteutuksenKuvaus')}
+          section="description"
+          header={
+            hasOsaamistavoitteetField
+              ? t('toteutuslomake.toteutuksenKuvausJaOsaamistavoitteet')
+              : t('toteutuslomake.toteutuksenKuvaus')
+          }
           languages={languages}
           koulutus={koulutus}
           Component={match(koulutustyyppi)
             .with(
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               () => OsaamismerkkiToteutuksenKuvausSection
+            )
+            .when(
+              () => hasOsaamistavoitteetField,
+              () => ToteutuksenKuvausJaOsaamistavoitteetSection
             )
             .otherwise(() => ToteutuksenKuvausSection)}
         />

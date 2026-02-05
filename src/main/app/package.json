@@ -45,7 +45,7 @@
     "i18next-http-backend": "^3.0.2",
     "immer": "^10.1.1",
     "lexical": "^0.38.2",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "memoizee": "^0.4.17",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
     "polished": "^4.3.1",

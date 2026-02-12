@@ -60,7 +60,6 @@ export const KuvausFieldsSection = ({
           name={`${name}.osaamistavoitteet.${language}`}
           component={FormFieldEditor}
           label={t('yleiset.osaamistavoitteet')}
-          required={true}
         />
       </Box>
     </>

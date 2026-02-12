@@ -111,7 +111,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
           message={t('ilmoitukset.osaamistavoitteet.viesti')}
         />
         <FormLabel htmlFor="osaamistavoitteet">
-          {`${t('yleiset.osaamistavoitteet')} *`}
+          {`${t('yleiset.osaamistavoitteet')}`}
         </FormLabel>
         <FormButton
           variant="outlined"
@@ -126,7 +126,6 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
         <Field
           name={`${name}.osaamistavoitteet.${language}`}
           component={FormFieldEditor}
-          required={true}
         />
       </Box>
     </>

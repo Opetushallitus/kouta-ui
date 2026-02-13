@@ -61,6 +61,9 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
   );
   const isOsaamistavoitteetEditorEmpty = isEditorEmpty(currOsaamistavoitteet);
   const koulutuksenOsaamistavoitteet = koulutus?.metadata?.osaamistavoitteet;
+  const koulutuksenOsaamistavoitteetInEditorFormat = parseEditorState(
+    koulutuksenOsaamistavoitteet?.[language] || ''
+  );
 
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
@@ -69,7 +72,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
     setIsConfirmationDialogOpen(false);
     change(
       `${name}.osaamistavoitteet.${language}`,
-      parseEditorState(koulutuksenOsaamistavoitteet?.[language] || '')
+      koulutuksenOsaamistavoitteetInEditorFormat
     );
   };
 
@@ -77,7 +80,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
     if (isOsaamistavoitteetEditorEmpty) {
       change(
         `${name}.osaamistavoitteet.${language}`,
-        parseEditorState(koulutuksenOsaamistavoitteet?.[language] || '')
+        koulutuksenOsaamistavoitteetInEditorFormat
       );
     } else {
       setIsConfirmationDialogOpen(true);
@@ -85,9 +88,9 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
   }, [
     change,
     isOsaamistavoitteetEditorEmpty,
-    koulutuksenOsaamistavoitteet,
     language,
     name,
+    koulutuksenOsaamistavoitteetInEditorFormat,
   ]);
 
   return (
@@ -119,7 +122,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
           type="button"
           style={{ marginBottom: '1rem' }}
           onClick={copyOsaamistavoitteetFromKoulutus}
-          disabled={isEmpty(koulutuksenOsaamistavoitteet)}
+          disabled={isEditorEmpty(koulutuksenOsaamistavoitteetInEditorFormat)}
         >
           {t('toteutuslomake.kaytaKoulutuksenOsaamistavoitteita')}
         </FormButton>

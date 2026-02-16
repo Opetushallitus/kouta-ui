@@ -111,7 +111,17 @@ export const serializeEditorState = (value: EditorState): string => {
 
   editor.update(
     () => {
-      html = $generateHtmlFromNodes(editor, null);
+      const root = $getRoot();
+      const children = root.getChildren();
+
+      const hasOnlyOneEmptyChild =
+        children.length === 1 && children[0].getTextContent().trim() === '';
+
+      if (hasOnlyOneEmptyChild) {
+        html = '';
+      } else {
+        html = $generateHtmlFromNodes(editor, null);
+      }
     },
     // Päivitetään synkronisesti!
     { discrete: true }

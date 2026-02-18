@@ -14,7 +14,16 @@ export const pickAndSerializeTranslations = (
   value: any,
   kielivalinta: Array<LanguageCode>
 ) => {
-  return _.mapValues(_.pick(value || {}, kielivalinta), serializeEditorState);
+  const translations = _.mapValues(
+    _.pick(value || {}, kielivalinta),
+    serializeEditorState
+  );
+
+  if (_.every(translations, _.isEmpty)) {
+    return {};
+  }
+
+  return translations;
 };
 
 const pickTranslationsCurried = _.curry(pickTranslations);

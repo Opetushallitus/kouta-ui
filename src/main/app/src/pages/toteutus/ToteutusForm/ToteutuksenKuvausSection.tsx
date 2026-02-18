@@ -122,7 +122,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
           type="button"
           style={{ marginBottom: '1rem' }}
           onClick={copyOsaamistavoitteetFromKoulutus}
-          disabled={isEditorEmpty(koulutuksenOsaamistavoitteetInEditorFormat)}
+          disabled={isEmpty(koulutuksenOsaamistavoitteet?.[language])}
         >
           {t('toteutuslomake.kaytaKoulutuksenOsaamistavoitteita')}
         </FormButton>

@@ -34,7 +34,10 @@ import { useIsAmmTutkintoWithoutEperuste } from './AmmatillinenTiedotSection/Amm
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
-import { KuvausFieldsSection } from './KuvausFieldsSection';
+import {
+  KuvausFieldsSection,
+  OsaamistavoitteetField,
+} from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
@@ -324,6 +327,14 @@ export const KoulutusForm = ({
                   disabled={onlyTarjoajaRights}
                   koulutustyyppi={koulutustyyppi}
                   {...getTestIdProps('tutkinnonOsienKuvausSection')}
+                />
+                <FormCollapse
+                  section="description"
+                  header={t('koulutuslomake.koulutuksenOsaamistavoitteet')}
+                  Component={OsaamistavoitteetField}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
                 />
               </>
             )}

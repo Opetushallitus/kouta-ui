@@ -203,6 +203,9 @@ test.describe('Create koulutus', () => {
           new RegExp('#/fi/esitys/7823345/reformi/tutkinnonosat/7843530$')
         );
       });
+      await withinSection(page, 'description', async section => {
+        await typeToEditor(section, 'Koulutuksen osaamistavoitteet');
+      });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
       await fillJarjestajaSection(page);

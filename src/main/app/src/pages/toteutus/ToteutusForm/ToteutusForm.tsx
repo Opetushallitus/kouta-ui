@@ -130,11 +130,9 @@ const ToteutusForm = ({
     toteutus?.oid && data?.totalCount ? Number(data?.totalCount) > 0 : false;
 
   const hasOsaamistavoitteetField =
-    ![
-      KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-      KOULUTUSTYYPPI.OSAAMISALA,
-      KOULUTUSTYYPPI.TUTKINNON_OSA,
-    ].includes(koulutustyyppi) ||
+    ![KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS, KOULUTUSTYYPPI.OSAAMISALA].includes(
+      koulutustyyppi
+    ) ||
     koulutus?.koulutuksetKoodiUri?.some(koodiUri =>
       AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE.includes(
         koodiUriWithoutVersion(koodiUri)

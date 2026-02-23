@@ -6,6 +6,21 @@ import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 
+export const OsaamistavoitteetField = ({ disabled, language, name }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Box mb={2} {...getTestIdProps('osaamistavoitteet')}>
+      <Field
+        disabled={disabled}
+        name={`${name}.osaamistavoitteet.${language}`}
+        component={FormFieldEditor}
+        label={t('yleiset.osaamistavoitteet')}
+      />
+    </Box>
+  );
+};
+
 export const KuvausFieldsSection = ({
   disabled,
   language,
@@ -54,14 +69,11 @@ export const KuvausFieldsSection = ({
           />
         </Box>
       )}
-      <Box mb={2} {...getTestIdProps('osaamistavoitteet')}>
-        <Field
-          disabled={disabled}
-          name={`${name}.osaamistavoitteet.${language}`}
-          component={FormFieldEditor}
-          label={t('yleiset.osaamistavoitteet')}
-        />
-      </Box>
+      <OsaamistavoitteetField
+        disabled={disabled}
+        language={language}
+        name={name}
+      />
     </>
   );
 };

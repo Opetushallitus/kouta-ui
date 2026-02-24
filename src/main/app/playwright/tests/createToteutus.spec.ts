@@ -262,7 +262,7 @@ export const fillKuvausAndOsaamistavoitteetSection = (
     await fillKuvausAndOsaamistavoitteet(section);
 
     if (kaytaKoulutuksenOsaamistavoitteita) {
-      section
+      await section
         .getByRole('button', {
           name: 'toteutuslomake.kaytaKoulutuksenOsaamistavoitteita',
         })
@@ -581,6 +581,54 @@ test.describe('Create toteutus', () => {
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
       await fillKuvausAndOsaamistavoitteetSection(page, true);
+      await fillJarjestamistiedotSection(page);
+      await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+      await fillJarjestajaSection(page);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
+  test('should be able to copy osaamistavoitteet from koulutus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'kk-opintojakso';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await withinSection(page, 'description', async section => {
+        await fillKuvausAndOsaamistavoitteet(section);
+        const editors = getEditableEditors(section);
+        const osaamistavoitteetEditor = editors.nth(1);
+        let osaamistavoitteetText = await osaamistavoitteetEditor.textContent();
+        expect(osaamistavoitteetText).toEqual('Osaamistavoitteet');
+
+        // Vahvistusmodaali aukeaa "Käytä koulutuksen osaamistavoitteita" -nappia painettaessa
+        // koska osaamistavoitteet-kentässä on tekstiä
+        await section
+          .getByRole('button', {
+            name: 'toteutuslomake.kaytaKoulutuksenOsaamistavoitteita',
+          })
+          .click();
+        await page.getByRole('button', { name: 'ilmoitukset.peruuta' }).click();
+
+        await osaamistavoitteetEditor.focus();
+        await osaamistavoitteetEditor.fill('');
+        osaamistavoitteetText = await osaamistavoitteetEditor.textContent();
+        expect(osaamistavoitteetText).toEqual('');
+
+        // Vahvistusmodaali ei aukea "Käytä koulutuksen osaamistavoitteita" -nappia painettaessa
+        // sen jälkeen, kun osaamistavoitteet-kentän teksti on poistettu (tyhjä string)
+        await section
+          .getByRole('button', {
+            name: 'toteutuslomake.kaytaKoulutuksenOsaamistavoitteita',
+          })
+          .click();
+      });
+
       await fillJarjestamistiedotSection(page);
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);

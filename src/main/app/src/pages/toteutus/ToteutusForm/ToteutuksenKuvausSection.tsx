@@ -80,7 +80,8 @@ export const ToteutuksenOsaamistavoitteetWithCopyButton = ({
   const currOsaamistavoitteet = useFieldValue(
     `${name}.osaamistavoitteet.${language}`
   );
-  const isOsaamistavoitteetEditorEmpty = isEditorEmpty(currOsaamistavoitteet);
+  const isOsaamistavoitteetEditorEmpty =
+    isEmpty(currOsaamistavoitteet) || isEditorEmpty(currOsaamistavoitteet);
   const koulutuksenOsaamistavoitteet = koulutus?.metadata?.osaamistavoitteet;
   const koulutuksenOsaamistavoitteetInEditorFormat = parseEditorState(
     koulutuksenOsaamistavoitteet?.[language] || ''

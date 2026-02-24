@@ -156,6 +156,7 @@ export function hasWhitespace(node: ElementNode): boolean {
   }
   return true;
 }
+
 export const isEditorEmpty = (value: EditorState) => {
   return value?.read(() => {
     const root = $getRoot();

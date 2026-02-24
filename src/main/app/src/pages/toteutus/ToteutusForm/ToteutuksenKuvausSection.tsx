@@ -13,6 +13,7 @@ import {
   parseEditorState,
 } from '#/src/components/LexicalEditorUI/utils';
 import { Box, FormLabel } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useOsaamismerkki } from '#/src/hooks/useEPeruste/useOsaamismerkki';
 import { KoulutusModel } from '#/src/types/domainTypes';
@@ -28,7 +29,7 @@ export const ToteutuksenKuvausSection = ({
   language,
   name,
 }: {
-  language: string;
+  language: LanguageCode;
   name: string;
 }) => {
   const { t } = useTranslation();
@@ -45,12 +46,32 @@ export const ToteutuksenKuvausSection = ({
   );
 };
 
-export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
+export const ToteutuksenOsaamistavoitteet = ({
+  language,
+  name,
+}: {
+  language: LanguageCode;
+  name: string;
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Box mb={2}>
+      <Field
+        name={`${name}.osaamistavoitteet.${language}`}
+        component={FormFieldEditor}
+        label={t('toteutuslomake.toteutuksenOsaamistavoitteet')}
+      />
+    </Box>
+  );
+};
+
+export const ToteutuksenOsaamistavoitteetWithCopyButton = ({
   language,
   name,
   koulutus,
 }: {
-  language: 'fi' | 'sv' | 'en';
+  language: LanguageCode;
   name: string;
   koulutus: KoulutusModel;
 }) => {
@@ -94,6 +115,49 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
   ]);
 
   return (
+    <Box mb={2}>
+      <DeleteConfirmationDialog
+        isOpen={isConfirmationDialogOpen}
+        onConfirm={doReplaceOsaamistavoitteet}
+        onCancel={() => {
+          setIsConfirmationDialogOpen(false);
+        }}
+        headerText={t('ilmoitukset.osaamistavoitteet.otsikko')}
+        message={t('ilmoitukset.osaamistavoitteet.viesti')}
+      />
+      <FormLabel htmlFor="osaamistavoitteet">
+        {`${t('toteutuslomake.toteutuksenOsaamistavoitteet')}`}
+      </FormLabel>
+      <FormButton
+        variant="outlined"
+        color="primary"
+        type="button"
+        style={{ marginBottom: '1rem' }}
+        onClick={copyOsaamistavoitteetFromKoulutus}
+        disabled={isEmpty(koulutuksenOsaamistavoitteet?.[language])}
+      >
+        {t('toteutuslomake.kaytaKoulutuksenOsaamistavoitteita')}
+      </FormButton>
+      <Field
+        name={`${name}.osaamistavoitteet.${language}`}
+        component={FormFieldEditor}
+      />
+    </Box>
+  );
+};
+
+export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
+  language,
+  name,
+  koulutus,
+}: {
+  language: LanguageCode;
+  name: string;
+  koulutus: KoulutusModel;
+}) => {
+  const { t } = useTranslation();
+
+  return (
     <>
       <Box mb={2}>
         <Field
@@ -103,34 +167,15 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
           required
         />
       </Box>
-      <Box mb={2}>
-        <DeleteConfirmationDialog
-          isOpen={isConfirmationDialogOpen}
-          onConfirm={doReplaceOsaamistavoitteet}
-          onCancel={() => {
-            setIsConfirmationDialogOpen(false);
-          }}
-          headerText={t('ilmoitukset.osaamistavoitteet.otsikko')}
-          message={t('ilmoitukset.osaamistavoitteet.viesti')}
+      {koulutus?.koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ? (
+        <ToteutuksenOsaamistavoitteet name={name} language={language} />
+      ) : (
+        <ToteutuksenOsaamistavoitteetWithCopyButton
+          name={name}
+          language={language}
+          koulutus={koulutus}
         />
-        <FormLabel htmlFor="osaamistavoitteet">
-          {`${t('yleiset.osaamistavoitteet')}`}
-        </FormLabel>
-        <FormButton
-          variant="outlined"
-          color="primary"
-          type="button"
-          style={{ marginBottom: '1rem' }}
-          onClick={copyOsaamistavoitteetFromKoulutus}
-          disabled={isEmpty(koulutuksenOsaamistavoitteet?.[language])}
-        >
-          {t('toteutuslomake.kaytaKoulutuksenOsaamistavoitteita')}
-        </FormButton>
-        <Field
-          name={`${name}.osaamistavoitteet.${language}`}
-          component={FormFieldEditor}
-        />
-      </Box>
+      )}
     </>
   );
 };

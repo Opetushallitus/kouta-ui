@@ -506,7 +506,7 @@ test.describe('Create toteutus', () => {
       await fillOrgSection(page, organisaatioOid);
       await fillKieliversiotSection(page);
       await fillTiedotSection(page, tyyppi);
-      await fillKuvausSection(page);
+      await fillKuvausAndOsaamistavoitteetSection(page);
       await withinSection(page, 'osaamisalat', async section => {
         await section
           .locator('label')

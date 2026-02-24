@@ -130,9 +130,10 @@ const ToteutusForm = ({
     toteutus?.oid && data?.totalCount ? Number(data?.totalCount) > 0 : false;
 
   const hasOsaamistavoitteetField =
-    ![KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS, KOULUTUSTYYPPI.OSAAMISALA].includes(
-      koulutustyyppi
-    ) ||
+    ![
+      KOULUTUSTYYPPI.OSAAMISALA,
+      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+    ].includes(koulutustyyppi) ||
     koulutus?.koulutuksetKoodiUri?.some(koodiUri =>
       AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE.includes(
         koodiUriWithoutVersion(koodiUri)
@@ -254,7 +255,8 @@ const ToteutusForm = ({
         <FormCollapse
           section="description"
           header={
-            hasOsaamistavoitteetField
+            hasOsaamistavoitteetField ||
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI
               ? t('toteutuslomake.toteutuksenKuvausJaOsaamistavoitteet')
               : t('toteutuslomake.toteutuksenKuvaus')
           }

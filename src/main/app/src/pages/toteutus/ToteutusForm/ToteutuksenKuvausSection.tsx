@@ -46,7 +46,7 @@ export const ToteutuksenKuvausSection = ({
   );
 };
 
-export const ToteutuksenOsaamistavoitteet = ({
+const ToteutuksenOsaamistavoitteet = ({
   language,
   name,
 }: {
@@ -56,7 +56,7 @@ export const ToteutuksenOsaamistavoitteet = ({
   const { t } = useTranslation();
 
   return (
-    <Box mb={2}>
+    <Box>
       <Field
         name={`${name}.osaamistavoitteet.${language}`}
         component={FormFieldEditor}
@@ -66,7 +66,7 @@ export const ToteutuksenOsaamistavoitteet = ({
   );
 };
 
-export const ToteutuksenOsaamistavoitteetWithCopyButton = ({
+const ToteutuksenOsaamistavoitteetWithCopyButton = ({
   language,
   name,
   koulutus,
@@ -116,7 +116,7 @@ export const ToteutuksenOsaamistavoitteetWithCopyButton = ({
   ]);
 
   return (
-    <Box mb={2}>
+    <Box>
       <DeleteConfirmationDialog
         isOpen={isConfirmationDialogOpen}
         onConfirm={doReplaceOsaamistavoitteet}
@@ -160,7 +160,7 @@ export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
 
   return (
     <>
-      <Box mb={2}>
+      <Box mb={3}>
         <Field
           name={`${name}.kuvaus.${language}`}
           component={FormFieldEditor}

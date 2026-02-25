@@ -256,7 +256,7 @@ const ToteutusForm = ({
           section="description"
           header={
             hasOsaamistavoitteetField ||
-            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI === koulutustyyppi
               ? t('toteutuslomake.toteutuksenKuvausJaOsaamistavoitteet')
               : t('toteutuslomake.toteutuksenKuvaus')
           }

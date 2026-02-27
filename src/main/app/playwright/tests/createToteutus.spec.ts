@@ -603,7 +603,8 @@ test.describe('Create toteutus', () => {
         await fillKuvausAndOsaamistavoitteet(section);
         const editors = getEditableEditors(section);
         const osaamistavoitteetEditor = editors.nth(1);
-        let osaamistavoitteetText = await osaamistavoitteetEditor.textContent();
+        const osaamistavoitteetText =
+          await osaamistavoitteetEditor.textContent();
         expect(osaamistavoitteetText).toEqual('Osaamistavoitteet');
 
         // Vahvistusmodaali aukeaa "Käytä koulutuksen osaamistavoitteita" -nappia painettaessa
@@ -616,9 +617,10 @@ test.describe('Create toteutus', () => {
         await page.getByRole('button', { name: 'ilmoitukset.peruuta' }).click();
 
         await osaamistavoitteetEditor.focus();
-        await osaamistavoitteetEditor.fill('');
-        osaamistavoitteetText = await osaamistavoitteetEditor.textContent();
-        expect(osaamistavoitteetText).toEqual('');
+        await osaamistavoitteetEditor.clear();
+        const osaamistavoitteetEmpty =
+          await osaamistavoitteetEditor.textContent();
+        expect(osaamistavoitteetEmpty).toEqual('');
 
         // Vahvistusmodaali ei aukea "Käytä koulutuksen osaamistavoitteita" -nappia painettaessa
         // sen jälkeen, kun osaamistavoitteet-kentän teksti on poistettu (tyhjä string)

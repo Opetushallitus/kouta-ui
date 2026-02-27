@@ -23,7 +23,7 @@ const AmmattitaitoVaatimukset = ({ tutkinnonOsa, language }) => {
   const { ammattitaitovaatimukset, ammattitaitovaatimukset2019 } = tutkinnonOsa;
 
   if (ammattitaitovaatimukset) {
-    return <StyledSectionHTML html={ammattitaitovaatimukset[language]} />;
+    return <StyledSectionHTML html={ammattitaitovaatimukset?.[language]} />;
   } else if (ammattitaitovaatimukset2019) {
     return (
       <>
@@ -31,11 +31,11 @@ const AmmattitaitoVaatimukset = ({ tutkinnonOsa, language }) => {
           ({ kuvaus, vaatimukset }) => {
             return (
               <div key={kuvaus?._id}>
-                <BodyHeading>{sanitizeHTML(kuvaus[language])}</BodyHeading>
+                <BodyHeading>{sanitizeHTML(kuvaus?.[language])}</BodyHeading>
                 <Typography variant="body">
                   <ul>
                     {vaatimukset?.map(({ vaatimus, koodi }) => (
-                      <li key={koodi?.uri}>{vaatimus[language]}</li>
+                      <li key={koodi?.uri}>{vaatimus?.[language]}</li>
                     ))}
                   </ul>
                 </Typography>

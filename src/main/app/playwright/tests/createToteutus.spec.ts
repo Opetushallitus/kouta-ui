@@ -530,6 +530,41 @@ test.describe('Create toteutus', () => {
       await tallenna(page);
     }));
 
+  test('should be able to create lukuvuosimaksullinen ammatillinen toteutus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'amm';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await fillKuvausSection(page);
+      await withinSection(page, 'osaamisalat', async section => {
+        await section
+          .locator('label')
+          .filter({ hasText: 'Kaivostyön osaamisala' })
+          .click();
+        await section.getByTestId('osaamisalaToggle.osaamisala_1800').click();
+        await section
+          .locator('label')
+          .filter({ hasText: 'yleiset.linkki' })
+          .fill('http://linkki.com');
+        await section
+          .locator('label')
+          .filter({ hasText: 'yleiset.linkinOtsikko' })
+          .fill('osaamisala_0 otsikko');
+      });
+      await fillJarjestamistiedotSection(page, {
+        maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+      });
+      await fillNayttamistiedotSection(page, { ammattinimikkeet: true });
+      await fillJarjestajaSection(page);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
   test('should be able to create korkeakoulu toteutus', ({ page }, testInfo) =>
     mutationTest({ page, testInfo }, async () => {
       const tyyppi = 'yo';
@@ -670,6 +705,26 @@ test.describe('Create toteutus', () => {
       await fillKuvausAndOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page, { lukiotiedot: true });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+      await fillJarjestajaSection(page);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
+  test('should be able to create lukuvuosimaksullinen lukio toteutus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'lk';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await fillKuvausSection(page);
+      await fillJarjestamistiedotSection(page, {
+        lukiotiedot: true,
+        maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+      });
       await fillJarjestajaSection(page);
       await fillYhteystiedotSection(page);
       await fillTilaSection(page);

@@ -116,7 +116,12 @@ export const ApurahaMaaraFields = createFormFieldComponent(
   }
 );
 
-export const ApurahaFields = ({ language, name, toteutuksenMetadata }) => {
+export const ApurahaFields = ({
+  language,
+  name,
+  toteutuksenMetadata,
+  koulutustyyppi,
+}) => {
   const { t } = useTranslation();
   const onkoApurahaSelected = useFieldValue<boolean>(`${name}.onkoApuraha`);
 
@@ -128,7 +133,7 @@ export const ApurahaFields = ({ language, name, toteutuksenMetadata }) => {
   // onkoApurahaInDb-check tehdään, koska tietokannassa on jo maksullisia toteutuksia, joille
   // on virheellisesti asetettu apuraha
   const isVisible =
-    isApurahaVisible(maksullisuustyyppi) ||
+    isApurahaVisible(maksullisuustyyppi, koulutustyyppi) ||
     (onkoApurahaInDb && maksullisuustyyppi !== MaksullisuusTyyppi.MAKSUTON);
 
   if (!isVisible) {

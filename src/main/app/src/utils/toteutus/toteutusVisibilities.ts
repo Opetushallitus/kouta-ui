@@ -3,9 +3,16 @@ import {
   Koulutustyyppi,
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
-export const isApurahaVisible = (maksullisuustyyppi: string) => {
-  return maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU;
+export const isApurahaVisible = (
+  maksullisuustyyppi: string,
+  koulutustyyppi: string
+) => {
+  return (
+    maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU &&
+    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)
+  );
 };
 
 export const isHakeutumisTaiIlmoittautumisosioVisible = (

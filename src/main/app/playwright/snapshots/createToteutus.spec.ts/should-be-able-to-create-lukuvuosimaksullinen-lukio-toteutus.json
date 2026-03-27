@@ -41,6 +41,7 @@
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
+      "onkoApuraha": false,
       "apuraha": null,
       "suunniteltuKestoVuodet": 2,
       "suunniteltuKestoKuukaudet": 6,

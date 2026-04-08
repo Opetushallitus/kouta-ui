@@ -34,7 +34,10 @@ import { useIsAmmTutkintoWithoutEperuste } from './AmmatillinenTiedotSection/Amm
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
 import { KoulutusSaveErrorModal } from './KoulutusSaveErrorModal';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
-import { KuvausFieldsSection } from './KuvausFieldsSection';
+import {
+  KuvausFieldsSection,
+  OsaamistavoitteetField,
+} from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
@@ -232,7 +235,9 @@ export const KoulutusForm = ({
                 Monien koulutustyyppien metadatassa on kuvaus-kenttä, mutta siihen ei voi syöttää mitään. */}
                 <FormCollapse
                   section="description"
-                  header={t('koulutuslomake.koulutuksenKuvaus')}
+                  header={t(
+                    'koulutuslomake.koulutuksenKuvausJaOsaamistavoitteet'
+                  )}
                   Component={match(koulutustyyppi)
                     .with(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS, () =>
                       isAmmTutkintoWithoutEperuste
@@ -322,6 +327,14 @@ export const KoulutusForm = ({
                   disabled={onlyTarjoajaRights}
                   koulutustyyppi={koulutustyyppi}
                   {...getTestIdProps('tutkinnonOsienKuvausSection')}
+                />
+                <FormCollapse
+                  section="description"
+                  header={t('koulutuslomake.koulutuksenOsaamistavoitteet')}
+                  Component={OsaamistavoitteetField}
+                  languages={languageTabs}
+                  disabled={onlyTarjoajaRights}
+                  koulutustyyppi={koulutustyyppi}
                 />
               </>
             )}

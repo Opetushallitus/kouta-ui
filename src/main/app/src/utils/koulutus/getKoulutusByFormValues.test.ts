@@ -28,6 +28,7 @@ const KOULUTUS_FORM_VALUES_BASE: KoulutusFormValues = {
   },
   description: {
     kuvaus: {},
+    osaamistavoitteet: {},
   },
   tutkinnonosat: {
     nimi: {},
@@ -92,6 +93,10 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
       kuvaus: {
         fi: parseEditorState('Fi kuvaus'),
         sv: parseEditorState('Sv kuvaus'),
+      },
+      osaamistavoitteet: {
+        fi: parseEditorState('Fi osaamistavoitteet'),
+        sv: parseEditorState('Sv osaamistavoitteet'),
       },
     },
     tutkinnonosat: {
@@ -198,6 +203,14 @@ test('for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved', () =>
       ],
     },
     koulutustyyppi: KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+    kieliversiot: ['fi', 'sv'],
+    description: {
+      kuvaus: {},
+      osaamistavoitteet: {
+        fi: parseEditorState('Fi osaamistavoitteet'),
+        sv: parseEditorState('Sv osaamistavoitteet'),
+      },
+    },
   });
 
   expect(koulutus).toMatchSnapshot();

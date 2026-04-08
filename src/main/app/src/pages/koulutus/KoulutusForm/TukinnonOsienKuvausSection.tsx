@@ -1,6 +1,4 @@
-import React from 'react';
-
-import _fp from 'lodash/fp';
+import { toNumber } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -25,24 +23,26 @@ const AmmattitaitoVaatimukset = ({ tutkinnonOsa, language }) => {
   const { ammattitaitovaatimukset, ammattitaitovaatimukset2019 } = tutkinnonOsa;
 
   if (ammattitaitovaatimukset) {
-    return <StyledSectionHTML html={ammattitaitovaatimukset[language]} />;
+    return <StyledSectionHTML html={ammattitaitovaatimukset?.[language]} />;
   } else if (ammattitaitovaatimukset2019) {
     return (
       <>
-        {_fp.map(({ kuvaus, vaatimukset }) => {
-          return (
-            <div key={kuvaus?._id}>
-              <BodyHeading>{sanitizeHTML(kuvaus[language])}</BodyHeading>
-              <Typography variant="body">
-                <ul>
-                  {_fp.map(({ vaatimus, koodi }) => (
-                    <li key={koodi?.uri}>{vaatimus[language]}</li>
-                  ))(vaatimukset)}
-                </ul>
-              </Typography>
-            </div>
-          );
-        })(ammattitaitovaatimukset2019?.kohdealueet)}
+        {ammattitaitovaatimukset2019?.kohdealueet?.map(
+          ({ kuvaus, vaatimukset }) => {
+            return (
+              <div key={kuvaus?._id}>
+                <BodyHeading>{sanitizeHTML(kuvaus?.[language])}</BodyHeading>
+                <Typography variant="body">
+                  <ul>
+                    {vaatimukset?.map(({ vaatimus, koodi }) => (
+                      <li key={koodi?.uri}>{vaatimus?.[language]}</li>
+                    ))}
+                  </ul>
+                </Typography>
+              </div>
+            );
+          }
+        )}
       </>
     );
   }
@@ -57,8 +57,8 @@ const TutkinnonOsaKuvaus = ({ ePerusteId, viiteId, osa, language }) => {
     ePerusteId,
   });
 
-  const viiteData = _fp.find(tutkinnonOsa => tutkinnonOsa?.id === viiteId)(
-    tutkinnonOsat
+  const viiteData = tutkinnonOsat?.find(
+    tutkinnonOsa => tutkinnonOsa?.id === viiteId
   );
 
   const apiUrls = useUrls();
@@ -110,15 +110,13 @@ export const TutkinnonOsienKuvausSection = ({ language }) => {
   });
 
   const viiteIdForOsa = ({ id }) => {
-    return selectedTutkinnonOsat.find(
-      v => v.tutkinnonosaId === _fp.toNumber(id)
-    )?.tutkinnonosaViite;
+    return selectedTutkinnonOsat.find(v => v.tutkinnonosaId === toNumber(id))
+      ?.tutkinnonosaViite;
   };
 
   const eperusteForOsa = ({ id }) => {
-    return selectedTutkinnonOsat.find(
-      v => v.tutkinnonosaId === _fp.toNumber(id)
-    )?.ePerusteId;
+    return selectedTutkinnonOsat.find(v => v.tutkinnonosaId === toNumber(id))
+      ?.ePerusteId;
   };
 
   return (

@@ -37,6 +37,9 @@
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
+    "osaamistavoitteet": {
+      "fi": "<p>Osaamistavoitteet</p>"
+    },
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMin": null,

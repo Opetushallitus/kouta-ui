@@ -1,4 +1,4 @@
-import { Page, test, expect } from '@playwright/test';
+import { Page, test, expect, type Locator } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -15,6 +15,7 @@ import {
   getSelectByLabel,
   getSection,
   assertBaseTilaNotCopied,
+  getEditableEditors,
 } from '#/playwright/playwright-helpers';
 import {
   fixtureFromFile,
@@ -26,6 +27,18 @@ import { ENTITY } from '#/src/constants';
 const mutationTest = wrapMutationTest(ENTITY.KOULUTUS);
 
 const organisaatioOid = '1.1.1.1.1.1';
+
+const fillKuvausAndOsaamistavoitteet = async (section: Locator) => {
+  const editors = getEditableEditors(section);
+
+  const editor1 = editors.nth(0);
+  await editor1.focus();
+  await editor1.fill('Kuvaus');
+
+  const editor2 = editors.nth(1);
+  await editor2.focus();
+  await editor2.fill('Osaamistavoitteet');
+};
 
 const fillLisatiedotSection = (page: Page) =>
   withinSection(page, 'lisatiedot', async section => {
@@ -190,6 +203,9 @@ test.describe('Create koulutus', () => {
           new RegExp('#/fi/esitys/7823345/reformi/tutkinnonosat/7843530$')
         );
       });
+      await withinSection(page, 'description', async section => {
+        await typeToEditor(section, 'Koulutuksen osaamistavoitteet');
+      });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
       await fillJarjestajaSection(page);
@@ -225,9 +241,11 @@ test.describe('Create koulutus', () => {
           .getByLabel('koulutuslomake.muokkaaKoulutuksenNimea')
           .fill('Tiedot nimi');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
+
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
       await fillJarjestajaSection(page);
@@ -261,8 +279,9 @@ test.describe('Create koulutus', () => {
         );
         await section.getByText('yleiset.isAvoinKorkeakoulutus').click();
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillJarjestajaSection(page);
@@ -296,8 +315,9 @@ test.describe('Create koulutus', () => {
           'Muut opinnot'
         );
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillJarjestajaSection(page);
@@ -341,9 +361,11 @@ test.describe('Create koulutus', () => {
           section.getByLabel('koulutuslomake.muokkaaKoulutuksenNimea')
         ).toHaveValue('Ammatillinen opettajankoulutus');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
+
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
       await fillJarjestajaSection(page);
@@ -362,9 +384,11 @@ test.describe('Create koulutus', () => {
           'Ylioppilastutkinto'
         );
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
+
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
       await fillJarjestajaSection(page);
@@ -383,8 +407,9 @@ test.describe('Create koulutus', () => {
           section.getByLabel('koulutuslomake.koulutuksenNimi')
         ).toHaveValue('koulutustyypit.tuva');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -414,8 +439,9 @@ test.describe('Create koulutus', () => {
           .getByLabel('koulutuslomake.koulutuksenNimi')
           .fill('vapaa sivistystyö nimi');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -449,8 +475,9 @@ test.describe('Create koulutus', () => {
           .getByLabel('koulutuslomake.koulutuksenNimi')
           .fill('vapaa sivistystyö nimi');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -523,12 +550,14 @@ test.describe('Create koulutus', () => {
           section.getByLabel('koulutuslomake.koulutuksenNimi')
         ).toHaveValue('koulutustyypit.telma');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
       });
+
       await fillJarjestajaSection(page);
       await fillNakyvyysSection(page);
       await fillTilaSection(page);
@@ -556,12 +585,14 @@ test.describe('Create koulutus', () => {
           .getByLabel('koulutuslomake.koulutuksenNimi')
           .fill('muu ammatillinen nimi');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
         await expect(
           section.getByLabel('koulutuslomake.linkkiEPerusteisiin')
         ).toBeHidden();
       });
+
       await fillJarjestajaSection(page);
       await fillNakyvyysSection(page);
       await fillTilaSection(page);
@@ -591,8 +622,9 @@ test.describe('Create koulutus', () => {
           .getByLabel('koulutuslomake.koulutuksenNimi')
           .fill('erikoislääkäri-koulutus nimi');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
         await expect(
           section.getByLabel('koulutuslomake.linkkiEPerusteisiin')
         ).toBeHidden();
@@ -621,8 +653,9 @@ test.describe('Create koulutus', () => {
           section.getByLabel('koulutuslomake.koulutuksenNimi')
         ).toHaveValue('koulutustyypit.aikuistenPerusopetus');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
         await section
           .getByLabel('koulutuslomake.linkkiEPerusteisiin')
           .fill('http://linkki.fi');
@@ -654,8 +687,9 @@ test.describe('Create koulutus', () => {
           section.getByLabel('koulutuslomake.muokkaaKoulutuksenNimea')
         ).toHaveValue('Deutsche Internationale Abitur; Reifeprüfung');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
@@ -682,8 +716,9 @@ test.describe('Create koulutus', () => {
           section.getByLabel('koulutuslomake.muokkaaKoulutuksenNimea')
         ).toHaveValue('EB-tutkinto (European Baccalaureate)');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);
@@ -723,8 +758,9 @@ test.describe('Create koulutus', () => {
           section.getByLabel('koulutuslomake.muokkaaKoulutuksenNimea')
         ).toHaveValue('Big Data Analytics');
       });
+
       await withinSection(page, 'description', async section => {
-        await typeToEditor(section, 'Kuvaus');
+        await fillKuvausAndOsaamistavoitteet(section);
       });
       await fillLisatiedotSection(page);
       await fillSoraKuvausSection(page);

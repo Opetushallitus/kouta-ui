@@ -89,6 +89,10 @@ test('getFormValuesByKoulutus returns correct form values for erikoistumiskoulut
         fi: 'Fi kuvaus',
         sv: 'Sv kuvaus',
       },
+      osaamistavoitteet: {
+        fi: 'Fi osaamistavoitteet',
+        sv: 'Sv osaamistavoitteet',
+      },
       erikoistumiskoulutusKoodiUri: 'erikoistumiskoulutukset_001#2',
       opintojenLaajuusyksikko: 'opintojenlaajuusyksikko_2#1',
       opintojenLaajuusNumeroMax: 10,

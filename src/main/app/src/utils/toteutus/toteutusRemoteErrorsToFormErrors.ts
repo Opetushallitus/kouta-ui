@@ -103,7 +103,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
 
   if (path === 'metadata.kuvaus' && errorType === 'invalidKielistetty') {
     return LANGUAGES.map(lng => ({
-      field: `kuvaus.${lng}`,
+      field: `description.kuvaus.${lng}`,
       errorKey: 'validointivirheet.pakollisetKaannokset',
     }));
   }
@@ -276,5 +276,15 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
           julkaistutToteutukset: meta?.julkaistutToteutukset,
         }),
     };
+  }
+
+  if (
+    path === 'metadata.osaamistavoitteet' &&
+    errorType === 'invalidKielistetty'
+  ) {
+    return LANGUAGES.map(lng => ({
+      field: `description.osaamistavoitteet.${lng}`,
+      errorKey: 'validointivirheet.pakollisetKaannokset',
+    }));
   }
 };

@@ -52,7 +52,7 @@ export const wrapMutationTest =
     const request = await requestPromise;
     const reqData = JSON.stringify(request.postDataJSON(), null, 2);
     // eslint-disable-next-line playwright/no-standalone-expect
-    await expect(reqData).toMatchSnapshot(`${testInfo.title}.json`);
+    expect(reqData).toMatchSnapshot(`${testInfo.title}.json`);
   };
 
 export const getSelectOption = (page: Page) => (value: string) =>
@@ -87,10 +87,14 @@ export const getFieldWrapperByName = (loc: Locator, name: string) =>
 
 export const parent = (loc: Locator) => loc.locator('xpath=..');
 
+export const getEditableEditors = (loc: Locator) => {
+  return loc.locator('.Editor__').locator('[contenteditable="true"]');
+};
+
 // Lexical editor requires explicit focus before filling to ensure
 // the editor state is properly initialized and onChange events fire correctly
 export const typeToEditor = async (loc: Locator, text: string) => {
-  const editor = loc.locator('.Editor__').locator('[contenteditable="true"]');
+  const editor = getEditableEditors(loc);
   await editor.focus();
   await editor.fill(text);
 };
@@ -126,35 +130,26 @@ const selectLanguages = async (
   selector: Locator,
   selectedLanguages: Array<string> = []
 ) => {
-  const languages = ['en', 'fi', 'sv'];
+  const languages = ['suomi', 'ruotsi', 'englanti'];
   await Promise.all(
     languages.map(async lang => {
-      const langInput = selector.locator(`input[name="${lang}"]`);
+      const langInput = selector.getByText(`yleiset.${lang}`);
       const isChecked = await langInput.isChecked();
-      if (selectedLanguages.includes(lang)) {
-        if (!isChecked) {
-          await langInput.setChecked(true, {
-            // eslint-disable-next-line playwright/no-force-option
-            force: true,
-            // Joissakin järjestelmissä nämä napsautukset ei osu checkboxiin ilman sijainnin kertomista
-            position: { x: 5, y: 5 },
-          });
-        }
-      } else if (isChecked) {
-        await langInput.setChecked(false, {
-          // eslint-disable-next-line playwright/no-force-option
-          force: true,
-          position: { x: 5, y: 5 },
-        });
+      if (
+        (selectedLanguages.includes(lang) && !isChecked) ||
+        (!selectedLanguages.includes(lang) && isChecked)
+      ) {
+        await langInput.click();
       }
     })
   );
 };
 
-export const fillKieliversiotSection = (page: Page) =>
-  withinSection(page, 'kieliversiot', async section => {
-    await selectLanguages(section, ['fi']);
+export const fillKieliversiotSection = async (page: Page) => {
+  await withinSection(page, 'kieliversiot', async section => {
+    await selectLanguages(section, ['suomi']);
   });
+};
 
 const assertOnFrontPage = (page: Page) =>
   expect(page).toHaveURL(/\/kouta?\/\?.+$/);
@@ -170,9 +165,7 @@ export const assertNoUnsavedChangesDialog = async (page: Page) => {
 };
 
 export const confirmDelete = async (page: Page) => {
-  await page
-    .getByRole('button', { name: 'ilmoitukset.luonnoksenPoisto.jatka' })
-    .click();
+  await page.getByRole('button', { name: 'ilmoitukset.jatka' }).click();
   await assertOnFrontPage(page);
 };
 

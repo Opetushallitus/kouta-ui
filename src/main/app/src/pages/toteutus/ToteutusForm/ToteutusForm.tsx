@@ -1,5 +1,3 @@
-import React from 'react';
-
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
@@ -21,6 +19,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   FormMode,
   ENTITY,
+  AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
@@ -30,6 +29,7 @@ import { getTestIdProps } from '#/src/utils';
 import { useFilteredHakukohteet } from '#/src/utils/hakukohde/searchHakukohteet';
 import { isDIAkoulutus as isDIA } from '#/src/utils/isDIAkoulutus';
 import { isEBkoulutus as isEB } from '#/src/utils/isEBkoulutus';
+import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 import { isHakeutumisTaiIlmoittautumisosioVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
@@ -67,6 +67,7 @@ import {
 import {
   OsaamismerkkiToteutuksenKuvausSection,
   ToteutuksenKuvausSection,
+  ToteutuksenKuvausJaOsaamistavoitteetSection,
 } from './ToteutuksenKuvausSection';
 import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
@@ -127,6 +128,17 @@ const ToteutusForm = ({
   // jos toteutusta ei vielä tallennettu, totalcount on koko organisaation hakukohdemäärä ilman toteutusrajausta
   const hasHakukohdeAttached: boolean =
     toteutus?.oid && data?.totalCount ? Number(data?.totalCount) > 0 : false;
+
+  const hasOsaamistavoitteetField =
+    ![
+      KOULUTUSTYYPPI.OSAAMISALA,
+      KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
+    ].includes(koulutustyyppi) ||
+    koulutus?.koulutuksetKoodiUri?.some(koodiUri =>
+      AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE.includes(
+        koodiUriWithoutVersion(koodiUri)
+      )
+    );
 
   return (
     <>
@@ -241,14 +253,23 @@ const ToteutusForm = ({
         />
 
         <FormCollapse
-          section="kuvaus"
-          header={t('toteutuslomake.toteutuksenKuvaus')}
+          section="description"
+          header={
+            hasOsaamistavoitteetField ||
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI === koulutustyyppi
+              ? t('toteutuslomake.toteutuksenKuvausJaOsaamistavoitteet')
+              : t('toteutuslomake.toteutuksenKuvaus')
+          }
           languages={languages}
           koulutus={koulutus}
           Component={match(koulutustyyppi)
             .with(
               KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OSAAMISMERKKI,
               () => OsaamismerkkiToteutuksenKuvausSection
+            )
+            .when(
+              () => hasOsaamistavoitteetField,
+              () => ToteutuksenKuvausJaOsaamistavoitteetSection
             )
             .otherwise(() => ToteutuksenKuvausSection)}
         />

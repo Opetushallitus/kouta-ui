@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -7,6 +5,21 @@ import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
+
+export const OsaamistavoitteetField = ({ disabled, language, name }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Box mb={2} {...getTestIdProps('osaamistavoitteet')}>
+      <Field
+        disabled={disabled}
+        name={`${name}.osaamistavoitteet.${language}`}
+        component={FormFieldEditor}
+        label={t('yleiset.osaamistavoitteet')}
+      />
+    </Box>
+  );
+};
 
 export const KuvausFieldsSection = ({
   disabled,
@@ -56,6 +69,11 @@ export const KuvausFieldsSection = ({
           />
         </Box>
       )}
+      <OsaamistavoitteetField
+        disabled={disabled}
+        language={language}
+        name={name}
+      />
     </>
   );
 };

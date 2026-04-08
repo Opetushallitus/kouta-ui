@@ -1,15 +1,22 @@
-import React, { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { TFunction } from 'i18next';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
+import DeleteConfirmationDialog from '#/src/components/DeleteConfirmationDialog';
+import { FormButton } from '#/src/components/FormButton';
 import { FormFieldEditor } from '#/src/components/formFields';
-import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
-import { Box } from '#/src/components/virkailija';
+import {
+  isEditorEmpty,
+  parseEditorState,
+} from '#/src/components/LexicalEditorUI/utils';
+import { Box, FormLabel } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useOsaamismerkki } from '#/src/hooks/useEPeruste/useOsaamismerkki';
+import { KoulutusModel } from '#/src/types/domainTypes';
 import { sanitizeHTML } from '#/src/utils';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
@@ -18,18 +25,159 @@ import {
   OsaamismerkkiKuvaus,
 } from '../../koulutus/KoulutusForm/TiedotSection/OsaamismerkkiField';
 
-export const ToteutuksenKuvausSection = ({ language }) => {
+export const ToteutuksenKuvausSection = ({
+  language,
+  name,
+}: {
+  language: LanguageCode;
+  name: string;
+}) => {
   const { t } = useTranslation();
 
   return (
     <Box mb={2}>
       <Field
-        name={`kuvaus.${language}`}
+        name={`${name}.kuvaus.${language}`}
         component={FormFieldEditor}
         label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
         required
       />
     </Box>
+  );
+};
+
+const ToteutuksenOsaamistavoitteet = ({
+  language,
+  name,
+}: {
+  language: LanguageCode;
+  name: string;
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Box>
+      <Field
+        name={`${name}.osaamistavoitteet.${language}`}
+        component={FormFieldEditor}
+        label={t('toteutuslomake.toteutuksenOsaamistavoitteet')}
+      />
+    </Box>
+  );
+};
+
+const ToteutuksenOsaamistavoitteetWithCopyButton = ({
+  language,
+  name,
+  koulutus,
+}: {
+  language: LanguageCode;
+  name: string;
+  koulutus: KoulutusModel;
+}) => {
+  const { t } = useTranslation();
+  const { change } = useBoundFormActions();
+  const currOsaamistavoitteet = useFieldValue(
+    `${name}.osaamistavoitteet.${language}`
+  );
+  const isOsaamistavoitteetEditorEmpty =
+    isEmpty(currOsaamistavoitteet) || isEditorEmpty(currOsaamistavoitteet);
+  const koulutuksenOsaamistavoitteet = koulutus?.metadata?.osaamistavoitteet;
+  const koulutuksenOsaamistavoitteetInEditorFormat = parseEditorState(
+    koulutuksenOsaamistavoitteet?.[language] || ''
+  );
+
+  const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
+    useState(false);
+
+  const doReplaceOsaamistavoitteet = () => {
+    setIsConfirmationDialogOpen(false);
+    change(
+      `${name}.osaamistavoitteet.${language}`,
+      koulutuksenOsaamistavoitteetInEditorFormat
+    );
+  };
+
+  const copyOsaamistavoitteetFromKoulutus = useCallback(() => {
+    if (isOsaamistavoitteetEditorEmpty) {
+      change(
+        `${name}.osaamistavoitteet.${language}`,
+        koulutuksenOsaamistavoitteetInEditorFormat
+      );
+    } else {
+      setIsConfirmationDialogOpen(true);
+    }
+  }, [
+    change,
+    isOsaamistavoitteetEditorEmpty,
+    language,
+    name,
+    koulutuksenOsaamistavoitteetInEditorFormat,
+  ]);
+
+  return (
+    <Box>
+      <DeleteConfirmationDialog
+        isOpen={isConfirmationDialogOpen}
+        onConfirm={doReplaceOsaamistavoitteet}
+        onCancel={() => {
+          setIsConfirmationDialogOpen(false);
+        }}
+        headerText={t('ilmoitukset.osaamistavoitteet.otsikko')}
+        message={t('ilmoitukset.osaamistavoitteet.viesti')}
+      />
+      <FormLabel htmlFor="osaamistavoitteet">
+        {`${t('toteutuslomake.toteutuksenOsaamistavoitteet')}`}
+      </FormLabel>
+      <FormButton
+        variant="outlined"
+        color="primary"
+        type="button"
+        style={{ marginBottom: '1rem' }}
+        onClick={copyOsaamistavoitteetFromKoulutus}
+        disabled={isEmpty(koulutuksenOsaamistavoitteet?.[language])}
+      >
+        {t('toteutuslomake.kaytaKoulutuksenOsaamistavoitteita')}
+      </FormButton>
+      <Field
+        name={`${name}.osaamistavoitteet.${language}`}
+        component={FormFieldEditor}
+      />
+    </Box>
+  );
+};
+
+export const ToteutuksenKuvausJaOsaamistavoitteetSection = ({
+  language,
+  name,
+  koulutus,
+}: {
+  language: LanguageCode;
+  name: string;
+  koulutus: KoulutusModel;
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <Box mb={3}>
+        <Field
+          name={`${name}.kuvaus.${language}`}
+          component={FormFieldEditor}
+          label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
+          required
+        />
+      </Box>
+      {koulutus?.koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ? (
+        <ToteutuksenOsaamistavoitteet name={name} language={language} />
+      ) : (
+        <ToteutuksenOsaamistavoitteetWithCopyButton
+          name={name}
+          language={language}
+          koulutus={koulutus}
+        />
+      )}
+    </>
   );
 };
 
@@ -130,12 +278,12 @@ export const OsaamismerkkiToteutuksenKuvausSection = ({
   const { t } = useTranslation();
 
   const osaamismerkkiId = koulutus?.metadata?.osaamismerkkiKoodiUri;
-  useKuvausFromEPerusteet(osaamismerkkiId, name, language, t);
+  useKuvausFromEPerusteet(osaamismerkkiId, `${name}.kuvaus`, language, t);
 
   return (
     <Box mb={2}>
       <Field
-        name={`kuvaus.${language}`}
+        name={`${name}.kuvaus.${language}`}
         component={FormFieldEditor}
         label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
         required

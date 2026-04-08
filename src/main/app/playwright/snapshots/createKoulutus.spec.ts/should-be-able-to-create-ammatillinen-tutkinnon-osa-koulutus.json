@@ -46,6 +46,9 @@
       }
     ],
     "kuvaus": {},
+    "osaamistavoitteet": {
+      "fi": "<p>Koulutuksen osaamistavoitteet</p>"
+    },
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMin": null,

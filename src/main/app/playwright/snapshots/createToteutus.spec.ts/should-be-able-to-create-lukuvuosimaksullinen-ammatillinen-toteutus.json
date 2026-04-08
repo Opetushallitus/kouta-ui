@@ -119,6 +119,9 @@
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
+    "osaamistavoitteet": {
+      "fi": "<p>Osaamistavoitteet</p>"
+    },
     "tyyppi": "amm",
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": null,

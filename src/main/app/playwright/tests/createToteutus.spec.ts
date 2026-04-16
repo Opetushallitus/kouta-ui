@@ -1,5 +1,5 @@
 import { Page, test, expect, Locator } from '@playwright/test';
-import { merge } from 'lodash';
+import { isArray, merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
 import {
@@ -44,7 +44,7 @@ const fillJarjestamistiedotSection = (
   page: Page,
   values?: {
     opetuskieli?: string;
-    maksullisuusTyyppi?: MaksullisuusTyyppi;
+    maksullisuusTyyppi?: MaksullisuusTyyppi | Array<MaksullisuusTyyppi>;
     apuraha?: {
       maara: string;
       kuvaus: string;
@@ -79,15 +79,43 @@ const fillJarjestamistiedotSection = (
     });
     await opetustapa.getByText('Lähiopetus').click();
 
-    if (
-      values?.maksullisuusTyyppi &&
-      values?.maksullisuusTyyppi !== MaksullisuusTyyppi.MAKSUTON
-    ) {
-      const maksullisuus = section.getByRole('region', {
-        name: 'toteutuslomake.opetuksenMaksullisuus',
-      });
-      await fillRadioValue(maksullisuus, values?.maksullisuusTyyppi);
-      await maksullisuus.getByPlaceholder('yleiset.maara').fill('10');
+    const maksullisuustyyppi = values?.maksullisuusTyyppi;
+    const maksullisuus = section.getByRole('region', {
+      name: 'toteutuslomake.opetuksenMaksullisuus',
+    });
+
+    if (isArray(maksullisuustyyppi)) {
+      if (
+        maksullisuustyyppi.some(mt => mt === MaksullisuusTyyppi.MAKSULLINEN)
+      ) {
+        await maksullisuus.getByText('yleiset.kylla').click();
+        await maksullisuus.getByLabel('toteutuslomake.maksunMaara').fill('10');
+      }
+
+      if (
+        maksullisuustyyppi.some(mt => mt === MaksullisuusTyyppi.LUKUVUOSIMAKSU)
+      ) {
+        await maksullisuus
+          .getByText('toteutuslomake.kaytossaLukuvuosimaksu')
+          .click();
+        await maksullisuus
+          .getByLabel('toteutuslomake.lukuvuosimaksunMaara')
+          .fill('100');
+      }
+      await maksullisuus.getByText('yleiset.ei').click();
+      await typeToEditor(maksullisuus, 'maksullisuus kuvaus');
+    } else if (maksullisuustyyppi) {
+      if (maksullisuustyyppi === MaksullisuusTyyppi.MAKSULLINEN) {
+        await fillRadioValue(maksullisuus, maksullisuustyyppi);
+        await maksullisuus.getByLabel('toteutuslomake.maksunMaara').fill('10');
+      }
+
+      if (maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU) {
+        await fillRadioValue(maksullisuus, maksullisuustyyppi);
+        await maksullisuus
+          .getByLabel('toteutuslomake.lukuvuosimaksunMaara')
+          .fill('10');
+      }
       await typeToEditor(maksullisuus, 'maksullisuus kuvaus');
     }
 
@@ -530,7 +558,7 @@ test.describe('Create toteutus', () => {
       await tallenna(page);
     }));
 
-  test('should be able to create lukuvuosimaksullinen ammatillinen toteutus', ({
+  test('should be able to create ammatillinen toteutus that is both maksullinen and lukuvuosimaksullinen', ({
     page,
   }, testInfo) =>
     mutationTest({ page, testInfo }, async () => {
@@ -556,7 +584,10 @@ test.describe('Create toteutus', () => {
           .fill('osaamisala_0 otsikko');
       });
       await fillJarjestamistiedotSection(page, {
-        maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        maksullisuusTyyppi: [
+          MaksullisuusTyyppi.MAKSULLINEN,
+          MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        ],
       });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: true });
       await fillJarjestajaSection(page);
@@ -723,7 +754,7 @@ test.describe('Create toteutus', () => {
       await fillKuvausAndOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page, {
         lukiotiedot: true,
-        maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        maksullisuusTyyppi: [MaksullisuusTyyppi.LUKUVUOSIMAKSU],
       });
       await fillJarjestajaSection(page);
       await fillYhteystiedotSection(page);

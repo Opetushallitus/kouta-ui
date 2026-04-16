@@ -1,3 +1,4 @@
+import { every, isArray } from 'lodash';
 import _fp from 'lodash/fp';
 
 import {
@@ -7,7 +8,11 @@ import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
 } from '#/src/constants';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import {
+  ToteutusFormValues,
+  MaksullisuusTyyppi,
+} from '#/src/types/toteutusTypes';
+import { isKoulutustyyppiWithMultipleMaksullisuustyyppi } from '#/src/utils';
 import createErrorBuilder, {
   validate,
   validateArrayMinLength,
@@ -119,8 +124,37 @@ const validateApuraha = eb => {
   )(eb);
 };
 
+const validateMaksullisuustyypit = eb => {
+  const { values } = eb;
+  const koulutustyyppi = values?.koulutustyyppi;
+  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
+
+  const koulutustyyppiWithMultipleMaksullisuustyyppi =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi);
+
+  return validateIf(
+    koulutustyyppiWithMultipleMaksullisuustyyppi &&
+      isArray(maksullisuustyyppi) &&
+      maksullisuustyyppi.length > 1,
+    validate(
+      'jarjestamistiedot.maksullisuustyyppi',
+      () => {
+        return every(
+          maksullisuustyyppi,
+          mt => mt !== MaksullisuusTyyppi.MAKSUTON
+        );
+      },
+      {
+        message: [
+          'validointivirheet.invalidMaksutonWhenMultipleMaksullisuustyypit',
+        ],
+      }
+    )
+  )(eb);
+};
+
 const validateHakeutumisTaiIlmoittautumisTapa = eb => {
-  const values = eb.values;
+  const values = eb?.values;
   const hakeutumisTaiIlmoittautumistapa =
     values?.hakeutumisTaiIlmoittautumistapa?.hakeutumisTaiIlmoittautumistapa;
   return _fp.flow(
@@ -207,6 +241,7 @@ export const validateToteutusForm = (
       ),
       validateOptionalTranslatedField('jarjestamistiedot.opetusaikaKuvaus'),
       validateOptionalTranslatedField('jarjestamistiedot.opetustapaKuvaus'),
+      validateMaksullisuustyypit,
       validateOptionalTranslatedField('jarjestamistiedot.maksullisuusKuvaus'),
       validateApuraha,
       validateOptionalTranslatedField('jarjestamistiedot.apurahaKuvaus'),

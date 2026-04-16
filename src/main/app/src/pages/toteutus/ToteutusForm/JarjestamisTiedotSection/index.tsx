@@ -256,6 +256,7 @@ export const JarjestamisTiedotSection = ({
                 tohtorikoulutukset,
                 koulutusKoodiurit
               )}
+              koulutustyyppi={koulutustyyppi}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />

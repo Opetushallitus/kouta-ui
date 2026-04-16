@@ -27,7 +27,7 @@ describe('getMaksutByValues', () => {
 
   test('it should create maksut for one "lukuvuosimaksullinen"-maksullisuustyyppi with maksunMaara', () => {
     const maksullisuustyypit = 'lukuvuosimaksu';
-    const maksunMaara = '500';
+    const maksunMaara = undefined;
     const lukuvuosimaksunMaara = '1000';
     expect(
       getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
@@ -38,6 +38,18 @@ describe('getMaksutByValues', () => {
     const maksullisuustyypit = ['maksullinen', 'lukuvuosimaksu'];
     const maksunMaara = '500';
     const lukuvuosimaksunMaara = '1000';
+    expect(
+      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+    ).toEqual([
+      { maksullisuustyyppi: 'maksullinen', maksunMaara: 500.0 },
+      { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.0 },
+    ]);
+  });
+
+  test('it should set maksunMaara correctly also when it is a number', () => {
+    const maksullisuustyypit = ['maksullinen', 'lukuvuosimaksu'];
+    const maksunMaara = 500;
+    const lukuvuosimaksunMaara = 1000;
     expect(
       getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
     ).toEqual([
@@ -90,7 +102,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     tarjoajat: ['org1', 'org2'],
     jarjestamistiedot: {
       maksullisuustyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-      maksunMaara: '50.5',
+      lukuvuosimaksunMaara: '50.5',
       maksullisuusKuvaus: {
         fi: parseEditorState('Fi maksullisuuskuvaus'),
         sv: parseEditorState('Sv maksullisuuskuvaus'),

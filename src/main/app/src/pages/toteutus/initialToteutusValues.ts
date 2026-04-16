@@ -6,6 +6,7 @@ import {
   KOULUTUSTYYPPI,
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
+import { isKoulutustyyppiWithMultipleMaksullisuustyyppi } from '#/src/utils';
 
 export const initialValues = ({ koulutus }) => {
   const koulutustyyppi = koulutus?.koulutustyyppi;
@@ -67,7 +68,11 @@ export const initialValues = ({ koulutus }) => {
       tapa: POHJAVALINTA.UUSI,
     },
     jarjestamistiedot: {
-      maksullisuustyyppi: MaksullisuusTyyppi.MAKSUTON,
+      maksullisuustyyppi: isKoulutustyyppiWithMultipleMaksullisuustyyppi(
+        koulutustyyppi
+      )
+        ? [MaksullisuusTyyppi.MAKSUTON]
+        : MaksullisuusTyyppi.MAKSUTON,
       apurahaMaaraTyyppi: MaaraTyyppi.YKSI_ARVO,
       apurahaYksikko: { value: ApurahaYksikko.EURO },
       suunniteltuKesto: { vuotta: 0, kuukautta: 0 },

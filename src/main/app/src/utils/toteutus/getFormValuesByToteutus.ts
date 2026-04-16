@@ -7,6 +7,7 @@ import {
   MaksullisuusTyyppi,
   LukiolinjatOsio,
   LukioDiplomiValues,
+  Maksu,
 } from '#/src/types/toteutusTypes';
 import {
   kieliArvoListToMultiSelectValue,
@@ -110,11 +111,27 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     osaamistavoitteet,
   } = metadata;
 
-  const {
-    lisatiedot,
-    koulutuksenAlkamiskausi = {},
-    maksullisuustyyppi = MaksullisuusTyyppi.MAKSUTON,
-  } = opetus;
+  const { lisatiedot, koulutuksenAlkamiskausi = {}, maksut } = opetus;
+
+  const maksullisuustyyppi =
+    maksut?.length === 1
+      ? maksut?.[0].maksullisuustyyppi
+      : maksut?.map(m => m.maksullisuustyyppi) || MaksullisuusTyyppi.MAKSUTON;
+
+  const getMaksunMaara = (
+    maksut: Array<Maksu>,
+    predFunc: (maksu: Maksu) => boolean
+  ): number => maksut?.filter(predFunc)?.[0]?.maksunMaara;
+
+  const maksunMaara = getMaksunMaara(
+    maksut,
+    v => v.maksullisuustyyppi === MaksullisuusTyyppi.MAKSULLINEN
+  );
+
+  const lukuvuosimaksunMaara = getMaksunMaara(
+    maksut,
+    v => v.maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU
+  );
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
     (acc, curr: any) => {
@@ -176,7 +193,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {
       maksullisuustyyppi,
-      maksunMaara: opetus?.maksunMaara,
+      maksunMaara: maksunMaara,
+      lukuvuosimaksunMaara: lukuvuosimaksunMaara,
       opetustapa: opetus?.opetustapaKoodiUrit || [],
       opetusaika: opetus?.opetusaikaKoodiUrit || [],
       opetuskieli: opetus?.opetuskieliKoodiUrit || [],

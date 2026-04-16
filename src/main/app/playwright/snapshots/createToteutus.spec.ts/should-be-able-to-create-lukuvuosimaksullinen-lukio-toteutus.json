@@ -23,8 +23,12 @@
       "opetuskieliKoodiUrit": [
         "oppilaitoksenopetuskieli_1#2"
       ],
-      "maksullisuustyyppi": "lukuvuosimaksu",
-      "maksunMaara": 10,
+      "maksut": [
+        {
+          "maksullisuustyyppi": "lukuvuosimaksu",
+          "maksunMaara": 100
+        }
+      ],
       "opetustapaKoodiUrit": [
         "opetuspaikkakk_1#1"
       ],

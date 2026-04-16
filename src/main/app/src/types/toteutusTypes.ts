@@ -19,6 +19,11 @@ export enum MaksullisuusTyyppi {
   LUKUVUOSIMAKSU = 'lukuvuosimaksu',
 }
 
+export type Maksu = {
+  maksullisuustyyppi: string;
+  maksunMaara: number;
+};
+
 type Toteutusjakso = {
   nimi: TranslatedField<string>;
   koodi: string;
@@ -91,9 +96,9 @@ export type ToteutusFormValues = {
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;
   jarjestamistiedot: {
-    maksullisuustyyppi: MaksullisuusTyyppi;
-    maksunMaara?: string;
-    lukuvuosimaksunMaara?: string;
+    maksullisuustyyppi: MaksullisuusTyyppi | Array<MaksullisuusTyyppi>;
+    maksunMaara?: string | number;
+    lukuvuosimaksunMaara?: string | number;
     maksullisuusKuvaus: Kuvaus;
     opetustapa: Array<string>;
     opetustapaKuvaus: Kuvaus;

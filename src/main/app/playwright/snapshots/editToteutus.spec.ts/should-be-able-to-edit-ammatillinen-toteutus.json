@@ -17,8 +17,12 @@
     "opetus": {
       "lisatiedot": [],
       "opetuskieliKoodiUrit": [],
-      "maksullisuustyyppi": "maksuton",
-      "maksunMaara": null,
+      "maksut": [
+        {
+          "maksullisuustyyppi": "maksuton",
+          "maksunMaara": null
+        }
+      ],
       "opetustapaKoodiUrit": [],
       "opetusaikaKoodiUrit": [],
       "opetuskieletKuvaus": {},

@@ -92,7 +92,8 @@ export type ToteutusFormValues = {
   tarjoajat: Array<string>;
   jarjestamistiedot: {
     maksullisuustyyppi: MaksullisuusTyyppi;
-    maksunMaara: number;
+    maksunMaara?: string;
+    lukuvuosimaksunMaara?: string;
     maksullisuusKuvaus: Kuvaus;
     opetustapa: Array<string>;
     opetustapaKuvaus: Kuvaus;

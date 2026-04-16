@@ -1,7 +1,11 @@
+import { isArray } from 'lodash';
 import _fp from 'lodash/fp';
 
 import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import {
+  MaksullisuusTyyppi,
+  ToteutusFormValues,
+} from '#/src/types/toteutusTypes';
 import {
   getTermsByLanguage,
   isPartialDate,
@@ -33,6 +37,37 @@ const getDiplomitByValues = (diplomiValues, kieleistykset) =>
     linkki: kieleistykset(diplomiValues?.linkit[index]?.url),
     linkinAltTeksti: kieleistykset(diplomiValues?.linkit[index]?.alt),
   })) || [];
+
+export const getMaksutByValues = (
+  maksullisuustyypit: string | Array<string>,
+  maksunMaara?: string,
+  lukuvuosimaksunMaara?: string
+): Array<{
+  maksullisuustyyppi: string | undefined;
+  maksunMaara: string | undefined;
+}> => {
+  return isArray(maksullisuustyypit)
+    ? maksullisuustyypit?.map(mt => {
+        return {
+          maksullisuustyyppi: mt,
+          maksunMaara:
+            mt === MaksullisuusTyyppi.MAKSULLINEN
+              ? maybeParseNumber(maksunMaara)
+              : mt === MaksullisuusTyyppi.LUKUVUOSIMAKSU
+                ? maybeParseNumber(lukuvuosimaksunMaara)
+                : null,
+        };
+      })
+    : [
+        {
+          maksullisuustyyppi: maksullisuustyypit,
+          maksunMaara:
+            maksullisuustyypit === MaksullisuusTyyppi.MAKSULLINEN
+              ? maybeParseNumber(maksunMaara)
+              : maybeParseNumber(lukuvuosimaksunMaara),
+        },
+      ];
+};
 
 const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {

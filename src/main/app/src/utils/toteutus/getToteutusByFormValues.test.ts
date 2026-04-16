@@ -9,9 +9,43 @@ import {
   KOULUTUSTYYPPI,
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
-import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
+import getToteutusByFormValues, {
+  getMaksutByValues,
+} from '#/src/utils/toteutus/getToteutusByFormValues';
 
 import { sisalto } from '../testFormData';
+
+describe('getMaksutByValues', () => {
+  test('it should create maksut for one "maksullinen"-maksullisuustyyppi with maksunMaara', () => {
+    const maksullisuustyypit = 'maksullinen';
+    const maksunMaara = '500';
+    const lukuvuosimaksunMaara = undefined;
+    expect(
+      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+    ).toEqual([{ maksullisuustyyppi: 'maksullinen', maksunMaara: 500.0 }]);
+  });
+
+  test('it should create maksut for one "lukuvuosimaksullinen"-maksullisuustyyppi with maksunMaara', () => {
+    const maksullisuustyypit = 'lukuvuosimaksu';
+    const maksunMaara = '500';
+    const lukuvuosimaksunMaara = '1000';
+    expect(
+      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+    ).toEqual([{ maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.0 }]);
+  });
+
+  test('it should create maksut when both "lukuvuosimaksullinen" and "maksullinen" are defined', () => {
+    const maksullisuustyypit = ['maksullinen', 'lukuvuosimaksu'];
+    const maksunMaara = '500';
+    const lukuvuosimaksunMaara = '1000';
+    expect(
+      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+    ).toEqual([
+      { maksullisuustyyppi: 'maksullinen', maksunMaara: 500.0 },
+      { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.0 },
+    ]);
+  });
+});
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues({
@@ -56,7 +90,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     tarjoajat: ['org1', 'org2'],
     jarjestamistiedot: {
       maksullisuustyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-      maksunMaara: 50.5,
+      maksunMaara: '50.5',
       maksullisuusKuvaus: {
         fi: parseEditorState('Fi maksullisuuskuvaus'),
         sv: parseEditorState('Sv maksullisuuskuvaus'),

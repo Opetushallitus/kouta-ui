@@ -27,18 +27,18 @@ describe('isApurahaVisible', () => {
     ).toBeTruthy();
   });
 
-  test('should return false when maksullisuustyyppi is lukuvuosimaksu and koulutustyyppi is amm', () => {
-    expect(
-      isApurahaVisible('lukuvuosimaksu', KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS)
-    ).toBeFalsy();
-  });
-
-  test('should return false when maksullisuustyyppi is lukuvuosimaksu_amm_lk and koulutustyyppi is amm', () => {
+  test('should return false when maksullisuustyyppi is an array that contains "lukuvuosimaksu" and koulutustyyppi is amm', () => {
     expect(
       isApurahaVisible(
-        'lukuvuosimaksu_amm_lk',
+        ['maksullinen', 'lukuvuosimaksu'],
         KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
       )
     ).toBeFalsy();
+  });
+
+  test('should return true when maksullisuustyyppi is an array that contains "lukuvuosimaksu" and koulutustyyppi is yo', () => {
+    expect(
+      isApurahaVisible(['lukuvuosimaksu'], KOULUTUSTYYPPI.YLIOPISTOKOULUTUS)
+    ).toBeTruthy();
   });
 });

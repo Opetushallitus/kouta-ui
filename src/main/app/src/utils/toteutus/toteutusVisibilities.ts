@@ -1,3 +1,5 @@
+import { isArray, some } from 'lodash';
+
 import {
   KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA,
   Koulutustyyppi,
@@ -6,12 +8,18 @@ import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 export const isApurahaVisible = (
-  maksullisuustyyppi: string,
+  maksullisuustyyppi: string | Array<string>,
   koulutustyyppi: string
 ) => {
+  const maksullisuustyyppiArray = isArray(maksullisuustyyppi)
+    ? maksullisuustyyppi
+    : [maksullisuustyyppi];
+
   return (
-    maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU &&
-    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)
+    some(
+      maksullisuustyyppiArray,
+      mt => mt === MaksullisuusTyyppi.LUKUVUOSIMAKSU
+    ) && isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)
   );
 };
 

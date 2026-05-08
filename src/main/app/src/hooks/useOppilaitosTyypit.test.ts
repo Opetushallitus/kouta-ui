@@ -3,7 +3,6 @@ import _ from 'lodash';
 import {
   KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
-  EI_TUETUT_KOULUTUSTYYPIT,
   ENTITY,
   ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT,
 } from '#/src/constants';
@@ -58,10 +57,7 @@ test.each(ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)(
 );
 
 test.each(
-  _.difference(
-    KOULUTUSTYYPIT,
-    _.union(EI_TUETUT_KOULUTUSTYYPIT, ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)
-  )
+  _.difference(KOULUTUSTYYPIT, ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)
 )(
   'Should not disable any koulutustyyppi when not detecting any oppilaitos types',
   kt => {

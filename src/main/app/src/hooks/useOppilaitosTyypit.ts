@@ -3,7 +3,6 @@ import { useMemo } from 'react';
 import _fp from 'lodash/fp';
 
 import {
-  EI_TUETUT_KOULUTUSTYYPIT,
   ENTITY,
   ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT,
 } from '#/src/constants';
@@ -54,10 +53,6 @@ export const createIsKoulutustyyppiDisabledGetter = ({
       entityType === ENTITY.KOULUTUS &&
       ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT.includes(value)
     ) {
-      return true;
-    }
-
-    if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
       return true;
     }
 

@@ -265,6 +265,23 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
     };
   }
 
+  if (path === 'metadata.opetus.maksunMaara' && errorType === 'missingMsg') {
+    return {
+      field: 'jarjestamistiedot.maksunMaara',
+      errorKey: `validointivirheet.pakollinen`,
+    };
+  }
+
+  if (
+    path === 'metadata.opetus.lukuvuosimaksunMaara' &&
+    errorType === 'missingMsg'
+  ) {
+    return {
+      field: 'jarjestamistiedot.lukuvuosimaksunMaara',
+      errorKey: `validointivirheet.pakollinen`,
+    };
+  }
+
   if (
     path === 'metadata.tila' &&
     errorType === 'invalidStateChangeForLiitetty'

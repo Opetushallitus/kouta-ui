@@ -115,8 +115,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
 
   const maksullisuustyyppi =
     maksut?.length === 1
-      ? maksut?.[0].maksullisuustyyppi
-      : maksut?.map(m => m.maksullisuustyyppi) || MaksullisuusTyyppi.MAKSUTON;
+      ? [maksut?.[0].maksullisuustyyppi]
+      : maksut?.map(m => m.maksullisuustyyppi) || [MaksullisuusTyyppi.MAKSUTON];
 
   const getMaksunMaara = (
     maksut: Array<Maksu>,

@@ -14,7 +14,6 @@ import {
   toSelectValueList,
 } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
-import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
 
 const lukiolinjatiedotToFormValues = (lukiolinjatiedot): LukiolinjatOsio => {
   const result = {
@@ -86,11 +85,9 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     opintojenLaajuusNumeroMin,
     opintojenLaajuusNumeroMax,
     opintojenLaajuusyksikkoKoodiUri,
-    ilmoittautumislinkki,
     aloituspaikat,
     aloituspaikkakuvaus,
     kielivalikoima = {},
-    toteutusjaksot,
     ammatillinenPerustutkintoErityisopetuksena,
     jarjestetaanErityisopetuksena,
     painotukset,
@@ -156,7 +153,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opintojenLaajuusNumeroMin: opintojenLaajuusNumeroMin,
       opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
       opintojenLaajuusyksikko: toSelectValue(opintojenLaajuusyksikkoKoodiUri),
-      ilmoittautumislinkki: ilmoittautumislinkki || {},
       isAvoinKorkeakoulutus: Boolean(isAvoinKorkeakoulutus),
       isPieniOsaamiskokonaisuus: Boolean(isPieniOsaamiskokonaisuus),
       tunniste,
@@ -276,23 +272,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         erityisetKoulutustehtavat
       ),
     },
-    toteutusjaksot: _fp.map(
-      ({
-        nimi = {},
-        koodi = '',
-        laajuus = {},
-        ilmoittautumislinkki = {},
-        kuvaus = {},
-        sisalto,
-      }) => ({
-        nimi,
-        koodi,
-        laajuus,
-        ilmoittautumislinkki,
-        kuvaus: _fp.mapValues(parseEditorState, kuvaus),
-        sisalto: parseSisaltoField(sisalto),
-      })
-    )(toteutusjaksot),
     teemakuva,
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,

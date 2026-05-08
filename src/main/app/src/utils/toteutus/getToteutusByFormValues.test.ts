@@ -11,8 +11,6 @@ import {
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 
-import { sisalto } from '../testFormData';
-
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues({
     externalId: 'ext1',
@@ -22,10 +20,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       nimi: {
         fi: 'Fi nimi',
         sv: 'Sv nimi',
-      },
-      ilmoittautumislinkki: {
-        fi: 'Fi linkki',
-        sv: 'Sv linkki',
       },
       opintojenLaajuusNumero: '252',
       laajuusNumeroTyyppi: MaaraTyyppi.YKSI_ARVO,
@@ -229,28 +223,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         },
       },
     },
-    toteutusjaksot: [
-      {
-        nimi: {
-          fi: 'Fi nimi',
-          sv: 'Sv nimi',
-        },
-        koodi: 'koodi 123',
-        laajuus: {
-          fi: 'Fi laajuus',
-          sv: 'Sv laajuus',
-        },
-        kuvaus: {
-          fi: parseEditorState('Fi kuvaus'),
-          sv: parseEditorState('Sv kuvaus'),
-        },
-        ilmoittautumislinkki: {
-          fi: 'Fi linkki',
-          sv: 'Sv linkki',
-        },
-        sisalto: sisalto,
-      },
-    ],
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU,
       isHakukohteetKaytossa: false,

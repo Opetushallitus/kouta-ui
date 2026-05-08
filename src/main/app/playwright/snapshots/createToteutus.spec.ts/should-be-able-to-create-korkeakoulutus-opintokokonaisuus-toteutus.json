@@ -111,8 +111,6 @@
     "opintojenLaajuusNumero": 10,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
-    "ilmoittautumislinkki": {},
-    "toteutusjaksot": [],
     "isHakukohteetKaytossa": false,
     "hakutermi": "hakeutuminen",
     "hakulomaketyyppi": "muu",

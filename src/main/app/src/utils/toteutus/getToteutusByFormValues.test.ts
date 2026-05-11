@@ -18,11 +18,11 @@ import { sisalto } from '../testFormData';
 describe('getMaksutByValues', () => {
   test('it should create maksut for one "maksullinen"-maksullisuustyyppi with maksunMaara', () => {
     const maksullisuustyypit = 'maksullinen';
-    const maksunMaara = '500';
+    const maksunMaara = '500.5';
     const lukuvuosimaksunMaara = undefined;
     expect(
       getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
-    ).toEqual([{ maksullisuustyyppi: 'maksullinen', maksunMaara: 500.0 }]);
+    ).toEqual([{ maksullisuustyyppi: 'maksullinen', maksunMaara: 500.5 }]);
   });
 
   test('it should create maksut for one "lukuvuosimaksullinen"-maksullisuustyyppi with maksunMaara', () => {
@@ -31,18 +31,18 @@ describe('getMaksutByValues', () => {
     const lukuvuosimaksunMaara = '1000';
     expect(
       getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
-    ).toEqual([{ maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.0 }]);
+    ).toEqual([{ maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000 }]);
   });
 
   test('it should create maksut when both "lukuvuosimaksullinen" and "maksullinen" are defined', () => {
     const maksullisuustyypit = ['maksullinen', 'lukuvuosimaksu'];
-    const maksunMaara = '500';
-    const lukuvuosimaksunMaara = '1000';
+    const maksunMaara = '500.5';
+    const lukuvuosimaksunMaara = '1000.5';
     expect(
       getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
     ).toEqual([
-      { maksullisuustyyppi: 'maksullinen', maksunMaara: 500.0 },
-      { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.0 },
+      { maksullisuustyyppi: 'maksullinen', maksunMaara: 500.5 },
+      { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.5 },
     ]);
   });
 
@@ -53,8 +53,8 @@ describe('getMaksutByValues', () => {
     expect(
       getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
     ).toEqual([
-      { maksullisuustyyppi: 'maksullinen', maksunMaara: 500.0 },
-      { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.0 },
+      { maksullisuustyyppi: 'maksullinen', maksunMaara: 500 },
+      { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000 },
     ]);
   });
 });

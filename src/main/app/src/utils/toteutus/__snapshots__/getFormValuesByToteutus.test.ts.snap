@@ -107,7 +107,7 @@ exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] 
         },
       ],
     },
-    "lukuvuosimaksunMaara": 1500,
+    "lukuvuosimaksunMaara": 1500.5,
     "maksullisuusKuvaus": {
       "fi": "<p>Fi maksullisuuskuvaus</p>",
       "sv": "<p>Sv maksullisuuskuvaus</p>",

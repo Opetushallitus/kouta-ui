@@ -125,7 +125,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const getMaksunMaara = (
     maksut: Array<Maksu>,
     predFunc: (maksu: Maksu) => boolean
-  ): number => maksut?.filter(predFunc)?.[0]?.maksunMaara;
+  ): number | undefined => maksut?.find(predFunc)?.maksunMaara;
 
   const maksunMaara = getMaksunMaara(
     maksut,

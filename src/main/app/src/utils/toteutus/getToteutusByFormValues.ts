@@ -48,15 +48,24 @@ export const getMaksutByValues = (
     ? maksullisuustyyppiValue
     : [maksullisuustyyppiValue];
 
+  const getMaksunMaara = (
+    maksullisuustyyppi: string,
+    maksunMaara?: string | number,
+    lukuvuosimaksunMaara?: string | number
+  ) => {
+    if (maksullisuustyyppi === MaksullisuusTyyppi.MAKSULLINEN) {
+      return maybeParseNumber(maksunMaara) || undefined;
+    } else if (maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU) {
+      return maybeParseNumber(lukuvuosimaksunMaara) || undefined;
+    } else {
+      return null;
+    }
+  };
+
   return maksullisuustyypit?.map(mt => {
     return {
       maksullisuustyyppi: mt,
-      maksunMaara:
-        mt === MaksullisuusTyyppi.MAKSULLINEN
-          ? maybeParseNumber(maksunMaara) || undefined
-          : mt === MaksullisuusTyyppi.LUKUVUOSIMAKSU
-            ? maybeParseNumber(lukuvuosimaksunMaara) || undefined
-            : null,
+      maksunMaara: getMaksunMaara(mt, maksunMaara, lukuvuosimaksunMaara),
     };
   });
 };

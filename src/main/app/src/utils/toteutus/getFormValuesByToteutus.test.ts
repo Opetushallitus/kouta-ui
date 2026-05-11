@@ -83,16 +83,14 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
             },
           },
         ],
-        maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
-        maksunMaara: 500.0,
         maksut: [
           {
             maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
-            maksunMaara: 500.0,
+            maksunMaara: 500,
           },
           {
             maksullisuustyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-            maksunMaara: 1500.0,
+            maksunMaara: 1500.5,
           },
         ],
         maksullisuusKuvaus: {

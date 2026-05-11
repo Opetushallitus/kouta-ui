@@ -10,6 +10,7 @@ import {
   Maksu,
 } from '#/src/types/toteutusTypes';
 import {
+  isKoulutustyyppiWithMultipleMaksullisuustyyppi,
   kieliArvoListToMultiSelectValue,
   toSelectValue,
   toSelectValueList,
@@ -114,9 +115,12 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const { lisatiedot, koulutuksenAlkamiskausi = {}, maksut } = opetus;
 
   const maksullisuustyyppi =
-    maksut?.length === 1
-      ? [maksut?.[0].maksullisuustyyppi]
-      : maksut?.map(m => m.maksullisuustyyppi) || [MaksullisuusTyyppi.MAKSUTON];
+    maksut?.length === 1 ? maksut?.[0].maksullisuustyyppi : null;
+
+  const maksullisuustyypit =
+    maksullisuustyyppi && isKoulutustyyppiWithMultipleMaksullisuustyyppi(tyyppi)
+      ? [maksullisuustyyppi]
+      : maksut?.map(m => m.maksullisuustyyppi) || MaksullisuusTyyppi.MAKSUTON;
 
   const getMaksunMaara = (
     maksut: Array<Maksu>,
@@ -192,7 +196,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     kieliversiot: kielivalinta ?? [],
     tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {
-      maksullisuustyyppi,
+      maksullisuustyyppi: maksullisuustyyppi || maksullisuustyypit,
       maksunMaara: maksunMaara,
       lukuvuosimaksunMaara: lukuvuosimaksunMaara,
       opetustapa: opetus?.opetustapaKoodiUrit || [],

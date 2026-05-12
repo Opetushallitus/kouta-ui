@@ -41,6 +41,19 @@ export const MaksuField = ({ name, t, label }) => {
   );
 };
 
+const isMaksunMaaraVisible = (
+  selectedMaksullisuustyypit: MaksullisuusTyyppi | Array<MaksullisuusTyyppi>,
+  maksullisuustyyppiForMaksunMaara: MaksullisuusTyyppi
+): boolean => {
+  return isArray(selectedMaksullisuustyypit)
+    ? some(
+        selectedMaksullisuustyypit,
+        (mt: MaksullisuusTyyppi): boolean =>
+          mt === maksullisuustyyppiForMaksunMaara
+      )
+    : selectedMaksullisuustyypit === maksullisuustyyppiForMaksunMaara;
+};
+
 export const MaksullisuusFields = ({
   name,
   isLukuvuosimaksuVisible,
@@ -68,23 +81,14 @@ export const MaksullisuusFields = ({
   const tyyppiName = `${name}.maksullisuustyyppi`;
   const selectedMaksullisuustyypit = useFieldValue(tyyppiName);
 
-  const isMaksunMaaraVisible = (
-    selectedMaksullisuustyypit: MaksullisuusTyyppi | Array<MaksullisuusTyyppi>,
-    predFunc: (s: MaksullisuusTyyppi) => boolean
-  ): boolean => {
-    return isArray(selectedMaksullisuustyypit)
-      ? some(selectedMaksullisuustyypit, v => predFunc(v))
-      : predFunc(selectedMaksullisuustyypit);
-  };
-
   const maksunMaaraVisible = isMaksunMaaraVisible(
     selectedMaksullisuustyypit,
-    v => v === MaksullisuusTyyppi.MAKSULLINEN
+    MaksullisuusTyyppi.MAKSULLINEN
   );
 
   const lukuvuosimaksunMaaraVisible = isMaksunMaaraVisible(
     selectedMaksullisuustyypit,
-    v => v === MaksullisuusTyyppi.LUKUVUOSIMAKSU
+    MaksullisuusTyyppi.LUKUVUOSIMAKSU
   );
 
   const koulutustyyppiWithMultipleMaksullisuustyyppi =

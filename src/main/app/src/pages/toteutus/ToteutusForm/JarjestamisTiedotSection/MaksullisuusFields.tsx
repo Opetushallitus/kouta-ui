@@ -8,9 +8,9 @@ import styled from 'styled-components';
 import {
   FormFieldRadioGroup,
   FormFieldFloatInput,
-  createFormFieldComponent,
+  FormFieldCheckboxGroup,
 } from '#/src/components/formFields';
-import { Box, CheckboxGroup, InputIcon } from '#/src/components/virkailija';
+import { Box, InputIcon } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import {
@@ -22,21 +22,6 @@ const MaksuInputWrapper = styled.div`
   width: 100%;
   max-width: 200px;
 `;
-
-const MaksullisuustyypitCheckboxGroup = props => {
-  const options = props;
-
-  return <CheckboxGroup options={options} {...props} />;
-};
-
-const MaksullisuustyypitField = createFormFieldComponent(
-  MaksullisuustyypitCheckboxGroup,
-  ({ input: { value, ...input }, ...props }) => ({
-    ...input,
-    value: value || [],
-    ...props,
-  })
-);
 
 export const MaksuField = ({ name, t, label }) => {
   return (
@@ -111,7 +96,7 @@ export const MaksullisuusFields = ({
         {koulutustyyppiWithMultipleMaksullisuustyyppi ? (
           <Field
             name={tyyppiName}
-            component={MaksullisuustyypitField}
+            component={FormFieldCheckboxGroup}
             options={options}
             label={label}
             error={error}

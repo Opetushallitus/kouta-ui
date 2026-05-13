@@ -61,7 +61,6 @@ export const MaksullisuusFields = ({
   isLukuvuosimaksuVisible,
   label,
   koulutustyyppi,
-  error,
 }) => {
   const { t } = useTranslation();
 
@@ -111,7 +110,6 @@ export const MaksullisuusFields = ({
             component={FormFieldCheckboxGroup}
             options={options}
             label={label}
-            error={error}
             required
           />
         ) : (

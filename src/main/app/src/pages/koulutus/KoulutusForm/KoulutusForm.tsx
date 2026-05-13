@@ -83,7 +83,9 @@ export const KoulutusForm = ({
 }: KoulutusFormProps) => {
   const { t } = useTranslation();
 
-  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
+  const koulutustyyppi = useFieldValue('koulutustyyppi') as
+    | KOULUTUSTYYPPI
+    | undefined;
   const kieliversiotValue = useFieldValue('kieliversiot');
   const koulutuskoodi = useFieldValue('information.koulutus');
   const languageTabs = kieliversiotValue || [];

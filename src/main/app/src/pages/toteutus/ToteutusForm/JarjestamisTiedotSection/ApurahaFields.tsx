@@ -48,9 +48,9 @@ const ApurahaYksikkoField = ({ name, disabled }) => {
 export const ApurahaMaaraFields = createFormFieldComponent(
   ({ section, disabled }) => {
     const { t } = useTranslation();
-    const apurahaMaaraTyyppi = useFieldValue<MaaraTyyppi>(
+    const apurahaMaaraTyyppi = useFieldValue(
       `${section}.apurahaMaaraTyyppi`
-    );
+    ) as MaaraTyyppi | undefined;
     return (
       <Box marginTop={1} width="240px">
         <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
@@ -118,11 +118,13 @@ export const ApurahaMaaraFields = createFormFieldComponent(
 
 export const ApurahaFields = ({ language, name, toteutuksenMetadata }) => {
   const { t } = useTranslation();
-  const onkoApurahaSelected = useFieldValue<boolean>(`${name}.onkoApuraha`);
+  const onkoApurahaSelected = useFieldValue(`${name}.onkoApuraha`) as
+    | boolean
+    | undefined;
 
-  const maksullisuustyyppi = useFieldValue<string>(
-    `${name}.maksullisuustyyppi`
-  );
+  const maksullisuustyyppi = useFieldValue(`${name}.maksullisuustyyppi`) as
+    | string
+    | undefined;
   const onkoApurahaInDb = toteutuksenMetadata?.opetus?.onkoApuraha;
 
   // onkoApurahaInDb-check tehdään, koska tietokannassa on jo maksullisia toteutuksia, joille

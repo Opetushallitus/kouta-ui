@@ -6,7 +6,7 @@ import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import {
   useFieldValue,
-  useInitalFieldValue,
+  useInitialFieldValue,
   useIsDirty,
   useSetFieldValue,
 } from '#/src/hooks/form';
@@ -17,7 +17,7 @@ const JarjestaaUrheilijanAmmatillistaKoulutustaField = ({
 }) => {
   const { t } = useTranslation();
   const jarjestyspaikkaOid = useFieldValue('jarjestyspaikkaOid');
-  const initialJarjestyspaikkaOid = useInitalFieldValue('jarjestyspaikkaOid');
+  const initialJarjestyspaikkaOid = useInitialFieldValue('jarjestyspaikkaOid');
   const jarjestyspaikka = options.find(
     option => option.value === jarjestyspaikkaOid
   );

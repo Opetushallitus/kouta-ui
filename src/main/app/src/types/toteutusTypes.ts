@@ -20,7 +20,7 @@ export enum MaksullisuusTyyppi {
 }
 
 export type Maksu = {
-  maksullisuustyyppi: string;
+  maksullisuustyyppi: MaksullisuusTyyppi;
   maksunMaara: number;
 };
 

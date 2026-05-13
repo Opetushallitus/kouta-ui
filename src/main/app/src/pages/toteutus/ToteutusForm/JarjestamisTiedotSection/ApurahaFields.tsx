@@ -128,7 +128,9 @@ export const ApurahaFields = ({
     isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi)
       ? `${name}.maksullisuustyypit`
       : `${name}.maksullisuustyyppi`;
-  const maksullisuustyyppi = useFieldValue<string>(maksullisuustyyppiFieldName);
+  const maksullisuustyyppi = useFieldValue<MaksullisuusTyyppi>(
+    maksullisuustyyppiFieldName
+  );
 
   const onkoApurahaInDb = toteutuksenMetadata?.opetus?.onkoApuraha;
 

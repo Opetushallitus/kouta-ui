@@ -76,7 +76,17 @@ const getMaksullisuustyyppi = (maksut: Array<Maksu>): MaksullisuusTyyppi => {
   if (isEmpty(maksut)) {
     return MaksullisuusTyyppi.MAKSUTON;
   } else {
-    return maksut?.[0].maksullisuustyyppi as MaksullisuusTyyppi;
+    return maksut?.[0].maksullisuustyyppi;
+  }
+};
+
+const getMaksullisuustyypit = (
+  maksut: Array<Maksu>
+): Array<MaksullisuusTyyppi> => {
+  if (isEmpty(maksut)) {
+    return [MaksullisuusTyyppi.MAKSUTON];
+  } else {
+    return maksut?.map((m: Maksu): MaksullisuusTyyppi => m.maksullisuustyyppi);
   }
 };
 
@@ -139,7 +149,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     : getMaksullisuustyyppi(maksut);
 
   const maksullisuustyypit = koulutustyyppiWithMultipleMaksullisuustyyppi
-    ? maksut?.map((m: Maksu): string => m.maksullisuustyyppi)
+    ? getMaksullisuustyypit(maksut)
     : undefined;
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(

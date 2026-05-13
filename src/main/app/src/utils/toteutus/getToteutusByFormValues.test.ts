@@ -17,7 +17,7 @@ import { sisalto } from '../testFormData';
 
 describe('getMaksutByFormValues', () => {
   test('it should create maksut for one "maksullinen"-maksullisuustyyppi with maksunMaara', () => {
-    const maksullisuustyypit = ['maksullinen'];
+    const maksullisuustyypit = [MaksullisuusTyyppi.MAKSULLINEN];
     const maksunMaara = '500.5';
     const lukuvuosimaksunMaara = undefined;
     expect(
@@ -29,8 +29,8 @@ describe('getMaksutByFormValues', () => {
     ).toEqual([{ maksullisuustyyppi: 'maksullinen', maksunMaara: 500.5 }]);
   });
 
-  test('it should create maksut for one "lukuvuosimaksullinen"-maksullisuustyyppi with maksunMaara', () => {
-    const maksullisuustyypit = ['lukuvuosimaksu'];
+  test('it should create maksut for one "lukuvuosimaksu"-maksullisuustyyppi with maksunMaara', () => {
+    const maksullisuustyypit = [MaksullisuusTyyppi.LUKUVUOSIMAKSU];
     const maksunMaara = undefined;
     const lukuvuosimaksunMaara = '1000';
     expect(
@@ -42,8 +42,11 @@ describe('getMaksutByFormValues', () => {
     ).toEqual([{ maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000 }]);
   });
 
-  test('it should create maksut when both "lukuvuosimaksullinen" and "maksullinen" are defined', () => {
-    const maksullisuustyypit = ['maksullinen', 'lukuvuosimaksu'];
+  test('it should create maksut when both "lukuvuosimaksu" and "maksullinen" are defined', () => {
+    const maksullisuustyypit = [
+      MaksullisuusTyyppi.MAKSULLINEN,
+      MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+    ];
     const maksunMaara = '500.5';
     const lukuvuosimaksunMaara = '1000.5';
     expect(
@@ -72,7 +75,10 @@ describe('getMaksutByFormValues', () => {
   });
 
   test('it should set maksunMaara correctly also when it is a number', () => {
-    const maksullisuustyypit = ['maksullinen', 'lukuvuosimaksu'];
+    const maksullisuustyypit = [
+      MaksullisuusTyyppi.MAKSULLINEN,
+      MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+    ];
     const maksunMaara = 500;
     const lukuvuosimaksunMaara = 1000;
     expect(

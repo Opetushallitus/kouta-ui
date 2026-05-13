@@ -9,7 +9,7 @@ import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkin
 
 export const isApurahaVisible = (
   koulutustyyppi: string,
-  maksullisuustyyppi?: string | Array<string>
+  maksullisuustyyppi?: MaksullisuusTyyppi | Array<MaksullisuusTyyppi>
 ) => {
   const maksullisuustyyppiArray = isArray(maksullisuustyyppi)
     ? maksullisuustyyppi
@@ -18,7 +18,8 @@ export const isApurahaVisible = (
   return (
     some(
       maksullisuustyyppiArray,
-      mt => mt === MaksullisuusTyyppi.LUKUVUOSIMAKSU
+      (mt?: MaksullisuusTyyppi): boolean =>
+        mt === MaksullisuusTyyppi.LUKUVUOSIMAKSU
     ) && isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)
   );
 };

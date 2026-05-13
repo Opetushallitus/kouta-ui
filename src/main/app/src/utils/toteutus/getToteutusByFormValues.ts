@@ -55,7 +55,7 @@ const getMaksunMaara = (
 };
 
 export const getMaksutByFormValues = (
-  maksullisuustyyppiValue?: Array<string> | MaksullisuusTyyppi,
+  maksullisuustyyppiValue?: Array<MaksullisuusTyyppi> | MaksullisuusTyyppi,
   maksunMaara?: string | number,
   lukuvuosimaksunMaara?: string | number
 ): Array<Maksu> | undefined => {
@@ -64,7 +64,7 @@ export const getMaksutByFormValues = (
       ? maksullisuustyyppiValue
       : [maksullisuustyyppiValue];
 
-    return maksullisuustyypit?.map(mt => {
+    return maksullisuustyypit?.map((mt: MaksullisuusTyyppi): Maksu => {
       return {
         maksullisuustyyppi: mt,
         maksunMaara: getMaksunMaara(mt, maksunMaara, lukuvuosimaksunMaara),

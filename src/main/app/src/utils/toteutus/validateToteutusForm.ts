@@ -72,14 +72,14 @@ const validateApuraha = eb => {
       onkoApuraha,
       validate(
         'jarjestamistiedot.onkoApuraha',
-        () => isApurahaVisible(maksullisuustyyppi, koulutustyyppi),
+        () => isApurahaVisible(koulutustyyppi, maksullisuustyyppi),
         {
           message: ['validointivirheet.vaaraMaksullisuustyyppiApurahalle'],
         }
       )
     ),
     validateIf(
-      onkoApuraha && isApurahaVisible(maksullisuustyyppi, koulutustyyppi),
+      onkoApuraha && isApurahaVisible(koulutustyyppi, maksullisuustyyppi),
       _fp.flow(
         validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
           message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
@@ -124,24 +124,24 @@ const validateApuraha = eb => {
   )(eb);
 };
 
-const validateMaksullisuustyypit = eb => {
+const validateMaksullisuustyypit = (eb: { values: ToteutusFormValues }) => {
   const { values } = eb;
   const koulutustyyppi = values?.koulutustyyppi;
-  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
+  const maksullisuustyypit = values?.jarjestamistiedot?.maksullisuustyypit;
 
   const koulutustyyppiWithMultipleMaksullisuustyyppi =
     isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi);
 
   return validateIf(
     koulutustyyppiWithMultipleMaksullisuustyyppi &&
-      isArray(maksullisuustyyppi) &&
-      maksullisuustyyppi.length > 1,
+      isArray(maksullisuustyypit) &&
+      maksullisuustyypit.length > 1,
     validate(
-      'jarjestamistiedot.maksullisuustyyppi',
+      'jarjestamistiedot.maksullisuustyypit',
       () => {
         return every(
-          maksullisuustyyppi,
-          mt => mt !== MaksullisuusTyyppi.MAKSUTON
+          maksullisuustyypit,
+          (mt: string): boolean => mt !== MaksullisuusTyyppi.MAKSUTON
         );
       },
       {

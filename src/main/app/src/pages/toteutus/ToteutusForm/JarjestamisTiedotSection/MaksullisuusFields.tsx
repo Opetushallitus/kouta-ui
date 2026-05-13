@@ -42,16 +42,18 @@ export const MaksuField = ({ name, t, label }) => {
 };
 
 const isMaksunMaaraVisible = (
-  selectedMaksullisuustyypit: MaksullisuusTyyppi | Array<MaksullisuusTyyppi>,
+  selectedMaksullisuustyyppiValue:
+    | MaksullisuusTyyppi
+    | Array<MaksullisuusTyyppi>,
   maksullisuustyyppiForMaksunMaara: MaksullisuusTyyppi
 ): boolean => {
-  return isArray(selectedMaksullisuustyypit)
+  return isArray(selectedMaksullisuustyyppiValue)
     ? some(
-        selectedMaksullisuustyypit,
+        selectedMaksullisuustyyppiValue,
         (mt: MaksullisuusTyyppi): boolean =>
           mt === maksullisuustyyppiForMaksunMaara
       )
-    : selectedMaksullisuustyypit === maksullisuustyyppiForMaksunMaara;
+    : selectedMaksullisuustyyppiValue === maksullisuustyyppiForMaksunMaara;
 };
 
 export const MaksullisuusFields = ({
@@ -78,28 +80,34 @@ export const MaksullisuusFields = ({
     ];
   }, [t, isLukuvuosimaksuVisible]);
 
-  const tyyppiName = `${name}.maksullisuustyyppi`;
-  const selectedMaksullisuustyypit = useFieldValue(tyyppiName);
+  const koulutustyyppiWithMultipleMaksullisuustyyppi =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi);
+
+  const maksullisuustyyppiFieldName =
+    koulutustyyppiWithMultipleMaksullisuustyyppi
+      ? `${name}.maksullisuustyypit`
+      : `${name}.maksullisuustyyppi`;
+
+  const selectedMaksullisuustyyppiValue = useFieldValue(
+    maksullisuustyyppiFieldName
+  );
 
   const maksunMaaraVisible = isMaksunMaaraVisible(
-    selectedMaksullisuustyypit,
+    selectedMaksullisuustyyppiValue,
     MaksullisuusTyyppi.MAKSULLINEN
   );
 
   const lukuvuosimaksunMaaraVisible = isMaksunMaaraVisible(
-    selectedMaksullisuustyypit,
+    selectedMaksullisuustyyppiValue,
     MaksullisuusTyyppi.LUKUVUOSIMAKSU
   );
-
-  const koulutustyyppiWithMultipleMaksullisuustyyppi =
-    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi);
 
   return (
     <>
       <div {...getTestIdProps('tyyppi')}>
         {koulutustyyppiWithMultipleMaksullisuustyyppi ? (
           <Field
-            name={tyyppiName}
+            name={maksullisuustyyppiFieldName}
             component={FormFieldCheckboxGroup}
             options={options}
             label={label}
@@ -108,7 +116,7 @@ export const MaksullisuusFields = ({
           />
         ) : (
           <Field
-            name={tyyppiName}
+            name={maksullisuustyyppiFieldName}
             component={FormFieldRadioGroup}
             options={options}
             label={label}

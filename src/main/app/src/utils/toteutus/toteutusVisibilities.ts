@@ -8,8 +8,8 @@ import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 export const isApurahaVisible = (
-  maksullisuustyyppi: string | Array<string>,
-  koulutustyyppi: string
+  koulutustyyppi: string,
+  maksullisuustyyppi?: string | Array<string>
 ) => {
   const maksullisuustyyppiArray = isArray(maksullisuustyyppi)
     ? maksullisuustyyppi

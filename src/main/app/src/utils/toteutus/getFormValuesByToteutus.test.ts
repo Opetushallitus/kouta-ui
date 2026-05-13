@@ -14,6 +14,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
     tila: JULKAISUTILA.TALLENNETTU,
     kielivalinta: ['fi', 'sv'],
     metadata: {
+      tyyppi: 'amm',
       ammattinimikkeet: [
         {
           arvo: 'nimike1',

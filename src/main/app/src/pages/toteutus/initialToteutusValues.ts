@@ -27,6 +27,9 @@ export const initialValues = ({ koulutus }) => {
       ? koulutus?.metadata?.opintojenLaajuusNumeroMin
       : '';
 
+  const koulutustyyppiWithMultipleMaksullisuustyyppi =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi);
+
   return {
     tila: DEFAULT_JULKAISUTILA,
     esikatselu: true,
@@ -68,11 +71,12 @@ export const initialValues = ({ koulutus }) => {
       tapa: POHJAVALINTA.UUSI,
     },
     jarjestamistiedot: {
-      maksullisuustyyppi: isKoulutustyyppiWithMultipleMaksullisuustyyppi(
-        koulutustyyppi
-      )
-        ? [MaksullisuusTyyppi.MAKSUTON]
+      maksullisuustyyppi: koulutustyyppiWithMultipleMaksullisuustyyppi
+        ? undefined
         : MaksullisuusTyyppi.MAKSUTON,
+      maksullisuustyypit: koulutustyyppiWithMultipleMaksullisuustyyppi
+        ? [MaksullisuusTyyppi.MAKSUTON]
+        : undefined,
       apurahaMaaraTyyppi: MaaraTyyppi.YKSI_ARVO,
       apurahaYksikko: { value: ApurahaYksikko.EURO },
       suunniteltuKesto: { vuotta: 0, kuukautta: 0 },

@@ -19,8 +19,12 @@
       "opetuskieliKoodiUrit": [],
       "maksut": [
         {
-          "maksullisuustyyppi": "maksuton",
-          "maksunMaara": null
+          "maksullisuustyyppi": "lukuvuosimaksu",
+          "maksunMaara": 500
+        },
+        {
+          "maksullisuustyyppi": "maksullinen",
+          "maksunMaara": 25
         }
       ],
       "opetustapaKoodiUrit": [],

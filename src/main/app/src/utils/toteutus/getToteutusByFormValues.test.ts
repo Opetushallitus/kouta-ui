@@ -10,27 +10,35 @@ import {
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getToteutusByFormValues, {
-  getMaksutByValues,
+  getMaksutByFormValues,
 } from '#/src/utils/toteutus/getToteutusByFormValues';
 
 import { sisalto } from '../testFormData';
 
-describe('getMaksutByValues', () => {
+describe('getMaksutByFormValues', () => {
   test('it should create maksut for one "maksullinen"-maksullisuustyyppi with maksunMaara', () => {
-    const maksullisuustyypit = 'maksullinen';
+    const maksullisuustyypit = ['maksullinen'];
     const maksunMaara = '500.5';
     const lukuvuosimaksunMaara = undefined;
     expect(
-      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+      getMaksutByFormValues(
+        maksullisuustyypit,
+        maksunMaara,
+        lukuvuosimaksunMaara
+      )
     ).toEqual([{ maksullisuustyyppi: 'maksullinen', maksunMaara: 500.5 }]);
   });
 
   test('it should create maksut for one "lukuvuosimaksullinen"-maksullisuustyyppi with maksunMaara', () => {
-    const maksullisuustyypit = 'lukuvuosimaksu';
+    const maksullisuustyypit = ['lukuvuosimaksu'];
     const maksunMaara = undefined;
     const lukuvuosimaksunMaara = '1000';
     expect(
-      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+      getMaksutByFormValues(
+        maksullisuustyypit,
+        maksunMaara,
+        lukuvuosimaksunMaara
+      )
     ).toEqual([{ maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000 }]);
   });
 
@@ -39,11 +47,28 @@ describe('getMaksutByValues', () => {
     const maksunMaara = '500.5';
     const lukuvuosimaksunMaara = '1000.5';
     expect(
-      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+      getMaksutByFormValues(
+        maksullisuustyypit,
+        maksunMaara,
+        lukuvuosimaksunMaara
+      )
     ).toEqual([
       { maksullisuustyyppi: 'maksullinen', maksunMaara: 500.5 },
       { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000.5 },
     ]);
+  });
+
+  test('it should return undefined when maksullisuustyypit is undefined', () => {
+    const maksullisuustyypit = undefined;
+    const maksunMaara = '500.5';
+    const lukuvuosimaksunMaara = '1000.5';
+    expect(
+      getMaksutByFormValues(
+        maksullisuustyypit,
+        maksunMaara,
+        lukuvuosimaksunMaara
+      )
+    ).toEqual(undefined);
   });
 
   test('it should set maksunMaara correctly also when it is a number', () => {
@@ -51,7 +76,11 @@ describe('getMaksutByValues', () => {
     const maksunMaara = 500;
     const lukuvuosimaksunMaara = 1000;
     expect(
-      getMaksutByValues(maksullisuustyypit, maksunMaara, lukuvuosimaksunMaara)
+      getMaksutByFormValues(
+        maksullisuustyypit,
+        maksunMaara,
+        lukuvuosimaksunMaara
+      )
     ).toEqual([
       { maksullisuustyyppi: 'maksullinen', maksunMaara: 500 },
       { maksullisuustyyppi: 'lukuvuosimaksu', maksunMaara: 1000 },

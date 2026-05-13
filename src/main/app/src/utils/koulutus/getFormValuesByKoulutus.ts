@@ -69,6 +69,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     osaamismerkkiKoodiUri,
     luokittelutermit,
     osaamistavoitteet,
+    paikallisetTutkinnonOsat = [],
   } = metadata;
 
   return {
@@ -149,6 +150,20 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         ),
       }),
     },
+    paikallisetTutkinnonOsat: paikallisetTutkinnonOsat.reduce(
+      (acc, { toteutussuunnitelmaId, tutkinnonosaId }) => {
+        return {
+          ...acc,
+          // Backendissä toteutussuunnitelma on sama kaikille paikallisille tutkinnon osille
+          toteutussuunnitelmaId: { value: toteutussuunnitelmaId },
+          tutkinnonOsat: [
+            ...(acc.tutkinnonOsat ?? []),
+            { value: tutkinnonosaId },
+          ],
+        };
+      },
+      {}
+    ),
     tutkinnonosat: {
       osat: _fp.values(
         _fp.reduce(

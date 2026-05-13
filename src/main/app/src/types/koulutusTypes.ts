@@ -46,6 +46,10 @@ export type KoulutusFormValues = {
     nimi: TranslatedField<string>;
     osat: Array<TutkinnonOsa>;
   };
+  paikallisetTutkinnonOsat: {
+    toteutussuunnitelmaId: { value: string };
+    tutkinnonosat: Array<{ value: string }>;
+  };
   description: {
     kuvaus: TranslatedField<EditorState>;
     osaamistavoitteet?: TranslatedField<EditorState>;

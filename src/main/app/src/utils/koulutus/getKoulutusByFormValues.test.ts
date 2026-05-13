@@ -34,6 +34,10 @@ const KOULUTUS_FORM_VALUES_BASE: KoulutusFormValues = {
     nimi: {},
     osat: [],
   },
+  paikallisetTutkinnonOsat: {
+    toteutussuunnitelmaId: { value: '' },
+    tutkinnonosat: [],
+  },
   soraKuvaus: {
     value: '',
   },
@@ -111,6 +115,10 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
           osat: [],
         },
       ],
+    },
+    paikallisetTutkinnonOsat: {
+      toteutussuunnitelmaId: { value: '5678' },
+      tutkinnonosat: [{ value: '91011' }],
     },
     soraKuvaus: {
       value: '1234',

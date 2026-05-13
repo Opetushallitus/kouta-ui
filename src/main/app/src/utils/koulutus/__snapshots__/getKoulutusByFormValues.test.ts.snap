@@ -36,6 +36,7 @@ exports[`for erikoistumiskoulutus, erikoistumiskoulutusKoodiUri is resolved 1`] 
       "fi": "<p>Fi osaamistavoitteet</p>",
       "sv": "<p>Sv osaamistavoitteet</p>",
     },
+    "paikallisetTutkinnonOsat": [],
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -80,6 +81,7 @@ exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
     "osaamistavoitteet": {},
+    "paikallisetTutkinnonOsat": [],
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
@@ -127,6 +129,7 @@ exports[`getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatil
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
     "osaamistavoitteet": {},
+    "paikallisetTutkinnonOsat": [],
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
@@ -202,6 +205,12 @@ exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] 
       "fi": "<p>Fi osaamistavoitteet</p>",
       "sv": "<p>Sv osaamistavoitteet</p>",
     },
+    "paikallisetTutkinnonOsat": [
+      {
+        "toteutussuunnitelmaId": "5678",
+        "tutkinnonosaId": "91011",
+      },
+    ],
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
@@ -252,6 +261,7 @@ exports[`it should return empty array if no koulutusKoodiUri given 1`] = `
     "osaamisalaKoodiUri": null,
     "osaamismerkkiKoodiUri": null,
     "osaamistavoitteet": {},
+    "paikallisetTutkinnonOsat": [],
     "tunniste": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],

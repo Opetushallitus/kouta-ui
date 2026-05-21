@@ -107,15 +107,15 @@ export const PaikallisetTutkinnonOsatSection = ({
     hasNextPage,
   } = useInfiniteOpetussuunnitelmat({ nimi });
 
-  const selectedToteutussuunnitelma = useKoulutusFormField(
+  const selectedOpetussuunnitelmaId = useKoulutusFormField(
     'paikallisetTutkinnonOsat.toteutussuunnitelmaId'
   );
-  const selectedTotsuId = selectedToteutussuunnitelma?.value;
+  const selectedOpsId = selectedOpetussuunnitelmaId?.value;
 
   const {
     data: paikallisetTutkinnonosatOptions,
     isLoading: isLoadingTutkinnonosat,
-  } = usePaikallisetTutkinnonosatOptions(selectedTotsuId);
+  } = usePaikallisetTutkinnonosatOptions(selectedOpsId);
 
   const loadPaikallisetTutkinnonosat = useLoadOptions(
     paikallisetTutkinnonosatOptions
@@ -141,12 +141,12 @@ export const PaikallisetTutkinnonOsatSection = ({
       </Box>
       <Box>
         <Field
-          name="paikallisetTutkinnonOsat.tutkinnonOsat"
+          name="paikallisetTutkinnonOsat.tutkinnonosat"
           component={FormFieldAsyncSelect}
           label={t('koulutuslomake.valitsePaikallisetTutkinnonOsat')}
           loadOptions={loadPaikallisetTutkinnonosat}
           defaultOptions={paikallisetTutkinnonosatOptions}
-          disabled={disabled || !selectedTotsuId}
+          disabled={disabled || !selectedOpsId}
           isLoading={isLoadingTutkinnonosat}
           isMulti
         />

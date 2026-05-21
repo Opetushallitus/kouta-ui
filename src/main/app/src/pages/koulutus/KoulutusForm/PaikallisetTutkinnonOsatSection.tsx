@@ -9,18 +9,56 @@ import {
   FormFieldSelect,
 } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
+import { ORGANISAATIOTYYPPI } from '#/src/constants';
+import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useKoulutusFormField } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useLoadOptions from '#/src/hooks/useLoadOptions';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
 import { getLanguageValue } from '#/src/utils/languageUtils';
+import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 type PaikallisetTutkinnonOsatProps = {
   disabled: boolean;
+};
+
+const useOrganisaatioOidsWithRights = (): Array<string> | undefined => {
+  const isOph = useIsOphVirkailija();
+  const user = useAuthorizedUser();
+
+  const rawOids = useMemo(() => {
+    if (isOph) return undefined;
+    return (
+      user?.organisaatiot
+        ?.filter(({ kayttooikeudet }) =>
+          kayttooikeudet.some(({ oikeus }) =>
+            ['READ_UPDATE', 'CRUD'].includes(oikeus)
+          )
+        )
+        .map(({ organisaatioOid }) => organisaatioOid) ?? []
+    );
+  }, [isOph, user]);
+
+  const { hierarkia, isLoading } = useOrganisaatioHierarkia(rawOids, {
+    skipParents: true,
+    enabled: (rawOids?.length ?? 0) > 0,
+  });
+
+  return useMemo(() => {
+    if (isOph || isLoading) return undefined;
+    return flatFilterHierarkia(
+      hierarkia,
+      org =>
+        org.organisaatiotyyppiUris?.includes(ORGANISAATIOTYYPPI.OPPILAITOS) ??
+        false
+    ).map(org => org.oid);
+  }, [isOph, isLoading, hierarkia]);
 };
 
 const useInfiniteOpetussuunnitelmat = ({
@@ -99,13 +137,15 @@ export const PaikallisetTutkinnonOsatSection = ({
     return () => clearTimeout(timer);
   }, [inputValue]);
 
+  const organisaatioOids = useOrganisaatioOidsWithRights();
+
   const {
     options: opetussuunnitelmaOptions,
     isLoading: isLoadingOps,
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteOpetussuunnitelmat({ nimi });
+  } = useInfiniteOpetussuunnitelmat({ organisaatioOids, nimi });
 
   const selectedOpetussuunnitelmaId = useKoulutusFormField(
     'paikallisetTutkinnonOsat.toteutussuunnitelmaId'

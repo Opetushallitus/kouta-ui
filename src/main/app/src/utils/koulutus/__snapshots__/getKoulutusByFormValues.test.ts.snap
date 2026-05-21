@@ -207,7 +207,7 @@ exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] 
     },
     "paikallisetTutkinnonOsat": [
       {
-        "toteutussuunnitelmaId": "5678",
+        "opetussuunnitelmaId": "5678",
         "tutkinnonosaId": "91011",
       },
     ],

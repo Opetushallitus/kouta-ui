@@ -1,9 +1,10 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
-import { KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
+import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
+import { AnyKoulutusMetadata, KoulutusModel } from '#/src/types/domainTypes';
 import { KoulutusFormValues } from '#/src/types/koulutusTypes';
-import { isNumeric, toSelectValue } from '#/src/utils';
+import { isNumeric, toEnum, toSelectValue } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -15,7 +16,7 @@ const koodiUriToKoodi = koodiUri => {
 // erikseen tapaus jossa koodiUreja voi olla vain yksi (muut kuin korkeakoulutukset) ja tapaus jossa
 // niitä voi olla monta (korkeakoulutus)
 function getKoulutusKoodiUrit(
-  koulutustyyppi: KOULUTUSTYYPPI,
+  koulutustyyppi?: KOULUTUSTYYPPI,
   koulutusKoodiUrit?: Array<string>
 ): { koulutusKoodiUri?: string; korkeakoulutusKoodiUrit: Array<string> } {
   const isKorkeakoulu = isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
@@ -28,7 +29,9 @@ function getKoulutusKoodiUrit(
   };
 }
 
-export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
+export const getFormValuesByKoulutus = (
+  koulutus: KoulutusModel
+): KoulutusFormValues => {
   const {
     kielivalinta = [],
     koulutustyyppi = '',
@@ -46,7 +49,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
   } = koulutus;
 
   const { koulutusKoodiUri, korkeakoulutusKoodiUrit } = getKoulutusKoodiUrit(
-    koulutustyyppi,
+    toEnum(KOULUTUSTYYPPI, koulutustyyppi),
     koulutus.koulutuksetKoodiUri
   );
 
@@ -70,18 +73,18 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
     luokittelutermit,
     osaamistavoitteet,
     paikallisetTutkinnonOsat = [],
-  } = metadata;
+  } = metadata as AnyKoulutusMetadata;
 
   return {
     organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
-    tila,
+    tila: toEnum(JULKAISUTILA, tila),
     kieliversiot: kielivalinta,
     tarjoajat: { tarjoajat },
     information: {
       nimi,
       eperuste: {
-        value: ePerusteId,
+        value: ePerusteId?.toString(),
       },
       koulutus: {
         value: koulutusKoodiUri,
@@ -91,14 +94,14 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         value: opintojenLaajuusyksikkoKoodiUri,
       },
       opintojenLaajuusNumero: isNumeric(opintojenLaajuusNumero)
-        ? opintojenLaajuusNumero.toString()
+        ? opintojenLaajuusNumero?.toString()
         : '',
       laajuusNumeroTyyppi:
         opintojenLaajuusNumeroMin === opintojenLaajuusNumeroMax
           ? MaaraTyyppi.YKSI_ARVO
           : MaaraTyyppi.VAIHTELUVALI,
-      opintojenLaajuusNumeroMin: opintojenLaajuusNumeroMin,
-      opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax,
+      opintojenLaajuusNumeroMin: opintojenLaajuusNumeroMin?.toString(),
+      opintojenLaajuusNumeroMax: opintojenLaajuusNumeroMax?.toString(),
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
       koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),
       isAvoinKorkeakoulutus: Boolean(isAvoinKorkeakoulutus),
@@ -111,7 +114,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       },
       osaamismerkki: { value: osaamismerkkiKoodiUri },
       ...(![KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA].includes(
-        koulutustyyppi
+        toEnum(KOULUTUSTYYPPI, koulutustyyppi) as KOULUTUSTYYPPI
       ) && {
         luokittelutermit: luokittelutermit?.map(
           (value: string): { label: string; value: string } => {
@@ -123,7 +126,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
         ),
       }),
     },
-    koulutustyyppi,
+    koulutustyyppi: toEnum(KOULUTUSTYYPPI, koulutustyyppi) as KOULUTUSTYYPPI,
     lisatiedot: {
       osioKuvaukset: lisatiedot.reduce((acc, curr) => {
         if (curr.otsikkoKoodiUri) {
@@ -136,9 +139,9 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       }, {}),
       osiot: lisatiedot
         .filter(({ otsikkoKoodiUri }) => Boolean(otsikkoKoodiUri))
-        .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })),
+        .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri! })),
       ...([KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA].includes(
-        koulutustyyppi
+        koulutustyyppi as KOULUTUSTYYPPI
       ) && {
         luokittelutermit: luokittelutermit?.map(
           (value: string): { label: string; value: string } => {
@@ -151,18 +154,20 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
       }),
     },
     paikallisetTutkinnonOsat: paikallisetTutkinnonOsat.reduce(
-      (acc, { toteutussuunnitelmaId, tutkinnonosaId }) => {
+      (acc, { opetussuunnitelmaId, tutkinnonosaId }) => {
         return {
-          ...acc,
-          // Backendissä toteutussuunnitelma on sama kaikille paikallisille tutkinnon osille
-          toteutussuunnitelmaId: { value: toteutussuunnitelmaId },
-          tutkinnonOsat: [
-            ...(acc.tutkinnonOsat ?? []),
-            { value: tutkinnonosaId },
+          // Backendissä opetussuunnitelma on sama kaikille paikallisille tutkinnon osille
+          opetussuunnitelmaId: { value: opetussuunnitelmaId ?? '' },
+          tutkinnonosat: [
+            ...(acc.tutkinnonosat ?? []),
+            { value: tutkinnonosaId ?? '' },
           ],
         };
       },
-      {}
+      {
+        opetussuunnitelmaId: { value: '' },
+        tutkinnonosat: [],
+      } as KoulutusFormValues['paikallisetTutkinnonOsat']
     ),
     tutkinnonosat: {
       osat: _fp.values(
@@ -202,7 +207,7 @@ export const getFormValuesByKoulutus = (koulutus): KoulutusFormValues => {
           osaamisala: {
             value: koodiUriToKoodi(osaamisalaKoodiUri),
           },
-          eperuste: { value: ePerusteId },
+          eperuste: { value: ePerusteId?.toString() },
           koulutus: { value: koulutusKoodiUri },
         }
       : null,

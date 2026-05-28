@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { isArray, some } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
@@ -47,12 +46,8 @@ const isMaksunMaaraVisible = (
     | Array<MaksullisuusTyyppi>,
   maksullisuustyyppiForMaksunMaara: MaksullisuusTyyppi
 ): boolean => {
-  return isArray(selectedMaksullisuustyyppiValue)
-    ? some(
-        selectedMaksullisuustyyppiValue,
-        (mt: MaksullisuusTyyppi): boolean =>
-          mt === maksullisuustyyppiForMaksunMaara
-      )
+  return Array.isArray(selectedMaksullisuustyyppiValue)
+    ? selectedMaksullisuustyyppiValue.includes(maksullisuustyyppiForMaksunMaara)
     : selectedMaksullisuustyyppiValue === maksullisuustyyppiForMaksunMaara;
 };
 

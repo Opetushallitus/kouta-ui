@@ -19,6 +19,7 @@ import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useLoadOptions from '#/src/hooks/useLoadOptions';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { getOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
 import { getLanguageValue } from '#/src/utils/languageUtils';
@@ -69,6 +70,15 @@ function useOppilaitosOidsWithRights(): {
   };
 }
 
+const createOpetussuunitelmaLabel = (
+  id: number | undefined,
+  nimi: TranslatedField<string> | undefined,
+  oppilaitos: { nimi?: TranslatedField<string> } | undefined,
+  language: LanguageCode
+) =>
+  (getLanguageValue(nimi, language) ?? String(id)) +
+  (oppilaitos ? ` (${getLanguageValue(oppilaitos.nimi, language)})` : '');
+
 const useInfiniteOpetussuunnitelmat = ({
   organisaatioOids,
   nimi,
@@ -107,17 +117,38 @@ const useInfiniteOpetussuunnitelmat = ({
         page =>
           page.data?.map(({ id, nimi, koulutustoimija }) => ({
             value: String(id),
-            label:
-              (getLanguageValue(nimi, language) ?? String(id)) +
-              (koulutustoimija
-                ? ` (${getLanguageValue(koulutustoimija.nimi, language)})`
-                : ''),
+            label: createOpetussuunitelmaLabel(
+              id,
+              nimi,
+              koulutustoimija,
+              language
+            ),
           })) ?? []
       ) ?? [],
     [query.data, language]
   );
 
   return { ...query, options };
+};
+
+const useOpetussuunnitelmaByIdOption = (
+  opetussuunnitelmaOption?: SelectOption
+) => {
+  const language = useUserLanguage();
+  const opsId = opetussuunnitelmaOption?.value;
+  const opsLabel = opetussuunnitelmaOption?.label;
+  return useApiQuery(
+    'getOpetussuunnitelmaById',
+    getOpetussuunnitelmaById,
+    { opsId },
+    {
+      enabled: Boolean(opsId) && !opsLabel,
+      select: ({ id, nimi, koulutustoimija }) => ({
+        value: String(id),
+        label: createOpetussuunitelmaLabel(id, nimi, koulutustoimija, language),
+      }),
+    }
+  );
 };
 
 const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
@@ -160,9 +191,25 @@ export const PaikallisetTutkinnonOsatSection = ({
     hasNextPage,
   } = useInfiniteOpetussuunnitelmat({ organisaatioOids: oppilaitosOids, nimi });
 
-  const selectedOpetussuunnitelmaId = useKoulutusFormField(
+  const selectedOpetussuunnitelma = useKoulutusFormField(
     'paikallisetTutkinnonOsat.opetussuunnitelmaId'
-  )?.value;
+  );
+  const selectedOpetussuunnitelmaId = selectedOpetussuunnitelma?.value;
+
+  const { data: selectedOpetussuunnitelmaOption } =
+    useOpetussuunnitelmaByIdOption(selectedOpetussuunnitelma);
+
+  const allOpetussuunnitelmaOptions = useMemo(() => {
+    if (
+      !selectedOpetussuunnitelmaOption ||
+      opetussuunnitelmaOptions.some(
+        opt => opt.value === selectedOpetussuunnitelmaOption.value
+      )
+    ) {
+      return opetussuunnitelmaOptions;
+    }
+    return [selectedOpetussuunnitelmaOption, ...opetussuunnitelmaOptions];
+  }, [selectedOpetussuunnitelmaOption, opetussuunnitelmaOptions]);
 
   const {
     data: paikallisetTutkinnonosatOptions,
@@ -180,7 +227,7 @@ export const PaikallisetTutkinnonOsatSection = ({
           name="paikallisetTutkinnonOsat.opetussuunnitelmaId"
           component={FormFieldSelect}
           label={t('koulutuslomake.valitseOpetussuunnitelma')}
-          options={opetussuunnitelmaOptions}
+          options={allOpetussuunnitelmaOptions}
           disabled={disabled}
           isLoading={
             isLoadingOps || isLoadingOppilaitosOids || isFetchingNextPage
@@ -190,7 +237,11 @@ export const PaikallisetTutkinnonOsatSection = ({
             // TODO: Reset paikalliset tutkinnon osat when changing opetussuunnitelma
             setInputValue(value);
           }}
-          onMenuScrollToBottom={() => hasNextPage && fetchNextPage()}
+          onMenuScrollToBottom={() => {
+            if (hasNextPage) {
+              fetchNextPage();
+            }
+          }}
         />
       </Box>
       <Box>

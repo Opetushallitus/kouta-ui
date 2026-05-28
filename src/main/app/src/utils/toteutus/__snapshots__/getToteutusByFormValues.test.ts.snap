@@ -80,10 +80,6 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
     "hakulomaketyyppi": "muu",
     "hakutermi": "ilmoittautuminen",
     "hasJotpaRahoitus": false,
-    "ilmoittautumislinkki": {
-      "fi": "Fi linkki",
-      "sv": "Sv linkki",
-    },
     "isAvoinKorkeakoulutus": false,
     "isHakukohteetKaytossa": false,
     "isPieniOsaamiskokonaisuus": undefined,
@@ -254,86 +250,6 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
     "taiteenalaKoodiUrit": [
       "taiteenperusopetustaiteenala_sirkustaide",
       "taiteenperusopetustaiteenala_sanataide",
-    ],
-    "toteutusjaksot": [
-      {
-        "ilmoittautumislinkki": {
-          "fi": "Fi linkki",
-          "sv": "Sv linkki",
-        },
-        "koodi": "koodi 123",
-        "kuvaus": {
-          "fi": "<p>Fi kuvaus</p>",
-          "sv": "<p>Sv kuvaus</p>",
-        },
-        "laajuus": {
-          "fi": "Fi laajuus",
-          "sv": "Sv laajuus",
-        },
-        "nimi": {
-          "fi": "Fi nimi",
-          "sv": "Sv nimi",
-        },
-        "sisalto": [
-          {
-            "data": {
-              "fi": "<h2>Fi sisalto</h2>",
-              "sv": "<h2>Sv sisalto</h2>",
-            },
-            "tyyppi": "teksti",
-          },
-          {
-            "data": {
-              "id": "table-1",
-              "nimi": {
-                "fi": "Fi taulukko",
-                "sv": "Sv taulukko",
-              },
-              "rows": [
-                {
-                  "columns": [
-                    {
-                      "index": 0,
-                      "text": {
-                        "fi": "Fi column1",
-                        "sv": "Sv column1",
-                      },
-                    },
-                    {
-                      "index": 1,
-                      "text": {
-                        "fi": "Fi column2",
-                        "sv": "Sv column2",
-                      },
-                    },
-                  ],
-                  "index": 0,
-                },
-                {
-                  "columns": [
-                    {
-                      "index": 0,
-                      "text": {
-                        "fi": "Fi column3",
-                        "sv": "Sv column3",
-                      },
-                    },
-                    {
-                      "index": 1,
-                      "text": {
-                        "fi": "Fi column4",
-                        "sv": "Sv column4",
-                      },
-                    },
-                  ],
-                  "index": 1,
-                },
-              ],
-            },
-            "tyyppi": "taulukko",
-          },
-        ],
-      },
     ],
     "tunniste": null,
     "tyyppi": "amk",

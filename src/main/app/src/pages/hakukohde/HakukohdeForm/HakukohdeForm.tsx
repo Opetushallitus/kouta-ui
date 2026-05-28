@@ -17,8 +17,8 @@ import {
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import {
-  useFieldValue,
-  useInitalFieldValue,
+  useHakukohdeFormField,
+  useInitialFieldValue,
   useSetFieldValue,
 } from '#/src/hooks/form';
 import { useHakukohdeAllowsPoistettuTila } from '#/src/hooks/useHakukohdeInfo';
@@ -36,7 +36,7 @@ import { HakukohteenLinjaSection } from './HakukohteenLinjaSection';
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
 import { JarjestyspaikkaSection } from './JarjestyspaikkaSection';
 import { KuvausSection } from './KuvausSection';
-import { LiitteetSection } from './LiitteetSection';
+import { LiitteetSection } from './LiitteetFields';
 import { PerustiedotSection } from './PerustiedotSection';
 import { PohjakoulutusSection } from './PohjakoulutusSection';
 
@@ -76,7 +76,7 @@ export const HakukohdeForm = ({
   hakukohde?: HakukohdeModel;
 }) => {
   const { t } = useTranslation();
-  const languages = useFieldValue('kieliversiot') || [];
+  const languages = useHakukohdeFormField('kieliversiot') || [];
 
   const formMode = useFormMode();
 
@@ -90,7 +90,7 @@ export const HakukohdeForm = ({
 
   const hakutapa = haku?.hakutapaKoodiUri;
 
-  const hakuajatField = useFieldValue('hakuajat');
+  const hakuajatField = useHakukohdeFormField('hakuajat');
   const hakukohteenHakujat = hakuajatField?.hakuajat;
   const eriHakuaika = hakuajatField?.eriHakuaika;
   const hakukohteenHakuaikaMenossa = isHakukohteenHakuaikaMenossa(
@@ -105,8 +105,8 @@ export const HakukohdeForm = ({
     isLoading
   );
 
-  const initiaTila = useInitalFieldValue('tila');
-  const currentTila = useFieldValue('tila');
+  const initiaTila = useInitialFieldValue('tila');
+  const currentTila = useHakukohdeFormField('tila');
   const updateTila =
     (hakukohteenHakuaikaMenossa &&
       initiaTila === JULKAISUTILA.ARKISTOITU &&

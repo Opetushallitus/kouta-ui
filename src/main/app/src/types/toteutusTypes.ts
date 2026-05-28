@@ -9,7 +9,7 @@ import {
   ApurahaYksikko,
 } from '#/src/constants';
 
-import { AjankohtaFields, SisaltoValues } from './formTypes';
+import { AjankohtaFields } from './formTypes';
 
 type Kuvaus = TranslatedField<any>;
 
@@ -22,15 +22,6 @@ export enum MaksullisuusTyyppi {
 export type Maksu = {
   maksullisuustyyppi: MaksullisuusTyyppi;
   maksunMaara: number;
-};
-
-type Toteutusjakso = {
-  nimi: TranslatedField<string>;
-  koodi: string;
-  laajuus: TranslatedField<string>;
-  ilmoittautumislinkki: TranslatedField<string>;
-  kuvaus: Kuvaus;
-  sisalto: SisaltoValues;
 };
 
 export type LukiolinjatOsio = {
@@ -72,7 +63,6 @@ export type ToteutusFormValues = {
     opintojenLaajuusNumeroMin?: string;
     opintojenLaajuusNumeroMax?: string;
     laajuusNumeroTyyppi?: MaaraTyyppi;
-    ilmoittautumislinkki: TranslatedField<string>;
     hasJotpaRahoitus: boolean;
     isTyovoimakoulutus: boolean;
     isTaydennyskoulutus: boolean;
@@ -139,7 +129,6 @@ export type ToteutusFormValues = {
     painotukset: LukiolinjatOsio;
     erityisetKoulutustehtavat: LukiolinjatOsio;
   };
-  toteutusjaksot: Array<Toteutusjakso>;
   teemakuva?: string;
   hakeutumisTaiIlmoittautumistapa: {
     isHakukohteetKaytossa?: boolean;

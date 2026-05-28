@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldAsyncKoodistoSelect } from '#/src/components/formFields';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import {
   useBoundFormActions,
-  useFieldValue,
   useIsDirty,
+  useKoulutusFormField,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useKoulutuksetByKoulutustyyppi } from '#/src/hooks/useKoulutuksetByKoulutustyyppi';
@@ -21,10 +22,11 @@ const KoulutusField = props => {
     valitseKoulutusLabel = t('yleiset.valitseKoulutus'),
   } = props;
 
-  const koulutustyyppi = useFieldValue('koulutustyyppi');
+  const koulutustyyppi = useKoulutusFormField('koulutustyyppi');
 
-  const { data: koulutukset, isLoading } =
-    useKoulutuksetByKoulutustyyppi(koulutustyyppi);
+  const { data: koulutukset, isLoading } = useKoulutuksetByKoulutustyyppi(
+    koulutustyyppi as KOULUTUSTYYPPI
+  );
 
   const koulutustyyppiChanged = useHasChanged(koulutustyyppi);
 

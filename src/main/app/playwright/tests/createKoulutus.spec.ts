@@ -183,7 +183,7 @@ test.describe('Create koulutus', () => {
           section.getByRole('link', { name: '106436', exact: true })
         ).toHaveAttribute(
           'href',
-          new RegExp('#/fi/esitys/7823345/reformi/tutkinnonosat/7843530$')
+          new RegExp('#/fi/ammatillinen/7823345/tutkinnonosat/7843530$')
         );
       });
       await withinSection(page, 'nimi', async section => {
@@ -200,7 +200,7 @@ test.describe('Create koulutus', () => {
           section.getByRole('link', { name: '106436', exact: true })
         ).toHaveAttribute(
           'href',
-          new RegExp('#/fi/esitys/7823345/reformi/tutkinnonosat/7843530$')
+          new RegExp('#/fi/ammatillinen/7823345/tutkinnonosat/7843530$')
         );
       });
       await withinSection(page, 'description', async section => {

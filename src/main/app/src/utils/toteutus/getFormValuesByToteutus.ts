@@ -67,10 +67,12 @@ export const hakukohteetKaytossaToFormValues = metadata => {
 const getMaksunMaara = (
   maksut: Array<Maksu>,
   maksullisuustyyppi: MaksullisuusTyyppi
-): number | undefined =>
-  maksut?.find(
-    (maksu: Maksu): boolean => maksu.maksullisuustyyppi === maksullisuustyyppi
-  )?.maksunMaara;
+): string | undefined =>
+  maksut
+    ?.find(
+      (maksu: Maksu): boolean => maksu.maksullisuustyyppi === maksullisuustyyppi
+    )
+    ?.maksunMaara?.toString();
 
 const getMaksullisuustyyppi = (maksut: Array<Maksu>): MaksullisuusTyyppi => {
   if (isEmpty(maksut)) {

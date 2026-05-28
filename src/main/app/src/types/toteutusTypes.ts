@@ -98,8 +98,8 @@ export type ToteutusFormValues = {
   jarjestamistiedot: {
     maksullisuustyyppi?: MaksullisuusTyyppi;
     maksullisuustyypit?: Array<MaksullisuusTyyppi>;
-    maksunMaara?: string | number;
-    lukuvuosimaksunMaara?: string | number;
+    maksunMaara?: string;
+    lukuvuosimaksunMaara?: string;
     maksullisuusKuvaus: Kuvaus;
     opetustapa: Array<string>;
     opetustapaKuvaus: Kuvaus;

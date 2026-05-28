@@ -40,13 +40,13 @@ export type LukiolinjatOsio = {
 };
 
 type Kielivalikoima = {
-  A1Kielet: SelectOptions;
-  A2Kielet: SelectOptions;
-  aidinkielet: SelectOptions;
-  B1Kielet: SelectOptions;
-  B2Kielet: SelectOptions;
-  B3Kielet: SelectOptions;
-  muutKielet: SelectOptions;
+  A1Kielet?: SelectOptions;
+  A2Kielet?: SelectOptions;
+  aidinkielet?: SelectOptions;
+  B1Kielet?: SelectOptions;
+  B2Kielet?: SelectOptions;
+  B3Kielet?: SelectOptions;
+  muutKielet?: SelectOptions;
 };
 
 export type LukioDiplomiValues = {
@@ -125,8 +125,8 @@ export type ToteutusFormValues = {
     ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {
-    ammattinimikkeet: TranslatedField<SelectOptions>;
-    avainsanat: TranslatedField<SelectOptions>;
+    ammattinimikkeet?: TranslatedField<SelectOptions>;
+    avainsanat?: TranslatedField<SelectOptions>;
   };
   yhteyshenkilot: Array<Yhteystieto>;
   osaamisalat: {

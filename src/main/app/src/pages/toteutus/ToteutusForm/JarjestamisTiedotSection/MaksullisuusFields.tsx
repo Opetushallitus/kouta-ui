@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -7,25 +7,28 @@ import styled from 'styled-components';
 import {
   FormFieldRadioGroup,
   FormFieldFloatInput,
+  FormFieldCheckboxGroup,
 } from '#/src/components/formFields';
 import { Box, InputIcon } from '#/src/components/virkailija';
+import { useFieldValue } from '#/src/hooks/form';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
-import { getTestIdProps } from '#/src/utils';
+import {
+  getTestIdProps,
+  isKoulutustyyppiWithMultipleMaksullisuustyyppi,
+} from '#/src/utils';
 
 const MaksuInputWrapper = styled.div`
   width: 100%;
   max-width: 200px;
 `;
 
-export const MaksuField = ({ input: { value }, maksuName, t }) => {
-  return [
-    MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-    MaksullisuusTyyppi.MAKSULLINEN,
-  ].includes(value) ? (
+export const MaksuField = ({ name, t, label }) => {
+  return (
     <Box marginTop={2}>
       <MaksuInputWrapper>
         <Field
-          name={maksuName}
+          name={name}
+          label={label}
           component={FormFieldFloatInput}
           placeholder={t('yleiset.maara')}
           helperText={t('yleiset.euroa')}
@@ -34,13 +37,28 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
         />
       </MaksuInputWrapper>
     </Box>
-  ) : null;
+  );
+};
+
+const isMaksunMaaraVisible = (
+  selectedMaksullisuustyyppiValue:
+    | MaksullisuusTyyppi
+    | Array<MaksullisuusTyyppi>,
+  maksullisuustyyppiForMaksunMaara: MaksullisuusTyyppi
+): boolean => {
+  return Array.isArray(selectedMaksullisuustyyppiValue)
+    ? selectedMaksullisuustyyppiValue.some(
+        (mt: MaksullisuusTyyppi): boolean =>
+          mt === maksullisuustyyppiForMaksunMaara
+      )
+    : selectedMaksullisuustyyppiValue === maksullisuustyyppiForMaksunMaara;
 };
 
 export const MaksullisuusFields = ({
   name,
   isLukuvuosimaksuVisible,
   label,
+  koulutustyyppi,
 }) => {
   const { t } = useTranslation();
 
@@ -59,25 +77,63 @@ export const MaksullisuusFields = ({
     ];
   }, [t, isLukuvuosimaksuVisible]);
 
-  const tyyppiName = `${name}.maksullisuustyyppi`;
+  const koulutustyyppiWithMultipleMaksullisuustyyppi =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi);
+
+  const maksullisuustyyppiFieldName =
+    koulutustyyppiWithMultipleMaksullisuustyyppi
+      ? `${name}.maksullisuustyypit`
+      : `${name}.maksullisuustyyppi`;
+
+  const selectedMaksullisuustyyppiValue = useFieldValue(
+    maksullisuustyyppiFieldName
+  );
+
+  const maksunMaaraVisible = isMaksunMaaraVisible(
+    selectedMaksullisuustyyppiValue,
+    MaksullisuusTyyppi.MAKSULLINEN
+  );
+
+  const lukuvuosimaksunMaaraVisible = isMaksunMaaraVisible(
+    selectedMaksullisuustyyppiValue,
+    MaksullisuusTyyppi.LUKUVUOSIMAKSU
+  );
 
   return (
     <>
       <div {...getTestIdProps('tyyppi')}>
-        <Field
-          name={tyyppiName}
-          component={FormFieldRadioGroup}
-          options={options}
-          label={label}
-          required
-        />
+        {koulutustyyppiWithMultipleMaksullisuustyyppi ? (
+          <Field
+            name={maksullisuustyyppiFieldName}
+            component={FormFieldCheckboxGroup}
+            options={options}
+            label={label}
+            required
+          />
+        ) : (
+          <Field
+            name={maksullisuustyyppiFieldName}
+            component={FormFieldRadioGroup}
+            options={options}
+            label={label}
+            required
+          />
+        )}
       </div>
-      <Field
-        name={tyyppiName}
-        component={MaksuField}
-        maksuName={`${name}.maksunMaara`}
-        t={t}
-      />
+      {maksunMaaraVisible && (
+        <MaksuField
+          name={`${name}.maksunMaara`}
+          t={t}
+          label={t('toteutuslomake.maksunMaara')}
+        />
+      )}
+      {lukuvuosimaksunMaaraVisible && (
+        <MaksuField
+          name={`${name}.lukuvuosimaksunMaara`}
+          t={t}
+          label={t('toteutuslomake.lukuvuosimaksunMaara')}
+        />
+      )}
     </>
   );
 };

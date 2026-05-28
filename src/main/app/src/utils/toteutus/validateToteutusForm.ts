@@ -1,3 +1,4 @@
+import { every, isArray } from 'lodash';
 import _fp from 'lodash/fp';
 
 import {
@@ -7,7 +8,11 @@ import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
 } from '#/src/constants';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import {
+  ToteutusFormValues,
+  MaksullisuusTyyppi,
+} from '#/src/types/toteutusTypes';
+import { isKoulutustyyppiWithMultipleMaksullisuustyyppi } from '#/src/utils';
 import createErrorBuilder, {
   validate,
   validateArrayMinLength,
@@ -60,20 +65,21 @@ const validateApuraha = eb => {
   const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
   const apurahaYksikko = values?.jarjestamistiedot?.apurahaYksikko?.value;
   const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
+  const koulutustyyppi = values?.koulutustyyppi;
 
   return _fp.flow(
     validateIf(
       onkoApuraha,
       validate(
         'jarjestamistiedot.onkoApuraha',
-        () => isApurahaVisible(maksullisuustyyppi),
+        () => isApurahaVisible(koulutustyyppi, maksullisuustyyppi),
         {
           message: ['validointivirheet.vaaraMaksullisuustyyppiApurahalle'],
         }
       )
     ),
     validateIf(
-      onkoApuraha && isApurahaVisible(maksullisuustyyppi),
+      onkoApuraha && isApurahaVisible(koulutustyyppi, maksullisuustyyppi),
       _fp.flow(
         validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
           message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
@@ -118,8 +124,37 @@ const validateApuraha = eb => {
   )(eb);
 };
 
+const validateMaksullisuustyypit = (eb: { values: ToteutusFormValues }) => {
+  const { values } = eb;
+  const koulutustyyppi = values?.koulutustyyppi;
+  const maksullisuustyypit = values?.jarjestamistiedot?.maksullisuustyypit;
+
+  const koulutustyyppiWithMultipleMaksullisuustyyppi =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi);
+
+  return validateIf(
+    koulutustyyppiWithMultipleMaksullisuustyyppi &&
+      isArray(maksullisuustyypit) &&
+      maksullisuustyypit.length > 1,
+    validate(
+      'jarjestamistiedot.maksullisuustyypit',
+      () => {
+        return every(
+          maksullisuustyypit,
+          (mt: string): boolean => mt !== MaksullisuusTyyppi.MAKSUTON
+        );
+      },
+      {
+        message: [
+          'validointivirheet.invalidMaksutonWhenMultipleMaksullisuustyypit',
+        ],
+      }
+    )
+  )(eb);
+};
+
 const validateHakeutumisTaiIlmoittautumisTapa = eb => {
-  const values = eb.values;
+  const values = eb?.values;
   const hakeutumisTaiIlmoittautumistapa =
     values?.hakeutumisTaiIlmoittautumistapa?.hakeutumisTaiIlmoittautumistapa;
   return _fp.flow(
@@ -206,6 +241,7 @@ export const validateToteutusForm = (
       ),
       validateOptionalTranslatedField('jarjestamistiedot.opetusaikaKuvaus'),
       validateOptionalTranslatedField('jarjestamistiedot.opetustapaKuvaus'),
+      validateMaksullisuustyypit,
       validateOptionalTranslatedField('jarjestamistiedot.maksullisuusKuvaus'),
       validateApuraha,
       validateOptionalTranslatedField('jarjestamistiedot.apurahaKuvaus'),

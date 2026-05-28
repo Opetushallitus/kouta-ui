@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -16,6 +14,7 @@ import { Box } from '#/src/components/virkailija';
 import { MaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
+import { isKoulutustyyppiWithMultipleMaksullisuustyyppi } from '#/src/utils';
 import { isApurahaVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
 const APURAHA_YKSIKKO_OPTIONS = [
@@ -116,19 +115,29 @@ export const ApurahaMaaraFields = createFormFieldComponent(
   }
 );
 
-export const ApurahaFields = ({ language, name, toteutuksenMetadata }) => {
+export const ApurahaFields = ({
+  language,
+  name,
+  toteutuksenMetadata,
+  koulutustyyppi,
+}) => {
   const { t } = useTranslation();
   const onkoApurahaSelected = useFieldValue<boolean>(`${name}.onkoApuraha`);
 
-  const maksullisuustyyppi = useFieldValue<string>(
-    `${name}.maksullisuustyyppi`
+  const maksullisuustyyppiFieldName =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi)
+      ? `${name}.maksullisuustyypit`
+      : `${name}.maksullisuustyyppi`;
+  const maksullisuustyyppi = useFieldValue<MaksullisuusTyyppi>(
+    maksullisuustyyppiFieldName
   );
+
   const onkoApurahaInDb = toteutuksenMetadata?.opetus?.onkoApuraha;
 
   // onkoApurahaInDb-check tehdään, koska tietokannassa on jo maksullisia toteutuksia, joille
   // on virheellisesti asetettu apuraha
   const isVisible =
-    isApurahaVisible(maksullisuustyyppi) ||
+    isApurahaVisible(koulutustyyppi, maksullisuustyyppi) ||
     (onkoApurahaInDb && maksullisuustyyppi !== MaksullisuusTyyppi.MAKSUTON);
 
   if (!isVisible) {

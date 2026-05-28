@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
@@ -7,8 +8,10 @@ import {
   MaksullisuusTyyppi,
   LukiolinjatOsio,
   LukioDiplomiValues,
+  Maksu,
 } from '#/src/types/toteutusTypes';
 import {
+  isKoulutustyyppiWithMultipleMaksullisuustyyppi,
   kieliArvoListToMultiSelectValue,
   toSelectValue,
   toSelectValueList,
@@ -61,6 +64,34 @@ export const hakukohteetKaytossaToFormValues = metadata => {
   );
 };
 
+const getMaksunMaara = (
+  maksut: Array<Maksu>,
+  maksullisuustyyppi: MaksullisuusTyyppi
+): string | undefined =>
+  maksut
+    ?.find(
+      (maksu: Maksu): boolean => maksu.maksullisuustyyppi === maksullisuustyyppi
+    )
+    ?.maksunMaara?.toString();
+
+const getMaksullisuustyyppi = (maksut: Array<Maksu>): MaksullisuusTyyppi => {
+  if (isEmpty(maksut)) {
+    return MaksullisuusTyyppi.MAKSUTON;
+  } else {
+    return maksut?.[0].maksullisuustyyppi;
+  }
+};
+
+const getMaksullisuustyypit = (
+  maksut: Array<Maksu>
+): Array<MaksullisuusTyyppi> => {
+  if (isEmpty(maksut)) {
+    return [MaksullisuusTyyppi.MAKSUTON];
+  } else {
+    return maksut?.map((m: Maksu): MaksullisuusTyyppi => m.maksullisuustyyppi);
+  }
+};
+
 const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
     kielivalinta,
@@ -110,11 +141,18 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     osaamistavoitteet,
   } = metadata;
 
-  const {
-    lisatiedot,
-    koulutuksenAlkamiskausi = {},
-    maksullisuustyyppi = MaksullisuusTyyppi.MAKSUTON,
-  } = opetus;
+  const { lisatiedot, koulutuksenAlkamiskausi = {}, maksut } = opetus;
+
+  const koulutustyyppiWithMultipleMaksullisuustyyppi =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(tyyppi);
+
+  const maksullisuustyyppi = koulutustyyppiWithMultipleMaksullisuustyyppi
+    ? undefined
+    : getMaksullisuustyyppi(maksut);
+
+  const maksullisuustyypit = koulutustyyppiWithMultipleMaksullisuustyyppi
+    ? getMaksullisuustyypit(maksut)
+    : undefined;
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
     (acc, curr: any) => {
@@ -175,8 +213,13 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     kieliversiot: kielivalinta ?? [],
     tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {
-      maksullisuustyyppi,
-      maksunMaara: opetus?.maksunMaara,
+      maksullisuustyyppi: maksullisuustyyppi,
+      maksullisuustyypit: maksullisuustyypit,
+      maksunMaara: getMaksunMaara(maksut, MaksullisuusTyyppi.MAKSULLINEN),
+      lukuvuosimaksunMaara: getMaksunMaara(
+        maksut,
+        MaksullisuusTyyppi.LUKUVUOSIMAKSU
+      ),
       opetustapa: opetus?.opetustapaKoodiUrit || [],
       opetusaika: opetus?.opetusaikaKoodiUrit || [],
       opetuskieli: opetus?.opetuskieliKoodiUrit || [],

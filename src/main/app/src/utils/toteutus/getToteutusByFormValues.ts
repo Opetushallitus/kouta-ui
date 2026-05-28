@@ -1,9 +1,15 @@
+import { isArray } from 'lodash';
 import _fp from 'lodash/fp';
 
 import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import {
+  Maksu,
+  MaksullisuusTyyppi,
+  ToteutusFormValues,
+} from '#/src/types/toteutusTypes';
 import {
   getTermsByLanguage,
+  isKoulutustyyppiWithMultipleMaksullisuustyyppi,
   isPartialDate,
   maybeParseNumber,
 } from '#/src/utils';
@@ -34,6 +40,39 @@ const getDiplomitByValues = (diplomiValues, kieleistykset) =>
     linkinAltTeksti: kieleistykset(diplomiValues?.linkit[index]?.alt),
   })) || [];
 
+const getMaksunMaara = (
+  maksullisuustyyppi: string,
+  maksunMaara?: string | number,
+  lukuvuosimaksunMaara?: string | number
+) => {
+  if (maksullisuustyyppi === MaksullisuusTyyppi.MAKSULLINEN) {
+    return maybeParseNumber(maksunMaara) || undefined;
+  } else if (maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU) {
+    return maybeParseNumber(lukuvuosimaksunMaara) || undefined;
+  } else {
+    return null;
+  }
+};
+
+export const getMaksutByFormValues = (
+  maksullisuustyyppiValue?: Array<MaksullisuusTyyppi> | MaksullisuusTyyppi,
+  maksunMaara?: string | number,
+  lukuvuosimaksunMaara?: string | number
+): Array<Maksu> | undefined => {
+  if (maksullisuustyyppiValue) {
+    const maksullisuustyypit = isArray(maksullisuustyyppiValue)
+      ? maksullisuustyyppiValue
+      : [maksullisuustyyppiValue];
+
+    return maksullisuustyypit?.map((mt: MaksullisuusTyyppi): Maksu => {
+      return {
+        maksullisuustyyppi: mt,
+        maksunMaara: getMaksunMaara(mt, maksunMaara, lukuvuosimaksunMaara),
+      };
+    });
+  }
+};
+
 const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
     koulutustyyppi,
@@ -50,8 +89,19 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 
-  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
+  const maksullisuustyyppiValue =
+    isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi)
+      ? values?.jarjestamistiedot?.maksullisuustyypit
+      : values?.jarjestamistiedot?.maksullisuustyyppi;
+
   const maksunMaara = values?.jarjestamistiedot?.maksunMaara;
+  const lukuvuosimaksunMaara = values?.jarjestamistiedot?.lukuvuosimaksunMaara;
+
+  const maksut = getMaksutByFormValues(
+    maksullisuustyyppiValue,
+    maksunMaara,
+    lukuvuosimaksunMaara
+  );
 
   const osaamisalaLinkit = values?.osaamisalat?.osaamisalaLinkit || {};
   const osaamisalaLinkkiOtsikot =
@@ -61,7 +111,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const kielivalikoima = values?.jarjestamistiedot?.kielivalikoima;
 
   const ajankohta = values?.jarjestamistiedot?.ajankohta;
-  const apurahaVisible = isApurahaVisible(maksullisuustyyppi);
+  const apurahaVisible = isApurahaVisible(
+    koulutustyyppi,
+    maksullisuustyyppiValue
+  );
   const onkoApuraha = apurahaVisible
     ? values?.jarjestamistiedot?.onkoApuraha
     : false;
@@ -93,8 +146,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           })
         ),
         opetuskieliKoodiUrit: opetuskielet || [],
-        maksullisuustyyppi,
-        maksunMaara: maybeParseNumber(maksunMaara),
+        maksut,
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
         opetuskieletKuvaus: kielistyksetSerialized(

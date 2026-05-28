@@ -134,11 +134,13 @@ const isLukuvuosimaksuVisible = (
   opetuskielet?: Array<string>,
   tohtorikoulutukset?: Array<Koodi>,
   koulutusKoodiurit?: Array<string>
-) => {
+): boolean => {
   return (
-    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
-    !isTohtorikoulutus(koulutusKoodiurit, tohtorikoulutukset) &&
-    isEnglishChosen(opetuskielet)
+    (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
+      !isTohtorikoulutus(koulutusKoodiurit, tohtorikoulutukset) &&
+      isEnglishChosen(opetuskielet)) ||
+    koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ||
+    koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
   );
 };
 
@@ -254,6 +256,7 @@ export const JarjestamisTiedotSection = ({
                 tohtorikoulutukset,
                 koulutusKoodiurit
               )}
+              koulutustyyppi={koulutustyyppi}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />

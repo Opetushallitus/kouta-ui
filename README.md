@@ -128,7 +128,7 @@ Jos haluat ajaa **kaikki** testit kannattaa tehdä kuten Github Actionsissa, eli
 
 ja ajaa sitten kaikki testit toisessa terminaalissa komennolla
 
-    pnpm exec playwrigh
+    pnpm exec playwright test
 
 Playwright-testejä voi ajaa myös dev-serveriä vasten, mutta se on paljon hitaampaa kuin servattua tuotanto-buildia vasten. Aikakatkaisuja voi tulla, vaikka rajoja on kasvatettu. Playwright-testit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `pnpm run start:integration`tai `pnpm run start:integration:debug` komentoa dev-serverin käynnistämiseen. NPM-skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle, jolloin sovellusta voi testailla selaimella muutenkin. Tällöin täytyy kuitenkin olla tarkkana, että muistaa lisätä fixtuurit tarvittaville API-kyselyille.
 

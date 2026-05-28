@@ -105,9 +105,13 @@ const useInfiniteOpetussuunnitelmat = ({
     () =>
       query.data?.pages.flatMap(
         page =>
-          page.data?.map(({ id, nimi }) => ({
+          page.data?.map(({ id, nimi, koulutustoimija }) => ({
             value: String(id),
-            label: getLanguageValue(nimi, language) ?? String(id),
+            label:
+              (getLanguageValue(nimi, language) ?? String(id)) +
+              (koulutustoimija
+                ? ` (${getLanguageValue(koulutustoimija.nimi, language)})`
+                : ''),
           })) ?? []
       ) ?? [],
     [query.data, language]

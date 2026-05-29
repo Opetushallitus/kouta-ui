@@ -76,7 +76,9 @@ const serializeSisalto = (
   });
 };
 
-export const getValintaperusteByFormValues = (values: ValintaperusteFormValues) => {
+export const getValintaperusteByFormValues = (
+  values: ValintaperusteFormValues
+) => {
   const { tila, muokkaaja, perustiedot, esikatselu = false } = values;
 
   const koulutustyyppi = perustiedot?.tyyppi ?? null;

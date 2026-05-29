@@ -15,6 +15,7 @@ import {
 import { Box } from '#/src/components/virkailija';
 import { MaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
+import { AnyToteutusMetadata } from '#/src/types/domainTypes';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import { isApurahaVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
@@ -116,7 +117,15 @@ export const ApurahaMaaraFields = createFormFieldComponent(
   }
 );
 
-export const ApurahaFields = ({ language, name, toteutuksenMetadata }) => {
+export const ApurahaFields = ({
+  language,
+  name,
+  toteutuksenMetadata,
+}: {
+  language: LanguageCode;
+  name: string;
+  toteutuksenMetadata?: AnyToteutusMetadata;
+}) => {
   const { t } = useTranslation();
   const onkoApurahaSelected = useFieldValue(`${name}.onkoApuraha`) as
     | boolean

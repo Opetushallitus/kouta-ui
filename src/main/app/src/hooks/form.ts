@@ -93,7 +93,7 @@ export function useSubmitErrors<TErrors = Record<string, any>>(
   return useSelector(getFormSubmitErrors(formNameProp ?? formName)) as TErrors;
 }
 
-export function useFieldValue<T>(name: string, formNameProp?: string): T {
+export function useFieldValue<T = any>(name: string, formNameProp?: string): T {
   const contextFormName = useFormName();
   const formName = formNameProp || contextFormName;
 

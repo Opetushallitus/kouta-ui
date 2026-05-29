@@ -15,17 +15,23 @@ test('onChange works right', () => {
   const osaamisalatValue = ['osaamisala_1', 'osaamisala_2', 'osaamisala_3'];
 
   const ePeruste = {
-    nimi: 'eperuste nimi',
+    nimi: {
+      fi: 'eperuste nimi',
+    },
     osaamisalat: [
       { nimi: { fi: 'osaamisala 1' }, uri: 'osaamisala_1' },
       { nimi: { fi: 'osaamisala 2' }, uri: 'osaamisala_2' },
     ],
   };
 
-  const osaamisalatKoodistoData = [
+  const osaamisalatKoodistoData: Array<Koodi> = [
     {
       koodiUri: 'osaamisala_1',
       versio: 1,
+      koodiArvo: '1',
+      koodisto: {
+        koodistoUri: 'osaamisala',
+      },
       metadata: [
         {
           kieli: 'FI',
@@ -36,6 +42,10 @@ test('onChange works right', () => {
     {
       koodiUri: 'osaamisala_2',
       versio: 1,
+      koodiArvo: '2',
+      koodisto: {
+        koodistoUri: 'osaamisala',
+      },
       metadata: [
         {
           kieli: 'FI',
@@ -46,6 +56,10 @@ test('onChange works right', () => {
     {
       koodiUri: 'osaamisala_3',
       versio: 1,
+      koodiArvo: '3',
+      koodisto: {
+        koodistoUri: 'osaamisala',
+      },
       metadata: [
         {
           kieli: 'FI',

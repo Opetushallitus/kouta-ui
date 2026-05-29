@@ -10,7 +10,22 @@ const READ_ROLES = ['READ', 'READ_UPDATE', 'CRUD'];
 const UPDATE_ROLES = ['UPDATE', 'READ_UPDATE', 'CRUD'];
 const CREATE_ROLES = ['CRUD'];
 
-const getRoleName = role => {
+type RoleLookup = Record<string, Record<string, boolean>>;
+type OrganisaatioOrOids =
+  | OrganisaatioModel
+  | Array<string>
+  | string
+  | undefined;
+type CheckFn = (role: string, organisaatio: OrganisaatioOrOids) => RoleBuilder;
+type GetCheckFn = (rb: RoleBuilder) => CheckFn;
+
+type RoleBuilderOptions = {
+  roles?: Array<string>;
+  roleLookup?: RoleLookup;
+  result?: boolean;
+};
+
+const getRoleName = (role: string): string | undefined => {
   if (!_.isString(role)) {
     return undefined;
   }
@@ -20,10 +35,9 @@ const getRoleName = role => {
   return parts.filter(v => !isOid(v)).join('_');
 };
 
-const createRoleLookup = roles => {
-  const lookup = {};
+const createRoleLookup = (roles: Array<string>): RoleLookup => {
+  const lookup: RoleLookup = {};
 
-  // eslint-disable-next-line
   for (const role of roles) {
     const organisaatioOid = getRoleOrganisaatioOid(role);
 
@@ -44,8 +58,8 @@ const createRoleLookup = roles => {
 };
 
 const getParentAndSelfOids = (
-  organisaatioOrOids: OrganisaatioModel | Array<string> | string
-) => {
+  organisaatioOrOids: OrganisaatioOrOids
+): Array<string> => {
   if (_.isString(organisaatioOrOids)) {
     return [organisaatioOrOids];
   }
@@ -54,38 +68,53 @@ const getParentAndSelfOids = (
     return organisaatioOrOids;
   }
 
-  const parentOids = organisaatioOrOids?.parentOids;
+  const parentOids = organisaatioOrOids?.parentOids ?? [];
   const organisaatioOid = organisaatioOrOids?.oid;
   const parentsAndSelf = _.isEmpty(parentOids)
     ? [organisaatioOid]
     : [...parentOids, organisaatioOid];
 
-  return parentsAndSelf.filter(Boolean);
+  return parentsAndSelf.filter((v): v is string => Boolean(v));
 };
 
 class RoleBuilder {
-  constructor({ roles = [], roleLookup, result = true } = {}) {
+  currentResult: boolean;
+  roleLookup: RoleLookup;
+
+  constructor({
+    roles = [],
+    roleLookup,
+    result = true,
+  }: RoleBuilderOptions = {}) {
     this.currentResult = result;
-    this.roleLookup = roleLookup ? roleLookup : createRoleLookup(roles);
+    this.roleLookup = roleLookup ?? createRoleLookup(roles);
   }
 
-  hasOneOfFn(getCheckFn, roles, organisaatio) {
+  hasOneOfFn(
+    getCheckFn: GetCheckFn,
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return roles.reduce((acc, curr) => {
       return acc.or(rb => getCheckFn(rb)(curr, organisaatio));
     }, this.clone(false));
   }
 
-  hasAllFn(getCheckFn, roles, organisaatio) {
+  hasAllFn(
+    getCheckFn: GetCheckFn,
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return roles.reduce((acc, curr) => {
       return acc.and(rb => getCheckFn(rb)(curr, organisaatio));
     }, this.clone(true));
   }
 
-  hasOrganisaatioRole(role, organisaatioOid) {
+  hasOrganisaatioRole(role: string, organisaatioOid: string): boolean {
     return Boolean(this.roleLookup?.[organisaatioOid]?.[role]);
   }
 
-  hasRead(role, organisaatio) {
+  hasRead(role: string, organisaatio: OrganisaatioOrOids): RoleBuilder {
     return this.clone(
       getParentAndSelfOids(organisaatio).some(oid => {
         return (
@@ -96,7 +125,10 @@ class RoleBuilder {
     );
   }
 
-  hasReadOneOf(roles, organisaatio) {
+  hasReadOneOf(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasOneOfFn(
       rb =>
         (...args) =>
@@ -106,7 +138,10 @@ class RoleBuilder {
     );
   }
 
-  hasReadAll(roles, organisaatio) {
+  hasReadAll(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasAllFn(
       rb =>
         (...args) =>
@@ -116,7 +151,7 @@ class RoleBuilder {
     );
   }
 
-  hasUpdate(role, organisaatio) {
+  hasUpdate(role: string, organisaatio: OrganisaatioOrOids): RoleBuilder {
     return this.clone(
       getParentAndSelfOids(organisaatio).some(oid => {
         return (
@@ -127,7 +162,10 @@ class RoleBuilder {
     );
   }
 
-  hasUpdateOneOf(roles, organisaatio) {
+  hasUpdateOneOf(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasOneOfFn(
       rb =>
         (...args) =>
@@ -137,7 +175,10 @@ class RoleBuilder {
     );
   }
 
-  hasUpdateAll(roles, organisaatio) {
+  hasUpdateAll(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasAllFn(
       rb =>
         (...args) =>
@@ -147,7 +188,7 @@ class RoleBuilder {
     );
   }
 
-  hasCreate(role, organisaatio) {
+  hasCreate(role: string, organisaatio: OrganisaatioOrOids): RoleBuilder {
     return this.clone(
       getParentAndSelfOids(organisaatio).some(oid => {
         return (
@@ -158,7 +199,10 @@ class RoleBuilder {
     );
   }
 
-  hasCreateOneOf(roles, organisaatio) {
+  hasCreateOneOf(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasOneOfFn(
       rb =>
         (...args) =>
@@ -168,7 +212,10 @@ class RoleBuilder {
     );
   }
 
-  hasCreateAll(roles, organisaatio) {
+  hasCreateAll(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasAllFn(
       rb =>
         (...args) =>
@@ -178,26 +225,27 @@ class RoleBuilder {
     );
   }
 
-  clone(result) {
+  clone(result?: boolean): RoleBuilder {
     return new RoleBuilder({
       roleLookup: this.roleLookup,
       result,
     });
   }
 
-  or(fn) {
+  or(fn: (rb: RoleBuilder) => RoleBuilder): RoleBuilder {
     return this.clone(this.result() || fn(this.clone()).result());
   }
 
-  and(fn) {
+  and(fn: (rb: RoleBuilder) => RoleBuilder): RoleBuilder {
     return this.clone(this.result() && fn(this.clone()).result());
   }
 
-  result() {
+  result(): boolean {
     return this.currentResult;
   }
 }
 
-const createRoleBuilder = args => new RoleBuilder(args);
+const createRoleBuilder = (args?: RoleBuilderOptions): RoleBuilder =>
+  new RoleBuilder(args);
 
 export default createRoleBuilder;

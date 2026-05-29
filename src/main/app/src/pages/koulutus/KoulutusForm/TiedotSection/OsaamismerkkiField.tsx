@@ -141,27 +141,26 @@ const OsaamismerkkitiedotReadOnly = ({
 }: {
   osaamismerkkiData: Osaamismerkki;
   t: TFunction;
-  language: string;
+  language: LanguageCode;
 }) => {
   const apiUrls = useUrls();
 
   const logo = osaamismerkkiData?.kategoria?.liite?.binarydata;
 
   const voimassaoloLoppuu = osaamismerkkiData?.voimassaoloLoppuu;
-  const isDeprecated = voimassaoloLoppuu < now();
-  const voimassaoloLoppuuRow =
-    voimassaoloLoppuu && isDeprecated
-      ? {
-          title: t('yleiset.voimassaoloLoppuu'),
-          description: (
-            <StyledOsaamismerkkiVoimassaoloLoppunut
-              text={`${t(
-                'osaamismerkki.voimassaoloLoppunut'
-              )} ${getReadableDate(osaamismerkkiData?.voimassaoloLoppuu)}`}
-            />
-          ),
-        }
-      : null;
+  const isDeprecated = voimassaoloLoppuu && voimassaoloLoppuu < now();
+  const voimassaoloLoppuuRow = isDeprecated
+    ? {
+        title: t('yleiset.voimassaoloLoppuu'),
+        description: (
+          <StyledOsaamismerkkiVoimassaoloLoppunut
+            text={`${t(
+              'osaamismerkki.voimassaoloLoppunut'
+            )} ${getReadableDate(osaamismerkkiData?.voimassaoloLoppuu)}`}
+          />
+        ),
+      }
+    : null;
   return (
     <Box>
       <InfoBoxGrid
@@ -173,7 +172,7 @@ const OsaamismerkkitiedotReadOnly = ({
                 href={apiUrls.url(
                   'eperusteet.osaamismerkit',
                   language,
-                  osaamismerkkiData?.id
+                  osaamismerkkiData?.id.toString() ?? ''
                 )}
                 target="_blank"
               >
@@ -213,12 +212,12 @@ const OsaamismerkkitiedotReadOnly = ({
 };
 
 export const updateOptionsWithMaybeDeprecatedOsaamismerkki = (
-  options: Array<SelectOptions>,
-  osaamismerkkiId: string,
-  osaamismerkkidata: Osaamismerkki,
+  options: Array<SelectOption>,
+  osaamismerkkiId: string | undefined,
+  osaamismerkkidata: Pick<Osaamismerkki, 'nimi'> | undefined,
   language: LanguageCode
 ) => {
-  const alreadyExists = some(options, ({ value }) => {
+  const alreadyExists = some(options, ({ value }: { value: string }) => {
     return (
       koodiUriWithoutVersion(value) === koodiUriWithoutVersion(osaamismerkkiId)
     );

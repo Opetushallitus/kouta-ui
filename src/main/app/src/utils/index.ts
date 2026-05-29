@@ -48,7 +48,7 @@ import {
   NDASH,
   ORGANISAATIOTYYPPI,
 } from '#/src/constants';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import { NamedEntityModel } from '#/src/types/domainTypes';
 import { SelectValue } from '#/src/types/formTypes';
 import { memoizeOne } from '#/src/utils/memoize';
 
@@ -181,7 +181,7 @@ export function getCookies() {
       .filter(Boolean)
       .map(cookieStr => {
         const [key, ...rest] = cookieStr.split('=');
-        return [decodeURIComponent(key), decodeURIComponent(rest.join('='))];
+        return [decodeURIComponent(key!), decodeURIComponent(rest.join('='))];
       })
   );
 }
@@ -376,8 +376,8 @@ export const isIn = (coll: Array<unknown>) => (val: unknown) =>
   coll?.includes(val);
 
 export const getEntityNimiTranslation = (
-  entity: EntityModelBase | undefined,
-  lng: string
+  entity: NamedEntityModel | undefined,
+  lng: LanguageCode
 ) => {
   const { _enrichedData, nimi } = entity ?? {};
   return getFirstLanguageValue(_enrichedData?.esitysnimi || nimi, lng);
@@ -444,13 +444,17 @@ export const getKoulutustyyppiTranslation = (
 export const notToimipisteOrg = org =>
   !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE, org);
 
-export const toEnum = <T extends object>(obj: T, value?: string | null) => {
-  const values = Object.values(obj);
-  const index = values.indexOf(value);
-  return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
+export const toEnum = <T extends Record<string, string>>(
+  enumObj: T,
+  value: string | null | undefined
+): T[keyof T] | undefined => {
+  if (value == null) return undefined;
+  return (Object.values(enumObj) as Array<string>).includes(value)
+    ? (value as T[keyof T])
+    : undefined;
 };
 
-type KieliArvo = { kieli: string; arvo: string };
+type KieliArvo = { kieli?: LanguageCode; arvo?: string };
 type MultiSelectValue = Record<string, Array<{ label: string; value: string }>>;
 
 export const kieliArvoListToMultiSelectValue = (

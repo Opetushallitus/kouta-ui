@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { AxiosError } from 'axios';
 import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
 import { useAsync, useEvent, useIdle } from 'react-use';
@@ -48,8 +49,11 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
   useAsync(async () => {
     try {
       await httpClient.get(apiUrls.url('kouta-backend.session'));
-    } catch (e) {
-      if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
+    } catch (e: unknown) {
+      if (
+        e instanceof AxiosError &&
+        e?.response?.status === StatusCodes.UNAUTHORIZED
+      ) {
         window.location.replace(
           apiUrls.url('cas.login') +
             '?service=' +
@@ -71,12 +75,14 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
         if (isLoaded) {
           setErrorCode(null);
         }
-      } catch (e) {
-        console.error(e?.response?.status);
-        setErrorCode(e?.response?.status || ERROR_INTERNET_DISCONNECTED);
+      } catch (e: unknown) {
+        if (e instanceof AxiosError) {
+          console.error(e?.response?.status);
+          setErrorCode(e?.response?.status || ERROR_INTERNET_DISCONNECTED);
+        }
       }
     }
-  }, [apiUrls, httpClient, isFocused, isIdle]);
+  }, [apiUrls, httpClient, isFocused, isIdle, isLoaded]);
 
   const { data: asiointiKieli, isLoading: isLoadingAsiointiKieli } =
     useAsiointiKieli();

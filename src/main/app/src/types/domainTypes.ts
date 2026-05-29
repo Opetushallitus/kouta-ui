@@ -1,4 +1,5 @@
-import { ENTITY } from '../constants';
+import { ENTITY } from '#/src/constants';
+
 import { components } from './kouta-backend.api';
 
 export type KoulutusModel = components['schemas']['Koulutus'];
@@ -46,10 +47,16 @@ export type EntityModelBase = {
   tila?: components['schemas']['Julkaisutila'];
   _enrichedData?: {
     esitysnimi?: components['schemas']['Nimi'];
+    [key: string]: unknown;
   };
   muokkaaja?: string;
   modified?: string;
 };
+
+export type NamedEntityModel = Pick<
+  EntityModelBase,
+  'nimi' | 'tila' | '_enrichedData'
+>;
 
 export type KoulutustyyppiModel = components['schemas']['Koulutustyyppi'];
 

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 
 import {
   KOULUTUS_ROLE,
@@ -17,10 +16,16 @@ export const parseSort = sort => {
   return (sort || '').split(':');
 };
 
-const selectValueToSimpleValue = v => {
+type ValueObject = {
+  value?: unknown;
+};
+
+const selectValueToSimpleValue = (
+  v: Array<ValueObject> | ValueObject | null | undefined
+) => {
   switch (true) {
     case _.isArray(v):
-      return v.map(_fp.prop('value'));
+      return v.map($ => $?.value);
     case _.isObject(v):
       return v?.value;
     default:
@@ -28,7 +33,7 @@ const selectValueToSimpleValue = v => {
   }
 };
 
-const nakyvyysToBoolean = v => {
+const nakyvyysToBoolean = (v: ValueObject | null | undefined) => {
   if (v) {
     if (v.value === NAKYVYYS.JULKINEN) {
       return true;
@@ -38,6 +43,21 @@ const nakyvyysToBoolean = v => {
       return null;
     }
   }
+};
+
+export type FiltersState = {
+  organisaatioOid?: string;
+  nimi?: string;
+  hakuNimi?: string;
+  page?: number;
+  orderBy?: string;
+  tila?: any;
+  koulutustyyppi?: any;
+  hakutapa?: any;
+  nakyvyys?: any;
+  koulutuksenAlkamiskausi?: any;
+  koulutuksenAlkamisvuosi?: any;
+  orgWhitelist?: any;
 };
 
 export const getIndexParamsByFilters = ({
@@ -53,13 +73,13 @@ export const getIndexParamsByFilters = ({
   koulutuksenAlkamiskausi,
   koulutuksenAlkamisvuosi,
   orgWhitelist,
-}) => {
+}: FiltersState) => {
   const [orderField, orderDirection] = parseSort(orderBy);
   return {
     organisaatioOid,
     nimi,
     hakuNimi,
-    page: _fp.isNumber(page) ? page + 1 : 1,
+    page: _.isNumber(page) ? page + 1 : 1,
     pageSize: 10,
     orderField,
     orderDirection,

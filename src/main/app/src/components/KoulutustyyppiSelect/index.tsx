@@ -17,6 +17,12 @@ import { spacing, getThemeProp } from '#/src/theme';
 import { getTestIdProps, getKoulutustyyppiTranslationKey } from '#/src/utils';
 import iterateTree, { Order } from '#/src/utils/iterateTree';
 
+type HierarkiaNode = {
+  value: string;
+  disabled?: boolean;
+  children?: Array<HierarkiaNode>;
+};
+
 const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   margin-left: ${spacing(4)};
   padding-left: ${spacing(4)};
@@ -62,7 +68,7 @@ const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
       johtaaTutkintoon
         ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
         : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA
-    );
+    ) as Array<HierarkiaNode>;
 
     iterateTree(
       hierarkiaCopy,
@@ -71,9 +77,9 @@ const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
         // Disable first level if all of its children are disabled.
         // This works because leaves are iterated first
         item.disabled =
-          (KOULUTUSTYYPIT.includes(item.value) && getIsDisabled(item.value)) ||
-          (item?.children &&
-            _.every(item.children, ({ disabled }) => disabled));
+          ((KOULUTUSTYYPIT as Array<string>).includes(item.value) &&
+            getIsDisabled(item.value)) ||
+          item?.children?.every(child => child.disabled);
       },
       { order: Order.BottomUp }
     );

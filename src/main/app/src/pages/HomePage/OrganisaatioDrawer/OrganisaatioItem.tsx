@@ -67,18 +67,33 @@ export const OrganisaatioItem = ({
   nimi,
   open = false,
   collapse = false,
-  onToggleOpen: onToggleOpenProp = () => {},
+  onToggleOpen: onToggleOpenProp,
   children = [],
   language = 'fi',
   disabled = false,
   isEditable = false,
   editLinkURL,
+}: {
+  selected: boolean;
+  favourite: boolean;
+  onToggleFavourite: (oid: string) => void;
+  onSelect: (oid: string) => void;
+  oid: string;
+  nimi?: Record<LanguageCode, string>;
+  open?: boolean;
+  collapse?: boolean;
+  onToggleOpen?: (oid: string) => void;
+  children?: Array<any>;
+  language?: LanguageCode;
+  disabled?: boolean;
+  isEditable?: boolean;
+  editLinkURL?: string;
 }) => {
   const { t } = useTranslation();
 
   const onSelect = () => onSelectProp(oid);
   const onToggleFavourite = () => onToggleFavouriteProp(oid);
-  const onToggleOpen = () => onToggleOpenProp(oid);
+  const onToggleOpen = () => onToggleOpenProp?.(oid);
 
   return (
     <Container>

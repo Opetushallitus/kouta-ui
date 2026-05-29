@@ -13,7 +13,7 @@ import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOpp
 import { useIsOphVirkailija } from './useIsOphVirkailija';
 
 export const useOppilaitosTyypit = (
-  organisaatioOid,
+  organisaatioOid: string,
   options: { enabled?: boolean } = {}
 ) => {
   const { hierarkia, isLoading } = useOrganisaatioHierarkia(organisaatioOid, {
@@ -22,7 +22,7 @@ export const useOppilaitosTyypit = (
   });
 
   const oppilaitostyypit = useMemo(() => {
-    const tyypit: Array<any> = [];
+    const tyypit: Array<string> = [];
 
     iterateTree(hierarkia, org => {
       if (org?.oppilaitostyyppiUri) {
@@ -86,6 +86,9 @@ export const createIsKoulutustyyppiDisabledGetter = ({
 export const useIsKoulutustyyppiDisabledGetter = ({
   entityType,
   organisaatioOid,
+}: {
+  entityType: ENTITY;
+  organisaatioOid: string;
 }) => {
   const isOphVirkailija = useIsOphVirkailija();
 

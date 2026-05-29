@@ -5,9 +5,9 @@ import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import { FormFieldUrlInput } from '#/src/components/formFields';
+import Heading from '#/src/components/Heading';
 import useKoodisto from '#/src/hooks/useKoodisto';
-
-import Heading from '../Heading';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 type SomeFieldsProps = {
   name: string;
@@ -22,15 +22,18 @@ export const SomeFields = ({ name }: SomeFieldsProps) => {
       <Heading mt={4}>{t('oppilaitoslomake.some')}</Heading>
 
       <Grid style={{ marginBottom: '2rem' }}>
-        {somekanavat?.map(somekanava => (
-          <Cell width={4} key={`key-some-${somekanava.metadata[0].nimi}`}>
-            <Field
-              component={FormFieldUrlInput}
-              name={`${name}.some.${somekanava.koodiUri}`}
-              label={somekanava.metadata[0].nimi}
-            />
-          </Cell>
-        ))}
+        {somekanavat?.map(somekanava => {
+          const nimi = getKoodiNimiTranslation(somekanava);
+          return (
+            <Cell width={4} key={`key-some-${nimi}`}>
+              <Field
+                component={FormFieldUrlInput}
+                name={`${name}.some.${somekanava.koodiUri}`}
+                label={nimi}
+              />
+            </Cell>
+          );
+        })}
       </Grid>
     </>
   );

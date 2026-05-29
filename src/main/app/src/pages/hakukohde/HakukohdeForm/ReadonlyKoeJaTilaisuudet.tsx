@@ -7,42 +7,26 @@ import Heading from '#/src/components/Heading';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Divider } from '#/src/components/virkailija';
 import { useKoodiNimi } from '#/src/hooks/useKoodiNimi';
+import { ValintakoetilaisuusModel } from '#/src/types/domainTypes';
 import { formatDateValue } from '#/src/utils';
 
 import { useReadonlyKokeetJaTilaisuudet } from './useReadonlyKokeetJaTilaisuudet';
 
 type Props = {
-  index: number;
   language: LanguageCode;
-  id: string;
-  tyyppiKoodiUri: string;
-  nimi: TranslatedField<string>;
-  metadata: {
-    tietoja: TranslatedField<string>;
-    ohjeetEnnakkovalmistautumiseen: TranslatedField<string>;
-    ohjeetErityisjarjestelyihin: TranslatedField<string>;
+  tyyppiKoodiUri?: string;
+  nimi?: TranslatedField<string>;
+  metadata?: {
+    tietoja?: TranslatedField<string>;
+    ohjeetEnnakkovalmistautumiseen?: TranslatedField<string>;
+    ohjeetErityisjarjestelyihin?: TranslatedField<string>;
   };
-  tilaisuudet: Array<{
-    osoite: {
-      osoite: TranslatedField<string>;
-      postinumeroKoodiUri: string;
-    };
-    aika: {
-      alkaa: string;
-      paattyy: string;
-    };
-    jarjestamispaikka: TranslatedField<string>;
-    lisatietoja: TranslatedField<string>;
-  }>;
+  tilaisuudet?: Array<ValintakoetilaisuusModel>;
 };
 
 export const ReadonlyKoeJaTilaisuudet = ({
   language,
-  metadata: {
-    ohjeetEnnakkovalmistautumiseen,
-    ohjeetErityisjarjestelyihin,
-    tietoja,
-  },
+  metadata,
   nimi,
   tilaisuudet,
   tyyppiKoodiUri,
@@ -54,16 +38,22 @@ export const ReadonlyKoeJaTilaisuudet = ({
     language
   );
 
+  const {
+    ohjeetEnnakkovalmistautumiseen = {},
+    ohjeetErityisjarjestelyihin = {},
+    tietoja = {},
+  } = metadata ?? {};
+
   return (
     <>
-      <Grid css={{ marginBottom: '12px' }}>
+      <Grid style={{ marginBottom: '12px' }}>
         <Cell width={4}>
           <Heading>{t('koeTaiLisanaytto.tyyppi')}</Heading>
           {tyyppiKoodiNimi}
         </Cell>
         <Cell width={4}>
           <Heading>{t('koeTaiLisanaytto.hakijalleNakyvaNimi')}</Heading>
-          {nimi[language]}
+          {nimi?.[language]}
         </Cell>
       </Grid>
       {tietoja[language] && (

@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 
-import { QueryObserverResult } from 'react-query';
+import type { QueryObserverResult } from 'react-query';
 import ReactRouterPrompt from 'react-router-prompt';
 import styled from 'styled-components';
 
@@ -63,7 +63,7 @@ type FormPageProps = {
   title: string;
   entityType: ENTITY;
   formMode: FormMode;
-  initialValues: Record<string, any>;
+  initialValues?: Record<string, any>;
   queryResult?: QueryObserverResult | Array<QueryObserverResult>;
   header?: React.ReactNode;
   steps?: React.ReactNode;

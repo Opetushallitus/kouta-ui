@@ -1,5 +1,13 @@
 import _ from 'lodash';
-import { Machine, assign } from 'xstate';
+import { Machine, assign, DoneInvokeEvent } from 'xstate';
+
+type UploadFileEvent = { type: 'UPLOAD_FILE'; files: FileList };
+
+type ImageUploadContext = {
+  file: File | null | undefined;
+  url: string | null | undefined;
+  error: string | null | undefined;
+};
 
 export const actionTypes = {
   UPLOAD_FILE: 'UPLOAD_FILE',
@@ -29,31 +37,31 @@ const {
   draggingDisabled,
 } = controlStates;
 
-const clearValue = assign({
+const clearValue = assign<ImageUploadContext>({
   file: () => null,
   url: () => null,
 });
 
 const createUploadingState = t => ({
   id: uploading,
-  entry: assign({
-    file: (ctx, e) => e.files[0],
+  entry: assign<ImageUploadContext, UploadFileEvent>({
+    file: (_ctx, e) => e.files[0],
   }),
   invoke: {
     id: 'uploadFile',
     src: 'upload',
     onDone: {
       target: fileUploaded,
-      actions: assign({
-        url: (ctx, e) => e.data,
+      actions: assign<ImageUploadContext, DoneInvokeEvent<string>>({
+        url: (_ctx, e) => e.data,
       }),
     },
     onError: {
       target: error,
       actions: [
         clearValue,
-        assign({
-          error: (ctx, e) =>
+        assign<ImageUploadContext, DoneInvokeEvent<any>>({
+          error: (_ctx, e) =>
             _.isError(e.data)
               ? t('yleiset.kuvanLahetysVirhe')
               : e?.data?.message,
@@ -91,7 +99,7 @@ export function createImageUploadMachine({ url, externalError, t }) {
     initial = error;
   }
 
-  return Machine({
+  return Machine<ImageUploadContext>({
     id: 'imageUpload',
     initial,
     context: {

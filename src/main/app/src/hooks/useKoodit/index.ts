@@ -7,7 +7,17 @@ import { useApiQuery } from '#/src/hooks/useApiQuery';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
-const getKoodistot = ({ versiot, httpClient, apiUrls }) => {
+type GetKoodistotProps = {
+  versiot: Array<[string, string]>;
+  httpClient: any;
+  apiUrls: any;
+};
+
+const getKoodistot = ({
+  versiot,
+  httpClient,
+  apiUrls,
+}: GetKoodistotProps): Promise<Array<Array<Koodi> | undefined>> => {
   return versiot.length > 0
     ? Promise.all(
         versiot.map(([koodisto, versio]) =>
@@ -15,19 +25,20 @@ const getKoodistot = ({ versiot, httpClient, apiUrls }) => {
             httpClient,
             apiUrls,
             koodistoUri: koodisto,
-            versio,
+            versio: Number(versio),
           }).catch(e => {
             console.warn(e);
+            return undefined;
           })
         )
       )
-    : [];
+    : Promise.resolve([]);
 };
 
-export const useKoodit = koodiUris => {
+export const useKoodit = (koodiUris: Array<string>) => {
   const versiot = useMemo(() => {
     const versiotMap = _.isArray(koodiUris)
-      ? koodiUris.reduce((acc, uri) => {
+      ? koodiUris.reduce<Record<string, string>>((acc, uri) => {
           const { koodisto, versio } = parseKoodiUri(uri);
 
           if (koodisto && versio) {

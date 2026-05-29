@@ -13,7 +13,7 @@
  * - Adjust styles for unified look and feel
  */
 
-import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
+import { type Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 
 import {
@@ -26,12 +26,12 @@ import { $findMatchingParent, mergeRegister } from '@lexical/utils';
 import {
   $getSelection,
   $isRangeSelection,
-  BaseSelection,
+  type BaseSelection,
   COMMAND_PRIORITY_CRITICAL,
   COMMAND_PRIORITY_HIGH,
   COMMAND_PRIORITY_LOW,
   KEY_ESCAPE_COMMAND,
-  LexicalEditor,
+  type LexicalEditor,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 import { createPortal } from 'react-dom';

@@ -1,76 +1,82 @@
-import { AxiosInstance } from 'axios';
-import { mapValues, isPlainObject, isArray, isObject } from 'lodash';
+import type { AxiosResponse } from 'axios';
+import { mapValues, isPlainObject, isArray } from 'lodash';
 
 import { ENTITY } from '#/src/constants';
 import { useApiQuery, KoutaApiQueryConfig } from '#/src/hooks/useApiQuery';
+import { HttpClient } from '#/src/httpClient';
+import { EntityTypeMap } from '#/src/types/domainTypes';
+import { ApiUrls } from '#/src/urls';
 
-type GetEntityTypeByOidProps = {
-  entityType: ENTITY;
+type GetEntityTypeByOidProps<K extends ENTITY = ENTITY> = {
+  entityType: K;
   oid: string;
-  httpClient: AxiosInstance;
-  apiUrls: any;
+  httpClient: HttpClient;
+  apiUrls: ApiUrls;
   silent?: boolean;
 };
 
-const isEmptyParagraph = (value: any): boolean => value === '<p></p>';
+const isEmptyParagraph = (value: unknown): boolean => value === '<p></p>';
 
-const filterEmptyParagraphs = (obj: any): any => {
+const filterEmptyParagraphs = <T>(obj: T): T => {
   if (isArray(obj)) {
-    return obj.map(filterEmptyParagraphs);
+    return obj.map(filterEmptyParagraphs) as unknown as T;
   }
 
   if (isPlainObject(obj)) {
-    return mapValues(obj, value => {
-      if (isEmptyParagraph(value)) {
-        return '';
-      } else {
-        return filterEmptyParagraphs(value);
-      }
-    });
+    return mapValues(obj as Record<string, unknown>, value =>
+      isEmptyParagraph(value) ? '' : filterEmptyParagraphs(value)
+    ) as unknown as T;
   }
 
   return obj;
 };
 
-const processEntityData = <T>(data: T, headers: any) => {
-  const lastModified = headers?.['x-last-modified'] ?? null;
+const processEntityData = <T>(
+  data: T,
+  headers: AxiosResponse['headers']
+): T & { lastModified: string | null } => {
+  const lastModified: string | null = headers?.['x-last-modified'] ?? null;
 
   // Kouta-datassa on Lexical-editorin takia tyhjiä kappaleita, joita ei haluta sotkemaan lomakeen käsittelyä.
   const filteredData = filterEmptyParagraphs(data);
 
-  return isObject(filteredData)
-    ? { lastModified, ...filteredData }
-    : filteredData;
+  return { lastModified, ...(filteredData as object) } as T & {
+    lastModified: string | null;
+  };
 };
 
 // NOTE: SORA-kuvaus and valintaperuste use "id" instead of "oid", but this works for them as well.
-export async function getEntityByOid<T>({
+export async function getEntityByOid<K extends ENTITY>({
   entityType,
   oid,
   httpClient,
   apiUrls,
   silent = false,
-}: GetEntityTypeByOidProps) {
-  const { data, headers } = await httpClient.get<T>(
+}: GetEntityTypeByOidProps<K>): Promise<
+  EntityTypeMap[K] & { lastModified: string | null }
+> {
+  const { data, headers } = await httpClient.get<EntityTypeMap[K]>(
     apiUrls.url(`kouta-backend.${entityType}-by-oid`, oid),
     {
       errorNotifier: {
         silent,
       },
-    } as any
+    }
   );
 
   return processEntityData(data, headers);
 }
 
-export const useEntityByOid = <E>(
-  entityType: ENTITY,
+export const useEntityByOid = <K extends ENTITY>(
+  entityType: K,
   props?: { oid?: string | null; silent?: boolean },
-  options: KoutaApiQueryConfig = {}
+  options?: KoutaApiQueryConfig<
+    EntityTypeMap[K] & { lastModified: string | null }
+  >
 ) =>
-  useApiQuery<E>(
+  useApiQuery(
     entityType,
-    getEntityByOid,
+    getEntityByOid<K>,
     { entityType, ...props },
     {
       refetchOnWindowFocus: false,

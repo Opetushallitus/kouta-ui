@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import ListSpin from '#/src/components/ListSpin';
@@ -22,9 +22,9 @@ export const RelatedEntitiesTable = function ({
   const rows = useMemo(() => {
     return (
       data &&
-      _fp.flow(
-        _fp.map(entity => ({ ...entity, key: entity.oid })),
-        _fp.sortBy(e => e.nimi[i18n.language])
+      _.flow(
+        $ => $.map(entity => ({ ...entity, key: entity.oid })),
+        $ => _.sortBy($, e => e.nimi[i18n.language])
       )(data)
     );
   }, [data, i18n.language]);
@@ -43,7 +43,7 @@ export const RelatedEntitiesTable = function ({
 
   return (
     <>
-      {_fp.isNil(rows) ? (
+      {_.isNil(rows) ? (
         <ListSpin />
       ) : (
         <>

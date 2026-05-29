@@ -1,8 +1,7 @@
-import dns from 'dns';
-import path from 'path';
-import url from 'url';
+import dns from 'node:dns';
+import path from 'node:path';
+import url from 'node:url';
 
-//import { optimizeLodashImports } from '@optimize-lodash/rollup-plugin';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import react from '@vitejs/plugin-react';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
@@ -11,10 +10,10 @@ import checker from 'vite-plugin-checker';
 import pluginRewriteAll from 'vite-plugin-rewrite-all';
 import svgr from 'vite-plugin-svgr';
 
-const devProxyOptions = (targetUrl: string) => ({
+const devProxyOptions = (targetUrl?: string) => ({
   autoRewrite: true,
   headers: {
-    'Access-Control-Allow-Origin': targetUrl,
+    ...(targetUrl ? { 'Access-Control-Allow-Origin': targetUrl } : {}),
   },
   changeOrigin: true,
   cookieDomainRewrite: 'localhost',
@@ -28,7 +27,7 @@ const __dirname = path.dirname(__filename);
 dns.setDefaultResultOrder('verbatim');
 
 export default defineConfig(({ mode }) => {
-  const env = Object.assign({}, process.env, loadEnv(mode, process.cwd(), ''));
+  const env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
 
   const isDev = mode === 'development';
   const {
@@ -59,7 +58,7 @@ export default defineConfig(({ mode }) => {
         ? [
             pluginRewriteAll(),
             checker({
-              //typescript: true, //TS-tarkistuksen voi laittaa päälle sitten kun nykyiset TS-virheet on saatu korjattua
+              typescript: true,
               eslint: {
                 lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
               },

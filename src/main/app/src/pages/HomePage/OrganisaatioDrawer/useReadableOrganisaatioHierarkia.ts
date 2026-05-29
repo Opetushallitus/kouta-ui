@@ -80,7 +80,7 @@ export const useAllowedOrgs = () => {
     'searchOrganisaatioHierarkia',
     promiseFn,
     {
-      oids,
+      oids: oids as Array<string>,
     },
     { ...LONG_CACHE_QUERY_OPTIONS }
   );
@@ -134,7 +134,7 @@ export const useReadableOrganisaatioHierarkia = ({
     promiseFn,
     {
       searchString: formattedName,
-      oids,
+      oids: oids as Array<string>,
     },
     { ...LONG_CACHE_QUERY_OPTIONS }
   );

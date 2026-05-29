@@ -1,49 +1,87 @@
 import { useCallback, useMemo } from 'react';
 
-import { QueryObserverOptions, useQueries, useQuery } from 'react-query';
+import {
+  useQueries,
+  useQuery,
+  UseQueryResult,
+  UseQueryOptions,
+} from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 
-type ApiError = any;
-type ApiResult = any;
+// Helper types for extracting API function parameter and return types
+type ExtractApiProps<T> = T extends (params: infer P) => any
+  ? {
+      [K in keyof Omit<P, 'httpClient' | 'apiUrls'>]?:
+        | Omit<P, 'httpClient' | 'apiUrls'>[K]
+        | null;
+    }
+  : Record<string, any>;
 
-export type KoutaApiQueryConfig = QueryObserverOptions<ApiResult, ApiError>;
+type ExtractApiData<T> = T extends (...args: Array<any>) => Promise<infer D>
+  ? D
+  : unknown;
 
-export const useApiQuery = <E>(
+// Backward compatible type alias
+export type KoutaApiQueryConfig<
+  TQueryFnData = unknown,
+  TError = unknown,
+  TData = TQueryFnData,
+> = Omit<UseQueryOptions<TQueryFnData, TError, TData>, 'queryKey' | 'queryFn'>;
+
+export const useApiQuery = <
+  TApiFn extends (params: any) => Promise<any>,
+  TQueryFnData = ExtractApiData<TApiFn>,
+  TError = unknown,
+  TData = TQueryFnData,
+>(
   key: string,
-  apiFn: (any) => Promise<E>,
-  props: Record<string, any> = {},
-  options: KoutaApiQueryConfig = {}
-) => {
+  apiFn: TApiFn,
+  props?: ExtractApiProps<TApiFn>,
+  options?: KoutaApiQueryConfig<TQueryFnData, TError, TData>
+): UseQueryResult<TData, TError> => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
 
   const queryFn = useCallback(
-    () => apiFn({ httpClient, apiUrls, ...props }),
+    () => apiFn({ httpClient, apiUrls, ...props } as Parameters<TApiFn>[0]),
     [apiFn, httpClient, apiUrls, props]
   );
-  return useQuery<E>([key, props], queryFn, options);
+
+  return useQuery<TQueryFnData, TError, TData>([key, props], queryFn, options);
 };
 
-type QuerySpec = {
+type QuerySpec<
+  TApiFn extends (params: any) => Promise<any> = any,
+  TQueryFnData = ExtractApiData<TApiFn>,
+  TError = unknown,
+  TData = TQueryFnData,
+> = {
   key: string;
-  queryFn: (...params: any) => any;
-  props?: Record<string, any>;
-  options?: KoutaApiQueryConfig;
+  queryFn: TApiFn;
+  props?: ExtractApiProps<TApiFn>;
+  options?: KoutaApiQueryConfig<TQueryFnData, TError, TData>;
 };
 
-type QuerySpecs = Array<QuerySpec>;
-
-export const useApiQueries = (koutaQuerySpecs: QuerySpecs) => {
+export const useApiQueries = <
+  T extends ReadonlyArray<QuerySpec<any, any, any>>,
+>(
+  koutaQuerySpecs: readonly [...T]
+) => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
 
   const querySpecs = useMemo(
     () =>
-      koutaQuerySpecs.map(({ key, queryFn, props = {}, options = {} }) => ({
+      koutaQuerySpecs.map(({ key, queryFn, props, options = {} }) => ({
         queryKey: [key, props],
-        queryFn: () => queryFn({ httpClient, apiUrls, ...props }),
+        queryFn: () =>
+          queryFn({
+            httpClient,
+            apiUrls,
+            ...(props as Record<string, any>),
+          } as any),
         ...options,
       })),
     [koutaQuerySpecs, apiUrls, httpClient]

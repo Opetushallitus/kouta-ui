@@ -3,6 +3,7 @@ import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { LUKIO_YLEISLINJA } from '#/src/constants';
+import { ValintakoetilaisuusModel } from '#/src/types/domainTypes';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import {
   isNumeric,
@@ -169,7 +170,9 @@ export const getFormValuesByHakukohde = (
       // NOTE: tässä muutetaan taulukko [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}] objektiksi {id: [tilaisuus1, tilaisuus2]} käsittelyn helpottamiseksi
       valintaperusteenValintakokeidenLisatilaisuudet: _fp.flow(
         _fp.keyBy('id'),
-        _fp.mapValues(v => v.tilaisuudet.map(getTilaisuusValues))
+        _fp.mapValues((v: { tilaisuudet?: Array<ValintakoetilaisuusModel> }) =>
+          (v.tilaisuudet ?? []).map(getTilaisuusValues)
+        )
       )(valintaperusteenValintakokeidenLisatilaisuudet),
     },
     jarjestyspaikkaOid,

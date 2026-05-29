@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 
 import _ from 'lodash';
-import { SpaceProps } from 'styled-system';
+import type { SpaceProps } from 'styled-system';
 
 import Heading from '#/src/components/Heading';
 import { Box } from '#/src/components/virkailija';

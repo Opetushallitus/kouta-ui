@@ -23,7 +23,7 @@ import Navigation from './Navigation';
 import ToteutuksetSection from './ToteutuksetSection';
 import ValintaperusteetSection from './ValintaperusteetSection';
 
-const HomeContent = ({ organisaatioOid }) => {
+const HomeContent = ({ organisaatioOid }: { organisaatioOid: string }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -32,7 +32,7 @@ const HomeContent = ({ organisaatioOid }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const onOrganisaatioChange = useCallback(
-    value => {
+    (value: string) => {
       const searchParams = new URLSearchParams(search);
       searchParams.set('organisaatioOid', value);
       navigate({ search: searchParams.toString() });

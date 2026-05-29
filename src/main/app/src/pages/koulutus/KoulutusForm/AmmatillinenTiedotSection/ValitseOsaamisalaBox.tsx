@@ -23,16 +23,38 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
-export type OsaamisalaOsa = {
-  muodostumisSaanto: { laajuus: { minimi: number } };
-  osaamisala: { osaamisalakoodiArvo: number };
+type Osaamisala = {
+  arvo: string;
+  nimi: TranslatedField;
 };
 
-const getOsaamisalaOptions = (osaamisalat = [], language) =>
+type EPeruste = {
+  id: number;
+  osaamisalat?: Array<Osaamisala>;
+};
+
+type SisaltoLapsi = {
+  _perusteenOsa: number;
+  id: number;
+};
+
+type Props = {
+  fieldName: string;
+  language: LanguageCode;
+  selectedEPeruste: EPeruste | undefined;
+  koulutusIsLoading: boolean;
+  disabled: boolean;
+  languages: Array<LanguageCode>;
+};
+
+const getOsaamisalaOptions = (
+  osaamisalat?: Array<Osaamisala>,
+  language?: LanguageCode
+) =>
   _fp.map(({ arvo, nimi }) => ({
     label: getLanguageValue(nimi, language),
     value: arvo,
-  }))(osaamisalat);
+  }))(osaamisalat ?? []);
 
 export const ValitseOsaamisalaBox = ({
   fieldName,
@@ -41,7 +63,7 @@ export const ValitseOsaamisalaBox = ({
   koulutusIsLoading,
   disabled,
   languages,
-}) => {
+}: Props) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
   const selectedOsaamisala = useFieldValue(fieldName);
@@ -83,15 +105,15 @@ export const ValitseOsaamisalaBox = ({
   );
 
   const selectedOsaamisalaData = _fp.find(
-    ({ arvo }) => arvo === selectedOsaamisala?.value
+    ({ arvo }: Osaamisala) => arvo === selectedOsaamisala?.value
   )(osaamisalat);
 
   /* Get laajuus for selected osaamisala */
-  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat;
+  const ePerusteRakenneOsat = ePerusteRakenne?.osat;
   const osaamisalakoodi = selectedOsaamisalaData?.arvo;
 
   let osaamisalaLaajuus;
-  if (ePerusteRakenneOsat) {
+  if (ePerusteRakenneOsat && osaamisalakoodi) {
     osaamisalaLaajuus = getOsaamisalaLaajuus(
       ePerusteRakenneOsat,
       osaamisalakoodi
@@ -107,7 +129,7 @@ export const ValitseOsaamisalaBox = ({
   const isDirty = useIsDirty();
 
   const perusteenOsaId = _fp.find(
-    ({ _perusteenOsa }) =>
+    ({ _perusteenOsa }: SisaltoLapsi) =>
       Number(_perusteenOsa) === Number(selectedOsaamisalaKuvausId)
   )(ePerusteSisalto?.lapset)?.id;
 
@@ -170,8 +192,8 @@ export const ValitseOsaamisalaBox = ({
                   href={apiUrls.url(
                     'eperusteet.sisalto',
                     language,
-                    selectedEPerusteId,
-                    perusteenOsaId
+                    selectedEPerusteId?.toString(),
+                    perusteenOsaId?.toString()
                   )}
                   target="_blank"
                 >

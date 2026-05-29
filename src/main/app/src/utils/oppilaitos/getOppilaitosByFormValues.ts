@@ -32,23 +32,16 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     })
   );
 
-  interface Some {
-    [key: string]: string;
-  }
-
-  const removeEmptySomeKeys = (some: Some): Partial<Some> => {
-    let someWithEmptyValsRemoved: Partial<Some> = some;
-    Object.keys(some).forEach((key: string) => {
-      if (some[key].trim().length < 1) {
-        someWithEmptyValsRemoved = _.omit(someWithEmptyValsRemoved, [key]);
-      }
-    });
-    return someWithEmptyValsRemoved;
-  };
+  const removeEmptySomeKeys = (
+    some: Record<string, string>
+  ): Record<string, string> =>
+    Object.fromEntries(
+      Object.entries(some).filter(([, val]) => val.trim() !== '')
+    );
 
   const composeEsittelyvideoNimiObject = (
-    videoUrls: object
-  ): object | undefined => {
+    videoUrls: Record<string, string>
+  ): Record<string, string> | undefined => {
     const languages = Object.keys(videoUrls).filter(lang =>
       Boolean(videoUrls[lang])
     );

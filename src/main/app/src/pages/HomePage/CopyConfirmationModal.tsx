@@ -21,9 +21,9 @@ import { entitySelectionMachine } from './entitySelectionMachine';
 import { CopyToteutuksetMutationFunctionAsync } from './ToteutuksetSection/copyToteutukset';
 import { useEntitySelectionApi } from './useEntitySelection';
 
-export const BatchOpsCopyContext = React.createContext(
-  {} as InterpreterFrom<typeof BatchOpsMachine>
-);
+export const BatchOpsCopyContext = React.createContext<
+  InterpreterFrom<typeof BatchOpsMachine> | undefined
+>(undefined);
 
 export const useBatchOpsApi = (
   batchOpsService: InterpreterFrom<typeof BatchOpsMachine>
@@ -62,9 +62,7 @@ export const useBatchOpsApi = (
 
 export const useCopyBatchOpsApi = () => {
   const batchOpsService = useContextOrThrow(BatchOpsCopyContext);
-  return useBatchOpsApi(
-    batchOpsService as InterpreterFrom<typeof BatchOpsMachine>
-  );
+  return useBatchOpsApi(batchOpsService);
 };
 
 export const CopyConfirmationWrapper = ({
@@ -115,7 +113,7 @@ export const CopyConfirmationModal = ({
     [createColumns, selectionRef]
   );
 
-  const { selection } = useEntitySelectionApi(selectionRef);
+  const { selection } = useEntitySelectionApi(selectionRef!);
 
   const onConfirm = useCallback(() => {
     execute({ entities: selection });

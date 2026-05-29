@@ -1,7 +1,7 @@
 import { getFileExtension, getImageFileDimensions } from '#/src/utils';
 
 const promisifyValidate = validate =>
-  new Promise((resolve, reject) => {
+  new Promise<void>((resolve, reject) => {
     const error = validate();
     return error ? reject(error) : resolve();
   });

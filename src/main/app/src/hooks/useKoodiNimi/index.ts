@@ -6,7 +6,7 @@ import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 export const useKoodiNimi = (
   koodiUri,
-  { language: languageOpt }: { language?: string } = {}
+  { language: languageOpt }: { language?: LanguageCode } = {}
 ) => {
   const { koodi, ...rest } = useKoodi(koodiUri);
   const language = useUserLanguage();

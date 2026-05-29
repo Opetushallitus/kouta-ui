@@ -17,6 +17,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for one org', () => {
       ],
       nimi: {},
       kieletUris: [],
+      status: 'AKTIIVINEN',
     },
   ];
 
@@ -73,6 +74,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for one org', () => {
       kieletUris: [],
       jarjestaaUrheilijanAmmKoulutusta: true,
       mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
+      status: 'AKTIIVINEN',
     },
   ];
   expect(
@@ -92,6 +94,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
       ],
       nimi: {},
       kieletUris: [],
+      status: 'AKTIIVINEN',
     },
     {
       oid: '1.2.246.562.10.2013111415312640960525',
@@ -103,6 +106,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
       ],
       nimi: {},
       kieletUris: [],
+      status: 'AKTIIVINEN',
     },
   ];
 
@@ -165,6 +169,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
       mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
       nimi: {},
       kieletUris: [],
+      status: 'AKTIIVINEN',
     },
     {
       oid: '1.2.246.562.10.2013111415312640960525',
@@ -178,6 +183,7 @@ test('should add jarjestaaUrheilijanAmmKoulutusta for two orgs', () => {
       mahdollisuusJarjestaaUrheilijanAmmKoulutusta: false,
       nimi: {},
       kieletUris: [],
+      status: 'AKTIIVINEN',
     },
   ];
   expect(
@@ -196,6 +202,7 @@ test('should not add jarjestaaUrheilijanAmmKoulutusta for oppilaitos org that do
       ],
       nimi: {},
       kieletUris: [],
+      status: 'AKTIIVINEN',
     },
   ];
 
@@ -221,6 +228,7 @@ test('should not add jarjestaaUrheilijanAmmKoulutusta for oppilaitos org that do
       kieletUris: [],
       jarjestaaUrheilijanAmmKoulutusta: false,
       mahdollisuusJarjestaaUrheilijanAmmKoulutusta: false,
+      status: 'AKTIIVINEN',
     },
   ];
   expect(
@@ -240,6 +248,7 @@ test('should add jarjestaaUrheilijanAmmKolutusta from parent oppilaitos to toimi
       ],
       nimi: {},
       kieletUris: [],
+      status: 'AKTIIVINEN',
     },
   ];
 
@@ -272,6 +281,7 @@ test('should add jarjestaaUrheilijanAmmKolutusta from parent oppilaitos to toimi
       kieletUris: [],
       jarjestaaUrheilijanAmmKoulutusta: false,
       mahdollisuusJarjestaaUrheilijanAmmKoulutusta: true,
+      status: 'AKTIIVINEN',
     },
   ];
   expect(

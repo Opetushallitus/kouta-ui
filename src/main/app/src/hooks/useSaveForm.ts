@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
+import { AxiosResponse } from 'axios';
 import _ from 'lodash';
 import { batch } from 'react-redux';
 import {
@@ -8,17 +9,43 @@ import {
   initialize,
 } from 'redux-form';
 
+import { ENTITY } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm, useSubmitErrors } from '#/src/hooks/form';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
 import useToaster from '#/src/hooks/useToaster';
+import { HttpClient } from '#/src/httpClient';
+import { ApiUrls } from '#/src/urls';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
 
 import { useDispatch } from './reduxHooks';
 
-export const useSaveForm = ({ formName, validate, submit }) => {
+type SaveFormOptions = {
+  formName: string;
+  validate: (
+    values: any,
+    registeredFields: Record<string, { name: string }>
+  ) => Promise<Record<string, unknown>> | Record<string, unknown>;
+  submit: (args: {
+    values: any;
+    httpClient: HttpClient;
+    apiUrls: ApiUrls;
+  }) => Promise<{ warnings?: Array<string> } | void>;
+};
+
+type StopSubmitArgs = {
+  errors: Record<string, any> | null;
+  warnings?: Array<string>;
+  response?: AxiosResponse;
+};
+
+export const useSaveForm = ({
+  formName,
+  validate,
+  submit,
+}: SaveFormOptions) => {
   const dispatch = useDispatch();
   const user = useAuthorizedUser();
   const httpClient = useHttpClient();
@@ -42,20 +69,18 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   );
 
   const stopSubmit = useCallback(
-    ({ errors, warnings, response }) => {
+    ({ errors, warnings, response }: StopSubmitArgs) => {
       batch(() => {
-        dispatch(stopSubmitAction(formName, errors));
+        dispatch(stopSubmitAction(formName, errors ?? undefined));
         if (errors) {
           openSavingErrorToast(response?.data);
           setRemoteErrors(response?.data);
+        } else if (warnings) {
+          warnings.forEach(w => {
+            openWarningToast(w);
+          });
         } else {
-          if (warnings) {
-            warnings.forEach(w => {
-              openWarningToast(w);
-            });
-          } else {
-            openSavingSuccessToast();
-          }
+          openSavingSuccessToast();
         }
       });
     },
@@ -76,7 +101,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
 
     startSubmit();
 
-    let errors = {};
+    let errors: Record<string, unknown> = {};
 
     try {
       errors = await validate(enhancedValues, form.registeredFields);
@@ -98,9 +123,14 @@ export const useSaveForm = ({ formName, validate, submit }) => {
       }
     } catch (e) {
       console.error(e);
-      errors = withRemoteErrors(formName, e?.response, errors, currentValues);
-
-      stopSubmit({ errors, response: e?.response });
+      const axiosError = e as { response?: AxiosResponse };
+      errors = withRemoteErrors(
+        formName as ENTITY,
+        axiosError.response,
+        errors,
+        currentValues
+      );
+      stopSubmit({ errors, response: axiosError.response });
     }
   }, [
     form,

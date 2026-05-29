@@ -18,14 +18,26 @@ import {
 } from '#/src/utils/api/getSearchQueryParams';
 
 import Filters from './Filters';
-import { getIndexParamsByFilters } from './utils';
+import { getIndexParamsByFilters, FiltersState } from './utils';
+
+type SearchResponse = {
+  result: Array<Record<string, unknown>>;
+  totalCount: number;
+};
+
+type UseEntitySearchParams = {
+  filtersProps: FiltersState;
+  organisaatioOid: string;
+  searchEntities: (p: any) => Promise<SearchResponse>;
+  searchPage: string;
+};
 
 export const useEntitySearch = ({
   filtersProps,
   organisaatioOid,
   searchEntities,
   searchPage,
-}) => {
+}: UseEntitySearchParams) => {
   const queryParams = useMemo(
     () =>
       getSearchQueryParams(

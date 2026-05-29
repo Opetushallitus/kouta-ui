@@ -31,7 +31,7 @@ export const getEmptyColumn = (language: LanguageCode) =>
 
 export const getEmptyRow = (numColumns: number, language: LanguageCode) => {
   return {
-    columns: [...new Array(numColumns)].map(() => getEmptyColumn(language)),
+    columns: new Array(numColumns).map(() => getEmptyColumn(language)),
   };
 };
 
@@ -49,7 +49,7 @@ export const setTable = ({
     const numberOfColumns = getNumberOfColumns(rows);
     const extraRows = table.length - rows.length;
     if (extraRows > 0) {
-      const newRows = [...new Array(extraRows)].map(() =>
+      const newRows = new Array(extraRows).map(() =>
         getEmptyRow(numberOfColumns, language)
       );
       draft.rows = [...rows, ...newRows];
@@ -66,7 +66,7 @@ export const setTable = ({
 
         row.columns = [
           ...columns,
-          ...[...new Array(extraColumns)].map(() => getEmptyColumn(language)),
+          ...new Array(extraColumns).map(() => getEmptyColumn(language)),
         ];
       });
     }
@@ -83,7 +83,9 @@ export const setTable = ({
         if (language) {
           path = [...path, language];
         }
-        _.set(row, path, cell);
+        if (row) {
+          _.set(row, path, cell);
+        }
       });
     });
   });

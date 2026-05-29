@@ -23,7 +23,14 @@ import {
 } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-const MoveButton = SortableHandle(props => (
+type MoveButtonProps = {
+  variant?: string;
+  color?: string;
+  type?: string;
+  children?: React.ReactNode;
+};
+
+const MoveButton = SortableHandle<MoveButtonProps>(props => (
   <FormButton as="div" style={{ cursor: 'grab', width: '100%' }} {...props} />
 ));
 
@@ -113,7 +120,9 @@ const ContentField = ({ tyyppi, name, language }) => {
   return null;
 };
 
-const FieldSortableElement = SortableElement(props => <div {...props} />);
+const FieldSortableElement = SortableElement<
+  React.HTMLAttributes<HTMLDivElement>
+>(props => <div {...props} />);
 
 const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
   return (

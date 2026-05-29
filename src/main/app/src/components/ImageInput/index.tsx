@@ -73,6 +73,7 @@ const Container = styled.div<{
   nodrag?: boolean;
   error?: boolean;
   url?: string;
+  disabled?: boolean;
 }>`
   border: 1px dashed ${getThemeProp('palette.border')};
   border-radius: 2px;
@@ -90,28 +91,38 @@ const Container = styled.div<{
     border-color: ${getThemeProp('palette.primary.main')};
     outline: none;
   }
-  ${disabledStyle}
-  ${({ nodrag, error }) =>
-    (nodrag || error) &&
+  ${(props: { disabled?: boolean; theme: any }) =>
+    disabledStyle({ disabled: props.disabled ?? false, theme: props.theme })}
+  ${(props: { nodrag?: boolean; error?: boolean }) =>
+    (props.nodrag || props.error) &&
     css`
       border-color: ${getThemeProp('palette.danger.main')};
     `};
-  ${({ url }) => css`
-    background-image: ${url ? `url(${url})` : 'none'};
+  ${(props: { url?: string }) => css`
+    background-image: ${props.url ? `url(${props.url})` : 'none'};
   `};
 `;
 
-const FlexWrapper = ({ children }) => (
+const FlexWrapper = ({ children }: { children: Array<React.ReactNode> }) => (
   <Box display="flex" flexDirection="column" alignItems="center">
     {children.map((c, i) => (
-      <Box marginBottom={1} key={`item_${i}`}>
+      // eslint-disable-next-line react/no-array-index-key
+      <Box marginBottom={1} key={`wrapper-item-${i}`}>
         {c}
       </Box>
     ))}
   </Box>
 );
 
-const ValueContent = ({ file, t, onRemove }) => (
+const ValueContent = ({
+  file,
+  t,
+  onRemove,
+}: {
+  file: any;
+  t: any;
+  onRemove: () => void;
+}) => (
   <FlexWrapper>
     <FileUploadedMessage>{file ? file.name : ''}</FileUploadedMessage>
     <FormButton
@@ -125,14 +136,22 @@ const ValueContent = ({ file, t, onRemove }) => (
   </FlexWrapper>
 );
 
-const DragActiveContent = ({ message }) => (
+const DragActiveContent = ({ message }: { message: string }) => (
   <FlexWrapper>
     <DragActiveIcon />
     <PrimaryMessage>{message}</PrimaryMessage>
   </FlexWrapper>
 );
 
-const PlaceholderContent = ({ error, openDialog, t }) => (
+const PlaceholderContent = ({
+  error,
+  openDialog,
+  t,
+}: {
+  error: any;
+  openDialog: () => void;
+  t: any;
+}) => (
   <FlexWrapper>
     {error && <ErrorMessage>{error}</ErrorMessage>}
     <Typography>{t('yleiset.raahaaLiitettavaTiedosto')}</Typography>
@@ -148,14 +167,14 @@ const PlaceholderContent = ({ error, openDialog, t }) => (
   </FlexWrapper>
 );
 
-const Loader = ({ message }) => (
+const Loader = ({ message }: { message: string }) => (
   <FlexWrapper>
     <Spin></Spin>
     <PrimaryMessage>{message}</PrimaryMessage>
   </FlexWrapper>
 );
 
-const InfoText = props => (
+const InfoText = (props: any) => (
   <Typography variant="secondary" as="div" marginBottom={1} {...props} />
 );
 
@@ -165,6 +184,12 @@ const ImageConstraints = ({
   minDimensions,
   maxDimensions,
   t,
+}: {
+  acceptedFileFormats?: Array<string>;
+  maxSize?: number;
+  minDimensions?: any;
+  maxDimensions?: any;
+  t: any;
 }) => (
   <>
     {acceptedFileFormats && (
@@ -190,7 +215,21 @@ const ImageConstraints = ({
   </>
 );
 
-const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
+const InputAreaContent = ({
+  file,
+  machineError,
+  state,
+  open,
+  onRemove,
+  t,
+}: {
+  file: any;
+  machineError: any;
+  state: any;
+  open: () => void;
+  onRemove: () => void;
+  t: any;
+}) => (
   <>
     {match(state.value)
       .with(CS.empty, CS.error, () => (
@@ -213,7 +252,7 @@ const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
   </>
 );
 
-export const ImageInput = props => {
+export const ImageInput = (props: any) => {
   const {
     disabled = false,
     onChange = _.noop,

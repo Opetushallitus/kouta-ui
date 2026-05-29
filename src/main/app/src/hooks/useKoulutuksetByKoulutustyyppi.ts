@@ -35,7 +35,7 @@ export const useKoulutuksetByKoulutustyyppi = (
 
   const queryProps = useMemo(
     () =>
-      _.isNil(ylaKoodiUrit) ||
+      (_.isNil(ylaKoodiUrit) ||
       _.keys(KOULUTUSTYYPPI_KOODIURIT_MAPPING).includes(koulutustyyppi)
         ? [
             {
@@ -54,7 +54,7 @@ export const useKoulutuksetByKoulutustyyppi = (
               koodiUri,
             },
             ...LONG_CACHE_QUERY_OPTIONS,
-          })),
+          }))) as any,
     [ylaKoodiUrit, koulutustyyppi]
   );
 

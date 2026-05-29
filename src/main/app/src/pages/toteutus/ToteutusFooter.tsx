@@ -12,6 +12,7 @@ import { useForm } from '#/src/hooks/form';
 import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
@@ -25,7 +26,7 @@ import { useTarjoajatHierarkia } from './useTarjoajatHierarkia';
 type ToteutusFooterProps = {
   formMode: FormMode;
   organisaatioOid: string;
-  koulutustyyppi: KOULUTUSTYYPPI;
+  koulutustyyppi?: KOULUTUSTYYPPI;
   toteutus?: ToteutusModel;
   koulutus?: KoulutusModel;
   canUpdate?: boolean;
@@ -120,11 +121,8 @@ export const ToteutusFooter = ({
   const save = useSaveForm({
     formName,
     submit,
-    validate: values =>
-      validateToteutusForm(
-        { ...values, koulutustyyppi, koulutus },
-        form?.registeredFields
-      ),
+    validate: (values: ToteutusFormValues) =>
+      validateToteutusForm(values, form?.registeredFields),
   });
 
   const apiUrls = useUrls();
@@ -136,8 +134,9 @@ export const ToteutusFooter = ({
       save={save}
       canUpdate={canUpdate}
       esikatseluUrl={
-        formMode === FormMode.EDIT &&
-        apiUrls.url('konfo-ui.toteutus', toteutus?.oid)
+        formMode === FormMode.EDIT
+          ? apiUrls.url('konfo-ui.toteutus', toteutus?.oid)
+          : undefined
       }
     />
   );

@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import _ from 'lodash';
 
 import { ENTITY } from '#/src/constants';
+import { KoutaErrorData, KoutaErrorResponse } from '#/src/types/formTypes';
 import { hakuRemoteErrorsToFormErrors } from '#/src/utils/haku/hakuRemoteErrorsToFormErrors';
 import { hakukohdeRemoteErrorsToFormErrors } from '#/src/utils/hakukohde/hakukohdeRemoteErrorsToFormErrors';
 import { koulutusRemoteErrorsToFormErrors } from '#/src/utils/koulutus/koulutusRemoteErrorsToFormErrors';
@@ -19,14 +20,14 @@ const REMOTE_ERRORS_TO_FORM_ERRORS = {
 };
 
 const setErrors = (
-  errors,
-  remoteError,
-  fieldName,
+  errors: Record<string, unknown>,
+  remoteError: KoutaErrorResponse,
+  fieldName: string,
   errorKey = `validointivirheet.${remoteError?.errorType}`
 ) => {
   const existingError = _.get(errors, fieldName);
 
-  let val = existingError;
+  let val: unknown;
 
   if (_.isNil(existingError)) {
     val = [errorKey];
@@ -42,9 +43,9 @@ const setErrors = (
 
 export const withRemoteErrors = (
   formName: ENTITY,
-  response: AxiosResponse,
-  errors = {},
-  formValues = {}
+  response: AxiosResponse | undefined,
+  errors: Record<string, unknown> = {},
+  formValues: KoutaErrorData = {}
 ) => {
   const errorConverter = REMOTE_ERRORS_TO_FORM_ERRORS[formName];
   // Kaikki lomakkeet käyttävät useSaveFormia, mutta kaikille ei ole toteutettuna converteria
@@ -52,7 +53,7 @@ export const withRemoteErrors = (
     return errors;
   }
 
-  const resData = response?.data;
+  const resData: Array<KoutaErrorResponse> | undefined = response?.data;
   resData?.forEach?.(remoteError => {
     const formError = errorConverter?.(remoteError, formValues);
 

@@ -26,13 +26,13 @@ export type LukiolinjatOsio = {
 };
 
 type Kielivalikoima = {
-  A1Kielet: SelectOptions;
-  A2Kielet: SelectOptions;
-  aidinkielet: SelectOptions;
-  B1Kielet: SelectOptions;
-  B2Kielet: SelectOptions;
-  B3Kielet: SelectOptions;
-  muutKielet: SelectOptions;
+  A1Kielet?: SelectOptions;
+  A2Kielet?: SelectOptions;
+  aidinkielet?: SelectOptions;
+  B1Kielet?: SelectOptions;
+  B2Kielet?: SelectOptions;
+  B3Kielet?: SelectOptions;
+  muutKielet?: SelectOptions;
 };
 
 export type LukioDiplomiValues = {
@@ -46,9 +46,9 @@ export type LukioDiplomiValues = {
 export type ToteutusFormValues = {
   organisaatioOid?: SelectOption;
   externalId?: string;
-  koulutustyyppi: KOULUTUSTYYPPI;
+  koulutustyyppi?: KOULUTUSTYYPPI;
   muokkaaja?: string;
-  tila: JULKAISUTILA;
+  tila?: JULKAISUTILA;
   tiedot: {
     nimi: TranslatedField<string>;
     ammatillinenPerustutkintoErityisopetuksena: boolean;
@@ -81,8 +81,8 @@ export type ToteutusFormValues = {
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;
   jarjestamistiedot: {
-    maksullisuustyyppi: MaksullisuusTyyppi;
-    maksunMaara: number;
+    maksullisuustyyppi?: MaksullisuusTyyppi;
+    maksunMaara?: number;
     maksullisuusKuvaus: Kuvaus;
     opetustapa: Array<string>;
     opetustapaKuvaus: Kuvaus;
@@ -91,8 +91,8 @@ export type ToteutusFormValues = {
     opetuskieli: Array<string>;
     opetuskieliKuvaus: Kuvaus;
     suunniteltuKesto: {
-      vuotta: number;
-      kuukautta: number;
+      vuotta?: number;
+      kuukautta?: number;
     };
     suunniteltuKestoKuvaus: Kuvaus;
     osiot: Array<{ value: string }>;
@@ -108,8 +108,8 @@ export type ToteutusFormValues = {
     ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {
-    ammattinimikkeet: TranslatedField<SelectOptions>;
-    avainsanat: TranslatedField<SelectOptions>;
+    ammattinimikkeet?: TranslatedField<SelectOptions>;
+    avainsanat?: TranslatedField<SelectOptions>;
   };
   yhteyshenkilot: Array<Yhteystieto>;
   osaamisalat: {
@@ -118,14 +118,14 @@ export type ToteutusFormValues = {
     osaamisalaLinkkiOtsikot: Record<string, TranslatedField<string>>;
   };
   lukiolinjat: {
-    yleislinja: boolean;
+    yleislinja?: boolean;
     painotukset: LukiolinjatOsio;
     erityisetKoulutustehtavat: LukiolinjatOsio;
   };
   teemakuva?: string;
   hakeutumisTaiIlmoittautumistapa: {
     isHakukohteetKaytossa?: boolean;
-    hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
+    hakeutumisTaiIlmoittautumistapa?: HAKULOMAKETYYPPI;
     hakuTapa?: Hakeutumistapa;
     linkki?: TranslatedField;
     lisatiedot?: TranslatedField<EditorState>;

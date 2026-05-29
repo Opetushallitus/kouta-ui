@@ -4,7 +4,7 @@ import {
 } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
-export const isApurahaVisible = (maksullisuustyyppi: string) => {
+export const isApurahaVisible = (maksullisuustyyppi?: string) => {
   return maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU;
 };
 

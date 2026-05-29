@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { isFunction } from 'lodash';
 
-import { AsyncSelect, SelectProps } from '#/src/components/Select';
+import { AsyncSelect, type SelectProps } from '#/src/components/Select';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';

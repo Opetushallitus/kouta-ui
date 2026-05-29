@@ -315,7 +315,7 @@ export const KoulutusForm = ({
                 />
                 <FormCollapse
                   section="paikallisetTutkinnonOsat"
-                  header={t('koulutuslomake.paikallisetTutkinnonOsat')}
+                  header={t('koulutuslomake.valitsePaikallisetTutkinnonOsat')}
                   Component={PaikallisetTutkinnonOsatSection}
                   disabled={onlyTarjoajaRights}
                 />

@@ -15,21 +15,16 @@ export const getOpetussuunnitelmat = async ({
   nimi?: string;
   sivu?: number;
 }) => {
-  const params: {
-    organisaatio?: Array<string>;
-    nimi?: string;
-    sivu?: number;
-    paikallistasisaltoa?: boolean;
-  } = {
-    organisaatio: organisaatioOids,
-    nimi,
-    sivu,
-    paikallistasisaltoa: true,
-  };
-
   const { data } = await httpClient.get<AmosaaOpetussuunnitelmatResponse>(
     apiUrls.url('kouta-backend.eperuste-amosaa-opetussuunnitelmat'),
-    { params }
+    {
+      params: {
+        organisaatiot: organisaatioOids,
+        nimi,
+        sivu,
+        paikallistasisaltoa: true,
+      },
+    }
   );
   return data;
 };

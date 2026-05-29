@@ -166,8 +166,7 @@ public class UrlConfiguration extends OphProperties {
     this.frontProperties.setProperty(
         "eperusteet.tutkinnonosat", this.require("eperusteet.tutkinnonosat"));
     this.frontProperties.setProperty(
-        "eperusteet.paikallinen-tutkinnonosa",
-        this.require("eperusteet.paikallinen-tutkinnonosa"));
+        "eperusteet.paikallinen-tutkinnonosa", this.require("eperusteet.paikallinen-tutkinnonosa"));
     this.frontProperties.setProperty(
         "eperusteet.osaamismerkit", this.require("eperusteet.osaamismerkit"));
 

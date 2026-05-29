@@ -113,7 +113,7 @@ export const CopyConfirmationModal = ({
     [createColumns, selectionRef]
   );
 
-  const { selection } = useEntitySelectionApi(selectionRef);
+  const { selection } = useEntitySelectionApi(selectionRef!);
 
   const onConfirm = useCallback(() => {
     execute({ entities: selection });

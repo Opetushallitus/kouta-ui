@@ -20,14 +20,12 @@ import { CopyHakukohteetMutationFunctionAsync } from './HakukohteetSection/chang
 import { useEntitySelectionApi } from './useEntitySelection';
 
 export const BatchOpsStateChangeContext = React.createContext<
-  InterpreterFrom<typeof BatchOpsMachine>
->({} as any);
+  InterpreterFrom<typeof BatchOpsMachine> | undefined
+>(undefined);
 
 export const useStateChangeBatchOpsApi = () => {
   const batchOpsService = useContextOrThrow(BatchOpsStateChangeContext);
-  return useBatchOpsApi(
-    batchOpsService as InterpreterFrom<typeof BatchOpsMachine>
-  );
+  return useBatchOpsApi(batchOpsService);
 };
 
 export const StateChangeConfirmationWrapper = ({
@@ -41,7 +39,8 @@ export const StateChangeConfirmationWrapper = ({
 }) => {
   const batchOpsService = useInterpret(BatchOpsMachine, {
     services: {
-      runMutation: (ctx, e) => mutateAsync(e),
+      runMutation: (_ctx, e) =>
+        mutateAsync({ entities: e.entities, tila: e.tila! }),
     },
     devTools: isDev,
   });
@@ -79,7 +78,7 @@ export const StateChangeConfirmationModal = ({
     [createColumns, selectionRef]
   );
 
-  const { selection } = useEntitySelectionApi(selectionRef);
+  const { selection } = useEntitySelectionApi(selectionRef!);
 
   const onConfirm = useCallback(() => {
     execute({ entities: selection, tila });

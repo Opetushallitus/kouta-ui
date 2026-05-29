@@ -2,8 +2,12 @@ import { assign } from '@xstate/immer';
 import _ from 'lodash';
 import { createMachine } from 'xstate';
 
-type EntityListItem = {
+import { JULKAISUTILA } from '#/src/constants';
+
+export type EntityListItem = {
   oid: string;
+  nimi?: TranslatedField<string>;
+  tila?: JULKAISUTILA;
 };
 
 interface SelectionContext {
@@ -29,7 +33,6 @@ export const entitySelectionMachine = createMachine(
   {
     predictableActionArguments: true,
     id: 'EntitySelectionMachine',
-    tsTypes: {} as import('./entitySelectionMachine.typegen').Typegen0,
     schema: {
       context: {} as SelectionContext,
       events: {} as SelectItemsEvent | DeselectItemsEvent | ResetSelectionEvent,
@@ -55,12 +58,12 @@ export const entitySelectionMachine = createMachine(
         _.forEach(e.items, item => {
           ctx.selection[item.oid] = item;
         });
-      }),
+      }) as any,
       deselectItems: assign<SelectionContext, DeselectItemsEvent>((ctx, e) => {
         _.forEach(e.items, item => {
           delete ctx.selection[item.oid];
         });
-      }),
+      }) as any,
       resetSelection: assign<SelectionContext, ResetSelectionEvent>(
         (ctx, e) => {
           ctx.selection = {};
@@ -68,7 +71,7 @@ export const entitySelectionMachine = createMachine(
             ctx.selection[item.oid] = item;
           });
         }
-      ),
+      ) as any,
     },
   }
 );

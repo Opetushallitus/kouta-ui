@@ -23,11 +23,38 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
-const getOsaamisalaOptions = (osaamisalat = [], language) =>
+type Osaamisala = {
+  arvo: string;
+  nimi: TranslatedField;
+};
+
+type EPeruste = {
+  id: number;
+  osaamisalat?: Array<Osaamisala>;
+};
+
+type SisaltoLapsi = {
+  _perusteenOsa: number;
+  id: number;
+};
+
+type Props = {
+  fieldName: string;
+  language: LanguageCode;
+  selectedEPeruste: EPeruste | undefined;
+  koulutusIsLoading: boolean;
+  disabled: boolean;
+  languages: Array<LanguageCode>;
+};
+
+const getOsaamisalaOptions = (
+  osaamisalat?: Array<Osaamisala>,
+  language?: LanguageCode
+) =>
   _fp.map(({ arvo, nimi }) => ({
     label: getLanguageValue(nimi, language),
     value: arvo,
-  }))(osaamisalat);
+  }))(osaamisalat ?? []);
 
 export const ValitseOsaamisalaBox = ({
   fieldName,
@@ -36,7 +63,7 @@ export const ValitseOsaamisalaBox = ({
   koulutusIsLoading,
   disabled,
   languages,
-}) => {
+}: Props) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
   const selectedOsaamisala = useFieldValue(fieldName);
@@ -78,7 +105,7 @@ export const ValitseOsaamisalaBox = ({
   );
 
   const selectedOsaamisalaData = _fp.find(
-    ({ arvo }) => arvo === selectedOsaamisala?.value
+    ({ arvo }: Osaamisala) => arvo === selectedOsaamisala?.value
   )(osaamisalat);
 
   /* Get laajuus for selected osaamisala */
@@ -86,7 +113,7 @@ export const ValitseOsaamisalaBox = ({
   const osaamisalakoodi = selectedOsaamisalaData?.arvo;
 
   let osaamisalaLaajuus;
-  if (ePerusteRakenneOsat) {
+  if (ePerusteRakenneOsat && osaamisalakoodi) {
     osaamisalaLaajuus = getOsaamisalaLaajuus(
       ePerusteRakenneOsat,
       osaamisalakoodi
@@ -102,7 +129,7 @@ export const ValitseOsaamisalaBox = ({
   const isDirty = useIsDirty();
 
   const perusteenOsaId = _fp.find(
-    ({ _perusteenOsa }) =>
+    ({ _perusteenOsa }: SisaltoLapsi) =>
       Number(_perusteenOsa) === Number(selectedOsaamisalaKuvausId)
   )(ePerusteSisalto?.lapset)?.id;
 
@@ -165,8 +192,8 @@ export const ValitseOsaamisalaBox = ({
                   href={apiUrls.url(
                     'eperusteet.sisalto',
                     language,
-                    selectedEPerusteId,
-                    perusteenOsaId
+                    selectedEPerusteId?.toString(),
+                    perusteenOsaId?.toString()
                   )}
                   target="_blank"
                 >

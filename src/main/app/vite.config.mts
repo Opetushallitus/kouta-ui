@@ -58,7 +58,7 @@ export default defineConfig(({ mode }) => {
         ? [
             pluginRewriteAll(),
             checker({
-              //typescript: true, //TS-tarkistuksen voi laittaa päälle sitten kun nykyiset TS-virheet on saatu korjattua
+              typescript: true,
               eslint: {
                 lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
               },

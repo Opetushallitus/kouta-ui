@@ -1,6 +1,10 @@
 import { assign, createMachine, interpret } from 'xstate';
 
-const initialMachine = createMachine({
+type FilterValues = Record<string, unknown>;
+type FilterContext = { values: FilterValues };
+type SetValuesEvent = { type: 'SET_VALUES'; values: FilterValues };
+
+const initialMachine = createMachine<FilterContext, SetValuesEvent>({
   predictableActionArguments: true,
   on: {
     SET_VALUES: {

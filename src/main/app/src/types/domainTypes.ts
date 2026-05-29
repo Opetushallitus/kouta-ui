@@ -47,10 +47,16 @@ export type EntityModelBase = {
   tila?: components['schemas']['Julkaisutila'];
   _enrichedData?: {
     esitysnimi?: components['schemas']['Nimi'];
+    [key: string]: unknown;
   };
   muokkaaja?: string;
   modified?: string;
 };
+
+export type NamedEntityModel = Pick<
+  EntityModelBase,
+  'nimi' | 'tila' | '_enrichedData'
+>;
 
 export type KoulutustyyppiModel = components['schemas']['Koulutustyyppi'];
 

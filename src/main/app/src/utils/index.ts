@@ -444,13 +444,17 @@ export const getKoulutustyyppiTranslation = (
 export const notToimipisteOrg = org =>
   !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE, org);
 
-export const toEnum = <T extends object>(obj: T, value?: string | null) => {
-  const values = Object.values(obj);
-  const index = values.indexOf(value);
-  return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
+export const toEnum = <T extends Record<string, string>>(
+  enumObj: T,
+  value: string | null | undefined
+): T[keyof T] | undefined => {
+  if (value == null) return undefined;
+  return (Object.values(enumObj) as Array<string>).includes(value)
+    ? (value as T[keyof T])
+    : undefined;
 };
 
-type KieliArvo = { kieli: string; arvo: string };
+type KieliArvo = { kieli?: LanguageCode; arvo?: string };
 type MultiSelectValue = Record<string, Array<{ label: string; value: string }>>;
 
 export const kieliArvoListToMultiSelectValue = (

@@ -65,7 +65,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           koulutuksenAlkamiskausiKoodiUri: 'kausi_k#1',
           koulutuksenAlkamispaivamaara: '2021-04-16T00:00',
           koulutuksenPaattymispaivamaara: '2021-12-12T00:00',
-          koulutuksenAlkamisvuosi: 2020,
+          koulutuksenAlkamisvuosi: '2020',
         },
         lisatiedot: [
           {
@@ -84,7 +84,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
         ],
         maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
-        maksunMaara: 500.0,
+        maksunMaara: 500,
         maksullisuusKuvaus: {
           fi: 'Fi maksullisuuskuvaus',
           sv: 'Sv maksullisuuskuvaus',
@@ -185,13 +185,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
         },
       ],
-      tutkinnonOsat: [
-        {
-          osaamisalaKoodiUri: 'osaamisala_1#1',
-          tutkinnonOsaKoodiUrit: ['tutkinnonosa_1#1'],
-          tutkintoKoodiUri: 'tutkinto_1#1',
-        },
-      ],
       opintojenLaajuusNumero: 25,
       opintojenLaajuusNumeroMin: 30,
       opintojenLaajuusNumeroMax: 35,
@@ -200,10 +193,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
       aloituspaikkakuvaus: {
         fi: '<p>Aloituspaikan kuvaus - fi</p>',
         sv: '<p>Aloituspaikan kuvaus - sv</p>',
-      },
-      suunniteltuKesto: {
-        fi: 'Fi kesto',
-        sv: 'Sv kesto',
       },
       taiteenalaKoodiUrit: [
         'taiteenperusopetustaiteenala_sirkustaide',

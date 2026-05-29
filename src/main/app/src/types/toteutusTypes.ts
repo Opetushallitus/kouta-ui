@@ -46,9 +46,9 @@ export type LukioDiplomiValues = {
 export type ToteutusFormValues = {
   organisaatioOid?: SelectOption;
   externalId?: string;
-  koulutustyyppi: KOULUTUSTYYPPI;
+  koulutustyyppi?: KOULUTUSTYYPPI;
   muokkaaja?: string;
-  tila: JULKAISUTILA;
+  tila?: JULKAISUTILA;
   tiedot: {
     nimi: TranslatedField<string>;
     ammatillinenPerustutkintoErityisopetuksena: boolean;
@@ -81,7 +81,7 @@ export type ToteutusFormValues = {
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;
   jarjestamistiedot: {
-    maksullisuustyyppi: MaksullisuusTyyppi;
+    maksullisuustyyppi?: MaksullisuusTyyppi;
     maksunMaara?: number;
     maksullisuusKuvaus: Kuvaus;
     opetustapa: Array<string>;
@@ -108,8 +108,8 @@ export type ToteutusFormValues = {
     ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {
-    ammattinimikkeet: TranslatedField<SelectOptions>;
-    avainsanat: TranslatedField<SelectOptions>;
+    ammattinimikkeet?: TranslatedField<SelectOptions>;
+    avainsanat?: TranslatedField<SelectOptions>;
   };
   yhteyshenkilot: Array<Yhteystieto>;
   osaamisalat: {
@@ -118,7 +118,7 @@ export type ToteutusFormValues = {
     osaamisalaLinkkiOtsikot: Record<string, TranslatedField<string>>;
   };
   lukiolinjat: {
-    yleislinja: boolean;
+    yleislinja?: boolean;
     painotukset: LukiolinjatOsio;
     erityisetKoulutustehtavat: LukiolinjatOsio;
   };

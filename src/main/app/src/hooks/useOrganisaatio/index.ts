@@ -19,7 +19,10 @@ export const useOrganisaatio = (
   return { organisaatio: organisaatiot?.[0], ...rest };
 };
 
-export const useOrganisaatiot = (oids, options: KoutaApiQueryConfig = {}) => {
+export const useOrganisaatiot = (
+  oids: string | Array<string>,
+  options: KoutaApiQueryConfig = {}
+) => {
   const { data: organisaatiot, ...rest } = useApiQuery<
     Array<OrganisaatioModel>
   >(
@@ -94,7 +97,7 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
 };
 
 export const usePreferredOrganisaatio = (
-  creatorOrganisaatioOid: string,
+  creatorOrganisaatioOid: string | undefined,
   creatorOrganisaatioIsLoading: boolean
 ) => {
   const user = useAuthorizedUser();

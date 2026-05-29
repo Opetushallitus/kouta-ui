@@ -48,14 +48,12 @@ export const useSaveForm = ({ formName, validate, submit }) => {
         if (errors) {
           openSavingErrorToast(response?.data);
           setRemoteErrors(response?.data);
+        } else if (warnings) {
+          warnings.forEach(w => {
+            openWarningToast(w);
+          });
         } else {
-          if (warnings) {
-            warnings.forEach(w => {
-              openWarningToast(w);
-            });
-          } else {
-            openSavingSuccessToast();
-          }
+          openSavingSuccessToast();
         }
       });
     },

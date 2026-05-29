@@ -26,13 +26,13 @@ export type LukiolinjatOsio = {
 };
 
 type Kielivalikoima = {
-  A1Kielet: SelectOptions;
-  A2Kielet: SelectOptions;
-  aidinkielet: SelectOptions;
-  B1Kielet: SelectOptions;
-  B2Kielet: SelectOptions;
-  B3Kielet: SelectOptions;
-  muutKielet: SelectOptions;
+  A1Kielet?: SelectOptions;
+  A2Kielet?: SelectOptions;
+  aidinkielet?: SelectOptions;
+  B1Kielet?: SelectOptions;
+  B2Kielet?: SelectOptions;
+  B3Kielet?: SelectOptions;
+  muutKielet?: SelectOptions;
 };
 
 export type LukioDiplomiValues = {
@@ -82,7 +82,7 @@ export type ToteutusFormValues = {
   tarjoajat: Array<string>;
   jarjestamistiedot: {
     maksullisuustyyppi: MaksullisuusTyyppi;
-    maksunMaara: number;
+    maksunMaara?: number;
     maksullisuusKuvaus: Kuvaus;
     opetustapa: Array<string>;
     opetustapaKuvaus: Kuvaus;
@@ -91,8 +91,8 @@ export type ToteutusFormValues = {
     opetuskieli: Array<string>;
     opetuskieliKuvaus: Kuvaus;
     suunniteltuKesto: {
-      vuotta: number;
-      kuukautta: number;
+      vuotta?: number;
+      kuukautta?: number;
     };
     suunniteltuKestoKuvaus: Kuvaus;
     osiot: Array<{ value: string }>;
@@ -125,7 +125,7 @@ export type ToteutusFormValues = {
   teemakuva?: string;
   hakeutumisTaiIlmoittautumistapa: {
     isHakukohteetKaytossa?: boolean;
-    hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
+    hakeutumisTaiIlmoittautumistapa?: HAKULOMAKETYYPPI;
     hakuTapa?: Hakeutumistapa;
     linkki?: TranslatedField;
     lisatiedot?: TranslatedField<EditorState>;

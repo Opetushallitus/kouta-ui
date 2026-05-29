@@ -1,19 +1,20 @@
-import _ from 'lodash';
-
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
-import getUserRoles from './getUserRoles';
+import getUserRoles, { AuthorizedUser } from './getUserRoles';
 
-const getUserOrganisaatiotWithRoles = (user, roles) => {
-  if (!_.isArray(roles) || !user) {
+const getUserOrganisaatiotWithRoles = (
+  user: AuthorizedUser | null | undefined,
+  roles: Array<string>
+): Array<string> => {
+  if (!Array.isArray(roles) || !user) {
     return [];
   }
 
   const userRoles = getUserRoles(user);
 
-  const organisaatioOids = [];
+  const organisaatioOids: Array<string> = [];
 
   for (const role of userRoles) {
-    const isMatch = Boolean(roles.find(r => role.startsWith(r)));
+    const isMatch = roles.some(r => role.startsWith(r));
 
     if (!isMatch) {
       continue;

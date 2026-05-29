@@ -11,8 +11,12 @@ const UPDATE_ROLES = ['UPDATE', 'READ_UPDATE', 'CRUD'];
 const CREATE_ROLES = ['CRUD'];
 
 type RoleLookup = Record<string, Record<string, boolean>>;
-type Organisaatio = OrganisaatioModel | Array<string> | string;
-type CheckFn = (role: string, organisaatio: Organisaatio) => RoleBuilder;
+type OrganisaatioOrOids =
+  | OrganisaatioModel
+  | Array<string>
+  | string
+  | undefined;
+type CheckFn = (role: string, organisaatio: OrganisaatioOrOids) => RoleBuilder;
 type GetCheckFn = (rb: RoleBuilder) => CheckFn;
 
 type RoleBuilderOptions = {
@@ -54,7 +58,7 @@ const createRoleLookup = (roles: Array<string>): RoleLookup => {
 };
 
 const getParentAndSelfOids = (
-  organisaatioOrOids: OrganisaatioModel | Array<string> | string
+  organisaatioOrOids: OrganisaatioOrOids
 ): Array<string> => {
   if (_.isString(organisaatioOrOids)) {
     return [organisaatioOrOids];
@@ -64,7 +68,7 @@ const getParentAndSelfOids = (
     return organisaatioOrOids;
   }
 
-  const parentOids = organisaatioOrOids?.parentOids;
+  const parentOids = organisaatioOrOids?.parentOids ?? [];
   const organisaatioOid = organisaatioOrOids?.oid;
   const parentsAndSelf = _.isEmpty(parentOids)
     ? [organisaatioOid]
@@ -89,7 +93,7 @@ class RoleBuilder {
   hasOneOfFn(
     getCheckFn: GetCheckFn,
     roles: Array<string>,
-    organisaatio: Organisaatio
+    organisaatio: OrganisaatioOrOids
   ): RoleBuilder {
     return roles.reduce((acc, curr) => {
       return acc.or(rb => getCheckFn(rb)(curr, organisaatio));
@@ -99,7 +103,7 @@ class RoleBuilder {
   hasAllFn(
     getCheckFn: GetCheckFn,
     roles: Array<string>,
-    organisaatio: Organisaatio
+    organisaatio: OrganisaatioOrOids
   ): RoleBuilder {
     return roles.reduce((acc, curr) => {
       return acc.and(rb => getCheckFn(rb)(curr, organisaatio));
@@ -110,7 +114,7 @@ class RoleBuilder {
     return Boolean(this.roleLookup?.[organisaatioOid]?.[role]);
   }
 
-  hasRead(role: string, organisaatio: Organisaatio): RoleBuilder {
+  hasRead(role: string, organisaatio: OrganisaatioOrOids): RoleBuilder {
     return this.clone(
       getParentAndSelfOids(organisaatio).some(oid => {
         return (
@@ -121,7 +125,10 @@ class RoleBuilder {
     );
   }
 
-  hasReadOneOf(roles: Array<string>, organisaatio: Organisaatio): RoleBuilder {
+  hasReadOneOf(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasOneOfFn(
       rb =>
         (...args) =>
@@ -131,7 +138,10 @@ class RoleBuilder {
     );
   }
 
-  hasReadAll(roles: Array<string>, organisaatio: Organisaatio): RoleBuilder {
+  hasReadAll(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasAllFn(
       rb =>
         (...args) =>
@@ -141,7 +151,7 @@ class RoleBuilder {
     );
   }
 
-  hasUpdate(role: string, organisaatio: Organisaatio): RoleBuilder {
+  hasUpdate(role: string, organisaatio: OrganisaatioOrOids): RoleBuilder {
     return this.clone(
       getParentAndSelfOids(organisaatio).some(oid => {
         return (
@@ -154,7 +164,7 @@ class RoleBuilder {
 
   hasUpdateOneOf(
     roles: Array<string>,
-    organisaatio: Organisaatio
+    organisaatio: OrganisaatioOrOids
   ): RoleBuilder {
     return this.hasOneOfFn(
       rb =>
@@ -165,7 +175,10 @@ class RoleBuilder {
     );
   }
 
-  hasUpdateAll(roles: Array<string>, organisaatio: Organisaatio): RoleBuilder {
+  hasUpdateAll(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasAllFn(
       rb =>
         (...args) =>
@@ -175,7 +188,7 @@ class RoleBuilder {
     );
   }
 
-  hasCreate(role: string, organisaatio: Organisaatio): RoleBuilder {
+  hasCreate(role: string, organisaatio: OrganisaatioOrOids): RoleBuilder {
     return this.clone(
       getParentAndSelfOids(organisaatio).some(oid => {
         return (
@@ -188,7 +201,7 @@ class RoleBuilder {
 
   hasCreateOneOf(
     roles: Array<string>,
-    organisaatio: Organisaatio
+    organisaatio: OrganisaatioOrOids
   ): RoleBuilder {
     return this.hasOneOfFn(
       rb =>
@@ -199,7 +212,10 @@ class RoleBuilder {
     );
   }
 
-  hasCreateAll(roles: Array<string>, organisaatio: Organisaatio): RoleBuilder {
+  hasCreateAll(
+    roles: Array<string>,
+    organisaatio: OrganisaatioOrOids
+  ): RoleBuilder {
     return this.hasAllFn(
       rb =>
         (...args) =>

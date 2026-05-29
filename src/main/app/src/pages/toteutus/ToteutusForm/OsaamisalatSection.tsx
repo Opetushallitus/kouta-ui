@@ -226,11 +226,10 @@ export const OsaamisalatSection = ({
   const { ePerusteId } = koulutus || {};
   const { data: ePeruste, isLoading } = useExtendedEPeruste(ePerusteId);
 
-  const { data: osaamisalatKoodistodata = [], isKoodistoLoading } = useKoodisto(
-    {
+  const { data: osaamisalatKoodistodata = [], isLoading: isKoodistoLoading } =
+    useKoodisto({
       koodisto: 'osaamisala',
-    }
-  );
+    });
 
   return isLoading || isKoodistoLoading ? (
     <Spin center />

@@ -137,6 +137,18 @@ test.describe('Edit hakukohde', () => {
       organisaatioOid,
       tarjoajat,
     });
+    await page.route(
+      `**/hakukohde/${hakukohdeOid}`,
+      fixtureJSON(
+        merge(hakukohde(), {
+          toteutusOid,
+          hakuOid,
+          organisaatioOid: OPETUSHALLITUS_ORGANISAATIO_OID,
+          oid: hakukohdeOid,
+          valintaperusteId,
+        })
+      )
+    );
     await page.goto(`/kouta/hakukohde/${hakukohdeOid}/muokkaus`);
     await expect(page).toHaveURL(
       new RegExp(

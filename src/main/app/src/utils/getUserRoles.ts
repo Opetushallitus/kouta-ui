@@ -1,6 +1,15 @@
 import _ from 'lodash';
 
-const getUserRoles = userdata => {
+type Kayttooikeus = { palvelu: string; oikeus: string };
+type OrganisaatioWithRoles = {
+  organisaatioOid: string;
+  kayttooikeudet: Array<Kayttooikeus>;
+};
+export type AuthorizedUser = { organisaatiot: Array<OrganisaatioWithRoles> };
+
+const getUserRoles = (
+  userdata: AuthorizedUser | null | undefined
+): Array<string> => {
   if (!_.isObject(userdata)) {
     return [];
   }
@@ -13,7 +22,7 @@ const getUserRoles = userdata => {
     });
   });
   const roles = Array.from(roleSet);
-  return _.isArray(roles) ? roles : [];
+  return Array.isArray(roles) ? roles : [];
 };
 
 export default getUserRoles;

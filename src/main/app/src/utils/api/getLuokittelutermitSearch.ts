@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import { HttpClient } from '#/src/httpClient';
 
 export const getLuokittelutermit = async ({
   httpClient,
@@ -6,7 +6,7 @@ export const getLuokittelutermit = async ({
   searchStr,
   limit = 15,
 }: {
-  httpClient: AxiosInstance;
+  httpClient: HttpClient;
   apiUrls: any;
   searchStr: string;
   limit?: number;

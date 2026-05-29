@@ -1,12 +1,23 @@
+import type { TFunction, i18n as I18n } from 'i18next';
 import _ from 'lodash';
 
 import { LANGUAGES } from '#/src/constants';
 import { sanitizeHTML } from '#/src/utils';
 
-const addSection = (heading, content) => `<h6>${heading}</h6>${content}`;
+type EPeruste = {
+  kuvaus?: Record<string, string>;
+  tyotehtavatJoissaVoiToimia?: Record<string, string>;
+  suorittaneenOsaaminen?: Record<string, string>;
+};
 
-export default function getEPerusteKuvausHTML(ePeruste, i18n) {
-  const TRANSLATORS = _.transform(
+const addSection = (heading: string, content: string): string =>
+  `<h6>${heading}</h6>${content}`;
+
+export default function getEPerusteKuvausHTML(
+  ePeruste: EPeruste,
+  i18n: I18n
+): Record<string, string> | undefined {
+  const TRANSLATORS = _.transform<string, Record<string, TFunction>>(
     LANGUAGES,
     (result, lang) => (result[lang] = i18n.getFixedT(lang)),
     {}

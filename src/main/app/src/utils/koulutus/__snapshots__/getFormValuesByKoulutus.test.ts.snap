@@ -163,7 +163,7 @@ exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskou
     "opintojenLaajuusNumeroMax": "10",
     "opintojenLaajuusNumeroMin": "5",
     "opintojenLaajuusyksikko": {
-      "value": "",
+      "value": "opintojenlaajuusyksikko_2#1",
     },
     "osaamismerkki": {
       "value": undefined,

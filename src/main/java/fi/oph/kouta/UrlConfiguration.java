@@ -81,6 +81,15 @@ public class UrlConfiguration extends OphProperties {
     this.frontProperties.setProperty(
         "kouta-backend.valintaperuste-list", this.require("kouta-backend.valintaperuste-list"));
     this.frontProperties.setProperty(
+        "kouta-backend.eperuste-amosaa-opetussuunnitelmat",
+        this.require("kouta-backend.eperuste-amosaa-opetussuunnitelmat"));
+    this.frontProperties.setProperty(
+        "kouta-backend.eperuste-amosaa-opetussuunnitelma",
+        this.require("kouta-backend.eperuste-amosaa-opetussuunnitelma"));
+    this.frontProperties.setProperty(
+        "kouta-backend.eperuste-amosaa-paikalliset-tutkinnonosat",
+        this.require("kouta-backend.eperuste-amosaa-paikalliset-tutkinnonosat"));
+    this.frontProperties.setProperty(
         "kouta-backend.ammattinimike-search", this.require("kouta-backend.ammattinimike-search"));
     this.frontProperties.setProperty(
         "kouta-backend.asiasana-search", this.require("kouta-backend.asiasana-search"));
@@ -156,6 +165,9 @@ public class UrlConfiguration extends OphProperties {
     this.frontProperties.setProperty("eperusteet.sisalto", this.require("eperusteet.sisalto"));
     this.frontProperties.setProperty(
         "eperusteet.tutkinnonosat", this.require("eperusteet.tutkinnonosat"));
+    this.frontProperties.setProperty(
+        "eperusteet.paikallinen-tutkinnonosa",
+        this.require("eperusteet.paikallinen-tutkinnonosa"));
     this.frontProperties.setProperty(
         "eperusteet.osaamismerkit", this.require("eperusteet.osaamismerkit"));
 

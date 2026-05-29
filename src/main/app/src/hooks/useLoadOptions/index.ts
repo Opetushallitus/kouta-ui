@@ -10,11 +10,10 @@ const getMatchingOptions = (options: SelectOptions, input, maxMatches) => {
     return matches;
   }
 
-  // eslint-disable-next-line no-unused-vars
   for (const opt of options) {
     if (
       _.isString(opt.label) &&
-      opt.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
+      opt.label.toLowerCase().includes(input.toLowerCase())
     ) {
       matches.push(opt);
     }

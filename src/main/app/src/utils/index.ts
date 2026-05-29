@@ -377,7 +377,7 @@ export const isIn = (coll: Array<unknown>) => (val: unknown) =>
 
 export const getEntityNimiTranslation = (
   entity: NamedEntityModel | undefined,
-  lng: string
+  lng: LanguageCode
 ) => {
   const { _enrichedData, nimi } = entity ?? {};
   return getFirstLanguageValue(_enrichedData?.esitysnimi || nimi, lng);

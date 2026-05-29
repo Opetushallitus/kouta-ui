@@ -15,14 +15,14 @@ import { formValueExists } from '#/src/utils';
 
 export const getLanguageValue = (
   value?: TranslatedField,
-  language: string = 'fi'
+  language: LanguageCode = 'fi'
 ) => (isObject(value) ? value[language] || null : null);
 
 export const getFirstLanguageValue = (
   value?: TranslatedField,
-  priorityArg?: Array<string> | string
+  priorityArg?: Array<LanguageCode> | LanguageCode
 ) => {
-  const defaultPriority: Array<string> = ['fi', 'en', 'sv'];
+  const defaultPriority: Array<LanguageCode> = ['fi', 'en', 'sv'];
 
   let priority = defaultPriority;
 
@@ -34,7 +34,6 @@ export const getFirstLanguageValue = (
     priority = [priorityArg, ...defaultPriority];
   }
 
-  // eslint-disable-next-line
   for (const p of priority) {
     const v = getLanguageValue(value, p);
 
@@ -43,7 +42,7 @@ export const getFirstLanguageValue = (
     }
   }
 
-  return null;
+  return undefined;
 };
 
 export const arrayToTranslationObject = (arr, languageField = 'kieli') => {
@@ -90,7 +89,7 @@ export const getInvalidTranslations = (
 export const getKielistettyOsoite = (
   osoite?: Osoite,
   koodi?: Koodi,
-  language: string = 'fi'
+  language: LanguageCode = 'fi'
 ) => {
   const postinumeroMetadata = arrayToTranslationObject(koodi?.metadata);
   const postitoimipaikka = match(postinumeroMetadata)

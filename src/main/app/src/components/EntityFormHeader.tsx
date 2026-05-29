@@ -21,7 +21,10 @@ export default function EntityFormHeader({
 }: EntityFormHeaderProps) {
   const { t, i18n } = useTranslation();
   const { tila } = entity ?? {};
-  const translatedNimi = getEntityNimiTranslation(entity, i18n.language);
+  const translatedNimi = getEntityNimiTranslation(
+    entity,
+    i18n.language as LanguageCode
+  );
   return (
     <FormHeader
       title={translatedNimi ?? t(`yleiset.${entityType}`)}

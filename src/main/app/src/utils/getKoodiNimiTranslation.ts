@@ -5,7 +5,10 @@ import {
   arrayToTranslationObject,
 } from '#/src/utils/languageUtils';
 
-export const getKoodiNimiTranslation = (koodi?: Koodi, priority?: string) => {
+export const getKoodiNimiTranslation = (
+  koodi?: Koodi,
+  priority?: LanguageCode
+) => {
   return getFirstLanguageValue(
     _fp.mapValues(_fp.prop('nimi'), arrayToTranslationObject(koodi?.metadata)),
     priority

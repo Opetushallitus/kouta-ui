@@ -22,7 +22,7 @@ import {
   AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE,
 } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
-import { useFieldValue } from '#/src/hooks/form';
+import { useToteutusFormField } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
@@ -91,15 +91,15 @@ const ToteutusForm = ({
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 }: ToteutusFormProps) => {
   const { t } = useTranslation();
-  const kieliversiot = useFieldValue('kieliversiot');
+  const kieliversiot = useToteutusFormField('kieliversiot');
   const languages = kieliversiot || [];
   const { isOpen, open, close } = useModal();
 
-  const hakeutumisTaiIlmoittautumistapa = useFieldValue(
+  const hakeutumisTaiIlmoittautumistapa = useToteutusFormField(
     'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
   );
 
-  const hakukohteetKaytossaValittu = useFieldValue(
+  const hakukohteetKaytossaValittu = useToteutusFormField(
     'hakeutumisTaiIlmoittautumistapa.isHakukohteetKaytossa'
   );
 

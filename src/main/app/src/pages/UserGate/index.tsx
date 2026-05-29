@@ -82,7 +82,7 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
         }
       }
     }
-  }, [apiUrls, httpClient, isFocused, isIdle]);
+  }, [apiUrls, httpClient, isFocused, isIdle, isLoaded]);
 
   const { data: asiointiKieli, isLoading: isLoadingAsiointiKieli } =
     useAsiointiKieli();

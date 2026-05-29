@@ -26,20 +26,16 @@ import { HakukohdeForm } from './HakukohdeForm';
 const useInitialValues = hakukohde => {
   const { koodi: hakukohdeKoodi } = useKoodi(hakukohde?.hakukohdeKoodiUri);
 
-  const nimiHakukohdeKoodista = arrayToTranslationObject(
-    hakukohdeKoodi?.metadata
-  );
-
   return useMemo(
     () =>
       hakukohde
         ? getFormValuesByHakukohde(
             hakukohde,
             FormMode.EDIT,
-            nimiHakukohdeKoodista
+            arrayToTranslationObject(hakukohdeKoodi?.metadata)
           )
         : {},
-    [hakukohde, nimiHakukohdeKoodista]
+    [hakukohde, hakukohdeKoodi]
   );
 };
 

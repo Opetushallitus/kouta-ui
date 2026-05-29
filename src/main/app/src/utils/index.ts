@@ -181,7 +181,7 @@ export function getCookies() {
       .filter(Boolean)
       .map(cookieStr => {
         const [key, ...rest] = cookieStr.split('=');
-        return [decodeURIComponent(key), decodeURIComponent(rest.join('='))];
+        return [decodeURIComponent(key!), decodeURIComponent(rest.join('='))];
       })
   );
 }

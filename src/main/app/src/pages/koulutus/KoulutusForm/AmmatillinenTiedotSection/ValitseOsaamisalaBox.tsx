@@ -23,11 +23,6 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
-export type OsaamisalaOsa = {
-  muodostumisSaanto: { laajuus: { minimi: number } };
-  osaamisala: { osaamisalakoodiArvo: number };
-};
-
 const getOsaamisalaOptions = (osaamisalat = [], language) =>
   _fp.map(({ arvo, nimi }) => ({
     label: getLanguageValue(nimi, language),
@@ -87,7 +82,7 @@ export const ValitseOsaamisalaBox = ({
   )(osaamisalat);
 
   /* Get laajuus for selected osaamisala */
-  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat;
+  const ePerusteRakenneOsat = ePerusteRakenne?.osat;
   const osaamisalakoodi = selectedOsaamisalaData?.arvo;
 
   let osaamisalaLaajuus;

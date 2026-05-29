@@ -89,7 +89,7 @@ export const OppilaitoksenOsaPage = () => {
       header={
         <EntityFormHeader
           entityType={ENTITY.OPPILAITOKSEN_OSA}
-          entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
+          entity={{ ...organisaatio, ...oppilaitoksenOsa }}
         />
       }
       footer={

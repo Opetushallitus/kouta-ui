@@ -78,7 +78,7 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
   organisaatio,
   hierarkia,
   oppilaitostyypitByKoulutustyypit
-) => {
+): boolean => {
   const oppilaitoksenKoulutustyypit = organisaationKoulutustyypit(
     organisaatio,
     oppilaitostyypitByKoulutustyypit
@@ -135,11 +135,11 @@ export const usePreferredOrganisaatio = (
     const firstChildOrganisation =
       organisaatiot &&
       hierarkia &&
-      head(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
+      head(orgOids.filter(oid => hierarkia.filter(isChild(oid))));
     const firstParentOrganisation =
       organisaatiot &&
       hierarkia &&
-      head(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
+      head(orgOids.filter(oid => hierarkia.filter(isParent(oid))));
 
     const preferredOrganisaatio =
       organisaatiot &&

@@ -275,7 +275,6 @@ export const JarjestamisTiedotSection = ({
       <ApurahaFields
         language={language}
         name={name}
-        koulutustyyppi={koulutustyyppi}
         toteutuksenMetadata={toteutuksenMetadata}
       />
 

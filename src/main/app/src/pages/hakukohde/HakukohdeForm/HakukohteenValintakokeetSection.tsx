@@ -59,25 +59,33 @@ export const HakukohteenValintakokeetSection = ({
           <Heading hasDivider>
             {t('koeTaiLisanaytto.valintaperusteenValintakokeet')}
           </Heading>
-          {valintaperusteenValintakokeet.map(({ id, ...rest }, index) => (
-            <Box mb={2} key={`valintakoe-${id}`}>
-              <SectionInnerCollapse
-                header={t('koeTaiLisanaytto.title', { index: index + 1 })}
-                key={id}
-                defaultOpen={true}
-              >
-                <ReadonlyKoeJaTilaisuudet language={language} {...rest} />
-                <FieldArray
-                  name={`${name}.valintaperusteenValintakokeidenLisatilaisuudet.${id}`}
-                  readonlyAmount={rest?.tilaisuudet?.length}
-                  backgroundColor={getThemeProp('colors.white')}
-                  component={TilaisuudetFields}
-                  language={language}
-                  t={t}
-                />
-              </SectionInnerCollapse>
-            </Box>
-          ))}
+          {valintaperusteenValintakokeet.map(
+            ({ id, metadata, nimi, tilaisuudet, tyyppiKoodiUri }, index) => (
+              <Box mb={2} key={`valintakoe-${id}`}>
+                <SectionInnerCollapse
+                  header={t('koeTaiLisanaytto.title', { index: index + 1 })}
+                  key={id}
+                  defaultOpen={true}
+                >
+                  <ReadonlyKoeJaTilaisuudet
+                    language={language}
+                    metadata={metadata}
+                    nimi={nimi}
+                    tilaisuudet={tilaisuudet}
+                    tyyppiKoodiUri={tyyppiKoodiUri}
+                  />
+                  <FieldArray
+                    name={`${name}.valintaperusteenValintakokeidenLisatilaisuudet.${id}`}
+                    readonlyAmount={tilaisuudet?.length}
+                    backgroundColor={getThemeProp('colors.white')}
+                    component={TilaisuudetFields}
+                    language={language}
+                    t={t}
+                  />
+                </SectionInnerCollapse>
+              </Box>
+            )
+          )}
         </div>
       )}
       <Heading hasDivider>

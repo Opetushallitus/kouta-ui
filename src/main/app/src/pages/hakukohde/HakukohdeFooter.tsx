@@ -4,7 +4,7 @@ import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
-import { ENTITY, FormMode } from '#/src/constants';
+import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
@@ -26,7 +26,7 @@ type HakukohdeFooterProps = {
   formMode: FormMode;
   organisaatioOid: string;
   hakukohde?: HakukohdeModel;
-  koulutustyyppi: string;
+  koulutustyyppi: KOULUTUSTYYPPI;
   haku?: HakuModel;
   toteutus?: ToteutusModel;
   canUpdate?: boolean;

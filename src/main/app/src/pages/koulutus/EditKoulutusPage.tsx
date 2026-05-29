@@ -27,7 +27,7 @@ export const EditKoulutusPage = () => {
 
   const koulutusQueryResult = useKoulutusByOid(oid);
 
-  const { data: koulutus = null } = koulutusQueryResult;
+  const { data: koulutus } = koulutusQueryResult;
 
   const { t } = useTranslation();
   const initialValues = useMemo(() => {

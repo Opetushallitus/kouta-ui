@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { FieldArray } from 'redux-form';
+import { FieldArray, FieldArrayFieldsProps } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
@@ -12,7 +12,15 @@ import { WithKoulutusSelect } from './AmmatillinenTiedotSection/AmmatillinenTied
 import { EPerusteTiedot } from './AmmatillinenTiedotSection/EPerusteTiedot';
 import { useNimiFromKoulutusKoodi } from './useNimiFromKoulutusKoodi';
 
-const TutkinnonOsatField = ({ disabled, language, name }) => {
+const TutkinnonOsatField = ({
+  disabled,
+  language,
+  name,
+}: {
+  disabled: boolean;
+  language: LanguageCode;
+  name: string;
+}) => {
   useNimiFromKoulutusKoodi({
     nimiFieldName: `${name}.nimi`,
     koulutusFieldName: `${name}.koulutus`,
@@ -34,7 +42,15 @@ const TutkinnonOsatField = ({ disabled, language, name }) => {
   );
 };
 
-const TutkinnonOsatFields = ({ disabled, language, fields }) => {
+const TutkinnonOsatFields = ({
+  disabled,
+  language,
+  fields,
+}: {
+  disabled: boolean;
+  language: LanguageCode;
+  fields: FieldArrayFieldsProps<unknown>;
+}) => {
   const { t } = useTranslation();
   const onAddField = useCallback(() => {
     fields.push({});
@@ -73,20 +89,19 @@ const TutkinnonOsatFields = ({ disabled, language, fields }) => {
 export const TutkinnonOsatSection = ({
   disabled,
   language,
-  koulutustyyppi,
   name,
+}: {
+  disabled: boolean;
+  language: LanguageCode;
+  name: string;
 }) => {
-  const { t } = useTranslation();
-
   return (
     <Box mb={-2}>
       <Box mb={2}>
         <FieldArray
           disabled={disabled}
-          koulutustyyppi={koulutustyyppi}
-          name={name}
           component={TutkinnonOsatFields}
-          t={t}
+          name={name}
           language={language}
         />
       </Box>

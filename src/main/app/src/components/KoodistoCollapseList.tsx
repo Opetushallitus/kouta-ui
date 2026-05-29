@@ -29,7 +29,7 @@ export const KoodistoCollapseList = ({
   name: string;
   selectLabel: string;
   CollapseContent: React.ComponentType<CollapseContentProps>;
-  koodistoData: Array<Koodi>;
+  koodistoData?: Array<Koodi>;
   formatLabel?: (koodi: Koodi, language: LanguageCode) => string;
   itemProps: any;
 }) => {

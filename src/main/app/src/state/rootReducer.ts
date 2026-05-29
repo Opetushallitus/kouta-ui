@@ -1,5 +1,6 @@
 import { produce } from 'immer';
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import { persistReducer } from 'redux-persist';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import storage from 'redux-persist/lib/storage';
@@ -50,5 +51,6 @@ export const createRootReducer = (reducers = {}) =>
           return state;
       }
     },
+    form: formReducer,
     ...reducers,
   });

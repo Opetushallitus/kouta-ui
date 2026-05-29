@@ -92,7 +92,7 @@ export const Filters = ({
 
   const parseChildOrgs = (hierarkia, lang) => {
     const flatHierarkia = flattenHierarkia(hierarkia);
-    const result = [];
+    const result: Array<SelectOption> = [];
     flatHierarkia.forEach(org => {
       if (org?.nimi) {
         const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi;
@@ -149,7 +149,7 @@ export const Filters = ({
 
   const nakyvyysOptions = useNakyvyysOptions(t);
 
-  const koulutuksenAlkamisvuosiOptions = getKoulutuksenAlkamisvuosiOptions(t);
+  const koulutuksenAlkamisvuosiOptions = getKoulutuksenAlkamisvuosiOptions();
   const { options: koulutuksenAlkamiskausiOptions } = useKoodistoOptions({
     koodisto: 'kausi',
   });

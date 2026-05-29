@@ -1,4 +1,5 @@
-import { ENTITY } from '../constants';
+import { ENTITY } from '#/src/constants';
+
 import { components } from './kouta-backend.api';
 
 export type KoulutusModel = components['schemas']['Koulutus'];

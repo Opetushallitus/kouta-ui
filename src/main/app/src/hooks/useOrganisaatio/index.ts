@@ -12,7 +12,7 @@ import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByO
 
 export const useOrganisaatio = (
   oid: string,
-  options: KoutaApiQueryConfig = {}
+  options: KoutaApiQueryConfig<Array<OrganisaatioModel>> = {}
 ) => {
   const { organisaatiot, ...rest } = useOrganisaatiot(oid, options);
 
@@ -21,11 +21,9 @@ export const useOrganisaatio = (
 
 export const useOrganisaatiot = (
   oids: string | Array<string>,
-  options: KoutaApiQueryConfig = {}
+  options: KoutaApiQueryConfig<Array<OrganisaatioModel>> = {}
 ) => {
-  const { data: organisaatiot, ...rest } = useApiQuery<
-    Array<OrganisaatioModel>
-  >(
+  const { data: organisaatiot, ...rest } = useApiQuery(
     'getOrganisaatiot',
     getOrganisaatiotByOids,
     { oids: castArray(oids) },

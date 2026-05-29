@@ -52,7 +52,7 @@ export const useKoodit = (koodiUris: Array<string>) => {
     return Object.entries(versiotMap);
   }, [koodiUris]);
 
-  const { data, ...rest } = useApiQuery<Array<Array<Koodi> | undefined>>(
+  const { data, ...rest } = useApiQuery(
     'getKoodistot',
     getKoodistot,
     { versiot },

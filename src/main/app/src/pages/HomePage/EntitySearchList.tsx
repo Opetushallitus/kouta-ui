@@ -46,7 +46,7 @@ export const useEntitySearch = ({
     [filtersProps, organisaatioOid]
   );
 
-  return useApiQuery<SearchResponse>(
+  return useApiQuery(
     'search.' + searchPage,
     searchEntities,
     { params: queryParams },

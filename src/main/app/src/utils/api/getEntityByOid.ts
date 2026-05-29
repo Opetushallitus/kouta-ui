@@ -52,7 +52,9 @@ export async function getEntityByOid<K extends ENTITY>({
   httpClient,
   apiUrls,
   silent = false,
-}: GetEntityTypeByOidProps<K>) {
+}: GetEntityTypeByOidProps<K>): Promise<
+  EntityTypeMap[K] & { lastModified: string | null }
+> {
   const { data, headers } = await httpClient.get<EntityTypeMap[K]>(
     apiUrls.url(`kouta-backend.${entityType}-by-oid`, oid),
     {
@@ -68,11 +70,13 @@ export async function getEntityByOid<K extends ENTITY>({
 export const useEntityByOid = <K extends ENTITY>(
   entityType: K,
   props?: { oid?: string | null; silent?: boolean },
-  options: KoutaApiQueryConfig = {}
+  options?: KoutaApiQueryConfig<
+    EntityTypeMap[K] & { lastModified: string | null }
+  >
 ) =>
-  useApiQuery<EntityTypeMap[K] & { lastModified: string | null }>(
+  useApiQuery(
     entityType,
-    getEntityByOid,
+    getEntityByOid<K>,
     { entityType, ...props },
     {
       refetchOnWindowFocus: false,

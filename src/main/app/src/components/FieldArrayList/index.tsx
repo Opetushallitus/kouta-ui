@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { FieldArrayFieldsProps } from 'redux-form';
+import type { FieldArrayFieldsProps } from 'redux-form';
 import styled, { css } from 'styled-components';
 
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';

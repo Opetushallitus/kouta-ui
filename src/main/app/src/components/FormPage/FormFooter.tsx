@@ -10,7 +10,7 @@ import { Box, Button } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import type { EntityModelBase } from '#/src/types/domainTypes';
 import { getEntityNimiTranslation } from '#/src/utils';
 
 import DeleteConfirmationDialog from '../DeleteConfirmationDialog';

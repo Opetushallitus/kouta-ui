@@ -1,13 +1,28 @@
 import React, { useMemo } from 'react';
 
-import { reduxForm } from 'redux-form';
+import { reduxForm, InjectedFormProps, ConfigProps } from 'redux-form';
 
+import { ENTITY, FormMode } from '#/src/constants';
 import FormContext from '#/src/contexts/FormContext';
+
+interface FormWrapperProps {
+  children?: React.ReactNode;
+}
 
 const ReduxFormWrapper = reduxForm({
   initialValues: {},
   enableReinitialize: true,
-})(({ children }) => <>{children}</>);
+})(({ children }: FormWrapperProps & InjectedFormProps) => (
+  <>{children}</>
+)) as React.ComponentType<ConfigProps<any> & { children?: React.ReactNode }>;
+
+interface ReduxFormProps {
+  form: ENTITY;
+  mode?: FormMode;
+  disabled?: boolean;
+  children: React.ReactNode;
+  initialValues: any;
+}
 
 export const ReduxForm = ({
   form,
@@ -15,7 +30,7 @@ export const ReduxForm = ({
   disabled = false,
   children,
   initialValues,
-}) => {
+}: ReduxFormProps) => {
   const formCtx = useMemo(
     () => ({ name: form, disabled, mode }),
     [form, disabled, mode]

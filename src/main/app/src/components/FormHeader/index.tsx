@@ -11,16 +11,28 @@ const HomeIcon = styled(Icon).attrs({ type: 'home' })`
   font-size: 1.5rem;
 `;
 
-const IconContainer = styled.div`
+const iconContainerStyles = `
   display: inline-flex;
   justify-content: center;
   align-items: center;
   width: 2rem;
   height: 2rem;
-  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-  border: 1px solid ${getThemeProp('palette.text.primary')};
-  border-radius: ${getThemeProp('shape.borderRadius')};
+  border: 1px solid;
   cursor: pointer;
+`;
+
+const IconContainer = styled.div`
+  ${iconContainerStyles}
+  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
+  border-color: ${getThemeProp('palette.text.primary')};
+  border-radius: ${getThemeProp('shape.borderRadius')};
+`;
+
+const IconContainerLink = styled(Link)`
+  ${iconContainerStyles}
+  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
+  border-color: ${getThemeProp('palette.text.primary')};
+  border-radius: ${getThemeProp('shape.borderRadius')};
 `;
 
 const Container = styled.div`
@@ -50,14 +62,18 @@ const FormHeader = ({
   children,
   hasHomeLink = true,
 }: FormHeaderProps) => {
-  const homeIconProps = hasHomeLink ? { as: Link, to: '/' } : {};
-
   return (
     <Container>
       <TitleContainer>
-        <IconContainer {...homeIconProps}>
-          <HomeIcon />
-        </IconContainer>
+        {hasHomeLink ? (
+          <IconContainerLink to="/">
+            <HomeIcon />
+          </IconContainerLink>
+        ) : (
+          <IconContainer>
+            <HomeIcon />
+          </IconContainer>
+        )}
         <Typography variant="h5">{title}</Typography>
         {status && (
           <Box ml={2} mr={2}>

@@ -42,13 +42,13 @@ const getDiplomitByValues = (diplomiValues, kieleistykset) =>
 
 const getMaksunMaara = (
   maksullisuustyyppi: string,
-  maksunMaara?: string | number,
-  lukuvuosimaksunMaara?: string | number
-) => {
+  maksunMaara?: string,
+  lukuvuosimaksunMaara?: string
+): number | null => {
   if (maksullisuustyyppi === MaksullisuusTyyppi.MAKSULLINEN) {
-    return maybeParseNumber(maksunMaara) || undefined;
+    return maybeParseNumber(maksunMaara);
   } else if (maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU) {
-    return maybeParseNumber(lukuvuosimaksunMaara) || undefined;
+    return maybeParseNumber(lukuvuosimaksunMaara);
   } else {
     return null;
   }
@@ -56,8 +56,8 @@ const getMaksunMaara = (
 
 export const getMaksutByFormValues = (
   maksullisuustyyppiValue?: Array<MaksullisuusTyyppi> | MaksullisuusTyyppi,
-  maksunMaara?: string | number,
-  lukuvuosimaksunMaara?: string | number
+  maksunMaara?: string,
+  lukuvuosimaksunMaara?: string
 ): Array<Maksu> | undefined => {
   if (maksullisuustyyppiValue) {
     const maksullisuustyypit = isArray(maksullisuustyyppiValue)

@@ -21,7 +21,7 @@ export enum MaksullisuusTyyppi {
 
 export type Maksu = {
   maksullisuustyyppi: MaksullisuusTyyppi;
-  maksunMaara: number;
+  maksunMaara: number | null;
 };
 
 type Toteutusjakso = {

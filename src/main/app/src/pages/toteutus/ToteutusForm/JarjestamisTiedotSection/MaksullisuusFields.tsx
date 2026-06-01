@@ -82,9 +82,9 @@ export const MaksullisuusFields = ({
       ? `${name}.maksullisuustyypit`
       : `${name}.maksullisuustyyppi`;
 
-  const selectedMaksullisuustyyppiValue = useFieldValue(
-    maksullisuustyyppiFieldName
-  );
+  const selectedMaksullisuustyyppiValue = useFieldValue<
+    MaksullisuusTyyppi | Array<MaksullisuusTyyppi>
+  >(maksullisuustyyppiFieldName);
 
   const maksunMaaraVisible = isMaksunMaaraVisible(
     selectedMaksullisuustyyppiValue,

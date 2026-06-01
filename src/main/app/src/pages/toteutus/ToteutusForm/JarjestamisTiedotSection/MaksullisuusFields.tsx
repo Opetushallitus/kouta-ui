@@ -47,10 +47,7 @@ const isMaksunMaaraVisible = (
   maksullisuustyyppiForMaksunMaara: MaksullisuusTyyppi
 ): boolean => {
   return Array.isArray(selectedMaksullisuustyyppiValue)
-    ? selectedMaksullisuustyyppiValue.some(
-        (mt: MaksullisuusTyyppi): boolean =>
-          mt === maksullisuustyyppiForMaksunMaara
-      )
+    ? selectedMaksullisuustyyppiValue.includes(maksullisuustyyppiForMaksunMaara)
     : selectedMaksullisuustyyppiValue === maksullisuustyyppiForMaksunMaara;
 };
 
@@ -85,9 +82,9 @@ export const MaksullisuusFields = ({
       ? `${name}.maksullisuustyypit`
       : `${name}.maksullisuustyyppi`;
 
-  const selectedMaksullisuustyyppiValue = useFieldValue(
-    maksullisuustyyppiFieldName
-  );
+  const selectedMaksullisuustyyppiValue = useFieldValue<
+    MaksullisuusTyyppi | Array<MaksullisuusTyyppi>
+  >(maksullisuustyyppiFieldName);
 
   const maksunMaaraVisible = isMaksunMaaraVisible(
     selectedMaksullisuustyyppiValue,

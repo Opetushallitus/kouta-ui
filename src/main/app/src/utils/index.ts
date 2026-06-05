@@ -48,7 +48,7 @@ import {
   LANGUAGES,
   NDASH,
   ORGANISAATIOTYYPPI,
-  Koulutustyyppi,
+  KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI,
 } from '#/src/constants';
 import { EntityModelBase } from '#/src/types/domainTypes';
 import { SelectValue } from '#/src/types/formTypes';
@@ -500,7 +500,6 @@ export const isTruthy = <T>(value: T | false | null | undefined): value is T =>
   Boolean(value);
 
 export const isKoulutustyyppiWithMultipleMaksullisuustyyppi = (
-  koulutustyyppi: Koulutustyyppi
+  koulutustyyppi: KOULUTUSTYYPPI
 ): boolean =>
-  koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ||
-  koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
+  KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI.includes(koulutustyyppi);

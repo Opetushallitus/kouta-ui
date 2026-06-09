@@ -523,6 +523,56 @@ test.describe('Create toteutus', () => {
       await tallenna(page);
     }));
 
+  test('should be able to create ammatillinen tutkinnon osa toteutus with maksullinen and lukuvuosimaksullinen opetus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'amm-tutkinnon-osa';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await fillKuvausAndOsaamistavoitteetSection(page);
+      await fillJarjestamistiedotSection(page, {
+        maksullisuusTyyppi: [
+          MaksullisuusTyyppi.MAKSULLINEN,
+          MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        ],
+      });
+      await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+      await fillJarjestajaSection(page);
+      await expect(getSection(page, 'soraKuvaus')).toBeHidden();
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
+  test('should be able to osaamisala toteutus with maksullinen and lukuvuosimaksullinen opetus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'amm-osaamisala';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await fillKuvausSection(page);
+      await fillJarjestamistiedotSection(page, {
+        maksullisuusTyyppi: [
+          MaksullisuusTyyppi.MAKSULLINEN,
+          MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        ],
+      });
+      await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+      await fillJarjestajaSection(page);
+      await expect(getSection(page, 'soraKuvaus')).toBeHidden();
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
   test('should be able to create ammatillinen toteutus', ({ page }, testInfo) =>
     mutationTest({ page, testInfo }, async () => {
       const tyyppi = 'amm';
@@ -846,6 +896,29 @@ test.describe('Create toteutus', () => {
       await tallenna(page);
     }));
 
+  test('should be able to create TELMA toteutus with maksullinen and lukuvuosimaksullinen opetus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'telma';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await fillKuvausAndOsaamistavoitteetSection(page);
+      await fillJarjestamistiedotSection(page, {
+        maksullisuusTyyppi: [
+          MaksullisuusTyyppi.MAKSULLINEN,
+          MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        ],
+      });
+      await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+      await fillJarjestajaSection(page);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
   test('should be able to create muu ammatillinen toteutus', ({
     page,
   }, testInfo) =>
@@ -857,6 +930,30 @@ test.describe('Create toteutus', () => {
       await fillTiedotSection(page, tyyppi);
       await fillKuvausAndOsaamistavoitteetSection(page);
       await fillJarjestamistiedotSection(page);
+      await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
+      await fillJarjestajaSection(page);
+      await fillHakeutumisTaiIlmoittautumisTapaSection(page);
+      await fillYhteystiedotSection(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
+  test('should be able to create muu ammatillinen toteutus with maksullinen and lukuvuosimaksullinen opetus', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      const tyyppi = 'amm-muu';
+      await prepareTest(page, tyyppi);
+      await fillOrgSection(page, organisaatioOid);
+      await fillKieliversiotSection(page);
+      await fillTiedotSection(page, tyyppi);
+      await fillKuvausAndOsaamistavoitteetSection(page);
+      await fillJarjestamistiedotSection(page, {
+        maksullisuusTyyppi: [
+          MaksullisuusTyyppi.MAKSULLINEN,
+          MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+        ],
+      });
       await fillNayttamistiedotSection(page, { ammattinimikkeet: false });
       await fillJarjestajaSection(page);
       await fillHakeutumisTaiIlmoittautumisTapaSection(page);

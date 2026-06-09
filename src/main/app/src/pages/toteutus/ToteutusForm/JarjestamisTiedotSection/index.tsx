@@ -14,7 +14,11 @@ import {
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI, TOHTORITUTKINTOTYYPPI } from '#/src/constants';
+import {
+  KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI,
+  KOULUTUSTYYPPI,
+  TOHTORITUTKINTOTYYPPI,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useLisatiedotOptions } from '#/src/hooks/useKoodistoOptions';
 import { useKoulutuksetByTutkintotyyppi } from '#/src/hooks/useKoulutuksetByTutkintotyyppi';
@@ -139,8 +143,7 @@ const isLukuvuosimaksuVisible = (
     (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
       !isTohtorikoulutus(koulutusKoodiurit, tohtorikoulutukset) &&
       isEnglishChosen(opetuskielet)) ||
-    koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ||
-    koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
+    KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI.includes(koulutustyyppi)
   );
 };
 

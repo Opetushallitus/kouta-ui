@@ -14,6 +14,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
     tila: JULKAISUTILA.TALLENNETTU,
     kielivalinta: ['fi', 'sv'],
     metadata: {
+      tyyppi: 'amm',
       ammattinimikkeet: [
         {
           arvo: 'nimike1',
@@ -83,8 +84,16 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
             },
           },
         ],
-        maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
-        maksunMaara: 500.0,
+        maksut: [
+          {
+            maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
+            maksunMaara: 500,
+          },
+          {
+            maksullisuustyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+            maksunMaara: 1500.5,
+          },
+        ],
         maksullisuusKuvaus: {
           fi: 'Fi maksullisuuskuvaus',
           sv: 'Sv maksullisuuskuvaus',

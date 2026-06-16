@@ -107,12 +107,17 @@ exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] 
         },
       ],
     },
+    "lukuvuosimaksunMaara": "1500.5",
     "maksullisuusKuvaus": {
       "fi": "<p>Fi maksullisuuskuvaus</p>",
       "sv": "<p>Sv maksullisuuskuvaus</p>",
     },
-    "maksullisuustyyppi": "maksullinen",
-    "maksunMaara": 500,
+    "maksullisuustyypit": [
+      "maksullinen",
+      "lukuvuosimaksu",
+    ],
+    "maksullisuustyyppi": undefined,
+    "maksunMaara": "500",
     "onkoApuraha": true,
     "opetusaika": [
       "opetusaika_1#1",
@@ -168,7 +173,7 @@ exports[`getFormValuesByToteutus returns correct form values given toteutus 1`] 
     "fi",
     "sv",
   ],
-  "koulutustyyppi": undefined,
+  "koulutustyyppi": "amm",
   "lukiolinjat": {
     "erityisetKoulutustehtavat": {
       "kaytossa": true,

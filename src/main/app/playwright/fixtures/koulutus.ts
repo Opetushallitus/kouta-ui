@@ -2,6 +2,7 @@ import { merge } from 'lodash';
 
 import { type TestiKoulutustyyppi } from '#/playwright/test-types';
 import { OpintojenLaajuusyksikko } from '#/src/constants';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const getBaseFields = (tyyppi: TestiKoulutustyyppi = 'amm') => {
   return {
@@ -58,6 +59,27 @@ const getAmmatillinenFields = (tyyppi: TestiKoulutustyyppi) => {
     kielivalinta: ['fi', 'sv'],
     ePerusteId: 6777660,
     modified: '2020-09-21T16:27',
+  });
+};
+
+const getAmmFields = (tyyppi: TestiKoulutustyyppi) => {
+  return merge(getAmmatillinenFields(tyyppi), {
+    metadata: {
+      kuvaus: {},
+      lisatiedot: [],
+      opetus: {
+        maksut: [
+          {
+            maksullisuustyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+            maksunMaara: 500,
+          },
+          {
+            maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
+            maksunMaara: 25,
+          },
+        ],
+      },
+    },
   });
 };
 
@@ -227,6 +249,8 @@ export default (tyyppi: TestiKoulutustyyppi = 'amm') => {
     return getAmmOpeErityisopeJaOpoFields();
   } else if (tyyppi === 'amm-muu') {
     return getMuuAmmatillinenFields();
+  } else if (tyyppi === 'amm') {
+    return getAmmFields(tyyppi);
   } else if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields(tyyppi);
   } else if (['yo', 'amk'].includes(tyyppi)) {

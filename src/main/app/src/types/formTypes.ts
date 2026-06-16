@@ -9,6 +9,8 @@ import {
   Koulutustyyppi,
 } from '#/src/constants';
 
+import { MaksullisuusTyyppi } from './toteutusTypes';
+
 interface FieldBaseProps {
   name: string;
   disabled: boolean;
@@ -49,7 +51,12 @@ type KoutaErrorResponse = {
   errorType: string;
   msg: string;
   path: string;
-  meta?: { entiteetit?: Array<string>; julkaistutToteutukset: Array<string> };
+  meta?: {
+    entiteetit?: Array<string>;
+    julkaistutToteutukset: Array<string>;
+    maksullisuustyyppi?: MaksullisuusTyyppi;
+    osaamismerkit: Array<string>;
+  };
 };
 
 type KoutaErrorData = {

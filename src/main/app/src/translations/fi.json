@@ -370,7 +370,8 @@
     "invalidOpetuskieliWithLukuvuosimaksu": "Lukuvuosimaksun voi valita maksullisuustyypiksi vain englanninkielisille toteutuksille.",
     "missingTarjoajatForNonJulkinenKoulutus": "Tämän tyyppiselle koulutukselle täytyy valita vähintään yksi järjestäjä, ellei koulutus ole julkinen",
     "invalidStateChangeForLiitetty": "Entiteetin tilaa ei voi vaihtaa, koska se on liitetty entiteetteihin {{julkaistutToteutukset}}, joiden tila on Julkaistu.",
-    "deprecatedOsaamismerkki": "Osaamismerkin voimassaolo on päättynyt eikä sitä voi liittää toteutukselle."
+    "deprecatedOsaamismerkki": "Osaamismerkin voimassaolo on päättynyt eikä sitä voi liittää toteutukselle.",
+    "invalidMaksutonWhenMultipleMaksullisuustyypit": "Opetus ei voi olla samanaikaisesti maksutonta ja maksullista/lukuvuosimaksullista"
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",
@@ -540,6 +541,7 @@
     "toteutuksenTiedot": "Toteutuksen tiedot",
     "toteutuksenKuvaus": "Toteutuksen kuvaus",
     "toteutuksenKuvausJaOsaamistavoitteet": "Toteutuksen kuvaus ja osaamistavoitteet",
+    "toteutuksenOsaamistavoitteet": "Toteutuksen osaamistavoitteet",
     "toteutuksenYleinenKuvaus": "Toteutuksen yleinen kuvaus",
     "ilmoittautumislinkki": "Ilmoittautumislinkki",
     "laajuus": "Laajuus",
@@ -561,6 +563,8 @@
     "onkoLukuvuosimaksua": "Onko lukuvuosimaksua?",
     "jotpaRahoitus": "Koulutus on JOTPA-rahoitettu",
     "apuraha": "Apuraha",
+    "maksunMaara": "Maksullisen opetuksen maksun määrä",
+    "lukuvuosimaksunMaara": "Lukuvuosimaksun määrä",
     "valitseKaytettavaApurahoitus": "Valitse käytettava apurahoitus",
     "syotaApurahanMaara": "Syötä apurahan määrä",
     "yksiArvo": "Yksi arvo",

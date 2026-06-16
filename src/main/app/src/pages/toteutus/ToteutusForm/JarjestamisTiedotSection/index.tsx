@@ -14,7 +14,11 @@ import {
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
-import { KOULUTUSTYYPPI, TOHTORITUTKINTOTYYPPI } from '#/src/constants';
+import {
+  KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI,
+  KOULUTUSTYYPPI,
+  TOHTORITUTKINTOTYYPPI,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { useLisatiedotOptions } from '#/src/hooks/useKoodistoOptions';
 import { useKoulutuksetByTutkintotyyppi } from '#/src/hooks/useKoulutuksetByTutkintotyyppi';
@@ -134,11 +138,12 @@ const isLukuvuosimaksuVisible = (
   opetuskielet?: Array<string>,
   tohtorikoulutukset?: Array<Koodi>,
   koulutusKoodiurit?: Array<string>
-) => {
+): boolean => {
   return (
-    isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
-    !isTohtorikoulutus(koulutusKoodiurit, tohtorikoulutukset) &&
-    isEnglishChosen(opetuskielet)
+    (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) &&
+      !isTohtorikoulutus(koulutusKoodiurit, tohtorikoulutukset) &&
+      isEnglishChosen(opetuskielet)) ||
+    KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI.includes(koulutustyyppi)
   );
 };
 
@@ -254,6 +259,7 @@ export const JarjestamisTiedotSection = ({
                 tohtorikoulutukset,
                 koulutusKoodiurit
               )}
+              koulutustyyppi={koulutustyyppi}
               name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />

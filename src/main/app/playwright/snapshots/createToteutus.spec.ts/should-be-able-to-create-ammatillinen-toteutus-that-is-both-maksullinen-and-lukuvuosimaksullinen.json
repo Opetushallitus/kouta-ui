@@ -27,8 +27,12 @@
       ],
       "maksut": [
         {
-          "maksullisuustyyppi": "maksuton",
-          "maksunMaara": null
+          "maksullisuustyyppi": "maksullinen",
+          "maksunMaara": 10
+        },
+        {
+          "maksullisuustyyppi": "lukuvuosimaksu",
+          "maksunMaara": 100
         }
       ],
       "opetustapaKoodiUrit": [
@@ -44,7 +48,9 @@
       "opetusaikaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
       },
-      "maksullisuusKuvaus": {},
+      "maksullisuusKuvaus": {
+        "fi": "<p>maksullisuus kuvaus</p>"
+      },
       "onkoApuraha": false,
       "apuraha": null,
       "suunniteltuKestoVuodet": 2,
@@ -62,7 +68,6 @@
       }
     },
     "diplomit": [],
-    "isPieniOsaamiskokonaisuus": true,
     "painotukset": [],
     "kielivalikoima": {
       "A1Kielet": [],
@@ -74,7 +79,17 @@
       "muutKielet": []
     },
     "erityisetKoulutustehtavat": [],
-    "osaamisalat": [],
+    "osaamisalat": [
+      {
+        "koodiUri": "osaamisala_1800",
+        "linkki": {
+          "fi": "http://linkki.com"
+        },
+        "otsikko": {
+          "fi": "osaamisala_0 otsikko"
+        }
+      }
+    ],
     "yhteyshenkilot": [
       {
         "nimi": {
@@ -97,7 +112,12 @@
         }
       }
     ],
-    "ammattinimikkeet": [],
+    "ammattinimikkeet": [
+      {
+        "kieli": "fi",
+        "arvo": "ammattinimike"
+      }
+    ],
     "asiasanat": [
       {
         "kieli": "fi",
@@ -110,33 +130,19 @@
     "osaamistavoitteet": {
       "fi": "<p>Osaamistavoitteet</p>"
     },
-    "tyyppi": "amm-tutkinnon-osa",
+    "tyyppi": "amm",
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "ilmoittautumislinkki": {},
     "toteutusjaksot": [],
-    "isHakukohteetKaytossa": false,
-    "hakutermi": "hakeutuminen",
-    "hakulomaketyyppi": "muu",
-    "hakulomakeLinkki": {
-      "fi": "http://example.com"
-    },
-    "lisatietoaHakeutumisesta": {
-      "fi": "<p>lisätiedot</p>"
-    },
-    "lisatietoaValintaperusteista": {
-      "fi": "<p>lisätiedot valintaperusteista</p>"
-    },
-    "hakuaika": {
-      "alkaa": "2050-04-01T00:00",
-      "paattyy": "2050-09-01T00:00"
-    },
-    "aloituspaikat": 25,
-    "aloituspaikkakuvaus": {
-      "fi": "<p>lisätietoja aloituspaikoista</p>"
-    },
+    "hakulomakeLinkki": {},
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
+    "hakuaika": null,
+    "aloituspaikat": null,
+    "aloituspaikkakuvaus": {},
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,

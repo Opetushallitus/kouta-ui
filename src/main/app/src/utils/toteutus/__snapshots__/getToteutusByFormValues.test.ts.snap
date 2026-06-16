@@ -162,8 +162,12 @@ exports[`getToteutusByFormValues returns correct toteutus given form values 1`] 
         "fi": "<p>Fi maksullisuuskuvaus</p>",
         "sv": "<p>Sv maksullisuuskuvaus</p>",
       },
-      "maksullisuustyyppi": "lukuvuosimaksu",
-      "maksunMaara": 50.5,
+      "maksut": [
+        {
+          "maksullisuustyyppi": "lukuvuosimaksu",
+          "maksunMaara": 50.5,
+        },
+      ],
       "onkoApuraha": true,
       "opetusaikaKoodiUrit": [
         "opetusaika_1#1",

@@ -27,8 +27,12 @@
       ],
       "maksut": [
         {
-          "maksullisuustyyppi": "maksuton",
-          "maksunMaara": null
+          "maksullisuustyyppi": "maksullinen",
+          "maksunMaara": 10
+        },
+        {
+          "maksullisuustyyppi": "lukuvuosimaksu",
+          "maksunMaara": 100
         }
       ],
       "opetustapaKoodiUrit": [
@@ -44,7 +48,9 @@
       "opetusaikaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
       },
-      "maksullisuusKuvaus": {},
+      "maksullisuusKuvaus": {
+        "fi": "<p>maksullisuus kuvaus</p>"
+      },
       "onkoApuraha": false,
       "apuraha": null,
       "suunniteltuKestoVuodet": 2,

@@ -2,7 +2,7 @@
   "organisaatioOid": "1.1.1.1.1.1",
   "externalId": null,
   "nimi": {
-    "fi": "Kaivosalan perustutkinto"
+    "fi": "Työhön ja itsenäiseen elämään valmentava koulutus (TELMA)"
   },
   "tarjoajat": [
     "1.2.2.1.1.1"
@@ -27,8 +27,12 @@
       ],
       "maksut": [
         {
-          "maksullisuustyyppi": "maksuton",
-          "maksunMaara": null
+          "maksullisuustyyppi": "maksullinen",
+          "maksunMaara": 10
+        },
+        {
+          "maksullisuustyyppi": "lukuvuosimaksu",
+          "maksunMaara": 100
         }
       ],
       "opetustapaKoodiUrit": [
@@ -44,7 +48,9 @@
       "opetusaikaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
       },
-      "maksullisuusKuvaus": {},
+      "maksullisuusKuvaus": {
+        "fi": "<p>maksullisuus kuvaus</p>"
+      },
       "onkoApuraha": false,
       "apuraha": null,
       "suunniteltuKestoVuodet": 2,
@@ -62,7 +68,6 @@
       }
     },
     "diplomit": [],
-    "isPieniOsaamiskokonaisuus": true,
     "painotukset": [],
     "kielivalikoima": {
       "A1Kielet": [],
@@ -110,33 +115,19 @@
     "osaamistavoitteet": {
       "fi": "<p>Osaamistavoitteet</p>"
     },
-    "tyyppi": "amm-tutkinnon-osa",
+    "tyyppi": "telma",
     "opintojenLaajuusyksikkoKoodiUri": null,
     "opintojenLaajuusNumero": null,
     "opintojenLaajuusNumeroMin": null,
     "opintojenLaajuusNumeroMax": null,
     "ilmoittautumislinkki": {},
     "toteutusjaksot": [],
-    "isHakukohteetKaytossa": false,
-    "hakutermi": "hakeutuminen",
-    "hakulomaketyyppi": "muu",
-    "hakulomakeLinkki": {
-      "fi": "http://example.com"
-    },
-    "lisatietoaHakeutumisesta": {
-      "fi": "<p>lisätiedot</p>"
-    },
-    "lisatietoaValintaperusteista": {
-      "fi": "<p>lisätiedot valintaperusteista</p>"
-    },
-    "hakuaika": {
-      "alkaa": "2050-04-01T00:00",
-      "paattyy": "2050-09-01T00:00"
-    },
-    "aloituspaikat": 25,
-    "aloituspaikkakuvaus": {
-      "fi": "<p>lisätietoja aloituspaikoista</p>"
-    },
+    "hakulomakeLinkki": {},
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
+    "hakuaika": null,
+    "aloituspaikat": null,
+    "aloituspaikkakuvaus": {},
     "isAvoinKorkeakoulutus": false,
     "tunniste": null,
     "opinnonTyyppiKoodiUri": null,

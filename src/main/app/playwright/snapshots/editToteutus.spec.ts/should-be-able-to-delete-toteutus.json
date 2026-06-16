@@ -16,8 +16,16 @@
     "opetus": {
       "lisatiedot": [],
       "opetuskieliKoodiUrit": [],
-      "maksullisuustyyppi": "maksuton",
-      "maksunMaara": null,
+      "maksut": [
+        {
+          "maksullisuustyyppi": "lukuvuosimaksu",
+          "maksunMaara": 500
+        },
+        {
+          "maksullisuustyyppi": "maksullinen",
+          "maksunMaara": 25
+        }
+      ],
       "opetustapaKoodiUrit": [],
       "opetusaikaKoodiUrit": [],
       "opetuskieletKuvaus": {},

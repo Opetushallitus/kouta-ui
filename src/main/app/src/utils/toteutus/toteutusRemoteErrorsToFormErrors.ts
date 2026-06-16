@@ -4,6 +4,7 @@ import { match } from 'ts-pattern';
 
 import { LANGUAGES, KOULUTUSTYYPPI } from '#/src/constants';
 import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 export const findAllIndices = (liitetytEntiteetit, virheellinen) => {
   if (isEmpty(virheellinen) || isEmpty(liitetytEntiteetit)) {
@@ -256,12 +257,33 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
   }
 
   if (
-    path === 'metadata.opetus.maksullisuustyyppi' &&
+    path === 'metadata.opetus.maksut' &&
     errorType === 'invalidOpetuskieliWithLukuvuosimaksu'
   ) {
     return {
       field: 'jarjestamistiedot.maksullisuustyyppi',
       errorKey: `validointivirheet.${errorType}`,
+    };
+  }
+
+  if (
+    /metadata\.opetus\.maksut\[(\d)+\]\.maksunMaara/.test(path) &&
+    errorType === 'missingMsg'
+  ) {
+    const fieldName =
+      meta?.maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU
+        ? 'lukuvuosimaksunMaara'
+        : 'maksunMaara';
+    return {
+      field: `jarjestamistiedot.${fieldName}`,
+      errorKey: `validointivirheet.pakollinen`,
+    };
+  }
+
+  if (path === 'metadata.opetus.maksut' && errorType === 'missingMsg') {
+    return {
+      field: 'jarjestamistiedot.maksullisuustyypit',
+      errorKey: `validointivirheet.pakollinen`,
     };
   }
 

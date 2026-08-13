@@ -198,8 +198,11 @@ export const PaikallisetTutkinnonOsatSection = ({
   );
   const selectedOpetussuunnitelmaId = selectedOpetussuunnitelma?.value;
 
-  const { data: selectedOpetussuunnitelmaOption } =
+  const { data: selectedOpetussuunnitelmaOptionWithId } =
     useOpetussuunnitelmaByIdOption(selectedOpetussuunnitelma);
+
+  const selectedOpetussuunnitelmaOption =
+    selectedOpetussuunnitelmaOptionWithId ?? selectedOpetussuunnitelma;
 
   const allOpetussuunnitelmaOptions = useMemo(() => {
     if (

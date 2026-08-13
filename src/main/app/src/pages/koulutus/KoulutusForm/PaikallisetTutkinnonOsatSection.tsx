@@ -67,7 +67,7 @@ function useOppilaitosOidsWithRights(): {
   };
 }
 
-const createOpetussuunitelmaLabel = (
+const createOpetussuunnitelmaLabel = (
   id: number | undefined,
   nimi: TranslatedField<string> | undefined,
   oppilaitos: { nimi?: TranslatedField<string> } | undefined,
@@ -114,7 +114,7 @@ const useInfiniteOpetussuunnitelmat = ({
         page =>
           page.data?.map(({ id, nimi, koulutustoimija }) => ({
             value: String(id),
-            label: createOpetussuunitelmaLabel(
+            label: createOpetussuunnitelmaLabel(
               id,
               nimi,
               koulutustoimija,
@@ -142,7 +142,12 @@ const useOpetussuunnitelmaByIdOption = (
       enabled: Boolean(opsId) && !opsLabel,
       select: ({ id, nimi, koulutustoimija }) => ({
         value: String(id),
-        label: createOpetussuunitelmaLabel(id, nimi, koulutustoimija, language),
+        label: createOpetussuunnitelmaLabel(
+          id,
+          nimi,
+          koulutustoimija,
+          language
+        ),
       }),
     }
   );

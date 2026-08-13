@@ -1,10 +1,13 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
+import { useInfiniteQuery } from 'react-query';
 import { Field } from 'redux-form';
 
-import { FormFieldAsyncSelect } from '#/src/components/formFields';
+import {
+  FormFieldAsyncSelect,
+  FormFieldSelect,
+} from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -16,27 +19,51 @@ import { getOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelma
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
-type Props = {
+type PaikallisetTutkinnonOsatProps = {
   disabled: boolean;
   organisaatioOid: string;
-  name?: string;
 };
 
-const useOpetussuunnitelmaOptions = (organisaatioOid: string) => {
+const useInfiniteOpetussuunnitelmat = (
+  organisaatioOid?: string,
+  nimi?: string
+) => {
+  const httpClient = useHttpClient();
+  const apiUrls = useUrls();
   const language = useUserLanguage();
-  return useApiQuery(
-    'getOpetussuunnitelmat',
-    getOpetussuunnitelmat,
-    { organisaatioOid },
+
+  const query = useInfiniteQuery(
+    ['getOpetussuunnitelmat', { organisaatioOid, nimi }],
+    ({ pageParam = 1 }) =>
+      getOpetussuunnitelmat({
+        httpClient,
+        apiUrls,
+        organisaatioOid,
+        nimi,
+        sivu: pageParam,
+      }),
     {
       enabled: Boolean(organisaatioOid),
-      select: response =>
-        response.data?.map(({ id, nimi }) => ({
-          value: String(id),
-          label: getLanguageValue(nimi, language) ?? String(id),
-        })) ?? [],
+      getNextPageParam: lastPage =>
+        lastPage.sivu && lastPage.sivuja && lastPage.sivu < lastPage.sivuja
+          ? lastPage.sivu + 1
+          : undefined,
     }
   );
+
+  const options = useMemo(
+    () =>
+      query.data?.pages.flatMap(
+        page =>
+          page.data?.map(({ id, nimi }) => ({
+            value: String(id),
+            label: getLanguageValue(nimi, language) ?? String(id),
+          })) ?? []
+      ) ?? [],
+    [query.data, language]
+  );
+
+  return { ...query, options };
 };
 
 const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
@@ -59,44 +86,23 @@ const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
 export const PaikallisetTutkinnonOsatSection = ({
   disabled,
   organisaatioOid,
-}: Props) => {
+}: PaikallisetTutkinnonOsatProps) => {
   const { t } = useTranslation();
-  const language = useUserLanguage();
-  const httpClient = useHttpClient();
-  const apiUrls = useUrls();
-  const { data: opetussuunnitelmaOptions, isLoading: isLoadingOps } =
-    useOpetussuunnitelmaOptions(organisaatioOid);
+  const [inputValue, setInputValue] = useState('');
+  const [nimi, setNimi] = useState('');
 
-  const loadOpetussuunnitelmat = useCallback(
-    async (inputValue: string) => {
-      if (!organisaatioOid) {
-        return [];
-      }
-      try {
-        const data = await getOpetussuunnitelmat({
-          httpClient,
-          apiUrls,
-          organisaatioOid,
-          nimi: inputValue,
-        });
-        return (
-          data.data?.map(({ id, nimi }) => ({
-            value: String(id),
-            label: getLanguageValue(nimi, language) ?? String(id),
-          })) ?? []
-        );
-      } catch (error) {
-        console.error('Error loading opetussuunnitelmat:', error);
-        return [];
-      }
-    },
-    [organisaatioOid, httpClient, apiUrls, language]
-  );
+  useEffect(() => {
+    const timer = setTimeout(() => setNimi(inputValue), 300);
+    return () => clearTimeout(timer);
+  }, [inputValue]);
 
-  const debouncedLoadOpetussuunnitelmat = useMemo(
-    () => debounce(loadOpetussuunnitelmat, 500),
-    [loadOpetussuunnitelmat]
-  );
+  const {
+    options: opetussuunnitelmaOptions,
+    isLoading: isLoadingOps,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteOpetussuunnitelmat(organisaatioOid, nimi);
 
   const selectedToteutussuunnitelma = useKoulutusFormField(
     'paikallisetTutkinnonOsat.toteutussuunnitelmaId'
@@ -117,12 +123,14 @@ export const PaikallisetTutkinnonOsatSection = ({
       <Box mb={2}>
         <Field
           name="paikallisetTutkinnonOsat.toteutussuunnitelmaId"
-          component={FormFieldAsyncSelect}
+          component={FormFieldSelect}
           label={t('koulutuslomake.valitseToteutussuunnitelma')}
-          loadOptions={debouncedLoadOpetussuunnitelmat}
-          defaultOptions={opetussuunnitelmaOptions}
+          options={opetussuunnitelmaOptions}
           disabled={disabled}
-          isLoading={isLoadingOps}
+          isLoading={isLoadingOps || isFetchingNextPage}
+          inputValue={inputValue}
+          onInputChange={setInputValue}
+          onMenuScrollToBottom={() => hasNextPage && fetchNextPage()}
         />
       </Box>
       <Box>

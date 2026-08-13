@@ -7,18 +7,20 @@ export const getOpetussuunnitelmat = async ({
   apiUrls,
   organisaatioOid,
   nimi,
+  sivu,
 }: {
   httpClient: HttpClient;
   apiUrls: ApiUrls;
-  organisaatioOid: string;
+  organisaatioOid?: string;
   nimi?: string;
+  sivu?: number;
 }) => {
-  const params: { organisaatio: string; nimi?: string } = {
+  const params: { organisaatio?: string; nimi?: string; sivu?: number } = {
     organisaatio: organisaatioOid,
+    nimi,
+    sivu,
   };
-  if (nimi) {
-    params.nimi = nimi;
-  }
+
   const { data } = await httpClient.get<AmosaaOpetussuunnitelmatResponse>(
     apiUrls.url('kouta-backend.eperuste-amosaa-opetussuunnitelmat'),
     { params }

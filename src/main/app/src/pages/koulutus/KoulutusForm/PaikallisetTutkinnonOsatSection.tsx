@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,7 @@ import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { isTruthy } from '#/src/utils';
@@ -199,14 +200,7 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
     .filter(isTruthy);
 
   const { t } = useTranslation();
-  const [inputValue, setInputValue] = useState('');
-  const [nimi, setNimi] = useState('');
-
-  // debounce
-  useEffect(() => {
-    const timer = setTimeout(() => setNimi(inputValue), 300);
-    return () => clearTimeout(timer);
-  }, [inputValue]);
+  const [inputValue, setInputValue, nimi] = useDebounceState('', 300);
 
   const selectedOpetussuunnitelma = useFieldValue<SelectOption | undefined>(
     `${name}.opetussuunnitelmaId`

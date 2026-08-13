@@ -1,13 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
+import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery } from 'react-query';
 import { Field } from 'redux-form';
 
-import {
-  FormFieldAsyncSelect,
-  FormFieldSelect,
-} from '#/src/components/formFields';
+import { FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
@@ -16,7 +14,6 @@ import { useUrls } from '#/src/contexts/UrlContext';
 import { useKoulutusFormField } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
-import useLoadOptions from '#/src/hooks/useLoadOptions';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
@@ -216,8 +213,8 @@ export const PaikallisetTutkinnonOsatSection = ({
     isLoading: isLoadingTutkinnonosat,
   } = usePaikallisetTutkinnonosatOptions(selectedOpetussuunnitelmaId);
 
-  const loadPaikallisetTutkinnonosat = useLoadOptions(
-    paikallisetTutkinnonosatOptions
+  const selectedTutkinnonOsat = useKoulutusFormField(
+    'paikallisetTutkinnonOsat.tutkinnonosat'
   );
 
   return (
@@ -228,13 +225,12 @@ export const PaikallisetTutkinnonOsatSection = ({
           component={FormFieldSelect}
           label={t('koulutuslomake.valitseOpetussuunnitelma')}
           options={allOpetussuunnitelmaOptions}
-          disabled={disabled}
+          disabled={disabled || !isEmpty(selectedTutkinnonOsat)}
           isLoading={
             isLoadingOps || isLoadingOppilaitosOids || isFetchingNextPage
           }
           inputValue={inputValue}
           onInputChange={value => {
-            // TODO: Reset paikalliset tutkinnon osat when changing opetussuunnitelma
             setInputValue(value);
           }}
           onMenuScrollToBottom={() => {
@@ -247,11 +243,12 @@ export const PaikallisetTutkinnonOsatSection = ({
       <Box>
         <Field
           name="paikallisetTutkinnonOsat.tutkinnonosat"
-          component={FormFieldAsyncSelect}
+          component={FormFieldSelect}
           label={t('koulutuslomake.valitsePaikallisetTutkinnonOsat')}
-          loadOptions={loadPaikallisetTutkinnonosat}
-          defaultOptions={paikallisetTutkinnonosatOptions}
-          disabled={disabled || !selectedOpetussuunnitelmaId}
+          options={paikallisetTutkinnonosatOptions}
+          disabled={
+            disabled || isLoadingTutkinnonosat || !selectedOpetussuunnitelmaId
+          }
           isLoading={isLoadingTutkinnonosat}
           isMulti
         />

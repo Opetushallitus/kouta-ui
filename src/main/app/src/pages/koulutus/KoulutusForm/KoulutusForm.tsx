@@ -42,6 +42,7 @@ import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import { OsaamismerkkiKuvausSection } from './OsaamismerkkiKuvausSection';
+import { PaikallisetTutkinnonOsatSection } from './PaikallisetTutkinnonOsatSection';
 import { TarjoajatSection } from './tarjoajat/TarjoajatSection';
 import {
   TiedotSection,
@@ -313,6 +314,12 @@ export const KoulutusForm = ({
                   koulutustyyppi={koulutustyyppi}
                 />
                 <FormCollapse
+                  section="paikallisetTutkinnonOsat"
+                  header={t('koulutuslomake.paikallisetTutkinnonOsat')}
+                  Component={PaikallisetTutkinnonOsatSection}
+                  disabled={onlyTarjoajaRights}
+                />
+                <FormCollapse
                   section="tutkinnonosat"
                   header={t('koulutuslomake.koulutuksenNimi')}
                   Component={TutkinnonOsaKoulutusNimiSection}
@@ -340,7 +347,6 @@ export const KoulutusForm = ({
                 />
               </>
             )}
-
             {![
               KOULUTUSTYYPPI.TUVA,
               KOULUTUSTYYPPI.TELMA,

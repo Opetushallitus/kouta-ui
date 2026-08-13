@@ -103,6 +103,9 @@ export type OrganisaatioYhteystiedot =
 export type PaikallinenTutkinnonOsa =
   components['schemas']['PaikallinenTutkinnonOsa'];
 
+export type AmosaaOpetussuunnitelma =
+  components['schemas']['AmosaaOpetussuunnitelma'];
+
 export type AmosaaOpetussuunnitelmatResponse =
   components['schemas']['AmosaaOpetussuunnitelmatResponse'];
 

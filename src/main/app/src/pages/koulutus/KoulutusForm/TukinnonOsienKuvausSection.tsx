@@ -170,7 +170,7 @@ const useSelectedPaikallisetTutkinnonOsat = () => {
   );
 
   const selectedIds = new Set<string>(
-    (selectedOsat ?? []).map(({ value }: { value: string }) => String(value))
+    (selectedOsat ?? []).map(({ value }: SelectOption) => String(value))
   );
 
   const filtered: AmosaaPaikallisetTutkinnonosatResponse = (

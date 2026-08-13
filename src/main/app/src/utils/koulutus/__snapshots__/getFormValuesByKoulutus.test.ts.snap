@@ -94,12 +94,7 @@ exports[`getFormValuesByKoulutus returns correct form values for ammatillinen ko
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
-  "paikallisetTutkinnonOsat": {
-    "opetussuunnitelmaId": {
-      "value": "",
-    },
-    "tutkinnonosat": [],
-  },
+  "paikallisetTutkinnonOsat": [],
   "soraKuvaus": null,
   "tarjoajat": {
     "tarjoajat": [
@@ -180,12 +175,7 @@ exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskou
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
-  "paikallisetTutkinnonOsat": {
-    "opetussuunnitelmaId": {
-      "value": "",
-    },
-    "tutkinnonosat": [],
-  },
+  "paikallisetTutkinnonOsat": [],
   "soraKuvaus": null,
   "tarjoajat": {
     "tarjoajat": [],
@@ -291,12 +281,7 @@ exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] 
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
-  "paikallisetTutkinnonOsat": {
-    "opetussuunnitelmaId": {
-      "value": "",
-    },
-    "tutkinnonosat": [],
-  },
+  "paikallisetTutkinnonOsat": [],
   "soraKuvaus": {
     "value": "1234",
   },

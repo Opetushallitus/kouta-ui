@@ -121,11 +121,14 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         }>
       )(values?.tutkinnonosat?.osat),
       paikallisetTutkinnonOsat:
-        values?.paikallisetTutkinnonOsat?.tutkinnonosat?.map(({ value }) => ({
-          opetussuunnitelmaId:
-            values?.paikallisetTutkinnonOsat?.opetussuunnitelmaId?.value,
-          tutkinnonosaId: value,
-        })) ?? [],
+        values?.paikallisetTutkinnonOsat?.flatMap(
+          ({ opetussuunnitelmaId, tutkinnonosat }) => {
+            return tutkinnonosat.map(({ value }) => ({
+              opetussuunnitelmaId: opetussuunnitelmaId?.value,
+              tutkinnonosaId: value,
+            }));
+          }
+        ) ?? [],
       osaamisalaKoodiUri: osaamisalaKoodiToKoodiUri(
         osaamisala?.osaamisala?.value
       ),

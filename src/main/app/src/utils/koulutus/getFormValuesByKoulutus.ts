@@ -1,3 +1,4 @@
+import { groupBy } from 'lodash';
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
@@ -153,21 +154,17 @@ export const getFormValuesByKoulutus = (
         ),
       }),
     },
-    paikallisetTutkinnonOsat: paikallisetTutkinnonOsat.reduce(
-      (acc, { opetussuunnitelmaId, tutkinnonosaId }) => {
-        return {
-          // Backendissä opetussuunnitelma on sama kaikille paikallisille tutkinnon osille
-          opetussuunnitelmaId: { value: opetussuunnitelmaId ?? '' },
-          tutkinnonosat: [
-            ...(acc.tutkinnonosat ?? []),
-            { value: tutkinnonosaId ?? '' },
-          ],
-        };
-      },
-      {
-        opetussuunnitelmaId: { value: '' },
-        tutkinnonosat: [],
-      } as KoulutusFormValues['paikallisetTutkinnonOsat']
+    paikallisetTutkinnonOsat: Object.values(
+      groupBy(paikallisetTutkinnonOsat, 'opetussuunnitelmaId')
+    ).map(
+      (opetussuunnitelmanTutkinnonosat: typeof paikallisetTutkinnonOsat) => ({
+        opetussuunnitelmaId: {
+          value: opetussuunnitelmanTutkinnonosat[0]?.opetussuunnitelmaId,
+        },
+        tutkinnonosat: opetussuunnitelmanTutkinnonosat.map(
+          ({ tutkinnonosaId }) => ({ value: tutkinnonosaId })
+        ),
+      })
     ),
     tutkinnonosat: {
       osat: _fp.values(

@@ -9,18 +9,16 @@ import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { KOULUTUS_ROLE } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
-import { useHttpClient } from '#/src/contexts/HttpClientContext';
-import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useDebounceState } from '#/src/hooks/useDebounceState';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
-import { getOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
+import { useQueryOptionsGetOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
@@ -31,22 +29,18 @@ type PaikallisetTutkinnonOsatProps = {
 };
 
 function useOrganisaatioOidsWithUpdateRights(): Array<string> {
-  const isOph = useIsOphVirkailija();
   const user = useAuthorizedUser();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
 
-  return useMemo(() => {
-    return isOph
-      ? [OPETUSHALLITUS_ORGANISAATIO_OID]
-      : (user?.organisaatiot
-          ?.filter(({ kayttooikeudet }) =>
-            kayttooikeudet.some(
-              ({ palvelu, oikeus }) =>
-                palvelu === 'KOUTA' &&
-                ['UPDATE', 'READ_UPDATE', 'CRUD'].includes(oikeus)
-            )
-          )
-          .map(({ organisaatioOid }) => organisaatioOid) ?? []);
-  }, [user, isOph]);
+  return useMemo(
+    () =>
+      user?.organisaatiot
+        ?.filter(({ organisaatioOid }) =>
+          roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatioOid).result()
+        )
+        .map(({ organisaatioOid }) => organisaatioOid) ?? [],
+    [user, roleBuilder]
+  );
 }
 
 const createOpetussuunnitelmaLabel = (
@@ -83,19 +77,19 @@ const useOpetussuunnitelmaOptionWithLabel = (
   );
 };
 
-const useResetOpetussuunnitelmaQueryPageOnNimiChange = (
+const useResetOpetussuunnitelmatQueryPageOnNimiChange = (
   nimi?: string,
   organisaatioOids?: Array<string>
 ) => {
   const queryClient = useQueryClient();
-
   const previousNimiRef = useRef(nimi);
+
+  const previousQueryKey = useQueryOptionsGetOpetussuunnitelmat({
+    organisaatioOids: organisaatioOids ?? [],
+    nimi: previousNimiRef.current,
+  }).queryKey;
+
   if (previousNimiRef.current !== nimi) {
-    const previousQueryKey = [
-      'getOpetussuunnitelmat',
-      organisaatioOids,
-      previousNimiRef.current,
-    ];
     const previousData = queryClient.getQueryData<{
       pages: Array<unknown>;
       pageParams: Array<unknown>;
@@ -119,35 +113,15 @@ const useInfiniteOpetussuunnitelmaOptions = ({
   selectedOpetussuunnitelma?: SelectOption;
   allSelectedOpetussuunnitelmaIds?: Array<string>;
 }) => {
-  const httpClient = useHttpClient();
-  const apiUrls = useUrls();
   const language = useUserLanguage();
 
   const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
 
   // Resetoidaan opetussuunnitelmien queryn sivu jos nimi muuttuu, jotta haetaan aina nimen muututtua vain ensimmäinen sivu, eikä kaikkia aiemmin haettuja sivuja.
-  useResetOpetussuunnitelmaQueryPageOnNimiChange(nimi, organisaatioOids);
+  useResetOpetussuunnitelmatQueryPageOnNimiChange(nimi, organisaatioOids);
 
   const query = useInfiniteQuery(
-    ['getOpetussuunnitelmat', organisaatioOids, nimi],
-    ({ pageParam = 0 }) =>
-      getOpetussuunnitelmat({
-        httpClient,
-        apiUrls,
-        organisaatioOids,
-        nimi,
-        sivu: pageParam,
-      }),
-    {
-      cacheTime: 30000,
-      staleTime: 30000,
-      getNextPageParam: lastPage =>
-        lastPage.sivu != null &&
-        lastPage.sivuja != null &&
-        lastPage.sivu < lastPage.sivuja
-          ? lastPage.sivu + 1
-          : undefined,
-    }
+    useQueryOptionsGetOpetussuunnitelmat({ organisaatioOids, nimi })
   );
 
   const {

@@ -123,7 +123,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       paikallisetTutkinnonOsat:
         values?.paikallisetTutkinnonOsat?.flatMap(
           ({ opetussuunnitelmaId, tutkinnonosat }) => {
-            return tutkinnonosat.map(({ value }) => ({
+            return (tutkinnonosat ?? []).map(({ value }) => ({
               opetussuunnitelmaId: opetussuunnitelmaId?.value,
               tutkinnonosaId: value,
             }));

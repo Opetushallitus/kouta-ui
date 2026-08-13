@@ -47,8 +47,8 @@ export type KoulutusFormValues = {
     osat: Array<TutkinnonOsa>;
   };
   paikallisetTutkinnonOsat: Array<{
-    opetussuunnitelmaId: SelectOption;
-    tutkinnonosat: Array<SelectOption>;
+    opetussuunnitelmaId?: SelectOption;
+    tutkinnonosat?: Array<SelectOption>;
   }>;
   description: {
     kuvaus: TranslatedField<EditorState>;

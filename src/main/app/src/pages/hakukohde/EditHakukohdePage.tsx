@@ -23,13 +23,16 @@ import { HakukohdeFooter } from './HakukohdeFooter';
 import { HakukohdeForm } from './HakukohdeForm';
 
 const useInitialValues = hakukohde => {
-  const { koodi: hakukohdeKoodi } = useKoodi(hakukohde?.hakukohdeKoodiUri);
+  const hakukohdeKoodiUri = hakukohde?.hakukohdeKoodiUri;
+  const hakukohdeKoodiQueryResult = useKoodi(hakukohdeKoodiUri);
+  const { koodi: hakukohdeKoodi } = hakukohdeKoodiQueryResult;
 
-  const nimiHakukohdeKoodista = arrayToTranslationObject(
-    hakukohdeKoodi?.metadata
+  const nimiHakukohdeKoodista = useMemo(
+    () => arrayToTranslationObject(hakukohdeKoodi?.metadata),
+    [hakukohdeKoodi]
   );
 
-  return useMemo(
+  const initialValues = useMemo(
     () =>
       hakukohde
         ? getFormValuesByHakukohde(
@@ -40,6 +43,8 @@ const useInitialValues = hakukohde => {
         : {},
     [hakukohde, nimiHakukohdeKoodista]
   );
+
+  return { initialValues, hakukohdeKoodiUri, hakukohdeKoodiQueryResult };
 };
 
 export const EditHakukohdePage = () => {
@@ -64,7 +69,8 @@ export const EditHakukohdePage = () => {
 
   const { t } = useTranslation();
 
-  const initialValues = useInitialValues(hakukohde);
+  const { initialValues, hakukohdeKoodiUri, hakukohdeKoodiQueryResult } =
+    useInitialValues(hakukohde);
 
   const resultObj = useCanUpdateHakukohde(
     haku?.hakukohteenMuokkaamisenTakaraja,
@@ -79,7 +85,11 @@ export const EditHakukohdePage = () => {
       title={t('sivuTitlet.hakukohteenMuokkaus')}
       entityType={ENTITY.HAKUKOHDE}
       formMode={FormMode.EDIT}
-      queryResult={[hakukohdeQueryResult, hakukohdePageDataQueryResult]}
+      queryResult={[
+        hakukohdeQueryResult,
+        hakukohdePageDataQueryResult,
+        ...(hakukohdeKoodiUri ? [hakukohdeKoodiQueryResult] : []),
+      ]}
       initialValues={initialValues}
       readOnly={!canUpdate}
       header={

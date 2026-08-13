@@ -158,7 +158,9 @@ export const JarjestamisTiedotSection = ({
 
   const osiotOptions = useLisatiedotOptions();
 
-  const opetuskielet = useFieldValue<Array<string>>(`${name}.opetuskieli`);
+  const opetuskielet = useFieldValue(`${name}.opetuskieli`) as
+    | Array<string>
+    | undefined;
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
     `${name}.ajankohta.ajankohtaKaytossa`

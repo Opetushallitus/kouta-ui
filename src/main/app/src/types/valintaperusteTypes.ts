@@ -4,7 +4,7 @@ import { JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 
 import { SisaltoValues, ValintakokeetValues } from './formTypes';
 
-export type ValintaperusteValues = {
+export type ValintaperusteFormValues = {
   organisaatioOid?: SelectOption;
   externalId?: string;
   tila?: JULKAISUTILA;

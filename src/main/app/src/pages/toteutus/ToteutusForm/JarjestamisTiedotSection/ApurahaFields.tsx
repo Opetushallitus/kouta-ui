@@ -47,9 +47,9 @@ const ApurahaYksikkoField = ({ name, disabled }) => {
 export const ApurahaMaaraFields = createFormFieldComponent(
   ({ section, disabled }) => {
     const { t } = useTranslation();
-    const apurahaMaaraTyyppi = useFieldValue<MaaraTyyppi>(
+    const apurahaMaaraTyyppi = useFieldValue(
       `${section}.apurahaMaaraTyyppi`
-    );
+    ) as MaaraTyyppi | undefined;
     return (
       <Box marginTop={1} width="240px">
         <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
@@ -122,7 +122,9 @@ export const ApurahaFields = ({
   koulutustyyppi,
 }) => {
   const { t } = useTranslation();
-  const onkoApurahaSelected = useFieldValue<boolean>(`${name}.onkoApuraha`);
+  const onkoApurahaSelected = useFieldValue(`${name}.onkoApuraha`) as
+    | boolean
+    | undefined;
 
   const maksullisuustyyppiFieldName =
     isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi)

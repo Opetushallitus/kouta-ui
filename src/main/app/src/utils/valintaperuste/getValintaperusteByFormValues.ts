@@ -5,7 +5,7 @@ import { match, P } from 'ts-pattern';
 import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { TableInputValue } from '#/src/components/TableInput/utils';
 import { KieliversiotValues, SisaltoValues } from '#/src/types/formTypes';
-import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';
+import { ValintaperusteFormValues } from '#/src/types/valintaperusteTypes';
 import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
@@ -76,7 +76,7 @@ const serializeSisalto = (
   });
 };
 
-export const getValintaperusteByFormValues = (values: ValintaperusteValues) => {
+export const getValintaperusteByFormValues = (values: ValintaperusteFormValues) => {
   const { tila, muokkaaja, perustiedot, esikatselu = false } = values;
 
   const koulutustyyppi = perustiedot?.tyyppi ?? null;

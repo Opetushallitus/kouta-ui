@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { FormMode, JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 import { ValintaperusteModel } from '#/src/types/domainTypes';
-import { ValintaperusteValues } from '#/src/types/valintaperusteTypes';
+import { ValintaperusteFormValues } from '#/src/types/valintaperusteTypes';
 import { toEnumValue, toSelectValue } from '#/src/utils';
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
@@ -11,7 +11,7 @@ import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
 export const getFormValuesByValintaperuste = (
   valintaperuste: ValintaperusteModel,
   formMode?: FormMode
-): ValintaperusteValues => {
+): ValintaperusteFormValues => {
   const {
     hakutapaKoodiUri = null,
     kielivalinta = [],

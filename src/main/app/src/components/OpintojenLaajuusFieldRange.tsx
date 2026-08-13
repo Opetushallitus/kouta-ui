@@ -19,9 +19,9 @@ const OpintojenLaajuusRangeGroupInput = createFormFieldComponent(
   ({ disabled, section, fixedLaajuusYksikko }) => {
     const { t } = useTranslation();
     const selectedLanguage = useLanguageTab();
-    const laajuusNumeroTyyppi = useFieldValue<MaaraTyyppi>(
+    const laajuusNumeroTyyppi = useFieldValue(
       `${section}.laajuusNumeroTyyppi`
-    );
+    ) as MaaraTyyppi | undefined;
 
     const { data: koodistoData } = useKoodisto({
       koodisto: 'opintojenlaajuusyksikko',

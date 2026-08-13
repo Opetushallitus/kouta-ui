@@ -108,3 +108,6 @@ export type AmosaaOpetussuunnitelmatResponse =
 
 export type AmosaaPaikallisetTutkinnonosatResponse =
   components['schemas']['AmosaaPaikallisetTutkinnonOsatResponse'];
+
+export type AmosaaOmaTutkinnonosa =
+  components['schemas']['AmosaaOmaTutkinnonosa'];

@@ -102,9 +102,10 @@ const development = {
   'oppijanumerorekisteri-service.henkilo': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/$1`,
   'oppijanumerorekisteri-service.asiointiKieli': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/current/asiointiKieli`,
   'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
-  'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/tutkinnonosat/$3`,
+  'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/ammatillinen/$2/tutkinnonosat/$3`,
   'eperusteet.sisalto': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/sisalto/$3`,
   'eperusteet.osaamismerkit': `${ePerusteetDevUrl}/#/$1/osaamismerkit/osaamismerkki/$2`,
+  'eperusteet.paikallinen-tutkinnonosa': `${ePerusteetDevUrl}/#/$1/toteutussuunnitelma/$2/ammatillinen/sisalto/$3`,
   'hakukohderyhmapalvelu.haun-asetukset': `${virkailijaDevUrl}/hakukohderyhmapalvelu/haun-asetukset?hakuOid=$1`,
   'organisaatiopalvelu.organisaation-muokkaus-ui': `${virkailijaDevUrl}/organisaatio-service/lomake/$1`,
 } as const;

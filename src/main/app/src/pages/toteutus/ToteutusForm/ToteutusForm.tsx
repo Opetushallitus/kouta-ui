@@ -69,7 +69,6 @@ import {
   ToteutuksenKuvausSection,
   ToteutuksenKuvausJaOsaamistavoitteetSection,
 } from './ToteutuksenKuvausSection';
-import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { MUU } = HAKULOMAKETYYPPI;
@@ -304,19 +303,6 @@ const ToteutusForm = ({
               Component={LukiolinjatSection}
             />
           )}
-        {[
-          KOULUTUSTYYPPI.AVOIN_YO,
-          KOULUTUSTYYPPI.AVOIN_AMK,
-          KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
-        ].includes(koulutustyyppi) && (
-          <FormCollapse
-            section="toteutusjaksot"
-            header={t('toteutuslomake.toteutukseenLiittyvatJaksot')}
-            languages={languages}
-            {...getTestIdProps('toteutusjaksotSection')}
-            Component={ToteutusjaksotSection}
-          />
-        )}
         {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
           koulutustyyppi
         ) && (

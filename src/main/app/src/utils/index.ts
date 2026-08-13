@@ -41,7 +41,6 @@ import {
 } from '#/src/components/LexicalEditorUI/utils';
 import {
   ALLOWED_HTML_TAGS,
-  EI_TUETUT_KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
@@ -389,31 +388,29 @@ export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
   isNil(tyyppi) ? '' : `koulutustyypit.${camelCase(tyyppi)}`;
 
 export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
-  hierarkia
-    .flatMap(({ value: topValue, children }) => {
-      if (children) {
-        return children.map(({ value }) => ({
-          label:
-            ([
-              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-              KOULUTUSTYYPPI.TUTKINNON_OSA,
-              KOULUTUSTYYPPI.OSAAMISALA,
-            ].includes(value)
-              ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
-              : '') + t(getKoulutustyyppiTranslationKey(value)),
-          value,
-        }));
-      } else {
-        return [
-          {
-            label: t(getKoulutustyyppiTranslationKey(topValue)),
-            value: topValue,
-          },
-        ];
-      }
-    })
-    .filter(({ value }) => !EI_TUETUT_KOULUTUSTYYPIT.includes(value));
+  hierarkia.flatMap(({ value: topValue, children }) => {
+    if (children) {
+      return children.map(({ value }) => ({
+        label:
+          ([
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+            KOULUTUSTYYPPI.TUTKINNON_OSA,
+            KOULUTUSTYYPPI.OSAAMISALA,
+          ].includes(value)
+            ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
+            : '') + t(getKoulutustyyppiTranslationKey(value)),
+        value,
+      }));
+    } else {
+      return [
+        {
+          label: t(getKoulutustyyppiTranslationKey(topValue)),
+          value: topValue,
+        },
+      ];
+    }
+  });
 
 export const koulutustyyppiHierarkiaToTranslationMap = memoizeOne(
   (hierarkia, t) => {

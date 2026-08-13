@@ -28,7 +28,10 @@ type PaikallisetTutkinnonOsatProps = {
   disabled: boolean;
 };
 
-const useOrganisaatioOidsWithRights = (): Array<string> | undefined => {
+function useOppilaitosOidsWithRights(): {
+  isLoading: boolean;
+  oppilaitosOids?: Array<string>;
+} {
   const isOph = useIsOphVirkailija();
   const user = useAuthorizedUser();
 
@@ -50,7 +53,7 @@ const useOrganisaatioOidsWithRights = (): Array<string> | undefined => {
     enabled: (rawOids?.length ?? 0) > 0,
   });
 
-  return useMemo(() => {
+  const oppilaitosOids = useMemo(() => {
     if (isOph || isLoading) return undefined;
     return flatFilterHierarkia(
       hierarkia,
@@ -59,7 +62,12 @@ const useOrganisaatioOidsWithRights = (): Array<string> | undefined => {
         false
     ).map(org => org.oid);
   }, [isOph, isLoading, hierarkia]);
-};
+
+  return {
+    isLoading,
+    oppilaitosOids,
+  };
+}
 
 const useInfiniteOpetussuunnitelmat = ({
   organisaatioOids,
@@ -137,7 +145,8 @@ export const PaikallisetTutkinnonOsatSection = ({
     return () => clearTimeout(timer);
   }, [inputValue]);
 
-  const organisaatioOids = useOrganisaatioOidsWithRights();
+  const { oppilaitosOids, isLoading: isLoadingOppilaitosOids } =
+    useOppilaitosOidsWithRights();
 
   const {
     options: opetussuunnitelmaOptions,
@@ -145,17 +154,16 @@ export const PaikallisetTutkinnonOsatSection = ({
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteOpetussuunnitelmat({ organisaatioOids, nimi });
+  } = useInfiniteOpetussuunnitelmat({ organisaatioOids: oppilaitosOids, nimi });
 
   const selectedOpetussuunnitelmaId = useKoulutusFormField(
     'paikallisetTutkinnonOsat.opetussuunnitelmaId'
-  );
-  const selectedOpsId = selectedOpetussuunnitelmaId?.value;
+  )?.value;
 
   const {
     data: paikallisetTutkinnonosatOptions,
     isLoading: isLoadingTutkinnonosat,
-  } = usePaikallisetTutkinnonosatOptions(selectedOpsId);
+  } = usePaikallisetTutkinnonosatOptions(selectedOpetussuunnitelmaId);
 
   const loadPaikallisetTutkinnonosat = useLoadOptions(
     paikallisetTutkinnonosatOptions
@@ -170,7 +178,9 @@ export const PaikallisetTutkinnonOsatSection = ({
           label={t('koulutuslomake.valitseOpetussuunnitelma')}
           options={opetussuunnitelmaOptions}
           disabled={disabled}
-          isLoading={isLoadingOps || isFetchingNextPage}
+          isLoading={
+            isLoadingOps || isLoadingOppilaitosOids || isFetchingNextPage
+          }
           inputValue={inputValue}
           onInputChange={value => {
             // TODO: Reset paikalliset tutkinnon osat when changing opetussuunnitelma
@@ -186,7 +196,7 @@ export const PaikallisetTutkinnonOsatSection = ({
           label={t('koulutuslomake.valitsePaikallisetTutkinnonOsat')}
           loadOptions={loadPaikallisetTutkinnonosat}
           defaultOptions={paikallisetTutkinnonosatOptions}
-          disabled={disabled || !selectedOpsId}
+          disabled={disabled || !selectedOpetussuunnitelmaId}
           isLoading={isLoadingTutkinnonosat}
           isMulti
         />

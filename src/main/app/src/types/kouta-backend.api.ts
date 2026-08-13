@@ -3335,18 +3335,16 @@ export interface components {
              *           "fi": "Opetustavan suomenkielinen kuvaus",
              *           "sv": "Opetustavan ruotsinkielinen kuvaus"
              *         },
-             *         "maksullisuustyyppi": "maksullinen,",
              *         "maksullisuusKuvaus": {
              *           "fi": "Maksullisuuden suomenkielinen kuvaus",
              *           "sv": "Maksullisuuden ruotsinkielinen kuvaus"
              *         },
-             *         "maksunMaara": 200.5,
-             *         "alkamiskausiKoodiUri": "kausi_k#1",
-             *         "alkamisvuosi": 2020,
-             *         "alkamisaikaKuvaus": {
-             *           "fi": "Alkamisajan suomenkielinen kuvaus",
-             *           "sv": "Alkamisajan ruotsinkielinen kuvaus"
-             *         },
+             *         "maksut": [
+             *           {
+             *             "maksullisuustyyppi": "maksullinen",
+             *             "maksunMaara": 200.5
+             *           }
+             *         ],
              *         "lisatiedot": [
              *           {
              *             "otsikkoKoodiUri": "koulutuksenlisatiedot_03#1",
@@ -3355,15 +3353,7 @@ export interface components {
              *               "sv": "Ruotsinkielinen lisätietoteksti"
              *             }
              *           }
-             *         ],
-             *         "lukuvuosimaksu": {
-             *           "fi": "200 lukukaudessa",
-             *           "sv": "200 på svenska"
-             *         },
-             *         "lukuvuosimaksuKuvaus": {
-             *           "fi": "Lukuvuosimaksun suomenkielinen kuvaus",
-             *           "sv": "Lukuvuosimaksun ruotsinkielinen kuvaus"
-             *         }
+             *         ]
              *       },
              *       "ammattinimikkeet": [
              *         {
@@ -3500,19 +3490,10 @@ export interface components {
             opetustapaKoodiUrit?: string[];
             /** @description Koulutuksen toteutuksen opetustapoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
             opetustapaKuvaus?: components["schemas"]["Kuvaus"];
-            /**
-             * @description Maksullisuuden tyyppi
-             * @enum {string}
-             */
-            maksullisuustyyppi?: "maksullinen" | "maksuton" | "lukuvuosimaksu";
             /** @description Koulutuksen toteutuksen maksullisuutta tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
             maksullisuusKuvaus?: components["schemas"]["Kuvaus"];
-            /**
-             * Format: double
-             * @description Koulutuksen toteutuksen maksun määrä euroissa?
-             * @example 220.5
-             */
-            maksunMaara?: number;
+            /** @description Opetuksen maksullisuustiedot. Ammatillisilla (amm, amm-tutkinnon-osa, amm-osaamisala, amm-muu, telma) ja lukiototeutuksilla voi olla yhtäaikaa kaksi eri maksutyyppiä, 'lukuvuosimaksu' ja 'maksullinen', muilla toteutuksilla vain yksi arvo, joka on julkaistulle toteutukselle pakollinen. */
+            maksut?: components["schemas"]["Maksu"][];
             /** @description Koulutuksen alkamiskausi */
             koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
             /** @description Koulutuksen toteutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
@@ -3533,6 +3514,19 @@ export interface components {
             suunniteltuKestoKuukaudet?: number;
             /** @description Koulutuksen toteutuksen suunnitellun keston kuvaus eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
             suunniteltuKestoKuvaus?: components["schemas"]["Kuvaus"];
+        };
+        Maksu: {
+            /**
+             * @description Maksullisuuden tyyppi.
+             * @enum {string}
+             */
+            maksullisuustyyppi: "maksullinen" | "maksuton" | "lukuvuosimaksu";
+            /**
+             * Format: double
+             * @description Koulutuksen toteutuksen maksun määrä euroissa. Pakollinen, jos maksullisuustyyppi ei ole 'maksuton'.
+             * @example 220.5
+             */
+            maksunMaara?: number;
         };
         Apuraha: {
             /**
@@ -5731,11 +5725,11 @@ export interface operations {
     siirtotiedostoPistehistoria: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -5814,11 +5808,11 @@ export interface operations {
     siirtotiedostoHakukohteet: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -6011,7 +6005,7 @@ export interface operations {
     getOpetussuunnitelmat: {
         parameters: {
             query?: {
-                /** @description Lista organisaatioiden OIDeja */
+                /** @description Lista organisaatioiden OIDeja, joiden koulutustoimija-organisaatioilta opetussuunnitelmat haetaan. */
                 organisaatiot?: string[];
                 /** @description Opetussunnitelman nimen osa */
                 nimi?: string;
@@ -7110,11 +7104,11 @@ export interface operations {
     siirtotiedostoValintaperusteet: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -7165,11 +7159,11 @@ export interface operations {
     siirtotiedostoToteutukset: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -7581,11 +7575,11 @@ export interface operations {
     siirtotiedostoHaut: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -8082,11 +8076,11 @@ export interface operations {
     siirtotiedostoSorakuvaukset: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -8272,11 +8266,11 @@ export interface operations {
     siirtotiedostoKoulutukset: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -8629,11 +8623,11 @@ export interface operations {
     siirtotiedostoOppilaitoksetJaOsat: {
         parameters: {
             query?: {
-                /** @example 2026-05-28T10:06:05 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-05-28T10:06:05
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };

@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { Field, FieldArray, FieldArrayFieldsProps } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
@@ -83,6 +83,33 @@ const useOpetussuunnitelmaOptionWithLabel = (
   );
 };
 
+const useResetOpetussuunnitelmaQueryPageOnNimiChange = (
+  nimi?: string,
+  organisaatioOids?: Array<string>
+) => {
+  const queryClient = useQueryClient();
+
+  const previousNimiRef = useRef(nimi);
+  if (previousNimiRef.current !== nimi) {
+    const previousQueryKey = [
+      'getOpetussuunnitelmat',
+      organisaatioOids,
+      previousNimiRef.current,
+    ];
+    const previousData = queryClient.getQueryData<{
+      pages: Array<unknown>;
+      pageParams: Array<unknown>;
+    }>(previousQueryKey);
+    if (previousData) {
+      queryClient.setQueryData(previousQueryKey, {
+        pages: previousData.pages.slice(0, 1),
+        pageParams: previousData.pageParams.slice(0, 1),
+      });
+    }
+    previousNimiRef.current = nimi;
+  }
+};
+
 const useInfiniteOpetussuunnitelmaOptions = ({
   nimi,
   selectedOpetussuunnitelma,
@@ -98,6 +125,9 @@ const useInfiniteOpetussuunnitelmaOptions = ({
 
   const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
 
+  // Resetoidaan opetussuunnitelmien queryn sivu jos nimi muuttuu, jotta haetaan aina nimen muututtua vain ensimmäinen sivu, eikä kaikkia aiemmin haettuja sivuja.
+  useResetOpetussuunnitelmaQueryPageOnNimiChange(nimi, organisaatioOids);
+
   const query = useInfiniteQuery(
     ['getOpetussuunnitelmat', organisaatioOids, nimi],
     ({ pageParam = 0 }) =>
@@ -109,7 +139,8 @@ const useInfiniteOpetussuunnitelmaOptions = ({
         sivu: pageParam,
       }),
     {
-      cacheTime: 0,
+      cacheTime: 30000,
+      staleTime: 30000,
       getNextPageParam: lastPage =>
         lastPage.sivu != null &&
         lastPage.sivuja != null &&

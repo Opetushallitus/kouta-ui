@@ -537,7 +537,8 @@
     "luokittelutermit": "Koulutuksen luokitteluun liittyviä avainsanoja",
     "luokittelutermitOhje": "Luokittelutermejä käytetään koulutusten hakemiseen ohjelmallisesti eikä niitä näytetä Opintopolussa",
     "valitseToteutussuunnitelma": "Valitse toteutussuunnitelma",
-    "valitsePaikallisetTutkinnonOsat": "Valitse paikalliset tutkinnon osat"
+    "valitsePaikallisetTutkinnonOsat": "Valitse paikalliset tutkinnon osat",
+    "lisaaToteutussuunnitelma": "Lisää uusi toteutussuunnitelma"
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",

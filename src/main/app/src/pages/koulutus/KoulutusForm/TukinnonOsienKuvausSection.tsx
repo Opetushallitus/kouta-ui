@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { isEmpty, toNumber } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -6,9 +8,8 @@ import Anchor from '#/src/components/Anchor';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Box, Spin, Typography } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useKoulutusFormField } from '#/src/hooks/form';
+import { useFieldValue } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getThemeProp } from '#/src/theme';
 import {
   AmosaaPaikallisetTutkinnonosatResponse,
@@ -151,35 +152,26 @@ const TutkinnonOsaKuvaus = ({
   );
 };
 
-const useSelectedPaikallisetTutkinnonOsat = () => {
-  const language = useUserLanguage();
-  const opetussuunnitelmaId = useKoulutusFormField(
-    'paikallisetTutkinnonOsat.opetussuunnitelmaId'
-  );
-  const selectedOsat = useKoulutusFormField(
-    'paikallisetTutkinnonOsat.tutkinnonosat'
-  );
-
-  const opsId: string | undefined = opetussuunnitelmaId?.value;
-
-  const { data: allOsat, isLoading } = useApiQuery(
+const usePaikallisetTutkinnonosatForOpetussuunnitelma = (
+  opsId: string | undefined,
+  selectedOsat: Array<SelectOption> | undefined
+) => {
+  const { data, isLoading } = useApiQuery(
     'getPaikallisetTutkinnonosat',
     getPaikallisetTutkinnonosat,
     { opsId },
     { enabled: Boolean(opsId) }
   );
+  const osat = useMemo(() => {
+    const selectedIds = new Set<string>(
+      selectedOsat?.map(({ value }) => String(value))
+    );
+    return data?.filter((osa: AmosaaPaikallisetTutkinnonosatResponse[number]) =>
+      selectedIds.has(String(osa.id))
+    );
+  }, [data, selectedOsat]);
 
-  const selectedIds = new Set<string>(
-    (selectedOsat ?? []).map(({ value }: SelectOption) => String(value))
-  );
-
-  const filtered: AmosaaPaikallisetTutkinnonosatResponse = (
-    allOsat ?? []
-  ).filter((osa: AmosaaPaikallisetTutkinnonosatResponse[number]) =>
-    selectedIds.has(String(osa.id))
-  );
-
-  return { osat: filtered, isLoading, language, opsId };
+  return { osat, isLoading };
 };
 
 type AmosaaAmmattitaitoVaatimuksetProps = {
@@ -316,6 +308,42 @@ const PaikallinenTutkinnonOsaKuvaus = ({
   );
 };
 
+type PaikallisetOsatKuvauksetProps = {
+  opetussuunnitelmaId: SelectOption | undefined;
+  tutkinnonosat: Array<SelectOption> | undefined;
+  language: LanguageCode;
+};
+
+const PaikallisetOsatKuvaukset = ({
+  opetussuunnitelmaId,
+  tutkinnonosat,
+  language,
+}: PaikallisetOsatKuvauksetProps) => {
+  const opsId = opetussuunnitelmaId?.value;
+  const { osat, isLoading } = usePaikallisetTutkinnonosatForOpetussuunnitelma(
+    opsId,
+    tutkinnonosat
+  );
+
+  if (isLoading) {
+    return <Spin />;
+  }
+
+  return (
+    <>
+      {osat?.map((osa: AmosaaPaikallisetTutkinnonosatResponse[number]) => (
+        <StyledInfoBox key={`paikallinen_${opsId}_${osa.id}`} mb={2}>
+          <PaikallinenTutkinnonOsaKuvaus
+            osa={osa}
+            opsId={opsId}
+            language={language}
+          />
+        </StyledInfoBox>
+      ))}
+    </>
+  );
+};
+
 type TutkinnonOsienKuvausSectionProps = {
   language: LanguageCode;
 };
@@ -349,11 +377,13 @@ export const TutkinnonOsienKuvausSection = ({
       )
       ?.ePerusteId?.toString();
 
-  const {
-    osat: paikallisetOsat,
-    isLoading: isLoadingPaikalliset,
-    opsId,
-  } = useSelectedPaikallisetTutkinnonOsat();
+  const paikallisetTutkinnonOsat = useFieldValue<
+    | Array<{
+        opetussuunnitelmaId?: SelectOption;
+        tutkinnonosat?: Array<SelectOption>;
+      }>
+    | undefined
+  >('paikallisetTutkinnonOsat');
 
   return (
     <Box mb={-2}>
@@ -368,24 +398,14 @@ export const TutkinnonOsienKuvausSection = ({
             />
           </StyledInfoBox>
         ))}
-        {isLoadingPaikalliset ? (
-          <Spin />
-        ) : (
-          (paikallisetOsat ?? []).map(
-            (
-              osa: AmosaaPaikallisetTutkinnonosatResponse[number],
-              index: number
-            ) => (
-              <StyledInfoBox key={`paikallinen_${osa.id}_${index}`} mb={2}>
-                <PaikallinenTutkinnonOsaKuvaus
-                  osa={osa}
-                  opsId={opsId}
-                  language={language}
-                />
-              </StyledInfoBox>
-            )
-          )
-        )}
+        {(paikallisetTutkinnonOsat ?? []).map((entry, index) => (
+          <PaikallisetOsatKuvaukset
+            key={entry?.opetussuunnitelmaId?.value ?? index}
+            opetussuunnitelmaId={entry?.opetussuunnitelmaId}
+            tutkinnonosat={entry?.tutkinnonosat}
+            language={language}
+          />
+        ))}
         <Typography variant="secondary" as="div" marginTop={1}>
           ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
         </Typography>

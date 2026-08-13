@@ -3,21 +3,26 @@ import { useEffect, useMemo, useState } from 'react';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery } from 'react-query';
-import { Field } from 'redux-form';
+import { Field, FieldArray, FieldArrayFieldsProps } from 'redux-form';
 
+import FieldArrayList from '#/src/components/FieldArrayList';
+import { FormButton } from '#/src/components/FormButton';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useKoulutusFormField } from '#/src/hooks/form';
+import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { getOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
 import { getLanguageValue } from '#/src/utils/languageUtils';
+
+import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 
 type PaikallisetTutkinnonOsatProps = {
   disabled: boolean;
@@ -81,10 +86,12 @@ const useInfiniteOpetussuunnitelmaOptions = ({
   organisaatioOids,
   nimi,
   selectedOpetussuunnitelma,
+  allSelectedOpetussuunnitelmaIds,
 }: {
   organisaatioOids?: Array<string>;
   nimi?: string;
   selectedOpetussuunnitelma?: SelectOption;
+  allSelectedOpetussuunnitelmaIds?: Array<string>;
 }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
@@ -120,6 +127,10 @@ const useInfiniteOpetussuunnitelmaOptions = ({
     selectedOpetussuunnitelmaOptionWithId ?? selectedOpetussuunnitelma;
 
   const options = useMemo(() => {
+    const otherSelectedOpetussuunnitelmaIds =
+      allSelectedOpetussuunnitelmaIds?.filter(
+        opsId => opsId !== selectedOpetussuunnitelmaOptionWithLabel?.value
+      );
     const opetussuunnitelmaOptions =
       query.data?.pages.flatMap(
         page =>
@@ -131,6 +142,7 @@ const useInfiniteOpetussuunnitelmaOptions = ({
               koulutustoimija,
               language
             ),
+            isDisabled: otherSelectedOpetussuunnitelmaIds?.includes(String(id)),
           })) ?? []
       ) ?? [];
 
@@ -140,7 +152,12 @@ const useInfiniteOpetussuunnitelmaOptions = ({
       )
       ? opetussuunnitelmaOptions
       : [selectedOpetussuunnitelmaOptionWithLabel, ...opetussuunnitelmaOptions];
-  }, [query.data, language, selectedOpetussuunnitelmaOptionWithLabel]);
+  }, [
+    query.data,
+    language,
+    selectedOpetussuunnitelmaOptionWithLabel,
+    allSelectedOpetussuunnitelmaIds,
+  ]);
 
   return {
     ...query,
@@ -166,9 +183,21 @@ const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
   );
 };
 
-export const PaikallisetTutkinnonOsatSection = ({
+const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   disabled,
-}: PaikallisetTutkinnonOsatProps) => {
+  name,
+  organisaatioOids,
+}: {
+  disabled: boolean;
+  name: string;
+  organisaatioOids?: Array<string>;
+}) => {
+  const allSelectedOpetussuunnitelmaIds = useKoulutusFormField(
+    'paikallisetTutkinnonOsat'
+  )
+    ?.map(({ opetussuunnitelmaId }) => opetussuunnitelmaId?.value)
+    .filter(isTruthy);
+
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState('');
   const [nimi, setNimi] = useState('');
@@ -179,10 +208,8 @@ export const PaikallisetTutkinnonOsatSection = ({
     return () => clearTimeout(timer);
   }, [inputValue]);
 
-  const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
-
-  const selectedOpetussuunnitelma = useKoulutusFormField(
-    'paikallisetTutkinnonOsat.opetussuunnitelmaId'
+  const selectedOpetussuunnitelma = useFieldValue<SelectOption | undefined>(
+    `${name}.opetussuunnitelmaId`
   );
 
   const {
@@ -195,24 +222,25 @@ export const PaikallisetTutkinnonOsatSection = ({
     organisaatioOids,
     nimi,
     selectedOpetussuunnitelma,
+    allSelectedOpetussuunnitelmaIds,
   });
 
   const selectedOpetussuunnitelmaId = selectedOpetussuunnitelma?.value;
+
+  const selectedTutkinnonOsat = useFieldValue<Array<SelectOption> | undefined>(
+    `${name}.tutkinnonosat`
+  );
 
   const {
     data: paikallisetTutkinnonosatOptions,
     isLoading: isLoadingTutkinnonosat,
   } = usePaikallisetTutkinnonosatOptions(selectedOpetussuunnitelmaId);
 
-  const selectedTutkinnonOsat = useKoulutusFormField(
-    'paikallisetTutkinnonOsat.tutkinnonosat'
-  );
-
   return (
-    <Box>
+    <StyledInfoBox mt={2}>
       <Box mb={2}>
         <Field
-          name="paikallisetTutkinnonOsat.opetussuunnitelmaId"
+          name={`${name}.opetussuunnitelmaId`}
           component={FormFieldSelect}
           label={t('koulutuslomake.valitseToteutussuunnitelma')}
           options={opetussuunnitelmaOptions}
@@ -231,7 +259,7 @@ export const PaikallisetTutkinnonOsatSection = ({
       </Box>
       <Box>
         <Field
-          name="paikallisetTutkinnonOsat.tutkinnonosat"
+          name={`${name}.tutkinnonosat`}
           component={FormFieldSelect}
           label={t('koulutuslomake.valitsePaikallisetTutkinnonOsat')}
           options={paikallisetTutkinnonosatOptions}
@@ -242,6 +270,57 @@ export const PaikallisetTutkinnonOsatSection = ({
           isMulti
         />
       </Box>
-    </Box>
+    </StyledInfoBox>
+  );
+};
+
+const PaikallisetTutkinnonOsatFields = ({
+  disabled,
+  fields,
+}: {
+  disabled: boolean;
+  fields: FieldArrayFieldsProps<unknown>;
+}) => {
+  const { t } = useTranslation();
+  const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
+
+  return (
+    <>
+      <FieldArrayList fields={fields}>
+        {({ field }) => (
+          <OpetussuunnitelmanPaikallisetTutkinnonOsat
+            disabled={disabled}
+            name={field}
+            organisaatioOids={organisaatioOids}
+          />
+        )}
+      </FieldArrayList>
+      <Box
+        display="flex"
+        justifyContent="center"
+        mt={fields.length > 0 ? 4 : 0}
+      >
+        <FormButton
+          variant="outlined"
+          color="primary"
+          type="button"
+          onClick={() => fields.push({})}
+        >
+          {t('koulutuslomake.lisaaToteutussuunnitelma')}
+        </FormButton>
+      </Box>
+    </>
+  );
+};
+
+export const PaikallisetTutkinnonOsatSection = ({
+  disabled,
+}: PaikallisetTutkinnonOsatProps) => {
+  return (
+    <FieldArray
+      name="paikallisetTutkinnonOsat"
+      component={PaikallisetTutkinnonOsatFields}
+      disabled={disabled}
+    />
   );
 };

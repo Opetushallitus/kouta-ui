@@ -77,8 +77,8 @@ describe('getMaksutByFormValues', () => {
       MaksullisuusTyyppi.MAKSULLINEN,
       MaksullisuusTyyppi.LUKUVUOSIMAKSU,
     ];
-    const maksunMaara = 500;
-    const lukuvuosimaksunMaara = 1000;
+    const maksunMaara = '500';
+    const lukuvuosimaksunMaara = '1000';
     expect(
       getMaksutByFormValues(
         maksullisuustyypit,

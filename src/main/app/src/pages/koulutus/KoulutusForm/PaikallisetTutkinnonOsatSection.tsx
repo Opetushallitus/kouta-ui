@@ -148,7 +148,7 @@ export const PaikallisetTutkinnonOsatSection = ({
   } = useInfiniteOpetussuunnitelmat({ organisaatioOids, nimi });
 
   const selectedOpetussuunnitelmaId = useKoulutusFormField(
-    'paikallisetTutkinnonOsat.toteutussuunnitelmaId'
+    'paikallisetTutkinnonOsat.opetussuunnitelmaId'
   );
   const selectedOpsId = selectedOpetussuunnitelmaId?.value;
 
@@ -165,15 +165,15 @@ export const PaikallisetTutkinnonOsatSection = ({
     <Box>
       <Box mb={2}>
         <Field
-          name="paikallisetTutkinnonOsat.toteutussuunnitelmaId"
+          name="paikallisetTutkinnonOsat.opetussuunnitelmaId"
           component={FormFieldSelect}
-          label={t('koulutuslomake.valitseToteutussuunnitelma')}
+          label={t('koulutuslomake.valitseOpetussuunnitelma')}
           options={opetussuunnitelmaOptions}
           disabled={disabled}
           isLoading={isLoadingOps || isFetchingNextPage}
           inputValue={inputValue}
           onInputChange={value => {
-            // TODO: Reset paikalliset tutkinnon osat when changing toteutussuunnitelma
+            // TODO: Reset paikalliset tutkinnon osat when changing opetussuunnitelma
             setInputValue(value);
           }}
           onMenuScrollToBottom={() => hasNextPage && fetchNextPage()}

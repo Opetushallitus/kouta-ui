@@ -111,3 +111,7 @@ export type AmosaaPaikallisetTutkinnonosatResponse =
 
 export type AmosaaOmaTutkinnonosa =
   components['schemas']['AmosaaOmaTutkinnonosa'];
+
+export type AnyKoulutusMetadata = WideUnion<
+  NonNullable<KoulutusModel['metadata']>
+>;

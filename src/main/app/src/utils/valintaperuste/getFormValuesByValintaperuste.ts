@@ -4,7 +4,7 @@ import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { FormMode, JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 import { ValintaperusteModel } from '#/src/types/domainTypes';
 import { ValintaperusteFormValues } from '#/src/types/valintaperusteTypes';
-import { toEnumValue, toSelectValue } from '#/src/utils';
+import { toEnum, toSelectValue } from '#/src/utils';
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import { parseSisaltoField } from '#/src/utils/form/parseSisaltoField';
 
@@ -39,9 +39,9 @@ export const getFormValuesByValintaperuste = (
   return {
     organisaatioOid: toSelectValue(organisaatioOid),
     externalId,
-    tila: toEnumValue(JULKAISUTILA, tila),
+    tila: toEnum(JULKAISUTILA, tila),
     perustiedot: {
-      tyyppi: toEnumValue(KOULUTUSTYYPPI, koulutustyyppi),
+      tyyppi: toEnum(KOULUTUSTYYPPI, koulutustyyppi),
       kieliversiot: kielivalinta,
       hakutapa: hakutapaKoodiUri,
       kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,

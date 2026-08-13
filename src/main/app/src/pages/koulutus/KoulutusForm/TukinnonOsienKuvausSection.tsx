@@ -153,14 +153,14 @@ const TutkinnonOsaKuvaus = ({
 
 const useSelectedPaikallisetTutkinnonOsat = () => {
   const language = useUserLanguage();
-  const toteutussuunnitelmaId = useKoulutusFormField(
-    'paikallisetTutkinnonOsat.toteutussuunnitelmaId'
+  const opetussuunnitelmaId = useKoulutusFormField(
+    'paikallisetTutkinnonOsat.opetussuunnitelmaId'
   );
   const selectedOsat = useKoulutusFormField(
     'paikallisetTutkinnonOsat.tutkinnonosat'
   );
 
-  const opsId: string | undefined = toteutussuunnitelmaId?.value;
+  const opsId: string | undefined = opetussuunnitelmaId?.value;
 
   const { data: allOsat, isLoading } = useApiQuery(
     'getPaikallisetTutkinnonosat',

@@ -23,7 +23,7 @@ type PaikallisetTutkinnonOsatProps = {
   disabled: boolean;
 };
 
-function useOrganisaatioOidsWithRights(): Array<string> | undefined {
+function useOrganisaatioOidsWithUpdateRights(): Array<string> | undefined {
   const isOph = useIsOphVirkailija();
   const user = useAuthorizedUser();
 
@@ -32,8 +32,10 @@ function useOrganisaatioOidsWithRights(): Array<string> | undefined {
     return (
       user?.organisaatiot
         ?.filter(({ kayttooikeudet }) =>
-          kayttooikeudet.some(({ oikeus }) =>
-            ['READ_UPDATE', 'CRUD'].includes(oikeus)
+          kayttooikeudet.some(
+            ({ palvelu, oikeus }) =>
+              palvelu === 'KOUTA' &&
+              ['UPDATE', 'READ_UPDATE', 'CRUD'].includes(oikeus)
           )
         )
         .map(({ organisaatioOid }) => organisaatioOid) ?? []
@@ -50,59 +52,7 @@ const createOpetussuunnitelmaLabel = (
   (getLanguageValue(nimi, language) ?? String(id)) +
   (oppilaitos ? ` (${getLanguageValue(oppilaitos.nimi, language)})` : '');
 
-const useInfiniteOpetussuunnitelmat = ({
-  organisaatioOids,
-  nimi,
-}: {
-  organisaatioOids?: Array<string>;
-  nimi?: string;
-}) => {
-  const httpClient = useHttpClient();
-  const apiUrls = useUrls();
-  const language = useUserLanguage();
-
-  const query = useInfiniteQuery(
-    ['getOpetussuunnitelmat', organisaatioOids, nimi],
-    ({ pageParam = 0 }) =>
-      getOpetussuunnitelmat({
-        httpClient,
-        apiUrls,
-        organisaatioOids,
-        nimi,
-        sivu: pageParam,
-      }),
-    {
-      getNextPageParam: lastPage =>
-        lastPage.sivu != null &&
-        lastPage.sivuja != null &&
-        lastPage.sivu < lastPage.sivuja
-          ? lastPage.sivu + 1
-          : undefined,
-      cacheTime: 0,
-    }
-  );
-
-  const options = useMemo(
-    () =>
-      query.data?.pages.flatMap(
-        page =>
-          page.data?.map(({ id, nimi, koulutustoimija }) => ({
-            value: String(id),
-            label: createOpetussuunnitelmaLabel(
-              id,
-              nimi,
-              koulutustoimija,
-              language
-            ),
-          })) ?? []
-      ) ?? [],
-    [query.data, language]
-  );
-
-  return { ...query, options };
-};
-
-const useOpetussuunnitelmaByIdOption = (
+const useOpetussuunnitelmaOptionWithLabel = (
   opetussuunnitelmaOption?: SelectOption
 ) => {
   const language = useUserLanguage();
@@ -125,6 +75,78 @@ const useOpetussuunnitelmaByIdOption = (
       }),
     }
   );
+};
+
+const useInfiniteOpetussuunnitelmaOptions = ({
+  organisaatioOids,
+  nimi,
+  selectedOpetussuunnitelma,
+}: {
+  organisaatioOids?: Array<string>;
+  nimi?: string;
+  selectedOpetussuunnitelma?: SelectOption;
+}) => {
+  const httpClient = useHttpClient();
+  const apiUrls = useUrls();
+  const language = useUserLanguage();
+
+  const query = useInfiniteQuery(
+    ['getOpetussuunnitelmat', organisaatioOids, nimi],
+    ({ pageParam = 0 }) =>
+      getOpetussuunnitelmat({
+        httpClient,
+        apiUrls,
+        organisaatioOids,
+        nimi,
+        sivu: pageParam,
+      }),
+    {
+      cacheTime: 0,
+      getNextPageParam: lastPage =>
+        lastPage.sivu != null &&
+        lastPage.sivuja != null &&
+        lastPage.sivu < lastPage.sivuja
+          ? lastPage.sivu + 1
+          : undefined,
+    }
+  );
+
+  const {
+    data: selectedOpetussuunnitelmaOptionWithId,
+    isLoading: isLoadingSelectedOpetussuunnitelmaOption,
+  } = useOpetussuunnitelmaOptionWithLabel(selectedOpetussuunnitelma);
+
+  const selectedOpetussuunnitelmaOptionWithLabel =
+    selectedOpetussuunnitelmaOptionWithId ?? selectedOpetussuunnitelma;
+
+  const options = useMemo(() => {
+    const opetussuunnitelmaOptions =
+      query.data?.pages.flatMap(
+        page =>
+          page.data?.map(({ id, nimi, koulutustoimija }) => ({
+            value: String(id),
+            label: createOpetussuunnitelmaLabel(
+              id,
+              nimi,
+              koulutustoimija,
+              language
+            ),
+          })) ?? []
+      ) ?? [];
+
+    return !selectedOpetussuunnitelmaOptionWithLabel ||
+      opetussuunnitelmaOptions?.some(
+        opt => opt.value === selectedOpetussuunnitelmaOptionWithLabel.value
+      )
+      ? opetussuunnitelmaOptions
+      : [selectedOpetussuunnitelmaOptionWithLabel, ...opetussuunnitelmaOptions];
+  }, [query.data, language, selectedOpetussuunnitelmaOptionWithLabel]);
+
+  return {
+    ...query,
+    isLoading: query.isLoading || isLoadingSelectedOpetussuunnitelmaOption,
+    options,
+  };
 };
 
 const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
@@ -157,7 +179,11 @@ export const PaikallisetTutkinnonOsatSection = ({
     return () => clearTimeout(timer);
   }, [inputValue]);
 
-  const organisaatioOids = useOrganisaatioOidsWithRights();
+  const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
+
+  const selectedOpetussuunnitelma = useKoulutusFormField(
+    'paikallisetTutkinnonOsat.opetussuunnitelmaId'
+  );
 
   const {
     options: opetussuunnitelmaOptions,
@@ -165,33 +191,13 @@ export const PaikallisetTutkinnonOsatSection = ({
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteOpetussuunnitelmat({
+  } = useInfiniteOpetussuunnitelmaOptions({
     organisaatioOids,
     nimi,
+    selectedOpetussuunnitelma,
   });
 
-  const selectedOpetussuunnitelma = useKoulutusFormField(
-    'paikallisetTutkinnonOsat.opetussuunnitelmaId'
-  );
   const selectedOpetussuunnitelmaId = selectedOpetussuunnitelma?.value;
-
-  const { data: selectedOpetussuunnitelmaOptionWithId } =
-    useOpetussuunnitelmaByIdOption(selectedOpetussuunnitelma);
-
-  const selectedOpetussuunnitelmaOption =
-    selectedOpetussuunnitelmaOptionWithId ?? selectedOpetussuunnitelma;
-
-  const allOpetussuunnitelmaOptions = useMemo(() => {
-    if (
-      !selectedOpetussuunnitelmaOption ||
-      opetussuunnitelmaOptions.some(
-        opt => opt.value === selectedOpetussuunnitelmaOption.value
-      )
-    ) {
-      return opetussuunnitelmaOptions;
-    }
-    return [selectedOpetussuunnitelmaOption, ...opetussuunnitelmaOptions];
-  }, [selectedOpetussuunnitelmaOption, opetussuunnitelmaOptions]);
 
   const {
     data: paikallisetTutkinnonosatOptions,
@@ -209,7 +215,7 @@ export const PaikallisetTutkinnonOsatSection = ({
           name="paikallisetTutkinnonOsat.opetussuunnitelmaId"
           component={FormFieldSelect}
           label={t('koulutuslomake.valitseToteutussuunnitelma')}
-          options={allOpetussuunnitelmaOptions}
+          options={opetussuunnitelmaOptions}
           disabled={disabled || !isEmpty(selectedTutkinnonOsat)}
           isLoading={isLoadingOps || isFetchingNextPage}
           inputValue={inputValue}

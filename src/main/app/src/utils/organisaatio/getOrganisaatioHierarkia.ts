@@ -34,7 +34,8 @@ const getOrganisaatioHierarkia = async ({
     skipParents: skipParents ? 'true' : 'false',
     ...(Array.isArray(oids) && { oidRestrictionList: oids }),
   };
-
+  //HUOM! skipParents ei toimi organisaatio-servicen hierarkia/hae-rajapinnassa, kun sitä käytetään
+  //yhdessä oidRestrictionListin kanssa eli kun tehdään pyyntö useammalla oidilla
   const { data } = await httpClient.get<OrganisaatioHierarkiaModel>(
     apiUrls.url('kouta-backend.organisaatio-hierarkia'),
     {

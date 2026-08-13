@@ -46,6 +46,8 @@ const development = {
   'kouta-backend.valintaperuste': `${koutaBackendDevUrl}/valintaperuste`,
   'kouta-backend.valintaperuste-by-oid': `${koutaBackendDevUrl}/valintaperuste/$1`,
   'kouta-backend.valintaperuste-list': `${koutaBackendDevUrl}/valintaperuste/list`,
+  'kouta-backend.eperuste-amosaa-opetussuunnitelmat': `${koutaBackendDevUrl}/eperuste-amosaa/opetussuunnitelmat`,
+  'kouta-backend.eperuste-amosaa-paikalliset-tutkinnonosat': `${koutaBackendDevUrl}/eperuste-amosaa/opetussuunnitelma/$1/paikalliset-tutkinnonosat`,
   'kouta-backend.ammattinimike-search': `${koutaBackendDevUrl}/ammattinimike/search/$1`,
   'kouta-backend.asiasana-search': `${koutaBackendDevUrl}/asiasana/search/$1`,
   'kouta-backend.luokittelutermi-search': `${koutaBackendDevUrl}/luokittelutermi/search/$1`,

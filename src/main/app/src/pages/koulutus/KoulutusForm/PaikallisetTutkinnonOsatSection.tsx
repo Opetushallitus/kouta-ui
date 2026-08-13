@@ -9,6 +9,7 @@ import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -29,24 +30,23 @@ type PaikallisetTutkinnonOsatProps = {
   disabled: boolean;
 };
 
-function useOrganisaatioOidsWithUpdateRights(): Array<string> | undefined {
+function useOrganisaatioOidsWithUpdateRights(): Array<string> {
   const isOph = useIsOphVirkailija();
   const user = useAuthorizedUser();
 
   return useMemo(() => {
-    if (isOph) return undefined;
-    return (
-      user?.organisaatiot
-        ?.filter(({ kayttooikeudet }) =>
-          kayttooikeudet.some(
-            ({ palvelu, oikeus }) =>
-              palvelu === 'KOUTA' &&
-              ['UPDATE', 'READ_UPDATE', 'CRUD'].includes(oikeus)
+    return isOph
+      ? [OPETUSHALLITUS_ORGANISAATIO_OID]
+      : (user?.organisaatiot
+          ?.filter(({ kayttooikeudet }) =>
+            kayttooikeudet.some(
+              ({ palvelu, oikeus }) =>
+                palvelu === 'KOUTA' &&
+                ['UPDATE', 'READ_UPDATE', 'CRUD'].includes(oikeus)
+            )
           )
-        )
-        .map(({ organisaatioOid }) => organisaatioOid) ?? []
-    );
-  }, [isOph, user]);
+          .map(({ organisaatioOid }) => organisaatioOid) ?? []);
+  }, [user, isOph]);
 }
 
 const createOpetussuunnitelmaLabel = (
@@ -84,12 +84,10 @@ const useOpetussuunnitelmaOptionWithLabel = (
 };
 
 const useInfiniteOpetussuunnitelmaOptions = ({
-  organisaatioOids,
   nimi,
   selectedOpetussuunnitelma,
   allSelectedOpetussuunnitelmaIds,
 }: {
-  organisaatioOids?: Array<string>;
   nimi?: string;
   selectedOpetussuunnitelma?: SelectOption;
   allSelectedOpetussuunnitelmaIds?: Array<string>;
@@ -97,6 +95,8 @@ const useInfiniteOpetussuunnitelmaOptions = ({
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
   const language = useUserLanguage();
+
+  const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
 
   const query = useInfiniteQuery(
     ['getOpetussuunnitelmat', organisaatioOids, nimi],
@@ -187,11 +187,9 @@ const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
 const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   disabled,
   name,
-  organisaatioOids,
 }: {
   disabled: boolean;
   name: string;
-  organisaatioOids?: Array<string>;
 }) => {
   const allSelectedOpetussuunnitelmaIds = useKoulutusFormField(
     'paikallisetTutkinnonOsat'
@@ -213,7 +211,6 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteOpetussuunnitelmaOptions({
-    organisaatioOids,
     nimi,
     selectedOpetussuunnitelma,
     allSelectedOpetussuunnitelmaIds,
@@ -276,7 +273,6 @@ const PaikallisetTutkinnonOsatFields = ({
   fields: FieldArrayFieldsProps<unknown>;
 }) => {
   const { t } = useTranslation();
-  const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
 
   return (
     <>
@@ -285,7 +281,6 @@ const PaikallisetTutkinnonOsatFields = ({
           <OpetussuunnitelmanPaikallisetTutkinnonOsat
             disabled={disabled}
             name={field}
-            organisaatioOids={organisaatioOids}
           />
         )}
       </FieldArrayList>

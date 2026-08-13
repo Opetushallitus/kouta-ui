@@ -21,33 +21,37 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 type PaikallisetTutkinnonOsatProps = {
   disabled: boolean;
-  organisaatioOid: string;
 };
 
-const useInfiniteOpetussuunnitelmat = (
-  organisaatioOid?: string,
-  nimi?: string
-) => {
+const useInfiniteOpetussuunnitelmat = ({
+  organisaatioOids,
+  nimi,
+}: {
+  organisaatioOids?: Array<string>;
+  nimi?: string;
+}) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
   const language = useUserLanguage();
 
   const query = useInfiniteQuery(
-    ['getOpetussuunnitelmat', { organisaatioOid, nimi }],
-    ({ pageParam = 1 }) =>
+    ['getOpetussuunnitelmat', organisaatioOids, nimi],
+    ({ pageParam = 0 }) =>
       getOpetussuunnitelmat({
         httpClient,
         apiUrls,
-        organisaatioOid,
+        organisaatioOids,
         nimi,
         sivu: pageParam,
       }),
     {
-      enabled: Boolean(organisaatioOid),
       getNextPageParam: lastPage =>
-        lastPage.sivu && lastPage.sivuja && lastPage.sivu < lastPage.sivuja
+        lastPage.sivu != null &&
+        lastPage.sivuja != null &&
+        lastPage.sivu < lastPage.sivuja
           ? lastPage.sivu + 1
           : undefined,
+      cacheTime: 0,
     }
   );
 
@@ -85,7 +89,6 @@ const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
 
 export const PaikallisetTutkinnonOsatSection = ({
   disabled,
-  organisaatioOid,
 }: PaikallisetTutkinnonOsatProps) => {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState('');
@@ -102,7 +105,7 @@ export const PaikallisetTutkinnonOsatSection = ({
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteOpetussuunnitelmat(organisaatioOid, nimi);
+  } = useInfiniteOpetussuunnitelmat({ nimi });
 
   const selectedToteutussuunnitelma = useKoulutusFormField(
     'paikallisetTutkinnonOsat.toteutussuunnitelmaId'
@@ -129,7 +132,10 @@ export const PaikallisetTutkinnonOsatSection = ({
           disabled={disabled}
           isLoading={isLoadingOps || isFetchingNextPage}
           inputValue={inputValue}
-          onInputChange={setInputValue}
+          onInputChange={value => {
+            // TODO: Reset paikalliset tutkinnon osat when changing toteutussuunnitelma
+            setInputValue(value);
+          }}
           onMenuScrollToBottom={() => hasNextPage && fetchNextPage()}
         />
       </Box>

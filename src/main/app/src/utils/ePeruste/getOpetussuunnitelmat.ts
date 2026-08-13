@@ -5,20 +5,26 @@ import { ApiUrls } from '#/src/urls';
 export const getOpetussuunnitelmat = async ({
   httpClient,
   apiUrls,
-  organisaatioOid,
+  organisaatioOids,
   nimi,
   sivu,
 }: {
   httpClient: HttpClient;
   apiUrls: ApiUrls;
-  organisaatioOid?: string;
+  organisaatioOids?: Array<string>;
   nimi?: string;
   sivu?: number;
 }) => {
-  const params: { organisaatio?: string; nimi?: string; sivu?: number } = {
-    organisaatio: organisaatioOid,
+  const params: {
+    organisaatio?: Array<string>;
+    nimi?: string;
+    sivu?: number;
+    paikallistasisaltoa?: boolean;
+  } = {
+    organisaatio: organisaatioOids,
     nimi,
     sivu,
+    paikallistasisaltoa: true,
   };
 
   const { data } = await httpClient.get<AmosaaOpetussuunnitelmatResponse>(

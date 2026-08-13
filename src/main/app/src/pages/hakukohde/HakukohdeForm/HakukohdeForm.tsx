@@ -36,7 +36,7 @@ import { HakukohteenLinjaSection } from './HakukohteenLinjaSection';
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
 import { JarjestyspaikkaSection } from './JarjestyspaikkaSection';
 import { KuvausSection } from './KuvausSection';
-import { LiitteetSection } from './LiitteetSection';
+import { LiitteetSection } from './LiitteetFields';
 import { PerustiedotSection } from './PerustiedotSection';
 import { PohjakoulutusSection } from './PohjakoulutusSection';
 

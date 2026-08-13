@@ -1,8 +1,8 @@
+import { ENTITY } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { HttpClient } from '#/src/httpClient';
 import { ApiUrls } from '#/src/urls';
-import getHakuByOid from '#/src/utils/haku/getHakuByOid';
-import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
+import { getEntityByOid } from '#/src/utils/api/getEntityByOid';
 
 export const getHakukohdePageData = async ({
   hakuOid,
@@ -16,8 +16,18 @@ export const getHakukohdePageData = async ({
   apiUrls: ApiUrls;
 }) => {
   const [toteutus, haku] = await Promise.all([
-    getToteutusByOid({ oid: toteutusOid, httpClient, apiUrls }),
-    getHakuByOid({ oid: hakuOid, httpClient, apiUrls }),
+    getEntityByOid({
+      entityType: ENTITY.TOTEUTUS,
+      oid: toteutusOid,
+      httpClient,
+      apiUrls,
+    }),
+    getEntityByOid({
+      entityType: ENTITY.HAKU,
+      oid: hakuOid,
+      httpClient,
+      apiUrls,
+    }),
   ]);
 
   return {

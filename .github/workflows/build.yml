@@ -10,27 +10,28 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   HUSKY: 0
+  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     env:
       GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up JDK 21
+      - name: Set up JDK
         uses: actions/setup-java@v5
         with:
           java-version-file: '.java-version'
           distribution: 'corretto'
           cache: 'maven'
 
+      - uses: ./.github/actions/setup-npm-registry-auth
+
       - name: Build with Maven
-        run: |
-          git clone https://github.com/Opetushallitus/ci-tools.git
-          source ci-tools/common/setup-tools.sh
-          mvn clean spotless:check package -B
+        run: mvn clean spotless:check package -B
 
       - uses: actions/cache/save@v5
         id: restore-build
@@ -40,6 +41,7 @@ jobs:
 
   lint-and-unit-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     env:
       GITHUB_TOKEN: ${{ github.token }}
     defaults:
@@ -47,16 +49,9 @@ jobs:
         working-directory: ./src/main/app
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v6
+      - uses: ./.github/actions/setup-node-env
         with:
-          package_json_file: src/main/app/package.json
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: src/main/app/.nvmrc
-          cache: 'pnpm'
-          cache-dependency-path: src/main/app/pnpm-lock.yaml
-      - name: Install dependencies
-        run: pnpm install
+          project_path: src/main/app
       - name: Run tests
         run: |
           pnpm run lint
@@ -64,22 +59,15 @@ jobs:
 
   test-playwright:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: ./src/main/app
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v6
+      - uses: ./.github/actions/setup-node-env
         with:
-          package_json_file: src/main/app/package.json
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: src/main/app/.nvmrc
-          cache: 'pnpm'
-          cache-dependency-path: src/main/app/pnpm-lock.yaml
-      - name: Install dependencies
-        run: | 
-          pnpm install --prefer-offline
+          project_path: src/main/app
       - name: Get installed Playwright version
         id: playwright-version
         run: pnpm list --json @playwright/test > pw.json && echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./pw.json')[0].devDependencies['@playwright/test'].version)")" >> $GITHUB_ENV
@@ -98,6 +86,7 @@ jobs:
   deploy-container:
     needs: [build, lint-and-unit-test, test-playwright]
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v6

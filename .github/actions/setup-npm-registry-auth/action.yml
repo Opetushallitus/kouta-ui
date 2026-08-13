@@ -1,0 +1,7 @@
+name: setup-npm-registry-auth
+description: 'Configure npm/pnpm auth for the @opetushallitus GitHub Packages registry (CI runner only, does not touch the project .npmrc)'
+runs:
+  using: 'composite'
+  steps:
+    - shell: bash
+      run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc

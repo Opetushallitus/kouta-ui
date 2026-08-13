@@ -31,7 +31,7 @@
     "@lexical/selection": "^0.38.2",
     "@lexical/table": "^0.38.2",
     "@lexical/utils": "^0.38.2",
-    "@opetushallitus/virkailija-ui-components": "^0.4.7",
+    "@opetushallitus/virkailija-ui-components": "^0.4.8",
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.5",
     "@xstate/immer": "^0.3.3",

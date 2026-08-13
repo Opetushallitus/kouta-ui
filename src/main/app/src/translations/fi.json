@@ -536,7 +536,7 @@
     "valitseErikoistumiskoulutus": "Valitse erikoistumiskoulutus",
     "luokittelutermit": "Koulutuksen luokitteluun liittyviä avainsanoja",
     "luokittelutermitOhje": "Luokittelutermejä käytetään koulutusten hakemiseen ohjelmallisesti eikä niitä näytetä Opintopolussa",
-    "valitseOpetussuunnitelma": "Valitse opetussuunnitelma",
+    "valitseToteutussuunnitelma": "Valitse toteutussuunnitelma",
     "valitsePaikallisetTutkinnonOsat": "Valitse paikalliset tutkinnon osat"
   },
   "toteutuslomake": {

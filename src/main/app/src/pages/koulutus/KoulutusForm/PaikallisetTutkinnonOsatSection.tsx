@@ -260,7 +260,7 @@ export const PaikallisetTutkinnonOsatSection = ({
         <Field
           name="paikallisetTutkinnonOsat.opetussuunnitelmaId"
           component={FormFieldSelect}
-          label={t('koulutuslomake.valitseOpetussuunnitelma')}
+          label={t('koulutuslomake.valitseToteutussuunnitelma')}
           options={allOpetussuunnitelmaOptions}
           disabled={disabled || !isEmpty(selectedTutkinnonOsat)}
           isLoading={

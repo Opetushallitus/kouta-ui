@@ -113,6 +113,8 @@ export type SisaltoTekstiValue = {
   data?: TranslatedField<EditorState>;
 };
 
-export type SisaltoValues = Array<SisaltoTekstiValue | SisaltoTaulukkoValue>;
+export type Sisalto = SisaltoTaulukkoValue | SisaltoTekstiValue;
+
+export type SisaltoValues = Array<Sisalto>;
 
 export type KieliversiotValues = Array<LanguageCode>;

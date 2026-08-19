@@ -137,7 +137,13 @@ const SortableBlock = ({
   });
 
   return (
-    <Box key={id} display="flex" ref={ref} data-dragging={isDragging}>
+    <Box
+      key={id}
+      display="flex"
+      ref={ref}
+      data-dragging={isDragging}
+      marginBottom={index < fields.length - 1 ? 2 : 0}
+    >
       <InputContainer flexGrow={1}>
         <InputWrapper>
           <ContentField
@@ -181,7 +187,7 @@ const SortableContainer = (props: {
           const { initialIndex, index } = source;
 
           if (initialIndex !== index) {
-            fields.swap(initialIndex, index);
+            fields.move(initialIndex, index);
           }
         }
       }}

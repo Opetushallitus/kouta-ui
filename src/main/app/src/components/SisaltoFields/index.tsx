@@ -191,7 +191,7 @@ const SortableContainer = (props: {
       <Box style={{ position: 'relative' }}>
         {fields.map((fieldName: string, index: number) => {
           const fieldValue = fields.get(index);
-          const id = JSON.stringify(fieldValue);
+          const id = `${JSON.stringify(fieldValue)}_${index}`;
 
           return (
             <SortableBlock

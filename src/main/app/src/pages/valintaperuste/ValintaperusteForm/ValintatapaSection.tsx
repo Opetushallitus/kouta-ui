@@ -65,7 +65,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
       />
     </Box>
 
-    <Box paddingTop={2} {...getTestIdProps('valintatapaSisalto')}>
+    <Box {...getTestIdProps('valintatapaSisalto')}>
       <SisaltoFields name={`${valintatapa}.sisalto`} language={language} />
     </Box>
   </div>

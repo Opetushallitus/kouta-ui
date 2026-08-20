@@ -223,11 +223,13 @@ export const SisaltoFields = ({
   language: LanguageCode;
 }) => {
   return (
-    <FieldArray
-      name={name}
-      {...props}
-      component={SortableContainer}
-      language={language}
-    />
+    <Box marginTop={4}>
+      <FieldArray
+        name={name}
+        {...props}
+        component={SortableContainer}
+        language={language}
+      />
+    </Box>
   );
 };

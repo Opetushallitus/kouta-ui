@@ -118,15 +118,15 @@ const ContentField = ({
 const SortableBlock = ({
   id,
   index,
-  contentValue,
-  contentName,
+  fieldValue,
+  fieldName,
   language,
   fields,
 }: {
   id: string;
   index: number;
-  contentValue: Sisalto;
-  contentName: string;
+  fieldValue: Sisalto;
+  fieldName: string;
   language: LanguageCode;
   fields: FieldArrayFieldsProps<Sisalto>;
 }) => {
@@ -146,11 +146,7 @@ const SortableBlock = ({
     >
       <InputContainer flexGrow={1}>
         <InputWrapper>
-          <ContentField
-            {...contentValue}
-            name={contentName}
-            language={language}
-          />
+          <ContentField {...fieldValue} name={fieldName} language={language} />
         </InputWrapper>
       </InputContainer>
       <Box flexGrow={0} paddingLeft={2}>
@@ -193,17 +189,17 @@ const SortableContainer = (props: {
       }}
     >
       <Box style={{ position: 'relative' }}>
-        {fields.map((contentName: string, index: number) => {
-          const contentValue = fields.get(index);
-          const id = JSON.stringify(contentValue);
+        {fields.map((fieldName: string, index: number) => {
+          const fieldValue = fields.get(index);
+          const id = JSON.stringify(fieldValue);
 
           return (
             <SortableBlock
               key={id}
               id={id}
               index={index}
-              contentValue={contentValue}
-              contentName={contentName}
+              fieldValue={fieldValue}
+              fieldName={fieldName}
               {...props}
             />
           );

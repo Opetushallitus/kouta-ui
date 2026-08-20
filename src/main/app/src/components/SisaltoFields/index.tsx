@@ -131,7 +131,7 @@ const SortableBlock = ({
   fields: FieldArrayFieldsProps<Sisalto>;
 }) => {
   const { t } = useTranslation();
-  const { ref, isDragging } = useSortable({
+  const { ref, isDragging, handleRef } = useSortable({
     id,
     index,
   });
@@ -154,7 +154,7 @@ const SortableBlock = ({
         </InputWrapper>
       </InputContainer>
       <Box flexGrow={0} paddingLeft={2}>
-        <Box marginBottom={2}>
+        <Box ref={handleRef} marginBottom={2}>
           <FormButton
             as="div"
             variant="outlined"

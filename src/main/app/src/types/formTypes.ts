@@ -99,7 +99,11 @@ export type ValintakokeetValues = {
   }>;
 };
 
-export type SisaltoTaulukkoValue = {
+type SisaltoBase = {
+  id: string;
+};
+
+export type SisaltoTaulukkoValue = SisaltoBase & {
   tyyppi: 'taulukko';
   data?: {
     id: string;
@@ -108,7 +112,7 @@ export type SisaltoTaulukkoValue = {
   };
 };
 
-export type SisaltoTekstiValue = {
+export type SisaltoTekstiValue = SisaltoBase & {
   tyyppi: 'teksti';
   data?: TranslatedField<EditorState>;
 };

@@ -138,7 +138,6 @@ const SortableBlock = ({
 
   return (
     <Box
-      key={id}
       display="flex"
       ref={ref}
       data-dragging={isDragging}
@@ -191,7 +190,7 @@ const SortableContainer = (props: {
       <Box style={{ position: 'relative' }}>
         {fields.map((fieldName: string, index: number) => {
           const fieldValue = fields.get(index);
-          const id = `${JSON.stringify(fieldValue)}_${index}`;
+          const id = fieldValue?.id;
 
           return (
             <SortableBlock
@@ -207,7 +206,9 @@ const SortableContainer = (props: {
       </Box>
       <Box marginTop={fields.length > 0 ? 2 : 0}>
         <AddContentDropdown
-          onAdd={(content: Sisalto) => fields.push(content)}
+          onAdd={(content: Sisalto) =>
+            fields.push({ ...content, id: crypto.randomUUID() })
+          }
         />
       </Box>
     </DragDropProvider>

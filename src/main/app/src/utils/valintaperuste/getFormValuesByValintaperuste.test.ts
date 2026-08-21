@@ -148,5 +148,16 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
     ],
   });
 
-  expect(values).toMatchSnapshot();
+  const valuesWithoutRandomIds = {
+    ...values,
+    valintatavat: values.valintatavat.map(valintatapa => ({
+      ...valintatapa,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      sisalto: valintatapa.sisalto?.map(({ id, ...sisalto }) => ({
+        ...sisalto,
+      })),
+    })),
+  };
+
+  expect(valuesWithoutRandomIds).toMatchSnapshot();
 });

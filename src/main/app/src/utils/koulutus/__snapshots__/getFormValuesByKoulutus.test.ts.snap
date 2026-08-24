@@ -94,6 +94,7 @@ exports[`getFormValuesByKoulutus returns correct form values for ammatillinen ko
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
+  "paikallisetTutkinnonOsat": [],
   "soraKuvaus": null,
   "tarjoajat": {
     "tarjoajat": [
@@ -154,8 +155,8 @@ exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskou
       "value": undefined,
     },
     "opintojenLaajuusNumero": "",
-    "opintojenLaajuusNumeroMax": 10,
-    "opintojenLaajuusNumeroMin": 5,
+    "opintojenLaajuusNumeroMax": "10",
+    "opintojenLaajuusNumeroMin": "5",
     "opintojenLaajuusyksikko": {
       "value": "",
     },
@@ -174,6 +175,7 @@ exports[`getFormValuesByKoulutus returns correct form values for erikoistumiskou
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
+  "paikallisetTutkinnonOsat": [],
   "soraKuvaus": null,
   "tarjoajat": {
     "tarjoajat": [],
@@ -279,6 +281,7 @@ exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] 
   },
   "organisaatioOid": undefined,
   "osaamisala": null,
+  "paikallisetTutkinnonOsat": [],
   "soraKuvaus": {
     "value": "1234",
   },

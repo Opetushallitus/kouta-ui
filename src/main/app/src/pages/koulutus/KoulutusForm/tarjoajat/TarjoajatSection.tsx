@@ -14,9 +14,8 @@ import {
   KOULUTUS_ROLE,
   OPH_PAAKAYTTAJA_ROLE,
   KOULUTUSTYYPPI,
-  ENTITY,
 } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
+import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { getTestIdProps } from '#/src/utils';
@@ -36,8 +35,8 @@ const TarjoajatSelector = ({ organisaatioOid }) => {
   const isAvoinKorkeakoulutus = useFieldValue(
     'information.isAvoinKorkeakoulutus'
   );
-  const isJulkinen = useFieldValue('julkinen', ENTITY.KOULUTUS);
-  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
+  const isJulkinen = useKoulutusFormField('julkinen');
+  const koulutustyyppi = useKoulutusFormField('koulutustyyppi');
 
   const { tarjoajat, isLoading } = useSelectableKoulutusTarjoajat({
     organisaatioOid,
@@ -73,7 +72,7 @@ const TarjoajatSelector = ({ organisaatioOid }) => {
             KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
             KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
             KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-          ].includes(koulutustyyppi) && !isJulkinen
+          ].includes(koulutustyyppi as KOULUTUSTYYPPI) && !isJulkinen
         }
       />
     </div>

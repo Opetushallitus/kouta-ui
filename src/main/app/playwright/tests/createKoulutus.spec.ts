@@ -183,13 +183,56 @@ test.describe('Create koulutus', () => {
           section.getByRole('link', { name: '106436', exact: true })
         ).toHaveAttribute(
           'href',
-          new RegExp('#/fi/esitys/7823345/reformi/tutkinnonosat/7843530$')
+          new RegExp('#/fi/ammatillinen/7823345/tutkinnonosat/7843530$')
         );
       });
       await withinSection(page, 'nimi', async section => {
         await expect(
           section.getByLabel('koulutuslomake.lisaaKoulutuksenNimi')
         ).toHaveValue('Louhintaporaus');
+      });
+      await page.route(
+        '**/eperuste-amosaa/opetussuunnitelmat**',
+        fixtureJSON({
+          data: [
+            {
+              id: 111,
+              nimi: { fi: 'Testin opetussuunnitelma' },
+            },
+          ],
+          sivu: 0,
+          sivuja: 1,
+        })
+      );
+      await page.route(
+        '**/eperuste-amosaa/opetussuunnitelma/111/paikalliset-tutkinnonosat',
+        fixtureJSON([
+          {
+            id: 222,
+            nimi: { fi: 'Testin paikallinen tutkinnon osa' },
+          },
+        ])
+      );
+      await withinSection(page, 'paikallisetTutkinnonOsat', async section => {
+        await section
+          .getByRole('button', {
+            name: 'koulutuslomake.lisaaToteutussuunnitelma',
+          })
+          .click();
+        await fillAsyncSelect(
+          getSelectByLabel(
+            section,
+            'koulutuslomake.valitseToteutussuunnitelma'
+          ),
+          'Testin opetussuunnitelma'
+        );
+        await fillAsyncSelect(
+          getSelectByLabel(
+            section,
+            'koulutuslomake.valitsePaikallisetTutkinnonOsat'
+          ),
+          'Testin paikallinen tutkinnon osa'
+        );
       });
       await withinSection(page, 'tutkinnonosat', async section => {
         await fillAsyncSelect(
@@ -200,7 +243,7 @@ test.describe('Create koulutus', () => {
           section.getByRole('link', { name: '106436', exact: true })
         ).toHaveAttribute(
           'href',
-          new RegExp('#/fi/esitys/7823345/reformi/tutkinnonosat/7843530$')
+          new RegExp('#/fi/ammatillinen/7823345/tutkinnonosat/7843530$')
         );
       });
       await withinSection(page, 'description', async section => {

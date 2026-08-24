@@ -535,7 +535,10 @@
     "naytaVainValitut": "Näytä vain valitut",
     "valitseErikoistumiskoulutus": "Valitse erikoistumiskoulutus",
     "luokittelutermit": "Koulutuksen luokitteluun liittyviä avainsanoja",
-    "luokittelutermitOhje": "Luokittelutermejä käytetään koulutusten hakemiseen ohjelmallisesti eikä niitä näytetä Opintopolussa"
+    "luokittelutermitOhje": "Luokittelutermejä käytetään koulutusten hakemiseen ohjelmallisesti eikä niitä näytetä Opintopolussa",
+    "valitseToteutussuunnitelma": "Valitse toteutussuunnitelma",
+    "valitsePaikallisetTutkinnonOsat": "Valitse paikalliset tutkinnon osat",
+    "lisaaToteutussuunnitelma": "Lisää uusi toteutussuunnitelma"
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",
@@ -543,7 +546,6 @@
     "toteutuksenKuvausJaOsaamistavoitteet": "Toteutuksen kuvaus ja osaamistavoitteet",
     "toteutuksenOsaamistavoitteet": "Toteutuksen osaamistavoitteet",
     "toteutuksenYleinenKuvaus": "Toteutuksen yleinen kuvaus",
-    "ilmoittautumislinkki": "Ilmoittautumislinkki",
     "laajuus": "Laajuus",
     "opintojenSuunniteltuKesto": "Opintojen suunniteltu kesto",
     "suunniteltuKesto": "Suunniteltu kesto",

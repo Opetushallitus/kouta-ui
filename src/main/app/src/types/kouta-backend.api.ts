@@ -376,6 +376,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/eperuste-amosaa/opetussuunnitelmat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae opetussuunnitelmia eperusteet-amosaa-palvelusta parametrien perusteella sivutettuna
+         * @description Hakee opetussuunnitelmat eperusteet-amosaa-palvelusta organisaatio-oidien perusteella
+         */
+        get: operations["getOpetussuunnitelmat"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/toteutus/copy": {
         parameters: {
             query?: never;
@@ -552,6 +572,26 @@ export interface paths {
          * @description Listaa niiden toteutusten tiedot, jotka ovat organisaation käytettävissä
          */
         get: operations["Listaa toteutukset"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/eperuste-amosaa/opetussuunnitelma/{opsId}/paikalliset-tutkinnonosat": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae opetussuunnitelman paikalliset tutkinnon osat eperusteet-amosaa-palvelusta
+         * @description Hakee opetussuunnitelman paikalliset tutkinnon osat eperusteet-amosaa-palvelusta
+         */
+        get: operations["getPaikallisetTutkinnonosat"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1800,6 +1840,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/eperuste-amosaa/opetussuunnitelma/{opsId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Hae yksittäinen opetussuunnitelma eperusteet-amosaa-palvelusta
+         * @description Hakee yksittäisen opetussuunnitelman eperusteet-amosaa-palvelusta tunnisteen perusteella
+         */
+        get: operations["getOpetussuunnitelma"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/external/valintaperuste/": {
         parameters: {
             query?: never;
@@ -2273,6 +2333,12 @@ export interface components {
              */
             tutkinnonosaViite?: number;
         };
+        PaikallinenTutkinnonOsa: {
+            /** @description Paikallisen tutkinnon osan opetussuunnitelman tunniste */
+            opetussuunnitelmaId?: string;
+            /** @description Paikallisen tutkinnon osan tunniste */
+            tutkinnonosaId?: string;
+        };
         KoulutuksenAlkamiskausi: {
             /**
              * @description Alkamiskauden tyyppi
@@ -2367,6 +2433,238 @@ export interface components {
              */
             tarjoajat?: string[];
         };
+        AmosaaLokalisoituTeksti: {
+            /** @description Suomenkielinen teksti */
+            fi?: string;
+            /** @description Ruotsinkielinen teksti */
+            sv?: string;
+            /** @description Englanninkielinen teksti */
+            en?: string;
+        };
+        AmosaaKoulutus: {
+            /**
+             * Format: int64
+             * @description Koulutuksen id
+             */
+            id?: number;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            /** @description Koulutuskoodin arvo */
+            koulutuskoodiArvo?: string;
+            /** @description Koulutuskoodin URI */
+            koulutuskoodiUri?: string;
+            /** @description Koulutusalakoodi */
+            koulutusalakoodi?: string;
+            /** @description Opintoalakoodi */
+            opintoalakoodi?: string;
+        };
+        AmosaaPeruste: {
+            /**
+             * Format: int64
+             * @description Perusteen id
+             */
+            id?: number;
+            /** @description Perusteen diaarinumero */
+            diaarinumero?: string;
+            /**
+             * Format: int64
+             * @description Perusteen id ePerusteissa
+             */
+            perusteId?: number;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            /** @description Koulutustyyppi */
+            koulutustyyppi?: string;
+            koulutukset?: components["schemas"]["AmosaaKoulutus"][];
+        };
+        AmosaaKoulutustoimija: {
+            /**
+             * Format: int64
+             * @description Koulutustoimijan id
+             */
+            id?: number;
+            /** @description Organisaation OID */
+            organisaatio?: string;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            /** @description Onko organisaatio ryhmä */
+            organisaatioRyhma?: boolean;
+            /** @description Oppilaitostyyppi */
+            oppilaitostyyppi?: string;
+            /** @description Oppilaitostyypin koodi URI */
+            oppilaitosTyyppiKoodiUri?: string;
+        };
+        AmosaaOpetussuunnitelma: {
+            /**
+             * Format: int64
+             * @description Opetussuunnitelman id
+             */
+            id?: number;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            /** @description Opetussuunnitelman tila */
+            tila?: string;
+            /** @description Opetussuunnitelman tyyppi */
+            tyyppi?: string;
+            /** @description Opetussuunnitelman kuvaus */
+            kuvaus?: string;
+            koulutustoimija?: components["schemas"]["AmosaaKoulutustoimija"];
+            /**
+             * Format: int64
+             * @description Luontiaika (unix timestamp)
+             */
+            luotu?: number;
+            /**
+             * Format: int64
+             * @description Muokkausaika (unix timestamp)
+             */
+            muokattu?: number;
+            peruste?: components["schemas"]["AmosaaPeruste"];
+            /** @description JOTPA-tyyppi */
+            jotpatyyppi?: string;
+            /** @description Julkaisukielet */
+            julkaisukielet?: string[];
+            /**
+             * Format: int64
+             * @description Voimaantuloaika (unix timestamp)
+             */
+            voimaantulo?: number;
+            /**
+             * Format: int64
+             * @description Voimassaolon loppumisaika (unix timestamp)
+             */
+            voimassaoloLoppuu?: number;
+            /** @description Onko esikatseltavissa */
+            esikatseltavissa?: boolean;
+            /** @description Koulutustyyppi */
+            koulutustyyppi?: string;
+            /** @description Oppilaitostyypin koodi URI */
+            oppilaitosTyyppiKoodiUri?: string;
+        };
+        AmosaaOpetussuunnitelmatResponse: {
+            /** @description Opetussuunnitelmat */
+            data?: components["schemas"]["AmosaaOpetussuunnitelma"][];
+            /** @description Sivujen lukumäärä */
+            sivuja?: number;
+            /** @description Kokonaismäärä */
+            "kokonaism\u00E4\u00E4r\u00E4"?: number;
+            /** @description Nykyisen sivun numero */
+            sivu?: number;
+            /** @description Sivun koko */
+            sivukoko?: number;
+        };
+        AmosaaVaatimus: {
+            /** @description Vaatimuksen koodi */
+            koodi?: string;
+            vaatimus?: components["schemas"]["AmosaaLokalisoituTeksti"];
+        };
+        AmosaaKohdealue: {
+            kuvaus?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            vaatimukset?: components["schemas"]["AmosaaVaatimus"][];
+        };
+        AmosaaAmmattitaitovaatimukset: {
+            /** Format: int64 */
+            id?: number;
+            kohde?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            kohdealueet?: components["schemas"]["AmosaaKohdealue"][];
+            vaatimukset?: components["schemas"]["AmosaaVaatimus"][];
+        };
+        AmosaaArviointi: {
+            /** Format: int64 */
+            id?: number;
+            lisatiedot?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            arvioinninkohdealueet?: components["schemas"]["AmosaaKohdealue"][];
+        };
+        AmosaaKoodi: {
+            /** @description Koodin URI */
+            uri?: string;
+            /** @description Koodin arvo */
+            arvo?: string;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            /** @description Koodin versio */
+            versio?: number;
+            /** @description Koodisto */
+            koodisto?: string;
+        };
+        AmosaaOsaamistaso: {
+            /** Format: int64 */
+            id?: number;
+            koodi?: components["schemas"]["AmosaaKoodi"];
+            otsikko?: components["schemas"]["AmosaaLokalisoituTeksti"];
+        };
+        AmosaaOsaamistasonKriteerit: {
+            kriteerit?: components["schemas"]["AmosaaLokalisoituTeksti"][];
+            osaamistaso?: components["schemas"]["AmosaaOsaamistaso"];
+        };
+        AmosaaArviointiasteikko: {
+            /** Format: int64 */
+            id?: number;
+            osaamistasot?: components["schemas"]["AmosaaOsaamistaso"][];
+        };
+        AmosaaGeneerinenArviointiasteikko: {
+            /** Format: int64 */
+            id?: number;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            kohde?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            arviointiasteikko?: components["schemas"]["AmosaaArviointiasteikko"];
+            osaamistasonkriteerit?: components["schemas"]["AmosaaOsaamistasonKriteerit"][];
+        };
+        AmosaaOmaTutkinnonosa: {
+            /** Format: int64 */
+            id?: number;
+            koodi?: string;
+            /** Format: double */
+            laajuus?: number;
+            arviointi?: components["schemas"]["AmosaaArviointi"];
+            /** Format: int64 */
+            geneerinenarviointi?: number;
+            ammattitaitovaatimukset?: components["schemas"]["AmosaaAmmattitaitovaatimukset"];
+            geneerinenarviointiasteikko?: components["schemas"]["AmosaaGeneerinenArviointiasteikko"];
+            ammattitaidonosoittamistavat?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            ammattitaitovaatimuksetlista?: components["schemas"]["AmosaaAmmattitaitovaatimukset"];
+        };
+        AmosaaTekstiKappale: {
+            /** Format: int64 */
+            id?: number;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            /**
+             * Format: int64
+             * @description Luontiaika (unix timestamp)
+             */
+            luotu?: number;
+            teksti?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            /**
+             * Format: int64
+             * @description Muokkausaika (unix timestamp)
+             */
+            muokattu?: number;
+            tunniste?: string;
+        };
+        AmosaaTosa: {
+            /** Format: int64 */
+            id?: number;
+            /** @description Tutkinnon osan tyyppi */
+            tyyppi?: string;
+            /**
+             * Format: int64
+             * @description Muokkausaika (unix timestamp)
+             */
+            muokattu?: number;
+            omatutkinnonosa?: components["schemas"]["AmosaaOmaTutkinnonosa"];
+        };
+        AmosaaPaikallinenTutkinnonosa: {
+            /**
+             * Format: int64
+             * @description Paikallisen tutkinnon osan id
+             */
+            id?: number;
+            nimi?: components["schemas"]["AmosaaLokalisoituTeksti"];
+            tosa?: components["schemas"]["AmosaaTosa"];
+            /** @description Paikallisen tutkinnon osan tyyppi */
+            tyyppi?: string;
+            tekstikappale?: components["schemas"]["AmosaaTekstiKappale"];
+            /** @description Hierarkkisen rakenteen lapset */
+            lapset?: components["schemas"]["AmosaaPaikallinenTutkinnonosa"][];
+            naytapohjanteksti?: boolean;
+            naytaperusteenteksti?: boolean;
+        };
+        AmosaaPaikallisetTutkinnonOsatResponse: components["schemas"]["AmosaaPaikallinenTutkinnonosa"][];
         Asiasana: {
             /**
              * @description Asiasanan kieli
@@ -2536,6 +2834,8 @@ export interface components {
             osaamistavoitteet?: components["schemas"]["Osaamistavoitteet"];
             /** @description Koulutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
             lisatiedot?: components["schemas"]["Lisatieto"][];
+            /** @description Koulutukseen liittyvät luokittelutermit */
+            luokittelutermit?: string[];
         };
         AmmatillinenKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
             /**
@@ -2673,6 +2973,8 @@ export interface components {
             tyyppi?: "amm-tutkinnon-osa";
             /** @description Tutkinnon osat */
             tutkinnonOsat?: components["schemas"]["TutkinnonOsa"][];
+            /** @description Paikalliset tutkinnon osat */
+            paikallisetTutkinnonOsat?: components["schemas"]["PaikallinenTutkinnonOsa"][];
         };
         AmmatillinenOsaamisalaKoulutusMetadata: components["schemas"]["KoulutusMetadata"] & {
             /**
@@ -3033,18 +3335,16 @@ export interface components {
              *           "fi": "Opetustavan suomenkielinen kuvaus",
              *           "sv": "Opetustavan ruotsinkielinen kuvaus"
              *         },
-             *         "maksullisuustyyppi": "maksullinen,",
              *         "maksullisuusKuvaus": {
              *           "fi": "Maksullisuuden suomenkielinen kuvaus",
              *           "sv": "Maksullisuuden ruotsinkielinen kuvaus"
              *         },
-             *         "maksunMaara": 200.5,
-             *         "alkamiskausiKoodiUri": "kausi_k#1",
-             *         "alkamisvuosi": 2020,
-             *         "alkamisaikaKuvaus": {
-             *           "fi": "Alkamisajan suomenkielinen kuvaus",
-             *           "sv": "Alkamisajan ruotsinkielinen kuvaus"
-             *         },
+             *         "maksut": [
+             *           {
+             *             "maksullisuustyyppi": "maksullinen",
+             *             "maksunMaara": 200.5
+             *           }
+             *         ],
              *         "lisatiedot": [
              *           {
              *             "otsikkoKoodiUri": "koulutuksenlisatiedot_03#1",
@@ -3053,15 +3353,7 @@ export interface components {
              *               "sv": "Ruotsinkielinen lisätietoteksti"
              *             }
              *           }
-             *         ],
-             *         "lukuvuosimaksu": {
-             *           "fi": "200 lukukaudessa",
-             *           "sv": "200 på svenska"
-             *         },
-             *         "lukuvuosimaksuKuvaus": {
-             *           "fi": "Lukuvuosimaksun suomenkielinen kuvaus",
-             *           "sv": "Lukuvuosimaksun ruotsinkielinen kuvaus"
-             *         }
+             *         ]
              *       },
              *       "ammattinimikkeet": [
              *         {
@@ -3132,6 +3424,11 @@ export interface components {
              */
             modified?: string;
             /**
+             * @description Toteutukseen liittyvän SORA-kuvauksen yksilöivä tunniste
+             * @example ea596a9c-5940-497e-b5b7-aded3a2352a7
+             */
+            sorakuvausId?: string;
+            /**
              * @description Koulutuksen koodi URIt. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/koulutus/11)
              * @example [
              *       "koulutus_371101#1",
@@ -3193,19 +3490,10 @@ export interface components {
             opetustapaKoodiUrit?: string[];
             /** @description Koulutuksen toteutuksen opetustapoja tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
             opetustapaKuvaus?: components["schemas"]["Kuvaus"];
-            /**
-             * @description Maksullisuuden tyyppi
-             * @enum {string}
-             */
-            maksullisuustyyppi?: "maksullinen" | "maksuton" | "lukuvuosimaksu";
             /** @description Koulutuksen toteutuksen maksullisuutta tarkentava kuvausteksti eri kielillä. Kielet on määritetty koulutuksen kielivalinnassa. */
             maksullisuusKuvaus?: components["schemas"]["Kuvaus"];
-            /**
-             * Format: double
-             * @description Koulutuksen toteutuksen maksun määrä euroissa?
-             * @example 220.5
-             */
-            maksunMaara?: number;
+            /** @description Opetuksen maksullisuustiedot. Ammatillisilla (amm, amm-tutkinnon-osa, amm-osaamisala, amm-muu, telma) ja lukiototeutuksilla voi olla yhtäaikaa kaksi eri maksutyyppiä, 'lukuvuosimaksu' ja 'maksullinen', muilla toteutuksilla vain yksi arvo, joka on julkaistulle toteutukselle pakollinen. */
+            maksut?: components["schemas"]["Maksu"][];
             /** @description Koulutuksen alkamiskausi */
             koulutuksenAlkamiskausi?: components["schemas"]["KoulutuksenAlkamiskausi"];
             /** @description Koulutuksen toteutukseen liittyviä lisätietoja, jotka näkyvät oppijalle Opintopolussa */
@@ -3226,6 +3514,19 @@ export interface components {
             suunniteltuKestoKuukaudet?: number;
             /** @description Koulutuksen toteutuksen suunnitellun keston kuvaus eri kielillä. Kielet on määritetty toteutuksen kielivalinnassa. */
             suunniteltuKestoKuvaus?: components["schemas"]["Kuvaus"];
+        };
+        Maksu: {
+            /**
+             * @description Maksullisuuden tyyppi.
+             * @enum {string}
+             */
+            maksullisuustyyppi: "maksullinen" | "maksuton" | "lukuvuosimaksu";
+            /**
+             * Format: double
+             * @description Koulutuksen toteutuksen maksun määrä euroissa. Pakollinen, jos maksullisuustyyppi ei ole 'maksuton'.
+             * @example 220.5
+             */
+            maksunMaara?: number;
         };
         Apuraha: {
             /**
@@ -3282,16 +3583,6 @@ export interface components {
             /** @description Onko toteutus täydennyskoulutusta? */
             isTaydennyskoulutus?: boolean;
         };
-        KorkeakouluOsaamisala: {
-            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. nimi */
-            nimi?: components["schemas"]["Nimi"];
-            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. kuvaus */
-            kuvaus?: components["schemas"]["Kuvaus"];
-            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. linkki */
-            linkki?: components["schemas"]["Linkki"];
-            /** @description Korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. linkin otsikko */
-            otsikko?: components["schemas"]["Teksti"];
-        };
         Osaamisala: {
             /**
              * @description Osaamisalan koodi URI. Viittaa [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/osaamisala/1)
@@ -3336,6 +3627,8 @@ export interface components {
             tyyppi?: "kk-opintojakso";
             /** @description Onko koulutus avointa korkeakoulutusta? */
             isAvoinKorkeakoulutus?: boolean;
+            /** @description Onko toteutus pieni osaamiskokonaisuus? */
+            isPieniOsaamiskokonaisuus?: boolean;
             /** @description Hakijalle näkyvä tunniste */
             tunniste?: string;
             /**
@@ -3343,6 +3636,16 @@ export interface components {
              * @example opinnontyyppi_1#1
              */
             opinnonTyyppiKoodiUri?: string;
+            /**
+             * @description Opintojen laajuusyksikko. Viittaa koodistoon [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/opintojenlaajuusyksikko/1)
+             * @example opintojenlaajuusyksikko_6#1
+             */
+            opintojenLaajuusyksikkoKoodiUri?: string;
+            /**
+             * @description Opintojen laajuus tai kesto numeroarvona
+             * @example 10
+             */
+            opintojenLaajuusNumero?: number;
         };
         YliopistoToteutusMetadata: components["schemas"]["ToteutusMetadata"] & {
             /**
@@ -3441,7 +3744,7 @@ export interface components {
             /** @description Koulutuksen kielivalikoima */
             kielivalikoima?: components["schemas"]["Kielivalikoima"];
             /** @description Onko lukio-toteutuksella yleislinja? */
-            yleislinja?: Record<string, never>;
+            yleislinja?: boolean;
             /** @description Lukio-toteutuksen painotukset. Taulukon alkioiden koodiUri-kentät viittaavat [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/lukiopainotukset/1). */
             painotukset?: components["schemas"]["LukiolinjaTieto"][];
             /** @description Lukio-toteutuksen erityiset koulutustehtävät. Taulukon alkioiden koodiUri-kentät viittaavat [koodistoon](https://virkailija.testiopintopolku.fi/koodisto-ui/html/koodisto/lukiolinjaterityinenkoulutustehtava/1). */
@@ -3470,6 +3773,8 @@ export interface components {
              * @example false
              */
             suoritetaanNayttona?: boolean;
+            /** @description Toteutukseen liitettyjen osaamismerkkien koulutus-oidit */
+            liitetytOsaamismerkit?: string[];
         };
         VapaaSivistystyoMuuToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
             /**
@@ -3483,6 +3788,8 @@ export interface components {
              * @example false
              */
             suoritetaanNayttona?: boolean;
+            /** @description Toteutukseen liitettyjen osaamismerkkien koulutus-oidit */
+            liitetytOsaamismerkit?: string[];
         };
         VapaaSivistystyoOsaamismerkkiToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
             /**
@@ -3547,6 +3854,10 @@ export interface components {
              * @example opinnontyyppi_1#1
              */
             opinnonTyyppiKoodiUri?: string;
+            /** @description Opintokokonaisuuteen liitettyjen opintojaksojen toteutus-oidit */
+            liitetytOpintojaksot?: string[];
+            /** @description Onko toteutus pieni osaamiskokonaisuus? */
+            isPieniOsaamiskokonaisuus?: boolean;
         };
         ErikoistumiskoulutusToteutusMetadata: components["schemas"]["TutkintoonJohtamatonToteutusMetadata"] & {
             /**
@@ -4710,6 +5021,8 @@ export interface components {
         Organisaatio: {
             /** @example 1.2.246.562.10.66634895871 */
             oid: string;
+            /** @example 1.2.246.562.10.594252633210 */
+            parentOid?: string;
             parentOids: string[];
             nimi: components["schemas"]["Nimi"];
             kieletUris: string[];
@@ -4743,6 +5056,8 @@ export interface components {
             /** @example oppilaitostyyppi_21 */
             oppilaitostyyppiUri?: string;
             organisaatiotyyppiUris?: string[];
+            /** @example AKTIIVINEN */
+            status: string;
         };
         OrganisaatioHierarkia: {
             organisaatiot?: components["schemas"]["Organisaatio"][];
@@ -5410,11 +5725,11 @@ export interface operations {
     siirtotiedostoPistehistoria: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -5493,11 +5808,11 @@ export interface operations {
     siirtotiedostoHakukohteet: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -5684,6 +5999,37 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    getOpetussuunnitelmat: {
+        parameters: {
+            query?: {
+                /** @description Lista organisaatioiden OIDeja, joiden koulutustoimija-organisaatioilta opetussuunnitelmat haetaan. */
+                organisaatiot?: string[];
+                /** @description Opetussunnitelman nimen osa */
+                nimi?: string;
+                /** @description Suodattaa paikallisten tutkinnon osien perusteella. true = sisältää, false = ei sisällä, pois jätettynä suodatinta ei käytetä. */
+                paikallistasisaltoa?: boolean;
+                /** @description Sivunumero (oletus 0) */
+                sivu?: number;
+                /** @description Sivun koko (oletus 15) */
+                sivukoko?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Opetussuunnitelmat */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AmosaaOpetussuunnitelmatResponse"];
+                };
             };
         };
     };
@@ -6011,6 +6357,32 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ToteutusListItem"][];
+                };
+            };
+        };
+    };
+    getPaikallisetTutkinnonosat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Opetussuunnitelman id
+                 * @example 5574388
+                 */
+                opsId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Paikalliset tutkinnon osat */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AmosaaPaikallisetTutkinnonOsatResponse"];
                 };
             };
         };
@@ -6732,11 +7104,11 @@ export interface operations {
     siirtotiedostoValintaperusteet: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -6787,11 +7159,11 @@ export interface operations {
     siirtotiedostoToteutukset: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -7203,11 +7575,11 @@ export interface operations {
     siirtotiedostoHaut: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -7704,11 +8076,11 @@ export interface operations {
     siirtotiedostoSorakuvaukset: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -7894,11 +8266,11 @@ export interface operations {
     siirtotiedostoKoulutukset: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };
@@ -7939,6 +8311,32 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ToteutusListItem"][];
+                };
+            };
+        };
+    };
+    getOpetussuunnitelma: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Opetussuunnitelman id
+                 * @example 5574388
+                 */
+                opsId: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Opetussuunnitelma */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AmosaaOpetussuunnitelma"];
                 };
             };
         };
@@ -8225,11 +8623,11 @@ export interface operations {
     siirtotiedostoOppilaitoksetJaOsat: {
         parameters: {
             query?: {
-                /** @example 2025-11-11T11:04:49 */
+                /** @example 2026-07-06T12:31:28 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2025-11-11T11:04:49
+                 * @example 2026-07-06T12:31:28
                  */
                 endTime?: string;
             };

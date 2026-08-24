@@ -42,6 +42,7 @@ import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import { OsaamismerkkiKuvausSection } from './OsaamismerkkiKuvausSection';
+import { PaikallisetTutkinnonOsatSection } from './PaikallisetTutkinnonOsatSection';
 import { TarjoajatSection } from './tarjoajat/TarjoajatSection';
 import {
   TiedotSection,
@@ -83,7 +84,9 @@ export const KoulutusForm = ({
 }: KoulutusFormProps) => {
   const { t } = useTranslation();
 
-  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI>('koulutustyyppi');
+  const koulutustyyppi = useFieldValue('koulutustyyppi') as
+    | KOULUTUSTYYPPI
+    | undefined;
   const kieliversiotValue = useFieldValue('kieliversiot');
   const koulutuskoodi = useFieldValue('information.koulutus');
   const languageTabs = kieliversiotValue || [];
@@ -311,6 +314,12 @@ export const KoulutusForm = ({
                   koulutustyyppi={koulutustyyppi}
                 />
                 <FormCollapse
+                  section="paikallisetTutkinnonOsat"
+                  header={t('koulutuslomake.valitsePaikallisetTutkinnonOsat')}
+                  Component={PaikallisetTutkinnonOsatSection}
+                  disabled={onlyTarjoajaRights}
+                />
+                <FormCollapse
                   section="tutkinnonosat"
                   header={t('koulutuslomake.koulutuksenNimi')}
                   Component={TutkinnonOsaKoulutusNimiSection}
@@ -338,7 +347,6 @@ export const KoulutusForm = ({
                 />
               </>
             )}
-
             {![
               KOULUTUSTYYPPI.TUVA,
               KOULUTUSTYYPPI.TELMA,

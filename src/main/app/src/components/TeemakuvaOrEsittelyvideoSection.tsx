@@ -24,7 +24,7 @@ const ActionArea = styled(Box)`
 export const TeemakuvaOrEsittelyvideoSection = props => {
   const { name, disabled, language } = props;
   const { t } = useTranslation();
-  const mediaType = useFieldValue<string>(`${name}.mediaType`);
+  const mediaType = useFieldValue(`${name}.mediaType`) as string | undefined;
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
@@ -17,43 +17,11 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import { Box, FormLabel, Typography } from '#/src/components/virkailija';
+import { Box, FormLabel } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
-
-const ContactInfo = ({
-  osoite,
-  postinumero,
-  postitoimipaikka,
-  sahkoposti,
-  language,
-}) => {
-  const translatedOsoite = getFirstLanguageValue(osoite, language);
-  const translatedPostitoimipaikka = getFirstLanguageValue(
-    postitoimipaikka,
-    language
-  );
-
-  return translatedOsoite &&
-    postinumero &&
-    translatedPostitoimipaikka &&
-    sahkoposti
-    ? [
-        translatedOsoite,
-        `${postinumero} ${translatedPostitoimipaikka}`,
-        sahkoposti,
-      ].map((value, index) => (
-        <Typography variant="secondary" as="div" key={index}>
-          {value}
-        </Typography>
-      ))
-    : null;
-};
 
 const ToimitusaikaFields = ({ name }) => {
   const { t } = useTranslation();
@@ -66,16 +34,6 @@ const ToimitusaikaFields = ({ name }) => {
       helperText={t('yleiset.paivamaaraJaKellonaika')}
     />
   );
-};
-
-const useOrganisaatioContactInfo = oid => {
-  const { organisaatio, ...rest } = useOrganisaatio(oid);
-
-  const contactInfo = useMemo(() => {
-    return organisaatio ? getOrganisaatioContactInfo(organisaatio) : null;
-  }, [organisaatio]);
-
-  return { contactInfo, ...rest };
 };
 
 const ToimituspaikkaFields = ({ name, language }) => {
@@ -134,7 +92,6 @@ const ToimitustapaPaikkaFields = ({
   input: { value: toimitustapa },
   baseName,
   language,
-  contactInfo,
 }) => {
   if (toimitustapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE) {
     return (
@@ -142,21 +99,12 @@ const ToimitustapaPaikkaFields = ({
         <ToimituspaikkaFields name={baseName} language={language} />
       </Box>
     );
-  } else if (
-    toimitustapa === LIITTEEN_TOIMITUSTAPA.JARJESTAJAN_OSOITE &&
-    contactInfo
-  ) {
-    return (
-      <Box marginTop={2}>
-        <ContactInfo {...contactInfo} language={language} />
-      </Box>
-    );
   }
 
   return null;
 };
 
-const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
+const ToimitustapaFields = ({ name, t, language }) => {
   const options = useMemo(() => {
     return [
       {
@@ -165,11 +113,6 @@ const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
           'liitteenToimitustapaValinnat.toimitetaanLahettamisenYhteydessa'
         ),
       },
-      // NOTE: Määrittely päivittyi ettei järjestäjän osoitetta haluta näyttää valittavana, mutta palautetaan jos joskus tulee tarve
-      // {
-      //   value: LIITTEEN_TOIMITUSTAPA.JARJESTAJAN_OSOITE,
-      //   label: t('liitteenToimitustapaValinnat.jarjestajanOsoite'),
-      // },
       {
         value: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
         label: t('liitteenToimitustapaValinnat.muuOsoite'),
@@ -194,7 +137,6 @@ const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
         component={ToimitustapaPaikkaFields}
         language={language}
         baseName={`${name}.paikka`}
-        contactInfo={contactInfo}
         t={t}
       />
     </>
@@ -207,7 +149,6 @@ const LiitteetListField = ({
   includeToimitusaika = true,
   includeToimituspaikka = true,
   tyyppiOptions,
-  contactInfo,
   t,
 }) => {
   return (
@@ -261,7 +202,6 @@ const LiitteetListField = ({
               <ToimitustapaFields
                 language={language}
                 name={`${liite}.toimitustapa`}
-                contactInfo={contactInfo}
                 t={t}
               />
             ) : null}
@@ -295,7 +235,6 @@ const LiitteetField = ({
   t,
   yhteinenToimitusaikaName,
   yhteinenToimituspaikkaName,
-  contactInfo,
   ...props
 }) => {
   const yhteinenToimitusaika = Boolean(
@@ -318,7 +257,6 @@ const LiitteetField = ({
           includeToimitusaika={!yhteinenToimitusaika}
           includeToimituspaikka={!yhteinenToimituspaikka}
           tyyppiOptions={tyyppiOptions}
-          contactInfo={contactInfo}
           t={t}
         />
       </Box>
@@ -350,7 +288,6 @@ const LiitteetField = ({
                   language={language}
                   name={`${baseName}.toimitustapa`}
                   t={t}
-                  contactInfo={contactInfo}
                 />
               </Box>
             ) : null}
@@ -361,13 +298,12 @@ const LiitteetField = ({
   );
 };
 
-export const LiitteetFields = ({ language, name, organisaatioOid }) => {
+export const LiitteetSection = ({ language, name }) => {
   const { options: tyyppiOptions } = useKoodistoOptions({
     koodisto: 'liitetyypitamm',
   });
 
   const { t } = useTranslation();
-  const { contactInfo } = useOrganisaatioContactInfo(organisaatioOid);
 
   const yhteinenToimitusaikaName = `${name}.yhteinenToimitusaika`;
   const yhteinenToimituspaikkaName = `${name}.yhteinenToimituspaikka`;
@@ -382,7 +318,6 @@ export const LiitteetFields = ({ language, name, organisaatioOid }) => {
       yhteinenToimitusaikaName={yhteinenToimitusaikaName}
       yhteinenToimituspaikkaName={yhteinenToimituspaikkaName}
       baseName={name}
-      contactInfo={contactInfo}
     />
   );
 };

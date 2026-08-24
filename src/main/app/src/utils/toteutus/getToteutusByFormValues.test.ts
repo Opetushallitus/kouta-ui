@@ -13,8 +13,6 @@ import getToteutusByFormValues, {
   getMaksutByFormValues,
 } from '#/src/utils/toteutus/getToteutusByFormValues';
 
-import { sisalto } from '../testFormData';
-
 describe('getMaksutByFormValues', () => {
   test('it should create maksut for one "maksullinen"-maksullisuustyyppi with maksunMaara', () => {
     const maksullisuustyypit = [MaksullisuusTyyppi.MAKSULLINEN];
@@ -79,8 +77,8 @@ describe('getMaksutByFormValues', () => {
       MaksullisuusTyyppi.MAKSULLINEN,
       MaksullisuusTyyppi.LUKUVUOSIMAKSU,
     ];
-    const maksunMaara = 500;
-    const lukuvuosimaksunMaara = 1000;
+    const maksunMaara = '500';
+    const lukuvuosimaksunMaara = '1000';
     expect(
       getMaksutByFormValues(
         maksullisuustyypit,
@@ -103,10 +101,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       nimi: {
         fi: 'Fi nimi',
         sv: 'Sv nimi',
-      },
-      ilmoittautumislinkki: {
-        fi: 'Fi linkki',
-        sv: 'Sv linkki',
       },
       opintojenLaajuusNumero: '252',
       laajuusNumeroTyyppi: MaaraTyyppi.YKSI_ARVO,
@@ -310,28 +304,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         },
       },
     },
-    toteutusjaksot: [
-      {
-        nimi: {
-          fi: 'Fi nimi',
-          sv: 'Sv nimi',
-        },
-        koodi: 'koodi 123',
-        laajuus: {
-          fi: 'Fi laajuus',
-          sv: 'Sv laajuus',
-        },
-        kuvaus: {
-          fi: parseEditorState('Fi kuvaus'),
-          sv: parseEditorState('Sv kuvaus'),
-        },
-        ilmoittautumislinkki: {
-          fi: 'Fi linkki',
-          sv: 'Sv linkki',
-        },
-        sisalto: sisalto,
-      },
-    ],
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU,
       isHakukohteetKaytossa: false,

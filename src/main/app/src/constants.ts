@@ -43,11 +43,7 @@ export enum KOULUTUSTYYPPI {
   TUTKINNON_OSA = 'amm-tutkinnon-osa',
   OSAAMISALA = 'amm-osaamisala',
   MUU_AMMATILLINEN_KOULUTUS = 'amm-muu',
-  AVOIN_YO = 'avoin_yo',
-  AVOIN_AMK = 'avoin_amk',
-  TAYDENNYSKOULUTUS = 'taydennyskoulutus',
   ERIKOISTUMISKOULUTUS = 'erikoistumiskoulutus',
-  VALMENTAVA_KOULUTUS = 'valmentava_koulutus',
   AMMATILLINEN_OPETTAJA_ERITYISOPETTAJA_JA_OPOKOULUTUS = 'amm-ope-erityisope-ja-opo',
   OPETTAJIEN_PEDAGOGISET_OPINNOT = 'ope-pedag-opinnot',
   TUVA = 'tuva',
@@ -104,14 +100,6 @@ export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = without(
   KOULUTUSTYYPIT,
   ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT
 );
-
-// NOTE: Näitä koulutustyyppejä ei tueta koska niiden toteutus puuttuu backendista, päivitä listaa kun backend tukee näitä
-export const EI_TUETUT_KOULUTUSTYYPIT = [
-  KOULUTUSTYYPPI.AVOIN_YO,
-  KOULUTUSTYYPPI.AVOIN_AMK,
-  KOULUTUSTYYPPI.TAYDENNYSKOULUTUS,
-  KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS,
-];
 
 export const TOINEN_ASTE_YHTEISHAKU_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
@@ -194,11 +182,6 @@ export const KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP = {
     'eqf_8',
   ],
   [KOULUTUSTYYPPI.AMKKOULUTUS]: [
-    'tutkintotyyppi_06',
-    'tutkintotyyppi_07',
-    'tutkintotyyppi_12',
-  ],
-  [KOULUTUSTYYPPI.AVOIN_AMK]: [
     'tutkintotyyppi_06',
     'tutkintotyyppi_07',
     'tutkintotyyppi_12',

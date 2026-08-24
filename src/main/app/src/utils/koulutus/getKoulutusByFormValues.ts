@@ -120,6 +120,15 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
           tutkinnonosaViite: number;
         }>
       )(values?.tutkinnonosat?.osat),
+      paikallisetTutkinnonOsat:
+        values?.paikallisetTutkinnonOsat?.flatMap(
+          ({ opetussuunnitelmaId, tutkinnonosat }) => {
+            return (tutkinnonosat ?? []).map(({ value }) => ({
+              opetussuunnitelmaId: opetussuunnitelmaId?.value,
+              tutkinnonosaId: value,
+            }));
+          }
+        ) ?? [],
       osaamisalaKoodiUri: osaamisalaKoodiToKoodiUri(
         osaamisala?.osaamisala?.value
       ),

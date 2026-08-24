@@ -14,7 +14,6 @@ import {
   maybeParseNumber,
 } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
-import { serializeSisaltoField } from '#/src/utils/form/serializeSisaltoField';
 
 import { isApurahaVisible } from './toteutusVisibilities';
 import {
@@ -268,17 +267,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       opintojenLaajuusNumeroMax: isLaajuusRange
         ? maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMax)
         : maybeParseNumber(values?.tiedot?.opintojenLaajuusNumeroMin),
-      ilmoittautumislinkki: kielistykset(values?.tiedot?.ilmoittautumislinkki),
-      toteutusjaksot: (values?.toteutusjaksot || []).map(
-        ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
-          nimi: kielistykset(nimi),
-          koodi: koodi || null,
-          laajuus: kielistykset(laajuus),
-          ilmoittautumislinkki: kielistykset(ilmoittautumislinkki),
-          kuvaus: kielistyksetSerialized(kuvaus),
-          sisalto: serializeSisaltoField(sisalto, kielivalinta),
-        })
-      ),
       isHakukohteetKaytossa: HTIT?.isHakukohteetKaytossa,
       hakutermi: HTIT?.hakuTapa,
       hakulomaketyyppi,

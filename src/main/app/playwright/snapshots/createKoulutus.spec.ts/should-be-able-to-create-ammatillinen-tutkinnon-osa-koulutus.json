@@ -35,6 +35,12 @@
         "tutkinnonosaViite": 6778207
       }
     ],
+    "paikallisetTutkinnonOsat": [
+      {
+        "opetussuunnitelmaId": "111",
+        "tutkinnonosaId": "222"
+      }
+    ],
     "osaamisalaKoodiUri": null,
     "koulutustyyppi": "amm-tutkinnon-osa",
     "lisatiedot": [

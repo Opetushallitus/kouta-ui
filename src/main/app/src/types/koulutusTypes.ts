@@ -35,7 +35,7 @@ export type KoulutusFormValues = {
   koulutustyyppi: KOULUTUSTYYPPI;
   kieliversiot: Array<LanguageCode>;
   muokkaaja?: string;
-  tila: JULKAISUTILA;
+  tila?: JULKAISUTILA;
   pohja?: PohjaValinta & { tarjoajat: Array<string> };
   information: InformationSectionValues;
   lisatiedot: {
@@ -46,6 +46,10 @@ export type KoulutusFormValues = {
     nimi: TranslatedField<string>;
     osat: Array<TutkinnonOsa>;
   };
+  paikallisetTutkinnonOsat: Array<{
+    opetussuunnitelmaId?: SelectOption;
+    tutkinnonosat?: Array<SelectOption>;
+  }>;
   description: {
     kuvaus: TranslatedField<EditorState>;
     osaamistavoitteet?: TranslatedField<EditorState>;

@@ -1,6 +1,14 @@
+import { vi } from 'vitest';
+
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 
 test('getFormValuesByValintaperuste returns correct form values given valintaperuste', () => {
+  const randomIdSpy = vi
+    .spyOn(global.crypto, 'randomUUID')
+    .mockImplementation(() => {
+      return `124-456-789-1011-121${randomIdSpy.mock.calls.length}`;
+    });
+
   const values = getFormValuesByValintaperuste({
     tila: 'tallennettu',
     hakutapaKoodiUri: 'tapa_1#1',
@@ -148,16 +156,5 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
     ],
   });
 
-  const valuesWithoutRandomIds = {
-    ...values,
-    valintatavat: values.valintatavat.map(valintatapa => ({
-      ...valintatapa,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      sisalto: valintatapa.sisalto?.map(({ id, ...sisalto }) => ({
-        ...sisalto,
-      })),
-    })),
-  };
-
-  expect(valuesWithoutRandomIds).toMatchSnapshot();
+  expect(values).toMatchSnapshot();
 });

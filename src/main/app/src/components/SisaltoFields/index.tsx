@@ -145,7 +145,11 @@ const SortableBlock = ({
     >
       <InputContainer flexGrow={1}>
         <InputWrapper>
-          <ContentField {...fieldValue} name={fieldName} language={language} />
+          <ContentField
+            tyyppi={fieldValue.tyyppi}
+            name={fieldName}
+            language={language}
+          />
         </InputWrapper>
       </InputContainer>
       <Box flexGrow={0} paddingLeft={2}>
@@ -170,7 +174,7 @@ const SortableContainer = (props: {
   fields: FieldArrayFieldsProps<Sisalto>;
   language: LanguageCode;
 }) => {
-  const { fields } = props;
+  const { fields, language } = props;
   return (
     <DragDropProvider
       onDragEnd={(event: DragEndEvent) => {
@@ -199,7 +203,8 @@ const SortableContainer = (props: {
               index={index}
               fieldValue={fieldValue}
               fieldName={fieldName}
-              {...props}
+              fields={fields}
+              language={language}
             />
           );
         })}
@@ -218,7 +223,6 @@ const SortableContainer = (props: {
 export const SisaltoFields = ({
   name,
   language = 'fi',
-  ...props
 }: {
   name: string;
   language: LanguageCode;
@@ -227,7 +231,6 @@ export const SisaltoFields = ({
     <Box marginTop={4}>
       <FieldArray
         name={name}
-        {...props}
         component={SortableContainer}
         language={language}
       />

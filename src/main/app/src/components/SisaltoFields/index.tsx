@@ -95,12 +95,14 @@ const ContentField = ({
 }) => {
   if (tyyppi === 'taulukko') {
     return (
-      <Field
-        name={`${name}.data`}
-        component={renderTableInputField}
-        language={language}
-        {...getTestIdProps('taulukkoSisalto')}
-      />
+      <Box style={{ zIndex: 3 }}>
+        <Field
+          name={`${name}.data`}
+          component={renderTableInputField}
+          language={language}
+          {...getTestIdProps('taulukkoSisalto')}
+        />
+      </Box>
     );
   } else if (tyyppi === 'teksti') {
     return (
@@ -144,7 +146,7 @@ const SortableBlock = ({
       marginBottom={index < fields.length - 1 ? 2 : 0}
     >
       <InputContainer flexGrow={1}>
-        <InputWrapper>
+        <InputWrapper style={{ display: 'flex' }}>
           <ContentField
             tyyppi={fieldValue.tyyppi}
             name={fieldName}

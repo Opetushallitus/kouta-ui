@@ -153,6 +153,7 @@ const ToteutusForm = ({
             section="organisaatio"
             Component={OrganisaatioSection}
             header={t('yleiset.organisaatio')}
+            organisaatioOid={organisaatioOid}
           />
         )}
         {formMode === FormMode.CREATE && (

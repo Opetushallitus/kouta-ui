@@ -198,9 +198,6 @@ const HakuForm = ({
                   disabled={!canAddHakukohde}
                   type="button"
                   title={infoText}
-                  isHakukohteenLiittaja={hakuProp?.hakukohteenLiittajaOrganisaatiot.includes(
-                    organisaatioOid
-                  )}
                 >
                   {t('yleiset.liitaHakukohde')}
                 </Button>

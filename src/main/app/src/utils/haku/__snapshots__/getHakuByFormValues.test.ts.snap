@@ -50,6 +50,7 @@ exports[`getHakuByFormValues returns correct haku given different hakulomake var
         "paattyy": "2019-09-18T08:44",
       },
     ],
+    "varasijatayttoPaattyy": "2019-04-19T15:00",
     "yhteyshenkilot": [
       {
         "nimi": {
@@ -72,7 +73,10 @@ exports[`getHakuByFormValues returns correct haku given different hakulomake var
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": {},
+        "wwwSivuTeksti": {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
     ],
   },
@@ -136,6 +140,7 @@ exports[`getHakuByFormValues returns correct haku given different hakulomake var
         "paattyy": "2019-09-18T08:44",
       },
     ],
+    "varasijatayttoPaattyy": "2019-04-19T15:00",
     "yhteyshenkilot": [
       {
         "nimi": {
@@ -158,7 +163,10 @@ exports[`getHakuByFormValues returns correct haku given different hakulomake var
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": {},
+        "wwwSivuTeksti": {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
     ],
   },
@@ -220,6 +228,7 @@ exports[`getHakuByFormValues returns correct haku given form values 1`] = `
         "paattyy": "2019-09-18T08:44",
       },
     ],
+    "varasijatayttoPaattyy": "2019-04-19T15:00",
     "yhteyshenkilot": [
       {
         "nimi": {
@@ -242,7 +251,10 @@ exports[`getHakuByFormValues returns correct haku given form values 1`] = `
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": {},
+        "wwwSivuTeksti": {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
     ],
   },
@@ -307,6 +319,7 @@ exports[`getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen su
         "paattyy": "2019-09-18T08:44",
       },
     ],
+    "varasijatayttoPaattyy": "2019-04-19T15:00",
     "yhteyshenkilot": [
       {
         "nimi": {
@@ -329,7 +342,10 @@ exports[`getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen su
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": {},
+        "wwwSivuTeksti": {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
     ],
   },
@@ -391,6 +407,7 @@ exports[`getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
         "paattyy": "2019-09-18T08:44",
       },
     ],
+    "varasijatayttoPaattyy": "2019-04-19T15:00",
     "yhteyshenkilot": [
       {
         "nimi": {
@@ -413,7 +430,10 @@ exports[`getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
           "fi": "Fi verkkosivu",
           "sv": "Sv verkkosivu",
         },
-        "wwwSivuTeksti": {},
+        "wwwSivuTeksti": {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
     ],
   },

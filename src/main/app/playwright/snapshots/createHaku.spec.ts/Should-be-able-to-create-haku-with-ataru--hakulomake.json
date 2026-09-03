@@ -21,6 +21,7 @@
   "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_2#1",
   "hakulomaketyyppi": "ataru",
   "metadata": {
+    "varasijatayttoPaattyy": "2019-12-26T09:05",
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
       "koulutuksenAlkamispaivamaara": null,

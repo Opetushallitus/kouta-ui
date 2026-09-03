@@ -58,14 +58,14 @@ const ScheduleSection = ({
             {t('hakulomake.haullaErillinenAloitusajankohta')}
           </Field>
         </Box>
-        {haullaErillinenAloitusajankohta && (
+        {haullaErillinenAloitusajankohta ? (
           <KoulutuksenAloitusajankohtaFields
             section={name}
             name={`${name}.ajankohtaTyyppi`}
             language={language}
             kausiRequired={isYhteishaku}
           />
-        )}
+        ) : null}
       </FieldGroup>
 
       {(isYhteishaku || isErillishaku) && isOphVirkailija ? (

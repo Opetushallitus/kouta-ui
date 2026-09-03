@@ -43,6 +43,15 @@ const ScheduleSection = ({
         />
       </FieldGroup>
 
+      <FieldGroup title={t('hakulomake.varasijatayttoPaattyy')}>
+        <Field
+          name={`${name}.varasijatayttoPaattyy`}
+          component={FormFieldDateTimeInput}
+          helperText={t('yleiset.paivamaaraJaKellonaika')}
+          required={true}
+        />
+      </FieldGroup>
+
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
         <Box mb={2}>
           <Field name={`${name}.ajankohtaKaytossa`} component={FormFieldSwitch}>

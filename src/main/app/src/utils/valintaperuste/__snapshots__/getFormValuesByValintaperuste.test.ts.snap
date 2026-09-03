@@ -113,6 +113,7 @@ exports[`getFormValuesByValintaperuste returns correct form values given valinta
             "fi": "<h2>Fi sisalto</h2>",
             "sv": "<h2>Sv sisalto</h2>",
           },
+          "id": "124-456-789-1011-1211",
           "tyyppi": "teksti",
         },
         {
@@ -158,6 +159,7 @@ exports[`getFormValuesByValintaperuste returns correct form values given valinta
               },
             ],
           },
+          "id": "124-456-789-1011-1212",
           "tyyppi": "taulukko",
         },
       ],

@@ -23,6 +23,7 @@
     "postinstall": "pnpm run xstate:typegen"
   },
   "dependencies": {
+    "@dnd-kit/react": "^0.5.0",
     "@lexical/html": "^0.38.2",
     "@lexical/link": "^0.38.2",
     "@lexical/list": "^0.38.2",
@@ -62,7 +63,6 @@
     "react-router-prompt": "^0.7.2",
     "react-select": "^4.3.1",
     "react-simple-timefield": "^3.3.1",
-    "react-sortable-hoc": "^2.0.0",
     "react-use": "^17.6.0",
     "redux": "^4.2.1",
     "redux-form": "^8.3.10",
@@ -112,6 +112,7 @@
     "jest-styled-components": "^7.2.0",
     "jsdom": "^26.1.0",
     "lint-staged": "^16.1.2",
+    "openapi-typescript": "^7.13.0",
     "prettier": "^3.6.2",
     "start-server-and-test": "^2.0.12",
     "typescript": "5.8",
@@ -121,12 +122,6 @@
     "vite-plugin-rewrite-all": "^1.0.1",
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.2.4"
-  },
-  "overrides": {
-    "react-sortable-hoc": {
-      "react": "^18.0",
-      "react-dom": "^18.0"
-    }
   },
   "browserslist": [
     ">0.2%",

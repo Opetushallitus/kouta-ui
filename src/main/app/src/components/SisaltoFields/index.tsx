@@ -1,18 +1,15 @@
-import React, { RefObject, useCallback } from 'react';
+import { RefObject, useCallback } from 'react';
 
+import { DragDropProvider, DragEndEvent } from '@dnd-kit/react';
+import { isSortable, useSortable } from '@dnd-kit/react/sortable';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
+import { Field, FieldArray, FieldArrayFieldsProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormButton } from '#/src/components/FormButton';
 import IconButton from '#/src/components/IconButton';
 import { LexicalEditorUI } from '#/src/components/LexicalEditorUI';
 import RemoveButton from '#/src/components/RemoveButton';
-import {
-  SortableContainer,
-  SortableElement,
-  SortableHandle,
-} from '#/src/components/Sortable';
 import TableInput from '#/src/components/TableInput';
 import {
   Box,
@@ -21,11 +18,8 @@ import {
   DropdownMenuItem,
   Icon,
 } from '#/src/components/virkailija';
+import { Sisalto } from '#/src/types/formTypes';
 import { getTestIdProps } from '#/src/utils';
-
-const MoveButton = SortableHandle(props => (
-  <FormButton as="div" style={{ cursor: 'grab', width: '100%' }} {...props} />
-));
 
 const InputContainer = styled(Box)`
   max-width: 100%;
@@ -90,98 +84,160 @@ const renderTableInputField = ({ input, language, ...props }) => (
 
 const renderEditorField = ({ input }) => <LexicalEditorUI {...input} />;
 
-const ContentField = ({ tyyppi, name, language }) => {
+const ContentField = ({
+  tyyppi,
+  name,
+  language,
+}: {
+  tyyppi: string;
+  name: string;
+  language: LanguageCode;
+}) => {
   if (tyyppi === 'taulukko') {
     return (
-      <Field
-        name={`${name}.data`}
-        component={renderTableInputField}
-        language={language}
-        {...getTestIdProps('taulukkoSisalto')}
-      />
+      <Box style={{ zIndex: 3 }}>
+        <Field
+          name={`${name}.data`}
+          component={renderTableInputField}
+          language={language}
+          {...getTestIdProps('taulukkoSisalto')}
+        />
+      </Box>
     );
   } else if (tyyppi === 'teksti') {
     return (
-      <Field
-        name={`${name}.data.${language}`}
-        component={renderEditorField}
-        {...getTestIdProps('tekstiSisalto')}
-      />
+      <Box style={{ width: '100%' }}>
+        <Field
+          name={`${name}.data.${language}`}
+          component={renderEditorField}
+          {...getTestIdProps('tekstiSisalto')}
+        />
+      </Box>
     );
   }
 
   return null;
 };
 
-const FieldSortableElement = SortableElement(props => <div {...props} />);
+const SortableBlock = ({
+  id,
+  index,
+  fieldValue,
+  fieldName,
+  language,
+  fields,
+}: {
+  id: string;
+  index: number;
+  fieldValue: Sisalto;
+  fieldName: string;
+  language: LanguageCode;
+  fields: FieldArrayFieldsProps<Sisalto>;
+}) => {
+  const { t } = useTranslation();
+  const { ref, isDragging, handleRef } = useSortable({
+    id,
+    index,
+  });
 
-const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
   return (
-    <div style={{ position: 'relative' }}>
-      {fields.map((content, index) => {
-        const contentValue = fields.get(index);
-
-        return (
-          <FieldSortableElement key={index} index={index}>
-            <Box
-              display="flex"
-              marginBottom={index < fields.length - 1 ? 2 : 0}
-            >
-              <InputContainer flexGrow={1}>
-                <InputWrapper>
-                  <ContentField
-                    {...contentValue}
-                    name={content}
-                    language={language}
-                  />
-                </InputWrapper>
-              </InputContainer>
-              <Box flexGrow={0} paddingLeft={2}>
-                <Box marginBottom={2}>
-                  <MoveButton variant="outlined" color="primary" type="button">
-                    <Icon type="drag_indicator" /> {t('yleiset.siirra')}
-                  </MoveButton>
-                </Box>
-                <RemoveButton onClick={() => fields.remove(index)} />
-              </Box>
-            </Box>
-          </FieldSortableElement>
-        );
-      })}
-      <Box marginTop={fields.length > 0 ? 2 : 0}>
-        <AddContentDropdown onAdd={content => fields.push(content)} />
+    <Box
+      display="flex"
+      ref={ref}
+      data-dragging={isDragging}
+      marginBottom={index < fields.length - 1 ? 2 : 0}
+    >
+      <InputContainer flexGrow={1}>
+        <InputWrapper style={{ display: 'flex' }}>
+          <ContentField
+            tyyppi={fieldValue.tyyppi}
+            name={fieldName}
+            language={language}
+          />
+        </InputWrapper>
+      </InputContainer>
+      <Box flexGrow={0} paddingLeft={2}>
+        <Box ref={handleRef} marginBottom={2}>
+          <FormButton
+            as="div"
+            variant="outlined"
+            color="primary"
+            type="button"
+            style={{ cursor: 'grab', width: '100%' }}
+          >
+            <Icon type="drag_indicator" /> {t('yleiset.siirra')}
+          </FormButton>
+        </Box>
+        <RemoveButton onClick={() => fields.remove(index)} />
       </Box>
-    </div>
-  );
-});
-
-const renderFields = props => {
-  const { fields } = props;
-
-  return (
-    <FieldsSortableContainer
-      {...props}
-      lockAxis="y"
-      onSortEnd={({ oldIndex, newIndex }) => {
-        if (oldIndex !== newIndex) {
-          fields.swap(oldIndex, newIndex);
-        }
-      }}
-      useDragHandle
-    />
+    </Box>
   );
 };
 
-export const SisaltoFields = ({ name, language = 'fi', ...props }) => {
-  const { t } = useTranslation();
-
+const SortableContainer = (props: {
+  fields: FieldArrayFieldsProps<Sisalto>;
+  language: LanguageCode;
+}) => {
+  const { fields, language } = props;
   return (
-    <FieldArray
-      name={name}
-      {...props}
-      component={renderFields}
-      language={language}
-      t={t}
-    />
+    <DragDropProvider
+      onDragEnd={(event: DragEndEvent) => {
+        if (event.canceled) return;
+
+        const { source } = event.operation;
+
+        if (isSortable(source)) {
+          const { initialIndex, index } = source;
+
+          if (initialIndex !== index) {
+            fields.move(initialIndex, index);
+          }
+        }
+      }}
+    >
+      <Box style={{ position: 'relative' }}>
+        {fields.map((fieldName: string, index: number) => {
+          const fieldValue = fields.get(index);
+          const id = fieldValue?.id;
+
+          return (
+            <SortableBlock
+              key={id}
+              id={id}
+              index={index}
+              fieldValue={fieldValue}
+              fieldName={fieldName}
+              fields={fields}
+              language={language}
+            />
+          );
+        })}
+      </Box>
+      <Box marginTop={fields.length > 0 ? 2 : 0}>
+        <AddContentDropdown
+          onAdd={(content: Sisalto) =>
+            fields.push({ ...content, id: crypto.randomUUID() })
+          }
+        />
+      </Box>
+    </DragDropProvider>
+  );
+};
+
+export const SisaltoFields = ({
+  name,
+  language = 'fi',
+}: {
+  name: string;
+  language: LanguageCode;
+}) => {
+  return (
+    <Box marginTop={4}>
+      <FieldArray
+        name={name}
+        component={SortableContainer}
+        language={language}
+      />
+    </Box>
   );
 };

@@ -25,6 +25,7 @@ const baseHaku = {
       koulutuksenAlkamiskausiKoodiUri: 'alkamiskausi_1#1',
       koulutuksenAlkamisvuosi: '2020',
     },
+    varasijatayttoPaattyy: '2019-09-29T15:00',
     tulevaisuudenAikataulu: [
       { alkaa: '2019-02-20T12:28', paattyy: '2019-08-01T12:45' },
     ],

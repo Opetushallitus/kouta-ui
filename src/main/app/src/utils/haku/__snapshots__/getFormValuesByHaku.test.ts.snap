@@ -25,6 +25,7 @@ exports[`getFormValuesByHaku returns correct form values given different hakulom
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
+    "varasijatayttoPaattyy": "2019-09-29T15:00",
     "vuosi": {
       "value": "2020",
     },
@@ -110,6 +111,7 @@ exports[`getFormValuesByHaku returns correct form values given different hakulom
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
+    "varasijatayttoPaattyy": "2019-09-29T15:00",
     "vuosi": {
       "value": "2020",
     },
@@ -195,6 +197,7 @@ exports[`getFormValuesByHaku returns correct form values given haku 1`] = `
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
+    "varasijatayttoPaattyy": "2019-09-29T15:00",
     "vuosi": {
       "value": "2020",
     },
@@ -284,6 +287,7 @@ exports[`getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen su
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
+    "varasijatayttoPaattyy": "2019-09-29T15:00",
     "vuosi": undefined,
   },
   "externalId": "ext1",
@@ -367,6 +371,7 @@ exports[`getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": "2030-12-20T12:28",
     "tarkkaPaattyy": "2030-12-21T12:28",
+    "varasijatayttoPaattyy": "2019-09-29T15:00",
     "vuosi": {
       "value": "2030",
     },

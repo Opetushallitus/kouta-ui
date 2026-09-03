@@ -106,11 +106,13 @@ const ContentField = ({
     );
   } else if (tyyppi === 'teksti') {
     return (
-      <Field
-        name={`${name}.data.${language}`}
-        component={renderEditorField}
-        {...getTestIdProps('tekstiSisalto')}
-      />
+      <Box style={{ width: '100%' }}>
+        <Field
+          name={`${name}.data.${language}`}
+          component={renderEditorField}
+          {...getTestIdProps('tekstiSisalto')}
+        />
+      </Box>
     );
   }
 

@@ -1,6 +1,14 @@
+import { vi } from 'vitest';
+
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 
 test('getFormValuesByValintaperuste returns correct form values given valintaperuste', () => {
+  const randomIdSpy = vi
+    .spyOn(global.crypto, 'randomUUID')
+    .mockImplementation(() => {
+      return `124-456-789-1011-121${randomIdSpy.mock.calls.length}`;
+    });
+
   const values = getFormValuesByValintaperuste({
     tila: 'tallennettu',
     hakutapaKoodiUri: 'tapa_1#1',

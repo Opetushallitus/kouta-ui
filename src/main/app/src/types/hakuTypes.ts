@@ -1,3 +1,5 @@
+import { EditorState } from 'lexical';
+
 import { HAKULOMAKETYYPPI, JULKAISUTILA } from '#/src/constants';
 
 import { AjankohtaFields } from './formTypes';
@@ -6,7 +8,7 @@ export type HakulomakeFormSection = {
   tyyppi: HAKULOMAKETYYPPI;
   lomake: { value?: string };
   linkki?: TranslatedField<string>;
-  kuvaus?: TranslatedField<string>;
+  kuvaus?: TranslatedField<EditorState>;
 };
 
 export type HakuFormValues = {
@@ -32,5 +34,5 @@ export type HakuFormValues = {
   };
   hakulomake: HakulomakeFormSection;
   yhteyshenkilot: Array<Yhteystieto>;
-  hakukohteenLiittajaOrganisaatiot: Array<string>;
+  hakukohteenLiittajaOrganisaatiot?: Array<string>;
 };

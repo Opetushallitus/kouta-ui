@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
 import { FormFieldInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';

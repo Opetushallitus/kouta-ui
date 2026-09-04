@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import {
@@ -9,6 +8,7 @@ import {
   FormFieldFloatInput,
   FormFieldCheckboxGroup,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, InputIcon } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';

@@ -1,10 +1,10 @@
 import React, { RefObject, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormButton } from '#/src/components/FormButton';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import IconButton from '#/src/components/IconButton';
 import { LexicalEditorUI } from '#/src/components/LexicalEditorUI';
 import RemoveButton from '#/src/components/RemoveButton';

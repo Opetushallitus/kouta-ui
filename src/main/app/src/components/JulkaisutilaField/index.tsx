@@ -2,10 +2,10 @@ import React from 'react';
 
 import { setLightness } from 'polished';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormFieldRadioGroup } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Radio, Typography } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';

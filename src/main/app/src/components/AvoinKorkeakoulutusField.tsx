@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { getTestIdProps } from '#/src/utils';
 
 type AvoinKorkeakoulutusFieldProps = {

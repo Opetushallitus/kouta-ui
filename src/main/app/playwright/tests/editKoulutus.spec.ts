@@ -110,6 +110,55 @@ test.describe('Edit koulutus', () => {
   // Kohteena linkkiEPerusteisiin: tavallinen tekstikenttä, käännetty, menee runkoon
   // läpi pickTranslationsilla, eikä sitä validoida lainkaan.
 
+  // Kielivälilehden vaihto ei saa palauttaa kentän ALKUARVOA muokkauksen päälle.
+  //
+  // Tämä on eri vika kuin alla oleva testi, vaikka oire on samassa paikassa:
+  // react-final-form 7.0.1:n useField kirjoittaa kentän mountissa alkuarvon
+  // takaisin, jos kentällä ei ole field statea - ja välilehden vaihto vie sen
+  // tilan, koska Fieldin name muuttuu. Korjaus on kirjaston paikkaus
+  // (patches/react-final-form@7.0.1.patch, ylävirran PR #1096), joten tämä testi
+  // vartioi nimenomaan sitä paikkaa.
+  //
+  // Fixturessa kuvaus on tallennettu TYHJÄNÄ merkkijonona molemmille kielille, ja
+  // se on koko vian laukaisija: getFormValuesByKoulutus ajaa arvon
+  // parseEditorStaten läpi, joten alkuarvoksi tulee tyhjä EditorState-OLIO eikä
+  // undefined. Kirjaston ehto on "alkuarvo !== undefined", joten määritelty mutta
+  // tyhjä arvo laukaisee palautuksen. Puuttuvalla avaimella vika ei ilmene
+  // lainkaan - juuri siksi lisätietojen osiokuvaukset toimivat, niillä ei ole
+  // alkuarvoa.
+  //
+  // Mitattu erottelukyky: ilman paikkausta testi kaatuu viimeiseen väitteeseen ja
+  // kenttä on tyhjä - 3/3 yhdellä workerilla, 4/5 kahdella. Sama vika osuu myös
+  // tavalliseen tekstikenttään, mutta siellä harvemmin (mitattu 1/3), koska
+  // editorin ohjelmallinen synkka osuu ajoitukseen luotettavammin. Siksi vartija
+  // on editorissa.
+  test('should keep an edit when the language tab is switched and the initial value is empty', async ({
+    page,
+  }) => {
+    const tyhjaKuvaus = merge(koulutus('amk'), testKoulutusFields);
+    tyhjaKuvaus.metadata.kuvaus = { fi: '', sv: '' };
+    await page.route(
+      `**/kouta-backend/koulutus/${koulutusOid}`,
+      fixtureJSON(tyhjaKuvaus)
+    );
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    const section = getSection(page, 'description');
+    const kuvaus = page.getByTestId('form-control_description.kuvaus');
+    const editori = () => getEditableEditors(kuvaus).first();
+
+    await typeToEditor(kuvaus, 'Fi kuvaus kirjoitettu');
+    await expect(editori()).toHaveText('Fi kuvaus kirjoitettu');
+
+    // Käydään ruotsin välilehdellä ja palataan.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await section.getByText('yleiset.suomeksi').click();
+
+    await expect(editori()).toHaveText('Fi kuvaus kirjoitettu');
+  });
+
   // Kielivälilehden vaihto ei saa tuhota toisen kielen tekstiä editorikentässä.
   //
   // Kohteena kuvaus, koska se on editori (LexicalEditorUI) ja käännetty. Ero

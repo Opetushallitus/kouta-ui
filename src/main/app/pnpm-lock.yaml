@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  react-final-form@7.0.1:
+    hash: c83ad8aa818e4556f29d2bc0326cb2d49b5107881b268c3d7d3b747b5afacd7d
+    path: patches/react-final-form@7.0.1.patch
+
 importers:
 
   .:
@@ -112,10 +117,10 @@ importers:
         version: 14.3.8(react@18.3.1)
       react-final-form:
         specifier: ^7.0.1
-        version: 7.0.1(final-form@5.0.1)(react@18.3.1)
+        version: 7.0.1(patch_hash=c83ad8aa818e4556f29d2bc0326cb2d49b5107881b268c3d7d3b747b5afacd7d)(final-form@5.0.1)(react@18.3.1)
       react-final-form-arrays:
         specifier: ^5.0.0
-        version: 5.0.0(final-form-arrays@4.0.1(final-form@5.0.1))(final-form@5.0.1)(react-final-form@7.0.1(final-form@5.0.1)(react@18.3.1))(react@18.3.1)
+        version: 5.0.0(final-form-arrays@4.0.1(final-form@5.0.1))(final-form@5.0.1)(react-final-form@7.0.1(patch_hash=c83ad8aa818e4556f29d2bc0326cb2d49b5107881b268c3d7d3b747b5afacd7d)(final-form@5.0.1)(react@18.3.1))(react@18.3.1)
       react-i18next:
         specifier: ^13.0.3
         version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -7750,15 +7755,15 @@ snapshots:
 
   react-fast-compare@3.2.2: {}
 
-  react-final-form-arrays@5.0.0(final-form-arrays@4.0.1(final-form@5.0.1))(final-form@5.0.1)(react-final-form@7.0.1(final-form@5.0.1)(react@18.3.1))(react@18.3.1):
+  react-final-form-arrays@5.0.0(final-form-arrays@4.0.1(final-form@5.0.1))(final-form@5.0.1)(react-final-form@7.0.1(patch_hash=c83ad8aa818e4556f29d2bc0326cb2d49b5107881b268c3d7d3b747b5afacd7d)(final-form@5.0.1)(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.4
       final-form: 5.0.1
       final-form-arrays: 4.0.1(final-form@5.0.1)
       react: 18.3.1
-      react-final-form: 7.0.1(final-form@5.0.1)(react@18.3.1)
+      react-final-form: 7.0.1(patch_hash=c83ad8aa818e4556f29d2bc0326cb2d49b5107881b268c3d7d3b747b5afacd7d)(final-form@5.0.1)(react@18.3.1)
 
-  react-final-form@7.0.1(final-form@5.0.1)(react@18.3.1):
+  react-final-form@7.0.1(patch_hash=c83ad8aa818e4556f29d2bc0326cb2d49b5107881b268c3d7d3b747b5afacd7d)(final-form@5.0.1)(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.4
       final-form: 5.0.1

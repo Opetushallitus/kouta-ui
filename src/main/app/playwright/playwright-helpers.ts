@@ -19,11 +19,20 @@ export const assertURLEndsWith = (page: Page, urlEnd: string) =>
 
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
+// HUOM: mock kaikuttaa pyynnön rungon sellaisenaan takaisin eikä validoi sitä mitenkään.
+// Snapshotit lukitsevat siis sen, MITÄ lähetämme, eivät sitä hyväksyykö kouta-backend sen.
+// Esim. nimi: null menisi näistä testeistä läpi, vaikka backend vastaisi tuotannossa 400
+// (validateKielistetty). Ks. getValuesForSaving-kommentti sallittujen polkujen listasta.
 export const wrapMutationTest =
-  (entityName: ENTITY, params?: { oid?: string; id?: string }) =>
+  (
+    entityName: ENTITY,
+    params?: { oid?: string; id?: string; urlPath?: string }
+  ) =>
   async (args: { page: Page; testInfo: TestInfo }, run: () => Promise<any>) => {
     const { page, testInfo } = args;
-    const entityLower = toLower(entityName);
+    // urlPath, koska kaikkien entiteettien backend-polku ei ole entiteetin nimi
+    // pienellä: oppilaitoksenOsa on polussa "oppilaitoksen-osa" (urls.ts:65).
+    const entityLower = params?.urlPath ?? toLower(entityName);
 
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();
@@ -61,6 +70,21 @@ export const getSelectOption = (page: Page) => (value: string) =>
 export const getSection = (page: Page, name: string) =>
   page.getByTestId(`${name}Section`);
 
+// Osion avaaminen: klikkaus rajatulla aikakatkaisulla, ja VAIKUTUS tarkistetaan.
+//
+// Aiempi versio luki open-attribuutin kerran, klikkasi kerran rajattomalla
+// aikakatkaisulla eikä varmistanut avautumista. Se tuotti haaran sitkeimmän flakyn:
+// otsikko ei koskaan tullut Playwrightin mielestä "actionableksi", klikkaus jäi
+// odottamaan koko testin 60 s budjetin, ja testi kaatui vasta mutationTestin
+// waitForRequestiin - eli aivan eri kohtaan kuin missä vika oli.
+//
+// Mitattu: ei toistu yksittäin ajettuna (204 kohdennettua ajoa, 0 kaatumista) vaan
+// ainoastaan täydessä suoritteessa, jossa palvelin on kuormitettu. Jäljitetty
+// tracesta: otsikko resolvoituu, mutta actionability-tarkistus ei mene koskaan läpi.
+// Sivulla pyörii samaan aikaan latausindikaattori (ääretön opacity-animaatio).
+//
+// Rajattu aikakatkaisu antaa uusinnalle mahdollisuuden osua vakaaseen hetkeen, ja
+// jos osio ei siltikään aukea, virhe tulee TÄSTÄ eikä kolmen apurin päästä.
 export const withinSection = async (
   page: Page,
   name: string,
@@ -69,12 +93,50 @@ export const withinSection = async (
   const section = getSection(page, name);
   const sectionHeading = section.locator('> :first-child');
 
-  const isSectionClosed = await sectionHeading.evaluate(
-    el => el.getAttribute('open') === null
-  );
-  if (isSectionClosed) {
-    await sectionHeading.click();
+  // Auki-tilan tunnistus kattaa molemmat osiotyypit. Kaikki osiot eivät ole
+  // kokoontaittuvia: esim. Valintaperusteen kieliversiot-osiossa otsikolla ei ole
+  // open-attribuuttia lainkaan, ja sen sisältö on aina näkyvissä. Pelkkään
+  // open-attribuuttiin nojaava tarkistus punasi kaikki kahdeksan
+  // Valintaperuste-testiä.
+  const isSectionOpen = () =>
+    sectionHeading.evaluate(el => {
+      if (el.getAttribute('open') !== null) {
+        return true;
+      }
+
+      const content = el.nextElementSibling as HTMLElement | null;
+
+      // Ei sisältökäärettä -> osio ei ole kokoontaittuva -> aina auki.
+      if (!content) {
+        return true;
+      }
+
+      // Suljettuna kääreen max-height on 0, joten korkeus kertoo tilan myös
+      // silloin kun open-attribuuttia ei käytetä.
+      return content.getBoundingClientRect().height > 0;
+    });
+
+  for (let yritys = 0; yritys < 4; yritys++) {
+    if (await isSectionOpen()) {
+      break;
+    }
+
+    try {
+      await sectionHeading.click({ timeout: 5000 });
+      await expect.poll(isSectionOpen, { timeout: 2000 }).toBe(true);
+      break;
+    } catch {
+      // Klikkaus ei mennyt läpi tai osio ei auennut - yritetään uudelleen.
+    }
   }
+
+  await expect
+    .poll(isSectionOpen, {
+      timeout: 5000,
+      message: `Osio "${name}" ei auennut`,
+    })
+    .toBe(true);
+
   await fn(section);
 };
 

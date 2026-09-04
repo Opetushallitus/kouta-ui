@@ -8,6 +8,8 @@ import {
   tallenna,
   wrapMutationTest,
   withinSection,
+  getRadio,
+  getLabel,
   confirmDelete,
   assertNoUnsavedChangesDialog,
   setFakeTime,
@@ -22,9 +24,46 @@ import { selectedToimipisteNimi } from '#/playwright/stubHakukohdeRoutes';
 import { stubKayttoOikeusOmatTiedot } from '#/playwright/stubKayttoOikeusOmatTiedot';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
+// Klikataan radiota ja varmistetaan että valinta meni perille.
+//
+// Aiemmin tässä klikattiin pelkkää toimipisteen nimeä. JarjestyspaikkaRadioGroup
+// renderöi <Spin /> niin kauan kuin vaihtoehdot latautuvat, joten nimi saattoi osua
+// johonkin muuhun kuin radion labeliin - klikkaus meni tyhjään eikä arvo asettunut.
+// Tallennus lähti silti, ja jarjestyspaikkaOid puuttui rungosta. Se oli noin 18 %:n
+// flakejen syy; se EI ollut sovelluksen bugi eikä rekisteröinnin ajoitus, vaikka
+// molempia epäiltiin. Instrumentointi tallennushetkellä näytti kentän olevan
+// rekisterissä molemmissa rekistereissä ja arvon olevan null.
 const fillJarjestyspaikkaSection = (page: Page) =>
   withinSection(page, 'jarjestyspaikka', async section => {
-    await section.getByText(selectedToimipisteNimi).click();
+    const radio = getRadio(section, tarjoajat[0]);
+
+    // Odotetaan että radio on olemassa: osio renderöi <Spin />:n niin kauan kuin
+    // vaihtoehdot latautuvat, eikä klikkaus sitä ennen osu mihinkään.
+    await expect(radio).toBeAttached();
+
+    // Klikataan LABELIA, ja toistetaan kunnes valinta on perillä.
+    //
+    // Kolme väärää yritystä matkan varrella, jotka kannattaa tietää ettei niitä
+    // yritetä uudelleen: pelkkä getByText(nimi) saattoi osua muuhunkin kuin
+    // labeliin; radion check({ force: true }) ei laukaise Reactin onChangea, koska
+    // input on tyylitelty piiloon; ja kertaklikkaus labeliin jäi yhä toisinaan
+    // menemättä perille, koska osio renderöityy uudelleen vaihtoehtojen latauduttua
+    // ja klikkaus voi osua vaihdon hetkeen.
+    //
+    // Toisto on tässä oikea ratkaisu eikä laastari: kyse on aidosti
+    // uudelleenrenderöityvästä käyttöliittymästä, jossa yksittäinen klikkaus ei ole
+    // luotettava primitiivi.
+    await expect
+      .poll(
+        async () => {
+          if (!(await radio.isChecked())) {
+            await getLabel(section, selectedToimipisteNimi).click();
+          }
+          return radio.isChecked();
+        },
+        { timeout: 15000 }
+      )
+      .toBe(true);
   });
 
 const organisaatioOid = '1.2.246.562.10.52251087186'; // Stadin ammatti- ja aikuisopisto

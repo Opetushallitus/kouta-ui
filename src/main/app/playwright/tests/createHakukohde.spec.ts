@@ -18,6 +18,7 @@ import {
   getSelectByLabel,
   fillRadioValue,
   getLabel,
+  getRadio,
   assertBaseTilaNotCopied,
   fillValintakokeetSection,
 } from '#/playwright/playwright-helpers';
@@ -276,7 +277,22 @@ const fillJarjestyspaikkaSection = (
   options?: { jarjestaaUrheilijanAmmKoulutusta?: boolean }
 ) =>
   withinSection(page, 'jarjestyspaikka', async section => {
-    await section.getByText(selectedToimipisteNimi).click();
+    // Sama kovennus kuin editHakukohteessa: klikataan labelia ja toistetaan kunnes
+    // valinta on perillä. Ks. sikäläinen kommentti perusteluineen.
+    const radio = getRadio(section, tarjoajat[0]);
+    await expect(radio).toBeAttached();
+    await expect
+      .poll(
+        async () => {
+          if (!(await radio.isChecked())) {
+            await getLabel(section, selectedToimipisteNimi).click();
+          }
+          return radio.isChecked();
+        },
+        { timeout: 15000 }
+      )
+      .toBe(true);
+
     if (options?.jarjestaaUrheilijanAmmKoulutusta) {
       await section
         .getByText('hakukohdelomake.jarjestaaUrheilijanAmmKoulutusta')

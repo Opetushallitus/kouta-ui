@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 
 import oppilaitos from '#/playwright/fixtures/oppilaitosWithOnlyYhteystiedot';
 import {
@@ -12,7 +12,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubOppilaitosRoutes } from '#/playwright/stubOppilaitosRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY } from '#/src/constants';
 
 const mutationTest = wrapMutationTest(ENTITY.OPPILAITOS);

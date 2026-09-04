@@ -16,7 +16,7 @@ import _ from 'lodash';
 // validoinnille. Se korvasi redux-formilta luetun tiedon
 // (state.form[lomake].registeredFields ja rootReducer.ts:n unregisteredFields-siivu,
 // joka kuunteli redux-formin sisäisiä @@redux-form/*-actioneita); molemmat poistuivat
-// redux-formin mukana, samoin niitä vasten ajettu varjovertailu.
+// redux-formin mukana.
 //
 // Yksi asia on tehty tarkoituksella eri tavalla kuin vanhassa:
 // 1. Tila on refeissä eikä statessa. Footerit lukevat rekisterin vasta tallennushetkellä,

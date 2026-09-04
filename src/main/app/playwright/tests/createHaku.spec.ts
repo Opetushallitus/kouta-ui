@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -18,7 +18,6 @@ import {
   fillYhteystiedotWithoutVerkkosivuTekstiSection,
 } from '#/playwright/playwright-helpers';
 import { stubHakuRoutes } from '#/playwright/stubHakuRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
 
 const fillNimiSection = (page: Page) =>

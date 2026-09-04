@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import valintaperuste from '#/playwright/fixtures/valintaperuste';
@@ -15,7 +15,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubValintaperusteRoutes } from '#/playwright/stubValintaperusteRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { KoulutustyyppiModel } from '#/src/types/domainTypes';
 

@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -17,7 +17,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubKoulutusRoutes } from '#/playwright/stubKoulutusRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { TestiKoulutustyyppi } from '#/playwright/test-types';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 

@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 
 import createSoraKuvaus from '#/playwright/fixtures/soraKuvaus';
 import {
@@ -14,7 +14,6 @@ import {
   assertBaseTilaNotCopied,
 } from '#/playwright/playwright-helpers';
 import { stubSoraKuvausRoutes } from '#/playwright/stubSoraKuvausRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY } from '#/src/constants';
 
 const soraKuvaus = createSoraKuvaus();

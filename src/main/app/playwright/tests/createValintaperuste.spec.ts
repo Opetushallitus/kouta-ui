@@ -1,4 +1,4 @@
-import { Page, expect, Locator } from '@playwright/test';
+import { Page, expect, Locator, test } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -17,7 +17,6 @@ import {
   assertTilaIs,
 } from '#/playwright//playwright-helpers';
 import { stubValintaperusteRoutes } from '#/playwright/stubValintaperusteRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY } from '#/src/constants';
 
 const valintaperusteId = '111-222-333-444-555';
@@ -194,10 +193,8 @@ test.describe('Create Valintaperuste', () => {
       );
     }));
 
-  // Todistaa, että validointi ylipäätään ajetaan. Valintaperuste on siirretty
-  // react-final-formiin, ja siirretyillä lomakkeilla varjovertailua ei ajeta -
-  // vertailukohtaa ei ole, koska redux-form-tilaa ei enää synny. Kenttärekisterin
-  // oikeellisuudelle ei siis ole muuta turvaverkkoa kuin nämä testit.
+  // Todistaa, että validointi ylipäätään ajetaan. Kenttärekisterin oikeellisuudelle
+  // ei ole muuta turvaverkkoa kuin nämä testit.
   //
   // Mitattu aukko: kun sovittimen registeredFields-getter palautti tyhjän joukon,
   // createErrorBuilder (createErrorBuilder.ts:46) ei tunnistanut yhtään polkua

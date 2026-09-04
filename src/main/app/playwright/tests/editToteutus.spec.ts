@@ -1,4 +1,4 @@
-import { Page, expect, type Locator } from '@playwright/test';
+import { Page, expect, type Locator, test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -18,7 +18,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
 import { stubToteutusRoutes } from '#/playwright/stubToteutusRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { TestiKoulutustyyppi } from '#/playwright/test-types';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -90,7 +89,7 @@ test.describe('Edit toteutus', () => {
       await tallenna(page);
     }));
 
-  // Piilota-ja-tallenna -tapaus varjovertailua varten, ks. editHakukohde.spec.ts.
+  // Piilota-ja-tallenna -tapaus, ks. editHakukohde.spec.ts.
   // Maksullisuustyypin vaihto maksullisesta maksuttomaan piilottaa maksun määrän,
   // jolloin se poistuu rekisteristä ja tyhjennetään backendissä.
   test('should clear maksunMaara when maksullisuustyyppi changes to maksuton', ({

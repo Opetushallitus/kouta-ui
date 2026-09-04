@@ -1,4 +1,4 @@
-import { Page, expect, Locator } from '@playwright/test';
+import { Page, expect, Locator, test } from '@playwright/test';
 import { isArray, merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -27,7 +27,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
 import { stubToteutusRoutes } from '#/playwright/stubToteutusRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { TestiKoulutustyyppi } from '#/playwright/test-types';
 import { ENTITY, KOULUTUSTYYPPI, Koulutustyyppi } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';

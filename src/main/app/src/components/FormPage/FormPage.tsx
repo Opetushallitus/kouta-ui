@@ -130,11 +130,6 @@ const FormPageContent = ({
   );
 };
 
-// Lomakkeet siirretään react-final-formiin yksi entiteetti kerrallaan. Tämä lista on
-// ainoa paikka, josta näkee missä mennään - lisää entiteetti tähän ja se siirtyy.
-//
-// Siirtojärjestys ei ole mielivaltainen: ensin ne, joiden footer EI rakenna runkoa
-// getValuesForSaving-funktiolla, koska niissä virhe ei voi tyhjentää julkaistua dataa.
 const FormPage: React.FC<FormPageProps> = props => {
   const {
     entityType,

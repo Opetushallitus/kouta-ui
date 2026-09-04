@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 import { sub } from 'date-fns';
 import { merge } from 'lodash';
 
@@ -18,7 +18,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubHakuRoutes } from '#/playwright/stubHakuRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 import { stubOrgPaakayttajaRights } from '../stubOrgPaakayttajaRights';

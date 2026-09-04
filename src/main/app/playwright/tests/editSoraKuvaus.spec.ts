@@ -1,3 +1,4 @@
+import { test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import createSoraKuvaus from '#/playwright/fixtures/soraKuvaus';
@@ -13,7 +14,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubSoraKuvausRoutes } from '#/playwright/stubSoraKuvausRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const soraKuvaus = createSoraKuvaus();

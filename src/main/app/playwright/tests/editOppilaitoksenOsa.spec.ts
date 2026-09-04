@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 
 import oppilaitoksenOsa from '#/playwright/fixtures/oppilaitoksenOsa';
 import {
@@ -10,7 +10,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubOppilaitoksenOsaRoutes } from '#/playwright/stubOppilaitoksenOsaRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY } from '#/src/constants';
 
 // Oppilaitoksen osa oli haaran ainoa lomake ilman yhtään selaintestiä, eikä sitä

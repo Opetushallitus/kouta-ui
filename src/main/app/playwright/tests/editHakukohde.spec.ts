@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import hakukohde from '#/playwright/fixtures/hakukohde';
@@ -23,7 +23,6 @@ import {
 } from '#/playwright/prepareHakukohdeTest';
 import { selectedToimipisteNimi } from '#/playwright/stubHakukohdeRoutes';
 import { stubKayttoOikeusOmatTiedot } from '#/playwright/stubKayttoOikeusOmatTiedot';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 // Klikataan radiota ja varmistetaan että valinta meni perille.
@@ -123,10 +122,10 @@ test.describe('Edit hakukohde', () => {
       await tallenna(page);
     }));
 
-  // Kentän piilottaminen ja tallennus. Nämä testit ovat olemassa varjovertailun takia:
-  // rekisteristä poistuneiden joukko on niissä EI-tyhjä, toisin kuin lähes kaikissa
-  // muissa tallennustesteissä. Mittasimme, että koko seurannan rikkominen punasi ilman
-  // näitä vain yhden testin 128:sta.
+  // Kentän piilottaminen ja tallennus. Näissä rekisteristä poistuneiden joukko on
+  // EI-tyhjä, toisin kuin lähes kaikissa muissa tallennustesteissä - eli juuri nämä
+  // testit ajavat sen koodin, joka tyhjentää dataa backendistä. Mitattu: koko
+  // seurannan rikkominen punasi ilman näitä vain yhden testin 128:sta.
   test('should clear the hakukohde hakuajat when the shared haku schedule is taken into use', ({
     page,
   }, testInfo) =>

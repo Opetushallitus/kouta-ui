@@ -10,9 +10,9 @@ import {
  * Kenttärekisterin testit.
  *
  * Rekisterin on toistettava täsmälleen se, mitä redux-form ja rootReducer.ts:n
- * unregisteredFields-siivu tekevät tänään - myös siltä osin kuin se näyttää bugilta.
+ * unregisteredFields-siivu tekivät - myös siltä osin kuin se näyttää bugilta.
  * Nämä testit lukitsevat säännöt, jotta poikkeama huomataan tässä eikä vasta
- * selaintestien varjovertailussa.
+ * selaintesteissä runkosnapshotin muutoksena.
  *
  * | redux-form       | rekisteri                                     |
  * |------------------|-----------------------------------------------|

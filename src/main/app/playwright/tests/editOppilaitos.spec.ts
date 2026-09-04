@@ -1,3 +1,5 @@
+import { test } from '@playwright/test';
+
 import oppilaitos from '#/playwright/fixtures/oppilaitos';
 import {
   fillKieliversiotSection,
@@ -8,7 +10,6 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubOppilaitosRoutes } from '#/playwright/stubOppilaitosRoutes';
-import { test } from '#/playwright/test-fixtures';
 import { ENTITY } from '#/src/constants';
 
 const mutationTest = wrapMutationTest(ENTITY.OPPILAITOS);

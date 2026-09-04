@@ -74,9 +74,8 @@ export const useSaveForm = ({ formName, validate, submit }) => {
     let errors = {};
 
     try {
-      // Näkyvyyssääntö validoinnille tulee kenttärekisteristä. Se on ainoa lähde:
-      // aiemmin tässä oli lippu ja varjovertailu redux-formin rekisteriin, mutta
-      // redux-formia ei enää ole eikä vertailukohtaa siten myöskään.
+      // Näkyvyyssääntö validoinnille tulee kenttärekisteristä, joka on sen ainoa
+      // lähde.
       //
       // Rekisteri seuraa RENDERÖITYJÄ kenttiä. Kirjaston oma getRegisteredFields ei
       // kelpaisi: react-final-formissa useField rekisteröi kentän jo pelkästä

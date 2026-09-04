@@ -2,8 +2,5 @@ ignoredBuiltDependencies:
   - es5-ext
   - esbuild
 
-onlyBuiltDependencies:
-  - https-pem
-
 patchedDependencies:
   react-final-form@7.0.1: patches/react-final-form@7.0.1.patch

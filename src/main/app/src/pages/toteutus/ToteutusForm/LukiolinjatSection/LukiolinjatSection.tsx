@@ -2,10 +2,10 @@ import React, { useEffect, useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldEditor, FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
 import { Box } from '#/src/components/virkailija';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';

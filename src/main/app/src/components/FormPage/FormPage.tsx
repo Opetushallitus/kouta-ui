@@ -8,7 +8,7 @@ import Container from '#/src/components/Container';
 import FullSpin from '#/src/components/FullSpin';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
-import { ReduxForm } from '#/src/components/ReduxForm';
+import { ReactFinalForm } from '#/src/components/ReactFinalForm';
 import Title from '#/src/components/Title';
 import { ENTITY, FormMode, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsDirty, useIsSubmitting } from '#/src/hooks/form';
@@ -138,17 +138,20 @@ const FormPage: React.FC<FormPageProps> = props => {
     queryResult,
     readOnly = false,
   } = props;
-  const isSubmitting = useIsSubmitting();
+
+  // disabled={readOnly}, EI isSubmittingia: lomake disabloi itsensa tallennuksen
+  // aikana (ReactFinalForm/index.tsx). Lomaketilaa ei voi lukea lomakkeen
+  // ylapuolelta, koska se syntyy vasta lomakkeen mukana.
   return (
     <ConditionalQueryResult queryResult={queryResult}>
-      <ReduxForm
+      <ReactFinalForm
         form={entityType}
         mode={formMode}
         initialValues={initialValues}
-        disabled={isSubmitting || readOnly}
+        disabled={readOnly}
       >
         <FormPageContent {...props} />
-      </ReduxForm>
+      </ReactFinalForm>
     </ConditionalQueryResult>
   );
 };

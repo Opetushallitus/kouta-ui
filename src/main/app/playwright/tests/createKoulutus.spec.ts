@@ -1,4 +1,4 @@
-import { Page, test, expect, type Locator } from '@playwright/test';
+import { Page, expect, type Locator, test } from '@playwright/test';
 
 import {
   fillAsyncSelect,

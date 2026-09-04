@@ -85,8 +85,61 @@ module.exports = {
     'no-negated-condition': ['error'],
     'no-implicit-coercion': ['error'],
     'no-var': ['error'],
+    // Kenttäkomponentit tuodaan aina #/src/components/formFields/Field -kääreen kautta,
+    // ei suoraan lomakekirjastosta. Kääre on se paikka, joka ilmoittaa kentät
+    // kenttärekisterille ja toistaa redux-formin semantiikan (tyhjentyvä kenttä,
+    // arvoa muuttava blur, submit-virheet), joten suora tuonti jättäisi kentän näiden
+    // ulkopuolelle ilman että mikään kaatuisi tai näkyisi testeissä.
+    //
+    // Rajoitus koski aiemmin redux-formia. Se on nyt poistettu, mutta perustelu on
+    // sama react-final-formille - itse asiassa vahvempi, koska kääreessä on nyt kuusi
+    // mitattua kirjastoeron korjausta joita suora tuonti ohittaisi.
+    //
+    // Rajoitus koskee koko moduulia, ei yksittäisiä vientejä: nimilista pettäisi hiljaa
+    // heti kun joku ottaisi käyttöön nimen jota listalla ei ole. Juuri niin kävi Fields-
+    // komponentille (monikko), joka jäi kahdesti huomaamatta migraatiota suunniteltaessa.
+    //
+    // Sallitut poikkeukset ovat overrides-listassa tiedoston lopussa.
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          {
+            group: [
+              'react-final-form',
+              'react-final-form/**',
+              'react-final-form-arrays',
+              'react-final-form-arrays/**',
+            ],
+            message:
+              'Tuo Field, FieldArray ja Fields osoitteesta #/src/components/formFields/Field.',
+          },
+        ],
+      },
+    ],
   },
   overrides: [
+    {
+      // Nämä tiedostot saavat tuoda lomakekirjastoa suoraan.
+      //
+      // formFields/Field.tsx on kääre itse eli ainoa paikka, joka saa tuoda
+      // kenttäkomponentit.
+      //
+      // ReactFinalForm/index.tsx mountaa <Form>-juuren ja hooks/form.ts lukee
+      // lomaketilaa useFieldillä ja useFormStatella. Kumpikaan ei tuo
+      // kenttäkomponentteja.
+      //
+      // hooks/useSaveForm.ts ei ole listalla eikä kuulu sille: se lukee lomaketilan
+      // hooks/form.ts:n kautta eikä tunne kirjastoa.
+      files: [
+        './src/components/formFields/Field.tsx',
+        './src/components/ReactFinalForm/index.tsx',
+        './src/hooks/form.ts',
+      ],
+      rules: {
+        'no-restricted-imports': 'off',
+      },
+    },
     {
       files: './playwright/*.ts',
       extends: 'plugin:playwright/recommended',

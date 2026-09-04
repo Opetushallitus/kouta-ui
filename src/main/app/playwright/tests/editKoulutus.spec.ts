@@ -1,14 +1,17 @@
-import { test, Page } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
 import {
   assertNoUnsavedChangesDialog,
+  assertUnsavedChangesDialog,
   assertURLEndsWith,
   confirmDelete,
   fillKieliversiotSection,
   fillTilaSection,
   tallenna,
+  getEditableEditors,
+  getSection,
   typeToEditor,
   wrapMutationTest,
 } from '#/playwright/playwright-helpers';
@@ -96,6 +99,167 @@ test.describe('Edit koulutus', () => {
       await tallenna(page);
     }));
 
+  // --- Siirron suojatestit -------------------------------------------------
+  //
+  // Kirjoitettu ja ajettu vanhalla polulla ensin, jotta ne lukitsevat nykyisen
+  // käyttäytymisen. Koulutuksen FieldArrayt sisältävät vain selectejä, joten
+  // kirjoitustesti kohdistuu tavalliseen kenttään - samoin kuin SoraKuvauksella ja
+  // Oppilaitoksella.
+  //
+  // Kohteena linkkiEPerusteisiin: tavallinen tekstikenttä, käännetty, menee runkoon
+  // läpi pickTranslationsilla, eikä sitä validoida lainkaan.
+
+  // Kielivälilehden vaihto ei saa palauttaa kentän ALKUARVOA muokkauksen päälle.
+  //
+  // Tämä on eri vika kuin alla oleva testi, vaikka oire on samassa paikassa:
+  // react-final-form 7.0.1:n useField kirjoittaa kentän mountissa alkuarvon
+  // takaisin, jos kentällä ei ole field statea - ja välilehden vaihto vie sen
+  // tilan, koska Fieldin name muuttuu. Korjaus on kirjaston paikkaus
+  // (patches/react-final-form@7.0.1.patch, ylävirran PR #1096), joten tämä testi
+  // vartioi nimenomaan sitä paikkaa.
+  //
+  // Fixturessa kuvaus on tallennettu TYHJÄNÄ merkkijonona molemmille kielille, ja
+  // se on koko vian laukaisija: getFormValuesByKoulutus ajaa arvon
+  // parseEditorStaten läpi, joten alkuarvoksi tulee tyhjä EditorState-OLIO eikä
+  // undefined. Kirjaston ehto on "alkuarvo !== undefined", joten määritelty mutta
+  // tyhjä arvo laukaisee palautuksen. Puuttuvalla avaimella vika ei ilmene
+  // lainkaan - juuri siksi lisätietojen osiokuvaukset toimivat, niillä ei ole
+  // alkuarvoa.
+  //
+  // Mitattu erottelukyky: ilman paikkausta testi kaatuu viimeiseen väitteeseen ja
+  // kenttä on tyhjä - 3/3 yhdellä workerilla, 4/5 kahdella. Sama vika osuu myös
+  // tavalliseen tekstikenttään, mutta siellä harvemmin (mitattu 1/3), koska
+  // editorin ohjelmallinen synkka osuu ajoitukseen luotettavammin. Siksi vartija
+  // on editorissa.
+  test('should keep an edit when the language tab is switched and the initial value is empty', async ({
+    page,
+  }) => {
+    const tyhjaKuvaus = merge(koulutus('amk'), testKoulutusFields);
+    tyhjaKuvaus.metadata.kuvaus = { fi: '', sv: '' };
+    await page.route(
+      `**/kouta-backend/koulutus/${koulutusOid}`,
+      fixtureJSON(tyhjaKuvaus)
+    );
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    const section = getSection(page, 'description');
+    const kuvaus = page.getByTestId('form-control_description.kuvaus');
+    const editori = () => getEditableEditors(kuvaus).first();
+
+    await typeToEditor(kuvaus, 'Fi kuvaus kirjoitettu');
+    await expect(editori()).toHaveText('Fi kuvaus kirjoitettu');
+
+    // Käydään ruotsin välilehdellä ja palataan.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await section.getByText('yleiset.suomeksi').click();
+
+    await expect(editori()).toHaveText('Fi kuvaus kirjoitettu');
+  });
+
+  // Kielivälilehden vaihto ei saa tuhota toisen kielen tekstiä editorikentässä.
+  //
+  // Kohteena kuvaus, koska se on editori (LexicalEditorUI) ja käännetty. Ero
+  // tavalliseen tekstikenttään on olennainen: editori kirjoittaa arvon myös
+  // OHJELMALLISESTI, kun välilehden vaihto antaa sille uuden value-propin, ja juuri
+  // se kirjoitus meni väärälle kielelle. Sama testi tavallisella kentällä menisi läpi
+  // myös rikkinäisellä koodilla - mitattu.
+  //
+  // Fixturessa kuvaus on VAIN suomeksi, ja se on tarkoituksellista kahdesta syystä:
+  //
+  // 1. Se on käyttäjän raportoima tilanne: julkaisu vaatii ruotsinkielisen kuvauksen,
+  //    käyttäjä kirjoittaa sen, ja teksti häviää välilehteä vaihtaessa.
+  // 2. Se tekee testistä immuunin erilliselle satunnaiselle kirjastovialle
+  //    (react-final-form 7.0.1, ks. docs/redux-form-migraatio.md Part 8), joka
+  //    palauttaa kentän ALKUARVON kentän rekisteröityessä uudelleen. Ruotsinkielistä
+  //    alkuarvoa ei ole, joten palautus ei voi laueta tälle polulle. Kaksikielisellä
+  //    fixturella tämä testi punasi kertaalleen juuri sen vian takia.
+  //
+  // Mitattu erottelukyky: ilman HISTORY_MERGE-tagia (LexicalEditorUI.tsx) testi
+  // kaatuu, ja ruotsin välilehdellä lukee "Fi kuvaus" - eli suomenkielinen teksti on
+  // valunut ruotsin päälle.
+  test('should keep an edited translation when the language tab is switched in an editor field', async ({
+    page,
+  }) => {
+    // Oma fixture: kuvaus vain suomeksi. merge() ei poista avaimia, joten arvo
+    // asetetaan tässä eikä prepareTestin kautta.
+    const koulutusVainSuomeksi = merge(koulutus('amk'), testKoulutusFields);
+    koulutusVainSuomeksi.metadata.kuvaus = { fi: 'Fi kuvaus' };
+    await page.route(
+      `**/kouta-backend/koulutus/${koulutusOid}`,
+      fixtureJSON(koulutusVainSuomeksi)
+    );
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    const section = getSection(page, 'description');
+    const kuvaus = page.getByTestId('form-control_description.kuvaus');
+    const editori = () => getEditableEditors(kuvaus).first();
+
+    // Ruotsin välilehdelle ja kirjoitetaan puuttuva ruotsinkielinen kuvaus.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await typeToEditor(kuvaus, 'Sv kuvaus kirjoitettu');
+    await expect(editori()).toHaveText('Sv kuvaus kirjoitettu');
+
+    // Suomen välilehti: suomenkielisen pitää olla koskematon.
+    await section.getByText('yleiset.suomeksi').click();
+    await expect(editori()).toHaveText('Fi kuvaus');
+
+    // Takaisin ruotsiin: kirjoitetun tekstin pitää olla tallella.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await expect(editori()).toHaveText('Sv kuvaus kirjoitettu');
+  });
+
+  // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
+  // fokuksen menetystä näppäinpainallusten välissä.
+  test('should not lose focus while typing in linkkiEPerusteisiin', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'tuva', { loadPage: true });
+
+    const linkki = page
+      .getByTestId('linkkiEPerusteisiinInput')
+      .locator('input');
+
+    await linkki.pressSequentially('http://linkki.example', { delay: 20 });
+    await expect(linkki).toHaveValue('http://linkki.example');
+  });
+
+  // Tyhjennetty kenttä päätyy runkoon tyhjänä. Täytetään ensin ja tyhjennetään
+  // vasta sitten, jottei testi mittaa täyttämättä jättämistä.
+  //
+  // Odotus {} eikä { fi: '' }: Koulutuksen footer rakentaa rungon rekisterin avulla,
+  // ja getValuesForSaving normalisoi kokonaan tyhjän käännetyn kentän (utils/
+  // index.ts:351). Sama kuin Haulla ja Toteutuksella.
+  test('should send an emptied translated field as empty', async ({ page }) => {
+    await prepareTest(page, 'tuva', { loadPage: true });
+    await fillKieliversiotSection(page);
+
+    const linkki = page
+      .getByTestId('linkkiEPerusteisiinInput')
+      .locator('input');
+
+    await linkki.fill('http://testilinkki.fi');
+    await expect(linkki).toHaveValue('http://testilinkki.fi');
+    await linkki.fill('');
+
+    const requestPromise = page.waitForRequest(
+      req =>
+        req.url().endsWith('/kouta-backend/koulutus') &&
+        ['POST', 'PUT'].includes(req.method())
+    );
+    await page.route('**/kouta-backend/koulutus', route =>
+      route.fulfill({ json: route.request().postDataJSON() })
+    );
+
+    await tallenna(page);
+
+    const body = (await requestPromise).postDataJSON();
+    expect(body.metadata.linkkiEPerusteisiin).toEqual({});
+  });
+
   test('Should be able to edit TELMA-koulutus', async ({ page }, testInfo) =>
     await mutationTest({ page, testInfo }, async () => {
       await prepareTest(page, 'telma', {
@@ -181,6 +345,14 @@ test.describe('Edit koulutus', () => {
   }) => {
     await prepareTest(page, 'amm', { loadPage: true });
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should complain about unsaved changes after an edit', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'amm', { loadPage: true });
+    await fillKieliversiotSection(page);
+    await assertUnsavedChangesDialog(page);
   });
 
   test('Should redirect from url without organization', async ({ page }) => {

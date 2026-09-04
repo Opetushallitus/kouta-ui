@@ -293,6 +293,11 @@ const copyPathsIfDefined = (source, target, paths) => {
   });
 };
 
+// Vertailija polkujen lajitteluun. Käytetään tarkoituksella koodiyksikkövertailua eikä
+// String.localeCompare:a: järjestys määrää mitä backendiin kirjoitetaan, joten sen on
+// oltava riippumaton lokaalista ja Noden ICU-versiosta.
+const byPathDescending = (a: string, b: string) => (a < b ? 1 : a > b ? -1 : 0);
+
 // Get form values for saving. Filters out fields that user has hidden.
 // Result can be passed to get**ByFormValues().
 // Note that this does not filter out fields that are already in initialValues but are hidden.
@@ -307,8 +312,27 @@ export const getValuesForSaving = (
   // Use initial values as a base. Both create and edit forms' changes are differences to the initial values.
   const saveableValues: any = cloneDeep(initialValues);
 
-  // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
-  forEach(unregisteredFields, ({ name }) => {
+  // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values.
+  // Lajitellaan LASKEVAAN järjestykseen, jotta lapsikentät nollataan ennen vanhempiaan. Nousevassa
+  // järjestyksessä vanhempi nollattaisiin ensin ja lodashin set() herättäisi sen takaisin objektiksi
+  // lasta kirjoittaessaan: { p: null } -> { p: { c: null } }. Esim. piilotetusta FieldArraysta lähtisi
+  // backendiin [{ alkaa: null, paattyy: null }] eikä null.
+  //
+  // Lajittelu tehdään raa'oilla nimillä, vaikka kirjoitus tapahtuu kielipäätteettömällä nimellä. Se on
+  // turvallista KAHDEN invariantin nojalla: (1) TranslatedField on suljettu
+  // Partial<Record<'fi'|'sv'|'en', T>>, joten kielipäätteisen polun vanhemmalla ei voi olla muita kuin
+  // kielilapsia, ja (2) T ei ole koskaan itse TranslatedField, eli kielistys on aina yksitasoista.
+  // Jälkimmäistä tarvitaan, koska sisäkkäinen kielistys kääntäisi järjestyksen: raakana
+  // 'nimi.sv' > 'nimi.fi.fi', mutta typistettynä 'nimi' on 'nimi.fi':n vanhempi, jolloin tulos olisi
+  // { nimi: { fi: null } } eikä { nimi: null }. Huom. TranslatedField<any> (Kuvaus) ei estä sisäkkäisyyttä
+  // tyyppitasolla, joten invariantti (2) nojaa tarkastukseen eikä kääntäjään. Jos kumpi tahansa
+  // invariantti murtuu, typistys on siirrettävä ennen lajittelua. Huom: rekisteröityjen silmukka alempana
+  // lajitellaan tarkoituksella päinvastoin (nousevasti), koska siinä vanhempi pitää kirjoittaa ennen lapsia.
+  const sortedUnregisteredFields = Object.values(unregisteredFields)
+    .map(f => f.name)
+    .sort(byPathDescending);
+
+  sortedUnregisteredFields.forEach(name => {
     const fieldName = getFieldNameWithoutLanguage(name);
     set(saveableValues, fieldName!, null);
   });
@@ -328,12 +352,23 @@ export const getValuesForSaving = (
     set(saveableValues, fieldName!, valueForSave);
   });
 
-  // Some exceptions (fields that should be saved even though they are not visible)
+  // Some exceptions (fields that should be saved even though they are not visible).
+  // Pääsääntöisesti null tarkoittaa backendissä tyhjennystä: KoutaServlet.parsedBody poistaa kaikki
+  // nullit bodysta ennen parsintaa, ja päivitys korvaa koko dokumentin, joten puuttuva kenttä päätyy
+  // kantaan tyhjänä. Näillä viidellä polulla se ei kuitenkaan toimi niin, kullakin eri syystä:
   copyPathsIfDefined(values, saveableValues, [
+    // puuttuva -> case classin oletus false, eli true muuttuisi hiljaa falseksi
     'esikatselu',
+    // ei-optionaalinen eikä oletusarvoa -> 400
     'koulutustyyppi',
+    // 400 parsinnassa; backend ylikirjoittaa arvon istunnosta joka tapauksessa
     'muokkaaja',
+    // validateKielistetty -> 400 (Koulutus/Haku, missä tahansa tilassa); lisäksi backend täydentää
+    // nimen koodistosta useille koulutustyypeille
     'information.nimi',
+    // Tämä tyhjenisi backendissä oikein. Polku on listalla tuotesyystä: OPH-virkailijan muokatessa
+    // olemassa olevaa koulutusta tarjoajavalitsin on piilotettu, vaikka tarjoajia on (muiden
+    // organisaatioiden liitokset). Piilotus ei siis tarkoita, että ne halutaan poistaa.
     'tarjoajat.tarjoajat',
   ]);
 

@@ -3,11 +3,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { TFunction } from 'i18next';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import DeleteConfirmationDialog from '#/src/components/DeleteConfirmationDialog';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldEditor } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import {
   isEditorEmpty,
   parseEditorState,

@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
 import { Box, Typography } from '#/src/components/virkailija';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';

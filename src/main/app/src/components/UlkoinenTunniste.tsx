@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 
 import { FormFieldInput } from './formFields';

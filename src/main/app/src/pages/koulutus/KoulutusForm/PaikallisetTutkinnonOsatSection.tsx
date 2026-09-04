@@ -3,11 +3,15 @@ import { useMemo, useRef } from 'react';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
-import { Field, FieldArray, FieldArrayFieldsProps } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldSelect } from '#/src/components/formFields';
+import {
+  Field,
+  FieldArray,
+  FieldArrayFieldsProps,
+} from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUS_ROLE } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';

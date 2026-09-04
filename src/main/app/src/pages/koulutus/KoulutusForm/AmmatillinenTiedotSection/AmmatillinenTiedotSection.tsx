@@ -2,9 +2,9 @@ import React from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';

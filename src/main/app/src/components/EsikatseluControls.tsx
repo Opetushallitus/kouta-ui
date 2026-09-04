@@ -2,10 +2,10 @@ import React from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormFieldCheckbox } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Tooltip } from '#/src/components/Tooltip';
 import { Button } from '#/src/components/virkailija';
 import { JULKAISUTILA } from '#/src/constants';

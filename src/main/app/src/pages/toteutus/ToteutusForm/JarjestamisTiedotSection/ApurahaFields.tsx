@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
@@ -10,6 +9,7 @@ import {
   FormFieldSwitch,
   createFormFieldComponent,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { MaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';

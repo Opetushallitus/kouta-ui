@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
@@ -12,6 +11,7 @@ import {
   FormFieldSwitch,
   FormFieldIntegerInput,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import {

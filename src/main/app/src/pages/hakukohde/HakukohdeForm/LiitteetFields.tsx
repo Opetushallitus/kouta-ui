@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray, Fields } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FieldGroup } from '#/src/components/FieldGroup';
@@ -17,6 +16,7 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
+import { Field, FieldArray, Fields } from '#/src/components/formFields/Field';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';

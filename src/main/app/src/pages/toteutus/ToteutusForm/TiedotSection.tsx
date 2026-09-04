@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
 import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';

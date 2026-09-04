@@ -2,13 +2,13 @@ import React from 'react';
 
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import {
   FormFieldEditor,
   createFormFieldComponent,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Radio } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { getThemeProp } from '#/src/theme';

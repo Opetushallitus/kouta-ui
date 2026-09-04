@@ -1,4 +1,4 @@
-import { Page, test, expect, Locator } from '@playwright/test';
+import { Page, expect, Locator } from '@playwright/test';
 import { isArray, merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -27,6 +27,7 @@ import {
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
 import { stubToteutusRoutes } from '#/playwright/stubToteutusRoutes';
+import { test } from '#/playwright/test-fixtures';
 import { TestiKoulutustyyppi } from '#/playwright/test-types';
 import { ENTITY, KOULUTUSTYYPPI, Koulutustyyppi } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
@@ -1074,6 +1075,73 @@ test.describe('Create toteutus', () => {
         .getByTestId('form-control_yhteyshenkilot[0].verkkosivu')
         .getByText('validointivirheet.pakollinen')
     ).toBeVisible();
+  });
+
+  // Merkki kerrallaan, EI fillillä. Kohde on FieldArrayn sisällä oleva kenttä:
+  // jokainen näppäinpainallus muuttaa yhteyshenkilot-taulukon arvoa ja renderöi
+  // FieldArrayn, joten tämä vartioi Field.tsx:n kääreen muistiinpanoa juuri tällä
+  // lomakkeella.
+  test('should not lose focus while typing in yhteyshenkilo nimi', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'amm');
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+
+    await withinSection(page, 'yhteyshenkilot', async section => {
+      await section
+        .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
+        .click();
+
+      const nimi = section.getByRole('textbox', { name: 'yleiset.nimi' });
+      await nimi.pressSequentially('Yhteyshenkilon nimi', { delay: 20 });
+      await expect(nimi).toHaveValue('Yhteyshenkilon nimi');
+    });
+  });
+
+  // Tyhjennetty kenttä päätyy runkoon tyhjänä. Täytetään ensin ja tyhjennetään
+  // vasta sitten: pelkkä fill('') kentälle jota ei ole koskaan asetettu ei laukaise
+  // muutosta lainkaan, jolloin testi mittaisi täyttämättä jättämistä.
+  //
+  // Odotus on {}, ei { fi: '' }: Toteutuksen footer rakentaa rungon rekisterin
+  // avulla, ja getValuesForSaving normalisoi kokonaan tyhjän käännetyn kentän
+  // muotoon {} (utils/index.ts:351). Sama kuin Haulla.
+  test('should send an emptied translated field as empty', async ({ page }) => {
+    const tyyppi = 'amm';
+    await prepareTest(page, tyyppi);
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+    await fillTiedotSection(page, tyyppi);
+    await fillKuvausAndOsaamistavoitteetSection(page);
+    await fillJarjestamistiedotSection(page);
+    await fillNayttamistiedotSection(page, { ammattinimikkeet: true });
+    await fillJarjestajaSection(page);
+    await fillYhteystiedotSection(page);
+
+    await withinSection(page, 'yhteyshenkilot', async section => {
+      const titteli = section.getByRole('textbox', {
+        name: 'yleiset.titteli',
+      });
+      await expect(titteli).toHaveValue('titteli');
+      await titteli.fill('');
+    });
+
+    await fillTilaSection(page);
+
+    const requestPromise = page.waitForRequest(
+      req =>
+        req.url().endsWith('/kouta-backend/toteutus') &&
+        ['POST', 'PUT'].includes(req.method())
+    );
+    await page.route('**/kouta-backend/toteutus', route =>
+      route.fulfill({ json: route.request().postDataJSON() })
+    );
+
+    await tallenna(page);
+
+    const body = (await requestPromise).postDataJSON();
+    expect(body.metadata.yhteyshenkilot[0].titteli).toEqual({});
+    expect(body.metadata.yhteyshenkilot[0].nimi).toEqual({ fi: 'nimi' });
   });
 
   test('Should not copy publishing state when using existing entity as base', async ({

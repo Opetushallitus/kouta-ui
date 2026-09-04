@@ -1,4 +1,3 @@
-import { test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import createSoraKuvaus from '#/playwright/fixtures/soraKuvaus';
@@ -9,10 +8,12 @@ import {
   wrapMutationTest,
   confirmDelete,
   assertNoUnsavedChangesDialog,
+  assertUnsavedChangesDialog,
   assertURLEndsWith,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubSoraKuvausRoutes } from '#/playwright/stubSoraKuvausRoutes';
+import { test } from '#/playwright/test-fixtures';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const soraKuvaus = createSoraKuvaus();
@@ -58,6 +59,13 @@ test.describe('Edit SORA-kuvaus', () => {
     page,
   }) => {
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should complain about unsaved changes after an edit', async ({
+    page,
+  }) => {
+    await fillKieliversiotSection(page);
+    await assertUnsavedChangesDialog(page);
   });
 
   test('Should redirect from url without organization', async ({ page }) => {

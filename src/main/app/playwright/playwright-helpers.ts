@@ -226,6 +226,46 @@ export const assertNoUnsavedChangesDialog = async (page: Page) => {
   await assertOnFrontPage(page);
 };
 
+// Vastinpari assertNoUnsavedChangesDialogille. Varmistaa, että muokatulta lomakkeelta
+// poistuttaessa varoitus NÄKYY ja ettei navigointi mene läpi.
+//
+// Tämä on kirjoitettu ennen kirjastonvaihtoa tarkoituksella. redux-form päättää
+// dirty-tilan vertaamalla initialValuesin SISÄLTÖÄ, react-final-form vertaa
+// IDENTITEETTIÄ - ja Edit-sivut laskevat initialValuesin uudelleen joka renderillä
+// kyselyn datasta. Vaihdon jälkeen lomake voi siis jäädä pysyvästi dirtyksi, jolloin
+// varoitus tulee joka navigoinnilla. Jos nämä testit kirjoitettaisiin vasta vaihdon
+// jälkeen, ne lukitsisivat sen mikä sattuu olemaan totta - eivät sitä mikä on oikein.
+export const assertUnsavedChangesDialog = async (page: Page) => {
+  const urlBefore = page.url();
+
+  await page.getByRole('link', { name: 'Home' }).click();
+
+  await expect(
+    page.getByRole('heading', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
+    })
+  ).toBeVisible();
+
+  // Varoitus ei riitä: navigoinnin pitää oikeasti estyä.
+  expect(page.url()).toBe(urlBefore);
+
+  // Perutaan, jotta testi päättyy lomakkeelle eikä puolitiehen.
+  await page
+    .getByRole('button', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.peruuta',
+    })
+    .click();
+
+  // Peruutuksen pitää myös peruuttaa. Ilman näitä regressio, jossa Peruuta sulkee
+  // dialogin mutta päästää odottavan navigoinnin läpi, menisi testistä läpi.
+  await expect(
+    page.getByRole('heading', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
+    })
+  ).toBeHidden();
+  await expect(page).toHaveURL(urlBefore);
+};
+
 export const confirmDelete = async (page: Page) => {
   await page.getByRole('button', { name: 'ilmoitukset.jatka' }).click();
   await assertOnFrontPage(page);

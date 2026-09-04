@@ -1,4 +1,4 @@
-import { Locator, Page, test, expect } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -33,6 +33,7 @@ import {
 } from '#/playwright/stubHakukohdeRoutes';
 import { stubOrganisaatioRoutes } from '#/playwright/stubOrganisaatioRoutes';
 import { stubOrgPaakayttajaRights } from '#/playwright/stubOrgPaakayttajaRights';
+import { test } from '#/playwright/test-fixtures';
 import {
   Alkamiskausityyppi,
   ENTITY,

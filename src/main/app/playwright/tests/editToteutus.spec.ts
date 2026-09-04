@@ -1,4 +1,4 @@
-import { Page, test, expect, type Locator } from '@playwright/test';
+import { Page, expect, type Locator } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -8,14 +8,17 @@ import {
   tallenna,
   wrapMutationTest,
   withinSection,
+  fillRadioValue,
   getSection,
   assertURLEndsWith,
   assertNoUnsavedChangesDialog,
+  assertUnsavedChangesDialog,
   confirmDelete,
   getEditableEditors,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON, mocksFromFile } from '#/playwright/playwright-mock-utils';
 import { stubToteutusRoutes } from '#/playwright/stubToteutusRoutes';
+import { test } from '#/playwright/test-fixtures';
 import { TestiKoulutustyyppi } from '#/playwright/test-types';
 import { ENTITY, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
@@ -84,6 +87,46 @@ test.describe('Edit toteutus', () => {
         getSection(page, 'hakeutumisTaiIlmoittautumistapa')
       ).toBeHidden();
       await expect(getSection(page, 'hakukohteet')).toBeVisible();
+      await tallenna(page);
+    }));
+
+  // Piilota-ja-tallenna -tapaus varjovertailua varten, ks. editHakukohde.spec.ts.
+  // Maksullisuustyypin vaihto maksullisesta maksuttomaan piilottaa maksun määrän,
+  // jolloin se poistuu rekisteristä ja tyhjennetään backendissä.
+  test('should clear maksunMaara when maksullisuustyyppi changes to maksuton', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      // yo, koska ammatillisilla maksullisuustyyppi on monivalinta eikä radio.
+      // Reititetään toteutus itse, koska prepareTest ei anna sille maksullisuustietoja
+      // eikä tyhjentymistä voi näyttää ilman lähtöarvoa.
+      const tyyppi = 'yo';
+      await page.route(
+        `**/koulutus/${koulutusOid}`,
+        fixtureJSON(merge(koulutus(tyyppi), testKoulutusFields))
+      );
+      await page.route(
+        `**/toteutus/${toteutusOid}`,
+        fixtureJSON(
+          merge(koulutus(tyyppi), testToteutusFields, {
+            metadata: {
+              opetus: {
+                maksut: [
+                  { maksullisuustyyppi: 'maksullinen', maksunMaara: 20 },
+                ],
+              },
+            },
+          })
+        )
+      );
+      await page.goto(
+        `/kouta/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`
+      );
+
+      await withinSection(page, 'jarjestamistiedot', async section => {
+        await fillRadioValue(section.getByTestId('tyyppi'), 'maksuton');
+      });
+
       await tallenna(page);
     }));
 
@@ -261,6 +304,14 @@ test.describe('Edit toteutus', () => {
     const tyyppi = 'amm';
     await prepareTest(page, tyyppi);
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should complain about unsaved changes after an edit', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'amm');
+    await fillKieliversiotSection(page);
+    await assertUnsavedChangesDialog(page);
   });
 
   test('Should redirect from url without organization', async ({ page }) => {

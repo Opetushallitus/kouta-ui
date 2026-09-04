@@ -1,4 +1,4 @@
-import { Page, test, expect, type Locator } from '@playwright/test';
+import { Page, expect, type Locator } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -22,6 +22,7 @@ import {
   fixtureJSON,
 } from '#/playwright/playwright-mock-utils';
 import { stubKoulutusRoutes } from '#/playwright/stubKoulutusRoutes';
+import { test } from '#/playwright/test-fixtures';
 import { ENTITY } from '#/src/constants';
 
 const mutationTest = wrapMutationTest(ENTITY.KOULUTUS);

@@ -1,4 +1,4 @@
-import { Page, test, expect } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -18,6 +18,7 @@ import {
   fillYhteystiedotWithoutVerkkosivuTekstiSection,
 } from '#/playwright/playwright-helpers';
 import { stubHakuRoutes } from '#/playwright/stubHakuRoutes';
+import { test } from '#/playwright/test-fixtures';
 import { ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
 
 const fillNimiSection = (page: Page) =>
@@ -192,6 +193,31 @@ test.describe('Create haku', () => {
       await fillHakulomakeSection(page, HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA);
       await tallenna(page);
     }));
+
+  // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
+  // fokuksen menetystä näppäinpainallusten välissä.
+  //
+  // Kohde on FieldArrayn sisällä oleva kenttä, mikä on olennaista: jokainen
+  // näppäinpainallus muuttaa yhteyshenkilot-taulukon arvoa, mikä renderöi
+  // FieldArrayn. Jos sen käärettä ei muistettaisi (Field.tsx:n
+  // memoizeComponentWrapper), React mounttaisi lapsikentät uudelleen ja fokus
+  // katoaisi ensimmäisen merkin jälkeen.
+  test('Should not lose focus while typing in yhteyshenkilo nimi', async ({
+    page,
+  }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+
+    await withinSection(page, 'yhteyshenkilot', async section => {
+      await section
+        .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
+        .click();
+
+      const nimi = section.getByRole('textbox', { name: 'yleiset.nimi' });
+      await nimi.pressSequentially('Yhteyshenkilon nimi', { delay: 20 });
+      await expect(nimi).toHaveValue('Yhteyshenkilon nimi');
+    });
+  });
 
   test('Should not copy publishing state when using existing entity as base', async ({
     page,

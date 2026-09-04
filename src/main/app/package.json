@@ -13,7 +13,7 @@
     "preview:watch": "pnpm run build:test -- --watch & pnpm run serve:test",
     "serve:test": "node test-server.js",
     "test": "vitest",
-    "lint": "eslint './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
+    "lint": "eslint --max-warnings=0 './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
     "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './playwright/**/*.ts'",
     "tsc": "tsc",
     "test:integration": "pnpm run build:test && START_SERVER_AND_TEST_INSECURE=1 start-server-and-test 'pnpm run serve:test' https://localhost:3000/kouta 'pnpm exec playwright test'",

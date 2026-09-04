@@ -7,8 +7,7 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormMode, useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useForm } from '#/src/hooks/form';
-import { useSelector } from '#/src/hooks/reduxHooks';
+import { useFieldValue, useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel } from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';
@@ -32,58 +31,75 @@ export const KoulutusFooter = ({
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  // julkinen luetaan TÄSSÄ eikä sivulta. EditKoulutusPage luki sen aiemmin
+  // useFieldValue('julkinen', ENTITY.KOULUTUS):lla lomakkeen ULKOPUOLELTA, mikä toimi
+  // vain koska redux-formin tila oli globaali ja osoitettavissa lomakkeen nimellä.
+  // react-final-formissa tila asuu lomakkeessa, joten lukijan pitää olla sen sisällä -
+  // ja footer on. Ilman tätä koko sivu kaatui renderissä: 15 testiä punaisi.
+  const isJulkinen = useFieldValue('julkinen');
   const form = useForm();
   const formName = useFormName();
   const formMode = useFormMode();
-  const unregisteredFields = useSelector(state => state?.unregisteredFields);
-  const initialValues = useSelector(state => state.form?.[formName]?.initial);
+  // Alkuarvot sovittimelta, EI redux-formin storesta suoraan. Ks. HakuFooter -
+  // sama korjaus tehtiin siellä siirron yhteydessä, ja se tehdään tänne nyt, koska
+  // vika on näkymätön: siirretyllä lomakkeella state.form[formName] puuttuu,
+  // initialValues on undefined, ja getValuesForSaving rakentaa rungon tyhjän pohjan
+  // päälle - jolloin jokainen kenttä jota käyttäjä ei koskenut katoaa rungosta
+  // hiljaa. Mitattu: yksikään testi ei huomaa tätä, koska kokoontaittuva osio
+  // renderöi kenttänsä myös kiinni ollessaan ja rekisteri kattaa ne.
+  //
+  // Redux-form-polulla form.initial on sama arvo kuin storesta luettuna, joten
+  // muutos on turvallinen jo ennen tämän lomakkeen siirtoa.
+  const initialValues = form?.initial;
 
   const dataSendFn =
     formMode === FormMode.CREATE ? createKoulutus : updateKoulutus;
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      const valuesForSaving = getValuesForSaving(
+      const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,
-        unregisteredFields,
+        form.unregisteredFields,
         initialValues
       );
+
       const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
         koulutus:
           formMode === FormMode.CREATE
             ? {
-                ...getKoulutusByFormValues(valuesForSaving),
+                ...getKoulutusByFormValues(valuesToSend),
               }
             : {
                 ...koulutus,
-                ...getKoulutusByFormValues(valuesForSaving),
+                ...getKoulutusByFormValues(valuesToSend),
               },
       });
 
       if (formMode === FormMode.CREATE) {
         navigate(`/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`);
       } else {
-        afterUpdate(
-          queryClient,
-          navigate,
-          ENTITY.KOULUTUS,
-          valuesForSaving.tila
-        );
+        afterUpdate(queryClient, navigate, ENTITY.KOULUTUS, valuesToSend.tila);
       }
       return { warnings: warnings };
     },
     [
       dataSendFn,
-      form.registeredFields,
+      // form, EI form.registeredFields tai form.unregisteredFields. Molemmat ovat
+      // gettereitä sovittimen lomaketilassa, ja riippuvuuslistassa mainitseminen
+      // lukisi getterin RENDERIN AIKANA - vastoin sitä lukuhetki-semantiikkaa jonka
+      // takia ne ovat gettereitä (rekisteri elää refeissä eikä provider renderöi
+      // uudelleen kenttien mountatessa, joten renderin aikana luettu joukko on
+      // helposti vanhentunut). form kattaa molemmat luvut ja vaientaa säännön
+      // ilman suppressiota.
+      form,
       formMode,
       navigate,
       initialValues,
       koulutus,
       organisaatioOid,
-      unregisteredFields,
       queryClient,
     ]
   );
@@ -100,7 +116,7 @@ export const KoulutusFooter = ({
     <FormFooter
       entityType={ENTITY.KOULUTUS}
       save={save}
-      canUpdate={canUpdate}
+      canUpdate={canUpdate || isJulkinen}
       entity={koulutus}
       esikatseluUrl={
         FormMode.EDIT && apiUrls.url('konfo-ui.koulutus', koulutus?.oid)

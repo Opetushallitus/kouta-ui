@@ -1,15 +1,12 @@
-import { useMemo, useCallback, useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 
 import _ from 'lodash';
-import { change, isDirty, isSubmitting, getFormSubmitErrors } from 'redux-form';
-import formActions from 'redux-form/lib/actions';
 
 import { useFormName } from '#/src/contexts/FormContext';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
-import { useDispatch, useSelector } from './reduxHooks';
-import { useActions } from './useActions';
+import { useFormAdapter } from './formAdapter';
 import { HakukohdeFormValues } from '../types/hakukohdeTypes';
 import { HakuFormValues } from '../types/hakuTypes';
 import { KoulutusFormValues } from '../types/koulutusTypes';
@@ -53,58 +50,38 @@ type FormStateWithCorrectTypes = {
   [key: string]: any;
 };
 
-export const useForm = (formNameProp?: string): FormStateWithCorrectTypes => {
-  const formName = useFormName();
+export const useForm = (formNameProp?: string): FormStateWithCorrectTypes =>
+  useFormAdapter().useFormState(formNameProp) as FormStateWithCorrectTypes;
 
-  return useSelector(state =>
-    _.get(state, `form.${formNameProp ?? formName}`)
-  ) as unknown as FormStateWithCorrectTypes;
-};
-
+// Palauttaa vain changen. Aiemmin tämä sitoi redux-formin KOKO action creator
+// -pinnan lomakkeeseen, mutta kutsupaikoista käytetään yksinomaan changea (16
+// paikkaa, kaikki purkavat sen destrukturoiden). Kapea rajapinta on myös se, mikä
+// tekee kirjastonvaihdosta mahdollisen: react-final-formissa ei ole vastaavaa
+// action creator -pinnan kokoelmaa.
 export function useBoundFormActions() {
-  const formName = useFormName();
-  const boundFormActions = useMemo(
-    () =>
-      _.mapValues(
-        formActions,
-        (action: any) =>
-          (...args: Array<any>) =>
-            action(formName, ...args)
-      ),
-    [formName]
-  );
-  return useActions(boundFormActions);
+  const change = useFormAdapter().useChange();
+  return useMemo(() => ({ change }), [change]);
 }
 
 export function useIsDirty(): boolean {
-  const formName = useFormName();
-  return useSelector(isDirty(formName));
+  return useFormAdapter().useIsDirty();
 }
 
 export function useIsSubmitting(formNameProp?: string): boolean {
-  const formName = useFormName();
-  return useSelector(isSubmitting(formNameProp ?? formName));
+  return useFormAdapter().useIsSubmitting(formNameProp);
 }
 
 export function useSubmitErrors<TErrors = Record<string, any>>(
   formNameProp?: string
 ): TErrors {
-  const formName = useFormName();
-  return useSelector(getFormSubmitErrors(formNameProp ?? formName)) as TErrors;
+  return useFormAdapter().useSubmitErrors(formNameProp) as TErrors;
 }
 
 export function useFieldValue<T>(name: string, formNameProp?: string): T {
   const contextFormName = useFormName();
-  const formName = formNameProp || contextFormName;
+  assert((formNameProp || contextFormName) != null);
 
-  assert(formName != null);
-
-  const selector = useCallback(
-    (state): any => _.get(state, `form.${formName}.values.${name}`),
-    [formName, name]
-  );
-
-  return useSelector(selector);
+  return useFormAdapter().useValue(name, formNameProp);
 }
 
 /**
@@ -139,15 +116,9 @@ export function makeFormFieldHook<TFormValues>() {
     const formName = useFormName();
     assert(formName != null);
 
-    const selector = useCallback(
-      (state): PathValue<TFormValues, TPath> | undefined =>
-        _.get(state, `form.${formName}.values.${name}`) as
-          | PathValue<TFormValues, TPath>
-          | undefined,
-      [formName, name]
-    );
-
-    return useSelector(selector);
+    return useFormAdapter().useValue(name) as
+      | PathValue<TFormValues, TPath>
+      | undefined;
   };
 }
 
@@ -171,16 +142,9 @@ export const useValintaperusteFormField =
  */
 export function useInitialFieldValue(name: string, formNameProp?: string): any {
   const contextFormName = useFormName();
-  const formName = formNameProp || contextFormName;
+  assert((formNameProp || contextFormName) != null);
 
-  assert(formName != null);
-
-  const selector = useCallback(
-    (state): any => _.get(state, `form.${formName}.initial.${name}`),
-    [formName, name]
-  );
-
-  return useSelector(selector);
+  return useFormAdapter().useInitialValue(name, formNameProp);
 }
 
 /**
@@ -201,17 +165,17 @@ export function useSetFieldValue(
   condition = true
 ): void {
   const form = useFormName();
-  const dispatch = useDispatch();
+  const change = useFormAdapter().useChange();
   const currentValue = useFieldValue(name, form);
   const valueHasChanged = !_.isEqual(currentValue, value);
   useEffect(() => {
     if (condition && valueHasChanged) {
-      dispatch(change(form, name, value));
+      change(name, value);
     }
-  }, [dispatch, form, name, value, valueHasChanged, condition]);
+  }, [change, name, value, valueHasChanged, condition]);
 }
 
 export const useSelectedLanguages = (): Array<LanguageCode> => {
-  const formName = useFormName();
-  return useSelector(state => getKielivalinta(state?.form?.[formName]?.values));
+  const form = useFormAdapter().useFormState();
+  return getKielivalinta(form?.values);
 };

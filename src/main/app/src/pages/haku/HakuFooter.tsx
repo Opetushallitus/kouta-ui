@@ -7,7 +7,6 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useForm } from '#/src/hooks/form';
-import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { HakuModel } from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';
@@ -35,17 +34,22 @@ export const HakuFooter = ({
 
   const form = useForm();
   const formName = useFormName();
-  const unregisteredFields = useSelector(state => state?.unregisteredFields);
-  const initialValues = useSelector(state => state.form?.[formName]?.initial);
+
+  // Alkuarvot sovittimelta, EI redux-formin storesta suoraan. Siirretyllä
+  // lomakkeella state.form[formName] ei ole olemassa lainkaan, jolloin
+  // initialValues olisi undefined ja getValuesForSaving rakentaisi rungon tyhjän
+  // pohjan päälle - eli kaikki kentät, joita käyttäjä ei koskenut, katoaisivat
+  // rungosta. Molemmat sovittimet palauttavat initialin lomaketilassa.
+  const initialValues = form?.initial;
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
       const dataSendFn = formMode === FormMode.CREATE ? createHaku : updateHaku;
 
-      const valuesForSaving = getValuesForSaving(
+      const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,
-        unregisteredFields,
+        form.unregisteredFields,
         initialValues
       );
 
@@ -54,25 +58,31 @@ export const HakuFooter = ({
         apiUrls,
         haku: {
           ...haku,
-          ...getHakuByFormValues(valuesForSaving),
+          ...getHakuByFormValues(valuesToSend),
         },
       });
 
       if (formMode === FormMode.CREATE) {
         navigate(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
       } else {
-        afterUpdate(queryClient, navigate, ENTITY.HAKU, valuesForSaving.tila);
+        afterUpdate(queryClient, navigate, ENTITY.HAKU, valuesToSend.tila);
       }
       return { warnings: warnings };
     },
     [
       organisaatioOid,
-      form.registeredFields,
+      // form, EI form.registeredFields tai form.unregisteredFields. Molemmat ovat
+      // gettereitä sovittimen lomaketilassa, ja riippuvuuslistassa mainitseminen
+      // lukisi getterin RENDERIN AIKANA - vastoin sitä lukuhetki-semantiikkaa jonka
+      // takia ne ovat gettereitä (rekisteri elää refeissä eikä provider renderöi
+      // uudelleen kenttien mountatessa, joten renderin aikana luettu joukko on
+      // helposti vanhentunut). form kattaa molemmat luvut ja vaientaa säännön
+      // ilman suppressiota.
+      form,
       formMode,
       haku,
       navigate,
       initialValues,
-      unregisteredFields,
       queryClient,
     ]
   );

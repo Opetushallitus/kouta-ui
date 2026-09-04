@@ -35,6 +35,24 @@ export const simpleMapProps = ({ input, ...props }) => ({
   ...props,
 });
 
+// HUOM: rivien järjestys on merkityksellinen, eikä onBlur-nollausta saa poistaa.
+//
+// Field.tsx kääree siirretyn polun kenttien inputin ja lisää onBlur-käsittelijän,
+// joka kirjoittaa tapahtuman arvon kentän arvoksi. Se on redux-formin BLUR-semantiikka
+// ja sitä tarvitaan tekstikentissä: UrlInput lisää puuttuvan http://-etuliitteen
+// juuri blurissa.
+//
+// Select-kentille sama käsittelijä olisi väärin. Niiden input.value on olio, kun taas
+// DOM:n blur-tapahtuman target.value on merkkijono (selectin hakukentän sisältö, usein
+// tyhjä). Arvot eroaisivat siis aina, ja käsittelijä ylikirjoittaisi valinnan
+// hakutekstillä joka blurilla - eli hukkaisi dataa.
+//
+// Näillä kuudella select-mapperilla se ei tapahdu, koska onBlur nollataan TÄSSÄ
+// input-levityksen JÄLKEEN ja kääreen käsittelijä jää siten käyttämättä.
+// simpleMapProps päästää sen läpi, mikä on tekstikentille oikein.
+//
+// Jos ...input siirretään onBlur-rivin alle, tämä muuttuu hiljaisesta no-opista
+// datahäviöksi.
 export const selectMapProps = ({ input, ...props }) => ({
   ...input,
   onBlur: _.noop,

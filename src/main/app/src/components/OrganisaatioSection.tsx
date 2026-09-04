@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
 
 import _ from 'lodash';
-import { Field } from 'redux-form';
 
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';

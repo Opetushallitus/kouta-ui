@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';

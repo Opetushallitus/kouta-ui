@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, FormControl } from '#/src/components/virkailija';
 import { MaaraTyyppi, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';

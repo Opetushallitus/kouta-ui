@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
+import { Field } from '#/src/components/formFields/Field';
 import {
   KOULUTUSTYYPPI,
   TEEMAKUVA_ACCEPTED_FORMATS,

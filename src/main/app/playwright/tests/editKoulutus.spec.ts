@@ -10,6 +10,8 @@ import {
   fillKieliversiotSection,
   fillTilaSection,
   tallenna,
+  getEditableEditors,
+  getSection,
   typeToEditor,
   wrapMutationTest,
 } from '#/playwright/playwright-helpers';
@@ -107,6 +109,60 @@ test.describe('Edit koulutus', () => {
   //
   // Kohteena linkkiEPerusteisiin: tavallinen tekstikenttä, käännetty, menee runkoon
   // läpi pickTranslationsilla, eikä sitä validoida lainkaan.
+
+  // Kielivälilehden vaihto ei saa tuhota toisen kielen tekstiä editorikentässä.
+  //
+  // Kohteena kuvaus, koska se on editori (LexicalEditorUI) ja käännetty. Ero
+  // tavalliseen tekstikenttään on olennainen: editori kirjoittaa arvon myös
+  // OHJELMALLISESTI, kun välilehden vaihto antaa sille uuden value-propin, ja juuri
+  // se kirjoitus meni väärälle kielelle. Sama testi tavallisella kentällä menisi läpi
+  // myös rikkinäisellä koodilla - mitattu.
+  //
+  // Fixturessa kuvaus on VAIN suomeksi, ja se on tarkoituksellista kahdesta syystä:
+  //
+  // 1. Se on käyttäjän raportoima tilanne: julkaisu vaatii ruotsinkielisen kuvauksen,
+  //    käyttäjä kirjoittaa sen, ja teksti häviää välilehteä vaihtaessa.
+  // 2. Se tekee testistä immuunin erilliselle satunnaiselle kirjastovialle
+  //    (react-final-form 7.0.1, ks. docs/redux-form-migraatio.md Part 8), joka
+  //    palauttaa kentän ALKUARVON kentän rekisteröityessä uudelleen. Ruotsinkielistä
+  //    alkuarvoa ei ole, joten palautus ei voi laueta tälle polulle. Kaksikielisellä
+  //    fixturella tämä testi punasi kertaalleen juuri sen vian takia.
+  //
+  // Mitattu erottelukyky: ilman HISTORY_MERGE-tagia (LexicalEditorUI.tsx) testi
+  // kaatuu, ja ruotsin välilehdellä lukee "Fi kuvaus" - eli suomenkielinen teksti on
+  // valunut ruotsin päälle.
+  test('should keep an edited translation when the language tab is switched in an editor field', async ({
+    page,
+  }) => {
+    // Oma fixture: kuvaus vain suomeksi. merge() ei poista avaimia, joten arvo
+    // asetetaan tässä eikä prepareTestin kautta.
+    const koulutusVainSuomeksi = merge(koulutus('amk'), testKoulutusFields);
+    koulutusVainSuomeksi.metadata.kuvaus = { fi: 'Fi kuvaus' };
+    await page.route(
+      `**/kouta-backend/koulutus/${koulutusOid}`,
+      fixtureJSON(koulutusVainSuomeksi)
+    );
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    const section = getSection(page, 'description');
+    const kuvaus = page.getByTestId('form-control_description.kuvaus');
+    const editori = () => getEditableEditors(kuvaus).first();
+
+    // Ruotsin välilehdelle ja kirjoitetaan puuttuva ruotsinkielinen kuvaus.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await typeToEditor(kuvaus, 'Sv kuvaus kirjoitettu');
+    await expect(editori()).toHaveText('Sv kuvaus kirjoitettu');
+
+    // Suomen välilehti: suomenkielisen pitää olla koskematon.
+    await section.getByText('yleiset.suomeksi').click();
+    await expect(editori()).toHaveText('Fi kuvaus');
+
+    // Takaisin ruotsiin: kirjoitetun tekstin pitää olla tallella.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await expect(editori()).toHaveText('Sv kuvaus kirjoitettu');
+  });
 
   // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
   // fokuksen menetystä näppäinpainallusten välissä.

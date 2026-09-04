@@ -5,24 +5,18 @@ import { Form } from 'react-final-form';
 
 import { FieldRegistryProvider } from '#/src/components/formFields/FieldRegistry';
 import FormContext from '#/src/contexts/FormContext';
-import { FormAdapterProvider } from '#/src/hooks/formAdapter';
-import { createReactFinalFormAdapter } from '#/src/hooks/formAdapterReactFinalForm';
+import { FormSubmitContext } from '#/src/contexts/FormSubmitContext';
 
-// react-final-form-vastine ReduxForm-kääreelle. Sama rakenne, sama vastuu: renderöi
-// lomake, tarjoa FormContext, kenttärekisteri ja lomakesovitin.
+// Lomakkeen juuri: renderöi <Form>, ja tarjoaa alipuulleen FormContextin,
+// kenttärekisterin ja tallennuksen tilan.
 //
-// Kolme eroa, jotka kaikki johtuvat samasta syystä - react-final-formin tila on
-// lomakekohtainen eikä globaali:
+// Kaksi asiaa, jotka eivät tule kirjastolta:
 //
-// 1. Sovitin annetaan TÄSSÄ, ei sovelluksen juuressa. Se ohittaa juuren
-//    redux-form-sovittimen tämän lomakkeen alipuussa, ja vain siellä.
-// 2. submitting ja submitErrors pidetään kääreen omassa tilassa. kouta ei käytä
-//    kirjaston handleSubmitia vaan kutsuu footerista save():a suoraan, joten
-//    kirjasto ei tiedä tallennuksesta mitään.
-// 3. FieldArray vaatii arrayMutators-mutaattorit; redux-formissa ne tulivat mukana.
-//
-// onSubmit on pakollinen propsi, mutta jää käyttämättä samasta syystä kuin kohdassa
-// 2: tallennus kulkee footerin save():n kautta.
+// 1. submitting ja submitErrors pidetään täällä. kouta ei käytä kirjaston
+//    handleSubmitia vaan kutsuu footerista save():a suoraan, joten kirjasto ei tiedä
+//    tallennuksesta mitään. Samasta syystä onSubmit on pakollinen propsi mutta jää
+//    käyttämättä.
+// 2. FieldArray vaatii arrayMutators-mutaattorit erikseen.
 export const ReactFinalForm = ({
   form,
   mode,
@@ -43,14 +37,8 @@ export const ReactFinalForm = ({
     [form, disabled, isSubmitting, mode]
   );
 
-  const adapter = useMemo(
-    () =>
-      createReactFinalFormAdapter({
-        isSubmitting,
-        submitErrors,
-        setIsSubmitting,
-        setSubmitErrors,
-      }),
+  const submitState = useMemo(
+    () => ({ isSubmitting, submitErrors, setIsSubmitting, setSubmitErrors }),
     [isSubmitting, submitErrors]
   );
 
@@ -62,13 +50,13 @@ export const ReactFinalForm = ({
       subscription={{}}
     >
       {() => (
-        <FormAdapterProvider adapter={adapter}>
+        <FormSubmitContext.Provider value={submitState}>
           <FieldRegistryProvider initialValues={initialValues}>
             <FormContext.Provider value={formCtx}>
               {children}
             </FormContext.Provider>
           </FieldRegistryProvider>
-        </FormAdapterProvider>
+        </FormSubmitContext.Provider>
       )}
     </Form>
   );

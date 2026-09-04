@@ -125,16 +125,16 @@ module.exports = {
       // formFields/Field.tsx on kääre itse eli ainoa paikka, joka saa tuoda
       // kenttäkomponentit.
       //
-      // ReactFinalForm/index.tsx mountaa <Form>-juuren ja hooks/
-      // formAdapterReactFinalForm.ts lukee lomaketilaa useFieldillä ja
-      // useFormStatella. Kumpikaan ei tuo kenttäkomponentteja.
+      // ReactFinalForm/index.tsx mountaa <Form>-juuren ja hooks/form.ts lukee
+      // lomaketilaa useFieldillä ja useFormStatella. Kumpikaan ei tuo
+      // kenttäkomponentteja.
       //
-      // hooks/form.ts ja hooks/useSaveForm.ts eivät ole listalla eivätkä kuulu sille:
-      // ne käyttävät sovitinta eivätkä tunne kirjastoa lainkaan.
+      // hooks/useSaveForm.ts ei ole listalla eikä kuulu sille: se lukee lomaketilan
+      // hooks/form.ts:n kautta eikä tunne kirjastoa.
       files: [
         './src/components/formFields/Field.tsx',
         './src/components/ReactFinalForm/index.tsx',
-        './src/hooks/formAdapterReactFinalForm.ts',
+        './src/hooks/form.ts',
       ],
       rules: {
         'no-restricted-imports': 'off',

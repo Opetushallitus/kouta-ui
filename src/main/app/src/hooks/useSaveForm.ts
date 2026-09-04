@@ -7,8 +7,7 @@ import { useFieldRegistry } from '#/src/components/formFields/FieldRegistry';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useForm, useSubmitErrors } from '#/src/hooks/form';
-import { useFormAdapter } from '#/src/hooks/formAdapter';
+import { useForm, useSubmitErrors, useSubmitLifecycle } from '#/src/hooks/form';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
 import useToaster from '#/src/hooks/useToaster';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
@@ -20,9 +19,9 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   const { openSavingSuccessToast, openSavingErrorToast, openWarningToast } =
     useToaster();
   const { setRemoteErrors } = useFormSaveRemoteErrors();
-  const form = useForm(formName);
+  const form = useForm();
   const fieldRegistry = useFieldRegistry();
-  const submitLifecycle = useFormAdapter().useSubmitLifecycle();
+  const submitLifecycle = useSubmitLifecycle();
 
   const submitErrors = useSubmitErrors();
   // Resetoidaan remote-errorit, ettei tallennusvirhe-modaali jää kummittelemaan

@@ -1,17 +1,33 @@
-import { useMemo, useEffect } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 
 import _ from 'lodash';
+import {
+  useField,
+  useForm as useRffForm,
+  useFormState,
+} from 'react-final-form';
 
+import { useFieldRegistry } from '#/src/components/formFields/FieldRegistry';
 import { useFormName } from '#/src/contexts/FormContext';
+import { useFormSubmitContext } from '#/src/contexts/FormSubmitContext';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
-import { useFormAdapter } from './formAdapter';
 import { HakukohdeFormValues } from '../types/hakukohdeTypes';
 import { HakuFormValues } from '../types/hakuTypes';
 import { KoulutusFormValues } from '../types/koulutusTypes';
 import { ToteutusFormValues } from '../types/toteutusTypes';
 import { ValintaperusteFormValues } from '../types/valintaperusteTypes';
+
+// Tämä moduuli on koko sovelluksen rajapinta lomaketilaan: ~200 kutsupaikkaa käyttää
+// useFieldValueä ja sen sisaruksia, eikä yksikään mainitse lomakekirjastoa. Siksi
+// react-final-form saa esiintyä täällä ja vain täällä (.eslintrc.js).
+//
+// HUOM formNameProp: kaikki alla olevat hookit ottavat sen yhteensopivuuden vuoksi ja
+// JÄTTÄVÄT SEN HUOMIOTTA. Se on redux-formin globaalin storen aikakauden käsite -
+// silloin lomaketilaan pystyi osoittamaan nimellä mistä tahansa. react-final-formissa
+// tila asuu lomakkeen sisällä, ja yksikään kutsupaikka ei anna toisen lomakkeen nimeä,
+// vain oman - mikä on tässä implisiittistä.
 
 // Utility type to generate all valid paths from a type (depth 3 avoids recursing into complex library types)
 type Paths<T, D extends number = 3> = [D] extends [never]
@@ -50,8 +66,82 @@ type FormStateWithCorrectTypes = {
   [key: string]: any;
 };
 
-export const useForm = (formNameProp?: string): FormStateWithCorrectTypes =>
-  useFormAdapter().useFormState(formNameProp) as FormStateWithCorrectTypes;
+export const useForm = (): FormStateWithCorrectTypes => {
+  const state = useFormState({
+    subscription: { values: true, initialValues: true },
+  });
+  const registry = useFieldRegistry();
+
+  // registeredFields tulee OMASTA rekisteristä, ei kirjastolta.
+  //
+  // react-final-formin form.getRegisteredFields() on tähän liian laaja: useField
+  // rekisteröi kentän myös pelkästä lukemisesta, ja useFieldValue kulkee sen kautta -
+  // eli jokainen arvon luku rekisteröisi kenttänsä. Näkyvyyssääntö tarkoittaa
+  // RENDERÖITYJÄ kenttiä, ja vain oma rekisteri seuraa niitä. Kirjaston joukkoa ei
+  // tarjota tässä lainkaan, jottei väärää vastausta voi vahingossa kysyä.
+  if (!registry) {
+    // Ei hiljaista varasuunnitelmaa. Tyhjä joukko tarkoittaisi "mitään ei ole
+    // rekisteröity": createErrorBuilderin isVisible palauttaisi falsen joka polulle,
+    // jolloin validointi katoaisi kokonaan, ja getValuesForSaving putoaisi
+    // initialValues-kloonin ja sallittujen polkujen varaan. Tallennus menisi läpi
+    // hiljaa ja väärin. Mieluummin kova virhe mountissa.
+    throw new Error(
+      'Kenttärekisteriä ei löydy. ReactFinalForm-kääreen pitää renderöidä ' +
+        'FieldRegistryProvider.'
+    );
+  }
+
+  return {
+    values: state.values,
+    initial: state.initialValues,
+
+    // Getterit, EIVÄT tilannekuvia. Rekisteri elää refeissä eikä FieldRegistryProvider
+    // renderöi uudelleen kenttien mountatessa - se on tarkoituksellista, koska muuten
+    // kielivälilehden vaihto aiheuttaisi satoja uudelleenrenderöintejä. Renderin aikana
+    // luettu arvo olisi siis helposti tyhjä tai vanhentunut: footer, joka pitää kiinni
+    // const form = useForm():sta, lukisi joukon ennen kuin kentät ehtivät
+    // rekisteröityä. Getterinä se evaluoituu vasta lukuhetkellä, joka on
+    // tallennushetki.
+    get registeredFields() {
+      return registry.getRegisteredFields();
+    },
+
+    get unregisteredFields() {
+      return registry.getUnregisteredFields();
+    },
+  } as FormStateWithCorrectTypes;
+};
+
+const useChange = () => {
+  const form = useRffForm();
+  return useCallback(
+    (name: string, value: any) => form.change(name, value),
+    [form]
+  );
+};
+
+// Tallennuksen elinkaari. Kolme vaihetta riittaa: aloitus, lopetus virheineen, ja
+// uudelleenalustus tallennuksen jalkeen. reinitialize vastaa redux-formin initializea:
+// se asettaa uuden lahtotilan, jolloin dirty nollautuu eika "tallentamattomia
+// muutoksia" -varoitus jaa paalle.
+export const useSubmitLifecycle = () => {
+  const form = useRffForm();
+  const { setIsSubmitting, setSubmitErrors } = useFormSubmitContext();
+  return useMemo(
+    () => ({
+      startSubmit: () => {
+        setIsSubmitting(true);
+        setSubmitErrors(undefined);
+      },
+      stopSubmit: (errors?: any) => {
+        setIsSubmitting(false);
+        setSubmitErrors(errors);
+      },
+      reinitialize: (values: any) => form.initialize(values),
+    }),
+    [form, setIsSubmitting, setSubmitErrors]
+  );
+};
 
 // Palauttaa vain changen. Aiemmin tämä sitoi redux-formin KOKO action creator
 // -pinnan lomakkeeseen, mutta kutsupaikoista käytetään yksinomaan changea (16
@@ -59,29 +149,42 @@ export const useForm = (formNameProp?: string): FormStateWithCorrectTypes =>
 // tekee kirjastonvaihdosta mahdollisen: react-final-formissa ei ole vastaavaa
 // action creator -pinnan kokoelmaa.
 export function useBoundFormActions() {
-  const change = useFormAdapter().useChange();
+  const change = useChange();
   return useMemo(() => ({ change }), [change]);
 }
 
 export function useIsDirty(): boolean {
-  return useFormAdapter().useIsDirty();
+  return Boolean(useFormState({ subscription: { dirty: true } }).dirty);
 }
 
-export function useIsSubmitting(formNameProp?: string): boolean {
-  return useFormAdapter().useIsSubmitting(formNameProp);
+export function useIsSubmitting(): boolean {
+  return useFormSubmitContext().isSubmitting;
 }
 
-export function useSubmitErrors<TErrors = Record<string, any>>(
-  formNameProp?: string
-): TErrors {
-  return useFormAdapter().useSubmitErrors(formNameProp) as TErrors;
+export function useSubmitErrors<TErrors = Record<string, any>>(): TErrors {
+  return useFormSubmitContext().submitErrors as TErrors;
 }
+
+// RAAKA arvo, ei muotoiltu. react-final-formin oletus-format muuttaa undefinedin
+// tyhjaksi merkkijonoksi, jolloin lukija ei erota "ei arvoa" tyhjasta arvosta.
+//
+// Ero ei ole teoreettinen. ToteutusForm/TiedotSection.tsx:153 asettaa
+// isPieniOsaamiskokonaisuuden oletusarvon efektissa, jonka ehto on
+// _fp.isUndefined(currValue). Muotoiltuna arvo oli '', ehto ei tayttynyt koskaan, eika
+// kenttaa asetettu - runkosnapshot menetti isPieniOsaamiskokonaisuus: true
+// yhdessatoista Toteutus-testissa. Identiteettimuotoilu kytkee oletusmuotoilun pois
+// tasta lukijasta; kenttien renderointiin se ei vaikuta, se on eri useField-kutsu.
+const useRawValue = (name: string) =>
+  useField(name, {
+    subscription: { value: true },
+    format: value => value,
+  }).input.value;
 
 export function useFieldValue<T>(name: string, formNameProp?: string): T {
   const contextFormName = useFormName();
   assert((formNameProp || contextFormName) != null);
 
-  return useFormAdapter().useValue(name, formNameProp);
+  return useRawValue(name);
 }
 
 /**
@@ -116,9 +219,7 @@ export function makeFormFieldHook<TFormValues>() {
     const formName = useFormName();
     assert(formName != null);
 
-    return useFormAdapter().useValue(name) as
-      | PathValue<TFormValues, TPath>
-      | undefined;
+    return useRawValue(name) as PathValue<TFormValues, TPath> | undefined;
   };
 }
 
@@ -144,7 +245,7 @@ export function useInitialFieldValue(name: string, formNameProp?: string): any {
   const contextFormName = useFormName();
   assert((formNameProp || contextFormName) != null);
 
-  return useFormAdapter().useInitialValue(name, formNameProp);
+  return useField(name, { subscription: { initial: true } }).meta.initial;
 }
 
 /**
@@ -165,7 +266,7 @@ export function useSetFieldValue(
   condition = true
 ): void {
   const form = useFormName();
-  const change = useFormAdapter().useChange();
+  const change = useChange();
   const currentValue = useFieldValue(name, form);
   const valueHasChanged = !_.isEqual(currentValue, value);
   useEffect(() => {
@@ -176,6 +277,6 @@ export function useSetFieldValue(
 }
 
 export const useSelectedLanguages = (): Array<LanguageCode> => {
-  const form = useFormAdapter().useFormState();
-  return getKielivalinta(form?.values);
+  const values = useFormState({ subscription: { values: true } }).values;
+  return getKielivalinta(values);
 };

@@ -8,7 +8,7 @@ Koulutustarjonnan virkailijan käyttöliittymä. React-kirjastolla kehitetty SPA
 
 ### Lomakkeiden logiikka
 
-Lomakkeiden tilan hallinta on toteutettu redux-form-kirjastolla. Redux-form *rekisteröi* kentän kun sitä vastaava komponentti renderöidään. Vastaavasti *rekisteröinti poistetaan* (unregister), kun kenttää vastaava komponentti poistetaan. Näiden redux-tapahtumien avulla tunnistetaan milloin käyttäjä on poistanut kentät itse näkyvistä ja niille halutaan lähettää tyhjä arvo. Tämä onnistuu, koska *unregister*-tapahtumaa ei lähetetä alussa kun kenttä on piilossa.
+Lomakkeiden tilan hallinta on toteutettu react-final-form-kirjastolla. Kenttäkomponentit tuodaan `src/components/formFields/Field.tsx`-wrapperin kautta, joka *rekisteröi* kentän FieldRegistryyn kun sitä vastaava komponentti renderöidään ja *poistaa rekisteröinnin*, kun komponentti poistetaan. Rekisterin avulla tunnistetaan, milloin käyttäjä on poistanut kentät itse näkyvistä ja niille halutaan lähettää tyhjä arvo. Alussa piilossa ollutta kenttää ei koskaan rekisteröity, joten sitä ei myöskään tyhjennetä.
 
 ### Palvelinkyselyiden hallinta ja muistintaminen
 

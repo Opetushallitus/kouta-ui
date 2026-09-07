@@ -10,6 +10,7 @@ import { LomakeFields } from '#/src/components/LomakeFields';
 import { Box, Typography } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
+import { useFieldValue } from '#/src/hooks/form';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const hakulomakeTyyppiToLabel = {
@@ -57,20 +58,13 @@ const HakulomakeInfo = ({ haku, t }) => {
   );
 };
 
-const ConditionalLomakeFields = ({
-  input: { value },
-  fieldsName,
-  language,
-}) => {
-  return value ? (
-    <Box marginTop={2}>
-      <LomakeFields name={fieldsName} language={language} />
-    </Box>
-  ) : null;
-};
-
 const LomakeSection = ({ language, haku }) => {
   const { t } = useTranslation();
+  // Arvon luku hookilla, ei toisella <Field>:llä. Kenttäkomponentti olisi tähän
+  // väärä työkalu: se ei renderöi mitään omaa vaan lukee arvon päättääkseen mitä
+  // sen alle renderöidään - ja samalla se rekisteröisi saman nimen toiseen kertaan
+  // kenttärekisteriin.
+  const eriHakulomake = useFieldValue('hakulomake.eriHakulomake');
   const haunHakulomaketyyppi = haku?.hakulomaketyyppi;
   const canSelectHakulomake = haunHakulomaketyyppi === HAKULOMAKETYYPPI.MUU;
 
@@ -91,13 +85,10 @@ const LomakeSection = ({ language, haku }) => {
       >
         {t('hakukohdelomake.eriHakulomake')}
       </Field>
-      {canSelectHakulomake ? (
-        <Field
-          component={ConditionalLomakeFields}
-          name="hakulomake.eriHakulomake"
-          fieldsName="hakulomake"
-          language={language}
-        />
+      {canSelectHakulomake && eriHakulomake ? (
+        <Box marginTop={2}>
+          <LomakeFields name="hakulomake" language={language} />
+        </Box>
       ) : null}
     </>
   );

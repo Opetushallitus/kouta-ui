@@ -85,14 +85,14 @@ module.exports = {
     'no-negated-condition': ['error'],
     'no-implicit-coercion': ['error'],
     'no-var': ['error'],
-    // Kenttäkomponentit tuodaan aina #/src/components/formFields/Field -kääreen kautta,
-    // ei suoraan redux-formista. Kääre on se paikka, johon kenttien rekisteröinnin seuranta
-    // lisätään ennen kirjastonvaihtoa, joten suora tuonti jättäisi kentän seurannan
-    // ulkopuolelle ilman että mikään kaatuisi tai näkyisi testeissä.
+    // Kenttäkomponentit tuodaan aina #/src/components/formFields/Field -wrapperin kautta,
+    // ei suoraan lomakekirjastosta. Wrapper on se paikka, joka ilmoittaa kentät
+    // kenttärekisterille ja toistaa redux-formin semantiikan (tyhjentyvä kenttä,
+    // submit-virheet), joten suora tuonti jättäisi kentän näiden ulkopuolelle ilman
+    // että mikään kaatuisi tai näkyisi testeissä.
     //
     // Rajoitus koskee koko moduulia, ei yksittäisiä vientejä: nimilista pettäisi hiljaa
-    // heti kun joku ottaisi käyttöön nimen jota listalla ei ole. Juuri niin kävi Fields-
-    // komponentille (monikko), joka jäi kahdesti huomaamatta migraatiota suunniteltaessa.
+    // heti kun joku ottaisi käyttöön nimen jota listalla ei ole.
     //
     // Sallitut poikkeukset ovat overrides-listassa.
     'no-restricted-imports': [
@@ -100,9 +100,14 @@ module.exports = {
       {
         patterns: [
           {
-            group: ['redux-form', 'redux-form/**'],
+            group: [
+              'react-final-form',
+              'react-final-form/**',
+              'react-final-form-arrays',
+              'react-final-form-arrays/**',
+            ],
             message:
-              'Tuo Field, FieldArray ja Fields osoitteesta #/src/components/formFields/Field.',
+              'Tuo Field ja FieldArray osoitteesta #/src/components/formFields/Field.',
           },
         ],
       },
@@ -110,18 +115,21 @@ module.exports = {
   },
   overrides: [
     {
-      // Nämä tiedostot saavat tuoda redux-formia suoraan.
+      // Nämä tiedostot saavat tuoda lomakekirjastoa suoraan.
       //
-      // formFields/Field.tsx on kääre itse eli ainoa paikka, joka saa tuoda
-      // kenttäkomponentit. Neljä muuta käyttävät redux-formin muita rajapintoja (reducer,
-      // reduxForm, action creatorit); ne eivät poistu kääreen myötä vaan vasta silloin, kun
-      // lomakekirjasto oikeasti vaihdetaan.
+      // formFields/Field.tsx on wrapper itse eli ainoa paikka, joka saa tuoda
+      // kenttäkomponentit.
+      //
+      // ReactFinalForm/index.tsx mountaa <Form>-juuren ja hooks/form.ts lukee
+      // lomaketilaa useFieldillä ja useFormStatella. Kumpikaan ei tuo
+      // kenttäkomponentteja.
+      //
+      // hooks/useSaveForm.ts ei ole listalla eikä kuulu sille: se lukee lomaketilan
+      // hooks/form.ts:n kautta eikä tunne kirjastoa.
       files: [
         './src/components/formFields/Field.tsx',
-        './src/components/ReduxForm/index.tsx',
+        './src/components/ReactFinalForm/index.tsx',
         './src/hooks/form.ts',
-        './src/hooks/useSaveForm.ts',
-        './src/state/store.ts',
       ],
       rules: {
         'no-restricted-imports': 'off',

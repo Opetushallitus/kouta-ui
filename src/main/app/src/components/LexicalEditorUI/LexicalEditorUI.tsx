@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useId } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect, useId } from 'react';
 
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
@@ -7,9 +7,8 @@ import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
-import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { $getRoot, EditorState } from 'lexical';
+import { $getRoot, EditorState, HISTORY_MERGE_TAG } from 'lexical';
 
 import { Container, EditorScroller, Editor } from './Components';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
@@ -27,6 +26,51 @@ interface LexicalEditorUIProps {
   hideHeaderSelect?: boolean;
 }
 
+// Ohjelmallisten synkkojen tunniste. EditorChangePlugin ohittaa tällä tagilla merkityt
+// päivitykset, jotta ne eivät emittoi onChangea; syy on UpdatePluginin efektissä.
+const HISTORY_MERGE = { tag: HISTORY_MERGE_TAG };
+
+// Oma kuuntelija kirjaston OnChangePluginin (@lexical/react) sijaan.
+//
+// Kirjaston plugin ohittaa päivityksen, jonka EDELLINEN tila on
+// prevEditorState.isEmpty(). Se ei tarkoita "tyhjä teksti" vaan koskemattoman
+// editorin alkutilaa (nodeMapissa pelkkä root ja selection === null). Tarkoitus on
+// vaimentaa alustus, mutta samalla katoaa käyttäjän ENSIMMÄINEN muokkaus, jos se osuu
+// editorin ensimmäiseen committiin - hiljaa, kenttä vain puuttuu tallennusrungosta.
+// Vika oli pitkään piilossa, koska FormCollapseGroupin values-tilaus pakotti
+// ylimääräisen flushin, joka jakoi eleen kahdeksi commitiksi.
+//
+// Alustuksen vaimennukseen vartijaa ei tarvita: UpdatePluginin isInitialMount ohittaa
+// mountin, ohjelmalliset synkat on merkitty history-merge-tagilla, eikä mount-commit
+// muutenkaan päädy kuuntelijalle. Kaksi muuta vartijaa ovat kirjaston omat.
+const EditorChangePlugin = ({ onChange }: { onChange?: any }) => {
+  const [editor] = useLexicalComposerContext();
+
+  useLayoutEffect(() => {
+    if (!onChange) {
+      return;
+    }
+
+    return editor.registerUpdateListener(
+      ({ editorState, dirtyElements, dirtyLeaves, tags }) => {
+        // Pelkkä kursorin siirto ei ole muutos (kirjaston ignoreSelectionChange).
+        if (dirtyElements.size === 0 && dirtyLeaves.size === 0) {
+          return;
+        }
+
+        // Ohjelmallinen synkkaus (UpdatePlugin), ei käyttäjän muokkaus.
+        if (tags.has(HISTORY_MERGE_TAG)) {
+          return;
+        }
+
+        onChange(editorState, editor, tags);
+      }
+    );
+  }, [editor, onChange]);
+
+  return null;
+};
+
 /* We need this, so that when editor is updated in the fly,
    eg. when changing language, the state updates accordingly. */
 const UpdatePlugin = ({ value }: { value?: EditorState }) => {
@@ -40,15 +84,26 @@ const UpdatePlugin = ({ value }: { value?: EditorState }) => {
       return;
     }
 
+    // Synkka on OHJELMALLINEN eikä siitä saa lähteä onChangea, siksi HISTORY_MERGE-tagi.
+    //
+    // Ilman sitä kielivälilehden vaihto tuhoaa sen kielen tekstin, jolta poistutaan:
+    // fi -> sv vaihdon jälkeen molemmat kielet sisältävät ruotsin tekstin. Välilehden
+    // vaihto muuttaa Fieldin name-propin (kuvaus.fi -> kuvaus.sv) instanssia purkamatta,
+    // tämä efekti ajaa setEditorStaten, ja onChange on react-final-formin
+    // input.onChange, jonka ref.current päivitetään EFEKTISSÄ. React ajaa lapsen
+    // efektit ennen vanhemman, joten kirjoitus menisi edellisen renderin nimeen eli
+    // väärälle kielelle. Koskemattomassa kentässä vika ei näy, koska kirjasto
+    // palauttaa alkuarvon; juuri käyttäjän oma muokkaus tuhoutuu. redux-formilla
+    // ongelmaa ei ollut, koska sen käsittelijä luki nimen vasta kutsuhetkellä.
     if (value) {
       // If the update was done by lexical internally the editorstate object identity remains the same -> no need to reset the editor state
       if (value !== editor.getEditorState()) {
-        editor.setEditorState(value);
+        editor.setEditorState(value, HISTORY_MERGE);
       }
     } else {
       editor.update(() => {
         $getRoot().clear();
-      });
+      }, HISTORY_MERGE);
     }
   }, [value, editor]);
 
@@ -118,7 +173,7 @@ export const LexicalEditorUI = ({
           )}
         </>
         <HistoryPlugin />
-        <OnChangePlugin onChange={onChange} ignoreSelectionChange />
+        <EditorChangePlugin onChange={onChange} />
         <UpdatePlugin value={value} />
       </LexicalComposer>
     </Container>

@@ -33,7 +33,7 @@ export const OppilaitosFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
     [oppilaitos, organisaatioOid, queryClient]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName: ENTITY.OPPILAITOS,
     submit,
     validate: validateOppilaitosForm,
@@ -45,7 +45,6 @@ export const OppilaitosFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
     <FormFooter
       entityType={ENTITY.OPPILAITOS}
       entity={oppilaitos}
-      save={save}
       canUpdate={!readOnly}
       esikatseluUrl={
         oppilaitos && apiUrls.url('konfo-ui.oppilaitos', organisaatioOid)

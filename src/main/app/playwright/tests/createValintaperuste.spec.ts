@@ -1,4 +1,4 @@
-import { Page, test, expect, Locator } from '@playwright/test';
+import { Page, expect, Locator, test } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -67,12 +67,17 @@ const lisaaSisaltoa = async (section: Locator, tyyppi: string) => {
   }
 };
 
-const fillKuvausSection = async (page: Page) =>
+const fillKuvausSection = async (
+  page: Page,
+  { skipNimi = false }: { skipNimi?: boolean } = {}
+) =>
   withinSection(page, 'kuvaus', async section => {
-    await section
-      .getByTestId('nimi')
-      .locator('input')
-      .fill('Valintaperusteen nimi');
+    if (!skipNimi) {
+      await section
+        .getByTestId('nimi')
+        .locator('input')
+        .fill('Valintaperusteen nimi');
+    }
 
     await typeToEditor(section.getByTestId('kuvaus'), 'Kuvaus');
     const sisalto = section.getByTestId('sisalto');
@@ -142,6 +147,56 @@ test.describe('Create Valintaperuste', () => {
         )
       );
     }));
+
+  // Todistaa, että validointi ylipäätään ajetaan. Kenttärekisterin oikeellisuudelle
+  // ei ole muuta turvaverkkoa kuin nämä testit: jos registeredFields palauttaa tyhjän
+  // joukon, createErrorBuilderin isVisible ei tunnista yhtään polkua eikä validointi
+  // tee mitään. Tyhjä joukko ei ole sama kuin nil - nil tarkoittaa "validoi kaikki".
+  test('Should show validation error for missing kuvaus nimi', async ({
+    page,
+  }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillPerustiedotSection(page, ['korkeakoulutus', 'yo']);
+    await fillKieliversiotSection(page);
+    await fillHakukelpoisuusSection(page);
+    await fillKuvausSection(page, { skipNimi: true });
+    await fillValintatapaSection(page);
+    await fillValintakokeetSection(page, {
+      withValintaperusteenKokeet: false,
+    });
+    await fillLisatiedotSection(page);
+    await fillJulkisuusSection(page);
+    await fillTilaSection(page);
+    await tallenna(page);
+
+    await expect(
+      page
+        .getByTestId('form-control_kuvaus.nimi')
+        .getByText('validointivirheet.pakollisetKaannokset')
+    ).toBeVisible();
+  });
+
+  // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
+  // fokuksen menetystä näppäinpainallusten välissä. Jokainen painallus renderöi
+  // FieldArrayn, ja jos sen wrapper luodaan renderin sisällä, React mounttaa
+  // lapsikentät uudelleen.
+  test('Should not lose focus while typing in valintatapa nimi', async ({
+    page,
+  }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillPerustiedotSection(page, ['korkeakoulutus', 'yo']);
+    await fillKieliversiotSection(page);
+
+    await withinSection(page, 'valintatavat', async () => {
+      const nimi = page
+        .getByTestId('valintatapalista')
+        .getByTestId('nimi')
+        .locator('input');
+
+      await nimi.pressSequentially('Valintatavan nimi', { delay: 20 });
+      await expect(nimi).toHaveValue('Valintatavan nimi');
+    });
+  });
 
   test('Should not copy publishing state when using existing entity as base', async ({
     page,

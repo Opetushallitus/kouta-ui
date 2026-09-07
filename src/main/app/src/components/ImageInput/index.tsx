@@ -251,7 +251,11 @@ export const ImageInput = props => {
     send,
   });
 
-  useEffect(() => onChange(url), [onChange, url]);
+  // Lohkorunko tarkoituksella: tiivis nuolifunktio palauttaisi onChangen paluuarvon,
+  // jonka React tulkitsisi efektin siivousfunktioksi.
+  useEffect(() => {
+    onChange(url);
+  }, [onChange, url]);
 
   return (
     <>

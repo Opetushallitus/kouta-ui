@@ -9,7 +9,6 @@ import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';
@@ -49,20 +48,20 @@ export const ToteutusFooter = ({
 
   const form = useForm();
   const formName = useFormName();
-  const unregisteredFields = useSelector(state => state?.unregisteredFields);
-  const initialValues = useSelector(state => state.form?.[formName]?.initial);
+  const initialValues = form.initial;
 
   const dataSendFn =
     formMode === FormMode.CREATE ? createToteutus : updateToteutus;
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      const valuesForSaving = getValuesForSaving(
+      const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,
-        unregisteredFields,
+        form.unregisteredFields,
         initialValues
       );
+
       const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
@@ -70,7 +69,7 @@ export const ToteutusFooter = ({
           formMode === FormMode.CREATE
             ? {
                 ...getToteutusByFormValues({
-                  ...valuesForSaving,
+                  ...valuesToSend,
                   koulutustyyppi,
                 }),
                 koulutusOid: koulutus?.oid,
@@ -78,7 +77,7 @@ export const ToteutusFooter = ({
             : {
                 ..._.omit(toteutus, '_enrichedData'),
                 ...getToteutusByFormValues({
-                  ...valuesForSaving,
+                  ...valuesToSend,
                   koulutustyyppi,
                 }),
                 tarjoajat: getTarjoajaOids({
@@ -92,18 +91,13 @@ export const ToteutusFooter = ({
       if (formMode === FormMode.CREATE) {
         navigate(`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`);
       } else {
-        afterUpdate(
-          queryClient,
-          navigate,
-          ENTITY.TOTEUTUS,
-          valuesForSaving.tila
-        );
+        afterUpdate(queryClient, navigate, ENTITY.TOTEUTUS, valuesToSend.tila);
       }
       return { warnings: warnings };
     },
     [
       dataSendFn,
-      form.registeredFields,
+      form, // getterit, ks. useForm
       formMode,
       hierarkia,
       navigate,
@@ -112,20 +106,20 @@ export const ToteutusFooter = ({
       koulutustyyppi,
       organisaatioOid,
       toteutus,
-      unregisteredFields,
       queryClient,
     ]
   );
 
-  const save = useSaveForm({
-    formName,
-    submit,
-    validate: values =>
+  const validate = useCallback(
+    (values, registeredFields) =>
       validateToteutusForm(
         { ...values, koulutustyyppi, koulutus },
-        form?.registeredFields
+        registeredFields
       ),
-  });
+    [koulutustyyppi, koulutus]
+  );
+
+  useSaveForm({ formName, submit, validate });
 
   const apiUrls = useUrls();
 
@@ -133,7 +127,6 @@ export const ToteutusFooter = ({
     <FormFooter
       entityType={ENTITY.TOTEUTUS}
       entity={toteutus}
-      save={save}
       canUpdate={canUpdate}
       esikatseluUrl={
         formMode === FormMode.EDIT &&

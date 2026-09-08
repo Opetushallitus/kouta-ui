@@ -14,4 +14,14 @@ export const hakuRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
       };
     }
   }
+
+  if (
+    path === 'metadata.varasijatayttoPaattyy' &&
+    errorType === 'invalidVarasijatayttoPaattyyMsg'
+  ) {
+    return {
+      field: 'aikataulut.varasijatayttoPaattyy',
+      errorKey: 'ilmoitukset.varasijatayttoPaattyyEnnenHaunPaattymista',
+    };
+  }
 };

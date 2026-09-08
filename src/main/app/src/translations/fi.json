@@ -299,7 +299,8 @@
     "osaamistavoitteet": {
       "otsikko": "Vahvista osaamistavoitteiden tuonti",
       "viesti": "Tuonti korvaa nykyisen kuvauksen. Haluatko jatkaa?"
-    }
+    },
+    "varasijatayttoPaattyyEnnenHaunPaattymista": "Varasijatäytön päättymisen ajankohta ei voi olla ennen haun päättymisajankohtaa"
   },
   "sivuTitlet": {
     "etuliite": "Tarjonta",

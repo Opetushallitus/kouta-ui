@@ -144,8 +144,7 @@ test.describe('Edit hakukohde', () => {
       await fillJarjestyspaikkaSection(page);
 
       // Yhteinen toimitusaika käyttöön -> liitekohtaiset toimitusaika-kentät katoavat.
-      // Tämä on ainoa paikka sovelluksessa, jossa käytetään monikkomuotoa <Fields>, ja
-      // juuri se ohjaa lomakkeen mutkikkainta näytä/piilota-logiikkaa.
+      // Tämä on lomakkeen mutkikkain näytä/piilota-logiikka.
       await withinSection(page, 'liitteet', async section => {
         const liitekohtaisetToimitusajat = section
           .getByTestId('liitelista')
@@ -157,13 +156,10 @@ test.describe('Edit hakukohde', () => {
           .getByText('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')
           .click();
 
-        // NÄKYVYYS, ei vain runko. Tämä on ainoa selaintason väite joka riippuu
-        // <Fields>-korvikkeen PROPSIMUODOSTA: yhteinenToimitusaika luetaan
-        // props-oliosta polkurakenteen mukaan (LiitteetFields.tsx:241), ja se ohjaa
-        // includeToimitusaika-lippua. Väärällä muodolla luku antaisi undefinedin,
-        // liitekohtaiset kentät jäisivät näkyviin - ja mitattu tosiasia on, että
-        // runkosnapshotit eivät huomaa sitä: litteäksi mutatoitu korvike läpäisi
-        // kaikki 26 Hakukohde-testia ennen tätä väitettä.
+        // NÄKYVYYS, ei vain runko. yhteinenToimitusaika luetaan useFieldValuella
+        // (LiitteetFields.tsx) ja se ohjaa includeToimitusaika-lippua. Jos luku
+        // antaisi undefinedin, liitekohtaiset kentät jäisivät näkyviin, eivätkä
+        // runkosnapshotit huomaisi sitä.
         await expect(liitekohtaisetToimitusajat).toHaveCount(0);
       });
 

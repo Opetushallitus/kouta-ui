@@ -2,5 +2,16 @@ ignoredBuiltDependencies:
   - es5-ext
   - esbuild
 
-onlyBuiltDependencies:
-  - https-pem
+# Tarkka versio, ei ^7.0.1: patch on sidottu avaimeen react-final-form@7.0.1, joten
+# resoluution nousu 7.0.2:een pudottaisi paikan hiljaa - ja vikamuoto on paikatun
+# vian paluu. Ks. patches/react-final-form@7.0.1.patch.
+#
+# Paikka on ylävirran PR #1096 (https://github.com/final-form/react-final-form/pull/1096),
+# joka korjaa issuen #1095 (https://github.com/final-form/react-final-form/issues/1095).
+# Paikan voi pudottaa, kun julkaisu sisältää sen. Hunk 1 (valueWasDestroyed) on se
+# kantava: se estää uudelleenmountautuvan kentän ylikirjoittamasta arvoa, joka on
+# kirjoitettu vain form.changen kautta. Hunk 2 (muuttuneen initialValue-propsin
+# takaisinkirjoitus) on täällä kuollutta painoa - yksikään kutsupaikka ei anna
+# initialValue-propsia - ja mukana vain, jotta paikka on identtinen ylävirran kanssa.
+patchedDependencies:
+  react-final-form@7.0.1: patches/react-final-form@7.0.1.patch

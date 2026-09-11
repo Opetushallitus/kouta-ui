@@ -7,7 +7,6 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { createValintaperuste } from '#/src/utils/valintaperuste/createValintaperuste';
@@ -30,7 +29,6 @@ export const ValintaperusteFooter = ({
 }: ValintaperusteFooterProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const form = useForm();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -68,18 +66,16 @@ export const ValintaperusteFooter = ({
 
   const formName = useFormName();
 
-  const save = useSaveForm({
-    formName,
-    submit,
-    validate: values =>
+  const validate = useCallback(
+    (values, registeredFields) =>
       validateValintaperusteForm(
-        {
-          organisaatioOid,
-          ...values,
-        },
-        form.registeredFields
+        { organisaatioOid, ...values },
+        registeredFields
       ),
-  });
+    [organisaatioOid]
+  );
+
+  useSaveForm({ formName, submit, validate });
 
   const apiUrls = useUrls();
 
@@ -87,7 +83,6 @@ export const ValintaperusteFooter = ({
     <FormFooter
       entityType={ENTITY.VALINTAPERUSTE}
       entity={valintaperuste}
-      save={save}
       canUpdate={canUpdate}
       esikatseluUrl={apiUrls.url('konfo-ui.valintaperuste', valintaperuste?.id)}
     />

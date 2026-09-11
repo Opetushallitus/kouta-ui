@@ -5,7 +5,11 @@ import _ from 'lodash';
 
 import { FormCollapseProps } from '#/src/components/FormCollapse';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
-import { useForm } from '#/src/hooks/form';
+import {
+  useIsSubmitting,
+  useSubmitErrors,
+  useSubmitFailed,
+} from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
 type FormCollapseList = Array<React.ReactElement<FormCollapseProps>>;
@@ -37,11 +41,13 @@ export const FormCollapseGroup = ({
   const [errorsNeedAttention, setErrorsNeedAttention] =
     useState<boolean>(false);
 
-  const {
-    submitFailed,
-    submitErrors: formErrors,
-    submitting: isSubmitting,
-  } = useForm();
+  // EI values-tilausta: ryhmä kloonaa lapsensa joka renderillä, joten values-tilaus
+  // renderöisi koko lomakkeen jokaisella näppäinpainalluksella. Tilaus oli tässä
+  // aiemmin peittämässä Lexicalin vartijavikaa, joka on korjattu EditorChangePluginissa
+  // (LexicalEditorUI.tsx). Ryhmä tilaa vain sen, mitä se lukee.
+  const formErrors = useSubmitErrors();
+  const isSubmitting = useIsSubmitting();
+  const submitFailed = useSubmitFailed();
 
   const flattenedChildren = useMemo(
     () => getFlattenedChildren(children),

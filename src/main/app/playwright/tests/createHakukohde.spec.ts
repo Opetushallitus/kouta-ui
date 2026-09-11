@@ -1,4 +1,4 @@
-import { Locator, Page, test, expect } from '@playwright/test';
+import { Locator, Page, expect, test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
@@ -18,6 +18,7 @@ import {
   getSelectByLabel,
   fillRadioValue,
   getLabel,
+  getRadio,
   assertBaseTilaNotCopied,
   fillValintakokeetSection,
 } from '#/playwright/playwright-helpers';
@@ -276,7 +277,10 @@ const fillJarjestyspaikkaSection = (
   options?: { jarjestaaUrheilijanAmmKoulutusta?: boolean }
 ) =>
   withinSection(page, 'jarjestyspaikka', async section => {
-    await section.getByText(selectedToimipisteNimi).click();
+    // Ks. editHakukohde.spec.ts - sama perustelu labelin klikkaamiselle.
+    await expect(getRadio(section, tarjoajat[0])).toBeAttached();
+    await getLabel(section, selectedToimipisteNimi).click();
+
     if (options?.jarjestaaUrheilijanAmmKoulutusta) {
       await section
         .getByText('hakukohdelomake.jarjestaaUrheilijanAmmKoulutusta')

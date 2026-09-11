@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldDateTimeInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';

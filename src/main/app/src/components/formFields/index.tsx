@@ -35,6 +35,10 @@ export const simpleMapProps = ({ input, ...props }) => ({
   ...props,
 });
 
+// Select-kentät eivät välitä bluria lomakkeelle. Nollaus on peruja redux-formista ja
+// pidetty ennallaan: react-final-formissa onBlur vain merkitsisi kentän kosketetuksi,
+// eikä kouta lue touched-tilaa. Sama nollaus on alla neljässä mapperissa, jotka
+// tarvitsevat lisäksi id:n.
 export const selectMapProps = ({ input, ...props }) => ({
   ...input,
   onBlur: _.noop,

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { FieldArrayFieldsProps } from 'redux-form';
 import styled, { css } from 'styled-components';
 
+import { FieldArrayFieldsProps } from '#/src/components/formFields/Field';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';

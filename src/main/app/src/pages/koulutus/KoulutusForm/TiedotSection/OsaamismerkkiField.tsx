@@ -4,11 +4,11 @@ import { TFunction } from 'i18next';
 import { isEmpty, lowerCase, some, now } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useUnmount } from 'react-use';
-import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import { OSAAMISMERKKI_JULKAISUTILA } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';

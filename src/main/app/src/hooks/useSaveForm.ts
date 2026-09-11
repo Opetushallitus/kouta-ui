@@ -1,32 +1,37 @@
 import { useCallback, useEffect } from 'react';
 
 import _ from 'lodash';
-import { batch } from 'react-redux';
-import {
-  startSubmit as startSubmitAction,
-  stopSubmit as stopSubmitAction,
-  initialize,
-} from 'redux-form';
 
+import { useFieldRegistry } from '#/src/components/formFields/FieldRegistry';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useForm, useSubmitErrors } from '#/src/hooks/form';
+import {
+  useRegisterSubmitHandler,
+  useReinitialize,
+  useSubmitErrors,
+} from '#/src/hooks/form';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
 import useToaster from '#/src/hooks/useToaster';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
 
-import { useDispatch } from './reduxHooks';
-
+// Tämä on kirjaston onSubmit, ei footerista kutsuttava funktio: useRegisterSubmitHandler
+// asettaa sen ReactFinalFormin refiin, josta <Form> kutsuu sitä.
+//
+// Erot redux-form-polkuun:
+//   - submitting-tilaa ei aseteta itse, kirjasto hoitaa sen form.submit():ssa
+//   - virheitä ei kirjata contextiin vaan PALAUTETAAN, jolloin kirjasto asettaa
+//     ne submitErrorsiin ja kenttien meta.submitErroriin
+//   - batch() reduxista ei enää tarvita, koska setStateja ei ole
 export const useSaveForm = ({ formName, validate, submit }) => {
-  const dispatch = useDispatch();
   const user = useAuthorizedUser();
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
   const { openSavingSuccessToast, openSavingErrorToast, openWarningToast } =
     useToaster();
   const { setRemoteErrors } = useFormSaveRemoteErrors();
-  const form = useForm(formName);
+  const fieldRegistry = useFieldRegistry();
+  const reinitialize = useReinitialize();
 
   const submitErrors = useSubmitErrors();
   // Resetoidaan remote-errorit, ettei tallennusvirhe-modaali jää kummittelemaan
@@ -36,82 +41,75 @@ export const useSaveForm = ({ formName, validate, submit }) => {
     }
   }, [submitErrors, setRemoteErrors]);
 
-  const startSubmit = useCallback(
-    () => dispatch(startSubmitAction(formName)),
-    [formName, dispatch]
-  );
+  const handler = useCallback(
+    async (submittedValues: any) => {
+      const muokkaaja = user?.oidHenkilo;
+      const currentValues = submittedValues ?? {};
+      const enhancedValues = { muokkaaja, ...currentValues };
 
-  const stopSubmit = useCallback(
-    ({ errors, warnings, response }) => {
-      batch(() => {
-        dispatch(stopSubmitAction(formName, errors));
-        if (errors) {
-          openSavingErrorToast(response?.data);
-          setRemoteErrors(response?.data);
-        } else {
-          if (warnings) {
-            warnings.forEach(w => {
-              openWarningToast(w);
-            });
+      let errors = {};
+
+      try {
+        // Näkyvyyssääntö validoinnille tulee kenttärekisteristä, joka on sen ainoa
+        // lähde. Ks. FieldRegistry - kirjaston getRegisteredFields ei kelpaisi, koska
+        // useField rekisteröi kentän myös pelkästä lukemisesta.
+        errors = await validate(
+          enhancedValues,
+          fieldRegistry?.getRegisteredFields() ?? undefined
+        );
+
+        if (_.isEmpty(errors)) {
+          const r = await submit({
+            values: enhancedValues,
+            httpClient,
+            apiUrls,
+          });
+
+          if (r?.warnings) {
+            r.warnings.forEach(w => openWarningToast(w));
           } else {
             openSavingSuccessToast();
           }
-        }
-      });
-    },
-    [
-      formName,
-      dispatch,
-      openSavingSuccessToast,
-      openSavingErrorToast,
-      openWarningToast,
-      setRemoteErrors,
-    ]
-  );
 
-  return useCallback(async () => {
-    const muokkaaja = user?.oidHenkilo;
-    const currentValues = form?.values ?? {};
-    const enhancedValues = { muokkaaja, ...currentValues };
-
-    startSubmit();
-
-    let errors = {};
-
-    try {
-      errors = await validate(enhancedValues, form.registeredFields);
-      if (_.isEmpty(errors)) {
-        await submit({
-          values: enhancedValues,
-          httpClient,
-          apiUrls,
-        }).then(r => {
-          stopSubmit({ errors: null, warnings: r?.warnings });
           // NOTE: initialize values with the saved ones to update the dirty state
           // This shouldn't be needed, because page data is refetched after save
           // (in Edit*Page components) and initial values are recalculated when data changes.
-          dispatch(initialize(formName, currentValues));
-        });
-      } else {
-        console.error(errors);
-        stopSubmit({ errors });
-      }
-    } catch (e) {
-      console.error(e);
-      errors = withRemoteErrors(formName, e?.response, errors, currentValues);
+          reinitialize(currentValues);
+          fieldRegistry?.clearUnregisteredFields();
+          return undefined;
+        }
 
-      stopSubmit({ errors, response: e?.response });
-    }
-  }, [
-    form,
-    formName,
-    dispatch,
-    user,
-    startSubmit,
-    validate,
-    submit,
-    httpClient,
-    apiUrls,
-    stopSubmit,
-  ]);
+        console.error(errors);
+        // Sama toast kuin redux-form-polulla, jossa stopSubmit näytti sen aina kun
+        // virheitä oli - myös pelkän validointivirheen kohdalla.
+        openSavingErrorToast(undefined);
+        setRemoteErrors(undefined);
+        // PALAUTETAAN, ei kirjata contextiin: kirjasto vie nämä submitErrorsiin ja
+        // kenttien meta.submitErroriin.
+        return errors;
+      } catch (e: any) {
+        console.error(e);
+        errors = withRemoteErrors(formName, e?.response, errors, currentValues);
+        openSavingErrorToast(e?.response?.data);
+        setRemoteErrors(e?.response?.data);
+        return errors;
+      }
+    },
+    [
+      apiUrls,
+      fieldRegistry,
+      formName,
+      httpClient,
+      openSavingErrorToast,
+      openSavingSuccessToast,
+      openWarningToast,
+      reinitialize,
+      setRemoteErrors,
+      submit,
+      user,
+      validate,
+    ]
+  );
+
+  useRegisterSubmitHandler(handler);
 };

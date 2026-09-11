@@ -9,11 +9,8 @@ import {
 } from '#/playwright/stubOrganisaatiotByOids';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
-// Organisaation valinta ja suosikit etusivulla. Nämä ovat redux-storen kaksi jäljellä
-// olevaa käyttökohdetta (organisaatioSelection ja organisaatioFavourites, molemmat
-// redux-persistin takana), ja testit kirjaavat nykyisen käytöksen ennen storen
-// korvaamista: mitä valinta tekee URL:lle ja listoille, mikä säilyy sivun
-// uudelleenlatauksen yli ja missä järjestyksessä suosikit näytetään.
+// Organisaation valinta ja suosikit etusivulla: mitä valinta tekee URL:lle ja listoille,
+// mikä säilyy sivun uudelleenlatauksen yli ja missä järjestyksessä suosikit näytetään.
 //
 // Käyttäjä on OPH-pääkäyttäjä (stubCommonRoutes), joten organisaatiopuu näytetään vasta
 // vähintään kolmen merkin haulla, ja Opetushallitus on oletusvalinta.
@@ -111,8 +108,7 @@ test.describe('Organisaation valinta ja suosikit', () => {
     await searchRequest;
   });
 
-  // redux-persist: valinta luetaan localStoragesta, kun sivu avataan ilman
-  // organisaatioOid-parametria.
+  // Valinta luetaan localStoragesta, kun sivu avataan ilman organisaatioOid-parametria.
   test('keeps the selected organisation across a reload', async ({ page }) => {
     const drawer = await selectOppilaitosFromTree(page);
     await closeDrawer(drawer);
@@ -196,11 +192,9 @@ test.describe('Organisaation valinta ja suosikit', () => {
     await expectSelected(page, ROOT_OID, 'Organisaatio_1');
   });
 
-  // Tallennusmuoto localStoragessa, sellaisena kuin redux-persist sen kirjoittaa:
-  // avain persist:<slice>, arvona olio jonka jokainen kenttä on erikseen
-  // JSON-koodattu merkkijono. Käyttäjillä on tämä data jo selaimissaan, joten
-  // storen korvaajan on luettava sama muoto tai migroitava se - muuten suosikit
-  // ja viimeinen valinta katoavat julkaisussa. Testi lukitsee muodon.
+  // Vanha, redux-persistin kirjoittama tallennusmuoto (ks. readLegacyField
+  // organisaatioValintaStorage.ts:ssä). Käynnistys kirjoittaa arvot uusiin avaimiin ja
+  // jättää vanhat paikoilleen.
   test('reads the selection and favourites persisted by redux-persist', async ({
     page,
   }) => {
@@ -236,6 +230,17 @@ test.describe('Organisaation valinta ja suosikit', () => {
     await expect(drawer.getByTestId('organization-favourites')).toContainText([
       'Organisaatio_1_1',
       'Organisaatio_1',
+    ]);
+
+    const stored = await page.evaluate(() => [
+      localStorage.getItem('kouta.organisaatioOid'),
+      localStorage.getItem('kouta.organisaatioFavourites'),
+      localStorage.getItem('persist:organisaatioSelection') !== null,
+    ]);
+    expect(stored).toEqual([
+      JSON.stringify(OPPILAITOS_OID),
+      JSON.stringify([OPPILAITOS_OID, ROOT_OID]),
+      true,
     ]);
   });
 });

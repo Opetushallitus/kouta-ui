@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import {
@@ -9,6 +8,7 @@ import {
   FormFieldSwitch,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import Heading from '#/src/components/Heading';
 import { Box, Typography } from '#/src/components/virkailija';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';

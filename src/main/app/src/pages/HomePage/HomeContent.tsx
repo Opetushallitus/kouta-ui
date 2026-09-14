@@ -11,10 +11,9 @@ import {
   HAKUKOHDE_ROLE,
   VALINTAPERUSTE_ROLE,
 } from '#/src/constants';
-import { useDispatch } from '#/src/hooks/reduxHooks';
+import { useOrganisaatioSelection } from '#/src/contexts/OrganisaatioValintaContext';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
-import { setOrganisaatio } from '#/src/state/organisaatioSelection';
 
 import HakukohteetSection from './HakukohteetSection';
 import HautSection from './HautSection';
@@ -25,7 +24,7 @@ import ValintaperusteetSection from './ValintaperusteetSection';
 
 const HomeContent = ({ organisaatioOid }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { setOrganisaatioOid } = useOrganisaatioSelection();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const { search } = useLocation();
@@ -36,9 +35,9 @@ const HomeContent = ({ organisaatioOid }) => {
       const searchParams = new URLSearchParams(search);
       searchParams.set('organisaatioOid', value);
       navigate({ search: searchParams.toString() });
-      dispatch(setOrganisaatio(value));
+      setOrganisaatioOid(value);
     },
-    [navigate, dispatch, search]
+    [navigate, setOrganisaatioOid, search]
   );
 
   const hasKoulutusWriteRole = useMemo(() => {

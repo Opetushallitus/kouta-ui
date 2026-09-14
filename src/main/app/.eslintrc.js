@@ -85,8 +85,48 @@ module.exports = {
     'no-negated-condition': ['error'],
     'no-implicit-coercion': ['error'],
     'no-var': ['error'],
+    // Kenttäkomponentit tuodaan aina #/src/components/formFields/Field -wrapperin kautta,
+    // ei suoraan lomakekirjastosta. Wrapper ilmoittaa kentät kenttärekisterille ja toistaa
+    // redux-formin semantiikan, joten suora tuonti jättäisi kentän niiden ulkopuolelle
+    // ilman että mikään kaatuisi tai näkyisi testeissä.
+    //
+    // Rajoitus koskee koko moduulia, ei yksittäisiä vientejä: nimilista pettäisi hiljaa
+    // heti kun joku ottaisi käyttöön nimen jota listalla ei ole.
+    //
+    // Sallitut poikkeukset ovat overrides-listassa.
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          {
+            group: [
+              'react-final-form',
+              'react-final-form/**',
+              'react-final-form-arrays',
+              'react-final-form-arrays/**',
+            ],
+            message:
+              'Tuo Field ja FieldArray osoitteesta #/src/components/formFields/Field.',
+          },
+        ],
+      },
+    ],
   },
   overrides: [
+    {
+      // Nämä tiedostot saavat tuoda lomakekirjastoa suoraan: formFields/Field.tsx on
+      // wrapper itse, ReactFinalForm/index.tsx mountaa <Form>-juuren ja hooks/form.ts
+      // lukee lomaketilaa. hooks/useSaveForm.ts ei kuulu listalle: se lukee lomaketilan
+      // hooks/form.ts:n kautta eikä tunne kirjastoa.
+      files: [
+        './src/components/formFields/Field.tsx',
+        './src/components/ReactFinalForm/index.tsx',
+        './src/hooks/form.ts',
+      ],
+      rules: {
+        'no-restricted-imports': 'off',
+      },
+    },
     {
       files: './playwright/*.ts',
       extends: 'plugin:playwright/recommended',

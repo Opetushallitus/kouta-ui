@@ -16,8 +16,7 @@ import {
   HAKUKOHDE_ROLE,
 } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
-import { useSelector } from '#/src/hooks/reduxHooks';
-import { selectOrganisaatio } from '#/src/state/organisaatioSelection';
+import { useSelectedOrganisaatioOid } from '#/src/contexts/OrganisaatioValintaContext';
 import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
 import getUserRoles from '#/src/utils/getUserRoles';
 
@@ -97,9 +96,7 @@ const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
 const HomePage = () => {
   const { search } = useLocation();
   const { t } = useTranslation();
-  const persistedOrganisaatioOid = useSelector(state =>
-    selectOrganisaatio(state)
-  );
+  const persistedOrganisaatioOid = useSelectedOrganisaatioOid();
 
   const query = useMemo(() => queryString.parse(search), [search]);
   const organisaatioOid = query?.organisaatioOid;

@@ -9,6 +9,7 @@ import {
   wrapMutationTest,
   confirmDelete,
   assertNoUnsavedChangesDialog,
+  assertUnsavedChangesDialog,
   assertURLEndsWith,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
@@ -58,6 +59,13 @@ test.describe('Edit SORA-kuvaus', () => {
     page,
   }) => {
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should complain about unsaved changes after an edit', async ({
+    page,
+  }) => {
+    await fillKieliversiotSection(page);
+    await assertUnsavedChangesDialog(page);
   });
 
   test('Should redirect from url without organization', async ({ page }) => {

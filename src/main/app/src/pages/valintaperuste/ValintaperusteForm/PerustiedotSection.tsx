@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import {
   FormFieldKoulutustyyppiSelect,
   FormFieldRadioGroup,
   FormFieldSelect,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { Divider } from '#/src/components/virkailija';
 import { ENTITY } from '#/src/constants';

@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import {
   FormFieldRadioGroup,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { Box, Radio } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';

@@ -146,4 +146,4 @@ Lokalisointiin käytetään [react-i18next](https://github.com/i18next/react-i18
 
 types/kouta-backend.api.ts on autogeneroitu kouta-backendin swaggerista openapi-typescript-kirjastolla. Jos teet muutoksia backendin tyypityksiin, päivitä tiedosto halutusta backend-ympäristöstä (ml. lokaali):
 
-`npx openapi-typescript https://virkailija.hahtuvaopintopolku.fi/kouta-backend/swagger/swagger.yaml -o ./src/types/kouta-backend.api.ts`
+`pnpm openapi-typescript https://virkailija.hahtuvaopintopolku.fi/kouta-backend/swagger/swagger.yaml -o ./src/types/kouta-backend.api.ts`

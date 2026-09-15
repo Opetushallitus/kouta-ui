@@ -2,8 +2,13 @@ import _ from 'lodash';
 import { match, P } from 'ts-pattern';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
-import { SisaltoModel } from '#/src/types/domainTypes';
 import {
+  SisaltoModel,
+  SisaltoItem,
+  TekstiModel,
+} from '#/src/types/domainTypes';
+import {
+  Sisalto,
   SisaltoTaulukkoValue,
   SisaltoTekstiValue,
   SisaltoValues,
@@ -14,23 +19,27 @@ export const parseSisaltoField = (sisalto?: SisaltoModel): SisaltoValues => {
     return [];
   }
 
-  return sisalto.map(sisaltoItem => {
+  return sisalto.map((sisaltoItem: SisaltoItem): Sisalto => {
+    // id for sortable list, not sent to backend
+    const id = crypto.randomUUID();
     return match(sisaltoItem)
       .with(
         { tyyppi: 'teksti', data: P.select() },
-        data =>
+        (data?: TekstiModel): SisaltoTekstiValue =>
           ({
             tyyppi: 'teksti',
             data: _.isObject(data)
               ? _.mapValues(data, parseEditorState)
               : undefined,
+            id,
           }) as SisaltoTekstiValue
       )
       .otherwise(
-        ({ data }) =>
+        ({ data }: SisaltoItem): SisaltoTaulukkoValue =>
           ({
             tyyppi: 'taulukko',
             data,
+            id,
           }) as SisaltoTaulukkoValue
       );
   });

@@ -32,6 +32,10 @@ export type SisaltoModel = components['schemas']['Valintatapa']['sisalto'];
 
 export type SisaltoTaulukkoModel = components['schemas']['SisaltoTaulukko'];
 
+export type TekstiModel = components['schemas']['Teksti'];
+
+export type SisaltoItem = components['schemas']['SisaltoItem'];
+
 export type Kielivalinta = Array<components['schemas']['Kieli']>;
 
 export type OrganisaatioModel = components['schemas']['Organisaatio'];

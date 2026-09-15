@@ -1937,7 +1937,7 @@ export interface paths {
         };
         /**
          * Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen
-         * @description Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen. Tämä rajapinta on indeksointia varten
+         * @description Hakee listan kaikesta, mikä on muuttunut tietyn ajanhetken jälkeen. Tämä rajapinta on indeksointia varten.
          */
         get: operations["indexerModifiedSince"];
         put?: never;
@@ -5725,11 +5725,11 @@ export interface operations {
     siirtotiedostoPistehistoria: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };
@@ -5808,11 +5808,11 @@ export interface operations {
     siirtotiedostoHakukohteet: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };
@@ -6005,7 +6005,7 @@ export interface operations {
     getOpetussuunnitelmat: {
         parameters: {
             query?: {
-                /** @description Lista organisaatioiden OIDeja, joiden koulutustoimija-organisaatioilta opetussuunnitelmat haetaan. */
+                /** @description Lista organisaatioiden OIDeja, joiden käytössä olevat opetussuunnitelmat haetaan. EPerusteista haetaan myös annettujen oidien ylätason organisaatioilla, jotta saadaan kaikki organisaation käytössä olevat opetussuunnitelmat. */
                 organisaatiot?: string[];
                 /** @description Opetussunnitelman nimen osa */
                 nimi?: string;
@@ -7104,11 +7104,11 @@ export interface operations {
     siirtotiedostoValintaperusteet: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };
@@ -7159,11 +7159,11 @@ export interface operations {
     siirtotiedostoToteutukset: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };
@@ -7575,11 +7575,11 @@ export interface operations {
     siirtotiedostoHaut: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };
@@ -8076,11 +8076,11 @@ export interface operations {
     siirtotiedostoSorakuvaukset: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };
@@ -8266,11 +8266,11 @@ export interface operations {
     siirtotiedostoKoulutukset: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };
@@ -8623,11 +8623,11 @@ export interface operations {
     siirtotiedostoOppilaitoksetJaOsat: {
         parameters: {
             query?: {
-                /** @example 2026-07-06T12:31:28 */
+                /** @example 2026-08-13T16:53:55 */
                 startTime?: string;
                 /**
                  * @description Jos arvoa ei ole annettu, asetetaan loppuajaksi nykyinen ajankohta.
-                 * @example 2026-07-06T12:31:28
+                 * @example 2026-08-13T16:53:55
                  */
                 endTime?: string;
             };

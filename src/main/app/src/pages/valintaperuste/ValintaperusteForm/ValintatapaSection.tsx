@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
@@ -67,9 +65,9 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
       />
     </Box>
 
-    <div {...getTestIdProps('valintatapaSisalto')}>
+    <Box {...getTestIdProps('valintatapaSisalto')}>
       <SisaltoFields name={`${valintatapa}.sisalto`} language={language} />
-    </div>
+    </Box>
   </div>
 );
 

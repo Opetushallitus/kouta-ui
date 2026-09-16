@@ -6,6 +6,7 @@ import {
   tallenna,
   wrapMutationTest,
   assertNoUnsavedChangesDialog,
+  assertUnsavedChangesDialog,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
 import { stubOppilaitosRoutes } from '#/playwright/stubOppilaitosRoutes';
@@ -39,5 +40,12 @@ test.describe('Edit oppilaitos', () => {
     page,
   }) => {
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should complain about unsaved changes after an edit', async ({
+    page,
+  }) => {
+    await fillKieliversiotSection(page);
+    await assertUnsavedChangesDialog(page);
   });
 });

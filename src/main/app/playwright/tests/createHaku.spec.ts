@@ -1,4 +1,4 @@
-import { Page, test, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -16,6 +16,7 @@ import {
   assertBaseTilaNotCopied,
   fillYhteystiedotWithoutVerkkosivuSection,
   fillYhteystiedotWithoutVerkkosivuTekstiSection,
+  getSection,
 } from '#/playwright/playwright-helpers';
 import { stubHakuRoutes } from '#/playwright/stubHakuRoutes';
 import { ENTITY, HAKULOMAKETYYPPI } from '#/src/constants';
@@ -149,6 +150,50 @@ test.describe('Create haku', () => {
     ).toBeVisible();
   });
 
+  // Epäonnistuneen tallennuksen pitää AVATA se osio, jossa virhe on. Create-
+  // lomakkeella se on ainoa tapa nähdä virhe: osiot ovat kiinni (FormCollapseGroup
+  // defaultOpen={!steps}). Nimi-osiota ei avata tässä testissä kertaakaan.
+  test('should open the section containing an error after a failed save', async ({
+    page,
+  }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+    // Julkaistu, koska pakollisuusvalidointi on sidottu tilaan - tallennettuna nimi
+    // ei ole pakollinen eikä virhettä synny lainkaan.
+    await fillTilaSection(page);
+
+    // Kiinni oleva osio renderöi sisältönsä silti (max-height: 0 + overflow: hidden,
+    // ei display: none), joten virheteksti on Playwrightin mielestä "visible" - siksi
+    // väite on osion AUKI-TILASTA eikä tekstin näkyvyydestä.
+    const nimiHeading = getSection(page, 'nimi').locator('> :first-child');
+    await expect(nimiHeading).not.toHaveAttribute('open', /.*/);
+
+    await tallenna(page);
+
+    await expect(nimiHeading).toHaveAttribute('open', /.*/);
+  });
+
+  // Tallennusvirhe katoaa kentältä heti kirjoitettaessa, kuten redux-formin CHANGEssa.
+  // Osio avataan tässä nimenomaisesti, jottei testi nojaa yllä olevaan
+  // automaattiavaukseen - näin punainen kertoo kummasta on kyse.
+  test('should clear a field error as soon as the user types', async ({
+    page,
+  }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+    await fillTilaSection(page);
+    await tallenna(page);
+
+    await withinSection(page, 'nimi', async section => {
+      const error = section.getByText('validointivirheet.pakollisetKaannokset');
+      await expect(error).toBeVisible();
+
+      await section.getByLabel('yleiset.nimi').fill('haun nimi');
+
+      await expect(error).toBeHidden();
+    });
+  });
+
   test('Should show validation error for verkkosivu', async ({ page }) => {
     await fillOrgSection(page, organisaatioOid);
     await fillKieliversiotSection(page);
@@ -192,6 +237,27 @@ test.describe('Create haku', () => {
       await fillHakulomakeSection(page, HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA);
       await tallenna(page);
     }));
+
+  // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
+  // fokuksen menetystä näppäinpainallusten välissä. Kohde on FieldArrayn sisällä:
+  // jokainen painallus renderöi FieldArrayn, ja jos sen wrapperia ei muistettaisi
+  // (Field.tsx, memoizeComponentWrapper), lapsikentät mounttaisivat uudelleen.
+  test('Should not lose focus while typing in yhteyshenkilo nimi', async ({
+    page,
+  }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKieliversiotSection(page);
+
+    await withinSection(page, 'yhteyshenkilot', async section => {
+      await section
+        .getByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' })
+        .click();
+
+      const nimi = section.getByRole('textbox', { name: 'yleiset.nimi' });
+      await nimi.pressSequentially('Yhteyshenkilon nimi', { delay: 20 });
+      await expect(nimi).toHaveValue('Yhteyshenkilon nimi');
+    });
+  });
 
   test('Should not copy publishing state when using existing entity as base', async ({
     page,

@@ -39,7 +39,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
   const removeEmptySomeKeys = (some: Some): Partial<Some> => {
     let someWithEmptyValsRemoved: Partial<Some> = some;
     Object.keys(some).forEach((key: string) => {
-      if (some[key].trim().length < 1) {
+      if ((some[key] ?? '').trim().length < 1) {
         someWithEmptyValsRemoved = omit(someWithEmptyValsRemoved, [key]);
       }
     });

@@ -7,7 +7,7 @@ import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useSelectBase } from '#/src/hooks/useSelectBase';
 import { useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
-export const usePohjaEntity = (entityType: ENTITY) => {
+export function usePohjaEntity<K extends ENTITY>(entityType: K) {
   const { search } = useLocation();
 
   const searchParams = queryString.parse(search);
@@ -36,4 +36,4 @@ export const usePohjaEntity = (entityType: ENTITY) => {
     selectPohja,
     copyId,
   };
-};
+}

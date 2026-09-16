@@ -18,6 +18,7 @@ import {
 import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import { KoulutusModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 
 import { TarjoajatLinkList } from './TarjoajatLinkList';
@@ -29,7 +30,11 @@ const TarjoajatFormField = createFormFieldComponent(
   simpleMapProps
 );
 
-const TarjoajatSelector = ({ organisaatioOid }) => {
+const TarjoajatSelector = ({
+  organisaatioOid,
+}: {
+  organisaatioOid: string;
+}) => {
   const { t } = useTranslation();
 
   const isAvoinKorkeakoulutus = useFieldValue(
@@ -83,6 +88,10 @@ export const TarjoajatSection = ({
   organisaatioOid,
   koulutus,
   disableTarjoajaHierarkia,
+}: {
+  organisaatioOid: string;
+  koulutus?: KoulutusModel;
+  disableTarjoajaHierarkia?: boolean;
 }) => {
   const { t } = useTranslation();
 
@@ -124,10 +133,7 @@ export const TarjoajatSection = ({
             </Box>
           )}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
-            <TarjoajatSelector
-              koulutus={koulutus}
-              organisaatioOid={organisaatioOid}
-            />
+            <TarjoajatSelector organisaatioOid={organisaatioOid} />
           )}
         </>
       )}

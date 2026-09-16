@@ -10,9 +10,9 @@ type Options = {
   order?: Order;
 };
 
-const iterateTree = (
-  tree: Array<TreeNode> | undefined,
-  fn: (node: TreeNode) => void,
+const iterateTree = <T extends TreeNode>(
+  tree: Array<T> | undefined,
+  fn: (node: T) => void,
   options: Options = {}
 ) => {
   const { childrenKey = 'children', order = Order.TopDown } = options;

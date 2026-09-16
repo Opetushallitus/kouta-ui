@@ -14,6 +14,7 @@ import FormSteps from '#/src/components/FormSteps';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
 import useKoodi from '#/src/hooks/useKoodi';
+import { toEnum } from '#/src/utils';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import { arrayToTranslationObject } from '#/src/utils/languageUtils';
@@ -64,8 +65,9 @@ export const EditHakukohdePage = () => {
     { enabled: Boolean(hakukohde) }
   );
 
-  const { data: { toteutus, haku, koulutustyyppi } = {} } =
-    hakukohdePageDataQueryResult;
+  const { data: { toteutus, haku } = {} } = hakukohdePageDataQueryResult;
+
+  const data = hakukohdePageDataQueryResult.data;
 
   const { t } = useTranslation();
 
@@ -79,6 +81,10 @@ export const EditHakukohdePage = () => {
 
   const canUpdate = resultObj.canUpdate;
   const infoTextTranslationKey = canUpdate ? '' : resultObj.reasonKey;
+
+  const koulutustyyppi =
+    toEnum(KOULUTUSTYYPPI, data?.koulutustyyppi) ||
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage
@@ -102,9 +108,7 @@ export const EditHakukohdePage = () => {
           organisaatioOid={organisaatioOid}
           hakukohde={hakukohde}
           toteutus={toteutus}
-          koulutustyyppi={
-            koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-          }
+          koulutustyyppi={koulutustyyppi}
           haku={haku}
           canUpdate={canUpdate}
           infoTextTranslationKey={infoTextTranslationKey}
@@ -125,7 +129,7 @@ export const EditHakukohdePage = () => {
         haku={haku}
         hakukohde={hakukohde}
         toteutus={toteutus}
-        koulutustyyppi={koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS}
+        koulutustyyppi={koulutustyyppi}
       />
     </FormPage>
   );

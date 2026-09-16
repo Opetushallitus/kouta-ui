@@ -17,7 +17,7 @@ type ToteutuksetTilaChangeResponseData = Array<ToteutusTilaChangeResponseItem>;
 
 type ChangeToteutustenTilaProps = {
   entities: EntitySelection;
-  tila?: JULKAISUTILA;
+  tila: JULKAISUTILA;
 };
 
 export type CopyToteutuksetMutationFunctionAsync = UseMutateAsyncFunction<

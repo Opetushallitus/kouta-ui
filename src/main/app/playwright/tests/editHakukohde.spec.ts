@@ -32,7 +32,7 @@ const fillJarjestyspaikkaSection = (page: Page) =>
   withinSection(page, 'jarjestyspaikka', async section => {
     // Odotetaan että radio on olemassa: osio renderöi <Spin />:n niin kauan kuin
     // vaihtoehdot latautuvat, eikä klikkaus sitä ennen osu mihinkään.
-    await expect(getRadio(section, tarjoajat[0])).toBeAttached();
+    await expect(getRadio(section, tarjoajat[0]!)).toBeAttached();
 
     // check({ force: true }) ei kelpaa: input on tyylitelty piiloon, eikä pakotettu
     // klikkaus laukaise Reactin onChangea.

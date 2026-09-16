@@ -281,8 +281,8 @@ export const JarjestamisTiedotSection = ({
       <ApurahaFields
         language={language}
         name={name}
-        koulutustyyppi={koulutustyyppi}
         toteutuksenMetadata={toteutuksenMetadata}
+        koulutustyyppi={koulutustyyppi}
       />
 
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
@@ -294,13 +294,13 @@ export const JarjestamisTiedotSection = ({
             {t('toteutuslomake.toteutuksellaErillinenAloitusajankohta')}
           </Field>
         </Box>
-        {toteutuksellaErillinenAloitusajankohta && (
+        {toteutuksellaErillinenAloitusajankohta ? (
           <KoulutuksenAloitusajankohtaFields
             section={`${name}.ajankohta`}
             name={`${name}.ajankohta.ajankohtaTyyppi`}
             language={language}
           />
-        )}
+        ) : null}
       </FieldGroup>
 
       {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (

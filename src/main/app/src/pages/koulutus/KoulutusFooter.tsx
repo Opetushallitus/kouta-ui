@@ -102,7 +102,9 @@ export const KoulutusFooter = ({
       canUpdate={canUpdate || isJulkinen}
       entity={koulutus}
       esikatseluUrl={
-        FormMode.EDIT && apiUrls.url('konfo-ui.koulutus', koulutus?.oid)
+        formMode === FormMode.EDIT
+          ? apiUrls.url('konfo-ui.koulutus', koulutus?.oid)
+          : undefined
       }
     />
   );

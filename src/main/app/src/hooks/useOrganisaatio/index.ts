@@ -79,7 +79,7 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
   organisaatio,
   hierarkia,
   oppilaitostyypitByKoulutustyypit
-) => {
+): boolean => {
   const oppilaitoksenKoulutustyypit = organisaationKoulutustyypit(
     organisaatio,
     oppilaitostyypitByKoulutustyypit

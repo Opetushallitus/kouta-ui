@@ -25,7 +25,6 @@ import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import getOsaamisalaLaajuus from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
-import { OsaamisalaOsa } from '../../koulutus/KoulutusForm/AmmatillinenTiedotSection/ValitseOsaamisalaBox';
 
 type NimiSectionProps = {
   name: string;
@@ -113,7 +112,7 @@ const OpintojenLaajuusForOsaamisala = ({
 
   const { ePerusteId } = koulutus || {};
   const { data: ePerusteRakenne } = useEPerusteRakenne({ ePerusteId });
-  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat || [];
+  const ePerusteRakenneOsat = ePerusteRakenne?.osat || [];
 
   const osaamisalaKoodiUri = koulutus?.metadata?.osaamisalaKoodiUri;
   const { koodiArvo } = parseKoodiUri(osaamisalaKoodiUri);
@@ -130,7 +129,7 @@ const OpintojenLaajuusForOsaamisala = ({
           selectedLanguage={selectedLanguage}
           koodiUri={laajuusyksikkoKoodiUri}
           label={t('toteutuslomake.laajuus')}
-          prefix={osaamisalaLaajuus || ''}
+          prefix={osaamisalaLaajuus ? String(osaamisalaLaajuus) : ''}
         />
       </Box>
     </Box>

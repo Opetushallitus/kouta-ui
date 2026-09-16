@@ -27,7 +27,7 @@ const OppilaitoksenOsaForm = ({
   oppilaitoksenOsa?: OppilaitoksenOsaModel;
 }) => {
   const { t } = useTranslation();
-  const languageTabs = useFieldValue('kieliversiot');
+  const languageTabs = useFieldValue<Array<LanguageCode>>('kieliversiot');
   const organisaatio = oppilaitoksenOsa?._enrichedData?.organisaatio;
 
   return (

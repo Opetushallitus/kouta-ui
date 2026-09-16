@@ -22,7 +22,7 @@ import {
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { checkHasHakukohdeKoodiUri } from '#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection';
-import { toSelectValue } from '#/src/utils';
+import { toEnum, toSelectValue } from '#/src/utils';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
@@ -72,7 +72,8 @@ export const CreateHakukohdePage = () => {
   const { data: hakukohde } = usePohjaEntity(ENTITY.HAKUKOHDE);
 
   const koulutustyyppi =
-    data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    toEnum(KOULUTUSTYYPPI, data?.koulutustyyppi) ??
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   const isNimiKoodi = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
 

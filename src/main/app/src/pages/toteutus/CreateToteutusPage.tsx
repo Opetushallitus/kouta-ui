@@ -20,6 +20,7 @@ import {
 } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
+import { toEnum } from '#/src/utils';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 
@@ -41,7 +42,7 @@ const getInitialValues = ({
   koulutus,
 }: {
   toteutus?: ToteutusModel;
-  koulutus: KoulutusModel;
+  koulutus?: KoulutusModel;
 }) => {
   return toteutus
     ? {
@@ -62,7 +63,8 @@ export const CreateToteutusPage = () => {
 
   const { t } = useTranslation();
 
-  const koulutustyyppi = koulutus?.koulutustyyppi ?? AMMATILLINEN_KOULUTUS;
+  const koulutustyyppi =
+    toEnum(KOULUTUSTYYPPI, koulutus?.koulutustyyppi) ?? AMMATILLINEN_KOULUTUS;
 
   const { data: toteutus } = usePohjaEntity(ENTITY.TOTEUTUS);
 
@@ -102,12 +104,14 @@ export const CreateToteutusPage = () => {
         />
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
-      <ToteutusForm
-        steps
-        koulutus={koulutus}
-        organisaatioOid={organisaatioOid}
-        koulutustyyppi={koulutustyyppi}
-      />
+      {koulutus && (
+        <ToteutusForm
+          steps
+          koulutus={koulutus}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+        />
+      )}
     </FormPage>
   );
 };

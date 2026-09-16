@@ -125,7 +125,7 @@ const useFavouriteItems = (oids: Array<string>, roleBuilder: RoleBuilder) => {
 };
 
 type DrawerContentProps = {
-  organisaatioOid: string;
+  organisaatioOid?: string;
   onOrganisaatioChange: (oid: string) => void;
   onClose: () => void;
   open: boolean;
@@ -136,7 +136,7 @@ const DrawerContent = ({
   onOrganisaatioChange,
   onClose,
   open,
-}) => {
+}: DrawerContentProps) => {
   const {
     favourites: organisaatioFavourites,
     toggleFavourite: onToggleFavourite,
@@ -204,7 +204,7 @@ const DrawerContent = ({
   const previousOpen = usePrevious(open);
 
   const saveOrganisaatioIfChanged = useCallback(() => {
-    if (organisaatioOid !== selectedOrganisaatio) {
+    if (selectedOrganisaatio && organisaatioOid !== selectedOrganisaatio) {
       onOrganisaatioChange(selectedOrganisaatio);
     }
   }, [onOrganisaatioChange, organisaatioOid, selectedOrganisaatio]);

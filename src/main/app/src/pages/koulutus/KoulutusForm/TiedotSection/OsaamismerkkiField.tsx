@@ -141,7 +141,7 @@ const OsaamismerkkitiedotReadOnly = ({
 }: {
   osaamismerkkiData: Osaamismerkki;
   t: TFunction;
-  language: string;
+  language: LanguageCode;
 }) => {
   const apiUrls = useUrls();
 

@@ -7,5 +7,5 @@ export const getPostinumeroKoodiLabel = (
   language: LanguageCode
 ) =>
   `${koodi?.koodiArvo} ${upperFirst(
-    getKoodiNimiTranslation(koodi, language).toLowerCase()
+    getKoodiNimiTranslation(koodi, language)?.toLowerCase() ?? ''
   )}`;

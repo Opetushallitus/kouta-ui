@@ -7,8 +7,8 @@ import { RouterAnchor } from '#/src/components/Anchor';
 import { FormButton } from '#/src/components/FormButton';
 import Modal from '#/src/components/Modal';
 import { Box, Typography } from '#/src/components/virkailija';
+import { useSelectedOrganisaatioOid } from '#/src/contexts/OrganisaatioValintaContext';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
-import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 
 export const KoulutusSaveErrorModal = () => {
   const { t } = useTranslation();

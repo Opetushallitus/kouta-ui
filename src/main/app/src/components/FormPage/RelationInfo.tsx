@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
 import { Box, Typography } from '#/src/components/virkailija';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import type { EntityModelBase } from '#/src/types/domainTypes';
 import { getEntityNimiTranslation } from '#/src/utils';
 
 export const RelationInfoContainer = ({ children }) => {

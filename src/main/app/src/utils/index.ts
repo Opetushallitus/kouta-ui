@@ -156,14 +156,18 @@ export const getTestIdProps = testId => ({
   'data-test-id': testId,
 });
 
-export const getImageFileDimensions = imgFile => {
+export const getImageFileDimensions = (
+  imgFile: File | Blob
+): Promise<{ width: number; height: number }> => {
   const objectURL = URL.createObjectURL(imgFile);
   const img = new Image();
   img.src = objectURL;
-  const result = new Promise((resolve, reject) => {
-    img.onload = () => resolve({ width: img.width, height: img.height });
-    img.onerror = e => reject(e);
-  });
+  const result = new Promise<{ width: number; height: number }>(
+    (resolve, reject) => {
+      img.onload = () => resolve({ width: img.width, height: img.height });
+      img.onerror = e => reject(e);
+    }
+  );
   result.finally(() => URL.revokeObjectURL(objectURL));
   return result;
 };

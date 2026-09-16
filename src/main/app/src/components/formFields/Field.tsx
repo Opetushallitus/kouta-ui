@@ -1,57 +1,29 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 
-import _ from 'lodash';
+import { isFunction } from 'lodash';
 import { Field as RffField, FieldProps } from 'react-final-form';
 import { FieldArray as RffFieldArray } from 'react-final-form-arrays';
 
 import { useFieldRegistration } from './FieldRegistry';
 
-// Tämän moduulin kautta kulkevat kaikki sovelluksen Field- ja FieldArray-tuonnit.
-// Wrapper tekee kaksi asiaa: ilmoittaa jokaisen kentän FieldRegistrylle mountissa ja
-// unmountissa, ja toistaa ne redux-formin yksityiskohdat, joita react-final-formissa
-// ei ole.
+// Kaikki sovelluksen Field-/FieldArray-tuonnit kulkevat tästä. Wrapper rekisteröi
+// kentät FieldRegistryyn (kouta tyhjentää piilotetun kentän datan, ja tieto "oli
+// näkyvissä/piilotettu" tuli ennen redux-formin storesta - react-final-formissa vastaavaa
+// ei ole) ja paikkaa hiljaisesti redux-formin yksityiskohdat, joita kirjastolla ei ole.
+// Perustelu kunkin korjauksen vieressä: buildErrorAwareComponent, applyEmptyStringRule,
+// identityParse, identityFormat. Kaksi muuta on korjattu muualla: arvon luku palauttaa
+// muotoillun arvon (hooks/form.ts, useRawValue), ja blur ei muuta arvoa (UrlInput/
+// NumberInput kutsuvat onChangea ennen onBluria).
 //
-// Rekisteröinti: kouta tyhjentää dataa backendistä piilottamalla kentän, ja tieto
-// "oli näkyvissä, ei enää" luettiin ennen redux-formin storesta (unregisteredFields).
-// react-final-formissa vastaavaa ei ole, joten se kerätään täällä.
-//
-// Kirjastoerot, jotka wrapper toistaa. Jokainen on hiljainen: mikään ei kaadu, runko
-// vain muuttuu. Perustelu on kunkin korjauksen vieressä - getErrorAwareComponent,
-// memoizeComponentWrapper, applyEmptyStringRule, identityParse, identityFormat.
-//
-// Kaksi eroa on korjattu muualla: arvon luku palauttaa muotoillun arvon eikä raakaa
-// (hooks/form.ts, useRawValue), ja blur ei voi muuttaa arvoa (UrlInput ja NumberInput
-// kutsuvat onChangea ennen onBluria).
-//
-// eslint-sääntö no-restricted-imports estää react-final-formin suoran tuonnin muualla;
-// tämä tiedosto on sallittu poikkeus .eslintrc.js:n overrides-listalla.
+// no-restricted-imports estää react-final-formin suoran tuonnin muualla; tämä tiedosto
+// on sallittu poikkeus .eslintrc.js:ssä.
 
-// Pysyvä komponentti-identiteetti. Renderin sisällä luotu wrapper olisi joka renderillä
-// uusi komponenttityyppi, jolloin React purkaa ja mounttaa koko alipuun uudelleen:
-// fokus katoaa kesken kirjoittamisen ja rekisteri saa unregister -> register joka
-// renderillä. Kaikki muuttuva tieto luetaan wrapperin SISÄLLÄ, ei suljeta sen ylle.
-// Cache on rajattu: kutsupaikoissa component on aina tunniste, ei inline-funktio.
-const memoizeComponentWrapper = (build: (Component: any) => any) => {
-  const cache = new Map<any, any>();
-
-  return (Component: any) => {
-    const cached = cache.get(Component);
-    if (cached) {
-      return cached;
-    }
-
-    const Wrapped = build(Component);
-    cache.set(Component, Wrapped);
-    return Wrapped;
-  };
-};
-
-// Tunnistaa muutoksen, jonka uusi arvo on tyhjä merkkijono. Valintaruudut ja
-// radiot rajataan pois: niillä target.value ei ole kentän arvo lainkaan.
+// Onko muutoksen uusi arvo tyhjä merkkijono?
 const isEmptyStringChange = (eventOrValue: any) => {
   const target = eventOrValue?.target;
 
   if (target) {
+    // Valintaruudut/radiot rajataan pois: niillä target.value ei ole kentän arvo.
     if (target.type === 'checkbox' || target.type === 'radio') {
       return false;
     }
@@ -61,16 +33,10 @@ const isEmptyStringChange = (eventOrValue: any) => {
   return eventOrValue === '';
 };
 
-// redux-formin sääntö tyhjentyvälle kentälle, sen reducerista (createReducer.js,
-// CHANGE):
-//
-//   if (initial === undefined && payload === '' || payload === undefined) {
-//     result = deleteInWithCleanUp(result, "values." + field);
-//   }
-//
-// Tyhjä merkkijono siis POISTAA arvon, jos kentällä ei ole alkuarvoa, mutta jää tilaan
-// jos alkuarvo on. Ero erottaa "tyhjensin tallennetun arvon" tilanteesta "en täyttänyt
-// tätä koskaan". identityParse toistaa säännön jälkimmäisen puolen, tämä edellisen.
+// redux-formin sääntö tyhjentyvälle kentälle (CHANGE-reducer): tyhjä merkkijono POISTAA
+// arvon jos kentällä ei ollut alkuarvoa, mutta jää tilaan jos alkuarvo oli. Erottaa
+// "tyhjensin arvon" tilanteesta "en täyttänyt koskaan". identityParse hoitaa säännön
+// jälkimmäisen puolen, tämä edellisen.
 const applyEmptyStringRule = (input: any, meta: any, eventOrValue: any) => {
   if (meta?.initial === undefined && isEmptyStringChange(eventOrValue)) {
     input.onChange(undefined);
@@ -79,14 +45,10 @@ const applyEmptyStringRule = (input: any, meta: any, eventOrValue: any) => {
   input.onChange(eventOrValue);
 };
 
-// Pysyvä identiteetti onChangelle. Kutsupaikat olettavat sitä: Lexicalin
-// EditorChangePlugin purkaisi ja rekisteröisi update-listenerin joka renderillä
-// (onChange on sen efektin riippuvuus), ja ImageInput joutuisi kiertämään oman
-// riippuvuuslistansa refillä.
-//
-// Sääntö luetaan KUTSUHETKELLÄ refin takaa: sulkeuma näkisi sen renderin
-// meta.initialin jolla se luotiin, ja vanhentunut alkuarvo on tässä sama asia kuin
-// väärä arvo lomakkeeseen.
+// onChangen identiteetin pitää pysyä samana: EditorChangePluginin efekti riippuu
+// siitä, ja ImageInput joutuisi muuten kiertämään sen refillä. Arvot luetaan
+// KUTSUHETKELLÄ refin takaa, ei suljeta sisään - muuten sulkeuma näkisi luontihetken
+// vanhentuneen meta.initialin.
 const useStableInputSemantics = (input: any, meta: any) => {
   const latest = useRef({ input, meta });
   latest.current = { input, meta };
@@ -99,18 +61,15 @@ const useStableInputSemantics = (input: any, meta: any) => {
   return { ...input, onChange };
 };
 
-// Tallennusvalidoinnin virheet kentälle.
+// redux-form raportoi tallennusvirheet meta.errorissa (createComponent lukee sitä).
+// react-final-formin kanava on meta.submitError; wrapper siirtää sen erroriin, jotta
+// käyttäjälle näkyy MIKÄ kenttä pitää korjata. Kanava täyttyy koska useSaveFormin
+// käsittelijä PALAUTTAA virheet.
 //
-// redux-form raportoi ne kentän meta.errorissa, ja createComponent
-// (formFields/utils.tsx) lukee juuri sitä. react-final-formin kanava on
-// meta.submitError. Wrapper siirtää sen meta.erroriin - ilman siirtoa tallennus estyy
-// oikein, mutta käyttäjälle ei kerrota MITÄ kenttää korjata. Kanava täyttyy vain
-// koska useSaveFormin käsittelijä PALAUTTAA virheet (ReactFinalForm/index.tsx).
-//
-// redux-formin CHANGE-reducer siivosi virheen ensimmäisellä näppäinpainalluksella.
-// react-final-formissa submitError säilyy seuraavaan tallennukseen asti, joten se
-// piilotetaan kirjaston oman meta.modifiedSinceLastSubmit-lipun perusteella.
-const getErrorAwareComponent = memoizeComponentWrapper((Component: any) => {
+// redux-form siivosi virheen ensimmäisellä näppäinpainalluksella; react-final-formissa
+// submitError säilyy seuraavaan tallennukseen asti, siksi piilotus
+// modifiedSinceLastSubmitin perusteella.
+const buildErrorAwareComponent = (Component: any) => {
   const Wrapped = (innerProps: any) => {
     const meta = innerProps.meta;
     const input = useStableInputSemantics(innerProps.input, meta);
@@ -131,20 +90,18 @@ const getErrorAwareComponent = memoizeComponentWrapper((Component: any) => {
   };
 
   return Wrapped;
-});
+};
 
-// react-final-formin oletus-parse muuttaa tyhjän merkkijonon undefinediksi, minkä
-// jälkeen kirjasto karsii tyhjentyneet vanhemmat pois arvoista: {nimi: {fi: ''}}
-// muuttuu tyhjäksi olioksi. redux-formin oma parse on identiteetti, ja tyhjä
-// merkkijono säilyi. Kutsupaikka voittaa, jos se antaa oman parsen.
+// react-final-formin oletus-parse muuttaa tyhjän merkkijonon undefinediksi ja karsii
+// tyhjentyneet vanhemmat pois arvoista ({nimi: {fi: ''}} -> {}). redux-formin parse oli
+// identiteetti eikä tehnyt niin.
 const identityParse = (value: any) => value;
 
-// redux-formissa format={null} tarkoittaa "ei muotoilua". react-final-form kutsuu
-// formattia aina kun se ei ole undefined, joten null kaataa renderin ("format is not
-// a function"). Identiteetti päästää arvon läpi koskemattomana, myös undefinedin -
-// kirjaston oletusmuotoilu muuttaisi sen tyhjäksi merkkijonoksi. Kutsupaikka on
-// ToteutusForm/OsaamisalatSection.tsx, jossa undefined-arvoinen input voi nostaa
-// Reactin controlled/uncontrolled-varoituksen; se on odotettu seuraus.
+// redux-formissa format={null} tarkoitti "ei muotoilua"; react-final-form kutsuu sitä
+// aina eikä hyväksy nullia ("format is not a function"). Identiteetti päästää arvon
+// (myös undefinedin) läpi koskemattomana. Ainoa kutsupaikka: ToteutusForm/
+// OsaamisalatSection.tsx - undefined-arvoinen input voi siellä nostaa Reactin
+// controlled/uncontrolled-varoituksen, mikä on odotettu seuraus.
 const identityFormat = (value: any) => value;
 
 const FieldWithRegistration = (props: any) => {
@@ -156,36 +113,35 @@ const FieldWithRegistration = (props: any) => {
     rffProps.format = identityFormat;
   }
 
-  // Merkkijonokomponentille (esim. component="input") kirjasto ei anna metaa
-  // lainkaan, joten wrapperille ei ole paikkaa eikä tarvetta.
-  if (!_.isFunction(component)) {
+  // component="input" (merkkijono) ei saa kirjastolta metaa - wrapperille ei silloin
+  // ole paikkaa eikä tarvetta.
+  const isFunctionComponent = isFunction(component);
+  const ErrorAwareComponent = useMemo(
+    () => (isFunctionComponent ? buildErrorAwareComponent(component) : null),
+    [isFunctionComponent, component]
+  );
+
+  if (!ErrorAwareComponent) {
     return <RffField {...rffProps} />;
   }
 
-  return (
-    <RffField {...rffProps} component={getErrorAwareComponent(component)} />
-  );
+  return <RffField {...rffProps} component={ErrorAwareComponent} />;
 };
 
-// react-final-form-arrays ei tarjoa fields.get(index):iä, redux-form tarjoaa. Arvo on
-// fields.value-taulukossa. Ero näkyisi jaetuissa komponenteissa, jotka saavat fieldsin
-// renderöintipropsina (SisaltoFields, ToteutusForm/EntityFields).
-//
-// Proxy eikä levitys, koska fieldsin jäsenistä osa on gettereitä ja metodit pitää
-// sitoa alkuperäiseen olioon.
+// react-final-form-arrays ei tarjoa fields.get(index):iä, kuten redux-form; arvo on
+// fields.value-taulukossa. Proxy, koska osa jäsenistä on gettereitä ja
+// metodit pitää sitoa alkuperäiseen olioon.
 const withReduxFormFieldsApi = (fields: any) => {
-  // Proxy nimetään, jotta map voi antaa iteraattorille PROXYN eikä targetia, joka on
-  // paikkaamaton react-final-form-arraysin olio ilman getiä.
+  // Nimetty, jotta map antaa iteraattorille PROXYN eikä paikkaamatonta targetia.
   const proxy: any = new Proxy(fields, {
     get(target, prop) {
       if (prop === 'get') {
         return (index: number) => target.value?.[index];
       }
 
-      // redux-form antoi iteraattorille KOLME argumenttia (name, index, fields),
-      // react-final-form-arrays antaa kaksi. FieldArrayList purkaa kolmannen ja
-      // välittää sen eteenpäin; yksikään kutsupaikka ei vielä lue sitä, mutta tyyppi
-      // lupaa sen.
+      // redux-form antoi iteraattorille kolme argumenttia (name, index, fields),
+      // react-final-form-arrays kaksi. Kolmas tuettu tyypissä, vaikkei yksikään kutsupaikka
+      // vielä käytä sitä.
       if (prop === 'map') {
         return (iterator: (name: string, index: number, fields: any) => any) =>
           target.map((name: string, index: number) =>
@@ -194,20 +150,18 @@ const withReduxFormFieldsApi = (fields: any) => {
       }
 
       const value = target[prop];
-      return _.isFunction(value) ? value.bind(target) : value;
+      return isFunction(value) ? value.bind(target) : value;
     },
   });
 
   return proxy;
 };
 
-const getFieldsApiComponent = memoizeComponentWrapper(
-  (Component: any) => (innerProps: any) => (
-    <Component
-      {...innerProps}
-      fields={withReduxFormFieldsApi(innerProps.fields)}
-    />
-  )
+const buildFieldsApiComponent = (Component: any) => (innerProps: any) => (
+  <Component
+    {...innerProps}
+    fields={withReduxFormFieldsApi(innerProps.fields)}
+  />
 );
 
 const FieldArrayWithRegistration = (props: any) => {
@@ -215,20 +169,17 @@ const FieldArrayWithRegistration = (props: any) => {
 
   const { component: Component, ...rest } = props;
 
-  return (
-    <RffFieldArray {...rest} component={getFieldsApiComponent(Component)} />
+  const FieldsApiComponent = useMemo(
+    () => buildFieldsApiComponent(Component),
+    [Component]
   );
+
+  return <RffFieldArray {...rest} component={FieldsApiComponent} />;
 };
 
-// Wrapperin OMAT proppityypit, ei kirjaston sellaisenaan eikä any. Wrapper tukee
-// tarkoituksella kahta asiaa, jotka react-final-formin FieldProps hylkää:
-//
-//   format={null}  redux-formin "ei muotoilua", ks. identityFormat.
-//   name puuttuu   osa kutsupaikoista saa nimen vanhemmalta (esim. DateTimeRange,
-//                  ValitseEPerusteBox), joten name ei voi olla pakollinen.
-//
-// Vapaat lisäpropsit menevät läpi jo kirjaston tyypissä ([key: string]: any), joten
-// tarkistus kohdistuu kirjaston tuntemiin konfiguraatioavaimiin. Cast unknownin kautta,
+// Wrapperin omat proppityypit tukevat kahta asiaa, joita react-final-formin FieldProps
+// ei hyväksy: format={null} (ks. identityFormat) ja puuttuva name (osa kutsupaikoista
+// saa sen vanhemmalta, esim. DateTimeRange, ValitseEPerusteBox). Cast unknownin kautta,
 // koska funktiokomponentti ei ole rakenteellisesti yhteensopiva luokkakomponentin
 // konstruktorin kanssa.
 type KoutaFieldProps = Omit<FieldProps<any, any>, 'name' | 'format'> & {
@@ -240,8 +191,8 @@ export const Field =
   FieldWithRegistration as unknown as React.FC<KoutaFieldProps>;
 
 // FieldArrayn wrapper välittää vapaat lisäpropsit (language, t, readonlyAmount, ...)
-// render-komponentille, jonka propsit eivät siksi ole kirjaston
-// ComponentType<FieldArrayRenderProps>. Se on tarkoituksellinen sopimus.
+// render-komponentille - tarkoituksella laveampi kuin kirjaston
+// ComponentType<FieldArrayRenderProps>.
 type KoutaFieldArrayProps = {
   name: string;
   component: React.ComponentType<any>;
@@ -251,9 +202,8 @@ type KoutaFieldArrayProps = {
 export const FieldArray =
   FieldArrayWithRegistration as unknown as React.FC<KoutaFieldArrayProps>;
 
-// fields-renderöintipropsin tyyppi. Tuli aiemmin redux-formista; nyt se kuvataan tässä,
-// koska withReduxFormFieldsApi paikkaa getin ja pinta on siksi redux-formin kaltainen
-// eikä kirjaston oma.
+// fields-renderöintipropsin tyyppi tuli redux-formista; kuvataan tässä, koska
+// withReduxFormFieldsApi paikkaa getin ja pinta on siksi redux-formin kaltainen.
 export type FieldArrayFieldsProps<T> = {
   get: (index: number) => T;
   length: number;

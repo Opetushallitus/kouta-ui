@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 
 import { useFieldRegistry } from '#/src/components/formFields/FieldRegistry';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
@@ -32,7 +32,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   const submitErrors = useSubmitErrors();
   // Resetoidaan remote-errorit, ettei tallennusvirhe-modaali jää kummittelemaan
   useEffect(() => {
-    if (_.isEmpty(submitErrors)) {
+    if (isEmpty(submitErrors)) {
       setRemoteErrors(null);
     }
   }, [submitErrors, setRemoteErrors]);
@@ -54,7 +54,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
           fieldRegistry?.getRegisteredFields() ?? undefined
         );
 
-        if (_.isEmpty(errors)) {
+        if (isEmpty(errors)) {
           const r = await submit({
             values: enhancedValues,
             httpClient,

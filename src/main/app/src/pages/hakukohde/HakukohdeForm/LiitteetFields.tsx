@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
@@ -257,7 +257,7 @@ const LiitteetField = ({
           t={t}
         />
       </Box>
-      {!_.isEmpty(liitteetFieldValue) && (
+      {!isEmpty(liitteetFieldValue) && (
         <>
           <Box>
             <Field

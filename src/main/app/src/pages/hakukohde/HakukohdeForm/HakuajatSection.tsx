@@ -1,6 +1,5 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldSwitch } from '#/src/components/formFields';
@@ -18,7 +17,7 @@ const HakuaikaInterval = ({ haku }) => {
 
   const hakuajat = useMemo(
     () =>
-      (haku && _.isArray(haku.hakuajat) ? haku.hakuajat : []).map(
+      (haku && Array.isArray(haku.hakuajat) ? haku.hakuajat : []).map(
         ({ alkaa, paattyy }) => [
           formatDateValue(alkaa) ?? '',
           formatDateValue(paattyy) ?? '',

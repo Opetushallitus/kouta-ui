@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { set } from 'lodash';
 
 import { useKoodit } from '#/src/hooks/useKoodit';
 import { getPostinumeroByPostinumeroUri } from '#/src/utils';
@@ -23,7 +23,7 @@ export const useReadonlyKokeetJaTilaisuudet = (
         // Jos tilaisuudella on postinumerokoodi, haetaan käännös osaksi näytettävää tekstiä
         const koodiUri = t.osoite?.postinumeroKoodiUri;
         const koodi = koodiUri && koodit[neededPostinumeros.indexOf(koodiUri)];
-        return _.set(
+        return set(
           t,
           'osoite.postinumero',
           koodiUri

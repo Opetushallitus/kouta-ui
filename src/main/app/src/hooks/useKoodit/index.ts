@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { get } from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
@@ -26,7 +26,7 @@ const getKoodistot = ({ versiot, httpClient, apiUrls }) => {
 
 export const useKoodit = koodiUris => {
   const versiot = useMemo(() => {
-    const versiotMap = _.isArray(koodiUris)
+    const versiotMap = Array.isArray(koodiUris)
       ? koodiUris.reduce((acc, uri) => {
           const { koodisto, versio } = parseKoodiUri(uri);
 
@@ -55,8 +55,8 @@ export const useKoodit = koodiUris => {
       const dataKoodisto = data
         ? data.find(
             k =>
-              _.get(k, '[0].koodisto.koodistoUri') === koodisto &&
-              `${_.get(k, '[0].versio')}` === versio
+              get(k, '[0].koodisto.koodistoUri') === koodisto &&
+              `${get(k, '[0].versio')}` === versio
           )
         : undefined;
 

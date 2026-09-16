@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { get, isEmpty } from 'lodash';
 
 import {
   isNumeric,
@@ -35,8 +35,8 @@ export const getKokeetTaiLisanaytotData = ({
   kieleistykset,
   kieleistyksetSerialized,
 }) => {
-  const kokeetTaiLisanaytot = _.get(valintakoeValues, 'kokeetTaiLisanaytot');
-  if (_.isEmpty(kokeetTaiLisanaytot)) {
+  const kokeetTaiLisanaytot = get(valintakoeValues, 'kokeetTaiLisanaytot');
+  if (isEmpty(kokeetTaiLisanaytot)) {
     return undefined;
   }
 
@@ -54,7 +54,7 @@ export const getKokeetTaiLisanaytotData = ({
       tilaisuudet = [],
     }) => ({
       id,
-      tyyppiKoodiUri: _.get(tyyppi, 'value'),
+      tyyppiKoodiUri: get(tyyppi, 'value'),
       nimi: kieleistykset(nimi),
       metadata: {
         tietoja: kieleistyksetSerialized(tietoaHakijalle),

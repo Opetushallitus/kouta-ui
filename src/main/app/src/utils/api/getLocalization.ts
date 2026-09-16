@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { set } from 'lodash';
 
 export const getLocalization = async ({
   category = 'kouta',
@@ -15,13 +15,12 @@ export const getLocalization = async ({
 
   const resource = {};
 
-  // eslint-disable-next-line
   for (const translation of data) {
     const lng = translation.locale.toLowerCase();
     const { key, value } = translation;
 
     if (lng === locale && key && value) {
-      _.set(resource, key, value);
+      set(resource, key, value);
     }
   }
 

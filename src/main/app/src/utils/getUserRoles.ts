@@ -1,7 +1,7 @@
-import _ from 'lodash';
+import { isObject } from 'lodash';
 
 const getUserRoles = userdata => {
-  if (!_.isObject(userdata)) {
+  if (!isObject(userdata)) {
     return [];
   }
   const roleSet: Set<string> = new Set();
@@ -13,7 +13,7 @@ const getUserRoles = userdata => {
     });
   });
   const roles = Array.from(roleSet);
-  return _.isArray(roles) ? roles : [];
+  return Array.isArray(roles) ? roles : [];
 };
 
 export default getUserRoles;

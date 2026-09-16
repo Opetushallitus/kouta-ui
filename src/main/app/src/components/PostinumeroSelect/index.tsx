@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { size, trim } from 'lodash';
 
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
@@ -20,11 +20,11 @@ export const PostinumeroSelect = ({ ...props }) => {
 
   const loadOptions = useCallback(
     async (inputValue: string) => {
-      if (_.size(inputValue) === VALID_POSTINUMERO_LENGTH) {
+      if (size(inputValue) === VALID_POSTINUMERO_LENGTH) {
         const koodi = await getKoodi({
           httpClient,
           apiUrls,
-          koodi: `posti_${_.trim(inputValue)}`,
+          koodi: `posti_${trim(inputValue)}`,
           silent: true,
         });
 

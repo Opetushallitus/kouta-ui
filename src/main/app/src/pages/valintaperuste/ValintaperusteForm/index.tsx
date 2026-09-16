@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 
 import { POHJAVALINTA, DEFAULT_JULKAISUTILA } from '#/src/constants';
 
@@ -15,7 +15,7 @@ export const initialValues = (
   },
   perustiedot: {
     tyyppi: koulutustyyppi,
-    kieliversiot: _.isEmpty(kieliValinnat) ? ['fi'] : kieliValinnat,
+    kieliversiot: isEmpty(kieliValinnat) ? ['fi'] : kieliValinnat,
   },
   valintatavat: [{}],
 });

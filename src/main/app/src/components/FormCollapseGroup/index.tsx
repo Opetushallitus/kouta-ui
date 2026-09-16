@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { produce } from 'immer';
-import _ from 'lodash';
+import { get, isFunction, kebabCase } from 'lodash';
 
 import { FormCollapseProps } from '#/src/components/FormCollapse';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
@@ -60,7 +60,7 @@ export const FormCollapseGroup = ({
         // Get the 'section'-prop of the FormCollapse component
         // TODO: Enforce prop types
         const firstSection = child.props.section || '';
-        return _.get(formErrors, firstSection) != null;
+        return get(formErrors, firstSection) != null;
       }),
     [formErrors, flattenedChildren]
   );
@@ -121,14 +121,14 @@ export const FormCollapseGroup = ({
           onContinue:
             !isLast && enabled
               ? () => {
-                  if (_.isFunction(child.props.onContinue)) {
+                  if (isFunction(child.props.onContinue)) {
                     child.props.onContinue();
                   }
                   setSectionNeedsFocus(index + 1);
                 }
               : undefined,
           isLast,
-          key: `FormCollapse_${_.kebabCase(child?.props?.header)}`,
+          key: `FormCollapse_${kebabCase(child?.props?.header)}`,
           id: getFormCollapseId(index),
         };
         return React.cloneElement(child, childProps);

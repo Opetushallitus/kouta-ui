@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
-
 import useKoodisto from '#/src/hooks/useKoodisto';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
@@ -18,7 +16,9 @@ const useKoodi = koodiUri => {
   const { data } = koodistoQueryResult;
 
   const koodistoKoodi = useMemo(() => {
-    return _.isArray(data) ? data.find(k => k.koodiUri === koodi) : undefined;
+    return Array.isArray(data)
+      ? data.find(k => k.koodiUri === koodi)
+      : undefined;
   }, [data, koodi]);
 
   return { ...koodistoQueryResult, koodi: koodistoKoodi };

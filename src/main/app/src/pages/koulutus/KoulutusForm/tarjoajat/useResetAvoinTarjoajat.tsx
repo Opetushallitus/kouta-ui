@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useRef } from 'react';
 
-import _ from 'lodash';
+import { difference, uniq } from 'lodash';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useIsDirty } from '#/src/hooks/form';
@@ -52,7 +52,7 @@ export const useResetAvoinTarjoajat = ({
   useEffect(() => {
     if (isDirty && isAvoinKorkeakoulutusChanged) {
       if (isAvoinKorkeakoulutus) {
-        onChange(_.uniq([...value, ...hiddenOppilaitosOids.current]));
+        onChange(uniq([...value, ...hiddenOppilaitosOids.current]));
         hiddenOppilaitosOids.current = [];
       } else {
         const oidsToHide: Array<string> = [];
@@ -64,7 +64,7 @@ export const useResetAvoinTarjoajat = ({
         });
 
         // Jos isAvoinKorkeakoulutus vaihtuu falseksi, karsitaan pois tarjoajia
-        onChange(_.difference(value, oidsToHide));
+        onChange(difference(value, oidsToHide));
         hiddenOppilaitosOids.current = oidsToHide;
       }
     }

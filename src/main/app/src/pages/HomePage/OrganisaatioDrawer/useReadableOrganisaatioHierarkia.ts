@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 
-import _ from 'lodash';
+import { isString, uniq } from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
@@ -28,10 +28,10 @@ const pickKoutaRoleOid = role => {
 };
 
 const getKoutaRolesOrganisaatioOids = roles => {
-  return _.uniq(roles.map(pickKoutaRoleOid).filter(Boolean));
+  return uniq(roles.map(pickKoutaRoleOid).filter(Boolean));
 };
 
-const isValidNameSearch = name => _.isString(name) && name.length >= 3;
+const isValidNameSearch = name => isString(name) && name.length >= 3;
 
 const invalidOrganisaatioTypeMap = {
   organisaatiotyyppi_05: true,
@@ -43,7 +43,7 @@ const invalidOrganisaatioTypeMap = {
 const organisaatioHasCorrectType = (organisaatio: OrganisaatioModel) => {
   const { organisaatiotyyppiUris: organisaatiotyypit } = organisaatio;
 
-  if (!_.isArray(organisaatiotyypit)) {
+  if (!Array.isArray(organisaatiotyypit)) {
     return true;
   }
 
@@ -96,7 +96,7 @@ export const useAllowedOrgs = () => {
   );
 
   const hierarkia = useMemo(() => {
-    return _.isArray(data)
+    return Array.isArray(data)
       ? flatFilterHierarkia(
           data,
           org => organisaatioHasCorrectType(org) && hasRequiredRoles(org)
@@ -125,7 +125,7 @@ export const useReadableOrganisaatioHierarkia = ({
   }, [name, nameSearchEnabled]);
 
   const formattedName = useMemo(
-    () => (_.isString(name) ? name.toLowerCase() : undefined),
+    () => (isString(name) ? name.toLowerCase() : undefined),
     [name]
   );
 
@@ -150,7 +150,7 @@ export const useReadableOrganisaatioHierarkia = ({
   );
 
   const hierarkia = useMemo(() => {
-    return _.isArray(data)
+    return Array.isArray(data)
       ? filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch(
           data,
           org => organisaatioHasCorrectType(org) && hasRequiredRoles(org)

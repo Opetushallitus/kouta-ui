@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { forEach, merge } from 'lodash';
 
 import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
@@ -56,7 +56,7 @@ test('getFormValuesByHaku returns correct form values given haku', () => {
 
 test('getFormValuesByHaku returns correct form values given different hakulomake variations', () => {
   const valuesMuu = getFormValuesByHaku(
-    _.merge({}, baseHaku, {
+    merge({}, baseHaku, {
       hakulomaketyyppi: HAKULOMAKETYYPPI.MUU,
       hakulomakeLinkki: {
         fi: 'https://google.fi',
@@ -65,7 +65,7 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
   );
 
   const valuesEiHakua = getFormValuesByHaku(
-    _.merge({}, baseHaku, {
+    merge({}, baseHaku, {
       hakulomaketyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
       hakulomakeKuvaus: {
         fi: '<p>kuvaus</p>',
@@ -80,7 +80,7 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
 test('getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika', () => {
   expect(
     getFormValuesByHaku(
-      _.merge({}, baseHaku, {
+      merge({}, baseHaku, {
         metadata: {
           koulutuksenAlkamiskausi: {
             alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
@@ -103,7 +103,7 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
   };
 
   const values = getFormValuesByHaku(
-    _.merge({}, baseHaku, {
+    merge({}, baseHaku, {
       metadata: {
         koulutuksenAlkamiskausi: {
           alkamiskausityyppi: Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA,
@@ -118,7 +118,7 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
   );
   expect(values).toMatchSnapshot();
 
-  _.forEach(
+  forEach(
     values?.aikataulut.henkilokohtaisenSuunnitelmanLisatiedot,
     (lisatiedotEditorState, lisatiedotKey) => {
       expect(serializeEditorState(lisatiedotEditorState!)).toEqual(

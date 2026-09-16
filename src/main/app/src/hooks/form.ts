@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useEffect } from 'react';
 
-import _ from 'lodash';
+import { isEqual } from 'lodash';
 import {
   useField,
   useForm as useRffForm,
@@ -291,7 +291,7 @@ export function useSetFieldValue(
   const form = useFormName();
   const change = useChange();
   const currentValue = useFieldValue(name, form);
-  const valueHasChanged = !_.isEqual(currentValue, value);
+  const valueHasChanged = !isEqual(currentValue, value);
   useEffect(() => {
     if (condition && valueHasChanged) {
       change(name, value);

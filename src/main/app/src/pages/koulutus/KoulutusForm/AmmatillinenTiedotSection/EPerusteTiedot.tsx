@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { find, toString } from 'lodash';
 
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
@@ -31,10 +31,10 @@ export const EPerusteTiedot = ({
 
   const selectedEPeruste = useMemo(
     () =>
-      _.find(
+      find(
         ePerusteet,
         ePeruste =>
-          ePeruste.id.toString() === _.toString(selectedEPerusteId ?? '')
+          ePeruste.id.toString() === toString(selectedEPerusteId ?? '')
       ),
     [ePerusteet, selectedEPerusteId]
   );

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { mapValues } from 'lodash';
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
@@ -15,7 +15,6 @@ import {
   getKokeetTaiLisanaytotValues,
   getTilaisuusValues,
 } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
-import { mapValues } from '#/src/utils/lodashFpUncapped';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -50,7 +49,7 @@ const getHakukohteenLinjaValues = ({
 }) => ({
   linja: linja || LUKIO_YLEISLINJA,
   alinHyvaksyttyKeskiarvo: parseKeskiarvo(alinHyvaksyttyKeskiarvo),
-  lisatietoa: mapValues(parseEditorState, lisatietoa),
+  lisatietoa: _fp.mapValues(parseEditorState, lisatietoa),
   painotetutArvosanat: (painotetutArvosanat || []).map(arvosana => {
     return {
       painotettuOppiaine: {
@@ -120,7 +119,10 @@ export const getFormValuesByHakukohde = (
       ensikertalaismaara: isNumeric(aloituspaikat?.ensikertalaisille)
         ? aloituspaikat.ensikertalaisille.toString()
         : '',
-      aloituspaikkakuvaus: mapValues(parseEditorState, aloituspaikat?.kuvaus),
+      aloituspaikkakuvaus: _fp.mapValues(
+        parseEditorState,
+        aloituspaikat?.kuvaus
+      ),
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,
@@ -147,7 +149,7 @@ export const getFormValuesByHakukohde = (
           value,
         })
       ),
-      tarkenne: _.mapValues(
+      tarkenne: mapValues(
         pohjakoulutusvaatimusTarkenne || {},
         parseEditorState
       ),
@@ -158,7 +160,7 @@ export const getFormValuesByHakukohde = (
             value: valintaperusteId,
           }
         : undefined,
-      kynnysehto: _.mapValues(kynnysehto, parseEditorState),
+      kynnysehto: mapValues(kynnysehto, parseEditorState),
     },
     valintakokeet: {
       ...getKokeetTaiLisanaytotValues(
@@ -193,7 +195,7 @@ export const getFormValuesByHakukohde = (
         }) => ({
           tyyppi: { value: tyyppiKoodiUri },
           nimi,
-          kuvaus: _.mapValues(kuvaus, parseEditorState),
+          kuvaus: mapValues(kuvaus, parseEditorState),
           toimitusaika: toimitusaika || '',
           toimitustapa: getToimitustapaValues(toimitustapa, toimitusosoite),
         })

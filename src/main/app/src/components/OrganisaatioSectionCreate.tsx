@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { map, uniqBy } from 'lodash';
 
 import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
@@ -30,8 +30,8 @@ export const OrganisaatioSectionCreate = ({ organisaatioOid }) => {
 
     if (isOphVirkailija && !ophIsLoading && oph) orgs.unshift(oph);
 
-    return _.uniqBy(
-      _.map(orgs, ({ oid, nimi }) => ({
+    return uniqBy(
+      map(orgs, ({ oid, nimi }) => ({
         value: oid,
         label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
       })),

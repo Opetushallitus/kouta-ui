@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isError } from 'lodash';
 import { Machine, assign } from 'xstate';
 
 export const actionTypes = {
@@ -54,9 +54,7 @@ const createUploadingState = t => ({
         clearValue,
         assign({
           error: (ctx, e) =>
-            _.isError(e.data)
-              ? t('yleiset.kuvanLahetysVirhe')
-              : e?.data?.message,
+            isError(e.data) ? t('yleiset.kuvanLahetysVirhe') : e?.data?.message,
         }),
       ],
     },

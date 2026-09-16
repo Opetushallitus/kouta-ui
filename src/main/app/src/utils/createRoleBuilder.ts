@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isEmpty, isString, set } from 'lodash';
 
 import { OPH_PAAKAYTTAJA_ROLE } from '#/src/constants';
 import { OrganisaatioModel } from '#/src/types/domainTypes';
@@ -11,7 +11,7 @@ const UPDATE_ROLES = ['UPDATE', 'READ_UPDATE', 'CRUD'];
 const CREATE_ROLES = ['CRUD'];
 
 const getRoleName = role => {
-  if (!_.isString(role)) {
+  if (!isString(role)) {
     return undefined;
   }
 
@@ -37,7 +37,7 @@ const createRoleLookup = roles => {
       continue;
     }
 
-    _.set(lookup, [organisaatioOid, roleName], true);
+    set(lookup, [organisaatioOid, roleName], true);
   }
 
   return lookup;
@@ -46,17 +46,17 @@ const createRoleLookup = roles => {
 const getParentAndSelfOids = (
   organisaatioOrOids: OrganisaatioModel | Array<string> | string
 ) => {
-  if (_.isString(organisaatioOrOids)) {
+  if (isString(organisaatioOrOids)) {
     return [organisaatioOrOids];
   }
 
-  if (_.isArray(organisaatioOrOids)) {
+  if (Array.isArray(organisaatioOrOids)) {
     return organisaatioOrOids;
   }
 
   const parentOids = organisaatioOrOids?.parentOids;
   const organisaatioOid = organisaatioOrOids?.oid;
-  const parentsAndSelf = _.isEmpty(parentOids)
+  const parentsAndSelf = isEmpty(parentOids)
     ? [organisaatioOid]
     : [...parentOids, organisaatioOid];
 

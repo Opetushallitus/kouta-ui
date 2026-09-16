@@ -1,5 +1,14 @@
 import { differenceInMonths } from 'date-fns';
-import _ from 'lodash';
+import {
+  castArray,
+  forEach,
+  get,
+  includes,
+  isEmpty,
+  isNil,
+  set,
+  values as lodashValues,
+} from 'lodash';
 import _fp from 'lodash/fp';
 
 import {
@@ -9,7 +18,6 @@ import {
 } from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
 
-// TODO: Remove ErrorBuilder and replace all form validations with just _fp.flow(...validators)({values})
 class ErrorBuilder {
   constructor(
     values,
@@ -21,7 +29,9 @@ class ErrorBuilder {
     this.errors = {};
     this.registeredFields =
       registeredFields &&
-      _.values(registeredFields).map(v => getFieldNameWithoutLanguage(v.name)!);
+      lodashValues(registeredFields).map(
+        v => getFieldNameWithoutLanguage(v.name)!
+      );
   }
 
   private languages: Array<LanguageCode>;
@@ -30,7 +40,7 @@ class ErrorBuilder {
   private registeredFields: Array<string> | null;
 
   getValue(path) {
-    return _.get(this._values, path);
+    return get(this._values, path);
   }
 
   getValues() {
@@ -42,9 +52,7 @@ class ErrorBuilder {
   }
 
   isVisible(path: string) {
-    return (
-      _.isNil(this.registeredFields) || this.registeredFields.includes(path)
-    );
+    return isNil(this.registeredFields) || this.registeredFields.includes(path);
   }
 
   getErrors() {
@@ -52,7 +60,7 @@ class ErrorBuilder {
   }
 
   setError(path, value) {
-    _.set(this.errors, path, value ? _.castArray(value) : null);
+    set(this.errors, path, value ? castArray(value) : null);
   }
 
   validateExistenceOfDate(path, { message = null } = {}) {
@@ -92,12 +100,12 @@ class ErrorBuilder {
     const validURL = str => {
       try {
         const url = new URL(str);
-        return _.includes(['http:', 'https:'], url.protocol);
+        return includes(['http:', 'https:'], url.protocol);
       } catch {
         return false;
       }
     };
-    _.forEach(Object.entries(value || {}), ([lang, value]) => {
+    forEach(Object.entries(value || {}), ([lang, value]) => {
       if (!validURL(value)) {
         this.setError(`${path}.${lang}`, errorMessage);
       }
@@ -201,7 +209,7 @@ class ErrorBuilder {
         ? 'validointivirheet.listaVahintaanYksi'
         : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
 
-    if (!_.isArray(value) || value.length < min) {
+    if (!Array.isArray(value) || value.length < min) {
       this.setError(isFieldArray ? `${path}._error` : path, errorMessage);
     }
 
@@ -215,14 +223,14 @@ class ErrorBuilder {
 
     const value = this.getValue(path);
 
-    if (_.isArray(value)) {
+    if (Array.isArray(value)) {
       const errors = value.map(v => {
         // NOTE: ehdollinen näkyvyys *EI* toimi nestatuissa validaattoreissa (e.g. validateArrayn sisäiset validaattorit)
         // Jos tätä tarvitsee joskus tukea, täytyy errorbuilderille lisätä basepath tjms. mikä kertoo jos se on sisäinen eb
         return makeBuilder(new ErrorBuilder(v, this.languages), v).getErrors();
       });
 
-      if (errors.find(e => !_.isEmpty(e))) {
+      if (errors.find(e => !isEmpty(e))) {
         this.setError(path, errors);
       }
     }
@@ -238,7 +246,7 @@ class ErrorBuilder {
     const errorMessage = message || 'validointivirheet.kokonaislukuValilta';
     const value = this.getValue(path);
 
-    if (_.isNil(value) || value === '') {
+    if (isNil(value) || value === '') {
       if (optional) {
         return this;
       } else {

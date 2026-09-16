@@ -1,5 +1,4 @@
 import {
-  isArray,
   isEmpty,
   isObject,
   isString,
@@ -26,7 +25,7 @@ export const getFirstLanguageValue = (
 
   let priority = defaultPriority;
 
-  if (isArray(priorityArg)) {
+  if (Array.isArray(priorityArg)) {
     priority = [...priorityArg, ...defaultPriority];
   }
 
@@ -47,7 +46,7 @@ export const getFirstLanguageValue = (
 };
 
 export const arrayToTranslationObject = (arr, languageField = 'kieli') => {
-  return isArray(arr)
+  return Array.isArray(arr)
     ? arr.reduce((acc, curr) => {
         acc[
           isString(curr[languageField])

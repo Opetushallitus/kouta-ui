@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { mapValues, toString } from 'lodash';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { FormMode } from '#/src/constants';
@@ -19,7 +19,7 @@ export const getTilaisuusValues = ({
   postinumero: toKielistettyWithValueField(osoite?.postinumeroKoodiUri),
   alkaa: aika?.alkaa || '',
   paattyy: aika?.paattyy || '',
-  lisatietoja: _.mapValues(lisatietoja || {}, parseEditorState),
+  lisatietoja: mapValues(lisatietoja || {}, parseEditorState),
   jarjestamispaikka,
 });
 
@@ -29,7 +29,7 @@ export const getKokeetTaiLisanaytotValues = (
   formMode?: FormMode
 ): ValintakokeetValues => {
   return {
-    yleisKuvaus: _.mapValues(yleisKuvaus, kuvaus =>
+    yleisKuvaus: mapValues(yleisKuvaus, kuvaus =>
       kuvaus ? parseEditorState(kuvaus) : undefined
     ),
     kokeetTaiLisanaytot: valintakokeet.map(
@@ -51,18 +51,18 @@ export const getKokeetTaiLisanaytotValues = (
         tyyppi: toSelectValue(tyyppiKoodiUri),
         nimi,
         liittyyEnnakkovalmistautumista,
-        ohjeetEnnakkovalmistautumiseen: _.mapValues(
+        ohjeetEnnakkovalmistautumiseen: mapValues(
           ohjeetEnnakkovalmistautumiseen,
           parseEditorState
         ),
         erityisjarjestelytMahdollisia,
-        ohjeetErityisjarjestelyihin: _.mapValues(
+        ohjeetErityisjarjestelyihin: mapValues(
           ohjeetErityisjarjestelyihin,
           parseEditorState
         ),
-        tietoaHakijalle: _.mapValues(tietoja, parseEditorState),
+        tietoaHakijalle: mapValues(tietoja, parseEditorState),
         vahimmaispistemaara:
-          _.toString(vahimmaispisteet)?.replace('.', ',') || '',
+          toString(vahimmaispisteet)?.replace('.', ',') || '',
         tilaisuudet: tilaisuudet?.map(getTilaisuusValues),
       })
     ),

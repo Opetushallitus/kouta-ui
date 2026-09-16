@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { omit } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -39,7 +39,7 @@ const getInitialValues = (
     ? {
         ...getCopyValues(valintaperuste.id),
         ...getFormValuesByValintaperuste(
-          _.omit(valintaperuste, ['organisaatioOid']),
+          omit(valintaperuste, ['organisaatioOid']),
           FormMode.CREATE
         ),
         tila: DEFAULT_JULKAISUTILA,

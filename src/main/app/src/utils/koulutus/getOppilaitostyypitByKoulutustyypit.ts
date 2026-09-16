@@ -1,7 +1,5 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
-
 import { PREVENT_REFETCH_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 
@@ -32,7 +30,7 @@ export const useOppilaitostyypitByKoulutustyypit = (options = {}) => {
 
   const oppilaitostyypitByKoulutustyypit = useMemo(() => {
     const mappings: Array<Mapping> = [];
-    if (_.isArray(data)) {
+    if (Array.isArray(data)) {
       data.forEach((mapping: Mapping) =>
         mappings.push({
           koulutustyyppi: mapping.koulutustyyppi,

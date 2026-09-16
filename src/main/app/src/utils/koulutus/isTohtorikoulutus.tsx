@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { intersection, isEmpty } from 'lodash';
 
 import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 
@@ -14,7 +14,7 @@ export const isTohtorikoulutus = (
     koodiUriWithoutVersion(koodiuri)
   );
 
-  return !_.isEmpty(
-    _.intersection(koulutuskoodiuritWithoutVersion, tohtorikoulutuskoodiurit)
+  return !isEmpty(
+    intersection(koulutuskoodiuritWithoutVersion, tohtorikoulutuskoodiurit)
   );
 };

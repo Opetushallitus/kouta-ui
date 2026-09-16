@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import _ from 'lodash';
+import { difference, find, noop, sortBy, uniq } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
@@ -35,11 +35,11 @@ const useSplitOptions = ({
 
   const invalidOptions = useMemo(
     () =>
-      _.difference(
+      difference(
         allSeenValues.map(koodiUriWithoutVersion),
         osaamisalat.map(({ uri }) => koodiUriWithoutVersion(uri))
       ).map(koodiUri => {
-        const foundKoodi = _.find(
+        const foundKoodi = find(
           osaamisalatKoodistoData,
           koodi =>
             koodiUriWithoutVersion(koodi.koodiUri) ===
@@ -58,8 +58,8 @@ const useSplitOptions = ({
 
   return useMemo(
     () => ({
-      validOptions: _.sortBy(validOptions, 'label'),
-      invalidOptions: _.sortBy(invalidOptions, 'label'),
+      validOptions: sortBy(validOptions, 'label'),
+      invalidOptions: sortBy(invalidOptions, 'label'),
     }),
     [validOptions, invalidOptions]
   );
@@ -72,7 +72,7 @@ const useSplitValues = ({ osaamisalat, value }) =>
 
     value?.forEach(v => {
       if (
-        _.find(
+        find(
           osaamisalat,
           ({ uri }) => koodiUriWithoutVersion(uri) === koodiUriWithoutVersion(v)
         )
@@ -108,7 +108,7 @@ export const OsaamisalatInput = ({
   language,
   ePeruste,
   osaamisalatKoodistoData = [],
-  onChange = _.noop,
+  onChange = noop,
 }: OsaamisalatInputProps) => {
   const { t } = useTranslation();
 
@@ -117,7 +117,7 @@ export const OsaamisalatInput = ({
   const [allSeenValues, setAllSeenValues] = useState(() => value);
 
   useEffect(() => {
-    setAllSeenValues(allVals => _.uniq([...allVals, ...value]));
+    setAllSeenValues(allVals => uniq([...allVals, ...value]));
   }, [value]);
 
   const { validOptions, invalidOptions } = useSplitOptions({

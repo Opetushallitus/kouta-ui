@@ -36,7 +36,7 @@ import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 
 const makeCountLimitOnChange = (onChange, max) => items =>
-  _fp.isArray(items) && items.length <= max && onChange(items);
+  Array.isArray(items) && items.length <= max && onChange(items);
 
 const OpetusaikaField = createFormFieldComponent(
   OpetusaikaCheckboxGroup,

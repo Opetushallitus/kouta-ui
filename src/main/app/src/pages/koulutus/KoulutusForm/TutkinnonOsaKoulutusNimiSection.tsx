@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import { getTestIdProps, oneAndOnlyOne } from '#/src/utils';

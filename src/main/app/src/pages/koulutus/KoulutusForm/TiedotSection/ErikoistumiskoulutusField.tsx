@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import {
   createFormFieldComponent,
   selectMapProps,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { getTestIdProps } from '#/src/utils';
 
 import ErikoistumiskoulutusSelect from './ErikoistumiskoulutusSelect';

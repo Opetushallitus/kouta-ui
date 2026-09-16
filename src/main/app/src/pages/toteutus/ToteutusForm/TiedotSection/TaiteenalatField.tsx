@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 

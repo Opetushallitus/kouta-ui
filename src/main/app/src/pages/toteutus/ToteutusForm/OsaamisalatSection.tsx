@@ -2,7 +2,6 @@ import React from 'react';
 
 import _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { AbstractCollapse } from '#/src/components/AbstractCollapse';
@@ -13,6 +12,7 @@ import {
   FormFieldUrlInput,
   simpleMapProps,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import {
   Box,

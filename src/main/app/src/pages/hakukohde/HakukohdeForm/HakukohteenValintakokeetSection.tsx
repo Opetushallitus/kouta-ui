@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldEditor } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import Heading from '#/src/components/Heading';
 import { KokeetTaiLisanaytotFields } from '#/src/components/KokeetTaiLisanaytotFields';
 import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';

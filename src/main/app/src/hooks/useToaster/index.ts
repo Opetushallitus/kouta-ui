@@ -12,6 +12,17 @@ const OPEN_TOAST = 'OPEN_TOAST';
 const TOAST_MOUSEENTER = 'TOAST_MOUSEENTER';
 const TOAST_MOUSELEAVE = 'TOAST_MOUSELEAVE';
 
+type Toast = {
+  key?: string;
+  duration?: number;
+  ref?: ReturnType<typeof spawn>;
+  [key: string]: unknown;
+};
+
+type OpenToastEvent = { type: 'OPEN_TOAST'; toast: Toast };
+type CloseToastEvent = { type: 'CLOSE_TOAST'; key: string };
+type ToastMouseEnterEvent = { type: 'TOAST_MOUSEENTER'; key: string };
+
 const setToastTimer = (key, duration, callback) =>
   setTimeout(() => callback({ type: CLOSE_TOAST, key }), duration);
 
@@ -40,16 +51,16 @@ export const toastService = interpret(
       id: 'toastMachine',
       initial: 'empty',
       context: {
-        toasts: [],
+        toasts: [] as Array<Toast>,
       },
       states: {
         empty: {},
         showing: {
+          always: {
+            target: 'empty',
+            cond: 'noToasts',
+          },
           on: {
-            always: {
-              target: 'empty',
-              cond: 'noToasts',
-            },
             [CLOSE_TOAST]: {
               target: 'showing',
               actions: 'removeToast',
@@ -72,12 +83,16 @@ export const toastService = interpret(
     },
     {
       actions: {
-        forwardToToastActor: forwardTo((context, { key }) => key),
+        forwardToToastActor: forwardTo(
+          (_ctx, event) => (event as CloseToastEvent | ToastMouseEnterEvent).key
+        ),
         removeToast: assign({
-          toasts: (context, { key }) => _fp.reject({ key }, context.toasts),
+          toasts: (context, event) =>
+            _fp.reject({ key: (event as CloseToastEvent).key }, context.toasts),
         }),
         addToast: assign({
-          toasts: (context, { toast }) => {
+          toasts: (context, event) => {
+            const { toast } = event as OpenToastEvent;
             const key = toast?.key ?? _fp.uniqueId('toast_');
             const ownToastProps = _fp.omit(['ref', 'key']);
 

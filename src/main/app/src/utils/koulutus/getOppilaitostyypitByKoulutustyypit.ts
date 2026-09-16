@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 
+import { isUndefined } from 'lodash';
+
 import { PREVENT_REFETCH_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 
@@ -34,9 +36,9 @@ export const useOppilaitostyypitByKoulutustyypit = (options = {}) => {
       data.forEach((mapping: Mapping) =>
         mappings.push({
           koulutustyyppi: mapping.koulutustyyppi,
-          oppilaitostyypit: mapping.oppilaitostyypit.map(
-            oppilaitostyyppi => oppilaitostyyppi.split('#')[0]
-          ),
+          oppilaitostyypit: mapping.oppilaitostyypit
+            .map(oppilaitostyyppi => oppilaitostyyppi.split('#')[0])
+            .filter($ => !isUndefined($)),
         })
       );
     }

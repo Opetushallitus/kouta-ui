@@ -12,9 +12,7 @@ const getKayttoOikeusOmatTiedot = async ({ httpClient, apiUrls }) => {
 };
 
 export const useKayttoOikeusOmatTiedot = () => {
-  return useApiQuery<{
-    oidHenkilo: string;
-  }>(
+  return useApiQuery<typeof getKayttoOikeusOmatTiedot, { oidHenkilo: string }>(
     'getMe',
     getKayttoOikeusOmatTiedot,
     {},

@@ -148,20 +148,19 @@ const OsaamismerkkitiedotReadOnly = ({
   const logo = osaamismerkkiData?.kategoria?.liite?.binarydata;
 
   const voimassaoloLoppuu = osaamismerkkiData?.voimassaoloLoppuu;
-  const isDeprecated = voimassaoloLoppuu < now();
-  const voimassaoloLoppuuRow =
-    voimassaoloLoppuu && isDeprecated
-      ? {
-          title: t('yleiset.voimassaoloLoppuu'),
-          description: (
-            <StyledOsaamismerkkiVoimassaoloLoppunut
-              text={`${t(
-                'osaamismerkki.voimassaoloLoppunut'
-              )} ${getReadableDate(osaamismerkkiData?.voimassaoloLoppuu)}`}
-            />
-          ),
-        }
-      : null;
+  const isDeprecated = voimassaoloLoppuu && voimassaoloLoppuu < now();
+  const voimassaoloLoppuuRow = isDeprecated
+    ? {
+        title: t('yleiset.voimassaoloLoppuu'),
+        description: (
+          <StyledOsaamismerkkiVoimassaoloLoppunut
+            text={`${t(
+              'osaamismerkki.voimassaoloLoppunut'
+            )} ${getReadableDate(osaamismerkkiData?.voimassaoloLoppuu)}`}
+          />
+        ),
+      }
+    : null;
   return (
     <Box>
       <InfoBoxGrid
@@ -213,12 +212,12 @@ const OsaamismerkkitiedotReadOnly = ({
 };
 
 export const updateOptionsWithMaybeDeprecatedOsaamismerkki = (
-  options: Array<SelectOptions>,
+  options: Array<SelectOption>,
   osaamismerkkiId: string,
   osaamismerkkidata: Osaamismerkki,
   language: LanguageCode
 ) => {
-  const alreadyExists = some(options, ({ value }) => {
+  const alreadyExists = some(options, ({ value }: { value: string }) => {
     return (
       koodiUriWithoutVersion(value) === koodiUriWithoutVersion(osaamismerkkiId)
     );

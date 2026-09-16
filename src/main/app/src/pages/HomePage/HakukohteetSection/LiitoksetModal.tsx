@@ -20,8 +20,8 @@ import { useToteutukset } from '#/src/utils/toteutus/getToteutukset';
 const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [haku, setHaku] = useState();
-  const [toteutus, setToteutus] = useState();
+  const [haku, setHaku] = useState<SelectOption | null>(null);
+  const [toteutus, setToteutus] = useState<SelectOption | null>(null);
 
   const { data: haut } = useHaut({
     organisaatioOid,

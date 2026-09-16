@@ -45,7 +45,7 @@ export const useApiQuery = <
   const httpClient = useHttpClient();
 
   const queryFn = useCallback(
-    () => apiFn({ httpClient, apiUrls, ...props }),
+    () => apiFn({ httpClient, apiUrls, ...props } as Parameters<TApiFn>[0]),
     [apiFn, httpClient, apiUrls, props]
   );
 

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { set } from 'lodash-es';
 
 import { useKoodit } from '#/src/hooks/useKoodit';
-import { getPostinumeroByPostinumeroUri } from '#/src/utils';
+import { getPostinumeroByPostinumeroUri, isTruthy } from '#/src/utils';
 import { getPostinumeroKoodiLabel } from '#/src/utils/koodi/postinumero';
 
 export const useReadonlyKokeetJaTilaisuudet = (
@@ -13,7 +13,7 @@ export const useReadonlyKokeetJaTilaisuudet = (
   // NOTE: Etsitään tarvittavat postinumerokoodit käännöstä varten
   const neededPostinumeros = useMemo(
     () =>
-      tilaisuudet?.map(v => v.osoite?.postinumeroKoodiUri).filter(Boolean) ??
+      tilaisuudet?.map(v => v.osoite?.postinumeroKoodiUri).filter(isTruthy) ??
       [],
     [tilaisuudet]
   );

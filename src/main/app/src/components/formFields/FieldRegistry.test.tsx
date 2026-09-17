@@ -53,6 +53,7 @@ const Harness = ({ fields = [] }: { fields?: Array<string> }) => (
   <FieldRegistryProvider>
     <Probe />
     {fields.map((name, index) => (
+      // eslint-disable-next-line @eslint-react/no-array-index-key -- name is intentionally non-unique in some test cases (duplicate-name mounting), so index is the only safe key
       <Field key={index} name={name} />
     ))}
   </FieldRegistryProvider>

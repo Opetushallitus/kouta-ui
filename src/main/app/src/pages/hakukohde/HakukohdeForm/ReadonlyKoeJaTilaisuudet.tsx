@@ -84,6 +84,7 @@ export const ReadonlyKoeJaTilaisuudet = ({
               { aika, jarjestamispaikka, lisatietoja, osoite },
               tilaisuusIndex
             ) => (
+              // eslint-disable-next-line @eslint-react/no-array-index-key -- read-only display of fetched data, never reordered
               <React.Fragment key={`readonly-tilaisuus-${tilaisuusIndex}`}>
                 <Heading>
                   {t('koeTaiLisanaytto.tilaisuusTitle', {

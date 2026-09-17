@@ -16,6 +16,7 @@ type FormCollapseList = Array<React.ReactElement<FormCollapseProps>>;
 
 const getFlattenedChildren = children => {
   let res: FormCollapseList = [];
+  // eslint-disable-next-line @eslint-react/no-children-for-each -- flattens arbitrary Fragment-wrapped children; compound-component pattern, not a quick fix
   React.Children.forEach(children, child => {
     if (!child) {
       return;
@@ -114,7 +115,7 @@ export const FormCollapseGroup = ({
       {flattenedChildren.map((child, index) => {
         const isLast = index === flattenedChildren.length - 1;
         const childProps = {
-          ...(child?.props ?? {}),
+          ...child?.props,
           index,
           isOpen: collapsesOpen[index],
           onToggle: () => {
@@ -124,7 +125,7 @@ export const FormCollapseGroup = ({
             !isLast && enabled
               ? () => {
                   if (isFunction(child.props.onContinue)) {
-                    child.props.onContinue();
+                    child?.props?.onContinue?.();
                   }
                   setSectionNeedsFocus(index + 1);
                 }
@@ -133,6 +134,7 @@ export const FormCollapseGroup = ({
           key: `FormCollapse_${kebabCase(child?.props?.header)}`,
           id: getFormCollapseId(index),
         };
+        // eslint-disable-next-line @eslint-react/no-clone-element -- injects shared open/toggle state into each child; compound-component pattern, not a quick fix
         return React.cloneElement(child, childProps);
       })}
     </>

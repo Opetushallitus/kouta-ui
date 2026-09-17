@@ -110,7 +110,7 @@ const Container = styled.div<{
 const FlexWrapper = ({ children }: { children: Array<React.ReactNode> }) => (
   <Box display="flex" flexDirection="column" alignItems="center">
     {children.map((c, i) => (
-      // eslint-disable-next-line react/no-array-index-key
+      // eslint-disable-next-line @eslint-react/no-array-index-key -- fixed set of children passed in by the parent, never reordered/filtered
       <Box marginBottom={1} key={`wrapper-item-${i}`}>
         {c}
       </Box>

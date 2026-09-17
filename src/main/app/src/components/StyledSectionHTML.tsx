@@ -30,6 +30,7 @@ export default function StyledSectionHTML({ html, ...props }) {
   return (
     <StyledKuvaus
       {...props}
+      // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml
       dangerouslySetInnerHTML={{
         __html: html,
       }}

@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 
 import { mapValues, pickBy } from 'lodash-es';
+import { isTruthy } from '#/src/utils';
 
 // Lomakekohtainen rekisteri siitä, mitkä kentät ovat näkyvissä ja mitkä on poistettu
 // näkyvistä. Tallennusrunko rakennetaan tämän tiedon perusteella.
@@ -56,22 +57,22 @@ export const FieldRegistryProvider = ({
   // typistää kielipäätteen MOLEMMILTA puolilta, joten nimi.sv (poistunut) ja nimi.fi
   // (rekisteröity) osuvat samaan polkuun nimi - kieliversion poisto kirjoittaa nullin,
   // jonka rekisteröityjen kierros kirjoittaa takaisin.
-  const counts = useRef<Record<string, number>>({});
+  const countsRef = useRef<Record<string, number>>({});
 
   // Rekisteri rakennetaan kerran laiskalla alustimella: kaikki metodit sulkeutuvat
-  // vain counts-refin ylle, joten niiden identiteetti ei koskaan tarvitse muuttua.
+  // vain countsRefin ylle, joten niiden identiteetti ei koskaan tarvitse muuttua.
   // useState:n laiska muoto takaa tämän rakenteellisesti, eikä varaa erikseen
   // useCallbackia jokaiselle metodille tai useMemoa koko oliolle.
   const [registry] = useState<FieldRegistry>(() => {
     const selectFields = (matches: (count: number) => boolean): FieldSet =>
-      mapValues(pickBy(counts.current, matches), (_count, name) => ({
+      mapValues(pickBy(countsRef.current, matches), (_count, name) => ({
         name,
       }));
 
     return {
       registerFields: names => {
         names.forEach(name => {
-          counts.current[name] = (counts.current[name] ?? 0) + 1;
+          countsRef.current[name] = (countsRef.current[name] ?? 0) + 1;
         });
       },
 
@@ -79,7 +80,10 @@ export const FieldRegistryProvider = ({
         names.forEach(name => {
           // Avain JÄÄ nollana: juuri se kirjaa "oli näkyvissä, ei enää". Clamp
           // nollaan, jottei alilaskenta pääse negatiiviseksi ja piiloon.
-          counts.current[name] = Math.max((counts.current[name] ?? 0) - 1, 0);
+          countsRef.current[name] = Math.max(
+            (countsRef.current[name] ?? 0) - 1,
+            0
+          );
         });
       },
 
@@ -97,7 +101,7 @@ export const FieldRegistryProvider = ({
       // commitissa tapahtuneen piilotuksen, koska React ajaa lasten siivoukset
       // ennen vanhemman efektiä.
       clearUnregisteredFields: () => {
-        counts.current = pickBy(counts.current, count => count > 0);
+        countsRef.current = pickBy(countsRef.current, count => count > 0);
       },
     };
   });
@@ -125,7 +129,7 @@ export const useFieldRegistration = (names: Array<string>) => {
   // Tyhjät nimet pois: name on tarkoituksella valinnainen, koska osa kutsupaikoista
   // perii sen vanhemmalta - mutta jos se todella puuttuu, avaimeksi tulisi tyhjä
   // merkkijono ja getValuesForSaving kirjoittaisi {"": null} tallennusrunkoon.
-  const namesKey = names.filter(Boolean).join('\n');
+  const namesKey = names.filter(isTruthy).join('\n');
 
   useEffect(() => {
     if (!registry || !namesKey) {

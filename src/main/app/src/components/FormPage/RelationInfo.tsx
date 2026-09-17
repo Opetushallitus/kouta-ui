@@ -13,6 +13,7 @@ export const RelationInfoContainer = ({ children }) => {
       display="flex"
       marginBottom={2}
       justifyContent={
+        // eslint-disable-next-line @eslint-react/no-children-count -- correctly handles all valid children shapes (single element, array, fragments); a hand-rolled count would be less correct, not more
         React.Children.count(children) === 1 ? 'flex-end' : 'space-between'
       }
     >

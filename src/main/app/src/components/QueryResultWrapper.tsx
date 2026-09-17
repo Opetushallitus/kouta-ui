@@ -5,6 +5,7 @@ import { QueryObserverResult } from 'react-query';
 import { Spin } from '#/src/components/virkailija';
 
 import ErrorAlert from './ErrorAlert';
+import { isTruthy } from '../utils';
 
 export const getCombinedQueryStatus = (
   responses: Array<QueryObserverResult> = []
@@ -36,7 +37,7 @@ export const QueryResultWrapper = ({
   if (Array.isArray(queryResult)) {
     status = getCombinedQueryStatus(queryResult);
     isFetching = queryResult.some(({ isFetching }) => isFetching);
-    errors = queryResult?.map(({ error }) => error).filter(Boolean);
+    errors = queryResult?.map(({ error }) => error).filter(isTruthy);
     refetch = () => queryResult.forEach(({ refetch }) => refetch());
   } else {
     status = queryResult?.status;

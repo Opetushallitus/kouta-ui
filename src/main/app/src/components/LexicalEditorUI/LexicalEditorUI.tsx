@@ -37,7 +37,7 @@ const HISTORY_MERGE = { tag: HISTORY_MERGE_TAG };
 // alkutilaa, joten samalla katoaa käyttäjän ENSIMMÄINEN muokkaus, jos se osuu editorin
 // ensimmäiseen committiin - hiljaa, kenttä vain puuttuu tallennusrungosta.
 //
-// Alustuksen vaimennukseen vartijaa ei tarvita: UpdatePluginin isInitialMount ohittaa
+// Alustuksen vaimennukseen vartijaa ei tarvita: UpdatePluginin isInitialMountRef ohittaa
 // mountin, ohjelmalliset synkat on merkitty history-merge-tagilla, eikä mount-commit
 // muutenkaan päädy kuuntelijalle.
 const EditorChangePlugin = ({ onChange }: { onChange?: any }) => {
@@ -72,12 +72,12 @@ const EditorChangePlugin = ({ onChange }: { onChange?: any }) => {
    eg. when changing language, the state updates accordingly. */
 const UpdatePlugin = ({ value }: { value?: EditorState }) => {
   const [editor] = useLexicalComposerContext();
-  const isInitialMount = useRef(true);
+  const isInitialMountRef = useRef(true);
 
   useEffect(() => {
     // Skip the initial mount to avoid triggering onChange during setup
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false;
       return;
     }
 

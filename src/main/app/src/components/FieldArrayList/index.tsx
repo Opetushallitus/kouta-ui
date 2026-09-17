@@ -66,6 +66,7 @@ export function FieldArrayList<T>({
       <Item
         isFirst={index === 0}
         isLast={index === fields.length - 1}
+        // eslint-disable-next-line @eslint-react/no-array-index-key -- react-final-form-arrays ei tarjoa pysyvää rivi-id:tä, kentän polku itsessään on indeksiperustainen
         key={index}
         hasDivider={hasDivider}
       >

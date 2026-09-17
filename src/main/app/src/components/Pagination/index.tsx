@@ -32,7 +32,7 @@ const PageCount = styled(Typography)`
 `;
 
 const getPageOptions = pageCount =>
-  new Array(pageCount).map((v, index) => ({
+  [...new Array(pageCount)].map((v, index) => ({
     value: index,
     label: index + 1,
   }));

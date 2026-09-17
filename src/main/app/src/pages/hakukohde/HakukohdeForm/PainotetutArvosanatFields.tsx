@@ -24,6 +24,7 @@ const PainotetutArvosanatFields = ({ fields }) => {
           <Box
             display="flex"
             width={0.6}
+            // eslint-disable-next-line @eslint-react/no-array-index-key -- react-final-form-arrays ei tarjoa pysyvää rivi-id:tä, kentän polku itsessään on indeksiperustainen
             key={index}
             marginTop={2}
             {...getTestIdProps(`painotettuOppiaine-${index}`)}

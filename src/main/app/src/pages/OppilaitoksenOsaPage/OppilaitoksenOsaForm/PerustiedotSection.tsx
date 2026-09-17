@@ -15,7 +15,7 @@ import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { OrganisaatioModel } from '#/src/types/domainTypes';
-import { getTestIdProps } from '#/src/utils';
+import { getTestIdProps, isTruthy } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const InfoLabel = props => (
@@ -117,7 +117,7 @@ const OrganisaatioSection = ({ organisaatio, t, language }) => {
           </Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{opetuskielet.filter(Boolean).join(', ')}</Typography>
+          <Typography>{opetuskielet.filter(isTruthy).join(', ')}</Typography>
         </InfoValue>
       </Box>
     </>

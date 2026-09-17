@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { flow, sortBy, sortedUniqBy } from 'lodash';
+import { flow, sortBy, sortedUniqBy } from 'lodash-es';
 
 import { useFieldValue } from '#/src/hooks/form';
 import { useOppilaitoksetForAvoinKorkeakoulutus } from '#/src/hooks/useOppilaitoksetForAvoinKorkeakoulutus';

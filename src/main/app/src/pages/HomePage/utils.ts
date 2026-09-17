@@ -1,4 +1,4 @@
-import { isNumber, isObject } from 'lodash';
+import { isNumber, isObject } from 'lodash-es';
 
 import {
   KOULUTUS_ROLE,
@@ -17,7 +17,7 @@ export const parseSort = sort => {
 };
 
 type ValueObject = {
-  value?: unknown;
+  value: string;
 };
 
 const selectValueToSimpleValue = (

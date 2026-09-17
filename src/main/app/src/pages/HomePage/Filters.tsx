@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { flow, isEqual, map, reject, values } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import Select from '#/src/components/Select';
@@ -26,13 +26,14 @@ const NAME_INPUT_DEBOUNCE_TIME = 300;
 const useTilaOptions = t =>
   useMemo(
     () =>
-      _fp.flow(
-        _fp.values,
-        _fp.remove(_fp.isEqual(JULKAISUTILA.POISTETTU)),
-        _fp.map(tila => ({
-          label: t(getJulkaisutilaTranslationKey(tila)),
-          value: tila,
-        }))
+      flow(
+        values,
+        arr => reject(arr, v => isEqual(v, JULKAISUTILA.POISTETTU)),
+        arr =>
+          map(arr, tila => ({
+            label: t(getJulkaisutilaTranslationKey(tila)),
+            value: tila,
+          }))
       )(JULKAISUTILA),
     [t]
   );

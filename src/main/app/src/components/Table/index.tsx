@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 import styled, { css } from 'styled-components';
 
 import { Icon } from '#/src/components/virkailija';

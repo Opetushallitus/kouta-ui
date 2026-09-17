@@ -1,5 +1,5 @@
 import { Page, expect, Locator, test } from '@playwright/test';
-import { isArray, merge } from 'lodash';
+import { isArray, merge } from 'lodash-es';
 
 import koulutus from '#/playwright/fixtures/koulutus';
 import {

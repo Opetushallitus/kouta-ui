@@ -1,4 +1,4 @@
-import { isEmpty, isFunction } from 'lodash';
+import { isEmpty, isFunction } from 'lodash-es';
 
 function filterTree<Item extends { children?: Array<Item> }>(
   tree: Array<Item> | undefined,

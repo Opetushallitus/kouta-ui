@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { flow, sortBy, isNil } from 'lodash';
+import { flow, sortBy, isNil } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import ListSpin from '#/src/components/ListSpin';

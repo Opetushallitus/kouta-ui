@@ -1,5 +1,5 @@
 import { useActor } from '@xstate/react';
-import _fp from 'lodash/fp';
+import { isEqual, omit, reject, uniqueId } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { createMachine, interpret, assign, spawn, forwardTo } from 'xstate';
 
@@ -88,20 +88,18 @@ export const toastService = interpret(
         ),
         removeToast: assign({
           toasts: (context, event) =>
-            _fp.reject({ key: (event as CloseToastEvent).key }, context.toasts),
+            reject(context.toasts, { key: (event as CloseToastEvent).key }),
         }),
         addToast: assign({
           toasts: (context, event) => {
             const { toast } = event as OpenToastEvent;
-            const key = toast?.key ?? _fp.uniqueId('toast_');
-            const ownToastProps = _fp.omit(['ref', 'key']);
+            const key = toast?.key ?? uniqueId('toast_');
+            const ownToastProps = obj => omit(obj, ['ref', 'key']);
 
             return [
               // Hide all existing toasts, that are visually equal to the new one
-              ..._fp.reject(
-                oldToast =>
-                  _fp.isEqual(ownToastProps(oldToast), ownToastProps(toast)),
-                context.toasts
+              ...reject(context.toasts, oldToast =>
+                isEqual(ownToastProps(oldToast), ownToastProps(toast))
               ),
               {
                 ...toast,

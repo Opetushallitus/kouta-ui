@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { mapValues } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
@@ -25,7 +25,7 @@ import {
 import PainotetutArvosanatFields from './PainotetutArvosanatFields';
 
 type Props = {
-  name: TranslatedField;
+  name: string;
   language: LanguageCode;
   toteutus: ToteutusModel;
   nimiFieldPath: string;
@@ -35,10 +35,7 @@ const koodiToKoodiUri = koodi => `${koodi?.koodiUri}#${koodi.versio}`;
 
 const mapKoodiToTranslateable = koodi => ({
   koodiUri: koodiToKoodiUri(koodi),
-  nimi: _fp.mapValues(
-    _fp.prop('nimi'),
-    arrayToTranslationObject(koodi?.metadata)
-  ),
+  nimi: mapValues(arrayToTranslationObject(koodi?.metadata), v => v?.nimi),
 });
 
 const useLukiolinjaKoodit = toteutus => {

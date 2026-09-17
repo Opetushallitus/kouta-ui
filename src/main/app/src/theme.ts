@@ -1,5 +1,5 @@
 import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
-import { get, isUndefined, merge, range } from 'lodash';
+import { get, isUndefined, merge, range } from 'lodash-es';
 import { mix } from 'polished';
 
 const breakpoints = ['576px', '768px', '992px'];

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { difference, find, noop, sortBy, uniq } from 'lodash';
+import { difference, find, noop, sortBy, uniq } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { FieldGroup } from '#/src/components/FieldGroup';

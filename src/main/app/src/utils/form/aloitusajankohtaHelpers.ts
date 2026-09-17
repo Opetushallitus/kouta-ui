@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { mapValues } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { AjankohtaFields } from '#/src/types/formTypes';
@@ -39,8 +39,9 @@ export const getAjankohtaFields = (
     vuosi: toSelectValue(koulutuksenAlkamisvuosi),
     tarkkaAlkaa: koulutuksenAlkamispaivamaara,
     tarkkaPaattyy: koulutuksenPaattymispaivamaara,
-    henkilokohtaisenSuunnitelmanLisatiedot: _fp.mapValues(parseEditorState)(
-      henkilokohtaisenSuunnitelmanLisatiedot
+    henkilokohtaisenSuunnitelmanLisatiedot: mapValues(
+      henkilokohtaisenSuunnitelmanLisatiedot,
+      parseEditorState
     ),
     ajankohtaKaytossa: Boolean(alkamiskausityyppi),
   };

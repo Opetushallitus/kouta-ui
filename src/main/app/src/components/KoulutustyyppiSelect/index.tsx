@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-import { cloneDeep, isEmpty, map, some } from 'lodash';
+import { cloneDeep, isEmpty, map, some } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 

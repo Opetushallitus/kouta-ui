@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import { sortBy } from 'lodash-es';
 
 type Tree = Array<{
   [x: string]: unknown;

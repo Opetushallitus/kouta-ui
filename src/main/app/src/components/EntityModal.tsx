@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import { noop } from 'lodash';
+import { noop } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '#/src/components/Modal';

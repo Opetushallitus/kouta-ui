@@ -1,5 +1,4 @@
-import { groupBy } from 'lodash';
-import _fp from 'lodash/fp';
+import { groupBy, mapValues, reduce, toString, values } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { JULKAISUTILA, KOULUTUSTYYPPI, MaaraTyyppi } from '#/src/constants';
@@ -131,10 +130,7 @@ export const getFormValuesByKoulutus = (
     lisatiedot: {
       osioKuvaukset: lisatiedot.reduce((acc, curr) => {
         if (curr.otsikkoKoodiUri) {
-          acc[curr.otsikkoKoodiUri] = _fp.mapValues(
-            parseEditorState,
-            curr.teksti
-          );
+          acc[curr.otsikkoKoodiUri] = mapValues(curr.teksti, parseEditorState);
         }
         return acc;
       }, {}),
@@ -167,8 +163,9 @@ export const getFormValuesByKoulutus = (
       })
     ),
     tutkinnonosat: {
-      osat: _fp.values(
-        _fp.reduce(
+      osat: values(
+        reduce(
+          tutkinnonOsat,
           (
             grouped,
             { ePerusteId, koulutusKoodiUri, tutkinnonosaId, tutkinnonosaViite }
@@ -180,20 +177,20 @@ export const getFormValuesByKoulutus = (
               osat: [
                 ...(grouped?.[`${koulutusKoodiUri}_${ePerusteId}`]?.osat || []),
                 {
-                  value: _fp.toString(tutkinnonosaId),
-                  viite: _fp.toString(tutkinnonosaViite),
+                  value: toString(tutkinnonosaId),
+                  viite: toString(tutkinnonosaViite),
                 },
               ],
             },
           }),
           {}
-        )(tutkinnonOsat)
+        )
       ),
       nimi,
     },
     description: {
-      kuvaus: _fp.mapValues(parseEditorState, kuvaus),
-      osaamistavoitteet: _fp.mapValues(parseEditorState, osaamistavoitteet),
+      kuvaus: mapValues(kuvaus, parseEditorState),
+      osaamistavoitteet: mapValues(osaamistavoitteet, parseEditorState),
       linkkiEPerusteisiin,
     },
     esikatselu,

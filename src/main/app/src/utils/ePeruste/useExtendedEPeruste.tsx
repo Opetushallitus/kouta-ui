@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { get, isString, map, mapValues } from 'lodash';
+import { get, isString, map, mapValues } from 'lodash-es';
 
 import { sanitizeHTML } from '#/src/utils';
 import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';

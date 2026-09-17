@@ -1,4 +1,4 @@
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 import { setLightness } from 'polished';
 import { css } from 'styled-components';
 

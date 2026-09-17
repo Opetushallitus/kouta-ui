@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { map } from 'lodash';
+import { map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 

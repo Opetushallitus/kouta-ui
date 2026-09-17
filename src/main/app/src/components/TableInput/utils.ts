@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { get, set } from 'lodash';
+import { get, set } from 'lodash-es';
 
 export type TableColumn = {
   index?: number;

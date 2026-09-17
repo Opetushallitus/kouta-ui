@@ -1,4 +1,4 @@
-import { isObject, mapValues } from 'lodash';
+import { isObject, mapValues } from 'lodash-es';
 import { match, P } from 'ts-pattern';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';

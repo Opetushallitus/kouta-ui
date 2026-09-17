@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { get, isNil, isString, set, uniq } from 'lodash';
+import { get, isNil, isString, set, uniq } from 'lodash-es';
 
 import { ENTITY } from '#/src/constants';
 import { KoutaErrorData, KoutaErrorResponse } from '#/src/types/formTypes';

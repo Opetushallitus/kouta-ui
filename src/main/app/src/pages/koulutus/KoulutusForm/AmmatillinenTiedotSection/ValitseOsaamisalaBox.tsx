@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _fp from 'lodash/fp';
+import { find, isEmpty, isNil, map, pick } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import Anchor from '#/src/components/Anchor';
@@ -51,10 +51,10 @@ const getOsaamisalaOptions = (
   osaamisalat?: Array<Osaamisala>,
   language?: LanguageCode
 ) =>
-  _fp.map(({ arvo, nimi }) => ({
+  map(osaamisalat ?? [], ({ arvo, nimi }) => ({
     label: getLanguageValue(nimi, language),
     value: arvo,
-  }))(osaamisalat ?? []);
+  }));
 
 export const ValitseOsaamisalaBox = ({
   fieldName,
@@ -104,9 +104,10 @@ export const ValitseOsaamisalaBox = ({
     [language, osaamisalat]
   );
 
-  const selectedOsaamisalaData = _fp.find(
+  const selectedOsaamisalaData = find(
+    osaamisalat,
     ({ arvo }: Osaamisala) => arvo === selectedOsaamisala?.value
-  )(osaamisalat);
+  );
 
   /* Get laajuus for selected osaamisala */
   const ePerusteRakenneOsat = ePerusteRakenne?.osat;
@@ -128,10 +129,11 @@ export const ValitseOsaamisalaBox = ({
 
   const isDirty = useIsDirty();
 
-  const perusteenOsaId = _fp.find(
+  const perusteenOsaId = find(
+    ePerusteSisalto?.lapset,
     ({ _perusteenOsa }: SisaltoLapsi) =>
       Number(_perusteenOsa) === Number(selectedOsaamisalaKuvausId)
-  )(ePerusteSisalto?.lapset)?.id;
+  )?.id;
 
   useEffect(() => {
     if (isDirty && ePerusteHasChanged) {
@@ -141,14 +143,14 @@ export const ValitseOsaamisalaBox = ({
 
   useEffect(() => {
     if (isDirty && osaamisalaChanged) {
-      const selectedOsaamisalaData = _fp.find(
-        osaamisala => osaamisala?.arvo === selectedOsaamisala?.value,
-        osaamisalat
+      const selectedOsaamisalaData = find(
+        osaamisalat,
+        osaamisala => osaamisala?.arvo === selectedOsaamisala?.value
       );
       if (selectedOsaamisalaData) {
         change(
           'information.nimi',
-          _fp.pick(languages, selectedOsaamisalaData?.nimi)
+          pick(selectedOsaamisalaData?.nimi, languages)
         );
       } else {
         change('information.nimi', {});
@@ -171,9 +173,7 @@ export const ValitseOsaamisalaBox = ({
           name={fieldName}
           label={t('koulutuslomake.valitseOsaamisala')}
           options={osaamisalaOptions}
-          disabled={
-            disabled || _fp.isNil(osaamisalat) || _fp.isEmpty(osaamisalat)
-          }
+          disabled={disabled || isNil(osaamisalat) || isEmpty(osaamisalat)}
         />
       </Box>
       {isLoading ? (

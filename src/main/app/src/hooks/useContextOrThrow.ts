@@ -1,6 +1,6 @@
 import { Context, useContext } from 'react';
 
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 
 export const valueOrThrow = <T>(
   val: T | null | undefined,

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { head, isFunction } from 'lodash';
+import { head, isFunction } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 

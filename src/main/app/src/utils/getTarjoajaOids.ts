@@ -1,4 +1,4 @@
-import { isEmpty, uniq, without } from 'lodash';
+import { isEmpty, uniq, without } from 'lodash-es';
 
 import iterateTree from '#/src/utils/iterateTree';
 

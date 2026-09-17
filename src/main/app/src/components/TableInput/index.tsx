@@ -1,6 +1,6 @@
 import React, { ClipboardEventHandler, Component, RefObject } from 'react';
 
-import { get, isFunction, isObject } from 'lodash';
+import { get, isFunction, isObject } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
@@ -424,7 +424,7 @@ class TableInput extends Component<TableInputProps> {
           <EditRowPlaceholder>
             <Invisible>0</Invisible>
           </EditRowPlaceholder>
-          {[...new Array(numberOfColumns)].map((v, columnIndex) => (
+          {new Array(numberOfColumns).map((v, columnIndex) => (
             <EditColumn
               onAddColumnLeft={this.makeOnAddColumnLeft({ columnIndex })}
               onAddColumnRight={this.makeOnAddColumnRight({

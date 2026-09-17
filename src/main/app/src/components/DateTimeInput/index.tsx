@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
-import { isString } from 'lodash';
+import { isString } from 'lodash-es';
 
 import { DatePickerInput } from '#/src/components/DatePickerInput';
 import TimeInput from '#/src/components/TimeInput';

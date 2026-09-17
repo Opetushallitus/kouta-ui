@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { isEmpty, toNumber } from 'lodash';
+import { isEmpty, toNumber } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 

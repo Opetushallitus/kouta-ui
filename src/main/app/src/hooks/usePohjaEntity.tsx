@@ -1,4 +1,4 @@
-import { capitalize } from 'lodash';
+import { capitalize } from 'lodash-es';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 

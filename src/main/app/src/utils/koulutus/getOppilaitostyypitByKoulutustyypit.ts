@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { isUndefined } from 'lodash';
+import { isUndefined } from 'lodash-es';
 
 import { PREVENT_REFETCH_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';

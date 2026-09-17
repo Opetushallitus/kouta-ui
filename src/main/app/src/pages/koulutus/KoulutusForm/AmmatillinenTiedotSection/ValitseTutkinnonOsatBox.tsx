@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 
-import { filter, isEmpty, isNil, map, some, toNumber } from 'lodash';
+import { filter, isEmpty, isNil, map, some, toNumber } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { usePrevious } from 'react-use';
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { isFunction, isString } from 'lodash';
+import { isFunction, isString } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 

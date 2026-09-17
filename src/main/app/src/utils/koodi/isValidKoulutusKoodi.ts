@@ -1,5 +1,5 @@
 import { isBefore, parseISO, endOfToday } from 'date-fns';
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 
 export const isValidKoulutusKoodi = ({
   koodiArvo,

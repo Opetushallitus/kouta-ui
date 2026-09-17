@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { isEmpty } from 'lodash-es';
 
 import {
   pickTranslations,
@@ -12,7 +12,7 @@ const getSoraKuvausByFormValues = values => {
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
-    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
+    externalId: isEmpty(values?.externalId) ? null : values?.externalId,
     tila,
     muokkaaja,
     nimi: pickTranslations(values?.tiedot?.nimi, kielivalinta),
@@ -20,7 +20,7 @@ const getSoraKuvausByFormValues = values => {
     kielivalinta,
     metadata: {
       koulutusalaKoodiUri: koulutusala?.value,
-      koulutusKoodiUrit: koulutukset?.map(_fp.prop('value')),
+      koulutusKoodiUrit: koulutukset?.map(({ value }) => value),
       kuvaus: pickAndSerializeTranslations(
         values?.tiedot?.kuvaus,
         kielivalinta

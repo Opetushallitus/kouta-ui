@@ -1,4 +1,4 @@
-import { forEach, merge } from 'lodash';
+import { forEach, merge } from 'lodash-es';
 
 import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';

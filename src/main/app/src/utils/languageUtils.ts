@@ -6,7 +6,7 @@ import {
   pickBy,
   toPairs,
   zipObject,
-} from 'lodash';
+} from 'lodash-es';
 import { match } from 'ts-pattern';
 
 import { Osoite } from '#/src/types/domainTypes';

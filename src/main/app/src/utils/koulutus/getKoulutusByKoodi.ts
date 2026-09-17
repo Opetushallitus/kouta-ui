@@ -1,4 +1,4 @@
-import { isNil, keyBy, mapValues, maxBy } from 'lodash';
+import { isNil, keyBy, mapValues, maxBy } from 'lodash-es';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isString, noop } from 'lodash';
+import { isString, noop } from 'lodash-es';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 

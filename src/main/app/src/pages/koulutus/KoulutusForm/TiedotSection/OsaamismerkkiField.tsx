@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { TFunction } from 'i18next';
-import { isEmpty, lowerCase, some, now } from 'lodash';
+import { isEmpty, lowerCase, some, now } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useUnmount } from 'react-use';
 import styled, { css } from 'styled-components';

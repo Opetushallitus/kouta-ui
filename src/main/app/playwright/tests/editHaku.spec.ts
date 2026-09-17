@@ -1,6 +1,6 @@
 import { Page, expect, test } from '@playwright/test';
 import { sub } from 'date-fns';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import haku from '#/playwright/fixtures/haku';
 import {

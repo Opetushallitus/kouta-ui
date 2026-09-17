@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { every } from 'lodash';
+import { every } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from 'react-query';
 import styled from 'styled-components';

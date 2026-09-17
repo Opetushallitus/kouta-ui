@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useEffect } from 'react';
 
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import {
   useField,
   useForm as useRffForm,
@@ -194,7 +194,7 @@ export function useSubmitErrors<TErrors = Record<string, any>>(): TErrors {
 //
 // Ero ei ole teoreettinen: ToteutusForm/TiedotSection.tsx asettaa
 // isPieniOsaamiskokonaisuuden oletusarvon efektissä, jonka ehto on
-// _fp.isUndefined(currValue). Muotoiltuna arvo oli '', ehto ei täyttynyt koskaan,
+// isUndefined(currValue). Muotoiltuna arvo oli '', ehto ei täyttynyt koskaan,
 // eikä kenttää asetettu. Identiteettimuotoilu kytkee oletusmuotoilun pois tästä
 // lukijasta; kenttien renderöintiin se ei vaikuta, se on eri useField-kutsu.
 const useRawValue = (name: string) =>

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { get } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
@@ -23,9 +23,9 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
       value,
       label: label
         ? label
-        : _fp.get(
-            'label',
-            osiotOptions.find(({ value: v }) => v === value)
+        : get(
+            osiotOptions.find(({ value: v }) => v === value),
+            'label'
           ) || null,
     }));
   }, [osiot, osiotOptions]);

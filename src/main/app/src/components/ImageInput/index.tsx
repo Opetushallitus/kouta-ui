@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 
 import { type TFunction } from 'i18next';
-import { noop } from 'lodash';
+import { noop } from 'lodash-es';
 import prettyBytes from 'pretty-bytes';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';

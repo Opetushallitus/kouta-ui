@@ -1,5 +1,12 @@
 import { TFunction } from 'i18next';
-import { capitalize, map, findIndex, isEmpty, isUndefined, uniq } from 'lodash';
+import {
+  capitalize,
+  map,
+  findIndex,
+  isEmpty,
+  isUndefined,
+  uniq,
+} from 'lodash-es';
 import { match } from 'ts-pattern';
 
 import { LANGUAGES, KOULUTUSTYYPPI } from '#/src/constants';

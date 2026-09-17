@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { identity, isNaN, isNil, isNumber, noop, toString } from 'lodash';
+import { identity, isNaN, isNil, isNumber, noop, toString } from 'lodash-es';
 
 import { Input, InputProps } from '#/src/components/virkailija';
 import { parseFloatComma } from '#/src/utils';

@@ -1,4 +1,4 @@
-import { flow, fromPairs, reject, size, toPairs } from 'lodash';
+import { flow, fromPairs, reject, size, toPairs } from 'lodash-es';
 import { actions, ActorRefFrom, createMachine, spawn } from 'xstate';
 
 import { JULKAISUTILA } from '#/src/constants';

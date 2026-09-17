@@ -6,10 +6,10 @@ import {
   includes,
   isEmpty,
   isNil,
+  pick,
   set,
   values as lodashValues,
-} from 'lodash';
-import _fp from 'lodash/fp';
+} from 'lodash-es';
 
 import {
   formValueExists as exists,
@@ -172,7 +172,7 @@ class ErrorBuilder {
       return this;
     }
 
-    const pickTranslations = _fp.pick(languages || []);
+    const pickTranslations = v => pick(v, languages || []);
     const hasNonemptyKieliversio = v =>
       v &&
       Object.values(pickTranslations(v)).some(n => String(n).trim().length > 0);

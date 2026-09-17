@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { filter, flow, map, size, values } from 'lodash';
+import { filter, flow, map, size, values } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { match } from 'ts-pattern';

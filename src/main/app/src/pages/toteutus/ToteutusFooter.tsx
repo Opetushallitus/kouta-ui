@@ -10,7 +10,10 @@ import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
+import { HttpClient } from '#/src/httpClient';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import { ApiUrls } from '#/src/urls';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
@@ -54,13 +57,26 @@ export const ToteutusFooter = ({
     formMode === FormMode.CREATE ? createToteutus : updateToteutus;
 
   const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
+    async ({
+      values,
+      httpClient,
+      apiUrls,
+    }: {
+      values: ToteutusFormValues;
+      httpClient: HttpClient;
+      apiUrls: ApiUrls;
+    }) => {
       const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,
         form.unregisteredFields,
         initialValues
       );
+
+      // koulutustyyppi tulee aina koulutukselta: FormPage näyttää footerin vasta
+      // kun sekä koulutus- että toteutuskysely ovat ladanneet, joten se on tässä
+      // aina jo ratkennut kelvolliseksi arvoksi.
+      const resolvedKoulutustyyppi = koulutustyyppi as KOULUTUSTYYPPI;
 
       const { oid, warnings } = await dataSendFn({
         httpClient,
@@ -70,7 +86,7 @@ export const ToteutusFooter = ({
             ? {
                 ...getToteutusByFormValues({
                   ...valuesToSend,
-                  koulutustyyppi,
+                  koulutustyyppi: resolvedKoulutustyyppi,
                 }),
                 koulutusOid: koulutus?.oid,
               }
@@ -78,7 +94,7 @@ export const ToteutusFooter = ({
                 ...omit(toteutus, '_enrichedData'),
                 ...getToteutusByFormValues({
                   ...valuesToSend,
-                  koulutustyyppi,
+                  koulutustyyppi: resolvedKoulutustyyppi,
                 }),
                 tarjoajat: getTarjoajaOids({
                   hierarkia,

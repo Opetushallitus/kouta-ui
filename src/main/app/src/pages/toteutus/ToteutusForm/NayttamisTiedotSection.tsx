@@ -51,7 +51,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   const avainsanat = useFieldValue(`${name}.avainsanat.${language}`);
 
   const loadAmmattinimikkeet = useCallback(
-    inputValue =>
+    (inputValue: string) =>
       searchAmmattinimikkeetByTerm({
         httpClient,
         apiUrls,
@@ -62,7 +62,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   );
 
   const loadAvainsanat = useCallback(
-    inputValue =>
+    (inputValue: string) =>
       searchAvainsanatByTerm({
         httpClient,
         apiUrls,

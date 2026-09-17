@@ -9,11 +9,14 @@ import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
+import { HttpClient } from '#/src/httpClient';
 import {
   ToteutusModel,
   HakuModel,
   HakukohdeModel,
 } from '#/src/types/domainTypes';
+import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
+import { ApiUrls } from '#/src/urls';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { createHakukohde } from '#/src/utils/hakukohde/createHakukohde';
@@ -50,7 +53,15 @@ export const HakukohdeFooter = ({
   const initialValues = form.initial;
 
   const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
+    async ({
+      values,
+      httpClient,
+      apiUrls,
+    }: {
+      values: HakukohdeFormValues;
+      httpClient: HttpClient;
+      apiUrls: ApiUrls;
+    }) => {
       const dataSendFn =
         formMode === FormMode.CREATE ? createHakukohde : updateHakukohde;
 

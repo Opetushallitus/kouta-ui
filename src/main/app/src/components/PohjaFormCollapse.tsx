@@ -30,8 +30,10 @@ export default function PohjaFormCollapse({
   ...props
 }: PohjaFormCollapseProps) {
   const { t } = useTranslation();
-  const tapa = useFieldValue('pohja.tapa');
-  const valinta = useFieldValue('pohja.valinta');
+  const tapa = useFieldValue<string | undefined>('pohja.tapa');
+  const valinta = useFieldValue<SelectOption<string> | undefined>(
+    'pohja.valinta'
+  );
 
   const fieldRegistry = useFieldRegistry();
 

@@ -278,7 +278,7 @@ const fillJarjestyspaikkaSection = (
 ) =>
   withinSection(page, 'jarjestyspaikka', async section => {
     // Ks. editHakukohde.spec.ts - sama perustelu labelin klikkaamiselle.
-    await expect(getRadio(section, tarjoajat[0])).toBeAttached();
+    await expect(getRadio(section, tarjoajat[0]!)).toBeAttached();
     await getLabel(section, selectedToimipisteNimi).click();
 
     if (options?.jarjestaaUrheilijanAmmKoulutusta) {

@@ -365,14 +365,14 @@ export const TutkinnonOsienKuvausSection = ({
 
   const viiteIdForOsa = ({ id }: { id: number }): string | undefined =>
     selectedTutkinnonOsat
-      .find(
+      ?.find(
         (v: { tutkinnonosaId: number }) => v.tutkinnonosaId === toNumber(id)
       )
       ?.tutkinnonosaViite?.toString();
 
   const eperusteForOsa = ({ id }: { id: number }): string | undefined =>
     selectedTutkinnonOsat
-      .find(
+      ?.find(
         (v: { tutkinnonosaId: number }) => v.tutkinnonosaId === toNumber(id)
       )
       ?.ePerusteId?.toString();

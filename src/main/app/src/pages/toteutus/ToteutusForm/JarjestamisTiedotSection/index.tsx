@@ -66,7 +66,9 @@ const OpetustapaField = createFormFieldComponent(
 );
 
 const OsiotFields = ({ language, osiotOptions, name }) => {
-  const osiot = useFieldValue(`${name}.osiot`);
+  const osiot = useFieldValue<Array<SelectOption<string>> | undefined>(
+    `${name}.osiot`
+  );
 
   const osiotArrWithLabels = useMemo(() => {
     return (osiot || []).map(({ value, label }) => ({
@@ -84,7 +86,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
     <>
       {osiotArrWithLabels.map(({ value, label }, index) => (
         <Box
-          marginBottom={index === osiot.length - 1 ? 0 : 2}
+          marginBottom={index === osiotArrWithLabels.length - 1 ? 0 : 2}
           key={value}
           {...getTestIdProps(`osioKuvaus.${value}`)}
         >

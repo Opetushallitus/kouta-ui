@@ -79,7 +79,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
         // Sama toast kuin redux-form-polulla, jossa stopSubmit näytti sen aina kun
         // virheitä oli - myös pelkän validointivirheen kohdalla.
         openSavingErrorToast(undefined);
-        setRemoteErrors(undefined);
+        setRemoteErrors(null);
         // PALAUTETAAN, ei kirjata contextiin: kirjasto vie nämä submitErrorsiin ja
         // kenttien meta.submitErroriin.
         return errors;

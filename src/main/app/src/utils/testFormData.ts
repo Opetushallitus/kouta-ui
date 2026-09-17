@@ -407,6 +407,7 @@ export const BASE_VALINTAPERUSTE_FORM_DATA: ValintaperusteFormValues = {
 
 export const sisalto: SisaltoValues = [
   {
+    id: 'sisalto-1',
     tyyppi: 'teksti',
     data: {
       fi: parseEditorState('<h2>Fi sisalto</h2>'),
@@ -414,6 +415,7 @@ export const sisalto: SisaltoValues = [
     },
   },
   {
+    id: 'sisalto-2',
     tyyppi: 'taulukko',
     data: {
       id: 'table-1',

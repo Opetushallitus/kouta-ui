@@ -39,10 +39,10 @@ export const KoeTaiLisanayttoFields = ({
     osaamisalat,
   });
 
-  const liittyyEnnakkovalmistautumista = useFieldValue(
+  const liittyyEnnakkovalmistautumista = useFieldValue<boolean | undefined>(
     `${field}.liittyyEnnakkovalmistautumista`
   );
-  const erityisjarjestelytMahdollisia = useFieldValue(
+  const erityisjarjestelytMahdollisia = useFieldValue<boolean | undefined>(
     `${field}.erityisjarjestelytMahdollisia`
   );
 

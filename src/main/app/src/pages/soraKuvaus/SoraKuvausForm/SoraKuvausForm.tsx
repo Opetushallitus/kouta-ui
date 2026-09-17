@@ -24,7 +24,9 @@ const SoraKuvausForm = ({
   organisaatioOid,
 }) => {
   const { t } = useTranslation();
-  const kieliversiot = useFieldValue('kieliversiot');
+  const kieliversiot = useFieldValue<Array<LanguageCode> | undefined>(
+    'kieliversiot'
+  );
   const languageTabs = kieliversiot || [];
 
   const formMode = useFormMode();

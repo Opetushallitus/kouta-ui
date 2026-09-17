@@ -70,7 +70,7 @@ export const KoodistoCollapseList = ({
       </Box>
       {selectedItemsWithLabels?.map(({ value, label }, index) => (
         <Box mb={3} key={value}>
-          <SectionInnerCollapse header={label}>
+          <SectionInnerCollapse header={label ?? ''}>
             <CollapseContent
               koodiUri={value}
               index={index}

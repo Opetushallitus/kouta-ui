@@ -35,7 +35,9 @@ export const KuvausSection = ({
   const hakuOid = haku?.oid;
   const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
   const { t } = useTranslation();
-  const kuvausValues = useFieldValue(name);
+  const kuvausValues = useFieldValue<
+    { valintaperuste?: SelectOption<string> } | undefined
+  >(name);
   const valintaperusteOid = kuvausValues?.valintaperuste?.value;
   const kieliValinnat = languages;
   const preventCreation =

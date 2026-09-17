@@ -38,7 +38,7 @@ const LukiolinjaOsio = ({
   koodistoData,
   ...props
 }) => {
-  const isKaytossa = useFieldValue(`${name}.kaytossa`);
+  const isKaytossa = useFieldValue<boolean | undefined>(`${name}.kaytossa`);
 
   return (
     <FieldGroup title={title} {...props}>

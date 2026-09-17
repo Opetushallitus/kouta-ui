@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { noop } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +17,6 @@ import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import searchAmmattinimikkeetByTerm from '#/src/utils/api/searchAmmattinimikkeetByTerm';
 import searchAvainsanatByTerm from '#/src/utils/api/searchAvainsanatByTerm';
-import { memoize } from '#/src/utils/memoize';
 
 const notTooLong = (v, maxItems) => {
   if (Array.isArray(v)) {
@@ -41,38 +40,6 @@ const CreatableField = createFormFieldComponent(
 const MAX_ITEMS_AMMATTINIMIKKEET = 5;
 const MAX_ITEMS_AVAINSANAT = 20;
 
-const makeLoadAmmattinimikkeet = memoize(
-  (httpClient, apiUrls, language) => inputValue => {
-    return searchAmmattinimikkeetByTerm({
-      httpClient,
-      apiUrls,
-      language,
-      term: inputValue,
-    }).then(result =>
-      result.map(r => ({
-        value: r,
-        label: r,
-      }))
-    );
-  }
-);
-
-const makeLoadAvainsanat = memoize(
-  (httpClient, apiUrls, language) => inputValue => {
-    return searchAvainsanatByTerm({
-      httpClient,
-      apiUrls,
-      language,
-      term: inputValue,
-    }).then(result =>
-      result.map(r => ({
-        value: r,
-        label: r,
-      }))
-    );
-  }
-);
-
 export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   const { t } = useTranslation();
   const httpClient = useHttpClient();
@@ -82,6 +49,28 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
     `${name}.ammattinimikkeet.${language}`
   );
   const avainsanat = useFieldValue(`${name}.avainsanat.${language}`);
+
+  const loadAmmattinimikkeet = useCallback(
+    inputValue =>
+      searchAmmattinimikkeetByTerm({
+        httpClient,
+        apiUrls,
+        language,
+        term: inputValue,
+      }).then(result => result.map(r => ({ value: r, label: r }))),
+    [httpClient, apiUrls, language]
+  );
+
+  const loadAvainsanat = useCallback(
+    inputValue =>
+      searchAvainsanatByTerm({
+        httpClient,
+        apiUrls,
+        language,
+        term: inputValue,
+      }).then(result => result.map(r => ({ value: r, label: r }))),
+    [httpClient, apiUrls, language]
+  );
 
   return (
     <>
@@ -99,11 +88,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
               component={CreatableField}
               isMulti
               isClearable
-              loadOptions={makeLoadAmmattinimikkeet(
-                httpClient,
-                apiUrls,
-                language
-              )}
+              loadOptions={loadAmmattinimikkeet}
               label={t('toteutuslomake.ammattinimikkeet')}
               helperText={t('toteutuslomake.oletValinnutAmmattinimikkeet', {
                 lukumaara: Array.isArray(ammattinimikkeet)
@@ -123,7 +108,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             component={CreatableField}
             isMulti
             isClearable
-            loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
+            loadOptions={loadAvainsanat}
             label={t('toteutuslomake.avainsanat')}
             helperText={t('toteutuslomake.oletValinnutAvainsanat', {
               lukumaara: Array.isArray(avainsanat) ? avainsanat.length : 0,

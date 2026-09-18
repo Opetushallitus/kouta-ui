@@ -2,8 +2,10 @@ import { Page, expect, test } from '@playwright/test';
 
 import oppilaitos from '#/playwright/fixtures/oppilaitosWithOnlyYhteystiedot';
 import {
+  createImageFile,
   fillAsyncSelect,
   fillKieliversiotSection,
+  fillRadioValue,
   fillTilaSection,
   tallenna,
   wrapMutationTest,
@@ -128,6 +130,32 @@ test.describe('Create oppilaitos', () => {
       await fillEsittelySection(page);
       await checkYhteystiedotSection(page);
       await fillHakijapalveluidenYhteystiedot(page);
+      await fillTilaSection(page);
+      await tallenna(page);
+    }));
+
+  test('should be able to add a teemakuva', ({ page }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await fillKieliversiotSection(page);
+      await fillPerustiedotSection(page);
+      await fillEsittelySection(page);
+      await fillTietoaOpiskelustaSection(page);
+
+      await page.route(
+        '**/kouta-backend/upload/teemakuva**',
+        fixtureJSON({ url: 'https://example.com/teemakuva.png' })
+      );
+
+      await withinSection(page, 'teemakuvaOrEsittelyvideo', async section => {
+        await fillRadioValue(section, 'teemakuva');
+        await section
+          .locator('input[type="file"]')
+          .setInputFiles(await createImageFile(page));
+        await expect(
+          section.getByRole('button', { name: 'yleiset.poista' })
+        ).toBeVisible();
+      });
+
       await fillTilaSection(page);
       await tallenna(page);
     }));

@@ -497,6 +497,37 @@ export const fillValintakokeetSection = (
     await fillTilaisuus(kokeetTaiLisanaytot);
   });
 
+// Piirretään kuva canvasille ja luetaan se PNG:nä ulos, jotta setInputFiles saa
+// oikeasti kelvollisen ja pyydetyn kokoisen tiedoston (ImageInput lukee
+// resoluution img.onloadilla, joten se ei suostu satunnaiseen tavupuuroon).
+export const createImageFile = async (
+  page: Page,
+  {
+    width = 1260,
+    height = 400,
+    name = 'kuva.png',
+  }: { width?: number; height?: number; name?: string } = {}
+) => {
+  const dataUrl = await page.evaluate(
+    ({ width, height }) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx!.fillStyle = '#336699';
+      ctx!.fillRect(0, 0, width, height);
+      return canvas.toDataURL('image/png');
+    },
+    { width, height }
+  );
+
+  return {
+    name,
+    mimeType: 'image/png',
+    buffer: Buffer.from(dataUrl.split(',')[1]!, 'base64'),
+  };
+};
+
 // For debugging
 export const outerHTML = (l: Locator) => l.evaluate(el => el.outerHTML);
 export const innerHTML = (l: Locator) => l.evaluate(el => el.innerHTML);

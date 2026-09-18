@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useActor, useInterpret } from '@xstate/react';
+import { useActorRef, useSelector } from '@xstate/react';
 import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { ActorRefFrom, InterpreterFrom } from 'xstate';
+import { ActorRefFrom, fromPromise } from 'xstate';
 
 import Modal from '#/src/components/Modal';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
@@ -11,7 +11,6 @@ import { Box, Button } from '#/src/components/virkailija';
 import { safeGetJulkaisutilaTranslationKey } from '#/src/constants';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
 import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
-import { isDev } from '#/src/utils';
 
 import { useBatchOpsApi } from './CopyConfirmationModal';
 import { EntityListTable } from './EntitySearchList';
@@ -20,7 +19,7 @@ import { CopyHakukohteetMutationFunctionAsync } from './HakukohteetSection/chang
 import { useEntitySelectionApi } from './useEntitySelection';
 
 export const BatchOpsStateChangeContext = React.createContext<
-  InterpreterFrom<typeof BatchOpsMachine> | undefined
+  ActorRefFrom<typeof BatchOpsMachine> | undefined
 >(undefined);
 
 export const useStateChangeBatchOpsApi = () => {
@@ -37,15 +36,17 @@ export const StateChangeConfirmationWrapper = ({
   mutateAsync: CopyHakukohteetMutationFunctionAsync;
   entityTranslationKeyPath: string;
 }) => {
-  const batchOpsService = useInterpret(BatchOpsMachine, {
-    services: {
-      runMutation: (_ctx, e) =>
-        mutateAsync({ entities: e.entities, tila: e.tila! }),
-    },
-    devTools: isDev,
-  });
+  const batchOpsService = useActorRef(
+    BatchOpsMachine.provide({
+      actors: {
+        runMutation: fromPromise(({ input }) =>
+          mutateAsync({ entities: input.entities, tila: input.tila! })
+        ),
+      },
+    })
+  );
 
-  const [state] = useActor(batchOpsService);
+  const state = useSelector(batchOpsService, s => s);
   const { t } = useTranslation();
 
   return (

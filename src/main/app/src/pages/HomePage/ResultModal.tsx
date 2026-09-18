@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { InterpreterFrom } from 'xstate';
+import { ActorRefFrom } from 'xstate';
 
 import ErrorAlert from '#/src/components/ErrorAlert';
 import ListTable from '#/src/components/ListTable';
@@ -33,7 +33,7 @@ export const ResultModal = ({
 }: {
   onClose: any;
   headerText: string;
-  batchOpsService: InterpreterFrom<typeof BatchOpsMachine>;
+  batchOpsService: ActorRefFrom<typeof BatchOpsMachine>;
   columns: Array<{
     key: string;
     title?: string;

@@ -1,83 +1,81 @@
-import { assign, createMachine, interpret } from 'xstate';
+import { assign, createActor, createMachine } from 'xstate';
+
+import { inspect } from '#/src/utils/xstateInspector';
 
 type FilterValues = Record<string, unknown>;
 type FilterContext = { values: FilterValues };
 type SetValuesEvent = { type: 'SET_VALUES'; values: FilterValues };
 
-const initialMachine = createMachine<FilterContext, SetValuesEvent>({
-  predictableActionArguments: true,
-  on: {
-    SET_VALUES: {
-      actions: [
-        assign({
-          values: (context, event) => ({
+const createFilterMachine = (initialValues: FilterValues) =>
+  createMachine({
+    types: {
+      context: {} as FilterContext,
+      events: {} as SetValuesEvent,
+    },
+    context: { values: initialValues },
+    on: {
+      SET_VALUES: {
+        actions: assign({
+          values: ({ context, event }) => ({
             ...context.values,
             ...event.values,
           }),
         }),
-      ],
+      },
     },
-  },
+  });
+
+export const hakuMachine = createFilterMachine({
+  page: 0,
+  nimi: '',
+  tila: [],
+  orderBy: '',
+  hakutapa: [],
+  koulutuksenAlkamiskausi: null,
+  koulutuksenAlkamisvuosi: [],
 });
 
-export const hakuMachine = initialMachine.withContext({
-  values: {
-    page: 0,
-    nimi: '',
-    tila: [],
-    orderBy: '',
-    hakutapa: [],
-    koulutuksenAlkamiskausi: null,
-    koulutuksenAlkamisvuosi: [],
-  },
+export const hakukohdeMachine = createFilterMachine({
+  page: 0,
+  nimi: '',
+  hakuNimi: '',
+  koulutustyyppi: [],
+  tila: [],
+  orgWhitelist: [],
+  orderBy: '',
 });
 
-export const hakukohdeMachine = initialMachine.withContext({
-  values: {
-    page: 0,
-    nimi: '',
-    hakuNimi: '',
-    koulutustyyppi: [],
-    tila: [],
-    orgWhitelist: [],
-    orderBy: '',
-  },
+export const koulutusMachine = createFilterMachine({
+  page: 0,
+  nimi: '',
+  koulutustyyppi: [],
+  tila: [],
+  nakyvyys: null,
+  orderBy: '',
 });
 
-export const koulutusMachine = initialMachine.withContext({
-  values: {
-    page: 0,
-    nimi: '',
-    koulutustyyppi: [],
-    tila: [],
-    nakyvyys: null,
-    orderBy: '',
-  },
+export const toteutusMachine = createFilterMachine({
+  page: 0,
+  nimi: '',
+  koulutustyyppi: [],
+  tila: [],
+  orderBy: '',
 });
 
-export const toteutusMachine = initialMachine.withContext({
-  values: {
-    page: 0,
-    nimi: '',
-    koulutustyyppi: [],
-    tila: [],
-    orderBy: '',
-  },
+export const valintaperusteMachine = createFilterMachine({
+  page: 0,
+  nimi: '',
+  koulutustyyppi: [],
+  tila: [],
+  nakyvyys: null,
+  orderBy: '',
 });
 
-export const valintaperusteMachine = initialMachine.withContext({
-  values: {
-    page: 0,
-    nimi: '',
-    koulutustyyppi: [],
-    tila: [],
-    nakyvyys: null,
-    orderBy: '',
-  },
-});
+const startFilterService = (machine: ReturnType<typeof createFilterMachine>) =>
+  createActor(machine, inspect ? { inspect } : undefined).start();
 
-export const hakuService = interpret(hakuMachine).start();
-export const hakukohdeService = interpret(hakukohdeMachine).start();
-export const koulutusService = interpret(koulutusMachine).start();
-export const toteutusService = interpret(toteutusMachine).start();
-export const valintaperusteService = interpret(valintaperusteMachine).start();
+export const hakuService = startFilterService(hakuMachine);
+export const hakukohdeService = startFilterService(hakukohdeMachine);
+export const koulutusService = startFilterService(koulutusMachine);
+export const toteutusService = startFilterService(toteutusMachine);
+export const valintaperusteService = startFilterService(valintaperusteMachine);

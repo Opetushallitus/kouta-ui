@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Navigate, createBrowserRouter, Outlet } from 'react-router-dom';
+import { Navigate, createBrowserRouter, Outlet } from 'react-router';
 
 import RouterScrollToTop from '#/src/components/RouterScrollToTop';
 import { Toaster } from '#/src/components/Toaster';

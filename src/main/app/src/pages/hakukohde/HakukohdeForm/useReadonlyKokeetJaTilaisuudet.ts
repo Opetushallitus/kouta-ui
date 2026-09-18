@@ -1,29 +1,31 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { set } from 'lodash-es';
 
 import { useKoodit } from '#/src/hooks/useKoodit';
-import { getPostinumeroByPostinumeroUri } from '#/src/utils';
+import { getPostinumeroByPostinumeroUri, isTruthy } from '#/src/utils';
 import { getPostinumeroKoodiLabel } from '#/src/utils/koodi/postinumero';
 
 export const useReadonlyKokeetJaTilaisuudet = (
-  tilaisuudet: Array<any>,
+  tilaisuudet: Array<any> | undefined,
   language: LanguageCode
 ) => {
   // NOTE: Etsitään tarvittavat postinumerokoodit käännöstä varten
   const neededPostinumeros = useMemo(
-    () => tilaisuudet.map(v => v.osoite?.postinumeroKoodiUri).filter(Boolean),
+    () =>
+      tilaisuudet?.map(v => v.osoite?.postinumeroKoodiUri).filter(isTruthy) ??
+      [],
     [tilaisuudet]
   );
   const { koodit } = useKoodit(neededPostinumeros);
 
   const usedTilaisuudet = useMemo(
     () =>
-      tilaisuudet.map(t => {
+      tilaisuudet?.map(t => {
         // Jos tilaisuudella on postinumerokoodi, haetaan käännös osaksi näytettävää tekstiä
         const koodiUri = t.osoite?.postinumeroKoodiUri;
         const koodi = koodiUri && koodit[neededPostinumeros.indexOf(koodiUri)];
-        return _.set(
+        return set(
           t,
           'osoite.postinumero',
           koodiUri
@@ -32,7 +34,7 @@ export const useReadonlyKokeetJaTilaisuudet = (
               : getPostinumeroByPostinumeroUri(koodiUri)
             : null
         );
-      }),
+      }) ?? [],
     [neededPostinumeros, koodit, language, tilaisuudet]
   );
 

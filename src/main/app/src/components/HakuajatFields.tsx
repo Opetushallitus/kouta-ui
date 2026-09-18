@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 
 import DateTimeRange from '#/src/components/DateTimeRange';
 import { FormButton } from '#/src/components/FormButton';
@@ -10,11 +10,12 @@ import { getTestIdProps } from '#/src/utils';
 export const HakuajatFields = ({ fields, t, meta: { error } }) => (
   <>
     <FormControl
-      error={!_.isNil(error)}
-      helperText={error && _.isArray(error) ? t(...error) : t(error)}
+      error={!isNil(error)}
+      helperText={error && Array.isArray(error) ? t(...error) : t(error)}
     >
       {fields.map((hakuaika, index) => (
         <DateTimeRange
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- react-final-form-arrays ei tarjoa pysyvää rivi-id:tä, kentän polku itsessään on indeksiperustainen
           key={index}
           startProps={{ name: `${hakuaika}.alkaa` }}
           endProps={{ name: `${hakuaika}.paattyy` }}

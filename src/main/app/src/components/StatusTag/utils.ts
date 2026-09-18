@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isString } from 'lodash-es';
 
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
@@ -9,7 +9,7 @@ export type StatusTagProps = {
 };
 
 export const getLabel = ({ status, t }) => {
-  if (!_.isString(status)) {
+  if (!isString(status)) {
     return null;
   }
 

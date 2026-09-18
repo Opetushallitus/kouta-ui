@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { noop } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { createFormFieldComponent } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { AsyncCreatableSelect } from '#/src/components/Select';
 import { Box } from '#/src/components/virkailija';
 import {
@@ -17,10 +17,9 @@ import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import searchAmmattinimikkeetByTerm from '#/src/utils/api/searchAmmattinimikkeetByTerm';
 import searchAvainsanatByTerm from '#/src/utils/api/searchAvainsanatByTerm';
-import { memoize } from '#/src/utils/memoize';
 
 const notTooLong = (v, maxItems) => {
-  if (_.isArray(v)) {
+  if (Array.isArray(v)) {
     return v.length <= maxItems;
   } else {
     return true;
@@ -31,7 +30,7 @@ const CreatableField = createFormFieldComponent(
   AsyncCreatableSelect,
   ({ input: { onChange, ...input }, maxItems, ...props }) => ({
     ...input,
-    onBlur: _.noop,
+    onBlur: noop,
     onChange: v => notTooLong(v, maxItems) && onChange(v),
     maxItems,
     ...props,
@@ -40,38 +39,6 @@ const CreatableField = createFormFieldComponent(
 
 const MAX_ITEMS_AMMATTINIMIKKEET = 5;
 const MAX_ITEMS_AVAINSANAT = 20;
-
-const makeLoadAmmattinimikkeet = memoize(
-  (httpClient, apiUrls, language) => inputValue => {
-    return searchAmmattinimikkeetByTerm({
-      httpClient,
-      apiUrls,
-      language,
-      term: inputValue,
-    }).then(result =>
-      result.map(r => ({
-        value: r,
-        label: r,
-      }))
-    );
-  }
-);
-
-const makeLoadAvainsanat = memoize(
-  (httpClient, apiUrls, language) => inputValue => {
-    return searchAvainsanatByTerm({
-      httpClient,
-      apiUrls,
-      language,
-      term: inputValue,
-    }).then(result =>
-      result.map(r => ({
-        value: r,
-        label: r,
-      }))
-    );
-  }
-);
 
 export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   const { t } = useTranslation();
@@ -82,6 +49,28 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
     `${name}.ammattinimikkeet.${language}`
   );
   const avainsanat = useFieldValue(`${name}.avainsanat.${language}`);
+
+  const loadAmmattinimikkeet = useCallback(
+    (inputValue: string) =>
+      searchAmmattinimikkeetByTerm({
+        httpClient,
+        apiUrls,
+        language,
+        term: inputValue,
+      }).then(result => result.map(r => ({ value: r, label: r }))),
+    [httpClient, apiUrls, language]
+  );
+
+  const loadAvainsanat = useCallback(
+    (inputValue: string) =>
+      searchAvainsanatByTerm({
+        httpClient,
+        apiUrls,
+        language,
+        term: inputValue,
+      }).then(result => result.map(r => ({ value: r, label: r }))),
+    [httpClient, apiUrls, language]
+  );
 
   return (
     <>
@@ -99,14 +88,10 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
               component={CreatableField}
               isMulti
               isClearable
-              loadOptions={makeLoadAmmattinimikkeet(
-                httpClient,
-                apiUrls,
-                language
-              )}
+              loadOptions={loadAmmattinimikkeet}
               label={t('toteutuslomake.ammattinimikkeet')}
               helperText={t('toteutuslomake.oletValinnutAmmattinimikkeet', {
-                lukumaara: _.isArray(ammattinimikkeet)
+                lukumaara: Array.isArray(ammattinimikkeet)
                   ? ammattinimikkeet.length
                   : 0,
                 maksimi: MAX_ITEMS_AMMATTINIMIKKEET,
@@ -123,10 +108,10 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             component={CreatableField}
             isMulti
             isClearable
-            loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
+            loadOptions={loadAvainsanat}
             label={t('toteutuslomake.avainsanat')}
             helperText={t('toteutuslomake.oletValinnutAvainsanat', {
-              lukumaara: _.isArray(avainsanat) ? avainsanat.length : 0,
+              lukumaara: Array.isArray(avainsanat) ? avainsanat.length : 0,
               maksimi: MAX_ITEMS_AVAINSANAT,
             })}
             maxItems={MAX_ITEMS_AVAINSANAT}

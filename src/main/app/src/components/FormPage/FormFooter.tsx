@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 
-import _ from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import { FormButton } from '#/src/components/FormButton';
 import { Box, Button } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
-import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
+import {
+  useFieldValue,
+  useIsSubmitting,
+  useSubmitForm,
+} from '#/src/hooks/form';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import type { EntityModelBase } from '#/src/types/domainTypes';
 import { getEntityNimiTranslation } from '#/src/utils';
 
 import DeleteConfirmationDialog from '../DeleteConfirmationDialog';
@@ -19,7 +23,6 @@ import FormEditInfo from '../FormEditInfo';
 type FormFooterProps = {
   entityType: ENTITY;
   entity?: EntityModelBase;
-  save: () => void;
   canUpdate?: boolean;
   submitProps?: object;
   hideEsikatselu?: boolean;
@@ -36,7 +39,6 @@ export const FormFooter = ({
   entity = {
     tila: undefined,
   },
-  save,
   canUpdate = true,
   submitProps = {},
   hideEsikatselu = false,
@@ -45,17 +47,19 @@ export const FormFooter = ({
 }: FormFooterProps) => {
   const { t } = useTranslation();
   const isSubmitting = useIsSubmitting();
+  // Tallennus laukaistaan kirjaston kautta, ks. useSubmitForm.
+  const save = useSubmitForm();
   let title;
 
   if (!canUpdate) {
-    if (_.isEmpty(infoTextTranslationKey)) {
+    if (isEmpty(infoTextTranslationKey)) {
       title = t(`${entityType}lomake.eiMuokkausOikeutta`);
     } else {
       title = t(`${entityType}lomake.${infoTextTranslationKey}`);
     }
   }
   const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);
-  const tila = useFieldValue('tila');
+  const tila = useFieldValue<JULKAISUTILA | undefined>('tila');
   const theEntityName = getEntityNimiTranslation(entity, useUserLanguage());
 
   const doDelete = () => {

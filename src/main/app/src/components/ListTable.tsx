@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 
 import Box from '@opetushallitus/virkailija-ui-components/Box';
-import _ from 'lodash';
+import { TFunction } from 'i18next';
+import { fromPairs, get, isFunction } from 'lodash-es';
 import styled, { css } from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -12,8 +13,12 @@ import Table, {
   TableCell,
 } from '#/src/components/Table';
 import { Icon, Dropdown } from '#/src/components/virkailija';
+import {
+  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+} from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { formatDateValue, getKoulutustyyppiTranslation } from '#/src/utils';
+import { formatDateValue, koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import Badge from './Badge';
@@ -41,10 +46,12 @@ export const getSortDirection = ({ sort, name }) => {
 };
 
 type Column = {
-  title?: string;
+  title?: string | ((props: { rows: Array<any> }) => React.ReactNode);
   key: string;
-  sortable: boolean;
-  render: (any) => React.ReactNode;
+  sortable?: boolean;
+  render?: (props: any) => React.ReactNode;
+  Component?: React.ComponentType<any>;
+  collapsible?: boolean;
   style?: Record<string, string | number>;
 };
 
@@ -88,16 +95,33 @@ export const makeHakuColumn = (
   },
 });
 
-export const makeKoulutustyyppiColumn = t => ({
-  title: t('yleiset.koulutustyyppi'),
-  key: 'koulutustyyppi',
-  sortable: true,
-  render: ({ koulutustyyppi }) =>
-    getKoulutustyyppiTranslation(koulutustyyppi, t),
-  style: {
-    width: '180px',
-  },
-});
+export const makeKoulutustyyppiColumn = (t: TFunction) => {
+  const koulutustyyppiMapping: Record<string, string> = {
+    ...fromPairs(
+      koulutustyyppiHierarkiaToOptions(
+        TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+        t
+      ).map(({ label, value }) => [value, label])
+    ),
+    ...fromPairs(
+      koulutustyyppiHierarkiaToOptions(
+        TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+        t
+      ).map(({ label, value }) => [value, label])
+    ),
+  };
+
+  return {
+    title: t('yleiset.koulutustyyppi'),
+    key: 'koulutustyyppi',
+    sortable: true,
+    render: ({ koulutustyyppi }) =>
+      koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '',
+    style: {
+      width: '180px',
+    },
+  };
+};
 
 export const makeCountColumn = ({ title, key, propName }) => ({
   title,
@@ -164,7 +188,7 @@ export const makeMuokkaajaColumn = (t): Column => ({
   title: t('yleiset.muokkaaja'),
   key: 'muokkaaja',
   sortable: true,
-  render: ({ muokkaaja }) => _.get(muokkaaja, 'nimi') || null,
+  render: ({ muokkaaja }) => get(muokkaaja, 'nimi') || null,
   style: {
     width: '170px',
   },
@@ -225,18 +249,18 @@ const ActionsDropdown = ({ actionsMenu }) => {
 
 const Cell = styled(TableCell)`
   ${({ onClick }) =>
-    _.isFunction(onClick) &&
+    isFunction(onClick) &&
     css`
       cursor: pointer;
     `}
 `;
 
 type ListTableProps = {
-  onSort?: (string) => any;
+  onSort?: (dir: string) => void;
   sort?: boolean;
-  columns?: Array<any>;
+  columns?: Array<Column>;
   rows?: Array<any>;
-  renderActionsMenu?: (any) => void;
+  renderActionsMenu?: (props: any) => React.ReactNode;
   defaultCollapsedRow?: string;
   defaultCollapsedColumn?: string;
 };
@@ -257,7 +281,7 @@ export const ListTable = ({
     row: defaultCollapsedRow,
     column: defaultCollapsedColumn,
   });
-  const isTableSortable = _.isFunction(onSort);
+  const isTableSortable = isFunction(onSort);
 
   const language = useUserLanguage();
 
@@ -291,7 +315,7 @@ export const ListTable = ({
                 onSort={sortable ? makeOnSort({ name: key, onSort }) : null}
                 style={style}
               >
-                {_.isFunction(title) ? title({ rows }) : title}
+                {isFunction(title) ? title({ rows }) : title}
               </TableCell>
             );
           })}
@@ -333,10 +357,10 @@ export const ListTable = ({
                             : undefined
                         }
                       >
-                        {_.isFunction(Component) ? (
+                        {isFunction(Component) ? (
                           <Component language={language} {...rowProps} />
                         ) : (
-                          render({ ...rowProps, language })
+                          render?.({ ...rowProps, language })
                         )}
                       </Cell>
                     );

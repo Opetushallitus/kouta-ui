@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldEditor, FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
 import { Box } from '#/src/components/virkailija';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
@@ -38,7 +38,7 @@ const LukiolinjaOsio = ({
   koodistoData,
   ...props
 }) => {
-  const isKaytossa = useFieldValue(`${name}.kaytossa`);
+  const isKaytossa = useFieldValue<boolean | undefined>(`${name}.kaytossa`);
 
   return (
     <FieldGroup title={title} {...props}>
@@ -48,15 +48,13 @@ const LukiolinjaOsio = ({
         </Field>
       </Box>
       {isKaytossa && (
-        <>
-          <KoodistoCollapseList
-            koodistoData={koodistoData}
-            name={name}
-            itemProps={{ kuvausLabel }}
-            selectLabel={valinnatLabel}
-            CollapseContent={LukiolinjaKuvaus}
-          />
-        </>
+        <KoodistoCollapseList
+          koodistoData={koodistoData}
+          name={name}
+          itemProps={{ kuvausLabel }}
+          selectLabel={valinnatLabel}
+          CollapseContent={LukiolinjaKuvaus}
+        />
       )}
     </FieldGroup>
   );
@@ -98,7 +96,7 @@ export const LukiolinjatSection = ({ name }) => {
   const isLoading = isLoadingPainotukset || isLoadingKoulutustehtavat;
 
   const linjaSelectionsEmpty =
-    _fp.isEmpty(selectedPainotukset) && _fp.isEmpty(selectedKoulutustehtavat);
+    isEmpty(selectedPainotukset) && isEmpty(selectedKoulutustehtavat);
 
   const { change } = useBoundFormActions();
   const isDirty = useIsDirty();

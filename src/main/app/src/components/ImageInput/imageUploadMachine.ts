@@ -1,5 +1,19 @@
-import _ from 'lodash';
-import { Machine, assign } from 'xstate';
+import { type TFunction } from 'i18next';
+import { isError } from 'lodash-es';
+import { assign, fromPromise, setup } from 'xstate';
+
+export interface ImageUploadContext {
+  file?: File | null;
+  url?: string | null;
+  error?: string | null;
+}
+
+export type ImageUploadEvent =
+  | { type: 'UPLOAD_FILE'; files: Array<File> }
+  | { type: 'REMOVE_FILE' }
+  | { type: 'RESET' }
+  | { type: 'DRAG_START' }
+  | { type: 'DRAG_STOP' };
 
 export const actionTypes = {
   UPLOAD_FILE: 'UPLOAD_FILE',
@@ -7,7 +21,7 @@ export const actionTypes = {
   RESET: 'RESET',
   DRAG_START: 'DRAG_START',
   DRAG_STOP: 'DRAG_STOP',
-};
+} as const;
 
 const { UPLOAD_FILE, REMOVE_FILE, DRAG_START, DRAG_STOP } = actionTypes;
 
@@ -29,47 +43,64 @@ const {
   draggingDisabled,
 } = controlStates;
 
-const clearValue = assign({
-  file: () => null,
-  url: () => null,
-});
-
-const createUploadingState = t => ({
-  id: uploading,
-  entry: assign({
-    file: (ctx, e) => e.files[0],
-  }),
-  invoke: {
-    id: 'uploadFile',
-    src: 'upload',
-    onDone: {
-      target: fileUploaded,
-      actions: assign({
-        url: (ctx, e) => e.data,
-      }),
-    },
-    onError: {
-      target: error,
-      actions: [
-        clearValue,
-        assign({
-          error: (ctx, e) =>
-            _.isError(e.data)
-              ? t('yleiset.kuvanLahetysVirhe')
-              : e?.data?.message,
-        }),
-      ],
-    },
+const machineSetup = setup({
+  types: {
+    context: {} as ImageUploadContext,
+    events: {} as ImageUploadEvent,
+  },
+  actors: {
+    upload: fromPromise<string, ImageUploadEvent>(() => {
+      throw new Error('upload actor must be provided via .provide()');
+    }),
   },
 });
 
+const createUploadingState = (t: TFunction) =>
+  machineSetup.createStateConfig({
+    id: uploading,
+    entry: machineSetup.assign({
+      file: ({ event }) =>
+        event.type === UPLOAD_FILE ? event.files[0] : undefined,
+    }),
+    invoke: {
+      id: 'uploadFile',
+      src: 'upload',
+      input: ({ event }) => event,
+      onDone: {
+        target: fileUploaded,
+        actions: assign({
+          url: ({ event }) => event.output,
+        }),
+      },
+      onError: {
+        target: error,
+        actions: [
+          assign({
+            file: () => null,
+            url: () => null,
+          }),
+          assign({
+            error: ({ event }) =>
+              isError(event.error)
+                ? t('yleiset.kuvanLahetysVirhe')
+                : (event.error as { message?: string } | undefined)?.message,
+          }),
+        ],
+      },
+    },
+  });
+
 const draggingStates = {
+  initial: 'enabled',
   states: {
     enabled: {
       on: {
         [DRAG_STOP]: {
           target: `#${empty}`,
-          actions: clearValue,
+          actions: machineSetup.assign({
+            file: () => null,
+            url: () => null,
+          }),
         },
         [UPLOAD_FILE]: `#${uploading}`,
       },
@@ -83,7 +114,15 @@ const draggingStates = {
   },
 };
 
-export function createImageUploadMachine({ url, externalError, t }) {
+export function createImageUploadMachine({
+  url,
+  externalError,
+  t,
+}: {
+  url?: string | null;
+  externalError?: string | null;
+  t: TFunction;
+}) {
   let initial = empty;
   if (url) {
     initial = fileUploaded;
@@ -91,7 +130,7 @@ export function createImageUploadMachine({ url, externalError, t }) {
     initial = error;
   }
 
-  return Machine({
+  return machineSetup.createMachine({
     id: 'imageUpload',
     initial,
     context: {
@@ -112,7 +151,10 @@ export function createImageUploadMachine({ url, externalError, t }) {
         on: {
           [REMOVE_FILE]: {
             target: empty,
-            actions: clearValue,
+            actions: machineSetup.assign({
+              file: () => null,
+              url: () => null,
+            }),
           },
           [DRAG_START]: draggingDisabled,
         },
@@ -123,7 +165,7 @@ export function createImageUploadMachine({ url, externalError, t }) {
           [UPLOAD_FILE]: uploading,
           [DRAG_START]: draggingEnabled,
         },
-        exit: assign({
+        exit: machineSetup.assign({
           error: () => null,
         }),
       },

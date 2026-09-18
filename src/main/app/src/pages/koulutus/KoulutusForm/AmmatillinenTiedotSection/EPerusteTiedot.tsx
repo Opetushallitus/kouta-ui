@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { find, toString } from 'lodash-es';
 
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
@@ -17,29 +17,34 @@ export const EPerusteTiedot = ({
   name,
   disabled,
 }) => {
-  const languages = useFieldValue('kieliversiot') || [];
+  const languages =
+    useFieldValue<Array<LanguageCode> | undefined>('kieliversiot') || [];
 
-  const selectedEPerusteId = useFieldValue(`${name}.eperuste`)?.value;
+  const selectedEPerusteId = useFieldValue<SelectOption<string> | undefined>(
+    `${name}.eperuste`
+  )?.value;
 
   const { data: koulutus, status } = useKoulutusByKoodi({
     koodiUri: selectedKoulutus,
   });
 
-  const koulutusIsLoading = status === 'loading';
+  const koulutusIsLoading = status === 'pending';
 
   const ePerusteet = koulutus?.ePerusteet;
 
   const selectedEPeruste = useMemo(
     () =>
-      _.find(
+      find(
         ePerusteet,
         ePeruste =>
-          ePeruste.id.toString() === _.toString(selectedEPerusteId ?? '')
+          ePeruste.id.toString() === toString(selectedEPerusteId ?? '')
       ),
     [ePerusteet, selectedEPerusteId]
   );
 
-  const koulutustyyppi = useFieldValue('koulutustyyppi');
+  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI | undefined>(
+    'koulutustyyppi'
+  );
   return (
     <Box>
       {selectedKoulutus && (

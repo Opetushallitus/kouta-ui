@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 
-import _ from 'lodash';
+import { noop } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
 import { Box, Button, FormLabel } from '#/src/components/virkailija';
-import { SelectValue } from '#/src/types/formTypes';
+import type { SelectValue } from '#/src/types/formTypes';
 
 type EntityModalProps = {
   headerText: string;
@@ -22,8 +22,8 @@ export const EntityModal = ({
   headerText,
   labelText,
   submitText,
-  onClose = _.noop,
-  onSubmit: onSubmitProp = _.noop,
+  onClose = noop,
+  onSubmit: onSubmitProp = noop,
   open = false,
   options = [],
 }: EntityModalProps) => {

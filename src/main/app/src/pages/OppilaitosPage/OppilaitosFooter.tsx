@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
@@ -28,12 +28,12 @@ export const OppilaitosFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
         },
       });
 
-      queryClient.invalidateQueries(ENTITY.OPPILAITOS);
+      queryClient.invalidateQueries({ queryKey: [ENTITY.OPPILAITOS] });
     },
     [oppilaitos, organisaatioOid, queryClient]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName: ENTITY.OPPILAITOS,
     submit,
     validate: validateOppilaitosForm,
@@ -45,7 +45,6 @@ export const OppilaitosFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
     <FormFooter
       entityType={ENTITY.OPPILAITOS}
       entity={oppilaitos}
-      save={save}
       canUpdate={!readOnly}
       esikatseluUrl={
         oppilaitos && apiUrls.url('konfo-ui.oppilaitos', organisaatioOid)

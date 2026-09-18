@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 import { setLightness } from 'polished';
 import { css } from 'styled-components';
 
@@ -11,10 +11,7 @@ import {
 import { Theme } from '#/src/theme';
 
 export type EPerusteStatus =
-  | 'voimassa'
-  | 'tuleva'
-  | 'laadinnassa'
-  | 'paattynyt';
+  'voimassa' | 'tuleva' | 'laadinnassa' | 'paattynyt';
 
 export const getEPerusteStatus = ePeruste => {
   if (ePeruste) {
@@ -25,7 +22,7 @@ export const getEPerusteStatus = ePeruste => {
     } else if (
       voimassaoloAlkaa &&
       voimassaoloAlkaa < now &&
-      (_.isNil(voimassaoloLoppuu) || voimassaoloLoppuu > now)
+      (isNil(voimassaoloLoppuu) || voimassaoloLoppuu > now)
     ) {
       return 'voimassa' as EPerusteStatus;
     } else if (voimassaoloAlkaa > now) {

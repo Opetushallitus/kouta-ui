@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -18,14 +18,26 @@ import {
 } from '#/src/utils/api/getSearchQueryParams';
 
 import Filters from './Filters';
-import { getIndexParamsByFilters } from './utils';
+import { getIndexParamsByFilters, FiltersState } from './utils';
+
+type SearchResponse = {
+  result: Array<Record<string, unknown>>;
+  totalCount: number;
+};
+
+type UseEntitySearchParams = {
+  filtersProps: FiltersState;
+  organisaatioOid: string;
+  searchEntities: (p: any) => Promise<SearchResponse>;
+  searchPage: string;
+};
 
 export const useEntitySearch = ({
   filtersProps,
   organisaatioOid,
   searchEntities,
   searchPage,
-}) => {
+}: UseEntitySearchParams) => {
   const queryParams = useMemo(
     () =>
       getSearchQueryParams(
@@ -68,7 +80,7 @@ type EntitySearchListProps = {
 export const EntityListTable = ({ entities, ...rest }) => {
   const rows = useMemo(
     () =>
-      _.map(entities, entityData => ({
+      map(entities, entityData => ({
         ...entityData,
         key: entityData?.oid ?? entityData?.id,
       })),
@@ -114,7 +126,10 @@ export const EntitySearchList = ({
   });
   const { t } = useTranslation();
 
-  const { result: entities, totalCount } = queryResult?.data ?? {};
+  const { result: entities, totalCount } = queryResult?.data ?? {
+    result: [],
+    totalCount: 0,
+  };
 
   const pageCount = useMemo(
     () => (totalCount ? Math.ceil(totalCount / FILTER_PAGE_SIZE) : 0),

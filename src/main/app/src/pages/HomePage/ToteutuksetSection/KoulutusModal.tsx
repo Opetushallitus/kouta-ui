@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import { isFuture } from 'date-fns';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { EntityModal } from '#/src/components/EntityModal';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
@@ -32,7 +32,7 @@ export const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const options = useEntityOptions(filteredResults, getEntitySuffix);
 
   const onSubmit = useCallback(
-    ({ oid }) => {
+    ({ oid }: { oid?: string }) => {
       navigate(`/organisaatio/${organisaatioOid}/koulutus/${oid}/toteutus`);
     },
     [navigate, organisaatioOid]

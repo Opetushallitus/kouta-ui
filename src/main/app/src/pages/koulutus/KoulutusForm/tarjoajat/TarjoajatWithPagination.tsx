@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 
-import _ from 'lodash';
+import { difference, isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
@@ -46,7 +46,7 @@ export const TarjoajatWithPagination = ({
   let pageCount = countPageNumber(itemsToShow);
   const currentPageFirstItemIndex = currentPage * PAGE_SIZE;
 
-  if (!_.isEmpty(usedNimi)) {
+  if (!isEmpty(usedNimi)) {
     itemsToShow = searchOrgsFromHierarkiaWithName(
       filteredTarjoajat,
       usedNimi,
@@ -77,7 +77,7 @@ export const TarjoajatWithPagination = ({
 
   const onOrgsChange = useCallback(
     selectedPageOids => {
-      onChange([..._.difference(value, pageOids), ...selectedPageOids]);
+      onChange([...difference(value, pageOids), ...selectedPageOids]);
     },
     [value, pageOids, onChange]
   );

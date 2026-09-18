@@ -115,7 +115,7 @@ export const serializeEditorState = (value: EditorState): string => {
       const children = root.getChildren();
 
       const hasOnlyOneEmptyChild =
-        children.length === 1 && children[0].getTextContent().trim() === '';
+        children.length === 1 && children?.[0]?.getTextContent().trim() === '';
 
       if (hasOnlyOneEmptyChild) {
         html = '';

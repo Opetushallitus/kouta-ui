@@ -28,7 +28,7 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import {
   $createHeadingNode,
   $isHeadingNode,
-  HeadingTagType,
+  type HeadingTagType,
 } from '@lexical/rich-text';
 import { $setBlocksType } from '@lexical/selection';
 import { $isTableSelection } from '@lexical/table';
@@ -227,7 +227,9 @@ export default function ToolbarPlugin(): JSX.Element {
           const type = parentList
             ? parentList.getListType()
             : element.getListType();
-          setBlockType(type);
+          if (type in blockTypeToBlockName) {
+            setBlockType(type as keyof typeof blockTypeToBlockName);
+          }
         } else {
           const type = $isHeadingNode(element)
             ? element.getTag()

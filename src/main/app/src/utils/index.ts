@@ -13,7 +13,6 @@ import {
   intersection,
   keys,
   every,
-  fromPairs,
   isNumber,
   isUndefined,
   round,
@@ -31,7 +30,7 @@ import {
   size,
   camelCase,
   castArray,
-} from 'lodash';
+} from 'lodash-es';
 import stripTags from 'striptags';
 import { match } from 'ts-pattern';
 
@@ -42,16 +41,13 @@ import {
 import {
   ALLOWED_HTML_TAGS,
   KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
-  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
   LANGUAGES,
   NDASH,
   ORGANISAATIOTYYPPI,
   KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI,
 } from '#/src/constants';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import { NamedEntityModel } from '#/src/types/domainTypes';
 import { SelectValue } from '#/src/types/formTypes';
-import { memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
@@ -83,11 +79,11 @@ export const parseFloatComma = (
   value?: string | number | null,
   decimals?: number
 ): number | null => {
-  if (isNumber(value) && isFinite(value)) {
+  if (isNumber(value) && Number.isFinite(value)) {
     return value;
   } else if (isString(value)) {
-    const parsedValue = parseFloat(value.replace(',', '.'));
-    if (isFinite(parsedValue)) {
+    const parsedValue = Number.parseFloat(value.replace(',', '.'));
+    if (Number.isFinite(parsedValue)) {
       return isUndefined(decimals) ? parsedValue : round(parsedValue, decimals);
     } else {
       return null;
@@ -103,7 +99,7 @@ export const isNumeric = value => {
   }
 
   if (isString(value)) {
-    return !isNaN(parseFloat(value.replace(',', '.')));
+    return !Number.isNaN(Number.parseFloat(value.replace(',', '.')));
   }
 
   return false;
@@ -156,14 +152,18 @@ export const getTestIdProps = testId => ({
   'data-test-id': testId,
 });
 
-export const getImageFileDimensions = imgFile => {
+export const getImageFileDimensions = (
+  imgFile: File | Blob
+): Promise<{ width: number; height: number }> => {
   const objectURL = URL.createObjectURL(imgFile);
   const img = new Image();
   img.src = objectURL;
-  const result = new Promise((resolve, reject) => {
-    img.onload = () => resolve({ width: img.width, height: img.height });
-    img.onerror = e => reject(e);
-  });
+  const result = new Promise<{ width: number; height: number }>(
+    (resolve, reject) => {
+      img.onload = () => resolve({ width: img.width, height: img.height });
+      img.onerror = e => reject(e);
+    }
+  );
   result.finally(() => URL.revokeObjectURL(objectURL));
   return result;
 };
@@ -179,10 +179,10 @@ export function getCookies() {
   return Object.fromEntries(
     document.cookie
       .split('; ')
-      .filter(Boolean)
+      .filter(isTruthy)
       .map(cookieStr => {
         const [key, ...rest] = cookieStr.split('=');
-        return [decodeURIComponent(key), decodeURIComponent(rest.join('='))];
+        return [decodeURIComponent(key!), decodeURIComponent(rest.join('='))];
       })
   );
 }
@@ -237,7 +237,7 @@ export const maybeParseNumber = value => {
     isString(value) && value.includes(',')
       ? Number(value.replace(',', '.'))
       : Number(value);
-  return isNaN(numberValue) ? value : numberValue;
+  return Number.isNaN(numberValue) ? value : numberValue;
 };
 
 export const toSelectValue = value => (isNil(value) ? undefined : { value });
@@ -284,7 +284,11 @@ const isEmptyTranslatedField = value =>
   !isEmpty(intersection(keys(value), LANGUAGES)) &&
   every(value, v => !formValueExists(v));
 
-const copyPathsIfDefined = (source, target, paths) => {
+const copyPathsIfDefined = (
+  source: Record<string, unknown>,
+  target: Record<string, unknown>,
+  paths: Array<string>
+) => {
   forEach(paths, path => {
     const val = get(source, path);
     if (!isUndefined(val)) {
@@ -293,22 +297,49 @@ const copyPathsIfDefined = (source, target, paths) => {
   });
 };
 
+// Vertailija polkujen lajitteluun. Käytetään tarkoituksella koodiyksikkövertailua eikä
+// String.localeCompare:a: järjestys määrää mitä backendiin kirjoitetaan, joten sen on
+// oltava riippumaton lokaalista ja Noden ICU-versiosta.
+const byPathDescending = (a: string, b: string) => {
+  if (a < b) {
+    return 1;
+  }
+  if (a > b) {
+    return -1;
+  }
+  return 0;
+};
+
 // Get form values for saving. Filters out fields that user has hidden.
 // Result can be passed to get**ByFormValues().
 // Note that this does not filter out fields that are already in initialValues but are hidden.
 // This means that in edit-mode values that come from backend will only be filtered out if
 // the user somehow makes those fields visible and then hides them again by changing form values.
-export const getValuesForSaving = (
-  values: any,
+export const getValuesForSaving = <T extends Record<string, unknown>>(
+  values: T,
   registeredFields: Record<string, { name: string }>,
   unregisteredFields: Record<string, { name: string }>,
-  initialValues: any = {}
-) => {
+  initialValues: Partial<T> = {}
+): T => {
   // Use initial values as a base. Both create and edit forms' changes are differences to the initial values.
-  const saveableValues: any = cloneDeep(initialValues);
+  const saveableValues = cloneDeep(initialValues) as T;
 
-  // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
-  forEach(unregisteredFields, ({ name }) => {
+  // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values.
+  // Lajitellaan LASKEVAAN järjestykseen, jotta lapsikentät nollataan ennen vanhempiaan. Nousevassa
+  // järjestyksessä vanhempi nollattaisiin ensin ja lodashin set() herättäisi sen takaisin objektiksi
+  // lasta kirjoittaessaan: { p: null } -> { p: { c: null } }.
+  //
+  // Lajittelu tehdään raa'oilla nimillä, vaikka kirjoitus tapahtuu kielipäätteettömällä nimellä. Se on
+  // turvallista kahden invariantin nojalla: (1) TranslatedField on suljettu Partial<Record<'fi'|'sv'|'en', T>>,
+  // joten kielipäätteisen polun vanhemmalla ei voi olla muita kuin kielilapsia, ja (2) T ei ole koskaan itse
+  // TranslatedField. Kääntäjä ei valvo (2):ta (TranslatedField<any>). Jos kumpi tahansa invariantti murtuu,
+  // typistys on siirrettävä ennen lajittelua. Rekisteröityjen silmukka alempana lajitellaan tarkoituksella
+  // nousevasti, koska siinä vanhempi pitää kirjoittaa ennen lapsia.
+  const sortedUnregisteredFields = Object.values(unregisteredFields)
+    .map(f => f.name)
+    .sort(byPathDescending);
+
+  sortedUnregisteredFields.forEach(name => {
     const fieldName = getFieldNameWithoutLanguage(name);
     set(saveableValues, fieldName!, null);
   });
@@ -328,12 +359,23 @@ export const getValuesForSaving = (
     set(saveableValues, fieldName!, valueForSave);
   });
 
-  // Some exceptions (fields that should be saved even though they are not visible)
+  // Some exceptions (fields that should be saved even though they are not visible).
+  // Pääsääntöisesti null tarkoittaa backendissä tyhjennystä: KoutaServlet.parsedBody poistaa kaikki
+  // nullit bodysta ennen parsintaa, ja päivitys korvaa koko dokumentin, joten puuttuva kenttä päätyy
+  // kantaan tyhjänä. Näillä viidellä polulla se ei kuitenkaan toimi niin, kullakin eri syystä:
   copyPathsIfDefined(values, saveableValues, [
+    // puuttuva -> case classin oletus false, eli true muuttuisi hiljaa falseksi
     'esikatselu',
+    // ei-optionaalinen eikä oletusarvoa -> 400
     'koulutustyyppi',
+    // 400 parsinnassa; backend ylikirjoittaa arvon istunnosta joka tapauksessa
     'muokkaaja',
+    // validateKielistetty -> 400 (Koulutus/Haku, missä tahansa tilassa); lisäksi backend täydentää
+    // nimen koodistosta useille koulutustyypeille
     'information.nimi',
+    // Tämä tyhjenisi backendissä oikein. Polku on listalla tuotesyystä: OPH-virkailijan muokatessa
+    // olemassa olevaa koulutusta tarjoajavalitsin on piilotettu, vaikka tarjoajia on (muiden
+    // organisaatioiden liitokset). Piilotus ei siis tarkoita, että ne halutaan poistaa.
     'tarjoajat.tarjoajat',
   ]);
 
@@ -377,8 +419,8 @@ export const isIn = (coll: Array<unknown>) => (val: unknown) =>
   coll?.includes(val);
 
 export const getEntityNimiTranslation = (
-  entity: EntityModelBase | undefined,
-  lng: string
+  entity: NamedEntityModel | undefined,
+  lng: LanguageCode
 ) => {
   const { _enrichedData, nimi } = entity ?? {};
   return getFirstLanguageValue(_enrichedData?.esitysnimi || nimi, lng);
@@ -387,17 +429,27 @@ export const getEntityNimiTranslation = (
 export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
   isNil(tyyppi) ? '' : `koulutustyypit.${camelCase(tyyppi)}`;
 
-export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
+type KoulutustyyppiHierarkia = Array<{
+  value: string;
+  children?: Array<{ value: string }>;
+}>;
+
+export const koulutustyyppiHierarkiaToOptions = (
+  hierarkia: KoulutustyyppiHierarkia,
+  t: TFunction
+): Array<{ label: string; value: string }> =>
   hierarkia.flatMap(({ value: topValue, children }) => {
     if (children) {
       return children.map(({ value }) => ({
         label:
-          ([
-            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-            KOULUTUSTYYPPI.TUTKINNON_OSA,
-            KOULUTUSTYYPPI.OSAAMISALA,
-          ].includes(value)
+          ((
+            [
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+              KOULUTUSTYYPPI.TUTKINNON_OSA,
+              KOULUTUSTYYPPI.OSAAMISALA,
+            ] as Array<string>
+          ).includes(value)
             ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
             : '') + t(getKoulutustyyppiTranslationKey(value)),
         value,
@@ -412,43 +464,13 @@ export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
     }
   });
 
-export const koulutustyyppiHierarkiaToTranslationMap = memoizeOne(
-  (hierarkia, t) => {
-    const koulutustyyppiOptions = koulutustyyppiHierarkiaToOptions(
-      hierarkia,
-      t
-    );
-    return fromPairs(
-      koulutustyyppiOptions.map(({ label, value }) => [value, label])
-    );
-  }
-);
-
-export const getKoulutustyyppiTranslation = (
-  koulutustyyppi?: string,
-  t?: TFunction
-) => {
-  const koulutustyyppiMapping = {
-    ...koulutustyyppiHierarkiaToTranslationMap(
-      TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
-      t
-    ),
-    ...koulutustyyppiHierarkiaToTranslationMap(
-      TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
-      t
-    ),
-  };
-
-  return koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '';
-};
-
 export const notToimipisteOrg = org =>
   !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE, org);
 
 export const toEnum = <T extends object>(obj: T, value?: string | null) => {
   const values = Object.values(obj);
   const index = values.indexOf(value);
-  return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
+  return values.includes(value) ? (values[index] as ValueOf<T>) : undefined;
 };
 
 type KieliArvo = { kieli: string; arvo: string };
@@ -472,8 +494,7 @@ export const kieliArvoListToMultiSelectValue = (
 };
 
 type SelectValuesByLanguage =
-  | Partial<Record<LanguageCode, SelectOptions>>
-  | undefined;
+  Partial<Record<LanguageCode, SelectOptions>> | undefined;
 
 export const getTermsByLanguage = (
   values: SelectValuesByLanguage

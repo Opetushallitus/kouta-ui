@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
-import { isString } from 'lodash/fp';
+import { isString } from 'lodash-es';
 
 import { DatePickerInput } from '#/src/components/DatePickerInput';
 import { Box, FormControl } from '#/src/components/virkailija';
@@ -62,7 +62,7 @@ export const DateInput = ({
 
   useEffect(() => {
     isValidDate(dateValue) && setDate(dateValue);
-  }, [JSON.stringify(dateValue)]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(dateValue)]); // eslint-disable-line @eslint-react/exhaustive-deps
 
   const onDateChange = useCallback(
     d => {

@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { useQueryClient } from '@tanstack/react-query';
+import { every } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -57,7 +57,7 @@ const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
   color: ${({ theme }) => theme.colors.red.main};
 `;
 
-const useTableColumns = (
+const getTableColumns = (
   t,
   entityType,
   getLinkUrl,
@@ -109,7 +109,7 @@ const useTableColumns = (
 ];
 
 const isStateChangeResultSuccessful = mutationResult =>
-  _.isArray(mutationResult) && _.every(mutationResult, { status: 'success' });
+  Array.isArray(mutationResult) && every(mutationResult, { status: 'success' });
 
 export const StateChangeResultModal = ({
   entityType,
@@ -131,12 +131,14 @@ export const StateChangeResultModal = ({
       removeSelection();
     }
     close();
-    queryClient.invalidateQueries('search.homepage.hakukohteet');
+    queryClient.invalidateQueries({
+      queryKey: ['search.homepage.hakukohteet'],
+    });
   }, [close, removeSelection, queryClient, result]);
 
   const { t } = useTranslation();
 
-  const columns = useTableColumns(
+  const columns = getTableColumns(
     t,
     entityType,
     getLinkUrl,

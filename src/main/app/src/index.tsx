@@ -1,25 +1,19 @@
 import { Globals } from '@react-spring/web';
-import { inspect } from '@xstate/inspect';
 import { urls as ophUrls } from 'oph-urls-js';
 import { createRoot } from 'react-dom/client';
 
 import createHttpClient from './httpClient';
 import { createDefaultLocalization } from './localization';
 import App from './pages/App';
-import { store, persistor } from './state/store';
 import defaultTheme from './theme';
 import { configure as configureUrls } from './urls';
 import { isPlaywright } from './utils';
+import { migrateLegacyStorage } from './utils/organisaatioValintaStorage';
+import './utils/xstateInspector';
 
 Globals.assign({
   skipAnimation: isPlaywright,
 });
-
-if (import.meta.env.VITE_XSTATE_INSPECTOR) {
-  inspect({
-    iframe: false, // open in new window
-  });
-}
 
 (async () => {
   let apiUrls = ophUrls;
@@ -36,16 +30,16 @@ if (import.meta.env.VITE_XSTATE_INSPECTOR) {
     apiUrls,
   });
 
+  migrateLegacyStorage();
+
   const root = createRoot(document.getElementById('root') as Element);
 
   root.render(
     <App
-      store={store}
       theme={defaultTheme}
       urls={apiUrls}
       httpClient={httpClient}
       localization={localizationInstance}
-      persistor={persistor}
     />
   );
 })();

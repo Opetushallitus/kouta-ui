@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import { type TestiKoulutustyyppi } from '#/playwright/test-types';
 import { OpintojenLaajuusyksikko } from '#/src/constants';

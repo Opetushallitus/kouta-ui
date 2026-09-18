@@ -1,5 +1,5 @@
 import { isBefore, parseISO, endOfToday } from 'date-fns';
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 
 export const isValidKoulutusKoodi = ({
   koodiArvo,
@@ -8,5 +8,5 @@ export const isValidKoulutusKoodi = ({
 }) =>
   koodisto?.koodistoUri === 'koulutus' &&
   !koodiArvo.endsWith('00') && // suodatetaan pois väliotsikot
-  (_.isNil(voimassaLoppuPvm) ||
+  (isNil(voimassaLoppuPvm) ||
     isBefore(endOfToday(), parseISO(voimassaLoppuPvm)));

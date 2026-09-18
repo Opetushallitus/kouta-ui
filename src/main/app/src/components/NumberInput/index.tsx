@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { identity, isNaN, isNil, isNumber, noop, toString } from 'lodash';
+import { identity, isNaN, isNil, isNumber, noop, toString } from 'lodash-es';
 
 import { Input, InputProps } from '#/src/components/virkailija';
 import { parseFloatComma } from '#/src/utils';
@@ -17,6 +17,7 @@ const floatToCommaStr = (value?: number | null) =>
   isNil(value) ? '' : toString(value).replace('.', ',');
 
 const NumberInput = ({
+  onChange = noop,
   onBlur = noop,
   min,
   max,
@@ -24,24 +25,28 @@ const NumberInput = ({
   parseValue = identity,
   ...props
 }: NumberInputProps) => {
+  // Arvo normalisoidaan blurissa ja annetaan lomakkeelle onChangella. redux-formin
+  // BLUR-reducer kirjoitti tapahtuman arvon kentän arvoksi, joten e.target.valuen
+  // mutatointi riitti; react-final-formin onBlur ei lue arvoa lainkaan.
   const usedOnBlur = e => {
     const value: string = e?.target?.value;
     const floatValue = parseValue(value);
     if (isNaN(floatValue) || isNil(floatValue)) {
-      e.target.value = fallbackValue;
+      e.target.value = toString(fallbackValue);
+    } else if (isNumber(max) && floatValue > max) {
+      e.target.value = max;
+    } else if (isNumber(min) && floatValue < min) {
+      e.target.value = min;
     } else {
-      if (isNumber(max) && floatValue > max) {
-        e.target.value = max;
-      } else if (isNumber(min) && floatValue < min) {
-        e.target.value = min;
-      } else {
-        e.target.value = floatToCommaStr(floatValue);
-      }
+      e.target.value = floatToCommaStr(floatValue);
     }
+    onChange(e);
     onBlur(e);
   };
 
-  return <Input type="number" onBlur={usedOnBlur} {...props} />;
+  return (
+    <Input type="number" onChange={onChange} onBlur={usedOnBlur} {...props} />
+  );
 };
 
 export const IntegerInput = ({

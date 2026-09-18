@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { get } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
 import { Box, Typography } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
@@ -14,23 +14,25 @@ import { Kielivalinta } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 
 const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
-  const osiot = useFieldValue(`${name}.osiot`);
+  const osiot = useFieldValue<Array<SelectOption<string>> | undefined>(
+    `${name}.osiot`
+  );
 
   const osiotArrWithLabels = useMemo(() => {
     return (osiot ?? []).map(({ value, label }) => ({
       value,
       label: label
         ? label
-        : _fp.get(
-            'label',
-            osiotOptions.find(({ value: v }) => v === value)
+        : get(
+            osiotOptions.find(({ value: v }) => v === value),
+            'label'
           ) || null,
     }));
   }, [osiot, osiotOptions]);
 
   return osiotArrWithLabels.map(({ value, label }, index) => (
     <Box
-      marginBottom={index === osiot.length - 1 ? 0 : 2}
+      marginBottom={index === osiotArrWithLabels.length - 1 ? 0 : 2}
       key={value}
       {...getTestIdProps(`osioKuvaus.${value}`)}
     >

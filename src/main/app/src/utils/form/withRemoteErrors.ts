@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
-import _ from 'lodash';
+import { get, isNil, isString, set, uniq } from 'lodash-es';
 
 import { ENTITY } from '#/src/constants';
+import { KoutaErrorData, KoutaErrorResponse } from '#/src/types/formTypes';
 import { hakuRemoteErrorsToFormErrors } from '#/src/utils/haku/hakuRemoteErrorsToFormErrors';
 import { hakukohdeRemoteErrorsToFormErrors } from '#/src/utils/hakukohde/hakukohdeRemoteErrorsToFormErrors';
 import { koulutusRemoteErrorsToFormErrors } from '#/src/utils/koulutus/koulutusRemoteErrorsToFormErrors';
@@ -19,32 +20,32 @@ const REMOTE_ERRORS_TO_FORM_ERRORS = {
 };
 
 const setErrors = (
-  errors,
-  remoteError,
-  fieldName,
+  errors: Record<string, unknown>,
+  remoteError: KoutaErrorResponse,
+  fieldName: string,
   errorKey = `validointivirheet.${remoteError?.errorType}`
 ) => {
-  const existingError = _.get(errors, fieldName);
+  const existingError = get(errors, fieldName);
 
-  let val = existingError;
+  let val: unknown;
 
-  if (_.isNil(existingError)) {
+  if (isNil(existingError)) {
     val = [errorKey];
-  } else if (_.isArray(existingError)) {
-    val = _.uniq([...existingError, errorKey]);
+  } else if (Array.isArray(existingError)) {
+    val = uniq([...existingError, errorKey]);
   } else {
-    val = _.uniq([existingError, errorKey]);
+    val = uniq([existingError, errorKey]);
   }
 
-  _.set(errors, fieldName, val);
+  set(errors, fieldName, val);
   return errors;
 };
 
 export const withRemoteErrors = (
   formName: ENTITY,
-  response: AxiosResponse,
-  errors = {},
-  formValues = {}
+  response: AxiosResponse | undefined,
+  errors: Record<string, unknown> = {},
+  formValues: KoutaErrorData = {}
 ) => {
   const errorConverter = REMOTE_ERRORS_TO_FORM_ERRORS[formName];
   // Kaikki lomakkeet käyttävät useSaveFormia, mutta kaikille ei ole toteutettuna converteria
@@ -52,14 +53,14 @@ export const withRemoteErrors = (
     return errors;
   }
 
-  const resData = response?.data;
+  const resData: Array<KoutaErrorResponse> | undefined = response?.data;
   resData?.forEach?.(remoteError => {
     const formError = errorConverter?.(remoteError, formValues);
 
     // formError merkkijonona on vain lomakkeen kentän nimi. Virheavain päätellään backend-virheen errorType-kentästä.
-    if (_.isString(formError)) {
+    if (isString(formError)) {
       setErrors(errors, remoteError, formError);
-    } else if (_.isArray(formError)) {
+    } else if (Array.isArray(formError)) {
       formError.forEach(({ field, errorKey }) => {
         setErrors(errors, remoteError, field, errorKey);
       });

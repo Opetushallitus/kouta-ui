@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isFunction } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
@@ -91,7 +91,9 @@ const ToteutusForm = ({
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 }: ToteutusFormProps) => {
   const { t } = useTranslation();
-  const kieliversiot = useFieldValue('kieliversiot');
+  const kieliversiot = useFieldValue<Array<LanguageCode> | undefined>(
+    'kieliversiot'
+  );
   const languages = kieliversiot || [];
   const { isOpen, open, close } = useModal();
 
@@ -380,7 +382,7 @@ const ToteutusForm = ({
           entity={toteutus}
           {...getTestIdProps('tilaSection')}
         />
-        {_.isFunction(onAttachHakukohde) && hakukohteetKaytossa && (
+        {isFunction(onAttachHakukohde) && hakukohteetKaytossa && (
           <FormCollapse
             header={
               t('toteutuslomake.toteutukseenLiitetytHakukohteet') +

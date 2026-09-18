@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
-import _ from 'lodash';
+import { isString } from 'lodash-es';
 
 import { DatePickerInput } from '#/src/components/DatePickerInput';
 import TimeInput from '#/src/components/TimeInput';
@@ -32,7 +32,7 @@ const getTime = value => {
 };
 
 const isValidTime = value => {
-  if (!_.isString(value)) {
+  if (!isString(value)) {
     return false;
   }
 
@@ -42,7 +42,7 @@ const isValidTime = value => {
 };
 
 const parseValue = value => {
-  if (!_.isString(value)) {
+  if (!isString(value)) {
     return {
       date: undefined,
       time: '00:00',
@@ -101,7 +101,7 @@ export const DateTimeInput = ({
 
   useEffect(() => {
     isValidDate(dateValue) && setDate(dateValue);
-  }, [JSON.stringify(dateValue)]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(dateValue)]); // eslint-disable-line @eslint-react/exhaustive-deps
 
   useEffect(() => {
     isValidTime(timeValue) &&
@@ -117,7 +117,7 @@ export const DateTimeInput = ({
         ? onChange(formatValue({ date, time }))
         : onChange(null);
     },
-    [onChange, JSON.stringify(date)] // eslint-disable-line react-hooks/exhaustive-deps
+    [onChange, JSON.stringify(date)] // eslint-disable-line @eslint-react/exhaustive-deps
   );
 
   const onDateChange = useCallback(

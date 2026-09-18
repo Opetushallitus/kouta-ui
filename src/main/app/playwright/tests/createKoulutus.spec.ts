@@ -1,4 +1,4 @@
-import { Page, test, expect, type Locator } from '@playwright/test';
+import { Page, expect, type Locator, test } from '@playwright/test';
 
 import {
   fillAsyncSelect,
@@ -811,6 +811,21 @@ test.describe('Create koulutus', () => {
       await fillTilaSection(page);
       await tallenna(page);
     }));
+
+  // Tallenna ei saa disabloitua create-lomakkeella. KoulutusFooter laskee
+  // canUpdate || isJulkinen, ja create-sivu ei anna canUpdatea - joten heti kun
+  // julkinen on false, lauseke on false ja footer disabloi itsensä.
+  test('should keep Save enabled on the create form when julkisuus is unticked', async ({
+    page,
+  }) => {
+    await fillKoulutustyyppiSection(page, ['amm']);
+    await fillNakyvyysSection(page);
+    await fillNakyvyysSection(page);
+
+    await expect(
+      page.getByRole('button', { name: 'yleiset.tallenna' })
+    ).toBeEnabled();
+  });
 
   test('Should not copy publishing state when using existing koulutus as base', async ({
     page,

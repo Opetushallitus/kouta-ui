@@ -10,7 +10,7 @@
    but using styled-components and minor style changes + cleanup. */
 
 import {
-  ReactNode,
+  type ReactNode,
   useCallback,
   useEffect,
   useMemo,

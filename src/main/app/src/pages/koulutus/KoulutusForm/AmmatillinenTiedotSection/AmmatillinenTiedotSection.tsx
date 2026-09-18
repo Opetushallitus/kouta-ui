@@ -1,10 +1,10 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { includes } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { VerticalBox } from '#/src/components/VerticalBox';
 import { Box } from '#/src/components/virkailija';
@@ -76,7 +76,9 @@ export const WithKoulutusSelect = ({
 }) => {
   const language = useLanguageTab();
 
-  const koulutus = useFieldValue(`${name}.koulutus`)?.value;
+  const koulutus = useFieldValue<SelectOption<string> | undefined>(
+    `${name}.koulutus`
+  )?.value;
 
   return (
     <Box display="flex" flexDirection="column">
@@ -91,9 +93,11 @@ export const WithKoulutusSelect = ({
 };
 
 export const useIsAmmTutkintoWithoutEperuste = () => {
-  const koulutus = useFieldValue('information.koulutus')?.value;
+  const koulutus = useFieldValue<SelectOption<string> | undefined>(
+    'information.koulutus'
+  )?.value;
 
-  return _.includes(
+  return includes(
     AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE,
     koodiUriWithoutVersion(koulutus)
   );

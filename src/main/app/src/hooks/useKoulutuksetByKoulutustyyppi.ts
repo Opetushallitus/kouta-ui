@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { castArray, isNil } from 'lodash-es';
 
 import { getCombinedQueryStatus } from '#/src/components/QueryResultWrapper';
 import {
@@ -35,8 +35,8 @@ export const useKoulutuksetByKoulutustyyppi = (
 
   const queryProps = useMemo(
     () =>
-      _.isNil(ylaKoodiUrit) ||
-      _.keys(KOULUTUSTYYPPI_KOODIURIT_MAPPING).includes(koulutustyyppi)
+      isNil(ylaKoodiUrit) ||
+      Object.keys(KOULUTUSTYYPPI_KOODIURIT_MAPPING).includes(koulutustyyppi)
         ? [
             {
               key: GET_KOODISTO_QUERY_KEY,
@@ -47,14 +47,14 @@ export const useKoulutuksetByKoulutustyyppi = (
               ...LONG_CACHE_QUERY_OPTIONS,
             },
           ]
-        : _.castArray(ylaKoodiUrit)?.map(koodiUri => ({
+        : (castArray(ylaKoodiUrit)?.map(koodiUri => ({
             key: GET_SISALTYY_YLAKOODIT_QUERY_KEY,
             queryFn: getSisaltyyYlakoodit,
             props: {
               koodiUri,
             },
             ...LONG_CACHE_QUERY_OPTIONS,
-          })),
+          })) as any),
     [ylaKoodiUrit, koulutustyyppi]
   );
 
@@ -70,5 +70,5 @@ export const useKoulutuksetByKoulutustyyppi = (
 
   const status = getCombinedQueryStatus(responses);
 
-  return { data: koulutukset, isLoading: status === 'loading' };
+  return { data: koulutukset, isLoading: status === 'pending' };
 };

@@ -1,14 +1,14 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _ from 'lodash';
+import { isEmpty, isNil, map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useUnmount } from 'react-use';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import {
@@ -17,7 +17,7 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { getTestIdProps, getReadableDate } from '#/src/utils';
+import { getTestIdProps, getReadableDate, isTruthy } from '#/src/utils';
 import {
   getEPerusteStatusCss,
   getEPerusteStatus,
@@ -29,7 +29,7 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getListNimiLanguageValues = (list = [], language) =>
-  list.map(({ nimi }) => getLanguageValue(nimi, language)).filter(Boolean);
+  list.map(({ nimi }) => getLanguageValue(nimi, language)).filter(isTruthy);
 
 const TilaBadge = ({
   status,
@@ -54,7 +54,7 @@ const StyledTilaBadge = styled(TilaBadge)`
 `;
 
 const getEPerusteetOptions = (ePerusteet, language) =>
-  _.map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
+  map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
     label: `${getLanguageValue(nimi, language)} (${diaarinumero})`,
     value: id,
   }));
@@ -73,7 +73,7 @@ const EPerusteField = ({ isLoading, disabled, ...props }) => {
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
       disabled={
-        disabled || isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)
+        disabled || isLoading || isNil(ePerusteet) || isEmpty(ePerusteet)
       }
       {...props}
     />
@@ -90,7 +90,9 @@ export const ValitseEPerusteBox = ({
 }) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
-  const ePerusteId = useFieldValue(fieldName)?.value;
+  const ePerusteId = useFieldValue<SelectOption<string> | undefined>(
+    fieldName
+  )?.value;
   const { data: ePeruste = {} } = useEPerusteById(ePerusteId);
 
   const { opintojenlaajuus, nimikkeet, osaamisalat } = useMemo(

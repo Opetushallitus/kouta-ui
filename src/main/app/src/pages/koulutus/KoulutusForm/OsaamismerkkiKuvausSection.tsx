@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TFunction } from 'i18next';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { Heading } from '#/src/components/Heading';
@@ -67,6 +67,7 @@ const OsaamismerkkiKuvausSubsection = ({
       </Heading>
       <ul>
         {(entities || []).map((entity, index) => (
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- read-only display of fetched data, never reordered
           <li key={index}>
             {sanitizeHTML(getLanguageValue(entity[entityKey], language))}
           </li>
@@ -83,7 +84,9 @@ export const OsaamismerkkiKuvausSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const osaamismerkkiId = useFieldValue('information.osaamismerkki')?.value;
+  const osaamismerkkiId = useFieldValue<SelectOption<string> | undefined>(
+    'information.osaamismerkki'
+  )?.value;
 
   const { data: osaamismerkki = {}, isLoading: osaamismerkkiIsLoading } =
     useOsaamismerkki(osaamismerkkiId);

@@ -1,9 +1,9 @@
 import React, { useMemo, Fragment } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import Heading from '#/src/components/Heading';
 import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
@@ -16,7 +16,9 @@ export const TietoaOpiskelustaSection = ({ name, language }) => {
     koodisto: 'organisaationkuvaustiedot',
   });
 
-  const osiot = useFieldValue(`${name}.osiot`);
+  const osiot = useFieldValue<Array<SelectOption<string>> | undefined>(
+    `${name}.osiot`
+  );
 
   const osiotWithLabels = useMemo(() => {
     return (osiot || []).map(({ value }) => ({

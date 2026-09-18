@@ -11,6 +11,13 @@ export const OrganisaatioTreeList = ({
   onToggleFavourite,
   onToggleOpen,
   language = 'fi',
+}: {
+  items: Array<any>;
+  onSelect: (oid: string) => void;
+  selected?: string;
+  onToggleFavourite: (oid: string) => void;
+  onToggleOpen?: (oid: string) => void;
+  language?: LanguageCode;
 }) => (
   <TreeList items={items} defaultOpen={false}>
     {itemProps => (

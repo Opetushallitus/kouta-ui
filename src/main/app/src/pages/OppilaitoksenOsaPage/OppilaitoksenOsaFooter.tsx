@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
@@ -35,12 +35,12 @@ export const OppilaitoksenOsaFooter = ({
         },
       });
 
-      queryClient.invalidateQueries(ENTITY.OPPILAITOKSEN_OSA);
+      queryClient.invalidateQueries({ queryKey: [ENTITY.OPPILAITOKSEN_OSA] });
     },
     [oppilaitoksenOsa, organisaatioOid, queryClient]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName: ENTITY.OPPILAITOKSEN_OSA,
     submit,
     validate: validateOppilaitoksenOsaForm,
@@ -52,7 +52,6 @@ export const OppilaitoksenOsaFooter = ({
     <FormFooter
       entityType={ENTITY.OPPILAITOKSEN_OSA}
       entity={oppilaitoksenOsa}
-      save={save}
       canUpdate={!readOnly}
       esikatseluUrl={
         oppilaitoksenOsa &&

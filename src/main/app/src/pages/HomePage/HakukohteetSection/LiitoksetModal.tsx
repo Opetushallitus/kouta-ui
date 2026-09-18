@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';

@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router';
 import { ThemeProvider } from 'styled-components';
 
 import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';

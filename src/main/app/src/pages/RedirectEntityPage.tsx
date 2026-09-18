@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router';
 
 import { FullSpin } from '#/src/components/FullSpin';
 import { ENTITY } from '#/src/constants';

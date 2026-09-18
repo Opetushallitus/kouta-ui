@@ -494,8 +494,7 @@ export const kieliArvoListToMultiSelectValue = (
 };
 
 type SelectValuesByLanguage =
-  | Partial<Record<LanguageCode, SelectOptions>>
-  | undefined;
+  Partial<Record<LanguageCode, SelectOptions>> | undefined;
 
 export const getTermsByLanguage = (
   values: SelectValuesByLanguage

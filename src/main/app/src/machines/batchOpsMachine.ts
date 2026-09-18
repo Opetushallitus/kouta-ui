@@ -42,10 +42,7 @@ interface BatchOpsMachineContext {
 }
 
 type BatchOpsMachineEvent =
-  | StartEvent
-  | ExecuteEvent
-  | CancelEvent
-  | CloseEvent;
+  StartEvent | ExecuteEvent | CancelEvent | CloseEvent;
 
 const machineSetup = setup({
   types: {

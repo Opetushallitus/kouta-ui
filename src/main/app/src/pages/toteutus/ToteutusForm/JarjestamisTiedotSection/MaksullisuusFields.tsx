@@ -42,8 +42,7 @@ export const MaksuField = ({ name, t, label }) => {
 
 const isMaksunMaaraVisible = (
   selectedMaksullisuustyyppiValue:
-    | MaksullisuusTyyppi
-    | Array<MaksullisuusTyyppi>,
+    MaksullisuusTyyppi | Array<MaksullisuusTyyppi>,
   maksullisuustyyppiForMaksunMaara: MaksullisuusTyyppi
 ): boolean => {
   return Array.isArray(selectedMaksullisuustyyppiValue)

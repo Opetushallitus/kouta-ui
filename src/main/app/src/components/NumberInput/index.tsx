@@ -32,15 +32,13 @@ const NumberInput = ({
     const value: string = e?.target?.value;
     const floatValue = parseValue(value);
     if (isNaN(floatValue) || isNil(floatValue)) {
-      e.target.value = fallbackValue;
+      e.target.value = toString(fallbackValue);
+    } else if (isNumber(max) && floatValue > max) {
+      e.target.value = max;
+    } else if (isNumber(min) && floatValue < min) {
+      e.target.value = min;
     } else {
-      if (isNumber(max) && floatValue > max) {
-        e.target.value = max;
-      } else if (isNumber(min) && floatValue < min) {
-        e.target.value = min;
-      } else {
-        e.target.value = floatToCommaStr(floatValue);
-      }
+      e.target.value = floatToCommaStr(floatValue);
     }
     onChange(e);
     onBlur(e);

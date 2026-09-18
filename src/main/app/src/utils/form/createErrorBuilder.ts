@@ -29,8 +29,8 @@ class ErrorBuilder {
     this.errors = {};
     this.registeredFields =
       registeredFields &&
-      lodashValues(registeredFields).map(
-        v => getFieldNameWithoutLanguage(v.name)!
+      lodashValues(registeredFields).map(v =>
+        getFieldNameWithoutLanguage(v.name)!
       );
   }
 

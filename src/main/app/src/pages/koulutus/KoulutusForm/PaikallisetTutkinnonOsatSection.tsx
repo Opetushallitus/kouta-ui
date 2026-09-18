@@ -1,8 +1,8 @@
 import { useMemo, useRef } from 'react';
 
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useInfiniteQuery, useQueryClient } from 'react-query';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';

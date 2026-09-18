@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { map } from 'lodash-es';
-import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { JULKAISUTILA } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
@@ -55,5 +55,8 @@ export const useChangeToteutuksetTilaMutation = () => {
     ToteutuksetTilaChangeResponseData,
     unknown,
     ChangeToteutustenTilaProps
-  >('changeToteutustenTila', changeToteutustenTila);
+  >({
+    mutationKey: ['changeToteutustenTila'],
+    mutationFn: changeToteutustenTila,
+  });
 };

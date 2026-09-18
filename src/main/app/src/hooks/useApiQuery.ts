@@ -5,7 +5,7 @@ import {
   useQuery,
   UseQueryResult,
   UseQueryOptions,
-} from 'react-query';
+} from '@tanstack/react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -49,7 +49,11 @@ export const useApiQuery = <
     [apiFn, httpClient, apiUrls, props]
   );
 
-  return useQuery<TQueryFnData, TError, TData>([key, props], queryFn, options);
+  return useQuery<TQueryFnData, TError, TData>({
+    queryKey: [key, props],
+    queryFn,
+    ...options,
+  });
 };
 
 type QuerySpec<
@@ -87,5 +91,5 @@ export const useApiQueries = <
     [koutaQuerySpecs, apiUrls, httpClient]
   );
 
-  return useQueries(querySpecs);
+  return useQueries({ queries: querySpecs });
 };

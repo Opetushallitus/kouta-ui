@@ -28,7 +28,7 @@ export const EPerusteTiedot = ({
     koodiUri: selectedKoulutus,
   });
 
-  const koulutusIsLoading = status === 'loading';
+  const koulutusIsLoading = status === 'pending';
 
   const ePerusteet = koulutus?.ePerusteet;
 

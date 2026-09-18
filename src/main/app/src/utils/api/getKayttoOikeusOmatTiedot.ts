@@ -21,7 +21,7 @@ export const useKayttoOikeusOmatTiedot = () => {
     {},
     {
       staleTime: Infinity,
-      cacheTime: Infinity,
+      gcTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );

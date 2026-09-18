@@ -28,8 +28,10 @@ jobs:
           distribution: 'corretto'
           cache: 'maven'
 
-      - uses: ./.github/actions/setup-npm-registry-auth
-
+      - uses: ./.github/actions/setup-node-env
+        with:
+          project_path: src/main/app
+        
       - name: Build with Maven
         run: mvn clean spotless:check package -B
 
@@ -52,6 +54,7 @@ jobs:
       - uses: ./.github/actions/setup-node-env
         with:
           project_path: src/main/app
+          install: true
       - name: Run tests
         run: |
           pnpm run tsc

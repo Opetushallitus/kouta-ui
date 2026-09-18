@@ -28,3 +28,6 @@ overrides:
   # Major-loikka yli 2.x:n: ainoa käyttäjä react-usen useCookie tarvitsee vain
   # get/set/remove, jotka ovat 3.x:ssa ennallaan - eikä sitä kutsuta täältä lainkaan.
   js-cookie@2: 3.0.8
+
+allowBuilds:
+  esbuild: true

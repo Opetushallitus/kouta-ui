@@ -159,6 +159,41 @@ test.describe('Edit hakukohde', () => {
       await tallenna(page);
     }));
 
+  test('should clear the per-liite toimitustapa when a shared toimituspaikka is taken into use', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await prepareHakukohdeTest(page, {
+        tyyppi: 'yo',
+        hakuOid,
+        organisaatioOid,
+        tarjoajat,
+      });
+      await loadHakukohdePage(page);
+      await fillKieliversiotSection(page);
+      await fillJarjestyspaikkaSection(page);
+
+      // Yhteinen toimituspaikka käyttöön -> liitekohtaiset toimitustapa-kentät
+      // katoavat. Piilotettu arvo palaa payloadiin FieldArrayn mukana, joten
+      // payload on tässä se mitattava asia: liitekohtainen toimitustapa ja
+      // osoite eivät saa lähteä backendiin, joka vaatisi niiltä täyden osoitteen.
+      await withinSection(page, 'liitteet', async section => {
+        const liitekohtaisetToimitustavat = section
+          .getByTestId('liitelista')
+          .getByTestId('toimitustapa');
+
+        await expect(liitekohtaisetToimitustavat).not.toHaveCount(0);
+
+        await section
+          .getByText('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')
+          .click();
+
+        await expect(liitekohtaisetToimitustavat).toHaveCount(0);
+      });
+
+      await tallenna(page);
+    }));
+
   // --- Siirron suojatestit -------------------------------------------------
 
   // Merkki kerrallaan, EI fillillä. Kohde on FieldArrayn lapsi: jokainen

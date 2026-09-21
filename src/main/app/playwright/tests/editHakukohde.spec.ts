@@ -194,6 +194,49 @@ test.describe('Edit hakukohde', () => {
       await tallenna(page);
     }));
 
+  // Kantaan jäänyttä kuollutta dataa ei voi siivota rekisteröinnin kautta: ilman
+  // rastia ohjekenttä ei mounttaudu lainkaan, joten mikään ei poistu näkyvistä eikä
+  // mitään nollata. Tässä testissä valintakoeosiota ei kosketa ollenkaan.
+  test('should drop valintakoe ohjeet that are already in the entity without the checkbox', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await prepareHakukohdeTest(page, {
+        tyyppi: 'yo',
+        hakuOid,
+        organisaatioOid,
+        tarjoajat,
+      });
+      await page.route(
+        `**/hakukohde/${hakukohdeOid}`,
+        fixtureJSON(
+          merge(hakukohde(), {
+            toteutusOid,
+            hakuOid,
+            organisaatioOid,
+            oid: hakukohdeOid,
+            valintaperusteId,
+            valintakokeet: [
+              {
+                metadata: {
+                  liittyyEnnakkovalmistautumista: false,
+                  erityisjarjestelytMahdollisia: false,
+                },
+              },
+            ],
+          })
+        )
+      );
+      await page.goto(
+        `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+      );
+
+      await fillKieliversiotSection(page);
+      await fillJarjestyspaikkaSection(page);
+
+      await tallenna(page);
+    }));
+
   // --- Siirron suojatestit -------------------------------------------------
 
   // Merkki kerrallaan, EI fillillä. Kohde on FieldArrayn lapsi: jokainen

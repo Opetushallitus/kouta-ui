@@ -177,13 +177,18 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     ({ tyyppi, nimi, kuvaus, toimitusaika, toimitustapa }) => {
       const tapa = toimitustapa?.tapa || null;
       return {
-        toimitustapa: tapa,
+        // Yhteinen toimituspaikka syrjäyttää liitekohtaisen, joten liitekohtainen
+        // toimitustapa on nollattava kuten toimitusaikakin: piilotettu arvo jää
+        // lomakkeelle, ja backend vaatii osoitteen jokaiselta liitteeltä jonka
+        // toimitustapa on MUU_OSOITE, vaikka se lukisi vain yhteistä osoitetta.
+        toimitustapa: liitteetOnkoSamaToimitusosoite ? null : tapa,
         tyyppiKoodiUri: tyyppi?.value || null,
         nimi: kieleistykset(nimi),
         toimitusaika: liitteetOnkoSamaToimitusaika
           ? null
           : toimitusaika || null,
         toimitusosoite:
+          !liitteetOnkoSamaToimitusosoite &&
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
             ? getLiiteToimitusosoite(toimitustapa, kielivalinta, kieleistykset)
             : null,

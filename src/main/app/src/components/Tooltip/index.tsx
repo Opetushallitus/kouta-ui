@@ -4,7 +4,7 @@ import RcTooltip from 'rc-tooltip';
 
 export const Tooltip = ({ children, overlay, ...props }) => (
   <RcTooltip
-    arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
+    showArrow={{ content: <div className="rc-tooltip-arrow-inner"></div> }}
     overlay={overlay}
     {...props}
   >

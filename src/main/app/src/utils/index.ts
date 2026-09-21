@@ -359,6 +359,43 @@ export const getValuesForSaving = <T extends Record<string, unknown>>(
     set(saveableValues, fieldName!, valueForSave);
   });
 
+  // Poistuneiden nollaus uudelleen. Rekisteröityjen kierros kirjoittaa FieldArrayn koko
+  // taulukon yhdellä set-kutsulla (FieldArray rekisteröi oman polkunsa), joten taulukon
+  // sisällä piilotetun kentän nollaus kumoutuu ja arvo lähtisi backendiin.
+  //
+  // Poistunut polku nollataan vain, jos rekisteröityjen kierros ei kirjoittanut arvoa
+  // polkuun itseensä eikä sen sisälle. Ehto kysyy siis: omistaako jokin näkyvä kenttä
+  // tämän polun tai jotain sen alta? Esi-isää ei lasketa mukaan, ja juuri se erottaa
+  // kolme törmäystä, jotka pitää ratkaista eri suuntiin:
+  //
+  //   nimi.sv poistunut, nimi.fi rekisteröity    sama polku nimi  -> rekisteröity voittaa
+  //   p poistunut, p.c rekisteröity              näkyvä alla      -> p jää kirjoitetuksi
+  //   liite[0].tapa poistunut, liitteet rekist.  vain esi-isä     -> nollataan uudelleen
+  //
+  // Lisäksi vain jo olemassa oleva polku nollataan: tämä kierros tyhjentää, mutta ei
+  // luo rakennetta. Poistettu taulukon rivi jättää jälkeensä poistuneen kentän, jonka
+  // indeksi on lyhentyneen taulukon ulkopuolella, ja set() herättäisi rivin takaisin.
+  //
+  // Sama laskeva järjestys kuin ensimmäisellä kierroksella, samasta syystä.
+  const registeredPaths = sortedFields.map(name =>
+    getFieldNameWithoutLanguage(name)!
+  );
+
+  const writtenByRegisteredField = (path: string) =>
+    registeredPaths.some(
+      registeredPath =>
+        registeredPath === path ||
+        registeredPath.startsWith(`${path}.`) ||
+        registeredPath.startsWith(`${path}[`)
+    );
+
+  sortedUnregisteredFields
+    .map(name => getFieldNameWithoutLanguage(name)!)
+    .filter(
+      path => has(saveableValues, path) && !writtenByRegisteredField(path)
+    )
+    .forEach(path => set(saveableValues, path, null));
+
   // Some exceptions (fields that should be saved even though they are not visible).
   // Pääsääntöisesti null tarkoittaa backendissä tyhjennystä: KoutaServlet.parsedBody poistaa kaikki
   // nullit bodysta ennen parsintaa, ja päivitys korvaa koko dokumentin, joten puuttuva kenttä päätyy

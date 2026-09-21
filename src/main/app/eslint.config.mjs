@@ -30,6 +30,8 @@ export default defineConfig([
     languageOptions: {
       parserOptions: {
         ecmaFeatures: { jsx: true },
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         ...globals.browser,
@@ -37,6 +39,7 @@ export default defineConfig([
       },
     },
     rules: {
+      '@typescript-eslint/no-deprecated': 'error',
       'no-empty': 'off',
       '@eslint-react/rules-of-hooks': 'error',
       '@eslint-react/exhaustive-deps': 'warn',
@@ -134,7 +137,6 @@ export default defineConfig([
     languageOptions: {
       parserOptions: {
         tsconfigRootDir: import.meta.dirname,
-        project: './playwright/tsconfig.json',
       },
     },
     rules: {

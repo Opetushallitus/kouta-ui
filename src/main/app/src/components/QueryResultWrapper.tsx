@@ -23,7 +23,7 @@ export const getCombinedQueryStatus = (
 };
 
 type Props = {
-  children: JSX.Element;
+  children: React.JSX.Element;
   queryResult:
     | QueryObserverResult<unknown, unknown>
     | Array<QueryObserverResult<unknown, unknown>>;

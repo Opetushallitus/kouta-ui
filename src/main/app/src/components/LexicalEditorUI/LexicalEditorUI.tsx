@@ -137,6 +137,7 @@ export const LexicalEditorUI = ({
 
   return (
     <Container className="Editor__" hasFocus={hasFocus} disabled={disabled}>
+      {/* eslint-disable-next-line @typescript-eslint/no-deprecated -- LexicalComposer is superseded by LexicalExtensionComposer, but migrating means reworking this editor's plugin composition (children -> extensions array) and undo/redo wiring; tracked as follow-up, not part of enabling this rule. */}
       <LexicalComposer initialConfig={config}>
         <ToolbarPlugin />
         <RichTextPlugin

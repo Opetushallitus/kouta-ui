@@ -114,6 +114,33 @@ describe('migrateLegacyStorage', () => {
     expect(loadOrganisaatioFavourites()).toEqual([A]);
   });
 
+  test('migrates over a corrupt new value', () => {
+    localStorage.setItem(ORGANISAATIO_OID_KEY, '{not json');
+    localStorage.setItem(ORGANISAATIO_FAVOURITES_KEY, JSON.stringify('x'));
+    localStorage.setItem(LEGACY_SELECTION_KEY, legacy({ oid: B }));
+    localStorage.setItem(
+      LEGACY_FAVOURITES_KEY,
+      legacy({ byOid: { [B]: true } })
+    );
+
+    migrateLegacyStorage();
+
+    expect(loadOrganisaatioOid()).toBe(B);
+    expect(loadOrganisaatioFavourites()).toEqual([B]);
+  });
+
+  test('keeps an emptied favourites list', () => {
+    saveOrganisaatioFavourites([]);
+    localStorage.setItem(
+      LEGACY_FAVOURITES_KEY,
+      legacy({ byOid: { [B]: true } })
+    );
+
+    migrateLegacyStorage();
+
+    expect(loadOrganisaatioFavourites()).toEqual([]);
+  });
+
   test('migrates the slices independently', () => {
     saveOrganisaatioOid(A);
     localStorage.setItem(LEGACY_SELECTION_KEY, legacy({ oid: B }));

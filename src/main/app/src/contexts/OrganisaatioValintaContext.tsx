@@ -46,16 +46,18 @@ export const OrganisaatioValintaProvider = ({
     saveOrganisaatioOid(oid);
   }, []);
 
-  const toggleFavourite = useCallback(
-    (oid: string) => {
+  // Funktionaalinen päivitys, jotta peräkkäiset kutsut samassa tapahtumassa eivät
+  // laske seuraavaa tilaa samasta vanhentuneesta listasta. Kirjoitus päivittäjän sisällä
+  // on idempotentti, joten StrictModen tuplakutsu ei haittaa.
+  const toggleFavourite = useCallback((oid: string) => {
+    setFavouritesState(favourites => {
       const next = favourites.includes(oid)
         ? favourites.filter(o => o !== oid)
         : [...favourites, oid];
-      setFavouritesState(next);
       saveOrganisaatioFavourites(next);
-    },
-    [favourites]
-  );
+      return next;
+    });
+  }, []);
 
   const selection = useMemo(
     () => ({ organisaatioOid, setOrganisaatioOid }),

@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { act, render, waitFor } from '@testing-library/react';
 
 import { Field, FieldArray } from '#/src/components/formFields/Field';
 import { ReactFinalForm } from '#/src/components/ReactFinalForm';
-import { useForm } from '#/src/hooks/form';
+import {
+  useForm,
+  useRegisterSubmitHandler,
+  useSubmitForm,
+} from '#/src/hooks/form';
 
 /**
  * Footerit lukevat kenttäjoukon VASTA tallennushetkellä, vaikka ne ottavat form-olion
@@ -144,4 +148,80 @@ test('fields.map antaa kolmantena argumenttina paikatun fields-olion', async () 
   });
 
   expect(kolmas.get(0)).toEqual({ arvo: 'a' });
+});
+
+/**
+ * Taulukon oma tallennusvirhe näkyy FieldArrayn meta.errorissa.
+ *
+ * createErrorBuilder kirjoittaa taulukkovirheen redux-formin polkuun `${name}._error`.
+ * final-form ei poimi sitä itse, joten ilman wrapperin siirtoa virhe katoaa hiljaa, eikä
+ * käyttäjä näe miksi tallennus epäonnistui. Rivin lisäys piilottaa virheen.
+ */
+test('FieldArray näyttää taulukon tallennusvirheen kunnes taulukko muuttuu', async () => {
+  let lastMeta: any = null;
+  let lastFields: any = null;
+  let submit: () => void = () => undefined;
+
+  const Rivit = ({ fields, meta }: any) => {
+    lastMeta = meta;
+    lastFields = fields;
+    return null;
+  };
+
+  const Tallennus = () => {
+    submit = useSubmitForm();
+    useRegisterSubmitHandler(
+      useCallback(async () => ({ rivit: { _error: ['vähintään yksi'] } }), [])
+    );
+    return null;
+  };
+
+  render(
+    <ReactFinalForm form="soraKuvaus" mode="edit" initialValues={{ rivit: [] }}>
+      <Tallennus />
+      <FieldArray name="rivit" component={Rivit} />
+    </ReactFinalForm>
+  );
+
+  expect(lastMeta.error).toBeUndefined();
+
+  await act(async () => submit());
+  expect(lastMeta.error).toEqual(['vähintään yksi']);
+
+  act(() => lastFields.push({ arvo: 'a' }));
+  expect(lastMeta.error).toBeUndefined();
+});
+
+/**
+ * Proxy sitoo metodit alkuperäiseen fields-olioon. Mutaattorit ovat metodeja, joten
+ * väärä this rikkoisi ne kaikki kerralla.
+ */
+test('fields-proxyn mutaattorit muuttavat taulukkoa', async () => {
+  let lastFields: any = null;
+
+  const Rivit = ({ fields }: any) => {
+    lastFields = fields;
+    return null;
+  };
+
+  render(
+    <ReactFinalForm
+      form="soraKuvaus"
+      mode="edit"
+      initialValues={{ rivit: ['a', 'b'] }}
+    >
+      <FieldArray name="rivit" component={Rivit} />
+    </ReactFinalForm>
+  );
+
+  act(() => lastFields.push('c'));
+  expect(lastFields.value).toEqual(['a', 'b', 'c']);
+
+  act(() => lastFields.swap(0, 2));
+  expect(lastFields.value).toEqual(['c', 'b', 'a']);
+
+  act(() => lastFields.remove(1));
+  expect(lastFields.value).toEqual(['c', 'a']);
+  expect(lastFields.get(1)).toBe('a');
+  expect(lastFields.length).toBe(2);
 });

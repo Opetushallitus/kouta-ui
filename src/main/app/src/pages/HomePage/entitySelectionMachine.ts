@@ -1,9 +1,13 @@
-import { assign } from '@xstate/immer';
-import _ from 'lodash';
-import { createMachine } from 'xstate';
+import { produce } from 'immer';
+import { forEach } from 'lodash-es';
+import { setup } from 'xstate';
 
-type EntityListItem = {
+import { JULKAISUTILA } from '#/src/constants';
+
+export type EntityListItem = {
   oid: string;
+  nimi?: TranslatedField<string>;
+  tila?: JULKAISUTILA;
 };
 
 interface SelectionContext {
@@ -25,50 +29,49 @@ interface ResetSelectionEvent {
   items?: Array<EntityListItem>;
 }
 
-export const entitySelectionMachine = createMachine(
-  {
-    predictableActionArguments: true,
-    id: 'EntitySelectionMachine',
-    tsTypes: {} as import('./entitySelectionMachine.typegen').Typegen0,
-    schema: {
-      context: {} as SelectionContext,
-      events: {} as SelectItemsEvent | DeselectItemsEvent | ResetSelectionEvent,
-    },
-    context: {
-      selection: {},
-    },
-    on: {
-      SELECT_ITEMS: {
-        actions: 'selectItems',
-      },
-      DESELECT_ITEMS: {
-        actions: 'deselectItems',
-      },
-      RESET_SELECTION: {
-        actions: 'resetSelection',
-      },
-    },
+type EntitySelectionEvent =
+  SelectItemsEvent | DeselectItemsEvent | ResetSelectionEvent;
+
+const machineSetup = setup({
+  types: {
+    context: {} as SelectionContext,
+    events: {} as EntitySelectionEvent,
   },
-  {
-    actions: {
-      selectItems: assign<SelectionContext, SelectItemsEvent>((ctx, e) => {
-        _.forEach(e.items, item => {
-          ctx.selection[item.oid] = item;
-        });
-      }),
-      deselectItems: assign<SelectionContext, DeselectItemsEvent>((ctx, e) => {
-        _.forEach(e.items, item => {
-          delete ctx.selection[item.oid];
-        });
-      }),
-      resetSelection: assign<SelectionContext, ResetSelectionEvent>(
-        (ctx, e) => {
-          ctx.selection = {};
-          _.forEach(e?.items, item => {
-            ctx.selection[item.oid] = item;
+});
+
+export const entitySelectionMachine = machineSetup.createMachine({
+  id: 'EntitySelectionMachine',
+  context: {
+    selection: {},
+  },
+  on: {
+    SELECT_ITEMS: {
+      actions: machineSetup.assign(({ context, event }) =>
+        produce(context, draft => {
+          forEach((event as SelectItemsEvent).items, item => {
+            draft.selection[item.oid] = item;
           });
-        }
+        })
       ),
     },
-  }
-);
+    DESELECT_ITEMS: {
+      actions: machineSetup.assign(({ context, event }) =>
+        produce(context, draft => {
+          forEach((event as DeselectItemsEvent).items, item => {
+            delete draft.selection[item.oid];
+          });
+        })
+      ),
+    },
+    RESET_SELECTION: {
+      actions: machineSetup.assign(({ context, event }) =>
+        produce(context, draft => {
+          draft.selection = {};
+          forEach((event as ResetSelectionEvent)?.items, item => {
+            draft.selection[item.oid] = item;
+          });
+        })
+      ),
+    },
+  },
+});

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { flow, sortBy, sortedUniqBy } from 'lodash-es';
 
 import { useFieldValue } from '#/src/hooks/form';
 import { useOppilaitoksetForAvoinKorkeakoulutus } from '#/src/hooks/useOppilaitoksetForAvoinKorkeakoulutus';
@@ -24,11 +24,11 @@ export const useSelectableKoulutusTarjoajat = ({ organisaatioOid }) => {
 
   const tarjoajat = useMemo(
     () =>
-      _.flow(
+      flow(
         h => flattenHierarkia(h),
         h => (isAvoinKorkeakoulutus ? [...h, ...organisaatiot] : h),
-        h => _.sortBy(h, e => getFirstLanguageValue(e.nimi)),
-        h => _.sortedUniqBy(h, 'oid')
+        h => sortBy(h, e => getFirstLanguageValue(e.nimi)),
+        h => sortedUniqBy(h, 'oid')
       )(hierarkia),
     [hierarkia, organisaatiot, isAvoinKorkeakoulutus]
   );

@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { createFormFieldComponent } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import { Spin } from '#/src/components/virkailija';
 import { TOTEUTUS_ROLE } from '#/src/constants';

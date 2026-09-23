@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import { Alkamiskausityyppi } from '#/src/constants';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';

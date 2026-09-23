@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { every } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -30,7 +30,7 @@ const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
   color: ${({ theme }) => theme.colors.red.main};
 `;
 
-const useTableColumns = (t, entityType, getLinkUrl) => [
+const getTableColumns = (t, entityType, getLinkUrl) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
@@ -70,7 +70,7 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
 ];
 
 const isCopyResultSuccessful = mutationResult =>
-  _.isArray(mutationResult) && _.every(mutationResult, { status: 'success' });
+  Array.isArray(mutationResult) && every(mutationResult, { status: 'success' });
 
 export const CopyResultModal = ({
   entityType,
@@ -94,7 +94,7 @@ export const CopyResultModal = ({
 
   const { t } = useTranslation();
 
-  const columns = useTableColumns(t, entityType, getLinkUrl);
+  const columns = getTableColumns(t, entityType, getLinkUrl);
 
   return (
     <ResultModal

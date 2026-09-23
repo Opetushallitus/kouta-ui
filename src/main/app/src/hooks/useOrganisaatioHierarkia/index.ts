@@ -59,7 +59,11 @@ export const useOrganisaatioHierarkia = (
   );
 
   const hierarkia = useMemo(
-    () => filterTree(data, org => defaultFilter(org) && filter(org)),
+    () =>
+      filterTree<OrganisaatioModel>(
+        data,
+        org => defaultFilter(org) && filter(org)
+      ),
     [data, filter]
   );
 

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { omit } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -39,7 +39,7 @@ const getInitialValues = (
     ? {
         ...getCopyValues(valintaperuste.id),
         ...getFormValuesByValintaperuste(
-          _.omit(valintaperuste, ['organisaatioOid']),
+          omit(valintaperuste, ['organisaatioOid']),
           FormMode.CREATE
         ),
         tila: DEFAULT_JULKAISUTILA,

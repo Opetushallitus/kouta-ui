@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import { OrganisaatioModel } from '#/src/types/domainTypes';

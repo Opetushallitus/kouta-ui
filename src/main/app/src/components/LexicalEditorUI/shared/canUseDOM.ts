@@ -6,7 +6,7 @@
  *
  */
 
-export const CAN_USE_DOM: boolean =
-  !window.isUndefined &&
-  !window.document.isUndefined &&
-  !window.document.createElement.isUndefined;
+export const CAN_USE_DOM: boolean = Boolean(
+  // eslint-disable-next-line @typescript-eslint/no-deprecated -- TS resolves this uncalled property read to Document's deprecated-tag-name overload of createElement, not an actual use of a deprecated API
+  globalThis.window?.document?.createElement
+);

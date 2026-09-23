@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { noop } from 'lodash-es';
 
 import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
 import { DateInput } from '#/src/components/DateInput';
@@ -35,9 +35,13 @@ export const simpleMapProps = ({ input, ...props }) => ({
   ...props,
 });
 
+// Select-kentät eivät välitä bluria lomakkeelle. Nollaus on peruja redux-formista ja
+// pidetty ennallaan: react-final-formissa onBlur vain merkitsisi kentän kosketetuksi,
+// eikä kouta lue touched-tilaa. Sama nollaus on alla neljässä mapperissa, jotka
+// tarvitsevat lisäksi id:n.
 export const selectMapProps = ({ input, ...props }) => ({
   ...input,
-  onBlur: _.noop,
+  onBlur: noop,
   ...props,
 });
 
@@ -85,7 +89,7 @@ export const FormFieldHardcoded = value =>
   createComponent(Select, ({ input, id, ...props }) => ({
     ...input,
     value: { value: value },
-    onBlur: _.noop,
+    onBlur: noop,
     ...props,
     id,
   }));
@@ -94,7 +98,7 @@ export const FormFieldSelect = createComponent(
   Select,
   ({ input, id, ...props }) => ({
     ...input,
-    onBlur: _.noop,
+    onBlur: noop,
     ...props,
     id,
   })
@@ -115,7 +119,7 @@ export const FormFieldYearSelect = createComponent(
   YearSelect,
   ({ input, id, ...props }) => ({
     ...input,
-    onBlur: _.noop,
+    onBlur: noop,
     ...props,
     id,
   })
@@ -144,7 +148,7 @@ export const FormFieldSoraKuvausSelect = createComponent(
   SoraKuvausSelect,
   ({ input, id, ...props }) => ({
     ...input,
-    onBlur: _.noop,
+    onBlur: noop,
     ...props,
     id,
   })

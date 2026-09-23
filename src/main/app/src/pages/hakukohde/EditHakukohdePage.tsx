@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -14,6 +14,7 @@ import FormSteps from '#/src/components/FormSteps';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useCanUpdateHakukohde } from '#/src/hooks/useCanUpdateHakukohde';
 import useKoodi from '#/src/hooks/useKoodi';
+import { toEnum } from '#/src/utils';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import { arrayToTranslationObject } from '#/src/utils/languageUtils';
@@ -27,21 +28,16 @@ const useInitialValues = hakukohde => {
   const hakukohdeKoodiQueryResult = useKoodi(hakukohdeKoodiUri);
   const { koodi: hakukohdeKoodi } = hakukohdeKoodiQueryResult;
 
-  const nimiHakukohdeKoodista = useMemo(
-    () => arrayToTranslationObject(hakukohdeKoodi?.metadata),
-    [hakukohdeKoodi]
-  );
-
   const initialValues = useMemo(
     () =>
       hakukohde
         ? getFormValuesByHakukohde(
             hakukohde,
             FormMode.EDIT,
-            nimiHakukohdeKoodista
+            arrayToTranslationObject(hakukohdeKoodi?.metadata)
           )
         : {},
-    [hakukohde, nimiHakukohdeKoodista]
+    [hakukohde, hakukohdeKoodi]
   );
 
   return { initialValues, hakukohdeKoodiUri, hakukohdeKoodiQueryResult };
@@ -64,8 +60,9 @@ export const EditHakukohdePage = () => {
     { enabled: Boolean(hakukohde) }
   );
 
-  const { data: { toteutus, haku, koulutustyyppi } = {} } =
-    hakukohdePageDataQueryResult;
+  const { data: { toteutus, haku } = {} } = hakukohdePageDataQueryResult;
+
+  const data = hakukohdePageDataQueryResult.data;
 
   const { t } = useTranslation();
 
@@ -79,6 +76,10 @@ export const EditHakukohdePage = () => {
 
   const canUpdate = resultObj.canUpdate;
   const infoTextTranslationKey = canUpdate ? '' : resultObj.reasonKey;
+
+  const koulutustyyppi =
+    toEnum(KOULUTUSTYYPPI, data?.koulutustyyppi) ||
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage
@@ -102,9 +103,7 @@ export const EditHakukohdePage = () => {
           organisaatioOid={organisaatioOid}
           hakukohde={hakukohde}
           toteutus={toteutus}
-          koulutustyyppi={
-            koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-          }
+          koulutustyyppi={koulutustyyppi}
           haku={haku}
           canUpdate={canUpdate}
           infoTextTranslationKey={infoTextTranslationKey}
@@ -125,7 +124,7 @@ export const EditHakukohdePage = () => {
         haku={haku}
         hakukohde={hakukohde}
         toteutus={toteutus}
-        koulutustyyppi={koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS}
+        koulutustyyppi={koulutustyyppi}
       />
     </FormPage>
   );

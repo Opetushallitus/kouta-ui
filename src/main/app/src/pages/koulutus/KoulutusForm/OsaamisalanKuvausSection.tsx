@@ -10,8 +10,12 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 export const OsaamisalanKuvausSection = ({ language }) => {
   const { t } = useTranslation();
-  const selectedEPeruste = useFieldValue('osaamisala.eperuste')?.value;
-  const selectedOsaamisala = useFieldValue('osaamisala.osaamisala')?.value;
+  const selectedEPeruste = useFieldValue<SelectOption<string> | undefined>(
+    'osaamisala.eperuste'
+  )?.value;
+  const selectedOsaamisala = useFieldValue<SelectOption<string> | undefined>(
+    'osaamisala.osaamisala'
+  )?.value;
 
   const { data: osaamisalaKuvaukset } = useEPerusteOsaamisalaKuvaukset({
     ePerusteId: selectedEPeruste,

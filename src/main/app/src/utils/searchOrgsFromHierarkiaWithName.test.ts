@@ -3,7 +3,7 @@ import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { searchOrgsFromHierarkiaWithName } from './searchOrgsFromHierarkiaWithName';
 
 test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches the given name', () => {
-  const hierarkia = [
+  const hierarkia: Array<OrganisaatioModel> = [
     {
       oid: '1.2.246.562.10.501459103410',
       parentOids: ['1.2.246.562.10.501459103410', '1.2.246.562.10.00000000001'],
@@ -14,6 +14,7 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
       },
       kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_208',
+      status: 'AKTIIVINEN',
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
@@ -31,8 +32,9 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
           kotipaikkaUri: 'kunta_208',
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
+          status: 'AKTIIVINEN',
         },
-      ] as Array<OrganisaatioModel>,
+      ],
       organisaatiotyyppiUris: [
         'organisaatiotyyppi_01',
         'organisaatiotyyppi_07',
@@ -45,7 +47,7 @@ test('searchOrgHierarkiaWithName returns the only org in hierarkia as it matches
 });
 
 test('searchOrgHierarkiaWithName returns only the matching org from hierarkia with its child that has non-matching name', () => {
-  const hierarkia = [
+  const hierarkia: Array<OrganisaatioModel> = [
     {
       oid: '1.2.246.562.10.353744225710',
       parentOids: ['1.2.246.562.10.353744225710', '1.2.246.562.10.00000000001'],
@@ -56,6 +58,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
       },
       kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_091',
+      status: 'AKTIIVINEN',
       children: [
         {
           oid: '1.2.246.562.10.92541507692',
@@ -74,8 +77,9 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           kotipaikkaUri: 'kunta_091',
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
+          status: 'AKTIIVINEN',
         },
-      ] as Array<OrganisaatioModel>,
+      ],
       organisaatiotyyppiUris: ['organisaatiotyyppi_01'],
     },
     {
@@ -88,6 +92,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
       },
       kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_208',
+      status: 'AKTIIVINEN',
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
@@ -106,6 +111,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           kotipaikkaUri: 'kunta_208',
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
+          status: 'AKTIIVINEN',
         },
       ],
       organisaatiotyyppiUris: [
@@ -127,6 +133,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
       },
       kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_208',
+      status: 'AKTIIVINEN',
       children: [
         {
           oid: '1.2.246.562.10.58311582298',
@@ -145,6 +152,7 @@ test('searchOrgHierarkiaWithName returns only the matching org from hierarkia wi
           kotipaikkaUri: 'kunta_208',
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
+          status: 'AKTIIVINEN',
         },
       ] as Array<OrganisaatioModel>,
       organisaatiotyyppiUris: [
@@ -187,6 +195,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
           kotipaikkaUri: 'kunta_208',
           children: [],
           organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
+          status: 'AKTIIVINEN',
         },
       ] as Array<OrganisaatioModel>,
       organisaatiotyyppiUris: [
@@ -203,7 +212,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
 });
 
 test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child's name matches the given name", () => {
-  const hierarkia = [
+  const hierarkia: Array<OrganisaatioModel> = [
     {
       oid: '1.2.246.562.10.353744225710',
       parentOids: ['1.2.246.562.10.353744225710', '1.2.246.562.10.00000000001'],
@@ -214,6 +223,7 @@ test("searchOrgHierarkiaWithName returns the only org in hierarkia as its child'
       },
       kieletUris: ['oppilaitoksenopetuskieli_1#2'],
       kotipaikkaUri: 'kunta_091',
+      status: 'AKTIIVINEN',
       children: [
         {
           oid: '1.2.246.562.10.92541507692',

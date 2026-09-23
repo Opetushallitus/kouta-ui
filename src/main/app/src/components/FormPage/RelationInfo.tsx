@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
 import { Box, Typography } from '#/src/components/virkailija';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import type { EntityModelBase } from '#/src/types/domainTypes';
 import { getEntityNimiTranslation } from '#/src/utils';
 
 export const RelationInfoContainer = ({ children }) => {
@@ -13,6 +13,7 @@ export const RelationInfoContainer = ({ children }) => {
       display="flex"
       marginBottom={2}
       justifyContent={
+        // eslint-disable-next-line @eslint-react/no-children-count -- correctly handles all valid children shapes (single element, array, fragments); a hand-rolled count would be less correct, not more
         React.Children.count(children) === 1 ? 'flex-end' : 'space-between'
       }
     >
@@ -31,7 +32,8 @@ export function RelationInfo({
   linkUrl?: string;
 }) {
   const { i18n } = useTranslation();
-  const name = getEntityNimiTranslation(entity, i18n.language) || '';
+  const name =
+    getEntityNimiTranslation(entity, i18n.language as LanguageCode) || '';
   return (
     <Box
       flexGrow={0}

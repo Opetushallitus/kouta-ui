@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -10,7 +10,6 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
@@ -27,7 +26,7 @@ export const EditKoulutusPage = () => {
 
   const koulutusQueryResult = useKoulutusByOid(oid);
 
-  const { data: koulutus = null } = koulutusQueryResult;
+  const { data: koulutus } = koulutusQueryResult;
 
   const { t } = useTranslation();
   const initialValues = useMemo(() => {
@@ -48,8 +47,6 @@ export const EditKoulutusPage = () => {
     koulutus?.organisaatioOid
   );
 
-  const isJulkinen = useFieldValue('julkinen', ENTITY.KOULUTUS);
-
   return (
     <FormPage
       title={t('sivuTitlet.koulutuksenMuokkaus')}
@@ -66,7 +63,7 @@ export const EditKoulutusPage = () => {
         <KoulutusFooter
           koulutus={koulutus}
           organisaatioOid={organisaatioOid}
-          canUpdate={canUpdate || isJulkinen}
+          canUpdate={canUpdate}
         />
       }
     >

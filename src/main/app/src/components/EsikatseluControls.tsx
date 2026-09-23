@@ -1,11 +1,11 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormFieldCheckbox } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Tooltip } from '#/src/components/Tooltip';
 import { Button } from '#/src/components/virkailija';
 import { JULKAISUTILA } from '#/src/constants';
@@ -30,7 +30,7 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
   const entityExistsAfterThisEdit =
     tila !== JULKAISUTILA.POISTETTU && tila !== JULKAISUTILA.ARKISTOITU;
   const isJulkaistu = tila === JULKAISUTILA.JULKAISTU;
-  const showCheckbox = _.isNil(tila) || tila === JULKAISUTILA.TALLENNETTU;
+  const showCheckbox = isNil(tila) || tila === JULKAISUTILA.TALLENNETTU;
   const esikatseluEnabled = useFieldValue('esikatselu');
   const showButton =
     entityExistsAfterThisEdit && (esikatseluEnabled || isJulkaistu);

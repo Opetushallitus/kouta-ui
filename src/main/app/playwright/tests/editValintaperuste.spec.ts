@@ -1,5 +1,5 @@
-import { Page, test, expect } from '@playwright/test';
-import { merge } from 'lodash';
+import { Page, expect, test } from '@playwright/test';
+import { merge } from 'lodash-es';
 
 import valintaperuste from '#/playwright/fixtures/valintaperuste';
 import {
@@ -7,8 +7,10 @@ import {
   fillTilaSection,
   tallenna,
   wrapMutationTest,
+  withinSection,
   confirmDelete,
   assertNoUnsavedChangesDialog,
+  assertUnsavedChangesDialog,
   assertURLEndsWith,
 } from '#/playwright/playwright-helpers';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';
@@ -44,6 +46,49 @@ test.describe('Edit Valintaperuste', () => {
       await tallenna(page);
     }));
 
+  // Haaran ainoa testi joka TYHJENTÄÄ kentän. Kaikki muut asettavat arvon, ja juuri
+  // siksi react-final-formin oletus-parse (tyhjä merkkijono -> undefined, jonka
+  // jälkeen kirjasto karsii tyhjentyneet vanhemmat) ehti jäädä huomaamatta.
+  //
+  // Valintatavan nimi kelpaa, koska se on käännetty (pickTranslations säilyttää tyhjän
+  // merkkijonon) ja pakollinen vasta julkaistuna - fixture on tallennettu-tilassa.
+  //
+  // Ilman Field.tsx:n identiteetti-parsea runkoon lähtee nimi: {} tämän sijaan.
+  test('Should send an emptied translated field as an empty string', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'amk');
+
+    // Fixturessa on vain fi-nimi, mutta kielivalinta on [fi, sv], joten
+    // validateTranslations('kuvaus.nimi') vaatisi myös sv:n eikä tallennus lähtisi.
+    // Muut tämän tiedoston tallentavat testit tekevät saman.
+    await fillKieliversiotSection(page);
+
+    const nimi = page
+      .getByTestId('valintatapalista')
+      .getByTestId('nimi')
+      .locator('input');
+
+    await withinSection(page, 'valintatavat', async () => {
+      await expect(nimi).toHaveValue('Valintatavan nimi');
+      await nimi.fill('');
+    });
+
+    const requestPromise = page.waitForRequest(
+      req =>
+        req.url().endsWith('/kouta-backend/valintaperuste') &&
+        ['POST', 'PUT'].includes(req.method())
+    );
+    await page.route('**/kouta-backend/valintaperuste', route =>
+      route.fulfill({ json: route.request().postDataJSON() })
+    );
+
+    await tallenna(page);
+
+    const body = (await requestPromise).postDataJSON();
+    expect(body.metadata.valintatavat[0].nimi).toEqual({ fi: '' });
+  });
+
   test('Should be able to delete valintaperuste', ({ page }, testInfo) =>
     mutationTest({ page, testInfo }, async () => {
       await prepareTest(page, 'amk');
@@ -58,6 +103,14 @@ test.describe('Edit Valintaperuste', () => {
   }) => {
     await prepareTest(page, 'amm');
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should complain about unsaved changes after an edit', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'amm');
+    await fillKieliversiotSection(page);
+    await assertUnsavedChangesDialog(page);
   });
 
   test("Shouldn't complain about unsaved changes for untouched amk-form", async ({

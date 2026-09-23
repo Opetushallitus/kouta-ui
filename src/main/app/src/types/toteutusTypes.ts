@@ -98,8 +98,8 @@ export type ToteutusFormValues = {
     opetuskieli: Array<string>;
     opetuskieliKuvaus: Kuvaus;
     suunniteltuKesto: {
-      vuotta: number;
-      kuukautta: number;
+      vuotta?: number;
+      kuukautta?: number;
     };
     suunniteltuKestoKuvaus: Kuvaus;
     osiot: Array<{ value: string }>;
@@ -132,7 +132,7 @@ export type ToteutusFormValues = {
   teemakuva?: string;
   hakeutumisTaiIlmoittautumistapa: {
     isHakukohteetKaytossa?: boolean;
-    hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
+    hakeutumisTaiIlmoittautumistapa?: HAKULOMAKETYYPPI;
     hakuTapa?: Hakeutumistapa;
     linkki?: TranslatedField;
     lisatiedot?: TranslatedField<EditorState>;

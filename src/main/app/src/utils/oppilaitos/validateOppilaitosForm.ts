@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { flow } from 'lodash-es';
 
 import createErrorBuilder, {
   validateArray,
@@ -13,17 +13,15 @@ import {
 
 export const validateOppilaitosForm = values => {
   const kieliversiot = getKielivalinta(values);
-  return _fp
-    .flow(
-      validateArrayMinLength('kieliversiot', 1),
-      validateArray('yhteystiedot', eb =>
-        eb.validateTranslations('nimi', kieliversiot)
-      ),
-      validateOptionalTranslatedField('hakijapalveluidenYhteystiedot.nimi'),
-      validateIfJulkaistu(eb =>
-        eb.validateTranslations('perustiedot.wwwSivuUrl', kieliversiot)
-      ),
-      crossCheckWwwSivu(kieliversiot)
-    )(createErrorBuilder(values))
-    .getErrors();
+  return flow(
+    validateArrayMinLength('kieliversiot', 1),
+    validateArray('yhteystiedot', eb =>
+      eb.validateTranslations('nimi', kieliversiot)
+    ),
+    validateOptionalTranslatedField('hakijapalveluidenYhteystiedot.nimi'),
+    validateIfJulkaistu(eb =>
+      eb.validateTranslations('perustiedot.wwwSivuUrl', kieliversiot)
+    ),
+    crossCheckWwwSivu(kieliversiot)
+  )(createErrorBuilder(values)).getErrors();
 };

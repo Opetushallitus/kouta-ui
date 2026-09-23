@@ -1,10 +1,9 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 
 import { FormFieldSwitch } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import { HakuajatFields } from '#/src/components/HakuajatFields';
 import { Box, Typography } from '#/src/components/virkailija';
 import { NDASH } from '#/src/constants';
@@ -18,7 +17,7 @@ const HakuaikaInterval = ({ haku }) => {
 
   const hakuajat = useMemo(
     () =>
-      (haku && _.isArray(haku.hakuajat) ? haku.hakuajat : []).map(
+      (haku && Array.isArray(haku.hakuajat) ? haku.hakuajat : []).map(
         ({ alkaa, paattyy }) => [
           formatDateValue(alkaa) ?? '',
           formatDateValue(paattyy) ?? '',

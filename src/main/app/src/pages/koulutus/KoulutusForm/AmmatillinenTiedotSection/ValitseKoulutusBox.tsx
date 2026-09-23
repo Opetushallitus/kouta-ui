@@ -27,7 +27,9 @@ export const ValitseKoulutusBox = ({
 }: ValitseKoulutusBoxProps) => {
   const { t } = useTranslation();
 
-  const koulutusFieldValue = useFieldValue(fieldName)?.value;
+  const koulutusFieldValue = useFieldValue<SelectOption<string> | undefined>(
+    fieldName
+  )?.value;
   const queryResult = useKoulutusByKoodi({
     koodiUri: koulutusFieldValue,
   });

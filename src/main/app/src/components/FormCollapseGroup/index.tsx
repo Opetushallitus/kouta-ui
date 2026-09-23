@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { produce } from 'immer';
-import _ from 'lodash';
+import { get, isFunction, kebabCase } from 'lodash-es';
 
-import { FormCollapseProps } from '#/src/components/FormCollapse';
+import type { FormCollapseProps } from '#/src/components/FormCollapse';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
-import { useForm } from '#/src/hooks/form';
+import {
+  useIsSubmitting,
+  useSubmitErrors,
+  useSubmitFailed,
+} from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
 type FormCollapseList = Array<React.ReactElement<FormCollapseProps>>;
 
 const getFlattenedChildren = children => {
   let res: FormCollapseList = [];
+  // eslint-disable-next-line @eslint-react/no-children-for-each -- flattens arbitrary Fragment-wrapped children; compound-component pattern, not a quick fix
   React.Children.forEach(children, child => {
     if (!child) {
       return;
@@ -22,7 +27,7 @@ const getFlattenedChildren = children => {
     }
   });
 
-  return res as FormCollapseList;
+  return res;
 };
 
 const getFormCollapseId = id => `FormCollapse_${id}`;
@@ -37,11 +42,13 @@ export const FormCollapseGroup = ({
   const [errorsNeedAttention, setErrorsNeedAttention] =
     useState<boolean>(false);
 
-  const {
-    submitFailed,
-    submitErrors: formErrors,
-    submitting: isSubmitting,
-  } = useForm();
+  // EI values-tilausta: ryhmä kloonaa lapsensa joka renderillä, joten values-tilaus
+  // renderöisi koko lomakkeen jokaisella näppäinpainalluksella. Tilaus oli tässä
+  // aiemmin peittämässä Lexicalin vartijavikaa, joka on korjattu EditorChangePluginissa
+  // (LexicalEditorUI.tsx). Ryhmä tilaa vain sen, mitä se lukee.
+  const formErrors = useSubmitErrors();
+  const isSubmitting = useIsSubmitting();
+  const submitFailed = useSubmitFailed();
 
   const flattenedChildren = useMemo(
     () => getFlattenedChildren(children),
@@ -54,7 +61,7 @@ export const FormCollapseGroup = ({
         // Get the 'section'-prop of the FormCollapse component
         // TODO: Enforce prop types
         const firstSection = child.props.section || '';
-        return _.get(formErrors, firstSection) != null;
+        return get(formErrors, firstSection) != null;
       }),
     [formErrors, flattenedChildren]
   );
@@ -82,9 +89,11 @@ export const FormCollapseGroup = ({
   useEffect(() => {
     if (errorsNeedAttention) {
       setCollapsesOpen(collapses =>
-        sectionErrors.map((error, i) => error || collapses[i])
+        sectionErrors.map((error, i) => error || Boolean(collapses[i]))
       );
-      const firstError = document.querySelector(`.${FIELD_ERROR_CLASSNAME}`);
+      const firstError = document.querySelector<HTMLElement>(
+        `.${FIELD_ERROR_CLASSNAME}`
+      );
       if (firstError) {
         scrollElementIntoView(firstError, 200);
       }
@@ -106,7 +115,7 @@ export const FormCollapseGroup = ({
       {flattenedChildren.map((child, index) => {
         const isLast = index === flattenedChildren.length - 1;
         const childProps = {
-          ...(child?.props ?? {}),
+          ...child?.props,
           index,
           isOpen: collapsesOpen[index],
           onToggle: () => {
@@ -115,16 +124,17 @@ export const FormCollapseGroup = ({
           onContinue:
             !isLast && enabled
               ? () => {
-                  if (_.isFunction(child.props.onContinue)) {
-                    child.props.onContinue();
+                  if (isFunction(child.props.onContinue)) {
+                    child?.props?.onContinue?.();
                   }
                   setSectionNeedsFocus(index + 1);
                 }
               : undefined,
           isLast,
-          key: `FormCollapse_${_.kebabCase(child?.props?.header)}`,
+          key: `FormCollapse_${kebabCase(child?.props?.header)}`,
           id: getFormCollapseId(index),
         };
+        // eslint-disable-next-line @eslint-react/no-clone-element -- injects shared open/toggle state into each child; compound-component pattern, not a quick fix
         return React.cloneElement(child, childProps);
       })}
     </>

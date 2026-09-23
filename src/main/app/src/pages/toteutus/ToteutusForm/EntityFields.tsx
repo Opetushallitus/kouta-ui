@@ -1,11 +1,11 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { capitalize, isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { RouterAnchor } from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
@@ -24,16 +24,17 @@ export const EntityFields = ({
   return (
     <>
       <FormControl>
-        {fields.map((field: Field, index: number) => {
+        {fields.map((field: string, index: number) => {
           const fieldData = fields.get(index);
           const oid =
-            !_.isEmpty(fieldData) && !_.isEmpty(fieldData[fieldName])
+            !isEmpty(fieldData) && !isEmpty(fieldData[fieldName])
               ? fieldData[fieldName].value
               : undefined;
           return (
             <Box
               display="flex"
               width={0.8}
+              // eslint-disable-next-line @eslint-react/no-array-index-key -- react-final-form-arrays ei tarjoa pysyvää rivi-id:tä, kentän polku itsessään on indeksiperustainen
               key={index}
               marginTop={2}
               {...getTestIdProps(`${fieldName}-${index}`)}
@@ -82,7 +83,7 @@ export const EntityFields = ({
           }}
           {...getTestIdProps('lisaaButton')}
         >
-          {t(`toteutuslomake.lisaa${_.capitalize(fieldName)}`)}
+          {t(`toteutuslomake.lisaa${capitalize(fieldName)}`)}
         </IconButton>
       </Box>
     </>

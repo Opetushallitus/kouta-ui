@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldEditor } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 
 const EsittelySection = ({ name, language }) => {
   const { t } = useTranslation();

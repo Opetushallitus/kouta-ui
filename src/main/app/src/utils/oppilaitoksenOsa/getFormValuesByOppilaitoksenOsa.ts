@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isEmpty, isNumber, isString, mapValues } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { toKielistettyWithValueField } from '#/src/utils';
@@ -25,9 +25,9 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   return {
     tila,
     kieliversiot: kielivalinta,
-    esittely: _.mapValues(esittely || {}, parseEditorState),
+    esittely: mapValues(esittely || {}, parseEditorState),
     perustiedot: {
-      opiskelijoita: _.isNumber(opiskelijoita) ? opiskelijoita : '',
+      opiskelijoita: isNumber(opiskelijoita) ? opiskelijoita : '',
       kampus: kampus || {},
       wwwSivuUrl: wwwSivu?.url || {},
       wwwSivuNimi: wwwSivu?.nimi || {},
@@ -50,7 +50,7 @@ export const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
       : null,
     teemakuvaOrEsittelyvideo: {
       mediaType:
-        _.isString(teemakuva) || _.isEmpty(esittelyvideo?.url)
+        isString(teemakuva) || isEmpty(esittelyvideo?.url)
           ? 'teemakuva'
           : 'esittelyvideo',
       teemakuvaUrl: teemakuva,

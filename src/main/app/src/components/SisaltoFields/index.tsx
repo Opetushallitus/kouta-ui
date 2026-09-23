@@ -3,10 +3,14 @@ import { RefObject, useCallback } from 'react';
 import { DragDropProvider, DragEndEvent } from '@dnd-kit/react';
 import { isSortable, useSortable } from '@dnd-kit/react/sortable';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray, FieldArrayFieldsProps } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormButton } from '#/src/components/FormButton';
+import {
+  Field,
+  FieldArray,
+  FieldArrayFieldsProps,
+} from '#/src/components/formFields/Field';
 import IconButton from '#/src/components/IconButton';
 import { LexicalEditorUI } from '#/src/components/LexicalEditorUI';
 import RemoveButton from '#/src/components/RemoveButton';

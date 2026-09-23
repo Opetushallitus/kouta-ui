@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
@@ -20,8 +20,8 @@ import { useToteutukset } from '#/src/utils/toteutus/getToteutukset';
 const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [haku, setHaku] = useState();
-  const [toteutus, setToteutus] = useState();
+  const [haku, setHaku] = useState<SelectOption | null>(null);
+  const [toteutus, setToteutus] = useState<SelectOption | null>(null);
 
   const { data: haut } = useHaut({
     organisaatioOid,

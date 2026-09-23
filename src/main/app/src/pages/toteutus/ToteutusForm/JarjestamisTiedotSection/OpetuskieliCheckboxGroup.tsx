@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { sortBy } from 'lodash-es';
 
 import { CheckboxGroup } from '#/src/components/virkailija';
 import { FormMode } from '#/src/constants';
@@ -17,7 +17,7 @@ const OpetuskieliCheckboxGroup = props => {
       const order = fixedOrder.indexOf(label);
       return order === -1 ? Number.MAX_SAFE_INTEGER : order;
     };
-    return _.sortBy(options, [byFixedOrder, byLabel]);
+    return sortBy(options, [byFixedOrder, byLabel]);
   };
 
   // Tämä on pikakorjaus siihen, että oppilaitoksenopetuskieli-koodiston uusi versio rikkoi opetuskielen näyttämisen

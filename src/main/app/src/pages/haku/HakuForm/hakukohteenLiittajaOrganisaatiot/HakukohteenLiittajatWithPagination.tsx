@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 
-import { difference, isEmpty } from 'lodash';
+import { difference, isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';

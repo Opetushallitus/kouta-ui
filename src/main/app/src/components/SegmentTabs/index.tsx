@@ -20,13 +20,18 @@ export const SegmentTabs = ({
     | React.ReactElement<React.ComponentProps<typeof SegmentTab>>;
 }) => (
   <SegmentTabsBase {...props}>
-    {React.Children.map(children, (c, index) =>
-      React.cloneElement(c, {
-        active: value !== undefined && c.props.value === value,
-        isFirst: index === 0,
-        isLast: index === React.Children.count(children) - 1,
-        isInTabs: true,
-      })
-    )}
+    {
+      // eslint-disable-next-line @eslint-react/no-children-map -- injects active/position state into each SegmentTab child; compound-component pattern, not a quick fix
+      React.Children.map(children, (c, index) =>
+        // eslint-disable-next-line @eslint-react/no-clone-element -- see no-children-map above
+        React.cloneElement(c, {
+          active: value !== undefined && c.props.value === value,
+          isFirst: index === 0,
+          // eslint-disable-next-line @eslint-react/no-children-count -- correctly handles all valid children shapes; see no-children-map above
+          isLast: index === React.Children.count(children) - 1,
+          isInTabs: true,
+        })
+      )
+    }
   </SegmentTabsBase>
 );

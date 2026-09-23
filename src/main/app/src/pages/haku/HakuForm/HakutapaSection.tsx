@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldRadioGroup } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 

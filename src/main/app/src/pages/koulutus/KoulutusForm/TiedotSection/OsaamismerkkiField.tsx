@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 
 import { TFunction } from 'i18next';
-import { isEmpty, lowerCase, some, now } from 'lodash';
+import { isEmpty, lowerCase, some, now } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useUnmount } from 'react-use';
-import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import { OSAAMISMERKKI_JULKAISUTILA } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -141,27 +141,26 @@ const OsaamismerkkitiedotReadOnly = ({
 }: {
   osaamismerkkiData: Osaamismerkki;
   t: TFunction;
-  language: string;
+  language: LanguageCode;
 }) => {
   const apiUrls = useUrls();
 
   const logo = osaamismerkkiData?.kategoria?.liite?.binarydata;
 
   const voimassaoloLoppuu = osaamismerkkiData?.voimassaoloLoppuu;
-  const isDeprecated = voimassaoloLoppuu < now();
-  const voimassaoloLoppuuRow =
-    voimassaoloLoppuu && isDeprecated
-      ? {
-          title: t('yleiset.voimassaoloLoppuu'),
-          description: (
-            <StyledOsaamismerkkiVoimassaoloLoppunut
-              text={`${t(
-                'osaamismerkki.voimassaoloLoppunut'
-              )} ${getReadableDate(osaamismerkkiData?.voimassaoloLoppuu)}`}
-            />
-          ),
-        }
-      : null;
+  const isDeprecated = voimassaoloLoppuu && voimassaoloLoppuu < now();
+  const voimassaoloLoppuuRow = isDeprecated
+    ? {
+        title: t('yleiset.voimassaoloLoppuu'),
+        description: (
+          <StyledOsaamismerkkiVoimassaoloLoppunut
+            text={`${t(
+              'osaamismerkki.voimassaoloLoppunut'
+            )} ${getReadableDate(osaamismerkkiData?.voimassaoloLoppuu)}`}
+          />
+        ),
+      }
+    : null;
   return (
     <Box>
       <InfoBoxGrid
@@ -173,7 +172,7 @@ const OsaamismerkkitiedotReadOnly = ({
                 href={apiUrls.url(
                   'eperusteet.osaamismerkit',
                   language,
-                  osaamismerkkiData?.id
+                  osaamismerkkiData?.id.toString() ?? ''
                 )}
                 target="_blank"
               >
@@ -213,12 +212,12 @@ const OsaamismerkkitiedotReadOnly = ({
 };
 
 export const updateOptionsWithMaybeDeprecatedOsaamismerkki = (
-  options: Array<SelectOptions>,
-  osaamismerkkiId: string,
-  osaamismerkkidata: Osaamismerkki,
+  options: Array<SelectOption>,
+  osaamismerkkiId: string | undefined,
+  osaamismerkkidata: Pick<Osaamismerkki, 'nimi'> | undefined,
   language: LanguageCode
 ) => {
-  const alreadyExists = some(options, ({ value }) => {
+  const alreadyExists = some(options, ({ value }: { value: string }) => {
     return (
       koodiUriWithoutVersion(value) === koodiUriWithoutVersion(osaamismerkkiId)
     );
@@ -248,7 +247,7 @@ export const OsaamismerkkiField = (props: SelectFieldProps) => {
     language: language,
   });
 
-  const osaamismerkkiId = useFieldValue(name)?.value;
+  const osaamismerkkiId = useFieldValue<SelectOption | undefined>(name)?.value;
 
   const { data: osaamismerkkiData, isLoading: osaamismerkkiIsLoading } =
     useOsaamismerkki(osaamismerkkiId);

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { omit } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -33,7 +33,7 @@ const getInitialValues = haku => {
   return haku
     ? {
         ...getCopyValues(haku.oid),
-        ...getFormValuesByHaku(_.omit(haku, ['organisaatioOid'])),
+        ...getFormValuesByHaku(omit(haku, ['organisaatioOid'])),
         tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues;

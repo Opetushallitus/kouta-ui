@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useInterpret } from '@xstate/react';
+import { useActorRef } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -38,7 +38,7 @@ export const HakukohteetSection = function ({ haku, organisaatioOid }) {
 
   const filterParams = { hakuOid: haku?.oid };
 
-  const hakukohdeService = useInterpret(hakukohdeMachine);
+  const hakukohdeService = useActorRef(hakukohdeMachine);
 
   const filterState = useFilterState(HAKUKOHDE, hakukohdeService);
 

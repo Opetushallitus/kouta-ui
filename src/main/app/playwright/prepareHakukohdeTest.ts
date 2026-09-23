@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import koulutus from '#/playwright/fixtures/koulutus';
 import toteutus from '#/playwright/fixtures/toteutus';

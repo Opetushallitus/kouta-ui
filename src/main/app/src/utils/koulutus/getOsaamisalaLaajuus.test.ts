@@ -2,12 +2,14 @@ import getOsaamisalaLaajuus, {
   setDefaultMuodostumisSaanto,
 } from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 
+import { OsaamisalaOsa } from '../ePeruste/getEPerusteRakenne';
+
 test('sets default muodostumisSaanto for osaamisala that is missing it', () => {
-  const osaamisala = {
+  const osaamisala: OsaamisalaOsa = {
     nimi: {
       fi: 'Talonrakennuksen osaamisala',
     },
-    muodostumisSaanto: null,
+    muodostumisSaanto: undefined,
     osaamisala: {
       nimi: {
         fi: 'Talonrakennuksen osaamisala',
@@ -25,7 +27,7 @@ test('sets default muodostumisSaanto for osaamisala that is missing it', () => {
 
   expect(
     setDefaultMuodostumisSaanto(osaamisala, defaultMuodostumisSaanto)
-      .muodostumisSaanto.laajuus.minimi
+      .muodostumisSaanto!.laajuus.minimi
   ).toEqual(145);
 });
 
@@ -49,12 +51,12 @@ test('keeps the original muodostumisSaanto for Avolouhinnan osaamisala that has 
   };
 
   expect(
-    setDefaultMuodostumisSaanto(osaamisala).muodostumisSaanto.laajuus.minimi
+    setDefaultMuodostumisSaanto(osaamisala).muodostumisSaanto!.laajuus.minimi
   ).toEqual(90);
 });
 
 test('keeps the original muodostumisSaanto for Valinnaiset tutkinnon osat that has it set', () => {
-  const osaamisala = {
+  const osaamisala: OsaamisalaOsa = {
     nimi: {
       fi: 'Avolouhinnan osaamisala',
     },
@@ -100,7 +102,7 @@ test('keeps the original muodostumisSaanto for Valinnaiset tutkinnon osat that h
 
   const result = setDefaultMuodostumisSaanto(osaamisala);
 
-  expect(result.osat[0].muodostumisSaanto.laajuus.minimi).toEqual(90);
+  expect(result.osat![0]!.muodostumisSaanto!.laajuus.minimi).toEqual(90);
 });
 
 test('keeps the original muodostumisSaanto for "Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta" that has it set', () => {
@@ -151,7 +153,9 @@ test('keeps the original muodostumisSaanto for "Tutkinnon osa tai osia ammattitu
 
   const result = setDefaultMuodostumisSaanto(osaamisala);
 
-  expect(result.osat[0].osat[0].muodostumisSaanto.laajuus.minimi).toEqual(30);
+  expect(result.osat![0]!.osat![0]!.muodostumisSaanto!.laajuus.minimi).toEqual(
+    30
+  );
 });
 
 test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Talonrakennuksen osaamisala that does not have it set', () => {
@@ -170,7 +174,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Talonrakennuksen 
         nimi: {
           fi: 'Talonrakennuksen osaamisala',
         },
-        muodostumisSaanto: null,
+        muodostumisSaanto: undefined,
         osaamisala: {
           nimi: {
             fi: 'Talonrakennuksen osaamisala',
@@ -196,7 +200,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Talonrakennuksen 
         nimi: {
           fi: 'Maarakennuksen osaamisala',
         },
-        muodostumisSaanto: null,
+        muodostumisSaanto: undefined,
         osaamisala: {
           nimi: {
             fi: 'Maarakennuksen osaamisala',
@@ -223,7 +227,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Talonrakennuksen 
 
   const result = setDefaultMuodostumisSaanto(osaamisala);
 
-  expect(result.osat[0].muodostumisSaanto.laajuus.minimi).toEqual(145);
+  expect(result.osat![0]!.muodostumisSaanto!.laajuus.minimi).toEqual(145);
 });
 
 test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Maarakennuksen osaamisala that does not have it set', () => {
@@ -242,7 +246,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Maarakennuksen os
         nimi: {
           fi: 'Talonrakennuksen osaamisala',
         },
-        muodostumisSaanto: null,
+        muodostumisSaanto: undefined,
         osaamisala: {
           nimi: {
             fi: 'Talonrakennuksen osaamisala',
@@ -268,7 +272,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Maarakennuksen os
         nimi: {
           fi: 'Maarakennuksen osaamisala',
         },
-        muodostumisSaanto: null,
+        muodostumisSaanto: undefined,
         osaamisala: {
           nimi: {
             fi: 'Maarakennuksen osaamisala',
@@ -295,7 +299,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Maarakennuksen os
 
   const result = setDefaultMuodostumisSaanto(osaamisala);
 
-  expect(result.osat[0].muodostumisSaanto.laajuus.minimi).toEqual(145);
+  expect(result.osat![0]!.muodostumisSaanto!.laajuus.minimi).toEqual(145);
 });
 
 test('keeps muodostumisSaanto for "Pakollinen tutkinnon osa" as it is originally set', () => {
@@ -314,7 +318,7 @@ test('keeps muodostumisSaanto for "Pakollinen tutkinnon osa" as it is originally
         nimi: {
           fi: 'Talonrakennuksen osaamisala',
         },
-        muodostumisSaanto: null,
+        muodostumisSaanto: undefined,
         osaamisala: {
           nimi: {
             fi: 'Talonrakennuksen osaamisala',
@@ -341,7 +345,9 @@ test('keeps muodostumisSaanto for "Pakollinen tutkinnon osa" as it is originally
 
   const result = setDefaultMuodostumisSaanto(osaamisala);
 
-  expect(result.osat[0].osat[0].muodostumisSaanto.laajuus.minimi).toEqual(50);
+  expect(result.osat![0]!.osat![0]!.muodostumisSaanto!.laajuus.minimi).toEqual(
+    50
+  );
 });
 
 test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
@@ -356,7 +362,7 @@ test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
           maksimi: 60,
         },
       },
-      osaamisala: null,
+      osaamisala: undefined,
     },
     {
       nimi: {
@@ -385,7 +391,7 @@ test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
               maksimi: 90,
             },
           },
-          osaamisala: null,
+          osaamisala: undefined,
           osat: [
             {
               nimi: {
@@ -397,7 +403,7 @@ test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
                   maksimi: 30,
                 },
               },
-              osaamisala: null,
+              osaamisala: undefined,
             },
           ],
         },
@@ -430,7 +436,7 @@ test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
               maksimi: 90,
             },
           },
-          osaamisala: null,
+          osaamisala: undefined,
           osat: [
             {
               nimi: {
@@ -442,7 +448,7 @@ test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
                   maksimi: 30,
                 },
               },
-              osaamisala: null,
+              osaamisala: undefined,
             },
           ],
         },
@@ -467,7 +473,7 @@ test('gets osaamisalan laajuus for Maarakennuksen osaamisala from parent "Ammati
           maksimi: 145,
         },
       },
-      osaamisala: null,
+      osaamisala: undefined,
       osat: [
         {
           nimi: {
@@ -479,13 +485,13 @@ test('gets osaamisalan laajuus for Maarakennuksen osaamisala from parent "Ammati
               maksimi: 25,
             },
           },
-          osaamisala: null,
+          osaamisala: undefined,
         },
         {
           nimi: {
             fi: 'Talonrakennuksen osaamisala',
           },
-          muodostumisSaanto: null,
+          muodostumisSaanto: undefined,
           osaamisala: {
             nimi: {
               fi: 'Talonrakennuksen osaamisala',
@@ -503,7 +509,7 @@ test('gets osaamisalan laajuus for Maarakennuksen osaamisala from parent "Ammati
                   maksimi: 50,
                 },
               },
-              osaamisala: null,
+              osaamisala: undefined,
             },
           ],
         },
@@ -511,7 +517,7 @@ test('gets osaamisalan laajuus for Maarakennuksen osaamisala from parent "Ammati
           nimi: {
             fi: 'Maarakennuksen osaamisala',
           },
-          muodostumisSaanto: null,
+          muodostumisSaanto: undefined,
           osaamisala: {
             nimi: {
               fi: 'Maarakennuksen osaamisala',
@@ -529,7 +535,7 @@ test('gets osaamisalan laajuus for Maarakennuksen osaamisala from parent "Ammati
                   maksimi: 50,
                 },
               },
-              osaamisala: null,
+              osaamisala: undefined,
             },
           ],
         },

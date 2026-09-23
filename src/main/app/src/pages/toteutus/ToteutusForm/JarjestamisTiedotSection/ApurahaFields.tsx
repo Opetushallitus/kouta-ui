@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
@@ -10,9 +9,16 @@ import {
   FormFieldSwitch,
   createFormFieldComponent,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
-import { MaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
+import {
+  MaaraTyyppi,
+  ApurahaYksikko,
+  NDASH,
+  KOULUTUSTYYPPI,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
+import { AnyToteutusMetadata } from '#/src/types/domainTypes';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import { isKoulutustyyppiWithMultipleMaksullisuustyyppi } from '#/src/utils';
 import { isApurahaVisible } from '#/src/utils/toteutus/toteutusVisibilities';
@@ -120,11 +126,15 @@ export const ApurahaFields = ({
   name,
   toteutuksenMetadata,
   koulutustyyppi,
+}: {
+  language: LanguageCode;
+  name: string;
+  toteutuksenMetadata?: AnyToteutusMetadata;
+  koulutustyyppi: KOULUTUSTYYPPI;
 }) => {
   const { t } = useTranslation();
   const onkoApurahaSelected = useFieldValue(`${name}.onkoApuraha`) as
-    | boolean
-    | undefined;
+    boolean | undefined;
 
   const maksullisuustyyppiFieldName =
     isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi)

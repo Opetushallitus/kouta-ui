@@ -1,18 +1,18 @@
-import _ from 'lodash';
+import { capitalize } from 'lodash-es';
 import queryString from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { ENTITY } from '#/src/constants';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useSelectBase } from '#/src/hooks/useSelectBase';
 import { useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
-export const usePohjaEntity = (entityType: ENTITY) => {
+export function usePohjaEntity<K extends ENTITY>(entityType: K) {
   const { search } = useLocation();
 
   const searchParams = queryString.parse(search);
 
-  const kopioParam = `kopio${_.capitalize(entityType)}`;
+  const kopioParam = `kopio${capitalize(entityType)}`;
 
   const copyId = searchParams[kopioParam] as string;
 
@@ -36,4 +36,4 @@ export const usePohjaEntity = (entityType: ENTITY) => {
     selectPohja,
     copyId,
   };
-};
+}

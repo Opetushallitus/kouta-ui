@@ -18,15 +18,15 @@ test.each([
   ['0001', '1'],
 ])(
   'Input value "%s" should change to "%s" on blur when min="-100" and max="100"',
-  (inputValue, parsedValue) => {
+  async (inputValue, parsedValue) => {
     // defaultValue is 0 by default
     renderWithTheme(<IntegerInput min={-100} max={100} />);
     const inputEl = screen.getByRole('textbox');
-    userEvent.clear(inputEl);
+    await userEvent.clear(inputEl);
     if (inputValue !== '') {
-      userEvent.type(inputEl, inputValue);
+      await userEvent.type(inputEl, inputValue);
     }
-    userEvent.click(document.body); // click outside the input element to blur
+    await userEvent.click(document.body); // click outside the input element to blur
     expect(inputEl).toHaveValue(parsedValue);
   }
 );
@@ -42,15 +42,15 @@ test.each([
   ['0001', '1'],
 ])(
   'Input value "%s" should change to "%s" on blur when min="-100" and max="100"',
-  (inputValue, parsedValue) => {
+  async (inputValue, parsedValue) => {
     // defaultValue is 0 by default
     renderWithTheme(<FloatInput min={-100} max={100} />);
     const inputEl = screen.getByRole('textbox');
-    userEvent.clear(inputEl);
+    await userEvent.clear(inputEl);
     if (inputValue !== '') {
-      userEvent.type(inputEl, inputValue);
+      await userEvent.type(inputEl, inputValue);
     }
-    userEvent.click(document.body); // click outside the input element to blur
+    await userEvent.click(document.body); // click outside the input element to blur
     expect(inputEl).toHaveValue(parsedValue);
   }
 );

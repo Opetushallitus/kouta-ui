@@ -14,7 +14,6 @@ export const useSoraKuvaukset = ({ organisaatioOid }) => {
     'getSoraKuvaukset',
     getSoraKuvaukset,
     {
-      promiseFn: getSoraKuvaukset,
       organisaatioOid,
     },
     { enabled: Boolean(organisaatioOid) }

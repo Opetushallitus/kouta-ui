@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
 
@@ -38,7 +38,7 @@ export const InlineInfoBox = ({
   iconType,
 }: {
   title: string;
-  value?: React.ReactElement;
+  value?: React.ReactNode;
   iconType: string;
 }) => {
   return (
@@ -46,7 +46,7 @@ export const InlineInfoBox = ({
       <GrayIcon type={iconType} />
       <Box display="flex" flexDirection="column" pt="3px">
         <InfoText>{title}</InfoText>
-        {!_.isNil(value) && <InfoText bold>{value}</InfoText>}
+        {!isNil(value) && <InfoText bold>{value}</InfoText>}
       </Box>
     </StyledInlineInfoBox>
   );

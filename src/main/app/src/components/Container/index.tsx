@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MaxWidthProps } from 'styled-system';
+import type { MaxWidthProps } from 'styled-system';
 
 import { spacing } from '#/src/theme';
 

@@ -1,28 +1,35 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 
-import _ from 'lodash';
+import { type TFunction } from 'i18next';
+import { noop } from 'lodash-es';
 import prettyBytes from 'pretty-bytes';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { match } from 'ts-pattern';
+import { fromPromise, type SnapshotFrom } from 'xstate';
 
 import { FormButton } from '#/src/components/FormButton';
 import { Box, Typography, Icon, Spin } from '#/src/components/virkailija';
 import { useMachine } from '#/src/hooks/useMachine';
 import { disabledStyle } from '#/src/system';
-import { getThemeProp, spacing } from '#/src/theme';
+import { getThemeProp, spacing, type Theme } from '#/src/theme';
 
 import {
   createImageUploadMachine,
   actionTypes as AT,
   controlStates as CS,
+  type ImageUploadEvent,
 } from './imageUploadMachine';
-import validateInput from './validateInput';
+import validateInput, { type Dimensions } from './validateInput';
 
-const useMachineDropZone = ({ send }) => {
+const useMachineDropZone = ({
+  send,
+}: {
+  send: (event: ImageUploadEvent) => void;
+}) => {
   const onDrop = useCallback(
-    async files => {
+    async (files: Array<File>) => {
       send({ type: AT.UPLOAD_FILE, files });
     },
     [send]
@@ -71,8 +78,9 @@ const FileUploadedMessage = styled(Typography)`
 
 const Container = styled.div<{
   nodrag?: boolean;
-  error?: boolean;
-  url?: string;
+  error?: string | null;
+  url?: string | null;
+  disabled?: boolean;
 }>`
   border: 1px dashed ${getThemeProp('palette.border')};
   border-radius: 2px;
@@ -90,28 +98,38 @@ const Container = styled.div<{
     border-color: ${getThemeProp('palette.primary.main')};
     outline: none;
   }
-  ${disabledStyle}
-  ${({ nodrag, error }) =>
-    (nodrag || error) &&
+  ${(props: { disabled?: boolean; theme: Theme }) =>
+    disabledStyle({ disabled: props.disabled ?? false, theme: props.theme })}
+  ${(props: { nodrag?: boolean; error?: string | null }) =>
+    (props.nodrag || props.error) &&
     css`
       border-color: ${getThemeProp('palette.danger.main')};
     `};
-  ${({ url }) => css`
-    background-image: ${url ? `url(${url})` : 'none'};
+  ${(props: { url?: string | null }) => css`
+    background-image: ${props.url ? `url(${props.url})` : 'none'};
   `};
 `;
 
-const FlexWrapper = ({ children }) => (
+const FlexWrapper = ({ children }: { children: Array<React.ReactNode> }) => (
   <Box display="flex" flexDirection="column" alignItems="center">
     {children.map((c, i) => (
-      <Box marginBottom={1} key={`item_${i}`}>
+      // eslint-disable-next-line @eslint-react/no-array-index-key -- fixed set of children passed in by the parent, never reordered/filtered
+      <Box marginBottom={1} key={`wrapper-item-${i}`}>
         {c}
       </Box>
     ))}
   </Box>
 );
 
-const ValueContent = ({ file, t, onRemove }) => (
+const ValueContent = ({
+  file,
+  t,
+  onRemove,
+}: {
+  file?: File | null;
+  t: TFunction;
+  onRemove: () => void;
+}) => (
   <FlexWrapper>
     <FileUploadedMessage>{file ? file.name : ''}</FileUploadedMessage>
     <FormButton
@@ -125,14 +143,22 @@ const ValueContent = ({ file, t, onRemove }) => (
   </FlexWrapper>
 );
 
-const DragActiveContent = ({ message }) => (
+const DragActiveContent = ({ message }: { message: string }) => (
   <FlexWrapper>
     <DragActiveIcon />
     <PrimaryMessage>{message}</PrimaryMessage>
   </FlexWrapper>
 );
 
-const PlaceholderContent = ({ error, openDialog, t }) => (
+const PlaceholderContent = ({
+  error,
+  openDialog,
+  t,
+}: {
+  error?: string | null;
+  openDialog: () => void;
+  t: TFunction;
+}) => (
   <FlexWrapper>
     {error && <ErrorMessage>{error}</ErrorMessage>}
     <Typography>{t('yleiset.raahaaLiitettavaTiedosto')}</Typography>
@@ -148,14 +174,14 @@ const PlaceholderContent = ({ error, openDialog, t }) => (
   </FlexWrapper>
 );
 
-const Loader = ({ message }) => (
+const Loader = ({ message }: { message: string }) => (
   <FlexWrapper>
     <Spin></Spin>
     <PrimaryMessage>{message}</PrimaryMessage>
   </FlexWrapper>
 );
 
-const InfoText = props => (
+const InfoText = (props: React.ComponentProps<typeof Typography>) => (
   <Typography variant="secondary" as="div" marginBottom={1} {...props} />
 );
 
@@ -165,6 +191,12 @@ const ImageConstraints = ({
   minDimensions,
   maxDimensions,
   t,
+}: {
+  acceptedFileFormats?: Array<string>;
+  maxSize?: number;
+  minDimensions?: Dimensions;
+  maxDimensions?: Dimensions;
+  t: TFunction;
 }) => (
   <>
     {acceptedFileFormats && (
@@ -179,18 +211,32 @@ const ImageConstraints = ({
     )}
     {minDimensions && (
       <InfoText>
-        {t('yleiset.tiedostonMinimiresoluutio', minDimensions)}
+        {t('yleiset.tiedostonMinimiresoluutio', { ...minDimensions })}
       </InfoText>
     )}
     {maxDimensions && (
       <InfoText>
-        {t('yleiset.tiedostonMaksimiresoluutio', maxDimensions)}
+        {t('yleiset.tiedostonMaksimiresoluutio', { ...maxDimensions })}
       </InfoText>
     )}
   </>
 );
 
-const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
+const InputAreaContent = ({
+  file,
+  machineError,
+  state,
+  open,
+  onRemove,
+  t,
+}: {
+  file?: File | null;
+  machineError?: string | null;
+  state: SnapshotFrom<ReturnType<typeof createImageUploadMachine>>;
+  open: () => void;
+  onRemove: () => void;
+  t: TFunction;
+}) => (
   <>
     {match(state.value)
       .with(CS.empty, CS.error, () => (
@@ -213,10 +259,24 @@ const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
   </>
 );
 
-export const ImageInput = props => {
+export interface ImageInputProps {
+  disabled?: boolean;
+  onChange?: (url?: string | null) => void;
+  error?: string | null;
+  upload: (file: File) => Promise<string>;
+  maxSize?: number;
+  minDimensions?: Dimensions;
+  maxDimensions?: Dimensions;
+  acceptedFileFormats?: Array<string>;
+  noDimensionCheckForFormats?: Array<string>;
+  dropzoneStyle?: React.CSSProperties;
+  uploadedImageUrl?: string;
+}
+
+export const ImageInput = (props: ImageInputProps) => {
   const {
     disabled = false,
-    onChange = _.noop,
+    onChange = noop,
     error: externalError,
     upload,
     maxSize,
@@ -228,30 +288,49 @@ export const ImageInput = props => {
   } = props;
   const { t } = useTranslation();
 
-  const fileUploadMachine = createImageUploadMachine({
-    url: uploadedImageUrl,
-    externalError,
-    t,
-  });
-  const [state, send] = useMachine(fileUploadMachine, {
-    services: {
-      upload(_, e) {
+  // Muistoitettu: uuden koneen luonti joka renderillä loisi uuden
+  // machine.config-viitteen, ja @xstate/react uudelleenluo actorin aina kun
+  // se muuttuu -> ikuinen renderöintilooppi (React-virhe #301). .provide()
+  // sen sijaan säilyttää alkuperäisen config-viitteen, joten sen voi kutsua
+  // joka renderillä pysyttäen upload-sulkeuman ajan tasalla.
+  const imageUploadMachine = useMemo(
+    () =>
+      createImageUploadMachine({
+        url: uploadedImageUrl,
+        externalError,
+        t,
+      }),
+    [uploadedImageUrl, externalError, t]
+  );
+
+  const fileUploadMachine = imageUploadMachine.provide({
+    actors: {
+      upload: fromPromise(({ input: e }) => {
+        if (e.type !== AT.UPLOAD_FILE) {
+          return Promise.reject(new Error(`Unexpected event ${e.type}`));
+        }
+        const file = e.files[0] as File;
         const p = validateInput(e.files, { ...props, t }).then(() =>
-          upload(e.files[0])
+          upload(file)
         );
         // Log uncaught errors in validation/upload for easier debugging
         p.catch(console.error);
         return p;
-      },
+      }),
     },
   });
+  const [state, send] = useMachine(fileUploadMachine);
 
   const { file, url, error: machineError } = state.context;
   const { getInputProps, getRootProps, onRemove, open } = useMachineDropZone({
     send,
   });
 
-  useEffect(() => onChange(url), [onChange, url]);
+  // Lohkorunko tarkoituksella: tiivis nuolifunktio palauttaisi onChangen paluuarvon,
+  // jonka React tulkitsisi efektin siivousfunktioksi.
+  useEffect(() => {
+    onChange(url);
+  }, [onChange, url]);
 
   return (
     <>
@@ -276,7 +355,7 @@ export const ImageInput = props => {
       >
         <input
           {...getInputProps({
-            accept: acceptedFileFormats,
+            accept: acceptedFileFormats?.join(','),
             multiple: false,
             disabled,
           })}

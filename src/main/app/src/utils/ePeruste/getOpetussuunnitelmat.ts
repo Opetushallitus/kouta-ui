@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
@@ -55,7 +55,7 @@ export const useQueryOptionsGetOpetussuunnitelmat = ({
   const apiUrls = useUrls();
   return {
     queryKey: ['getOpetussuunnitelmat', organisaatioOids, nimi],
-    queryFn: ({ pageParam = 0 }) =>
+    queryFn: ({ pageParam }: { pageParam: number }) =>
       getOpetussuunnitelmat({
         httpClient,
         apiUrls,
@@ -63,7 +63,8 @@ export const useQueryOptionsGetOpetussuunnitelmat = ({
         nimi,
         sivu: pageParam,
       }),
-    cacheTime: 30000,
+    initialPageParam: 0,
+    gcTime: 30000,
     staleTime: 30000,
     getNextPageParam: lastPage =>
       lastPage.sivu != null &&

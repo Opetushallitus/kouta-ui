@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { flow, sortBy, sortedUniqBy } from 'lodash';
+import { flow, sortBy, sortedUniqBy } from 'lodash-es';
 
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';

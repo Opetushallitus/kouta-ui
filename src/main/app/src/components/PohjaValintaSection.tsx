@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import {
   FormFieldSelect,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, FormControl, Typography } from '#/src/components/virkailija';
 import { POHJAVALINTA } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';

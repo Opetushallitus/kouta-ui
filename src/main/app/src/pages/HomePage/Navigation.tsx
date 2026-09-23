@@ -205,11 +205,9 @@ const Navigation = ({
   }, [setActiveItem]);
 
   useEffect(() => {
-    window.addEventListener('resize', () => setActiveItem(getActiveAnchor()));
-    return () =>
-      window.removeEventListener('resize', () =>
-        setActiveItem(getActiveAnchor())
-      );
+    const onResize = () => setActiveItem(getActiveAnchor());
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
   }, []);
 
   return (

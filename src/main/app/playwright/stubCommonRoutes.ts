@@ -1,5 +1,5 @@
 import { type Page } from '@playwright/test';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import { koutaSearchItem } from '#/playwright/fixtures/koutaSearchItem';
 import {

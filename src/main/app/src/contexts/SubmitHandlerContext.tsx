@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
+
+import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
 
 // Tallennuksen toteutus rakennetaan lomakkeen SISÄLLÄ (useSaveForm footerissa), koska
 // se tarvitsee kenttärekisterin näkyvyysjoukon ja lomakkeen arvot. react-final-form
@@ -10,21 +12,13 @@ import React, { useContext } from 'react';
 // nostaa myös - eli kahdeksan sivua ja kahdeksan footeria uusiksi.
 export type SubmitHandler = (values: any) => Promise<any | undefined>;
 
-export const SubmitHandlerContext =
-  React.createContext<React.MutableRefObject<SubmitHandler | null> | null>(
-    null
-  );
+export const SubmitHandlerContext = React.createContext<
+  React.MutableRefObject<SubmitHandler | null> | undefined
+>(undefined);
 
 SubmitHandlerContext.displayName = 'SubmitHandlerContext';
 
-export const useSubmitHandlerRef = () => {
-  const ref = useContext(SubmitHandlerContext);
-  if (!ref) {
-    throw new Error(
-      'Tallennuskäsittelijän refiä ei löydy. Puuttuuko ReactFinalForm-wrapper?'
-    );
-  }
-  return ref;
-};
+export const useSubmitHandlerRef = () =>
+  useContextOrThrow(SubmitHandlerContext);
 
 export default SubmitHandlerContext;

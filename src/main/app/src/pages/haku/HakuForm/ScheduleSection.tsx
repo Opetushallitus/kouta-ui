@@ -48,7 +48,6 @@ const ScheduleSection = ({
           name={`${name}.varasijatayttoPaattyy`}
           component={FormFieldDateTimeInput}
           helperText={t('yleiset.paivamaaraJaKellonaika')}
-          required={true}
         />
       </FieldGroup>
 

@@ -54,7 +54,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
       : null,
     hakulomaketyyppi,
     metadata: {
-      varasijatayttoPaattyy: values?.aikataulut?.varasijatayttoPaattyy,
+      varasijatayttoPaattyy: values?.aikataulut?.varasijatayttoPaattyy || null,
       koulutuksenAlkamiskausi: getAlkamiskausiData(
         values?.aikataulut,
         kieleistyksetSerialized

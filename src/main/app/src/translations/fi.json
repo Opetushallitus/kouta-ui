@@ -299,7 +299,8 @@
     "osaamistavoitteet": {
       "otsikko": "Vahvista osaamistavoitteiden tuonti",
       "viesti": "Tuonti korvaa nykyisen kuvauksen. Haluatko jatkaa?"
-    }
+    },
+    "varasijatayttoPaattyyEnnenHaunPaattymista": "Varasijatäytön päättymisen ajankohta ei voi olla ennen haun päättymisajankohtaa"
   },
   "sivuTitlet": {
     "etuliite": "Tarjonta",
@@ -691,6 +692,7 @@
     "hakutapa": "Hakutapa",
     "valitseHakutapa": "Valitse hakutapa",
     "haunAikataulu": "Haun aikataulu",
+    "varasijatayttoPaattyy": "Haun varasijatäytön päättymisen ajankohta",
     "hakukohteenLisaamisenJaPerumisenTakaraja": "Hakukohteen lisäämisen ja perumisen takaraja",
     "hakukohteenMuokkauksenTakaraja": "Hakukohteen muokkauksen takaraja",
     "hakukohteenliittajaorganisaatiot": "Hakukohteen liittajaorganisaatiot",

@@ -24,8 +24,8 @@ import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 const getTutkinnonosatOptions = (selectedPeruste, language) =>
   _.map(
     selectedPeruste?.tutkinnonosat ?? [],
-    ({ _tutkinnonOsa, nimi, laajuus, id }) => ({
-      label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
+    ({ _tutkinnonOsa, tutkinnonOsa, laajuus, id }) => ({
+      label: `${getLanguageValue(tutkinnonOsa.nimi, language) ?? getLanguageValue(tutkinnonOsa.nimi, 'fi')}, ${laajuus} osp`,
       value: _tutkinnonOsa,
       viite: id,
     })

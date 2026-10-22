@@ -25,7 +25,11 @@ const getTutkinnonosatOptions = (selectedPeruste, language) =>
   _.map(
     selectedPeruste?.tutkinnonosat ?? [],
     ({ _tutkinnonOsa, nimi, laajuus, id }) => ({
-      label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
+      label: `${
+        getLanguageValue(nimi, language)?.length > 1
+          ? getLanguageValue(nimi, language)
+          : getLanguageValue(nimi, 'fi')
+      }, ${laajuus} osp`,
       value: _tutkinnonOsa,
       viite: id,
     })

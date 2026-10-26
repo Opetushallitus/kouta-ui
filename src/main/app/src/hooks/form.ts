@@ -13,6 +13,7 @@ import {
   SubmitHandler,
   useSubmitHandlerRef,
 } from '#/src/contexts/SubmitHandlerContext';
+import { valueOrThrow } from '#/src/hooks/useContextOrThrow';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
@@ -70,12 +71,23 @@ type FormStateWithCorrectTypes = {
 // Paluuarvo muistetaan, jotta footerien useCallback-riippuvuus form pysyy vakaana.
 export const useForm = (): FormStateWithCorrectTypes => {
   const state = useFormState({ subscription: { initialValues: true } });
-  const registry = useFieldRegistry();
+  // registeredFields tulee OMASTA rekisteristä, ei kirjastolta:
+  // form.getRegisteredFields() on liian laaja, koska useField rekisteröi kentän myös
+  // pelkästä lukemisesta ja useFieldValue kulkee sen kautta. Näkyvyyssääntö tarkoittaa
+  // RENDERÖITYJÄ kenttiä. Kirjaston joukkoa ei tarjota tässä lainkaan, jottei väärää
+  // vastausta voi vahingossa kysyä.
+  //
+  // Ei hiljaista varasuunnitelmaa puuttuvalle rekisterille. Tyhjä joukko tarkoittaisi
+  // "mitään ei ole rekisteröity": validointi katoaisi kokonaan ja tallennus menisi läpi
+  // hiljaa ja väärin. Mieluummin kova virhe mountissa.
+  const registry = valueOrThrow(
+    useFieldRegistry(),
+    'Kenttärekisteriä ei löydy. ReactFinalForm-wrapperin pitää renderöidä ' +
+      'FieldRegistryProvider.'
+  );
   const initial = state.initialValues;
 
-  // Muistetaan ENNEN rekisterivartijaa, jotta hookit kutsutaan ehdoitta.
-  // Gettereitä ei voi lukea ilman rekisteriä, koska vartija heittää ensin.
-  const form = useMemo(
+  return useMemo(
     () => ({
       initial,
 
@@ -88,32 +100,15 @@ export const useForm = (): FormStateWithCorrectTypes => {
       // form.registeredFieldsia: riippuvuuslistassa mainitseminen lukisi getterin
       // renderin aikana.
       get registeredFields() {
-        return registry!.getRegisteredFields();
+        return registry.getRegisteredFields();
       },
 
       get unregisteredFields() {
-        return registry!.getUnregisteredFields();
+        return registry.getUnregisteredFields();
       },
     }),
     [initial, registry]
   );
-
-  // registeredFields tulee OMASTA rekisteristä, ei kirjastolta:
-  // form.getRegisteredFields() on liian laaja, koska useField rekisteröi kentän myös
-  // pelkästä lukemisesta ja useFieldValue kulkee sen kautta. Näkyvyyssääntö tarkoittaa
-  // RENDERÖITYJÄ kenttiä. Kirjaston joukkoa ei tarjota tässä lainkaan, jottei väärää
-  // vastausta voi vahingossa kysyä.
-  if (!registry) {
-    // Ei hiljaista varasuunnitelmaa. Tyhjä joukko tarkoittaisi "mitään ei ole
-    // rekisteröity": validointi katoaisi kokonaan ja tallennus menisi läpi hiljaa ja
-    // väärin. Mieluummin kova virhe mountissa.
-    throw new Error(
-      'Kenttärekisteriä ei löydy. ReactFinalForm-wrapperin pitää renderöidä ' +
-        'FieldRegistryProvider.'
-    );
-  }
-
-  return form;
 };
 
 const useChange = () => {

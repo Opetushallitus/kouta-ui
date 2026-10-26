@@ -12,6 +12,7 @@ import {
 } from '#/src/types/toteutusTypes';
 import {
   isKoulutustyyppiWithMultipleMaksullisuustyyppi,
+  isTruthy,
   kieliArvoListToMultiSelectValue,
   toSelectValue,
   toSelectValueList,
@@ -73,11 +74,11 @@ const getMaksunMaara = (
     )
     ?.maksunMaara?.toString();
 
-const getMaksullisuustyyppi = (maksut: Array<Maksu>): MaksullisuusTyyppi => {
-  if (isEmpty(maksut)) {
-    return MaksullisuusTyyppi.MAKSUTON;
+const getMaksullisuustyyppi = (maksut?: Array<Maksu>): MaksullisuusTyyppi => {
+  if (isTruthy(maksut?.[0]?.maksullisuustyyppi)) {
+    return maksut[0].maksullisuustyyppi;
   } else {
-    return maksut?.[0].maksullisuustyyppi;
+    return MaksullisuusTyyppi.MAKSUTON;
   }
 };
 

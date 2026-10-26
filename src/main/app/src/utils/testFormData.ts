@@ -445,7 +445,7 @@ export const valintatapa: Valintatapa = {
     fi: parseEditorState('<p>Fi kynnysehto</p>'),
     sv: parseEditorState('<p>Sv kynnysehto</p>'),
   },
-  valintatapaKoodiUri: 'tapa_1#1',
+  tapa: { value: 'tapa_1#1' },
   enimmaispistemaara: '20,2',
   vahimmaispistemaara: '10,1',
   sisalto: sisalto,

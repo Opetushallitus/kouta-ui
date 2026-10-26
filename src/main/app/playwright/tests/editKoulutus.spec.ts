@@ -10,6 +10,8 @@ import {
   fillKieliversiotSection,
   fillTilaSection,
   tallenna,
+  getEditableEditors,
+  getSection,
   typeToEditor,
   wrapMutationTest,
 } from '#/playwright/playwright-helpers';
@@ -102,6 +104,49 @@ test.describe('Edit koulutus', () => {
   // Kohteena linkkiEPerusteisiin: tavallinen tekstikenttä, käännetty, eikä sitä
   // validoida lainkaan. Koulutuksen FieldArrayt sisältävät vain selectejä, joten
   // kirjoitustesti kohdistuu tavalliseen kenttään.
+
+  // Kielivälilehden vaihto ei saa tuhota toisen kielen tekstiä editorikentässä.
+  //
+  // Vartioi HISTORY_MERGE-tagia (LexicalEditorUI.tsx).
+  //
+  // Kohteena kuvaus, koska se on editori ja käännetty: editori kirjoittaa arvon myös
+  // OHJELMALLISESTI, kun välilehden vaihto antaa sille uuden value-propin, ja juuri
+  // se kirjoitus meni väärälle kielelle. Tavallisella kentällä sama testi menisi läpi
+  // myös rikkinäisellä koodilla.
+  //
+  // Fixturessa kuvaus on VAIN suomeksi: se on käyttäjän raportoima tilanne, ja ilman
+  // ruotsinkielistä alkuarvoa tähän ei voi sekoittua yllä kuvattu alkuarvon palautus.
+  test('should keep an edited translation when the language tab is switched in an editor field', async ({
+    page,
+  }) => {
+    // Oma fixture: kuvaus vain suomeksi. merge() ei poista avaimia, joten arvo
+    // asetetaan tässä eikä prepareTestin kautta.
+    const koulutusVainSuomeksi = merge(koulutus('amk'), testKoulutusFields);
+    koulutusVainSuomeksi.metadata.kuvaus = { fi: 'Fi kuvaus' };
+    await page.route(
+      `**/kouta-backend/koulutus/${koulutusOid}`,
+      fixtureJSON(koulutusVainSuomeksi)
+    );
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    const section = getSection(page, 'description');
+    const kuvaus = page.getByTestId('form-control_description.kuvaus');
+    const editori = () => getEditableEditors(kuvaus).first();
+
+    await section.getByText('yleiset.ruotsiksi').click();
+    await typeToEditor(kuvaus, 'Sv kuvaus kirjoitettu');
+    await expect(editori()).toHaveText('Sv kuvaus kirjoitettu');
+
+    // Suomen välilehti: suomenkielisen pitää olla koskematon.
+    await section.getByText('yleiset.suomeksi').click();
+    await expect(editori()).toHaveText('Fi kuvaus');
+
+    // Takaisin ruotsiin: kirjoitetun tekstin pitää olla tallella.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await expect(editori()).toHaveText('Sv kuvaus kirjoitettu');
+  });
 
   // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
   // fokuksen menetystä näppäinpainallusten välissä.

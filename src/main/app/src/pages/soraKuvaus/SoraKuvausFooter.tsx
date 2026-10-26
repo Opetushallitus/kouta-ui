@@ -57,7 +57,7 @@ export const SoraKuvausFooter = ({
     [formMode, soraKuvaus, navigate, queryClient, organisaatioOid]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName: ENTITY.SORA_KUVAUS,
     submit,
     validate: validateSoraKuvausForm,
@@ -68,7 +68,6 @@ export const SoraKuvausFooter = ({
       entityType={ENTITY.SORA_KUVAUS}
       entity={soraKuvaus}
       hideEsikatselu
-      save={save}
       canUpdate={canUpdate}
     />
   );

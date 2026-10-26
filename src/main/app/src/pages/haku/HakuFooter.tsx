@@ -7,7 +7,6 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useForm } from '#/src/hooks/form';
-import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import { HakuModel } from '#/src/types/domainTypes';
 import { getValuesForSaving } from '#/src/utils';
@@ -35,17 +34,17 @@ export const HakuFooter = ({
 
   const form = useForm();
   const formName = useFormName();
-  const unregisteredFields = useSelector(state => state?.unregisteredFields);
-  const initialValues = useSelector(state => state.form?.[formName]?.initial);
+
+  const initialValues = form.initial;
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
       const dataSendFn = formMode === FormMode.CREATE ? createHaku : updateHaku;
 
-      const valuesForSaving = getValuesForSaving(
+      const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,
-        unregisteredFields,
+        form.unregisteredFields,
         initialValues
       );
 
@@ -54,30 +53,29 @@ export const HakuFooter = ({
         apiUrls,
         haku: {
           ...haku,
-          ...getHakuByFormValues(valuesForSaving),
+          ...getHakuByFormValues(valuesToSend),
         },
       });
 
       if (formMode === FormMode.CREATE) {
         navigate(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
       } else {
-        afterUpdate(queryClient, navigate, ENTITY.HAKU, valuesForSaving.tila);
+        afterUpdate(queryClient, navigate, ENTITY.HAKU, valuesToSend.tila);
       }
       return { warnings: warnings };
     },
     [
       organisaatioOid,
-      form.registeredFields,
+      form, // getterit, ks. useForm
       formMode,
       haku,
       navigate,
       initialValues,
-      unregisteredFields,
       queryClient,
     ]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName,
     submit,
     validate: validateHakuForm,
@@ -88,7 +86,6 @@ export const HakuFooter = ({
       hideEsikatselu
       entityType={ENTITY.HAKU}
       entity={haku}
-      save={save}
       canUpdate={canUpdate}
     />
   );

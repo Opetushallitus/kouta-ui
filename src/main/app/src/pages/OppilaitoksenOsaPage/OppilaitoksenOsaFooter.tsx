@@ -40,7 +40,7 @@ export const OppilaitoksenOsaFooter = ({
     [oppilaitoksenOsa, organisaatioOid, queryClient]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName: ENTITY.OPPILAITOKSEN_OSA,
     submit,
     validate: validateOppilaitoksenOsaForm,
@@ -52,7 +52,6 @@ export const OppilaitoksenOsaFooter = ({
     <FormFooter
       entityType={ENTITY.OPPILAITOKSEN_OSA}
       entity={oppilaitoksenOsa}
-      save={save}
       canUpdate={!readOnly}
       esikatseluUrl={
         oppilaitoksenOsa &&

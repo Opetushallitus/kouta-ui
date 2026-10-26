@@ -8,7 +8,6 @@ import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
 import {
   ToteutusModel,
@@ -48,18 +47,17 @@ export const HakukohdeFooter = ({
 
   const form = useForm();
   const formName = useFormName();
-  const unregisteredFields = useSelector(state => state?.unregisteredFields);
-  const initialValues = useSelector(state => state.form?.[formName]?.initial);
+  const initialValues = form.initial;
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
       const dataSendFn =
         formMode === FormMode.CREATE ? createHakukohde : updateHakukohde;
 
-      const valuesForSaving = getValuesForSaving(
+      const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,
-        unregisteredFields,
+        form.unregisteredFields,
         initialValues
       );
 
@@ -69,43 +67,37 @@ export const HakukohdeFooter = ({
         hakukohde:
           formMode === FormMode.CREATE
             ? {
-                ...getHakukohdeByFormValues(valuesForSaving),
+                ...getHakukohdeByFormValues(valuesToSend),
                 hakuOid: haku?.oid,
                 toteutusOid: toteutus?.oid,
               }
             : {
                 ...hakukohde,
-                ...getHakukohdeByFormValues(valuesForSaving),
+                ...getHakukohdeByFormValues(valuesToSend),
               },
       });
 
       if (formMode === FormMode.CREATE) {
         navigate(`/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`);
       } else {
-        afterUpdate(
-          queryClient,
-          navigate,
-          ENTITY.HAKUKOHDE,
-          valuesForSaving.tila
-        );
+        afterUpdate(queryClient, navigate, ENTITY.HAKUKOHDE, valuesToSend.tila);
       }
       return { warnings: warnings };
     },
     [
       organisaatioOid,
-      form.registeredFields,
+      form, // getterit, ks. useForm
       formMode,
       haku,
       hakukohde,
       navigate,
       initialValues,
       toteutus,
-      unregisteredFields,
       queryClient,
     ]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName,
     submit,
     validate: validateHakukohdeForm(koulutustyyppi),
@@ -117,7 +109,6 @@ export const HakukohdeFooter = ({
     <FormFooter
       entityType={ENTITY.HAKUKOHDE}
       entity={hakukohde}
-      save={save}
       canUpdate={canUpdate}
       esikatseluUrl={apiUrls.url('konfo-ui.toteutus', hakukohde?.toteutusOid)}
       infoTextTranslationKey={infoTextTranslationKey}

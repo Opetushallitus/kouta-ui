@@ -8,7 +8,11 @@ import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import { FormButton } from '#/src/components/FormButton';
 import { Box, Button } from '#/src/components/virkailija';
 import { ENTITY, JULKAISUTILA } from '#/src/constants';
-import { useFieldValue, useIsSubmitting } from '#/src/hooks/form';
+import {
+  useFieldValue,
+  useIsSubmitting,
+  useSubmitForm,
+} from '#/src/hooks/form';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { EntityModelBase } from '#/src/types/domainTypes';
 import { getEntityNimiTranslation } from '#/src/utils';
@@ -19,7 +23,6 @@ import FormEditInfo from '../FormEditInfo';
 type FormFooterProps = {
   entityType: ENTITY;
   entity?: EntityModelBase;
-  save: () => void;
   canUpdate?: boolean;
   submitProps?: object;
   hideEsikatselu?: boolean;
@@ -36,7 +39,6 @@ export const FormFooter = ({
   entity = {
     tila: undefined,
   },
-  save,
   canUpdate = true,
   submitProps = {},
   hideEsikatselu = false,
@@ -45,6 +47,8 @@ export const FormFooter = ({
 }: FormFooterProps) => {
   const { t } = useTranslation();
   const isSubmitting = useIsSubmitting();
+  // Tallennus laukaistaan kirjaston kautta, ks. useSubmitForm.
+  const save = useSubmitForm();
   let title;
 
   if (!canUpdate) {

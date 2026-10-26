@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isEmpty, isNumber, isString, mapValues } from 'lodash';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { toKielistettyWithValueField } from '#/src/utils';
@@ -34,7 +34,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     kieliversiot: kielivalinta || [],
     tila,
     esikatselu,
-    esittely: _.mapValues(esittely || {}, parseEditorState),
+    esittely: mapValues(esittely || {}, parseEditorState),
     hakijapalveluidenYhteystiedot: hy
       ? {
           nimi: hy.nimi || {},
@@ -56,7 +56,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       })),
       tiedot: (tietoaOpiskelusta || []).reduce(
         (acc, { otsikkoKoodiUri, teksti }) => {
-          acc[otsikkoKoodiUri] = _.mapValues(teksti || {}, parseEditorState);
+          acc[otsikkoKoodiUri] = mapValues(teksti || {}, parseEditorState);
 
           return acc;
         },
@@ -64,13 +64,13 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       ),
     },
     perustiedot: {
-      opiskelijoita: _.isNumber(opiskelijoita) ? opiskelijoita : '',
-      korkeakouluja: _.isNumber(korkeakouluja) ? korkeakouluja : '',
-      tiedekuntia: _.isNumber(tiedekuntia) ? tiedekuntia : '',
-      kampuksia: _.isNumber(kampuksia) ? kampuksia : '',
-      yksikoita: _.isNumber(yksikoita) ? yksikoita : '',
-      toimipisteita: _.isNumber(toimipisteita) ? toimipisteita : '',
-      akatemioita: _.isNumber(akatemioita) ? akatemioita : '',
+      opiskelijoita: isNumber(opiskelijoita) ? opiskelijoita : '',
+      korkeakouluja: isNumber(korkeakouluja) ? korkeakouluja : '',
+      tiedekuntia: isNumber(tiedekuntia) ? tiedekuntia : '',
+      kampuksia: isNumber(kampuksia) ? kampuksia : '',
+      yksikoita: isNumber(yksikoita) ? yksikoita : '',
+      toimipisteita: isNumber(toimipisteita) ? toimipisteita : '',
+      akatemioita: isNumber(akatemioita) ? akatemioita : '',
       logo,
       wwwSivuUrl: wwwSivu?.url || {},
       wwwSivuNimi: wwwSivu?.nimi || {},
@@ -79,7 +79,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     },
     teemakuvaOrEsittelyvideo: {
       mediaType:
-        _.isString(teemakuva) || _.isEmpty(esittelyvideo?.url)
+        isString(teemakuva) || isEmpty(esittelyvideo?.url)
           ? 'teemakuva'
           : 'esittelyvideo',
       teemakuvaUrl: teemakuva,

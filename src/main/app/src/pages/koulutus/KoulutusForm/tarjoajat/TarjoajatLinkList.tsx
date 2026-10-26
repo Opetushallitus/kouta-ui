@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { compact, flow, map, sortBy } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
@@ -28,10 +28,10 @@ export const TarjoajatLinkList = ({ koulutus }) => {
   ];
 
   const rows = useMemo(() => {
-    return _.flow(
-      _.compact,
-      ts => _.map(ts, (entity: any = {}) => ({ ...entity, key: entity.oid })),
-      ts => _.sortBy(ts, e => getFirstLanguageValue(e.nimi))
+    return flow(
+      compact,
+      ts => map(ts, (entity: any = {}) => ({ ...entity, key: entity.oid })),
+      ts => sortBy(ts, e => getFirstLanguageValue(e.nimi))
     )(tarjoajat);
   }, [tarjoajat]);
 

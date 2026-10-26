@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import _ from 'lodash';
+import { map } from 'lodash';
 import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
@@ -34,7 +34,7 @@ const useCopyToteutukset = () => {
     async ({ entities }: CopyToteutuksetProps) => {
       const result = await httpClient.put(
         apiUrls.url('kouta-backend.toteutus-copy'),
-        _.map(entities, 'oid')
+        map(entities, 'oid')
       );
       return result.data as ToteutusCopyResponseData;
     },

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
-import _ from 'lodash';
+import { isNil } from 'lodash';
 
 export const valueOrThrow = (val, errorMessage) => {
-  if (_.isNil(val)) {
+  if (isNil(val)) {
     throw new Error(errorMessage);
   }
   return val;

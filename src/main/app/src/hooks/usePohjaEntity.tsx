@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { capitalize } from 'lodash';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export const usePohjaEntity = (entityType: ENTITY) => {
 
   const searchParams = queryString.parse(search);
 
-  const kopioParam = `kopio${_.capitalize(entityType)}`;
+  const kopioParam = `kopio${capitalize(entityType)}`;
 
   const copyId = searchParams[kopioParam] as string;
 

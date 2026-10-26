@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isPlainObject, isString, uniq } from 'lodash';
 
 // Valitun organisaation ja organisaatiosuosikkien tallennus localStorageen. Avaimet ovat
 // kouta-etuliitteisiä, koska virkailija-origin on yhteinen usealle sovellukselle.
@@ -47,10 +47,10 @@ const parseJson = (raw: string | null): unknown => {
 
 // Tyhjä merkkijono tarkoittaa "ei valintaa".
 const isOid = (value: unknown): value is string =>
-  _.isString(value) && value.length > 0;
+  isString(value) && value.length > 0;
 
 const parseOids = (value: unknown): Array<string> =>
-  Array.isArray(value) ? _.uniq(value.filter(isOid)) : [];
+  Array.isArray(value) ? uniq(value.filter(isOid)) : [];
 
 export const loadOrganisaatioOid = (): string | null => {
   const value = parseJson(getItem(ORGANISAATIO_OID_KEY));
@@ -70,11 +70,11 @@ export const saveOrganisaatioFavourites = (oids: Array<string>) =>
 // merkkijono, esim. {"oid":"\"1.2.3\"","_persist":"{...}"}.
 const readLegacyField = (key: string, field: string): unknown => {
   const outer = parseJson(getItem(key));
-  if (!_.isPlainObject(outer)) {
+  if (!isPlainObject(outer)) {
     return undefined;
   }
   const inner = (outer as Record<string, unknown>)[field];
-  return _.isString(inner) ? parseJson(inner) : undefined;
+  return isString(inner) ? parseJson(inner) : undefined;
 };
 
 // Kirjoittaa vanhan muodon arvot uusiin avaimiin, jos uutta avainta ei vielä ole.
@@ -90,7 +90,7 @@ export const migrateLegacyStorage = () => {
 
   if (getItem(ORGANISAATIO_FAVOURITES_KEY) === null) {
     const byOid = readLegacyField(LEGACY_FAVOURITES_KEY, 'byOid');
-    if (_.isPlainObject(byOid)) {
+    if (isPlainObject(byOid)) {
       const map = byOid as Record<string, unknown>;
       // Näyttöjärjestys oli avainten lisäysjärjestys. Oidit sisältävät pisteitä, joten ne
       // eivät ole kokonaislukuavaimia eikä JS järjestä niitä uudelleen.

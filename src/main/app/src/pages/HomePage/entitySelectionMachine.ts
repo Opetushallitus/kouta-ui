@@ -1,5 +1,5 @@
 import { assign } from '@xstate/immer';
-import _ from 'lodash';
+import { forEach } from 'lodash';
 import { createMachine } from 'xstate';
 
 type EntityListItem = {
@@ -52,19 +52,19 @@ export const entitySelectionMachine = createMachine(
   {
     actions: {
       selectItems: assign<SelectionContext, SelectItemsEvent>((ctx, e) => {
-        _.forEach(e.items, item => {
+        forEach(e.items, item => {
           ctx.selection[item.oid] = item;
         });
       }),
       deselectItems: assign<SelectionContext, DeselectItemsEvent>((ctx, e) => {
-        _.forEach(e.items, item => {
+        forEach(e.items, item => {
           delete ctx.selection[item.oid];
         });
       }),
       resetSelection: assign<SelectionContext, ResetSelectionEvent>(
         (ctx, e) => {
           ctx.selection = {};
-          _.forEach(e?.items, item => {
+          forEach(e?.items, item => {
             ctx.selection[item.oid] = item;
           });
         }

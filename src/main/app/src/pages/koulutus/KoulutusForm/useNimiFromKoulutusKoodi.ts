@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 
-import _ from 'lodash';
+import { find, isEmpty, isNil, toLower } from 'lodash';
 import { usePrevious } from 'react-use';
 
 import {
@@ -23,7 +23,7 @@ function shouldUpdateNimi(
     (koulutusChanged || languagesChanged) &&
     //Halutaan päivittää nimi myös siinä tapauksessa että koulutuksia on valittu
     //enemmän kuin yksi ja koulutusvalue on null
-    (koulutusKoodi || _.isNil(koulutusValue))
+    (koulutusKoodi || isNil(koulutusValue))
   );
 }
 
@@ -35,15 +35,15 @@ function getNimiFromKoodistoResponse(
 ) {
   const newNimiFieldValue = {};
   languages?.forEach(lang => {
-    const koodiNimi = _.find(
+    const koodiNimi = find(
       koulutusKoodi?.metadata,
-      ({ kieli }) => _.toLower(kieli) === lang
+      ({ kieli }) => toLower(kieli) === lang
     )?.nimi;
     // Only overwrite existing nimi values when koulutus-field changes.
     // When selected languages change, set only language versioned nimi fields that are empty.
     if (
       koulutusChanged ||
-      (!koulutusChanged && nimiFieldValue && _.isEmpty(nimiFieldValue[lang]))
+      (!koulutusChanged && nimiFieldValue && isEmpty(nimiFieldValue[lang]))
     ) {
       newNimiFieldValue[lang] = koodiNimi;
     } else {

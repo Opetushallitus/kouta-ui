@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { mapValues, isPlainObject, isArray, isObject } from 'lodash';
+import { mapValues, isPlainObject, isObject } from 'lodash';
 
 import { ENTITY } from '#/src/constants';
 import { useApiQuery, KoutaApiQueryConfig } from '#/src/hooks/useApiQuery';
@@ -15,7 +15,7 @@ type GetEntityTypeByOidProps = {
 const isEmptyParagraph = (value: any): boolean => value === '<p></p>';
 
 const filterEmptyParagraphs = (obj: any): any => {
-  if (isArray(obj)) {
+  if (Array.isArray(obj)) {
     return obj.map(filterEmptyParagraphs);
   }
 

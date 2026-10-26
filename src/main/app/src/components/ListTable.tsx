@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 import Box from '@opetushallitus/virkailija-ui-components/Box';
-import _ from 'lodash';
+import { get, isFunction } from 'lodash';
 import styled, { css } from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -164,7 +164,7 @@ export const makeMuokkaajaColumn = (t): Column => ({
   title: t('yleiset.muokkaaja'),
   key: 'muokkaaja',
   sortable: true,
-  render: ({ muokkaaja }) => _.get(muokkaaja, 'nimi') || null,
+  render: ({ muokkaaja }) => get(muokkaaja, 'nimi') || null,
   style: {
     width: '170px',
   },
@@ -225,7 +225,7 @@ const ActionsDropdown = ({ actionsMenu }) => {
 
 const Cell = styled(TableCell)`
   ${({ onClick }) =>
-    _.isFunction(onClick) &&
+    isFunction(onClick) &&
     css`
       cursor: pointer;
     `}
@@ -257,7 +257,7 @@ export const ListTable = ({
     row: defaultCollapsedRow,
     column: defaultCollapsedColumn,
   });
-  const isTableSortable = _.isFunction(onSort);
+  const isTableSortable = isFunction(onSort);
 
   const language = useUserLanguage();
 
@@ -291,7 +291,7 @@ export const ListTable = ({
                 onSort={sortable ? makeOnSort({ name: key, onSort }) : null}
                 style={style}
               >
-                {_.isFunction(title) ? title({ rows }) : title}
+                {isFunction(title) ? title({ rows }) : title}
               </TableCell>
             );
           })}
@@ -333,7 +333,7 @@ export const ListTable = ({
                             : undefined
                         }
                       >
-                        {_.isFunction(Component) ? (
+                        {isFunction(Component) ? (
                           <Component language={language} {...rowProps} />
                         ) : (
                           render({ ...rowProps, language })

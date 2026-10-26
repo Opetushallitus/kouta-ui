@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { mapValues, toString } from 'lodash';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { FormMode, JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
@@ -49,11 +49,11 @@ export const getFormValuesByValintaperuste = (
     julkinen,
     kuvaus: {
       nimi,
-      kuvaus: _.mapValues(kuvaus || {}, parseEditorState),
+      kuvaus: mapValues(kuvaus || {}, parseEditorState),
       sisalto: parseSisaltoField(sisalto),
     },
-    hakukelpoisuus: _.mapValues(hakukelpoisuus || {}, parseEditorState),
-    lisatiedot: _.mapValues(lisatiedot || {}, parseEditorState),
+    hakukelpoisuus: mapValues(hakukelpoisuus || {}, parseEditorState),
+    lisatiedot: mapValues(lisatiedot || {}, parseEditorState),
     valintatavat: (valintatavat || []).map(
       ({
         nimi: valintatapaNimi,
@@ -66,11 +66,10 @@ export const getFormValuesByValintaperuste = (
         nimi: valintatapaNimi || {},
         sisalto: parseSisaltoField(valintatapaSisalto),
         tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
-        kynnysehto: _.mapValues(kynnysehto || {}, parseEditorState),
-        enimmaispistemaara:
-          _.toString(enimmaispisteet)?.replace('.', ',') || '',
+        kynnysehto: mapValues(kynnysehto || {}, parseEditorState),
+        enimmaispistemaara: toString(enimmaispisteet)?.replace('.', ',') || '',
         vahimmaispistemaara:
-          _.toString(vahimmaispisteet)?.replace('.', ',') || '',
+          toString(vahimmaispisteet)?.replace('.', ',') || '',
       })
     ),
     valintakokeet: getKokeetTaiLisanaytotValues(

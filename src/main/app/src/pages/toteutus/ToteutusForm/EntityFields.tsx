@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { capitalize, isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -27,7 +27,7 @@ export const EntityFields = ({
         {fields.map((field: string, index: number) => {
           const fieldData = fields.get(index);
           const oid =
-            !_.isEmpty(fieldData) && !_.isEmpty(fieldData[fieldName])
+            !isEmpty(fieldData) && !isEmpty(fieldData[fieldName])
               ? fieldData[fieldName].value
               : undefined;
           return (
@@ -82,7 +82,7 @@ export const EntityFields = ({
           }}
           {...getTestIdProps('lisaaButton')}
         >
-          {t(`toteutuslomake.lisaa${_.capitalize(fieldName)}`)}
+          {t(`toteutuslomake.lisaa${capitalize(fieldName)}`)}
         </IconButton>
       </Box>
     </>

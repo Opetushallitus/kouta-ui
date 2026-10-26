@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import _ from 'lodash';
+import { map } from 'lodash';
 
 import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
@@ -37,7 +37,7 @@ export const OrganisaatioSection = () => {
     const orgs = flattenHierarkia(hierarkia);
     if (isOphVirkailija && !ophIsLoading && oph) orgs.unshift(oph);
 
-    return _.map(orgs, ({ oid, nimi }) => ({
+    return map(orgs, ({ oid, nimi }) => ({
       value: oid,
       label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
     }));

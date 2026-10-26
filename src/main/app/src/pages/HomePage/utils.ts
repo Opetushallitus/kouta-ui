@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isObject } from 'lodash';
 import _fp from 'lodash/fp';
 
 import {
@@ -19,9 +19,9 @@ export const parseSort = sort => {
 
 const selectValueToSimpleValue = v => {
   switch (true) {
-    case _.isArray(v):
+    case Array.isArray(v):
       return v.map(_fp.prop('value'));
-    case _.isObject(v):
+    case isObject(v):
       return v?.value;
     default:
       return null;

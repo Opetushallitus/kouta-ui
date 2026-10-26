@@ -1,4 +1,4 @@
-import { isArray, some } from 'lodash';
+import { some } from 'lodash';
 
 import {
   KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA,
@@ -12,7 +12,7 @@ export const isApurahaVisible = (
   koulutustyyppi: KOULUTUSTYYPPI,
   maksullisuustyyppi?: MaksullisuusTyyppi | Array<MaksullisuusTyyppi>
 ) => {
-  const maksullisuustyyppiArray = isArray(maksullisuustyyppi)
+  const maksullisuustyyppiArray = Array.isArray(maksullisuustyyppi)
     ? maksullisuustyyppi
     : [maksullisuustyyppi];
 

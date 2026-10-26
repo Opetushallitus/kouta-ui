@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { omit } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -35,7 +35,7 @@ const getInitialValues = (soraKuvaus, kieliValinnat) => {
   return soraKuvaus && soraKuvaus.id
     ? {
         ...getCopyValues(soraKuvaus.id),
-        ...getFormValuesBySoraKuvaus(_.omit(soraKuvaus, ['organisaatioOid'])),
+        ...getFormValuesBySoraKuvaus(omit(soraKuvaus, ['organisaatioOid'])),
         tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues(kieliValinnatLista);

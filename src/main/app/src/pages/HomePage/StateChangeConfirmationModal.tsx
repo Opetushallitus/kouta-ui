@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useActor, useInterpret } from '@xstate/react';
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { ActorRefFrom, InterpreterFrom } from 'xstate';
 
@@ -99,7 +99,7 @@ export const StateChangeConfirmationModal = ({
               {t('yleiset.sulje')}
             </Button>
           </Box>
-          <Button disabled={_.isEmpty(selection)} onClick={onConfirm}>
+          <Button disabled={isEmpty(selection)} onClick={onConfirm}>
             {t(`${entityTranslationKeyPath}.vahvistaTilanmuutos`, {
               tila: t(safeGetJulkaisutilaTranslationKey(tila)),
             })}

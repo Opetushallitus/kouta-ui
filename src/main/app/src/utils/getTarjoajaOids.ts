@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isEmpty, uniq, without } from 'lodash';
 
 import iterateTree from '#/src/utils/iterateTree';
 
@@ -13,24 +13,26 @@ const getAvailableTarjoajaOids = hierarkia => {
 };
 
 const getTarjoajaOperations = (availableOids, oids) => {
-  const normalizedOids = _.isArray(oids) ? oids : [];
-  const normalizedAvailableOids = _.isArray(availableOids) ? availableOids : [];
+  const normalizedOids = Array.isArray(oids) ? oids : [];
+  const normalizedAvailableOids = Array.isArray(availableOids)
+    ? availableOids
+    : [];
   let inserted = normalizedOids;
 
-  if (!_.isEmpty(normalizedAvailableOids)) {
+  if (!isEmpty(normalizedAvailableOids)) {
     inserted = normalizedOids.filter(o => normalizedAvailableOids.includes(o));
   }
 
   return {
     inserted,
-    deleted: _.without(availableOids, ...inserted),
+    deleted: without(availableOids, ...inserted),
   };
 };
 
 const mergeTarjoajat = (existingOids, valueOids, availableOids) => {
   const { inserted, deleted } = getTarjoajaOperations(availableOids, valueOids);
 
-  return _.uniq(_.without([...(existingOids || []), ...inserted], ...deleted));
+  return uniq(without([...(existingOids || []), ...inserted], ...deleted));
 };
 
 export const getTarjoajaOids = ({

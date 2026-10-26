@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { noop } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { createFormFieldComponent } from '#/src/components/formFields';
@@ -20,7 +20,7 @@ import searchAvainsanatByTerm from '#/src/utils/api/searchAvainsanatByTerm';
 import { memoize } from '#/src/utils/memoize';
 
 const notTooLong = (v, maxItems) => {
-  if (_.isArray(v)) {
+  if (Array.isArray(v)) {
     return v.length <= maxItems;
   } else {
     return true;
@@ -31,7 +31,7 @@ const CreatableField = createFormFieldComponent(
   AsyncCreatableSelect,
   ({ input: { onChange, ...input }, maxItems, ...props }) => ({
     ...input,
-    onBlur: _.noop,
+    onBlur: noop,
     onChange: v => notTooLong(v, maxItems) && onChange(v),
     maxItems,
     ...props,
@@ -106,7 +106,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
               )}
               label={t('toteutuslomake.ammattinimikkeet')}
               helperText={t('toteutuslomake.oletValinnutAmmattinimikkeet', {
-                lukumaara: _.isArray(ammattinimikkeet)
+                lukumaara: Array.isArray(ammattinimikkeet)
                   ? ammattinimikkeet.length
                   : 0,
                 maksimi: MAX_ITEMS_AMMATTINIMIKKEET,
@@ -126,7 +126,7 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
             loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
             label={t('toteutuslomake.avainsanat')}
             helperText={t('toteutuslomake.oletValinnutAvainsanat', {
-              lukumaara: _.isArray(avainsanat) ? avainsanat.length : 0,
+              lukumaara: Array.isArray(avainsanat) ? avainsanat.length : 0,
               maksimi: MAX_ITEMS_AVAINSANAT,
             })}
             maxItems={MAX_ITEMS_AVAINSANAT}

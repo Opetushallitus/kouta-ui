@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import { isString } from 'lodash';
 
 import isOid from './isOid';
 
 const getRoleOrganisaatioOid = role => {
-  if (!_.isString(role)) {
+  if (!isString(role)) {
     return undefined;
   }
 

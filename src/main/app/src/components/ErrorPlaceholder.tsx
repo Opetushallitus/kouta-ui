@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { get, isNil } from 'lodash';
 
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
@@ -10,8 +10,8 @@ import { getFieldNameWithoutLanguage } from '#/src/utils';
 export const ErrorPlaceholder = props => {
   const { name } = props;
   const errors = useSubmitErrors();
-  const error = _.get(errors, name);
-  const isError = !_.isNil(error);
+  const error = get(errors, name);
+  const isError = !isNil(error);
 
   return (
     <div

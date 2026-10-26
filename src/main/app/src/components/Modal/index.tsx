@@ -9,8 +9,8 @@ import {
 } from '#/src/components/virkailija';
 
 type KoutaModalProps = {
-  footer?: JSX.Element | string;
-  header?: JSX.Element | string;
+  footer?: React.JSX.Element | string;
+  header?: React.JSX.Element | string;
   children: React.ReactNode;
   onClose?: () => void;
   minHeight?: string | number;

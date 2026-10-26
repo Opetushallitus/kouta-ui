@@ -19,7 +19,6 @@ export const useNavigationBlocker = (when: boolean | BlockerFunction) => {
             : when;
         if (shouldBlock) {
           event.preventDefault();
-          event.returnValue = '';
         }
       },
       [when]

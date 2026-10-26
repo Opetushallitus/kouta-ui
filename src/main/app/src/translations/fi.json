@@ -538,7 +538,8 @@
     "luokittelutermitOhje": "Luokittelutermejä käytetään koulutusten hakemiseen ohjelmallisesti eikä niitä näytetä Opintopolussa",
     "valitseToteutussuunnitelma": "Valitse toteutussuunnitelma",
     "valitsePaikallisetTutkinnonOsat": "Valitse paikalliset tutkinnon osat",
-    "lisaaToteutussuunnitelma": "Lisää uusi toteutussuunnitelma"
+    "lisaaToteutussuunnitelma": "Lisää uusi toteutussuunnitelma",
+    "valitseTotsunKieli": "Valitse haettavan toteutussuunnitelman kieli"
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",

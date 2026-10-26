@@ -208,12 +208,12 @@ test.describe('Organisaation valinta ja suosikit', () => {
       });
 
     await page.addInitScript(
-      ([selection, favourites]) => {
+      ([selection, favourites]: Array<string>) => {
         // Vain uudet avaimet pois: localStorage.clear() pyyhkisi myös isPlaywright-lipun.
         localStorage.removeItem('kouta.organisaatioOid');
         localStorage.removeItem('kouta.organisaatioFavourites');
-        localStorage.setItem('persist:organisaatioSelection', selection);
-        localStorage.setItem('persist:organisaatioFavourites', favourites);
+        localStorage.setItem('persist:organisaatioSelection', selection!);
+        localStorage.setItem('persist:organisaatioFavourites', favourites!);
       },
       [
         persisted({ oid: OPPILAITOS_OID }),

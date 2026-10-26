@@ -16,7 +16,9 @@ export const TietoaOpiskelustaSection = ({ name, language }) => {
     koodisto: 'organisaationkuvaustiedot',
   });
 
-  const osiot = useFieldValue(`${name}.osiot`);
+  const osiot = useFieldValue<Array<SelectOption<string>> | undefined>(
+    `${name}.osiot`
+  );
 
   const osiotWithLabels = useMemo(() => {
     return (osiot || []).map(({ value }) => ({

@@ -58,7 +58,9 @@ export const useJarjestyspaikkaOptions = ({ tarjoajaOids, t }) => {
     CRUD_ROLES.UPDATE
   );
 
-  const selectedValue = useFieldValue('jarjestyspaikkaOid');
+  const selectedValue = useFieldValue<string | null | undefined>(
+    'jarjestyspaikkaOid'
+  );
 
   const {
     hierarkia,

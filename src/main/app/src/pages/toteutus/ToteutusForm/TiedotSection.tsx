@@ -145,8 +145,12 @@ const PieniOsaamiskokonaisuusField = ({
 }) => {
   const { t } = useTranslation();
   const { change } = useBoundFormActions();
-  const currValue = useFieldValue(`${name}.isPieniOsaamiskokonaisuus`);
-  const toteutuksenLaajuus = useFieldValue(`${name}.opintojenLaajuusNumero`);
+  const currValue = useFieldValue<boolean | undefined>(
+    `${name}.isPieniOsaamiskokonaisuus`
+  );
+  const toteutuksenLaajuus = useFieldValue<number | string | undefined>(
+    `${name}.opintojenLaajuusNumero`
+  );
   const koulutustyyppi = koulutus?.koulutustyyppi;
 
   useEffect(() => {
@@ -158,7 +162,7 @@ const PieniOsaamiskokonaisuusField = ({
           KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
         ].includes(koulutustyyppi) &&
           isNumeric(toteutuksenLaajuus) &&
-          toteutuksenLaajuus < 60))
+          Number(toteutuksenLaajuus) < 60))
     ) {
       change(`${name}.isPieniOsaamiskokonaisuus`, true);
     }

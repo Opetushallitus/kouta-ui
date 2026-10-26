@@ -29,7 +29,9 @@ const getTutkinnonosatOptions = (selectedPeruste, language) =>
       const fallbackValue = getLanguageValue(nimi, 'fi');
       return {
         label: `${
-          userLanguageValue?.length > 1 ? userLanguageValue : fallbackValue
+          userLanguageValue && userLanguageValue.length > 1
+            ? userLanguageValue
+            : fallbackValue
         }, ${laajuus} osp`,
         value: _tutkinnonOsa,
         viite: id,
@@ -98,7 +100,9 @@ export const ValitseTutkinnonOsatBox = ({
   language,
   ePeruste,
 }) => {
-  const tutkinnonosatFieldValue = useFieldValue(fieldName);
+  const tutkinnonosatFieldValue = useFieldValue<
+    Array<SelectOption<string>> | undefined
+  >(fieldName);
   const selectedTutkinnonosat = useMemo(
     () =>
       filter(ePeruste?.tutkinnonosat, t =>

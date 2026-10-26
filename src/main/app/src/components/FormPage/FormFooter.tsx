@@ -59,7 +59,7 @@ export const FormFooter = ({
     }
   }
   const [isConfirmationDialogOpen, toggleConfirmationDialog] = useState(false);
-  const tila = useFieldValue('tila');
+  const tila = useFieldValue<JULKAISUTILA | undefined>('tila');
   const theEntityName = getEntityNimiTranslation(entity, useUserLanguage());
 
   const doDelete = () => {

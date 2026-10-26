@@ -203,7 +203,7 @@ const useRawValue = (name: string) =>
     format: value => value,
   }).input.value;
 
-export function useFieldValue<T>(name: string, formNameProp?: string): T {
+export function useFieldValue<T = any>(name: string, formNameProp?: string): T {
   const contextFormName = useFormName();
   assert((formNameProp || contextFormName) != null);
 

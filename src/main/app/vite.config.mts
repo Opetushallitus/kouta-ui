@@ -52,13 +52,11 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       svgr(),
-      //optimizeLodashImports(), // Tämän voi ottaa käyttöön sitten kun lodash-importit on muutettu käyttämään nimettyjä importteja
-      // Tuotanto-buildissa karsitaan devaus-plugineja hidastamasta
       ...(isDev && !STORYBOOK
         ? [
             pluginRewriteAll(),
             checker({
-              //typescript: true, //TS-tarkistuksen voi laittaa päälle sitten kun nykyiset TS-virheet on saatu korjattua
+              typescript: true,
               eslint: {
                 lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
               },

@@ -11,7 +11,7 @@ import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOpp
 import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
 
 export const useOrganisaatio = (
-  oid: string,
+  oid: string | null | undefined,
   options: KoutaApiQueryConfig<Array<OrganisaatioModel>> = {}
 ) => {
   const { organisaatiot, ...rest } = useOrganisaatiot(oid, options);
@@ -20,13 +20,13 @@ export const useOrganisaatio = (
 };
 
 export const useOrganisaatiot = (
-  oids: string | Array<string>,
+  oids: string | Array<string> | null | undefined,
   options: KoutaApiQueryConfig<Array<OrganisaatioModel>> = {}
 ) => {
   const { data: organisaatiot, ...rest } = useApiQuery(
     'getOrganisaatiot',
     getOrganisaatiotByOids,
-    { oids: castArray(oids) },
+    { oids: castArray(oids ?? []) },
     {
       ...options,
       ...LONG_CACHE_QUERY_OPTIONS,

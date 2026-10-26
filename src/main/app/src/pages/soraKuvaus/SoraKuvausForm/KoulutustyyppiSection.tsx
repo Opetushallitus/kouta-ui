@@ -23,7 +23,9 @@ export const KoulutustyyppiSection = ({ name, canEditKoulutustyyppi }) => {
 
   const { change } = useBoundFormActions();
 
-  const koulutusalaFieldValue = useFieldValue('koulutusala')?.value;
+  const koulutusalaFieldValue = useFieldValue<SelectOption<string> | undefined>(
+    'koulutusala'
+  )?.value;
 
   const koulutusalaHasChanged = useHasChanged(koulutusalaFieldValue);
 

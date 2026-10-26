@@ -84,7 +84,7 @@ const InlineAjankohtaInfoBox = ({
 
 export const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
   const { t } = useTranslation();
-  const kaytetaanHakukohteenAlkamiskautta = useFieldValue(
+  const kaytetaanHakukohteenAlkamiskautta = useFieldValue<boolean | undefined>(
     `${name}.kaytetaanHakukohteenAlkamiskautta`
   );
 

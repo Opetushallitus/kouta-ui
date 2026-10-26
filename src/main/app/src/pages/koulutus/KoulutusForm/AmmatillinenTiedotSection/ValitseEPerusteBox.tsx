@@ -90,7 +90,9 @@ export const ValitseEPerusteBox = ({
 }) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
-  const ePerusteId = useFieldValue(fieldName)?.value;
+  const ePerusteId = useFieldValue<SelectOption<string> | undefined>(
+    fieldName
+  )?.value;
   const { data: ePeruste = {} } = useEPerusteById(ePerusteId);
 
   const { opintojenlaajuus, nimikkeet, osaamisalat } = useMemo(

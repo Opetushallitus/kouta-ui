@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { flow, lowerCase, map, sortBy } from 'lodash-es';
+import { compact, flow, lowerCase, map, sortBy } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
@@ -25,7 +25,8 @@ export const useEntityOptions = <T>(
     () =>
       Array.isArray(entities)
         ? flow(
-            (arr: Array<EntityForDropdown<T>>) =>
+            (arr: Array<EntityForDropdown<T>>) => compact(arr),
+            arr =>
               map(arr, entity => ({
                 value: entity.id ?? entity.oid,
                 label:

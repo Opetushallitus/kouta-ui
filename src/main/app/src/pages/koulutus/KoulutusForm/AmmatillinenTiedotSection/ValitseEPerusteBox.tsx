@@ -17,7 +17,7 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { getTestIdProps, getReadableDate } from '#/src/utils';
+import { getTestIdProps, getReadableDate, isTruthy } from '#/src/utils';
 import {
   getEPerusteStatusCss,
   getEPerusteStatus,
@@ -29,7 +29,7 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getListNimiLanguageValues = (list = [], language) =>
-  list.map(({ nimi }) => getLanguageValue(nimi, language)).filter(Boolean);
+  list.map(({ nimi }) => getLanguageValue(nimi, language)).filter(isTruthy);
 
 const TilaBadge = ({
   status,

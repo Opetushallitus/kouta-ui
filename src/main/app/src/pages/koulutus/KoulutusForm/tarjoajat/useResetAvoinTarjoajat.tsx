@@ -47,13 +47,13 @@ export const useResetAvoinTarjoajat = ({
     [organisaatiot, omatOppilaitokset, isAvoinKorkeakoulutus]
   );
 
-  const hiddenOppilaitosOids = useRef<Array<string>>([]);
+  const hiddenOppilaitosOidsRef = useRef<Array<string>>([]);
 
   useEffect(() => {
     if (isDirty && isAvoinKorkeakoulutusChanged) {
       if (isAvoinKorkeakoulutus) {
-        onChange(uniq([...value, ...hiddenOppilaitosOids.current]));
-        hiddenOppilaitosOids.current = [];
+        onChange(uniq([...value, ...hiddenOppilaitosOidsRef.current]));
+        hiddenOppilaitosOidsRef.current = [];
       } else {
         const oidsToHide: Array<string> = [];
 
@@ -65,7 +65,7 @@ export const useResetAvoinTarjoajat = ({
 
         // Jos isAvoinKorkeakoulutus vaihtuu falseksi, karsitaan pois tarjoajia
         onChange(difference(value, oidsToHide));
-        hiddenOppilaitosOids.current = oidsToHide;
+        hiddenOppilaitosOidsRef.current = oidsToHide;
       }
     }
   }, [

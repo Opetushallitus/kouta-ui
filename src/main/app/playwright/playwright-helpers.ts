@@ -498,7 +498,5 @@ export const fillValintakokeetSection = (
   });
 
 // For debugging
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const outerHTML = (l: Locator) => l.evaluate(el => el.outerHTML);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const innerHTML = (l: Locator) => l.evaluate(el => el.innerHTML);

@@ -4,7 +4,10 @@ import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { defaultFilter } from '#/src/hooks/useOrganisaatioHierarkia';
 import { type HttpClient } from '#/src/httpClient';
-import { type OppilaitoksetResponseModel } from '#/src/types/domainTypes';
+import {
+  type OppilaitoksetResponseModel,
+  type OrganisaatioModel,
+} from '#/src/types/domainTypes';
 import { ApiUrls } from '#/src/urls';
 import filterTree from '#/src/utils/filterTree';
 
@@ -36,8 +39,9 @@ export const useOppilaitoksetByOids = (tarjoajaOids: Array<string>) => {
   const hierarkia = useMemo(
     () =>
       // TODO: Suodatetaan turhat organisaatiot pois jo kouta-backendissä, jolloin tätä ei tarvita
-      filterTree(data?.organisaatioHierarkia?.organisaatiot, org =>
-        defaultFilter(org)
+      filterTree<OrganisaatioModel>(
+        data?.organisaatioHierarkia?.organisaatiot,
+        org => defaultFilter(org)
       ),
     [data]
   );

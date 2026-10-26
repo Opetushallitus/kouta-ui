@@ -18,6 +18,7 @@ import {
 } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 import { createCanReadSomethingRoleBuilder } from '../utils';
+import { isTruthy } from '#/src/utils';
 
 const pickKoutaRoleOid = role => {
   if (role?.startsWith('APP_KOUTA')) {
@@ -28,7 +29,7 @@ const pickKoutaRoleOid = role => {
 };
 
 const getKoutaRolesOrganisaatioOids = roles => {
-  return uniq(roles.map(pickKoutaRoleOid).filter(Boolean));
+  return uniq(roles.map(pickKoutaRoleOid).filter(isTruthy));
 };
 
 const isValidNameSearch = name => isString(name) && name.length >= 3;

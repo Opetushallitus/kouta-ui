@@ -67,6 +67,7 @@ const OsaamismerkkiKuvausSubsection = ({
       </Heading>
       <ul>
         {(entities || []).map((entity, index) => (
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- read-only display of fetched data, never reordered
           <li key={index}>
             {sanitizeHTML(getLanguageValue(entity[entityKey], language))}
           </li>

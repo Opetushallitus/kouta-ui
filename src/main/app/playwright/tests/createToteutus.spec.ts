@@ -85,12 +85,12 @@ const fillJarjestamistiedotSection = (
     });
 
     if (isArray(maksullisuustyyppi)) {
-      if (maksullisuustyyppi.includes(MaksullisuusTyyppi.MAKSULLINEN)) {
+      if (maksullisuustyyppi?.includes(MaksullisuusTyyppi.MAKSULLINEN)) {
         await maksullisuus.getByText('yleiset.kylla').click();
         await maksullisuus.getByLabel('toteutuslomake.maksunMaara').fill('10');
       }
 
-      if (maksullisuustyyppi.includes(MaksullisuusTyyppi.LUKUVUOSIMAKSU)) {
+      if (maksullisuustyyppi?.includes(MaksullisuusTyyppi.LUKUVUOSIMAKSU)) {
         await maksullisuus
           .getByText('toteutuslomake.kaytossaLukuvuosimaksu')
           .click();

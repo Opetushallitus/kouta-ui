@@ -424,7 +424,7 @@ class TableInput extends Component<TableInputProps> {
           <EditRowPlaceholder>
             <Invisible>0</Invisible>
           </EditRowPlaceholder>
-          {new Array(numberOfColumns).map((v, columnIndex) => (
+          {[...new Array(numberOfColumns)].map((_, columnIndex) => (
             <EditColumn
               onAddColumnLeft={this.makeOnAddColumnLeft({ columnIndex })}
               onAddColumnRight={this.makeOnAddColumnRight({
@@ -436,6 +436,7 @@ class TableInput extends Component<TableInputProps> {
                   : null
               }
               overflow={this.props.overflowDropdowns}
+              // eslint-disable-next-line @eslint-react/no-array-index-key -- columns are a grid position, not an identity; there's no column id to key on
               key={columnIndex}
             >
               {columnIndex + 1}

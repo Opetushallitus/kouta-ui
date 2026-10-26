@@ -80,7 +80,7 @@ export type HakukohdeFormValues = {
     tyyppi: HAKULOMAKETYYPPI;
     lomake?: { value?: string };
     linkki?: TranslatedField<string>;
-    kuvaus?: TranslatedField<string>;
+    kuvaus?: TranslatedField<EditorState>;
     eriHakulomake: boolean;
   };
   hakukohteenLinja?: {

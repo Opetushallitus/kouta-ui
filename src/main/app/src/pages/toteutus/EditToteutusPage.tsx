@@ -10,8 +10,9 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
-import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { toEnum } from '#/src/utils';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
@@ -36,7 +37,7 @@ export const EditToteutusPage = () => {
 
   const { data: koulutus } = koulutusQueryResult;
 
-  const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
+  const koulutustyyppi = toEnum(KOULUTUSTYYPPI, koulutus?.koulutustyyppi);
   const { t } = useTranslation();
 
   const onAttachHakukohde = useCallback(
@@ -91,14 +92,16 @@ export const EditToteutusPage = () => {
         />
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
-      <ToteutusForm
-        toteutus={toteutus}
-        koulutus={koulutus}
-        steps={false}
-        onAttachHakukohde={onAttachHakukohde}
-        organisaatioOid={organisaatioOid}
-        koulutustyyppi={koulutustyyppi}
-      />
+      {koulutus && (
+        <ToteutusForm
+          toteutus={toteutus}
+          koulutus={koulutus}
+          steps={false}
+          onAttachHakukohde={onAttachHakukohde}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+        />
+      )}
     </FormPage>
   );
 };

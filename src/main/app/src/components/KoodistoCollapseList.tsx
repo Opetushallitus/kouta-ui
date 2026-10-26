@@ -28,11 +28,13 @@ export const KoodistoCollapseList = ({
   name: string;
   selectLabel: string;
   CollapseContent: React.ComponentType<CollapseContentProps>;
-  koodistoData: Array<Koodi>;
+  koodistoData?: Array<Koodi>;
   formatLabel?: (koodi: Koodi, language: LanguageCode) => string;
   itemProps: any;
 }) => {
-  const selectedItems = useFieldValue(`${name}.valinnat`);
+  const selectedItems = useFieldValue<Array<SelectOption<string>> | undefined>(
+    `${name}.valinnat`
+  );
   const userLanguage = useUserLanguage();
 
   const selectedItemsWithLabels = useMemo(

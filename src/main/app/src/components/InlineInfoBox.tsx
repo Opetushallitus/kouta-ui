@@ -38,7 +38,7 @@ export const InlineInfoBox = ({
   iconType,
 }: {
   title: string;
-  value?: React.ReactElement;
+  value?: React.ReactNode;
   iconType: string;
 }) => {
   return (

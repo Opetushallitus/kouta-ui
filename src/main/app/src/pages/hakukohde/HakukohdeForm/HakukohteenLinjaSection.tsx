@@ -15,7 +15,7 @@ import { LANGUAGES, LUKIO_YLEISLINJA } from '#/src/constants';
 import { useFieldValue, useIsDirty, useSetFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
-import { ToteutusModel } from '#/src/types/toteutusTypes';
+import { ToteutusModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import {
   arrayToTranslationObject,

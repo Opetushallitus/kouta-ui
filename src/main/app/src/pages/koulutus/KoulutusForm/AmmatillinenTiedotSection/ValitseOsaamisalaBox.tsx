@@ -23,13 +23,21 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
-export type OsaamisalaOsa = {
-  muodostumisSaanto: { laajuus: { minimi: number } };
-  osaamisala: { osaamisalakoodiArvo: number };
+type Osaamisala = {
+  arvo: string;
+  nimi?: TranslatedField;
 };
 
-const getOsaamisalaOptions = (osaamisalat = [], language) =>
-  _fp.map(({ arvo, nimi }) => ({
+type SelectedEPeruste = {
+  id?: string | number;
+  osaamisalat?: Array<Osaamisala>;
+};
+
+const getOsaamisalaOptions = (
+  osaamisalat: Array<Osaamisala> = [],
+  language: LanguageCode
+) =>
+  _fp.map(({ arvo, nimi }: Osaamisala) => ({
     label: getLanguageValue(nimi, language),
     value: arvo,
   }))(osaamisalat);
@@ -41,10 +49,17 @@ export const ValitseOsaamisalaBox = ({
   koulutusIsLoading,
   disabled,
   languages,
+}: {
+  fieldName: string;
+  language: LanguageCode;
+  selectedEPeruste?: SelectedEPeruste;
+  koulutusIsLoading?: boolean;
+  disabled?: boolean;
+  languages?: Array<LanguageCode>;
 }) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
-  const selectedOsaamisala = useFieldValue(fieldName);
+  const selectedOsaamisala = useFieldValue<SelectOption | undefined>(fieldName);
   const osaamisalaChanged = useHasChanged(selectedOsaamisala);
 
   const selectedEPerusteId = selectedEPeruste?.id;
@@ -87,7 +102,7 @@ export const ValitseOsaamisalaBox = ({
   )(osaamisalat);
 
   /* Get laajuus for selected osaamisala */
-  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat;
+  const ePerusteRakenneOsat = ePerusteRakenne?.osat;
   const osaamisalakoodi = selectedOsaamisalaData?.arvo;
 
   let osaamisalaLaajuus;

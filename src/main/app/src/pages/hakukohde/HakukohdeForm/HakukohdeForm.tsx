@@ -24,6 +24,7 @@ import {
 import { useHakukohdeAllowsPoistettuTila } from '#/src/hooks/useHakukohdeInfo';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 import {
+  AnyToteutusMetadata,
   HakukohdeModel,
   HakuModel,
   ToteutusModel,
@@ -113,6 +114,10 @@ export const HakukohdeForm = ({
       currentTila === JULKAISUTILA.POISTETTU) ||
     false;
   useSetFieldValue('tila', initiaTila, updateTila);
+
+  const toteutusMetadata = toteutus?.metadata as
+    | AnyToteutusMetadata
+    | undefined;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
@@ -204,7 +209,7 @@ export const HakukohdeForm = ({
         languages={languages}
         haku={haku}
         koulutuskoodit={koulutusKoodiUrit}
-        osaamisalat={toteutus?.metadata?.osaamisalat?.map(oa => oa.koodiUri)}
+        osaamisalat={toteutusMetadata?.osaamisalat?.map(oa => oa.koodiUri)}
         Component={HakukohteenValintakokeetSection}
       />
 

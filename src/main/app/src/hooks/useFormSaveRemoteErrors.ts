@@ -1,12 +1,22 @@
 import { createGlobalState } from 'react-use';
 
-const useFormRemoteErrorsState = createGlobalState(null);
+type RemoteError = {
+  errorType: string;
+  meta: {
+    toteutukset: Array<string>;
+  };
+};
+
+const useFormRemoteErrorsState = createGlobalState<Array<RemoteError> | null>(
+  null
+);
 
 export const useFormSaveRemoteErrors = () => {
   const [remoteErrors, setRemoteErrors] = useFormRemoteErrorsState();
 
   return {
     remoteErrors,
-    setRemoteErrors: errors => setRemoteErrors(errors),
+    setRemoteErrors: (errors: Array<RemoteError> | null) =>
+      setRemoteErrors(errors),
   };
 };

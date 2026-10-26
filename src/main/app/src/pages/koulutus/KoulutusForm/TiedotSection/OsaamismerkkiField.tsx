@@ -172,7 +172,7 @@ const OsaamismerkkitiedotReadOnly = ({
                 href={apiUrls.url(
                   'eperusteet.osaamismerkit',
                   language,
-                  osaamismerkkiData?.id
+                  osaamismerkkiData?.id.toString() ?? ''
                 )}
                 target="_blank"
               >
@@ -213,8 +213,8 @@ const OsaamismerkkitiedotReadOnly = ({
 
 export const updateOptionsWithMaybeDeprecatedOsaamismerkki = (
   options: Array<SelectOption>,
-  osaamismerkkiId: string,
-  osaamismerkkidata: Osaamismerkki,
+  osaamismerkkiId: string | undefined,
+  osaamismerkkidata: Pick<Osaamismerkki, 'nimi'> | undefined,
   language: LanguageCode
 ) => {
   const alreadyExists = some(options, ({ value }: { value: string }) => {
@@ -247,7 +247,7 @@ export const OsaamismerkkiField = (props: SelectFieldProps) => {
     language: language,
   });
 
-  const osaamismerkkiId = useFieldValue(name)?.value;
+  const osaamismerkkiId = useFieldValue<SelectOption | undefined>(name)?.value;
 
   const { data: osaamismerkkiData, isLoading: osaamismerkkiIsLoading } =
     useOsaamismerkki(osaamismerkkiId);

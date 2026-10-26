@@ -7,7 +7,7 @@ import { SisaltoValues, ValintakokeetValues } from './formTypes';
 export type Valintatapa = {
   nimi?: TranslatedField;
   sisalto?: SisaltoValues;
-  valintatapaKoodiUri?: string;
+  tapa?: SelectOption | null;
   kynnysehto?: TranslatedField<EditorState>;
   enimmaispistemaara?: string;
   vahimmaispistemaara?: string;

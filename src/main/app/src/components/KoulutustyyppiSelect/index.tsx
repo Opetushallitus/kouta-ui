@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-import _ from 'lodash';
+import { cloneDeep, every, isEmpty, map, some } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -24,7 +24,7 @@ const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
 `;
 
 const useFirstLevelOptions = (hierarkia, t) =>
-  _.map(hierarkia, ({ value, disabled }) => ({
+  map(hierarkia, ({ value, disabled }) => ({
     value,
     label: t(getKoulutustyyppiTranslationKey(value)),
     disabled,
@@ -34,7 +34,7 @@ const useSecondLevelOptions = (hierarkia, firstLevelValue, t) => {
   return useMemo(() => {
     const node = hierarkia.find(({ value }) => value === firstLevelValue);
 
-    return _.map(node?.children, ({ value, disabled }) => ({
+    return map(node?.children, ({ value, disabled }) => ({
       value,
       label: t(getKoulutustyyppiTranslationKey(value)),
       disabled,
@@ -50,7 +50,7 @@ const getFirstLevelValue = (hierarkia, selectedValue) => {
   }
 
   node = hierarkia.find(({ children }) =>
-    _.some(children, ({ value }) => value === selectedValue)
+    some(children, ({ value }) => value === selectedValue)
   );
 
   return node?.value;
@@ -58,7 +58,7 @@ const getFirstLevelValue = (hierarkia, selectedValue) => {
 
 const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
   useMemo(() => {
-    const hierarkiaCopy = _.cloneDeep(
+    const hierarkiaCopy = cloneDeep(
       johtaaTutkintoon
         ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
         : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA
@@ -72,8 +72,7 @@ const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
         // This works because leaves are iterated first
         item.disabled =
           (KOULUTUSTYYPIT.includes(item.value) && getIsDisabled(item.value)) ||
-          (item?.children &&
-            _.every(item.children, ({ disabled }) => disabled));
+          (item?.children && every(item.children, ({ disabled }) => disabled));
       },
       { order: Order.BottomUp }
     );
@@ -153,7 +152,7 @@ export const KoulutustyyppiSelect = ({
     [setFirstLevelValue, onChange]
   );
 
-  const hasSecondLevelOptions = !_.isEmpty(secondLevelOptions);
+  const hasSecondLevelOptions = !isEmpty(secondLevelOptions);
 
   return (
     <>

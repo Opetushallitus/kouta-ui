@@ -1,6 +1,6 @@
 import React, { ClipboardEventHandler, Component, RefObject } from 'react';
 
-import _ from 'lodash';
+import { get, isFunction, isObject } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
@@ -140,7 +140,7 @@ const EditColumn = ({
       <DropdownMenuItem onClick={onAddColumnLeft}>
         {t('yleiset.lisaaSarakeVasemmalle')}
       </DropdownMenuItem>
-      {_.isFunction(onRemoveColumn) ? (
+      {isFunction(onRemoveColumn) ? (
         <DropdownMenuItem onClick={onRemoveColumn}>
           {t('yleiset.poistaSarake')}
         </DropdownMenuItem>
@@ -187,7 +187,7 @@ const EditRow = ({
       <DropdownMenuItem onClick={onAddRowAbove}>
         {t('yleiset.lisaaRiviYlapuolelle')}
       </DropdownMenuItem>
-      {_.isFunction(onRemoveRow) ? (
+      {isFunction(onRemoveRow) ? (
         <DropdownMenuItem onClick={onRemoveRow}>
           {t('yleiset.poistaRivi')}
         </DropdownMenuItem>
@@ -336,7 +336,7 @@ class TableInput extends Component<TableInputProps> {
 
     const path = language ? ['text', language] : ['text'];
 
-    return _.get(column, path) || '';
+    return get(column, path) || '';
   };
 
   handlePasteEvent: ClipboardEventHandler<HTMLTextAreaElement> = event => {
@@ -389,7 +389,7 @@ class TableInput extends Component<TableInputProps> {
           >
             {rowIndex + 1}
           </EditRow>
-          {_.isArray(row.columns)
+          {Array.isArray(row.columns)
             ? row.columns.map((column, columnIndex) =>
                 this.renderColumn({ column, columnIndex, rowIndex })
               )
@@ -401,7 +401,7 @@ class TableInput extends Component<TableInputProps> {
 
   getRows() {
     const value = this.getValue();
-    if (_.isObject(value) && _.isArray(value.rows) && value.rows.length > 0) {
+    if (isObject(value) && Array.isArray(value.rows) && value.rows.length > 0) {
       return value.rows;
     } else {
       const rowsFallback = [

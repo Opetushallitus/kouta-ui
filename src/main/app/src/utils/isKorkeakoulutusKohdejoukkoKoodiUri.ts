@@ -1,9 +1,9 @@
-import _ from 'lodash';
+import { isString } from 'lodash';
 
 const koodiUriRegExp = /^haunkohdejoukko_12/;
 
 const isKorkeakoulutusKohdejoukkoKoodiUri = value => {
-  return _.isString(value) && koodiUriRegExp.test(value);
+  return isString(value) && koodiUriRegExp.test(value);
 };
 
 export default isKorkeakoulutusKohdejoukkoKoodiUri;

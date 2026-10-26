@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _ from 'lodash';
+import { isEmpty, isNil, map } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useUnmount } from 'react-use';
 import styled from 'styled-components';
@@ -54,7 +54,7 @@ const StyledTilaBadge = styled(TilaBadge)`
 `;
 
 const getEPerusteetOptions = (ePerusteet, language) =>
-  _.map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
+  map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
     label: `${getLanguageValue(nimi, language)} (${diaarinumero})`,
     value: id,
   }));
@@ -73,7 +73,7 @@ const EPerusteField = ({ isLoading, disabled, ...props }) => {
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
       disabled={
-        disabled || isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)
+        disabled || isLoading || isNil(ePerusteet) || isEmpty(ePerusteet)
       }
       {...props}
     />

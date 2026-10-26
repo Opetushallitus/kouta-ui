@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isFunction } from 'lodash';
 import { setLightness } from 'polished';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -57,7 +57,7 @@ export const ErrorAlert = ({
         <Box flexGrow={1}>
           <ErrorTypography>{text}</ErrorTypography>{' '}
           <Box>
-            {_.isFunction(onReload) ? (
+            {isFunction(onReload) ? (
               <ReloadAnchor as="span" onClick={onReload}>
                 {reloadText}
               </ReloadAnchor>

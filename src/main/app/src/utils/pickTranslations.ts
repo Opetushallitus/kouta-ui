@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { every, isEmpty, mapValues, pick } from 'lodash';
 
 import { serializeEditorState } from '../components/LexicalEditorUI/utils';
 
@@ -8,37 +8,34 @@ export const getKielivalinta = (values): Array<LanguageCode> =>
 export const pickTranslations = (
   value: any,
   kielivalinta: Array<LanguageCode>
-) => _.pick(value || {}, kielivalinta);
+) => pick(value || {}, kielivalinta);
 
 export const pickAndSerializeTranslations = (
   value: any,
   kielivalinta: Array<LanguageCode>
 ) => {
-  const translations = _.mapValues(
-    _.pick(value || {}, kielivalinta),
+  const translations = mapValues(
+    pick(value || {}, kielivalinta),
     serializeEditorState
   );
 
-  if (_.every(translations, _.isEmpty)) {
+  if (every(translations, isEmpty)) {
     return {};
   }
 
   return translations;
 };
 
-const pickTranslationsCurried = _.curry(pickTranslations);
-const pickAndSerializeTranslationsCurried = _.curry(
-  pickAndSerializeTranslations
-);
+export const getKieleistyksetForKieliversiot =
+  (kielivalinta: Array<LanguageCode>) => (value: any) =>
+    pickTranslations(value, kielivalinta);
 
 export const getKieleistyksetFromValues = values =>
-  pickTranslationsCurried(_, getKielivalinta(values));
+  getKieleistyksetForKieliversiot(getKielivalinta(values));
 
-export const getKieleistyksetForKieliversiot = kieliversiot =>
-  pickTranslationsCurried(_, kieliversiot);
+export const getSerializedKieleistyksetFromKieliversiot =
+  (kielivalinta: Array<LanguageCode>) => (value: any) =>
+    pickAndSerializeTranslations(value, kielivalinta);
 
 export const getSerializedKieleistykset = values =>
-  pickAndSerializeTranslationsCurried(_, getKielivalinta(values));
-
-export const getSerializedKieleistyksetFromKieliversiot = kieliversiot =>
-  pickAndSerializeTranslationsCurried(_, kieliversiot);
+  getSerializedKieleistyksetFromKieliversiot(getKielivalinta(values));

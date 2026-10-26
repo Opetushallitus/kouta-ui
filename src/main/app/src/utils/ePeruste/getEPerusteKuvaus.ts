@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { get, mapValues, transform } from 'lodash';
 
 import { LANGUAGES } from '#/src/constants';
 import { sanitizeHTML } from '#/src/utils';
@@ -6,7 +6,7 @@ import { sanitizeHTML } from '#/src/utils';
 const addSection = (heading, content) => `<h6>${heading}</h6>${content}`;
 
 export default function getEPerusteKuvausHTML(ePeruste, i18n) {
-  const TRANSLATORS = _.transform(
+  const TRANSLATORS = transform(
     LANGUAGES,
     (result, lang) => (result[lang] = i18n.getFixedT(lang)),
     {}
@@ -16,18 +16,18 @@ export default function getEPerusteKuvausHTML(ePeruste, i18n) {
     ePeruste;
 
   if (tyotehtavatJoissaVoiToimia && suorittaneenOsaaminen) {
-    return _.mapValues(TRANSLATORS, (t, lang) =>
+    return mapValues(TRANSLATORS, (t, lang) =>
       sanitizeHTML(
         `${addSection(
           t('eperuste.suorittaneenOsaaminen'),
-          _.get(suorittaneenOsaaminen, lang) || '-'
+          get(suorittaneenOsaaminen, lang) || '-'
         )}${addSection(
           t('eperuste.tyotehtavatJoissaVoiToimia'),
-          _.get(tyotehtavatJoissaVoiToimia, lang) || '-'
+          get(tyotehtavatJoissaVoiToimia, lang) || '-'
         )}`
       )
     );
   } else if (kuvaus) {
-    return _.mapValues(kuvaus, sanitizeHTML);
+    return mapValues(kuvaus, sanitizeHTML);
   }
 }

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import _ from 'lodash';
+import { snakeCase } from 'lodash';
 import { SpaceProps } from 'styled-system';
 
 import Heading from '#/src/components/Heading';
@@ -27,8 +27,8 @@ export const FieldGroup: React.FC<FieldGroupProps> = ({
   required = false,
   ...props
 }) => {
-  const headerId = _.snakeCase(title) + '_FieldGroup_header';
-  const contentId = _.snakeCase(title) + '_FieldGroup_content';
+  const headerId = snakeCase(title) + '_FieldGroup_header';
+  const contentId = snakeCase(title) + '_FieldGroup_content';
 
   return (
     <Box marginBottom={4} {...props}>

@@ -23,7 +23,7 @@ export const useEntityOptions = <T>(
 
   return useMemo(
     () =>
-      _fp.isArray(entities)
+      Array.isArray(entities)
         ? _fp.flow(
             _fp.map((entity: EntityForDropdown<T>) => ({
               value: entity.id ?? entity.oid,

@@ -4,7 +4,7 @@ import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
-import _ from 'lodash';
+import { identity, isObject, isUndefined, reduce } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { components, Props } from 'react-select';
@@ -53,7 +53,7 @@ const getDefaultProps = memoizeOne(t => ({
 }));
 
 const getOptionLabelByValue = (options: Array<any> = []) =>
-  _.reduce(
+  reduce(
     options,
     (acc, curr) => {
       acc[curr?.value || '_'] = curr?.label || curr?.value;
@@ -65,7 +65,7 @@ const getOptionLabelByValue = (options: Array<any> = []) =>
 const getAsyncValue = async (
   value?: SelectOption | SelectOptions | null,
   options?: Array<any>,
-  loadLabel: any = _.identity
+  loadLabel: any = identity
 ) => {
   const newValue = valueToArray(getValue(value, options));
   const result = await Promise.all(
@@ -87,11 +87,11 @@ const getValue = (
   options?: Array<any>
 ) => {
   const labelByValue = getOptionLabelByValue(options);
-  if (_.isArray(value)) {
+  if (Array.isArray(value)) {
     const newValue: SelectOptions = [];
 
     for (const item of value) {
-      if (_.isObject(item) && item.value) {
+      if (isObject(item) && item.value) {
         const { value: itemValue, label: itemLabel, ...rest } = item;
 
         newValue.push({
@@ -251,7 +251,7 @@ export const AsyncSelect = ({
       {...getDefaultProps(t)}
       isDisabled={
         disabled ||
-        _.isUndefined(props?.loadOptions) ||
+        isUndefined(props?.loadOptions) ||
         isLoading ||
         isLoadingValue
       }

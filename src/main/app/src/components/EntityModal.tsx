@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
-import _ from 'lodash';
+import { noop } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '#/src/components/Modal';
@@ -22,8 +22,8 @@ export const EntityModal = ({
   headerText,
   labelText,
   submitText,
-  onClose = _.noop,
-  onSubmit: onSubmitProp = _.noop,
+  onClose = noop,
+  onSubmit: onSubmitProp = noop,
   open = false,
   options = [],
 }: EntityModalProps) => {

@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import _ from 'lodash';
+import { get, isNil, isString, set, uniq } from 'lodash';
 
 import { ENTITY } from '#/src/constants';
 import { hakuRemoteErrorsToFormErrors } from '#/src/utils/haku/hakuRemoteErrorsToFormErrors';
@@ -24,19 +24,19 @@ const setErrors = (
   fieldName,
   errorKey = `validointivirheet.${remoteError?.errorType}`
 ) => {
-  const existingError = _.get(errors, fieldName);
+  const existingError = get(errors, fieldName);
 
   let val = existingError;
 
-  if (_.isNil(existingError)) {
+  if (isNil(existingError)) {
     val = [errorKey];
-  } else if (_.isArray(existingError)) {
-    val = _.uniq([...existingError, errorKey]);
+  } else if (Array.isArray(existingError)) {
+    val = uniq([...existingError, errorKey]);
   } else {
-    val = _.uniq([existingError, errorKey]);
+    val = uniq([existingError, errorKey]);
   }
 
-  _.set(errors, fieldName, val);
+  set(errors, fieldName, val);
   return errors;
 };
 
@@ -57,9 +57,9 @@ export const withRemoteErrors = (
     const formError = errorConverter?.(remoteError, formValues);
 
     // formError merkkijonona on vain lomakkeen kentän nimi. Virheavain päätellään backend-virheen errorType-kentästä.
-    if (_.isString(formError)) {
+    if (isString(formError)) {
       setErrors(errors, remoteError, formError);
-    } else if (_.isArray(formError)) {
+    } else if (Array.isArray(formError)) {
       formError.forEach(({ field, errorKey }) => {
         setErrors(errors, remoteError, field, errorKey);
       });

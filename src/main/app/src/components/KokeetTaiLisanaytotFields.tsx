@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
@@ -177,7 +177,7 @@ export const KokeetTaiLisanaytotFields = ({
           />
         )}
       </FieldArrayList>
-      {!_.isEmpty(fields) && <Divider />}
+      {!isEmpty(fields) && <Divider />}
       <Box
         display="flex"
         justifyContent="center"

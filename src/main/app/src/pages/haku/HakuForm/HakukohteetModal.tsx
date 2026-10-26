@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { noop } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { EntityModal } from '#/src/components/EntityModal';
@@ -11,7 +11,7 @@ const HakukohteetModal = ({
   open,
   onClose,
   organisaatioOid,
-  onSave: onSaveProp = _.noop,
+  onSave: onSaveProp = noop,
 }) => {
   const { t } = useTranslation();
 

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isObject, mapValues } from 'lodash';
 import { match, P } from 'ts-pattern';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
@@ -15,7 +15,7 @@ import {
 } from '#/src/types/formTypes';
 
 export const parseSisaltoField = (sisalto?: SisaltoModel): SisaltoValues => {
-  if (!_.isArray(sisalto)) {
+  if (!Array.isArray(sisalto)) {
     return [];
   }
 
@@ -28,8 +28,8 @@ export const parseSisaltoField = (sisalto?: SisaltoModel): SisaltoValues => {
         (data?: TekstiModel): SisaltoTekstiValue =>
           ({
             tyyppi: 'teksti',
-            data: _.isObject(data)
-              ? _.mapValues(data, parseEditorState)
+            data: isObject(data)
+              ? mapValues(data, parseEditorState)
               : undefined,
             id,
           }) as SisaltoTekstiValue

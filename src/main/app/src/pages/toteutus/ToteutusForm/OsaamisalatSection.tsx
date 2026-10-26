@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -163,14 +163,14 @@ const OsaamisalatContainer = ({
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
-    _.get(koulutus, 'nimi'),
+    get(koulutus, 'nimi'),
     language
   )} (${koodiArvo})`;
 
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
   return (
     <>
-      {_.isEmpty(osaamisalat) && (
+      {isEmpty(osaamisalat) && (
         <Typography style={{ display: 'block', marginBottom: '24px' }}>
           <Trans
             i18nKey="toteutuslomake.eiOsaamisaloja"

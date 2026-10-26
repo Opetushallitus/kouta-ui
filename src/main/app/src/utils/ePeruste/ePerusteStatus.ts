@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isNil } from 'lodash';
 import { setLightness } from 'polished';
 import { css } from 'styled-components';
 
@@ -25,7 +25,7 @@ export const getEPerusteStatus = ePeruste => {
     } else if (
       voimassaoloAlkaa &&
       voimassaoloAlkaa < now &&
-      (_.isNil(voimassaoloLoppuu) || voimassaoloLoppuu > now)
+      (isNil(voimassaoloLoppuu) || voimassaoloLoppuu > now)
     ) {
       return 'voimassa' as EPerusteStatus;
     } else if (voimassaoloAlkaa > now) {

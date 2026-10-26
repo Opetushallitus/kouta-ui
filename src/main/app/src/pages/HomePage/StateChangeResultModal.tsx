@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { every } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
@@ -109,7 +109,7 @@ const useTableColumns = (
 ];
 
 const isStateChangeResultSuccessful = mutationResult =>
-  _.isArray(mutationResult) && _.every(mutationResult, { status: 'success' });
+  Array.isArray(mutationResult) && every(mutationResult, { status: 'success' });
 
 export const StateChangeResultModal = ({
   entityType,

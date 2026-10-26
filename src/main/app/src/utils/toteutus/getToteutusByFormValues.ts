@@ -1,4 +1,3 @@
-import { isArray } from 'lodash';
 import _fp from 'lodash/fp';
 
 import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
@@ -59,7 +58,7 @@ export const getMaksutByFormValues = (
   lukuvuosimaksunMaara?: string
 ): Array<Maksu> | undefined => {
   if (maksullisuustyyppiValue) {
-    const maksullisuustyypit = isArray(maksullisuustyyppiValue)
+    const maksullisuustyypit = Array.isArray(maksullisuustyyppiValue)
       ? maksullisuustyyppiValue
       : [maksullisuustyyppiValue];
 

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { size } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { SimpleCollapse } from '#/src/components/SimpleCollapse';
@@ -25,7 +25,7 @@ export const PikavalinnatCollapse = ({
     () => organisaatioFavourites.includes(OPETUSHALLITUS_ORGANISAATIO_OID),
     [organisaatioFavourites]
   );
-  const pikavalinnatCount = _.size(favouriteItems) + (hasOphOption ? 1 : 0);
+  const pikavalinnatCount = size(favouriteItems) + (hasOphOption ? 1 : 0);
 
   return (
     <SimpleCollapse

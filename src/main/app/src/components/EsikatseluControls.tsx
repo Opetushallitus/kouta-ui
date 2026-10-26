@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isNil } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -30,7 +30,7 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
   const entityExistsAfterThisEdit =
     tila !== JULKAISUTILA.POISTETTU && tila !== JULKAISUTILA.ARKISTOITU;
   const isJulkaistu = tila === JULKAISUTILA.JULKAISTU;
-  const showCheckbox = _.isNil(tila) || tila === JULKAISUTILA.TALLENNETTU;
+  const showCheckbox = isNil(tila) || tila === JULKAISUTILA.TALLENNETTU;
   const esikatseluEnabled = useFieldValue('esikatselu');
   const showButton =
     entityExistsAfterThisEdit && (esikatseluEnabled || isJulkaistu);

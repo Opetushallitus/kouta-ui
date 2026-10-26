@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _ from 'lodash';
+import { filter, isEmpty, isNil, map, some, toNumber } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { usePrevious } from 'react-use';
 
@@ -22,7 +22,7 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getTutkinnonosatOptions = (selectedPeruste, language) =>
-  _.map(
+  map(
     selectedPeruste?.tutkinnonosat ?? [],
     ({ _tutkinnonOsa, nimi, laajuus, id }) => {
       const userLanguageValue = getLanguageValue(nimi, language);
@@ -51,7 +51,7 @@ const TutkinnonOsatField = ({ isLoading, ...props }) => {
       label={t('koulutuslomake.valitseKaytettavaTutkinnonOsa')}
       options={tutkinnonosatOptions}
       disabled={
-        isLoading || _.isNil(selectedEPeruste) || _.isEmpty(selectedEPeruste)
+        isLoading || isNil(selectedEPeruste) || isEmpty(selectedEPeruste)
       }
       isMulti={true}
       required
@@ -101,11 +101,8 @@ export const ValitseTutkinnonOsatBox = ({
   const tutkinnonosatFieldValue = useFieldValue(fieldName);
   const selectedTutkinnonosat = useMemo(
     () =>
-      _.filter(ePeruste?.tutkinnonosat, t =>
-        _.some(
-          tutkinnonosatFieldValue,
-          ({ value }) => value === t._tutkinnonOsa
-        )
+      filter(ePeruste?.tutkinnonosat, t =>
+        some(tutkinnonosatFieldValue, ({ value }) => value === t._tutkinnonOsa)
       ),
     [ePeruste, tutkinnonosatFieldValue]
   );
@@ -133,7 +130,7 @@ export const ValitseTutkinnonOsatBox = ({
       kuvaukset?.map(({ id, koodiArvo }) => {
         return {
           ...(selectedTutkinnonosat?.find(
-            t => _.toNumber(t?._tutkinnonOsa) === id
+            t => toNumber(t?._tutkinnonOsa) === id
           ) || {}),
           koodiArvo,
         };
@@ -155,7 +152,7 @@ export const ValitseTutkinnonOsatBox = ({
       {tutkinnonosatFieldValue && (
         <QueryResultWrapper queryResult={queryResult}>
           <Box>
-            {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
+            {map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
               <TutkinnonOsaInfo
                 key={tutkinnonOsa?.id}
                 tutkinnonOsa={tutkinnonOsa}

@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
@@ -21,7 +21,7 @@ export const getPerusteenOsat = async ({
   apiUrls: ApiUrls;
   tutkinnonOsat: Array<TutkinnonOsa>;
 }) => {
-  return _.isEmpty(tutkinnonOsat)
+  return isEmpty(tutkinnonOsat)
     ? null
     : await Promise.all(
         tutkinnonOsat.map(({ ePerusteId, tutkinnonosaId }) => {

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export enum Order {
   TopDown = 'top-down',
   BottomUp = 'bottom-up',
@@ -19,7 +17,7 @@ const iterateTree = (
 ) => {
   const { childrenKey = 'children', order = Order.TopDown } = options;
 
-  if (_.isArray(tree)) {
+  if (Array.isArray(tree)) {
     tree.forEach(child => {
       if (order === Order.TopDown) {
         fn(child);

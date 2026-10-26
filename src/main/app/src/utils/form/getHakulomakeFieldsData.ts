@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { get } from 'lodash';
 
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 
@@ -7,21 +7,21 @@ export const getHakulomakeFieldsData = ({
   kieleistykset,
   kieleistyksetSerialized,
 }) => {
-  const hakulomaketyyppi = _.get(hakulomakeValues, 'tyyppi') || null;
+  const hakulomaketyyppi = get(hakulomakeValues, 'tyyppi') || null;
 
   const hakulomakeAtaruId =
     hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU
-      ? _.get(hakulomakeValues, 'lomake.value') || null
+      ? get(hakulomakeValues, 'lomake.value') || null
       : null;
 
   const hakulomakeLinkki =
     hakulomaketyyppi === HAKULOMAKETYYPPI.MUU
-      ? kieleistykset(_.get(hakulomakeValues, 'linkki'))
+      ? kieleistykset(get(hakulomakeValues, 'linkki'))
       : {};
 
   const hakulomakeKuvaus =
     hakulomaketyyppi === HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA
-      ? kieleistyksetSerialized(_.get(hakulomakeValues, 'kuvaus'))
+      ? kieleistyksetSerialized(get(hakulomakeValues, 'kuvaus'))
       : {};
 
   return {

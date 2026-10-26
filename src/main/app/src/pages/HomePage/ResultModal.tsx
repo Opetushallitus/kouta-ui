@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { map } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { InterpreterFrom } from 'xstate';
@@ -19,7 +19,7 @@ const InfoText = styled(Box)`
 
 const ResultList = ({ data, columns }) => {
   const rows = useMemo(
-    () => _.map(data, result => ({ ...result, key: result.oid })),
+    () => map(data, result => ({ ...result, key: result.oid })),
     [data]
   );
   return <ListTable rows={rows} columns={columns} />;

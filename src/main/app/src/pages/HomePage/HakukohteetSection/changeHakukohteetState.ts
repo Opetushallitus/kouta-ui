@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import _ from 'lodash';
+import { map } from 'lodash';
 import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { JULKAISUTILA } from '#/src/constants';
@@ -36,7 +36,7 @@ const useChangeHakukohteidenTila = () => {
 
       const result = await httpClient.post(
         apiUrls.url('kouta-backend.hakukohteet-tilamuutos', tila),
-        _.map(entities, 'oid'),
+        map(entities, 'oid'),
         {
           headers: {
             'X-If-Unmodified-Since': lastModified,

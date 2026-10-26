@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { every } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -70,7 +70,7 @@ const useTableColumns = (t, entityType, getLinkUrl) => [
 ];
 
 const isCopyResultSuccessful = mutationResult =>
-  _.isArray(mutationResult) && _.every(mutationResult, { status: 'success' });
+  Array.isArray(mutationResult) && every(mutationResult, { status: 'success' });
 
 export const CopyResultModal = ({
   entityType,

@@ -6,10 +6,10 @@ import { isValidKoulutusKoodi } from './isValidKoulutusKoodi';
 export const selectValidKoulutusKoodit = (
   response: { data } | QueryObserverResult | Array<QueryObserverResult> = []
 ) => {
-  const koulutukset = _fp.isArray(response)
+  const koulutukset = Array.isArray(response)
     ? response.flatMap((response: any) => {
         const data = response?.data;
-        return _fp.isArray(data) ? data : [];
+        return Array.isArray(data) ? data : [];
       })
     : (response?.data ?? []);
 

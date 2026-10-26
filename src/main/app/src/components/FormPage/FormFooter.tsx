@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -52,7 +52,7 @@ export const FormFooter = ({
   let title;
 
   if (!canUpdate) {
-    if (_.isEmpty(infoTextTranslationKey)) {
+    if (isEmpty(infoTextTranslationKey)) {
       title = t(`${entityType}lomake.eiMuokkausOikeutta`);
     } else {
       title = t(`${entityType}lomake.${infoTextTranslationKey}`);

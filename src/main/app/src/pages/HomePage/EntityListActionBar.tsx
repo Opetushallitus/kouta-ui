@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { filter, flow, map, size, values } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { match } from 'ts-pattern';
@@ -52,11 +52,11 @@ function getJulkaisutilaTranslationKeyForDropdown(tila: JULKAISUTILA): string {
 const useTilaOptions = t =>
   useMemo(
     () =>
-      _.flow(
-        _.values,
-        tilat => _.filter(tilat, x => x !== JULKAISUTILA.POISTETTU),
+      flow(
+        values,
+        tilat => filter(tilat, x => x !== JULKAISUTILA.POISTETTU),
         tilat =>
-          _.map(tilat, tila => ({
+          map(tilat, tila => ({
             label: t(getJulkaisutilaTranslationKeyForDropdown(tila)),
             value: tila,
           }))
@@ -89,14 +89,14 @@ export const EntityListActionBar = ({
 
   const { selection, removeSelection } = useEntitySelection(entityType);
 
-  const isDisabled = _.size(selection) === 0;
+  const isDisabled = size(selection) === 0;
 
   const tilaOptions = useTilaOptions(t);
 
   return (
     <ButtonBox display="flex">
       <Box padding={1}>
-        {t(`etusivu.${entityType}.valitut`, { count: _.size(selection) })}
+        {t(`etusivu.${entityType}.valitut`, { count: size(selection) })}
       </Box>
       {changeTila && (
         <>

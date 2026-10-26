@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isNil } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
@@ -87,7 +87,7 @@ export function FieldArrayList<T>({
 
   return (
     <FormControl
-      error={!_.isNil(error)}
+      error={!isNil(error)}
       helperText={<FormHelperTextMulti errorMessage={error} />}
     >
       {fieldsContent}

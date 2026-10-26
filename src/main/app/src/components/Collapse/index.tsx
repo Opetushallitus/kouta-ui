@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isString, noop } from 'lodash';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 
@@ -65,7 +65,7 @@ const ToggleIcon = styled(DropdownIcon)`
 `;
 
 const renderHeader = header => {
-  return _.isString(header) ? (
+  return isString(header) ? (
     <Typography variant="h5" p={3}>
       {header}
     </Typography>
@@ -90,7 +90,7 @@ const Collapse = ({
   children = null,
   open,
   active = false,
-  onToggle = _.noop,
+  onToggle = noop,
   toggleOnHeaderClick = true,
   ...props
 }: CollapseProps) => {
@@ -99,7 +99,7 @@ const Collapse = ({
       <HeaderContainer open={open}>
         <HeaderContent
           toggleOnHeaderClick={toggleOnHeaderClick}
-          onClick={toggleOnHeaderClick ? onToggle : _.noop}
+          onClick={toggleOnHeaderClick ? onToggle : noop}
         >
           {renderHeader(header)}
         </HeaderContent>

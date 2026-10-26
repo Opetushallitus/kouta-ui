@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
+import { omit } from 'lodash';
 import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -75,7 +75,7 @@ export const ToteutusFooter = ({
                 koulutusOid: koulutus?.oid,
               }
             : {
-                ..._.omit(toteutus, '_enrichedData'),
+                ...omit(toteutus, '_enrichedData'),
                 ...getToteutusByFormValues({
                   ...valuesToSend,
                   koulutustyyppi,

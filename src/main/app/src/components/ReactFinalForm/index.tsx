@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 
 import arrayMutators from 'final-form-arrays';
-import _ from 'lodash';
+import { isEqual } from 'lodash';
 import { Form } from 'react-final-form';
 
 import { FieldRegistryProvider } from '#/src/components/formFields/FieldRegistry';
@@ -70,7 +70,7 @@ export const ReactFinalForm = ({
       // redux-form enableReinitialize vertasi syvästi: ilman tätä pelkkä uusi olio
       // samalla sisällöllä alustaisi lomakkeen uudelleen ja hylkäisi käyttäjän kesken
       // olevat arvot, koska keepDirtyOnReinitialize ei ole päällä.
-      initialValuesEqual={_.isEqual}
+      initialValuesEqual={isEqual}
       mutators={{ ...arrayMutators }}
       // Vain submitting: juuri ei renderöidy arvomuutoksilla, mutta tarvitsee
       // tallennustilan disabloidakseen lomakkeen. Yksi renderi tallennusta kohti.

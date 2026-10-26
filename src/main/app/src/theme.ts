@@ -1,5 +1,5 @@
 import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
-import _ from 'lodash';
+import { get, isUndefined, merge, range } from 'lodash';
 import { mix } from 'polished';
 
 const breakpoints = ['576px', '768px', '992px'];
@@ -30,8 +30,8 @@ export const getThemeProp =
     modifier: (value: PathValue<Theme, P>) => R = x => x as unknown as R
   ) =>
   ({ theme }: { theme: Theme }): R => {
-    const value = _.get(theme, path) as PathValue<Theme, P>;
-    if (_.isUndefined(value)) {
+    const value = get(theme, path) as PathValue<Theme, P>;
+    if (isUndefined(value)) {
       console.error(`getThemeProp: Theme value at path ${path} is undefined!`);
     }
     return modifier(value);
@@ -45,9 +45,9 @@ export const spacing =
 export const createTheme = () => {
   const base = createUiTheme();
 
-  const theme = _.merge(base, {
+  const theme = merge(base, {
     breakpoints,
-    space: _.range(0, 256, 8),
+    space: range(0, 256, 8),
     colors: {
       white: '#ffffff',
       mainBackground: '#f5f5f5',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isEmpty, noop } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -89,7 +89,7 @@ export const OrganisaatioItem = ({
             {getFirstLanguageValue(nimi, language)}
           </Radio>
         </Box>
-        {collapse && !_.isEmpty(children) ? (
+        {collapse && !isEmpty(children) ? (
           <Box flexGrow={0} pr={2}>
             <CollapseIcon
               onClick={onToggleOpen}
@@ -104,7 +104,7 @@ export const OrganisaatioItem = ({
           active={favourite}
           disabled={disabled}
           title={t('etusivu.lisaaSuosikkeihin')}
-          onClick={disabled ? _.noop : onToggleFavourite}
+          onClick={disabled ? noop : onToggleFavourite}
         />
         {isEditable && editLinkURL ? (
           <Typography as="div" ml={2}>

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 
-import _ from 'lodash';
+import { noop } from 'lodash';
 import prettyBytes from 'pretty-bytes';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
@@ -216,7 +216,7 @@ const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
 export const ImageInput = props => {
   const {
     disabled = false,
-    onChange = _.noop,
+    onChange = noop,
     error: externalError,
     upload,
     maxSize,

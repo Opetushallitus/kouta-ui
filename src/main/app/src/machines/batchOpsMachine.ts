@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { flow, fromPairs, reject, size, toPairs } from 'lodash';
 import { actions, ActorRefFrom, createMachine, spawn } from 'xstate';
 
 import { JULKAISUTILA } from '#/src/constants';
@@ -119,10 +119,10 @@ export const BatchOpsMachine =
         setContext: assign((ctx, e) => ({
           tila: e?.tila ?? ctx.tila,
           entities: e?.entities
-            ? _.flow(
-                t => _.toPairs<EntityItem>(t),
-                entities => _.reject(entities, ([, v]) => v?.tila === e?.tila),
-                _.fromPairs
+            ? flow(
+                t => toPairs<EntityItem>(t),
+                entities => reject(entities, ([, v]) => v?.tila === e?.tila),
+                fromPairs
               )(e?.entities)
             : ctx.entities,
         })),
@@ -146,7 +146,7 @@ export const BatchOpsMachine =
       },
       guards: {
         eventHasEntities: (ctx, e) => {
-          return _.size(_.reject(e?.entities, { tila: e?.tila })) > 0;
+          return size(reject(e?.entities, { tila: e?.tila })) > 0;
         },
       },
     }

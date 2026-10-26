@@ -1,4 +1,4 @@
-import { every, isArray } from 'lodash';
+import { every } from 'lodash';
 import _fp from 'lodash/fp';
 
 import {
@@ -134,7 +134,7 @@ const validateMaksullisuustyypit = (eb: { values: ToteutusFormValues }) => {
 
   return validateIf(
     koulutustyyppiWithMultipleMaksullisuustyyppi &&
-      isArray(maksullisuustyypit) &&
+      Array.isArray(maksullisuustyypit) &&
       maksullisuustyypit.length > 1,
     validate(
       'jarjestamistiedot.maksullisuustyypit',

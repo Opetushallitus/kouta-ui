@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { includes } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldInput } from '#/src/components/formFields';
@@ -93,7 +93,7 @@ export const WithKoulutusSelect = ({
 export const useIsAmmTutkintoWithoutEperuste = () => {
   const koulutus = useFieldValue('information.koulutus')?.value;
 
-  return _.includes(
+  return includes(
     AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE,
     koodiUriWithoutVersion(koulutus)
   );

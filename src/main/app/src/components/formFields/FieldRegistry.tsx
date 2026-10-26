@@ -1,13 +1,12 @@
 import React, {
   createContext,
-  useCallback,
   useContext,
   useEffect,
-  useMemo,
   useRef,
+  useState,
 } from 'react';
 
-import _ from 'lodash';
+import { mapValues, pickBy } from 'lodash';
 
 // Lomakekohtainen rekisteri siitä, mitkä kentät ovat näkyvissä ja mitkä on poistettu
 // näkyvistä. Tallennusrunko rakennetaan tämän tiedon perusteella.
@@ -59,67 +58,49 @@ export const FieldRegistryProvider = ({
   // jonka rekisteröityjen kierros kirjoittaa takaisin.
   const counts = useRef<Record<string, number>>({});
 
-  // Poistuneiden tyhjennys = nollien pudotus. Mountatut kentät jäävät ennalleen.
-  //
-  // Vastaa redux-formin INITIALIZEa, joka tyhjensi unregisteredFields-siivun.
-  // Kutsupaikkoja on kaksi: tallennus (useSaveForm) ja pohjan valinta
-  // (PohjaFormCollapse). Molemmissa kutsu tulee käyttäjän eleestä eikä uusien
-  // initialValuesien saapumisesta - eli eri commitissa kuin se render, jossa lomake
-  // alustuu uudelleen. Efektissä ajettuna tyhjennys söisi samassa commitissa
-  // tapahtuneen piilotuksen, koska React ajaa lasten siivoukset ennen vanhemman
-  // efektiä.
-  const clearUnregisteredFields = useCallback(() => {
-    counts.current = _.pickBy(counts.current, count => count > 0);
-  }, []);
+  // Rekisteri rakennetaan kerran laiskalla alustimella: kaikki metodit sulkeutuvat
+  // vain counts-refin ylle, joten niiden identiteetti ei koskaan tarvitse muuttua.
+  // useState:n laiska muoto takaa tämän rakenteellisesti, eikä varaa erikseen
+  // useCallbackia jokaiselle metodille tai useMemoa koko oliolle.
+  const [registry] = useState<FieldRegistry>(() => {
+    const selectFields = (matches: (count: number) => boolean): FieldSet =>
+      mapValues(pickBy(counts.current, matches), (_count, name) => ({
+        name,
+      }));
 
-  const registerFields = useCallback((names: Array<string>) => {
-    names.forEach(name => {
-      counts.current[name] = (counts.current[name] ?? 0) + 1;
-    });
-  }, []);
+    return {
+      registerFields: names => {
+        names.forEach(name => {
+          counts.current[name] = (counts.current[name] ?? 0) + 1;
+        });
+      },
 
-  const unregisterFields = useCallback((names: Array<string>) => {
-    names.forEach(name => {
-      // Avain JÄÄ nollana: juuri se kirjaa "oli näkyvissä, ei enää". Clamp nollaan,
-      // jottei alilaskenta pääse negatiiviseksi ja piiloon.
-      counts.current[name] = Math.max((counts.current[name] ?? 0) - 1, 0);
-    });
-  }, []);
+      unregisterFields: names => {
+        names.forEach(name => {
+          // Avain JÄÄ nollana: juuri se kirjaa "oli näkyvissä, ei enää". Clamp
+          // nollaan, jottei alilaskenta pääse negatiiviseksi ja piiloon.
+          counts.current[name] = Math.max((counts.current[name] ?? 0) - 1, 0);
+        });
+      },
 
-  const getRegisteredFields = useCallback(
-    () =>
-      _.mapValues(
-        _.pickBy(counts.current, count => count > 0),
-        (_count, name) => ({ name })
-      ),
-    []
-  );
+      getRegisteredFields: () => selectFields(count => count > 0),
 
-  const getUnregisteredFields = useCallback(
-    () =>
-      _.mapValues(
-        _.pickBy(counts.current, count => count === 0),
-        (_count, name) => ({ name })
-      ),
-    []
-  );
+      getUnregisteredFields: () => selectFields(count => count === 0),
 
-  const registry = useMemo(
-    () => ({
-      registerFields,
-      unregisterFields,
-      getRegisteredFields,
-      getUnregisteredFields,
-      clearUnregisteredFields,
-    }),
-    [
-      registerFields,
-      unregisterFields,
-      getRegisteredFields,
-      getUnregisteredFields,
-      clearUnregisteredFields,
-    ]
-  );
+      // Poistuneiden tyhjennys = nollien pudotus. Mountatut kentät jäävät ennalleen.
+      //
+      // Vastaa redux-formin INITIALIZEa, joka tyhjensi unregisteredFields-siivun.
+      // Kutsupaikkoja on kaksi: tallennus (useSaveForm) ja pohjan valinta
+      // (PohjaFormCollapse). Molemmissa kutsu tulee käyttäjän eleestä eikä uusien
+      // initialValuesien saapumisesta - eli eri commitissa kuin se render, jossa
+      // lomake alustuu uudelleen. Efektissä ajettuna tyhjennys söisi samassa
+      // commitissa tapahtuneen piilotuksen, koska React ajaa lasten siivoukset
+      // ennen vanhemman efektiä.
+      clearUnregisteredFields: () => {
+        counts.current = pickBy(counts.current, count => count > 0);
+      },
+    };
+  });
 
   return (
     <FieldRegistryContext.Provider value={registry}>

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { map, uniqBy } from 'lodash';
+import { map, uniqBy } from 'lodash-es';
 
 import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';

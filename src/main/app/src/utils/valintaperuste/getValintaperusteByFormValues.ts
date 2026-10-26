@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { get, includes, isEmpty, isObject, mapValues, pick } from 'lodash';
+import { get, includes, isEmpty, isObject, mapValues, pick } from 'lodash-es';
 import { match, P } from 'ts-pattern';
 
 import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';

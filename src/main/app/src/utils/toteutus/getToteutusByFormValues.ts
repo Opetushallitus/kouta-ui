@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { isEmpty, isNil } from 'lodash-es';
 
 import { MaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import {
@@ -126,7 +126,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
-    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
+    externalId: isEmpty(values?.externalId) ? null : values?.externalId,
     nimi: koulutustyyppi === 'lk' ? {} : kielistykset(values?.tiedot?.nimi),
     tarjoajat: values?.tarjoajat || [],
     kielivalinta,
@@ -212,13 +212,17 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         kielistyksetSerialized
       ),
       kielivalikoima: {
-        A1Kielet: (kielivalikoima?.A1Kielet || []).map(_fp.prop('value')),
-        A2Kielet: (kielivalikoima?.A2Kielet || []).map(_fp.prop('value')),
-        aidinkielet: (kielivalikoima?.aidinkielet || []).map(_fp.prop('value')),
-        B1Kielet: (kielivalikoima?.B1Kielet || []).map(_fp.prop('value')),
-        B2Kielet: (kielivalikoima?.B2Kielet || []).map(_fp.prop('value')),
-        B3Kielet: (kielivalikoima?.B3Kielet || []).map(_fp.prop('value')),
-        muutKielet: (kielivalikoima?.muutKielet || []).map(_fp.prop('value')),
+        A1Kielet: (kielivalikoima?.A1Kielet || []).map(({ value }) => value),
+        A2Kielet: (kielivalikoima?.A2Kielet || []).map(({ value }) => value),
+        aidinkielet: (kielivalikoima?.aidinkielet || []).map(
+          ({ value }) => value
+        ),
+        B1Kielet: (kielivalikoima?.B1Kielet || []).map(({ value }) => value),
+        B2Kielet: (kielivalikoima?.B2Kielet || []).map(({ value }) => value),
+        B3Kielet: (kielivalikoima?.B3Kielet || []).map(({ value }) => value),
+        muutKielet: (kielivalikoima?.muutKielet || []).map(
+          ({ value }) => value
+        ),
       },
       erityisetKoulutustehtavat: getLukiolinjatByValues(
         values?.lukiolinjat?.erityisetKoulutustehtavat,
@@ -281,7 +285,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           : {},
       hakuaika:
         hakulomaketyyppi === MUU &&
-        !(_fp.isNil(HTIT?.hakuaikaAlkaa) && _fp.isNil(HTIT?.hakuaikaPaattyy))
+        !(isNil(HTIT?.hakuaikaAlkaa) && isNil(HTIT?.hakuaikaPaattyy))
           ? {
               alkaa: isPartialDate(HTIT?.hakuaikaAlkaa)
                 ? null
@@ -307,7 +311,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       tunniste: values?.tiedot?.tunniste || null,
       opinnonTyyppiKoodiUri: values?.tiedot?.opinnonTyyppi?.value || null,
       taiteenalaKoodiUrit: (values?.tiedot?.taiteenalat ?? []).map(
-        _fp.prop('value')
+        ({ value }) => value
       ),
     },
   };

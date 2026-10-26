@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { flow } from 'lodash-es';
 
 import createErrorBuilder, {
   validateArray,
@@ -13,31 +13,29 @@ import {
   validateValintakokeet,
 } from '../form/formConfigUtils';
 
-const validateValintatavat = _fp.flow(
+const validateValintatavat = flow(
   validateIfJulkaistu(
     validateArrayMinLength('valintatavat', 1, {
       isFieldArray: false,
     }),
     validateArray(
       'valintatavat',
-      _fp.flow(validateExistence('tapa'), validateTranslations('nimi'))
+      flow(validateExistence('tapa'), validateTranslations('nimi'))
     )
   )
 );
 
 export const validateValintaperusteForm = (values, registeredFields) => {
   const kieliversiot = getKielivalinta(values);
-  return _fp
-    .flow(
-      validateExistence('tila'),
-      validateExistence('perustiedot.tyyppi'),
-      validateArrayMinLength('perustiedot.kieliversiot', 1),
-      validateIfJulkaistu(validateExistence('perustiedot.hakutapa')),
-      validateIfJulkaistu(validateExistence('perustiedot.kohdejoukko')),
-      validateTranslations('kuvaus.nimi'),
-      validateOptionalTranslatedField('kuvaus.kuvaus'),
-      validateIfJulkaistu(validateValintakokeet),
-      validateValintatavat
-    )(createErrorBuilder(values, kieliversiot, registeredFields))
-    .getErrors();
+  return flow(
+    validateExistence('tila'),
+    validateExistence('perustiedot.tyyppi'),
+    validateArrayMinLength('perustiedot.kieliversiot', 1),
+    validateIfJulkaistu(validateExistence('perustiedot.hakutapa')),
+    validateIfJulkaistu(validateExistence('perustiedot.kohdejoukko')),
+    validateTranslations('kuvaus.nimi'),
+    validateOptionalTranslatedField('kuvaus.kuvaus'),
+    validateIfJulkaistu(validateValintakokeet),
+    validateValintatavat
+  )(createErrorBuilder(values, kieliversiot, registeredFields)).getErrors();
 };

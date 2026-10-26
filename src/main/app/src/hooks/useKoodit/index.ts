@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';

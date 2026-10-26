@@ -1,5 +1,5 @@
 import { assign } from '@xstate/immer';
-import { forEach } from 'lodash';
+import { forEach } from 'lodash-es';
 import { createMachine } from 'xstate';
 
 import { JULKAISUTILA } from '#/src/constants';

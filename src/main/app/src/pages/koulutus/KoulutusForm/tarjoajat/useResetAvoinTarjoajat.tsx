@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useRef } from 'react';
 
-import { difference, uniq } from 'lodash';
+import { difference, uniq } from 'lodash-es';
 
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useIsDirty } from '#/src/hooks/form';

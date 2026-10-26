@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 
-import { mapValues, pickBy } from 'lodash';
+import { mapValues, pickBy } from 'lodash-es';
 
 // Lomakekohtainen rekisteri siitä, mitkä kentät ovat näkyvissä ja mitkä on poistettu
 // näkyvistä. Tallennusrunko rakennetaan tämän tiedon perusteella.

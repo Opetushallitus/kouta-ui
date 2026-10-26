@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import createSoraKuvaus from '#/playwright/fixtures/soraKuvaus';
 import {

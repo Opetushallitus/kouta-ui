@@ -5,7 +5,7 @@ import {
   type TestInfo,
   expect,
 } from '@playwright/test';
-import { includes, last, toLower } from 'lodash';
+import { includes, last, toLower } from 'lodash-es';
 
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 

@@ -1,4 +1,4 @@
-import { set } from 'lodash';
+import { set } from 'lodash-es';
 
 export const getLocalization = async ({
   category = 'kouta',

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-import { snakeCase } from 'lodash';
+import { snakeCase } from 'lodash-es';
 import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 

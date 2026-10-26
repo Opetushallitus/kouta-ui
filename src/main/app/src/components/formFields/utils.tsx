@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 
 import { simpleMapProps } from '#/src/components/formFields';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';

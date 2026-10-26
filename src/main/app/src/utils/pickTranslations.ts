@@ -1,4 +1,4 @@
-import { every, isEmpty, mapValues, pick } from 'lodash';
+import { every, isEmpty, mapValues, pick } from 'lodash-es';
 
 import { serializeEditorState } from '../components/LexicalEditorUI/utils';
 

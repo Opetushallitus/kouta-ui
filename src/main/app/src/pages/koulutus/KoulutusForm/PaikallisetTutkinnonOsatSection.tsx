@@ -1,6 +1,6 @@
 import React, { Dispatch, useMemo, useRef, useState } from 'react';
 
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import styled from 'styled-components';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { capitalize, isEmpty } from 'lodash';
+import { capitalize, isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';

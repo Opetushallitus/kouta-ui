@@ -1,5 +1,5 @@
 import { type TFunction } from 'i18next';
-import { isError } from 'lodash';
+import { isError } from 'lodash-es';
 import {
   createMachine,
   assign,

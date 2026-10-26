@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { filter, flow, groupBy, map, maxBy } from 'lodash-es';
 import { QueryObserverResult } from 'react-query';
 
 import { isValidKoulutusKoodi } from './isValidKoulutusKoodi';
@@ -13,9 +13,9 @@ export const selectValidKoulutusKoodit = (
       })
     : (response?.data ?? []);
 
-  return _fp.flow(
-    _fp.filter(isValidKoulutusKoodi),
-    _fp.groupBy('koodiUri'),
-    _fp.map(_fp.maxBy('versio'))
+  return flow(
+    (arr: typeof koulutukset) => filter(arr, isValidKoulutusKoodi),
+    arr => groupBy(arr, 'koodiUri'),
+    grouped => map(grouped, arr => maxBy(arr, 'versio'))
   )(koulutukset);
 };

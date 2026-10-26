@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { get, mapValues } from 'lodash-es';
 
 import {
   getFirstLanguageValue,
@@ -10,7 +10,7 @@ export const getKoodiNimiTranslation = (
   priority?: LanguageCode
 ) => {
   return getFirstLanguageValue(
-    _fp.mapValues(_fp.prop('nimi'), arrayToTranslationObject(koodi?.metadata)),
+    mapValues(arrayToTranslationObject(koodi?.metadata), v => get(v, 'nimi')),
     priority
   );
 };

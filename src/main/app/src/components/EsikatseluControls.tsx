@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 

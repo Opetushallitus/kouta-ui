@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { intersection, isEmpty } from 'lodash-es';
 
 import {
   ENTITY,
@@ -57,8 +57,8 @@ export const createIsKoulutustyyppiDisabledGetter = ({
     }
 
     if (
-      _fp.isEmpty(allowedOppilaitostyypit) ||
-      _fp.isEmpty(oppilaitostyypitByKoulutustyypit)
+      isEmpty(allowedOppilaitostyypit) ||
+      isEmpty(oppilaitostyypitByKoulutustyypit)
     ) {
       return false;
     }
@@ -69,8 +69,8 @@ export const createIsKoulutustyyppiDisabledGetter = ({
       )?.oppilaitostyypit;
 
     if (
-      !_fp.isEmpty(
-        _fp.intersection(
+      !isEmpty(
+        intersection(
           oppilaitostyypitForKoulutustyyppiWoVersion,
           allowedOppilaitostyypit
         )

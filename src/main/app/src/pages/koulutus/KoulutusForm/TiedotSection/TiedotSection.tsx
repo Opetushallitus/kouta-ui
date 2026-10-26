@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { find, isUndefined, toLower } from 'lodash';
+import { find, isUndefined, toLower } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';

@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { map } from 'lodash';
+import { map } from 'lodash-es';
 
 import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';

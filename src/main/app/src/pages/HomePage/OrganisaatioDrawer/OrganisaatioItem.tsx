@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isEmpty, noop } from 'lodash';
+import { isEmpty, noop } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';

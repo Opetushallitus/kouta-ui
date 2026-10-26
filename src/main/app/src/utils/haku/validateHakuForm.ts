@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { flow } from 'lodash-es';
 
 import {
   Alkamiskausityyppi,
@@ -38,79 +38,77 @@ const validateHakuForm = (values: HakuFormValues, registeredFields) => {
   const hakulomaketyyppi = values?.hakulomake?.tyyppi;
   const arkistointiHaunPaattymisestaKk = 3;
 
-  return _fp
-    .flow(
-      validatePohja,
-      validateExistence('organisaatioOid'),
-      validateExistence('tila'),
-      validateArrayMinLength('kieliversiot', 1),
-      validateTranslations('nimi'),
-      validateExistence('hakutapa'),
-      validateExistence('kohdejoukko.kohdejoukko'),
-      validateArray('yhteyshenkilot', validateYhteyshenkilo(kieliversiot)),
-      validateIf(
-        isJulkaistu,
-        _fp.flow(
-          validateIf(
-            isYhteishaku,
-            validate('aikataulut.ajankohtaKaytossa', v => v === true, {
-              message:
-                'validointivirheet.pakollinenAjankohtaJosJulkaistuYhteishaku',
-            }),
-            validateExistence('aikataulut.ajankohtaTyyppi', {
-              message:
-                'validointivirheet.pakollinenAjankohtaJosJulkaistuYhteishaku',
-            })
-          ),
-          validateIf(
-            values?.aikataulut?.ajankohtaKaytossa &&
-              values?.aikataulut?.ajankohtaTyyppi ===
-                Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
-            _fp.flow(
-              validateExistence('aikataulut.kausi'),
-              validateExistence('aikataulut.vuosi')
-            )
-          ),
-          validateIf(
-            values?.aikataulut?.ajankohtaKaytossa &&
-              values?.aikataulut?.ajankohtaTyyppi ===
-                Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
-            validateExistenceOfDate('aikataulut.tarkkaAlkaa')
-          ),
-          validateArrayMinLength('aikataulut.hakuaika', 1, {
-            isFieldArray: true,
+  return flow(
+    validatePohja,
+    validateExistence('organisaatioOid'),
+    validateExistence('tila'),
+    validateArrayMinLength('kieliversiot', 1),
+    validateTranslations('nimi'),
+    validateExistence('hakutapa'),
+    validateExistence('kohdejoukko.kohdejoukko'),
+    validateArray('yhteyshenkilot', validateYhteyshenkilo(kieliversiot)),
+    validateIf(
+      isJulkaistu,
+      flow(
+        validateIf(
+          isYhteishaku,
+          validate('aikataulut.ajankohtaKaytossa', v => v === true, {
+            message:
+              'validointivirheet.pakollinenAjankohtaJosJulkaistuYhteishaku',
           }),
-          validateArray(
-            'aikataulut.hakuaika',
-            _fp.flow(
-              validateExistenceOfDate('alkaa'),
-              validateIf(
-                isYhteishaku || isErillishaku,
-                validateExistenceOfDate('paattyy')
-              )
-            )
-          ),
-          validateOptionalTranslatedField(
-            'aikataulut.henkilokohtaisenSuunnitelmanLisatiedot'
-          ),
-          validateExistence('hakulomake.tyyppi'),
-          validateIf(
-            hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU,
-            validateExistence('hakulomake.lomake')
-          ),
-          validateIf(
-            hakulomaketyyppi === HAKULOMAKETYYPPI.MUU,
-            validateTranslations('hakulomake.linkki')
-          ),
-          validateIf(
-            values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi &&
-              values?.aikataulut?.hakuaika.map(h => h.paattyy),
-            validateArchiveDate('aikataulut', arkistointiHaunPaattymisestaKk)
+          validateExistence('aikataulut.ajankohtaTyyppi', {
+            message:
+              'validointivirheet.pakollinenAjankohtaJosJulkaistuYhteishaku',
+          })
+        ),
+        validateIf(
+          values?.aikataulut?.ajankohtaKaytossa &&
+            values?.aikataulut?.ajankohtaTyyppi ===
+              Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
+          flow(
+            validateExistence('aikataulut.kausi'),
+            validateExistence('aikataulut.vuosi')
           )
+        ),
+        validateIf(
+          values?.aikataulut?.ajankohtaKaytossa &&
+            values?.aikataulut?.ajankohtaTyyppi ===
+              Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
+          validateExistenceOfDate('aikataulut.tarkkaAlkaa')
+        ),
+        validateArrayMinLength('aikataulut.hakuaika', 1, {
+          isFieldArray: true,
+        }),
+        validateArray(
+          'aikataulut.hakuaika',
+          flow(
+            validateExistenceOfDate('alkaa'),
+            validateIf(
+              isYhteishaku || isErillishaku,
+              validateExistenceOfDate('paattyy')
+            )
+          )
+        ),
+        validateOptionalTranslatedField(
+          'aikataulut.henkilokohtaisenSuunnitelmanLisatiedot'
+        ),
+        validateExistence('hakulomake.tyyppi'),
+        validateIf(
+          hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU,
+          validateExistence('hakulomake.lomake')
+        ),
+        validateIf(
+          hakulomaketyyppi === HAKULOMAKETYYPPI.MUU,
+          validateTranslations('hakulomake.linkki')
+        ),
+        validateIf(
+          values?.aikataulut?.ajastettuHaunJaHakukohteidenArkistointi &&
+            values?.aikataulut?.hakuaika.map(h => h.paattyy),
+          validateArchiveDate('aikataulut', arkistointiHaunPaattymisestaKk)
         )
       )
-    )(createErrorBuilder(values, kieliversiot, registeredFields))
-    .getErrors();
+    )
+  )(createErrorBuilder(values, kieliversiot, registeredFields)).getErrors();
 };
 
 export default validateHakuForm;

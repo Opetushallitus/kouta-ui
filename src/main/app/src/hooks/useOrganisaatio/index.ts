@@ -1,4 +1,4 @@
-import { castArray, isEmpty, head, filter, some, uniq } from 'lodash';
+import { castArray, isEmpty, head, filter, some, uniq } from 'lodash-es';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';

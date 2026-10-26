@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { sortBy } from 'lodash';
+import { sortBy } from 'lodash-es';
 
 import { CheckboxGroup } from '#/src/components/virkailija';
 import { FormMode } from '#/src/constants';

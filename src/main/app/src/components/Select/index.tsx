@@ -4,7 +4,7 @@ import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
-import { identity, isObject, isUndefined, reduce } from 'lodash';
+import { identity, isObject, isUndefined, reduce } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { components, Props } from 'react-select';

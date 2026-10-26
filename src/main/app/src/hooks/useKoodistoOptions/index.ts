@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { isFunction, map, parseInt, sortBy } from 'lodash';
+import { isFunction, map, parseInt, sortBy } from 'lodash-es';
 
 import {
   useKoodisto,

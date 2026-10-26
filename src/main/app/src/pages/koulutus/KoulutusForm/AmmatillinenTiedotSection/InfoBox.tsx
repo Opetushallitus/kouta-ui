@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { filter, isNil, isNull } from 'lodash';
+import { filter, isNil, isNull } from 'lodash-es';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';

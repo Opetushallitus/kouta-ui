@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import _fp from 'lodash/fp';
+import { isEmpty, isUndefined } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
@@ -155,7 +155,7 @@ const PieniOsaamiskokonaisuusField = ({
 
   useEffect(() => {
     if (
-      _fp.isUndefined(currValue) &&
+      isUndefined(currValue) &&
       (KOULUTUSTYYPPI.TUTKINNON_OSA === koulutustyyppi ||
         ([
           KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
@@ -208,7 +208,7 @@ const useNimiFromKoulutus = ({ koulutus, name }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (_fp.isUndefined(currNimi) || _fp.isEmpty(currNimi)) {
+    if (isUndefined(currNimi) || isEmpty(currNimi)) {
       change(`${name}.nimi`, koulutusnimi || {});
     }
   }, [change, currNimi, koulutusnimi, name, t]);

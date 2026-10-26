@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import organisaatio from '#/playwright/fixtures/organisaatio';
 import { fixtureJSON } from '#/playwright/playwright-mock-utils';

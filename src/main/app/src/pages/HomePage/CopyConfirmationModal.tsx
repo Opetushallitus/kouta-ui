@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useActor, useInterpret, useSelector } from '@xstate/react';
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { ActorRefFrom, InterpreterFrom } from 'xstate';
 

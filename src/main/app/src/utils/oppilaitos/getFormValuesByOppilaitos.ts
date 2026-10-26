@@ -1,4 +1,4 @@
-import { isEmpty, isNumber, isString, mapValues } from 'lodash';
+import { isEmpty, isNumber, isString, mapValues } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { toKielistettyWithValueField } from '#/src/utils';

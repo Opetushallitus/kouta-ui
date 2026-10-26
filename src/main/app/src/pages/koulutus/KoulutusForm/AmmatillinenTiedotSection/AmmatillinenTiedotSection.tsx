@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { includes } from 'lodash';
+import { includes } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldInput } from '#/src/components/formFields';

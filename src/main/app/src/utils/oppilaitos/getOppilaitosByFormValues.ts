@@ -1,4 +1,4 @@
-import { get, isEmpty, omit } from 'lodash';
+import { get, isEmpty, omit } from 'lodash-es';
 
 import { isNumeric, toKielistettyWithValueStr } from '#/src/utils';
 

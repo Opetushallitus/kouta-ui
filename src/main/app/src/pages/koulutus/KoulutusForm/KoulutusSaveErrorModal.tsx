@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { isEmpty, map } from 'lodash';
+import { isEmpty, map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';

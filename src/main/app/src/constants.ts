@@ -1,4 +1,4 @@
-import { without } from 'lodash';
+import { without } from 'lodash-es';
 
 export const LANGUAGES = ['fi', 'sv', 'en'];
 

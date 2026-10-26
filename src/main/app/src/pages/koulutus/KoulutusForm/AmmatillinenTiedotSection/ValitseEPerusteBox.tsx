@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 
-import { isEmpty, isNil, map } from 'lodash';
+import { isEmpty, isNil, map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useUnmount } from 'react-use';
 import styled from 'styled-components';

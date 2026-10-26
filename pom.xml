@@ -140,8 +140,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <nodeVersion>v22.22.3</nodeVersion>
-                    <pnpmVersion>v10.22.0</pnpmVersion>
+                    <nodeVersion>v24.11.1</nodeVersion>
+                    <pnpmVersion>v12.2.4</pnpmVersion>
                     <workingDirectory>src/main/app</workingDirectory>
                 </configuration>
             </plugin>

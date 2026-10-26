@@ -23,10 +23,7 @@ export const useOrganisaatiot = (
   oids: string | Array<string>,
   options: KoutaApiQueryConfig<Array<OrganisaatioModel>> = {}
 ) => {
-  const { data: organisaatiot, ...rest } = useApiQuery<
-    typeof getOrganisaatiotByOids,
-    Array<OrganisaatioModel>
-  >(
+  const { data: organisaatiot, ...rest } = useApiQuery(
     'getOrganisaatiot',
     getOrganisaatiotByOids,
     { oids: castArray(oids) },

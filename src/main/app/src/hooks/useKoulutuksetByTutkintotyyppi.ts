@@ -7,7 +7,7 @@ import {
 import { selectValidKoulutusKoodit } from '#/src/utils/koodi/selectValidKoulutusKoodit';
 
 export const useKoulutuksetByTutkintotyyppi = tutkintotyyppiKoodiUri => {
-  return useApiQuery<Array<Koodi>>(
+  return useApiQuery(
     GET_SISALTYY_YLAKOODIT_QUERY_KEY,
     getSisaltyyYlakoodit,
     { koodiUri: tutkintotyyppiKoodiUri },

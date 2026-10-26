@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { castArray, isNil, keys } from 'lodash';
+import { castArray, isNil } from 'lodash';
 
 import { getCombinedQueryStatus } from '#/src/components/QueryResultWrapper';
 import {
@@ -36,7 +36,7 @@ export const useKoulutuksetByKoulutustyyppi = (
   const queryProps = useMemo(
     () =>
       isNil(ylaKoodiUrit) ||
-      keys(KOULUTUSTYYPPI_KOODIURIT_MAPPING).includes(koulutustyyppi)
+      Object.keys(KOULUTUSTYYPPI_KOODIURIT_MAPPING).includes(koulutustyyppi)
         ? [
             {
               key: GET_KOODISTO_QUERY_KEY,
@@ -47,14 +47,14 @@ export const useKoulutuksetByKoulutustyyppi = (
               ...LONG_CACHE_QUERY_OPTIONS,
             },
           ]
-        : castArray(ylaKoodiUrit)?.map(koodiUri => ({
+        : (castArray(ylaKoodiUrit)?.map(koodiUri => ({
             key: GET_SISALTYY_YLAKOODIT_QUERY_KEY,
             queryFn: getSisaltyyYlakoodit,
             props: {
               koodiUri,
             },
             ...LONG_CACHE_QUERY_OPTIONS,
-          })),
+          })) as any),
     [ylaKoodiUrit, koulutustyyppi]
   );
 

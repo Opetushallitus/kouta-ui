@@ -13,10 +13,12 @@ export const getOpetussuunnitelmat = async ({
   organisaatioOids = [],
   nimi,
   sivu,
+  kieli,
 }: {
   httpClient: HttpClient;
   apiUrls: ApiUrls;
   organisaatioOids: Array<string>;
+  kieli: LanguageCode;
   nimi?: string;
   sivu?: number;
 }) => {
@@ -37,6 +39,7 @@ export const getOpetussuunnitelmat = async ({
           : organisaatioOids,
         nimi,
         sivu,
+        kieli,
         paikallistasisaltoa: true,
       },
     }
@@ -47,14 +50,16 @@ export const getOpetussuunnitelmat = async ({
 export const useQueryOptionsGetOpetussuunnitelmat = ({
   organisaatioOids,
   nimi,
+  kieli,
 }: {
   organisaatioOids: Array<string>;
   nimi?: string;
+  kieli: LanguageCode;
 }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
   return {
-    queryKey: ['getOpetussuunnitelmat', organisaatioOids, nimi],
+    queryKey: ['getOpetussuunnitelmat', organisaatioOids, nimi, kieli],
     queryFn: ({ pageParam = 0 }) =>
       getOpetussuunnitelmat({
         httpClient,
@@ -62,6 +67,7 @@ export const useQueryOptionsGetOpetussuunnitelmat = ({
         organisaatioOids,
         nimi,
         sivu: pageParam,
+        kieli,
       }),
     cacheTime: 30000,
     staleTime: 30000,

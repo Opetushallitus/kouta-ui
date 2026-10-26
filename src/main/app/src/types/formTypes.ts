@@ -47,7 +47,7 @@ export type FormError = {
   errorKey: string | ((t: TFunction) => string) | null;
 };
 
-type KoutaErrorResponse = {
+export type KoutaErrorResponse = {
   errorType: string;
   msg: string;
   path: string;
@@ -59,7 +59,7 @@ type KoutaErrorResponse = {
   };
 };
 
-type KoutaErrorData = {
+export type KoutaErrorData = {
   koulutustyyppi?: KOULUTUSTYYPPI;
   opintojaksojenLiittaminen?: { opintojaksot: Array<string> };
   osaamismerkkienLiittaminen?: { osaamismerkit: Array<string> };

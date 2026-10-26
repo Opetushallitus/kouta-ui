@@ -24,7 +24,7 @@ import { useTarjoajatHierarkia } from './useTarjoajatHierarkia';
 type ToteutusFooterProps = {
   formMode: FormMode;
   organisaatioOid: string;
-  koulutustyyppi: KOULUTUSTYYPPI;
+  koulutustyyppi?: KOULUTUSTYYPPI;
   toteutus?: ToteutusModel;
   koulutus?: KoulutusModel;
   canUpdate?: boolean;
@@ -129,8 +129,9 @@ export const ToteutusFooter = ({
       entity={toteutus}
       canUpdate={canUpdate}
       esikatseluUrl={
-        formMode === FormMode.EDIT &&
-        apiUrls.url('konfo-ui.toteutus', toteutus?.oid)
+        formMode === FormMode.EDIT
+          ? apiUrls.url('konfo-ui.toteutus', toteutus?.oid)
+          : undefined
       }
     />
   );

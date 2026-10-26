@@ -2,8 +2,10 @@ import getOsaamisalaLaajuus, {
   setDefaultMuodostumisSaanto,
 } from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 
+import { OsaamisalaOsa } from '../ePeruste/getEPerusteRakenne';
+
 test('sets default muodostumisSaanto for osaamisala that is missing it', () => {
-  const osaamisala = {
+  const osaamisala: OsaamisalaOsa = {
     nimi: {
       fi: 'Talonrakennuksen osaamisala',
     },
@@ -54,7 +56,7 @@ test('keeps the original muodostumisSaanto for Avolouhinnan osaamisala that has 
 });
 
 test('keeps the original muodostumisSaanto for Valinnaiset tutkinnon osat that has it set', () => {
-  const osaamisala = {
+  const osaamisala: OsaamisalaOsa = {
     nimi: {
       fi: 'Avolouhinnan osaamisala',
     },

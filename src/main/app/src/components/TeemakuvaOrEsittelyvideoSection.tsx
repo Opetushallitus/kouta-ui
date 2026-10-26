@@ -41,7 +41,11 @@ export const TeemakuvaOrEsittelyvideoSection = props => {
       </Field>
       {mediaType === 'teemakuva' && (
         <ActionArea>
-          <TeemakuvaSection name={`${name}.teemakuvaUrl`} disabled={disabled} />
+          <TeemakuvaSection
+            name={`${name}.teemakuvaUrl`}
+            disabled={disabled}
+            language={language}
+          />
         </ActionArea>
       )}
       {mediaType === 'esittelyvideo' && (

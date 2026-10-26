@@ -17,7 +17,7 @@ type HakukohteetTilaChangeResponseData = Array<HakukohdeTilaChangeResponseItem>;
 
 type ChangeHakukohteidenTilaProps = {
   entities: EntitySelection;
-  tila?: JULKAISUTILA;
+  tila: JULKAISUTILA;
 };
 
 export type CopyHakukohteetMutationFunctionAsync = UseMutateAsyncFunction<

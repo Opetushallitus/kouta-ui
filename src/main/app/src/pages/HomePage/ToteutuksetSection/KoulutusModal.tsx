@@ -32,7 +32,7 @@ export const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const options = useEntityOptions(filteredResults, getEntitySuffix);
 
   const onSubmit = useCallback(
-    ({ oid }) => {
+    ({ oid }: { oid?: string }) => {
       navigate(`/organisaatio/${organisaatioOid}/koulutus/${oid}/toteutus`);
     },
     [navigate, organisaatioOid]

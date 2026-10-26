@@ -63,7 +63,7 @@ type FormPageProps = {
   title: string;
   entityType: ENTITY;
   formMode: FormMode;
-  initialValues: Record<string, any>;
+  initialValues?: Record<string, any>;
   queryResult?: QueryObserverResult | Array<QueryObserverResult>;
   header?: React.ReactNode;
   steps?: React.ReactNode;

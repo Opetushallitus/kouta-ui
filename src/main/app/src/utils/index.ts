@@ -1,4 +1,5 @@
 import { format as formatDate, isValid, parseISO } from 'date-fns';
+import { TFunction } from 'i18next';
 import {
   flow,
   flatMap,
@@ -283,7 +284,11 @@ const isEmptyTranslatedField = value =>
   !isEmpty(intersection(keys(value), LANGUAGES)) &&
   every(value, v => !formValueExists(v));
 
-const copyPathsIfDefined = (source, target, paths) => {
+const copyPathsIfDefined = (
+  source: Record<string, unknown>,
+  target: Record<string, unknown>,
+  paths: Array<string>
+) => {
   forEach(paths, path => {
     const val = get(source, path);
     if (!isUndefined(val)) {
@@ -310,14 +315,14 @@ const byPathDescending = (a: string, b: string) => {
 // Note that this does not filter out fields that are already in initialValues but are hidden.
 // This means that in edit-mode values that come from backend will only be filtered out if
 // the user somehow makes those fields visible and then hides them again by changing form values.
-export const getValuesForSaving = (
-  values: any,
+export const getValuesForSaving = <T extends Record<string, unknown>>(
+  values: T,
   registeredFields: Record<string, { name: string }>,
   unregisteredFields: Record<string, { name: string }>,
-  initialValues: any = {}
-) => {
+  initialValues: Partial<T> = {}
+): T => {
   // Use initial values as a base. Both create and edit forms' changes are differences to the initial values.
-  const saveableValues: any = cloneDeep(initialValues);
+  const saveableValues = cloneDeep(initialValues) as T;
 
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values.
   // Lajitellaan LASKEVAAN järjestykseen, jotta lapsikentät nollataan ennen vanhempiaan. Nousevassa
@@ -424,17 +429,27 @@ export const getEntityNimiTranslation = (
 export const getKoulutustyyppiTranslationKey = (tyyppi?: string) =>
   isNil(tyyppi) ? '' : `koulutustyypit.${camelCase(tyyppi)}`;
 
-export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
+type KoulutustyyppiHierarkia = Array<{
+  value: string;
+  children?: Array<{ value: string }>;
+}>;
+
+export const koulutustyyppiHierarkiaToOptions = (
+  hierarkia: KoulutustyyppiHierarkia,
+  t: TFunction
+): Array<{ label: string; value: string }> =>
   hierarkia.flatMap(({ value: topValue, children }) => {
     if (children) {
       return children.map(({ value }) => ({
         label:
-          ([
-            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
-            KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
-            KOULUTUSTYYPPI.TUTKINNON_OSA,
-            KOULUTUSTYYPPI.OSAAMISALA,
-          ].includes(value)
+          ((
+            [
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_MUU,
+              KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO_OPISTOVUOSI,
+              KOULUTUSTYYPPI.TUTKINNON_OSA,
+              KOULUTUSTYYPPI.OSAAMISALA,
+            ] as Array<string>
+          ).includes(value)
             ? t(getKoulutustyyppiTranslationKey(topValue)) + ' - '
             : '') + t(getKoulutustyyppiTranslationKey(value)),
         value,

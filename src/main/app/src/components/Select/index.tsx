@@ -4,6 +4,7 @@ import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
+import { TFunction } from 'i18next';
 import { identity, isObject, isUndefined, reduce } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
@@ -29,17 +30,18 @@ const OptionComponent = props => (
   />
 );
 
-const makeDefaultNoOptionsMessage = t => () =>
+const makeDefaultNoOptionsMessage = (t: TFunction) => () =>
   t('yleiset.eiValittaviaKohteita');
 
-const makeDefaultFormatCreateLabel = t => value =>
+const makeDefaultFormatCreateLabel = (t: TFunction) => (value: string) =>
   t('yleiset.luoKohde', { kohde: value });
 
-const makeDefaultPlaceholder = t => t('yleiset.valitseVaihtoehdoista');
+const makeDefaultPlaceholder = (t: TFunction) =>
+  t('yleiset.valitseVaihtoehdoista');
 
-const defaultLoadingMessage = t => () => t('yleiset.ladataan');
+const defaultLoadingMessage = (t: TFunction) => () => t('yleiset.ladataan');
 
-const buildDefaultProps = t => ({
+const buildDefaultProps = (t: TFunction) => ({
   isClearable: true,
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
@@ -51,7 +53,9 @@ const buildDefaultProps = t => ({
   },
 });
 
-const getOptionLabelByValue = (options: Array<any> = []) =>
+const getOptionLabelByValue = (
+  options: SelectOptions = []
+): Record<string, string> =>
   reduce(
     options,
     (acc, curr) => {
@@ -63,8 +67,8 @@ const getOptionLabelByValue = (options: Array<any> = []) =>
 
 const getAsyncValue = async (
   value?: SelectOption | SelectOptions | null,
-  options?: Array<any>,
-  loadLabel: any = identity
+  options?: SelectOptions,
+  loadLabel: (value?: string) => unknown = identity
 ) => {
   const newValue = valueToArray(getValue(value, options));
   const result = await Promise.all(
@@ -72,8 +76,9 @@ const getAsyncValue = async (
       ...singleValue,
       label:
         singleValue?.label === singleValue?.value
-          ? ((await loadLabel(singleValue?.value).catch(() => undefined)) ??
-            singleValue?.value)
+          ? ((await Promise.resolve(loadLabel(singleValue?.value)).catch(
+              () => undefined
+            )) ?? singleValue?.value)
           : singleValue?.label,
     }))
   );
@@ -83,7 +88,7 @@ const getAsyncValue = async (
 
 const getValue = (
   value?: SelectOption | SelectOptions | null,
-  options?: Array<any>
+  options?: SelectOptions
 ) => {
   const labelByValue = getOptionLabelByValue(options);
   if (Array.isArray(value)) {
@@ -123,7 +128,7 @@ export const Select = ({
   ...props
 }: SelectProps) => {
   const resolvedValue = useMemo(
-    () => getValue(value, options as any),
+    () => getValue(value, options),
     [value, options]
   );
 

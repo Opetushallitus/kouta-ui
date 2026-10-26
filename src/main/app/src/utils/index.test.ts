@@ -353,7 +353,12 @@ describe('getValuesForSaving', () => {
     // Ero näkyy lähetettävässä datassa: rekisteröimätön kenttä lähetetään nullina
     // (kouta-backend tyhjentää sen), rekisteröity kenttä ilman arvoa putoaa pois
     // JSON.stringifyssä ja jää koskemattomaksi.
-    const result = getValuesForSaving({}, registered('a'), {}, { a: 1 });
+    const result = getValuesForSaving<{ a?: number }>(
+      {},
+      registered('a'),
+      {},
+      { a: 1 }
+    );
 
     expect(Object.prototype.hasOwnProperty.call(result, 'a')).toBe(true);
     expect(result.a).toBeUndefined();

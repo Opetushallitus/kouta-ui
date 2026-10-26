@@ -92,7 +92,9 @@ export const ValitseTutkinnonOsatBox = ({
   language,
   ePeruste,
 }) => {
-  const tutkinnonosatFieldValue = useFieldValue(fieldName);
+  const tutkinnonosatFieldValue = useFieldValue<
+    Array<SelectOption<string>> | undefined
+  >(fieldName);
   const selectedTutkinnonosat = useMemo(
     () =>
       filter(ePeruste?.tutkinnonosat, t =>

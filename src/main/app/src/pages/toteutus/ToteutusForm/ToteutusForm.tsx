@@ -91,7 +91,9 @@ const ToteutusForm = ({
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 }: ToteutusFormProps) => {
   const { t } = useTranslation();
-  const kieliversiot = useFieldValue('kieliversiot');
+  const kieliversiot = useFieldValue<Array<LanguageCode> | undefined>(
+    'kieliversiot'
+  );
   const languages = kieliversiot || [];
   const { isOpen, open, close } = useModal();
 

@@ -17,9 +17,12 @@ export const EPerusteTiedot = ({
   name,
   disabled,
 }) => {
-  const languages = useFieldValue('kieliversiot') || [];
+  const languages =
+    useFieldValue<Array<LanguageCode> | undefined>('kieliversiot') || [];
 
-  const selectedEPerusteId = useFieldValue(`${name}.eperuste`)?.value;
+  const selectedEPerusteId = useFieldValue<SelectOption<string> | undefined>(
+    `${name}.eperuste`
+  )?.value;
 
   const { data: koulutus, status } = useKoulutusByKoodi({
     koodiUri: selectedKoulutus,
@@ -39,7 +42,9 @@ export const EPerusteTiedot = ({
     [ePerusteet, selectedEPerusteId]
   );
 
-  const koulutustyyppi = useFieldValue('koulutustyyppi');
+  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI | undefined>(
+    'koulutustyyppi'
+  );
   return (
     <Box>
       {selectedKoulutus && (

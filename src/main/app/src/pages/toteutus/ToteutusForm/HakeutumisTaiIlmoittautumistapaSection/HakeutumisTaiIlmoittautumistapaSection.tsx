@@ -50,9 +50,11 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
   koulutustyyppi,
 }) => {
   const { t } = useTranslation();
-  const hakuTapa = useFieldValue(`${name}.hakuTapa`);
+  const hakuTapa = useFieldValue<Hakeutumistapa | undefined>(
+    `${name}.hakuTapa`
+  );
 
-  const hakukohteetKaytossaValinta = useFieldValue(
+  const hakukohteetKaytossaValinta = useFieldValue<boolean | undefined>(
     `${name}.isHakukohteetKaytossa`
   );
 

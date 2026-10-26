@@ -54,6 +54,7 @@ jobs:
           project_path: src/main/app
       - name: Run tests
         run: |
+          pnpm run tsc
           pnpm run lint
           pnpm run test
 

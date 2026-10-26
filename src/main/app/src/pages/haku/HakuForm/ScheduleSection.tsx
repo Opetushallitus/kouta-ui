@@ -24,7 +24,7 @@ const ScheduleSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const haullaErillinenAloitusajankohta = useFieldValue(
+  const haullaErillinenAloitusajankohta = useFieldValue<boolean | undefined>(
     `${name}.ajankohtaKaytossa`
   );
 

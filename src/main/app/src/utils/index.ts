@@ -83,11 +83,11 @@ export const parseFloatComma = (
   value?: string | number | null,
   decimals?: number
 ): number | null => {
-  if (isNumber(value) && isFinite(value)) {
+  if (isNumber(value) && Number.isFinite(value)) {
     return value;
   } else if (isString(value)) {
-    const parsedValue = parseFloat(value.replace(',', '.'));
-    if (isFinite(parsedValue)) {
+    const parsedValue = Number.parseFloat(value.replace(',', '.'));
+    if (Number.isFinite(parsedValue)) {
       return isUndefined(decimals) ? parsedValue : round(parsedValue, decimals);
     } else {
       return null;
@@ -103,7 +103,7 @@ export const isNumeric = value => {
   }
 
   if (isString(value)) {
-    return !isNaN(parseFloat(value.replace(',', '.')));
+    return !Number.isNaN(Number.parseFloat(value.replace(',', '.')));
   }
 
   return false;
@@ -241,7 +241,7 @@ export const maybeParseNumber = value => {
     isString(value) && value.includes(',')
       ? Number(value.replace(',', '.'))
       : Number(value);
-  return isNaN(numberValue) ? value : numberValue;
+  return Number.isNaN(numberValue) ? value : numberValue;
 };
 
 export const toSelectValue = value => (isNil(value) ? undefined : { value });
@@ -490,7 +490,7 @@ export const notToimipisteOrg = org =>
 export const toEnum = <T extends object>(obj: T, value?: string | null) => {
   const values = Object.values(obj);
   const index = values.indexOf(value);
-  return values.indexOf(value) >= 0 ? (values[index] as ValueOf<T>) : undefined;
+  return values.includes(value) ? (values[index] as ValueOf<T>) : undefined;
 };
 
 type KieliArvo = { kieli: string; arvo: string };

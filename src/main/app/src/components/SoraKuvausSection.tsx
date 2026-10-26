@@ -11,7 +11,7 @@ import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
   const { t } = useTranslation();
-  const soraKuvaus = useFieldValue(name);
+  const soraKuvaus = useFieldValue<SelectOption<string> | undefined>(name);
   const soraKuvausId = soraKuvaus?.value;
   const kieliValinnat = languages;
 

@@ -83,7 +83,9 @@ export const OsaamismerkkiKuvausSection = ({
 }) => {
   const { t } = useTranslation();
 
-  const osaamismerkkiId = useFieldValue('information.osaamismerkki')?.value;
+  const osaamismerkkiId = useFieldValue<SelectOption<string> | undefined>(
+    'information.osaamismerkki'
+  )?.value;
 
   const { data: osaamismerkki = {}, isLoading: osaamismerkkiIsLoading } =
     useOsaamismerkki(osaamismerkkiId);

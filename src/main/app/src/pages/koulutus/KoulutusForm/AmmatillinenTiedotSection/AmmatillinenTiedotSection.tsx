@@ -76,7 +76,9 @@ export const WithKoulutusSelect = ({
 }) => {
   const language = useLanguageTab();
 
-  const koulutus = useFieldValue(`${name}.koulutus`)?.value;
+  const koulutus = useFieldValue<SelectOption<string> | undefined>(
+    `${name}.koulutus`
+  )?.value;
 
   return (
     <Box display="flex" flexDirection="column">
@@ -91,7 +93,9 @@ export const WithKoulutusSelect = ({
 };
 
 export const useIsAmmTutkintoWithoutEperuste = () => {
-  const koulutus = useFieldValue('information.koulutus')?.value;
+  const koulutus = useFieldValue<SelectOption<string> | undefined>(
+    'information.koulutus'
+  )?.value;
 
   return includes(
     AMM_TUTKINTO_KOULUTUSKOODIURIT_WITHOUT_EPERUSTE,

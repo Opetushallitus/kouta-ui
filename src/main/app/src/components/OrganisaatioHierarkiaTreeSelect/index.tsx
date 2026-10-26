@@ -1,17 +1,27 @@
 import React, { useCallback, useMemo } from 'react';
 
+import type { TreeSelectProps } from '@opetushallitus/virkailija-ui-components/TreeSelect';
+
 import { TreeSelect } from '#/src/components/virkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import sortTreeBy from '#/src/utils/sortTreeBy';
 
-const getValue = ({ oid }) => oid;
+type Props = Omit<
+  TreeSelectProps<OrganisaatioModel>,
+  'options' | 'getLabel' | 'getValue'
+> & {
+  hierarkia: Array<OrganisaatioModel>;
+};
 
-const OrganisaatioHierarkiaTreeSelect = ({ hierarkia, ...props }) => {
+const getValue = ({ oid }: OrganisaatioModel): string => oid;
+
+const OrganisaatioHierarkiaTreeSelect = ({ hierarkia, ...props }: Props) => {
   const language = useUserLanguage();
 
   const getLabel = useCallback(
-    ({ nimi }) => getFirstLanguageValue(nimi, language),
+    ({ nimi }: OrganisaatioModel) => getFirstLanguageValue(nimi, language),
     [language]
   );
 

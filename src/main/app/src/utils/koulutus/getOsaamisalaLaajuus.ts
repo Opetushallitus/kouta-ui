@@ -1,21 +1,35 @@
 import iterateTree from '#/src/utils/iterateTree';
 
+type MuodostumisSaanto = {
+  laajuus: {
+    minimi: number;
+  };
+};
+
+type Osa = {
+  osaamisala?: {
+    osaamisalakoodiArvo: string;
+  };
+  muodostumisSaanto?: MuodostumisSaanto;
+  osat?: Array<Osa>;
+};
+
 // Asetetaan osaamisalan "vanhemman" muodostumisSaanto rekursiivisesti alaspäin
 // sellaisille osaamisaloille, joilta se puuttuu,
 // jotta voidaan käyttöliittymässä näyttää osaamisalan laajuus.
-const getOsaamisalaLaajuus = (ePerusteOsat, osaamisalakoodi) => {
+const getOsaamisalaLaajuus = (
+  ePerusteOsat: Array<Osa>,
+  osaamisalakoodi: string
+): number | null => {
   const osat = ePerusteOsat.map(ePerusteOsa => {
     return setDefaultMuodostumisSaanto(ePerusteOsa);
   });
 
-  let osaamisalaLaajuus = null;
+  let osaamisalaLaajuus: number | null = null;
   iterateTree(
     osat,
     osa => {
-      if (
-        osa.osaamisala &&
-        osa.osaamisala.osaamisalakoodiArvo === osaamisalakoodi
-      ) {
+      if (osa.osaamisala?.osaamisalakoodiArvo === osaamisalakoodi) {
         osaamisalaLaajuus = osa.muodostumisSaanto.laajuus.minimi;
       }
     },
@@ -27,7 +41,10 @@ const getOsaamisalaLaajuus = (ePerusteOsat, osaamisalakoodi) => {
   return osaamisalaLaajuus;
 };
 
-const setDefaultMuodostumisSaanto = (osaamisala, defaultMuodostumisSaanto) => {
+const setDefaultMuodostumisSaanto = (
+  osaamisala: Osa,
+  defaultMuodostumisSaanto?: MuodostumisSaanto
+): Osa => {
   const muodostumisSaanto =
     osaamisala.muodostumisSaanto || defaultMuodostumisSaanto;
 

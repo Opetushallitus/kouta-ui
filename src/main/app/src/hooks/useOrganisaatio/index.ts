@@ -12,15 +12,19 @@ import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByO
 
 export const useOrganisaatio = (
   oid: string,
-  options: KoutaApiQueryConfig = {}
+  options: KoutaApiQueryConfig<Array<OrganisaatioModel>> = {}
 ) => {
   const { organisaatiot, ...rest } = useOrganisaatiot(oid, options);
 
   return { organisaatio: organisaatiot?.[0], ...rest };
 };
 
-export const useOrganisaatiot = (oids, options: KoutaApiQueryConfig = {}) => {
+export const useOrganisaatiot = (
+  oids: string | Array<string>,
+  options: KoutaApiQueryConfig<Array<OrganisaatioModel>> = {}
+) => {
   const { data: organisaatiot, ...rest } = useApiQuery<
+    typeof getOrganisaatiotByOids,
     Array<OrganisaatioModel>
   >(
     'getOrganisaatiot',
@@ -94,7 +98,7 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
 };
 
 export const usePreferredOrganisaatio = (
-  creatorOrganisaatioOid: string,
+  creatorOrganisaatioOid: string | undefined,
   creatorOrganisaatioIsLoading: boolean
 ) => {
   const user = useAuthorizedUser();
@@ -132,11 +136,11 @@ export const usePreferredOrganisaatio = (
     const firstChildOrganisation =
       organisaatiot &&
       hierarkia &&
-      head(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
+      head(orgOids.filter(oid => hierarkia.filter(isChild(oid))));
     const firstParentOrganisation =
       organisaatiot &&
       hierarkia &&
-      head(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
+      head(orgOids.filter(oid => hierarkia.filter(isParent(oid))));
 
     const preferredOrganisaatio =
       organisaatiot &&

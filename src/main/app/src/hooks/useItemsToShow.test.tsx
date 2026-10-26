@@ -19,6 +19,7 @@ const createOrg = ({
   parentOids,
   organisaatiotyyppiUris,
   children,
+  status: 'AKTIIVINEN',
 });
 
 test('useItemsToShow vain vain valitut organisaatiot, kun naytaVainValitut=true', () => {

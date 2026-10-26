@@ -11,7 +11,7 @@ type Options = {
 };
 
 const iterateTree = (
-  tree: Array<TreeNode>,
+  tree: Array<TreeNode> | undefined,
   fn: (node: TreeNode) => void,
   options: Options = {}
 ) => {

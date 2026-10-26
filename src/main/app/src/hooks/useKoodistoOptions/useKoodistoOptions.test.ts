@@ -8,30 +8,22 @@ test('useKoodistoDataOptions should return array of select options sorted by lab
       koodistoData: [
         {
           koodiUri: 'jokukoodisto_0',
+          koodiArvo: '0',
           versio: 1,
+          koodisto: { koodistoUri: 'jokukoodisto' },
           metadata: [
-            {
-              kieli: 'FI',
-              nimi: 'x fi',
-            },
-            {
-              kieli: 'SV',
-              nimi: 'x sv',
-            },
+            { kieli: 'FI', nimi: 'x fi' },
+            { kieli: 'SV', nimi: 'x sv' },
           ],
         },
         {
           koodiUri: 'jokukoodisto_1',
+          koodiArvo: '1',
           versio: 1,
+          koodisto: { koodistoUri: 'jokukoodisto' },
           metadata: [
-            {
-              kieli: 'FI',
-              nimi: 'a fi',
-            },
-            {
-              kieli: 'SV',
-              nimi: 'a sv',
-            },
+            { kieli: 'FI', nimi: 'a fi' },
+            { kieli: 'SV', nimi: 'a sv' },
           ],
         },
       ],

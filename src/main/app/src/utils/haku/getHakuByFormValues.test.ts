@@ -67,8 +67,13 @@ const baseValues: HakuFormValues = {
       sahkoposti: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
       puhelinnumero: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
       verkkosivu: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
+      verkkosivuTeksti: {
+        fi: 'Fi verkkosivuTeksti',
+        sv: 'Sv verkkosivuTeksti',
+      },
     },
   ],
+  hakukohteenLiittajaOrganisaatiot: [],
 };
 
 test('getHakuByFormValues returns correct haku given form values', () => {

@@ -47,8 +47,8 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
   };
 
   const composeEsittelyvideoNimiObject = (
-    videoUrls: object
-  ): object | undefined => {
+    videoUrls: Record<string, string>
+  ): Record<string, string> | undefined => {
     const languages = Object.keys(videoUrls).filter(lang =>
       Boolean(videoUrls[lang])
     );

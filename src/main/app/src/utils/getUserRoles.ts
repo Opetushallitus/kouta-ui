@@ -1,6 +1,16 @@
 import { isObject } from 'lodash';
 
-const getUserRoles = userdata => {
+type Kayttooikeus = { palvelu: string; oikeus: string };
+type OrganisaatioWithRoles = {
+  organisaatioOid: string;
+  kayttooikeudet: Array<Kayttooikeus>;
+};
+
+export type AuthorizedUser = { organisaatiot: Array<OrganisaatioWithRoles> };
+
+const getUserRoles = (
+  userdata: AuthorizedUser | null | undefined
+): Array<string> => {
   if (!isObject(userdata)) {
     return [];
   }

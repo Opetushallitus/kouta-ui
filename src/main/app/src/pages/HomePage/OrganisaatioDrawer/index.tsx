@@ -22,6 +22,7 @@ import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { spacing, getThemeProp } from '#/src/theme';
+import { OrganisaatioModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 
 import OrganisaatioTreeList from './OrganisaatioTreeList';
@@ -83,13 +84,20 @@ const Content = styled(Box)`
   width: 100%;
 `;
 
-const getTreeItems = (organisaatiot, favourites, open, roleBuilder) => {
-  const recursiveGetTreeItems = organisaatio => ({
+type RoleBuilder = ReturnType<typeof useAuthorizedUserRoleBuilder>;
+
+const getTreeItems = (
+  organisaatiot: Array<OrganisaatioModel>,
+  favourites: Array<string>,
+  open: Array<string>,
+  roleBuilder: RoleBuilder
+) => {
+  const recursiveGetTreeItems = (organisaatio: OrganisaatioModel) => ({
     ...organisaatio,
     favourite: favourites.includes(organisaatio.oid),
     key: organisaatio.oid,
     children: organisaatio?.children?.map?.(recursiveGetTreeItems) ?? [],
-    open: (open || []).includes(organisaatio.oid),
+    open: open.includes(organisaatio.oid),
     isEditable: isEditable(roleBuilder, organisaatio),
     editLinkURL: getEditLinkURL(organisaatio),
   });
@@ -97,7 +105,10 @@ const getTreeItems = (organisaatiot, favourites, open, roleBuilder) => {
   return organisaatiot.map(recursiveGetTreeItems);
 };
 
-const getFavouriteItems = (favourites, roleBuilder) =>
+const getFavouriteItems = (
+  favourites: Array<OrganisaatioModel> | undefined,
+  roleBuilder: RoleBuilder
+) =>
   favourites?.map(organisaatio => ({
     ...organisaatio,
     favourite: true,
@@ -105,12 +116,19 @@ const getFavouriteItems = (favourites, roleBuilder) =>
     editLinkURL: getEditLinkURL(organisaatio),
   })) ?? [];
 
-const useFavouriteItems = (oids, roleBuilder) => {
+const useFavouriteItems = (oids: Array<string>, roleBuilder: RoleBuilder) => {
   const { organisaatiot: favourites } = useOrganisaatiot(oids);
   return useMemo(
     () => getFavouriteItems(favourites, roleBuilder),
     [favourites, roleBuilder]
   );
+};
+
+type DrawerContentProps = {
+  organisaatioOid: string;
+  onOrganisaatioChange: (oid: string) => void;
+  onClose: () => void;
+  open: boolean;
 };
 
 const DrawerContent = ({
@@ -138,7 +156,7 @@ const DrawerContent = ({
 
   const { t } = useTranslation();
   const language = useUserLanguage();
-  const [openOrganisaatiot, setOpenOrganisaatiot] = useState([]);
+  const [openOrganisaatiot, setOpenOrganisaatiot] = useState<Array<string>>([]);
   const [nameFilter, setNameFilter, debounceNameFilter] = useDebounceState(
     '',
     500
@@ -165,7 +183,7 @@ const DrawerContent = ({
   const hasFavourites = favouriteItems?.length > 0;
 
   const onNameFilterChange = useCallback(
-    e => setNameFilter(e.target.value),
+    (e: React.ChangeEvent<HTMLInputElement>) => setNameFilter(e.target.value),
     [setNameFilter]
   );
 
@@ -173,7 +191,7 @@ const DrawerContent = ({
     useState(organisaatioOid);
 
   const onToggleOpen = useCallback(
-    oid => {
+    (oid: string) => {
       if (openOrganisaatiot.includes(oid)) {
         setOpenOrganisaatiot([...openOrganisaatiot.filter(o => o !== oid)]);
       } else {
@@ -278,7 +296,11 @@ const DrawerContent = ({
   );
 };
 
-export const OrganisaatioDrawer = ({ open, onClose, ...props }) => {
+export const OrganisaatioDrawer = ({
+  open,
+  onClose,
+  ...props
+}: DrawerContentProps) => {
   return (
     <Drawer open={open} onClose={onClose}>
       <DrawerContent onClose={onClose} open={open} {...props} />

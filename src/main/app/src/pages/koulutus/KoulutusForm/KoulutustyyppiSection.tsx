@@ -8,7 +8,15 @@ import { CRUD_ROLES, ENTITY } from '#/src/constants';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useIsKoulutustyyppiDisabledGetter } from '#/src/hooks/useOppilaitosTyypit';
 
-export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
+export const KoulutustyyppiSection = ({
+  organisaatioOid,
+  name,
+  disabled,
+}: {
+  organisaatioOid: string;
+  name: string;
+  disabled?: boolean;
+}) => {
   const { t } = useTranslation();
 
   const { getIsDisabled, isLoading } = useIsKoulutustyyppiDisabledGetter({

@@ -22,7 +22,9 @@ export const createRedirectEntityPage =
   ({ entityType, getRedirectUrl }: RedirectProps) =>
   () => {
     const { oid } = useParams() as { oid: string };
-    const { data: entity = {}, isLoading } = useEntityByOid(
+    const { data: entity, isLoading } = useEntityByOid<{
+      organisaatioOid: string;
+    }>(
       entityType,
       { oid },
       {

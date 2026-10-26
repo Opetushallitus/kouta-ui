@@ -1,6 +1,14 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { flow } from 'lodash';
 
+declare module 'axios' {
+  interface AxiosRequestConfig {
+    errorNotifier?: {
+      silent?: boolean;
+    };
+  }
+}
+
 import { getCookie } from '#/src/utils';
 
 import { ApiUrls } from './urls';

@@ -18,7 +18,6 @@ export const PikavalinnatCollapse = ({
   selectedOrganisaatio,
   onToggleFavourite,
   setSelectedOrganisaatio,
-  language,
 }) => {
   const { t } = useTranslation();
   const ophIsFavourite = useMemo(
@@ -55,7 +54,6 @@ export const PikavalinnatCollapse = ({
                 selected={selectedOrganisaatio}
                 onSelect={setSelectedOrganisaatio}
                 onToggleFavourite={onToggleFavourite}
-                language={language}
               />
             </Box>
           )}

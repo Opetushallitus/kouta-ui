@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 import Box from '@opetushallitus/virkailija-ui-components/Box';
+import { TFunction } from 'i18next';
 import { fromPairs, get, isFunction } from 'lodash-es';
 import styled, { css } from 'styled-components';
 
@@ -45,10 +46,12 @@ export const getSortDirection = ({ sort, name }) => {
 };
 
 type Column = {
-  title?: string;
+  title?: string | ((props: { rows: Array<any> }) => React.ReactNode);
   key: string;
-  sortable: boolean;
-  render: (any) => React.ReactNode;
+  sortable?: boolean;
+  render?: (props: any) => React.ReactNode;
+  Component?: React.ComponentType<any>;
+  collapsible?: boolean;
   style?: Record<string, string | number>;
 };
 
@@ -92,7 +95,7 @@ export const makeHakuColumn = (
   },
 });
 
-export const makeKoulutustyyppiColumn = t => {
+export const makeKoulutustyyppiColumn = (t: TFunction) => {
   const koulutustyyppiMapping: Record<string, string> = {
     ...fromPairs(
       koulutustyyppiHierarkiaToOptions(
@@ -253,11 +256,11 @@ const Cell = styled(TableCell)`
 `;
 
 type ListTableProps = {
-  onSort?: (string) => any;
+  onSort?: (dir: string) => void;
   sort?: boolean;
-  columns?: Array<any>;
+  columns?: Array<Column>;
   rows?: Array<any>;
-  renderActionsMenu?: (any) => void;
+  renderActionsMenu?: (props: any) => React.ReactNode;
   defaultCollapsedRow?: string;
   defaultCollapsedColumn?: string;
 };
@@ -357,7 +360,7 @@ export const ListTable = ({
                         {isFunction(Component) ? (
                           <Component language={language} {...rowProps} />
                         ) : (
-                          render({ ...rowProps, language })
+                          render?.({ ...rowProps, language })
                         )}
                       </Cell>
                     );

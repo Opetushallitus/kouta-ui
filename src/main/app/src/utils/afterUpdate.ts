@@ -7,7 +7,7 @@ export const afterUpdate = (
   queryClient: QueryClient,
   navigate: NavigateFunction,
   entityType: QueryKey,
-  newTila: JULKAISUTILA
+  newTila?: JULKAISUTILA
 ) => {
   const redirectToFrontpage = newTila && newTila === JULKAISUTILA.POISTETTU;
   const refetchActive = !newTila || newTila !== JULKAISUTILA.POISTETTU;

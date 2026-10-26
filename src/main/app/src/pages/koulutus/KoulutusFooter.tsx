@@ -9,7 +9,10 @@ import { useFormMode, useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue, useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
+import { HttpClient } from '#/src/httpClient';
 import { KoulutusModel } from '#/src/types/domainTypes';
+import { KoulutusFormValues } from '#/src/types/koulutusTypes';
+import { ApiUrls } from '#/src/urls';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { createKoulutus } from '#/src/utils/koulutus/createKoulutus';
@@ -47,7 +50,15 @@ export const KoulutusFooter = ({
     formMode === FormMode.CREATE ? createKoulutus : updateKoulutus;
 
   const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
+    async ({
+      values,
+      httpClient,
+      apiUrls,
+    }: {
+      values: KoulutusFormValues;
+      httpClient: HttpClient;
+      apiUrls: ApiUrls;
+    }) => {
       const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,

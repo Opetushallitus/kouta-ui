@@ -8,7 +8,10 @@ import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
+import { HttpClient } from '#/src/httpClient';
 import { HakuModel } from '#/src/types/domainTypes';
+import { HakuFormValues } from '#/src/types/hakuTypes';
+import { ApiUrls } from '#/src/urls';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { createHaku } from '#/src/utils/haku/createHaku';
@@ -38,7 +41,15 @@ export const HakuFooter = ({
   const initialValues = form.initial;
 
   const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
+    async ({
+      values,
+      httpClient,
+      apiUrls,
+    }: {
+      values: HakuFormValues;
+      httpClient: HttpClient;
+      apiUrls: ApiUrls;
+    }) => {
       const dataSendFn = formMode === FormMode.CREATE ? createHaku : updateHaku;
 
       const valuesToSend = getValuesForSaving(

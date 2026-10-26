@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router';
 import styled from 'styled-components';
 
 import { Alert } from '#/src/components/Alert';

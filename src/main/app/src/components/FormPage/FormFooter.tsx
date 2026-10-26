@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import { FormButton } from '#/src/components/FormButton';

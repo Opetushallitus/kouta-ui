@@ -1,6 +1,6 @@
 import { capitalize } from 'lodash-es';
 import queryString from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { ENTITY } from '#/src/constants';
 import { useHasChanged } from '#/src/hooks/useHasChanged';

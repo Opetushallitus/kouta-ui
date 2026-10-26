@@ -20,7 +20,10 @@ import { isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { useQueryOptionsGetOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
-import { getLanguageValue } from '#/src/utils/languageUtils';
+import {
+  getLanguageValue,
+  getFirstLanguageValue,
+} from '#/src/utils/languageUtils';
 
 import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 
@@ -49,8 +52,8 @@ const createOpetussuunnitelmaLabel = (
   oppilaitos: { nimi?: TranslatedField<string> } | undefined,
   language: LanguageCode
 ) =>
-  (getLanguageValue(nimi, language) ?? String(id)) +
-  (oppilaitos ? ` (${getLanguageValue(oppilaitos.nimi, language)})` : '');
+  (getFirstLanguageValue(nimi, language) ?? String(id)) +
+  (oppilaitos ? ` (${getFirstLanguageValue(oppilaitos.nimi, language)})` : '');
 
 const useOpetussuunnitelmaOptionWithLabel = (
   opetussuunnitelmaOption?: SelectOption

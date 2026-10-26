@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router';
 
 import Container from '#/src/components/Container';
 import { Box, Spin } from '#/src/components/virkailija';

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 
 import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';

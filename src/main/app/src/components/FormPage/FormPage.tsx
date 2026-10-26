@@ -1,7 +1,7 @@
-import React, { type ReactNode } from 'react';
+import React, { type ReactNode, useCallback } from 'react';
 
 import type { QueryObserverResult } from 'react-query';
-import ReactRouterPrompt from 'react-router-prompt';
+import type { BlockerFunction } from 'react-router';
 import styled from 'styled-components';
 
 import Container from '#/src/components/Container';
@@ -12,6 +12,7 @@ import { ReactFinalForm } from '#/src/components/ReactFinalForm';
 import Title from '#/src/components/Title';
 import { ENTITY, FormMode, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsDirty, useIsSubmitting } from '#/src/hooks/form';
+import { useNavigationBlocker } from '#/src/hooks/useNavigationBlocker';
 import { getThemeProp } from '#/src/theme';
 
 import UnsavedChangesDialog from '../UnsavedChangesDialog';
@@ -91,25 +92,27 @@ const FormPageContent = ({
   const isSubmitting = useIsSubmitting();
   const isDirty = useIsDirty();
   const tila: string = useFieldValue('tila');
+
+  const shouldBlockNavigation: BlockerFunction = useCallback(
+    ({ currentLocation, nextLocation } = {} as any) => {
+      const samePath = nextLocation?.pathname === currentLocation?.pathname;
+      const deleting = tila === JULKAISUTILA.POISTETTU;
+      return !samePath && !isSubmitting && isDirty && !deleting;
+    },
+    [isSubmitting, isDirty, tila]
+  );
+
+  const { isActive, onConfirm, onCancel } = useNavigationBlocker(
+    shouldBlockNavigation
+  );
+
   return (
     <>
       {isSubmitting && <OverlaySpin />}
       <Title>{title}</Title>
-      {
-        <ReactRouterPrompt
-          when={params => {
-            const currentLocation = params?.currentLocation;
-            const nextLocation = params?.nextLocation;
-            const samePath =
-              (nextLocation && nextLocation.pathname) ===
-              (currentLocation && currentLocation.pathname);
-            const deleting = tila === JULKAISUTILA.POISTETTU;
-            return !samePath && !isSubmitting && isDirty && !deleting;
-          }}
-        >
-          {props => <UnsavedChangesDialog {...props} />}
-        </ReactRouterPrompt>
-      }
+      {isActive && (
+        <UnsavedChangesDialog onConfirm={onConfirm} onCancel={onCancel} />
+      )}
       <Wrapper>
         <HeaderContainer>
           <Container>{header}</Container>

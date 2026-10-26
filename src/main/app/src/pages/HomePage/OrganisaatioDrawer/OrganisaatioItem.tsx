@@ -2,7 +2,7 @@ import React from 'react';
 
 import { isEmpty, noop } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import styled, { css } from 'styled-components';
 
 import { Box, Radio, Icon, Typography } from '#/src/components/virkailija';

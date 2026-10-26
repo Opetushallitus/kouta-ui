@@ -15,7 +15,6 @@ import styled, { ThemeContext } from 'styled-components';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { valueToArray, safeArrayToValue } from '#/src/utils';
-import { memoizeOne } from '#/src/utils/memoize';
 
 import { Button } from '../virkailija';
 
@@ -40,7 +39,7 @@ const makeDefaultPlaceholder = t => t('yleiset.valitseVaihtoehdoista');
 
 const defaultLoadingMessage = t => () => t('yleiset.ladataan');
 
-const getDefaultProps = memoizeOne(t => ({
+const buildDefaultProps = t => ({
   isClearable: true,
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
@@ -50,7 +49,7 @@ const getDefaultProps = memoizeOne(t => ({
   components: {
     Option: OptionComponent,
   },
-}));
+});
 
 const getOptionLabelByValue = (options: Array<any> = []) =>
   reduce(
@@ -129,10 +128,11 @@ export const Select = ({
   );
 
   const { t } = useTranslation();
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   return (
     <UiSelect
-      {...getDefaultProps(t)}
+      {...defaultProps}
       isDisabled={disabled}
       value={resolvedValue}
       options={options}
@@ -146,10 +146,11 @@ export const Select = ({
 export const CreatableSelect = ({ error = false, id, disabled, ...props }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   return (
     <ReactCreatable
-      {...getDefaultProps(t)}
+      {...defaultProps}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       inputId={id}
@@ -198,10 +199,11 @@ export const AsyncCreatableSelect = ({
 }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   return (
     <ReactAsyncCreatableSelect
-      {...getDefaultProps(t)}
+      {...defaultProps}
       placeholder={t('yleiset.kirjoitaHakusana')}
       styles={{
         ...getStyles(theme, error),
@@ -234,6 +236,7 @@ export const AsyncSelect = ({
 }: SelectProps) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   const getAsyncValueFn = useCallback(
     () => getAsyncValue(valueProp, defaultOptions, loadLabel),
@@ -248,7 +251,7 @@ export const AsyncSelect = ({
 
   return (
     <ReactAsyncSelect
-      {...getDefaultProps(t)}
+      {...defaultProps}
       isDisabled={
         disabled ||
         isUndefined(props?.loadOptions) ||

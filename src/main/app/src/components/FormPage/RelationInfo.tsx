@@ -31,7 +31,8 @@ export function RelationInfo({
   linkUrl?: string;
 }) {
   const { i18n } = useTranslation();
-  const name = getEntityNimiTranslation(entity, i18n.language) || '';
+  const name =
+    getEntityNimiTranslation(entity, i18n.language as LanguageCode) || '';
   return (
     <Box
       flexGrow={0}

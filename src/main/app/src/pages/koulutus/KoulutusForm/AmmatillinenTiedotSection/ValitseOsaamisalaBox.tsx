@@ -2,10 +2,10 @@ import React, { useMemo, useEffect } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import {

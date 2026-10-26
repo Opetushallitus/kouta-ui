@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
 import { Box, Typography } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';

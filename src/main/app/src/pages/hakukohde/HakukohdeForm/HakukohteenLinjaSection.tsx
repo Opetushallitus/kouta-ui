@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
@@ -10,6 +9,7 @@ import {
   FormFieldRadioGroup,
   FormFieldInput,
 } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import { LANGUAGES, LUKIO_YLEISLINJA } from '#/src/constants';
 import { useFieldValue, useIsDirty, useSetFieldValue } from '#/src/hooks/form';

@@ -2,7 +2,6 @@ import React from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import {
@@ -11,6 +10,7 @@ import {
   FormFieldInput,
   FormFieldEditor,
 } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';

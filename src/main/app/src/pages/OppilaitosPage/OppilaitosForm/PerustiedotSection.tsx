@@ -2,7 +2,6 @@ import React from 'react';
 
 import { TFunction } from 'i18next';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import {
@@ -10,6 +9,7 @@ import {
   FormFieldSwitch,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import Heading from '#/src/components/Heading';
 import LogoSection from '#/src/components/LogoSection';
 import { SomeFields } from '#/src/components/SomeFields';

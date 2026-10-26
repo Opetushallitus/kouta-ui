@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import { ErrorPlaceholder } from '#/src/components/ErrorPlaceholder';
@@ -10,6 +9,7 @@ import {
   FormFieldInput,
   FormFieldSelect,
 } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import { SisaltoFields } from '#/src/components/SisaltoFields';
 import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';

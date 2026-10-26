@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { Alert } from '#/src/components/Alert';
 import {
@@ -9,6 +8,7 @@ import {
   FormFieldCheckbox,
   simpleMapProps,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import {
   KOULUTUS_ROLE,

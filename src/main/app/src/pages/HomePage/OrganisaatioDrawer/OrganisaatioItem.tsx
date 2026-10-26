@@ -8,6 +8,7 @@ import styled, { css } from 'styled-components';
 import { Box, Radio, Icon, Typography } from '#/src/components/virkailija';
 import { disabledStyle } from '#/src/system';
 import { getThemeProp } from '#/src/theme';
+import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const FavouriteIconBase = styled(Icon)`
@@ -81,7 +82,7 @@ export const OrganisaatioItem = ({
   const onToggleOpen = () => onToggleOpenProp(oid);
 
   return (
-    <Container>
+    <Container {...getTestIdProps('organisaatioItem')}>
       <Box flexGrow={1} display="flex" pr={2}>
         <Box flexGrow={0} mr={1}>
           <Radio checked={selected} onChange={onSelect} disabled={disabled}>

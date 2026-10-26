@@ -34,7 +34,7 @@ export const ReadonlyKoeJaTilaisuudet = ({
   const { t } = useTranslation();
   const { nimi: tyyppiKoodiNimi } = useKoodiNimi(tyyppiKoodiUri, { language });
   const { tilaisuudet: usedTilaisuudet } = useReadonlyKokeetJaTilaisuudet(
-    tilaisuudet ?? [],
+    tilaisuudet,
     language
   );
 

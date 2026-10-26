@@ -28,21 +28,16 @@ const useInitialValues = hakukohde => {
   const hakukohdeKoodiQueryResult = useKoodi(hakukohdeKoodiUri);
   const { koodi: hakukohdeKoodi } = hakukohdeKoodiQueryResult;
 
-  const nimiHakukohdeKoodista = useMemo(
-    () => arrayToTranslationObject(hakukohdeKoodi?.metadata),
-    [hakukohdeKoodi]
-  );
-
   const initialValues = useMemo(
     () =>
       hakukohde
         ? getFormValuesByHakukohde(
             hakukohde,
             FormMode.EDIT,
-            nimiHakukohdeKoodista
+            arrayToTranslationObject(hakukohdeKoodi?.metadata)
           )
         : {},
-    [hakukohde, nimiHakukohdeKoodista]
+    [hakukohde, hakukohdeKoodi]
   );
 
   return { initialValues, hakukohdeKoodiUri, hakukohdeKoodiQueryResult };

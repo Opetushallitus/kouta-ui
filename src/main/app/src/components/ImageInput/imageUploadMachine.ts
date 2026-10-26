@@ -1,12 +1,6 @@
 import { type TFunction } from 'i18next';
 import { isError } from 'lodash-es';
-import {
-  createMachine,
-  assign,
-  type DoneInvokeEvent,
-  type ErrorPlatformEvent,
-  type EventObject,
-} from 'xstate';
+import { assign, fromPromise, setup } from 'xstate';
 
 export interface ImageUploadContext {
   file?: File | null;
@@ -49,45 +43,64 @@ const {
   draggingDisabled,
 } = controlStates;
 
-const clearValue = assign<ImageUploadContext, EventObject>({
-  file: () => null,
-  url: () => null,
-});
-
-const createUploadingState = (t: TFunction) => ({
-  id: uploading,
-  entry: assign<ImageUploadContext, ImageUploadEvent>({
-    file: (_ctx, e) => (e.type === UPLOAD_FILE ? e.files[0] : undefined),
-  }),
-  invoke: {
-    id: 'uploadFile',
-    src: 'upload',
-    onDone: {
-      target: fileUploaded,
-      actions: assign<ImageUploadContext, DoneInvokeEvent<string>>({
-        url: (_ctx, e) => e.data,
-      }),
-    },
-    onError: {
-      target: error,
-      actions: [
-        clearValue,
-        assign<ImageUploadContext, ErrorPlatformEvent>({
-          error: (_ctx, e) =>
-            isError(e.data) ? t('yleiset.kuvanLahetysVirhe') : e?.data?.message,
-        }),
-      ],
-    },
+const machineSetup = setup({
+  types: {
+    context: {} as ImageUploadContext,
+    events: {} as ImageUploadEvent,
+  },
+  actors: {
+    upload: fromPromise<string, ImageUploadEvent>(() => {
+      throw new Error('upload actor must be provided via .provide()');
+    }),
   },
 });
 
+const createUploadingState = (t: TFunction) =>
+  machineSetup.createStateConfig({
+    id: uploading,
+    entry: machineSetup.assign({
+      file: ({ event }) =>
+        event.type === UPLOAD_FILE ? event.files[0] : undefined,
+    }),
+    invoke: {
+      id: 'uploadFile',
+      src: 'upload',
+      input: ({ event }) => event,
+      onDone: {
+        target: fileUploaded,
+        actions: assign({
+          url: ({ event }) => event.output,
+        }),
+      },
+      onError: {
+        target: error,
+        actions: [
+          assign({
+            file: () => null,
+            url: () => null,
+          }),
+          assign({
+            error: ({ event }) =>
+              isError(event.error)
+                ? t('yleiset.kuvanLahetysVirhe')
+                : (event.error as { message?: string } | undefined)?.message,
+          }),
+        ],
+      },
+    },
+  });
+
 const draggingStates = {
+  initial: 'enabled',
   states: {
     enabled: {
       on: {
         [DRAG_STOP]: {
           target: `#${empty}`,
-          actions: clearValue,
+          actions: machineSetup.assign({
+            file: () => null,
+            url: () => null,
+          }),
         },
         [UPLOAD_FILE]: `#${uploading}`,
       },
@@ -117,7 +130,7 @@ export function createImageUploadMachine({
     initial = error;
   }
 
-  return createMachine<ImageUploadContext, ImageUploadEvent>({
+  return machineSetup.createMachine({
     id: 'imageUpload',
     initial,
     context: {
@@ -138,7 +151,10 @@ export function createImageUploadMachine({
         on: {
           [REMOVE_FILE]: {
             target: empty,
-            actions: clearValue,
+            actions: machineSetup.assign({
+              file: () => null,
+              url: () => null,
+            }),
           },
           [DRAG_START]: draggingDisabled,
         },
@@ -149,7 +165,7 @@ export function createImageUploadMachine({
           [UPLOAD_FILE]: uploading,
           [DRAG_START]: draggingEnabled,
         },
-        exit: assign<ImageUploadContext, ImageUploadEvent>({
+        exit: machineSetup.assign({
           error: () => null,
         }),
       },

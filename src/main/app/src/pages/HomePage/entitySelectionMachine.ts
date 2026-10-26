@@ -1,6 +1,6 @@
-import { assign } from '@xstate/immer';
+import { produce } from 'immer';
 import { forEach } from 'lodash-es';
-import { createMachine } from 'xstate';
+import { setup } from 'xstate';
 
 import { JULKAISUTILA } from '#/src/constants';
 
@@ -29,49 +29,51 @@ interface ResetSelectionEvent {
   items?: Array<EntityListItem>;
 }
 
-export const entitySelectionMachine = createMachine(
-  {
-    predictableActionArguments: true,
-    id: 'EntitySelectionMachine',
-    schema: {
-      context: {} as SelectionContext,
-      events: {} as SelectItemsEvent | DeselectItemsEvent | ResetSelectionEvent,
+type EntitySelectionEvent =
+  | SelectItemsEvent
+  | DeselectItemsEvent
+  | ResetSelectionEvent;
+
+const machineSetup = setup({
+  types: {
+    context: {} as SelectionContext,
+    events: {} as EntitySelectionEvent,
+  },
+});
+
+export const entitySelectionMachine = machineSetup.createMachine({
+  id: 'EntitySelectionMachine',
+  context: {
+    selection: {},
+  },
+  on: {
+    SELECT_ITEMS: {
+      actions: machineSetup.assign(({ context, event }) =>
+        produce(context, draft => {
+          forEach((event as SelectItemsEvent).items, item => {
+            draft.selection[item.oid] = item;
+          });
+        })
+      ),
     },
-    context: {
-      selection: {},
+    DESELECT_ITEMS: {
+      actions: machineSetup.assign(({ context, event }) =>
+        produce(context, draft => {
+          forEach((event as DeselectItemsEvent).items, item => {
+            delete draft.selection[item.oid];
+          });
+        })
+      ),
     },
-    on: {
-      SELECT_ITEMS: {
-        actions: 'selectItems',
-      },
-      DESELECT_ITEMS: {
-        actions: 'deselectItems',
-      },
-      RESET_SELECTION: {
-        actions: 'resetSelection',
-      },
+    RESET_SELECTION: {
+      actions: machineSetup.assign(({ context, event }) =>
+        produce(context, draft => {
+          draft.selection = {};
+          forEach((event as ResetSelectionEvent)?.items, item => {
+            draft.selection[item.oid] = item;
+          });
+        })
+      ),
     },
   },
-  {
-    actions: {
-      selectItems: assign<SelectionContext, SelectItemsEvent>((ctx, e) => {
-        forEach(e.items, item => {
-          ctx.selection[item.oid] = item;
-        });
-      }) as any,
-      deselectItems: assign<SelectionContext, DeselectItemsEvent>((ctx, e) => {
-        forEach(e.items, item => {
-          delete ctx.selection[item.oid];
-        });
-      }) as any,
-      resetSelection: assign<SelectionContext, ResetSelectionEvent>(
-        (ctx, e) => {
-          ctx.selection = {};
-          forEach(e?.items, item => {
-            ctx.selection[item.oid] = item;
-          });
-        }
-      ) as any,
-    },
-  }
-);
+});

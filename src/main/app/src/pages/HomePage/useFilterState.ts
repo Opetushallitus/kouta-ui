@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import { usePrevious } from 'react-use';
 
 import { ENTITY } from '#/src/constants';
@@ -9,7 +9,8 @@ import { useSelectedOrganisaatioOid } from '#/src/contexts/OrganisaatioValintaCo
 export const useFilterState = (name: ENTITY, service) => {
   const entityType = name;
 
-  const [state, send] = useActor(service);
+  const state = useSelector(service, s => s);
+  const send = useCallback(event => service.send(event), [service]);
 
   const selectedOrganisaatioOid = useSelectedOrganisaatioOid();
 

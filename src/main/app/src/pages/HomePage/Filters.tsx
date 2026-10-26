@@ -12,10 +12,10 @@ import {
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
+import { useSelectedOrganisaatioOid } from '#/src/contexts/OrganisaatioValintaContext';
 import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
 import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
@@ -106,9 +106,10 @@ export const Filters = ({
 
   const { data: selectedLanguage } = useAsiointiKieli();
 
-  const { hierarkia } = useOrganisaatioHierarkia(selectedOrganisaatioOid, {
-    skipParents: true,
-  });
+  const { hierarkia } = useOrganisaatioHierarkia(
+    selectedOrganisaatioOid ?? undefined,
+    { skipParents: true }
+  );
 
   const childOrgOptions = useMemo(
     () => parseChildOrgs(hierarkia, selectedLanguage),

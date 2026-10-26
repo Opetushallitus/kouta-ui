@@ -16,16 +16,11 @@ import {
   Spin,
 } from '#/src/components/virkailija';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-import { useSelector } from '#/src/hooks/reduxHooks';
-import { useActions } from '#/src/hooks/useActions';
+import { useOrganisaatioFavourites } from '#/src/contexts/OrganisaatioValintaContext';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import {
-  toggleFavourite,
-  selectOrganisaatioFavourites,
-} from '#/src/state/organisaatioFavourites';
 import { spacing, getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 
@@ -124,8 +119,10 @@ const DrawerContent = ({
   onClose,
   open,
 }) => {
-  const organisaatioFavourites = useSelector(selectOrganisaatioFavourites);
-  const [onToggleFavourite] = useActions([toggleFavourite]);
+  const {
+    favourites: organisaatioFavourites,
+    toggleFavourite: onToggleFavourite,
+  } = useOrganisaatioFavourites();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const hasOphOption = useMemo(

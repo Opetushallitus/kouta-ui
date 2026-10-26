@@ -4,7 +4,7 @@ import { useActor } from '@xstate/react';
 import { usePrevious } from 'react-use';
 
 import { ENTITY } from '#/src/constants';
-import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
+import { useSelectedOrganisaatioOid } from '#/src/contexts/OrganisaatioValintaContext';
 
 export const useFilterState = (name: ENTITY, service) => {
   const entityType = name;

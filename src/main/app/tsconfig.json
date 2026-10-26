@@ -1,31 +1,27 @@
 {
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "types": [
-      "node",
-    ],
-    "allowJs": true,
+    "types": ["node"],
     "checkJs": true,
     "esModuleInterop": true,
-    "jsx": "react-jsx",
-    "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "skipLibCheck": true,
     "allowUmdGlobalAccess": false,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
     "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
-    "strict": true
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "target": "ES2017",
+    "lib": ["DOM", "DOM.Iterable", "esnext"],
+    "allowJs": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
   },
   "include": [
     "src/**/*.ts",

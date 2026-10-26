@@ -8,7 +8,7 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
-import { $getRoot, EditorState, HISTORY_MERGE_TAG } from 'lexical';
+import { $getRoot, type EditorState, HISTORY_MERGE_TAG } from 'lexical';
 
 import { Container, EditorScroller, Editor } from './Components';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';

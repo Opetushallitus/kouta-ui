@@ -47,100 +47,98 @@ export const KoeTaiLisanayttoFields = ({
   );
 
   return (
-    <>
-      <SectionInnerCollapse
-        header={t(`koeTaiLisanaytto.title`, { index })}
-        defaultOpen={true}
-      >
-        <Box display="flex" ml={12}>
-          <Box flexGrow={1}>
-            <Box display="flex" mb={2}>
-              <Box flexGrow={1}>
-                <Box {...getTestIdProps('kokeenTaiLisanaytonTyyppi')}>
-                  <Field
-                    name={`${field}.tyyppi`}
-                    component={FormFieldSelect}
-                    options={options}
-                    label={t('koeTaiLisanaytto.tyyppi')}
-                    required
-                  />
-                </Box>
-              </Box>
-              <Box flexGrow={1} ml={4}>
-                <Box {...getTestIdProps('hakijalleNakyvaNimi')}>
-                  <Field
-                    name={`${field}.nimi.${language}`}
-                    component={FormFieldInput}
-                    label={t('koeTaiLisanaytto.hakijalleNakyvaNimi')}
-                  />
-                </Box>
+    <SectionInnerCollapse
+      header={t(`koeTaiLisanaytto.title`, { index })}
+      defaultOpen={true}
+    >
+      <Box display="flex" ml={12}>
+        <Box flexGrow={1}>
+          <Box display="flex" mb={2}>
+            <Box flexGrow={1}>
+              <Box {...getTestIdProps('kokeenTaiLisanaytonTyyppi')}>
+                <Field
+                  name={`${field}.tyyppi`}
+                  component={FormFieldSelect}
+                  options={options}
+                  label={t('koeTaiLisanaytto.tyyppi')}
+                  required
+                />
               </Box>
             </Box>
-            <Box mb={2} {...getTestIdProps('tietoaHakijalle')}>
+            <Box flexGrow={1} ml={4}>
+              <Box {...getTestIdProps('hakijalleNakyvaNimi')}>
+                <Field
+                  name={`${field}.nimi.${language}`}
+                  component={FormFieldInput}
+                  label={t('koeTaiLisanaytto.hakijalleNakyvaNimi')}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Box mb={2} {...getTestIdProps('tietoaHakijalle')}>
+            <Field
+              name={`${field}.tietoaHakijalle.${language}`}
+              component={FormFieldEditor}
+              label={t('koeTaiLisanaytto.tietoaHakijalle')}
+              hideHeaderSelect
+            />
+          </Box>
+          <Box mb={2} {...getTestIdProps('vahimmaispistemaara')}>
+            <Field
+              name={`${field}.vahimmaispistemaara`}
+              component={FormFieldInput}
+              type="number"
+              label={t('valintaperustelomake.vahimmaispistemaara')}
+            />
+          </Box>
+          <Box mb={2} {...getTestIdProps('liittyyEnnakkovalmistautumista')}>
+            <Field
+              name={`${field}.liittyyEnnakkovalmistautumista`}
+              component={FormFieldCheckbox}
+            >
+              {t('koeTaiLisanaytto.liittyyEnnakkovalmistautumista')}
+            </Field>
+          </Box>
+          {liittyyEnnakkovalmistautumista && (
+            <Box mb={2} {...getTestIdProps('ohjeetEnnakkovalmistautumiseen')}>
               <Field
-                name={`${field}.tietoaHakijalle.${language}`}
+                name={`${field}.ohjeetEnnakkovalmistautumiseen.${language}`}
                 component={FormFieldEditor}
-                label={t('koeTaiLisanaytto.tietoaHakijalle')}
+                label={t('koeTaiLisanaytto.materiaaliJaValmistautumisohjeet')}
                 hideHeaderSelect
               />
             </Box>
-            <Box mb={2} {...getTestIdProps('vahimmaispistemaara')}>
+          )}
+          <Box mb={2} {...getTestIdProps('erityisjarjestelytMahdollisia')}>
+            <Field
+              name={`${field}.erityisjarjestelytMahdollisia`}
+              component={FormFieldCheckbox}
+            >
+              {t('koeTaiLisanaytto.erityisjarjestelytMahdollisia')}
+            </Field>
+          </Box>
+          {erityisjarjestelytMahdollisia && (
+            <Box mb={2} {...getTestIdProps('ohjeetErityisjarjestelyihin')}>
               <Field
-                name={`${field}.vahimmaispistemaara`}
-                component={FormFieldInput}
-                type="number"
-                label={t('valintaperustelomake.vahimmaispistemaara')}
+                name={`${field}.ohjeetErityisjarjestelyihin.${language}`}
+                component={FormFieldEditor}
+                label={t('koeTaiLisanaytto.ohjeetErityisjarjestelyihin')}
+                hideHeaderSelect
               />
             </Box>
-            <Box mb={2} {...getTestIdProps('liittyyEnnakkovalmistautumista')}>
-              <Field
-                name={`${field}.liittyyEnnakkovalmistautumista`}
-                component={FormFieldCheckbox}
-              >
-                {t('koeTaiLisanaytto.liittyyEnnakkovalmistautumista')}
-              </Field>
-            </Box>
-            {liittyyEnnakkovalmistautumista && (
-              <Box mb={2} {...getTestIdProps('ohjeetEnnakkovalmistautumiseen')}>
-                <Field
-                  name={`${field}.ohjeetEnnakkovalmistautumiseen.${language}`}
-                  component={FormFieldEditor}
-                  label={t('koeTaiLisanaytto.materiaaliJaValmistautumisohjeet')}
-                  hideHeaderSelect
-                />
-              </Box>
-            )}
-            <Box mb={2} {...getTestIdProps('erityisjarjestelytMahdollisia')}>
-              <Field
-                name={`${field}.erityisjarjestelytMahdollisia`}
-                component={FormFieldCheckbox}
-              >
-                {t('koeTaiLisanaytto.erityisjarjestelytMahdollisia')}
-              </Field>
-            </Box>
-            {erityisjarjestelytMahdollisia && (
-              <Box mb={2} {...getTestIdProps('ohjeetErityisjarjestelyihin')}>
-                <Field
-                  name={`${field}.ohjeetErityisjarjestelyihin.${language}`}
-                  component={FormFieldEditor}
-                  label={t('koeTaiLisanaytto.ohjeetErityisjarjestelyihin')}
-                  hideHeaderSelect
-                />
-              </Box>
-            )}
-            <FieldArray
-              name={`${field}.tilaisuudet`}
-              component={TilaisuudetFields}
-              language={language}
-              t={t}
-            />
-          </Box>
-          <Box mt={4} ml={4}>
-            <RemoveButton onClick={removeSelf} />
-          </Box>
+          )}
+          <FieldArray
+            name={`${field}.tilaisuudet`}
+            component={TilaisuudetFields}
+            language={language}
+            t={t}
+          />
         </Box>
-      </SectionInnerCollapse>
-    </>
+        <Box mt={4} ml={4}>
+          <RemoveButton onClick={removeSelf} />
+        </Box>
+      </Box>
+    </SectionInnerCollapse>
   );
 };
 
@@ -167,7 +165,6 @@ export const KokeetTaiLisanaytotFields = ({
           <KoeTaiLisanayttoFields
             field={field}
             language={language}
-            meta={meta}
             index={index + 1 + readonlyAmount}
             removeSelf={() => fields.remove(index)}
             hakutapa={hakutapa}

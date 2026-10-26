@@ -11,10 +11,12 @@ const OrganisaatioRelation = ({ organisaatioOid }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   return (
-    <RelationInfo
-      title={t('yleiset.valittuOrganisaatio')}
-      entity={organisaatio}
-    />
+    organisaatio && (
+      <RelationInfo
+        title={t('yleiset.valittuOrganisaatio')}
+        entity={organisaatio}
+      />
+    )
   );
 };
 

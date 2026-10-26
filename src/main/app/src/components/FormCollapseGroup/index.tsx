@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { produce } from 'immer';
 import { get, isFunction, kebabCase } from 'lodash';
 
-import { FormCollapseProps } from '#/src/components/FormCollapse';
+import type { FormCollapseProps } from '#/src/components/FormCollapse';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import {
   useIsSubmitting,
@@ -88,9 +88,11 @@ export const FormCollapseGroup = ({
   useEffect(() => {
     if (errorsNeedAttention) {
       setCollapsesOpen(collapses =>
-        sectionErrors.map((error, i) => error || collapses[i])
+        sectionErrors.map((error, i) => error || Boolean(collapses[i]))
       );
-      const firstError = document.querySelector(`.${FIELD_ERROR_CLASSNAME}`);
+      const firstError = document.querySelector<HTMLElement>(
+        `.${FIELD_ERROR_CLASSNAME}`
+      );
       if (firstError) {
         scrollElementIntoView(firstError, 200);
       }

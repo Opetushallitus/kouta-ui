@@ -1,9 +1,10 @@
-import { test, Page } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 import { merge } from 'lodash';
 
 import koulutus from '#/playwright/fixtures/koulutus';
 import {
   assertNoUnsavedChangesDialog,
+  assertUnsavedChangesDialog,
   assertURLEndsWith,
   confirmDelete,
   fillKieliversiotSection,
@@ -96,6 +97,58 @@ test.describe('Edit koulutus', () => {
       await tallenna(page);
     }));
 
+  // --- Siirron suojatestit -------------------------------------------------
+  //
+  // Kohteena linkkiEPerusteisiin: tavallinen tekstikenttä, käännetty, eikä sitä
+  // validoida lainkaan. Koulutuksen FieldArrayt sisältävät vain selectejä, joten
+  // kirjoitustesti kohdistuu tavalliseen kenttään.
+
+  // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
+  // fokuksen menetystä näppäinpainallusten välissä.
+  test('should not lose focus while typing in linkkiEPerusteisiin', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'tuva', { loadPage: true });
+
+    const linkki = page
+      .getByTestId('linkkiEPerusteisiinInput')
+      .locator('input');
+
+    await linkki.pressSequentially('http://linkki.example', { delay: 20 });
+    await expect(linkki).toHaveValue('http://linkki.example');
+  });
+
+  // Tyhjennetty kenttä päätyy runkoon tyhjänä. Täytetään ensin ja tyhjennetään vasta
+  // sitten, jottei testi mittaa täyttämättä jättämistä. Odotus {} eikä { fi: '' },
+  // koska getValuesForSaving normalisoi kokonaan tyhjän käännetyn kentän
+  // (isEmptyTranslatedField).
+  test('should send an emptied translated field as empty', async ({ page }) => {
+    await prepareTest(page, 'tuva', { loadPage: true });
+    await fillKieliversiotSection(page);
+
+    const linkki = page
+      .getByTestId('linkkiEPerusteisiinInput')
+      .locator('input');
+
+    await linkki.fill('http://testilinkki.fi');
+    await expect(linkki).toHaveValue('http://testilinkki.fi');
+    await linkki.fill('');
+
+    const requestPromise = page.waitForRequest(
+      req =>
+        req.url().endsWith('/kouta-backend/koulutus') &&
+        ['POST', 'PUT'].includes(req.method())
+    );
+    await page.route('**/kouta-backend/koulutus', route =>
+      route.fulfill({ json: route.request().postDataJSON() })
+    );
+
+    await tallenna(page);
+
+    const body = (await requestPromise).postDataJSON();
+    expect(body.metadata.linkkiEPerusteisiin).toEqual({});
+  });
+
   test('Should be able to edit TELMA-koulutus', async ({ page }, testInfo) =>
     await mutationTest({ page, testInfo }, async () => {
       await prepareTest(page, 'telma', {
@@ -181,6 +234,14 @@ test.describe('Edit koulutus', () => {
   }) => {
     await prepareTest(page, 'amm', { loadPage: true });
     await assertNoUnsavedChangesDialog(page);
+  });
+
+  test('Should complain about unsaved changes after an edit', async ({
+    page,
+  }) => {
+    await prepareTest(page, 'amm', { loadPage: true });
+    await fillKieliversiotSection(page);
+    await assertUnsavedChangesDialog(page);
   });
 
   test('Should redirect from url without organization', async ({ page }) => {

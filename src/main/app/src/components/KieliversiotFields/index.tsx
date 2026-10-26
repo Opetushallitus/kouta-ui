@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldCheckboxGroup } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { getLanguageOptions } from '#/src/utils';
 
 export const KieliversiotFields = ({ name = 'kieliversiot', ...props }) => {

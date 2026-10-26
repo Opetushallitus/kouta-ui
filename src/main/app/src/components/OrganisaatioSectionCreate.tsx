@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
 import _ from 'lodash';
-import { Field } from 'redux-form';
 
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';

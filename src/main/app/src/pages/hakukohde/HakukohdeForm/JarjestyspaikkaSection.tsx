@@ -2,12 +2,12 @@ import React, { useMemo } from 'react';
 
 import { sortBy } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Radio, RadioGroup, Spin } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';

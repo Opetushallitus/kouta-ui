@@ -2,9 +2,9 @@ import React from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { createFormFieldComponent } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { AsyncCreatableSelect } from '#/src/components/Select';
 import { Box } from '#/src/components/virkailija';
 import {

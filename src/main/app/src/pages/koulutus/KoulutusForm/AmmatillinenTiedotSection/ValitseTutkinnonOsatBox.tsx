@@ -3,10 +3,10 @@ import React, { useMemo, useEffect } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { usePrevious } from 'react-use';
-import { Field } from 'redux-form';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { Box } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';

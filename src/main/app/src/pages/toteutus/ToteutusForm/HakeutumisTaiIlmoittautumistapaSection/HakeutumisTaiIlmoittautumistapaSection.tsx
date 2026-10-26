@@ -2,7 +2,6 @@ import React from 'react';
 
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { Alert } from '#/src/components/Alert';
@@ -12,6 +11,7 @@ import {
   FormFieldEditor,
   FormFieldIntegerInput,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { SegmentTab } from '#/src/components/SegmentTab';
 import { SegmentTabs } from '#/src/components/SegmentTabs';
 import { Box } from '#/src/components/virkailija';

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import DateTimeRange from '#/src/components/DateTimeRange';
@@ -11,6 +10,7 @@ import {
   FormFieldPostinumeroSelect,
   FormFieldEditor,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import Heading from '#/src/components/Heading';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';

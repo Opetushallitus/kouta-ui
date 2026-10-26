@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import { HAKU_ROLE } from '#/src/constants';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';

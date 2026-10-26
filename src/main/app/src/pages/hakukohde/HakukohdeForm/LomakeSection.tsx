@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 import { LomakeFields } from '#/src/components/LomakeFields';
 import { Box, Typography } from '#/src/components/virkailija';

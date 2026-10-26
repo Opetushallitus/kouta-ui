@@ -90,6 +90,17 @@ export default defineConfig(({ mode }) => {
       globals: true,
       include: ['**/**.test.[jt]s(x)?'],
       setupFiles: './src/setupTests.ts',
+      coverage: {
+        provider: 'v8',
+        reporter: ['text-summary', 'lcov'],
+        include: ['src/**'],
+        exclude: [
+          'src/**/*.test.*',
+          'src/**/*.d.ts',
+          'src/types/**',
+          'src/translations/**',
+        ],
+      },
     },
   };
 });

@@ -43,20 +43,28 @@ const ScheduleSection = ({
         />
       </FieldGroup>
 
+      <FieldGroup title={t('hakulomake.varasijatayttoPaattyy')}>
+        <Field
+          name={`${name}.varasijatayttoPaattyy`}
+          component={FormFieldDateTimeInput}
+          helperText={t('yleiset.paivamaaraJaKellonaika')}
+        />
+      </FieldGroup>
+
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
         <Box mb={2}>
           <Field name={`${name}.ajankohtaKaytossa`} component={FormFieldSwitch}>
             {t('hakulomake.haullaErillinenAloitusajankohta')}
           </Field>
         </Box>
-        {haullaErillinenAloitusajankohta && (
+        {haullaErillinenAloitusajankohta ? (
           <KoulutuksenAloitusajankohtaFields
             section={name}
             name={`${name}.ajankohtaTyyppi`}
             language={language}
             kausiRequired={isYhteishaku}
           />
-        )}
+        ) : null}
       </FieldGroup>
 
       {(isYhteishaku || isErillishaku) && isOphVirkailija ? (

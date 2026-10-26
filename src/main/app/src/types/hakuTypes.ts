@@ -21,6 +21,7 @@ export type HakuFormValues = {
   aikataulut: AjankohtaFields & {
     hakuaika: Array<FormDateRange>;
     aikataulu: Array<FormDateRange>;
+    varasijatayttoPaattyy?: FormDate;
     lisaamisenTakaraja: FormDate;
     muokkauksenTakaraja: FormDate;
     ajastettuJulkaisu: FormDate;
@@ -33,5 +34,5 @@ export type HakuFormValues = {
   };
   hakulomake: HakulomakeFormSection;
   yhteyshenkilot: Array<Yhteystieto>;
-  hakukohteenLiittajaOrganisaatiot: Array<string>;
+  hakukohteenLiittajaOrganisaatiot?: Array<string>;
 };

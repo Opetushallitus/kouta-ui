@@ -15,3 +15,16 @@ ignoredBuiltDependencies:
 # initialValue-propsia - ja mukana vain, jotta paikka on identtinen ylävirran kanssa.
 patchedDependencies:
   react-final-form@7.0.1: patches/react-final-form@7.0.1.patch
+
+# Turvapäivityksiä transitiivisiin riippuvuuksiin. Ylävirran paketit pinnaavat yhä
+# haavoittuvan version, joten korjattu versio on pakotettava täältä.
+overrides:
+  brace-expansion@1: 1.1.18
+  brace-expansion@2: 2.1.4
+  minimatch@3: 3.1.5
+  minimatch@9: 9.0.9
+  picomatch@2: 2.3.2
+  picomatch@4: 4.0.7
+  # Major-loikka yli 2.x:n: ainoa käyttäjä react-usen useCookie tarvitsee vain
+  # get/set/remove, jotka ovat 3.x:ssa ennallaan - eikä sitä kutsuta täältä lainkaan.
+  js-cookie@2: 3.0.8

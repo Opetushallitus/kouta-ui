@@ -11,9 +11,9 @@ import { useFieldRegistration } from './FieldRegistry';
 // näkyvissä/piilotettu" tuli ennen redux-formin storesta - react-final-formissa vastaavaa
 // ei ole) ja paikkaa hiljaisesti redux-formin yksityiskohdat, joita kirjastolla ei ole.
 // Perustelu kunkin korjauksen vieressä: buildErrorAwareComponent, applyEmptyStringRule,
-// identityParse, identityFormat. Kaksi muuta on korjattu muualla: arvon luku palauttaa
-// muotoillun arvon (hooks/form.ts, useRawValue), ja blur ei muuta arvoa (UrlInput/
-// NumberInput kutsuvat onChangea ennen onBluria).
+// identityParse, identityFormat, buildFieldArrayComponent. Kaksi muuta on korjattu
+// muualla: arvon luku palauttaa muotoillun arvon (hooks/form.ts, useRawValue), ja blur
+// ei muuta arvoa (UrlInput/NumberInput kutsuvat onChangea ennen onBluria).
 //
 // no-restricted-imports estää react-final-formin suoran tuonnin muualla; tämä tiedosto
 // on sallittu poikkeus .eslintrc.js:ssä.
@@ -157,24 +157,55 @@ const withReduxFormFieldsApi = (fields: any) => {
   return proxy;
 };
 
-const buildFieldsApiComponent = (Component: any) => (innerProps: any) => (
-  <Component
-    {...innerProps}
-    fields={withReduxFormFieldsApi(innerProps.fields)}
-  />
-);
+// Taulukon oma virhe (esim. "vähintään yksi rivi") on polussa `${name}._error`, koska
+// createErrorBuilder kirjoittaa sen redux-formin tapaan sinne. final-form ei lue sitä:
+// sen taulukkovirheen avain on ARRAY_ERROR, eikä submitErrorista poimita sitäkään.
+// Wrapper siirtää _errorin meta.erroriin kuten buildErrorAwareComponent skalaarikentille.
+//
+// Piilotus dirtySinceLastSubmitin eikä modifiedSinceLastSubmitin perusteella, koska
+// taulukkomutaattorit (push, remove, ...) eivät merkitse kenttää muokatuksi.
+const buildFieldArrayComponent = (Component: any) => (innerProps: any) => {
+  const meta = innerProps.meta;
+  const submitError = meta?.dirtySinceLastSubmit
+    ? undefined
+    : meta?.submitError?._error;
+
+  return (
+    <Component
+      {...innerProps}
+      fields={withReduxFormFieldsApi(innerProps.fields)}
+      meta={{ ...meta, error: meta?.error ?? submitError }}
+    />
+  );
+};
+
+// Kirjaston oletustilaus on length, value ja error. Tallennusvirhe ja sen piilotusehto
+// pitää tilata erikseen, muuten ne ovat metassa aina undefined.
+const fieldArraySubscription = {
+  length: true,
+  value: true,
+  error: true,
+  submitError: true,
+  dirtySinceLastSubmit: true,
+};
 
 const FieldArrayWithRegistration = (props: any) => {
   useFieldRegistration([props.name]);
 
   const { component: Component, ...rest } = props;
 
-  const FieldsApiComponent = useMemo(
-    () => buildFieldsApiComponent(Component),
+  const FieldArrayComponent = useMemo(
+    () => buildFieldArrayComponent(Component),
     [Component]
   );
 
-  return <RffFieldArray {...rest} component={FieldsApiComponent} />;
+  return (
+    <RffFieldArray
+      {...rest}
+      subscription={fieldArraySubscription}
+      component={FieldArrayComponent}
+    />
+  );
 };
 
 // Wrapperin omat proppityypit tukevat kahta asiaa, joita react-final-formin FieldProps

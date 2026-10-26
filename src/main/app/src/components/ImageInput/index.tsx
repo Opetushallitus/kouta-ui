@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 
 import { type TFunction } from 'i18next';
 import { noop } from 'lodash-es';
@@ -7,7 +7,7 @@ import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { match } from 'ts-pattern';
-import { type Sender, type State } from 'xstate';
+import { fromPromise, type SnapshotFrom } from 'xstate';
 
 import { FormButton } from '#/src/components/FormButton';
 import { Box, Typography, Icon, Spin } from '#/src/components/virkailija';
@@ -19,12 +19,15 @@ import {
   createImageUploadMachine,
   actionTypes as AT,
   controlStates as CS,
-  type ImageUploadContext,
   type ImageUploadEvent,
 } from './imageUploadMachine';
 import validateInput, { type Dimensions } from './validateInput';
 
-const useMachineDropZone = ({ send }: { send: Sender<ImageUploadEvent> }) => {
+const useMachineDropZone = ({
+  send,
+}: {
+  send: (event: ImageUploadEvent) => void;
+}) => {
   const onDrop = useCallback(
     async (files: Array<File>) => {
       send({ type: AT.UPLOAD_FILE, files });
@@ -229,7 +232,7 @@ const InputAreaContent = ({
 }: {
   file?: File | null;
   machineError?: string | null;
-  state: State<ImageUploadContext, ImageUploadEvent>;
+  state: SnapshotFrom<ReturnType<typeof createImageUploadMachine>>;
   open: () => void;
   onRemove: () => void;
   t: TFunction;
@@ -285,14 +288,24 @@ export const ImageInput = (props: ImageInputProps) => {
   } = props;
   const { t } = useTranslation();
 
-  const fileUploadMachine = createImageUploadMachine({
-    url: uploadedImageUrl,
-    externalError,
-    t,
-  });
-  const [state, send] = useMachine(fileUploadMachine, {
-    services: {
-      upload(_ctx: ImageUploadContext, e: ImageUploadEvent) {
+  // Muistoitettu: uuden koneen luonti joka renderillä loisi uuden
+  // machine.config-viitteen, ja @xstate/react uudelleenluo actorin aina kun
+  // se muuttuu -> ikuinen renderöintilooppi (React-virhe #301). .provide()
+  // sen sijaan säilyttää alkuperäisen config-viitteen, joten sen voi kutsua
+  // joka renderillä pysyttäen upload-sulkeuman ajan tasalla.
+  const imageUploadMachine = useMemo(
+    () =>
+      createImageUploadMachine({
+        url: uploadedImageUrl,
+        externalError,
+        t,
+      }),
+    [uploadedImageUrl, externalError, t]
+  );
+
+  const fileUploadMachine = imageUploadMachine.provide({
+    actors: {
+      upload: fromPromise(({ input: e }) => {
         if (e.type !== AT.UPLOAD_FILE) {
           return Promise.reject(new Error(`Unexpected event ${e.type}`));
         }
@@ -303,9 +316,10 @@ export const ImageInput = (props: ImageInputProps) => {
         // Log uncaught errors in validation/upload for easier debugging
         p.catch(console.error);
         return p;
-      },
+      }),
     },
   });
+  const [state, send] = useMachine(fileUploadMachine);
 
   const { file, url, error: machineError } = state.context;
   const { getInputProps, getRootProps, onRemove, open } = useMachineDropZone({

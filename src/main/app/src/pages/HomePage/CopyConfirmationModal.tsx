@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useActor, useInterpret, useSelector } from '@xstate/react';
+import { useActorRef, useSelector } from '@xstate/react';
 import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { ActorRefFrom, InterpreterFrom } from 'xstate';
+import { ActorRefFrom, fromPromise } from 'xstate';
 
 import Modal from '#/src/components/Modal';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
@@ -14,7 +14,6 @@ import {
   ExecuteEvent,
   StartEvent,
 } from '#/src/machines/batchOpsMachine';
-import { isDev } from '#/src/utils';
 
 import { EntityListTable } from './EntitySearchList';
 import { entitySelectionMachine } from './entitySelectionMachine';
@@ -22,13 +21,13 @@ import { CopyToteutuksetMutationFunctionAsync } from './ToteutuksetSection/copyT
 import { useEntitySelectionApi } from './useEntitySelection';
 
 export const BatchOpsCopyContext = React.createContext<
-  InterpreterFrom<typeof BatchOpsMachine> | undefined
+  ActorRefFrom<typeof BatchOpsMachine> | undefined
 >(undefined);
 
 export const useBatchOpsApi = (
-  batchOpsService: InterpreterFrom<typeof BatchOpsMachine>
+  batchOpsService: ActorRefFrom<typeof BatchOpsMachine>
 ) => {
-  const [state, send] = useActor(batchOpsService);
+  const state = useSelector(batchOpsService, s => s);
 
   const tila = useSelector(batchOpsService, s => s.context?.tila);
   const entities = useSelector(batchOpsService, s => s.context?.entities);
@@ -47,16 +46,16 @@ export const useBatchOpsApi = (
       entities,
       state: state.value,
       start: ({ tila, entities }: Omit<StartEvent, 'type'>) =>
-        send({ type: 'START', tila, entities }),
-      cancel: () => send({ type: 'CANCEL' }),
+        batchOpsService.send({ type: 'START', tila, entities }),
+      cancel: () => batchOpsService.send({ type: 'CANCEL' }),
       execute: ({ entities, tila }: Omit<ExecuteEvent, 'type'>) =>
-        send({ type: 'EXECUTE', entities, tila }),
-      close: () => send({ type: 'CLOSE' }),
+        batchOpsService.send({ type: 'EXECUTE', entities, tila }),
+      close: () => batchOpsService.send({ type: 'CLOSE' }),
       result,
-      isSuccess: state.matches('result.success'),
-      isError: state.matches('result.error'),
+      isSuccess: state.matches({ result: 'success' }),
+      isError: state.matches({ result: 'error' }),
     }),
-    [state, send, tila, entities, batchOpsService, result, selectionRef]
+    [state, batchOpsService, tila, entities, result, selectionRef]
   );
 };
 
@@ -72,14 +71,15 @@ export const CopyConfirmationWrapper = ({
   children: React.ReactNode;
   mutateAsync: CopyToteutuksetMutationFunctionAsync;
 }) => {
-  const batchOpsService = useInterpret(BatchOpsMachine, {
-    services: {
-      runMutation: (ctx, e) => mutateAsync(e),
-    },
-    devTools: isDev,
-  });
+  const batchOpsService = useActorRef(
+    BatchOpsMachine.provide({
+      actors: {
+        runMutation: fromPromise(({ input }) => mutateAsync(input)),
+      },
+    })
+  );
 
-  const [state] = useActor(batchOpsService);
+  const state = useSelector(batchOpsService, s => s);
 
   const { t } = useTranslation();
 

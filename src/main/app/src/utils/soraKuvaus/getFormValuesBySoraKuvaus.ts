@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { map, mapValues } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { toSelectValue } from '#/src/utils';
@@ -21,10 +21,10 @@ const getFormValuesBySoraKuvaus = soraKuvaus => {
     tila,
     kieliversiot: kielivalinta || [],
     koulutusala: toSelectValue(koulutusalaKoodiUri),
-    koulutukset: _fp.map(value => ({ value }))(koulutusKoodiUrit),
+    koulutukset: map(koulutusKoodiUrit, value => ({ value })),
     tiedot: {
       nimi: nimi || {},
-      kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
+      kuvaus: mapValues(kuvaus || {}, parseEditorState),
     },
     koulutustyyppi: koulutustyyppi || null,
   };

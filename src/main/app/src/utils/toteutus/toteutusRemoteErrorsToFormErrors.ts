@@ -1,12 +1,22 @@
 import { TFunction } from 'i18next';
-import { capitalize, map, findIndex, isEmpty, isUndefined, uniq } from 'lodash';
+import {
+  capitalize,
+  map,
+  findIndex,
+  isEmpty,
+  isUndefined,
+  uniq,
+} from 'lodash-es';
 import { match } from 'ts-pattern';
 
 import { LANGUAGES, KOULUTUSTYYPPI } from '#/src/constants';
 import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
 import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
-export const findAllIndices = (liitetytEntiteetit, virheellinen) => {
+export const findAllIndices = <T>(
+  liitetytEntiteetit: Array<T>,
+  virheellinen: T
+): Array<number> => {
   if (isEmpty(virheellinen) || isEmpty(liitetytEntiteetit)) {
     return [];
   } else {
@@ -20,7 +30,10 @@ export const findAllIndices = (liitetytEntiteetit, virheellinen) => {
   }
 };
 
-export const findIndices = (liitetytEntiteetit, virheellisetEntiteetit) => {
+export const findIndices = <T>(
+  liitetytEntiteetit: Array<T>,
+  virheellisetEntiteetit: Array<T> | undefined
+): Array<number> => {
   return uniq(virheellisetEntiteetit).flatMap(entiteetti => {
     return findAllIndices(liitetytEntiteetit, entiteetti);
   });
@@ -192,7 +205,10 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
 
     if (!isEmpty(liitetytEntiteetit)) {
       const indicesForOpintojaksotWithInvalidTila = map(meta?.entiteetit, oid =>
-        findIndex(liitetytEntiteetit, [`${koulutustyyppiName}.value`, oid])
+        findIndex(liitetytEntiteetit as Array<object>, [
+          `${koulutustyyppiName}.value`,
+          oid,
+        ])
       ).filter(i => i >= 0);
 
       const fieldValue = (index: number) => {
@@ -230,7 +246,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = (
     const liitetytOids = liitetytEntiteetit?.map(e => e?.osaamismerkki?.value);
 
     const indicesWithDeprecated = findIndices(
-      liitetytOids,
+      liitetytOids ?? [],
       meta?.osaamismerkit
     );
 

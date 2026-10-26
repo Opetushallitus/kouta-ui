@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
-import { Field } from 'redux-form';
-
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 
 import { FormFieldAsyncKoodistoSelect } from './formFields';
@@ -29,11 +28,13 @@ export const KoodistoCollapseList = ({
   name: string;
   selectLabel: string;
   CollapseContent: React.ComponentType<CollapseContentProps>;
-  koodistoData: Array<Koodi>;
+  koodistoData?: Array<Koodi>;
   formatLabel?: (koodi: Koodi, language: LanguageCode) => string;
   itemProps: any;
 }) => {
-  const selectedItems = useFieldValue(`${name}.valinnat`);
+  const selectedItems = useFieldValue<Array<SelectOption<string>> | undefined>(
+    `${name}.valinnat`
+  );
   const userLanguage = useUserLanguage();
 
   const selectedItemsWithLabels = useMemo(
@@ -69,7 +70,7 @@ export const KoodistoCollapseList = ({
       </Box>
       {selectedItemsWithLabels?.map(({ value, label }, index) => (
         <Box mb={3} key={value}>
-          <SectionInnerCollapse header={label}>
+          <SectionInnerCollapse header={label ?? ''}>
             <CollapseContent
               koodiUri={value}
               index={index}

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import {
@@ -9,13 +8,14 @@ import {
   FormFieldSwitch,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import Heading from '#/src/components/Heading';
 import { Box, Typography } from '#/src/components/virkailija';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { OrganisaatioModel } from '#/src/types/domainTypes';
-import { getTestIdProps } from '#/src/utils';
+import { getTestIdProps, isTruthy } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const InfoLabel = props => (
@@ -117,7 +117,7 @@ const OrganisaatioSection = ({ organisaatio, t, language }) => {
           </Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{opetuskielet.filter(Boolean).join(', ')}</Typography>
+          <Typography>{opetuskielet.filter(isTruthy).join(', ')}</Typography>
         </InfoValue>
       </Box>
     </>

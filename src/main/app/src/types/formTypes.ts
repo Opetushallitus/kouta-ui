@@ -47,7 +47,7 @@ export type FormError = {
   errorKey: string | ((t: TFunction) => string) | null;
 };
 
-type KoutaErrorResponse = {
+export type KoutaErrorResponse = {
   errorType: string;
   msg: string;
   path: string;
@@ -55,14 +55,18 @@ type KoutaErrorResponse = {
     entiteetit?: Array<string>;
     julkaistutToteutukset: Array<string>;
     maksullisuustyyppi?: MaksullisuusTyyppi;
-    osaamismerkit: Array<string>;
+    osaamismerkit?: Array<string>;
   };
 };
 
-type KoutaErrorData = {
+export type KoutaErrorData = {
   koulutustyyppi?: KOULUTUSTYYPPI;
-  opintojaksojenLiittaminen?: { opintojaksot: Array<string> };
-  osaamismerkkienLiittaminen?: { osaamismerkit: Array<string> };
+  opintojaksojenLiittaminen?: {
+    opintojaksot: Array<{ opintojakso?: SelectOption }>;
+  };
+  osaamismerkkienLiittaminen?: {
+    osaamismerkit: Array<{ osaamismerkki?: SelectOption }>;
+  };
 };
 
 export type RemoteErrorsToFormErrors = (

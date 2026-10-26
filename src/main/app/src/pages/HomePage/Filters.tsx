@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { flow, isEqual, map, reject, values } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import Select from '#/src/components/Select';
@@ -12,10 +12,10 @@ import {
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
 } from '#/src/constants';
+import { useSelectedOrganisaatioOid } from '#/src/contexts/OrganisaatioValintaContext';
 import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 import { koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
 import { getKoulutuksenAlkamisvuosiOptions } from '#/src/utils/getKoulutuksenAlkamisvuosiOptions';
@@ -26,13 +26,14 @@ const NAME_INPUT_DEBOUNCE_TIME = 300;
 const useTilaOptions = t =>
   useMemo(
     () =>
-      _fp.flow(
-        _fp.values,
-        _fp.remove(_fp.isEqual(JULKAISUTILA.POISTETTU)),
-        _fp.map(tila => ({
-          label: t(getJulkaisutilaTranslationKey(tila)),
-          value: tila,
-        }))
+      flow(
+        values,
+        arr => reject(arr, v => isEqual(v, JULKAISUTILA.POISTETTU)),
+        arr =>
+          map(arr, tila => ({
+            label: t(getJulkaisutilaTranslationKey(tila)),
+            value: tila,
+          }))
       )(JULKAISUTILA),
     [t]
   );
@@ -92,7 +93,7 @@ export const Filters = ({
 
   const parseChildOrgs = (hierarkia, lang) => {
     const flatHierarkia = flattenHierarkia(hierarkia);
-    const result = [];
+    const result: Array<SelectOption> = [];
     flatHierarkia.forEach(org => {
       if (org?.nimi) {
         const label = org.nimi[lang] ? org.nimi[lang] : org.nimi.fi;
@@ -106,9 +107,10 @@ export const Filters = ({
 
   const { data: selectedLanguage } = useAsiointiKieli();
 
-  const { hierarkia } = useOrganisaatioHierarkia(selectedOrganisaatioOid, {
-    skipParents: true,
-  });
+  const { hierarkia } = useOrganisaatioHierarkia(
+    selectedOrganisaatioOid ?? undefined,
+    { skipParents: true }
+  );
 
   const childOrgOptions = useMemo(
     () => parseChildOrgs(hierarkia, selectedLanguage),
@@ -149,7 +151,7 @@ export const Filters = ({
 
   const nakyvyysOptions = useNakyvyysOptions(t);
 
-  const koulutuksenAlkamisvuosiOptions = getKoulutuksenAlkamisvuosiOptions(t);
+  const koulutuksenAlkamisvuosiOptions = getKoulutuksenAlkamisvuosiOptions();
   const { options: koulutuksenAlkamiskausiOptions } = useKoodistoOptions({
     koodisto: 'kausi',
   });

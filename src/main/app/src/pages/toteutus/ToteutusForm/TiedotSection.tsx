@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 
-import _fp from 'lodash/fp';
+import { isEmpty, isUndefined } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
 import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
 import { FormFieldInput, FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { OpinnonTyyppiField } from '#/src/components/OpinnonTyyppiField';
 import { OpintojenLaajuusFieldExtended } from '#/src/components/OpintojenLaajuusFieldExtended';
 import { OpintojenLaajuusFieldRange } from '#/src/components/OpintojenLaajuusFieldRange';
@@ -25,7 +25,6 @@ import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import getOsaamisalaLaajuus from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 
 import { TaiteenalatField } from './TiedotSection/TaiteenalatField';
-import { OsaamisalaOsa } from '../../koulutus/KoulutusForm/AmmatillinenTiedotSection/ValitseOsaamisalaBox';
 
 type NimiSectionProps = {
   name: string;
@@ -113,7 +112,7 @@ const OpintojenLaajuusForOsaamisala = ({
 
   const { ePerusteId } = koulutus || {};
   const { data: ePerusteRakenne } = useEPerusteRakenne({ ePerusteId });
-  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat || [];
+  const ePerusteRakenneOsat = ePerusteRakenne?.osat || [];
 
   const osaamisalaKoodiUri = koulutus?.metadata?.osaamisalaKoodiUri;
   const { koodiArvo } = parseKoodiUri(osaamisalaKoodiUri);
@@ -130,7 +129,7 @@ const OpintojenLaajuusForOsaamisala = ({
           selectedLanguage={selectedLanguage}
           koodiUri={laajuusyksikkoKoodiUri}
           label={t('toteutuslomake.laajuus')}
-          prefix={osaamisalaLaajuus || ''}
+          prefix={osaamisalaLaajuus ? String(osaamisalaLaajuus) : ''}
         />
       </Box>
     </Box>
@@ -146,20 +145,24 @@ const PieniOsaamiskokonaisuusField = ({
 }) => {
   const { t } = useTranslation();
   const { change } = useBoundFormActions();
-  const currValue = useFieldValue(`${name}.isPieniOsaamiskokonaisuus`);
-  const toteutuksenLaajuus = useFieldValue(`${name}.opintojenLaajuusNumero`);
+  const currValue = useFieldValue<boolean | undefined>(
+    `${name}.isPieniOsaamiskokonaisuus`
+  );
+  const toteutuksenLaajuus = useFieldValue<number | string | undefined>(
+    `${name}.opintojenLaajuusNumero`
+  );
   const koulutustyyppi = koulutus?.koulutustyyppi;
 
   useEffect(() => {
     if (
-      _fp.isUndefined(currValue) &&
+      isUndefined(currValue) &&
       (KOULUTUSTYYPPI.TUTKINNON_OSA === koulutustyyppi ||
         ([
           KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOJAKSO,
           KOULUTUSTYYPPI.KORKEAKOULUTUS_OPINTOKOKONAISUUS,
         ].includes(koulutustyyppi) &&
           isNumeric(toteutuksenLaajuus) &&
-          toteutuksenLaajuus < 60))
+          Number(toteutuksenLaajuus) < 60))
     ) {
       change(`${name}.isPieniOsaamiskokonaisuus`, true);
     }
@@ -205,7 +208,7 @@ const useNimiFromKoulutus = ({ koulutus, name }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (_fp.isUndefined(currNimi) || _fp.isEmpty(currNimi)) {
+    if (isUndefined(currNimi) || isEmpty(currNimi)) {
       change(`${name}.nimi`, koulutusnimi || {});
     }
   }, [change, currNimi, koulutusnimi, name, t]);

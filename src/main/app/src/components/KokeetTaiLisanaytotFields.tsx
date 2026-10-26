@@ -1,8 +1,7 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import {
@@ -11,6 +10,7 @@ import {
   FormFieldInput,
   FormFieldEditor,
 } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';
@@ -39,108 +39,106 @@ export const KoeTaiLisanayttoFields = ({
     osaamisalat,
   });
 
-  const liittyyEnnakkovalmistautumista = useFieldValue(
+  const liittyyEnnakkovalmistautumista = useFieldValue<boolean | undefined>(
     `${field}.liittyyEnnakkovalmistautumista`
   );
-  const erityisjarjestelytMahdollisia = useFieldValue(
+  const erityisjarjestelytMahdollisia = useFieldValue<boolean | undefined>(
     `${field}.erityisjarjestelytMahdollisia`
   );
 
   return (
-    <>
-      <SectionInnerCollapse
-        header={t(`koeTaiLisanaytto.title`, { index })}
-        defaultOpen={true}
-      >
-        <Box display="flex" ml={12}>
-          <Box flexGrow={1}>
-            <Box display="flex" mb={2}>
-              <Box flexGrow={1}>
-                <Box {...getTestIdProps('kokeenTaiLisanaytonTyyppi')}>
-                  <Field
-                    name={`${field}.tyyppi`}
-                    component={FormFieldSelect}
-                    options={options}
-                    label={t('koeTaiLisanaytto.tyyppi')}
-                    required
-                  />
-                </Box>
-              </Box>
-              <Box flexGrow={1} ml={4}>
-                <Box {...getTestIdProps('hakijalleNakyvaNimi')}>
-                  <Field
-                    name={`${field}.nimi.${language}`}
-                    component={FormFieldInput}
-                    label={t('koeTaiLisanaytto.hakijalleNakyvaNimi')}
-                  />
-                </Box>
+    <SectionInnerCollapse
+      header={t(`koeTaiLisanaytto.title`, { index })}
+      defaultOpen={true}
+    >
+      <Box display="flex" ml={12}>
+        <Box flexGrow={1}>
+          <Box display="flex" mb={2}>
+            <Box flexGrow={1}>
+              <Box {...getTestIdProps('kokeenTaiLisanaytonTyyppi')}>
+                <Field
+                  name={`${field}.tyyppi`}
+                  component={FormFieldSelect}
+                  options={options}
+                  label={t('koeTaiLisanaytto.tyyppi')}
+                  required
+                />
               </Box>
             </Box>
-            <Box mb={2} {...getTestIdProps('tietoaHakijalle')}>
+            <Box flexGrow={1} ml={4}>
+              <Box {...getTestIdProps('hakijalleNakyvaNimi')}>
+                <Field
+                  name={`${field}.nimi.${language}`}
+                  component={FormFieldInput}
+                  label={t('koeTaiLisanaytto.hakijalleNakyvaNimi')}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Box mb={2} {...getTestIdProps('tietoaHakijalle')}>
+            <Field
+              name={`${field}.tietoaHakijalle.${language}`}
+              component={FormFieldEditor}
+              label={t('koeTaiLisanaytto.tietoaHakijalle')}
+              hideHeaderSelect
+            />
+          </Box>
+          <Box mb={2} {...getTestIdProps('vahimmaispistemaara')}>
+            <Field
+              name={`${field}.vahimmaispistemaara`}
+              component={FormFieldInput}
+              type="number"
+              label={t('valintaperustelomake.vahimmaispistemaara')}
+            />
+          </Box>
+          <Box mb={2} {...getTestIdProps('liittyyEnnakkovalmistautumista')}>
+            <Field
+              name={`${field}.liittyyEnnakkovalmistautumista`}
+              component={FormFieldCheckbox}
+            >
+              {t('koeTaiLisanaytto.liittyyEnnakkovalmistautumista')}
+            </Field>
+          </Box>
+          {liittyyEnnakkovalmistautumista && (
+            <Box mb={2} {...getTestIdProps('ohjeetEnnakkovalmistautumiseen')}>
               <Field
-                name={`${field}.tietoaHakijalle.${language}`}
+                name={`${field}.ohjeetEnnakkovalmistautumiseen.${language}`}
                 component={FormFieldEditor}
-                label={t('koeTaiLisanaytto.tietoaHakijalle')}
+                label={t('koeTaiLisanaytto.materiaaliJaValmistautumisohjeet')}
                 hideHeaderSelect
               />
             </Box>
-            <Box mb={2} {...getTestIdProps('vahimmaispistemaara')}>
+          )}
+          <Box mb={2} {...getTestIdProps('erityisjarjestelytMahdollisia')}>
+            <Field
+              name={`${field}.erityisjarjestelytMahdollisia`}
+              component={FormFieldCheckbox}
+            >
+              {t('koeTaiLisanaytto.erityisjarjestelytMahdollisia')}
+            </Field>
+          </Box>
+          {erityisjarjestelytMahdollisia && (
+            <Box mb={2} {...getTestIdProps('ohjeetErityisjarjestelyihin')}>
               <Field
-                name={`${field}.vahimmaispistemaara`}
-                component={FormFieldInput}
-                type="number"
-                label={t('valintaperustelomake.vahimmaispistemaara')}
+                name={`${field}.ohjeetErityisjarjestelyihin.${language}`}
+                component={FormFieldEditor}
+                label={t('koeTaiLisanaytto.ohjeetErityisjarjestelyihin')}
+                hideHeaderSelect
               />
             </Box>
-            <Box mb={2} {...getTestIdProps('liittyyEnnakkovalmistautumista')}>
-              <Field
-                name={`${field}.liittyyEnnakkovalmistautumista`}
-                component={FormFieldCheckbox}
-              >
-                {t('koeTaiLisanaytto.liittyyEnnakkovalmistautumista')}
-              </Field>
-            </Box>
-            {liittyyEnnakkovalmistautumista && (
-              <Box mb={2} {...getTestIdProps('ohjeetEnnakkovalmistautumiseen')}>
-                <Field
-                  name={`${field}.ohjeetEnnakkovalmistautumiseen.${language}`}
-                  component={FormFieldEditor}
-                  label={t('koeTaiLisanaytto.materiaaliJaValmistautumisohjeet')}
-                  hideHeaderSelect
-                />
-              </Box>
-            )}
-            <Box mb={2} {...getTestIdProps('erityisjarjestelytMahdollisia')}>
-              <Field
-                name={`${field}.erityisjarjestelytMahdollisia`}
-                component={FormFieldCheckbox}
-              >
-                {t('koeTaiLisanaytto.erityisjarjestelytMahdollisia')}
-              </Field>
-            </Box>
-            {erityisjarjestelytMahdollisia && (
-              <Box mb={2} {...getTestIdProps('ohjeetErityisjarjestelyihin')}>
-                <Field
-                  name={`${field}.ohjeetErityisjarjestelyihin.${language}`}
-                  component={FormFieldEditor}
-                  label={t('koeTaiLisanaytto.ohjeetErityisjarjestelyihin')}
-                  hideHeaderSelect
-                />
-              </Box>
-            )}
-            <FieldArray
-              name={`${field}.tilaisuudet`}
-              component={TilaisuudetFields}
-              language={language}
-              t={t}
-            />
-          </Box>
-          <Box mt={4} ml={4}>
-            <RemoveButton onClick={removeSelf} />
-          </Box>
+          )}
+          <FieldArray
+            name={`${field}.tilaisuudet`}
+            component={TilaisuudetFields}
+            language={language}
+            t={t}
+          />
         </Box>
-      </SectionInnerCollapse>
-    </>
+        <Box mt={4} ml={4}>
+          <RemoveButton onClick={removeSelf} />
+        </Box>
+      </Box>
+    </SectionInnerCollapse>
   );
 };
 
@@ -167,7 +165,6 @@ export const KokeetTaiLisanaytotFields = ({
           <KoeTaiLisanayttoFields
             field={field}
             language={language}
-            meta={meta}
             index={index + 1 + readonlyAmount}
             removeSelf={() => fields.remove(index)}
             hakutapa={hakutapa}
@@ -177,7 +174,7 @@ export const KokeetTaiLisanaytotFields = ({
           />
         )}
       </FieldArrayList>
-      {!_.isEmpty(fields) && <Divider />}
+      {!isEmpty(fields) && <Divider />}
       <Box
         display="flex"
         justifyContent="center"

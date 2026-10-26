@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import _ from 'lodash';
+import { get, includes, isEmpty, isObject, mapValues, pick } from 'lodash-es';
 import { match, P } from 'ts-pattern';
 
 import { serializeEditorState } from '#/src/components/LexicalEditorUI/utils';
@@ -16,7 +16,7 @@ import {
 } from '../pickTranslations';
 
 const getArrayValue = (values, key) => {
-  const valueCandidate = _.get(values, key);
+  const valueCandidate = get(values, key);
   return isDeepEmptyFormValues(valueCandidate) ? [] : valueCandidate;
 };
 
@@ -33,15 +33,15 @@ const serializeTable = ({
 
   return produce(table, draft => {
     (draft.rows || []).forEach((row, rowIndex) => {
-      if (_.isObject(row)) {
+      if (isObject(row)) {
         row.index = rowIndex;
 
         (row.columns || []).forEach((column, columnIndex) => {
-          if (_.isObject(column)) {
+          if (isObject(column)) {
             column.index = columnIndex;
 
-            if (_.isObject(column.text)) {
-              column.text = _.pick(column.text, kielivalinta);
+            if (isObject(column.text)) {
+              column.text = pick(column.text, kielivalinta);
             }
           }
         });
@@ -54,7 +54,7 @@ const serializeSisalto = (
   sisalto?: SisaltoValues,
   kielivalinta: KieliversiotValues = []
 ) => {
-  if (!_.isArray(sisalto)) {
+  if (!Array.isArray(sisalto)) {
     return [];
   }
 
@@ -63,8 +63,8 @@ const serializeSisalto = (
       tyyppi: sisaltoItem.tyyppi,
       data: match(sisaltoItem)
         .with({ tyyppi: 'teksti', data: P.select() }, data =>
-          _.pick(
-            _.isObject(data) ? _.mapValues(data, serializeEditorState) : {},
+          pick(
+            isObject(data) ? mapValues(data, serializeEditorState) : {},
             kielivalinta
           )
         )
@@ -96,10 +96,7 @@ export const getValintaperusteByFormValues = (
   const lisatiedot = kieleistyksetSerialized(values?.lisatiedot);
   const sisalto = serializeSisalto(values?.kuvaus?.sisalto, kielivalinta);
 
-  const valintatavat = _.includes(
-    KOULUTUSTYYPIT_WITH_VALINTATAPA,
-    koulutustyyppi
-  )
+  const valintatavat = includes(KOULUTUSTYYPIT_WITH_VALINTATAPA, koulutustyyppi)
     ? getArrayValue(values, 'valintatavat').map(
         ({
           nimi: valintatapaNimi,
@@ -136,7 +133,7 @@ export const getValintaperusteByFormValues = (
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
-    externalId: _.isEmpty(values?.externalId) ? null : values?.externalId,
+    externalId: isEmpty(values?.externalId) ? null : values?.externalId,
     tila,
     muokkaaja,
     kielivalinta,

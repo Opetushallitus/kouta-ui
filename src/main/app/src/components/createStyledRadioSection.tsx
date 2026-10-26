@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isFunction } from 'lodash-es';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -50,7 +50,7 @@ export const createStyledRadioSection = radioConfig =>
                     disabled={disabled}
                     error={error}
                   >
-                    {_.isFunction(label) ? label(t) : label}
+                    {isFunction(label) ? label(t) : label}
                   </StyledGrayRadio>
                   {isChecked && FieldsComponent && (
                     <StyledBlueBox>

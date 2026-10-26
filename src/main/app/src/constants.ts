@@ -1,4 +1,4 @@
-import { without } from 'lodash';
+import { without } from 'lodash-es';
 
 export const LANGUAGES = ['fi', 'sv', 'en'];
 
@@ -363,7 +363,7 @@ export enum HakukohteetToteutuksella {
 // react-query options for koodisto, eperuste etc. requests that change rarely
 export const LONG_CACHE_QUERY_OPTIONS = {
   staleTime: 30 * 60 * 1000,
-  cacheTime: 15 * 60 * 1000,
+  gcTime: 15 * 60 * 1000,
   refetchOnWindowFocus: false,
   refetchOnMount: false,
   refetchOnReconnect: false,
@@ -372,7 +372,7 @@ export const LONG_CACHE_QUERY_OPTIONS = {
 
 export const PREVENT_REFETCH_QUERY_OPTIONS = {
   staleTime: Infinity,
-  cacheTime: Infinity,
+  gcTime: Infinity,
   refetchOnWindowFocus: false,
   refetchOnMount: false,
   refetchOnReconnect: false,

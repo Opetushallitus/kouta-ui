@@ -1,0 +1,28 @@
+{
+  "organisaatioOid": "1.2.246.562.10.594252633210",
+  "oid": "1.2.246.562.10.594252633210",
+  "kielivalinta": [
+    "fi"
+  ],
+  "metadata": {
+    "esittely": {
+      "fi": "<p><em>Fi esittely</em></p>"
+    },
+    "opiskelijoita": 100,
+    "kampus": {
+      "fi": "Fi kampus"
+    },
+    "wwwSivu": {
+      "url": {
+        "fi": "http://www.verkkosivu.fi"
+      },
+      "nimi": {
+        "fi": "Verkkosivu fi"
+      }
+    },
+    "hakijapalveluidenYhteystiedot": null
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "tila": "tallennettu",
+  "esikatselu": false
+}

@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { get } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
@@ -12,6 +11,7 @@ import {
   FormFieldSwitch,
   FormFieldIntegerInput,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import {
@@ -36,7 +36,7 @@ import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 
 const makeCountLimitOnChange = (onChange, max) => items =>
-  _fp.isArray(items) && items.length <= max && onChange(items);
+  Array.isArray(items) && items.length <= max && onChange(items);
 
 const OpetusaikaField = createFormFieldComponent(
   OpetusaikaCheckboxGroup,
@@ -66,16 +66,18 @@ const OpetustapaField = createFormFieldComponent(
 );
 
 const OsiotFields = ({ language, osiotOptions, name }) => {
-  const osiot = useFieldValue(`${name}.osiot`);
+  const osiot = useFieldValue<Array<SelectOption<string>> | undefined>(
+    `${name}.osiot`
+  );
 
   const osiotArrWithLabels = useMemo(() => {
     return (osiot || []).map(({ value, label }) => ({
       value,
       label: label
         ? label
-        : _fp.get(
-            'label',
-            osiotOptions.find(({ value: v }) => v === value)
+        : get(
+            osiotOptions.find(({ value: v }) => v === value),
+            'label'
           ) || null, // TODO: Use something else than null as a label, when not found
     }));
   }, [osiot, osiotOptions]);
@@ -84,7 +86,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
     <>
       {osiotArrWithLabels.map(({ value, label }, index) => (
         <Box
-          marginBottom={index === osiot.length - 1 ? 0 : 2}
+          marginBottom={index === osiotArrWithLabels.length - 1 ? 0 : 2}
           key={value}
           {...getTestIdProps(`osioKuvaus.${value}`)}
         >
@@ -159,8 +161,7 @@ export const JarjestamisTiedotSection = ({
   const osiotOptions = useLisatiedotOptions();
 
   const opetuskielet = useFieldValue(`${name}.opetuskieli`) as
-    | Array<string>
-    | undefined;
+    Array<string> | undefined;
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
     `${name}.ajankohta.ajankohtaKaytossa`
@@ -281,8 +282,8 @@ export const JarjestamisTiedotSection = ({
       <ApurahaFields
         language={language}
         name={name}
-        koulutustyyppi={koulutustyyppi}
         toteutuksenMetadata={toteutuksenMetadata}
+        koulutustyyppi={koulutustyyppi}
       />
 
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
@@ -294,13 +295,13 @@ export const JarjestamisTiedotSection = ({
             {t('toteutuslomake.toteutuksellaErillinenAloitusajankohta')}
           </Field>
         </Box>
-        {toteutuksellaErillinenAloitusajankohta && (
+        {toteutuksellaErillinenAloitusajankohta ? (
           <KoulutuksenAloitusajankohtaFields
             section={`${name}.ajankohta`}
             name={`${name}.ajankohta.ajankohtaTyyppi`}
             language={language}
           />
-        )}
+        ) : null}
       </FieldGroup>
 
       {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (

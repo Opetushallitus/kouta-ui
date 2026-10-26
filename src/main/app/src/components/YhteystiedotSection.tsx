@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import { Grid, Cell } from 'styled-css-grid';
 
 import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Divider, Typography } from '#/src/components/virkailija';
 import { YhteystiedotMuokkausButton } from '#/src/components/YhteystiedotMuokkausButton';
 import useKoodi from '#/src/hooks/useKoodi';

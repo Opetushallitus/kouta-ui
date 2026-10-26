@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react';
 
-import _ from 'lodash';
-import { Field } from 'redux-form';
+import { map } from 'lodash-es';
 
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -37,7 +37,7 @@ export const OrganisaatioSection = () => {
     const orgs = flattenHierarkia(hierarkia);
     if (isOphVirkailija && !ophIsLoading && oph) orgs.unshift(oph);
 
-    return _.map(orgs, ({ oid, nimi }) => ({
+    return map(orgs, ({ oid, nimi }) => ({
       value: oid,
       label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
     }));

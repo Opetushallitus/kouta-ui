@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import _ from 'lodash';
-import { UseMutateAsyncFunction, useMutation } from 'react-query';
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
+import { map } from 'lodash-es';
 
 import { JULKAISUTILA } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
@@ -17,7 +17,7 @@ type ToteutuksetTilaChangeResponseData = Array<ToteutusTilaChangeResponseItem>;
 
 type ChangeToteutustenTilaProps = {
   entities: EntitySelection;
-  tila?: JULKAISUTILA;
+  tila: JULKAISUTILA;
 };
 
 export type CopyToteutuksetMutationFunctionAsync = UseMutateAsyncFunction<
@@ -36,7 +36,7 @@ const useChangeToteutustenTila = () => {
 
       const result = await httpClient.post(
         apiUrls.url('kouta-backend.toteutukset-tilamuutos', tila),
-        _.map(entities, 'oid'),
+        map(entities, 'oid'),
         {
           headers: {
             'X-If-Unmodified-Since': lastModified,
@@ -55,5 +55,8 @@ export const useChangeToteutuksetTilaMutation = () => {
     ToteutuksetTilaChangeResponseData,
     unknown,
     ChangeToteutustenTilaProps
-  >('changeToteutustenTila', changeToteutustenTila);
+  >({
+    mutationKey: ['changeToteutustenTila'],
+    mutationFn: changeToteutustenTila,
+  });
 };

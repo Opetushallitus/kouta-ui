@@ -14,6 +14,7 @@
  * - Adjust styles for unified look and feel
  */
 
+import * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
@@ -28,7 +29,7 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import {
   $createHeadingNode,
   $isHeadingNode,
-  HeadingTagType,
+  type HeadingTagType,
 } from '@lexical/rich-text';
 import { $setBlocksType } from '@lexical/selection';
 import { $isTableSelection } from '@lexical/table';
@@ -87,7 +88,7 @@ function BlockFormatDropDown({
   blockType: keyof typeof blockTypeToBlockName;
   editor: LexicalEditor;
   disabled?: boolean;
-}): JSX.Element {
+}): React.JSX.Element {
   const formatParagraph = () => {
     editor.update(() => {
       const selection = $getSelection();
@@ -172,11 +173,11 @@ function BlockFormatDropDown({
   );
 }
 
-function Divider(): JSX.Element {
+function Divider(): React.JSX.Element {
   return <div className="divider" />;
 }
 
-export default function ToolbarPlugin(): JSX.Element {
+export default function ToolbarPlugin(): React.JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [activeEditor, setActiveEditor] = useState(editor);
   const [blockType, setBlockType] =
@@ -227,7 +228,9 @@ export default function ToolbarPlugin(): JSX.Element {
           const type = parentList
             ? parentList.getListType()
             : element.getListType();
-          setBlockType(type);
+          if (type in blockTypeToBlockName) {
+            setBlockType(type as keyof typeof blockTypeToBlockName);
+          }
         } else {
           const type = $isHeadingNode(element)
             ? element.getTag()
@@ -263,6 +266,7 @@ export default function ToolbarPlugin(): JSX.Element {
         });
       }),
       activeEditor.registerCommand<boolean>(
+        // eslint-disable-next-line @typescript-eslint/no-deprecated -- superseded by the canUndo signal from HistoryExtension, which requires migrating this editor off LexicalComposer first (see LexicalEditorUI.tsx); tracked as follow-up, not part of enabling this rule.
         CAN_UNDO_COMMAND,
         payload => {
           setCanUndo(payload);
@@ -271,6 +275,7 @@ export default function ToolbarPlugin(): JSX.Element {
         COMMAND_PRIORITY_CRITICAL
       ),
       activeEditor.registerCommand<boolean>(
+        // eslint-disable-next-line @typescript-eslint/no-deprecated -- superseded by the canRedo signal from HistoryExtension, which requires migrating this editor off LexicalComposer first (see LexicalEditorUI.tsx); tracked as follow-up, not part of enabling this rule.
         CAN_REDO_COMMAND,
         payload => {
           setCanRedo(payload);

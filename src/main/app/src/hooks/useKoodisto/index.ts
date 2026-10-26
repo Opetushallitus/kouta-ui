@@ -13,7 +13,7 @@ export const useKoodisto = ({
   koodisto,
   versio: versioProp,
 }: UseKoodistoProps) => {
-  const versio = versioProp || '';
+  const versio = versioProp || undefined;
 
   return useApiQuery(
     GET_KOODISTO_QUERY_KEY,

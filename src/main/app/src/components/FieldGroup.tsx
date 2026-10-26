@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 
-import _ from 'lodash';
-import { SpaceProps } from 'styled-system';
+import { snakeCase } from 'lodash-es';
+import { type SpaceProps } from 'styled-system';
 
 import Heading from '#/src/components/Heading';
 import { Box } from '#/src/components/virkailija';
@@ -27,8 +27,8 @@ export const FieldGroup: React.FC<FieldGroupProps> = ({
   required = false,
   ...props
 }) => {
-  const headerId = _.snakeCase(title) + '_FieldGroup_header';
-  const contentId = _.snakeCase(title) + '_FieldGroup_content';
+  const headerId = snakeCase(title) + '_FieldGroup_header';
+  const contentId = snakeCase(title) + '_FieldGroup_content';
 
   return (
     <Box marginBottom={4} {...props}>

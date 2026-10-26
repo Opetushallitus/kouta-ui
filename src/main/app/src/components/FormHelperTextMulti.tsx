@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { castArray, identity, isFunction, uniqueId } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
@@ -18,15 +18,15 @@ export const FormHelperTextMulti = ({
   helperText?: string;
 }) => {
   const { t } = useTranslation();
-  const errors = errorMessage ? _.castArray(errorMessage) : [];
+  const errors = errorMessage ? castArray(errorMessage) : [];
   return (
     <>
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
       {errors &&
-        errors.filter(_.identity).map(e => (
-          <FormHelperText key={_.uniqueId('FormHelperText_')} error>
+        errors.filter(identity).map(e => (
+          <FormHelperText key={uniqueId('FormHelperText_')} error>
             {match(e)
-              .when(_.isFunction, f => f(t))
+              .when(isFunction, f => f(t))
               .otherwise(t)}
           </FormHelperText>
         ))}

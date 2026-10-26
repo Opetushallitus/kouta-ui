@@ -1,0 +1,123 @@
+diff --git a/dist/react-final-form.cjs.js b/dist/react-final-form.cjs.js
+index 82d660167c1f2597afce0aa8f7c0f43b3ac018d1..ae79fcf75d85b2626152b7fced546ccca360206e 100644
+--- a/dist/react-final-form.cjs.js
++++ b/dist/react-final-form.cjs.js
+@@ -633,15 +633,18 @@ function useField(name, config) {
+     // Check if field state exists in the form before registering
+     var existingFieldState = form.getFieldState(name);
+ 
+-    // If field doesn't exist in form state, it means the field was destroyed 
+-    // (e.g., by destroyOnUnregister in StrictMode). In this case, we need to 
+-    // explicitly set the value before registering to ensure the initial value 
+-    // is applied, even if form thinks initialValues haven't changed.
++    // FIX #1095: a missing field state does not mean the value was destroyed.
++    // Final Form drops `fields[name]` on the last unregister either way, so a
++    // path written only through `form.change()` looks the same as a wiped one.
++    // Values are deleted on unregister only under `destroyOnUnregister`, so that
++    // flag plus an empty path is what this reseed exists to repair (#1031).
+     if (!existingFieldState) {
+       var formState = form.getState();
++      var currentValue = formState.values ? finalForm.getIn(formState.values, name) : undefined;
+       var formInitialValue = formState.initialValues ? finalForm.getIn(formState.initialValues, name) : undefined;
+       var valueToSet = formInitialValue !== undefined ? formInitialValue : initialValue;
+-      if (valueToSet !== undefined) {
++      var valueWasDestroyed = form.destroyOnUnregister && currentValue === undefined;
++      if (valueToSet !== undefined && valueWasDestroyed) {
+         form.change(name, valueToSet);
+       }
+     }
+@@ -710,6 +713,12 @@ function useField(name, config) {
+               form.pauseValidation();
+             }
+             try {
++              // registerField only adopts a new `initialValue` while the field
++              // is pristine, so restore the old initial to satisfy that check.
++              // This used to happen implicitly, as a side effect of the mount
++              // effect above resetting on every re-registration. Safe here:
++              // `currentValue` already equals `initialValue`.
++              form.change(name, currentFormInitial);
+               // Manually update initialValues via registerField with silent: false
+               // to force notification
+               var unsubscribe = form.registerField(name, function () {}, {}, {
+diff --git a/dist/react-final-form.es.js b/dist/react-final-form.es.js
+index cfb2e24a75f91c08f00a1ab51aa42d97016541f2..0c9bd7a655fe91c6542611c524c060b10cbf5cc7 100644
+--- a/dist/react-final-form.es.js
++++ b/dist/react-final-form.es.js
+@@ -613,15 +613,18 @@ function useField(name, config) {
+     // Check if field state exists in the form before registering
+     var existingFieldState = form.getFieldState(name);
+ 
+-    // If field doesn't exist in form state, it means the field was destroyed 
+-    // (e.g., by destroyOnUnregister in StrictMode). In this case, we need to 
+-    // explicitly set the value before registering to ensure the initial value 
+-    // is applied, even if form thinks initialValues haven't changed.
++    // FIX #1095: a missing field state does not mean the value was destroyed.
++    // Final Form drops `fields[name]` on the last unregister either way, so a
++    // path written only through `form.change()` looks the same as a wiped one.
++    // Values are deleted on unregister only under `destroyOnUnregister`, so that
++    // flag plus an empty path is what this reseed exists to repair (#1031).
+     if (!existingFieldState) {
+       var formState = form.getState();
++      var currentValue = formState.values ? getIn(formState.values, name) : undefined;
+       var formInitialValue = formState.initialValues ? getIn(formState.initialValues, name) : undefined;
+       var valueToSet = formInitialValue !== undefined ? formInitialValue : initialValue;
+-      if (valueToSet !== undefined) {
++      var valueWasDestroyed = form.destroyOnUnregister && currentValue === undefined;
++      if (valueToSet !== undefined && valueWasDestroyed) {
+         form.change(name, valueToSet);
+       }
+     }
+@@ -690,6 +693,12 @@ function useField(name, config) {
+               form.pauseValidation();
+             }
+             try {
++              // registerField only adopts a new `initialValue` while the field
++              // is pristine, so restore the old initial to satisfy that check.
++              // This used to happen implicitly, as a side effect of the mount
++              // effect above resetting on every re-registration. Safe here:
++              // `currentValue` already equals `initialValue`.
++              form.change(name, currentFormInitial);
+               // Manually update initialValues via registerField with silent: false
+               // to force notification
+               var unsubscribe = form.registerField(name, function () {}, {}, {
+diff --git a/dist/react-final-form.umd.js b/dist/react-final-form.umd.js
+index f6668031909a1673105a3fe1e787ac4c46021794..e06c3b570579261335419bd27c381ce214eca0b5 100644
+--- a/dist/react-final-form.umd.js
++++ b/dist/react-final-form.umd.js
+@@ -651,15 +651,18 @@
+       // Check if field state exists in the form before registering
+       var existingFieldState = form.getFieldState(name);
+ 
+-      // If field doesn't exist in form state, it means the field was destroyed 
+-      // (e.g., by destroyOnUnregister in StrictMode). In this case, we need to 
+-      // explicitly set the value before registering to ensure the initial value 
+-      // is applied, even if form thinks initialValues haven't changed.
++      // FIX #1095: a missing field state does not mean the value was destroyed.
++      // Final Form drops `fields[name]` on the last unregister either way, so a
++      // path written only through `form.change()` looks the same as a wiped one.
++      // Values are deleted on unregister only under `destroyOnUnregister`, so that
++      // flag plus an empty path is what this reseed exists to repair (#1031).
+       if (!existingFieldState) {
+         var formState = form.getState();
++        var currentValue = formState.values ? finalForm.getIn(formState.values, name) : undefined;
+         var formInitialValue = formState.initialValues ? finalForm.getIn(formState.initialValues, name) : undefined;
+         var valueToSet = formInitialValue !== undefined ? formInitialValue : initialValue;
+-        if (valueToSet !== undefined) {
++        var valueWasDestroyed = form.destroyOnUnregister && currentValue === undefined;
++        if (valueToSet !== undefined && valueWasDestroyed) {
+           form.change(name, valueToSet);
+         }
+       }
+@@ -728,6 +731,12 @@
+                 form.pauseValidation();
+               }
+               try {
++                // registerField only adopts a new `initialValue` while the field
++                // is pristine, so restore the old initial to satisfy that check.
++                // This used to happen implicitly, as a side effect of the mount
++                // effect above resetting on every re-registration. Safe here:
++                // `currentValue` already equals `initialValue`.
++                form.change(name, currentFormInitial);
+                 // Manually update initialValues via registerField with silent: false
+                 // to force notification
+                 var unsubscribe = form.registerField(name, function () {}, {}, {

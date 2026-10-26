@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { intersection, isEmpty } from 'lodash-es';
 
 import {
   ENTITY,
@@ -13,7 +13,7 @@ import { useOppilaitostyypitByKoulutustyypit } from '#/src/utils/koulutus/getOpp
 import { useIsOphVirkailija } from './useIsOphVirkailija';
 
 export const useOppilaitosTyypit = (
-  organisaatioOid,
+  organisaatioOid: string,
   options: { enabled?: boolean } = {}
 ) => {
   const { hierarkia, isLoading } = useOrganisaatioHierarkia(organisaatioOid, {
@@ -22,7 +22,7 @@ export const useOppilaitosTyypit = (
   });
 
   const oppilaitostyypit = useMemo(() => {
-    const tyypit: Array<any> = [];
+    const tyypit: Array<string> = [];
 
     iterateTree(hierarkia, org => {
       if (org?.oppilaitostyyppiUri) {
@@ -57,8 +57,8 @@ export const createIsKoulutustyyppiDisabledGetter = ({
     }
 
     if (
-      _fp.isEmpty(allowedOppilaitostyypit) ||
-      _fp.isEmpty(oppilaitostyypitByKoulutustyypit)
+      isEmpty(allowedOppilaitostyypit) ||
+      isEmpty(oppilaitostyypitByKoulutustyypit)
     ) {
       return false;
     }
@@ -69,8 +69,8 @@ export const createIsKoulutustyyppiDisabledGetter = ({
       )?.oppilaitostyypit;
 
     if (
-      !_fp.isEmpty(
-        _fp.intersection(
+      !isEmpty(
+        intersection(
           oppilaitostyypitForKoulutustyyppiWoVersion,
           allowedOppilaitostyypit
         )
@@ -86,6 +86,9 @@ export const createIsKoulutustyyppiDisabledGetter = ({
 export const useIsKoulutustyyppiDisabledGetter = ({
   entityType,
   organisaatioOid,
+}: {
+  entityType: ENTITY;
+  organisaatioOid: string;
 }) => {
   const isOphVirkailija = useIsOphVirkailija();
 

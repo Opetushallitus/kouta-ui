@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router';
 
 import Container from '#/src/components/Container';
 import { Box, Spin } from '#/src/components/virkailija';
@@ -11,10 +11,10 @@ import {
   HAKUKOHDE_ROLE,
   VALINTAPERUSTE_ROLE,
 } from '#/src/constants';
-import { useDispatch } from '#/src/hooks/reduxHooks';
+import { useOrganisaatioSelection } from '#/src/contexts/OrganisaatioValintaContext';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
-import { setOrganisaatio } from '#/src/state/organisaatioSelection';
+import { isTruthy } from '#/src/utils';
 
 import HakukohteetSection from './HakukohteetSection';
 import HautSection from './HautSection';
@@ -23,22 +23,22 @@ import Navigation from './Navigation';
 import ToteutuksetSection from './ToteutuksetSection';
 import ValintaperusteetSection from './ValintaperusteetSection';
 
-const HomeContent = ({ organisaatioOid }) => {
+const HomeContent = ({ organisaatioOid }: { organisaatioOid: string }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { setOrganisaatioOid } = useOrganisaatioSelection();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const { search } = useLocation();
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const onOrganisaatioChange = useCallback(
-    value => {
+    (value: string) => {
       const searchParams = new URLSearchParams(search);
       searchParams.set('organisaatioOid', value);
       navigate({ search: searchParams.toString() });
-      dispatch(setOrganisaatio(value));
+      setOrganisaatioOid(value);
     },
-    [navigate, dispatch, search]
+    [navigate, setOrganisaatioOid, search]
   );
 
   const hasKoulutusWriteRole = useMemo(() => {
@@ -84,38 +84,43 @@ const HomeContent = ({ organisaatioOid }) => {
   const listSections = [
     hasKoulutusReadRole && (
       <KoulutuksetSection
+        key="koulutukset"
         canCreate={hasKoulutusWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasToteutusReadRole && (
       <ToteutuksetSection
+        key="toteutukset"
         canCreate={hasToteutusWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasHakuReadRole && (
       <HautSection
+        key="haut"
         canCreate={hasHakuWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasHakukohdeReadRole && (
       <HakukohteetSection
+        key="hakukohteet"
         canCreate={hasHakukohdeWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasValintaperusteReadRole && (
       <ValintaperusteetSection
+        key="valintaperusteet"
         canCreate={hasValintaperusteWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
   ]
-    .filter(Boolean)
-    .map((section, index) => (
-      <Box mb={4} key={index}>
+    .filter(isTruthy)
+    .map(section => (
+      <Box mb={4} key={section.key}>
         {section}
       </Box>
     ));

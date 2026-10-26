@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { isFunction, map, parseInt, sortBy } from 'lodash-es';
 
 import {
   useKoodisto,
@@ -12,8 +12,8 @@ import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 const defaultSort = options => {
   const byLabel = ({ label }) => label;
   const byFirstNumber = ({ label }) =>
-    /^\d/.test(label) && _.parseInt(label.match(/(\d+)/)?.[0]);
-  return _.sortBy(options, [byFirstNumber, byLabel]);
+    /^\d/.test(label) && parseInt(label.match(/(\d+)/)?.[0]);
+  return sortBy(options, [byFirstNumber, byLabel]);
 };
 
 type GetOptionsProps = {
@@ -30,9 +30,9 @@ const getOptions = ({
   formatLabel,
 }: GetOptionsProps) =>
   sortFn(
-    _.map(koodisto, koodi => ({
+    map(koodisto, koodi => ({
       value: `${koodi?.koodiUri}#${koodi?.versio}`,
-      label: _.isFunction(formatLabel)
+      label: isFunction(formatLabel)
         ? formatLabel(koodi, language)
         : (getKoodiNimiTranslation(koodi, language) ?? undefined),
     }))

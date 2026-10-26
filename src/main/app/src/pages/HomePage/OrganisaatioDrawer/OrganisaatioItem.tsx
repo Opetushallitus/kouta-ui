@@ -1,13 +1,14 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isEmpty, noop } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import styled, { css } from 'styled-components';
 
 import { Box, Radio, Icon, Typography } from '#/src/components/virkailija';
 import { disabledStyle } from '#/src/system';
 import { getThemeProp } from '#/src/theme';
+import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const FavouriteIconBase = styled(Icon)`
@@ -67,28 +68,43 @@ export const OrganisaatioItem = ({
   nimi,
   open = false,
   collapse = false,
-  onToggleOpen: onToggleOpenProp = () => {},
+  onToggleOpen: onToggleOpenProp,
   children = [],
   language = 'fi',
   disabled = false,
   isEditable = false,
   editLinkURL,
+}: {
+  selected: boolean;
+  favourite: boolean;
+  onToggleFavourite: (oid: string) => void;
+  onSelect: (oid: string) => void;
+  oid: string;
+  nimi?: Record<LanguageCode, string>;
+  open?: boolean;
+  collapse?: boolean;
+  onToggleOpen?: (oid: string) => void;
+  children?: Array<any>;
+  language?: LanguageCode;
+  disabled?: boolean;
+  isEditable?: boolean;
+  editLinkURL?: string;
 }) => {
   const { t } = useTranslation();
 
   const onSelect = () => onSelectProp(oid);
   const onToggleFavourite = () => onToggleFavouriteProp(oid);
-  const onToggleOpen = () => onToggleOpenProp(oid);
+  const onToggleOpen = () => onToggleOpenProp?.(oid);
 
   return (
-    <Container>
+    <Container {...getTestIdProps('organisaatioItem')}>
       <Box flexGrow={1} display="flex" pr={2}>
         <Box flexGrow={0} mr={1}>
           <Radio checked={selected} onChange={onSelect} disabled={disabled}>
             {getFirstLanguageValue(nimi, language)}
           </Radio>
         </Box>
-        {collapse && !_.isEmpty(children) ? (
+        {collapse && !isEmpty(children) ? (
           <Box flexGrow={0} pr={2}>
             <CollapseIcon
               onClick={onToggleOpen}
@@ -103,7 +119,7 @@ export const OrganisaatioItem = ({
           active={favourite}
           disabled={disabled}
           title={t('etusivu.lisaaSuosikkeihin')}
-          onClick={disabled ? _.noop : onToggleFavourite}
+          onClick={disabled ? noop : onToggleFavourite}
         />
         {isEditable && editLinkURL ? (
           <Typography as="div" ml={2}>

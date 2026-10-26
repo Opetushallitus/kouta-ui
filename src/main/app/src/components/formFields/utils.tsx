@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 
 import { simpleMapProps } from '#/src/components/formFields';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
@@ -25,7 +25,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
       input: { name },
     } = props;
     const { error } = meta;
-    const isError = !_.isNil(error);
+    const isError = !isNil(error);
     const labelId = `FormLabel_${name}`;
     const children = createElement(
       Component,

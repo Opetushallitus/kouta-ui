@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { difference } from 'lodash-es';
 
 import {
   KOULUTUSTYYPIT,
@@ -57,7 +57,7 @@ test.each(ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)(
 );
 
 test.each(
-  _.difference(KOULUTUSTYYPIT, ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)
+  difference(KOULUTUSTYYPIT, ONLY_OPH_CAN_SAVE_KOULUTUS_KOULUTUSTYYPIT)
 )(
   'Should not disable any koulutustyyppi when not detecting any oppilaitos types',
   kt => {

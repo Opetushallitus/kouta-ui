@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FixedValueKoodiInput } from '#/src/components/FixedValueKoodiInput';
+import { Field } from '#/src/components/formFields/Field';
 import { OpintojenLaajuusyksikko } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';

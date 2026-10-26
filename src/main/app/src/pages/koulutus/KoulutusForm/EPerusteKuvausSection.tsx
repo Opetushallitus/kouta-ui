@@ -10,7 +10,9 @@ import getEPerusteKuvausHTML from '#/src/utils/ePeruste/getEPerusteKuvaus';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
 export const EPerusteKuvausSection = ({ language }) => {
-  const ePerusteField = useFieldValue('information.eperuste');
+  const ePerusteField = useFieldValue<SelectOption<string> | undefined>(
+    'information.eperuste'
+  );
   const ePerusteId = ePerusteField?.value;
   const { t, i18n } = useTranslation();
 

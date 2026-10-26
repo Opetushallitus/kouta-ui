@@ -12,6 +12,7 @@ import {
   YhteystietoSection,
 } from '#/src/components/YhteystiedotSection';
 import { useFieldValue } from '#/src/hooks/form';
+import { OppilaitoksenOsaModel } from '#/src/types/domainTypes';
 
 import EsittelySection from './EsittelySection';
 import { PerustiedotSection } from './PerustiedotSection';
@@ -20,9 +21,13 @@ const OppilaitoksenOsaForm = ({
   steps = false,
   organisaatioOid,
   oppilaitoksenOsa,
+}: {
+  steps?: boolean;
+  organisaatioOid?: string;
+  oppilaitoksenOsa?: OppilaitoksenOsaModel;
 }) => {
   const { t } = useTranslation();
-  const languageTabs = useFieldValue('kieliversiot');
+  const languageTabs = useFieldValue<Array<LanguageCode>>('kieliversiot');
   const organisaatio = oppilaitoksenOsa?._enrichedData?.organisaatio;
 
   return (

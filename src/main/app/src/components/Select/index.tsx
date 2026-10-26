@@ -4,9 +4,10 @@ import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
-import _ from 'lodash';
+import { useQuery } from '@tanstack/react-query';
+import { TFunction } from 'i18next';
+import { identity, isObject, isUndefined, reduce } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from 'react-query';
 import { components, Props } from 'react-select';
 import ReactAsyncSelect from 'react-select/async';
 import ReactAsyncCreatableSelect from 'react-select/async-creatable';
@@ -15,7 +16,6 @@ import styled, { ThemeContext } from 'styled-components';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { valueToArray, safeArrayToValue } from '#/src/utils';
-import { memoizeOne } from '#/src/utils/memoize';
 
 import { Button } from '../virkailija';
 
@@ -30,17 +30,18 @@ const OptionComponent = props => (
   />
 );
 
-const makeDefaultNoOptionsMessage = t => () =>
+const makeDefaultNoOptionsMessage = (t: TFunction) => () =>
   t('yleiset.eiValittaviaKohteita');
 
-const makeDefaultFormatCreateLabel = t => value =>
+const makeDefaultFormatCreateLabel = (t: TFunction) => (value: string) =>
   t('yleiset.luoKohde', { kohde: value });
 
-const makeDefaultPlaceholder = t => t('yleiset.valitseVaihtoehdoista');
+const makeDefaultPlaceholder = (t: TFunction) =>
+  t('yleiset.valitseVaihtoehdoista');
 
-const defaultLoadingMessage = t => () => t('yleiset.ladataan');
+const defaultLoadingMessage = (t: TFunction) => () => t('yleiset.ladataan');
 
-const getDefaultProps = memoizeOne(t => ({
+const buildDefaultProps = (t: TFunction) => ({
   isClearable: true,
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
@@ -50,10 +51,12 @@ const getDefaultProps = memoizeOne(t => ({
   components: {
     Option: OptionComponent,
   },
-}));
+});
 
-const getOptionLabelByValue = (options: Array<any> = []) =>
-  _.reduce(
+const getOptionLabelByValue = (
+  options: SelectOptions = []
+): Record<string, string> =>
+  reduce(
     options,
     (acc, curr) => {
       acc[curr?.value || '_'] = curr?.label || curr?.value;
@@ -64,8 +67,8 @@ const getOptionLabelByValue = (options: Array<any> = []) =>
 
 const getAsyncValue = async (
   value?: SelectOption | SelectOptions | null,
-  options?: Array<any>,
-  loadLabel: any = _.identity
+  options?: SelectOptions,
+  loadLabel: (value?: string) => unknown = identity
 ) => {
   const newValue = valueToArray(getValue(value, options));
   const result = await Promise.all(
@@ -73,8 +76,9 @@ const getAsyncValue = async (
       ...singleValue,
       label:
         singleValue?.label === singleValue?.value
-          ? ((await loadLabel(singleValue?.value).catch(() => undefined)) ??
-            singleValue?.value)
+          ? ((await Promise.resolve(loadLabel(singleValue?.value)).catch(
+              () => undefined
+            )) ?? singleValue?.value)
           : singleValue?.label,
     }))
   );
@@ -84,14 +88,14 @@ const getAsyncValue = async (
 
 const getValue = (
   value?: SelectOption | SelectOptions | null,
-  options?: Array<any>
+  options?: SelectOptions
 ) => {
   const labelByValue = getOptionLabelByValue(options);
-  if (_.isArray(value)) {
+  if (Array.isArray(value)) {
     const newValue: SelectOptions = [];
 
     for (const item of value) {
-      if (_.isObject(item) && item.value) {
+      if (isObject(item) && item.value) {
         const { value: itemValue, label: itemLabel, ...rest } = item;
 
         newValue.push({
@@ -124,15 +128,16 @@ export const Select = ({
   ...props
 }: SelectProps) => {
   const resolvedValue = useMemo(
-    () => getValue(value, options as any),
+    () => getValue(value, options),
     [value, options]
   );
 
   const { t } = useTranslation();
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   return (
     <UiSelect
-      {...getDefaultProps(t)}
+      {...defaultProps}
       isDisabled={disabled}
       value={resolvedValue}
       options={options}
@@ -146,10 +151,11 @@ export const Select = ({
 export const CreatableSelect = ({ error = false, id, disabled, ...props }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   return (
     <ReactCreatable
-      {...getDefaultProps(t)}
+      {...defaultProps}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       inputId={id}
@@ -198,10 +204,11 @@ export const AsyncCreatableSelect = ({
 }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   return (
     <ReactAsyncCreatableSelect
-      {...getDefaultProps(t)}
+      {...defaultProps}
       placeholder={t('yleiset.kirjoitaHakusana')}
       styles={{
         ...getStyles(theme, error),
@@ -234,24 +241,26 @@ export const AsyncSelect = ({
 }: SelectProps) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
+  const defaultProps = useMemo(() => buildDefaultProps(t), [t]);
 
   const getAsyncValueFn = useCallback(
     () => getAsyncValue(valueProp, defaultOptions, loadLabel),
     [valueProp, defaultOptions, loadLabel]
   );
 
-  const { data: value, isFetching: isLoadingValue } = useQuery(
-    ['getAsyncSelectValue', valueProp, defaultOptions, loadLabel],
-    getAsyncValueFn,
-    { enabled: Boolean(valueProp), ...LONG_CACHE_QUERY_OPTIONS }
-  );
+  const { data: value, isFetching: isLoadingValue } = useQuery({
+    queryKey: ['getAsyncSelectValue', valueProp, defaultOptions, loadLabel],
+    queryFn: getAsyncValueFn,
+    enabled: Boolean(valueProp),
+    ...LONG_CACHE_QUERY_OPTIONS,
+  });
 
   return (
     <ReactAsyncSelect
-      {...getDefaultProps(t)}
+      {...defaultProps}
       isDisabled={
         disabled ||
-        _.isUndefined(props?.loadOptions) ||
+        isUndefined(props?.loadOptions) ||
         isLoading ||
         isLoadingValue
       }

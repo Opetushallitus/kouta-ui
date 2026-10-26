@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -11,7 +11,7 @@ export const useTarjoajatHierarkia = (organisaatioOid, tarjoajat) => {
     useIsOphVirkailija() &&
     organisaatioOid !== OPETUSHALLITUS_ORGANISAATIO_OID &&
     Array.isArray(tarjoajat) &&
-    !_.isEmpty(tarjoajat);
+    !isEmpty(tarjoajat);
 
   return useOrganisaatioHierarkia(
     isTarjoajatIncluded ? OPETUSHALLITUS_ORGANISAATIO_OID : organisaatioOid,

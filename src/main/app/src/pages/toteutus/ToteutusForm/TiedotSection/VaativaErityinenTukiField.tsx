@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 
 const useIsAmmatillinenPerustutkinto = koulutus => {

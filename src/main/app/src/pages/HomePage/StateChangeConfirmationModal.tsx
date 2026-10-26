@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { useActor, useInterpret } from '@xstate/react';
-import _ from 'lodash';
+import { useActorRef, useSelector } from '@xstate/react';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { ActorRefFrom, InterpreterFrom } from 'xstate';
+import { ActorRefFrom, fromPromise } from 'xstate';
 
 import Modal from '#/src/components/Modal';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
@@ -11,7 +11,6 @@ import { Box, Button } from '#/src/components/virkailija';
 import { safeGetJulkaisutilaTranslationKey } from '#/src/constants';
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
 import { BatchOpsMachine } from '#/src/machines/batchOpsMachine';
-import { isDev } from '#/src/utils';
 
 import { useBatchOpsApi } from './CopyConfirmationModal';
 import { EntityListTable } from './EntitySearchList';
@@ -20,14 +19,12 @@ import { CopyHakukohteetMutationFunctionAsync } from './HakukohteetSection/chang
 import { useEntitySelectionApi } from './useEntitySelection';
 
 export const BatchOpsStateChangeContext = React.createContext<
-  InterpreterFrom<typeof BatchOpsMachine>
->({} as any);
+  ActorRefFrom<typeof BatchOpsMachine> | undefined
+>(undefined);
 
 export const useStateChangeBatchOpsApi = () => {
   const batchOpsService = useContextOrThrow(BatchOpsStateChangeContext);
-  return useBatchOpsApi(
-    batchOpsService as InterpreterFrom<typeof BatchOpsMachine>
-  );
+  return useBatchOpsApi(batchOpsService);
 };
 
 export const StateChangeConfirmationWrapper = ({
@@ -39,14 +36,17 @@ export const StateChangeConfirmationWrapper = ({
   mutateAsync: CopyHakukohteetMutationFunctionAsync;
   entityTranslationKeyPath: string;
 }) => {
-  const batchOpsService = useInterpret(BatchOpsMachine, {
-    services: {
-      runMutation: (ctx, e) => mutateAsync(e),
-    },
-    devTools: isDev,
-  });
+  const batchOpsService = useActorRef(
+    BatchOpsMachine.provide({
+      actors: {
+        runMutation: fromPromise(({ input }) =>
+          mutateAsync({ entities: input.entities, tila: input.tila! })
+        ),
+      },
+    })
+  );
 
-  const [state] = useActor(batchOpsService);
+  const state = useSelector(batchOpsService, s => s);
   const { t } = useTranslation();
 
   return (
@@ -79,7 +79,7 @@ export const StateChangeConfirmationModal = ({
     [createColumns, selectionRef]
   );
 
-  const { selection } = useEntitySelectionApi(selectionRef);
+  const { selection } = useEntitySelectionApi(selectionRef!);
 
   const onConfirm = useCallback(() => {
     execute({ entities: selection, tila });
@@ -99,7 +99,7 @@ export const StateChangeConfirmationModal = ({
               {t('yleiset.sulje')}
             </Button>
           </Box>
-          <Button disabled={_.isEmpty(selection)} onClick={onConfirm}>
+          <Button disabled={isEmpty(selection)} onClick={onConfirm}>
             {t(`${entityTranslationKeyPath}.vahvistaTilanmuutos`, {
               tila: t(safeGetJulkaisutilaTranslationKey(tila)),
             })}

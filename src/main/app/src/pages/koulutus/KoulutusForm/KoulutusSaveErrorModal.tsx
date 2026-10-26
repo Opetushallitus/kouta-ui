@@ -1,25 +1,25 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { isEmpty, map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
 import { FormButton } from '#/src/components/FormButton';
 import Modal from '#/src/components/Modal';
 import { Box, Typography } from '#/src/components/virkailija';
+import { useSelectedOrganisaatioOid } from '#/src/contexts/OrganisaatioValintaContext';
 import { useFormSaveRemoteErrors } from '#/src/hooks/useFormSaveRemoteErrors';
-import { useSelectedOrganisaatioOid } from '#/src/hooks/useSelectedOrganisaatio';
 
 export const KoulutusSaveErrorModal = () => {
   const { t } = useTranslation();
 
   const { remoteErrors = [], setRemoteErrors } = useFormSaveRemoteErrors();
   const errorsWithToteutukset = useMemo(
-    () => remoteErrors?.filter?.(e => !_.isEmpty(e?.meta?.toteutukset)),
+    () => remoteErrors?.filter?.(e => !isEmpty(e?.meta?.toteutukset)),
     [remoteErrors]
   );
 
-  const isOpen = !_.isEmpty(errorsWithToteutukset);
+  const isOpen = !isEmpty(errorsWithToteutukset);
 
   const closeModal = () => setRemoteErrors(null);
 
@@ -41,7 +41,7 @@ export const KoulutusSaveErrorModal = () => {
       }
     >
       <Box flexDirection="column">
-        {_.map(errorsWithToteutukset, error => (
+        {map(errorsWithToteutukset, error => (
           <div key={error.errorType}>
             <Typography>
               {t(`validointivirheet.${error.errorType}`)}:

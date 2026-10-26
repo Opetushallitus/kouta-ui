@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { omit } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -35,7 +35,7 @@ const getInitialValues = koulutus => {
   return koulutus
     ? {
         ...getFormValuesByKoulutus(
-          _.omit(koulutus, ['tarjoajat', 'organisaatioOid'])
+          omit(koulutus, ['tarjoajat', 'organisaatioOid'])
         ),
         ...getCopyValues(koulutus),
         tila: DEFAULT_JULKAISUTILA,

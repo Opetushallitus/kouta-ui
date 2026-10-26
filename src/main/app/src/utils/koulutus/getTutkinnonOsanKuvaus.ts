@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
@@ -8,7 +8,7 @@ export const getTutkinnonOsanKuvaus = async ({
   apiUrls,
   tutkinnonOsat,
 }) => {
-  if (_.isNil(tutkinnonOsat)) {
+  if (isNil(tutkinnonOsat)) {
     return null;
   }
 

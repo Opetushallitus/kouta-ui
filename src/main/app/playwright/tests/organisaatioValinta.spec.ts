@@ -195,4 +195,47 @@ test.describe('Organisaation valinta ja suosikit', () => {
 
     await expectSelected(page, ROOT_OID, 'Organisaatio_1');
   });
+
+  // Tallennusmuoto localStoragessa, sellaisena kuin redux-persist sen kirjoittaa:
+  // avain persist:<slice>, arvona olio jonka jokainen kenttä on erikseen
+  // JSON-koodattu merkkijono. Käyttäjillä on tämä data jo selaimissaan, joten
+  // storen korvaajan on luettava sama muoto tai migroitava se - muuten suosikit
+  // ja viimeinen valinta katoavat julkaisussa. Testi lukitsee muodon.
+  test('reads the selection and favourites persisted by redux-persist', async ({
+    page,
+  }) => {
+    const persisted = (fields: Record<string, unknown>) =>
+      JSON.stringify({
+        ...Object.fromEntries(
+          Object.entries(fields).map(([key, value]) => [
+            key,
+            JSON.stringify(value),
+          ])
+        ),
+        _persist: JSON.stringify({ version: 1, rehydrated: true }),
+      });
+
+    await page.addInitScript(
+      ([selection, favourites]) => {
+        // Vain uudet avaimet pois: localStorage.clear() pyyhkisi myös isPlaywright-lipun.
+        localStorage.removeItem('kouta.organisaatioOid');
+        localStorage.removeItem('kouta.organisaatioFavourites');
+        localStorage.setItem('persist:organisaatioSelection', selection);
+        localStorage.setItem('persist:organisaatioFavourites', favourites);
+      },
+      [
+        persisted({ oid: OPPILAITOS_OID }),
+        persisted({ byOid: { [OPPILAITOS_OID]: true, [ROOT_OID]: true } }),
+      ]
+    );
+    await page.goto('/kouta/');
+
+    await expectSelected(page, OPPILAITOS_OID, 'Organisaatio_1_1');
+
+    const drawer = await openDrawer(page);
+    await expect(drawer.getByTestId('organization-favourites')).toContainText([
+      'Organisaatio_1_1',
+      'Organisaatio_1',
+    ]);
+  });
 });

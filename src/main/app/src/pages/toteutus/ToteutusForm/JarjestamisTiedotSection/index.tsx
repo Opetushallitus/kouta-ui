@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { get } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
@@ -75,9 +75,9 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
       value,
       label: label
         ? label
-        : _fp.get(
-            'label',
-            osiotOptions.find(({ value: v }) => v === value)
+        : get(
+            osiotOptions.find(({ value: v }) => v === value),
+            'label'
           ) || null, // TODO: Use something else than null as a label, when not found
     }));
   }, [osiot, osiotOptions]);

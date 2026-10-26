@@ -1,4 +1,4 @@
-import { castArray, identity, isFunction, uniqueId } from 'lodash';
+import { castArray, identity, isFunction, uniqueId } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 

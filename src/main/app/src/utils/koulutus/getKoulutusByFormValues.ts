@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { isEmpty, map, reduce } from 'lodash-es';
 
 import {
   KOULUTUSTYYPPI,
@@ -27,7 +27,7 @@ function getKoulutuksetKoodiUri(
   information?: InformationSectionValues
 ): Array<string> {
   if (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)) {
-    return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
+    return map(information?.korkeakoulutukset, 'value');
   }
 
   if (koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA) {
@@ -67,7 +67,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
-    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
+    externalId: isEmpty(values?.externalId) ? null : values?.externalId,
     johtaaTutkintoon:
       TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(koulutustyyppi),
     muokkaaja,
@@ -96,7 +96,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
     sorakuvausId,
     metadata: {
       tyyppi: koulutustyyppi,
-      tutkinnonOsat: _fp.reduce(
+      tutkinnonOsat: reduce(
+        values?.tutkinnonosat?.osat,
         (
           resultOsat,
           {
@@ -106,12 +107,12 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
           }: TutkinnonOsa
         ) => [
           ...resultOsat,
-          ..._fp.map(({ value, viite }) => ({
+          ...map(osat, ({ value, viite }) => ({
             ePerusteId: maybeParseNumber(ePerusteId),
             koulutusKoodiUri,
             tutkinnonosaId: maybeParseNumber(value),
             tutkinnonosaViite: maybeParseNumber(viite),
-          }))(osat),
+          })),
         ],
         [] as Array<{
           ePerusteId: number;
@@ -119,7 +120,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
           tutkinnonosaId: number;
           tutkinnonosaViite: number;
         }>
-      )(values?.tutkinnonosat?.osat),
+      ),
       paikallisetTutkinnonOsat:
         values?.paikallisetTutkinnonOsat?.flatMap(
           ({ opetussuunnitelmaId, tutkinnonosat }) => {

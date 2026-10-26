@@ -1,4 +1,4 @@
-import { isString } from 'lodash';
+import { isString } from 'lodash-es';
 
 import { HAKUTAPA_YHTEISHAKU_KOODI_URI } from '#/src/constants';
 

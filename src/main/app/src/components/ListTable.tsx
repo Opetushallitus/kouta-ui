@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 import Box from '@opetushallitus/virkailija-ui-components/Box';
-import { get, isFunction } from 'lodash';
+import { get, isFunction } from 'lodash-es';
 import styled, { css } from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';

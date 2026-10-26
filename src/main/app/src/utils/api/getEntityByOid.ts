@@ -1,5 +1,5 @@
 import type { AxiosResponse } from 'axios';
-import { mapValues, isPlainObject } from 'lodash';
+import { mapValues, isPlainObject } from 'lodash-es';
 
 import { ENTITY } from '#/src/constants';
 import { useApiQuery, KoutaApiQueryConfig } from '#/src/hooks/useApiQuery';

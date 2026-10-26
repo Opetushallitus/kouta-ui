@@ -7,7 +7,6 @@ import react from '@vitejs/plugin-react';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
 import { defineConfig, loadEnv } from 'vite';
 import checker from 'vite-plugin-checker';
-import pluginRewriteAll from 'vite-plugin-rewrite-all';
 import svgr from 'vite-plugin-svgr';
 
 const devProxyOptions = (targetUrl?: string) => ({
@@ -47,6 +46,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '#': path.resolve(__dirname),
+        lodash: 'lodash-es',
       },
     },
     plugins: [
@@ -54,7 +54,6 @@ export default defineConfig(({ mode }) => {
       svgr(),
       ...(isDev && !STORYBOOK
         ? [
-            pluginRewriteAll(),
             checker({
               typescript: true,
               eslint: {

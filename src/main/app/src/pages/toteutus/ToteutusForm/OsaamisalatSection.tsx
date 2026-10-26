@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { get, isEmpty } from 'lodash';
+import { get, isEmpty } from 'lodash-es';
 import { Trans, useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 

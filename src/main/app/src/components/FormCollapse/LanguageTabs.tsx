@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { type TFunction } from 'i18next';
-import { noop, sortBy } from 'lodash';
+import { noop, sortBy } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { Tab, Tabs } from '#/src/components/virkailija';

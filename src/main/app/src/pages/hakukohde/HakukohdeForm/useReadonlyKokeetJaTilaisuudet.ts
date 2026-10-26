@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { set } from 'lodash';
+import { set } from 'lodash-es';
 
 import { useKoodit } from '#/src/hooks/useKoodit';
 import { getPostinumeroByPostinumeroUri } from '#/src/utils';

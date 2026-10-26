@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { find, toString } from 'lodash';
+import { find, toString } from 'lodash-es';
 
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';

@@ -1,4 +1,4 @@
-import { some } from 'lodash';
+import { some } from 'lodash-es';
 
 import {
   KOULUTUSTYYPIT_WITH_HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA,

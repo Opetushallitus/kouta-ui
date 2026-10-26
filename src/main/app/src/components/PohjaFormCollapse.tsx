@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import _fp from 'lodash/fp';
+import { isFunction } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { useFieldRegistry } from '#/src/components/formFields/FieldRegistry';
@@ -39,7 +39,7 @@ export default function PohjaFormCollapse({
 
   const { selectPohja } = usePohjaEntity(entityType);
   const onPohjaContinue = useCallback(() => {
-    _fp.isFunction(onContinue) && onContinue();
+    isFunction(onContinue) && onContinue();
     // Pohjan valinta alustaa lomakkeen uudelleen: kopio haetaan, initialValues
     // vaihtuu, ja osiot mountautuvat uudelleen uusien arvojen mukaan. Vanhan
     // lomakkeen piilotukset eivät kuulu enää mihinkään, joten ne pudotetaan tässä -

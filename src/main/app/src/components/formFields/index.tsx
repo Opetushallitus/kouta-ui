@@ -1,4 +1,4 @@
-import { noop } from 'lodash';
+import { noop } from 'lodash-es';
 
 import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
 import { DateInput } from '#/src/components/DateInput';

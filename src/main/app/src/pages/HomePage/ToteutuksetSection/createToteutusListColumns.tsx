@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { TFunction } from 'i18next';
-import { stubTrue } from 'lodash';
+import { stubTrue } from 'lodash-es';
 
 import {
   makeCountColumn,

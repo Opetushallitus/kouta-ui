@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { compact, flow, map, sortBy } from 'lodash';
+import { compact, flow, map, sortBy } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import ListTable, { makeNimiColumn } from '#/src/components/ListTable';

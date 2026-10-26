@@ -31,7 +31,7 @@ import {
   size,
   camelCase,
   castArray,
-} from 'lodash';
+} from 'lodash-es';
 import stripTags from 'striptags';
 import { match } from 'ts-pattern';
 

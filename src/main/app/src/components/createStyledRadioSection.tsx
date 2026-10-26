@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';

@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 
-import { find, isEmpty, isNil, toLower } from 'lodash';
+import { find, isEmpty, isNil, toLower } from 'lodash-es';
 import { usePrevious } from 'react-use';
 
 import {

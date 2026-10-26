@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { sortBy } from 'lodash';
+import { sortBy } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import {

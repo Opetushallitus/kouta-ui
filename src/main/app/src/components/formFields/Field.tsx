@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 import { Field as RffField, FieldProps } from 'react-final-form';
 import { FieldArray as RffFieldArray } from 'react-final-form-arrays';
 

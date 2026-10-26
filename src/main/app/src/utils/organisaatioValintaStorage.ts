@@ -1,4 +1,4 @@
-import { isPlainObject, isString, uniq } from 'lodash';
+import { isPlainObject, isString, uniq } from 'lodash-es';
 
 // Valitun organisaation ja organisaatiosuosikkien tallennus localStorageen. Avaimet ovat
 // kouta-etuliitteisiä, koska virkailija-origin on yhteinen usealle sovellukselle.

@@ -1,5 +1,5 @@
 import { Page, expect, test } from '@playwright/test';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import valintaperuste from '#/playwright/fixtures/valintaperuste';
 import {

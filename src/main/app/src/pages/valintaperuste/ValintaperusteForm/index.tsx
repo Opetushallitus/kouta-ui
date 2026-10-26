@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { POHJAVALINTA, DEFAULT_JULKAISUTILA } from '#/src/constants';
 

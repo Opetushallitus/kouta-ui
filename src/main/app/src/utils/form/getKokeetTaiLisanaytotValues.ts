@@ -1,4 +1,4 @@
-import { mapValues, toString } from 'lodash';
+import { mapValues, toString } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { FormMode } from '#/src/constants';

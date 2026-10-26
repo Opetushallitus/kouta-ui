@@ -1,4 +1,4 @@
-import { mapValues, merge } from 'lodash';
+import { mapValues, merge } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import {

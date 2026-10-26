@@ -1,5 +1,5 @@
 import { getYear } from 'date-fns';
-import { range } from 'lodash';
+import { range } from 'lodash-es';
 
 const YEAR_PADDING = 2;
 

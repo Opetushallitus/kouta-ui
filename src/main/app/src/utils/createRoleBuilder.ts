@@ -1,4 +1,4 @@
-import { isEmpty, isString, set } from 'lodash';
+import { isEmpty, isString, set } from 'lodash-es';
 
 import { OPH_PAAKAYTTAJA_ROLE } from '#/src/constants';
 import { OrganisaatioModel } from '#/src/types/domainTypes';

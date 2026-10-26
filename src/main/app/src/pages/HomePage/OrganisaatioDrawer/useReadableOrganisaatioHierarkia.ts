@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 
-import { isString, uniq } from 'lodash';
+import { isString, uniq } from 'lodash-es';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';

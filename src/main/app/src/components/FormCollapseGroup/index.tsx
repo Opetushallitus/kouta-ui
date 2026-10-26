@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { produce } from 'immer';
-import { get, isFunction, kebabCase } from 'lodash';
+import { get, isFunction, kebabCase } from 'lodash-es';
 
 import type { FormCollapseProps } from '#/src/components/FormCollapse';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';

@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+import { get } from 'lodash-es';
 import { setLightness } from 'polished';
 import styled from 'styled-components';
 

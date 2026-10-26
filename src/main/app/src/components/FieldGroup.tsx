@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react';
 
-import { snakeCase } from 'lodash';
+import { snakeCase } from 'lodash-es';
 import { type SpaceProps } from 'styled-system';
 
 import Heading from '#/src/components/Heading';

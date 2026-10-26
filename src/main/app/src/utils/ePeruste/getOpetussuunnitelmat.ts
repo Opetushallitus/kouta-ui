@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';

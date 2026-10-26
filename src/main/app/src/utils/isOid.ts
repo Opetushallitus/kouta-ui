@@ -1,4 +1,4 @@
-import { isString } from 'lodash';
+import { isString } from 'lodash-es';
 
 const oidRegExp = /^[0-9]+(\.[0-9]+)+$/;
 

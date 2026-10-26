@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import _fp from 'lodash/fp';
+import { forEach } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldInput } from '#/src/components/formFields';
@@ -53,14 +53,14 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<
   useEffect(() => {
     if (!ePerusteTutkinnonOsatIsLoading) {
       if (changeNimi) {
-        _fp.each(lang => {
+        forEach(languages, lang => {
           change(
             `${name}.nimi.${lang}`,
             selectedTutkinnonosaNimi
               ? getLanguageValue(selectedTutkinnonosaNimi, lang)
               : null
           );
-        }, languages);
+        });
       }
       setSelectedTutkinnonosa(oneSelectedTutkinnonOsa?.tutkinnonosaViite);
     }

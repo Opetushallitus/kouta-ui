@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { omit } from 'lodash';
-import { merge } from 'lodash/fp';
+import { merge, omit } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
@@ -35,6 +34,7 @@ import {
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
   return merge(
+    {},
     getFormValuesByHakukohde(
       omit(hakukohde, ['organisaatioOid']),
       FormMode.CREATE

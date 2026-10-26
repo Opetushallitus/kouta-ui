@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { isEmpty } from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { useFieldRegistry } from '#/src/components/formFields/FieldRegistry';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';

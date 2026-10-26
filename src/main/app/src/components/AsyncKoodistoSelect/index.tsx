@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { isFunction } from 'lodash';
+import { isFunction } from 'lodash-es';
 
 import { AsyncSelect, type SelectProps } from '#/src/components/Select';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';

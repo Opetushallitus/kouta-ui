@@ -1,5 +1,5 @@
 import type { TFunction, i18n as I18n } from 'i18next';
-import { get, mapValues, transform } from 'lodash';
+import { get, mapValues, transform } from 'lodash-es';
 
 import { LANGUAGES } from '#/src/constants';
 import { sanitizeHTML } from '#/src/utils';

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { omit } from 'lodash';
+import { omit } from 'lodash-es';
 import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 

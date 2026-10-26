@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import i18n from 'i18next';
 import HttpBackend from 'i18next-http-backend';
-import { get, identity, isFunction, toLower, upperFirst } from 'lodash';
+import { get, identity, isFunction, toLower, upperFirst } from 'lodash-es';
 import { initReactI18next } from 'react-i18next';
 
 import { LANGUAGES } from '#/src/constants';

@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { every, filter, isEmpty } from 'lodash';
+import { every, filter, isEmpty } from 'lodash-es';
 
 import { Checkbox } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY } from '#/src/constants';

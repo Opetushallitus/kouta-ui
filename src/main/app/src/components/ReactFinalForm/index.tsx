@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 
 import arrayMutators from 'final-form-arrays';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { Form } from 'react-final-form';
 
 import { FieldRegistryProvider } from '#/src/components/formFields/FieldRegistry';

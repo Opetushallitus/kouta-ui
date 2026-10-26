@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { map } from 'lodash';
+import { map } from 'lodash-es';
 import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { JULKAISUTILA } from '#/src/constants';

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { castArray, isNil } from 'lodash';
+import { castArray, isNil } from 'lodash-es';
 
 import { getCombinedQueryStatus } from '#/src/components/QueryResultWrapper';
 import {

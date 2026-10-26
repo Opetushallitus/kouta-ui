@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
@@ -48,15 +48,13 @@ const LukiolinjaOsio = ({
         </Field>
       </Box>
       {isKaytossa && (
-        <>
-          <KoodistoCollapseList
-            koodistoData={koodistoData}
-            name={name}
-            itemProps={{ kuvausLabel }}
-            selectLabel={valinnatLabel}
-            CollapseContent={LukiolinjaKuvaus}
-          />
-        </>
+        <KoodistoCollapseList
+          koodistoData={koodistoData}
+          name={name}
+          itemProps={{ kuvausLabel }}
+          selectLabel={valinnatLabel}
+          CollapseContent={LukiolinjaKuvaus}
+        />
       )}
     </FieldGroup>
   );
@@ -98,7 +96,7 @@ export const LukiolinjatSection = ({ name }) => {
   const isLoading = isLoadingPainotukset || isLoadingKoulutustehtavat;
 
   const linjaSelectionsEmpty =
-    _fp.isEmpty(selectedPainotukset) && _fp.isEmpty(selectedKoulutustehtavat);
+    isEmpty(selectedPainotukset) && isEmpty(selectedKoulutustehtavat);
 
   const { change } = useBoundFormActions();
   const isDirty = useIsDirty();

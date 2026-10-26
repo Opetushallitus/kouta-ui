@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { includes } from 'lodash';
+import { includes } from 'lodash-es';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';

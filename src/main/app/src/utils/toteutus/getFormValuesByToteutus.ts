@@ -1,5 +1,4 @@
-import { isEmpty } from 'lodash';
-import _fp from 'lodash/fp';
+import { filter, isEmpty, isNumber, map, mapValues, reduce } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { MaaraTyyppi, ApurahaYksikko, HAKULOMAKETYYPPI } from '#/src/constants';
@@ -21,16 +20,16 @@ import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 
 const lukiolinjatiedotToFormValues = (lukiolinjatiedot): LukiolinjatOsio => {
   const result = {
-    kaytossa: !_fp.isEmpty(lukiolinjatiedot),
+    kaytossa: !isEmpty(lukiolinjatiedot),
     valinnat: [],
     kuvaukset: {},
   } as LukiolinjatOsio;
 
   lukiolinjatiedot?.forEach(lukiolinjatieto => {
     result.valinnat.push({ value: lukiolinjatieto.koodiUri });
-    result.kuvaukset[lukiolinjatieto.koodiUri] = _fp.mapValues(
-      parseEditorState,
-      lukiolinjatieto.kuvaus ?? {}
+    result.kuvaukset[lukiolinjatieto.koodiUri] = mapValues(
+      lukiolinjatieto.kuvaus ?? {},
+      parseEditorState
     );
   });
 
@@ -152,7 +151,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     ? getMaksullisuustyypit(maksut)
     : undefined;
 
-  const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
+  const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = reduce(
+    osaamisalat,
     (acc, curr: any) => {
       const { koodiUri, linkki = {}, otsikko = {} } = curr;
 
@@ -164,7 +164,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       return acc;
     },
     { osaamisalaLinkit: {}, osaamisalaLinkkiOtsikot: {} }
-  )(osaamisalat);
+  );
 
   return {
     organisaatioOid: toSelectValue(organisaatioOid),
@@ -182,7 +182,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       isTaydennyskoulutus: Boolean(isTaydennyskoulutus),
       isTyovoimakoulutus: Boolean(isTyovoimakoulutus),
       suoritetaanNayttona: Boolean(suoritetaanNayttona),
-      opintojenLaajuusNumero: _fp.isNumber(opintojenLaajuusNumero)
+      opintojenLaajuusNumero: isNumber(opintojenLaajuusNumero)
         ? opintojenLaajuusNumero.toString()
         : '',
       laajuusNumeroTyyppi:
@@ -201,11 +201,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       taiteenalat: toSelectValueList(taiteenalaKoodiUrit),
     },
     description: {
-      kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
-      osaamistavoitteet: _fp.mapValues(
-        parseEditorState,
-        osaamistavoitteet || {}
-      ),
+      kuvaus: mapValues(kuvaus || {}, parseEditorState),
+      osaamistavoitteet: mapValues(osaamistavoitteet || {}, parseEditorState),
     },
     kieliversiot: kielivalinta ?? [],
     tarjoajat: tarjoajat ?? [],
@@ -220,43 +217,47 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       opetustapa: opetus?.opetustapaKoodiUrit || [],
       opetusaika: opetus?.opetusaikaKoodiUrit || [],
       opetuskieli: opetus?.opetuskieliKoodiUrit || [],
-      suunniteltuKestoKuvaus: _fp.mapValues(
-        parseEditorState,
-        opetus?.suunniteltuKestoKuvaus || {}
+      suunniteltuKestoKuvaus: mapValues(
+        opetus?.suunniteltuKestoKuvaus || {},
+        parseEditorState
       ),
       suunniteltuKesto: {
         vuotta: opetus?.suunniteltuKestoVuodet,
         kuukautta: opetus?.suunniteltuKestoKuukaudet,
       },
-      opetusaikaKuvaus: _fp.mapValues(
-        parseEditorState,
-        opetus?.opetusaikaKuvaus || {}
+      opetusaikaKuvaus: mapValues(
+        opetus?.opetusaikaKuvaus || {},
+        parseEditorState
       ),
-      opetustapaKuvaus: _fp.mapValues(
-        parseEditorState,
-        opetus?.opetustapaKuvaus || {}
+      opetustapaKuvaus: mapValues(
+        opetus?.opetustapaKuvaus || {},
+        parseEditorState
       ),
-      opetuskieliKuvaus: _fp.mapValues(
-        parseEditorState,
-        opetus?.opetuskieletKuvaus || {}
+      opetuskieliKuvaus: mapValues(
+        opetus?.opetuskieletKuvaus || {},
+        parseEditorState
       ),
-      maksullisuusKuvaus: _fp.mapValues(
-        parseEditorState,
-        opetus?.maksullisuusKuvaus || {}
+      maksullisuusKuvaus: mapValues(
+        opetus?.maksullisuusKuvaus || {},
+        parseEditorState
       ),
-      osiot: _fp.flow(
-        _fp.filter(({ otsikkoKoodiUri }) => Boolean(otsikkoKoodiUri)),
-        _fp.map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }))
-      )(lisatiedot),
-      osioKuvaukset: _fp.reduce((acc, curr: any) => {
-        if (curr.otsikkoKoodiUri) {
-          acc[curr.otsikkoKoodiUri] = _fp.mapValues(
-            parseEditorState,
-            curr.teksti || {}
-          );
-        }
-        return acc;
-      }, {})(lisatiedot),
+      osiot: map(
+        filter(lisatiedot, ({ otsikkoKoodiUri }) => Boolean(otsikkoKoodiUri)),
+        ({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })
+      ),
+      osioKuvaukset: reduce(
+        lisatiedot,
+        (acc, curr: any) => {
+          if (curr.otsikkoKoodiUri) {
+            acc[curr.otsikkoKoodiUri] = mapValues(
+              curr.teksti || {},
+              parseEditorState
+            );
+          }
+          return acc;
+        },
+        {}
+      ),
       onkoApuraha: opetus?.onkoApuraha,
       apurahaMin: opetus?.apuraha?.min,
       apurahaMax: opetus?.apuraha?.max,
@@ -267,10 +268,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       apurahaYksikko: toSelectValue(
         opetus?.apuraha?.yksikko ?? ApurahaYksikko.EURO
       ),
-      apurahaKuvaus: _fp.mapValues(
-        parseEditorState,
-        opetus?.apuraha?.kuvaus || {}
-      ),
+      apurahaKuvaus: mapValues(opetus?.apuraha?.kuvaus || {}, parseEditorState),
       diplomit: diplomitToFormValues(diplomit),
       kielivalikoima: {
         A1Kielet: toSelectValueList(kielivalikoima.A1Kielet),
@@ -287,7 +285,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       ammattinimikkeet: kieliArvoListToMultiSelectValue(ammattinimikkeet),
       avainsanat: kieliArvoListToMultiSelectValue(asiasanat),
     },
-    yhteyshenkilot: _fp.map(
+    yhteyshenkilot: map(
+      yhteyshenkilot,
       ({
         nimi,
         titteli,
@@ -303,9 +302,9 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         verkkosivuTeksti: wwwSivuTeksti || {},
         puhelinnumero: puhelinnumero || {},
       })
-    )(yhteyshenkilot),
+    ),
     osaamisalat: {
-      osaamisalat: _fp.map(({ koodiUri }) => koodiUri)(osaamisalat),
+      osaamisalat: map(osaamisalat, ({ koodiUri }) => koodiUri),
       osaamisalaLinkit,
       osaamisalaLinkkiOtsikot,
     },
@@ -322,22 +321,20 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       isHakukohteetKaytossa: hakukohteetKaytossaToFormValues(metadata),
       hakuTapa: metadata?.hakutermi,
       linkki: metadata?.hakulomakeLinkki,
-      lisatiedot: _fp.mapValues(
-        parseEditorState,
-        metadata?.lisatietoaHakeutumisesta
+      lisatiedot: mapValues(
+        metadata?.lisatietoaHakeutumisesta,
+        parseEditorState
       ),
-      lisatiedotValintaperusteista: _fp.mapValues(
-        parseEditorState,
-        metadata?.lisatietoaValintaperusteista
+      lisatiedotValintaperusteista: mapValues(
+        metadata?.lisatietoaValintaperusteista,
+        parseEditorState
       ),
       hakuaikaAlkaa: metadata?.hakuaika?.alkaa,
       hakuaikaPaattyy: metadata?.hakuaika?.paattyy,
-      aloituspaikat: _fp.isNumber(aloituspaikat)
-        ? aloituspaikat.toString()
-        : '',
-      aloituspaikkakuvaus: _fp.mapValues(
-        parseEditorState,
-        aloituspaikkakuvaus || {}
+      aloituspaikat: isNumber(aloituspaikat) ? aloituspaikat.toString() : '',
+      aloituspaikkakuvaus: mapValues(
+        aloituspaikkakuvaus || {},
+        parseEditorState
       ),
     },
     soraKuvaus: toSelectValue(sorakuvausId),

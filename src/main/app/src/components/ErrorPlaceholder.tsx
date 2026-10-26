@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { get, isNil } from 'lodash';
+import { get, isNil } from 'lodash-es';
 
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';

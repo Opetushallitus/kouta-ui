@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isNil } from 'lodash';
+import { isNil } from 'lodash-es';
 
 import DateTimeRange from '#/src/components/DateTimeRange';
 import { FormButton } from '#/src/components/FormButton';

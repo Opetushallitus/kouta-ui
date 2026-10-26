@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { size, trim } from 'lodash';
+import { size, trim } from 'lodash-es';
 
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';

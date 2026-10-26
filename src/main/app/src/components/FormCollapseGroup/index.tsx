@@ -26,7 +26,7 @@ const getFlattenedChildren = children => {
     }
   });
 
-  return res as FormCollapseList;
+  return res;
 };
 
 const getFormCollapseId = id => `FormCollapse_${id}`;

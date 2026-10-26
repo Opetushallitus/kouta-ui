@@ -18,7 +18,7 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { Box } from '#/src/components/virkailija';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
-import { useFieldValue } from '#/src/hooks/form';
+import { useKoulutusFormField } from '#/src/hooks/form';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
@@ -84,11 +84,9 @@ export const KoulutusForm = ({
 }: KoulutusFormProps) => {
   const { t } = useTranslation();
 
-  const koulutustyyppi = useFieldValue('koulutustyyppi') as
-    | KOULUTUSTYYPPI
-    | undefined;
-  const kieliversiotValue = useFieldValue('kieliversiot');
-  const koulutuskoodi = useFieldValue('information.koulutus');
+  const koulutustyyppi = useKoulutusFormField('koulutustyyppi');
+  const kieliversiotValue = useKoulutusFormField('kieliversiot');
+  const koulutuskoodi = useKoulutusFormField('information.koulutus');
   const languageTabs = kieliversiotValue || [];
   const formMode = useFormMode();
   const isNewKoulutus = formMode === FormMode.CREATE;

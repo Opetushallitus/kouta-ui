@@ -94,7 +94,7 @@ test('getFormValuesByKoulutus returns correct form values for erikoistumiskoulut
         sv: 'Sv osaamistavoitteet',
       },
       erikoistumiskoulutusKoodiUri: 'erikoistumiskoulutukset_001#2',
-      opintojenLaajuusyksikko: 'opintojenlaajuusyksikko_2#1',
+      opintojenLaajuusyksikkoKoodiUri: 'opintojenlaajuusyksikko_2#1',
       opintojenLaajuusNumeroMax: 10,
       opintojenLaajuusNumeroMin: 5,
       koulutusalaKoodiUrit: ['koulutusala_1#1', 'koulutusala_2#1'],

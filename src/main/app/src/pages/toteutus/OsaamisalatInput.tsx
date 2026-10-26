@@ -92,7 +92,7 @@ const useSplitValues = ({ osaamisalat, value }) =>
 type OsaamisalatInputProps = {
   value: Array<string>;
   onChange?: (val: Array<string>) => void;
-  ePeruste: { osaamisalat: Array<Osaamisala>; nimi: string };
+  ePeruste: { osaamisalat: Array<Osaamisala>; nimi: TranslatedField };
   language: LanguageCode;
   disabled?: boolean;
   error?: boolean;

@@ -105,6 +105,47 @@ test.describe('Edit koulutus', () => {
   // validoida lainkaan. Koulutuksen FieldArrayt sisältävät vain selectejä, joten
   // kirjoitustesti kohdistuu tavalliseen kenttään.
 
+  // Kielivälilehden vaihto ei saa palauttaa kentän ALKUARVOA muokkauksen päälle.
+  //
+  // Eri vika kuin alla olevassa testissä, vaikka oire on samassa paikassa:
+  // react-final-form 7.0.1:n useField kirjoittaa mountissa alkuarvon takaisin, jos
+  // kentällä ei ole field statea - ja välilehden vaihto vie sen tilan, koska Fieldin
+  // name muuttuu. Vartioi kirjaston paikkausta
+  // (patches/react-final-form@7.0.1.patch, ylävirran PR #1096).
+  //
+  // Fixturessa kuvaus on tallennettu TYHJÄNÄ merkkijonona molemmille kielille, ja se
+  // on vian laukaisija: getFormValuesByKoulutus ajaa arvon parseEditorStaten läpi,
+  // joten alkuarvoksi tulee tyhjä EditorState-OLIO eikä undefined. Kirjaston ehto on
+  // "alkuarvo !== undefined", joten määritelty mutta tyhjä arvo laukaisee
+  // palautuksen. Vartija on editorissa, koska ohjelmallinen synkka osuu ajoitukseen
+  // luotettavammin kuin tavallinen tekstikenttä.
+  test('should keep an edit when the language tab is switched and the initial value is empty', async ({
+    page,
+  }) => {
+    const tyhjaKuvaus = merge(koulutus('amk'), testKoulutusFields);
+    tyhjaKuvaus.metadata.kuvaus = { fi: '', sv: '' };
+    await page.route(
+      `**/kouta-backend/koulutus/${koulutusOid}`,
+      fixtureJSON(tyhjaKuvaus)
+    );
+    await page.goto(
+      `/kouta/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+    );
+
+    const section = getSection(page, 'description');
+    const kuvaus = page.getByTestId('form-control_description.kuvaus');
+    const editori = () => getEditableEditors(kuvaus).first();
+
+    await typeToEditor(kuvaus, 'Fi kuvaus kirjoitettu');
+    await expect(editori()).toHaveText('Fi kuvaus kirjoitettu');
+
+    // Käydään ruotsin välilehdellä ja palataan.
+    await section.getByText('yleiset.ruotsiksi').click();
+    await section.getByText('yleiset.suomeksi').click();
+
+    await expect(editori()).toHaveText('Fi kuvaus kirjoitettu');
+  });
+
   // Kielivälilehden vaihto ei saa tuhota toisen kielen tekstiä editorikentässä.
   //
   // Vartioi HISTORY_MERGE-tagia (LexicalEditorUI.tsx).

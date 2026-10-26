@@ -1,19 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 
-import { withTranslation } from 'react-i18next';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
-class ErrorBoundaryNotifier extends Component {
-  static defaultProps = {
-    onError: () => {},
-  };
+type OwnProps = {
+  children: ReactNode;
+};
 
-  constructor(props) {
+type Props = OwnProps & WithTranslation;
+
+type State = {
+  error: Error | null;
+};
+
+class ErrorBoundaryNotifier extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
-    this.state = { error: null, info: '' };
+    this.state = { error: null };
   }
 
-  static getDerivedStateFromError(error, info) {
-    return { error, info };
+  static getDerivedStateFromError(error: Error): State {
+    return { error };
   }
 
   render() {
@@ -21,7 +27,7 @@ class ErrorBoundaryNotifier extends Component {
     return this.state.error ? (
       <div style={{ margin: '15px' }}>
         <p>{t('ilmoitukset.tuntematonVirhe.viesti')}</p>
-        <pre>{this.state.error?.stack ?? ''}</pre>
+        <pre>{this.state.error.stack ?? ''}</pre>
       </div>
     ) : (
       this.props.children

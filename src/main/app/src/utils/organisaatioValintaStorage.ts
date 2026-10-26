@@ -4,8 +4,9 @@ import { isPlainObject, isString, uniq } from 'lodash-es';
 // kouta-etuliitteisiä, koska virkailija-origin on yhteinen usealle sovellukselle.
 //
 // migrateLegacyStorage lukee redux-persistin jättämät persist:-avaimet kerran
-// käynnistyksessä ja kirjoittaa arvot uusiin avaimiin. Vanhoja avaimia ei poisteta, jotta
-// julkaisun peruminen löytää datansa; vanhan muodon luvun poisto on erillinen jatkotyö.
+// käynnistyksessä ja kirjoittaa arvot uusiin avaimiin. Vanhoja avaimia ei poisteta eikä
+// päivitetä: julkaisun peruminen löytää niistä migraatiohetken tilan, ja sen jälkeiset
+// muutokset jäävät vain uusiin avaimiin. Vanhan muodon luvun poisto on erillinen jatkotyö.
 //
 // Ei välilehtien välistä synkkaa: viimeinen kirjoitus voittaa uudelleenlatauksessa.
 
@@ -77,18 +78,22 @@ const readLegacyField = (key: string, field: string): unknown => {
   return isString(inner) ? parseJson(inner) : undefined;
 };
 
-// Kirjoittaa vanhan muodon arvot uusiin avaimiin, jos uutta avainta ei vielä ole.
+// Kirjoittaa vanhan muodon arvot uusiin avaimiin, jos uudessa avaimessa ei ole
+// kelvollista arvoa. Kelvollisuus eikä pelkkä olemassaolo, jottei rikkinäinen uusi arvo
+// estä pysyvästi kelvollisen vanhan palautusta. Tyhjä suosikkilista on kelvollinen:
+// käyttäjä on poistanut suosikit, eikä niitä saa herättää henkiin.
+//
 // Kutsutaan kerran ennen renderöintiä (index.tsx), jotta load-funktiot pysyvät
 // puhtaina lukuina.
 export const migrateLegacyStorage = () => {
-  if (getItem(ORGANISAATIO_OID_KEY) === null) {
+  if (loadOrganisaatioOid() === null) {
     const oid = readLegacyField(LEGACY_SELECTION_KEY, 'oid');
     if (isOid(oid)) {
       saveOrganisaatioOid(oid);
     }
   }
 
-  if (getItem(ORGANISAATIO_FAVOURITES_KEY) === null) {
+  if (!Array.isArray(parseJson(getItem(ORGANISAATIO_FAVOURITES_KEY)))) {
     const byOid = readLegacyField(LEGACY_FAVOURITES_KEY, 'byOid');
     if (isPlainObject(byOid)) {
       const map = byOid as Record<string, unknown>;

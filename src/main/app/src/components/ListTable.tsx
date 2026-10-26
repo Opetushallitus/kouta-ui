@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
 import Box from '@opetushallitus/virkailija-ui-components/Box';
-import { get, isFunction } from 'lodash-es';
+import { fromPairs, get, isFunction } from 'lodash-es';
 import styled, { css } from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -12,8 +12,12 @@ import Table, {
   TableCell,
 } from '#/src/components/Table';
 import { Icon, Dropdown } from '#/src/components/virkailija';
+import {
+  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+} from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { formatDateValue, getKoulutustyyppiTranslation } from '#/src/utils';
+import { formatDateValue, koulutustyyppiHierarkiaToOptions } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import Badge from './Badge';
@@ -88,16 +92,33 @@ export const makeHakuColumn = (
   },
 });
 
-export const makeKoulutustyyppiColumn = t => ({
-  title: t('yleiset.koulutustyyppi'),
-  key: 'koulutustyyppi',
-  sortable: true,
-  render: ({ koulutustyyppi }) =>
-    getKoulutustyyppiTranslation(koulutustyyppi, t),
-  style: {
-    width: '180px',
-  },
-});
+export const makeKoulutustyyppiColumn = t => {
+  const koulutustyyppiMapping: Record<string, string> = {
+    ...fromPairs(
+      koulutustyyppiHierarkiaToOptions(
+        TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
+        t
+      ).map(({ label, value }) => [value, label])
+    ),
+    ...fromPairs(
+      koulutustyyppiHierarkiaToOptions(
+        TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+        t
+      ).map(({ label, value }) => [value, label])
+    ),
+  };
+
+  return {
+    title: t('yleiset.koulutustyyppi'),
+    key: 'koulutustyyppi',
+    sortable: true,
+    render: ({ koulutustyyppi }) =>
+      koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '',
+    style: {
+      width: '180px',
+    },
+  };
+};
 
 export const makeCountColumn = ({ title, key, propName }) => ({
   title,

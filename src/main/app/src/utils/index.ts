@@ -1,5 +1,4 @@
 import { format as formatDate, isValid, parseISO } from 'date-fns';
-import { TFunction } from 'i18next';
 import {
   flow,
   flatMap,
@@ -13,7 +12,6 @@ import {
   intersection,
   keys,
   every,
-  fromPairs,
   isNumber,
   isUndefined,
   round,
@@ -42,8 +40,6 @@ import {
 import {
   ALLOWED_HTML_TAGS,
   KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
-  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
   LANGUAGES,
   NDASH,
   ORGANISAATIOTYYPPI,
@@ -51,7 +47,6 @@ import {
 } from '#/src/constants';
 import { NamedEntityModel } from '#/src/types/domainTypes';
 import { SelectValue } from '#/src/types/formTypes';
-import { memoizeOne } from '#/src/utils/memoize';
 
 import getKoodiNimiTranslation from './getKoodiNimiTranslation';
 import { getFirstLanguageValue } from './languageUtils';
@@ -453,36 +448,6 @@ export const koulutustyyppiHierarkiaToOptions = (hierarkia, t) =>
       ];
     }
   });
-
-export const koulutustyyppiHierarkiaToTranslationMap = memoizeOne(
-  (hierarkia, t) => {
-    const koulutustyyppiOptions = koulutustyyppiHierarkiaToOptions(
-      hierarkia,
-      t
-    );
-    return fromPairs(
-      koulutustyyppiOptions.map(({ label, value }) => [value, label])
-    );
-  }
-);
-
-export const getKoulutustyyppiTranslation = (
-  koulutustyyppi?: string,
-  t?: TFunction
-) => {
-  const koulutustyyppiMapping = {
-    ...koulutustyyppiHierarkiaToTranslationMap(
-      TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
-      t
-    ),
-    ...koulutustyyppiHierarkiaToTranslationMap(
-      TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
-      t
-    ),
-  };
-
-  return koulutustyyppi ? koulutustyyppiMapping[koulutustyyppi] : '';
-};
 
 export const notToimipisteOrg = org =>
   !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE, org);

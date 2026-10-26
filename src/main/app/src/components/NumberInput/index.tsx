@@ -17,6 +17,7 @@ const floatToCommaStr = (value?: number | null) =>
   isNil(value) ? '' : toString(value).replace('.', ',');
 
 const NumberInput = ({
+  onChange = noop,
   onBlur = noop,
   min,
   max,
@@ -24,6 +25,9 @@ const NumberInput = ({
   parseValue = identity,
   ...props
 }: NumberInputProps) => {
+  // Arvo normalisoidaan blurissa ja annetaan lomakkeelle onChangella. redux-formin
+  // BLUR-reducer kirjoitti tapahtuman arvon kentän arvoksi, joten e.target.valuen
+  // mutatointi riitti; react-final-formin onBlur ei lue arvoa lainkaan.
   const usedOnBlur = e => {
     const value: string = e?.target?.value;
     const floatValue = parseValue(value);
@@ -38,10 +42,13 @@ const NumberInput = ({
         e.target.value = floatToCommaStr(floatValue);
       }
     }
+    onChange(e);
     onBlur(e);
   };
 
-  return <Input type="number" onBlur={usedOnBlur} {...props} />;
+  return (
+    <Input type="number" onChange={onChange} onBlur={usedOnBlur} {...props} />
+  );
 };
 
 export const IntegerInput = ({

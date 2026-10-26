@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { I18nextProvider } from 'react-i18next';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { RouterProvider } from 'react-router';
 import { ThemeProvider } from 'styled-components';
 

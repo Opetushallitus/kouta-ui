@@ -1,10 +1,13 @@
+import { QueryObserverResult } from '@tanstack/react-query';
 import { filter, flow, groupBy, map, maxBy } from 'lodash-es';
-import { QueryObserverResult } from 'react-query';
 
 import { isValidKoulutusKoodi } from './isValidKoulutusKoodi';
 
 export const selectValidKoulutusKoodit = (
-  response: { data } | QueryObserverResult | Array<QueryObserverResult> = []
+  response:
+    | { data }
+    | QueryObserverResult<unknown, unknown>
+    | Array<QueryObserverResult<unknown, unknown>> = []
 ) => {
   const koulutukset = Array.isArray(response)
     ? response.flatMap((response: any) => {

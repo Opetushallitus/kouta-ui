@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { every } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -131,7 +131,9 @@ export const StateChangeResultModal = ({
       removeSelection();
     }
     close();
-    queryClient.invalidateQueries('search.homepage.hakukohteet');
+    queryClient.invalidateQueries({
+      queryKey: ['search.homepage.hakukohteet'],
+    });
   }, [close, removeSelection, queryClient, result]);
 
   const { t } = useTranslation();

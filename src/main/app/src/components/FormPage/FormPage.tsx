@@ -1,6 +1,6 @@
 import React, { type ReactNode, useCallback } from 'react';
 
-import type { QueryObserverResult } from 'react-query';
+import type { QueryObserverResult } from '@tanstack/react-query';
 import type { BlockerFunction } from 'react-router';
 import styled from 'styled-components';
 
@@ -65,7 +65,9 @@ type FormPageProps = {
   entityType: ENTITY;
   formMode: FormMode;
   initialValues?: Record<string, any>;
-  queryResult?: QueryObserverResult | Array<QueryObserverResult>;
+  queryResult?:
+    | QueryObserverResult<unknown, unknown>
+    | Array<QueryObserverResult<unknown, unknown>>;
   header?: React.ReactNode;
   steps?: React.ReactNode;
   footer?: React.ReactNode;

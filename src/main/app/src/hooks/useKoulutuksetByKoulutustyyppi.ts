@@ -70,5 +70,5 @@ export const useKoulutuksetByKoulutustyyppi = (
 
   const status = getCombinedQueryStatus(responses);
 
-  return { data: koulutukset, isLoading: status === 'loading' };
+  return { data: koulutukset, isLoading: status === 'pending' };
 };

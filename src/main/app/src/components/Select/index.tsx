@@ -4,10 +4,10 @@ import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
+import { useQuery } from '@tanstack/react-query';
 import { TFunction } from 'i18next';
 import { identity, isObject, isUndefined, reduce } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from 'react-query';
 import { components, Props } from 'react-select';
 import ReactAsyncSelect from 'react-select/async';
 import ReactAsyncCreatableSelect from 'react-select/async-creatable';
@@ -248,11 +248,12 @@ export const AsyncSelect = ({
     [valueProp, defaultOptions, loadLabel]
   );
 
-  const { data: value, isFetching: isLoadingValue } = useQuery(
-    ['getAsyncSelectValue', valueProp, defaultOptions, loadLabel],
-    getAsyncValueFn,
-    { enabled: Boolean(valueProp), ...LONG_CACHE_QUERY_OPTIONS }
-  );
+  const { data: value, isFetching: isLoadingValue } = useQuery({
+    queryKey: ['getAsyncSelectValue', valueProp, defaultOptions, loadLabel],
+    queryFn: getAsyncValueFn,
+    enabled: Boolean(valueProp),
+    ...LONG_CACHE_QUERY_OPTIONS,
+  });
 
   return (
     <ReactAsyncSelect

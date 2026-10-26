@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 
-import { isFunction } from 'lodash-es';
+import { identity, isFunction } from 'lodash-es';
 import { Field as RffField, FieldProps } from 'react-final-form';
 import { FieldArray as RffFieldArray } from 'react-final-form-arrays';
 
@@ -11,9 +11,9 @@ import { useFieldRegistration } from './FieldRegistry';
 // näkyvissä/piilotettu" tuli ennen redux-formin storesta - react-final-formissa vastaavaa
 // ei ole) ja paikkaa hiljaisesti redux-formin yksityiskohdat, joita kirjastolla ei ole.
 // Perustelu kunkin korjauksen vieressä: buildErrorAwareComponent, applyEmptyStringRule,
-// identityParse, identityFormat, buildFieldArrayComponent. Kaksi muuta on korjattu
-// muualla: arvon luku palauttaa muotoillun arvon (hooks/form.ts, useRawValue), ja blur
-// ei muuta arvoa (UrlInput/NumberInput kutsuvat onChangea ennen onBluria).
+// FieldWithRegistration (parse ja format), buildFieldArrayComponent. Kaksi muuta on
+// korjattu muualla: arvon luku palauttaa muotoillun arvon (hooks/form.ts, useRawValue),
+// ja blur ei muuta arvoa (UrlInput/NumberInput kutsuvat onChangea ennen onBluria).
 //
 // no-restricted-imports estää react-final-formin suoran tuonnin muualla; tämä tiedosto
 // on sallittu poikkeus .eslintrc.js:ssä.
@@ -35,7 +35,7 @@ const isEmptyStringChange = (eventOrValue: any) => {
 
 // redux-formin sääntö tyhjentyvälle kentälle (CHANGE-reducer): tyhjä merkkijono POISTAA
 // arvon jos kentällä ei ollut alkuarvoa, mutta jää tilaan jos alkuarvo oli. Erottaa
-// "tyhjensin arvon" tilanteesta "en täyttänyt koskaan". identityParse hoitaa säännön
+// "tyhjensin arvon" tilanteesta "en täyttänyt koskaan". Identiteetti-parse hoitaa säännön
 // jälkimmäisen puolen, tämä edellisen.
 const applyEmptyStringRule = (input: any, meta: any, eventOrValue: any) => {
   if (meta?.initial === undefined && isEmptyStringChange(eventOrValue)) {
@@ -92,25 +92,21 @@ const buildErrorAwareComponent = (Component: any) => {
   return Wrapped;
 };
 
-// react-final-formin oletus-parse muuttaa tyhjän merkkijonon undefinediksi ja karsii
-// tyhjentyneet vanhemmat pois arvoista ({nimi: {fi: ''}} -> {}). redux-formin parse oli
-// identiteetti eikä tehnyt niin.
-const identityParse = (value: any) => value;
-
-// redux-formissa format={null} tarkoitti "ei muotoilua"; react-final-form kutsuu sitä
-// aina eikä hyväksy nullia ("format is not a function"). Identiteetti päästää arvon
-// (myös undefinedin) läpi koskemattomana. Ainoa kutsupaikka: ToteutusForm/
-// OsaamisalatSection.tsx - undefined-arvoinen input voi siellä nostaa Reactin
-// controlled/uncontrolled-varoituksen, mikä on odotettu seuraus.
-const identityFormat = (value: any) => value;
-
 const FieldWithRegistration = (props: any) => {
   useFieldRegistration([props.name]);
 
   const { component } = props;
-  const rffProps: any = { parse: identityParse, ...props };
+  // react-final-formin oletus-parse muuttaa tyhjän merkkijonon undefinediksi ja karsii
+  // tyhjentyneet vanhemmat pois arvoista ({nimi: {fi: ''}} -> {}). redux-formin parse oli
+  // identiteetti eikä tehnyt niin.
+  const rffProps: any = { parse: identity, ...props };
+  // redux-formissa format={null} tarkoitti "ei muotoilua"; react-final-form kutsuu sitä
+  // aina eikä hyväksy nullia ("format is not a function"). Identiteetti päästää arvon
+  // (myös undefinedin) läpi koskemattomana. Ainoa kutsupaikka: ToteutusForm/
+  // OsaamisalatSection.tsx - undefined-arvoinen input voi siellä nostaa Reactin
+  // controlled/uncontrolled-varoituksen, mikä on odotettu seuraus.
   if (rffProps.format === null) {
-    rffProps.format = identityFormat;
+    rffProps.format = identity;
   }
 
   // component="input" (merkkijono) ei saa kirjastolta metaa - wrapperille ei silloin
@@ -209,10 +205,10 @@ const FieldArrayWithRegistration = (props: any) => {
 };
 
 // Wrapperin omat proppityypit tukevat kahta asiaa, joita react-final-formin FieldProps
-// ei hyväksy: format={null} (ks. identityFormat) ja puuttuva name (osa kutsupaikoista
-// saa sen vanhemmalta, esim. DateTimeRange, ValitseEPerusteBox). Cast unknownin kautta,
-// koska funktiokomponentti ei ole rakenteellisesti yhteensopiva luokkakomponentin
-// konstruktorin kanssa.
+// ei hyväksy: format={null} (ks. FieldWithRegistration) ja puuttuva name (osa
+// kutsupaikoista saa sen vanhemmalta, esim. DateTimeRange, ValitseEPerusteBox). Cast
+// unknownin kautta, koska funktiokomponentti ei ole rakenteellisesti yhteensopiva
+// luokkakomponentin konstruktorin kanssa.
 type KoutaFieldProps = Omit<FieldProps<any, any>, 'name' | 'format'> & {
   name?: string;
   format?: ((value: any, name: string) => any) | null;

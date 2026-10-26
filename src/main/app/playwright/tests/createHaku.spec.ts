@@ -52,6 +52,10 @@ const fillAikatauluSection = (page: Page) =>
       date: '25.11.2019',
       time: '23:59',
     });
+    await fillDateTime(section.getByLabel('hakulomake.varasijatayttoPaattyy'), {
+      date: '26.12.2019',
+      time: '09:05',
+    });
     const tulevat = section.getByTestId('tulevaisuudenaikataulu');
     await tulevat.getByTestId('lisaaButton').click();
     await fillDateTime(tulevat.getByTestId('alkaa'), {

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
 import { Box, Button, FormLabel } from '#/src/components/virkailija';
-import { SelectValue } from '#/src/types/formTypes';
+import type { SelectValue } from '#/src/types/formTypes';
 
 type EntityModalProps = {
   headerText: string;

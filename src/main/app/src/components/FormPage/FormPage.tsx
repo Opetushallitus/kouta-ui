@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 
-import { QueryObserverResult } from 'react-query';
+import type { QueryObserverResult } from 'react-query';
 import ReactRouterPrompt from 'react-router-prompt';
 import styled from 'styled-components';
 

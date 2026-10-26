@@ -1,5 +1,25 @@
+import { type TFunction } from 'i18next';
 import { isError } from 'lodash';
-import { Machine, assign } from 'xstate';
+import {
+  createMachine,
+  assign,
+  type DoneInvokeEvent,
+  type ErrorPlatformEvent,
+  type EventObject,
+} from 'xstate';
+
+export interface ImageUploadContext {
+  file?: File | null;
+  url?: string | null;
+  error?: string | null;
+}
+
+export type ImageUploadEvent =
+  | { type: 'UPLOAD_FILE'; files: Array<File> }
+  | { type: 'REMOVE_FILE' }
+  | { type: 'RESET' }
+  | { type: 'DRAG_START' }
+  | { type: 'DRAG_STOP' };
 
 export const actionTypes = {
   UPLOAD_FILE: 'UPLOAD_FILE',
@@ -7,7 +27,7 @@ export const actionTypes = {
   RESET: 'RESET',
   DRAG_START: 'DRAG_START',
   DRAG_STOP: 'DRAG_STOP',
-};
+} as const;
 
 const { UPLOAD_FILE, REMOVE_FILE, DRAG_START, DRAG_STOP } = actionTypes;
 
@@ -29,31 +49,31 @@ const {
   draggingDisabled,
 } = controlStates;
 
-const clearValue = assign({
+const clearValue = assign<ImageUploadContext, EventObject>({
   file: () => null,
   url: () => null,
 });
 
-const createUploadingState = t => ({
+const createUploadingState = (t: TFunction) => ({
   id: uploading,
-  entry: assign({
-    file: (ctx, e) => e.files[0],
+  entry: assign<ImageUploadContext, ImageUploadEvent>({
+    file: (_ctx, e) => (e.type === UPLOAD_FILE ? e.files[0] : undefined),
   }),
   invoke: {
     id: 'uploadFile',
     src: 'upload',
     onDone: {
       target: fileUploaded,
-      actions: assign({
-        url: (ctx, e) => e.data,
+      actions: assign<ImageUploadContext, DoneInvokeEvent<string>>({
+        url: (_ctx, e) => e.data,
       }),
     },
     onError: {
       target: error,
       actions: [
         clearValue,
-        assign({
-          error: (ctx, e) =>
+        assign<ImageUploadContext, ErrorPlatformEvent>({
+          error: (_ctx, e) =>
             isError(e.data) ? t('yleiset.kuvanLahetysVirhe') : e?.data?.message,
         }),
       ],
@@ -81,7 +101,15 @@ const draggingStates = {
   },
 };
 
-export function createImageUploadMachine({ url, externalError, t }) {
+export function createImageUploadMachine({
+  url,
+  externalError,
+  t,
+}: {
+  url?: string | null;
+  externalError?: string | null;
+  t: TFunction;
+}) {
   let initial = empty;
   if (url) {
     initial = fileUploaded;
@@ -89,7 +117,7 @@ export function createImageUploadMachine({ url, externalError, t }) {
     initial = error;
   }
 
-  return Machine({
+  return createMachine<ImageUploadContext, ImageUploadEvent>({
     id: 'imageUpload',
     initial,
     context: {
@@ -121,7 +149,7 @@ export function createImageUploadMachine({ url, externalError, t }) {
           [UPLOAD_FILE]: uploading,
           [DRAG_START]: draggingEnabled,
         },
-        exit: assign({
+        exit: assign<ImageUploadContext, ImageUploadEvent>({
           error: () => null,
         }),
       },

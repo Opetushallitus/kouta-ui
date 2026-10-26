@@ -6,7 +6,6 @@
  *
  */
 
-export const CAN_USE_DOM: boolean =
-  !window.isUndefined &&
-  !window.document.isUndefined &&
-  !window.document.createElement.isUndefined;
+export const CAN_USE_DOM: boolean = Boolean(
+  globalThis.window?.document?.createElement
+);

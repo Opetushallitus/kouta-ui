@@ -5,7 +5,7 @@ import UiVirkailijaRaamit from '@opetushallitus/virkailija-ui-components/Virkail
 import { useUrls } from '#/src/contexts/UrlContext';
 
 const getScriptUrl = urls => {
-  let scriptUrl = null;
+  let scriptUrl: string | undefined;
 
   try {
     scriptUrl = urls.url('virkailija-raamit.raamitJs');
@@ -18,7 +18,7 @@ const VirkailijaRaamit = () => {
   const urls = useUrls();
   const scriptUrl = getScriptUrl(urls);
 
-  return <UiVirkailijaRaamit scriptUrl={scriptUrl} />;
+  return scriptUrl ? <UiVirkailijaRaamit scriptUrl={scriptUrl} /> : null;
 };
 
 export default VirkailijaRaamit;

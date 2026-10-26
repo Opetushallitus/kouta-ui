@@ -1,6 +1,6 @@
-import React, { Component, ReactNode } from 'react';
+import React, { Component, type ReactNode } from 'react';
 
-import { WithTranslation, withTranslation } from 'react-i18next';
+import { type WithTranslation, withTranslation } from 'react-i18next';
 
 type OwnProps = {
   children: ReactNode;

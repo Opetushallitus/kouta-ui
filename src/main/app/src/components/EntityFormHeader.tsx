@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import FormHeader from '#/src/components/FormHeader';
 import { ENTITY } from '#/src/constants';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import type { EntityModelBase } from '#/src/types/domainTypes';
 
 import LargeStatusTag from './StatusTag/LargeStatusTag';
 import { UlkoinenTunniste } from './UlkoinenTunniste';

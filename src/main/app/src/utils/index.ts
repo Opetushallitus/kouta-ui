@@ -297,19 +297,6 @@ const copyPathsIfDefined = (
   });
 };
 
-// Vertailija polkujen lajitteluun. Käytetään tarkoituksella koodiyksikkövertailua eikä
-// String.localeCompare:a: järjestys määrää mitä backendiin kirjoitetaan, joten sen on
-// oltava riippumaton lokaalista ja Noden ICU-versiosta.
-const byPathDescending = (a: string, b: string) => {
-  if (a < b) {
-    return 1;
-  }
-  if (a > b) {
-    return -1;
-  }
-  return 0;
-};
-
 // Get form values for saving. Filters out fields that user has hidden.
 // Result can be passed to get**ByFormValues().
 // Note that this does not filter out fields that are already in initialValues but are hidden.
@@ -325,23 +312,19 @@ export const getValuesForSaving = <T extends Record<string, unknown>>(
   const saveableValues = cloneDeep(initialValues) as T;
 
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values.
+  // Kielipääte typistetään ENNEN lajittelua, jotta lajitellaan juuri niitä polkuja, joihin kirjoitetaan.
   // Lajitellaan LASKEVAAN järjestykseen, jotta lapsikentät nollataan ennen vanhempiaan. Nousevassa
   // järjestyksessä vanhempi nollattaisiin ensin ja lodashin set() herättäisi sen takaisin objektiksi
-  // lasta kirjoittaessaan: { p: null } -> { p: { c: null } }.
-  //
-  // Lajittelu tehdään raa'oilla nimillä, vaikka kirjoitus tapahtuu kielipäätteettömällä nimellä. Se on
-  // turvallista kahden invariantin nojalla: (1) TranslatedField on suljettu Partial<Record<'fi'|'sv'|'en', T>>,
-  // joten kielipäätteisen polun vanhemmalla ei voi olla muita kuin kielilapsia, ja (2) T ei ole koskaan itse
-  // TranslatedField. Kääntäjä ei valvo (2):ta (TranslatedField<any>). Jos kumpi tahansa invariantti murtuu,
-  // typistys on siirrettävä ennen lajittelua. Rekisteröityjen silmukka alempana lajitellaan tarkoituksella
-  // nousevasti, koska siinä vanhempi pitää kirjoittaa ennen lapsia.
+  // lasta kirjoittaessaan: { p: null } -> { p: { c: null } }. sort() vertaa koodiyksiköitä eikä
+  // lokaalia, joten järjestys ei riipu ajoympäristöstä. Rekisteröityjen silmukka alempana lajitellaan
+  // tarkoituksella nousevasti, koska siinä vanhempi pitää kirjoittaa ennen lapsia.
   const sortedUnregisteredFields = Object.values(unregisteredFields)
-    .map(f => f.name)
-    .sort(byPathDescending);
+    .map(f => getFieldNameWithoutLanguage(f.name)!)
+    .sort()
+    .reverse();
 
-  sortedUnregisteredFields.forEach(name => {
-    const fieldName = getFieldNameWithoutLanguage(name);
-    set(saveableValues, fieldName!, null);
+  sortedUnregisteredFields.forEach(fieldName => {
+    set(saveableValues, fieldName, null);
   });
 
   // In case of fields from multiple hierarchy levels, we want to process the lowest level one first so we don't accidentally

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import getYear from 'date-fns/getYear';
+import { getYear } from 'date-fns';
 import { parseInt, times } from 'lodash-es';
 
 import Select from '#/src/components/Select';

@@ -19,11 +19,19 @@ export const assertURLEndsWith = (page: Page, urlEnd: string) =>
 
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
+// HUOM: mock kaikuttaa pyynnön rungon sellaisenaan takaisin eikä validoi sitä. Snapshotit
+// lukitsevat siis sen, MITÄ lähetämme, eivät sitä hyväksyykö kouta-backend sen: esim.
+// nimi: null menisi näistä läpi, vaikka backend vastaisi tuotannossa 400.
 export const wrapMutationTest =
-  (entityName: ENTITY, params?: { oid?: string; id?: string }) =>
+  (
+    entityName: ENTITY,
+    params?: { oid?: string; id?: string; urlPath?: string }
+  ) =>
   async (args: { page: Page; testInfo: TestInfo }, run: () => Promise<any>) => {
     const { page, testInfo } = args;
-    const entityLower = toLower(entityName);
+    // urlPath, koska kaikkien entiteettien backend-polku ei ole entiteetin nimi
+    // pienellä: oppilaitoksenOsa on polussa "oppilaitoksen-osa" (src/urls.ts).
+    const entityLower = params?.urlPath ?? toLower(entityName);
 
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();
@@ -162,6 +170,43 @@ export const assertNoUnsavedChangesDialog = async (page: Page) => {
     })
   ).toBeHidden();
   await assertOnFrontPage(page);
+};
+
+// Vastinpari assertNoUnsavedChangesDialogille: varmistaa, että muokatulta lomakkeelta
+// poistuttaessa varoitus NÄKYY ja ettei navigointi mene läpi.
+//
+// redux-form päättää dirty-tilan vertaamalla initialValuesin SISÄLTÖÄ,
+// react-final-form vertaa IDENTITEETTIÄ - ja Edit-sivut laskevat initialValuesin
+// uudelleen joka renderillä, joten lomake voi jäädä pysyvästi dirtyksi.
+export const assertUnsavedChangesDialog = async (page: Page) => {
+  const urlBefore = page.url();
+
+  await page.getByRole('link', { name: 'Home' }).click();
+
+  await expect(
+    page.getByRole('heading', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
+    })
+  ).toBeVisible();
+
+  // Varoitus ei riitä: navigoinnin pitää oikeasti estyä.
+  expect(page.url()).toBe(urlBefore);
+
+  // Perutaan, jotta testi päättyy lomakkeelle eikä puolitiehen.
+  await page
+    .getByRole('button', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.peruuta',
+    })
+    .click();
+
+  // Peruutuksen pitää myös peruuttaa. Ilman näitä regressio, jossa Peruuta sulkee
+  // dialogin mutta päästää odottavan navigoinnin läpi, menisi testistä läpi.
+  await expect(
+    page.getByRole('heading', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
+    })
+  ).toBeHidden();
+  await expect(page).toHaveURL(urlBefore);
 };
 
 export const confirmDelete = async (page: Page) => {

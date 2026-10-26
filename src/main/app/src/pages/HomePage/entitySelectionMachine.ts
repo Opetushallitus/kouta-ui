@@ -30,9 +30,7 @@ interface ResetSelectionEvent {
 }
 
 type EntitySelectionEvent =
-  | SelectItemsEvent
-  | DeselectItemsEvent
-  | ResetSelectionEvent;
+  SelectItemsEvent | DeselectItemsEvent | ResetSelectionEvent;
 
 const machineSetup = setup({
   types: {

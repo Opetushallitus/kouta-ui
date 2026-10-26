@@ -11,10 +11,7 @@ import {
 import { Theme } from '#/src/theme';
 
 export type EPerusteStatus =
-  | 'voimassa'
-  | 'tuleva'
-  | 'laadinnassa'
-  | 'paattynyt';
+  'voimassa' | 'tuleva' | 'laadinnassa' | 'paattynyt';
 
 export const getEPerusteStatus = ePeruste => {
   if (ePeruste) {

@@ -14,8 +14,7 @@ import { useUrls } from '#/src/contexts/UrlContext';
 type ExtractApiProps<T> = T extends (params: infer P) => any
   ? {
       [K in keyof Omit<P, 'httpClient' | 'apiUrls'>]?:
-        | Omit<P, 'httpClient' | 'apiUrls'>[K]
-        | null;
+        Omit<P, 'httpClient' | 'apiUrls'>[K] | null;
     }
   : Record<string, any>;
 

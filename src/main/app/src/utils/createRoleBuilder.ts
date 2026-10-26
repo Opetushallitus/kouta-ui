@@ -12,10 +12,7 @@ const CREATE_ROLES = ['CRUD'];
 
 type RoleLookup = Record<string, Record<string, boolean>>;
 type OrganisaatioOrOids =
-  | OrganisaatioModel
-  | Array<string>
-  | string
-  | undefined;
+  OrganisaatioModel | Array<string> | string | undefined;
 type CheckFn = (role: string, organisaatio: OrganisaatioOrOids) => RoleBuilder;
 type GetCheckFn = (rb: RoleBuilder) => CheckFn;
 

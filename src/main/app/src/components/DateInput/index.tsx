@@ -62,7 +62,7 @@ export const DateInput = ({
 
   useEffect(() => {
     isValidDate(dateValue) && setDate(dateValue);
-  }, [JSON.stringify(dateValue)]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(dateValue)]); // eslint-disable-line @eslint-react/exhaustive-deps
 
   const onDateChange = useCallback(
     d => {

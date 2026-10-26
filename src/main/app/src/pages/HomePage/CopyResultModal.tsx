@@ -30,7 +30,7 @@ const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
   color: ${({ theme }) => theme.colors.red.main};
 `;
 
-const useTableColumns = (t, entityType, getLinkUrl) => [
+const getTableColumns = (t, entityType, getLinkUrl) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
@@ -94,7 +94,7 @@ export const CopyResultModal = ({
 
   const { t } = useTranslation();
 
-  const columns = useTableColumns(t, entityType, getLinkUrl);
+  const columns = getTableColumns(t, entityType, getLinkUrl);
 
   return (
     <ResultModal

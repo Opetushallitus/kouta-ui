@@ -183,7 +183,7 @@ export function getCookies() {
   return Object.fromEntries(
     document.cookie
       .split('; ')
-      .filter(Boolean)
+      .filter(isTruthy)
       .map(cookieStr => {
         const [key, ...rest] = cookieStr.split('=');
         return [decodeURIComponent(key!), decodeURIComponent(rest.join('='))];

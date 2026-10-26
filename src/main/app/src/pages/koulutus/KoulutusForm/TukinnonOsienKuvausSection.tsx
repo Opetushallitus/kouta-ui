@@ -201,6 +201,7 @@ const AmosaaAmmattitaitoVaatimukset = ({
           {t('eperuste.ammattitaitovaatimukset')}
         </Typography>
         {vaatimukset?.kohdealueet?.map(({ kuvaus, vaatimukset: v }, i) => (
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- read-only display of fetched eperuste data, never reordered
           <div key={i}>
             {kuvaus && (
               <BodyHeading>{getLanguageValue(kuvaus, language)}</BodyHeading>
@@ -209,6 +210,7 @@ const AmosaaAmmattitaitoVaatimukset = ({
               <Typography variant="body">
                 <ul>
                   {v.map((vaatimus, j) => (
+                    // eslint-disable-next-line @eslint-react/no-array-index-key -- read-only display of fetched eperuste data, never reordered
                     <li key={j}>
                       {getLanguageValue(vaatimus.vaatimus, language)}
                     </li>
@@ -389,6 +391,7 @@ export const TutkinnonOsienKuvausSection = ({
     <Box mb={-2}>
       <Box mb={2}>
         {(kuvaukset || []).map((osa: EPerusteTutkinnonOsa, index: number) => (
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- osa.id is the real key, index is only a uniqueness tiebreaker
           <StyledInfoBox key={`${osa.id}_${index}`} mb={2}>
             <TutkinnonOsaKuvaus
               viiteId={viiteIdForOsa(osa)}
@@ -400,6 +403,7 @@ export const TutkinnonOsienKuvausSection = ({
         ))}
         {(paikallisetTutkinnonOsat ?? []).map((entry, index) => (
           <PaikallisetOsatKuvaukset
+            // eslint-disable-next-line @eslint-react/no-array-index-key -- index is only a fallback when opetussuunnitelmaId is missing
             key={entry?.opetussuunnitelmaId?.value ?? index}
             opetussuunnitelmaId={entry?.opetussuunnitelmaId}
             tutkinnonosat={entry?.tutkinnonosat}

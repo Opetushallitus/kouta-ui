@@ -57,7 +57,7 @@ const ErrorIcon = styled(Icon).attrs({ type: 'error' })`
   color: ${({ theme }) => theme.colors.red.main};
 `;
 
-const useTableColumns = (
+const getTableColumns = (
   t,
   entityType,
   getLinkUrl,
@@ -136,7 +136,7 @@ export const StateChangeResultModal = ({
 
   const { t } = useTranslation();
 
-  const columns = useTableColumns(
+  const columns = getTableColumns(
     t,
     entityType,
     getLinkUrl,

@@ -29,7 +29,7 @@ const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   border-left: 1px solid ${getThemeProp('palette.divider')};
 `;
 
-const useFirstLevelOptions = (hierarkia, t) =>
+const getFirstLevelOptions = (hierarkia, t) =>
   map(hierarkia, ({ value, disabled }) => ({
     value,
     label: t(getKoulutustyyppiTranslationKey(value)),
@@ -136,7 +136,7 @@ export const KoulutustyyppiSelect = ({
     }
   }, [hierarkia, value]);
 
-  const firstLevelOptions = useFirstLevelOptions(hierarkia, t);
+  const firstLevelOptions = getFirstLevelOptions(hierarkia, t);
 
   const secondLevelOptions = useSecondLevelOptions(
     hierarkia,

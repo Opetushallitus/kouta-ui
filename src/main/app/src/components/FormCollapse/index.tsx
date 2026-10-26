@@ -119,7 +119,7 @@ export const FormCollapse = ({
     if (languages.length > 0 && !languages.find(lng => lng === language)) {
       setLanguage(languages[0]!);
     }
-  }, [languages]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [languages]); // eslint-disable-line @eslint-react/exhaustive-deps
 
   const childProps = { ...props, language, languages, onContinue };
 

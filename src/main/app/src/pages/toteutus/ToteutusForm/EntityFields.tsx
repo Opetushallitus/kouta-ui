@@ -34,6 +34,7 @@ export const EntityFields = ({
             <Box
               display="flex"
               width={0.8}
+              // eslint-disable-next-line @eslint-react/no-array-index-key -- react-final-form-arrays ei tarjoa pysyvää rivi-id:tä, kentän polku itsessään on indeksiperustainen
               key={index}
               marginTop={2}
               {...getTestIdProps(`${fieldName}-${index}`)}

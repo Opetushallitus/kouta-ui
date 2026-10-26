@@ -30,7 +30,7 @@ export const stubKoulutusRoutes = async (page, organisaatioOid) => {
   await page.route(
     '**/sorakuvaus/list**',
     fixtureJSON(
-      new Array(10).map((v, i) =>
+      [...new Array(10)].map((v, i) =>
         merge(soraKuvaus(), {
           nimi: { fi: `Sora-kuvaus ${i}` },
           id: i.toString(),

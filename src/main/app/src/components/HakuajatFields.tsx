@@ -15,6 +15,7 @@ export const HakuajatFields = ({ fields, t, meta: { error } }) => (
     >
       {fields.map((hakuaika, index) => (
         <DateTimeRange
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- react-final-form-arrays ei tarjoa pysyvää rivi-id:tä, kentän polku itsessään on indeksiperustainen
           key={index}
           startProps={{ name: `${hakuaika}.alkaa` }}
           endProps={{ name: `${hakuaika}.paattyy` }}

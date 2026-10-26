@@ -50,11 +50,11 @@ const applyEmptyStringRule = (input: any, meta: any, eventOrValue: any) => {
 // KUTSUHETKELLÄ refin takaa, ei suljeta sisään - muuten sulkeuma näkisi luontihetken
 // vanhentuneen meta.initialin.
 const useStableInputSemantics = (input: any, meta: any) => {
-  const latest = useRef({ input, meta });
-  latest.current = { input, meta };
+  const latestRef = useRef({ input, meta });
+  latestRef.current = { input, meta };
 
   const onChange = useCallback((eventOrValue: any) => {
-    const l = latest.current;
+    const l = latestRef.current;
     applyEmptyStringRule(l.input, l.meta, eventOrValue);
   }, []);
 

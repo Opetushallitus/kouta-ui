@@ -14,6 +14,7 @@ import {
 import { useOrganisaatioSelection } from '#/src/contexts/OrganisaatioValintaContext';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
+import { isTruthy } from '#/src/utils';
 
 import HakukohteetSection from './HakukohteetSection';
 import HautSection from './HautSection';
@@ -83,38 +84,43 @@ const HomeContent = ({ organisaatioOid }: { organisaatioOid: string }) => {
   const listSections = [
     hasKoulutusReadRole && (
       <KoulutuksetSection
+        key="koulutukset"
         canCreate={hasKoulutusWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasToteutusReadRole && (
       <ToteutuksetSection
+        key="toteutukset"
         canCreate={hasToteutusWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasHakuReadRole && (
       <HautSection
+        key="haut"
         canCreate={hasHakuWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasHakukohdeReadRole && (
       <HakukohteetSection
+        key="hakukohteet"
         canCreate={hasHakukohdeWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
     hasValintaperusteReadRole && (
       <ValintaperusteetSection
+        key="valintaperusteet"
         canCreate={hasValintaperusteWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),
   ]
-    .filter(Boolean)
-    .map((section, index) => (
-      <Box mb={4} key={index}>
+    .filter(isTruthy)
+    .map(section => (
+      <Box mb={4} key={section.key}>
         {section}
       </Box>
     ));

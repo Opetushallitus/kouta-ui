@@ -79,9 +79,11 @@ export const TableBody = styled.tbody``;
 type TableHeadProps = React.HTMLAttributes<HTMLTableSectionElement>;
 
 export const TableHead = ({ children, ...props }: TableHeadProps) => {
+  // eslint-disable-next-line @eslint-react/no-children-map -- injects isTableHead into each row child; compound-component pattern, not a quick fix
   const childrenProp = React.Children.map(children, child =>
     child
-      ? React.cloneElement(
+      ? // eslint-disable-next-line @eslint-react/no-clone-element -- see no-children-map above
+        React.cloneElement(
           child as React.ReactElement<Record<string, unknown>>,
           {
             isTableHead: true,
@@ -132,9 +134,11 @@ export const TableRow = ({
   isTableHead = false,
   ...props
 }: TableRowProps) => {
+  // eslint-disable-next-line @eslint-react/no-children-map -- injects isTableHead/as into each cell child; compound-component pattern, not a quick fix
   const childrenProp = React.Children.map(children, child =>
     child
-      ? React.cloneElement(
+      ? // eslint-disable-next-line @eslint-react/no-clone-element -- see no-children-map above
+        React.cloneElement(
           child as React.ReactElement<Record<string, unknown>>,
           {
             isTableHead,

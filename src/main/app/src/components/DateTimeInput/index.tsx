@@ -101,7 +101,7 @@ export const DateTimeInput = ({
 
   useEffect(() => {
     isValidDate(dateValue) && setDate(dateValue);
-  }, [JSON.stringify(dateValue)]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(dateValue)]); // eslint-disable-line @eslint-react/exhaustive-deps
 
   useEffect(() => {
     isValidTime(timeValue) &&
@@ -117,7 +117,7 @@ export const DateTimeInput = ({
         ? onChange(formatValue({ date, time }))
         : onChange(null);
     },
-    [onChange, JSON.stringify(date)] // eslint-disable-line react-hooks/exhaustive-deps
+    [onChange, JSON.stringify(date)] // eslint-disable-line @eslint-react/exhaustive-deps
   );
 
   const onDateChange = useCallback(

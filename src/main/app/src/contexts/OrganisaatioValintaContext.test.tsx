@@ -76,6 +76,20 @@ test('toggleFavourite appends on add and keeps the order on remove', () => {
   expect(stored(ORGANISAATIO_FAVOURITES_KEY)).toEqual([A, C, B]);
 });
 
+test('toggleFavourite sees the previous call in the same event', () => {
+  const { result } = renderHook(() => useOrganisaatioFavourites(), {
+    wrapper,
+  });
+
+  act(() => {
+    result.current.toggleFavourite(A);
+    result.current.toggleFavourite(B);
+  });
+
+  expect(result.current.favourites).toEqual([A, B]);
+  expect(stored(ORGANISAATIO_FAVOURITES_KEY)).toEqual([A, B]);
+});
+
 test('the hooks throw outside the provider', () => {
   // React kirjaa heiton myös console.erroriin; se ei kuulu testin tulosteeseen.
   vi.spyOn(console, 'error').mockImplementation(() => {});

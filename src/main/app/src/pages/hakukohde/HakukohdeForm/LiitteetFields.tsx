@@ -16,7 +16,7 @@ import {
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import { Field, FieldArray, Fields } from '#/src/components/formFields/Field';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import { Box, FormLabel } from '#/src/components/virkailija';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
@@ -235,14 +235,11 @@ const LiitteetField = ({
   t,
   yhteinenToimitusaikaName,
   yhteinenToimituspaikkaName,
-  ...props
 }) => {
-  const yhteinenToimitusaika = Boolean(
-    _.get(props, [baseName, 'yhteinenToimitusaika', 'input', 'value'])
-  );
+  const yhteinenToimitusaika = Boolean(useFieldValue(yhteinenToimitusaikaName));
 
   const yhteinenToimituspaikka = Boolean(
-    _.get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
+    useFieldValue(yhteinenToimituspaikkaName)
   );
 
   const liitteetFieldValue = useFieldValue(`${baseName}.liitteet`);
@@ -309,9 +306,7 @@ export const LiitteetSection = ({ language, name }) => {
   const yhteinenToimituspaikkaName = `${name}.yhteinenToimituspaikka`;
 
   return (
-    <Fields
-      names={[yhteinenToimitusaikaName, yhteinenToimituspaikkaName]}
-      component={LiitteetField}
+    <LiitteetField
       t={t}
       language={language}
       tyyppiOptions={tyyppiOptions}

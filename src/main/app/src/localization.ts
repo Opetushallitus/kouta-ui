@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import i18n from 'i18next';
 import HttpBackend from 'i18next-http-backend';
-import { get, identity, isFunction, toLower, upperFirst } from 'lodash-es';
+import { get, toLower, upperFirst } from 'lodash-es';
 import { initReactI18next } from 'react-i18next';
 
 import { LANGUAGES } from '#/src/constants';
@@ -15,14 +15,13 @@ const { VITE_CIMODE } = import.meta.env;
 const isCimode = VITE_CIMODE || isPlaywright;
 
 const formatMap = {
-  toLower: toLower,
-  upperFirst: upperFirst,
+  toLower: value => toLower(value),
+  upperFirst: value => upperFirst(value),
   unCapitalize: value => {
     const low = toLower(value);
     // if second character changes, return original value
     return get(value, 1) === get(low, 1) ? low : value;
   },
-  default: identity,
 };
 
 type CreateLocalizationProps = {
@@ -68,14 +67,12 @@ const createLocalization = async ({
             parse: data => data,
           },
         }),
-      interpolation: {
-        format(value, format = 'default') {
-          return isFunction(formatMap[format])
-            ? formatMap[format](value)
-            : value;
-        },
-      },
     });
+
+  Object.entries(formatMap).forEach(([name, format]) => {
+    i18n.services.formatter?.add(name, format);
+  });
+
   return i18n;
 };
 

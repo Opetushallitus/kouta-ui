@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
+import { UseMutateAsyncFunction, useMutation } from '@tanstack/react-query';
 import { map } from 'lodash-es';
-import { UseMutateAsyncFunction, useMutation } from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -44,7 +44,7 @@ const useCopyToteutukset = () => {
 
 export const useCopyToteutuksetMutation = () => {
   const copyToteutukset = useCopyToteutukset();
-  return useMutation<ToteutusCopyResponseData, unknown, CopyToteutuksetProps>(
-    copyToteutukset
-  );
+  return useMutation<ToteutusCopyResponseData, unknown, CopyToteutuksetProps>({
+    mutationFn: copyToteutukset,
+  });
 };

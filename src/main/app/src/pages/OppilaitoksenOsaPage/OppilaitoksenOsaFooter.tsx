@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
@@ -35,7 +35,7 @@ export const OppilaitoksenOsaFooter = ({
         },
       });
 
-      queryClient.invalidateQueries(ENTITY.OPPILAITOKSEN_OSA);
+      queryClient.invalidateQueries({ queryKey: [ENTITY.OPPILAITOKSEN_OSA] });
     },
     [oppilaitoksenOsa, organisaatioOid, queryClient]
   );

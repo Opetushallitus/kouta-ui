@@ -1,8 +1,8 @@
 import React, { Dispatch, useMemo, useRef, useState } from 'react';
 
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useInfiniteQuery, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
 import FieldArrayList from '#/src/components/FieldArrayList';

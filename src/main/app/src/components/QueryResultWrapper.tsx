@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { QueryObserverResult } from 'react-query';
+import { QueryObserverResult } from '@tanstack/react-query';
 
 import { Spin } from '#/src/components/virkailija';
 
@@ -8,11 +8,11 @@ import ErrorAlert from './ErrorAlert';
 import { isTruthy } from '../utils';
 
 export const getCombinedQueryStatus = (
-  responses: Array<QueryObserverResult> = []
+  responses: Array<QueryObserverResult<unknown, unknown>> = []
 ) => {
   switch (true) {
-    case responses.some(res => res?.status === 'loading'):
-      return 'loading';
+    case responses.some(res => res?.status === 'pending'):
+      return 'pending';
     case responses.some(res => res?.status === 'error'):
       return 'error';
     case responses.every(res => res?.status === 'success'):
@@ -24,7 +24,9 @@ export const getCombinedQueryStatus = (
 
 type Props = {
   children: JSX.Element;
-  queryResult: QueryObserverResult | Array<QueryObserverResult>;
+  queryResult:
+    | QueryObserverResult<unknown, unknown>
+    | Array<QueryObserverResult<unknown, unknown>>;
   LoadingWrapper?: React.ComponentType;
 };
 
@@ -59,7 +61,7 @@ export const QueryResultWrapper = ({
       // TODO: Get Axios response error status codes here.
       console.error(errors);
       return <ErrorAlert onReload={refetch} center />;
-    case 'loading':
+    case 'pending':
     default:
       return <LoadingWrapper />;
   }

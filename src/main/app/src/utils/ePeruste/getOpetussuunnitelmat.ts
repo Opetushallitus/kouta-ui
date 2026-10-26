@@ -60,7 +60,7 @@ export const useQueryOptionsGetOpetussuunnitelmat = ({
   const apiUrls = useUrls();
   return {
     queryKey: ['getOpetussuunnitelmat', organisaatioOids, nimi, kieli],
-    queryFn: ({ pageParam = 0 }) =>
+    queryFn: ({ pageParam }: { pageParam: number }) =>
       getOpetussuunnitelmat({
         httpClient,
         apiUrls,
@@ -69,7 +69,8 @@ export const useQueryOptionsGetOpetussuunnitelmat = ({
         sivu: pageParam,
         kieli,
       }),
-    cacheTime: 30000,
+    initialPageParam: 0,
+    gcTime: 30000,
     staleTime: 30000,
     getNextPageParam: lastPage =>
       lastPage.sivu != null &&

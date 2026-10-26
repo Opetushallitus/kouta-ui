@@ -134,8 +134,7 @@ export const ApurahaFields = ({
 }) => {
   const { t } = useTranslation();
   const onkoApurahaSelected = useFieldValue(`${name}.onkoApuraha`) as
-    | boolean
-    | undefined;
+    boolean | undefined;
 
   const maksullisuustyyppiFieldName =
     isKoulutustyyppiWithMultipleMaksullisuustyyppi(koulutustyyppi)

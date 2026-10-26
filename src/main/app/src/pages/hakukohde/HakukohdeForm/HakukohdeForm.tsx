@@ -116,8 +116,7 @@ export const HakukohdeForm = ({
   useSetFieldValue('tila', initiaTila, updateTila);
 
   const toteutusMetadata = toteutus?.metadata as
-    | AnyToteutusMetadata
-    | undefined;
+    AnyToteutusMetadata | undefined;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>

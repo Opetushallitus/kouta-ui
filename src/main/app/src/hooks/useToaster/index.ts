@@ -19,8 +19,7 @@ const TOAST_MOUSEENTER = 'TOAST_MOUSEENTER';
 const TOAST_MOUSELEAVE = 'TOAST_MOUSELEAVE';
 
 type ToastTimerEvent =
-  | { type: typeof TOAST_MOUSEENTER }
-  | { type: typeof TOAST_MOUSELEAVE };
+  { type: typeof TOAST_MOUSEENTER } | { type: typeof TOAST_MOUSELEAVE };
 
 const toastTimerLogic = fromCallback<
   ToastTimerEvent,

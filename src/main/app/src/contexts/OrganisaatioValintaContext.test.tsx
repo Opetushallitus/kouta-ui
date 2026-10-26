@@ -79,11 +79,19 @@ test('toggleFavourite appends on add and keeps the order on remove', () => {
 test('the hooks throw outside the provider', () => {
   // React kirjaa heiton myös console.erroriin; se ei kuulu testin tulosteeseen.
   vi.spyOn(console, 'error').mockImplementation(() => {});
+  // React uudelleenheittää virheen jsdomin ikkunatapahtuman kautta, jonka
+  // vitestin jsdom-ympäristö muuten nostaisi käsittelemättömäksi poikkeukseksi.
+  const preventDefault = (e: Event) => e.preventDefault();
+  window.addEventListener('error', preventDefault);
 
-  expect(() => renderHook(() => useOrganisaatioSelection())).toThrow(
-    /OrganisaatioSelectionContext/
-  );
-  expect(() => renderHook(() => useOrganisaatioFavourites())).toThrow(
-    /OrganisaatioFavouritesContext/
-  );
+  try {
+    expect(() => renderHook(() => useOrganisaatioSelection())).toThrow(
+      /OrganisaatioSelectionContext/
+    );
+    expect(() => renderHook(() => useOrganisaatioFavourites())).toThrow(
+      /OrganisaatioFavouritesContext/
+    );
+  } finally {
+    window.removeEventListener('error', preventDefault);
+  }
 });

@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next';
 
 import FormHeader from '#/src/components/FormHeader';
 import { ENTITY } from '#/src/constants';
-import type { EntityModelBase } from '#/src/types/domainTypes';
 
 import LargeStatusTag from './StatusTag/LargeStatusTag';
 import { UlkoinenTunniste } from './UlkoinenTunniste';
+import { NamedEntityModel } from '../types/domainTypes';
 import { getEntityNimiTranslation } from '../utils';
 
 type EntityFormHeaderProps = {
   entityType: ENTITY;
-  entity?: EntityModelBase;
+  entity?: NamedEntityModel;
 };
 
 export default function EntityFormHeader({
@@ -24,7 +24,7 @@ export default function EntityFormHeader({
   const translatedNimi = getEntityNimiTranslation(entity, i18n.language);
   return (
     <FormHeader
-      title={translatedNimi || t(`yleiset.${entityType}`)}
+      title={translatedNimi ?? t(`yleiset.${entityType}`)}
       status={tila ? <LargeStatusTag status={tila} /> : null}
     >
       {[

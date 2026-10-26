@@ -4,6 +4,15 @@ import { JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 
 import { SisaltoValues, ValintakokeetValues } from './formTypes';
 
+export type Valintatapa = {
+  nimi?: TranslatedField;
+  sisalto?: SisaltoValues;
+  valintatapaKoodiUri?: string;
+  kynnysehto?: TranslatedField<EditorState>;
+  enimmaispistemaara?: string;
+  vahimmaispistemaara?: string;
+};
+
 export type ValintaperusteFormValues = {
   organisaatioOid?: SelectOption;
   externalId?: string;
@@ -26,12 +35,5 @@ export type ValintaperusteFormValues = {
   };
   hakukelpoisuus: TranslatedField<EditorState>;
   lisatiedot: TranslatedField<EditorState>;
-  valintatavat: Array<{
-    nimi?: TranslatedField;
-    sisalto?: SisaltoValues;
-    valintatapaKoodiUri?: string;
-    kynnysehto?: TranslatedField<EditorState>;
-    enimmaispistemaara?: string;
-    vahimmaispistemaara?: string;
-  }>;
+  valintatavat: Array<Valintatapa>;
 };

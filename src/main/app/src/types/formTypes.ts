@@ -55,14 +55,18 @@ export type KoutaErrorResponse = {
     entiteetit?: Array<string>;
     julkaistutToteutukset: Array<string>;
     maksullisuustyyppi?: MaksullisuusTyyppi;
-    osaamismerkit: Array<string>;
+    osaamismerkit?: Array<string>;
   };
 };
 
 export type KoutaErrorData = {
   koulutustyyppi?: KOULUTUSTYYPPI;
-  opintojaksojenLiittaminen?: { opintojaksot: Array<string> };
-  osaamismerkkienLiittaminen?: { osaamismerkit: Array<string> };
+  opintojaksojenLiittaminen?: {
+    opintojaksot: Array<{ opintojakso?: SelectOption }>;
+  };
+  osaamismerkkienLiittaminen?: {
+    osaamismerkit: Array<{ osaamismerkki?: SelectOption }>;
+  };
 };
 
 export type RemoteErrorsToFormErrors = (

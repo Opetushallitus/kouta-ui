@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useActor, useSelector } from '@xstate/react';
-import { interpret } from 'xstate';
+import { ActorRefFrom, InterpreterFrom, interpret } from 'xstate';
 
 import { ENTITY } from '#/src/constants';
 import { isDev } from '#/src/utils';
@@ -17,7 +17,11 @@ export const SERVICE_BY_ENTITY = {
   }).start(),
 };
 
-export const useEntitySelectionApi = actor => {
+type EntitySelectionActor =
+  | ActorRefFrom<typeof entitySelectionMachine>
+  | InterpreterFrom<typeof entitySelectionMachine>;
+
+export const useEntitySelectionApi = (actor: EntitySelectionActor) => {
   const [, send] = useActor(actor);
 
   const selection = useSelector(actor, state => state.context.selection);

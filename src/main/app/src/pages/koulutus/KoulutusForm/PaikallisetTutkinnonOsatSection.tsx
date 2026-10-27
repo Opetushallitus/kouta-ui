@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import React, { Dispatch, useMemo, useRef, useState } from 'react';
 
 import { t } from 'i18next';
 import { isEmpty } from 'lodash';
@@ -207,7 +207,13 @@ const StyledRadio = styled(Radio)`
   padding-right: ${spacing(3)};
 `;
 
-const LanguageSelector = ({ selectedLanguage, setSelectedLanguage }) => {
+const LanguageSelector = ({
+  selectedLanguage,
+  setSelectedLanguage,
+}: {
+  selectedLanguage: LanguageCode;
+  setSelectedLanguage: Dispatch<LanguageCode>;
+}) => {
   const languageOptions = LANGUAGES.map((lang: string) => {
     const translationKey =
       lang === 'sv' ? 'ruotsi' : lang === 'en' ? 'englanti' : 'suomi';
@@ -246,15 +252,12 @@ const LanguageSelector = ({ selectedLanguage, setSelectedLanguage }) => {
 const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   disabled,
   name,
+  selectedLanguage,
 }: {
   disabled: boolean;
   name: string;
+  selectedLanguage: LanguageCode;
 }) => {
-  const userLanguage = useUserLanguage();
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    userLanguage || 'fi'
-  );
-
   const allSelectedOpetussuunnitelmaIds = useKoulutusFormField(
     'paikallisetTutkinnonOsat'
   )
@@ -297,10 +300,6 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
 
   return (
     <StyledInfoBox mt={2}>
-      <LanguageSelector
-        selectedLanguage={selectedLanguage}
-        setSelectedLanguage={setSelectedLanguage}
-      />
       <Box mb={2}>
         <Field
           name={`${name}.opetussuunnitelmaId`}
@@ -346,13 +345,23 @@ const PaikallisetTutkinnonOsatFields = ({
 }) => {
   const { t } = useTranslation();
 
+  const userLanguage = useUserLanguage();
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>(
+    userLanguage || 'fi'
+  );
+
   return (
     <>
+      <LanguageSelector
+        selectedLanguage={selectedLanguage}
+        setSelectedLanguage={setSelectedLanguage}
+      />
       <FieldArrayList fields={fields}>
         {({ field }) => (
           <OpetussuunnitelmanPaikallisetTutkinnonOsat
             disabled={disabled}
             name={field}
+            selectedLanguage={selectedLanguage}
           />
         )}
       </FieldArrayList>

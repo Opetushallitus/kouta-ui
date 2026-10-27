@@ -23,10 +23,7 @@ import { isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { useQueryOptionsGetOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
-import {
-  getLanguageValue,
-  getFirstLanguageValue,
-} from '#/src/utils/languageUtils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 
@@ -186,8 +183,10 @@ const useInfiniteOpetussuunnitelmaOptions = ({
   };
 };
 
-const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
-  const language = useUserLanguage();
+const usePaikallisetTutkinnonosatOptions = (
+  selectedLanguage: LanguageCode,
+  opsId?: string
+) => {
   return useApiQuery(
     'getPaikallisetTutkinnonosat',
     getPaikallisetTutkinnonosat,
@@ -197,7 +196,7 @@ const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
       select: response =>
         response.map(({ id, nimi }) => ({
           value: String(id),
-          label: getLanguageValue(nimi, language) ?? String(id),
+          label: getFirstLanguageValue(nimi, selectedLanguage) ?? String(id),
         })),
     }
   );
@@ -291,7 +290,10 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   const {
     data: paikallisetTutkinnonosatOptions,
     isLoading: isLoadingTutkinnonosat,
-  } = usePaikallisetTutkinnonosatOptions(selectedOpetussuunnitelmaId);
+  } = usePaikallisetTutkinnonosatOptions(
+    selectedLanguage,
+    selectedOpetussuunnitelmaId
+  );
 
   return (
     <StyledInfoBox mt={2}>

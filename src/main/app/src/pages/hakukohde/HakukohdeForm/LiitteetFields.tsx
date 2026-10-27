@@ -29,6 +29,7 @@ const ToimitusaikaFields = ({ name }) => {
   return (
     <Field
       name={name}
+      required
       component={FormFieldDateTimeInput}
       label={t('hakukohdelomake.toimitusaika')}
       helperText={t('yleiset.paivamaaraJaKellonaika')}
@@ -127,6 +128,7 @@ const ToimitustapaFields = ({ name, t, language }) => {
       <div {...getTestIdProps('toimitustapa')}>
         <Field
           name={toimitustapaName}
+          required
           component={FormFieldRadioGroup}
           options={options}
           label={t('liitteenToimitustapaValinnat.valitseToimitustapa')}

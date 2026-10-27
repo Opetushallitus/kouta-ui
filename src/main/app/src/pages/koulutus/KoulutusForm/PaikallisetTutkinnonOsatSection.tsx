@@ -210,11 +210,9 @@ const StyledRadio = styled(Radio)`
 const LanguageSelector = ({
   selectedLanguage,
   setSelectedLanguage,
-  disabled,
 }: {
   selectedLanguage: LanguageCode;
   setSelectedLanguage: Dispatch<LanguageCode>;
-  disabled: boolean;
 }) => {
   const languageOptions = LANGUAGES.map((lang: string) => {
     const translationKey =
@@ -237,7 +235,6 @@ const LanguageSelector = ({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSelectedLanguage(e.target.value as LanguageCode)
           }
-          disabled={disabled}
         >
           {languageOptions.map(
             ({ value, label }: { value: string; label: string }) => (
@@ -352,14 +349,12 @@ const PaikallisetTutkinnonOsatFields = ({
   const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>(
     userLanguage || 'fi'
   );
-  const languageSelectionDisabled = fields.length > 0;
 
   return (
     <>
       <LanguageSelector
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={setSelectedLanguage}
-        disabled={languageSelectionDisabled}
       />
       <FieldArrayList fields={fields}>
         {({ field }) => (

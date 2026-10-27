@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import React, { Dispatch, useMemo, useRef, useState } from 'react';
 
 import { t } from 'i18next';
 import { isEmpty } from 'lodash';
@@ -23,10 +23,7 @@ import { isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { useQueryOptionsGetOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
-import {
-  getLanguageValue,
-  getFirstLanguageValue,
-} from '#/src/utils/languageUtils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 
@@ -186,8 +183,10 @@ const useInfiniteOpetussuunnitelmaOptions = ({
   };
 };
 
-const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
-  const language = useUserLanguage();
+const usePaikallisetTutkinnonosatOptions = (
+  selectedLanguage: LanguageCode,
+  opsId?: string
+) => {
   return useApiQuery(
     'getPaikallisetTutkinnonosat',
     getPaikallisetTutkinnonosat,
@@ -197,7 +196,7 @@ const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
       select: response =>
         response.map(({ id, nimi }) => ({
           value: String(id),
-          label: getLanguageValue(nimi, language) ?? String(id),
+          label: getFirstLanguageValue(nimi, selectedLanguage) ?? String(id),
         })),
     }
   );
@@ -208,7 +207,15 @@ const StyledRadio = styled(Radio)`
   padding-right: ${spacing(3)};
 `;
 
-const LanguageSelector = ({ selectedLanguage, setSelectedLanguage }) => {
+const LanguageSelector = ({
+  selectedLanguage,
+  setSelectedLanguage,
+  disabled,
+}: {
+  selectedLanguage: LanguageCode;
+  setSelectedLanguage: Dispatch<LanguageCode>;
+  disabled: boolean;
+}) => {
   const languageOptions = LANGUAGES.map((lang: string) => {
     const translationKey =
       lang === 'sv' ? 'ruotsi' : lang === 'en' ? 'englanti' : 'suomi';
@@ -230,6 +237,7 @@ const LanguageSelector = ({ selectedLanguage, setSelectedLanguage }) => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSelectedLanguage(e.target.value as LanguageCode)
           }
+          disabled={disabled}
         >
           {languageOptions.map(
             ({ value, label }: { value: string; label: string }) => (
@@ -247,15 +255,12 @@ const LanguageSelector = ({ selectedLanguage, setSelectedLanguage }) => {
 const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   disabled,
   name,
+  selectedLanguage,
 }: {
   disabled: boolean;
   name: string;
+  selectedLanguage: LanguageCode;
 }) => {
-  const userLanguage = useUserLanguage();
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    userLanguage || 'fi'
-  );
-
   const allSelectedOpetussuunnitelmaIds = useKoulutusFormField(
     'paikallisetTutkinnonOsat'
   )
@@ -291,14 +296,13 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   const {
     data: paikallisetTutkinnonosatOptions,
     isLoading: isLoadingTutkinnonosat,
-  } = usePaikallisetTutkinnonosatOptions(selectedOpetussuunnitelmaId);
+  } = usePaikallisetTutkinnonosatOptions(
+    selectedLanguage,
+    selectedOpetussuunnitelmaId
+  );
 
   return (
     <StyledInfoBox mt={2}>
-      <LanguageSelector
-        selectedLanguage={selectedLanguage}
-        setSelectedLanguage={setSelectedLanguage}
-      />
       <Box mb={2}>
         <Field
           name={`${name}.opetussuunnitelmaId`}
@@ -344,13 +348,25 @@ const PaikallisetTutkinnonOsatFields = ({
 }) => {
   const { t } = useTranslation();
 
+  const userLanguage = useUserLanguage();
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>(
+    userLanguage || 'fi'
+  );
+  const languageSelectionDisabled = fields.length > 0;
+
   return (
     <>
+      <LanguageSelector
+        selectedLanguage={selectedLanguage}
+        setSelectedLanguage={setSelectedLanguage}
+        disabled={languageSelectionDisabled}
+      />
       <FieldArrayList fields={fields}>
         {({ field }) => (
           <OpetussuunnitelmanPaikallisetTutkinnonOsat
             disabled={disabled}
             name={field}
+            selectedLanguage={selectedLanguage}
           />
         )}
       </FieldArrayList>

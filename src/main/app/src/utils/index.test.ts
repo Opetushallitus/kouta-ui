@@ -236,6 +236,39 @@ describe('getValuesForSaving', () => {
       expected: { n: [{ v: 'a' }, { v: 'c' }] },
     },
     {
+      // FieldArray rekisteröi oman polkunsa, joten rekisteröityjen kierros kirjoittaa
+      // koko taulukon values-objektista. Ilman kolmatta kierrosta taulukon sisällä
+      // piilotetun kentän arvo palaisi payloadiin tässä.
+      name: 'nulls a field hidden inside a registered array parent',
+      values: { n: [{ v: 1, piilotettu: 'x' }] },
+      registeredFields: registered('n', 'n[0].v'),
+      unregisteredFields: registered('n[0].piilotettu'),
+      initialValues: { n: [{ v: 1, piilotettu: 'x' }] },
+      expected: { n: [{ v: 1, piilotettu: null }] },
+    },
+    {
+      // Sama taulukon sisällä syvemmällä ja vain osalle riveistä: rivi 1 säilyttää
+      // arvonsa, koska sen kenttä on yhä näkyvissä.
+      name: 'nulls a hidden array field only on the rows where it is hidden',
+      values: {
+        n: [{ o: { tapa: 'osoite' } }, { o: { tapa: 'osoite' } }],
+      },
+      registeredFields: registered('n', 'n[1].o.tapa'),
+      unregisteredFields: registered('n[0].o.tapa'),
+      initialValues: {},
+      expected: { n: [{ o: { tapa: null } }, { o: { tapa: 'osoite' } }] },
+    },
+    {
+      // Poistettu rivi vie kenttänsä poistuneisiin, ja sen indeksi jää lyhentyneen
+      // taulukon ulkopuolelle. Kolmas kierros ei saa herättää riviä takaisin.
+      name: 'does not resurrect a removed array row when its field is unregistered',
+      values: { n: [{ v: 'a' }, { v: 'c' }] },
+      registeredFields: registered('n', 'n[0].v', 'n[1].v'),
+      unregisteredFields: registered('n[2].v'),
+      initialValues: { n: [{ v: 'a' }, { v: 'b' }, { v: 'c' }] },
+      expected: { n: [{ v: 'a' }, { v: 'c' }] },
+    },
+    {
       name: 'writes a whole array from a registered parent alone',
       values: { n: [{ v: 1 }] },
       registeredFields: registered('n'),

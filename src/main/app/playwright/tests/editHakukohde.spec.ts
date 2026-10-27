@@ -159,6 +159,84 @@ test.describe('Edit hakukohde', () => {
       await tallenna(page);
     }));
 
+  test('should clear the per-liite toimitustapa when a shared toimituspaikka is taken into use', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await prepareHakukohdeTest(page, {
+        tyyppi: 'yo',
+        hakuOid,
+        organisaatioOid,
+        tarjoajat,
+      });
+      await loadHakukohdePage(page);
+      await fillKieliversiotSection(page);
+      await fillJarjestyspaikkaSection(page);
+
+      // Yhteinen toimituspaikka käyttöön -> liitekohtaiset toimitustapa-kentät
+      // katoavat. Piilotettu arvo palaa payloadiin FieldArrayn mukana, joten
+      // payload on tässä se mitattava asia: liitekohtainen toimitustapa ja
+      // osoite eivät saa lähteä backendiin, joka vaatisi niiltä täyden osoitteen.
+      await withinSection(page, 'liitteet', async section => {
+        const liitekohtaisetToimitustavat = section
+          .getByTestId('liitelista')
+          .getByTestId('toimitustapa');
+
+        await expect(liitekohtaisetToimitustavat).not.toHaveCount(0);
+
+        await section
+          .getByText('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')
+          .click();
+
+        await expect(liitekohtaisetToimitustavat).toHaveCount(0);
+      });
+
+      await tallenna(page);
+    }));
+
+  // Kantaan jäänyttä kuollutta dataa ei voi siivota rekisteröinnin kautta: ilman
+  // rastia ohjekenttä ei mounttaudu lainkaan, joten mikään ei poistu näkyvistä eikä
+  // mitään nollata. Tässä testissä valintakoeosiota ei kosketa ollenkaan.
+  test('should drop valintakoe ohjeet that are already in the entity without the checkbox', ({
+    page,
+  }, testInfo) =>
+    mutationTest({ page, testInfo }, async () => {
+      await prepareHakukohdeTest(page, {
+        tyyppi: 'yo',
+        hakuOid,
+        organisaatioOid,
+        tarjoajat,
+      });
+      await page.route(
+        `**/hakukohde/${hakukohdeOid}`,
+        fixtureJSON(
+          merge(hakukohde(), {
+            toteutusOid,
+            hakuOid,
+            organisaatioOid,
+            oid: hakukohdeOid,
+            valintaperusteId,
+            valintakokeet: [
+              {
+                metadata: {
+                  liittyyEnnakkovalmistautumista: false,
+                  erityisjarjestelytMahdollisia: false,
+                },
+              },
+            ],
+          })
+        )
+      );
+      await page.goto(
+        `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+      );
+
+      await fillKieliversiotSection(page);
+      await fillJarjestyspaikkaSection(page);
+
+      await tallenna(page);
+    }));
+
   // --- Siirron suojatestit -------------------------------------------------
 
   // Merkki kerrallaan, EI fillillä. Kohde on FieldArrayn lapsi: jokainen

@@ -110,29 +110,31 @@ const useResetOpetussuunnitelmatQueryPageOnNimiChange = (
 };
 
 const useInfiniteOpetussuunnitelmaOptions = ({
-  kieli,
+  selectedLanguage,
   nimi,
   selectedOpetussuunnitelma,
   allSelectedOpetussuunnitelmaIds,
 }: {
-  kieli: LanguageCode;
+  selectedLanguage: LanguageCode;
   nimi?: string;
   selectedOpetussuunnitelma?: SelectOption;
   allSelectedOpetussuunnitelmaIds?: Array<string>;
 }) => {
-  const language = useUserLanguage();
-
   const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
 
   // Resetoidaan opetussuunnitelmien queryn sivu jos nimi muuttuu, jotta haetaan aina nimen muututtua vain ensimmäinen sivu, eikä kaikkia aiemmin haettuja sivuja.
   useResetOpetussuunnitelmatQueryPageOnNimiChange(
-    kieli,
+    selectedLanguage,
     nimi,
     organisaatioOids
   );
 
   const query = useInfiniteQuery(
-    useQueryOptionsGetOpetussuunnitelmat({ organisaatioOids, nimi, kieli })
+    useQueryOptionsGetOpetussuunnitelmat({
+      organisaatioOids,
+      nimi,
+      kieli: selectedLanguage,
+    })
   );
 
   const {
@@ -157,7 +159,7 @@ const useInfiniteOpetussuunnitelmaOptions = ({
               id,
               nimi,
               koulutustoimija,
-              language
+              selectedLanguage
             ),
             isDisabled: otherSelectedOpetussuunnitelmaIds?.includes(String(id)),
           })) ?? []
@@ -171,7 +173,7 @@ const useInfiniteOpetussuunnitelmaOptions = ({
       : [selectedOpetussuunnitelmaOptionWithLabel, ...opetussuunnitelmaOptions];
   }, [
     query.data,
-    language,
+    selectedLanguage,
     selectedOpetussuunnitelmaOptionWithLabel,
     allSelectedOpetussuunnitelmaIds,
   ]);
@@ -278,7 +280,7 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteOpetussuunnitelmaOptions({
-    kieli: selectedLanguage,
+    selectedLanguage,
     nimi,
     selectedOpetussuunnitelma,
     allSelectedOpetussuunnitelmaIds,

@@ -1,19 +1,15 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldCheckboxGroup } from '#/src/components/formFields';
 import { Field } from '#/src/components/formFields/Field';
 
-const getOptions = t => [
-  { value: 'fi', label: t('yleiset.suomi') },
-  { value: 'sv', label: t('yleiset.ruotsi') },
-  { value: 'en', label: t('yleiset.englanti') },
-];
+import { getLanguageOptions } from '#/src/utils';
 
 export const KieliversiotFields = ({ name = 'kieliversiot', ...props }) => {
   const { t } = useTranslation();
-  const options = useMemo(() => getOptions(t), [t]);
+  const options = useMemo(() => getLanguageOptions(t), [t]);
 
   return (
     <Field

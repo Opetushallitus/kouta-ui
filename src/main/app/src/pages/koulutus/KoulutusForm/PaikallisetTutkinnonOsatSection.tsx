@@ -3,7 +3,6 @@ import React, { Dispatch, useMemo, useRef, useState } from 'react';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { isEmpty } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { t } from 'i18next';
 import styled from 'styled-components';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
@@ -15,7 +14,7 @@ import {
   FieldArrayFieldsProps,
 } from '#/src/components/formFields/Field';
 import { Box, FormLabel, Radio, RadioGroup } from '#/src/components/virkailija';
-import { KOULUTUS_ROLE, LANGUAGES } from '#/src/constants';
+import { KOULUTUS_ROLE } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
@@ -23,7 +22,7 @@ import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuild
 import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { spacing } from '#/src/theme';
-import { isTruthy } from '#/src/utils';
+import { getLanguageOptions, isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { useQueryOptionsGetOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
@@ -114,29 +113,31 @@ const useResetOpetussuunnitelmatQueryPageOnNimiChange = (
 };
 
 const useInfiniteOpetussuunnitelmaOptions = ({
-  kieli,
+  selectedLanguage,
   nimi,
   selectedOpetussuunnitelma,
   allSelectedOpetussuunnitelmaIds,
 }: {
-  kieli: LanguageCode;
+  selectedLanguage: LanguageCode;
   nimi?: string;
   selectedOpetussuunnitelma?: SelectOption;
   allSelectedOpetussuunnitelmaIds?: Array<string>;
 }) => {
-  const language = useUserLanguage();
-
   const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
 
   // Resetoidaan opetussuunnitelmien queryn sivu jos nimi muuttuu, jotta haetaan aina nimen muututtua vain ensimmäinen sivu, eikä kaikkia aiemmin haettuja sivuja.
   useResetOpetussuunnitelmatQueryPageOnNimiChange(
-    kieli,
+    selectedLanguage,
     nimi,
     organisaatioOids
   );
 
   const query = useInfiniteQuery(
-    useQueryOptionsGetOpetussuunnitelmat({ organisaatioOids, nimi, kieli })
+    useQueryOptionsGetOpetussuunnitelmat({
+      organisaatioOids,
+      nimi,
+      kieli: selectedLanguage,
+    })
   );
 
   const {
@@ -161,7 +162,7 @@ const useInfiniteOpetussuunnitelmaOptions = ({
               id,
               nimi,
               koulutustoimija,
-              language
+              selectedLanguage
             ),
             isDisabled: otherSelectedOpetussuunnitelmaIds?.includes(String(id)),
           })) ?? []
@@ -175,7 +176,7 @@ const useInfiniteOpetussuunnitelmaOptions = ({
       : [selectedOpetussuunnitelmaOptionWithLabel, ...opetussuunnitelmaOptions];
   }, [
     query.data,
-    language,
+    selectedLanguage,
     selectedOpetussuunnitelmaOptionWithLabel,
     allSelectedOpetussuunnitelmaIds,
   ]);
@@ -214,27 +215,24 @@ const StyledRadio = styled(Radio)`
 const LanguageSelector = ({
   selectedLanguage,
   setSelectedLanguage,
+  disabled,
 }: {
   selectedLanguage: LanguageCode;
   setSelectedLanguage: Dispatch<LanguageCode>;
+  disabled: boolean;
 }) => {
-  const languageOptions = LANGUAGES.map((lang: string) => {
-    const translationKey =
-      lang === 'sv' ? 'ruotsi' : lang === 'en' ? 'englanti' : 'suomi';
-    return {
-      value: lang,
-      label: t(`yleiset.${translationKey}`),
-    };
-  });
+  const { t } = useTranslation();
+  const languageOptions = getLanguageOptions(t);
 
   const id = 'totsu-language-selector';
   return (
     <Box>
-      <FormLabel htmlFor={id} as="div" marginBottom={1}>
+      <FormLabel id={id} as="div" marginBottom={1}>
         {t('koulutuslomake.valitseTotsunKieli')}
       </FormLabel>
-      <Box id={id} display={'flex'} flexDirection={'row'}>
+      <Box aria-labelledby={id} display="flex" flexDirection="row">
         <RadioGroup
+          disabled={disabled}
           value={selectedLanguage}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSelectedLanguage(e.target.value as LanguageCode)
@@ -282,7 +280,7 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteOpetussuunnitelmaOptions({
-    kieli: selectedLanguage,
+    selectedLanguage,
     nimi,
     selectedOpetussuunnitelma,
     allSelectedOpetussuunnitelmaIds,
@@ -359,6 +357,7 @@ const PaikallisetTutkinnonOsatFields = ({
       <LanguageSelector
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={setSelectedLanguage}
+        disabled={disabled}
       />
       <FieldArrayList fields={fields}>
         {({ field }) => (

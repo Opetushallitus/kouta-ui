@@ -211,9 +211,11 @@ const StyledRadio = styled(Radio)`
 const LanguageSelector = ({
   selectedLanguage,
   setSelectedLanguage,
+  disabled,
 }: {
   selectedLanguage: LanguageCode;
   setSelectedLanguage: Dispatch<LanguageCode>;
+  disabled: boolean;
 }) => {
   const { t } = useTranslation();
   const languageOptions = getLanguageOptions(t);
@@ -226,6 +228,7 @@ const LanguageSelector = ({
       </FormLabel>
       <Box id={id} display={'flex'} flexDirection={'row'}>
         <RadioGroup
+          disabled={disabled}
           value={selectedLanguage}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSelectedLanguage(e.target.value as LanguageCode)
@@ -350,6 +353,7 @@ const PaikallisetTutkinnonOsatFields = ({
       <LanguageSelector
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={setSelectedLanguage}
+        disabled={disabled}
       />
       <FieldArrayList fields={fields}>
         {({ field }) => (

@@ -24,11 +24,17 @@ import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 const getTutkinnonosatOptions = (selectedPeruste, language) =>
   _.map(
     selectedPeruste?.tutkinnonosat ?? [],
-    ({ _tutkinnonOsa, nimi, laajuus, id }) => ({
-      label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
-      value: _tutkinnonOsa,
-      viite: id,
-    })
+    ({ _tutkinnonOsa, nimi, laajuus, id }) => {
+      const userLanguageValue = getLanguageValue(nimi, language);
+      const fallbackValue = getLanguageValue(nimi, 'fi');
+      return {
+        label: `${
+          userLanguageValue?.length > 1 ? userLanguageValue : fallbackValue
+        }, ${laajuus} osp`,
+        value: _tutkinnonOsa,
+        viite: id,
+      };
+    }
   );
 
 const TutkinnonOsatField = ({ isLoading, ...props }) => {

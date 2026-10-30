@@ -223,10 +223,10 @@ const LanguageSelector = ({
   const id = 'totsu-language-selector';
   return (
     <Box>
-      <FormLabel htmlFor={id} as="div" marginBottom={1}>
+      <FormLabel id={id} as="div" marginBottom={1}>
         {t('koulutuslomake.valitseTotsunKieli')}
       </FormLabel>
-      <Box id={id} display={'flex'} flexDirection={'row'}>
+      <Box aria-labelledby={id} display="flex" flexDirection="row">
         <RadioGroup
           disabled={disabled}
           value={selectedLanguage}

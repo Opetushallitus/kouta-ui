@@ -1,6 +1,5 @@
 import React, { Dispatch, useMemo, useRef, useState } from 'react';
 
-import { t } from 'i18next';
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
@@ -11,7 +10,7 @@ import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box, FormLabel, Radio, RadioGroup } from '#/src/components/virkailija';
-import { KOULUTUS_ROLE, LANGUAGES } from '#/src/constants';
+import { KOULUTUS_ROLE } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
@@ -19,7 +18,7 @@ import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuild
 import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { spacing } from '#/src/theme';
-import { isTruthy } from '#/src/utils';
+import { getLanguageOptions, isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { useQueryOptionsGetOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
@@ -216,14 +215,8 @@ const LanguageSelector = ({
   selectedLanguage: LanguageCode;
   setSelectedLanguage: Dispatch<LanguageCode>;
 }) => {
-  const languageOptions = LANGUAGES.map((lang: string) => {
-    const translationKey =
-      lang === 'sv' ? 'ruotsi' : lang === 'en' ? 'englanti' : 'suomi';
-    return {
-      value: lang,
-      label: t(`yleiset.${translationKey}`),
-    };
-  });
+  const { t } = useTranslation();
+  const languageOptions = getLanguageOptions(t);
 
   const id = 'totsu-language-selector';
   return (

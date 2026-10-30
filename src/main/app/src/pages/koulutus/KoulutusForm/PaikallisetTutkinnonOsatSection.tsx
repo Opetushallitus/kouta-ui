@@ -1,14 +1,15 @@
-import { useMemo, useRef } from 'react';
+import React, { Dispatch, useMemo, useRef, useState } from 'react';
 
 import { isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { Field, FieldArray, FieldArrayFieldsProps } from 'redux-form';
+import styled from 'styled-components';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldSelect } from '#/src/components/formFields';
-import { Box } from '#/src/components/virkailija';
+import { Box, FormLabel, Radio, RadioGroup } from '#/src/components/virkailija';
 import { KOULUTUS_ROLE } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useFieldValue, useKoulutusFormField } from '#/src/hooks/form';
@@ -16,11 +17,12 @@ import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { useDebounceState } from '#/src/hooks/useDebounceState';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import { isTruthy } from '#/src/utils';
+import { spacing } from '#/src/theme';
+import { getLanguageOptions, isTruthy } from '#/src/utils';
 import { getOpetussuunnitelmaById } from '#/src/utils/ePeruste/getOpetussuunnitelmaById';
 import { useQueryOptionsGetOpetussuunnitelmat } from '#/src/utils/ePeruste/getOpetussuunnitelmat';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
-import { getLanguageValue } from '#/src/utils/languageUtils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
 
@@ -49,8 +51,8 @@ const createOpetussuunnitelmaLabel = (
   oppilaitos: { nimi?: TranslatedField<string> } | undefined,
   language: LanguageCode
 ) =>
-  (getLanguageValue(nimi, language) ?? String(id)) +
-  (oppilaitos ? ` (${getLanguageValue(oppilaitos.nimi, language)})` : '');
+  (getFirstLanguageValue(nimi, language) ?? String(id)) +
+  (oppilaitos ? ` (${getFirstLanguageValue(oppilaitos.nimi, language)})` : '');
 
 const useOpetussuunnitelmaOptionWithLabel = (
   opetussuunnitelmaOption?: SelectOption
@@ -78,6 +80,7 @@ const useOpetussuunnitelmaOptionWithLabel = (
 };
 
 const useResetOpetussuunnitelmatQueryPageOnNimiChange = (
+  kieli: LanguageCode,
   nimi?: string,
   organisaatioOids?: Array<string>
 ) => {
@@ -85,6 +88,7 @@ const useResetOpetussuunnitelmatQueryPageOnNimiChange = (
   const previousNimiRef = useRef(nimi);
 
   const previousQueryKey = useQueryOptionsGetOpetussuunnitelmat({
+    kieli,
     organisaatioOids: organisaatioOids ?? [],
     nimi: previousNimiRef.current,
   }).queryKey;
@@ -105,23 +109,31 @@ const useResetOpetussuunnitelmatQueryPageOnNimiChange = (
 };
 
 const useInfiniteOpetussuunnitelmaOptions = ({
+  selectedLanguage,
   nimi,
   selectedOpetussuunnitelma,
   allSelectedOpetussuunnitelmaIds,
 }: {
+  selectedLanguage: LanguageCode;
   nimi?: string;
   selectedOpetussuunnitelma?: SelectOption;
   allSelectedOpetussuunnitelmaIds?: Array<string>;
 }) => {
-  const language = useUserLanguage();
-
   const organisaatioOids = useOrganisaatioOidsWithUpdateRights();
 
   // Resetoidaan opetussuunnitelmien queryn sivu jos nimi muuttuu, jotta haetaan aina nimen muututtua vain ensimmäinen sivu, eikä kaikkia aiemmin haettuja sivuja.
-  useResetOpetussuunnitelmatQueryPageOnNimiChange(nimi, organisaatioOids);
+  useResetOpetussuunnitelmatQueryPageOnNimiChange(
+    selectedLanguage,
+    nimi,
+    organisaatioOids
+  );
 
   const query = useInfiniteQuery(
-    useQueryOptionsGetOpetussuunnitelmat({ organisaatioOids, nimi })
+    useQueryOptionsGetOpetussuunnitelmat({
+      organisaatioOids,
+      nimi,
+      kieli: selectedLanguage,
+    })
   );
 
   const {
@@ -146,7 +158,7 @@ const useInfiniteOpetussuunnitelmaOptions = ({
               id,
               nimi,
               koulutustoimija,
-              language
+              selectedLanguage
             ),
             isDisabled: otherSelectedOpetussuunnitelmaIds?.includes(String(id)),
           })) ?? []
@@ -160,7 +172,7 @@ const useInfiniteOpetussuunnitelmaOptions = ({
       : [selectedOpetussuunnitelmaOptionWithLabel, ...opetussuunnitelmaOptions];
   }, [
     query.data,
-    language,
+    selectedLanguage,
     selectedOpetussuunnitelmaOptionWithLabel,
     allSelectedOpetussuunnitelmaIds,
   ]);
@@ -172,8 +184,10 @@ const useInfiniteOpetussuunnitelmaOptions = ({
   };
 };
 
-const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
-  const language = useUserLanguage();
+const usePaikallisetTutkinnonosatOptions = (
+  selectedLanguage: LanguageCode,
+  opsId?: string
+) => {
   return useApiQuery(
     'getPaikallisetTutkinnonosat',
     getPaikallisetTutkinnonosat,
@@ -183,18 +197,64 @@ const usePaikallisetTutkinnonosatOptions = (opsId?: string) => {
       select: response =>
         response.map(({ id, nimi }) => ({
           value: String(id),
-          label: getLanguageValue(nimi, language) ?? String(id),
+          label: getFirstLanguageValue(nimi, selectedLanguage) ?? String(id),
         })),
     }
+  );
+};
+
+const StyledRadio = styled(Radio)`
+  margin-bottom: ${spacing(2)};
+  padding-right: ${spacing(3)};
+`;
+
+const LanguageSelector = ({
+  selectedLanguage,
+  setSelectedLanguage,
+  disabled,
+}: {
+  selectedLanguage: LanguageCode;
+  setSelectedLanguage: Dispatch<LanguageCode>;
+  disabled: boolean;
+}) => {
+  const { t } = useTranslation();
+  const languageOptions = getLanguageOptions(t);
+
+  const id = 'totsu-language-selector';
+  return (
+    <Box>
+      <FormLabel id={id} as="div" marginBottom={1}>
+        {t('koulutuslomake.valitseTotsunKieli')}
+      </FormLabel>
+      <Box aria-labelledby={id} display="flex" flexDirection="row">
+        <RadioGroup
+          disabled={disabled}
+          value={selectedLanguage}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSelectedLanguage(e.target.value as LanguageCode)
+          }
+        >
+          {languageOptions.map(
+            ({ value, label }: { value: string; label: string }) => (
+              <StyledRadio key={value} value={value}>
+                {label}
+              </StyledRadio>
+            )
+          )}
+        </RadioGroup>
+      </Box>
+    </Box>
   );
 };
 
 const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   disabled,
   name,
+  selectedLanguage,
 }: {
   disabled: boolean;
   name: string;
+  selectedLanguage: LanguageCode;
 }) => {
   const allSelectedOpetussuunnitelmaIds = useKoulutusFormField(
     'paikallisetTutkinnonOsat'
@@ -216,6 +276,7 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
     fetchNextPage,
     hasNextPage,
   } = useInfiniteOpetussuunnitelmaOptions({
+    selectedLanguage,
     nimi,
     selectedOpetussuunnitelma,
     allSelectedOpetussuunnitelmaIds,
@@ -230,7 +291,10 @@ const OpetussuunnitelmanPaikallisetTutkinnonOsat = ({
   const {
     data: paikallisetTutkinnonosatOptions,
     isLoading: isLoadingTutkinnonosat,
-  } = usePaikallisetTutkinnonosatOptions(selectedOpetussuunnitelmaId);
+  } = usePaikallisetTutkinnonosatOptions(
+    selectedLanguage,
+    selectedOpetussuunnitelmaId
+  );
 
   return (
     <StyledInfoBox mt={2}>
@@ -279,13 +343,24 @@ const PaikallisetTutkinnonOsatFields = ({
 }) => {
   const { t } = useTranslation();
 
+  const userLanguage = useUserLanguage();
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageCode>(
+    userLanguage || 'fi'
+  );
+
   return (
     <>
+      <LanguageSelector
+        selectedLanguage={selectedLanguage}
+        setSelectedLanguage={setSelectedLanguage}
+        disabled={disabled}
+      />
       <FieldArrayList fields={fields}>
         {({ field }) => (
           <OpetussuunnitelmanPaikallisetTutkinnonOsat
             disabled={disabled}
             name={field}
+            selectedLanguage={selectedLanguage}
           />
         )}
       </FieldArrayList>

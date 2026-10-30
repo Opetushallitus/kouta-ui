@@ -497,3 +497,9 @@ export const isKoulutustyyppiWithMultipleMaksullisuustyyppi = (
   koulutustyyppi: KOULUTUSTYYPPI
 ): boolean =>
   KOULUTUSTYYPIT_WITH_MULTIPLE_MAKSULLISUUSTYYPPI.includes(koulutustyyppi);
+
+export const getLanguageOptions = (t: TFunction) => [
+  { value: 'fi', label: t('yleiset.suomi') },
+  { value: 'sv', label: t('yleiset.ruotsi') },
+  { value: 'en', label: t('yleiset.englanti') },
+];

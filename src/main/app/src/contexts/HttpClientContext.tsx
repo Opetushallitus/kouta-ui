@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { AxiosInstance } from 'axios';
-
 import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
+import { HttpClient } from '#/src/httpClient';
 
-export const HttpClientContext = React.createContext<AxiosInstance | undefined>(
+export const HttpClientContext = React.createContext<HttpClient | undefined>(
   undefined
 );
 HttpClientContext.displayName = 'HttpClientContext';

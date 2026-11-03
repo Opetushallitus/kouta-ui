@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { type TFunction } from 'i18next';
-import _ from 'lodash';
+import { noop, sortBy } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { Tab, Tabs } from '#/src/components/virkailija';
@@ -21,7 +21,7 @@ const getLanguageOptions = ({
     en: t('yleiset.englanniksi'),
   };
 
-  return _.sortBy(
+  return sortBy(
     languages.map(item => {
       return {
         label: labelByValue[item] || item,
@@ -37,7 +37,7 @@ const onTabClick = e => e.stopPropagation();
 const LanguageTabs = ({
   languages = [],
   language = 'fi',
-  onChange = _.noop,
+  onChange = noop,
 }: {
   languages?: Array<LanguageCode>;
   language?: LanguageCode;

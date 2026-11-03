@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import _ from 'lodash';
+import { isFunction, isString } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -31,7 +31,7 @@ const LanguageTabsWrapper = styled.div`
 const Actions = ({ actions, onContinue, t }) => {
   return actions ? (
     actions
-  ) : _.isFunction(onContinue) ? (
+  ) : isFunction(onContinue) ? (
     <Box display="flex" justifyContent="center">
       <FormButton type="button" onClick={onContinue}>
         {t('yleiset.jatka')}
@@ -48,7 +48,7 @@ const Header = ({
   onLanguageChange,
   collapseOpen,
 }) => {
-  const headerContent = _.isString(header) ? (
+  const headerContent = isString(header) ? (
     <Typography variant="h5" py={3} px={0}>
       {index + 1}. {header}
     </Typography>
@@ -57,7 +57,7 @@ const Header = ({
   );
 
   const showLanguageTabs =
-    collapseOpen && _.isArray(languages) && languages.length > 0;
+    collapseOpen && Array.isArray(languages) && languages.length > 0;
 
   return (
     <HeaderWrapper>
@@ -117,9 +117,9 @@ export const FormCollapse = ({
 
   useEffect(() => {
     if (languages.length > 0 && !languages.find(lng => lng === language)) {
-      setLanguage(languages[0]);
+      setLanguage(languages[0]!);
     }
-  }, [languages]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [languages]); // eslint-disable-line @eslint-react/exhaustive-deps
 
   const childProps = { ...props, language, languages, onContinue };
 

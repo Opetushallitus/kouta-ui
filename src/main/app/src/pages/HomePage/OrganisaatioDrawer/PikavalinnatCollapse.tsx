@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { size } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { SimpleCollapse } from '#/src/components/SimpleCollapse';
@@ -18,14 +18,13 @@ export const PikavalinnatCollapse = ({
   selectedOrganisaatio,
   onToggleFavourite,
   setSelectedOrganisaatio,
-  language,
 }) => {
   const { t } = useTranslation();
   const ophIsFavourite = useMemo(
     () => organisaatioFavourites.includes(OPETUSHALLITUS_ORGANISAATIO_OID),
     [organisaatioFavourites]
   );
-  const pikavalinnatCount = _.size(favouriteItems) + (hasOphOption ? 1 : 0);
+  const pikavalinnatCount = size(favouriteItems) + (hasOphOption ? 1 : 0);
 
   return (
     <SimpleCollapse
@@ -55,7 +54,6 @@ export const PikavalinnatCollapse = ({
                 selected={selectedOrganisaatio}
                 onSelect={setSelectedOrganisaatio}
                 onToggleFavourite={onToggleFavourite}
-                language={language}
               />
             </Box>
           )}

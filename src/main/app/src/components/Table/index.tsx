@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { isFunction } from 'lodash-es';
 import styled, { css } from 'styled-components';
 
 import { Icon } from '#/src/components/virkailija';
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const SortIcon = styled(Icon)`
-  margin-left: ${spacing(1.0)};
+  margin-left: ${spacing(1)};
   color: ${getThemeProp('palette.text.primary')};
   cursor: pointer;
   font-size: 1.2rem;
@@ -29,7 +29,14 @@ const SortContainer = styled.div`
   cursor: pointer;
 `;
 
-export const TableCellBase = styled.td`
+type TableCellBaseProps = {
+  textCenter?: boolean;
+  isTableHead?: boolean;
+  noBorder?: boolean;
+  active?: boolean;
+};
+
+export const TableCellBase = styled.td<TableCellBaseProps>`
   border-spacing: 0px;
   padding: ${spacing(1)} ${spacing(2)};
   text-align: left;
@@ -69,19 +76,31 @@ const TableHeadBase = styled.thead`
 
 export const TableBody = styled.tbody``;
 
-export const TableHead = ({ children, ...props }) => {
+type TableHeadProps = React.HTMLAttributes<HTMLTableSectionElement>;
+
+export const TableHead = ({ children, ...props }: TableHeadProps) => {
+  // eslint-disable-next-line @eslint-react/no-children-map -- injects isTableHead into each row child; compound-component pattern, not a quick fix
   const childrenProp = React.Children.map(children, child =>
     child
-      ? React.cloneElement(child, {
-          isTableHead: true,
-        })
+      ? // eslint-disable-next-line @eslint-react/no-clone-element -- see no-children-map above
+        React.cloneElement(
+          child as React.ReactElement<Record<string, unknown>>,
+          {
+            isTableHead: true,
+          }
+        )
       : null
   );
 
   return <TableHeadBase {...props}>{childrenProp}</TableHeadBase>;
 };
 
-const TableRowBase = styled.tr`
+type TableRowBaseProps = {
+  isTableHead?: boolean;
+  noBorder?: boolean;
+};
+
+const TableRowBase = styled.tr<TableRowBaseProps>`
   border-spacing: 0px;
 
   ${({ isTableHead }) =>
@@ -105,13 +124,27 @@ const TableRowBase = styled.tr`
     `}
 `;
 
-export const TableRow = ({ children, isTableHead = false, ...props }) => {
+type TableRowProps = {
+  isTableHead?: boolean;
+  noBorder?: boolean;
+} & React.HTMLAttributes<HTMLTableRowElement>;
+
+export const TableRow = ({
+  children,
+  isTableHead = false,
+  ...props
+}: TableRowProps) => {
+  // eslint-disable-next-line @eslint-react/no-children-map -- injects isTableHead/as into each cell child; compound-component pattern, not a quick fix
   const childrenProp = React.Children.map(children, child =>
     child
-      ? React.cloneElement(child, {
-          isTableHead,
-          ...(isTableHead ? { as: 'th' } : {}),
-        })
+      ? // eslint-disable-next-line @eslint-react/no-clone-element -- see no-children-map above
+        React.cloneElement(
+          child as React.ReactElement<Record<string, unknown>>,
+          {
+            isTableHead,
+            ...(isTableHead ? { as: 'th' } : {}),
+          }
+        )
       : null
   );
 
@@ -124,15 +157,15 @@ export const TableRow = ({ children, isTableHead = false, ...props }) => {
 
 type TableCellProps = {
   sortDirection?: 'asc' | 'desc';
-  onSort?: ((any) => void) | null;
+  onSort?: ((direction: 'asc' | 'desc') => void) | null;
   children?: React.ReactNode;
   textCenter?: boolean;
   isTableHead?: boolean;
   noBorder?: boolean;
   active?: boolean;
-} & React.HTMLProps<HTMLTableCellElement>;
+} & React.TdHTMLAttributes<HTMLTableCellElement>;
 
-const getSortIconType = (sortDirection: any) => {
+const getSortIconType = (sortDirection: 'asc' | 'desc' | undefined): string => {
   switch (sortDirection) {
     case 'asc':
       return 'keyboard_arrow_up';
@@ -151,7 +184,7 @@ export const TableCell = ({
 }: TableCellProps) => {
   return (
     <TableCellBase {...props}>
-      {_.isFunction(onSort) ? (
+      {isFunction(onSort) ? (
         <SortContainer
           onClick={() => {
             onSort(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -167,7 +200,7 @@ export const TableCell = ({
   );
 };
 
-const Table = props => (
+const Table = (props: React.TableHTMLAttributes<HTMLTableElement>) => (
   <Wrapper>
     <TableBase {...props} />
   </Wrapper>

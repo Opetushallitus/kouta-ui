@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
-import { Field } from 'redux-form';
+import { map, uniqBy } from 'lodash-es';
 
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
@@ -30,8 +30,8 @@ export const OrganisaatioSectionCreate = ({ organisaatioOid }) => {
 
     if (isOphVirkailija && !ophIsLoading && oph) orgs.unshift(oph);
 
-    return _.uniqBy(
-      _.map(orgs, ({ oid, nimi }) => ({
+    return uniqBy(
+      map(orgs, ({ oid, nimi }) => ({
         value: oid,
         label: `${getFirstLanguageValue(nimi, language)} (${oid})`,
       })),

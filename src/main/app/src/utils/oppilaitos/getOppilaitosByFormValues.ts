@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { get, isEmpty, omit } from 'lodash-es';
 
 import { isNumeric, toKielistettyWithValueStr } from '#/src/utils';
 
@@ -27,7 +27,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     ({ value: otsikkoKoodiUri }) => ({
       otsikkoKoodiUri,
       teksti: kieleistyksetSerialized(
-        _.get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}
+        get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}
       ),
     })
   );
@@ -39,16 +39,16 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
   const removeEmptySomeKeys = (some: Some): Partial<Some> => {
     let someWithEmptyValsRemoved: Partial<Some> = some;
     Object.keys(some).forEach((key: string) => {
-      if (some[key].trim().length < 1) {
-        someWithEmptyValsRemoved = _.omit(someWithEmptyValsRemoved, [key]);
+      if ((some[key] ?? '').trim().length < 1) {
+        someWithEmptyValsRemoved = omit(someWithEmptyValsRemoved, [key]);
       }
     });
     return someWithEmptyValsRemoved;
   };
 
   const composeEsittelyvideoNimiObject = (
-    videoUrls: object
-  ): object | undefined => {
+    videoUrls: Record<string, string>
+  ): Record<string, string> | undefined => {
     const languages = Object.keys(videoUrls).filter(lang =>
       Boolean(videoUrls[lang])
     );
@@ -78,7 +78,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
         ? {
             nimi: kieleistykset(hy.nimi),
             postiosoite:
-              !_.isEmpty(hy.postiosoite) || !_.isEmpty(hy.postinumero)
+              !isEmpty(hy.postiosoite) || !isEmpty(hy.postinumero)
                 ? {
                     osoite: kieleistykset(hy.postiosoite),
                     postinumeroKoodiUri: kieleistykset(
@@ -87,8 +87,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
                   }
                 : null,
             kayntiosoite:
-              !_.isEmpty(hy.kayntiosoite) ||
-              !_.isEmpty(hy.kayntiosoitePostinumero)
+              !isEmpty(hy.kayntiosoite) || !isEmpty(hy.kayntiosoitePostinumero)
                 ? {
                     osoite: kieleistykset(hy.kayntiosoite),
                     postinumeroKoodiUri: kieleistykset(
@@ -114,7 +113,7 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       some: perustiedot?.some
         ? removeEmptySomeKeys(perustiedot.some)
         : undefined,
-      wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
+      wwwSivu: isEmpty(perustiedot?.wwwSivuUrl)
         ? null
         : {
             url: kieleistykset(perustiedot.wwwSivuUrl),

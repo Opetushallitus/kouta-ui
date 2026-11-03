@@ -1,17 +1,18 @@
-import React, { ReactNode } from 'react';
+import React, { type ReactNode, useCallback } from 'react';
 
-import { QueryObserverResult } from 'react-query';
-import ReactRouterPrompt from 'react-router-prompt';
+import type { QueryObserverResult } from '@tanstack/react-query';
+import type { BlockerFunction } from 'react-router';
 import styled from 'styled-components';
 
 import Container from '#/src/components/Container';
 import FullSpin from '#/src/components/FullSpin';
 import { OverlaySpin } from '#/src/components/OverlaySpin';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
-import { ReduxForm } from '#/src/components/ReduxForm';
+import { ReactFinalForm } from '#/src/components/ReactFinalForm';
 import Title from '#/src/components/Title';
 import { ENTITY, FormMode, JULKAISUTILA } from '#/src/constants';
 import { useFieldValue, useIsDirty, useIsSubmitting } from '#/src/hooks/form';
+import { useNavigationBlocker } from '#/src/hooks/useNavigationBlocker';
 import { getThemeProp } from '#/src/theme';
 
 import UnsavedChangesDialog from '../UnsavedChangesDialog';
@@ -63,8 +64,10 @@ type FormPageProps = {
   title: string;
   entityType: ENTITY;
   formMode: FormMode;
-  initialValues: Record<string, any>;
-  queryResult?: QueryObserverResult | Array<QueryObserverResult>;
+  initialValues?: Record<string, any>;
+  queryResult?:
+    | QueryObserverResult<unknown, unknown>
+    | Array<QueryObserverResult<unknown, unknown>>;
   header?: React.ReactNode;
   steps?: React.ReactNode;
   footer?: React.ReactNode;
@@ -91,25 +94,27 @@ const FormPageContent = ({
   const isSubmitting = useIsSubmitting();
   const isDirty = useIsDirty();
   const tila: string = useFieldValue('tila');
+
+  const shouldBlockNavigation: BlockerFunction = useCallback(
+    ({ currentLocation, nextLocation } = {} as any) => {
+      const samePath = nextLocation?.pathname === currentLocation?.pathname;
+      const deleting = tila === JULKAISUTILA.POISTETTU;
+      return !samePath && !isSubmitting && isDirty && !deleting;
+    },
+    [isSubmitting, isDirty, tila]
+  );
+
+  const { isActive, onConfirm, onCancel } = useNavigationBlocker(
+    shouldBlockNavigation
+  );
+
   return (
     <>
       {isSubmitting && <OverlaySpin />}
       <Title>{title}</Title>
-      {
-        <ReactRouterPrompt
-          when={params => {
-            const currentLocation = params?.currentLocation;
-            const nextLocation = params?.nextLocation;
-            const samePath =
-              (nextLocation && nextLocation.pathname) ===
-              (currentLocation && currentLocation.pathname);
-            const deleting = tila === JULKAISUTILA.POISTETTU;
-            return !samePath && !isSubmitting && isDirty && !deleting;
-          }}
-        >
-          {props => <UnsavedChangesDialog {...props} />}
-        </ReactRouterPrompt>
-      }
+      {isActive && (
+        <UnsavedChangesDialog onConfirm={onConfirm} onCancel={onCancel} />
+      )}
       <Wrapper>
         <HeaderContainer>
           <Container>{header}</Container>
@@ -138,17 +143,20 @@ const FormPage: React.FC<FormPageProps> = props => {
     queryResult,
     readOnly = false,
   } = props;
-  const isSubmitting = useIsSubmitting();
+
+  // disabled={readOnly}, EI isSubmittingia: lomake disabloi itsensä tallennuksen
+  // aikana (ReactFinalForm/index.tsx). Lomaketilaa ei voi lukea lomakkeen
+  // yläpuolelta, koska se syntyy vasta lomakkeen mukana.
   return (
     <ConditionalQueryResult queryResult={queryResult}>
-      <ReduxForm
+      <ReactFinalForm
         form={entityType}
         mode={formMode}
         initialValues={initialValues}
-        disabled={isSubmitting || readOnly}
+        disabled={readOnly}
       >
         <FormPageContent {...props} />
-      </ReduxForm>
+      </ReactFinalForm>
     </ConditionalQueryResult>
   );
 };

@@ -1,8 +1,8 @@
-import { AxiosInstance } from 'axios';
+import { HttpClient } from '#/src/httpClient';
 
 type GetKoodistoProps = {
   koodistoUri: string;
-  httpClient: AxiosInstance;
+  httpClient: HttpClient;
   apiUrls: any;
   versio?: number;
 };

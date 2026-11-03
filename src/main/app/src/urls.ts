@@ -124,5 +124,8 @@ export const configure = async (urls: ApiUrls, httpClient: AxiosInstance) => {
 
 export type ApiUrls = {
   addProperties: (properties: Record<string, string>) => void;
-  url: (key: keyof typeof development, ...params: Array<string>) => string;
+  url: (
+    key: keyof typeof development,
+    ...params: Array<string | undefined>
+  ) => string;
 };

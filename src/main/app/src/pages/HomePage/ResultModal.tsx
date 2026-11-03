@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { map } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { InterpreterFrom } from 'xstate';
+import { ActorRefFrom } from 'xstate';
 
 import ErrorAlert from '#/src/components/ErrorAlert';
 import ListTable from '#/src/components/ListTable';
@@ -19,7 +19,7 @@ const InfoText = styled(Box)`
 
 const ResultList = ({ data, columns }) => {
   const rows = useMemo(
-    () => _.map(data, result => ({ ...result, key: result.oid })),
+    () => map(data, result => ({ ...result, key: result.oid })),
     [data]
   );
   return <ListTable rows={rows} columns={columns} />;
@@ -33,7 +33,7 @@ export const ResultModal = ({
 }: {
   onClose: any;
   headerText: string;
-  batchOpsService: InterpreterFrom<typeof BatchOpsMachine>;
+  batchOpsService: ActorRefFrom<typeof BatchOpsMachine>;
   columns: Array<{
     key: string;
     title?: string;

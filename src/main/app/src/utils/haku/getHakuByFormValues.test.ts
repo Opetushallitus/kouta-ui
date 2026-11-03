@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { mapValues, merge } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import {
@@ -67,8 +67,13 @@ const baseValues: HakuFormValues = {
       sahkoposti: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
       puhelinnumero: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
       verkkosivu: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
+      verkkosivuTeksti: {
+        fi: 'Fi verkkosivuTeksti',
+        sv: 'Sv verkkosivuTeksti',
+      },
     },
   ],
+  hakukohteenLiittajaOrganisaatiot: [],
 };
 
 test('getHakuByFormValues returns correct haku given form values', () => {
@@ -79,7 +84,7 @@ test('getHakuByFormValues returns correct haku given form values', () => {
 
 test('getHakuByFormValues returns correct haku given different hakulomake variations', () => {
   const hakuMuu = getHakuByFormValues(
-    _.merge({}, baseValues, {
+    merge({}, baseValues, {
       hakulomake: {
         tyyppi: HAKULOMAKETYYPPI.MUU,
         linkki: { fi: 'https://google.fi' },
@@ -88,7 +93,7 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
   );
 
   const hakuEiHakua = getHakuByFormValues(
-    _.merge({}, baseValues, {
+    merge({}, baseValues, {
       hakulomake: {
         tyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
         kuvaus: { fi: parseEditorState('kuvaus') },
@@ -103,7 +108,7 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
 test('getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika', () => {
   expect(
     getHakuByFormValues(
-      _.merge({}, baseValues, {
+      merge({}, baseValues, {
         aikataulut: {
           ajankohtaTyyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
           tarkkaAlkaa: '2019-09-16T08:44',
@@ -117,10 +122,10 @@ test('getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika', () => {
 test('getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti', () => {
   expect(
     getHakuByFormValues(
-      _.merge({}, baseValues, {
+      merge({}, baseValues, {
         aikataulut: {
           ajankohtaTyyppi: Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA,
-          henkilokohtaisenSuunnitelmanLisatiedot: _.mapValues(
+          henkilokohtaisenSuunnitelmanLisatiedot: mapValues(
             {
               fi: '<p>hlokoht fi </p>',
               sv: '<p>hlokoht sv </p>',

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useInterpret } from '@xstate/react';
+import { useActorRef } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -41,7 +41,7 @@ export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
 
   const columns = useTableColumns(t, organisaatioOid);
 
-  const hakukohdeService = useInterpret(hakukohdeMachine);
+  const hakukohdeService = useActorRef(hakukohdeMachine);
 
   const filterParams = { toteutusOid: toteutus?.oid };
 

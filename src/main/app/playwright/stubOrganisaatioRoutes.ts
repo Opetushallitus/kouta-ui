@@ -1,5 +1,5 @@
 import { type Page } from '@playwright/test';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import oppilaitoksetFlat from '#/playwright/fixtures/oppilaitoksetFlat';
 import organisaatio from '#/playwright/fixtures/organisaatio';

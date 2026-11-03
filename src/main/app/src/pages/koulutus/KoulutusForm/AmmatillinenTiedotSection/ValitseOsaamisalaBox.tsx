@@ -1,11 +1,11 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _fp from 'lodash/fp';
+import { find, isEmpty, isNil, map, pick } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import {
@@ -23,16 +23,38 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
-export type OsaamisalaOsa = {
-  muodostumisSaanto: { laajuus: { minimi: number } };
-  osaamisala: { osaamisalakoodiArvo: number };
+type Osaamisala = {
+  arvo: string;
+  nimi: TranslatedField;
 };
 
-const getOsaamisalaOptions = (osaamisalat = [], language) =>
-  _fp.map(({ arvo, nimi }) => ({
+type EPeruste = {
+  id: number;
+  osaamisalat?: Array<Osaamisala>;
+};
+
+type SisaltoLapsi = {
+  _perusteenOsa: number;
+  id: number;
+};
+
+type Props = {
+  fieldName: string;
+  language: LanguageCode;
+  selectedEPeruste: EPeruste | undefined;
+  koulutusIsLoading: boolean;
+  disabled: boolean;
+  languages: Array<LanguageCode>;
+};
+
+const getOsaamisalaOptions = (
+  osaamisalat?: Array<Osaamisala>,
+  language?: LanguageCode
+) =>
+  map(osaamisalat ?? [], ({ arvo, nimi }) => ({
     label: getLanguageValue(nimi, language),
     value: arvo,
-  }))(osaamisalat);
+  }));
 
 export const ValitseOsaamisalaBox = ({
   fieldName,
@@ -41,10 +63,10 @@ export const ValitseOsaamisalaBox = ({
   koulutusIsLoading,
   disabled,
   languages,
-}) => {
+}: Props) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
-  const selectedOsaamisala = useFieldValue(fieldName);
+  const selectedOsaamisala = useFieldValue<SelectOption | undefined>(fieldName);
   const osaamisalaChanged = useHasChanged(selectedOsaamisala);
 
   const selectedEPerusteId = selectedEPeruste?.id;
@@ -82,16 +104,17 @@ export const ValitseOsaamisalaBox = ({
     [language, osaamisalat]
   );
 
-  const selectedOsaamisalaData = _fp.find(
-    ({ arvo }) => arvo === selectedOsaamisala?.value
-  )(osaamisalat);
+  const selectedOsaamisalaData = find(
+    osaamisalat,
+    ({ arvo }: Osaamisala) => arvo === selectedOsaamisala?.value
+  );
 
   /* Get laajuus for selected osaamisala */
-  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat;
+  const ePerusteRakenneOsat = ePerusteRakenne?.osat;
   const osaamisalakoodi = selectedOsaamisalaData?.arvo;
 
   let osaamisalaLaajuus;
-  if (ePerusteRakenneOsat) {
+  if (ePerusteRakenneOsat && osaamisalakoodi) {
     osaamisalaLaajuus = getOsaamisalaLaajuus(
       ePerusteRakenneOsat,
       osaamisalakoodi
@@ -106,10 +129,11 @@ export const ValitseOsaamisalaBox = ({
 
   const isDirty = useIsDirty();
 
-  const perusteenOsaId = _fp.find(
-    ({ _perusteenOsa }) =>
+  const perusteenOsaId = find(
+    ePerusteSisalto?.lapset,
+    ({ _perusteenOsa }: SisaltoLapsi) =>
       Number(_perusteenOsa) === Number(selectedOsaamisalaKuvausId)
-  )(ePerusteSisalto?.lapset)?.id;
+  )?.id;
 
   useEffect(() => {
     if (isDirty && ePerusteHasChanged) {
@@ -119,14 +143,14 @@ export const ValitseOsaamisalaBox = ({
 
   useEffect(() => {
     if (isDirty && osaamisalaChanged) {
-      const selectedOsaamisalaData = _fp.find(
-        osaamisala => osaamisala?.arvo === selectedOsaamisala?.value,
-        osaamisalat
+      const selectedOsaamisalaData = find(
+        osaamisalat,
+        osaamisala => osaamisala?.arvo === selectedOsaamisala?.value
       );
       if (selectedOsaamisalaData) {
         change(
           'information.nimi',
-          _fp.pick(languages, selectedOsaamisalaData?.nimi)
+          pick(selectedOsaamisalaData?.nimi, languages)
         );
       } else {
         change('information.nimi', {});
@@ -149,9 +173,7 @@ export const ValitseOsaamisalaBox = ({
           name={fieldName}
           label={t('koulutuslomake.valitseOsaamisala')}
           options={osaamisalaOptions}
-          disabled={
-            disabled || _fp.isNil(osaamisalat) || _fp.isEmpty(osaamisalat)
-          }
+          disabled={disabled || isNil(osaamisalat) || isEmpty(osaamisalat)}
         />
       </Box>
       {isLoading ? (
@@ -170,8 +192,8 @@ export const ValitseOsaamisalaBox = ({
                   href={apiUrls.url(
                     'eperusteet.sisalto',
                     language,
-                    selectedEPerusteId,
-                    perusteenOsaId
+                    selectedEPerusteId?.toString(),
+                    perusteenOsaId?.toString()
                   )}
                   target="_blank"
                 >

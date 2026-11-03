@@ -13,7 +13,7 @@
  * - Adjust styles for unified look and feel
  */
 
-import { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
+import { type Dispatch, useCallback, useEffect, useRef, useState } from 'react';
 import * as React from 'react';
 
 import {
@@ -26,12 +26,12 @@ import { $findMatchingParent, mergeRegister } from '@lexical/utils';
 import {
   $getSelection,
   $isRangeSelection,
-  BaseSelection,
+  type BaseSelection,
   COMMAND_PRIORITY_CRITICAL,
   COMMAND_PRIORITY_HIGH,
   COMMAND_PRIORITY_LOW,
   KEY_ESCAPE_COMMAND,
-  LexicalEditor,
+  type LexicalEditor,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 import { createPortal } from 'react-dom';
@@ -59,7 +59,7 @@ function FloatingLinkEditor({
   isLink: boolean;
   setIsLink: Dispatch<boolean>;
   anchorElem: HTMLElement;
-}): JSX.Element {
+}): React.JSX.Element {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [linkUrl, setLinkUrl] = useState('');
@@ -267,7 +267,7 @@ function FloatingLinkEditor({
 function useFloatingLinkEditorToolbar(
   editor: LexicalEditor,
   anchorElem: HTMLElement
-): JSX.Element | null {
+): React.JSX.Element | null {
   const [activeEditor, setActiveEditor] = useState(editor);
   const [isLink, setIsLink] = useState(false);
 
@@ -321,7 +321,7 @@ export default function FloatingLinkEditorPlugin({
   anchorElem = document.body,
 }: {
   anchorElem?: HTMLElement;
-}): JSX.Element | null {
+}): React.JSX.Element | null {
   const [editor] = useLexicalComposerContext();
   return useFloatingLinkEditorToolbar(editor, anchorElem);
 }

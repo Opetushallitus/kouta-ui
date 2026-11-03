@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { mapValues } from 'lodash-es';
 
 import { parseEditorState } from '#/src/components/LexicalEditorUI/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
@@ -16,5 +16,5 @@ export const getHakulomakeFieldsValues = ({
       ? { value: hakulomakeAtaruId || '' }
       : {},
   linkki: hakulomakeLinkki || {},
-  kuvaus: _fp.mapValues(parseEditorState, hakulomakeKuvaus || {}),
+  kuvaus: mapValues(hakulomakeKuvaus || {}, parseEditorState),
 });

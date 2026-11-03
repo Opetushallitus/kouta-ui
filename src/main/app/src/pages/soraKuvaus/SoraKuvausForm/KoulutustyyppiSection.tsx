@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import {
   FormFieldAsyncKoodistoSelect,
   FormFieldKoulutusalaSelect,
   FormFieldKoulutustyyppiSelect,
 } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import {
   useBoundFormActions,
@@ -23,7 +23,9 @@ export const KoulutustyyppiSection = ({ name, canEditKoulutustyyppi }) => {
 
   const { change } = useBoundFormActions();
 
-  const koulutusalaFieldValue = useFieldValue('koulutusala')?.value;
+  const koulutusalaFieldValue = useFieldValue<SelectOption<string> | undefined>(
+    'koulutusala'
+  )?.value;
 
   const koulutusalaHasChanged = useHasChanged(koulutusalaFieldValue);
 

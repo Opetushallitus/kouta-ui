@@ -1,4 +1,4 @@
-import { Page, test, expect } from '@playwright/test';
+import { Page, expect, test } from '@playwright/test';
 
 import createSoraKuvaus from '#/playwright/fixtures/soraKuvaus';
 import {
@@ -41,9 +41,14 @@ const fillKoulutustyyppiSection = async (
     );
   });
 
-const fillTiedotSection = async (page: Page) =>
+const fillTiedotSection = async (
+  page: Page,
+  { skipNimi = false }: { skipNimi?: boolean } = {}
+) =>
   withinSection(page, 'tiedot', async section => {
-    await section.getByTestId('nimi').locator('input').fill('Nimi');
+    if (!skipNimi) {
+      await section.getByTestId('nimi').locator('input').fill('Nimi');
+    }
     await typeToEditor(section.getByTestId('kuvaus'), 'Kuvaus');
   });
 
@@ -70,6 +75,43 @@ test.describe('Create SORA-kuvaus', () => {
         )
       );
     }));
+
+  // Todistaa, että kenttäkohtainen validointivirhe näkyy kentän kohdalla eikä vain
+  // virheilmoituksena: ilman sitä tallennus estyy oikein muttei kerro MITÄ kenttää
+  // korjata, ja juuri se kanava on kirjastojen välillä eri.
+  //
+  // EI kata tyhjän kenttärekisterin vaikutusta: validateSoraKuvausForm kutsuu
+  // createErrorBuilder(values) ilman registeredFieldsia, eli "validoi kaikki".
+  test('Should show validation error for missing nimi', async ({ page }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKoulutustyyppiSection(page, ['amm']);
+    await fillKieliversiotSection(page);
+    await fillTiedotSection(page, { skipNimi: true });
+    await fillTilaSection(page);
+    await tallenna(page);
+
+    await expect(
+      page
+        .getByTestId('form-control_tiedot.nimi')
+        .getByText('validointivirheet.pakollisetKaannokset')
+    ).toBeVisible();
+  });
+
+  // Merkki kerrallaan, EI fillillä: fill on yksi atominen toiminto eikä paljasta
+  // fokuksen menetystä näppäinpainallusten välissä. Tällä lomakkeella ei ole
+  // FieldArrayta, mutta Field.tsx:n submitError-wrapper on kaikkien kenttien tiellä:
+  // jos sen memoisointi hajoaa, kenttä mounttaa uudelleen ja siihen jää "N".
+  test('Should not lose focus while typing in nimi', async ({ page }) => {
+    await fillOrgSection(page, organisaatioOid);
+    await fillKoulutustyyppiSection(page, ['amm']);
+    await fillKieliversiotSection(page);
+
+    await withinSection(page, 'tiedot', async section => {
+      const nimi = section.getByTestId('nimi').locator('input');
+      await nimi.pressSequentially('Nimi merkki kerrallaan', { delay: 20 });
+      await expect(nimi).toHaveValue('Nimi merkki kerrallaan');
+    });
+  });
 
   test('Should not copy publishing state when using existing entity as base', async ({
     page,

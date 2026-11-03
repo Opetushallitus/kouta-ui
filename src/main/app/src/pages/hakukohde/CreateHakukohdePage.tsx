@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
-import { merge } from 'lodash/fp';
+import { merge, omit } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -22,7 +21,7 @@ import {
 import { useCanCreateHakukohde } from '#/src/hooks/useCanCreateHakukohde';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { checkHasHakukohdeKoodiUri } from '#/src/pages/hakukohde/HakukohdeForm/PerustiedotSection';
-import { toSelectValue } from '#/src/utils';
+import { toEnum, toSelectValue } from '#/src/utils';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
@@ -35,8 +34,9 @@ import {
 const getCopyValues = (oid, isNimiKoodi, hakukohde) => {
   const { nimi, hakukohdeKoodiUri } = hakukohde;
   return merge(
+    {},
     getFormValuesByHakukohde(
-      _.omit(hakukohde, ['organisaatioOid']),
+      omit(hakukohde, ['organisaatioOid']),
       FormMode.CREATE
     ),
     {
@@ -72,7 +72,8 @@ export const CreateHakukohdePage = () => {
   const { data: hakukohde } = usePohjaEntity(ENTITY.HAKUKOHDE);
 
   const koulutustyyppi =
-    data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    toEnum(KOULUTUSTYYPPI, data?.koulutustyyppi) ??
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   const isNimiKoodi = checkHasHakukohdeKoodiUri(koulutustyyppi, haku);
 

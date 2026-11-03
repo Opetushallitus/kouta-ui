@@ -1,5 +1,4 @@
-import { every, isArray } from 'lodash';
-import _fp from 'lodash/fp';
+import { every, flow, get } from 'lodash-es';
 
 import {
   Alkamiskausityyppi,
@@ -38,9 +37,9 @@ import {
 
 const validateDateTimeRange =
   (alkaaFieldName, paattyyFieldName) => (eb, values) => {
-    const alkaaValue = _fp.get(alkaaFieldName, values);
-    const paattyyValue = _fp.get(paattyyFieldName, values);
-    return _fp.flow(
+    const alkaaValue = get(values, alkaaFieldName);
+    const paattyyValue = get(values, paattyyFieldName);
+    return flow(
       eb =>
         paattyyValue
           ? validateExistenceOfDate(alkaaFieldName, {
@@ -59,15 +58,15 @@ const validateDateTimeRange =
 
 const validateApuraha = eb => {
   const values = eb.values;
-  const apurahaMin = _fp.parseInt(10, values?.jarjestamistiedot?.apurahaMin);
-  const apurahaMax = _fp.parseInt(10, values?.jarjestamistiedot?.apurahaMax);
+  const apurahaMin = Number.parseInt(values?.jarjestamistiedot?.apurahaMin, 10);
+  const apurahaMax = Number.parseInt(values?.jarjestamistiedot?.apurahaMax, 10);
   const onkoApuraha = values?.jarjestamistiedot?.onkoApuraha;
   const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
   const apurahaYksikko = values?.jarjestamistiedot?.apurahaYksikko?.value;
   const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
   const koulutustyyppi = values?.koulutustyyppi;
 
-  return _fp.flow(
+  return flow(
     validateIf(
       onkoApuraha,
       validate(
@@ -80,7 +79,7 @@ const validateApuraha = eb => {
     ),
     validateIf(
       onkoApuraha && isApurahaVisible(koulutustyyppi, maksullisuustyyppi),
-      _fp.flow(
+      flow(
         validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
           message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
         }),
@@ -96,7 +95,7 @@ const validateApuraha = eb => {
         ),
         validateIf(
           apurahaMaaraTyyppi === MaaraTyyppi.VAIHTELUVALI,
-          _fp.flow(
+          flow(
             validate('jarjestamistiedot.apurahaGroup', () => apurahaMax >= 0, {
               message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
             }),
@@ -134,7 +133,7 @@ const validateMaksullisuustyypit = (eb: { values: ToteutusFormValues }) => {
 
   return validateIf(
     koulutustyyppiWithMultipleMaksullisuustyyppi &&
-      isArray(maksullisuustyypit) &&
+      Array.isArray(maksullisuustyypit) &&
       maksullisuustyypit.length > 1,
     validate(
       'jarjestamistiedot.maksullisuustyypit',
@@ -157,7 +156,7 @@ const validateHakeutumisTaiIlmoittautumisTapa = eb => {
   const values = eb?.values;
   const hakeutumisTaiIlmoittautumistapa =
     values?.hakeutumisTaiIlmoittautumistapa?.hakeutumisTaiIlmoittautumistapa;
-  return _fp.flow(
+  return flow(
     eb =>
       validateDateTimeRange(
         'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa',
@@ -168,14 +167,14 @@ const validateHakeutumisTaiIlmoittautumisTapa = eb => {
         isHakeutumisTaiIlmoittautumisosioVisible(values?.koulutustyyppi) &&
         values?.hakeutumisTaiIlmoittautumistapa?.isHakukohteetKaytossa ===
           false,
-      _fp.flow(
+      flow(
         validateExistence('hakeutumisTaiIlmoittautumistapa.hakuTapa'),
         validateExistence(
           'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
         ),
         validateIf(
           hakeutumisTaiIlmoittautumistapa === HAKULOMAKETYYPPI.MUU,
-          _fp.flow(
+          flow(
             validateUrl(
               'hakeutumisTaiIlmoittautumistapa.linkki',
               getKielivalinta(values)
@@ -214,74 +213,70 @@ export const validateToteutusForm = (
   const kieliversiot = getKielivalinta(values);
 
   // NOTE: Only registered fields will be validated!
-  return _fp
-    .flow(
-      validatePohja,
-      validateExistence('organisaatioOid'),
-      validateExistence('tila'),
-      validateArrayMinLength('kieliversiot', 1),
-      validateTranslations('tiedot.nimi'),
-      validateOptionalTranslatedField('kuvaus'),
-      validateInteger(
-        'hakeutumisTaiIlmoittautumistapa.aloituspaikat',
-        {
-          min: 1,
-          optional: true,
-        },
-        'validointivirheet.positiivinenKokonaisluku'
-      ),
-      validateArray('yhteyshenkilot', validateYhteyshenkilo(kieliversiot)),
-      validateOptionalTranslatedField(
-        'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
-      ),
-      validateExistence('lukiolinjat.lukiolinja'),
-      validateOptionalTranslatedField('jarjestamistiedot.opetuskieliKuvaus'),
-      validateOptionalTranslatedField(
-        'jarjestamistiedot.suunniteltuKestoKuvaus'
-      ),
-      validateOptionalTranslatedField('jarjestamistiedot.opetusaikaKuvaus'),
-      validateOptionalTranslatedField('jarjestamistiedot.opetustapaKuvaus'),
-      validateMaksullisuustyypit,
-      validateOptionalTranslatedField('jarjestamistiedot.maksullisuusKuvaus'),
-      validateApuraha,
-      validateOptionalTranslatedField('jarjestamistiedot.apurahaKuvaus'),
-      validateHakeutumisTaiIlmoittautumisTapa,
-      validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
-        min: 0,
-        max: 99,
+  return flow(
+    validatePohja,
+    validateExistence('organisaatioOid'),
+    validateExistence('tila'),
+    validateArrayMinLength('kieliversiot', 1),
+    validateTranslations('tiedot.nimi'),
+    validateOptionalTranslatedField('kuvaus'),
+    validateInteger(
+      'hakeutumisTaiIlmoittautumistapa.aloituspaikat',
+      {
+        min: 1,
         optional: true,
-      }),
-      validateInteger('jarjestamistiedot.suunniteltuKesto.kuukautta', {
-        min: 0,
-        max: 11,
-        optional: true,
-      }),
-      validateIf(
-        isJulkaistu,
-        _fp.flow(
-          validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
-          validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta'),
-          validateExistence('jarjestamistiedot.suunniteltuKesto.kuukautta'),
-          validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
-          validateArrayMinLength('jarjestamistiedot.opetustapa', 1),
-          validateIf(
-            values?.jarjestamistiedot?.ajankohta?.ajankohtaKaytossa &&
-              values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
-                Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
-            _fp.flow(
-              validateExistence('jarjestamistiedot.ajankohta.kausi'),
-              validateExistence('jarjestamistiedot.ajankohta.vuosi')
-            )
-          ),
-          validateIf(
-            values?.jarjestamistiedot?.ajankohta?.ajankohtaKaytossa &&
-              values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
-                Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
-            validateExistenceOfDate('jarjestamistiedot.ajankohta.tarkkaAlkaa')
-          ),
-          validateArrayMinLength('tarjoajat', 1)
-        )
+      },
+      'validointivirheet.positiivinenKokonaisluku'
+    ),
+    validateArray('yhteyshenkilot', validateYhteyshenkilo(kieliversiot)),
+    validateOptionalTranslatedField(
+      'hakeutumisTaiIlmoittautumistapa.aloituspaikkakuvaus'
+    ),
+    validateExistence('lukiolinjat.lukiolinja'),
+    validateOptionalTranslatedField('jarjestamistiedot.opetuskieliKuvaus'),
+    validateOptionalTranslatedField('jarjestamistiedot.suunniteltuKestoKuvaus'),
+    validateOptionalTranslatedField('jarjestamistiedot.opetusaikaKuvaus'),
+    validateOptionalTranslatedField('jarjestamistiedot.opetustapaKuvaus'),
+    validateMaksullisuustyypit,
+    validateOptionalTranslatedField('jarjestamistiedot.maksullisuusKuvaus'),
+    validateApuraha,
+    validateOptionalTranslatedField('jarjestamistiedot.apurahaKuvaus'),
+    validateHakeutumisTaiIlmoittautumisTapa,
+    validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
+      min: 0,
+      max: 99,
+      optional: true,
+    }),
+    validateInteger('jarjestamistiedot.suunniteltuKesto.kuukautta', {
+      min: 0,
+      max: 11,
+      optional: true,
+    }),
+    validateIf(
+      isJulkaistu,
+      flow(
+        validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
+        validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta'),
+        validateExistence('jarjestamistiedot.suunniteltuKesto.kuukautta'),
+        validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
+        validateArrayMinLength('jarjestamistiedot.opetustapa', 1),
+        validateIf(
+          values?.jarjestamistiedot?.ajankohta?.ajankohtaKaytossa &&
+            values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
+              Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
+          flow(
+            validateExistence('jarjestamistiedot.ajankohta.kausi'),
+            validateExistence('jarjestamistiedot.ajankohta.vuosi')
+          )
+        ),
+        validateIf(
+          values?.jarjestamistiedot?.ajankohta?.ajankohtaKaytossa &&
+            values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
+              Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
+          validateExistenceOfDate('jarjestamistiedot.ajankohta.tarkkaAlkaa')
+        ),
+        validateArrayMinLength('tarjoajat', 1)
       )
-    )(createErrorBuilder(values, kieliversiot, registeredFields))
-    .getErrors();
+    )
+  )(createErrorBuilder(values, kieliversiot, registeredFields)).getErrors();
 };

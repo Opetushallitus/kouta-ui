@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { isEmpty } from 'lodash-es';
 
 import { HakuFormValues } from '#/src/types/hakuTypes';
 import { isPartialDate } from '#/src/utils';
@@ -32,7 +32,7 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
-    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
+    externalId: isEmpty(values?.externalId) ? null : values?.externalId,
     muokkaaja: values?.muokkaaja,
     tila: values?.tila,
     kielivalinta,

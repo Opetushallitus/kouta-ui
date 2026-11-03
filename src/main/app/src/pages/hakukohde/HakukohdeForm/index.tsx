@@ -1,4 +1,4 @@
-import getYear from 'date-fns/getYear';
+import { getYear } from 'date-fns';
 
 import { DEFAULT_JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 

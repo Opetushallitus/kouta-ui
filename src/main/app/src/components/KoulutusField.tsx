@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldAsyncKoodistoSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import {
   useBoundFormActions,

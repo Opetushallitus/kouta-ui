@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 
-import _ from 'lodash';
+import { isString, uniq } from 'lodash-es';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
@@ -18,6 +18,7 @@ import {
 } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 import { createCanReadSomethingRoleBuilder } from '../utils';
+import { isTruthy } from '#/src/utils';
 
 const pickKoutaRoleOid = role => {
   if (role?.startsWith('APP_KOUTA')) {
@@ -28,10 +29,10 @@ const pickKoutaRoleOid = role => {
 };
 
 const getKoutaRolesOrganisaatioOids = roles => {
-  return _.uniq(roles.map(pickKoutaRoleOid).filter(Boolean));
+  return uniq(roles.map(pickKoutaRoleOid).filter(isTruthy));
 };
 
-const isValidNameSearch = name => _.isString(name) && name.length >= 3;
+const isValidNameSearch = name => isString(name) && name.length >= 3;
 
 const invalidOrganisaatioTypeMap = {
   organisaatiotyyppi_05: true,
@@ -43,7 +44,7 @@ const invalidOrganisaatioTypeMap = {
 const organisaatioHasCorrectType = (organisaatio: OrganisaatioModel) => {
   const { organisaatiotyyppiUris: organisaatiotyypit } = organisaatio;
 
-  if (!_.isArray(organisaatiotyypit)) {
+  if (!Array.isArray(organisaatiotyypit)) {
     return true;
   }
 
@@ -80,7 +81,7 @@ export const useAllowedOrgs = () => {
     'searchOrganisaatioHierarkia',
     promiseFn,
     {
-      oids,
+      oids: oids as Array<string>,
     },
     { ...LONG_CACHE_QUERY_OPTIONS }
   );
@@ -96,7 +97,7 @@ export const useAllowedOrgs = () => {
   );
 
   const hierarkia = useMemo(() => {
-    return _.isArray(data)
+    return Array.isArray(data)
       ? flatFilterHierarkia(
           data,
           org => organisaatioHasCorrectType(org) && hasRequiredRoles(org)
@@ -125,7 +126,7 @@ export const useReadableOrganisaatioHierarkia = ({
   }, [name, nameSearchEnabled]);
 
   const formattedName = useMemo(
-    () => (_.isString(name) ? name.toLowerCase() : undefined),
+    () => (isString(name) ? name.toLowerCase() : undefined),
     [name]
   );
 
@@ -134,7 +135,7 @@ export const useReadableOrganisaatioHierarkia = ({
     promiseFn,
     {
       searchString: formattedName,
-      oids,
+      oids: oids as Array<string>,
     },
     { ...LONG_CACHE_QUERY_OPTIONS }
   );
@@ -150,7 +151,7 @@ export const useReadableOrganisaatioHierarkia = ({
   );
 
   const hierarkia = useMemo(() => {
-    return _.isArray(data)
+    return Array.isArray(data)
       ? filterHierarkiaUtilizingChildrenWhenParentDoesNotMatch(
           data,
           org => organisaatioHasCorrectType(org) && hasRequiredRoles(org)

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash';
+import { get, isString, map, mapValues } from 'lodash-es';
 
 import { sanitizeHTML } from '#/src/utils';
 import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
@@ -16,11 +16,11 @@ const useExtendedEPeruste = ePerusteId => {
 
   const osaamisalatWithDescriptions = useMemo(
     () =>
-      _.map(osaamisalat, osaamisala => ({
+      map(osaamisalat, osaamisala => ({
         ...osaamisala,
-        kuvaus: _.mapValues(
-          _.get(osaamisalaKuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-          v => (_.isString(v) ? sanitizeHTML(v) : v)
+        kuvaus: mapValues(
+          get(osaamisalaKuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
+          v => (isString(v) ? sanitizeHTML(v) : v)
         ),
       })),
     [osaamisalat, osaamisalaKuvaukset]

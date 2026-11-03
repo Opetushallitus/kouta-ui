@@ -79,7 +79,7 @@
                   "columns": [
                     {
                       "text": {
-                        "fi": "solu1.1\tsolu1.2\rsolu2.1\tsolu2.2"
+                        "fi": "solu1.1\tsolu1.2\nsolu2.1\tsolu2.2"
                       },
                       "index": 0
                     }
@@ -117,7 +117,7 @@
               "columns": [
                 {
                   "text": {
-                    "fi": "solu1.1\tsolu1.2\rsolu2.1\tsolu2.2"
+                    "fi": "solu1.1\tsolu1.2\nsolu2.1\tsolu2.2"
                   },
                   "index": 0
                 }

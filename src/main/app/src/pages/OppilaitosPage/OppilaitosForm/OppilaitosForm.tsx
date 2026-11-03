@@ -25,7 +25,9 @@ const OppilaitosForm = ({
   oppilaitos,
 }) => {
   const { t } = useTranslation();
-  const languageTabs = useFieldValue('kieliversiot');
+  const languageTabs = useFieldValue<Array<LanguageCode> | undefined>(
+    'kieliversiot'
+  );
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isNil, keyBy, mapValues, maxBy } from 'lodash-es';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
@@ -10,7 +10,7 @@ export const getKoulutusByKoodi = async ({
   koodiUri: argKoodiUri,
 }) => {
   const { koodi, versio } = parseKoodiUri(argKoodiUri);
-  if (_.isNil(koodi)) {
+  if (isNil(koodi)) {
     return null;
   }
 
@@ -79,27 +79,27 @@ export const getKoulutusByKoodi = async ({
     .filter(Boolean);
 
   const koulutusala =
-    koulutusalaKoodi && _.isArray(koulutusalaKoodi.metadata)
-      ? _.keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
+    koulutusalaKoodi && Array.isArray(koulutusalaKoodi.metadata)
+      ? keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
           kieli ? kieli.toLowerCase() : '_'
         )
       : null;
 
   const opintojenlaajuusYksikko =
     opintojenlaajuusYksikkoKoodi &&
-    _.isArray(opintojenlaajuusYksikkoKoodi.metadata)
-      ? _.keyBy(opintojenlaajuusYksikkoKoodi.metadata, ({ kieli }) =>
+    Array.isArray(opintojenlaajuusYksikkoKoodi.metadata)
+      ? keyBy(opintojenlaajuusYksikkoKoodi.metadata, ({ kieli }) =>
           kieli ? kieli.toLowerCase() : '_'
         )
       : null;
 
-  const latestKoodi = _.isArray(koodiData)
-    ? _.maxBy(koodiData, ({ versio }) => versio)
+  const latestKoodi = Array.isArray(koodiData)
+    ? maxBy(koodiData, ({ versio }) => versio)
     : koodiData;
 
   const nimi =
-    latestKoodi && _.isArray(latestKoodi.metadata)
-      ? _.keyBy(latestKoodi.metadata, ({ kieli }) =>
+    latestKoodi && Array.isArray(latestKoodi.metadata)
+      ? keyBy(latestKoodi.metadata, ({ kieli }) =>
           kieli ? kieli.toLowerCase() : '_'
         )
       : null;
@@ -119,13 +119,13 @@ export const getKoulutusByKoodi = async ({
     kuvaus,
     osaamisalat,
     tutkintonimikeKoodit,
-    koulutusala: _.mapValues(koulutusala, ({ nimi }) => nimi || null),
-    opintojenlaajuusYksikko: _.mapValues(
+    koulutusala: mapValues(koulutusala, ({ nimi }) => nimi || null),
+    opintojenlaajuusYksikko: mapValues(
       opintojenlaajuusYksikko,
       ({ nimi }) => nimi || null
     ),
     koulutustyyppiKoodit,
-    nimi: _.mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
+    nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
   };
 };
 

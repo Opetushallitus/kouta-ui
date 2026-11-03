@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {

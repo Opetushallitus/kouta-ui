@@ -63,11 +63,16 @@ const IconBase = styled(Icon)`
 `;
 
 const FormStepIcon = ({
-  children = null,
-  icon = null,
+  children,
+  icon,
   active = false,
   done = false,
   ...props
+}: {
+  children?: React.ReactNode;
+  icon?: string;
+  active?: boolean;
+  done?: boolean;
 }) => (
   <Container {...props}>
     <IconContainer active={active} done={done}>

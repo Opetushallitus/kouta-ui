@@ -1,14 +1,15 @@
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { type OrganisaatioModel } from '#/src/types/domainTypes';
 
-export default ({
+export default function oppilaitoksetFlat({
   rootOid = '1.1.1.1.1.1',
   rootName = 'Organisaatio',
-} = {}) => {
+} = {}) {
   return {
     organisaatiot: [
       {
         nimi: { fi: `${rootName}_1_1` },
+        status: 'AKTIIVINEN',
         oid: '1.2.1.1.1.1',
         kieletUris: ['oppilaitoksenopetuskieli_1#2'],
         organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
@@ -17,6 +18,7 @@ export default ({
       },
       {
         nimi: { fi: `${rootName}_1_2` },
+        status: 'AKTIIVINEN',
         oid: '1.3.1.1.1.1',
         kieletUris: ['oppilaitoksenopetuskieli_1#2'],
         organisaatiotyyppiUris: ['organisaatiotyyppi_02'],
@@ -25,4 +27,4 @@ export default ({
       },
     ] as Array<OrganisaatioModel>,
   };
-};
+}

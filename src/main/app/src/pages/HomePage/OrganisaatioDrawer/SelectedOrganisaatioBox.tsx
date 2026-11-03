@@ -1,9 +1,9 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { includes } from 'lodash-es';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import styled from 'styled-components';
 import { match } from 'ts-pattern';
 
@@ -30,11 +30,11 @@ export const SelectedOrganisaatioBox = ({ organisaatioOid }) => {
 
   const orgEntityType = match(tyypit)
     .when(
-      t => _.includes(t, ORGANISAATIOTYYPPI.OPPILAITOS),
+      t => includes(t, ORGANISAATIOTYYPPI.OPPILAITOS),
       () => 'oppilaitos'
     )
     .when(
-      t => _.includes(t, ORGANISAATIOTYYPPI.TOIMIPISTE),
+      t => includes(t, ORGANISAATIOTYYPPI.TOIMIPISTE),
       () => 'oppilaitoksen-osa'
     )
     .otherwise(() => undefined);

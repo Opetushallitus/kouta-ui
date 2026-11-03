@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { upperFirst } from 'lodash';
+import { upperFirst } from 'lodash-es';
 
 import { ENTITY_ROLES, CRUD_ROLES } from '#/src/constants';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';

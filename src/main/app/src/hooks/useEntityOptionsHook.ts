@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { compact, flow, lowerCase, map, sortBy } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
@@ -23,16 +23,18 @@ export const useEntityOptions = <T>(
 
   return useMemo(
     () =>
-      _fp.isArray(entities)
-        ? _fp.flow(
-            _fp.map((entity: EntityForDropdown<T>) => ({
-              value: entity.id ?? entity.oid,
-              label:
-                getFirstLanguageValue(entity.nimi, language) +
-                ` (${t(getJulkaisutilaTranslationKey(entity.tila))})` +
-                (suffixFn?.(entity) ?? ''),
-            })),
-            _fp.orderBy(({ label }) => _fp.lowerCase(label), 'asc')
+      Array.isArray(entities)
+        ? flow(
+            (arr: Array<EntityForDropdown<T>>) => compact(arr),
+            arr =>
+              map(arr, entity => ({
+                value: entity.id ?? entity.oid,
+                label:
+                  getFirstLanguageValue(entity.nimi, language) +
+                  ` (${t(getJulkaisutilaTranslationKey(entity.tila))})` +
+                  (suffixFn?.(entity) ?? ''),
+              })),
+            arr => sortBy(arr, ({ label }) => lowerCase(label))
           )(entities as Array<EntityForDropdown<T>>)
         : ([] as Array<any>),
     [entities, language, suffixFn, t]

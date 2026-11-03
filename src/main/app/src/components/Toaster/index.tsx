@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useTransition, animated } from '@react-spring/web';
-import _fp from 'lodash/fp';
+import { isFunction } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
@@ -115,7 +115,7 @@ export const Toast = ({
   <ToastContainer status={status} {...props}>
     <Icon type={iconByStatus[status] || ''} mr={2} />
     <Typography color="inherit">{children}</Typography>
-    {_fp.isFunction(onClose) ? (
+    {isFunction(onClose) ? (
       <Box ml={2}>
         <CloseIcon onClick={onClose} />
       </Box>

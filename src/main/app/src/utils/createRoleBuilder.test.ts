@@ -1,7 +1,13 @@
+import { OrganisaatioModel } from '#/src/types/domainTypes';
+
 import createRoleBuilder from './createRoleBuilder';
 
-const makeOrganisaatio = (parentOids: Array<string>) => ({
-  parentOids: parentOids,
+const makeOrganisaatio = (parentOids: Array<string>): OrganisaatioModel => ({
+  oid: '',
+  parentOids,
+  nimi: {},
+  kieletUris: [],
+  status: 'AKTIIVINEN',
 });
 
 test('hasRead works correctly', () => {

@@ -5,7 +5,7 @@ import {
   useQuery,
   UseQueryResult,
   UseQueryOptions,
-} from 'react-query';
+} from '@tanstack/react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -14,8 +14,7 @@ import { useUrls } from '#/src/contexts/UrlContext';
 type ExtractApiProps<T> = T extends (params: infer P) => any
   ? {
       [K in keyof Omit<P, 'httpClient' | 'apiUrls'>]?:
-        | Omit<P, 'httpClient' | 'apiUrls'>[K]
-        | null;
+        Omit<P, 'httpClient' | 'apiUrls'>[K] | null;
     }
   : Record<string, any>;
 
@@ -45,11 +44,15 @@ export const useApiQuery = <
   const httpClient = useHttpClient();
 
   const queryFn = useCallback(
-    () => apiFn({ httpClient, apiUrls, ...props }),
+    () => apiFn({ httpClient, apiUrls, ...props } as Parameters<TApiFn>[0]),
     [apiFn, httpClient, apiUrls, props]
   );
 
-  return useQuery<TQueryFnData, TError, TData>([key, props], queryFn, options);
+  return useQuery<TQueryFnData, TError, TData>({
+    queryKey: [key, props],
+    queryFn,
+    ...options,
+  });
 };
 
 type QuerySpec<
@@ -87,5 +90,5 @@ export const useApiQueries = <
     [koutaQuerySpecs, apiUrls, httpClient]
   );
 
-  return useQueries(querySpecs);
+  return useQueries({ queries: querySpecs });
 };

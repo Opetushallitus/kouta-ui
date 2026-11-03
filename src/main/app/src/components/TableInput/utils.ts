@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import _ from 'lodash';
+import { get, set } from 'lodash-es';
 
 export type TableColumn = {
   index?: number;
@@ -17,13 +17,15 @@ export type TableInputValue = {
 };
 
 export const getNumberOfColumns = (rows: TableInputRows) => {
-  return _.isArray(rows)
+  return Array.isArray(rows)
     ? Math.max(...rows.map(row => (row?.columns || []).length))
     : 0;
 };
 
 export const getMaxColumnLength = (rows: Array<Array<string>>) => {
-  return _.isArray(rows) ? Math.max(...rows.map(row => (row || []).length)) : 0;
+  return Array.isArray(rows)
+    ? Math.max(...rows.map(row => (row || []).length))
+    : 0;
 };
 
 export const getEmptyColumn = (language: LanguageCode) =>
@@ -62,7 +64,7 @@ export const setTable = ({
     const extraColumns = numberOfTableColumns - numberOfRowColumns;
     if (extraColumns > 0) {
       draft.rows.forEach(row => {
-        const columns = _.get(row, 'columns') || [];
+        const columns = get(row, 'columns') || [];
 
         row.columns = [
           ...columns,
@@ -83,7 +85,9 @@ export const setTable = ({
         if (language) {
           path = [...path, language];
         }
-        _.set(row, path, cell);
+        if (row) {
+          set(row, path, cell);
+        }
       });
     });
   });
@@ -102,7 +106,7 @@ export const addColumnToIndex = ({
     const rows = draft?.rows || [];
 
     rows.forEach(row => {
-      const columns = _.get(row, 'columns') || [];
+      const columns = get(row, 'columns') || [];
       const columnsBefore =
         columnIndex < 0 ? [] : columns.slice(0, columnIndex + 1);
 
@@ -131,7 +135,7 @@ export const removeColumn = ({
     const rows = draft?.rows || [];
 
     rows.forEach(row => {
-      const columns = _.get(row, 'columns') || [];
+      const columns = get(row, 'columns') || [];
 
       columns.splice(columnIndex, 1);
 
@@ -191,7 +195,7 @@ export const setRowHeaderStatus = ({
   status: boolean;
 }) => {
   return produce(value, draft => {
-    _.set(draft, ['rows', rowIndex, 'isHeader'], status);
+    set(draft, ['rows', rowIndex, 'isHeader'], status);
   });
 };
 
@@ -217,6 +221,6 @@ export const setColumnFieldValue = ({
   }
 
   return produce(value, draft => {
-    _.set(draft, path, fieldValue);
+    set(draft, path, fieldValue);
   });
 };

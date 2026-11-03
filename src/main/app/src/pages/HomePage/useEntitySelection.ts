@@ -1,40 +1,42 @@
 import { useCallback } from 'react';
 
-import { useActor, useSelector } from '@xstate/react';
-import { interpret } from 'xstate';
+import { useSelector } from '@xstate/react';
+import { createActor, type ActorRefFrom } from 'xstate';
 
 import { ENTITY } from '#/src/constants';
-import { isDev } from '#/src/utils';
+import { inspect } from '#/src/utils/xstateInspector';
 
 import { entitySelectionMachine } from './entitySelectionMachine';
 
+const startEntitySelectionService = () =>
+  createActor(
+    entitySelectionMachine,
+    inspect ? { inspect } : undefined
+  ).start();
+
 export const SERVICE_BY_ENTITY = {
-  [ENTITY.TOTEUTUS]: interpret(entitySelectionMachine, {
-    devTools: isDev,
-  }).start(),
-  [ENTITY.HAKUKOHDE]: interpret(entitySelectionMachine, {
-    devTools: isDev,
-  }).start(),
+  [ENTITY.TOTEUTUS]: startEntitySelectionService(),
+  [ENTITY.HAKUKOHDE]: startEntitySelectionService(),
 };
 
-export const useEntitySelectionApi = actor => {
-  const [, send] = useActor(actor);
+type EntitySelectionActor = ActorRefFrom<typeof entitySelectionMachine>;
 
+export const useEntitySelectionApi = (actor: EntitySelectionActor) => {
   const selection = useSelector(actor, state => state.context.selection);
 
   return {
     selection,
     selectItems: useCallback(
-      items => send({ type: 'SELECT_ITEMS', items }),
-      [send]
+      items => actor.send({ type: 'SELECT_ITEMS', items }),
+      [actor]
     ),
     deselectItems: useCallback(
-      items => send({ type: 'DESELECT_ITEMS', items }),
-      [send]
+      items => actor.send({ type: 'DESELECT_ITEMS', items }),
+      [actor]
     ),
     removeSelection: useCallback(
-      () => send({ type: 'RESET_SELECTION' }),
-      [send]
+      () => actor.send({ type: 'RESET_SELECTION' }),
+      [actor]
     ),
   };
 };

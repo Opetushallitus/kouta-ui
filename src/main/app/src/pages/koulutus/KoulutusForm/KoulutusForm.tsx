@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { head, isFunction } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
@@ -18,7 +18,7 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { Box } from '#/src/components/virkailija';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
-import { useFieldValue } from '#/src/hooks/form';
+import { useKoulutusFormField } from '#/src/hooks/form';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
@@ -67,7 +67,7 @@ import { TutkinnonOsatSection } from './TutkinnonOsatSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
-  _.head(hierarkia.children.filter(isInHierarkia(org)));
+  head(hierarkia.children.filter(isInHierarkia(org)));
 
 type KoulutusFormProps = {
   organisaatioOid: string;
@@ -84,11 +84,9 @@ export const KoulutusForm = ({
 }: KoulutusFormProps) => {
   const { t } = useTranslation();
 
-  const koulutustyyppi = useFieldValue('koulutustyyppi') as
-    | KOULUTUSTYYPPI
-    | undefined;
-  const kieliversiotValue = useFieldValue('kieliversiot');
-  const koulutuskoodi = useFieldValue('information.koulutus');
+  const koulutustyyppi = useKoulutusFormField('koulutustyyppi');
+  const kieliversiotValue = useKoulutusFormField('kieliversiot');
+  const koulutuskoodi = useKoulutusFormField('information.koulutus');
   const languageTabs = kieliversiotValue || [];
   const formMode = useFormMode();
   const isNewKoulutus = formMode === FormMode.CREATE;
@@ -421,7 +419,7 @@ export const KoulutusForm = ({
               entity={koulutusProp}
             />
 
-            {_.isFunction(onAttachToteutus) && (
+            {isFunction(onAttachToteutus) && (
               <FormCollapse
                 header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
                 id="koulutukseen-liitetetyt-toteutukset"

@@ -1,21 +1,24 @@
-import _fp from 'lodash/fp';
-import { QueryObserverResult } from 'react-query';
+import { QueryObserverResult } from '@tanstack/react-query';
+import { filter, flow, groupBy, map, maxBy } from 'lodash-es';
 
 import { isValidKoulutusKoodi } from './isValidKoulutusKoodi';
 
 export const selectValidKoulutusKoodit = (
-  response: { data } | QueryObserverResult | Array<QueryObserverResult> = []
+  response:
+    | { data }
+    | QueryObserverResult<unknown, unknown>
+    | Array<QueryObserverResult<unknown, unknown>> = []
 ) => {
-  const koulutukset = _fp.isArray(response)
+  const koulutukset = Array.isArray(response)
     ? response.flatMap((response: any) => {
         const data = response?.data;
-        return _fp.isArray(data) ? data : [];
+        return Array.isArray(data) ? data : [];
       })
     : (response?.data ?? []);
 
-  return _fp.flow(
-    _fp.filter(isValidKoulutusKoodi),
-    _fp.groupBy('koodiUri'),
-    _fp.map(_fp.maxBy('versio'))
+  return flow(
+    (arr: typeof koulutukset) => filter(arr, isValidKoulutusKoodi),
+    arr => groupBy(arr, 'koodiUri'),
+    grouped => map(grouped, arr => maxBy(arr, 'versio'))
   )(koulutukset);
 };

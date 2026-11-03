@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import _fp from 'lodash/fp';
+import { forEach } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import { getTestIdProps, oneAndOnlyOne } from '#/src/utils';
@@ -53,14 +53,14 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<
   useEffect(() => {
     if (!ePerusteTutkinnonOsatIsLoading) {
       if (changeNimi) {
-        _fp.each(lang => {
+        forEach(languages, lang => {
           change(
             `${name}.nimi.${lang}`,
             selectedTutkinnonosaNimi
               ? getLanguageValue(selectedTutkinnonosaNimi, lang)
               : null
           );
-        }, languages);
+        });
       }
       setSelectedTutkinnonosa(oneSelectedTutkinnonOsa?.tutkinnonosaViite);
     }

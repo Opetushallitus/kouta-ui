@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-import _ from 'lodash';
+import { snakeCase } from 'lodash-es';
 import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 
@@ -86,9 +86,9 @@ export const SectionInnerCollapse = ({
 
   const onToggle = useCallback(() => setIsOpen(open => !open), [setIsOpen]);
 
-  const headerId = _.snakeCase(header) + '_header';
-  const buttonId = _.snakeCase(header) + '_headerbutton';
-  const contentId = _.snakeCase(header) + '_content';
+  const headerId = snakeCase(header) + '_header';
+  const buttonId = snakeCase(header) + '_headerbutton';
+  const contentId = snakeCase(header) + '_content';
 
   return (
     <Box>

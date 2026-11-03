@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash';
+import { omit } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
@@ -20,6 +20,7 @@ import {
 } from '#/src/constants';
 import { usePohjaEntity } from '#/src/hooks/usePohjaEntity';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
+import { toEnum } from '#/src/utils';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 
@@ -41,12 +42,12 @@ const getInitialValues = ({
   koulutus,
 }: {
   toteutus?: ToteutusModel;
-  koulutus: KoulutusModel;
+  koulutus?: KoulutusModel;
 }) => {
   return toteutus
     ? {
         ...getCopyValues(toteutus.oid),
-        ...getFormValuesByToteutus(_.omit(toteutus, ['organisaatioOid'])),
+        ...getFormValuesByToteutus(omit(toteutus, ['organisaatioOid'])),
         tila: DEFAULT_JULKAISUTILA,
       }
     : initialValues({ koulutus });
@@ -62,7 +63,8 @@ export const CreateToteutusPage = () => {
 
   const { t } = useTranslation();
 
-  const koulutustyyppi = koulutus?.koulutustyyppi ?? AMMATILLINEN_KOULUTUS;
+  const koulutustyyppi =
+    toEnum(KOULUTUSTYYPPI, koulutus?.koulutustyyppi) ?? AMMATILLINEN_KOULUTUS;
 
   const { data: toteutus } = usePohjaEntity(ENTITY.TOTEUTUS);
 
@@ -102,12 +104,14 @@ export const CreateToteutusPage = () => {
         />
         <OrganisaatioRelation organisaatioOid={organisaatioOid} />
       </RelationInfoContainer>
-      <ToteutusForm
-        steps
-        koulutus={koulutus}
-        organisaatioOid={organisaatioOid}
-        koulutustyyppi={koulutustyyppi}
-      />
+      {koulutus && (
+        <ToteutusForm
+          steps
+          koulutus={koulutus}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+        />
+      )}
     </FormPage>
   );
 };

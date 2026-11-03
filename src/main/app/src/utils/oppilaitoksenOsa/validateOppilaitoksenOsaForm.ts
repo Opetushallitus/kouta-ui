@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { flow } from 'lodash-es';
 
 import createErrorBuilder, {
   validateArrayMinLength,
@@ -12,16 +12,14 @@ import {
 export const validateOppilaitoksenOsaForm = values => {
   const kieliversiot = getKielivalinta(values);
 
-  return _fp
-    .flow(
-      validateArrayMinLength('kieliversiot', 1),
-      validateIfJulkaistu(eb =>
-        eb.validateTranslations('perustiedot.wwwSivuUrl', kieliversiot)
-      ),
-      validateHakijapalveluidenYhteystiedot('hakijapalveluidenYhteystiedot', {
-        message: 'validointivirheet.nimiJollainKielellaPakollinen',
-        languages: kieliversiot,
-      })
-    )(createErrorBuilder(values))
-    .getErrors();
+  return flow(
+    validateArrayMinLength('kieliversiot', 1),
+    validateIfJulkaistu(eb =>
+      eb.validateTranslations('perustiedot.wwwSivuUrl', kieliversiot)
+    ),
+    validateHakijapalveluidenYhteystiedot('hakijapalveluidenYhteystiedot', {
+      message: 'validointivirheet.nimiJollainKielellaPakollinen',
+      languages: kieliversiot,
+    })
+  )(createErrorBuilder(values)).getErrors();
 };

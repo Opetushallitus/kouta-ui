@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash';
+import { filter, isNil, isNull } from 'lodash-es';
 import { transparentize } from 'polished';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
@@ -23,9 +23,7 @@ const InfoBoxRow = ({ title, description, suffix }) => {
       </Cell>
       <Cell key="description-cell">
         <Typography>
-          {_.isNil(description) || description?.length === 0
-            ? '-'
-            : description}
+          {isNil(description) || description?.length === 0 ? '-' : description}
           {description && suffix ? ` ${suffix}` : ''}
         </Typography>
       </Cell>
@@ -34,7 +32,7 @@ const InfoBoxRow = ({ title, description, suffix }) => {
 };
 
 export const InfoBoxGrid = ({ rows, ...props }) => {
-  const rowsWithoutNulls = _.filter(rows, row => !_.isNull(row));
+  const rowsWithoutNulls = filter(rows, row => !isNull(row));
   return (
     <Grid
       columns={'auto minmax(0, 1fr)'}

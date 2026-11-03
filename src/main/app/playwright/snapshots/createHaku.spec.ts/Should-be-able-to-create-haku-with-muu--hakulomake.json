@@ -16,6 +16,7 @@
   "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_2#1",
   "hakulomaketyyppi": "muu",
   "metadata": {
+    "varasijatayttoPaattyy": null,
     "koulutuksenAlkamiskausi": null,
     "tulevaisuudenAikataulu": [],
     "yhteyshenkilot": []

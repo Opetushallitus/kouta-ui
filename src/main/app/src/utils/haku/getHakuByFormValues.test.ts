@@ -46,6 +46,7 @@ const baseValues: HakuFormValues = {
     muokkauksenTakaraja: '2019-10-16T08:44',
     ajastettuJulkaisu: '2019-11-16T08:44',
     ajastettuHaunJaHakukohteidenArkistointi: '2019-11-16T09:44',
+    varasijatayttoPaattyy: '2019-04-19T15:00',
   },
   hakutapa: 'hakutapa_1#1',
   kohdejoukko: {
@@ -67,6 +68,7 @@ const baseValues: HakuFormValues = {
       sahkoposti: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
       puhelinnumero: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
       verkkosivu: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
+      verkkosivuTeksti: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
     },
   ],
 };

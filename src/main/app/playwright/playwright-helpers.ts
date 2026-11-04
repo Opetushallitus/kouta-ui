@@ -126,7 +126,7 @@ export const fillTilaSection = (page: Page, tila: string = 'julkaistu') =>
     await fillRadioValue(section, tila);
   });
 
-const selectLanguages = async (
+export const selectLanguages = async (
   selector: Locator,
   selectedLanguages: Array<string> = []
 ) => {

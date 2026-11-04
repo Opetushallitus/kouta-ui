@@ -19,7 +19,10 @@ import { sanitizeHTML } from '#/src/utils';
 import { getPaikallisetTutkinnonosat } from '#/src/utils/ePeruste/getPaikallisetTutkinnonosat';
 import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 import { useEPerusteTutkinnonOsat } from '#/src/utils/koulutus/getTutkinnonosaViite';
-import { getLanguageValue } from '#/src/utils/languageUtils';
+import {
+  getLanguageValue,
+  getFirstLanguageValue,
+} from '#/src/utils/languageUtils';
 
 import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
 import { StyledInfoBox } from './AmmatillinenTiedotSection/InfoBox';
@@ -203,14 +206,16 @@ const AmosaaAmmattitaitoVaatimukset = ({
         {vaatimukset?.kohdealueet?.map(({ kuvaus, vaatimukset: v }, i) => (
           <div key={i}>
             {kuvaus && (
-              <BodyHeading>{getLanguageValue(kuvaus, language)}</BodyHeading>
+              <BodyHeading>
+                {getFirstLanguageValue(kuvaus, language)}
+              </BodyHeading>
             )}
             {v && (
               <Typography variant="body">
                 <ul>
                   {v.map((vaatimus, j) => (
                     <li key={j}>
-                      {getLanguageValue(vaatimus.vaatimus, language)}
+                      {getFirstLanguageValue(vaatimus.vaatimus, language)}
                     </li>
                   ))}
                 </ul>
@@ -220,7 +225,7 @@ const AmosaaAmmattitaitoVaatimukset = ({
         ))}
         {vaatimukset?.vaatimukset?.map(vaatimus => (
           <Typography key={vaatimus.koodi} variant="body">
-            {getLanguageValue(vaatimus.vaatimus, language)}
+            {getFirstLanguageValue(vaatimus.vaatimus, language)}
           </Typography>
         ))}
       </>
@@ -251,7 +256,7 @@ const AmosaaAmmattitaidonOsoittamistavat = ({
           {t('eperuste.ammattitaidonOsoittamistavat')}
         </Typography>
         <StyledSectionHTML
-          html={getLanguageValue(
+          html={getFirstLanguageValue(
             omatutkinnonosa?.ammattitaidonosoittamistavat,
             language
           )}
@@ -277,7 +282,7 @@ const PaikallinenTutkinnonOsaKuvaus = ({
   return (
     <>
       <Typography variant="h4" mb={2}>
-        {getLanguageValue(osa.nimi, language)}
+        {getFirstLanguageValue(osa.nimi, language)}
         {omatutkinnonosa?.laajuus != null &&
           `, ${omatutkinnonosa.laajuus} osp`}{' '}
         (

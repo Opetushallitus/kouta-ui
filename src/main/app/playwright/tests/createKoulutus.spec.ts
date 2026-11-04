@@ -16,6 +16,7 @@ import {
   getSection,
   assertBaseTilaNotCopied,
   getEditableEditors,
+  selectLanguages,
 } from '#/playwright/playwright-helpers';
 import {
   fixtureFromFile,
@@ -197,7 +198,10 @@ test.describe('Create koulutus', () => {
           data: [
             {
               id: 111,
-              nimi: { fi: 'Testin opetussuunnitelma' },
+              nimi: {
+                fi: 'Testin opetussuunnitelma',
+                sv: 'Testin opetussuunnitelma sv',
+              },
             },
           ],
           sivu: 0,
@@ -209,11 +213,15 @@ test.describe('Create koulutus', () => {
         fixtureJSON([
           {
             id: 222,
-            nimi: { fi: 'Testin paikallinen tutkinnon osa' },
+            nimi: {
+              fi: 'Testin paikallinen tutkinnon osa',
+              sv: 'Testin paikallinen tutkinnon osa sv',
+            },
           },
         ])
       );
       await withinSection(page, 'paikallisetTutkinnonOsat', async section => {
+        await selectLanguages(section, ['ruotsi']);
         await section
           .getByRole('button', {
             name: 'koulutuslomake.lisaaToteutussuunnitelma',
@@ -224,14 +232,14 @@ test.describe('Create koulutus', () => {
             section,
             'koulutuslomake.valitseToteutussuunnitelma'
           ),
-          'Testin opetussuunnitelma'
+          'Testin opetussuunnitelma sv'
         );
         await fillAsyncSelect(
           getSelectByLabel(
             section,
             'koulutuslomake.valitsePaikallisetTutkinnonOsat'
           ),
-          'Testin paikallinen tutkinnon osa'
+          'Testin paikallinen tutkinnon osa sv'
         );
       });
       await withinSection(page, 'tutkinnonosat', async section => {

@@ -31,6 +31,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     tulevaisuudenAikataulu = [],
     yhteyshenkilot = [],
     koulutuksenAlkamiskausi,
+    varasijatayttoPaattyy,
   } = metadata;
 
   return {
@@ -43,6 +44,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     aikataulut: {
       ...getAjankohtaFields(koulutuksenAlkamiskausi),
       hakuaika: hakuajat,
+      varasijatayttoPaattyy: varasijatayttoPaattyy,
       aikataulu: tulevaisuudenAikataulu,
       lisaamisenTakaraja: hakukohteenLiittamisenTakaraja,
       muokkauksenTakaraja: hakukohteenMuokkaamisenTakaraja,

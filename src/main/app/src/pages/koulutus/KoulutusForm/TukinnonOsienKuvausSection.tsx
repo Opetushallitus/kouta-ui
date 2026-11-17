@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { isEmpty, toNumber } from 'lodash';
+import { isEmpty, toNumber } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -204,6 +204,7 @@ const AmosaaAmmattitaitoVaatimukset = ({
           {t('eperuste.ammattitaitovaatimukset')}
         </Typography>
         {vaatimukset?.kohdealueet?.map(({ kuvaus, vaatimukset: v }, i) => (
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- read-only display of fetched eperuste data, never reordered
           <div key={i}>
             {kuvaus && (
               <BodyHeading>
@@ -214,6 +215,7 @@ const AmosaaAmmattitaitoVaatimukset = ({
               <Typography variant="body">
                 <ul>
                   {v.map((vaatimus, j) => (
+                    // eslint-disable-next-line @eslint-react/no-array-index-key -- read-only display of fetched eperuste data, never reordered
                     <li key={j}>
                       {getFirstLanguageValue(vaatimus.vaatimus, language)}
                     </li>
@@ -370,14 +372,14 @@ export const TutkinnonOsienKuvausSection = ({
 
   const viiteIdForOsa = ({ id }: { id: number }): string | undefined =>
     selectedTutkinnonOsat
-      .find(
+      ?.find(
         (v: { tutkinnonosaId: number }) => v.tutkinnonosaId === toNumber(id)
       )
       ?.tutkinnonosaViite?.toString();
 
   const eperusteForOsa = ({ id }: { id: number }): string | undefined =>
     selectedTutkinnonOsat
-      .find(
+      ?.find(
         (v: { tutkinnonosaId: number }) => v.tutkinnonosaId === toNumber(id)
       )
       ?.ePerusteId?.toString();
@@ -394,6 +396,7 @@ export const TutkinnonOsienKuvausSection = ({
     <Box mb={-2}>
       <Box mb={2}>
         {(kuvaukset || []).map((osa: EPerusteTutkinnonOsa, index: number) => (
+          // eslint-disable-next-line @eslint-react/no-array-index-key -- osa.id is the real key, index is only a uniqueness tiebreaker
           <StyledInfoBox key={`${osa.id}_${index}`} mb={2}>
             <TutkinnonOsaKuvaus
               viiteId={viiteIdForOsa(osa)}
@@ -405,6 +408,7 @@ export const TutkinnonOsienKuvausSection = ({
         ))}
         {(paikallisetTutkinnonOsat ?? []).map((entry, index) => (
           <PaikallisetOsatKuvaukset
+            // eslint-disable-next-line @eslint-react/no-array-index-key -- index is only a fallback when opetussuunnitelmaId is missing
             key={entry?.opetussuunnitelmaId?.value ?? index}
             opetussuunnitelmaId={entry?.opetussuunnitelmaId}
             tutkinnonosat={entry?.tutkinnonosat}

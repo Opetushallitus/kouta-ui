@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldSwitch } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box } from '#/src/components/virkailija';
@@ -84,7 +84,7 @@ const InlineAjankohtaInfoBox = ({
 
 export const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
   const { t } = useTranslation();
-  const kaytetaanHakukohteenAlkamiskautta = useFieldValue(
+  const kaytetaanHakukohteenAlkamiskautta = useFieldValue<boolean | undefined>(
     `${name}.kaytetaanHakukohteenAlkamiskautta`
   );
 

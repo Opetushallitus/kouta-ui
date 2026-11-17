@@ -5,7 +5,7 @@ import {
   type TestInfo,
   expect,
 } from '@playwright/test';
-import { includes, last, toLower } from 'lodash';
+import { includes, last, toLower } from 'lodash-es';
 
 import { Alkamiskausityyppi, ENTITY } from '#/src/constants';
 
@@ -19,11 +19,19 @@ export const assertURLEndsWith = (page: Page, urlEnd: string) =>
 
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
+// HUOM: mock kaikuttaa pyynnön rungon sellaisenaan takaisin eikä validoi sitä. Snapshotit
+// lukitsevat siis sen, MITÄ lähetämme, eivät sitä hyväksyykö kouta-backend sen: esim.
+// nimi: null menisi näistä läpi, vaikka backend vastaisi tuotannossa 400.
 export const wrapMutationTest =
-  (entityName: ENTITY, params?: { oid?: string; id?: string }) =>
+  (
+    entityName: ENTITY,
+    params?: { oid?: string; id?: string; urlPath?: string }
+  ) =>
   async (args: { page: Page; testInfo: TestInfo }, run: () => Promise<any>) => {
     const { page, testInfo } = args;
-    const entityLower = toLower(entityName);
+    // urlPath, koska kaikkien entiteettien backend-polku ei ole entiteetin nimi
+    // pienellä: oppilaitoksenOsa on polussa "oppilaitoksen-osa" (src/urls.ts).
+    const entityLower = params?.urlPath ?? toLower(entityName);
 
     const requestPromise = page.waitForRequest(req => {
       const method = req.method();
@@ -162,6 +170,43 @@ export const assertNoUnsavedChangesDialog = async (page: Page) => {
     })
   ).toBeHidden();
   await assertOnFrontPage(page);
+};
+
+// Vastinpari assertNoUnsavedChangesDialogille: varmistaa, että muokatulta lomakkeelta
+// poistuttaessa varoitus NÄKYY ja ettei navigointi mene läpi.
+//
+// redux-form päättää dirty-tilan vertaamalla initialValuesin SISÄLTÖÄ,
+// react-final-form vertaa IDENTITEETTIÄ - ja Edit-sivut laskevat initialValuesin
+// uudelleen joka renderillä, joten lomake voi jäädä pysyvästi dirtyksi.
+export const assertUnsavedChangesDialog = async (page: Page) => {
+  const urlBefore = page.url();
+
+  await page.getByRole('link', { name: 'Home' }).click();
+
+  await expect(
+    page.getByRole('heading', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
+    })
+  ).toBeVisible();
+
+  // Varoitus ei riitä: navigoinnin pitää oikeasti estyä.
+  expect(page.url()).toBe(urlBefore);
+
+  // Perutaan, jotta testi päättyy lomakkeelle eikä puolitiehen.
+  await page
+    .getByRole('button', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.peruuta',
+    })
+    .click();
+
+  // Peruutuksen pitää myös peruuttaa. Ilman näitä regressio, jossa Peruuta sulkee
+  // dialogin mutta päästää odottavan navigoinnin läpi, menisi testistä läpi.
+  await expect(
+    page.getByRole('heading', {
+      name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
+    })
+  ).toBeHidden();
+  await expect(page).toHaveURL(urlBefore);
 };
 
 export const confirmDelete = async (page: Page) => {
@@ -452,8 +497,37 @@ export const fillValintakokeetSection = (
     await fillTilaisuus(kokeetTaiLisanaytot);
   });
 
+// Piirretään kuva canvasille ja luetaan se PNG:nä ulos, jotta setInputFiles saa
+// oikeasti kelvollisen ja pyydetyn kokoisen tiedoston (ImageInput lukee
+// resoluution img.onloadilla, joten se ei suostu satunnaiseen tavupuuroon).
+export const createImageFile = async (
+  page: Page,
+  {
+    width = 1260,
+    height = 400,
+    name = 'kuva.png',
+  }: { width?: number; height?: number; name?: string } = {}
+) => {
+  const dataUrl = await page.evaluate(
+    ({ width, height }) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx!.fillStyle = '#336699';
+      ctx!.fillRect(0, 0, width, height);
+      return canvas.toDataURL('image/png');
+    },
+    { width, height }
+  );
+
+  return {
+    name,
+    mimeType: 'image/png',
+    buffer: Buffer.from(dataUrl.split(',')[1]!, 'base64'),
+  };
+};
+
 // For debugging
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const outerHTML = (l: Locator) => l.evaluate(el => el.outerHTML);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const innerHTML = (l: Locator) => l.evaluate(el => el.innerHTML);

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-import _ from 'lodash';
+import { find, isUndefined, toLower } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 
 import { AvoinKorkeakoulutusField } from '#/src/components/AvoinKorkeakoulutusField';
 import { FormFieldInput } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
 import { LuokittelutermitField } from '#/src/components/LuokittelutermitField';
@@ -45,7 +45,7 @@ const useNimiFromKoulutustyyppi = ({ name, koulutustyyppi }) => {
   const { change } = useBoundFormActions();
   const currNimi = useFieldValue(`${name}.nimi`);
   useEffect(() => {
-    if (_.isUndefined(currNimi)) {
+    if (isUndefined(currNimi)) {
       change(`${name}.nimi`, {
         fi: t(`${koulutustyyppiKey}`, { lng: 'fi' }),
         sv: t(`${koulutustyyppiKey}`, { lng: 'sv' }),
@@ -58,9 +58,9 @@ const useNimiFromKoulutustyyppi = ({ name, koulutustyyppi }) => {
 const useNimiFromFixedKoulutusKoodi = ({ nimiFieldName, koodiUri }) => {
   const byLng = ({ koodiObject, lng }) => {
     const metadata = koodiObject.metadata;
-    const eqLow = (kieli, lng) => _.toLower(kieli) === lng;
-    const retVal = _.find(metadata, ({ kieli }) => eqLow(kieli, lng))?.nimi;
-    return retVal || _.find(metadata, ({ kieli }) => eqLow(kieli, 'fi'))?.nimi;
+    const eqLow = (kieli, lng) => toLower(kieli) === lng;
+    const retVal = find(metadata, ({ kieli }) => eqLow(kieli, lng))?.nimi;
+    return retVal || find(metadata, ({ kieli }) => eqLow(kieli, 'fi'))?.nimi;
   };
 
   const { change } = useBoundFormActions();
@@ -68,7 +68,7 @@ const useNimiFromFixedKoulutusKoodi = ({ nimiFieldName, koodiUri }) => {
   const koulutusKoodi = useKoodi(koodiUri)?.koodi;
 
   useEffect(() => {
-    if (_.isUndefined(currNimi) && koulutusKoodi) {
+    if (isUndefined(currNimi) && koulutusKoodi) {
       change(nimiFieldName, {
         fi: byLng({ koodiObject: koulutusKoodi, lng: 'fi' }),
         sv: byLng({ koodiObject: koulutusKoodi, lng: 'sv' }),

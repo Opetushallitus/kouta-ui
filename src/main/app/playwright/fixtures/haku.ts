@@ -1,5 +1,5 @@
 import { Alkamiskausityyppi } from '#/src/constants';
-import { HakuModel } from '#/src/types/domainTypes';
+import { type HakuModel } from '#/src/types/domainTypes';
 
 const haku = ({
   hakutapaKoodiUri,

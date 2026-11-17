@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { sortBy } from 'lodash-es';
 
 type Tree = Array<{
   [x: string]: unknown;
@@ -7,7 +7,7 @@ type Tree = Array<{
 
 const sortTreeBy = <T extends Tree>(tree?: T, sortOpt?: any) => {
   return (
-    _.sortBy<T>(
+    sortBy<T>(
       tree?.map(item => ({
         ...item,
         children: sortTreeBy(item?.children, sortOpt),

@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
@@ -23,22 +23,25 @@ export const OppilaitoksenOsaPage = () => {
 
   const [formMode, setFormMode] = useState<FormMode>(FormMode.EDIT);
 
-  const { data: oppilaitoksenOsa, isFetching } = useOppilaitoksenOsaByOid(
-    organisaatioOid,
-    {
-      retry: 0,
-      onError: e => {
-        if (e.response.status === StatusCodes.NOT_FOUND) {
-          setFormMode(FormMode.CREATE);
-        }
-      },
-      onSuccess: oppilaitoksenOsa => {
-        oppilaitoksenOsa?.lastModified
-          ? setFormMode(FormMode.EDIT)
-          : setFormMode(FormMode.CREATE);
-      },
+  const {
+    data: oppilaitoksenOsa,
+    error,
+    isFetching,
+  } = useOppilaitoksenOsaByOid(organisaatioOid, {
+    retry: 0,
+  });
+
+  useEffect(() => {
+    if (error) {
+      if ((error as any)?.response?.status === StatusCodes.NOT_FOUND) {
+        setFormMode(FormMode.CREATE);
+      }
+    } else if (oppilaitoksenOsa) {
+      setFormMode(
+        oppilaitoksenOsa?.lastModified ? FormMode.EDIT : FormMode.CREATE
+      );
     }
-  );
+  }, [error, oppilaitoksenOsa]);
 
   const organisaatio = oppilaitoksenOsa?._enrichedData?.organisaatio;
 
@@ -89,7 +92,7 @@ export const OppilaitoksenOsaPage = () => {
       header={
         <EntityFormHeader
           entityType={ENTITY.OPPILAITOKSEN_OSA}
-          entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
+          entity={{ ...organisaatio, ...oppilaitoksenOsa }}
         />
       }
       footer={

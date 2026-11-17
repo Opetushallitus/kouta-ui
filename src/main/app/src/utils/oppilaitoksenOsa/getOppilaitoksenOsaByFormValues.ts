@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { isEmpty } from 'lodash-es';
 
 import { isNumeric, toKielistettyWithValueStr } from '#/src/utils';
 
@@ -55,7 +55,7 @@ export const getOppilaitoksenOsaByFormValues = ({
         ? parseInt(perustiedot.opiskelijoita)
         : null,
       kampus: kieleistykset(perustiedot?.kampus),
-      wwwSivu: _.isEmpty(perustiedot?.wwwSivuUrl)
+      wwwSivu: isEmpty(perustiedot?.wwwSivuUrl)
         ? null
         : {
             url: kieleistykset(perustiedot.wwwSivuUrl),
@@ -67,7 +67,7 @@ export const getOppilaitoksenOsaByFormValues = ({
         ? {
             nimi: kieleistykset(hy.nimi),
             postiosoite:
-              !_.isEmpty(hy.postiosoite) || hy.postinumero
+              !isEmpty(hy.postiosoite) || hy.postinumero
                 ? {
                     osoite: kieleistykset(hy.postiosoite),
                     postinumeroKoodiUri: kieleistykset(
@@ -76,7 +76,7 @@ export const getOppilaitoksenOsaByFormValues = ({
                   }
                 : null,
             kayntiosoite:
-              !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
+              !isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
                 ? {
                     osoite: kieleistykset(hy.kayntiosoite),
                     postinumeroKoodiUri: kieleistykset(

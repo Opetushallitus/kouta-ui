@@ -1,4 +1,4 @@
-import _fp from 'lodash/fp';
+import { isEmpty, reduce } from 'lodash-es';
 
 import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
@@ -13,7 +13,6 @@ import {
   getKokeetTaiLisanaytotData,
   getTilaisuusData,
 } from '#/src/utils/form/getKokeetTaiLisanaytotData';
-import { reduce } from '#/src/utils/lodashFpUncapped';
 
 import {
   getKielivalinta,
@@ -55,7 +54,7 @@ function getPainotetutArvosanatData(arvosanat) {
     })
     .filter(
       arvosana =>
-        arvosana.painokerroin || !_fp.isEmpty(arvosana.koodiUrit?.oppiaine)
+        arvosana.painokerroin || !isEmpty(arvosana.koodiUrit?.oppiaine)
     );
 }
 
@@ -64,15 +63,15 @@ const getLiiteToimitusosoite = (toimitustapa, kielivalinta, kieleistykset) => {
     if (rivit) {
       const { rivi1, rivi2 } = rivit;
       if (rivi1) {
-        return _fp.reduce(
+        return reduce(
+          kielivalinta,
           (acc, kieli) => {
             const r1 = rivi1?.[kieli] ?? '';
             const r2 = rivi2?.[kieli] ?? '';
             acc[kieli] = `${r1}\n${r2}`.trim();
             return acc;
           },
-          {},
-          kielivalinta
+          {}
         );
       }
     }
@@ -156,9 +155,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     kieleistykset
   );
 
-  const liitteidenToimitustapa = _fp.isEmpty(
-    values?.liitteet?.toimitustapa?.tapa
-  )
+  const liitteidenToimitustapa = isEmpty(values?.liitteet?.toimitustapa?.tapa)
     ? null
     : values?.liitteet?.toimitustapa?.tapa;
 
@@ -223,6 +220,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   // NOTE: Tässä muutetaan object {id: [tilaisuus1, tilaisuus2]} takaisin taulukkomuotoon [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}]
   const valintaperusteenValintakokeidenLisatilaisuudet = reduce(
+    (values?.valintakokeet?.valintaperusteenValintakokeidenLisatilaisuudet ||
+      {}) as any,
     (a, v, k) =>
       v?.length > 0
         ? [
@@ -235,13 +234,12 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
             },
           ]
         : a,
-    [],
-    values?.valintakokeet?.valintaperusteenValintakokeidenLisatilaisuudet || {}
+    [] as Array<any>
   );
 
   return {
     organisaatioOid: values?.organisaatioOid?.value,
-    externalId: _fp.isEmpty(values?.externalId) ? null : values?.externalId,
+    externalId: isEmpty(values?.externalId) ? null : values?.externalId,
     muokkaaja,
     tila,
     esikatselu,
@@ -263,7 +261,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     liitteidenToimitusaika: liitteetOnkoSamaToimitusaika
       ? liitteidenToimitusaika
       : null,
-    nimi: _fp.isEmpty(hakukohdeKoodiUri) ? nimi : {},
+    nimi: isEmpty(hakukohdeKoodiUri) ? nimi : {},
     hakukohdeKoodiUri: hakukohdeKoodiUri,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,

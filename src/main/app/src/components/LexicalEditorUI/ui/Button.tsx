@@ -9,7 +9,8 @@
 /* Otherwise identical to Meta reference editor Button component,
    but with styles wrapped wity styled-components. */
 
-import { ReactNode } from 'react';
+import * as React from 'react';
+import { type ReactNode } from 'react';
 
 import styled from 'styled-components';
 
@@ -61,7 +62,7 @@ function PlainButton({
   onClick: () => void;
   small?: boolean;
   title?: string;
-}): JSX.Element {
+}): React.JSX.Element {
   return (
     <button
       disabled={disabled}

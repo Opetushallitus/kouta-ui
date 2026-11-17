@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-import _ from 'lodash';
+import { cloneDeep, isEmpty, map, some } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -17,14 +17,20 @@ import { spacing, getThemeProp } from '#/src/theme';
 import { getTestIdProps, getKoulutustyyppiTranslationKey } from '#/src/utils';
 import iterateTree, { Order } from '#/src/utils/iterateTree';
 
+type HierarkiaNode = {
+  value: string;
+  disabled?: boolean;
+  children?: Array<HierarkiaNode>;
+};
+
 const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   margin-left: ${spacing(4)};
   padding-left: ${spacing(4)};
   border-left: 1px solid ${getThemeProp('palette.divider')};
 `;
 
-const useFirstLevelOptions = (hierarkia, t) =>
-  _.map(hierarkia, ({ value, disabled }) => ({
+const getFirstLevelOptions = (hierarkia, t) =>
+  map(hierarkia, ({ value, disabled }) => ({
     value,
     label: t(getKoulutustyyppiTranslationKey(value)),
     disabled,
@@ -34,7 +40,7 @@ const useSecondLevelOptions = (hierarkia, firstLevelValue, t) => {
   return useMemo(() => {
     const node = hierarkia.find(({ value }) => value === firstLevelValue);
 
-    return _.map(node?.children, ({ value, disabled }) => ({
+    return map(node?.children, ({ value, disabled }) => ({
       value,
       label: t(getKoulutustyyppiTranslationKey(value)),
       disabled,
@@ -50,7 +56,7 @@ const getFirstLevelValue = (hierarkia, selectedValue) => {
   }
 
   node = hierarkia.find(({ children }) =>
-    _.some(children, ({ value }) => value === selectedValue)
+    some(children, ({ value }) => value === selectedValue)
   );
 
   return node?.value;
@@ -58,11 +64,11 @@ const getFirstLevelValue = (hierarkia, selectedValue) => {
 
 const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
   useMemo(() => {
-    const hierarkiaCopy = _.cloneDeep(
+    const hierarkiaCopy = cloneDeep(
       johtaaTutkintoon
         ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
         : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA
-    );
+    ) as Array<HierarkiaNode>;
 
     iterateTree(
       hierarkiaCopy,
@@ -71,9 +77,9 @@ const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
         // Disable first level if all of its children are disabled.
         // This works because leaves are iterated first
         item.disabled =
-          (KOULUTUSTYYPIT.includes(item.value) && getIsDisabled(item.value)) ||
-          (item?.children &&
-            _.every(item.children, ({ disabled }) => disabled));
+          ((KOULUTUSTYYPIT as Array<string>).includes(item.value) &&
+            getIsDisabled(item.value)) ||
+          item?.children?.every(child => child.disabled);
       },
       { order: Order.BottomUp }
     );
@@ -130,7 +136,7 @@ export const KoulutustyyppiSelect = ({
     }
   }, [hierarkia, value]);
 
-  const firstLevelOptions = useFirstLevelOptions(hierarkia, t);
+  const firstLevelOptions = getFirstLevelOptions(hierarkia, t);
 
   const secondLevelOptions = useSecondLevelOptions(
     hierarkia,
@@ -153,7 +159,7 @@ export const KoulutustyyppiSelect = ({
     [setFirstLevelValue, onChange]
   );
 
-  const hasSecondLevelOptions = !_.isEmpty(secondLevelOptions);
+  const hasSecondLevelOptions = !isEmpty(secondLevelOptions);
 
   return (
     <>

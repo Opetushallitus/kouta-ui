@@ -1,6 +1,6 @@
 import { type Page } from '@playwright/test';
 import { sub } from 'date-fns';
-import { merge } from 'lodash';
+import { merge } from 'lodash-es';
 
 import haku from '#/playwright/fixtures/haku';
 import organisaatioHierarkia from '#/playwright/fixtures/organisaatioHierarkia';

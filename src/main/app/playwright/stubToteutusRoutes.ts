@@ -28,7 +28,7 @@ export const stubToteutusRoutes = async (page, organisaatioOid) => {
 
   await page.route(
     '**/toteutus/1.2.246.562.17.00000000000000008265',
-    fixtureJSON(toteutusListItems(organisaatioOid)[0])
+    fixtureJSON(toteutusListItems(organisaatioOid)[0]!)
   );
 
   await page.route(

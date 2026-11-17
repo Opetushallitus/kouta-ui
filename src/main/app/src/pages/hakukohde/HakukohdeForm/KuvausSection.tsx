@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { Alert } from '#/src/components/Alert';
 import { FormButton } from '#/src/components/FormButton';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
@@ -35,7 +35,9 @@ export const KuvausSection = ({
   const hakuOid = haku?.oid;
   const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
   const { t } = useTranslation();
-  const kuvausValues = useFieldValue(name);
+  const kuvausValues = useFieldValue<
+    { valintaperuste?: SelectOption<string> } | undefined
+  >(name);
   const valintaperusteOid = kuvausValues?.valintaperuste?.value;
   const kieliValinnat = languages;
   const preventCreation =

@@ -1,17 +1,19 @@
 import React, { useCallback } from 'react';
 
-import _ from 'lodash';
-import { useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
+import { omit } from 'lodash-es';
+import { useNavigate } from 'react-router';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import { useSelector } from '#/src/hooks/reduxHooks';
 import { useSaveForm } from '#/src/hooks/useSaveForm';
+import { HttpClient } from '#/src/httpClient';
 import { KoulutusModel, ToteutusModel } from '#/src/types/domainTypes';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import { ApiUrls } from '#/src/urls';
 import { getValuesForSaving } from '#/src/utils';
 import { afterUpdate } from '#/src/utils/afterUpdate';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
@@ -25,7 +27,7 @@ import { useTarjoajatHierarkia } from './useTarjoajatHierarkia';
 type ToteutusFooterProps = {
   formMode: FormMode;
   organisaatioOid: string;
-  koulutustyyppi: KOULUTUSTYYPPI;
+  koulutustyyppi?: KOULUTUSTYYPPI;
   toteutus?: ToteutusModel;
   koulutus?: KoulutusModel;
   canUpdate?: boolean;
@@ -49,20 +51,33 @@ export const ToteutusFooter = ({
 
   const form = useForm();
   const formName = useFormName();
-  const unregisteredFields = useSelector(state => state?.unregisteredFields);
-  const initialValues = useSelector(state => state.form?.[formName]?.initial);
+  const initialValues = form.initial;
 
   const dataSendFn =
     formMode === FormMode.CREATE ? createToteutus : updateToteutus;
 
   const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
-      const valuesForSaving = getValuesForSaving(
+    async ({
+      values,
+      httpClient,
+      apiUrls,
+    }: {
+      values: ToteutusFormValues;
+      httpClient: HttpClient;
+      apiUrls: ApiUrls;
+    }) => {
+      const valuesToSend = getValuesForSaving(
         values,
         form.registeredFields,
-        unregisteredFields,
+        form.unregisteredFields,
         initialValues
       );
+
+      // koulutustyyppi tulee aina koulutukselta: FormPage näyttää footerin vasta
+      // kun sekä koulutus- että toteutuskysely ovat ladanneet, joten se on tässä
+      // aina jo ratkennut kelvolliseksi arvoksi.
+      const resolvedKoulutustyyppi = koulutustyyppi as KOULUTUSTYYPPI;
+
       const { oid, warnings } = await dataSendFn({
         httpClient,
         apiUrls,
@@ -70,16 +85,16 @@ export const ToteutusFooter = ({
           formMode === FormMode.CREATE
             ? {
                 ...getToteutusByFormValues({
-                  ...valuesForSaving,
-                  koulutustyyppi,
+                  ...valuesToSend,
+                  koulutustyyppi: resolvedKoulutustyyppi,
                 }),
                 koulutusOid: koulutus?.oid,
               }
             : {
-                ..._.omit(toteutus, '_enrichedData'),
+                ...omit(toteutus, '_enrichedData'),
                 ...getToteutusByFormValues({
-                  ...valuesForSaving,
-                  koulutustyyppi,
+                  ...valuesToSend,
+                  koulutustyyppi: resolvedKoulutustyyppi,
                 }),
                 tarjoajat: getTarjoajaOids({
                   hierarkia,
@@ -92,18 +107,13 @@ export const ToteutusFooter = ({
       if (formMode === FormMode.CREATE) {
         navigate(`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`);
       } else {
-        afterUpdate(
-          queryClient,
-          navigate,
-          ENTITY.TOTEUTUS,
-          valuesForSaving.tila
-        );
+        afterUpdate(queryClient, navigate, ENTITY.TOTEUTUS, valuesToSend.tila);
       }
       return { warnings: warnings };
     },
     [
       dataSendFn,
-      form.registeredFields,
+      form, // getterit, ks. useForm
       formMode,
       hierarkia,
       navigate,
@@ -112,20 +122,20 @@ export const ToteutusFooter = ({
       koulutustyyppi,
       organisaatioOid,
       toteutus,
-      unregisteredFields,
       queryClient,
     ]
   );
 
-  const save = useSaveForm({
-    formName,
-    submit,
-    validate: values =>
+  const validate = useCallback(
+    (values, registeredFields) =>
       validateToteutusForm(
         { ...values, koulutustyyppi, koulutus },
-        form?.registeredFields
+        registeredFields
       ),
-  });
+    [koulutustyyppi, koulutus]
+  );
+
+  useSaveForm({ formName, submit, validate });
 
   const apiUrls = useUrls();
 
@@ -133,11 +143,11 @@ export const ToteutusFooter = ({
     <FormFooter
       entityType={ENTITY.TOTEUTUS}
       entity={toteutus}
-      save={save}
       canUpdate={canUpdate}
       esikatseluUrl={
-        formMode === FormMode.EDIT &&
-        apiUrls.url('konfo-ui.toteutus', toteutus?.oid)
+        formMode === FormMode.EDIT
+          ? apiUrls.url('konfo-ui.toteutus', toteutus?.oid)
+          : undefined
       }
     />
   );

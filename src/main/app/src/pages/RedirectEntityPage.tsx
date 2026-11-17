@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router';
 
 import { FullSpin } from '#/src/components/FullSpin';
 import { ENTITY } from '#/src/constants';
@@ -22,7 +22,7 @@ export const createRedirectEntityPage =
   ({ entityType, getRedirectUrl }: RedirectProps) =>
   () => {
     const { oid } = useParams() as { oid: string };
-    const { data: entity = {}, isLoading } = useEntityByOid(
+    const { data: entity, isLoading } = useEntityByOid(
       entityType,
       { oid },
       {

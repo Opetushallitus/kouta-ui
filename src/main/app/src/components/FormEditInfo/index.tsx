@@ -7,7 +7,7 @@ import Anchor from '#/src/components/Anchor';
 import { Icon, Box } from '#/src/components/virkailija';
 import { useMuokkaajaName } from '#/src/hooks/useMuokkaajaName';
 import { getThemeProp } from '#/src/theme';
-import { EntityModelBase } from '#/src/types/domainTypes';
+import type { EntityModelBase } from '#/src/types/domainTypes';
 import { formatDateValue } from '#/src/utils';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`

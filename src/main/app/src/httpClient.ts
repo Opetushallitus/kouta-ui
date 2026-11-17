@@ -1,5 +1,13 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
-import { flow } from 'lodash';
+import { flow } from 'lodash-es';
+
+declare module 'axios' {
+  interface AxiosRequestConfig {
+    errorNotifier?: {
+      silent?: boolean;
+    };
+  }
+}
 
 import { getCookie } from '#/src/utils';
 

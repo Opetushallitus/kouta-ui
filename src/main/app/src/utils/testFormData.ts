@@ -3,10 +3,15 @@ import {
   Alkamiskausityyppi,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
+  KOULUTUSTYYPPI,
   LIITTEEN_TOIMITUSTAPA,
 } from '../constants';
 import { SisaltoValues, Tilaisuus } from '../types/formTypes';
 import { HakukohdeFormValues } from '../types/hakukohdeTypes';
+import {
+  ValintaperusteFormValues,
+  Valintatapa,
+} from '../types/valintaperusteTypes';
 
 const valintaTilaisuus: Tilaisuus = {
   osoite: { fi: 'fi osoite', sv: 'sv osoite' },
@@ -368,9 +373,9 @@ export const hakukohdeFormValuesWithExtraTranslations: HakukohdeFormValues = {
   },
 };
 
-export const BASE_VALINTAPERUSTE_FORM_DATA = {
+export const BASE_VALINTAPERUSTE_FORM_DATA: ValintaperusteFormValues = {
   perustiedot: {
-    tyyppi: 'amk',
+    tyyppi: KOULUTUSTYYPPI.AMKKOULUTUS,
     kieliversiot: ['fi', 'sv'],
     hakutapa: 'tapa_1#1',
     kohdejoukko: { value: 'joukko_1#1' },
@@ -384,6 +389,7 @@ export const BASE_VALINTAPERUSTE_FORM_DATA = {
       fi: parseEditorState('<h1>Fi kuvaus</h1>'),
       sv: parseEditorState('<h1>Sv kuvaus</h2>'),
     },
+    sisalto: [],
   },
   hakukelpoisuus: {
     fi: parseEditorState('<h1>Fi hakukelpoisuus</h1>'),
@@ -396,11 +402,12 @@ export const BASE_VALINTAPERUSTE_FORM_DATA = {
   valintatavat: [{}],
   julkinen: true,
   valintakokeet: valintakokeet,
-  tila: 'julkaistu',
+  tila: JULKAISUTILA.JULKAISTU,
 };
 
 export const sisalto: SisaltoValues = [
   {
+    id: 'sisalto-1',
     tyyppi: 'teksti',
     data: {
       fi: parseEditorState('<h2>Fi sisalto</h2>'),
@@ -408,6 +415,7 @@ export const sisalto: SisaltoValues = [
     },
   },
   {
+    id: 'sisalto-2',
     tyyppi: 'taulukko',
     data: {
       id: 'table-1',
@@ -430,7 +438,7 @@ export const sisalto: SisaltoValues = [
   },
 ];
 
-export const valintatapa = {
+export const valintatapa: Valintatapa = {
   nimi: {
     fi: 'Fi nimi',
     sv: 'Sv nimi',
@@ -445,7 +453,7 @@ export const valintatapa = {
   sisalto: sisalto,
 };
 
-export const valintatapaWithExtraTranslations = {
+export const valintatapaWithExtraTranslations: Valintatapa = {
   ...valintatapa,
   kynnysehto: {
     fi: parseEditorState('<p>Fi kynnysehto</p>'),
@@ -488,5 +496,5 @@ export const valintatapaWithExtraTranslations = {
         ],
       },
     },
-  ],
+  ] as SisaltoValues,
 };

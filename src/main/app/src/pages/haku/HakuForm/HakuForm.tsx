@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _fp from 'lodash/fp';
+import { isFunction } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 
 import FormCollapse from '#/src/components/FormCollapse';
@@ -180,7 +180,7 @@ const HakuForm = ({
           entity={hakuProp}
         />
 
-        {_fp.isFunction(onAttachHakukohde) ? (
+        {isFunction(onAttachHakukohde) ? (
           <FormCollapse
             header={t('hakulomake.liitetytHakukohteet') + ' ' + hakukohdeAmount}
             id="liitetyt-hakukohteet"

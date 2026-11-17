@@ -15,7 +15,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.13</version>
+        <version>3.5.16</version>
     </parent>
 
     <properties>
@@ -106,44 +106,49 @@
                     </jvmArguments>
                 </configuration>
             </plugin>
+            <!-- Buildataan frontend (src/main/app) pnpm:llä, jonka oletetaan olevan PATHissa -->
             <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.15.0</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
-                        <id>Install node and pnpm locally to the project</id>
-                        <goals>
-                            <goal>install-node-and-pnpm</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>pnpm install</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>pnpm</goal>
+                            <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <arguments>install</arguments>
+                            <executable>pnpm</executable>
+                            <workingDirectory>${project.basedir}/src/main/app</workingDirectory>
+                            <!-- CI=true, jotta pnpm ei kysy vahvistusta node_modulesin siivoukselle -->
+                            <environmentVariables>
+                                <CI>true</CI>
+                            </environmentVariables>
+                            <arguments>
+                                <argument>install</argument>
+                            </arguments>
                         </configuration>
                     </execution>
                     <execution>
                         <id>Build frontend</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>pnpm</goal>
+                            <goal>exec</goal>
                         </goals>
                         <configuration>
+                            <executable>pnpm</executable>
+                            <workingDirectory>${project.basedir}/src/main/app</workingDirectory>
                             <environmentVariables>
                                 <CI>false</CI>
                             </environmentVariables>
-                            <arguments>run build</arguments>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>build</argument>
+                            </arguments>
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <nodeVersion>v22.22.3</nodeVersion>
-                    <pnpmVersion>v10.22.0</pnpmVersion>
-                    <workingDirectory>src/main/app</workingDirectory>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

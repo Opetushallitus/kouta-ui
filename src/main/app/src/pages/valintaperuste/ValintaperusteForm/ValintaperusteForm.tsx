@@ -10,7 +10,7 @@ import { KokeetTaiLisanaytotSection } from '#/src/components/KokeetTaiLisanaytot
 import { OrganisaatioSection } from '#/src/components/OrganisaatioSection';
 import { OrganisaatioSectionCreate } from '#/src/components/OrganisaatioSectionCreate';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import { ENTITY, FormMode } from '#/src/constants';
+import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormMode } from '#/src/contexts/FormContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from '#/src/utils/valintaperuste/constants';
@@ -36,8 +36,12 @@ export const ValintaperusteForm = ({
   canEditTyyppi = true,
 }: ValintaperusteFormProps) => {
   const { t } = useTranslation();
-  const kieliversiot = useFieldValue('perustiedot.kieliversiot');
-  const koulutustyyppi = useFieldValue('perustiedot.tyyppi');
+  const kieliversiot = useFieldValue<Array<LanguageCode> | undefined>(
+    'perustiedot.kieliversiot'
+  );
+  const koulutustyyppi = useFieldValue<KOULUTUSTYYPPI | undefined>(
+    'perustiedot.tyyppi'
+  );
   const languages = kieliversiot || [];
 
   const formMode = useFormMode();

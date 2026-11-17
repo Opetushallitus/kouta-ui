@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
-import { useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
@@ -57,7 +57,7 @@ export const SoraKuvausFooter = ({
     [formMode, soraKuvaus, navigate, queryClient, organisaatioOid]
   );
 
-  const save = useSaveForm({
+  useSaveForm({
     formName: ENTITY.SORA_KUVAUS,
     submit,
     validate: validateSoraKuvausForm,
@@ -68,7 +68,6 @@ export const SoraKuvausFooter = ({
       entityType={ENTITY.SORA_KUVAUS}
       entity={soraKuvaus}
       hideEsikatselu
-      save={save}
       canUpdate={canUpdate}
     />
   );

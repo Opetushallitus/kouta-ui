@@ -1,8 +1,8 @@
-import _ from 'lodash';
+import { isNil } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { FieldArrayFieldsProps } from 'redux-form';
 import styled, { css } from 'styled-components';
 
+import { type FieldArrayFieldsProps } from '#/src/components/formFields/Field';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import RemoveButton from '#/src/components/RemoveButton';
 import { Box, FormControl } from '#/src/components/virkailija';
@@ -66,6 +66,7 @@ export function FieldArrayList<T>({
       <Item
         isFirst={index === 0}
         isLast={index === fields.length - 1}
+        // eslint-disable-next-line @eslint-react/no-array-index-key -- react-final-form-arrays ei tarjoa pysyvää rivi-id:tä, kentän polku itsessään on indeksiperustainen
         key={index}
         hasDivider={hasDivider}
       >
@@ -87,7 +88,7 @@ export function FieldArrayList<T>({
 
   return (
     <FormControl
-      error={!_.isNil(error)}
+      error={!isNil(error)}
       helperText={<FormHelperTextMulti errorMessage={error} />}
     >
       {fieldsContent}

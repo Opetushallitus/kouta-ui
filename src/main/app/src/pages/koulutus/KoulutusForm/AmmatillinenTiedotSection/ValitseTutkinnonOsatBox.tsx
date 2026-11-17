@@ -1,12 +1,12 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _ from 'lodash';
+import { filter, isEmpty, isNil, map, some, toNumber } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
 import { usePrevious } from 'react-use';
-import { Field } from 'redux-form';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
+import { Field } from '#/src/components/formFields/Field';
 import { QueryResultWrapper } from '#/src/components/QueryResultWrapper';
 import { Box } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -22,14 +22,16 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getTutkinnonosatOptions = (selectedPeruste, language) =>
-  _.map(
+  map(
     selectedPeruste?.tutkinnonosat ?? [],
     ({ _tutkinnonOsa, nimi, laajuus, id }) => {
       const userLanguageValue = getLanguageValue(nimi, language);
       const fallbackValue = getLanguageValue(nimi, 'fi');
       return {
         label: `${
-          userLanguageValue?.length > 1 ? userLanguageValue : fallbackValue
+          userLanguageValue && userLanguageValue.length > 1
+            ? userLanguageValue
+            : fallbackValue
         }, ${laajuus} osp`,
         value: _tutkinnonOsa,
         viite: id,
@@ -51,7 +53,7 @@ const TutkinnonOsatField = ({ isLoading, ...props }) => {
       label={t('koulutuslomake.valitseKaytettavaTutkinnonOsa')}
       options={tutkinnonosatOptions}
       disabled={
-        isLoading || _.isNil(selectedEPeruste) || _.isEmpty(selectedEPeruste)
+        isLoading || isNil(selectedEPeruste) || isEmpty(selectedEPeruste)
       }
       isMulti={true}
       required
@@ -98,14 +100,13 @@ export const ValitseTutkinnonOsatBox = ({
   language,
   ePeruste,
 }) => {
-  const tutkinnonosatFieldValue = useFieldValue(fieldName);
+  const tutkinnonosatFieldValue = useFieldValue<
+    Array<SelectOption<string>> | undefined
+  >(fieldName);
   const selectedTutkinnonosat = useMemo(
     () =>
-      _.filter(ePeruste?.tutkinnonosat, t =>
-        _.some(
-          tutkinnonosatFieldValue,
-          ({ value }) => value === t._tutkinnonOsa
-        )
+      filter(ePeruste?.tutkinnonosat, t =>
+        some(tutkinnonosatFieldValue, ({ value }) => value === t._tutkinnonOsa)
       ),
     [ePeruste, tutkinnonosatFieldValue]
   );
@@ -133,7 +134,7 @@ export const ValitseTutkinnonOsatBox = ({
       kuvaukset?.map(({ id, koodiArvo }) => {
         return {
           ...(selectedTutkinnonosat?.find(
-            t => _.toNumber(t?._tutkinnonOsa) === id
+            t => toNumber(t?._tutkinnonOsa) === id
           ) || {}),
           koodiArvo,
         };
@@ -155,7 +156,7 @@ export const ValitseTutkinnonOsatBox = ({
       {tutkinnonosatFieldValue && (
         <QueryResultWrapper queryResult={queryResult}>
           <Box>
-            {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
+            {map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
               <TutkinnonOsaInfo
                 key={tutkinnonOsa?.id}
                 tutkinnonOsa={tutkinnonOsa}

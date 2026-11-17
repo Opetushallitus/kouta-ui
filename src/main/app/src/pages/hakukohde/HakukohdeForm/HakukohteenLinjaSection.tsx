@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 
-import _fp from 'lodash/fp';
+import { mapValues } from 'lodash-es';
 import { useTranslation } from 'react-i18next';
-import { Field, FieldArray } from 'redux-form';
 
 import { FieldGroup } from '#/src/components/FieldGroup';
 import {
@@ -10,12 +9,13 @@ import {
   FormFieldRadioGroup,
   FormFieldInput,
 } from '#/src/components/formFields';
+import { Field, FieldArray } from '#/src/components/formFields/Field';
 import { Box, Spin } from '#/src/components/virkailija';
 import { LANGUAGES, LUKIO_YLEISLINJA } from '#/src/constants';
 import { useFieldValue, useIsDirty, useSetFieldValue } from '#/src/hooks/form';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
-import { ToteutusModel } from '#/src/types/toteutusTypes';
+import { ToteutusModel } from '#/src/types/domainTypes';
 import { getTestIdProps } from '#/src/utils';
 import {
   arrayToTranslationObject,
@@ -25,7 +25,7 @@ import {
 import PainotetutArvosanatFields from './PainotetutArvosanatFields';
 
 type Props = {
-  name: TranslatedField;
+  name: string;
   language: LanguageCode;
   toteutus: ToteutusModel;
   nimiFieldPath: string;
@@ -35,10 +35,7 @@ const koodiToKoodiUri = koodi => `${koodi?.koodiUri}#${koodi.versio}`;
 
 const mapKoodiToTranslateable = koodi => ({
   koodiUri: koodiToKoodiUri(koodi),
-  nimi: _fp.mapValues(
-    _fp.prop('nimi'),
-    arrayToTranslationObject(koodi?.metadata)
-  ),
+  nimi: mapValues(arrayToTranslationObject(koodi?.metadata), v => v?.nimi),
 });
 
 const useLukiolinjaKoodit = toteutus => {

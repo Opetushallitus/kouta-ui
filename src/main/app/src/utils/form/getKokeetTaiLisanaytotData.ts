@@ -61,14 +61,19 @@ export const getKokeetTaiLisanaytotData = ({
         vahimmaispisteet: isNumeric(vahimmaispistemaara)
           ? parseFloatComma(vahimmaispistemaara)
           : null,
+        // Ohjeet kuuluvat rastin mukana: ilman rastia kenttä on piilossa, joten sen
+        // arvo on kuollutta dataa. Rekisteröintiin perustuva piilotettujen nollaus ei
+        // yksin riitä, koska kenttä ei mounttaudu lainkaan, jos rasti on jo pois
+        // lomaketta avattaessa - silloin vanha teksti kulkisi initialValuesista
+        // payloadiin. Konfo näyttää ohjeet pelkän tyhjyystarkistuksen perusteella.
         liittyyEnnakkovalmistautumista,
-        ohjeetEnnakkovalmistautumiseen: kieleistyksetSerialized(
-          ohjeetEnnakkovalmistautumiseen
-        ),
+        ohjeetEnnakkovalmistautumiseen: liittyyEnnakkovalmistautumista
+          ? kieleistyksetSerialized(ohjeetEnnakkovalmistautumiseen)
+          : {},
         erityisjarjestelytMahdollisia,
-        ohjeetErityisjarjestelyihin: kieleistyksetSerialized(
-          ohjeetErityisjarjestelyihin
-        ),
+        ohjeetErityisjarjestelyihin: erityisjarjestelytMahdollisia
+          ? kieleistyksetSerialized(ohjeetErityisjarjestelyihin)
+          : {},
       },
       tilaisuudet: tilaisuudet.map(
         getTilaisuusData(kieleistykset, kieleistyksetSerialized)

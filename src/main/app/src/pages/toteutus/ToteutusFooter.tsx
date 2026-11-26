@@ -87,6 +87,7 @@ export const ToteutusFooter = ({
                 ...getToteutusByFormValues({
                   ...valuesToSend,
                   koulutustyyppi: resolvedKoulutustyyppi,
+                  koulutuksetKoodiUri: koulutus?.koulutuksetKoodiUri,
                 }),
                 koulutusOid: koulutus?.oid,
               }
@@ -95,6 +96,7 @@ export const ToteutusFooter = ({
                 ...getToteutusByFormValues({
                   ...valuesToSend,
                   koulutustyyppi: resolvedKoulutustyyppi,
+                  koulutuksetKoodiUri: koulutus?.koulutuksetKoodiUri,
                 }),
                 tarjoajat: getTarjoajaOids({
                   hierarkia,

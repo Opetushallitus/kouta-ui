@@ -1,7 +1,9 @@
 {
   "organisaatioOid": "1.1.1.1.1.1",
   "externalId": null,
-  "nimi": {},
+  "nimi": {
+    "fi": "EB-tutkinto (European Baccalaureate)"
+  },
   "tarjoajat": [
     "1.2.2.1.1.1"
   ],

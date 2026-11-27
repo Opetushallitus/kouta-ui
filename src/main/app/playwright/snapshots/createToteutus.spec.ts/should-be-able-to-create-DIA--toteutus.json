@@ -1,7 +1,9 @@
 {
   "organisaatioOid": "1.1.1.1.1.1",
   "externalId": null,
-  "nimi": {},
+  "nimi": {
+    "fi": "Deutsche Internationale Abitur; Reifeprüfung"
+  },
   "tarjoajat": [
     "1.2.2.1.1.1"
   ],

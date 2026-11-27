@@ -8,7 +8,10 @@ import {
   JULKAISUTILA,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
-import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
+import {
+  MaksullisuusTyyppi,
+  ToteutusFormValues,
+} from '#/src/types/toteutusTypes';
 import getToteutusByFormValues, {
   getMaksutByFormValues,
 } from '#/src/utils/toteutus/getToteutusByFormValues';
@@ -321,4 +324,47 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
   });
 
   expect(toteutus).toMatchSnapshot();
+});
+
+describe('getToteutusByFormValues nimi for lukiototeutus', () => {
+  const lukioValues = {
+    tila: JULKAISUTILA.TALLENNETTU,
+    koulutustyyppi: KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    kieliversiot: ['fi', 'en'],
+    tiedot: {
+      nimi: {
+        fi: 'Fi nimi',
+        en: 'En nimi',
+      },
+    },
+  } as unknown as ToteutusFormValues;
+
+  test('it should not send nimi for lukiototeutus', () => {
+    const toteutus = getToteutusByFormValues({
+      ...lukioValues,
+      koulutuksetKoodiUri: ['koulutus_309902#1'],
+    });
+    expect(toteutus.nimi).toEqual({});
+  });
+
+  test('it should not send nimi for lukiototeutus without koulutuksetKoodiUri', () => {
+    const toteutus = getToteutusByFormValues(lukioValues);
+    expect(toteutus.nimi).toEqual({});
+  });
+
+  test('it should send nimi for EB-toteutus', () => {
+    const toteutus = getToteutusByFormValues({
+      ...lukioValues,
+      koulutuksetKoodiUri: ['koulutus_301104#1'],
+    });
+    expect(toteutus.nimi).toEqual({ fi: 'Fi nimi', en: 'En nimi' });
+  });
+
+  test('it should send nimi for DIA-toteutus', () => {
+    const toteutus = getToteutusByFormValues({
+      ...lukioValues,
+      koulutuksetKoodiUri: ['koulutus_301103#1'],
+    });
+    expect(toteutus.nimi).toEqual({ fi: 'Fi nimi', en: 'En nimi' });
+  });
 });

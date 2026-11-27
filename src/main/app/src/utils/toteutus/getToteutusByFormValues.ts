@@ -14,6 +14,8 @@ import {
   maybeParseNumber,
 } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
+import { isDIAkoulutus } from '#/src/utils/isDIAkoulutus';
+import { isEBkoulutus } from '#/src/utils/isEBkoulutus';
 
 import { isApurahaVisible } from './toteutusVisibilities';
 import {
@@ -72,9 +74,12 @@ export const getMaksutByFormValues = (
   }
 };
 
-const getToteutusByFormValues = (values: ToteutusFormValues) => {
+const getToteutusByFormValues = (
+  values: ToteutusFormValues & { koulutuksetKoodiUri?: Array<string> }
+) => {
   const {
     koulutustyyppi,
+    koulutuksetKoodiUri,
     tila,
     esikatselu = false,
     muokkaaja,
@@ -128,7 +133,14 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   return {
     organisaatioOid: values?.organisaatioOid?.value,
     externalId: isEmpty(values?.externalId) ? null : values?.externalId,
-    nimi: koulutustyyppi === 'lk' ? {} : kielistykset(values?.tiedot?.nimi),
+    // Lukiototeutuksen nimi generoidaan, joten sitä ei lähetetä. Poikkeuksena DIA- ja
+    // EB-toteutukset, joille käyttäjä antaa nimen ja kouta-backend vaatii sen.
+    nimi:
+      koulutustyyppi === 'lk' &&
+      !isDIAkoulutus(koulutuksetKoodiUri, koulutustyyppi) &&
+      !isEBkoulutus(koulutuksetKoodiUri, koulutustyyppi)
+        ? {}
+        : kielistykset(values?.tiedot?.nimi),
     tarjoajat: values?.tarjoajat || [],
     kielivalinta,
     tila,
